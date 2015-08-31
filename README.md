@@ -1,5 +1,5 @@
-An Experimental Port of Lucene to Objective-C
-=============================================
+An Experimental Objective-C Port of Lucene 5.x
+==============================================
 
 ObjCLucene is an experimental Objective-C port of Lucene. The port is done
 by using Google's [j2objc](http://j2objc.org), and the goal is to make the
