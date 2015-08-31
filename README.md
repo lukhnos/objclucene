@@ -35,5 +35,12 @@ issues that I've already found:
   involved.
 * Highlighting is slow in the translated code.
 
-Please see [the Mobile Lucene project]()
+Please see [the Mobile Lucene project](https://github.com/lukhnos/mobilelucene)
 for more information.
+
+
+Building the Xcode Project
+--------------------------
+
+To build the Xcode project, make sure that you have j2objc installed in
+`vendor/j2objc`. You can run the script `setup-j2objc.sh` to do that for you.
