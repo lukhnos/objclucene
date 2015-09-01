@@ -4,14 +4,11 @@
 //
 
 #include "J2ObjC_source.h"
-#include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/miscellaneous/EmptyTokenStream.h"
 
-@implementation OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream
+#pragma clang diagnostic ignored "-Wprotocol"
 
-- (jboolean)incrementToken {
-  return NO;
-}
+@implementation OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream
 
 - (instancetype)init {
   OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream_init(self);
@@ -20,17 +17,16 @@
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "incrementToken", NULL, "Z", 0x11, NULL, NULL },
     { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream = { 2, "EmptyTokenStream", "org.apache.lucene.analysis.miscellaneous", NULL, 0x11, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream = { 2, "EmptyTokenStream", "org.apache.lucene.analysis.miscellaneous", NULL, 0x11, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream;
 }
 
 @end
 
 void OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream_init(OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream *self) {
-  OrgApacheLuceneAnalysisTokenStream_init(self);
+  NSObject_init(self);
 }
 
 OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream *new_OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream_init() {

@@ -20,12 +20,6 @@
 #define JavaLangEnum_INCLUDE 1
 #include "java/lang/Enum.h"
 
-typedef NS_ENUM(NSUInteger, OrgApacheLuceneSearchSpellSuggestMode) {
-  OrgApacheLuceneSearchSpellSuggestMode_SUGGEST_WHEN_NOT_IN_INDEX = 0,
-  OrgApacheLuceneSearchSpellSuggestMode_SUGGEST_MORE_POPULAR = 1,
-  OrgApacheLuceneSearchSpellSuggestMode_SUGGEST_ALWAYS = 2,
-};
-
 @interface OrgApacheLuceneSearchSpellSuggestModeEnum : JavaLangEnum < NSCopying >
 
 #pragma mark Package-Private
@@ -40,18 +34,9 @@ FOUNDATION_EXPORT OrgApacheLuceneSearchSpellSuggestModeEnum *OrgApacheLuceneSear
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneSearchSpellSuggestModeEnum)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSpellSuggestModeEnum)
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSpellSuggestModeEnum *OrgApacheLuceneSearchSpellSuggestModeEnum_values_[];
-
-#define OrgApacheLuceneSearchSpellSuggestModeEnum_SUGGEST_WHEN_NOT_IN_INDEX OrgApacheLuceneSearchSpellSuggestModeEnum_values_[OrgApacheLuceneSearchSpellSuggestMode_SUGGEST_WHEN_NOT_IN_INDEX]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneSearchSpellSuggestModeEnum, SUGGEST_WHEN_NOT_IN_INDEX)
-
-#define OrgApacheLuceneSearchSpellSuggestModeEnum_SUGGEST_MORE_POPULAR OrgApacheLuceneSearchSpellSuggestModeEnum_values_[OrgApacheLuceneSearchSpellSuggestMode_SUGGEST_MORE_POPULAR]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneSearchSpellSuggestModeEnum, SUGGEST_MORE_POPULAR)
-
-#define OrgApacheLuceneSearchSpellSuggestModeEnum_SUGGEST_ALWAYS OrgApacheLuceneSearchSpellSuggestModeEnum_values_[OrgApacheLuceneSearchSpellSuggestMode_SUGGEST_ALWAYS]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneSearchSpellSuggestModeEnum, SUGGEST_ALWAYS)
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpellSuggestModeEnum)
 

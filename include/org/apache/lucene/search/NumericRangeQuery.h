@@ -20,133 +20,19 @@
 #define OrgApacheLuceneSearchMultiTermQuery_INCLUDE 1
 #include "org/apache/lucene/search/MultiTermQuery.h"
 
-@class JavaLangDouble;
-@class JavaLangFloat;
-@class JavaLangInteger;
-@class JavaLangLong;
-@class OrgApacheLuceneDocumentFieldType_NumericTypeEnum;
-@class OrgApacheLuceneIndexTerms;
-@class OrgApacheLuceneIndexTermsEnum;
-@class OrgApacheLuceneUtilAttributeSource;
-
-@interface OrgApacheLuceneSearchNumericRangeQuery : OrgApacheLuceneSearchMultiTermQuery {
- @public
-  jint precisionStep_;
-  OrgApacheLuceneDocumentFieldType_NumericTypeEnum *dataType_;
-  NSNumber *min_, *max_;
-  jboolean minInclusive_, maxInclusive_;
-}
+@interface OrgApacheLuceneSearchNumericRangeQuery : OrgApacheLuceneSearchMultiTermQuery
 
 #pragma mark Public
 
-- (jboolean)isEqual:(id)o;
-
-- (id)getMax;
-
-- (id)getMin;
-
-- (jint)getPrecisionStep;
-
-- (NSUInteger)hash;
-
-- (jboolean)includesMax;
-
-- (jboolean)includesMin;
-
-+ (OrgApacheLuceneSearchNumericRangeQuery *)newDoubleRangeWithNSString:(NSString *)field
-                                                    withJavaLangDouble:(JavaLangDouble *)min
-                                                    withJavaLangDouble:(JavaLangDouble *)max
-                                                           withBoolean:(jboolean)minInclusive
-                                                           withBoolean:(jboolean)maxInclusive OBJC_METHOD_FAMILY_NONE;
-
-+ (OrgApacheLuceneSearchNumericRangeQuery *)newDoubleRangeWithNSString:(NSString *)field
-                                                               withInt:(jint)precisionStep
-                                                    withJavaLangDouble:(JavaLangDouble *)min
-                                                    withJavaLangDouble:(JavaLangDouble *)max
-                                                           withBoolean:(jboolean)minInclusive
-                                                           withBoolean:(jboolean)maxInclusive OBJC_METHOD_FAMILY_NONE;
-
-+ (OrgApacheLuceneSearchNumericRangeQuery *)newFloatRangeWithNSString:(NSString *)field
-                                                    withJavaLangFloat:(JavaLangFloat *)min
-                                                    withJavaLangFloat:(JavaLangFloat *)max
-                                                          withBoolean:(jboolean)minInclusive
-                                                          withBoolean:(jboolean)maxInclusive OBJC_METHOD_FAMILY_NONE;
-
-+ (OrgApacheLuceneSearchNumericRangeQuery *)newFloatRangeWithNSString:(NSString *)field
-                                                              withInt:(jint)precisionStep
-                                                    withJavaLangFloat:(JavaLangFloat *)min
-                                                    withJavaLangFloat:(JavaLangFloat *)max
-                                                          withBoolean:(jboolean)minInclusive
-                                                          withBoolean:(jboolean)maxInclusive OBJC_METHOD_FAMILY_NONE;
-
-+ (OrgApacheLuceneSearchNumericRangeQuery *)newIntRangeWithNSString:(NSString *)field
-                                                            withInt:(jint)precisionStep
-                                                withJavaLangInteger:(JavaLangInteger *)min
-                                                withJavaLangInteger:(JavaLangInteger *)max
-                                                        withBoolean:(jboolean)minInclusive
-                                                        withBoolean:(jboolean)maxInclusive OBJC_METHOD_FAMILY_NONE;
-
-+ (OrgApacheLuceneSearchNumericRangeQuery *)newIntRangeWithNSString:(NSString *)field
-                                                withJavaLangInteger:(JavaLangInteger *)min
-                                                withJavaLangInteger:(JavaLangInteger *)max
-                                                        withBoolean:(jboolean)minInclusive
-                                                        withBoolean:(jboolean)maxInclusive OBJC_METHOD_FAMILY_NONE;
-
-+ (OrgApacheLuceneSearchNumericRangeQuery *)newLongRangeWithNSString:(NSString *)field
-                                                             withInt:(jint)precisionStep
-                                                    withJavaLangLong:(JavaLangLong *)min
-                                                    withJavaLangLong:(JavaLangLong *)max
-                                                         withBoolean:(jboolean)minInclusive
-                                                         withBoolean:(jboolean)maxInclusive OBJC_METHOD_FAMILY_NONE;
-
-+ (OrgApacheLuceneSearchNumericRangeQuery *)newLongRangeWithNSString:(NSString *)field
-                                                    withJavaLangLong:(JavaLangLong *)min
-                                                    withJavaLangLong:(JavaLangLong *)max
-                                                         withBoolean:(jboolean)minInclusive
-                                                         withBoolean:(jboolean)maxInclusive OBJC_METHOD_FAMILY_NONE;
-
-- (NSString *)toStringWithNSString:(NSString *)field;
-
-#pragma mark Protected
-
-- (OrgApacheLuceneIndexTermsEnum *)getTermsEnumWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms
-                                      withOrgApacheLuceneUtilAttributeSource:(OrgApacheLuceneUtilAttributeSource *)atts;
+- (instancetype)init;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneSearchNumericRangeQuery)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchNumericRangeQuery)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchNumericRangeQuery, dataType_, OrgApacheLuceneDocumentFieldType_NumericTypeEnum *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchNumericRangeQuery, min_, id)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchNumericRangeQuery, max_, id)
+FOUNDATION_EXPORT void OrgApacheLuceneSearchNumericRangeQuery_init(OrgApacheLuceneSearchNumericRangeQuery *self);
 
-FOUNDATION_EXPORT jlong OrgApacheLuceneSearchNumericRangeQuery_LONG_NEGATIVE_INFINITY_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchNumericRangeQuery, LONG_NEGATIVE_INFINITY_, jlong)
-
-FOUNDATION_EXPORT jlong OrgApacheLuceneSearchNumericRangeQuery_LONG_POSITIVE_INFINITY_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchNumericRangeQuery, LONG_POSITIVE_INFINITY_, jlong)
-
-FOUNDATION_EXPORT jint OrgApacheLuceneSearchNumericRangeQuery_INT_NEGATIVE_INFINITY_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchNumericRangeQuery, INT_NEGATIVE_INFINITY_, jint)
-
-FOUNDATION_EXPORT jint OrgApacheLuceneSearchNumericRangeQuery_INT_POSITIVE_INFINITY_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchNumericRangeQuery, INT_POSITIVE_INFINITY_, jint)
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchNumericRangeQuery *OrgApacheLuceneSearchNumericRangeQuery_newLongRangeWithNSString_withInt_withJavaLangLong_withJavaLangLong_withBoolean_withBoolean_(NSString *field, jint precisionStep, JavaLangLong *min, JavaLangLong *max, jboolean minInclusive, jboolean maxInclusive);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchNumericRangeQuery *OrgApacheLuceneSearchNumericRangeQuery_newLongRangeWithNSString_withJavaLangLong_withJavaLangLong_withBoolean_withBoolean_(NSString *field, JavaLangLong *min, JavaLangLong *max, jboolean minInclusive, jboolean maxInclusive);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchNumericRangeQuery *OrgApacheLuceneSearchNumericRangeQuery_newIntRangeWithNSString_withInt_withJavaLangInteger_withJavaLangInteger_withBoolean_withBoolean_(NSString *field, jint precisionStep, JavaLangInteger *min, JavaLangInteger *max, jboolean minInclusive, jboolean maxInclusive);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchNumericRangeQuery *OrgApacheLuceneSearchNumericRangeQuery_newIntRangeWithNSString_withJavaLangInteger_withJavaLangInteger_withBoolean_withBoolean_(NSString *field, JavaLangInteger *min, JavaLangInteger *max, jboolean minInclusive, jboolean maxInclusive);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchNumericRangeQuery *OrgApacheLuceneSearchNumericRangeQuery_newDoubleRangeWithNSString_withInt_withJavaLangDouble_withJavaLangDouble_withBoolean_withBoolean_(NSString *field, jint precisionStep, JavaLangDouble *min, JavaLangDouble *max, jboolean minInclusive, jboolean maxInclusive);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchNumericRangeQuery *OrgApacheLuceneSearchNumericRangeQuery_newDoubleRangeWithNSString_withJavaLangDouble_withJavaLangDouble_withBoolean_withBoolean_(NSString *field, JavaLangDouble *min, JavaLangDouble *max, jboolean minInclusive, jboolean maxInclusive);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchNumericRangeQuery *OrgApacheLuceneSearchNumericRangeQuery_newFloatRangeWithNSString_withInt_withJavaLangFloat_withJavaLangFloat_withBoolean_withBoolean_(NSString *field, jint precisionStep, JavaLangFloat *min, JavaLangFloat *max, jboolean minInclusive, jboolean maxInclusive);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchNumericRangeQuery *OrgApacheLuceneSearchNumericRangeQuery_newFloatRangeWithNSString_withJavaLangFloat_withJavaLangFloat_withBoolean_withBoolean_(NSString *field, JavaLangFloat *min, JavaLangFloat *max, jboolean minInclusive, jboolean maxInclusive);
+FOUNDATION_EXPORT OrgApacheLuceneSearchNumericRangeQuery *new_OrgApacheLuceneSearchNumericRangeQuery_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchNumericRangeQuery)
 

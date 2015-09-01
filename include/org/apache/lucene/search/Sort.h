@@ -17,7 +17,6 @@
 #define _OrgApacheLuceneSearchSort_
 
 @class IOSObjectArray;
-@class OrgApacheLuceneSearchIndexSearcher;
 @class OrgApacheLuceneSearchSortField;
 
 @interface OrgApacheLuceneSearchSort : NSObject {
@@ -31,8 +30,6 @@
 
 - (instancetype)initWithOrgApacheLuceneSearchSortField:(OrgApacheLuceneSearchSortField *)field;
 
-- (instancetype)initWithOrgApacheLuceneSearchSortFieldArray:(IOSObjectArray *)fields;
-
 - (jboolean)isEqual:(id)o;
 
 - (IOSObjectArray *)getSort;
@@ -41,11 +38,7 @@
 
 - (jboolean)needsScores;
 
-- (OrgApacheLuceneSearchSort *)rewriteWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher;
-
 - (void)setSortWithOrgApacheLuceneSearchSortField:(OrgApacheLuceneSearchSortField *)field;
-
-- (void)setSortWithOrgApacheLuceneSearchSortFieldArray:(IOSObjectArray *)fields;
 
 - (NSString *)description;
 
@@ -68,10 +61,6 @@ FOUNDATION_EXPORT OrgApacheLuceneSearchSort *new_OrgApacheLuceneSearchSort_init(
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSort_initWithOrgApacheLuceneSearchSortField_(OrgApacheLuceneSearchSort *self, OrgApacheLuceneSearchSortField *field);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSort *new_OrgApacheLuceneSearchSort_initWithOrgApacheLuceneSearchSortField_(OrgApacheLuceneSearchSortField *field) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSort_initWithOrgApacheLuceneSearchSortFieldArray_(OrgApacheLuceneSearchSort *self, IOSObjectArray *fields);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSort *new_OrgApacheLuceneSearchSort_initWithOrgApacheLuceneSearchSortFieldArray_(IOSObjectArray *fields) NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSort)
 

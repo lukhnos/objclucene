@@ -20,16 +20,11 @@
 #define OrgApacheLuceneQueryparserXmlFilterBuilder_INCLUDE 1
 #include "org/apache/lucene/queryparser/xml/FilterBuilder.h"
 
-@class OrgApacheLuceneSearchFilter;
-@protocol OrgW3cDomElement;
-
 @interface OrgApacheLuceneQueryparserXmlBuildersDuplicateFilterBuilder : NSObject < OrgApacheLuceneQueryparserXmlFilterBuilder >
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (OrgApacheLuceneSearchFilter *)getFilterWithOrgW3cDomElement:(id<OrgW3cDomElement>)e;
 
 @end
 

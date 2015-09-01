@@ -20,31 +20,15 @@
 #define OrgApacheLuceneSearchSimilaritiesNormalization_INCLUDE 1
 #include "org/apache/lucene/search/similarities/Normalization.h"
 
-@class OrgApacheLuceneSearchSimilaritiesBasicStats;
-
 @interface OrgApacheLuceneSearchSimilaritiesNormalizationH1 : OrgApacheLuceneSearchSimilaritiesNormalization
 
 #pragma mark Public
 
 - (instancetype)init;
 
-- (instancetype)initWithFloat:(jfloat)c;
-
-- (jfloat)getC;
-
-- (jfloat)tfnWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
-                                                   withFloat:(jfloat)tf
-                                                   withFloat:(jfloat)len;
-
-- (NSString *)description;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSimilaritiesNormalizationH1)
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesNormalizationH1_initWithFloat_(OrgApacheLuceneSearchSimilaritiesNormalizationH1 *self, jfloat c);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesNormalizationH1 *new_OrgApacheLuceneSearchSimilaritiesNormalizationH1_initWithFloat_(jfloat c) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesNormalizationH1_init(OrgApacheLuceneSearchSimilaritiesNormalizationH1 *self);
 

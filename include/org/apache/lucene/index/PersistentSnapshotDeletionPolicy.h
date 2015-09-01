@@ -20,29 +20,11 @@
 #define OrgApacheLuceneIndexSnapshotDeletionPolicy_INCLUDE 1
 #include "org/apache/lucene/index/SnapshotDeletionPolicy.h"
 
-@class OrgApacheLuceneIndexIndexCommit;
-@class OrgApacheLuceneIndexIndexDeletionPolicy;
-@class OrgApacheLuceneIndexIndexWriterConfig_OpenModeEnum;
-@class OrgApacheLuceneStoreDirectory;
-
 @interface OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy : OrgApacheLuceneIndexSnapshotDeletionPolicy
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneIndexIndexDeletionPolicy:(OrgApacheLuceneIndexIndexDeletionPolicy *)primary
-                              withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir;
-
-- (instancetype)initWithOrgApacheLuceneIndexIndexDeletionPolicy:(OrgApacheLuceneIndexIndexDeletionPolicy *)primary
-                              withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
-         withOrgApacheLuceneIndexIndexWriterConfig_OpenModeEnum:(OrgApacheLuceneIndexIndexWriterConfig_OpenModeEnum *)mode;
-
-- (NSString *)getLastSaveFile;
-
-- (void)release__WithOrgApacheLuceneIndexIndexCommit:(OrgApacheLuceneIndexIndexCommit *)commit;
-
-- (void)release__WithLong:(jlong)gen;
-
-- (OrgApacheLuceneIndexIndexCommit *)snapshot;
+- (instancetype)init;
 
 @end
 
@@ -51,13 +33,9 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy)
 FOUNDATION_EXPORT NSString *OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_SNAPSHOTS_PREFIX_;
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy, SNAPSHOTS_PREFIX_, NSString *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_initWithOrgApacheLuceneIndexIndexDeletionPolicy_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy *self, OrgApacheLuceneIndexIndexDeletionPolicy *primary, OrgApacheLuceneStoreDirectory *dir);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_init(OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy *new_OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_initWithOrgApacheLuceneIndexIndexDeletionPolicy_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexIndexDeletionPolicy *primary, OrgApacheLuceneStoreDirectory *dir) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_initWithOrgApacheLuceneIndexIndexDeletionPolicy_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_OpenModeEnum_(OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy *self, OrgApacheLuceneIndexIndexDeletionPolicy *primary, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexIndexWriterConfig_OpenModeEnum *mode);
-
-FOUNDATION_EXPORT OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy *new_OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_initWithOrgApacheLuceneIndexIndexDeletionPolicy_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_OpenModeEnum_(OrgApacheLuceneIndexIndexDeletionPolicy *primary, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexIndexWriterConfig_OpenModeEnum *mode) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy *new_OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy)
 

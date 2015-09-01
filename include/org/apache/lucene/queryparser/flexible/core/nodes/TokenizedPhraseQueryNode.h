@@ -24,25 +24,11 @@
 #define OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_INCLUDE 1
 #include "org/apache/lucene/queryparser/flexible/core/nodes/FieldableNode.h"
 
-@protocol JavaLangCharSequence;
-@protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
-@protocol OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax;
-
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl < OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode >
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)cloneTree;
-
-- (id<JavaLangCharSequence>)getField;
-
-- (void)setFieldWithJavaLangCharSequence:(id<JavaLangCharSequence>)fieldName;
-
-- (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escapeSyntaxParser;
-
-- (NSString *)description;
 
 @end
 

@@ -16,7 +16,6 @@
 #if !defined (_OrgApacheLuceneIndexDocumentsWriterStallControl_) && (OrgApacheLuceneIndexDocumentsWriterStallControl_INCLUDE_ALL || OrgApacheLuceneIndexDocumentsWriterStallControl_INCLUDE)
 #define _OrgApacheLuceneIndexDocumentsWriterStallControl_
 
-@class JavaLangThread;
 @class OrgApacheLuceneIndexLiveIndexWriterConfig;
 
 @interface OrgApacheLuceneIndexDocumentsWriterStallControl : NSObject {
@@ -30,17 +29,9 @@
 
 - (jboolean)anyStalledThreads;
 
-- (jboolean)hasBlocked;
-
-- (jboolean)isHealthy;
-
-- (jboolean)isThreadQueuedWithJavaLangThread:(JavaLangThread *)t;
-
 - (void)updateStalledWithBoolean:(jboolean)stalled;
 
 - (void)waitIfStalled;
-
-- (jboolean)wasStalled;
 
 @end
 

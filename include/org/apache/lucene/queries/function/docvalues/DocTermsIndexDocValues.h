@@ -20,81 +20,17 @@
 #define OrgApacheLuceneQueriesFunctionFunctionValues_INCLUDE 1
 #include "org/apache/lucene/queries/function/FunctionValues.h"
 
-@class OrgApacheLuceneIndexIndexReader;
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneIndexSortedDocValues;
-@class OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller;
-@class OrgApacheLuceneQueriesFunctionValueSource;
-@class OrgApacheLuceneQueriesFunctionValueSourceScorer;
-@class OrgApacheLuceneUtilBytesRefBuilder;
-@class OrgApacheLuceneUtilCharsRefBuilder;
-@class OrgApacheLuceneUtilMutableMutableValueStr;
-
-@interface OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues : OrgApacheLuceneQueriesFunctionFunctionValues {
- @public
-  OrgApacheLuceneIndexSortedDocValues *termsIndex_;
-  OrgApacheLuceneQueriesFunctionValueSource *vs_;
-  OrgApacheLuceneUtilMutableMutableValueStr *val_;
-  OrgApacheLuceneUtilCharsRefBuilder *spareChars_;
-}
+@interface OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues : OrgApacheLuceneQueriesFunctionFunctionValues
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)vs
-                        withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-                                                     withNSString:(NSString *)field;
-
-- (jboolean)boolValWithInt:(jint)doc;
-
-- (jboolean)bytesValWithInt:(jint)doc
-withOrgApacheLuceneUtilBytesRefBuilder:(OrgApacheLuceneUtilBytesRefBuilder *)target;
-
-- (jboolean)existsWithInt:(jint)doc;
-
-- (OrgApacheLuceneQueriesFunctionValueSourceScorer *)getRangeScorerWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
-                                                                                          withNSString:(NSString *)lowerVal
-                                                                                          withNSString:(NSString *)upperVal
-                                                                                           withBoolean:(jboolean)includeLower
-                                                                                           withBoolean:(jboolean)includeUpper;
-
-- (OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller *)getValueFiller;
-
-- (jint)numOrd;
-
-- (id)objectValWithInt:(jint)doc;
-
-- (jint)ordValWithInt:(jint)doc;
-
-- (NSString *)strValWithInt:(jint)doc;
-
-- (NSString *)toStringWithInt:(jint)doc;
-
-#pragma mark Protected
-
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)vs
-                          withOrgApacheLuceneIndexSortedDocValues:(OrgApacheLuceneIndexSortedDocValues *)termsIndex;
-
-- (NSString *)toTermWithNSString:(NSString *)readableValue;
-
-#pragma mark Package-Private
-
-+ (OrgApacheLuceneIndexSortedDocValues *)openWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-                                                                          withNSString:(NSString *)field;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues, termsIndex_, OrgApacheLuceneIndexSortedDocValues *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues, vs_, OrgApacheLuceneQueriesFunctionValueSource *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues, val_, OrgApacheLuceneUtilMutableMutableValueStr *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues, spareChars_, OrgApacheLuceneUtilCharsRefBuilder *)
-
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_initWithOrgApacheLuceneQueriesFunctionValueSource_withOrgApacheLuceneIndexLeafReaderContext_withNSString_(OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues *self, OrgApacheLuceneQueriesFunctionValueSource *vs, OrgApacheLuceneIndexLeafReaderContext *context, NSString *field);
-
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_initWithOrgApacheLuceneQueriesFunctionValueSource_withOrgApacheLuceneIndexSortedDocValues_(OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues *self, OrgApacheLuceneQueriesFunctionValueSource *vs, OrgApacheLuceneIndexSortedDocValues *termsIndex);
-
-FOUNDATION_EXPORT OrgApacheLuceneIndexSortedDocValues *OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_openWithOrgApacheLuceneIndexLeafReaderContext_withNSString_(OrgApacheLuceneIndexLeafReaderContext *context, NSString *field);
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_init(OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues)
 
@@ -111,16 +47,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexD
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)fieldName
-    withJavaLangRuntimeException:(JavaLangRuntimeException *)cause;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_DocTermsIndexException)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_DocTermsIndexException_initWithNSString_withJavaLangRuntimeException_(OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_DocTermsIndexException *self, NSString *fieldName, JavaLangRuntimeException *cause);
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_DocTermsIndexException_init(OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_DocTermsIndexException *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_DocTermsIndexException *new_OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_DocTermsIndexException_initWithNSString_withJavaLangRuntimeException_(NSString *fieldName, JavaLangRuntimeException *cause) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_DocTermsIndexException *new_OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_DocTermsIndexException_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionDocvaluesDocTermsIndexDocValues_DocTermsIndexException)
 

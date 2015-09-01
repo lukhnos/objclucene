@@ -20,25 +20,19 @@
 #define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
-@class OrgApacheLuceneAnalysisTokenStream;
-
 @interface OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
-
-- (jboolean)incrementToken;
-
-- (void)reset;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter *self, OrgApacheLuceneAnalysisTokenStream *inArg);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter_init(OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter *new_OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter *new_OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter)
 

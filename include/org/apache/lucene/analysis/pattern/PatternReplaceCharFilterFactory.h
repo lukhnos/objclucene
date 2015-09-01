@@ -20,25 +20,19 @@
 #define OrgApacheLuceneAnalysisUtilCharFilterFactory_INCLUDE 1
 #include "org/apache/lucene/analysis/util/CharFilterFactory.h"
 
-@class JavaIoReader;
-@class OrgApacheLuceneAnalysisCharFilter;
-@protocol JavaUtilMap;
-
 @interface OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory : OrgApacheLuceneAnalysisUtilCharFilterFactory
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
-
-- (OrgApacheLuceneAnalysisCharFilter *)createWithJavaIoReader:(JavaIoReader *)input;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory *self, id<JavaUtilMap> args);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory_init(OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory *new_OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory *new_OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPatternPatternReplaceCharFilterFactory)
 

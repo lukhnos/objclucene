@@ -16,19 +16,19 @@
 #if !defined (_OrgApacheLuceneLucenePackage_) && (OrgApacheLuceneLucenePackage_INCLUDE_ALL || OrgApacheLuceneLucenePackage_INCLUDE)
 #define _OrgApacheLuceneLucenePackage_
 
-@class JavaLangPackage;
-
 @interface OrgApacheLuceneLucenePackage : NSObject
 
 #pragma mark Public
 
-+ (JavaLangPackage *)get;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneLucenePackage)
 
-FOUNDATION_EXPORT JavaLangPackage *OrgApacheLuceneLucenePackage_get();
+FOUNDATION_EXPORT void OrgApacheLuceneLucenePackage_init(OrgApacheLuceneLucenePackage *self);
+
+FOUNDATION_EXPORT OrgApacheLuceneLucenePackage *new_OrgApacheLuceneLucenePackage_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneLucenePackage)
 

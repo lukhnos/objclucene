@@ -43,8 +43,6 @@
 
 - (jint)compareToWithId:(OrgApacheLuceneUtilLongsRef *)other;
 
-+ (OrgApacheLuceneUtilLongsRef *)deepCopyOfWithOrgApacheLuceneUtilLongsRef:(OrgApacheLuceneUtilLongsRef *)other;
-
 - (jboolean)isEqual:(id)other;
 
 - (NSUInteger)hash;
@@ -75,8 +73,6 @@ FOUNDATION_EXPORT OrgApacheLuceneUtilLongsRef *new_OrgApacheLuceneUtilLongsRef_i
 FOUNDATION_EXPORT void OrgApacheLuceneUtilLongsRef_initWithLongArray_withInt_withInt_(OrgApacheLuceneUtilLongsRef *self, IOSLongArray *longs, jint offset, jint length);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilLongsRef *new_OrgApacheLuceneUtilLongsRef_initWithLongArray_withInt_withInt_(IOSLongArray *longs, jint offset, jint length) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilLongsRef *OrgApacheLuceneUtilLongsRef_deepCopyOfWithOrgApacheLuceneUtilLongsRef_(OrgApacheLuceneUtilLongsRef *other);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilLongsRef)
 

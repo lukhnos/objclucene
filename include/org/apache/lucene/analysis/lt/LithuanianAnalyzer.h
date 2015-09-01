@@ -20,25 +20,11 @@
 #define OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_INCLUDE 1
 #include "org/apache/lucene/analysis/util/StopwordAnalyzerBase.h"
 
-@class OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;
-@class OrgApacheLuceneAnalysisUtilCharArraySet;
-
 @interface OrgApacheLuceneAnalysisLtLithuanianAnalyzer : OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords;
-
-- (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords
-                    withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stemExclusionSet;
-
-+ (OrgApacheLuceneAnalysisUtilCharArraySet *)getDefaultStopSet;
-
-#pragma mark Protected
-
-- (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)createComponentsWithNSString:(NSString *)fieldName;
 
 @end
 
@@ -47,19 +33,9 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisLtLithuanianAnalyzer)
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisLtLithuanianAnalyzer_DEFAULT_STOPWORD_FILE_;
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisLtLithuanianAnalyzer, DEFAULT_STOPWORD_FILE_, NSString *)
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisLtLithuanianAnalyzer_getDefaultStopSet();
-
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisLtLithuanianAnalyzer_init(OrgApacheLuceneAnalysisLtLithuanianAnalyzer *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisLtLithuanianAnalyzer *new_OrgApacheLuceneAnalysisLtLithuanianAnalyzer_init() NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisLtLithuanianAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisLtLithuanianAnalyzer *self, OrgApacheLuceneAnalysisUtilCharArraySet *stopwords);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisLtLithuanianAnalyzer *new_OrgApacheLuceneAnalysisLtLithuanianAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisUtilCharArraySet *stopwords) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisLtLithuanianAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisLtLithuanianAnalyzer *self, OrgApacheLuceneAnalysisUtilCharArraySet *stopwords, OrgApacheLuceneAnalysisUtilCharArraySet *stemExclusionSet);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisLtLithuanianAnalyzer *new_OrgApacheLuceneAnalysisLtLithuanianAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisUtilCharArraySet *stopwords, OrgApacheLuceneAnalysisUtilCharArraySet *stemExclusionSet) NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisLtLithuanianAnalyzer)
 

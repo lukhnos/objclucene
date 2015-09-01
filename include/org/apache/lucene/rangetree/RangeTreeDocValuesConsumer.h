@@ -24,62 +24,19 @@
 #define JavaIoCloseable_INCLUDE 1
 #include "java/io/Closeable.h"
 
-@class OrgApacheLuceneIndexFieldInfo;
-@class OrgApacheLuceneIndexSegmentWriteState;
-@class OrgApacheLuceneStoreIndexOutput;
-@protocol JavaLangIterable;
-@protocol JavaUtilMap;
+@interface OrgApacheLuceneRangetreeRangeTreeDocValuesConsumer : OrgApacheLuceneCodecsDocValuesConsumer < JavaIoCloseable >
 
-@interface OrgApacheLuceneRangetreeRangeTreeDocValuesConsumer : OrgApacheLuceneCodecsDocValuesConsumer < JavaIoCloseable > {
- @public
-  OrgApacheLuceneCodecsDocValuesConsumer *delegate_;
-  jint maxPointsInLeafNode_;
-  jint maxPointsSortInHeap_;
-  OrgApacheLuceneStoreIndexOutput *out_;
-  id<JavaUtilMap> fieldIndexFPs_;
-  OrgApacheLuceneIndexSegmentWriteState *state_;
-}
+#pragma mark Package-Private
 
-#pragma mark Public
-
-- (instancetype)initWithOrgApacheLuceneCodecsDocValuesConsumer:(OrgApacheLuceneCodecsDocValuesConsumer *)delegate
-                     withOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state
-                                                       withInt:(jint)maxPointsInLeafNode
-                                                       withInt:(jint)maxPointsSortInHeap;
-
-- (void)addBinaryFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)field
-                                   withJavaLangIterable:(id<JavaLangIterable>)values;
-
-- (void)addNumericFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)field
-                                    withJavaLangIterable:(id<JavaLangIterable>)values;
-
-- (void)addSortedFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)field
-                                   withJavaLangIterable:(id<JavaLangIterable>)values
-                                   withJavaLangIterable:(id<JavaLangIterable>)docToOrd;
-
-- (void)addSortedNumericFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)field
-                                          withJavaLangIterable:(id<JavaLangIterable>)docToValueCount
-                                          withJavaLangIterable:(id<JavaLangIterable>)values;
-
-- (void)addSortedSetFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)field
-                                      withJavaLangIterable:(id<JavaLangIterable>)values
-                                      withJavaLangIterable:(id<JavaLangIterable>)docToOrdCount
-                                      withJavaLangIterable:(id<JavaLangIterable>)ords;
-
-- (void)close;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneRangetreeRangeTreeDocValuesConsumer)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeRangeTreeDocValuesConsumer, delegate_, OrgApacheLuceneCodecsDocValuesConsumer *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeRangeTreeDocValuesConsumer, out_, OrgApacheLuceneStoreIndexOutput *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeRangeTreeDocValuesConsumer, fieldIndexFPs_, id<JavaUtilMap>)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeRangeTreeDocValuesConsumer, state_, OrgApacheLuceneIndexSegmentWriteState *)
+FOUNDATION_EXPORT void OrgApacheLuceneRangetreeRangeTreeDocValuesConsumer_init(OrgApacheLuceneRangetreeRangeTreeDocValuesConsumer *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneRangetreeRangeTreeDocValuesConsumer_initWithOrgApacheLuceneCodecsDocValuesConsumer_withOrgApacheLuceneIndexSegmentWriteState_withInt_withInt_(OrgApacheLuceneRangetreeRangeTreeDocValuesConsumer *self, OrgApacheLuceneCodecsDocValuesConsumer *delegate, OrgApacheLuceneIndexSegmentWriteState *state, jint maxPointsInLeafNode, jint maxPointsSortInHeap);
-
-FOUNDATION_EXPORT OrgApacheLuceneRangetreeRangeTreeDocValuesConsumer *new_OrgApacheLuceneRangetreeRangeTreeDocValuesConsumer_initWithOrgApacheLuceneCodecsDocValuesConsumer_withOrgApacheLuceneIndexSegmentWriteState_withInt_withInt_(OrgApacheLuceneCodecsDocValuesConsumer *delegate, OrgApacheLuceneIndexSegmentWriteState *state, jint maxPointsInLeafNode, jint maxPointsSortInHeap) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneRangetreeRangeTreeDocValuesConsumer *new_OrgApacheLuceneRangetreeRangeTreeDocValuesConsumer_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeRangeTreeDocValuesConsumer)
 

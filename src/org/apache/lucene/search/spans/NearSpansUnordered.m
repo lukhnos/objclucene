@@ -12,7 +12,6 @@
 #include "org/apache/lucene/search/spans/ConjunctionSpans.h"
 #include "org/apache/lucene/search/spans/NearSpans.h"
 #include "org/apache/lucene/search/spans/NearSpansUnordered.h"
-#include "org/apache/lucene/search/spans/SpanCollector.h"
 #include "org/apache/lucene/search/spans/SpanNearQuery.h"
 #include "org/apache/lucene/search/spans/Spans.h"
 #include "org/apache/lucene/util/PriorityQueue.h"
@@ -71,8 +70,6 @@ __attribute__((unused)) static jboolean OrgApacheLuceneSearchSpansNearSpansUnord
 - (jint)endPosition;
 
 - (jint)width;
-
-- (void)collectWithOrgApacheLuceneSearchSpansSpanCollector:(id<OrgApacheLuceneSearchSpansSpanCollector>)collector;
 
 - (OrgApacheLuceneSearchTwoPhaseIterator *)asTwoPhaseIterator;
 
@@ -202,12 +199,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansNearSpansUnordered_SpanPosi
   return [((OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell *) nil_chk(maxEndPositionCell_)) startPosition] - [((OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell *) nil_chk(OrgApacheLuceneSearchSpansNearSpansUnordered_minPositionCell(self))) startPosition];
 }
 
-- (void)collectWithOrgApacheLuceneSearchSpansSpanCollector:(id<OrgApacheLuceneSearchSpansSpanCollector>)collector {
-  for (OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell * __strong cell in nil_chk(subSpanCells_)) {
-    [((OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell *) nil_chk(cell)) collectWithOrgApacheLuceneSearchSpansSpanCollector:collector];
-  }
-}
-
 - (NSString *)description {
   if (OrgApacheLuceneSearchSpansNearSpansUnordered_minPositionCell(self) != nil) {
     return JreStrcat("$C$$$", [[self getClass] getName], '(', [((OrgApacheLuceneSearchSpansSpanNearQuery *) nil_chk(query_)) description], @")@", (JreStrcat("ICICI", [self docID], ':', [self startPosition], '-', [self endPosition])));
@@ -237,7 +228,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansNearSpansUnordered_SpanPosi
     { "startPosition", NULL, "I", 0x1, NULL, NULL },
     { "endPosition", NULL, "I", 0x1, NULL, NULL },
     { "width", NULL, "I", 0x1, NULL, NULL },
-    { "collectWithOrgApacheLuceneSearchSpansSpanCollector:", "collect", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -247,7 +237,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansNearSpansUnordered_SpanPosi
     { "maxEndPositionCell_", NULL, 0x2, "Lorg.apache.lucene.search.spans.NearSpansUnordered$SpansCell;", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.search.spans.NearSpansUnordered$SpansCell;", "Lorg.apache.lucene.search.spans.NearSpansUnordered$SpanPositionQueue;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansNearSpansUnordered = { 2, "NearSpansUnordered", "org.apache.lucene.search.spans", NULL, 0x1, 13, methods, 4, fields, 0, NULL, 2, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansNearSpansUnordered = { 2, "NearSpansUnordered", "org.apache.lucene.search.spans", NULL, 0x1, 12, methods, 4, fields, 0, NULL, 2, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneSearchSpansNearSpansUnordered;
 }
 
@@ -342,10 +332,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansNearSpansUnordered)
   return [((OrgApacheLuceneSearchSpansSpans *) nil_chk(in_)) width];
 }
 
-- (void)collectWithOrgApacheLuceneSearchSpansSpanCollector:(id<OrgApacheLuceneSearchSpansSpanCollector>)collector {
-  [((OrgApacheLuceneSearchSpansSpans *) nil_chk(in_)) collectWithOrgApacheLuceneSearchSpansSpanCollector:collector];
-}
-
 - (OrgApacheLuceneSearchTwoPhaseIterator *)asTwoPhaseIterator {
   return [((OrgApacheLuceneSearchSpansSpans *) nil_chk(in_)) asTwoPhaseIterator];
 }
@@ -385,7 +371,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansNearSpansUnordered)
     { "startPosition", NULL, "I", 0x1, NULL, NULL },
     { "endPosition", NULL, "I", 0x1, NULL, NULL },
     { "width", NULL, "I", 0x1, NULL, NULL },
-    { "collectWithOrgApacheLuceneSearchSpansSpanCollector:", "collect", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "asTwoPhaseIterator", NULL, "Lorg.apache.lucene.search.TwoPhaseIterator;", 0x1, NULL, NULL },
     { "docID", NULL, "I", 0x1, NULL, NULL },
     { "nextDoc", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
@@ -398,7 +383,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansNearSpansUnordered)
     { "spanLength_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "in_", NULL, 0x10, "Lorg.apache.lucene.search.spans.Spans;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell = { 2, "SpansCell", "org.apache.lucene.search.spans", "NearSpansUnordered", 0x2, 14, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell = { 2, "SpansCell", "org.apache.lucene.search.spans", "NearSpansUnordered", 0x2, 13, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell;
 }
 

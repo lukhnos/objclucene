@@ -20,20 +20,13 @@
 #define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
-@class OrgApacheLuceneAnalysisTokenStream;
-@protocol OrgApacheLuceneAnalysisPayloadsPayloadEncoder;
-
 #define OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter_DEFAULT_DELIMITER '|'
 
 @interface OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-                                                  withChar:(jchar)delimiter
-         withOrgApacheLuceneAnalysisPayloadsPayloadEncoder:(id<OrgApacheLuceneAnalysisPayloadsPayloadEncoder>)encoder;
-
-- (jboolean)incrementToken;
+- (instancetype)init;
 
 @end
 
@@ -41,9 +34,9 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFil
 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter, DEFAULT_DELIMITER, jchar)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withChar_withOrgApacheLuceneAnalysisPayloadsPayloadEncoder_(OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter *self, OrgApacheLuceneAnalysisTokenStream *input, jchar delimiter, id<OrgApacheLuceneAnalysisPayloadsPayloadEncoder> encoder);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter_init(OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter *new_OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withChar_withOrgApacheLuceneAnalysisPayloadsPayloadEncoder_(OrgApacheLuceneAnalysisTokenStream *input, jchar delimiter, id<OrgApacheLuceneAnalysisPayloadsPayloadEncoder> encoder) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter *new_OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter)
 

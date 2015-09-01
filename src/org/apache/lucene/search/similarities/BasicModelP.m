@@ -4,15 +4,9 @@
 //
 
 #include "J2ObjC_source.h"
-#include "java/lang/Math.h"
-#include "org/apache/lucene/search/similarities/BasicModel.h"
 #include "org/apache/lucene/search/similarities/BasicModelP.h"
-#include "org/apache/lucene/search/similarities/BasicStats.h"
-#include "org/apache/lucene/search/similarities/SimilarityBase.h"
 
-J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchSimilaritiesBasicModelP)
-
-jdouble OrgApacheLuceneSearchSimilaritiesBasicModelP_LOG2_E_;
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneSearchSimilaritiesBasicModelP
 
@@ -21,40 +15,18 @@ jdouble OrgApacheLuceneSearchSimilaritiesBasicModelP_LOG2_E_;
   return self;
 }
 
-- (jfloat)scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
-                                                     withFloat:(jfloat)tfn {
-  jfloat lambda = (jfloat) ([((OrgApacheLuceneSearchSimilaritiesBasicStats *) nil_chk(stats)) getTotalTermFreq] + 1) / ([stats getNumberOfDocuments] + 1);
-  return (jfloat) (tfn * OrgApacheLuceneSearchSimilaritiesSimilarityBase_log2WithDouble_(tfn / lambda) + (lambda + 1 / (12 * tfn) - tfn) * OrgApacheLuceneSearchSimilaritiesBasicModelP_LOG2_E_ + 0.5 * OrgApacheLuceneSearchSimilaritiesSimilarityBase_log2WithDouble_(2 * JavaLangMath_PI * tfn));
-}
-
-- (NSString *)description {
-  return @"P";
-}
-
-+ (void)initialize {
-  if (self == [OrgApacheLuceneSearchSimilaritiesBasicModelP class]) {
-    OrgApacheLuceneSearchSimilaritiesBasicModelP_LOG2_E_ = OrgApacheLuceneSearchSimilaritiesSimilarityBase_log2WithDouble_(JavaLangMath_E);
-    J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchSimilaritiesBasicModelP)
-  }
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", "BasicModelP", NULL, 0x1, NULL, NULL },
-    { "scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:withFloat:", "score", "F", 0x11, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "LOG2_E_", NULL, 0xc, "D", &OrgApacheLuceneSearchSimilaritiesBasicModelP_LOG2_E_, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesBasicModelP = { 2, "BasicModelP", "org.apache.lucene.search.similarities", NULL, 0x1, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesBasicModelP = { 2, "BasicModelP", "org.apache.lucene.search.similarities", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchSimilaritiesBasicModelP;
 }
 
 @end
 
 void OrgApacheLuceneSearchSimilaritiesBasicModelP_init(OrgApacheLuceneSearchSimilaritiesBasicModelP *self) {
-  OrgApacheLuceneSearchSimilaritiesBasicModel_init(self);
+  NSObject_init(self);
 }
 
 OrgApacheLuceneSearchSimilaritiesBasicModelP *new_OrgApacheLuceneSearchSimilaritiesBasicModelP_init() {

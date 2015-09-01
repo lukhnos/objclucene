@@ -16,13 +16,9 @@
 #if !defined (_OrgApacheLuceneUtilAccountable_) && (OrgApacheLuceneUtilAccountable_INCLUDE_ALL || OrgApacheLuceneUtilAccountable_INCLUDE)
 #define _OrgApacheLuceneUtilAccountable_
 
-@protocol JavaUtilCollection;
-
 @protocol OrgApacheLuceneUtilAccountable < NSObject, JavaObject >
 
 - (jlong)ramBytesUsed;
-
-- (id<JavaUtilCollection>)getChildResources;
 
 @end
 

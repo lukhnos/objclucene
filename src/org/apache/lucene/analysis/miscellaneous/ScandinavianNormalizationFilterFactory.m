@@ -4,45 +4,34 @@
 //
 
 #include "J2ObjC_source.h"
-#include "java/lang/IllegalArgumentException.h"
-#include "java/util/Map.h"
-#include "org/apache/lucene/analysis/TokenStream.h"
-#include "org/apache/lucene/analysis/miscellaneous/ScandinavianNormalizationFilter.h"
 #include "org/apache/lucene/analysis/miscellaneous/ScandinavianNormalizationFilterFactory.h"
-#include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilterFactory
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args {
-  OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilterFactory_initWithJavaUtilMap_(self, args);
+- (instancetype)init {
+  OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilterFactory_init(self);
   return self;
-}
-
-- (OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  return [new_OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_(input) autorelease];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "ScandinavianNormalizationFilterFactory", NULL, 0x1, NULL, NULL },
-    { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.miscellaneous.ScandinavianNormalizationFilter;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilterFactory = { 2, "ScandinavianNormalizationFilterFactory", "org.apache.lucene.analysis.miscellaneous", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilterFactory = { 2, "ScandinavianNormalizationFilterFactory", "org.apache.lucene.analysis.miscellaneous", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilterFactory;
 }
 
 @end
 
-void OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilterFactory *self, id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
-  if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
-  }
+void OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilterFactory_init(OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilterFactory *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilterFactory *new_OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilterFactory *new_OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilterFactory_init() {
   OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilterFactory *self = [OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilterFactory alloc];
-  OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilterFactory_initWithJavaUtilMap_(self, args);
+  OrgApacheLuceneAnalysisMiscellaneousScandinavianNormalizationFilterFactory_init(self);
   return self;
 }
 

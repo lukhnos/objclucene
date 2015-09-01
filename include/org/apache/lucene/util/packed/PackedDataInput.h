@@ -16,32 +16,19 @@
 #if !defined (_OrgApacheLuceneUtilPackedPackedDataInput_) && (OrgApacheLuceneUtilPackedPackedDataInput_INCLUDE_ALL || OrgApacheLuceneUtilPackedPackedDataInput_INCLUDE)
 #define _OrgApacheLuceneUtilPackedPackedDataInput_
 
-@class OrgApacheLuceneStoreDataInput;
-
-@interface OrgApacheLuceneUtilPackedPackedDataInput : NSObject {
- @public
-  OrgApacheLuceneStoreDataInput *in_;
-  jlong current_;
-  jint remainingBits_;
-}
+@interface OrgApacheLuceneUtilPackedPackedDataInput : NSObject
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg;
-
-- (jlong)readLongWithInt:(jint)bitsPerValue;
-
-- (void)skipToNextByte;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilPackedPackedDataInput)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPackedPackedDataInput, in_, OrgApacheLuceneStoreDataInput *)
+FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedPackedDataInput_init(OrgApacheLuceneUtilPackedPackedDataInput *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedPackedDataInput_initWithOrgApacheLuceneStoreDataInput_(OrgApacheLuceneUtilPackedPackedDataInput *self, OrgApacheLuceneStoreDataInput *inArg);
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPackedDataInput *new_OrgApacheLuceneUtilPackedPackedDataInput_initWithOrgApacheLuceneStoreDataInput_(OrgApacheLuceneStoreDataInput *inArg) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPackedDataInput *new_OrgApacheLuceneUtilPackedPackedDataInput_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedDataInput)
 

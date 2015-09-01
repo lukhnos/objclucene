@@ -54,23 +54,12 @@
                                                      withBoolean:(jboolean)allowArrayArcs
                                                          withInt:(jint)bytesPageBits;
 
-- (instancetype)initWithOrgApacheLuceneUtilFstFST_INPUT_TYPEEnum:(OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum *)inputType
-                               withOrgApacheLuceneUtilFstOutputs:(OrgApacheLuceneUtilFstOutputs *)outputs;
-
 - (void)addWithOrgApacheLuceneUtilIntsRef:(OrgApacheLuceneUtilIntsRef *)input
                                    withId:(id)output;
 
 - (OrgApacheLuceneUtilFstFST *)finish;
 
-- (jlong)fstRamBytesUsed;
-
-- (jlong)getArcCount;
-
-- (jlong)getMappedStateCount;
-
 - (jlong)getNodeCount;
-
-- (jlong)getTermCount;
 
 @end
 
@@ -79,10 +68,6 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilFstBuilder)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstBuilder, fst_, OrgApacheLuceneUtilFstFST *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstBuilder, reusedBytesPerArc_, IOSIntArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstBuilder, bytes_, OrgApacheLuceneUtilFstBytesStore *)
-
-FOUNDATION_EXPORT void OrgApacheLuceneUtilFstBuilder_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_withOrgApacheLuceneUtilFstOutputs_(OrgApacheLuceneUtilFstBuilder *self, OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum *inputType, OrgApacheLuceneUtilFstOutputs *outputs);
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilFstBuilder *new_OrgApacheLuceneUtilFstBuilder_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_withOrgApacheLuceneUtilFstOutputs_(OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum *inputType, OrgApacheLuceneUtilFstOutputs *outputs) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilFstBuilder_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_withInt_withInt_withBoolean_withBoolean_withInt_withOrgApacheLuceneUtilFstOutputs_withBoolean_withFloat_withBoolean_withInt_(OrgApacheLuceneUtilFstBuilder *self, OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum *inputType, jint minSuffixCount1, jint minSuffixCount2, jboolean doShareSuffix, jboolean doShareNonSingletonNodes, jint shareMaxTailLength, OrgApacheLuceneUtilFstOutputs *outputs, jboolean doPackFST, jfloat acceptableOverheadRatio, jboolean allowArrayArcs, jint bytesPageBits);
 

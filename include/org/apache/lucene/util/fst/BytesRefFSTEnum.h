@@ -20,7 +20,6 @@
 #define OrgApacheLuceneUtilFstFSTEnum_INCLUDE 1
 #include "org/apache/lucene/util/fst/FSTEnum.h"
 
-@class OrgApacheLuceneUtilBytesRef;
 @class OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput;
 @class OrgApacheLuceneUtilFstFST;
 
@@ -30,21 +29,9 @@
 
 - (instancetype)initWithOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)fst;
 
-- (OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput *)current;
-
 - (OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput *)next;
 
-- (OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput *)seekCeilWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)target;
-
-- (OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput *)seekExactWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)target;
-
-- (OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput *)seekFloorWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)target;
-
 #pragma mark Protected
-
-- (jint)getCurrentLabel;
-
-- (jint)getTargetLabel;
 
 - (void)grow;
 

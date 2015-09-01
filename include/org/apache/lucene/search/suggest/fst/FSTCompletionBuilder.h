@@ -16,46 +16,23 @@
 #if !defined (_OrgApacheLuceneSearchSuggestFstFSTCompletionBuilder_) && (OrgApacheLuceneSearchSuggestFstFSTCompletionBuilder_INCLUDE_ALL || OrgApacheLuceneSearchSuggestFstFSTCompletionBuilder_INCLUDE)
 #define _OrgApacheLuceneSearchSuggestFstFSTCompletionBuilder_
 
-@class OrgApacheLuceneSearchSuggestFstFSTCompletion;
-@class OrgApacheLuceneUtilBytesRef;
-@class OrgApacheLuceneUtilFstFST;
-@protocol OrgApacheLuceneSearchSuggestFstBytesRefSorter;
-
 #define OrgApacheLuceneSearchSuggestFstFSTCompletionBuilder_DEFAULT_BUCKETS 10
 
-@interface OrgApacheLuceneSearchSuggestFstFSTCompletionBuilder : NSObject {
- @public
-  OrgApacheLuceneUtilFstFST *automaton_;
-}
+@interface OrgApacheLuceneSearchSuggestFstFSTCompletionBuilder : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
-- (instancetype)initWithInt:(jint)buckets
-withOrgApacheLuceneSearchSuggestFstBytesRefSorter:(id<OrgApacheLuceneSearchSuggestFstBytesRefSorter>)sorter
-                    withInt:(jint)shareMaxTailLength;
-
-- (void)addWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)utf8
-                                   withInt:(jint)bucket;
-
-- (OrgApacheLuceneSearchSuggestFstFSTCompletion *)build;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestFstFSTCompletionBuilder)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestFstFSTCompletionBuilder, automaton_, OrgApacheLuceneUtilFstFST *)
 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchSuggestFstFSTCompletionBuilder, DEFAULT_BUCKETS, jint)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestFstFSTCompletionBuilder_init(OrgApacheLuceneSearchSuggestFstFSTCompletionBuilder *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestFstFSTCompletionBuilder *new_OrgApacheLuceneSearchSuggestFstFSTCompletionBuilder_init() NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestFstFSTCompletionBuilder_initWithInt_withOrgApacheLuceneSearchSuggestFstBytesRefSorter_withInt_(OrgApacheLuceneSearchSuggestFstFSTCompletionBuilder *self, jint buckets, id<OrgApacheLuceneSearchSuggestFstBytesRefSorter> sorter, jint shareMaxTailLength);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestFstFSTCompletionBuilder *new_OrgApacheLuceneSearchSuggestFstFSTCompletionBuilder_initWithInt_withOrgApacheLuceneSearchSuggestFstBytesRefSorter_withInt_(jint buckets, id<OrgApacheLuceneSearchSuggestFstBytesRefSorter> sorter, jint shareMaxTailLength) NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestFstFSTCompletionBuilder)
 

@@ -33,13 +33,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsMultiLevelSkipListWriter, skipBuffer_, 
   return self;
 }
 
-- (instancetype)initWithInt:(jint)skipInterval
-                    withInt:(jint)maxSkipLevels
-                    withInt:(jint)df {
-  OrgApacheLuceneCodecsMultiLevelSkipListWriter_initWithInt_withInt_withInt_(self, skipInterval, maxSkipLevels, df);
-  return self;
-}
-
 - (void)init__ {
   JreStrongAssignAndConsume(&skipBuffer_, [IOSObjectArray newArrayWithLength:numberOfSkipLevels_ type:OrgApacheLuceneStoreRAMOutputStream_class_()]);
   for (jint i = 0; i < numberOfSkipLevels_; i++) {
@@ -105,7 +98,6 @@ withOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)skipBuffe
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithInt:withInt:withInt:withInt:", "MultiLevelSkipListWriter", NULL, 0x4, NULL, NULL },
-    { "initWithInt:withInt:withInt:", "MultiLevelSkipListWriter", NULL, 0x4, NULL, NULL },
     { "init__", "init", "V", 0x4, NULL, NULL },
     { "resetSkip", NULL, "V", 0x4, NULL, NULL },
     { "writeSkipDataWithInt:withOrgApacheLuceneStoreIndexOutput:", "writeSkipData", "V", 0x404, "Ljava.io.IOException;", NULL },
@@ -118,7 +110,7 @@ withOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)skipBuffe
     { "skipMultiplier_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "skipBuffer_", NULL, 0x2, "[Lorg.apache.lucene.store.RAMOutputStream;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsMultiLevelSkipListWriter = { 2, "MultiLevelSkipListWriter", "org.apache.lucene.codecs", NULL, 0x401, 7, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsMultiLevelSkipListWriter = { 2, "MultiLevelSkipListWriter", "org.apache.lucene.codecs", NULL, 0x401, 6, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneCodecsMultiLevelSkipListWriter;
 }
 
@@ -137,10 +129,6 @@ void OrgApacheLuceneCodecsMultiLevelSkipListWriter_initWithInt_withInt_withInt_w
   if (self->numberOfSkipLevels_ > maxSkipLevels) {
     self->numberOfSkipLevels_ = maxSkipLevels;
   }
-}
-
-void OrgApacheLuceneCodecsMultiLevelSkipListWriter_initWithInt_withInt_withInt_(OrgApacheLuceneCodecsMultiLevelSkipListWriter *self, jint skipInterval, jint maxSkipLevels, jint df) {
-  OrgApacheLuceneCodecsMultiLevelSkipListWriter_initWithInt_withInt_withInt_withInt_(self, skipInterval, skipInterval, maxSkipLevels, df);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsMultiLevelSkipListWriter)

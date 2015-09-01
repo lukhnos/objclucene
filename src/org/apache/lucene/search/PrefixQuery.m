@@ -28,10 +28,6 @@
   return OrgApacheLuceneSearchPrefixQuery_toAutomatonWithOrgApacheLuceneUtilBytesRef_(prefix);
 }
 
-- (OrgApacheLuceneIndexTerm *)getPrefix {
-  return term_;
-}
-
 - (NSString *)toStringWithNSString:(NSString *)field {
   JavaLangStringBuilder *buffer = [new_JavaLangStringBuilder_init() autorelease];
   if (![((NSString *) nil_chk([self getField])) isEqual:field]) {
@@ -69,12 +65,11 @@
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneIndexTerm:", "PrefixQuery", NULL, 0x1, NULL, NULL },
     { "toAutomatonWithOrgApacheLuceneUtilBytesRef:", "toAutomaton", "Lorg.apache.lucene.util.automaton.Automaton;", 0x9, NULL, NULL },
-    { "getPrefix", NULL, "Lorg.apache.lucene.index.Term;", 0x1, NULL, NULL },
     { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "hash", "hashCode", "I", 0x1, NULL, NULL },
     { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchPrefixQuery = { 2, "PrefixQuery", "org.apache.lucene.search", NULL, 0x1, 6, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchPrefixQuery = { 2, "PrefixQuery", "org.apache.lucene.search", NULL, 0x1, 5, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchPrefixQuery;
 }
 

@@ -22,17 +22,11 @@
 
 @class OrgApacheLuceneIndexIndexReader;
 @class OrgApacheLuceneSearchIndexSearcher;
-@class OrgApacheLuceneSearchJoinScoreModeEnum;
 @class OrgApacheLuceneSearchWeight;
-@protocol OrgApacheLuceneSearchJoinBitSetProducer;
 
 @interface OrgApacheLuceneSearchJoinToParentBlockJoinQuery : OrgApacheLuceneSearchQuery
 
 #pragma mark Public
-
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)childQuery
-       withOrgApacheLuceneSearchJoinBitSetProducer:(id<OrgApacheLuceneSearchJoinBitSetProducer>)parentsFilter
-        withOrgApacheLuceneSearchJoinScoreModeEnum:(OrgApacheLuceneSearchJoinScoreModeEnum *)scoreMode;
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores;
@@ -51,10 +45,6 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinToParentBlockJoinQuery)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinToParentBlockJoinQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchJoinBitSetProducer_withOrgApacheLuceneSearchJoinScoreModeEnum_(OrgApacheLuceneSearchJoinToParentBlockJoinQuery *self, OrgApacheLuceneSearchQuery *childQuery, id<OrgApacheLuceneSearchJoinBitSetProducer> parentsFilter, OrgApacheLuceneSearchJoinScoreModeEnum *scoreMode);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchJoinToParentBlockJoinQuery *new_OrgApacheLuceneSearchJoinToParentBlockJoinQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchJoinBitSetProducer_withOrgApacheLuceneSearchJoinScoreModeEnum_(OrgApacheLuceneSearchQuery *childQuery, id<OrgApacheLuceneSearchJoinBitSetProducer> parentsFilter, OrgApacheLuceneSearchJoinScoreModeEnum *scoreMode) NS_RETURNS_RETAINED;
-
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinToParentBlockJoinQuery)
 
 #endif
@@ -66,13 +56,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinToParentBlockJoinQuery)
 #define OrgApacheLuceneSearchScorer_INCLUDE 1
 #include "org/apache/lucene/search/Scorer.h"
 
-@class IOSFloatArray;
-@class IOSIntArray;
-@class OrgApacheLuceneSearchExplanation;
 @class OrgApacheLuceneSearchJoinScoreModeEnum;
 @class OrgApacheLuceneSearchWeight;
 @class OrgApacheLuceneUtilBitSet;
-@protocol JavaUtilCollection;
 
 @interface OrgApacheLuceneSearchJoinToParentBlockJoinQuery_BlockJoinScorer : OrgApacheLuceneSearchScorer
 
@@ -90,27 +76,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinToParentBlockJoinQuery)
 
 - (jint)docID;
 
-- (OrgApacheLuceneSearchExplanation *)explainWithInt:(jint)docBase;
-
 - (jint)freq;
-
-- (id<JavaUtilCollection>)getChildren;
 
 - (jint)nextDoc;
 
 - (jfloat)score;
-
-- (void)trackPendingChildHits;
-
-#pragma mark Package-Private
-
-- (jint)getChildCount;
-
-- (jint)getParentDoc;
-
-- (IOSIntArray *)swapChildDocsWithIntArray:(IOSIntArray *)other;
-
-- (IOSFloatArray *)swapChildScoresWithFloatArray:(IOSFloatArray *)other;
 
 @end
 

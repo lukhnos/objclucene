@@ -20,41 +20,19 @@
 #define OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource_INCLUDE 1
 #include "org/apache/lucene/queries/function/valuesource/DocFreqValueSource.h"
 
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneQueriesFunctionFunctionValues;
-@class OrgApacheLuceneSearchSimilaritiesSimilarity;
-@class OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity;
-@class OrgApacheLuceneUtilBytesRef;
-@protocol JavaUtilMap;
-
 @interface OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource : OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field
-                    withNSString:(NSString *)val
-                    withNSString:(NSString *)indexedField
- withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)indexedBytes;
-
-- (OrgApacheLuceneQueriesFunctionFunctionValues *)getValuesWithJavaUtilMap:(id<JavaUtilMap>)context
-                                 withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext;
-
-- (NSString *)name;
-
-#pragma mark Package-Private
-
-+ (OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *)asTFIDFWithOrgApacheLuceneSearchSimilaritiesSimilarity:(OrgApacheLuceneSearchSimilaritiesSimilarity *)sim
-                                                                                                withNSString:(NSString *)field;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource_initWithNSString_withNSString_withNSString_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource *self, NSString *field, NSString *val, NSString *indexedField, OrgApacheLuceneUtilBytesRef *indexedBytes);
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource_init(OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource_initWithNSString_withNSString_withNSString_withOrgApacheLuceneUtilBytesRef_(NSString *field, NSString *val, NSString *indexedField, OrgApacheLuceneUtilBytesRef *indexedBytes) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource_asTFIDFWithOrgApacheLuceneSearchSimilaritiesSimilarity_withNSString_(OrgApacheLuceneSearchSimilaritiesSimilarity *sim, NSString *field);
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceIDFValueSource)
 

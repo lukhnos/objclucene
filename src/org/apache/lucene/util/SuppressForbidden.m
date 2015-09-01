@@ -23,11 +23,7 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "reason", "reason", "Ljava.lang.String;", 0x401, NULL, NULL },
-    { "reasonDefault", "reason", "Ljava.lang.String;", 0x100a, NULL, NULL },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilSuppressForbidden = { 2, "SuppressForbidden", "org.apache.lucene.util", NULL, 0x2609, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilSuppressForbidden = { 2, "SuppressForbidden", "org.apache.lucene.util", NULL, 0x2609, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilSuppressForbidden;
 }
 

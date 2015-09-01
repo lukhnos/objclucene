@@ -20,18 +20,7 @@
 #define JavaIoCloseable_INCLUDE 1
 #include "java/io/Closeable.h"
 
-@protocol OrgApacheLuceneBkdtreeLatLonReader;
-
 @protocol OrgApacheLuceneBkdtreeLatLonWriter < JavaIoCloseable, NSObject, JavaObject >
-
-- (void)appendWithInt:(jint)latEnc
-              withInt:(jint)lonEnc
-             withLong:(jlong)ord
-              withInt:(jint)docID;
-
-- (id<OrgApacheLuceneBkdtreeLatLonReader>)getReaderWithLong:(jlong)start;
-
-- (void)destroy;
 
 @end
 

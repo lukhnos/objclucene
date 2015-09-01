@@ -33,21 +33,10 @@
 - (instancetype)init;
 
 - (instancetype)initWithInt:(jint)blockSize
-                    withInt:(jint)maxBufferedBlocks;
-
-- (instancetype)initWithInt:(jint)blockSize
                     withInt:(jint)maxBufferedBlocks
 withOrgApacheLuceneUtilCounter:(OrgApacheLuceneUtilCounter *)bytesUsed;
 
-- (jlong)bytesUsed;
-
-- (jint)freeBlocksWithInt:(jint)num;
-
 - (IOSByteArray *)getByteBlock;
-
-- (jint)maxBufferedBlocks;
-
-- (jint)numBufferedBlocks;
 
 - (void)recycleByteBlocksWithByteArray2:(IOSObjectArray *)blocks
                                 withInt:(jint)start
@@ -62,10 +51,6 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilRecyclingByteBlockAllocator, DEFAU
 FOUNDATION_EXPORT void OrgApacheLuceneUtilRecyclingByteBlockAllocator_initWithInt_withInt_withOrgApacheLuceneUtilCounter_(OrgApacheLuceneUtilRecyclingByteBlockAllocator *self, jint blockSize, jint maxBufferedBlocks, OrgApacheLuceneUtilCounter *bytesUsed);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilRecyclingByteBlockAllocator *new_OrgApacheLuceneUtilRecyclingByteBlockAllocator_initWithInt_withInt_withOrgApacheLuceneUtilCounter_(jint blockSize, jint maxBufferedBlocks, OrgApacheLuceneUtilCounter *bytesUsed) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneUtilRecyclingByteBlockAllocator_initWithInt_withInt_(OrgApacheLuceneUtilRecyclingByteBlockAllocator *self, jint blockSize, jint maxBufferedBlocks);
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilRecyclingByteBlockAllocator *new_OrgApacheLuceneUtilRecyclingByteBlockAllocator_initWithInt_withInt_(jint blockSize, jint maxBufferedBlocks) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilRecyclingByteBlockAllocator_init(OrgApacheLuceneUtilRecyclingByteBlockAllocator *self);
 

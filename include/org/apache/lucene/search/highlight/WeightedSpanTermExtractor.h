@@ -32,12 +32,7 @@
 
 - (instancetype)initWithNSString:(NSString *)defaultField;
 
-- (jboolean)getExpandMultiTermQuery;
-
 - (OrgApacheLuceneAnalysisTokenStream *)getTokenStream;
-
-- (id<JavaUtilMap>)getWeightedSpanTermsWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-                               withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tokenStream;
 
 - (id<JavaUtilMap>)getWeightedSpanTermsWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
                                withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tokenStream
@@ -49,8 +44,6 @@
                                             withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
 
 - (jboolean)isCachedTokenStream;
-
-- (jboolean)isUsePayloads;
 
 - (void)setExpandMultiTermQueryWithBoolean:(jboolean)expandMultiTermQuery;
 

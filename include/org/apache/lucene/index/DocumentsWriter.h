@@ -24,7 +24,6 @@
 #define OrgApacheLuceneUtilAccountable_INCLUDE 1
 #include "org/apache/lucene/util/Accountable.h"
 
-@class IOSObjectArray;
 @class OrgApacheLuceneAnalysisAnalyzer;
 @class OrgApacheLuceneIndexDocumentsWriterDeleteQueue;
 @class OrgApacheLuceneIndexDocumentsWriterFlushControl;
@@ -35,7 +34,6 @@
 @class OrgApacheLuceneIndexTerm;
 @class OrgApacheLuceneStoreDirectory;
 @protocol JavaLangIterable;
-@protocol JavaUtilCollection;
 @protocol JavaUtilQueue;
 
 @interface OrgApacheLuceneIndexDocumentsWriter : NSObject < JavaIoCloseable, OrgApacheLuceneUtilAccountable > {
@@ -54,14 +52,6 @@
 
 - (id<JavaUtilQueue>)eventQueue;
 
-- (jint)getBufferedDeleteTermsSize;
-
-- (id<JavaUtilCollection>)getChildResources;
-
-- (OrgApacheLuceneIndexLiveIndexWriterConfig *)getIndexWriterConfig;
-
-- (jint)getNumBufferedDeleteTerms;
-
 - (jlong)ramBytesUsed;
 
 #pragma mark Package-Private
@@ -75,12 +65,6 @@
 
 - (jboolean)anyChanges;
 
-- (OrgApacheLuceneIndexDocumentsWriterDeleteQueue *)currentDeleteSession;
-
-- (jboolean)deleteQueriesWithOrgApacheLuceneSearchQueryArray:(IOSObjectArray *)queries;
-
-- (jboolean)deleteTermsWithOrgApacheLuceneIndexTermArray:(IOSObjectArray *)terms;
-
 - (void)finishFullFlushWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)indexWriter
                                                withBoolean:(jboolean)success;
 
@@ -88,24 +72,14 @@
 
 - (jint)getNumDocs;
 
-- (jlong)lockAndAbortAllWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)indexWriter;
-
 - (jint)purgeBufferWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer
                                            withBoolean:(jboolean)forced;
 
 - (void)subtractFlushedNumDocsWithInt:(jint)numFlushed;
 
-- (void)unlockAllAfterAbortAllWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)indexWriter;
-
 - (jboolean)updateDocumentWithJavaLangIterable:(id<JavaLangIterable>)doc
            withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
                   withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)delTerm;
-
-- (jboolean)updateDocumentsWithJavaLangIterable:(id<JavaLangIterable>)docs
-            withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
-                   withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)delTerm;
-
-- (jboolean)updateDocValuesWithOrgApacheLuceneIndexDocValuesUpdateArray:(IOSObjectArray *)updates;
 
 @end
 

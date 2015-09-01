@@ -76,11 +76,6 @@ withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer:(OrgApacheLuceneSearch
   return numMatches_;
 }
 
-- (jfloat)sloppyFreq {
-  OrgApacheLuceneSearchSpansSpanScorer_ensureFreq(self);
-  return freq_;
-}
-
 - (jlong)cost {
   return [((OrgApacheLuceneSearchSpansSpans *) nil_chk(spans_)) cost];
 }
@@ -108,7 +103,6 @@ withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer:(OrgApacheLuceneSearch
     { "docID", NULL, "I", 0x11, NULL, NULL },
     { "score", NULL, "F", 0x11, "Ljava.io.IOException;", NULL },
     { "freq", NULL, "I", 0x11, "Ljava.io.IOException;", NULL },
-    { "sloppyFreq", NULL, "F", 0x11, "Ljava.io.IOException;", NULL },
     { "cost", NULL, "J", 0x11, NULL, NULL },
     { "asTwoPhaseIterator", NULL, "Lorg.apache.lucene.search.TwoPhaseIterator;", 0x11, NULL, NULL },
   };
@@ -119,7 +113,7 @@ withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer:(OrgApacheLuceneSearch
     { "numMatches_", NULL, 0x4, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "lastScoredDoc_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpanScorer = { 2, "SpanScorer", "org.apache.lucene.search.spans", NULL, 0x1, 14, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpanScorer = { 2, "SpanScorer", "org.apache.lucene.search.spans", NULL, 0x1, 13, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchSpansSpanScorer;
 }
 

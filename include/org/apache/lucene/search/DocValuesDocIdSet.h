@@ -20,37 +20,17 @@
 #define OrgApacheLuceneSearchDocIdSet_INCLUDE 1
 #include "org/apache/lucene/search/DocIdSet.h"
 
-@class OrgApacheLuceneSearchDocIdSetIterator;
-@protocol OrgApacheLuceneUtilBits;
-
-@interface OrgApacheLuceneSearchDocValuesDocIdSet : OrgApacheLuceneSearchDocIdSet {
- @public
-  jint maxDoc_;
-  id<OrgApacheLuceneUtilBits> acceptDocs_;
-}
+@interface OrgApacheLuceneSearchDocValuesDocIdSet : OrgApacheLuceneSearchDocIdSet
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)maxDoc
-withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)acceptDocs;
-
-- (id<OrgApacheLuceneUtilBits>)bits;
-
-- (OrgApacheLuceneSearchDocIdSetIterator *)iterator;
-
-- (jlong)ramBytesUsed;
-
-#pragma mark Protected
-
-- (jboolean)matchDocWithInt:(jint)doc;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchDocValuesDocIdSet)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchDocValuesDocIdSet, acceptDocs_, id<OrgApacheLuceneUtilBits>)
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchDocValuesDocIdSet_initWithInt_withOrgApacheLuceneUtilBits_(OrgApacheLuceneSearchDocValuesDocIdSet *self, jint maxDoc, id<OrgApacheLuceneUtilBits> acceptDocs);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchDocValuesDocIdSet_init(OrgApacheLuceneSearchDocValuesDocIdSet *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocValuesDocIdSet)
 

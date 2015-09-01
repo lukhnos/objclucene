@@ -20,30 +20,11 @@
 #define OrgApacheLuceneQueriesFunctionValueSource_INCLUDE 1
 #include "org/apache/lucene/queries/function/ValueSource.h"
 
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneQueriesFunctionFunctionValues;
-@class OrgApacheLuceneSearchIndexSearcher;
-@protocol JavaUtilMap;
-
 @interface OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource : OrgApacheLuceneQueriesFunctionValueSource
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (void)createWeightWithJavaUtilMap:(id<JavaUtilMap>)context
-withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher;
-
-- (NSString *)description__;
-
-- (jboolean)isEqual:(id)o;
-
-- (OrgApacheLuceneQueriesFunctionFunctionValues *)getValuesWithJavaUtilMap:(id<JavaUtilMap>)context
-                                 withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext;
-
-- (NSUInteger)hash;
-
-- (NSString *)name;
 
 @end
 

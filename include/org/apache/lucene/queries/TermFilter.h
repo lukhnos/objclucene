@@ -20,23 +20,19 @@
 #define OrgApacheLuceneSearchQueryWrapperFilter_INCLUDE 1
 #include "org/apache/lucene/search/QueryWrapperFilter.h"
 
-@class OrgApacheLuceneIndexTerm;
-
 @interface OrgApacheLuceneQueriesTermFilter : OrgApacheLuceneSearchQueryWrapperFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
-
-- (NSString *)toStringWithNSString:(NSString *)field;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesTermFilter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesTermFilter_initWithOrgApacheLuceneIndexTerm_(OrgApacheLuceneQueriesTermFilter *self, OrgApacheLuceneIndexTerm *term);
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesTermFilter_init(OrgApacheLuceneQueriesTermFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueriesTermFilter *new_OrgApacheLuceneQueriesTermFilter_initWithOrgApacheLuceneIndexTerm_(OrgApacheLuceneIndexTerm *term) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueriesTermFilter *new_OrgApacheLuceneQueriesTermFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesTermFilter)
 

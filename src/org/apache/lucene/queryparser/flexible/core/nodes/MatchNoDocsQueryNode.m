@@ -4,8 +4,9 @@
 //
 
 #include "J2ObjC_source.h"
-#include "org/apache/lucene/queryparser/flexible/core/nodes/DeletedQueryNode.h"
 #include "org/apache/lucene/queryparser/flexible/core/nodes/MatchNoDocsQueryNode.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneQueryparserFlexibleCoreNodesMatchNoDocsQueryNode
 
@@ -14,23 +15,18 @@
   return self;
 }
 
-- (NSString *)description {
-  return @"<matchNoDocsQueryNode/>";
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", "MatchNoDocsQueryNode", NULL, 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesMatchNoDocsQueryNode = { 2, "MatchNoDocsQueryNode", "org.apache.lucene.queryparser.flexible.core.nodes", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesMatchNoDocsQueryNode = { 2, "MatchNoDocsQueryNode", "org.apache.lucene.queryparser.flexible.core.nodes", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserFlexibleCoreNodesMatchNoDocsQueryNode;
 }
 
 @end
 
 void OrgApacheLuceneQueryparserFlexibleCoreNodesMatchNoDocsQueryNode_init(OrgApacheLuceneQueryparserFlexibleCoreNodesMatchNoDocsQueryNode *self) {
-  OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode_init(self);
+  NSObject_init(self);
 }
 
 OrgApacheLuceneQueryparserFlexibleCoreNodesMatchNoDocsQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesMatchNoDocsQueryNode_init() {

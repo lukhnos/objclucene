@@ -44,17 +44,7 @@
                                                                withInt:(jint)start
                                                                withInt:(jint)end;
 
-- (jchar)charAtWithInt:(jint)offset;
-
 - (IOSCharArray *)chars;
-
-- (void)clear;
-
-- (void)copyCharsWithCharArray:(IOSCharArray *)otherChars
-                       withInt:(jint)otherOffset
-                       withInt:(jint)otherLength OBJC_METHOD_FAMILY_NONE;
-
-- (void)copyCharsWithOrgApacheLuceneUtilCharsRef:(OrgApacheLuceneUtilCharsRef *)other OBJC_METHOD_FAMILY_NONE;
 
 - (void)copyUTF8BytesWithByteArray:(IOSByteArray *)bytes
                            withInt:(jint)offset
@@ -74,10 +64,6 @@
 
 - (void)setCharAtWithInt:(jint)offset
                 withChar:(jchar)b;
-
-- (void)setLengthWithInt:(jint)length;
-
-- (OrgApacheLuceneUtilCharsRef *)toCharsRef;
 
 - (NSString *)description;
 

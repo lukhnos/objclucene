@@ -37,12 +37,6 @@ withOrgApacheLuceneUtilCounter:(OrgApacheLuceneUtilCounter *)bytesUsed {
   return self;
 }
 
-- (instancetype)initWithInt:(jint)blockSize
-                    withInt:(jint)maxBufferedBlocks {
-  OrgApacheLuceneUtilRecyclingByteBlockAllocator_initWithInt_withInt_(self, blockSize, maxBufferedBlocks);
-  return self;
-}
-
 - (instancetype)init {
   OrgApacheLuceneUtilRecyclingByteBlockAllocator_init(self);
   return self;
@@ -80,38 +74,6 @@ withOrgApacheLuceneUtilCounter:(OrgApacheLuceneUtilCounter *)bytesUsed {
   JreAssert(([bytesUsed_ get] >= 0), (@"org/apache/lucene/util/RecyclingByteBlockAllocator.java:108 condition failed: assert bytesUsed.get() >= 0;"));
 }
 
-- (jint)numBufferedBlocks {
-  return freeBlocks_;
-}
-
-- (jlong)bytesUsed {
-  return [((OrgApacheLuceneUtilCounter *) nil_chk(bytesUsed_)) get];
-}
-
-- (jint)maxBufferedBlocks {
-  return maxBufferedBlocks_;
-}
-
-- (jint)freeBlocksWithInt:(jint)num {
-  JreAssert((num >= 0), (JreStrcat("$I", @"free blocks must be >= 0 but was: ", num)));
-  jint stop;
-  jint count;
-  if (num > freeBlocks_) {
-    stop = 0;
-    count = freeBlocks_;
-  }
-  else {
-    stop = freeBlocks_ - num;
-    count = num;
-  }
-  while (freeBlocks_ > stop) {
-    IOSObjectArray_Set(nil_chk(freeByteBlocks_), --freeBlocks_, nil);
-  }
-  [((OrgApacheLuceneUtilCounter *) nil_chk(bytesUsed_)) addAndGetWithLong:-count * blockSize_];
-  JreAssert(([bytesUsed_ get] >= 0), (@"org/apache/lucene/util/RecyclingByteBlockAllocator.java:154 condition failed: assert bytesUsed.get() >= 0;"));
-  return count;
-}
-
 - (void)dealloc {
   RELEASE_(freeByteBlocks_);
   RELEASE_(bytesUsed_);
@@ -121,14 +83,9 @@ withOrgApacheLuceneUtilCounter:(OrgApacheLuceneUtilCounter *)bytesUsed {
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithInt:withInt:withOrgApacheLuceneUtilCounter:", "RecyclingByteBlockAllocator", NULL, 0x1, NULL, NULL },
-    { "initWithInt:withInt:", "RecyclingByteBlockAllocator", NULL, 0x1, NULL, NULL },
     { "init", "RecyclingByteBlockAllocator", NULL, 0x1, NULL, NULL },
     { "getByteBlock", NULL, "[B", 0x1, NULL, NULL },
     { "recycleByteBlocksWithByteArray2:withInt:withInt:", "recycleByteBlocks", "V", 0x1, NULL, NULL },
-    { "numBufferedBlocks", NULL, "I", 0x1, NULL, NULL },
-    { "bytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "maxBufferedBlocks", NULL, "I", 0x1, NULL, NULL },
-    { "freeBlocksWithInt:", "freeBlocks", "I", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "freeByteBlocks_", NULL, 0x2, "[[B", NULL, NULL, .constantValue.asLong = 0 },
@@ -137,7 +94,7 @@ withOrgApacheLuceneUtilCounter:(OrgApacheLuceneUtilCounter *)bytesUsed {
     { "bytesUsed_", NULL, 0x12, "Lorg.apache.lucene.util.Counter;", NULL, NULL, .constantValue.asLong = 0 },
     { "DEFAULT_BUFFERED_BLOCKS", "DEFAULT_BUFFERED_BLOCKS", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilRecyclingByteBlockAllocator_DEFAULT_BUFFERED_BLOCKS },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilRecyclingByteBlockAllocator = { 2, "RecyclingByteBlockAllocator", "org.apache.lucene.util", NULL, 0x11, 9, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilRecyclingByteBlockAllocator = { 2, "RecyclingByteBlockAllocator", "org.apache.lucene.util", NULL, 0x11, 4, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilRecyclingByteBlockAllocator;
 }
 
@@ -154,16 +111,6 @@ void OrgApacheLuceneUtilRecyclingByteBlockAllocator_initWithInt_withInt_withOrgA
 OrgApacheLuceneUtilRecyclingByteBlockAllocator *new_OrgApacheLuceneUtilRecyclingByteBlockAllocator_initWithInt_withInt_withOrgApacheLuceneUtilCounter_(jint blockSize, jint maxBufferedBlocks, OrgApacheLuceneUtilCounter *bytesUsed) {
   OrgApacheLuceneUtilRecyclingByteBlockAllocator *self = [OrgApacheLuceneUtilRecyclingByteBlockAllocator alloc];
   OrgApacheLuceneUtilRecyclingByteBlockAllocator_initWithInt_withInt_withOrgApacheLuceneUtilCounter_(self, blockSize, maxBufferedBlocks, bytesUsed);
-  return self;
-}
-
-void OrgApacheLuceneUtilRecyclingByteBlockAllocator_initWithInt_withInt_(OrgApacheLuceneUtilRecyclingByteBlockAllocator *self, jint blockSize, jint maxBufferedBlocks) {
-  OrgApacheLuceneUtilRecyclingByteBlockAllocator_initWithInt_withInt_withOrgApacheLuceneUtilCounter_(self, blockSize, maxBufferedBlocks, OrgApacheLuceneUtilCounter_newCounterWithBoolean_(NO));
-}
-
-OrgApacheLuceneUtilRecyclingByteBlockAllocator *new_OrgApacheLuceneUtilRecyclingByteBlockAllocator_initWithInt_withInt_(jint blockSize, jint maxBufferedBlocks) {
-  OrgApacheLuceneUtilRecyclingByteBlockAllocator *self = [OrgApacheLuceneUtilRecyclingByteBlockAllocator alloc];
-  OrgApacheLuceneUtilRecyclingByteBlockAllocator_initWithInt_withInt_(self, blockSize, maxBufferedBlocks);
   return self;
 }
 

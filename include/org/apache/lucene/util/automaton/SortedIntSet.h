@@ -24,7 +24,6 @@
   IOSIntArray *values_;
   IOSIntArray *counts_;
   jint upto_;
-  jint state_;
 }
 
 #pragma mark Public

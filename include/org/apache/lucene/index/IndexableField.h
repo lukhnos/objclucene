@@ -16,7 +16,6 @@
 #if !defined (_OrgApacheLuceneIndexIndexableField_) && (OrgApacheLuceneIndexIndexableField_INCLUDE_ALL || OrgApacheLuceneIndexIndexableField_INCLUDE)
 #define _OrgApacheLuceneIndexIndexableField_
 
-@class JavaIoReader;
 @class OrgApacheLuceneAnalysisAnalyzer;
 @class OrgApacheLuceneAnalysisTokenStream;
 @class OrgApacheLuceneUtilBytesRef;
@@ -33,8 +32,6 @@
 - (OrgApacheLuceneUtilBytesRef *)binaryValue;
 
 - (NSString *)stringValue;
-
-- (JavaIoReader *)readerValue;
 
 - (NSNumber *)numericValue;
 

@@ -3,30 +3,10 @@
 //  source: ./sandbox/src/java/org/apache/lucene/rangetree/RangeTreeDocValuesFormat.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
-#include "org/apache/lucene/codecs/DocValuesConsumer.h"
-#include "org/apache/lucene/codecs/DocValuesFormat.h"
-#include "org/apache/lucene/codecs/DocValuesProducer.h"
-#include "org/apache/lucene/codecs/lucene50/Lucene50DocValuesFormat.h"
-#include "org/apache/lucene/index/SegmentReadState.h"
-#include "org/apache/lucene/index/SegmentWriteState.h"
-#include "org/apache/lucene/rangetree/RangeTreeDocValuesConsumer.h"
 #include "org/apache/lucene/rangetree/RangeTreeDocValuesFormat.h"
-#include "org/apache/lucene/rangetree/RangeTreeDocValuesProducer.h"
-#include "org/apache/lucene/rangetree/RangeTreeWriter.h"
 
-@interface OrgApacheLuceneRangetreeRangeTreeDocValuesFormat () {
- @public
-  jint maxPointsInLeafNode_;
-  jint maxPointsSortInHeap_;
-  OrgApacheLuceneCodecsDocValuesFormat *delegate_;
-}
-
-@end
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeRangeTreeDocValuesFormat, delegate_, OrgApacheLuceneCodecsDocValuesFormat *)
+#pragma clang diagnostic ignored "-Wprotocol"
 
 NSString *OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_DATA_CODEC_NAME_ = @"RangeTreeData";
 NSString *OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_DATA_EXTENSION_ = @"ndd";
@@ -40,31 +20,9 @@ NSString *OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_META_EXTENSION_ = @"n
   return self;
 }
 
-- (instancetype)initWithInt:(jint)maxPointsInLeafNode
-                    withInt:(jint)maxPointsSortInHeap {
-  OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_initWithInt_withInt_(self, maxPointsInLeafNode, maxPointsSortInHeap);
-  return self;
-}
-
-- (OrgApacheLuceneCodecsDocValuesConsumer *)fieldsConsumerWithOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state {
-  return [new_OrgApacheLuceneRangetreeRangeTreeDocValuesConsumer_initWithOrgApacheLuceneCodecsDocValuesConsumer_withOrgApacheLuceneIndexSegmentWriteState_withInt_withInt_([((OrgApacheLuceneCodecsDocValuesFormat *) nil_chk(delegate_)) fieldsConsumerWithOrgApacheLuceneIndexSegmentWriteState:state], state, maxPointsInLeafNode_, maxPointsSortInHeap_) autorelease];
-}
-
-- (OrgApacheLuceneCodecsDocValuesProducer *)fieldsProducerWithOrgApacheLuceneIndexSegmentReadState:(OrgApacheLuceneIndexSegmentReadState *)state {
-  return [new_OrgApacheLuceneRangetreeRangeTreeDocValuesProducer_initWithOrgApacheLuceneCodecsDocValuesProducer_withOrgApacheLuceneIndexSegmentReadState_([((OrgApacheLuceneCodecsDocValuesFormat *) nil_chk(delegate_)) fieldsProducerWithOrgApacheLuceneIndexSegmentReadState:state], state) autorelease];
-}
-
-- (void)dealloc {
-  RELEASE_(delegate_);
-  [super dealloc];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", "RangeTreeDocValuesFormat", NULL, 0x1, NULL, NULL },
-    { "initWithInt:withInt:", "RangeTreeDocValuesFormat", NULL, 0x1, NULL, NULL },
-    { "fieldsConsumerWithOrgApacheLuceneIndexSegmentWriteState:", "fieldsConsumer", "Lorg.apache.lucene.codecs.DocValuesConsumer;", 0x1, "Ljava.io.IOException;", NULL },
-    { "fieldsProducerWithOrgApacheLuceneIndexSegmentReadState:", "fieldsProducer", "Lorg.apache.lucene.codecs.DocValuesProducer;", 0x1, "Ljava.io.IOException;", NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "DATA_CODEC_NAME_", NULL, 0x18, "Ljava.lang.String;", &OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_DATA_CODEC_NAME_, NULL, .constantValue.asLong = 0 },
@@ -75,37 +33,20 @@ NSString *OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_META_EXTENSION_ = @"n
     { "META_VERSION_START", "META_VERSION_START", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_META_VERSION_START },
     { "META_VERSION_CURRENT", "META_VERSION_CURRENT", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_META_VERSION_CURRENT },
     { "META_EXTENSION_", NULL, 0x18, "Ljava.lang.String;", &OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_META_EXTENSION_, NULL, .constantValue.asLong = 0 },
-    { "maxPointsInLeafNode_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxPointsSortInHeap_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "delegate_", NULL, 0x12, "Lorg.apache.lucene.codecs.DocValuesFormat;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneRangetreeRangeTreeDocValuesFormat = { 2, "RangeTreeDocValuesFormat", "org.apache.lucene.rangetree", NULL, 0x1, 4, methods, 11, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneRangetreeRangeTreeDocValuesFormat = { 2, "RangeTreeDocValuesFormat", "org.apache.lucene.rangetree", NULL, 0x1, 1, methods, 8, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneRangetreeRangeTreeDocValuesFormat;
 }
 
 @end
 
 void OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_init(OrgApacheLuceneRangetreeRangeTreeDocValuesFormat *self) {
-  OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_initWithInt_withInt_(self, OrgApacheLuceneRangetreeRangeTreeWriter_DEFAULT_MAX_VALUES_IN_LEAF_NODE, OrgApacheLuceneRangetreeRangeTreeWriter_DEFAULT_MAX_VALUES_SORT_IN_HEAP);
+  NSObject_init(self);
 }
 
 OrgApacheLuceneRangetreeRangeTreeDocValuesFormat *new_OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_init() {
   OrgApacheLuceneRangetreeRangeTreeDocValuesFormat *self = [OrgApacheLuceneRangetreeRangeTreeDocValuesFormat alloc];
   OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_init(self);
-  return self;
-}
-
-void OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_initWithInt_withInt_(OrgApacheLuceneRangetreeRangeTreeDocValuesFormat *self, jint maxPointsInLeafNode, jint maxPointsSortInHeap) {
-  OrgApacheLuceneCodecsDocValuesFormat_initWithNSString_(self, @"RangeTree");
-  JreStrongAssignAndConsume(&self->delegate_, new_OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_init());
-  OrgApacheLuceneRangetreeRangeTreeWriter_verifyParamsWithInt_withInt_(maxPointsInLeafNode, maxPointsSortInHeap);
-  self->maxPointsInLeafNode_ = maxPointsInLeafNode;
-  self->maxPointsSortInHeap_ = maxPointsSortInHeap;
-}
-
-OrgApacheLuceneRangetreeRangeTreeDocValuesFormat *new_OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_initWithInt_withInt_(jint maxPointsInLeafNode, jint maxPointsSortInHeap) {
-  OrgApacheLuceneRangetreeRangeTreeDocValuesFormat *self = [OrgApacheLuceneRangetreeRangeTreeDocValuesFormat alloc];
-  OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_initWithInt_withInt_(self, maxPointsInLeafNode, maxPointsSortInHeap);
   return self;
 }
 

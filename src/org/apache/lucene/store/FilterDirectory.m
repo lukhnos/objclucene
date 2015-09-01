@@ -26,10 +26,6 @@
   return self;
 }
 
-- (OrgApacheLuceneStoreDirectory *)getDelegate {
-  return in_;
-}
-
 - (IOSObjectArray *)listAll {
   return [((OrgApacheLuceneStoreDirectory *) nil_chk(in_)) listAll];
 }
@@ -82,7 +78,6 @@
   static const J2ObjcMethodInfo methods[] = {
     { "unwrapWithOrgApacheLuceneStoreDirectory:", "unwrap", "Lorg.apache.lucene.store.Directory;", 0x9, NULL, NULL },
     { "initWithOrgApacheLuceneStoreDirectory:", "FilterDirectory", NULL, 0x4, NULL, NULL },
-    { "getDelegate", NULL, "Lorg.apache.lucene.store.Directory;", 0x11, NULL, NULL },
     { "listAll", NULL, "[Ljava.lang.String;", 0x1, "Ljava.io.IOException;", NULL },
     { "deleteFileWithNSString:", "deleteFile", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "fileLengthWithNSString:", "fileLength", "J", 0x1, "Ljava.io.IOException;", NULL },
@@ -97,7 +92,7 @@
   static const J2ObjcFieldInfo fields[] = {
     { "in_", NULL, 0x14, "Lorg.apache.lucene.store.Directory;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreFilterDirectory = { 2, "FilterDirectory", "org.apache.lucene.store", NULL, 0x1, 13, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreFilterDirectory = { 2, "FilterDirectory", "org.apache.lucene.store", NULL, 0x1, 12, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneStoreFilterDirectory;
 }
 

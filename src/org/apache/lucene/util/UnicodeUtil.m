@@ -11,7 +11,6 @@
 #include "java/lang/IndexOutOfBoundsException.h"
 #include "java/lang/Integer.h"
 #include "java/lang/Math.h"
-#include "java/lang/StringBuilder.h"
 #include "java/lang/System.h"
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/UnicodeUtil.h"
@@ -83,32 +82,14 @@ IOSIntArray *OrgApacheLuceneUtilUnicodeUtil_utf8CodeLength_;
   return OrgApacheLuceneUtilUnicodeUtil_UTF16toUTF8WithJavaLangCharSequence_withInt_withInt_withByteArray_(s, offset, length, outArg);
 }
 
-+ (jboolean)validUTF16StringWithJavaLangCharSequence:(id<JavaLangCharSequence>)s {
-  return OrgApacheLuceneUtilUnicodeUtil_validUTF16StringWithJavaLangCharSequence_(s);
-}
-
-+ (jboolean)validUTF16StringWithCharArray:(IOSCharArray *)s
-                                  withInt:(jint)size {
-  return OrgApacheLuceneUtilUnicodeUtil_validUTF16StringWithCharArray_withInt_(s, size);
-}
-
 + (jint)codePointCountWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)utf8 {
   return OrgApacheLuceneUtilUnicodeUtil_codePointCountWithOrgApacheLuceneUtilBytesRef_(utf8);
-}
-
-+ (jint)UTF8toUTF32WithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)utf8
-                                      withIntArray:(IOSIntArray *)ints {
-  return OrgApacheLuceneUtilUnicodeUtil_UTF8toUTF32WithOrgApacheLuceneUtilBytesRef_withIntArray_(utf8, ints);
 }
 
 + (NSString *)newStringWithIntArray:(IOSIntArray *)codePoints
                             withInt:(jint)offset
                             withInt:(jint)count {
   return OrgApacheLuceneUtilUnicodeUtil_newStringWithIntArray_withInt_withInt_(codePoints, offset, count);
-}
-
-+ (NSString *)toHexStringWithNSString:(NSString *)s {
-  return OrgApacheLuceneUtilUnicodeUtil_toHexStringWithNSString_(s);
 }
 
 + (jint)UTF8toUTF16WithByteArray:(IOSByteArray *)utf8
@@ -139,12 +120,8 @@ IOSIntArray *OrgApacheLuceneUtilUnicodeUtil_utf8CodeLength_;
     { "init", "UnicodeUtil", NULL, 0x2, NULL, NULL },
     { "UTF16toUTF8WithCharArray:withInt:withInt:withByteArray:", "UTF16toUTF8", "I", 0x9, NULL, NULL },
     { "UTF16toUTF8WithJavaLangCharSequence:withInt:withInt:withByteArray:", "UTF16toUTF8", "I", 0x9, NULL, NULL },
-    { "validUTF16StringWithJavaLangCharSequence:", "validUTF16String", "Z", 0x9, NULL, NULL },
-    { "validUTF16StringWithCharArray:withInt:", "validUTF16String", "Z", 0x9, NULL, NULL },
     { "codePointCountWithOrgApacheLuceneUtilBytesRef:", "codePointCount", "I", 0x9, NULL, NULL },
-    { "UTF8toUTF32WithOrgApacheLuceneUtilBytesRef:withIntArray:", "UTF8toUTF32", "I", 0x9, NULL, NULL },
     { "newStringWithIntArray:withInt:withInt:", "newString", "Ljava.lang.String;", 0x9, NULL, NULL },
-    { "toHexStringWithNSString:", "toHexString", "Ljava.lang.String;", 0x9, NULL, NULL },
     { "UTF8toUTF16WithByteArray:withInt:withInt:withCharArray:", "UTF8toUTF16", "I", 0x9, NULL, NULL },
     { "UTF8toUTF16WithOrgApacheLuceneUtilBytesRef:withCharArray:", "UTF8toUTF16", "I", 0x9, NULL, NULL },
   };
@@ -168,7 +145,7 @@ IOSIntArray *OrgApacheLuceneUtilUnicodeUtil_utf8CodeLength_;
     { "SUPPLEMENTARY_MIN_VALUE", "SUPPLEMENTARY_MIN_VALUE", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilUnicodeUtil_SUPPLEMENTARY_MIN_VALUE },
     { "LEAD_SURROGATE_OFFSET_", "LEAD_SURROGATE_OFFSET_", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilUnicodeUtil_LEAD_SURROGATE_OFFSET_ },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilUnicodeUtil = { 2, "UnicodeUtil", "org.apache.lucene.util", NULL, 0x11, 11, methods, 18, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilUnicodeUtil = { 2, "UnicodeUtil", "org.apache.lucene.util", NULL, 0x11, 7, methods, 18, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilUnicodeUtil;
 }
 
@@ -259,45 +236,6 @@ jint OrgApacheLuceneUtilUnicodeUtil_UTF16toUTF8WithJavaLangCharSequence_withInt_
   return upto;
 }
 
-jboolean OrgApacheLuceneUtilUnicodeUtil_validUTF16StringWithJavaLangCharSequence_(id<JavaLangCharSequence> s) {
-  OrgApacheLuceneUtilUnicodeUtil_initialize();
-  jint size = [((id<JavaLangCharSequence>) nil_chk(s)) length];
-  for (jint i = 0; i < size; i++) {
-    jchar ch = [s charAtWithInt:i];
-    if (ch >= OrgApacheLuceneUtilUnicodeUtil_UNI_SUR_HIGH_START && ch <= OrgApacheLuceneUtilUnicodeUtil_UNI_SUR_HIGH_END) {
-      if (i < size - 1) {
-        i++;
-        jchar nextCH = [s charAtWithInt:i];
-        if (nextCH >= OrgApacheLuceneUtilUnicodeUtil_UNI_SUR_LOW_START && nextCH <= OrgApacheLuceneUtilUnicodeUtil_UNI_SUR_LOW_END) {
-        }
-        else return NO;
-      }
-      else return NO;
-    }
-    else if (ch >= OrgApacheLuceneUtilUnicodeUtil_UNI_SUR_LOW_START && ch <= OrgApacheLuceneUtilUnicodeUtil_UNI_SUR_LOW_END) return NO;
-  }
-  return YES;
-}
-
-jboolean OrgApacheLuceneUtilUnicodeUtil_validUTF16StringWithCharArray_withInt_(IOSCharArray *s, jint size) {
-  OrgApacheLuceneUtilUnicodeUtil_initialize();
-  for (jint i = 0; i < size; i++) {
-    jchar ch = IOSCharArray_Get(nil_chk(s), i);
-    if (ch >= OrgApacheLuceneUtilUnicodeUtil_UNI_SUR_HIGH_START && ch <= OrgApacheLuceneUtilUnicodeUtil_UNI_SUR_HIGH_END) {
-      if (i < size - 1) {
-        i++;
-        jchar nextCH = IOSCharArray_Get(s, i);
-        if (nextCH >= OrgApacheLuceneUtilUnicodeUtil_UNI_SUR_LOW_START && nextCH <= OrgApacheLuceneUtilUnicodeUtil_UNI_SUR_LOW_END) {
-        }
-        else return NO;
-      }
-      else return NO;
-    }
-    else if (ch >= OrgApacheLuceneUtilUnicodeUtil_UNI_SUR_LOW_START && ch <= OrgApacheLuceneUtilUnicodeUtil_UNI_SUR_LOW_END) return NO;
-  }
-  return YES;
-}
-
 jint OrgApacheLuceneUtilUnicodeUtil_codePointCountWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilBytesRef *utf8) {
   OrgApacheLuceneUtilUnicodeUtil_initialize();
   jint pos = ((OrgApacheLuceneUtilBytesRef *) nil_chk(utf8))->offset_;
@@ -328,40 +266,6 @@ jint OrgApacheLuceneUtilUnicodeUtil_codePointCountWithOrgApacheLuceneUtilBytesRe
   }
   if (pos > limit) @throw [new_JavaLangIllegalArgumentException_init() autorelease];
   return codePointCount;
-}
-
-jint OrgApacheLuceneUtilUnicodeUtil_UTF8toUTF32WithOrgApacheLuceneUtilBytesRef_withIntArray_(OrgApacheLuceneUtilBytesRef *utf8, IOSIntArray *ints) {
-  OrgApacheLuceneUtilUnicodeUtil_initialize();
-  jint utf32Count = 0;
-  jint utf8Upto = ((OrgApacheLuceneUtilBytesRef *) nil_chk(utf8))->offset_;
-  IOSByteArray *bytes = utf8->bytes_;
-  jint utf8Limit = utf8->offset_ + utf8->length_;
-  while (utf8Upto < utf8Limit) {
-    jint numBytes = IOSIntArray_Get(nil_chk(OrgApacheLuceneUtilUnicodeUtil_utf8CodeLength_), IOSByteArray_Get(nil_chk(bytes), utf8Upto) & (jint) 0xFF);
-    jint v = 0;
-    switch (numBytes) {
-      case 1:
-      *IOSIntArray_GetRef(nil_chk(ints), utf32Count++) = IOSByteArray_Get(bytes, utf8Upto++);
-      continue;
-      case 2:
-      v = IOSByteArray_Get(bytes, utf8Upto++) & 31;
-      break;
-      case 3:
-      v = IOSByteArray_Get(bytes, utf8Upto++) & 15;
-      break;
-      case 4:
-      v = IOSByteArray_Get(bytes, utf8Upto++) & 7;
-      break;
-      default:
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"invalid utf8") autorelease];
-    }
-    jint limit = utf8Upto + numBytes - 1;
-    while (utf8Upto < limit) {
-      v = (JreLShift32(v, 6)) | (IOSByteArray_Get(bytes, utf8Upto++) & 63);
-    }
-    *IOSIntArray_GetRef(nil_chk(ints), utf32Count++) = v;
-  }
-  return utf32Count;
 }
 
 NSString *OrgApacheLuceneUtilUnicodeUtil_newStringWithIntArray_withInt_withInt_(IOSIntArray *codePoints, jint offset, jint count) {
@@ -398,38 +302,6 @@ NSString *OrgApacheLuceneUtilUnicodeUtil_newStringWithIntArray_withInt_withInt_(
     }
   }
   return [NSString stringWithCharacters:chars offset:0 length:w];
-}
-
-NSString *OrgApacheLuceneUtilUnicodeUtil_toHexStringWithNSString_(NSString *s) {
-  OrgApacheLuceneUtilUnicodeUtil_initialize();
-  JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
-  for (jint i = 0; i < ((jint) [((NSString *) nil_chk(s)) length]); i++) {
-    jchar ch = [s charAtWithInt:i];
-    if (i > 0) {
-      [sb appendWithChar:' '];
-    }
-    if (ch < 128) {
-      [sb appendWithChar:ch];
-    }
-    else {
-      if (ch >= OrgApacheLuceneUtilUnicodeUtil_UNI_SUR_HIGH_START && ch <= OrgApacheLuceneUtilUnicodeUtil_UNI_SUR_HIGH_END) {
-        [sb appendWithNSString:@"H:"];
-      }
-      else if (ch >= OrgApacheLuceneUtilUnicodeUtil_UNI_SUR_LOW_START && ch <= OrgApacheLuceneUtilUnicodeUtil_UNI_SUR_LOW_END) {
-        [sb appendWithNSString:@"L:"];
-      }
-      else if (ch > OrgApacheLuceneUtilUnicodeUtil_UNI_SUR_LOW_END) {
-        if (ch == (jint) 0xffff) {
-          [sb appendWithNSString:@"F:"];
-        }
-        else {
-          [sb appendWithNSString:@"E:"];
-        }
-      }
-      [sb appendWithNSString:JreStrcat("$$", @"0x", JavaLangInteger_toHexStringWithInt_(ch))];
-    }
-  }
-  return [sb description];
 }
 
 jint OrgApacheLuceneUtilUnicodeUtil_UTF8toUTF16WithByteArray_withInt_withInt_withCharArray_(IOSByteArray *utf8, jint offset, jint length, IOSCharArray *outArg) {

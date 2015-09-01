@@ -3,24 +3,10 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/standard/processors/RemoveEmptyNonLeafQueryNodeProcessor.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/util/LinkedList.h"
-#include "java/util/List.h"
-#include "org/apache/lucene/queryparser/flexible/core/QueryNodeException.h"
-#include "org/apache/lucene/queryparser/flexible/core/nodes/MatchNoDocsQueryNode.h"
-#include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNode.h"
-#include "org/apache/lucene/queryparser/flexible/core/processors/QueryNodeProcessorImpl.h"
 #include "org/apache/lucene/queryparser/flexible/standard/processors/RemoveEmptyNonLeafQueryNodeProcessor.h"
 
-@interface OrgApacheLuceneQueryparserFlexibleStandardProcessorsRemoveEmptyNonLeafQueryNodeProcessor () {
- @public
-  JavaUtilLinkedList *childrenBuffer_;
-}
-
-@end
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleStandardProcessorsRemoveEmptyNonLeafQueryNodeProcessor, childrenBuffer_, JavaUtilLinkedList *)
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneQueryparserFlexibleStandardProcessorsRemoveEmptyNonLeafQueryNodeProcessor
 
@@ -29,72 +15,18 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleStandardProcessorsRemoveEm
   return self;
 }
 
-- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)processWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryTree {
-  queryTree = [super processWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:queryTree];
-  if (![((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(queryTree)) isLeaf]) {
-    id<JavaUtilList> children = [queryTree getChildren];
-    if (children == nil || [children size] == 0) {
-      return [new_OrgApacheLuceneQueryparserFlexibleCoreNodesMatchNoDocsQueryNode_init() autorelease];
-    }
-  }
-  return queryTree;
-}
-
-- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)postProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)node {
-  return node;
-}
-
-- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)preProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)node {
-  return node;
-}
-
-- (id<JavaUtilList>)setChildrenOrderWithJavaUtilList:(id<JavaUtilList>)children {
-  @try {
-    for (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> __strong child in nil_chk(children)) {
-      if (![((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(child)) isLeaf]) {
-        id<JavaUtilList> grandChildren = [child getChildren];
-        if (grandChildren != nil && [grandChildren size] > 0) {
-          [((JavaUtilLinkedList *) nil_chk(self->childrenBuffer_)) addWithId:child];
-        }
-      }
-      else {
-        [((JavaUtilLinkedList *) nil_chk(self->childrenBuffer_)) addWithId:child];
-      }
-    }
-    [children clear];
-    [children addAllWithJavaUtilCollection:self->childrenBuffer_];
-  }
-  @finally {
-    [((JavaUtilLinkedList *) nil_chk(self->childrenBuffer_)) clear];
-  }
-  return children;
-}
-
-- (void)dealloc {
-  RELEASE_(childrenBuffer_);
-  [super dealloc];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", "RemoveEmptyNonLeafQueryNodeProcessor", NULL, 0x1, NULL, NULL },
-    { "processWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "process", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x1, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
-    { "postProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "postProcessNode", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
-    { "preProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "preProcessNode", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
-    { "setChildrenOrderWithJavaUtilList:", "setChildrenOrder", "Ljava.util.List;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "childrenBuffer_", NULL, 0x2, "Ljava.util.LinkedList;", NULL, "Ljava/util/LinkedList<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;", .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardProcessorsRemoveEmptyNonLeafQueryNodeProcessor = { 2, "RemoveEmptyNonLeafQueryNodeProcessor", "org.apache.lucene.queryparser.flexible.standard.processors", NULL, 0x1, 5, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardProcessorsRemoveEmptyNonLeafQueryNodeProcessor = { 2, "RemoveEmptyNonLeafQueryNodeProcessor", "org.apache.lucene.queryparser.flexible.standard.processors", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserFlexibleStandardProcessorsRemoveEmptyNonLeafQueryNodeProcessor;
 }
 
 @end
 
 void OrgApacheLuceneQueryparserFlexibleStandardProcessorsRemoveEmptyNonLeafQueryNodeProcessor_init(OrgApacheLuceneQueryparserFlexibleStandardProcessorsRemoveEmptyNonLeafQueryNodeProcessor *self) {
-  OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_init(self);
-  JreStrongAssignAndConsume(&self->childrenBuffer_, new_JavaUtilLinkedList_init());
+  NSObject_init(self);
 }
 
 OrgApacheLuceneQueryparserFlexibleStandardProcessorsRemoveEmptyNonLeafQueryNodeProcessor *new_OrgApacheLuceneQueryparserFlexibleStandardProcessorsRemoveEmptyNonLeafQueryNodeProcessor_init() {

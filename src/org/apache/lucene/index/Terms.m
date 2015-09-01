@@ -8,13 +8,10 @@
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
 #include "java/lang/IllegalArgumentException.h"
-#include "java/lang/StringBuilder.h"
-#include "java/lang/UnsupportedOperationException.h"
 #include "org/apache/lucene/index/AutomatonTermsEnum.h"
 #include "org/apache/lucene/index/Terms.h"
 #include "org/apache/lucene/index/TermsEnum.h"
 #include "org/apache/lucene/util/BytesRef.h"
-#include "org/apache/lucene/util/BytesRefBuilder.h"
 #include "org/apache/lucene/util/automaton/CompiledAutomaton.h"
 
 @interface OrgApacheLuceneIndexTerms_$1 : OrgApacheLuceneIndexAutomatonTermsEnum {
@@ -119,66 +116,6 @@ IOSObjectArray *OrgApacheLuceneIndexTerms_EMPTY_ARRAY_;
   return 0;
 }
 
-- (OrgApacheLuceneUtilBytesRef *)getMin {
-  return [((OrgApacheLuceneIndexTermsEnum *) nil_chk([self iterator])) next];
-}
-
-- (OrgApacheLuceneUtilBytesRef *)getMax {
-  jlong size = [self size];
-  if (size == 0) {
-    return nil;
-  }
-  else if (size >= 0) {
-    @try {
-      OrgApacheLuceneIndexTermsEnum *iterator = [self iterator];
-      [((OrgApacheLuceneIndexTermsEnum *) nil_chk(iterator)) seekExactWithLong:size - 1];
-      return [iterator term];
-    }
-    @catch (JavaLangUnsupportedOperationException *e) {
-    }
-  }
-  OrgApacheLuceneIndexTermsEnum *iterator = [self iterator];
-  OrgApacheLuceneUtilBytesRef *v = [((OrgApacheLuceneIndexTermsEnum *) nil_chk(iterator)) next];
-  if (v == nil) {
-    return v;
-  }
-  OrgApacheLuceneUtilBytesRefBuilder *scratch = [new_OrgApacheLuceneUtilBytesRefBuilder_init() autorelease];
-  [scratch appendWithByte:(jbyte) 0];
-  while (YES) {
-    jint low = 0;
-    jint high = 256;
-    while (low != high) {
-      jint mid = JreURShift32((low + high), 1);
-      [scratch setByteAtWithInt:[scratch length] - 1 withByte:(jbyte) mid];
-      if ([iterator seekCeilWithOrgApacheLuceneUtilBytesRef:[scratch get]] == JreLoadStatic(OrgApacheLuceneIndexTermsEnum_SeekStatusEnum, END)) {
-        if (mid == 0) {
-          [scratch setLengthWithInt:[scratch length] - 1];
-          return [scratch get];
-        }
-        high = mid;
-      }
-      else {
-        if (low == mid) {
-          break;
-        }
-        low = mid;
-      }
-    }
-    [scratch setLengthWithInt:[scratch length] + 1];
-    [scratch growWithInt:[scratch length]];
-  }
-}
-
-- (id)getStats {
-  JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
-  [sb appendWithNSString:JreStrcat("$$", @"impl=", [[self getClass] getSimpleName])];
-  [sb appendWithNSString:JreStrcat("$J", @",size=", [self size])];
-  [sb appendWithNSString:JreStrcat("$I", @",docCount=", [self getDocCount])];
-  [sb appendWithNSString:JreStrcat("$J", @",sumTotalTermFreq=", [self getSumTotalTermFreq])];
-  [sb appendWithNSString:JreStrcat("$J", @",sumDocFreq=", [self getSumDocFreq])];
-  return [sb description];
-}
-
 + (void)initialize {
   if (self == [OrgApacheLuceneIndexTerms class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneIndexTerms_EMPTY_ARRAY_, [IOSObjectArray newArrayWithLength:0 type:OrgApacheLuceneIndexTerms_class_()]);
@@ -199,14 +136,11 @@ IOSObjectArray *OrgApacheLuceneIndexTerms_EMPTY_ARRAY_;
     { "hasOffsets", NULL, "Z", 0x401, NULL, NULL },
     { "hasPositions", NULL, "Z", 0x401, NULL, NULL },
     { "hasPayloads", NULL, "Z", 0x401, NULL, NULL },
-    { "getMin", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
-    { "getMax", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
-    { "getStats", NULL, "Ljava.lang.Object;", 0x1, "Ljava.io.IOException;", NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "EMPTY_ARRAY_", NULL, 0x19, "[Lorg.apache.lucene.index.Terms;", &OrgApacheLuceneIndexTerms_EMPTY_ARRAY_, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexTerms = { 2, "Terms", "org.apache.lucene.index", NULL, 0x401, 14, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexTerms = { 2, "Terms", "org.apache.lucene.index", NULL, 0x401, 11, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexTerms;
 }
 

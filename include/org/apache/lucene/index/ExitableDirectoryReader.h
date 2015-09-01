@@ -20,34 +20,19 @@
 #define OrgApacheLuceneIndexFilterDirectoryReader_INCLUDE 1
 #include "org/apache/lucene/index/FilterDirectoryReader.h"
 
-@class OrgApacheLuceneIndexDirectoryReader;
-@protocol OrgApacheLuceneIndexQueryTimeout;
-
 @interface OrgApacheLuceneIndexExitableDirectoryReader : OrgApacheLuceneIndexFilterDirectoryReader
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneIndexDirectoryReader:(OrgApacheLuceneIndexDirectoryReader *)inArg
-                       withOrgApacheLuceneIndexQueryTimeout:(id<OrgApacheLuceneIndexQueryTimeout>)queryTimeout;
-
-- (NSString *)description;
-
-+ (OrgApacheLuceneIndexDirectoryReader *)wrapWithOrgApacheLuceneIndexDirectoryReader:(OrgApacheLuceneIndexDirectoryReader *)inArg
-                                                withOrgApacheLuceneIndexQueryTimeout:(id<OrgApacheLuceneIndexQueryTimeout>)queryTimeout;
-
-#pragma mark Protected
-
-- (OrgApacheLuceneIndexDirectoryReader *)doWrapDirectoryReaderWithOrgApacheLuceneIndexDirectoryReader:(OrgApacheLuceneIndexDirectoryReader *)inArg;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexExitableDirectoryReader)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexExitableDirectoryReader_initWithOrgApacheLuceneIndexDirectoryReader_withOrgApacheLuceneIndexQueryTimeout_(OrgApacheLuceneIndexExitableDirectoryReader *self, OrgApacheLuceneIndexDirectoryReader *inArg, id<OrgApacheLuceneIndexQueryTimeout> queryTimeout);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexExitableDirectoryReader_init(OrgApacheLuceneIndexExitableDirectoryReader *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexExitableDirectoryReader *new_OrgApacheLuceneIndexExitableDirectoryReader_initWithOrgApacheLuceneIndexDirectoryReader_withOrgApacheLuceneIndexQueryTimeout_(OrgApacheLuceneIndexDirectoryReader *inArg, id<OrgApacheLuceneIndexQueryTimeout> queryTimeout) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT OrgApacheLuceneIndexDirectoryReader *OrgApacheLuceneIndexExitableDirectoryReader_wrapWithOrgApacheLuceneIndexDirectoryReader_withOrgApacheLuceneIndexQueryTimeout_(OrgApacheLuceneIndexDirectoryReader *inArg, id<OrgApacheLuceneIndexQueryTimeout> queryTimeout);
+FOUNDATION_EXPORT OrgApacheLuceneIndexExitableDirectoryReader *new_OrgApacheLuceneIndexExitableDirectoryReader_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexExitableDirectoryReader)
 
@@ -62,17 +47,17 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexExitableDirectoryReader)
 
 @interface OrgApacheLuceneIndexExitableDirectoryReader_ExitingReaderException : JavaLangRuntimeException
 
-#pragma mark Package-Private
+#pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)msg;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexExitableDirectoryReader_ExitingReaderException)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexExitableDirectoryReader_ExitingReaderException_initWithNSString_(OrgApacheLuceneIndexExitableDirectoryReader_ExitingReaderException *self, NSString *msg);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexExitableDirectoryReader_ExitingReaderException_init(OrgApacheLuceneIndexExitableDirectoryReader_ExitingReaderException *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexExitableDirectoryReader_ExitingReaderException *new_OrgApacheLuceneIndexExitableDirectoryReader_ExitingReaderException_initWithNSString_(NSString *msg) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexExitableDirectoryReader_ExitingReaderException *new_OrgApacheLuceneIndexExitableDirectoryReader_ExitingReaderException_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexExitableDirectoryReader_ExitingReaderException)
 
@@ -85,24 +70,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexExitableDirectoryReader_ExitingRe
 #define OrgApacheLuceneIndexFilterDirectoryReader_SubReaderWrapper_INCLUDE 1
 #include "org/apache/lucene/index/FilterDirectoryReader.h"
 
-@class OrgApacheLuceneIndexLeafReader;
-@protocol OrgApacheLuceneIndexQueryTimeout;
-
 @interface OrgApacheLuceneIndexExitableDirectoryReader_ExitableSubReaderWrapper : OrgApacheLuceneIndexFilterDirectoryReader_SubReaderWrapper
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneIndexQueryTimeout:(id<OrgApacheLuceneIndexQueryTimeout>)queryTimeout;
-
-- (OrgApacheLuceneIndexLeafReader *)wrapWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexExitableDirectoryReader_ExitableSubReaderWrapper)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexExitableDirectoryReader_ExitableSubReaderWrapper_initWithOrgApacheLuceneIndexQueryTimeout_(OrgApacheLuceneIndexExitableDirectoryReader_ExitableSubReaderWrapper *self, id<OrgApacheLuceneIndexQueryTimeout> queryTimeout);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexExitableDirectoryReader_ExitableSubReaderWrapper_init(OrgApacheLuceneIndexExitableDirectoryReader_ExitableSubReaderWrapper *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexExitableDirectoryReader_ExitableSubReaderWrapper *new_OrgApacheLuceneIndexExitableDirectoryReader_ExitableSubReaderWrapper_initWithOrgApacheLuceneIndexQueryTimeout_(id<OrgApacheLuceneIndexQueryTimeout> queryTimeout) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexExitableDirectoryReader_ExitableSubReaderWrapper *new_OrgApacheLuceneIndexExitableDirectoryReader_ExitableSubReaderWrapper_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexExitableDirectoryReader_ExitableSubReaderWrapper)
 
@@ -115,30 +95,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexExitableDirectoryReader_ExitableS
 #define OrgApacheLuceneIndexFilterLeafReader_INCLUDE 1
 #include "org/apache/lucene/index/FilterLeafReader.h"
 
-@class OrgApacheLuceneIndexFields;
-@class OrgApacheLuceneIndexLeafReader;
-@protocol OrgApacheLuceneIndexQueryTimeout;
-
 @interface OrgApacheLuceneIndexExitableDirectoryReader_ExitableFilterAtomicReader : OrgApacheLuceneIndexFilterLeafReader
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)inArg
-                  withOrgApacheLuceneIndexQueryTimeout:(id<OrgApacheLuceneIndexQueryTimeout>)queryTimeout;
-
-- (OrgApacheLuceneIndexFields *)fields;
-
-- (id)getCombinedCoreAndDeletesKey;
-
-- (id)getCoreCacheKey;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexExitableDirectoryReader_ExitableFilterAtomicReader)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexExitableDirectoryReader_ExitableFilterAtomicReader_initWithOrgApacheLuceneIndexLeafReader_withOrgApacheLuceneIndexQueryTimeout_(OrgApacheLuceneIndexExitableDirectoryReader_ExitableFilterAtomicReader *self, OrgApacheLuceneIndexLeafReader *inArg, id<OrgApacheLuceneIndexQueryTimeout> queryTimeout);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexExitableDirectoryReader_ExitableFilterAtomicReader_init(OrgApacheLuceneIndexExitableDirectoryReader_ExitableFilterAtomicReader *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexExitableDirectoryReader_ExitableFilterAtomicReader *new_OrgApacheLuceneIndexExitableDirectoryReader_ExitableFilterAtomicReader_initWithOrgApacheLuceneIndexLeafReader_withOrgApacheLuceneIndexQueryTimeout_(OrgApacheLuceneIndexLeafReader *inArg, id<OrgApacheLuceneIndexQueryTimeout> queryTimeout) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexExitableDirectoryReader_ExitableFilterAtomicReader *new_OrgApacheLuceneIndexExitableDirectoryReader_ExitableFilterAtomicReader_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexExitableDirectoryReader_ExitableFilterAtomicReader)
 
@@ -151,18 +120,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexExitableDirectoryReader_ExitableF
 #define OrgApacheLuceneIndexFilterLeafReader_FilterFields_INCLUDE 1
 #include "org/apache/lucene/index/FilterLeafReader.h"
 
-@class OrgApacheLuceneIndexFields;
-@class OrgApacheLuceneIndexTerms;
-@protocol OrgApacheLuceneIndexQueryTimeout;
-
 @interface OrgApacheLuceneIndexExitableDirectoryReader_ExitableFields : OrgApacheLuceneIndexFilterLeafReader_FilterFields
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneIndexFields:(OrgApacheLuceneIndexFields *)fields
-              withOrgApacheLuceneIndexQueryTimeout:(id<OrgApacheLuceneIndexQueryTimeout>)queryTimeout;
-
-- (OrgApacheLuceneIndexTerms *)termsWithNSString:(NSString *)field;
+- (instancetype)init;
 
 #pragma mark Package-Private
 
@@ -171,9 +133,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexExitableDirectoryReader_ExitableF
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexExitableDirectoryReader_ExitableFields)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexExitableDirectoryReader_ExitableFields_initWithOrgApacheLuceneIndexFields_withOrgApacheLuceneIndexQueryTimeout_(OrgApacheLuceneIndexExitableDirectoryReader_ExitableFields *self, OrgApacheLuceneIndexFields *fields, id<OrgApacheLuceneIndexQueryTimeout> queryTimeout);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexExitableDirectoryReader_ExitableFields_init(OrgApacheLuceneIndexExitableDirectoryReader_ExitableFields *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexExitableDirectoryReader_ExitableFields *new_OrgApacheLuceneIndexExitableDirectoryReader_ExitableFields_initWithOrgApacheLuceneIndexFields_withOrgApacheLuceneIndexQueryTimeout_(OrgApacheLuceneIndexFields *fields, id<OrgApacheLuceneIndexQueryTimeout> queryTimeout) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexExitableDirectoryReader_ExitableFields *new_OrgApacheLuceneIndexExitableDirectoryReader_ExitableFields_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexExitableDirectoryReader_ExitableFields)
 
@@ -186,31 +148,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexExitableDirectoryReader_ExitableF
 #define OrgApacheLuceneIndexFilterLeafReader_FilterTerms_INCLUDE 1
 #include "org/apache/lucene/index/FilterLeafReader.h"
 
-@class OrgApacheLuceneIndexTerms;
-@class OrgApacheLuceneIndexTermsEnum;
-@class OrgApacheLuceneUtilAutomatonCompiledAutomaton;
-@class OrgApacheLuceneUtilBytesRef;
-@protocol OrgApacheLuceneIndexQueryTimeout;
-
 @interface OrgApacheLuceneIndexExitableDirectoryReader_ExitableTerms : OrgApacheLuceneIndexFilterLeafReader_FilterTerms
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms
-             withOrgApacheLuceneIndexQueryTimeout:(id<OrgApacheLuceneIndexQueryTimeout>)queryTimeout;
-
-- (OrgApacheLuceneIndexTermsEnum *)intersectWithOrgApacheLuceneUtilAutomatonCompiledAutomaton:(OrgApacheLuceneUtilAutomatonCompiledAutomaton *)compiled
-                                                              withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)startTerm;
-
-- (OrgApacheLuceneIndexTermsEnum *)iterator;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexExitableDirectoryReader_ExitableTerms)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexExitableDirectoryReader_ExitableTerms_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneIndexQueryTimeout_(OrgApacheLuceneIndexExitableDirectoryReader_ExitableTerms *self, OrgApacheLuceneIndexTerms *terms, id<OrgApacheLuceneIndexQueryTimeout> queryTimeout);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexExitableDirectoryReader_ExitableTerms_init(OrgApacheLuceneIndexExitableDirectoryReader_ExitableTerms *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexExitableDirectoryReader_ExitableTerms *new_OrgApacheLuceneIndexExitableDirectoryReader_ExitableTerms_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneIndexQueryTimeout_(OrgApacheLuceneIndexTerms *terms, id<OrgApacheLuceneIndexQueryTimeout> queryTimeout) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexExitableDirectoryReader_ExitableTerms *new_OrgApacheLuceneIndexExitableDirectoryReader_ExitableTerms_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexExitableDirectoryReader_ExitableTerms)
 
@@ -223,26 +173,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexExitableDirectoryReader_ExitableT
 #define OrgApacheLuceneIndexFilterLeafReader_FilterTermsEnum_INCLUDE 1
 #include "org/apache/lucene/index/FilterLeafReader.h"
 
-@class OrgApacheLuceneIndexTermsEnum;
-@class OrgApacheLuceneUtilBytesRef;
-@protocol OrgApacheLuceneIndexQueryTimeout;
-
 @interface OrgApacheLuceneIndexExitableDirectoryReader_ExitableTermsEnum : OrgApacheLuceneIndexFilterLeafReader_FilterTermsEnum
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)termsEnum
-                 withOrgApacheLuceneIndexQueryTimeout:(id<OrgApacheLuceneIndexQueryTimeout>)queryTimeout;
-
-- (OrgApacheLuceneUtilBytesRef *)next;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexExitableDirectoryReader_ExitableTermsEnum)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexExitableDirectoryReader_ExitableTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneIndexQueryTimeout_(OrgApacheLuceneIndexExitableDirectoryReader_ExitableTermsEnum *self, OrgApacheLuceneIndexTermsEnum *termsEnum, id<OrgApacheLuceneIndexQueryTimeout> queryTimeout);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexExitableDirectoryReader_ExitableTermsEnum_init(OrgApacheLuceneIndexExitableDirectoryReader_ExitableTermsEnum *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexExitableDirectoryReader_ExitableTermsEnum *new_OrgApacheLuceneIndexExitableDirectoryReader_ExitableTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneIndexQueryTimeout_(OrgApacheLuceneIndexTermsEnum *termsEnum, id<OrgApacheLuceneIndexQueryTimeout> queryTimeout) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexExitableDirectoryReader_ExitableTermsEnum *new_OrgApacheLuceneIndexExitableDirectoryReader_ExitableTermsEnum_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexExitableDirectoryReader_ExitableTermsEnum)
 

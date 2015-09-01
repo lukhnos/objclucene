@@ -20,26 +20,19 @@
 #define OrgApacheLuceneUtilBits_INCLUDE 1
 #include "org/apache/lucene/util/Bits.h"
 
-@class OrgApacheLuceneIndexReaderSlice;
-
 @interface OrgApacheLuceneIndexBitsSlice : NSObject < OrgApacheLuceneUtilBits >
 
-#pragma mark Public
+#pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)parent
-            withOrgApacheLuceneIndexReaderSlice:(OrgApacheLuceneIndexReaderSlice *)slice;
-
-- (jboolean)getWithInt:(jint)doc;
-
-- (jint)length;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexBitsSlice)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexBitsSlice_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneIndexReaderSlice_(OrgApacheLuceneIndexBitsSlice *self, id<OrgApacheLuceneUtilBits> parent, OrgApacheLuceneIndexReaderSlice *slice);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexBitsSlice_init(OrgApacheLuceneIndexBitsSlice *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexBitsSlice *new_OrgApacheLuceneIndexBitsSlice_initWithOrgApacheLuceneUtilBits_withOrgApacheLuceneIndexReaderSlice_(id<OrgApacheLuceneUtilBits> parent, OrgApacheLuceneIndexReaderSlice *slice) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexBitsSlice *new_OrgApacheLuceneIndexBitsSlice_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexBitsSlice)
 

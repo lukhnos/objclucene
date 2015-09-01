@@ -24,24 +24,11 @@
 #define OrgApacheLuceneSearchLeafCollector_INCLUDE 1
 #include "org/apache/lucene/search/LeafCollector.h"
 
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneSearchScorer;
-
 @interface OrgApacheLuceneSearchSimpleCollector : NSObject < OrgApacheLuceneSearchCollector, OrgApacheLuceneSearchLeafCollector >
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (void)collectWithInt:(jint)doc;
-
-- (id<OrgApacheLuceneSearchLeafCollector>)getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
-
-- (void)setScorerWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)scorer;
-
-#pragma mark Protected
-
-- (void)doSetNextReaderWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
 
 @end
 

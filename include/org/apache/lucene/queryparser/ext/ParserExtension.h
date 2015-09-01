@@ -16,16 +16,11 @@
 #if !defined (_OrgApacheLuceneQueryparserExtParserExtension_) && (OrgApacheLuceneQueryparserExtParserExtension_INCLUDE_ALL || OrgApacheLuceneQueryparserExtParserExtension_INCLUDE)
 #define _OrgApacheLuceneQueryparserExtParserExtension_
 
-@class OrgApacheLuceneQueryparserExtExtensionQuery;
-@class OrgApacheLuceneSearchQuery;
-
 @interface OrgApacheLuceneQueryparserExtParserExtension : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (OrgApacheLuceneSearchQuery *)parseWithOrgApacheLuceneQueryparserExtExtensionQuery:(OrgApacheLuceneQueryparserExtExtensionQuery *)query;
 
 @end
 

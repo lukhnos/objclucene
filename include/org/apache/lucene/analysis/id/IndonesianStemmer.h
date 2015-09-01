@@ -16,17 +16,11 @@
 #if !defined (_OrgApacheLuceneAnalysisIdIndonesianStemmer_) && (OrgApacheLuceneAnalysisIdIndonesianStemmer_INCLUDE_ALL || OrgApacheLuceneAnalysisIdIndonesianStemmer_INCLUDE)
 #define _OrgApacheLuceneAnalysisIdIndonesianStemmer_
 
-@class IOSCharArray;
-
 @interface OrgApacheLuceneAnalysisIdIndonesianStemmer : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (jint)stemWithCharArray:(IOSCharArray *)text
-                  withInt:(jint)length
-              withBoolean:(jboolean)stemDerivational;
 
 @end
 

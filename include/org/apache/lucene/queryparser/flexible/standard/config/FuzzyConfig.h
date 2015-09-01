@@ -22,14 +22,6 @@
 
 - (instancetype)init;
 
-- (jfloat)getMinSimilarity;
-
-- (jint)getPrefixLength;
-
-- (void)setMinSimilarityWithFloat:(jfloat)minSimilarity;
-
-- (void)setPrefixLengthWithInt:(jint)prefixLength;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleStandardConfigFuzzyConfig)

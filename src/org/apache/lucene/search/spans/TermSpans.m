@@ -11,7 +11,6 @@
 #include "org/apache/lucene/index/PostingsEnum.h"
 #include "org/apache/lucene/index/Term.h"
 #include "org/apache/lucene/search/DocIdSetIterator.h"
-#include "org/apache/lucene/search/spans/SpanCollector.h"
 #include "org/apache/lucene/search/spans/Spans.h"
 #include "org/apache/lucene/search/spans/TermSpans.h"
 #include "org/lukhnos/portmobile/util/Objects.h"
@@ -81,16 +80,8 @@
   return [((OrgApacheLuceneIndexPostingsEnum *) nil_chk(postings_)) cost];
 }
 
-- (void)collectWithOrgApacheLuceneSearchSpansSpanCollector:(id<OrgApacheLuceneSearchSpansSpanCollector>)collector {
-  [((id<OrgApacheLuceneSearchSpansSpanCollector>) nil_chk(collector)) collectLeafWithOrgApacheLuceneIndexPostingsEnum:postings_ withInt:position_ withOrgApacheLuceneIndexTerm:term_];
-}
-
 - (NSString *)description {
   return JreStrcat("$$$$", @"spans(", [((OrgApacheLuceneIndexTerm *) nil_chk(term_)) description], @")@", (doc_ == -1 ? @"START" : (doc_ == OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS) ? @"ENDDOC" : JreStrcat("I$@", doc_, @" - ", (position_ == OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS ? @"ENDPOS" : JavaLangInteger_valueOfWithInt_(position_)))));
-}
-
-- (OrgApacheLuceneIndexPostingsEnum *)getPostings {
-  return postings_;
 }
 
 - (void)dealloc {
@@ -110,9 +101,7 @@
     { "endPosition", NULL, "I", 0x1, NULL, NULL },
     { "width", NULL, "I", 0x1, NULL, NULL },
     { "cost", NULL, "J", 0x1, NULL, NULL },
-    { "collectWithOrgApacheLuceneSearchSpansSpanCollector:", "collect", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getPostings", NULL, "Lorg.apache.lucene.index.PostingsEnum;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "postings_", NULL, 0x14, "Lorg.apache.lucene.index.PostingsEnum;", NULL, NULL, .constantValue.asLong = 0 },
@@ -123,7 +112,7 @@
     { "position_", NULL, 0x4, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "readPayload_", NULL, 0x4, "Z", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansTermSpans = { 2, "TermSpans", "org.apache.lucene.search.spans", NULL, 0x1, 12, methods, 7, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansTermSpans = { 2, "TermSpans", "org.apache.lucene.search.spans", NULL, 0x1, 10, methods, 7, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchSpansTermSpans;
 }
 

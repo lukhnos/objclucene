@@ -16,16 +16,11 @@
 #if !defined (_OrgApacheLuceneAnalysisHiHindiStemmer_) && (OrgApacheLuceneAnalysisHiHindiStemmer_INCLUDE_ALL || OrgApacheLuceneAnalysisHiHindiStemmer_INCLUDE)
 #define _OrgApacheLuceneAnalysisHiHindiStemmer_
 
-@class IOSCharArray;
-
 @interface OrgApacheLuceneAnalysisHiHindiStemmer : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (jint)stemWithCharArray:(IOSCharArray *)buffer
-                  withInt:(jint)len;
 
 @end
 

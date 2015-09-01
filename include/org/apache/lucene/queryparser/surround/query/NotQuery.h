@@ -20,27 +20,19 @@
 #define OrgApacheLuceneQueryparserSurroundQueryComposedQuery_INCLUDE 1
 #include "org/apache/lucene/queryparser/surround/query/ComposedQuery.h"
 
-@class OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory;
-@class OrgApacheLuceneSearchQuery;
-@protocol JavaUtilList;
-
 @interface OrgApacheLuceneQueryparserSurroundQueryNotQuery : OrgApacheLuceneQueryparserSurroundQueryComposedQuery
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)queries
-                        withNSString:(NSString *)opName;
-
-- (OrgApacheLuceneSearchQuery *)makeLuceneQueryFieldNoBoostWithNSString:(NSString *)fieldName
-           withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *)qf;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserSurroundQueryNotQuery)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundQueryNotQuery_initWithJavaUtilList_withNSString_(OrgApacheLuceneQueryparserSurroundQueryNotQuery *self, id<JavaUtilList> queries, NSString *opName);
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundQueryNotQuery_init(OrgApacheLuceneQueryparserSurroundQueryNotQuery *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQueryNotQuery *new_OrgApacheLuceneQueryparserSurroundQueryNotQuery_initWithJavaUtilList_withNSString_(id<JavaUtilList> queries, NSString *opName) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQueryNotQuery *new_OrgApacheLuceneQueryparserSurroundQueryNotQuery_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundQueryNotQuery)
 

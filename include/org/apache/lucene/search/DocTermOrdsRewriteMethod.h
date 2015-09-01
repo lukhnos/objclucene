@@ -20,22 +20,11 @@
 #define OrgApacheLuceneSearchMultiTermQuery_RewriteMethod_INCLUDE 1
 #include "org/apache/lucene/search/MultiTermQuery.h"
 
-@class OrgApacheLuceneIndexIndexReader;
-@class OrgApacheLuceneSearchMultiTermQuery;
-@class OrgApacheLuceneSearchQuery;
-
 @interface OrgApacheLuceneSearchDocTermOrdsRewriteMethod : OrgApacheLuceneSearchMultiTermQuery_RewriteMethod
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (jboolean)isEqual:(id)obj;
-
-- (NSUInteger)hash;
-
-- (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
-                                   withOrgApacheLuceneSearchMultiTermQuery:(OrgApacheLuceneSearchMultiTermQuery *)query;
 
 @end
 

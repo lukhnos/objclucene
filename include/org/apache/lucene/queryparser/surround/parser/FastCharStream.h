@@ -20,57 +20,19 @@
 #define OrgApacheLuceneQueryparserSurroundParserCharStream_INCLUDE 1
 #include "org/apache/lucene/queryparser/surround/parser/CharStream.h"
 
-@class IOSCharArray;
-@class JavaIoReader;
-
-@interface OrgApacheLuceneQueryparserSurroundParserFastCharStream : NSObject < OrgApacheLuceneQueryparserSurroundParserCharStream > {
- @public
-  IOSCharArray *buffer_;
-  jint bufferLength_;
-  jint bufferPosition_;
-  jint tokenStart_;
-  jint bufferStart_;
-  JavaIoReader *input_;
-}
+@interface OrgApacheLuceneQueryparserSurroundParserFastCharStream : NSObject < OrgApacheLuceneQueryparserSurroundParserCharStream >
 
 #pragma mark Public
 
-- (instancetype)initWithJavaIoReader:(JavaIoReader *)r;
-
-- (void)backupWithInt:(jint)amount;
-
-- (jchar)BeginToken;
-
-- (void)Done;
-
-- (jint)getBeginColumn;
-
-- (jint)getBeginLine;
-
-- (jint)getColumn;
-
-- (jint)getEndColumn;
-
-- (jint)getEndLine;
-
-- (NSString *)GetImage;
-
-- (jint)getLine;
-
-- (IOSCharArray *)GetSuffixWithInt:(jint)len;
-
-- (jchar)readChar;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserSurroundParserFastCharStream)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserSurroundParserFastCharStream, buffer_, IOSCharArray *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserSurroundParserFastCharStream, input_, JavaIoReader *)
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundParserFastCharStream_init(OrgApacheLuceneQueryparserSurroundParserFastCharStream *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundParserFastCharStream_initWithJavaIoReader_(OrgApacheLuceneQueryparserSurroundParserFastCharStream *self, JavaIoReader *r);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundParserFastCharStream *new_OrgApacheLuceneQueryparserSurroundParserFastCharStream_initWithJavaIoReader_(JavaIoReader *r) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundParserFastCharStream *new_OrgApacheLuceneQueryparserSurroundParserFastCharStream_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundParserFastCharStream)
 

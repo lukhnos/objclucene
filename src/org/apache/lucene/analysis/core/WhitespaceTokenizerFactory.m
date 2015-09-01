@@ -4,45 +4,34 @@
 //
 
 #include "J2ObjC_source.h"
-#include "java/lang/IllegalArgumentException.h"
-#include "java/util/Map.h"
-#include "org/apache/lucene/analysis/core/WhitespaceTokenizer.h"
 #include "org/apache/lucene/analysis/core/WhitespaceTokenizerFactory.h"
-#include "org/apache/lucene/analysis/util/TokenizerFactory.h"
-#include "org/apache/lucene/util/AttributeFactory.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args {
-  OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory_initWithJavaUtilMap_(self, args);
+- (instancetype)init {
+  OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory_init(self);
   return self;
-}
-
-- (OrgApacheLuceneAnalysisCoreWhitespaceTokenizer *)createWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory {
-  return [new_OrgApacheLuceneAnalysisCoreWhitespaceTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(factory) autorelease];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "WhitespaceTokenizerFactory", NULL, 0x1, NULL, NULL },
-    { "createWithOrgApacheLuceneUtilAttributeFactory:", "create", "Lorg.apache.lucene.analysis.core.WhitespaceTokenizer;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory = { 2, "WhitespaceTokenizerFactory", "org.apache.lucene.analysis.core", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory = { 2, "WhitespaceTokenizerFactory", "org.apache.lucene.analysis.core", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory;
 }
 
 @end
 
-void OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory *self, id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisUtilTokenizerFactory_initWithJavaUtilMap_(self, args);
-  if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
-  }
+void OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory_init(OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory *new_OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory *new_OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory_init() {
   OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory *self = [OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory alloc];
-  OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory_initWithJavaUtilMap_(self, args);
+  OrgApacheLuceneAnalysisCoreWhitespaceTokenizerFactory_init(self);
   return self;
 }
 

@@ -20,51 +20,19 @@
 #define OrgApacheLuceneQueryparserSurroundQuerySrndQuery_INCLUDE 1
 #include "org/apache/lucene/queryparser/surround/query/SrndQuery.h"
 
-@class JavaLangStringBuilder;
-@class OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory;
-@class OrgApacheLuceneSearchQuery;
-@protocol JavaUtilList;
-
 @interface OrgApacheLuceneQueryparserSurroundQueryFieldsQuery : OrgApacheLuceneQueryparserSurroundQuerySrndQuery
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery:(OrgApacheLuceneQueryparserSurroundQuerySrndQuery *)q
-                                                        withJavaUtilList:(id<JavaUtilList>)fieldNames
-                                                                withChar:(jchar)fieldOp;
-
-- (instancetype)initWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery:(OrgApacheLuceneQueryparserSurroundQuerySrndQuery *)q
-                                                            withNSString:(NSString *)fieldName
-                                                                withChar:(jchar)fieldOp;
-
-- (id<JavaUtilList>)getFieldNames;
-
-- (jchar)getFieldOperator;
-
-- (jboolean)isFieldsSubQueryAcceptable;
-
-- (OrgApacheLuceneSearchQuery *)makeLuceneQueryFieldNoBoostWithNSString:(NSString *)fieldName
-           withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *)qf;
-
-- (OrgApacheLuceneSearchQuery *)makeLuceneQueryNoBoostWithOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *)qf;
-
-- (NSString *)description;
-
-#pragma mark Protected
-
-- (void)fieldNamesToStringWithJavaLangStringBuilder:(JavaLangStringBuilder *)r;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserSurroundQueryFieldsQuery)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundQueryFieldsQuery_initWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery_withJavaUtilList_withChar_(OrgApacheLuceneQueryparserSurroundQueryFieldsQuery *self, OrgApacheLuceneQueryparserSurroundQuerySrndQuery *q, id<JavaUtilList> fieldNames, jchar fieldOp);
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundQueryFieldsQuery_init(OrgApacheLuceneQueryparserSurroundQueryFieldsQuery *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQueryFieldsQuery *new_OrgApacheLuceneQueryparserSurroundQueryFieldsQuery_initWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery_withJavaUtilList_withChar_(OrgApacheLuceneQueryparserSurroundQuerySrndQuery *q, id<JavaUtilList> fieldNames, jchar fieldOp) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundQueryFieldsQuery_initWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery_withNSString_withChar_(OrgApacheLuceneQueryparserSurroundQueryFieldsQuery *self, OrgApacheLuceneQueryparserSurroundQuerySrndQuery *q, NSString *fieldName, jchar fieldOp);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQueryFieldsQuery *new_OrgApacheLuceneQueryparserSurroundQueryFieldsQuery_initWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery_withNSString_withChar_(OrgApacheLuceneQueryparserSurroundQuerySrndQuery *q, NSString *fieldName, jchar fieldOp) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQueryFieldsQuery *new_OrgApacheLuceneQueryparserSurroundQueryFieldsQuery_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundQueryFieldsQuery)
 

@@ -20,29 +20,19 @@
 #define OrgApacheLuceneUtilPriorityQueue_INCLUDE 1
 #include "org/apache/lucene/util/PriorityQueue.h"
 
-@class IOSObjectArray;
-@class OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc;
-
 @interface OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue : OrgApacheLuceneUtilPriorityQueue
 
-#pragma mark Public
+#pragma mark Package-Private
 
-- (instancetype)initWithInt:(jint)size;
-
-- (IOSObjectArray *)getResults;
-
-#pragma mark Protected
-
-- (jboolean)lessThanWithId:(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc *)a
-                    withId:(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc *)b;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue_initWithInt_(OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue *self, jint size);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue_init(OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue *new_OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue_initWithInt_(jint size) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue *new_OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue)
 

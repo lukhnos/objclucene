@@ -44,12 +44,6 @@
 
 - (void)decodeWithLongArray:(IOSLongArray *)blocks
                     withInt:(jint)blocksOffset
-               withIntArray:(IOSIntArray *)values
-                    withInt:(jint)valuesOffset
-                    withInt:(jint)iterations;
-
-- (void)decodeWithLongArray:(IOSLongArray *)blocks
-                    withInt:(jint)blocksOffset
               withLongArray:(IOSLongArray *)values
                     withInt:(jint)valuesOffset
                     withInt:(jint)iterations;

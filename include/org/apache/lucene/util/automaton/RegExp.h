@@ -19,8 +19,6 @@
 @class JavaLangStringBuilder;
 @class OrgApacheLuceneUtilAutomatonAutomaton;
 @class OrgApacheLuceneUtilAutomatonRegExp_KindEnum;
-@protocol JavaUtilMap;
-@protocol JavaUtilSet;
 @protocol OrgApacheLuceneUtilAutomatonAutomatonProvider;
 
 #define OrgApacheLuceneUtilAutomatonRegExp_INTERSECTION 1
@@ -46,34 +44,19 @@
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)s;
-
 - (instancetype)initWithNSString:(NSString *)s
                          withInt:(jint)syntax_flags;
 
-- (id<JavaUtilSet>)getIdentifiers;
-
 - (NSString *)getOriginalString;
-
-- (OrgApacheLuceneUtilAutomatonAutomaton *)toAutomaton;
 
 - (OrgApacheLuceneUtilAutomatonAutomaton *)toAutomatonWithOrgApacheLuceneUtilAutomatonAutomatonProvider:(id<OrgApacheLuceneUtilAutomatonAutomatonProvider>)automaton_provider
                                                                                                 withInt:(jint)maxDeterminizedStates;
 
-- (OrgApacheLuceneUtilAutomatonAutomaton *)toAutomatonWithInt:(jint)maxDeterminizedStates;
-
-- (OrgApacheLuceneUtilAutomatonAutomaton *)toAutomatonWithJavaUtilMap:(id<JavaUtilMap>)automata
-                                                              withInt:(jint)maxDeterminizedStates;
-
 - (NSString *)description;
-
-- (NSString *)toStringTree;
 
 #pragma mark Package-Private
 
 - (instancetype)init;
-
-- (void)getIdentifiersWithJavaUtilSet:(id<JavaUtilSet>)set;
 
 + (OrgApacheLuceneUtilAutomatonRegExp *)makeAnyChar;
 
@@ -138,9 +121,6 @@
 
 - (void)toStringBuilderWithJavaLangStringBuilder:(JavaLangStringBuilder *)b;
 
-- (void)toStringTreeWithJavaLangStringBuilder:(JavaLangStringBuilder *)b
-                                 withNSString:(NSString *)indent;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilAutomatonRegExp)
@@ -169,10 +149,6 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilAutomatonRegExp, NONE, jint)
 FOUNDATION_EXPORT void OrgApacheLuceneUtilAutomatonRegExp_init(OrgApacheLuceneUtilAutomatonRegExp *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonRegExp *new_OrgApacheLuceneUtilAutomatonRegExp_init() NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneUtilAutomatonRegExp_initWithNSString_(OrgApacheLuceneUtilAutomatonRegExp *self, NSString *s);
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonRegExp *new_OrgApacheLuceneUtilAutomatonRegExp_initWithNSString_(NSString *s) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilAutomatonRegExp_initWithNSString_withInt_(OrgApacheLuceneUtilAutomatonRegExp *self, NSString *s, jint syntax_flags);
 

@@ -20,47 +20,19 @@
 #define OrgApacheLuceneSearchQuery_INCLUDE 1
 #include "org/apache/lucene/search/Query.h"
 
-@class OrgApacheLuceneIndexIndexReader;
-@class OrgApacheLuceneSearchIndexSearcher;
-@class OrgApacheLuceneSearchWeight;
-
-@interface OrgApacheLuceneBkdtreeBKDPointInBBoxQuery : OrgApacheLuceneSearchQuery {
- @public
-  NSString *field_;
-  jdouble minLat_;
-  jdouble maxLat_;
-  jdouble minLon_;
-  jdouble maxLon_;
-}
+@interface OrgApacheLuceneBkdtreeBKDPointInBBoxQuery : OrgApacheLuceneSearchQuery
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field
-                      withDouble:(jdouble)minLat
-                      withDouble:(jdouble)maxLat
-                      withDouble:(jdouble)minLon
-                      withDouble:(jdouble)maxLon;
-
-- (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
-                                                                        withBoolean:(jboolean)needsScores;
-
-- (jboolean)isEqual:(id)other;
-
-- (NSUInteger)hash;
-
-- (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
-
-- (NSString *)toStringWithNSString:(NSString *)field;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneBkdtreeBKDPointInBBoxQuery)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneBkdtreeBKDPointInBBoxQuery, field_, NSString *)
+FOUNDATION_EXPORT void OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_init(OrgApacheLuceneBkdtreeBKDPointInBBoxQuery *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_initWithNSString_withDouble_withDouble_withDouble_withDouble_(OrgApacheLuceneBkdtreeBKDPointInBBoxQuery *self, NSString *field, jdouble minLat, jdouble maxLat, jdouble minLon, jdouble maxLon);
-
-FOUNDATION_EXPORT OrgApacheLuceneBkdtreeBKDPointInBBoxQuery *new_OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_initWithNSString_withDouble_withDouble_withDouble_withDouble_(NSString *field, jdouble minLat, jdouble maxLat, jdouble minLon, jdouble maxLon) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneBkdtreeBKDPointInBBoxQuery *new_OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeBKDPointInBBoxQuery)
 

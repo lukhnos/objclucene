@@ -20,25 +20,19 @@
 #define OrgApacheLuceneAnalysisUtilTokenizerFactory_INCLUDE 1
 #include "org/apache/lucene/analysis/util/TokenizerFactory.h"
 
-@class OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer;
-@class OrgApacheLuceneUtilAttributeFactory;
-@protocol JavaUtilMap;
-
 @interface OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerFactory : OrgApacheLuceneAnalysisUtilTokenizerFactory
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
-
-- (OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer *)createWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerFactory)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerFactory *self, id<JavaUtilMap> args);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerFactory_init(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerFactory *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerFactory *new_OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerFactory *new_OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerFactory_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerFactory)
 

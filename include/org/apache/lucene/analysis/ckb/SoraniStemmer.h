@@ -16,16 +16,11 @@
 #if !defined (_OrgApacheLuceneAnalysisCkbSoraniStemmer_) && (OrgApacheLuceneAnalysisCkbSoraniStemmer_INCLUDE_ALL || OrgApacheLuceneAnalysisCkbSoraniStemmer_INCLUDE)
 #define _OrgApacheLuceneAnalysisCkbSoraniStemmer_
 
-@class IOSCharArray;
-
 @interface OrgApacheLuceneAnalysisCkbSoraniStemmer : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (jint)stemWithCharArray:(IOSCharArray *)s
-                  withInt:(jint)len;
 
 @end
 

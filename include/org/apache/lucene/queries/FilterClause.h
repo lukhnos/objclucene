@@ -16,35 +16,19 @@
 #if !defined (_OrgApacheLuceneQueriesFilterClause_) && (OrgApacheLuceneQueriesFilterClause_INCLUDE_ALL || OrgApacheLuceneQueriesFilterClause_INCLUDE)
 #define _OrgApacheLuceneQueriesFilterClause_
 
-@class OrgApacheLuceneSearchBooleanClause_OccurEnum;
-@class OrgApacheLuceneSearchFilter;
-
 @interface OrgApacheLuceneQueriesFilterClause : NSObject
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter
-   withOrgApacheLuceneSearchBooleanClause_OccurEnum:(OrgApacheLuceneSearchBooleanClause_OccurEnum *)occur;
-
-- (jboolean)isEqual:(id)o;
-
-- (OrgApacheLuceneSearchFilter *)getFilter;
-
-- (OrgApacheLuceneSearchBooleanClause_OccurEnum *)getOccur;
-
-- (NSUInteger)hash;
-
-- (NSString *)description;
-
-- (NSString *)toStringWithNSString:(NSString *)field;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFilterClause)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFilterClause_initWithOrgApacheLuceneSearchFilter_withOrgApacheLuceneSearchBooleanClause_OccurEnum_(OrgApacheLuceneQueriesFilterClause *self, OrgApacheLuceneSearchFilter *filter, OrgApacheLuceneSearchBooleanClause_OccurEnum *occur);
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesFilterClause_init(OrgApacheLuceneQueriesFilterClause *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueriesFilterClause *new_OrgApacheLuceneQueriesFilterClause_initWithOrgApacheLuceneSearchFilter_withOrgApacheLuceneSearchBooleanClause_OccurEnum_(OrgApacheLuceneSearchFilter *filter, OrgApacheLuceneSearchBooleanClause_OccurEnum *occur) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFilterClause *new_OrgApacheLuceneQueriesFilterClause_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFilterClause)
 

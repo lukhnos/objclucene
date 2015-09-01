@@ -16,11 +16,7 @@
 #if !defined (_OrgApacheLuceneAnalysisUtilMultiTermAwareComponent_) && (OrgApacheLuceneAnalysisUtilMultiTermAwareComponent_INCLUDE_ALL || OrgApacheLuceneAnalysisUtilMultiTermAwareComponent_INCLUDE)
 #define _OrgApacheLuceneAnalysisUtilMultiTermAwareComponent_
 
-@class OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory;
-
 @protocol OrgApacheLuceneAnalysisUtilMultiTermAwareComponent < NSObject, JavaObject >
-
-- (OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory *)getMultiTermComponent;
 
 @end
 

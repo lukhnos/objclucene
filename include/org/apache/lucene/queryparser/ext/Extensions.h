@@ -16,9 +16,6 @@
 #if !defined (_OrgApacheLuceneQueryparserExtExtensions_) && (OrgApacheLuceneQueryparserExtExtensions_INCLUDE_ALL || OrgApacheLuceneQueryparserExtExtensions_INCLUDE)
 #define _OrgApacheLuceneQueryparserExtExtensions_
 
-@class OrgApacheLuceneQueryparserExtExtensions_Pair;
-@class OrgApacheLuceneQueryparserExtParserExtension;
-
 #define OrgApacheLuceneQueryparserExtExtensions_DEFAULT_EXTENSION_FIELD_DELIMITER ':'
 
 @interface OrgApacheLuceneQueryparserExtExtensions : NSObject
@@ -26,25 +23,6 @@
 #pragma mark Public
 
 - (instancetype)init;
-
-- (instancetype)initWithChar:(jchar)extensionFieldDelimiter;
-
-- (void)addWithNSString:(NSString *)key
-withOrgApacheLuceneQueryparserExtParserExtension:(OrgApacheLuceneQueryparserExtParserExtension *)extension;
-
-- (NSString *)buildExtensionFieldWithNSString:(NSString *)extensionKey;
-
-- (NSString *)buildExtensionFieldWithNSString:(NSString *)extensionKey
-                                 withNSString:(NSString *)field;
-
-- (NSString *)escapeExtensionFieldWithNSString:(NSString *)extfield;
-
-- (OrgApacheLuceneQueryparserExtParserExtension *)getExtensionWithNSString:(NSString *)key;
-
-- (jchar)getExtensionFieldDelimiter;
-
-- (OrgApacheLuceneQueryparserExtExtensions_Pair *)splitExtensionFieldWithNSString:(NSString *)defaultField
-                                                                     withNSString:(NSString *)field;
 
 @end
 
@@ -56,10 +34,6 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserExtExtensions_init(OrgApacheLuc
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserExtExtensions *new_OrgApacheLuceneQueryparserExtExtensions_init() NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserExtExtensions_initWithChar_(OrgApacheLuceneQueryparserExtExtensions *self, jchar extensionFieldDelimiter);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserExtExtensions *new_OrgApacheLuceneQueryparserExtExtensions_initWithChar_(jchar extensionFieldDelimiter) NS_RETURNS_RETAINED;
-
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserExtExtensions)
 
 #endif
@@ -67,27 +41,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserExtExtensions)
 #if !defined (_OrgApacheLuceneQueryparserExtExtensions_Pair_) && (OrgApacheLuceneQueryparserExtExtensions_INCLUDE_ALL || OrgApacheLuceneQueryparserExtExtensions_Pair_INCLUDE)
 #define _OrgApacheLuceneQueryparserExtExtensions_Pair_
 
-@interface OrgApacheLuceneQueryparserExtExtensions_Pair : NSObject {
- @public
-  id cur_;
-  id cud_;
-}
+@interface OrgApacheLuceneQueryparserExtExtensions_Pair : NSObject
 
 #pragma mark Public
 
-- (instancetype)initWithId:(id)cur
-                    withId:(id)cud;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserExtExtensions_Pair)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserExtExtensions_Pair, cur_, id)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserExtExtensions_Pair, cud_, id)
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserExtExtensions_Pair_init(OrgApacheLuceneQueryparserExtExtensions_Pair *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserExtExtensions_Pair_initWithId_withId_(OrgApacheLuceneQueryparserExtExtensions_Pair *self, id cur, id cud);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserExtExtensions_Pair *new_OrgApacheLuceneQueryparserExtExtensions_Pair_initWithId_withId_(id cur, id cud) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserExtExtensions_Pair *new_OrgApacheLuceneQueryparserExtExtensions_Pair_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserExtExtensions_Pair)
 

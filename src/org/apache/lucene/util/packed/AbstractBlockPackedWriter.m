@@ -55,29 +55,12 @@ __attribute__((unused)) static void OrgApacheLuceneUtilPackedAbstractBlockPacked
   ++ord_;
 }
 
-- (void)addBlockOfZeros {
-  OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_checkNotFinished(self);
-  if (off_ != 0 && off_ != ((IOSLongArray *) nil_chk(values_))->size_) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("I", off_)) autorelease];
-  }
-  if (off_ == ((IOSLongArray *) nil_chk(values_))->size_) {
-    [self flush];
-  }
-  JavaUtilArrays_fillWithLongArray_withLong_(values_, 0);
-  off_ = values_->size_;
-  ord_ += values_->size_;
-}
-
 - (void)finish {
   OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_checkNotFinished(self);
   if (off_ > 0) {
     [self flush];
   }
   finished_ = YES;
-}
-
-- (jlong)ord {
-  return ord_;
 }
 
 - (void)flush {
@@ -114,9 +97,7 @@ __attribute__((unused)) static void OrgApacheLuceneUtilPackedAbstractBlockPacked
     { "resetWithOrgApacheLuceneStoreDataOutput:", "reset", "V", 0x1, NULL, NULL },
     { "checkNotFinished", NULL, "V", 0x2, NULL, NULL },
     { "addWithLong:", "add", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "addBlockOfZeros", NULL, "V", 0x0, "Ljava.io.IOException;", NULL },
     { "finish", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "ord", NULL, "J", 0x1, NULL, NULL },
     { "flush", NULL, "V", 0x404, "Ljava.io.IOException;", NULL },
     { "writeValuesWithInt:", "writeValues", "V", 0x14, "Ljava.io.IOException;", NULL },
   };
@@ -132,7 +113,7 @@ __attribute__((unused)) static void OrgApacheLuceneUtilPackedAbstractBlockPacked
     { "ord_", NULL, 0x4, "J", NULL, NULL, .constantValue.asLong = 0 },
     { "finished_", NULL, 0x4, "Z", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedAbstractBlockPackedWriter = { 2, "AbstractBlockPackedWriter", "org.apache.lucene.util.packed", NULL, 0x400, 10, methods, 10, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedAbstractBlockPackedWriter = { 2, "AbstractBlockPackedWriter", "org.apache.lucene.util.packed", NULL, 0x400, 8, methods, 10, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilPackedAbstractBlockPackedWriter;
 }
 

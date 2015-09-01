@@ -44,8 +44,6 @@
 
 - (jint)docFreq;
 
-- (jlong)getVersion;
-
 - (OrgApacheLuceneUtilBytesRef *)next;
 
 - (jlong)ord;
@@ -63,8 +61,6 @@
 - (void)seekExactWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)target
                withOrgApacheLuceneIndexTermState:(OrgApacheLuceneIndexTermState *)otherState;
 
-- (void)seekExactWithLong:(jlong)ord;
-
 - (OrgApacheLuceneUtilBytesRef *)term;
 
 - (OrgApacheLuceneIndexTermState *)termState;
@@ -76,8 +72,6 @@
 #pragma mark Package-Private
 
 - (instancetype)initWithOrgApacheLuceneCodecsIdversionVersionFieldReader:(OrgApacheLuceneCodecsIdversionVersionFieldReader *)fr;
-
-+ (NSString *)brToStringWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)b;
 
 - (void)initIndexInput OBJC_METHOD_FAMILY_NONE;
 
@@ -101,8 +95,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum, ter
 FOUNDATION_EXPORT void OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum_initWithOrgApacheLuceneCodecsIdversionVersionFieldReader_(OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum *self, OrgApacheLuceneCodecsIdversionVersionFieldReader *fr);
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum *new_OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum_initWithOrgApacheLuceneCodecsIdversionVersionFieldReader_(OrgApacheLuceneCodecsIdversionVersionFieldReader *fr) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT NSString *OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum_brToStringWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilBytesRef *b);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum)
 

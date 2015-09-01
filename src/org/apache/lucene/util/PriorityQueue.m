@@ -115,23 +115,6 @@ __attribute__((unused)) static void OrgApacheLuceneUtilPriorityQueue_downHeapWit
   size_ = 0;
 }
 
-- (jboolean)removeWithId:(id)element {
-  for (jint i = 1; i <= size_; i++) {
-    if (IOSObjectArray_Get(nil_chk(heap_), i) == element) {
-      IOSObjectArray_Set(heap_, i, IOSObjectArray_Get(heap_, size_));
-      IOSObjectArray_Set(heap_, size_, nil);
-      size_--;
-      if (i <= size_) {
-        if (!OrgApacheLuceneUtilPriorityQueue_upHeapWithInt_(self, i)) {
-          OrgApacheLuceneUtilPriorityQueue_downHeapWithInt_(self, i);
-        }
-      }
-      return YES;
-    }
-  }
-  return NO;
-}
-
 - (jboolean)upHeapWithInt:(jint)origPos {
   return OrgApacheLuceneUtilPriorityQueue_upHeapWithInt_(self, origPos);
 }
@@ -163,7 +146,6 @@ __attribute__((unused)) static void OrgApacheLuceneUtilPriorityQueue_downHeapWit
     { "updateTopWithId:", "updateTop", "TT;", 0x11, NULL, "(TT;)TT;" },
     { "size", NULL, "I", 0x11, NULL, NULL },
     { "clear", NULL, "V", 0x11, NULL, NULL },
-    { "removeWithId:", "remove", "Z", 0x11, NULL, "(TT;)Z" },
     { "upHeapWithInt:", "upHeap", "Z", 0x12, NULL, NULL },
     { "downHeapWithInt:", "downHeap", "V", 0x12, NULL, NULL },
     { "getHeapArray", NULL, "[Ljava.lang.Object;", 0x14, NULL, NULL },
@@ -173,7 +155,7 @@ __attribute__((unused)) static void OrgApacheLuceneUtilPriorityQueue_downHeapWit
     { "maxSize_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "heap_", NULL, 0x12, "[Ljava.lang.Object;", NULL, "[TT;", .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPriorityQueue = { 2, "PriorityQueue", "org.apache.lucene.util", NULL, 0x401, 16, methods, 3, fields, 0, NULL, 0, NULL, NULL, "<T:Ljava/lang/Object;>Ljava/lang/Object;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPriorityQueue = { 2, "PriorityQueue", "org.apache.lucene.util", NULL, 0x401, 15, methods, 3, fields, 0, NULL, 0, NULL, NULL, "<T:Ljava/lang/Object;>Ljava/lang/Object;" };
   return &_OrgApacheLuceneUtilPriorityQueue;
 }
 

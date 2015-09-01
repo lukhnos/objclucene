@@ -20,44 +20,17 @@
 #define OrgApacheLuceneSearchRescorer_INCLUDE 1
 #include "org/apache/lucene/search/Rescorer.h"
 
-@class OrgApacheLuceneSearchExplanation;
-@class OrgApacheLuceneSearchIndexSearcher;
-@class OrgApacheLuceneSearchQuery;
-@class OrgApacheLuceneSearchTopDocs;
-
 @interface OrgApacheLuceneSearchQueryRescorer : OrgApacheLuceneSearchRescorer
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
-
-- (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
-                                               withOrgApacheLuceneSearchExplanation:(OrgApacheLuceneSearchExplanation *)firstPassExplanation
-                                                                            withInt:(jint)docID;
-
-- (OrgApacheLuceneSearchTopDocs *)rescoreWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
-                                               withOrgApacheLuceneSearchTopDocs:(OrgApacheLuceneSearchTopDocs *)firstPassTopDocs
-                                                                        withInt:(jint)topN;
-
-+ (OrgApacheLuceneSearchTopDocs *)rescoreWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
-                                               withOrgApacheLuceneSearchTopDocs:(OrgApacheLuceneSearchTopDocs *)topDocs
-                                                 withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-                                                                     withDouble:(jdouble)weight
-                                                                        withInt:(jint)topN;
-
-#pragma mark Protected
-
-- (jfloat)combineWithFloat:(jfloat)firstPassScore
-               withBoolean:(jboolean)secondPassMatches
-                 withFloat:(jfloat)secondPassScore;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchQueryRescorer)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchQueryRescorer_initWithOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchQueryRescorer *self, OrgApacheLuceneSearchQuery *query);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchTopDocs *OrgApacheLuceneSearchQueryRescorer_rescoreWithOrgApacheLuceneSearchIndexSearcher_withOrgApacheLuceneSearchTopDocs_withOrgApacheLuceneSearchQuery_withDouble_withInt_(OrgApacheLuceneSearchIndexSearcher *searcher, OrgApacheLuceneSearchTopDocs *topDocs, OrgApacheLuceneSearchQuery *query, jdouble weight, jint topN);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchQueryRescorer_init(OrgApacheLuceneSearchQueryRescorer *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchQueryRescorer)
 

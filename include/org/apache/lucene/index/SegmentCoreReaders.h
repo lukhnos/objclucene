@@ -26,7 +26,6 @@
 @class OrgApacheLuceneStoreDirectory;
 @class OrgApacheLuceneStoreIOContext;
 @class OrgApacheLuceneUtilCloseableThreadLocal;
-@protocol OrgApacheLuceneIndexLeafReader_CoreClosedListener;
 
 @interface OrgApacheLuceneIndexSegmentCoreReaders : NSObject {
  @public
@@ -47,15 +46,9 @@
                 withOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)si
                         withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
 
-- (void)addCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:(id<OrgApacheLuceneIndexLeafReader_CoreClosedListener>)listener;
-
 - (void)decRef;
 
-- (jint)getRefCount;
-
 - (void)incRef;
-
-- (void)removeCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:(id<OrgApacheLuceneIndexLeafReader_CoreClosedListener>)listener;
 
 @end
 

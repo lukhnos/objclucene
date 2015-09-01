@@ -20,51 +20,19 @@
 #define OrgApacheLuceneBkdtreeLatLonWriter_INCLUDE 1
 #include "org/apache/lucene/bkdtree/LatLonWriter.h"
 
-@class IOSByteArray;
-@class OrgApacheLuceneStoreByteArrayDataOutput;
-@class OrgApacheLuceneStoreOutputStreamDataOutput;
-@class OrgLukhnosPortmobileFilePath;
-@protocol OrgApacheLuceneBkdtreeLatLonReader;
+@interface OrgApacheLuceneBkdtreeOfflineLatLonWriter : NSObject < OrgApacheLuceneBkdtreeLatLonWriter >
 
-@interface OrgApacheLuceneBkdtreeOfflineLatLonWriter : NSObject < OrgApacheLuceneBkdtreeLatLonWriter > {
- @public
-  OrgLukhnosPortmobileFilePath *tempFile_;
-  IOSByteArray *scratchBytes_;
-  OrgApacheLuceneStoreByteArrayDataOutput *scratchBytesOutput_;
-  OrgApacheLuceneStoreOutputStreamDataOutput *out_;
-  jlong count_;
-}
+#pragma mark Package-Private
 
-#pragma mark Public
-
-- (instancetype)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)tempDir
-                                            withLong:(jlong)count;
-
-- (void)appendWithInt:(jint)latEnc
-              withInt:(jint)lonEnc
-             withLong:(jlong)ord
-              withInt:(jint)docID;
-
-- (void)close;
-
-- (void)destroy;
-
-- (id<OrgApacheLuceneBkdtreeLatLonReader>)getReaderWithLong:(jlong)start;
-
-- (NSString *)description;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneBkdtreeOfflineLatLonWriter)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneBkdtreeOfflineLatLonWriter, tempFile_, OrgLukhnosPortmobileFilePath *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneBkdtreeOfflineLatLonWriter, scratchBytes_, IOSByteArray *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneBkdtreeOfflineLatLonWriter, scratchBytesOutput_, OrgApacheLuceneStoreByteArrayDataOutput *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneBkdtreeOfflineLatLonWriter, out_, OrgApacheLuceneStoreOutputStreamDataOutput *)
+FOUNDATION_EXPORT void OrgApacheLuceneBkdtreeOfflineLatLonWriter_init(OrgApacheLuceneBkdtreeOfflineLatLonWriter *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneBkdtreeOfflineLatLonWriter_initWithOrgLukhnosPortmobileFilePath_withLong_(OrgApacheLuceneBkdtreeOfflineLatLonWriter *self, OrgLukhnosPortmobileFilePath *tempDir, jlong count);
-
-FOUNDATION_EXPORT OrgApacheLuceneBkdtreeOfflineLatLonWriter *new_OrgApacheLuceneBkdtreeOfflineLatLonWriter_initWithOrgLukhnosPortmobileFilePath_withLong_(OrgLukhnosPortmobileFilePath *tempDir, jlong count) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneBkdtreeOfflineLatLonWriter *new_OrgApacheLuceneBkdtreeOfflineLatLonWriter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeOfflineLatLonWriter)
 

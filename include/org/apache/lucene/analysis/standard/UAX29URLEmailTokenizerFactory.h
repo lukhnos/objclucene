@@ -20,25 +20,19 @@
 #define OrgApacheLuceneAnalysisUtilTokenizerFactory_INCLUDE 1
 #include "org/apache/lucene/analysis/util/TokenizerFactory.h"
 
-@class OrgApacheLuceneAnalysisTokenizer;
-@class OrgApacheLuceneUtilAttributeFactory;
-@protocol JavaUtilMap;
-
 @interface OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFactory : OrgApacheLuceneAnalysisUtilTokenizerFactory
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
-
-- (OrgApacheLuceneAnalysisTokenizer *)createWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFactory)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFactory *self, id<JavaUtilMap> args);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFactory_init(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFactory *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFactory *new_OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFactory *new_OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFactory_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerFactory)
 

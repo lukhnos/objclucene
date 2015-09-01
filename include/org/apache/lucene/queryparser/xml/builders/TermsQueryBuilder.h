@@ -20,25 +20,19 @@
 #define OrgApacheLuceneQueryparserXmlQueryBuilder_INCLUDE 1
 #include "org/apache/lucene/queryparser/xml/QueryBuilder.h"
 
-@class OrgApacheLuceneAnalysisAnalyzer;
-@class OrgApacheLuceneSearchQuery;
-@protocol OrgW3cDomElement;
-
 @interface OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder : NSObject < OrgApacheLuceneQueryparserXmlQueryBuilder >
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
-
-- (OrgApacheLuceneSearchQuery *)getQueryWithOrgW3cDomElement:(id<OrgW3cDomElement>)e;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder_initWithOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder *self, OrgApacheLuceneAnalysisAnalyzer *analyzer);
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder_init(OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder *new_OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder_initWithOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneAnalysisAnalyzer *analyzer) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder *new_OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlBuildersTermsQueryBuilder)
 

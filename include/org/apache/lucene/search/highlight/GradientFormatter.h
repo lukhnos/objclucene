@@ -20,46 +20,19 @@
 #define OrgApacheLuceneSearchHighlightFormatter_INCLUDE 1
 #include "org/apache/lucene/search/highlight/Formatter.h"
 
-@class OrgApacheLuceneSearchHighlightTokenGroup;
-
-@interface OrgApacheLuceneSearchHighlightGradientFormatter : NSObject < OrgApacheLuceneSearchHighlightFormatter > {
- @public
-  jint fgRMin_, fgGMin_, fgBMin_;
-  jint fgRMax_, fgGMax_, fgBMax_;
-  jboolean highlightForeground_;
-  jint bgRMin_, bgGMin_, bgBMin_;
-  jint bgRMax_, bgGMax_, bgBMax_;
-  jboolean highlightBackground_;
-}
+@interface OrgApacheLuceneSearchHighlightGradientFormatter : NSObject < OrgApacheLuceneSearchHighlightFormatter >
 
 #pragma mark Public
 
-- (instancetype)initWithFloat:(jfloat)maxScore
-                 withNSString:(NSString *)minForegroundColor
-                 withNSString:(NSString *)maxForegroundColor
-                 withNSString:(NSString *)minBackgroundColor
-                 withNSString:(NSString *)maxBackgroundColor;
-
-+ (jint)hexToIntWithNSString:(NSString *)hex;
-
-- (NSString *)highlightTermWithNSString:(NSString *)originalText
-withOrgApacheLuceneSearchHighlightTokenGroup:(OrgApacheLuceneSearchHighlightTokenGroup *)tokenGroup;
-
-#pragma mark Protected
-
-- (NSString *)getBackgroundColorStringWithFloat:(jfloat)score;
-
-- (NSString *)getForegroundColorStringWithFloat:(jfloat)score;
+- (instancetype)init;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneSearchHighlightGradientFormatter)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchHighlightGradientFormatter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightGradientFormatter_initWithFloat_withNSString_withNSString_withNSString_withNSString_(OrgApacheLuceneSearchHighlightGradientFormatter *self, jfloat maxScore, NSString *minForegroundColor, NSString *maxForegroundColor, NSString *minBackgroundColor, NSString *maxBackgroundColor);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightGradientFormatter_init(OrgApacheLuceneSearchHighlightGradientFormatter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightGradientFormatter *new_OrgApacheLuceneSearchHighlightGradientFormatter_initWithFloat_withNSString_withNSString_withNSString_withNSString_(jfloat maxScore, NSString *minForegroundColor, NSString *maxForegroundColor, NSString *minBackgroundColor, NSString *maxBackgroundColor) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT jint OrgApacheLuceneSearchHighlightGradientFormatter_hexToIntWithNSString_(NSString *hex);
+FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightGradientFormatter *new_OrgApacheLuceneSearchHighlightGradientFormatter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightGradientFormatter)
 

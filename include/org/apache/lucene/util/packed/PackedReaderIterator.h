@@ -41,8 +41,6 @@
 
 - (OrgApacheLuceneUtilLongsRef *)nextWithInt:(jint)count;
 
-- (jint)ord;
-
 #pragma mark Package-Private
 
 - (instancetype)initWithOrgApacheLuceneUtilPackedPackedInts_FormatEnum:(OrgApacheLuceneUtilPackedPackedInts_FormatEnum *)format

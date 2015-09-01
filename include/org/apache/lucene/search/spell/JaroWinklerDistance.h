@@ -26,19 +26,6 @@
 
 - (instancetype)init;
 
-- (jboolean)isEqual:(id)obj;
-
-- (jfloat)getDistanceWithNSString:(NSString *)s1
-                     withNSString:(NSString *)s2;
-
-- (jfloat)getThreshold;
-
-- (NSUInteger)hash;
-
-- (void)setThresholdWithFloat:(jfloat)threshold;
-
-- (NSString *)description;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSpellJaroWinklerDistance)

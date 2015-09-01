@@ -16,14 +16,7 @@
 #if !defined (_OrgApacheLuceneUtilNumericUtils_) && (OrgApacheLuceneUtilNumericUtils_INCLUDE_ALL || OrgApacheLuceneUtilNumericUtils_INCLUDE)
 #define _OrgApacheLuceneUtilNumericUtils_
 
-@class JavaLangInteger;
-@class JavaLangLong;
-@class OrgApacheLuceneIndexTerms;
-@class OrgApacheLuceneIndexTermsEnum;
-@class OrgApacheLuceneUtilBytesRef;
 @class OrgApacheLuceneUtilBytesRefBuilder;
-@class OrgApacheLuceneUtilNumericUtils_IntRangeBuilder;
-@class OrgApacheLuceneUtilNumericUtils_LongRangeBuilder;
 
 #define OrgApacheLuceneUtilNumericUtils_PRECISION_STEP_DEFAULT 16
 #define OrgApacheLuceneUtilNumericUtils_PRECISION_STEP_DEFAULT_32 8
@@ -36,25 +29,11 @@
 
 #pragma mark Public
 
+- (instancetype)init;
+
 + (jlong)doubleToSortableLongWithDouble:(jdouble)val;
 
-+ (OrgApacheLuceneIndexTermsEnum *)filterPrefixCodedIntsWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)termsEnum;
-
-+ (OrgApacheLuceneIndexTermsEnum *)filterPrefixCodedLongsWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)termsEnum;
-
 + (jint)floatToSortableIntWithFloat:(jfloat)val;
-
-+ (JavaLangInteger *)getMaxIntWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms;
-
-+ (JavaLangLong *)getMaxLongWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms;
-
-+ (JavaLangInteger *)getMinIntWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms;
-
-+ (JavaLangLong *)getMinLongWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms;
-
-+ (jint)getPrefixCodedIntShiftWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)val;
-
-+ (jint)getPrefixCodedLongShiftWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)val;
 
 + (void)intToPrefixCodedWithInt:(jint)val
                         withInt:(jint)shift
@@ -72,27 +51,9 @@ withOrgApacheLuceneUtilBytesRefBuilder:(OrgApacheLuceneUtilBytesRefBuilder *)byt
                                withInt:(jint)shift
 withOrgApacheLuceneUtilBytesRefBuilder:(OrgApacheLuceneUtilBytesRefBuilder *)bytes;
 
-+ (jint)prefixCodedToIntWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)val;
-
-+ (jlong)prefixCodedToLongWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)val;
-
 + (jlong)sortableDoubleBitsWithLong:(jlong)bits;
 
 + (jint)sortableFloatBitsWithInt:(jint)bits;
-
-+ (jfloat)sortableIntToFloatWithInt:(jint)val;
-
-+ (jdouble)sortableLongToDoubleWithLong:(jlong)val;
-
-+ (void)splitIntRangeWithOrgApacheLuceneUtilNumericUtils_IntRangeBuilder:(OrgApacheLuceneUtilNumericUtils_IntRangeBuilder *)builder
-                                                                 withInt:(jint)precisionStep
-                                                                 withInt:(jint)minBound
-                                                                 withInt:(jint)maxBound;
-
-+ (void)splitLongRangeWithOrgApacheLuceneUtilNumericUtils_LongRangeBuilder:(OrgApacheLuceneUtilNumericUtils_LongRangeBuilder *)builder
-                                                                   withInt:(jint)precisionStep
-                                                                  withLong:(jlong)minBound
-                                                                  withLong:(jlong)maxBound;
 
 @end
 
@@ -118,41 +79,17 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilNumericUtils_longToPrefixCodedBytesWit
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilNumericUtils_intToPrefixCodedBytesWithInt_withInt_withOrgApacheLuceneUtilBytesRefBuilder_(jint val, jint shift, OrgApacheLuceneUtilBytesRefBuilder *bytes);
 
-FOUNDATION_EXPORT jint OrgApacheLuceneUtilNumericUtils_getPrefixCodedLongShiftWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilBytesRef *val);
-
-FOUNDATION_EXPORT jint OrgApacheLuceneUtilNumericUtils_getPrefixCodedIntShiftWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilBytesRef *val);
-
-FOUNDATION_EXPORT jlong OrgApacheLuceneUtilNumericUtils_prefixCodedToLongWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilBytesRef *val);
-
-FOUNDATION_EXPORT jint OrgApacheLuceneUtilNumericUtils_prefixCodedToIntWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilBytesRef *val);
-
 FOUNDATION_EXPORT jlong OrgApacheLuceneUtilNumericUtils_doubleToSortableLongWithDouble_(jdouble val);
 
-FOUNDATION_EXPORT jdouble OrgApacheLuceneUtilNumericUtils_sortableLongToDoubleWithLong_(jlong val);
-
 FOUNDATION_EXPORT jint OrgApacheLuceneUtilNumericUtils_floatToSortableIntWithFloat_(jfloat val);
-
-FOUNDATION_EXPORT jfloat OrgApacheLuceneUtilNumericUtils_sortableIntToFloatWithInt_(jint val);
 
 FOUNDATION_EXPORT jlong OrgApacheLuceneUtilNumericUtils_sortableDoubleBitsWithLong_(jlong bits);
 
 FOUNDATION_EXPORT jint OrgApacheLuceneUtilNumericUtils_sortableFloatBitsWithInt_(jint bits);
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilNumericUtils_splitLongRangeWithOrgApacheLuceneUtilNumericUtils_LongRangeBuilder_withInt_withLong_withLong_(OrgApacheLuceneUtilNumericUtils_LongRangeBuilder *builder, jint precisionStep, jlong minBound, jlong maxBound);
+FOUNDATION_EXPORT void OrgApacheLuceneUtilNumericUtils_init(OrgApacheLuceneUtilNumericUtils *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilNumericUtils_splitIntRangeWithOrgApacheLuceneUtilNumericUtils_IntRangeBuilder_withInt_withInt_withInt_(OrgApacheLuceneUtilNumericUtils_IntRangeBuilder *builder, jint precisionStep, jint minBound, jint maxBound);
-
-FOUNDATION_EXPORT OrgApacheLuceneIndexTermsEnum *OrgApacheLuceneUtilNumericUtils_filterPrefixCodedLongsWithOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneIndexTermsEnum *termsEnum);
-
-FOUNDATION_EXPORT OrgApacheLuceneIndexTermsEnum *OrgApacheLuceneUtilNumericUtils_filterPrefixCodedIntsWithOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneIndexTermsEnum *termsEnum);
-
-FOUNDATION_EXPORT JavaLangInteger *OrgApacheLuceneUtilNumericUtils_getMinIntWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneIndexTerms *terms);
-
-FOUNDATION_EXPORT JavaLangInteger *OrgApacheLuceneUtilNumericUtils_getMaxIntWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneIndexTerms *terms);
-
-FOUNDATION_EXPORT JavaLangLong *OrgApacheLuceneUtilNumericUtils_getMinLongWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneIndexTerms *terms);
-
-FOUNDATION_EXPORT JavaLangLong *OrgApacheLuceneUtilNumericUtils_getMaxLongWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneIndexTerms *terms);
+FOUNDATION_EXPORT OrgApacheLuceneUtilNumericUtils *new_OrgApacheLuceneUtilNumericUtils_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilNumericUtils)
 
@@ -161,20 +98,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilNumericUtils)
 #if !defined (_OrgApacheLuceneUtilNumericUtils_LongRangeBuilder_) && (OrgApacheLuceneUtilNumericUtils_INCLUDE_ALL || OrgApacheLuceneUtilNumericUtils_LongRangeBuilder_INCLUDE)
 #define _OrgApacheLuceneUtilNumericUtils_LongRangeBuilder_
 
-@class OrgApacheLuceneUtilBytesRef;
-
 @interface OrgApacheLuceneUtilNumericUtils_LongRangeBuilder : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (void)addRangeWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)minPrefixCoded
-                withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)maxPrefixCoded;
-
-- (void)addRangeWithLong:(jlong)min
-                withLong:(jlong)max
-                 withInt:(jint)shift;
 
 @end
 
@@ -189,20 +117,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilNumericUtils_LongRangeBuilder)
 #if !defined (_OrgApacheLuceneUtilNumericUtils_IntRangeBuilder_) && (OrgApacheLuceneUtilNumericUtils_INCLUDE_ALL || OrgApacheLuceneUtilNumericUtils_IntRangeBuilder_INCLUDE)
 #define _OrgApacheLuceneUtilNumericUtils_IntRangeBuilder_
 
-@class OrgApacheLuceneUtilBytesRef;
-
 @interface OrgApacheLuceneUtilNumericUtils_IntRangeBuilder : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (void)addRangeWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)minPrefixCoded
-                withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)maxPrefixCoded;
-
-- (void)addRangeWithInt:(jint)min
-                withInt:(jint)max
-                withInt:(jint)shift;
 
 @end
 

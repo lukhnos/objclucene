@@ -20,25 +20,19 @@
 #define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
-@class OrgApacheLuceneAnalysisReverseReverseStringFilter;
-@class OrgApacheLuceneAnalysisTokenStream;
-@protocol JavaUtilMap;
-
 @interface OrgApacheLuceneAnalysisReverseReverseStringFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
-
-- (OrgApacheLuceneAnalysisReverseReverseStringFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisReverseReverseStringFilterFactory)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisReverseReverseStringFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisReverseReverseStringFilterFactory *self, id<JavaUtilMap> args);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisReverseReverseStringFilterFactory_init(OrgApacheLuceneAnalysisReverseReverseStringFilterFactory *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisReverseReverseStringFilterFactory *new_OrgApacheLuceneAnalysisReverseReverseStringFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisReverseReverseStringFilterFactory *new_OrgApacheLuceneAnalysisReverseReverseStringFilterFactory_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisReverseReverseStringFilterFactory)
 

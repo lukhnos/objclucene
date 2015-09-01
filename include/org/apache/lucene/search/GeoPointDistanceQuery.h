@@ -20,53 +20,19 @@
 #define OrgApacheLuceneSearchGeoPointInBBoxQuery_INCLUDE 1
 #include "org/apache/lucene/search/GeoPointInBBoxQuery.h"
 
-@class OrgApacheLuceneIndexIndexReader;
-@class OrgApacheLuceneSearchGeoBoundingBox;
-@class OrgApacheLuceneSearchQuery;
-
-@interface OrgApacheLuceneSearchGeoPointDistanceQuery : OrgApacheLuceneSearchGeoPointInBBoxQuery {
- @public
-  jdouble centerLon_;
-  jdouble centerLat_;
-  jdouble radius_;
-}
+@interface OrgApacheLuceneSearchGeoPointDistanceQuery : OrgApacheLuceneSearchGeoPointInBBoxQuery
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field
-                      withDouble:(jdouble)centerLon
-                      withDouble:(jdouble)centerLat
-                      withDouble:(jdouble)radius;
-
-- (jboolean)isEqual:(id)o;
-
-- (jdouble)getCenterLat;
-
-- (jdouble)getCenterLon;
-
-- (jdouble)getRadius;
-
-- (NSUInteger)hash;
-
-- (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
-
-- (NSString *)toStringWithNSString:(NSString *)field;
-
-#pragma mark Package-Private
-
-+ (OrgApacheLuceneSearchGeoBoundingBox *)computeBBoxWithDouble:(jdouble)centerLon
-                                                    withDouble:(jdouble)centerLat
-                                                    withDouble:(jdouble)radius;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchGeoPointDistanceQuery)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchGeoPointDistanceQuery_initWithNSString_withDouble_withDouble_withDouble_(OrgApacheLuceneSearchGeoPointDistanceQuery *self, NSString *field, jdouble centerLon, jdouble centerLat, jdouble radius);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchGeoPointDistanceQuery_init(OrgApacheLuceneSearchGeoPointDistanceQuery *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchGeoPointDistanceQuery *new_OrgApacheLuceneSearchGeoPointDistanceQuery_initWithNSString_withDouble_withDouble_withDouble_(NSString *field, jdouble centerLon, jdouble centerLat, jdouble radius) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchGeoBoundingBox *OrgApacheLuceneSearchGeoPointDistanceQuery_computeBBoxWithDouble_withDouble_withDouble_(jdouble centerLon, jdouble centerLat, jdouble radius);
+FOUNDATION_EXPORT OrgApacheLuceneSearchGeoPointDistanceQuery *new_OrgApacheLuceneSearchGeoPointDistanceQuery_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchGeoPointDistanceQuery)
 

@@ -3,30 +3,10 @@
 //  source: ./sandbox/src/java/org/apache/lucene/bkdtree/BKDTreeDocValuesFormat.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
-#include "org/apache/lucene/bkdtree/BKDTreeDocValuesConsumer.h"
 #include "org/apache/lucene/bkdtree/BKDTreeDocValuesFormat.h"
-#include "org/apache/lucene/bkdtree/BKDTreeDocValuesProducer.h"
-#include "org/apache/lucene/bkdtree/BKDTreeWriter.h"
-#include "org/apache/lucene/codecs/DocValuesConsumer.h"
-#include "org/apache/lucene/codecs/DocValuesFormat.h"
-#include "org/apache/lucene/codecs/DocValuesProducer.h"
-#include "org/apache/lucene/codecs/lucene50/Lucene50DocValuesFormat.h"
-#include "org/apache/lucene/index/SegmentReadState.h"
-#include "org/apache/lucene/index/SegmentWriteState.h"
 
-@interface OrgApacheLuceneBkdtreeBKDTreeDocValuesFormat () {
- @public
-  jint maxPointsInLeafNode_;
-  jint maxPointsSortInHeap_;
-  OrgApacheLuceneCodecsDocValuesFormat *delegate_;
-}
-
-@end
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneBkdtreeBKDTreeDocValuesFormat, delegate_, OrgApacheLuceneCodecsDocValuesFormat *)
+#pragma clang diagnostic ignored "-Wprotocol"
 
 NSString *OrgApacheLuceneBkdtreeBKDTreeDocValuesFormat_DATA_CODEC_NAME_ = @"BKDData";
 NSString *OrgApacheLuceneBkdtreeBKDTreeDocValuesFormat_DATA_EXTENSION_ = @"kdd";
@@ -40,31 +20,9 @@ NSString *OrgApacheLuceneBkdtreeBKDTreeDocValuesFormat_META_EXTENSION_ = @"kdm";
   return self;
 }
 
-- (instancetype)initWithInt:(jint)maxPointsInLeafNode
-                    withInt:(jint)maxPointsSortInHeap {
-  OrgApacheLuceneBkdtreeBKDTreeDocValuesFormat_initWithInt_withInt_(self, maxPointsInLeafNode, maxPointsSortInHeap);
-  return self;
-}
-
-- (OrgApacheLuceneCodecsDocValuesConsumer *)fieldsConsumerWithOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state {
-  return [new_OrgApacheLuceneBkdtreeBKDTreeDocValuesConsumer_initWithOrgApacheLuceneCodecsDocValuesConsumer_withOrgApacheLuceneIndexSegmentWriteState_withInt_withInt_([((OrgApacheLuceneCodecsDocValuesFormat *) nil_chk(delegate_)) fieldsConsumerWithOrgApacheLuceneIndexSegmentWriteState:state], state, maxPointsInLeafNode_, maxPointsSortInHeap_) autorelease];
-}
-
-- (OrgApacheLuceneCodecsDocValuesProducer *)fieldsProducerWithOrgApacheLuceneIndexSegmentReadState:(OrgApacheLuceneIndexSegmentReadState *)state {
-  return [new_OrgApacheLuceneBkdtreeBKDTreeDocValuesProducer_initWithOrgApacheLuceneCodecsDocValuesProducer_withOrgApacheLuceneIndexSegmentReadState_([((OrgApacheLuceneCodecsDocValuesFormat *) nil_chk(delegate_)) fieldsProducerWithOrgApacheLuceneIndexSegmentReadState:state], state) autorelease];
-}
-
-- (void)dealloc {
-  RELEASE_(delegate_);
-  [super dealloc];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", "BKDTreeDocValuesFormat", NULL, 0x1, NULL, NULL },
-    { "initWithInt:withInt:", "BKDTreeDocValuesFormat", NULL, 0x1, NULL, NULL },
-    { "fieldsConsumerWithOrgApacheLuceneIndexSegmentWriteState:", "fieldsConsumer", "Lorg.apache.lucene.codecs.DocValuesConsumer;", 0x1, "Ljava.io.IOException;", NULL },
-    { "fieldsProducerWithOrgApacheLuceneIndexSegmentReadState:", "fieldsProducer", "Lorg.apache.lucene.codecs.DocValuesProducer;", 0x1, "Ljava.io.IOException;", NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "DATA_CODEC_NAME_", NULL, 0x18, "Ljava.lang.String;", &OrgApacheLuceneBkdtreeBKDTreeDocValuesFormat_DATA_CODEC_NAME_, NULL, .constantValue.asLong = 0 },
@@ -75,37 +33,20 @@ NSString *OrgApacheLuceneBkdtreeBKDTreeDocValuesFormat_META_EXTENSION_ = @"kdm";
     { "META_VERSION_START", "META_VERSION_START", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneBkdtreeBKDTreeDocValuesFormat_META_VERSION_START },
     { "META_VERSION_CURRENT", "META_VERSION_CURRENT", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneBkdtreeBKDTreeDocValuesFormat_META_VERSION_CURRENT },
     { "META_EXTENSION_", NULL, 0x18, "Ljava.lang.String;", &OrgApacheLuceneBkdtreeBKDTreeDocValuesFormat_META_EXTENSION_, NULL, .constantValue.asLong = 0 },
-    { "maxPointsInLeafNode_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxPointsSortInHeap_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "delegate_", NULL, 0x12, "Lorg.apache.lucene.codecs.DocValuesFormat;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneBkdtreeBKDTreeDocValuesFormat = { 2, "BKDTreeDocValuesFormat", "org.apache.lucene.bkdtree", NULL, 0x1, 4, methods, 11, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneBkdtreeBKDTreeDocValuesFormat = { 2, "BKDTreeDocValuesFormat", "org.apache.lucene.bkdtree", NULL, 0x1, 1, methods, 8, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneBkdtreeBKDTreeDocValuesFormat;
 }
 
 @end
 
 void OrgApacheLuceneBkdtreeBKDTreeDocValuesFormat_init(OrgApacheLuceneBkdtreeBKDTreeDocValuesFormat *self) {
-  OrgApacheLuceneBkdtreeBKDTreeDocValuesFormat_initWithInt_withInt_(self, OrgApacheLuceneBkdtreeBKDTreeWriter_DEFAULT_MAX_POINTS_IN_LEAF_NODE, OrgApacheLuceneBkdtreeBKDTreeWriter_DEFAULT_MAX_POINTS_SORT_IN_HEAP);
+  NSObject_init(self);
 }
 
 OrgApacheLuceneBkdtreeBKDTreeDocValuesFormat *new_OrgApacheLuceneBkdtreeBKDTreeDocValuesFormat_init() {
   OrgApacheLuceneBkdtreeBKDTreeDocValuesFormat *self = [OrgApacheLuceneBkdtreeBKDTreeDocValuesFormat alloc];
   OrgApacheLuceneBkdtreeBKDTreeDocValuesFormat_init(self);
-  return self;
-}
-
-void OrgApacheLuceneBkdtreeBKDTreeDocValuesFormat_initWithInt_withInt_(OrgApacheLuceneBkdtreeBKDTreeDocValuesFormat *self, jint maxPointsInLeafNode, jint maxPointsSortInHeap) {
-  OrgApacheLuceneCodecsDocValuesFormat_initWithNSString_(self, @"BKDTree");
-  JreStrongAssignAndConsume(&self->delegate_, new_OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_init());
-  OrgApacheLuceneBkdtreeBKDTreeWriter_verifyParamsWithInt_withInt_(maxPointsInLeafNode, maxPointsSortInHeap);
-  self->maxPointsInLeafNode_ = maxPointsInLeafNode;
-  self->maxPointsSortInHeap_ = maxPointsSortInHeap;
-}
-
-OrgApacheLuceneBkdtreeBKDTreeDocValuesFormat *new_OrgApacheLuceneBkdtreeBKDTreeDocValuesFormat_initWithInt_withInt_(jint maxPointsInLeafNode, jint maxPointsSortInHeap) {
-  OrgApacheLuceneBkdtreeBKDTreeDocValuesFormat *self = [OrgApacheLuceneBkdtreeBKDTreeDocValuesFormat alloc];
-  OrgApacheLuceneBkdtreeBKDTreeDocValuesFormat_initWithInt_withInt_(self, maxPointsInLeafNode, maxPointsSortInHeap);
   return self;
 }
 

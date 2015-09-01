@@ -3,17 +3,10 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/standard/builders/RegexpQueryNodeBuilder.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "org/apache/lucene/index/Term.h"
-#include "org/apache/lucene/queryparser/flexible/core/QueryNodeException.h"
-#include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNode.h"
 #include "org/apache/lucene/queryparser/flexible/standard/builders/RegexpQueryNodeBuilder.h"
-#include "org/apache/lucene/queryparser/flexible/standard/nodes/RegexpQueryNode.h"
-#include "org/apache/lucene/queryparser/flexible/standard/processors/MultiTermRewriteMethodProcessor.h"
-#include "org/apache/lucene/search/MultiTermQuery.h"
-#include "org/apache/lucene/search/RegexpQuery.h"
-#include "org/apache/lucene/util/BytesRef.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneQueryparserFlexibleStandardBuildersRegexpQueryNodeBuilder
 
@@ -22,22 +15,11 @@
   return self;
 }
 
-- (OrgApacheLuceneSearchRegexpQuery *)buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryNode {
-  OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode *regexpNode = (OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode *) check_class_cast(queryNode, [OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode class]);
-  OrgApacheLuceneSearchRegexpQuery *q = [new_OrgApacheLuceneSearchRegexpQuery_initWithOrgApacheLuceneIndexTerm_([new_OrgApacheLuceneIndexTerm_initWithNSString_withOrgApacheLuceneUtilBytesRef_([((OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode *) nil_chk(regexpNode)) getFieldAsString], [regexpNode textToBytesRef]) autorelease]) autorelease];
-  OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *method = (OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *) check_class_cast([((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(queryNode)) getTagWithNSString:OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiTermRewriteMethodProcessor_TAG_ID_], [OrgApacheLuceneSearchMultiTermQuery_RewriteMethod class]);
-  if (method != nil) {
-    [q setRewriteMethodWithOrgApacheLuceneSearchMultiTermQuery_RewriteMethod:method];
-  }
-  return q;
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", "RegexpQueryNodeBuilder", NULL, 0x1, NULL, NULL },
-    { "buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "build", "Lorg.apache.lucene.search.RegexpQuery;", 0x1, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardBuildersRegexpQueryNodeBuilder = { 2, "RegexpQueryNodeBuilder", "org.apache.lucene.queryparser.flexible.standard.builders", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardBuildersRegexpQueryNodeBuilder = { 2, "RegexpQueryNodeBuilder", "org.apache.lucene.queryparser.flexible.standard.builders", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserFlexibleStandardBuildersRegexpQueryNodeBuilder;
 }
 

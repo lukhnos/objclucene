@@ -4,46 +4,34 @@
 //
 
 #include "J2ObjC_source.h"
-#include "java/lang/Double.h"
-#include "java/lang/IllegalArgumentException.h"
 #include "org/apache/lucene/document/DoubleDocValuesField.h"
-#include "org/apache/lucene/document/NumericDocValuesField.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneDocumentDoubleDocValuesField
 
-- (instancetype)initWithNSString:(NSString *)name
-                      withDouble:(jdouble)value {
-  OrgApacheLuceneDocumentDoubleDocValuesField_initWithNSString_withDouble_(self, name, value);
+- (instancetype)init {
+  OrgApacheLuceneDocumentDoubleDocValuesField_init(self);
   return self;
-}
-
-- (void)setDoubleValueWithDouble:(jdouble)value {
-  [super setLongValueWithLong:JavaLangDouble_doubleToRawLongBitsWithDouble_(value)];
-}
-
-- (void)setLongValueWithLong:(jlong)value {
-  @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"cannot change value type from Double to Long") autorelease];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withDouble:", "DoubleDocValuesField", NULL, 0x1, NULL, NULL },
-    { "setDoubleValueWithDouble:", "setDoubleValue", "V", 0x1, NULL, NULL },
-    { "setLongValueWithLong:", "setLongValue", "V", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneDocumentDoubleDocValuesField = { 2, "DoubleDocValuesField", "org.apache.lucene.document", NULL, 0x1, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneDocumentDoubleDocValuesField = { 2, "DoubleDocValuesField", "org.apache.lucene.document", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneDocumentDoubleDocValuesField;
 }
 
 @end
 
-void OrgApacheLuceneDocumentDoubleDocValuesField_initWithNSString_withDouble_(OrgApacheLuceneDocumentDoubleDocValuesField *self, NSString *name, jdouble value) {
-  OrgApacheLuceneDocumentNumericDocValuesField_initWithNSString_withLong_(self, name, JavaLangDouble_doubleToRawLongBitsWithDouble_(value));
+void OrgApacheLuceneDocumentDoubleDocValuesField_init(OrgApacheLuceneDocumentDoubleDocValuesField *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneDocumentDoubleDocValuesField *new_OrgApacheLuceneDocumentDoubleDocValuesField_initWithNSString_withDouble_(NSString *name, jdouble value) {
+OrgApacheLuceneDocumentDoubleDocValuesField *new_OrgApacheLuceneDocumentDoubleDocValuesField_init() {
   OrgApacheLuceneDocumentDoubleDocValuesField *self = [OrgApacheLuceneDocumentDoubleDocValuesField alloc];
-  OrgApacheLuceneDocumentDoubleDocValuesField_initWithNSString_withDouble_(self, name, value);
+  OrgApacheLuceneDocumentDoubleDocValuesField_init(self);
   return self;
 }
 

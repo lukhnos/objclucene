@@ -34,12 +34,6 @@
   return 0;
 }
 
-- (id<JavaUtilList>)children {
-  // can't call an abstract method
-  [self doesNotRecognizeSelector:_cmd];
-  return 0;
-}
-
 - (void)dealloc {
   RELEASE_(parent_);
   [super dealloc];
@@ -50,7 +44,6 @@
     { "initWithOrgApacheLuceneIndexCompositeReaderContext:withInt:withInt:", "IndexReaderContext", NULL, 0x0, NULL, NULL },
     { "reader", NULL, "Lorg.apache.lucene.index.IndexReader;", 0x401, NULL, NULL },
     { "leaves", NULL, "Ljava.util.List;", 0x401, "Ljava.lang.UnsupportedOperationException;", NULL },
-    { "children", NULL, "Ljava.util.List;", 0x401, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "parent_", NULL, 0x11, "Lorg.apache.lucene.index.CompositeReaderContext;", NULL, NULL, .constantValue.asLong = 0 },
@@ -58,7 +51,7 @@
     { "docBaseInParent_", NULL, 0x11, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "ordInParent_", NULL, 0x11, "I", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexReaderContext = { 2, "IndexReaderContext", "org.apache.lucene.index", NULL, 0x401, 4, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexReaderContext = { 2, "IndexReaderContext", "org.apache.lucene.index", NULL, 0x401, 3, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexIndexReaderContext;
 }
 

@@ -4,89 +4,34 @@
 //
 
 #include "J2ObjC_source.h"
-#include "java/util/Collection.h"
-#include "java/util/HashSet.h"
-#include "java/util/Map.h"
-#include "java/util/Set.h"
 #include "org/apache/lucene/util/MapOfSets.h"
 
-@interface OrgApacheLuceneUtilMapOfSets () {
- @public
-  id<JavaUtilMap> theMap_;
-}
-
-@end
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilMapOfSets, theMap_, id<JavaUtilMap>)
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneUtilMapOfSets
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)m {
-  OrgApacheLuceneUtilMapOfSets_initWithJavaUtilMap_(self, m);
+- (instancetype)init {
+  OrgApacheLuceneUtilMapOfSets_init(self);
   return self;
-}
-
-- (id<JavaUtilMap>)getMap {
-  return theMap_;
-}
-
-- (jint)putWithId:(id)key
-           withId:(id)val {
-  id<JavaUtilSet> theSet;
-  if ([((id<JavaUtilMap>) nil_chk(theMap_)) containsKeyWithId:key]) {
-    theSet = [theMap_ getWithId:key];
-  }
-  else {
-    theSet = [new_JavaUtilHashSet_initWithInt_(23) autorelease];
-    [theMap_ putWithId:key withId:theSet];
-  }
-  [((id<JavaUtilSet>) nil_chk(theSet)) addWithId:val];
-  return [theSet size];
-}
-
-- (jint)putAllWithId:(id)key
-withJavaUtilCollection:(id<JavaUtilCollection>)vals {
-  id<JavaUtilSet> theSet;
-  if ([((id<JavaUtilMap>) nil_chk(theMap_)) containsKeyWithId:key]) {
-    theSet = [theMap_ getWithId:key];
-  }
-  else {
-    theSet = [new_JavaUtilHashSet_initWithInt_(23) autorelease];
-    [theMap_ putWithId:key withId:theSet];
-  }
-  [((id<JavaUtilSet>) nil_chk(theSet)) addAllWithJavaUtilCollection:vals];
-  return [theSet size];
-}
-
-- (void)dealloc {
-  RELEASE_(theMap_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "MapOfSets", NULL, 0x1, NULL, NULL },
-    { "getMap", NULL, "Ljava.util.Map;", 0x1, NULL, NULL },
-    { "putWithId:withId:", "put", "I", 0x1, NULL, "(TK;TV;)I" },
-    { "putAllWithId:withJavaUtilCollection:", "putAll", "I", 0x1, NULL, "(TK;Ljava/util/Collection<+TV;>;)I" },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "theMap_", NULL, 0x12, "Ljava.util.Map;", NULL, "Ljava/util/Map<TK;Ljava/util/Set<TV;>;>;", .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilMapOfSets = { 2, "MapOfSets", "org.apache.lucene.util", NULL, 0x1, 4, methods, 1, fields, 0, NULL, 0, NULL, NULL, "<K:Ljava/lang/Object;V:Ljava/lang/Object;>Ljava/lang/Object;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilMapOfSets = { 2, "MapOfSets", "org.apache.lucene.util", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, "<K:Ljava/lang/Object;V:Ljava/lang/Object;>Ljava/lang/Object;" };
   return &_OrgApacheLuceneUtilMapOfSets;
 }
 
 @end
 
-void OrgApacheLuceneUtilMapOfSets_initWithJavaUtilMap_(OrgApacheLuceneUtilMapOfSets *self, id<JavaUtilMap> m) {
+void OrgApacheLuceneUtilMapOfSets_init(OrgApacheLuceneUtilMapOfSets *self) {
   NSObject_init(self);
-  JreStrongAssign(&self->theMap_, m);
 }
 
-OrgApacheLuceneUtilMapOfSets *new_OrgApacheLuceneUtilMapOfSets_initWithJavaUtilMap_(id<JavaUtilMap> m) {
+OrgApacheLuceneUtilMapOfSets *new_OrgApacheLuceneUtilMapOfSets_init() {
   OrgApacheLuceneUtilMapOfSets *self = [OrgApacheLuceneUtilMapOfSets alloc];
-  OrgApacheLuceneUtilMapOfSets_initWithJavaUtilMap_(self, m);
+  OrgApacheLuceneUtilMapOfSets_init(self);
   return self;
 }
 

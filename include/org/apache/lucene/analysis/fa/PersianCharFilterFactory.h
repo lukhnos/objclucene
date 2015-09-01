@@ -24,28 +24,19 @@
 #define OrgApacheLuceneAnalysisUtilMultiTermAwareComponent_INCLUDE 1
 #include "org/apache/lucene/analysis/util/MultiTermAwareComponent.h"
 
-@class JavaIoReader;
-@class OrgApacheLuceneAnalysisCharFilter;
-@class OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory;
-@protocol JavaUtilMap;
-
 @interface OrgApacheLuceneAnalysisFaPersianCharFilterFactory : OrgApacheLuceneAnalysisUtilCharFilterFactory < OrgApacheLuceneAnalysisUtilMultiTermAwareComponent >
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
-
-- (OrgApacheLuceneAnalysisCharFilter *)createWithJavaIoReader:(JavaIoReader *)input;
-
-- (OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory *)getMultiTermComponent;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisFaPersianCharFilterFactory)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisFaPersianCharFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisFaPersianCharFilterFactory *self, id<JavaUtilMap> args);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisFaPersianCharFilterFactory_init(OrgApacheLuceneAnalysisFaPersianCharFilterFactory *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisFaPersianCharFilterFactory *new_OrgApacheLuceneAnalysisFaPersianCharFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisFaPersianCharFilterFactory *new_OrgApacheLuceneAnalysisFaPersianCharFilterFactory_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisFaPersianCharFilterFactory)
 

@@ -20,24 +20,19 @@
 #define OrgApacheLuceneQueryparserXmlFilterBuilder_INCLUDE 1
 #include "org/apache/lucene/queryparser/xml/FilterBuilder.h"
 
-@class OrgApacheLuceneSearchFilter;
-@protocol OrgW3cDomElement;
-
 @interface OrgApacheLuceneQueryparserXmlBuildersBooleanFilterBuilder : NSObject < OrgApacheLuceneQueryparserXmlFilterBuilder >
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneQueryparserXmlFilterBuilder:(id<OrgApacheLuceneQueryparserXmlFilterBuilder>)factory;
-
-- (OrgApacheLuceneSearchFilter *)getFilterWithOrgW3cDomElement:(id<OrgW3cDomElement>)e;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserXmlBuildersBooleanFilterBuilder)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlBuildersBooleanFilterBuilder_initWithOrgApacheLuceneQueryparserXmlFilterBuilder_(OrgApacheLuceneQueryparserXmlBuildersBooleanFilterBuilder *self, id<OrgApacheLuceneQueryparserXmlFilterBuilder> factory);
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlBuildersBooleanFilterBuilder_init(OrgApacheLuceneQueryparserXmlBuildersBooleanFilterBuilder *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersBooleanFilterBuilder *new_OrgApacheLuceneQueryparserXmlBuildersBooleanFilterBuilder_initWithOrgApacheLuceneQueryparserXmlFilterBuilder_(id<OrgApacheLuceneQueryparserXmlFilterBuilder> factory) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersBooleanFilterBuilder *new_OrgApacheLuceneQueryparserXmlBuildersBooleanFilterBuilder_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlBuildersBooleanFilterBuilder)
 

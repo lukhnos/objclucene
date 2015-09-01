@@ -20,25 +20,19 @@
 #define OrgApacheLuceneAnalysisUtilTokenizerFactory_INCLUDE 1
 #include "org/apache/lucene/analysis/util/TokenizerFactory.h"
 
-@class OrgApacheLuceneAnalysisTokenizer;
-@class OrgApacheLuceneUtilAttributeFactory;
-@protocol JavaUtilMap;
-
 @interface OrgApacheLuceneAnalysisStandardStandardTokenizerFactory : OrgApacheLuceneAnalysisUtilTokenizerFactory
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
-
-- (OrgApacheLuceneAnalysisTokenizer *)createWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisStandardStandardTokenizerFactory)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisStandardStandardTokenizerFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisStandardStandardTokenizerFactory *self, id<JavaUtilMap> args);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisStandardStandardTokenizerFactory_init(OrgApacheLuceneAnalysisStandardStandardTokenizerFactory *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisStandardStandardTokenizerFactory *new_OrgApacheLuceneAnalysisStandardStandardTokenizerFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisStandardStandardTokenizerFactory *new_OrgApacheLuceneAnalysisStandardStandardTokenizerFactory_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisStandardStandardTokenizerFactory)
 

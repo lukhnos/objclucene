@@ -16,11 +16,6 @@
 #if !defined (_OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_) && (OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_INCLUDE_ALL || OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_INCLUDE)
 #define _OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_
 
-@class IOSObjectArray;
-@class JavaIoReader;
-@class JavaLangStringBuilder;
-@protocol OrgApacheLuceneAnalysisTokenattributesCharTermAttribute;
-
 #define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_YYEOF -1
 #define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_YYINITIAL 0
 #define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_CATEGORY_STATE 2
@@ -53,45 +48,13 @@
 
 @interface OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl : NSObject
 
-#pragma mark Public
-
-- (jint)getNextToken;
-
-- (jint)getNumWikiTokensSeen;
-
-- (jint)getPositionIncrement;
-
-- (void)yybeginWithInt:(jint)newState;
-
-- (jint)yychar;
-
-- (jchar)yycharatWithInt:(jint)pos;
-
-- (void)yyclose;
-
-- (jint)yylength;
-
-- (void)yypushbackWithInt:(jint)number;
-
-- (void)yyresetWithJavaIoReader:(JavaIoReader *)reader;
-
-- (jint)yystate;
-
-- (NSString *)yytext;
-
 #pragma mark Package-Private
 
-- (instancetype)initWithJavaIoReader:(JavaIoReader *)inArg;
-
-- (void)getTextWithOrgApacheLuceneAnalysisTokenattributesCharTermAttribute:(id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)t;
-
-- (void)reset;
-
-- (jint)setTextWithJavaLangStringBuilder:(JavaLangStringBuilder *)buffer;
+- (instancetype)init;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl)
 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl, YYEOF, jint)
 
@@ -151,12 +114,9 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImp
 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl, EXTERNAL_LINK_URL, jint)
 
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_TOKEN_TYPES_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl, TOKEN_TYPES_, IOSObjectArray *)
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_init(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_initWithJavaIoReader_(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl *self, JavaIoReader *inArg);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl *new_OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_initWithJavaIoReader_(JavaIoReader *inArg) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl *new_OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl)
 

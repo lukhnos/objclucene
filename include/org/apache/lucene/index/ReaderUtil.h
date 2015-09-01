@@ -24,6 +24,8 @@
 
 #pragma mark Public
 
+- (instancetype)init;
+
 + (OrgApacheLuceneIndexIndexReaderContext *)getTopLevelContextWithOrgApacheLuceneIndexIndexReaderContext:(OrgApacheLuceneIndexIndexReaderContext *)context;
 
 + (jint)subIndexWithInt:(jint)n
@@ -41,6 +43,10 @@ FOUNDATION_EXPORT OrgApacheLuceneIndexIndexReaderContext *OrgApacheLuceneIndexRe
 FOUNDATION_EXPORT jint OrgApacheLuceneIndexReaderUtil_subIndexWithInt_withIntArray_(jint n, IOSIntArray *docStarts);
 
 FOUNDATION_EXPORT jint OrgApacheLuceneIndexReaderUtil_subIndexWithInt_withJavaUtilList_(jint n, id<JavaUtilList> leaves);
+
+FOUNDATION_EXPORT void OrgApacheLuceneIndexReaderUtil_init(OrgApacheLuceneIndexReaderUtil *self);
+
+FOUNDATION_EXPORT OrgApacheLuceneIndexReaderUtil *new_OrgApacheLuceneIndexReaderUtil_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexReaderUtil)
 

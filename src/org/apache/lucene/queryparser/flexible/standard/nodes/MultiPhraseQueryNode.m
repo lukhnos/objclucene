@@ -3,17 +3,10 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/standard/nodes/MultiPhraseQueryNode.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/lang/CharSequence.h"
-#include "java/lang/CloneNotSupportedException.h"
-#include "java/lang/StringBuilder.h"
-#include "java/util/List.h"
-#include "org/apache/lucene/queryparser/flexible/core/nodes/FieldableNode.h"
-#include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNode.h"
-#include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNodeImpl.h"
-#include "org/apache/lucene/queryparser/flexible/core/parser/EscapeQuerySyntax.h"
 #include "org/apache/lucene/queryparser/flexible/standard/nodes/MultiPhraseQueryNode.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneQueryparserFlexibleStandardNodesMultiPhraseQueryNode
 
@@ -22,74 +15,18 @@
   return self;
 }
 
-- (NSString *)description {
-  if ([self getChildren] == nil || [((id<JavaUtilList>) nil_chk([self getChildren])) size] == 0) return @"<multiPhrase/>";
-  JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
-  [sb appendWithNSString:@"<multiPhrase>"];
-  for (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> __strong child in nil_chk([self getChildren])) {
-    [sb appendWithNSString:@"\n"];
-    [sb appendWithNSString:[((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(child)) description]];
-  }
-  [sb appendWithNSString:@"\n</multiPhrase>"];
-  return [sb description];
-}
-
-- (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escapeSyntaxParser {
-  if ([self getChildren] == nil || [((id<JavaUtilList>) nil_chk([self getChildren])) size] == 0) return @"";
-  JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
-  NSString *filler = @"";
-  for (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> __strong child in nil_chk([self getChildren])) {
-    [((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:filler])) appendWithJavaLangCharSequence:[((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(child)) toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:escapeSyntaxParser]];
-    filler = @",";
-  }
-  return JreStrcat("$$$", @"[MTP[", [sb description], @"]]");
-}
-
-- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)cloneTree {
-  OrgApacheLuceneQueryparserFlexibleStandardNodesMultiPhraseQueryNode *clone = (OrgApacheLuceneQueryparserFlexibleStandardNodesMultiPhraseQueryNode *) check_class_cast([super cloneTree], [OrgApacheLuceneQueryparserFlexibleStandardNodesMultiPhraseQueryNode class]);
-  return clone;
-}
-
-- (id<JavaLangCharSequence>)getField {
-  id<JavaUtilList> children = [self getChildren];
-  if (children == nil || [children size] == 0) {
-    return nil;
-  }
-  else {
-    return [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) nil_chk(((id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) check_protocol_cast([children getWithInt:0], OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_class_())))) getField];
-  }
-}
-
-- (void)setFieldWithJavaLangCharSequence:(id<JavaLangCharSequence>)fieldName {
-  id<JavaUtilList> children = [self getChildren];
-  if (children != nil) {
-    for (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> __strong child in children) {
-      if ([OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_class_() isInstance:child]) {
-        [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) nil_chk(((id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) check_protocol_cast(child, OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_class_())))) setFieldWithJavaLangCharSequence:fieldName];
-      }
-    }
-  }
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", "MultiPhraseQueryNode", NULL, 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:", "toQueryString", "Ljava.lang.CharSequence;", 0x1, NULL, NULL },
-    { "cloneTree", NULL, "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x1, "Ljava.lang.CloneNotSupportedException;", NULL },
-    { "getField", NULL, "Ljava.lang.CharSequence;", 0x1, NULL, NULL },
-    { "setFieldWithJavaLangCharSequence:", "setField", "V", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardNodesMultiPhraseQueryNode = { 2, "MultiPhraseQueryNode", "org.apache.lucene.queryparser.flexible.standard.nodes", NULL, 0x1, 6, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardNodesMultiPhraseQueryNode = { 2, "MultiPhraseQueryNode", "org.apache.lucene.queryparser.flexible.standard.nodes", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserFlexibleStandardNodesMultiPhraseQueryNode;
 }
 
 @end
 
 void OrgApacheLuceneQueryparserFlexibleStandardNodesMultiPhraseQueryNode_init(OrgApacheLuceneQueryparserFlexibleStandardNodesMultiPhraseQueryNode *self) {
-  OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_init(self);
-  [self setLeafWithBoolean:NO];
-  [self allocate];
+  NSObject_init(self);
 }
 
 OrgApacheLuceneQueryparserFlexibleStandardNodesMultiPhraseQueryNode *new_OrgApacheLuceneQueryparserFlexibleStandardNodesMultiPhraseQueryNode_init() {

@@ -22,7 +22,6 @@
 #include "org/apache/lucene/index/Terms.h"
 #include "org/apache/lucene/index/TermsEnum.h"
 #include "org/apache/lucene/search/CollectionStatistics.h"
-#include "org/apache/lucene/search/Explanation.h"
 #include "org/apache/lucene/search/IndexSearcher.h"
 #include "org/apache/lucene/search/Query.h"
 #include "org/apache/lucene/search/Scorer.h"
@@ -226,22 +225,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTermQuery)
   return OrgApacheLuceneSearchTermQuery_TermWeight_termNotInReaderWithOrgApacheLuceneIndexLeafReader_withOrgApacheLuceneIndexTerm_(self, reader, term);
 }
 
-- (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-                                                                               withInt:(jint)doc {
-  OrgApacheLuceneSearchScorer *scorer = [self scorerWithOrgApacheLuceneIndexLeafReaderContext:context];
-  if (scorer != nil) {
-    jint newDoc = [scorer advanceWithInt:doc];
-    if (newDoc == doc) {
-      jfloat freq = [scorer freq];
-      OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer = [((OrgApacheLuceneSearchSimilaritiesSimilarity *) nil_chk(similarity_)) simScorerWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight:stats_ withOrgApacheLuceneIndexLeafReaderContext:context];
-      OrgApacheLuceneSearchExplanation *freqExplanation = OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_(freq, JreStrcat("$F", @"termFreq=", freq), [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchExplanation_class_()]);
-      OrgApacheLuceneSearchExplanation *scoreExplanation = [((OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *) nil_chk(docScorer)) explainWithInt:doc withOrgApacheLuceneSearchExplanation:freqExplanation];
-      return OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_([((OrgApacheLuceneSearchExplanation *) nil_chk(scoreExplanation)) getValue], JreStrcat("$@$I$$$", @"weight(", [self getQuery], @" in ", doc, @") [", [[similarity_ getClass] getSimpleName], @"], result of:"), [IOSObjectArray arrayWithObjects:(id[]){ scoreExplanation } count:1 type:OrgApacheLuceneSearchExplanation_class_()]);
-    }
-  }
-  return OrgApacheLuceneSearchExplanation_noMatchWithNSString_withOrgApacheLuceneSearchExplanationArray_(@"no matching term", [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchExplanation_class_()]);
-}
-
 - (void)dealloc {
   RELEASE_(this$0_);
   RELEASE_(similarity_);
@@ -260,7 +243,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTermQuery)
     { "scorerWithOrgApacheLuceneIndexLeafReaderContext:", "scorer", "Lorg.apache.lucene.search.Scorer;", 0x1, "Ljava.io.IOException;", NULL },
     { "getTermsEnumWithOrgApacheLuceneIndexLeafReaderContext:", "getTermsEnum", "Lorg.apache.lucene.index.TermsEnum;", 0x2, "Ljava.io.IOException;", NULL },
     { "termNotInReaderWithOrgApacheLuceneIndexLeafReader:withOrgApacheLuceneIndexTerm:", "termNotInReader", "Z", 0x2, "Ljava.io.IOException;", NULL },
-    { "explainWithOrgApacheLuceneIndexLeafReaderContext:withInt:", "explain", "Lorg.apache.lucene.search.Explanation;", 0x1, "Ljava.io.IOException;", NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.TermQuery;", NULL, NULL, .constantValue.asLong = 0 },
@@ -269,7 +251,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTermQuery)
     { "termStates_", NULL, 0x12, "Lorg.apache.lucene.index.TermContext;", NULL, NULL, .constantValue.asLong = 0 },
     { "needsScores_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchTermQuery_TermWeight = { 2, "TermWeight", "org.apache.lucene.search", "TermQuery", 0x10, 9, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchTermQuery_TermWeight = { 2, "TermWeight", "org.apache.lucene.search", "TermQuery", 0x10, 8, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchTermQuery_TermWeight;
 }
 

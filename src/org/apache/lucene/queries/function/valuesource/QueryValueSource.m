@@ -3,128 +3,35 @@
 //  source: ./queries/src/java/org/apache/lucene/queries/function/valuesource/QueryValueSource.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
-#include "java/lang/Float.h"
-#include "java/lang/Integer.h"
-#include "java/lang/RuntimeException.h"
-#include "java/util/Map.h"
-#include "org/apache/lucene/index/IndexReaderContext.h"
-#include "org/apache/lucene/index/LeafReaderContext.h"
-#include "org/apache/lucene/index/ReaderUtil.h"
-#include "org/apache/lucene/queries/function/FunctionValues.h"
-#include "org/apache/lucene/queries/function/ValueSource.h"
-#include "org/apache/lucene/queries/function/docvalues/FloatDocValues.h"
 #include "org/apache/lucene/queries/function/valuesource/QueryValueSource.h"
-#include "org/apache/lucene/search/IndexSearcher.h"
-#include "org/apache/lucene/search/Query.h"
-#include "org/apache/lucene/search/Scorer.h"
-#include "org/apache/lucene/search/Weight.h"
-#include "org/apache/lucene/util/mutable/MutableValue.h"
-#include "org/apache/lucene/util/mutable/MutableValueFloat.h"
 
-@interface OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_$1 : OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller {
- @public
-  OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues *this$0_;
-  OrgApacheLuceneUtilMutableMutableValueFloat *mval_;
-}
-
-- (OrgApacheLuceneUtilMutableMutableValue *)getValue;
-
-- (void)fillValueWithInt:(jint)doc;
-
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValuesourceQueryDocValues:(OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues *)outer$;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_$1)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_$1, this$0_, OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_$1, mval_, OrgApacheLuceneUtilMutableMutableValueFloat *)
-
-__attribute__((unused)) static void OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_(OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_$1 *self, OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues *outer$);
-
-__attribute__((unused)) static OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_$1 *new_OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_(OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues *outer$) NS_RETURNS_RETAINED;
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_$1)
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource
 
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)q
-                                         withFloat:(jfloat)defVal {
-  OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource_initWithOrgApacheLuceneSearchQuery_withFloat_(self, q, defVal);
+- (instancetype)init {
+  OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource_init(self);
   return self;
-}
-
-- (OrgApacheLuceneSearchQuery *)getQuery {
-  return q_;
-}
-
-- (jfloat)getDefaultValue {
-  return defVal_;
-}
-
-- (NSString *)description__ {
-  return JreStrcat("$@$FC", @"query(", q_, @",def=", defVal_, ')');
-}
-
-- (OrgApacheLuceneQueriesFunctionFunctionValues *)getValuesWithJavaUtilMap:(id<JavaUtilMap>)fcontext
-                                 withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext {
-  return [new_OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_initWithOrgApacheLuceneQueriesFunctionValuesourceQueryValueSource_withOrgApacheLuceneIndexLeafReaderContext_withJavaUtilMap_(self, readerContext, fcontext) autorelease];
-}
-
-- (NSUInteger)hash {
-  return ((jint) [((OrgApacheLuceneSearchQuery *) nil_chk(q_)) hash]) * 29;
-}
-
-- (jboolean)isEqual:(id)o {
-  if (OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource_class_() != [nil_chk(o) getClass]) return NO;
-  OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource *other = (OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource *) check_class_cast(o, [OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource class]);
-  return [((OrgApacheLuceneSearchQuery *) nil_chk(self->q_)) isEqual:other->q_] && self->defVal_ == other->defVal_;
-}
-
-- (void)createWeightWithJavaUtilMap:(id<JavaUtilMap>)context
-withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher {
-  OrgApacheLuceneSearchWeight *w = [((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) createNormalizedWeightWithOrgApacheLuceneSearchQuery:q_ withBoolean:YES];
-  [((id<JavaUtilMap>) nil_chk(context)) putWithId:self withId:w];
-}
-
-- (void)dealloc {
-  RELEASE_(q_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchQuery:withFloat:", "QueryValueSource", NULL, 0x1, NULL, NULL },
-    { "getQuery", NULL, "Lorg.apache.lucene.search.Query;", 0x1, NULL, NULL },
-    { "getDefaultValue", NULL, "F", 0x1, NULL, NULL },
-    { "description__", "description", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getValuesWithJavaUtilMap:withOrgApacheLuceneIndexLeafReaderContext:", "getValues", "Lorg.apache.lucene.queries.function.FunctionValues;", 0x1, "Ljava.io.IOException;", NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "createWeightWithJavaUtilMap:withOrgApacheLuceneSearchIndexSearcher:", "createWeight", "V", 0x1, "Ljava.io.IOException;", NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "q_", NULL, 0x10, "Lorg.apache.lucene.search.Query;", NULL, NULL, .constantValue.asLong = 0 },
-    { "defVal_", NULL, 0x10, "F", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource = { 2, "QueryValueSource", "org.apache.lucene.queries.function.valuesource", NULL, 0x1, 8, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource = { 2, "QueryValueSource", "org.apache.lucene.queries.function.valuesource", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource;
 }
 
 @end
 
-void OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource_initWithOrgApacheLuceneSearchQuery_withFloat_(OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource *self, OrgApacheLuceneSearchQuery *q, jfloat defVal) {
-  OrgApacheLuceneQueriesFunctionValueSource_init(self);
-  JreStrongAssign(&self->q_, q);
-  self->defVal_ = defVal;
+void OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource_init(OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource_initWithOrgApacheLuceneSearchQuery_withFloat_(OrgApacheLuceneSearchQuery *q, jfloat defVal) {
+OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource_init() {
   OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource *self = [OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource alloc];
-  OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource_initWithOrgApacheLuceneSearchQuery_withFloat_(self, q, defVal);
+  OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource_init(self);
   return self;
 }
 
@@ -132,225 +39,29 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceQueryV
 
 @implementation OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues
 
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValuesourceQueryValueSource:(OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource *)vs
-                                        withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext
-                                                                  withJavaUtilMap:(id<JavaUtilMap>)fcontext {
-  OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_initWithOrgApacheLuceneQueriesFunctionValuesourceQueryValueSource_withOrgApacheLuceneIndexLeafReaderContext_withJavaUtilMap_(self, vs, readerContext, fcontext);
+- (instancetype)init {
+  OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_init(self);
   return self;
-}
-
-- (jfloat)floatValWithInt:(jint)doc {
-  @try {
-    if (doc < lastDocRequested_) {
-      if (noMatches_) return defVal_;
-      JreStrongAssign(&scorer_, [((OrgApacheLuceneSearchWeight *) nil_chk(weight_)) scorerWithOrgApacheLuceneIndexLeafReaderContext:readerContext_]);
-      if (scorer_ == nil) {
-        noMatches_ = YES;
-        return defVal_;
-      }
-      scorerDoc_ = -1;
-    }
-    lastDocRequested_ = doc;
-    if (scorerDoc_ < doc) {
-      scorerDoc_ = [((OrgApacheLuceneSearchScorer *) nil_chk(scorer_)) advanceWithInt:doc];
-    }
-    if (scorerDoc_ > doc) {
-      return defVal_;
-    }
-    return [((OrgApacheLuceneSearchScorer *) nil_chk(scorer_)) score];
-  }
-  @catch (JavaIoIOException *e) {
-    @throw [new_JavaLangRuntimeException_initWithNSString_withJavaLangThrowable_(JreStrcat("$@$I", @"caught exception in QueryDocVals(", q_, @") doc=", doc), e) autorelease];
-  }
-}
-
-- (jboolean)existsWithInt:(jint)doc {
-  @try {
-    if (doc < lastDocRequested_) {
-      if (noMatches_) return NO;
-      JreStrongAssign(&scorer_, [((OrgApacheLuceneSearchWeight *) nil_chk(weight_)) scorerWithOrgApacheLuceneIndexLeafReaderContext:readerContext_]);
-      scorerDoc_ = -1;
-      if (scorer_ == nil) {
-        noMatches_ = YES;
-        return NO;
-      }
-    }
-    lastDocRequested_ = doc;
-    if (scorerDoc_ < doc) {
-      scorerDoc_ = [((OrgApacheLuceneSearchScorer *) nil_chk(scorer_)) advanceWithInt:doc];
-    }
-    if (scorerDoc_ > doc) {
-      return NO;
-    }
-    return YES;
-  }
-  @catch (JavaIoIOException *e) {
-    @throw [new_JavaLangRuntimeException_initWithNSString_withJavaLangThrowable_(JreStrcat("$@$I", @"caught exception in QueryDocVals(", q_, @") doc=", doc), e) autorelease];
-  }
-}
-
-- (id)objectValWithInt:(jint)doc {
-  @try {
-    return [self existsWithInt:doc] ? JavaLangFloat_valueOfWithFloat_([((OrgApacheLuceneSearchScorer *) nil_chk(scorer_)) score]) : nil;
-  }
-  @catch (JavaIoIOException *e) {
-    @throw [new_JavaLangRuntimeException_initWithNSString_withJavaLangThrowable_(JreStrcat("$@$I", @"caught exception in QueryDocVals(", q_, @") doc=", doc), e) autorelease];
-  }
-}
-
-- (OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller *)getValueFiller {
-  return [new_OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_(self) autorelease];
-}
-
-- (NSString *)toStringWithInt:(jint)doc {
-  return JreStrcat("$@$F$F", @"query(", q_, @",def=", defVal_, @")=", [self floatValWithInt:doc]);
-}
-
-- (void)dealloc {
-  RELEASE_(readerContext_);
-  RELEASE_(weight_);
-  RELEASE_(fcontext_);
-  RELEASE_(q_);
-  RELEASE_(scorer_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneQueriesFunctionValuesourceQueryValueSource:withOrgApacheLuceneIndexLeafReaderContext:withJavaUtilMap:", "QueryDocValues", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "floatValWithInt:", "floatVal", "F", 0x1, NULL, NULL },
-    { "existsWithInt:", "exists", "Z", 0x1, NULL, NULL },
-    { "objectValWithInt:", "objectVal", "Ljava.lang.Object;", 0x1, NULL, NULL },
-    { "getValueFiller", NULL, "Lorg.apache.lucene.queries.function.FunctionValues$ValueFiller;", 0x1, NULL, NULL },
-    { "toStringWithInt:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x0, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "readerContext_", NULL, 0x10, "Lorg.apache.lucene.index.LeafReaderContext;", NULL, NULL, .constantValue.asLong = 0 },
-    { "weight_", NULL, 0x10, "Lorg.apache.lucene.search.Weight;", NULL, NULL, .constantValue.asLong = 0 },
-    { "defVal_", NULL, 0x10, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "fcontext_", NULL, 0x10, "Ljava.util.Map;", NULL, NULL, .constantValue.asLong = 0 },
-    { "q_", NULL, 0x10, "Lorg.apache.lucene.search.Query;", NULL, NULL, .constantValue.asLong = 0 },
-    { "scorer_", NULL, 0x0, "Lorg.apache.lucene.search.Scorer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "scorerDoc_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "noMatches_", NULL, 0x0, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "lastDocRequested_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues = { 2, "QueryDocValues", "org.apache.lucene.queries.function.valuesource", NULL, 0x0, 6, methods, 9, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues = { 2, "QueryDocValues", "org.apache.lucene.queries.function.valuesource", NULL, 0x0, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues;
 }
 
 @end
 
-void OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_initWithOrgApacheLuceneQueriesFunctionValuesourceQueryValueSource_withOrgApacheLuceneIndexLeafReaderContext_withJavaUtilMap_(OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues *self, OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource *vs, OrgApacheLuceneIndexLeafReaderContext *readerContext, id<JavaUtilMap> fcontext) {
-  OrgApacheLuceneQueriesFunctionDocvaluesFloatDocValues_initWithOrgApacheLuceneQueriesFunctionValueSource_(self, vs);
-  self->noMatches_ = NO;
-  self->lastDocRequested_ = JavaLangInteger_MAX_VALUE;
-  JreStrongAssign(&self->readerContext_, readerContext);
-  self->defVal_ = ((OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource *) nil_chk(vs))->defVal_;
-  JreStrongAssign(&self->q_, vs->q_);
-  JreStrongAssign(&self->fcontext_, fcontext);
-  OrgApacheLuceneSearchWeight *w = fcontext == nil ? nil : (OrgApacheLuceneSearchWeight *) check_class_cast([fcontext getWithId:vs], [OrgApacheLuceneSearchWeight class]);
-  if (w == nil) {
-    OrgApacheLuceneSearchIndexSearcher *weightSearcher;
-    if (fcontext == nil) {
-      weightSearcher = [new_OrgApacheLuceneSearchIndexSearcher_initWithOrgApacheLuceneIndexIndexReaderContext_(OrgApacheLuceneIndexReaderUtil_getTopLevelContextWithOrgApacheLuceneIndexIndexReaderContext_(readerContext)) autorelease];
-    }
-    else {
-      weightSearcher = (OrgApacheLuceneSearchIndexSearcher *) check_class_cast([fcontext getWithId:@"searcher"], [OrgApacheLuceneSearchIndexSearcher class]);
-      if (weightSearcher == nil) {
-        weightSearcher = [new_OrgApacheLuceneSearchIndexSearcher_initWithOrgApacheLuceneIndexIndexReaderContext_(OrgApacheLuceneIndexReaderUtil_getTopLevelContextWithOrgApacheLuceneIndexIndexReaderContext_(readerContext)) autorelease];
-      }
-    }
-    [vs createWeightWithJavaUtilMap:fcontext withOrgApacheLuceneSearchIndexSearcher:weightSearcher];
-    w = (OrgApacheLuceneSearchWeight *) check_class_cast([((id<JavaUtilMap>) nil_chk(fcontext)) getWithId:vs], [OrgApacheLuceneSearchWeight class]);
-  }
-  JreStrongAssign(&self->weight_, w);
+void OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_init(OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues *new_OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_initWithOrgApacheLuceneQueriesFunctionValuesourceQueryValueSource_withOrgApacheLuceneIndexLeafReaderContext_withJavaUtilMap_(OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource *vs, OrgApacheLuceneIndexLeafReaderContext *readerContext, id<JavaUtilMap> fcontext) {
+OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues *new_OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_init() {
   OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues *self = [OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues alloc];
-  OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_initWithOrgApacheLuceneQueriesFunctionValuesourceQueryValueSource_withOrgApacheLuceneIndexLeafReaderContext_withJavaUtilMap_(self, vs, readerContext, fcontext);
+  OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_init(self);
   return self;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues)
-
-@implementation OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_$1
-
-- (OrgApacheLuceneUtilMutableMutableValue *)getValue {
-  return mval_;
-}
-
-- (void)fillValueWithInt:(jint)doc {
-  @try {
-    if (this$0_->noMatches_) {
-      ((OrgApacheLuceneUtilMutableMutableValueFloat *) nil_chk(mval_))->value_ = this$0_->defVal_;
-      mval_->exists_ = NO;
-      return;
-    }
-    JreStrongAssign(&this$0_->scorer_, [((OrgApacheLuceneSearchWeight *) nil_chk(this$0_->weight_)) scorerWithOrgApacheLuceneIndexLeafReaderContext:this$0_->readerContext_]);
-    this$0_->scorerDoc_ = -1;
-    if (this$0_->scorer_ == nil) {
-      this$0_->noMatches_ = YES;
-      ((OrgApacheLuceneUtilMutableMutableValueFloat *) nil_chk(mval_))->value_ = this$0_->defVal_;
-      mval_->exists_ = NO;
-      return;
-    }
-    this$0_->lastDocRequested_ = doc;
-    if (this$0_->scorerDoc_ < doc) {
-      this$0_->scorerDoc_ = [((OrgApacheLuceneSearchScorer *) nil_chk(this$0_->scorer_)) advanceWithInt:doc];
-    }
-    if (this$0_->scorerDoc_ > doc) {
-      ((OrgApacheLuceneUtilMutableMutableValueFloat *) nil_chk(mval_))->value_ = this$0_->defVal_;
-      mval_->exists_ = NO;
-      return;
-    }
-    ((OrgApacheLuceneUtilMutableMutableValueFloat *) nil_chk(mval_))->value_ = [((OrgApacheLuceneSearchScorer *) nil_chk(this$0_->scorer_)) score];
-    mval_->exists_ = YES;
-  }
-  @catch (JavaIoIOException *e) {
-    @throw [new_JavaLangRuntimeException_initWithNSString_withJavaLangThrowable_(JreStrcat("$@$I", @"caught exception in QueryDocVals(", this$0_->q_, @") doc=", doc), e) autorelease];
-  }
-}
-
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValuesourceQueryDocValues:(OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues *)outer$ {
-  OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_(self, outer$);
-  return self;
-}
-
-- (void)dealloc {
-  RELEASE_(this$0_);
-  RELEASE_(mval_);
-  [super dealloc];
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getValue", NULL, "Lorg.apache.lucene.util.mutable.MutableValue;", 0x1, NULL, NULL },
-    { "fillValueWithInt:", "fillValue", "V", 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneQueriesFunctionValuesourceQueryDocValues:", "", NULL, 0x0, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.queries.function.valuesource.QueryDocValues;", NULL, NULL, .constantValue.asLong = 0 },
-    { "mval_", NULL, 0x12, "Lorg.apache.lucene.util.mutable.MutableValueFloat;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues", "getValueFiller" };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_$1 = { 2, "", "org.apache.lucene.queries.function.valuesource", "QueryDocValues", 0x8008, 3, methods, 2, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_$1;
-}
-
-@end
-
-void OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_(OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_$1 *self, OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues *outer$) {
-  JreStrongAssign(&self->this$0_, outer$);
-  OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller_init(self);
-  JreStrongAssignAndConsume(&self->mval_, new_OrgApacheLuceneUtilMutableMutableValueFloat_init());
-}
-
-OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_$1 *new_OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_(OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues *outer$) {
-  OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_$1 *self = [OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_$1 alloc];
-  OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_$1_initWithOrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_(self, outer$);
-  return self;
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_$1)

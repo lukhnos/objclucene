@@ -236,10 +236,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMergeState)
   return 0;
 }
 
-- (jboolean)hasDeletions {
-  return [self numDeletedDocs] > 0;
-}
-
 + (OrgApacheLuceneIndexMergeState_DocMap *)buildWithOrgApacheLuceneIndexCodecReader:(OrgApacheLuceneIndexCodecReader *)reader {
   return OrgApacheLuceneIndexMergeState_DocMap_buildWithOrgApacheLuceneIndexCodecReader_(reader);
 }
@@ -256,11 +252,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMergeState)
     { "maxDoc", NULL, "I", 0x401, NULL, NULL },
     { "numDocs", NULL, "I", 0x11, NULL, NULL },
     { "numDeletedDocs", NULL, "I", 0x401, NULL, NULL },
-    { "hasDeletions", NULL, "Z", 0x1, NULL, NULL },
     { "buildWithOrgApacheLuceneIndexCodecReader:", "build", "Lorg.apache.lucene.index.MergeState$DocMap;", 0x9, NULL, NULL },
     { "buildWithInt:withOrgApacheLuceneUtilBits:", "build", "Lorg.apache.lucene.index.MergeState$DocMap;", 0x8, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMergeState_DocMap = { 2, "DocMap", "org.apache.lucene.index", "MergeState", 0x409, 8, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMergeState_DocMap = { 2, "DocMap", "org.apache.lucene.index", "MergeState", 0x409, 7, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexMergeState_DocMap;
 }
 

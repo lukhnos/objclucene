@@ -17,11 +17,7 @@
 #include "java/lang/Thread.h"
 #include "java/lang/Throwable.h"
 #include "java/lang/UnsupportedOperationException.h"
-#include "java/util/ArrayList.h"
-#include "java/util/Collection.h"
-#include "java/util/Collections.h"
 #include "java/util/HashMap.h"
-#include "java/util/List.h"
 #include "java/util/Map.h"
 #include "java/util/concurrent/atomic/AtomicLong.h"
 #include "org/apache/lucene/codecs/CodecUtil.h"
@@ -49,8 +45,6 @@
 #include "org/apache/lucene/store/IOContext.h"
 #include "org/apache/lucene/store/IndexInput.h"
 #include "org/apache/lucene/store/RandomAccessInput.h"
-#include "org/apache/lucene/util/Accountable.h"
-#include "org/apache/lucene/util/Accountables.h"
 #include "org/apache/lucene/util/Bits.h"
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/IOUtils.h"
@@ -520,10 +514,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50DocValuesProduce
 
 - (OrgApacheLuceneIndexTermsEnum *)termsEnum;
 
-- (jlong)ordAtWithInt:(jint)index;
-
-- (jint)cardinality;
-
 - (instancetype)initWithOrgApacheLuceneUtilLongValues:(OrgApacheLuceneUtilLongValues *)capture$0
 withOrgApacheLuceneUtilPackedMonotonicBlockPackedReader:(OrgApacheLuceneUtilPackedMonotonicBlockPackedReader *)capture$1
 withOrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_LongBinaryDocValues:(OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_LongBinaryDocValues *)capture$2
@@ -555,11 +545,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50DocValuesProduce
 
 - (void)setDocumentWithInt:(jint)docID;
 
-- (jlong)ordAtWithInt:(jint)index;
-
 - (jlong)nextOrd;
-
-- (jint)cardinality;
 
 - (OrgApacheLuceneUtilBytesRef *)lookupOrdWithLong:(jlong)ord;
 
@@ -695,16 +681,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50DocValuesProduce
 
 - (jlong)ramBytesUsed {
   return [((JavaUtilConcurrentAtomicAtomicLong *) nil_chk(ramBytesUsed_)) get];
-}
-
-- (id<JavaUtilCollection>)getChildResources {
-  @synchronized(self) {
-    id<JavaUtilList> resources = [new_JavaUtilArrayList_init() autorelease];
-    [resources addAllWithJavaUtilCollection:OrgApacheLuceneUtilAccountables_namedAccountablesWithNSString_withJavaUtilMap_(@"addresses field", addressInstances_)];
-    [resources addAllWithJavaUtilCollection:OrgApacheLuceneUtilAccountables_namedAccountablesWithNSString_withJavaUtilMap_(@"ord index field", ordIndexInstances_)];
-    [resources addAllWithJavaUtilCollection:OrgApacheLuceneUtilAccountables_namedAccountablesWithNSString_withJavaUtilMap_(@"reverse index field", reverseIndexInstances_)];
-    return JavaUtilCollections_unmodifiableListWithJavaUtilList_(resources);
-  }
 }
 
 - (void)checkIntegrity {
@@ -926,7 +902,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50DocValuesProduce
     { "readSortedSetEntryWithOrgApacheLuceneStoreIndexInput:", "readSortedSetEntry", "Lorg.apache.lucene.codecs.lucene50.Lucene50DocValuesProducer$SortedSetEntry;", 0x0, "Ljava.io.IOException;", NULL },
     { "getNumericWithOrgApacheLuceneIndexFieldInfo:", "getNumeric", "Lorg.apache.lucene.index.NumericDocValues;", 0x1, "Ljava.io.IOException;", NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x21, NULL, NULL },
     { "checkIntegrity", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "getNumericWithOrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_NumericEntry:", "getNumeric", "Lorg.apache.lucene.util.LongValues;", 0x0, "Ljava.io.IOException;", NULL },
@@ -965,7 +940,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50DocValuesProduce
     { "merging_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.codecs.lucene50.Lucene50DocValuesProducer$NumericEntry;", "Lorg.apache.lucene.codecs.lucene50.Lucene50DocValuesProducer$BinaryEntry;", "Lorg.apache.lucene.codecs.lucene50.Lucene50DocValuesProducer$SortedSetEntry;", "Lorg.apache.lucene.codecs.lucene50.Lucene50DocValuesProducer$LongBinaryDocValues;", "Lorg.apache.lucene.codecs.lucene50.Lucene50DocValuesProducer$ReverseTermsIndex;", "Lorg.apache.lucene.codecs.lucene50.Lucene50DocValuesProducer$CompressedBinaryDocValues;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer = { 2, "Lucene50DocValuesProducer", "org.apache.lucene.codecs.lucene50", NULL, 0x0, 32, methods, 14, fields, 0, NULL, 6, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer = { 2, "Lucene50DocValuesProducer", "org.apache.lucene.codecs.lucene50", NULL, 0x0, 31, methods, 14, fields, 0, NULL, 6, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer;
 }
 
@@ -1607,13 +1582,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50DocValuesP
   return [((OrgApacheLuceneUtilPackedMonotonicBlockPackedReader *) nil_chk(termAddresses_)) ramBytesUsed] + [((OrgApacheLuceneUtilPagedBytes_Reader *) nil_chk(terms_)) ramBytesUsed];
 }
 
-- (id<JavaUtilCollection>)getChildResources {
-  id<JavaUtilList> resources = [new_JavaUtilArrayList_init() autorelease];
-  [resources addWithId:OrgApacheLuceneUtilAccountables_namedAccountableWithNSString_withOrgApacheLuceneUtilAccountable_(@"term bytes", terms_)];
-  [resources addWithId:OrgApacheLuceneUtilAccountables_namedAccountableWithNSString_withOrgApacheLuceneUtilAccountable_(@"term addresses", termAddresses_)];
-  return JavaUtilCollections_unmodifiableListWithJavaUtilList_(resources);
-}
-
 - (NSString *)description {
   return JreStrcat("$$JC", [[self getClass] getSimpleName], @"(size=", [((OrgApacheLuceneUtilPackedMonotonicBlockPackedReader *) nil_chk(termAddresses_)) size], ')');
 }
@@ -1632,7 +1600,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50DocValuesP
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "init", NULL, NULL, 0x0, NULL, NULL },
   };
@@ -1640,7 +1607,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50DocValuesP
     { "termAddresses_", NULL, 0x1, "Lorg.apache.lucene.util.packed.MonotonicBlockPackedReader;", NULL, NULL, .constantValue.asLong = 0 },
     { "terms_", NULL, 0x1, "Lorg.apache.lucene.util.PagedBytes$Reader;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_ReverseTermsIndex = { 2, "ReverseTermsIndex", "org.apache.lucene.codecs.lucene50", "Lucene50DocValuesProducer", 0x8, 4, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_ReverseTermsIndex = { 2, "ReverseTermsIndex", "org.apache.lucene.codecs.lucene50", "Lucene50DocValuesProducer", 0x8, 3, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_ReverseTermsIndex;
 }
 
@@ -2603,14 +2570,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50DocValuesP
   }
 }
 
-- (jlong)ordAtWithInt:(jint)index {
-  return [((OrgApacheLuceneUtilLongValues *) nil_chk(val$ordinals_)) getWithLong:startOffset_ + index];
-}
-
-- (jint)cardinality {
-  return (jint) (endOffset_ - startOffset_);
-}
-
 - (instancetype)initWithOrgApacheLuceneUtilLongValues:(OrgApacheLuceneUtilLongValues *)capture$0
 withOrgApacheLuceneUtilPackedMonotonicBlockPackedReader:(OrgApacheLuceneUtilPackedMonotonicBlockPackedReader *)capture$1
 withOrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_LongBinaryDocValues:(OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_LongBinaryDocValues *)capture$2
@@ -2634,8 +2593,6 @@ withOrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_LongBinaryDocValues:(
     { "getValueCount", NULL, "J", 0x1, NULL, NULL },
     { "lookupTermWithOrgApacheLuceneUtilBytesRef:", "lookupTerm", "J", 0x1, NULL, NULL },
     { "termsEnum", NULL, "Lorg.apache.lucene.index.TermsEnum;", 0x1, NULL, NULL },
-    { "ordAtWithInt:", "ordAt", "J", 0x1, NULL, NULL },
-    { "cardinality", NULL, "I", 0x1, NULL, NULL },
     { "initWithOrgApacheLuceneUtilLongValues:withOrgApacheLuceneUtilPackedMonotonicBlockPackedReader:withOrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_LongBinaryDocValues:withLong:", "", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -2648,7 +2605,7 @@ withOrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_LongBinaryDocValues:(
     { "val$valueCount_", NULL, 0x1012, "J", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer", "getSortedSetWithAddressesWithOrgApacheLuceneIndexFieldInfo:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_$10 = { 2, "", "org.apache.lucene.codecs.lucene50", "Lucene50DocValuesProducer", 0x8008, 9, methods, 7, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_$10 = { 2, "", "org.apache.lucene.codecs.lucene50", "Lucene50DocValuesProducer", 0x8008, 7, methods, 7, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
   return &_OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_$10;
 }
 
@@ -2678,10 +2635,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50DocValuesP
   endOffset_ = IOSIntArray_Get(val$offsets_, ord + 1);
 }
 
-- (jlong)ordAtWithInt:(jint)index {
-  return IOSLongArray_Get(nil_chk(val$table_), startOffset_ + index);
-}
-
 - (jlong)nextOrd {
   if (offset_ == endOffset_) {
     return OrgApacheLuceneIndexSortedSetDocValues_NO_MORE_ORDS;
@@ -2689,10 +2642,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50DocValuesP
   else {
     return IOSLongArray_Get(nil_chk(val$table_), offset_++);
   }
-}
-
-- (jint)cardinality {
-  return endOffset_ - startOffset_;
 }
 
 - (OrgApacheLuceneUtilBytesRef *)lookupOrdWithLong:(jlong)ord {
@@ -2741,9 +2690,7 @@ withOrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_LongBinaryDocValues:(
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "setDocumentWithInt:", "setDocument", "V", 0x1, NULL, NULL },
-    { "ordAtWithInt:", "ordAt", "J", 0x1, NULL, NULL },
     { "nextOrd", NULL, "J", 0x1, NULL, NULL },
-    { "cardinality", NULL, "I", 0x1, NULL, NULL },
     { "lookupOrdWithLong:", "lookupOrd", "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
     { "getValueCount", NULL, "J", 0x1, NULL, NULL },
     { "lookupTermWithOrgApacheLuceneUtilBytesRef:", "lookupTerm", "J", 0x1, NULL, NULL },
@@ -2761,7 +2708,7 @@ withOrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_LongBinaryDocValues:(
     { "val$valueCount_", NULL, 0x1012, "J", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer", "getSortedSetTableWithOrgApacheLuceneIndexFieldInfo:withOrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_SortedSetEntry:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_$11 = { 2, "", "org.apache.lucene.codecs.lucene50", "Lucene50DocValuesProducer", 0x8008, 9, methods, 8, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_$11 = { 2, "", "org.apache.lucene.codecs.lucene50", "Lucene50DocValuesProducer", 0x8008, 7, methods, 8, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
   return &_OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_$11;
 }
 

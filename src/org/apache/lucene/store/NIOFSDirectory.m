@@ -17,7 +17,6 @@
 #include "org/apache/lucene/store/BaseDirectory.h"
 #include "org/apache/lucene/store/BufferedIndexInput.h"
 #include "org/apache/lucene/store/FSDirectory.h"
-#include "org/apache/lucene/store/FSLockFactory.h"
 #include "org/apache/lucene/store/IOContext.h"
 #include "org/apache/lucene/store/IndexInput.h"
 #include "org/apache/lucene/store/LockFactory.h"
@@ -49,11 +48,6 @@ __attribute__((unused)) static jlong OrgApacheLuceneStoreNIOFSDirectory_NIOFSInd
   return self;
 }
 
-- (instancetype)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path {
-  OrgApacheLuceneStoreNIOFSDirectory_initWithOrgLukhnosPortmobileFilePath_(self, path);
-  return self;
-}
-
 - (OrgApacheLuceneStoreIndexInput *)openInputWithNSString:(NSString *)name
                         withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
   [self ensureOpen];
@@ -65,11 +59,10 @@ __attribute__((unused)) static jlong OrgApacheLuceneStoreNIOFSDirectory_NIOFSInd
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgLukhnosPortmobileFilePath:withOrgApacheLuceneStoreLockFactory:", "NIOFSDirectory", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgLukhnosPortmobileFilePath:", "NIOFSDirectory", NULL, 0x1, "Ljava.io.IOException;", NULL },
     { "openInputWithNSString:withOrgApacheLuceneStoreIOContext:", "openInput", "Lorg.apache.lucene.store.IndexInput;", 0x1, "Ljava.io.IOException;", NULL },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.store.NIOFSDirectory$NIOFSIndexInput;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreNIOFSDirectory = { 2, "NIOFSDirectory", "org.apache.lucene.store", NULL, 0x1, 3, methods, 0, NULL, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreNIOFSDirectory = { 2, "NIOFSDirectory", "org.apache.lucene.store", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 1, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneStoreNIOFSDirectory;
 }
 
@@ -82,16 +75,6 @@ void OrgApacheLuceneStoreNIOFSDirectory_initWithOrgLukhnosPortmobileFilePath_wit
 OrgApacheLuceneStoreNIOFSDirectory *new_OrgApacheLuceneStoreNIOFSDirectory_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneStoreLockFactory_(OrgLukhnosPortmobileFilePath *path, OrgApacheLuceneStoreLockFactory *lockFactory) {
   OrgApacheLuceneStoreNIOFSDirectory *self = [OrgApacheLuceneStoreNIOFSDirectory alloc];
   OrgApacheLuceneStoreNIOFSDirectory_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneStoreLockFactory_(self, path, lockFactory);
-  return self;
-}
-
-void OrgApacheLuceneStoreNIOFSDirectory_initWithOrgLukhnosPortmobileFilePath_(OrgApacheLuceneStoreNIOFSDirectory *self, OrgLukhnosPortmobileFilePath *path) {
-  OrgApacheLuceneStoreNIOFSDirectory_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneStoreLockFactory_(self, path, OrgApacheLuceneStoreFSLockFactory_getDefault());
-}
-
-OrgApacheLuceneStoreNIOFSDirectory *new_OrgApacheLuceneStoreNIOFSDirectory_initWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *path) {
-  OrgApacheLuceneStoreNIOFSDirectory *self = [OrgApacheLuceneStoreNIOFSDirectory alloc];
-  OrgApacheLuceneStoreNIOFSDirectory_initWithOrgLukhnosPortmobileFilePath_(self, path);
   return self;
 }
 

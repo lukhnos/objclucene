@@ -156,7 +156,6 @@ __attribute__((unused)) static OrgApacheLuceneIndexDefaultIndexingChain_PerField
   OrgApacheLuceneIndexDefaultIndexingChain_PerField *next_;
   OrgApacheLuceneIndexNormValuesWriter *norms_;
   OrgApacheLuceneAnalysisTokenStream *tokenStream_;
-  OrgApacheLuceneIndexIndexOptionsEnum *indexOptions_;
 }
 
 - (instancetype)initWithOrgApacheLuceneIndexDefaultIndexingChain:(OrgApacheLuceneIndexDefaultIndexingChain *)outer$
@@ -185,7 +184,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDefaultIndexingChain_PerField, docValues
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDefaultIndexingChain_PerField, next_, OrgApacheLuceneIndexDefaultIndexingChain_PerField *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDefaultIndexingChain_PerField, norms_, OrgApacheLuceneIndexNormValuesWriter *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDefaultIndexingChain_PerField, tokenStream_, OrgApacheLuceneAnalysisTokenStream *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDefaultIndexingChain_PerField, indexOptions_, OrgApacheLuceneIndexIndexOptionsEnum *)
 
 __attribute__((unused)) static void OrgApacheLuceneIndexDefaultIndexingChain_PerField_initWithOrgApacheLuceneIndexDefaultIndexingChain_withOrgApacheLuceneIndexFieldInfo_withBoolean_(OrgApacheLuceneIndexDefaultIndexingChain_PerField *self, OrgApacheLuceneIndexDefaultIndexingChain *outer$, OrgApacheLuceneIndexFieldInfo *fieldInfo, jboolean invert);
 
@@ -803,7 +801,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDefaultIndexingChain)
   RELEASE_(next_);
   RELEASE_(norms_);
   RELEASE_(tokenStream_);
-  RELEASE_(indexOptions_);
   [super dealloc];
 }
 
@@ -826,9 +823,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDefaultIndexingChain)
     { "next_", NULL, 0x0, "Lorg.apache.lucene.index.DefaultIndexingChain$PerField;", NULL, NULL, .constantValue.asLong = 0 },
     { "norms_", NULL, 0x0, "Lorg.apache.lucene.index.NormValuesWriter;", NULL, NULL, .constantValue.asLong = 0 },
     { "tokenStream_", NULL, 0x0, "Lorg.apache.lucene.analysis.TokenStream;", NULL, NULL, .constantValue.asLong = 0 },
-    { "indexOptions_", NULL, 0x0, "Lorg.apache.lucene.index.IndexOptions;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexDefaultIndexingChain_PerField = { 2, "PerField", "org.apache.lucene.index", "DefaultIndexingChain", 0x12, 5, methods, 11, fields, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/lang/Comparable<Lorg/apache/lucene/index/DefaultIndexingChain$PerField;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexDefaultIndexingChain_PerField = { 2, "PerField", "org.apache.lucene.index", "DefaultIndexingChain", 0x12, 5, methods, 10, fields, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/lang/Comparable<Lorg/apache/lucene/index/DefaultIndexingChain$PerField;>;" };
   return &_OrgApacheLuceneIndexDefaultIndexingChain_PerField;
 }
 

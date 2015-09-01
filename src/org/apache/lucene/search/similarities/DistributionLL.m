@@ -4,10 +4,9 @@
 //
 
 #include "J2ObjC_source.h"
-#include "java/lang/Math.h"
-#include "org/apache/lucene/search/similarities/BasicStats.h"
-#include "org/apache/lucene/search/similarities/Distribution.h"
 #include "org/apache/lucene/search/similarities/DistributionLL.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneSearchSimilaritiesDistributionLL
 
@@ -16,30 +15,18 @@
   return self;
 }
 
-- (jfloat)scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
-                                                     withFloat:(jfloat)tfn
-                                                     withFloat:(jfloat)lambda {
-  return (jfloat) -JavaLangMath_logWithDouble_(lambda / (tfn + lambda));
-}
-
-- (NSString *)description {
-  return @"LL";
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", "DistributionLL", NULL, 0x1, NULL, NULL },
-    { "scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:withFloat:withFloat:", "score", "F", 0x11, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesDistributionLL = { 2, "DistributionLL", "org.apache.lucene.search.similarities", NULL, 0x1, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesDistributionLL = { 2, "DistributionLL", "org.apache.lucene.search.similarities", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchSimilaritiesDistributionLL;
 }
 
 @end
 
 void OrgApacheLuceneSearchSimilaritiesDistributionLL_init(OrgApacheLuceneSearchSimilaritiesDistributionLL *self) {
-  OrgApacheLuceneSearchSimilaritiesDistribution_init(self);
+  NSObject_init(self);
 }
 
 OrgApacheLuceneSearchSimilaritiesDistributionLL *new_OrgApacheLuceneSearchSimilaritiesDistributionLL_init() {

@@ -56,8 +56,6 @@ withOrgApacheLuceneSearchPhraseQuery_PostingsAndFreqArray:(IOSObjectArray *)post
 withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer:(OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *)docScorer
                                         withBoolean:(jboolean)needsScores;
 
-- (jfloat)sloppyFreq;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSloppyPhraseScorer)

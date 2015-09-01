@@ -3,11 +3,10 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/util/ResourceLoader.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
-#include "java/io/InputStream.h"
 #include "org/apache/lucene/analysis/util/ResourceLoader.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @interface OrgApacheLuceneAnalysisUtilResourceLoader : NSObject
 
@@ -16,12 +15,7 @@
 @implementation OrgApacheLuceneAnalysisUtilResourceLoader
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "openResourceWithNSString:", "openResource", "Ljava.io.InputStream;", 0x401, "Ljava.io.IOException;", NULL },
-    { "findClassWithNSString:withIOSClass:", "findClass", "Ljava.lang.Class;", 0x401, NULL, "<T:Ljava/lang/Object;>(Ljava/lang/String;Ljava/lang/Class<TT;>;)Ljava/lang/Class<+TT;>;" },
-    { "newInstanceWithNSString:withIOSClass:", "newInstance", "TT;", 0x401, NULL, "<T:Ljava/lang/Object;>(Ljava/lang/String;Ljava/lang/Class<TT;>;)TT;" },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisUtilResourceLoader = { 2, "ResourceLoader", "org.apache.lucene.analysis.util", NULL, 0x609, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisUtilResourceLoader = { 2, "ResourceLoader", "org.apache.lucene.analysis.util", NULL, 0x609, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisUtilResourceLoader;
 }
 

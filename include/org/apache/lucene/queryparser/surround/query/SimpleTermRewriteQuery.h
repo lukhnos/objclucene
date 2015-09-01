@@ -20,30 +20,19 @@
 #define OrgApacheLuceneQueryparserSurroundQueryRewriteQuery_INCLUDE 1
 #include "org/apache/lucene/queryparser/surround/query/RewriteQuery.h"
 
-@class OrgApacheLuceneIndexIndexReader;
-@class OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory;
-@class OrgApacheLuceneQueryparserSurroundQuerySimpleTerm;
-@class OrgApacheLuceneSearchQuery;
-
 @interface OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery : OrgApacheLuceneQueryparserSurroundQueryRewriteQuery
-
-#pragma mark Public
-
-- (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTerm:(OrgApacheLuceneQueryparserSurroundQuerySimpleTerm *)srndQuery
-                                                             withNSString:(NSString *)fieldName
-             withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *)qf;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_withNSString_withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_(OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery *self, OrgApacheLuceneQueryparserSurroundQuerySimpleTerm *srndQuery, NSString *fieldName, OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *qf);
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_init(OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery *new_OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_initWithOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_withNSString_withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_(OrgApacheLuceneQueryparserSurroundQuerySimpleTerm *srndQuery, NSString *fieldName, OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *qf) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery *new_OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundQuerySimpleTermRewriteQuery)
 

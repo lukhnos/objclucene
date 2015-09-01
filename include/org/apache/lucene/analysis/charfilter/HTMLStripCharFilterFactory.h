@@ -20,35 +20,19 @@
 #define OrgApacheLuceneAnalysisUtilCharFilterFactory_INCLUDE 1
 #include "org/apache/lucene/analysis/util/CharFilterFactory.h"
 
-@class JavaIoReader;
-@class JavaUtilRegexPattern;
-@class OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter;
-@protocol JavaUtilMap;
-@protocol JavaUtilSet;
-
-@interface OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory : OrgApacheLuceneAnalysisUtilCharFilterFactory {
- @public
-  id<JavaUtilSet> escapedTags_;
-}
+@interface OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory : OrgApacheLuceneAnalysisUtilCharFilterFactory
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
-
-- (OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter *)createWithJavaIoReader:(JavaIoReader *)input;
+- (instancetype)init;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory, escapedTags_, id<JavaUtilSet>)
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory_init(OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory *self);
 
-FOUNDATION_EXPORT JavaUtilRegexPattern *OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory_TAG_NAME_PATTERN_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory, TAG_NAME_PATTERN_, JavaUtilRegexPattern *)
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory *self, id<JavaUtilMap> args);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory *new_OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory *new_OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilterFactory)
 

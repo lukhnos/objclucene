@@ -29,31 +29,9 @@
 
 - (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
 
-- (OrgApacheLuceneSearchQuery *)createBooleanQueryWithNSString:(NSString *)field
-                                                  withNSString:(NSString *)queryText;
-
-- (OrgApacheLuceneSearchQuery *)createBooleanQueryWithNSString:(NSString *)field
-                                                  withNSString:(NSString *)queryText
-              withOrgApacheLuceneSearchBooleanClause_OccurEnum:(OrgApacheLuceneSearchBooleanClause_OccurEnum *)operator_;
-
-- (OrgApacheLuceneSearchQuery *)createMinShouldMatchQueryWithNSString:(NSString *)field
-                                                         withNSString:(NSString *)queryText
-                                                            withFloat:(jfloat)fraction;
-
-- (OrgApacheLuceneSearchQuery *)createPhraseQueryWithNSString:(NSString *)field
-                                                 withNSString:(NSString *)queryText;
-
-- (OrgApacheLuceneSearchQuery *)createPhraseQueryWithNSString:(NSString *)field
-                                                 withNSString:(NSString *)queryText
-                                                      withInt:(jint)phraseSlop;
-
 - (OrgApacheLuceneAnalysisAnalyzer *)getAnalyzer;
 
-- (jboolean)getEnablePositionIncrements;
-
 - (void)setAnalyzerWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
-
-- (void)setEnablePositionIncrementsWithBoolean:(jboolean)enable;
 
 #pragma mark Protected
 

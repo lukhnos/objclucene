@@ -16,40 +16,15 @@
 #if !defined (_OrgApacheLuceneSearchHighlightQueryTermExtractor_) && (OrgApacheLuceneSearchHighlightQueryTermExtractor_INCLUDE_ALL || OrgApacheLuceneSearchHighlightQueryTermExtractor_INCLUDE)
 #define _OrgApacheLuceneSearchHighlightQueryTermExtractor_
 
-@class IOSObjectArray;
-@class OrgApacheLuceneIndexIndexReader;
-@class OrgApacheLuceneSearchQuery;
-
 @interface OrgApacheLuceneSearchHighlightQueryTermExtractor : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
-+ (IOSObjectArray *)getIdfWeightedTermsWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-                                  withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
-                                                         withNSString:(NSString *)fieldName;
-
-+ (IOSObjectArray *)getTermsWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
-
-+ (IOSObjectArray *)getTermsWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-                                               withBoolean:(jboolean)prohibited;
-
-+ (IOSObjectArray *)getTermsWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-                                               withBoolean:(jboolean)prohibited
-                                              withNSString:(NSString *)fieldName;
-
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneSearchHighlightQueryTermExtractor)
-
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneSearchHighlightQueryTermExtractor_getTermsWithOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchQuery *query);
-
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneSearchHighlightQueryTermExtractor_getIdfWeightedTermsWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexReader_withNSString_(OrgApacheLuceneSearchQuery *query, OrgApacheLuceneIndexIndexReader *reader, NSString *fieldName);
-
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneSearchHighlightQueryTermExtractor_getTermsWithOrgApacheLuceneSearchQuery_withBoolean_withNSString_(OrgApacheLuceneSearchQuery *query, jboolean prohibited, NSString *fieldName);
-
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneSearchHighlightQueryTermExtractor_getTermsWithOrgApacheLuceneSearchQuery_withBoolean_(OrgApacheLuceneSearchQuery *query, jboolean prohibited);
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchHighlightQueryTermExtractor)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightQueryTermExtractor_init(OrgApacheLuceneSearchHighlightQueryTermExtractor *self);
 

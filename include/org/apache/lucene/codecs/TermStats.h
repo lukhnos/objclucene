@@ -16,24 +16,19 @@
 #if !defined (_OrgApacheLuceneCodecsTermStats_) && (OrgApacheLuceneCodecsTermStats_INCLUDE_ALL || OrgApacheLuceneCodecsTermStats_INCLUDE)
 #define _OrgApacheLuceneCodecsTermStats_
 
-@interface OrgApacheLuceneCodecsTermStats : NSObject {
- @public
-  jint docFreq_;
-  jlong totalTermFreq_;
-}
+@interface OrgApacheLuceneCodecsTermStats : NSObject
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)docFreq
-                   withLong:(jlong)totalTermFreq;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsTermStats)
 
-FOUNDATION_EXPORT void OrgApacheLuceneCodecsTermStats_initWithInt_withLong_(OrgApacheLuceneCodecsTermStats *self, jint docFreq, jlong totalTermFreq);
+FOUNDATION_EXPORT void OrgApacheLuceneCodecsTermStats_init(OrgApacheLuceneCodecsTermStats *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsTermStats *new_OrgApacheLuceneCodecsTermStats_initWithInt_withLong_(jint docFreq, jlong totalTermFreq) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneCodecsTermStats *new_OrgApacheLuceneCodecsTermStats_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsTermStats)
 

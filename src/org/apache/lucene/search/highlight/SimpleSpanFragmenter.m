@@ -40,11 +40,6 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchHighlightSimpleSpanFragmenter, D
 
 @implementation OrgApacheLuceneSearchHighlightSimpleSpanFragmenter
 
-- (instancetype)initWithOrgApacheLuceneSearchHighlightQueryScorer:(OrgApacheLuceneSearchHighlightQueryScorer *)queryScorer {
-  OrgApacheLuceneSearchHighlightSimpleSpanFragmenter_initWithOrgApacheLuceneSearchHighlightQueryScorer_(self, queryScorer);
-  return self;
-}
-
 - (instancetype)initWithOrgApacheLuceneSearchHighlightQueryScorer:(OrgApacheLuceneSearchHighlightQueryScorer *)queryScorer
                                                           withInt:(jint)fragmentSize {
   OrgApacheLuceneSearchHighlightSimpleSpanFragmenter_initWithOrgApacheLuceneSearchHighlightQueryScorer_withInt_(self, queryScorer, fragmentSize);
@@ -96,7 +91,6 @@ withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tok
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchHighlightQueryScorer:", "SimpleSpanFragmenter", NULL, 0x1, NULL, NULL },
     { "initWithOrgApacheLuceneSearchHighlightQueryScorer:withInt:", "SimpleSpanFragmenter", NULL, 0x1, NULL, NULL },
     { "isNewFragment", NULL, "Z", 0x1, NULL, NULL },
     { "startWithNSString:withOrgApacheLuceneAnalysisTokenStream:", "start", "V", 0x1, NULL, NULL },
@@ -113,21 +107,11 @@ withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tok
     { "posIncAtt_", NULL, 0x2, "Lorg.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;", NULL, NULL, .constantValue.asLong = 0 },
     { "offsetAtt_", NULL, 0x2, "Lorg.apache.lucene.analysis.tokenattributes.OffsetAttribute;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightSimpleSpanFragmenter = { 2, "SimpleSpanFragmenter", "org.apache.lucene.search.highlight", NULL, 0x1, 4, methods, 10, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightSimpleSpanFragmenter = { 2, "SimpleSpanFragmenter", "org.apache.lucene.search.highlight", NULL, 0x1, 3, methods, 10, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchHighlightSimpleSpanFragmenter;
 }
 
 @end
-
-void OrgApacheLuceneSearchHighlightSimpleSpanFragmenter_initWithOrgApacheLuceneSearchHighlightQueryScorer_(OrgApacheLuceneSearchHighlightSimpleSpanFragmenter *self, OrgApacheLuceneSearchHighlightQueryScorer *queryScorer) {
-  OrgApacheLuceneSearchHighlightSimpleSpanFragmenter_initWithOrgApacheLuceneSearchHighlightQueryScorer_withInt_(self, queryScorer, OrgApacheLuceneSearchHighlightSimpleSpanFragmenter_DEFAULT_FRAGMENT_SIZE);
-}
-
-OrgApacheLuceneSearchHighlightSimpleSpanFragmenter *new_OrgApacheLuceneSearchHighlightSimpleSpanFragmenter_initWithOrgApacheLuceneSearchHighlightQueryScorer_(OrgApacheLuceneSearchHighlightQueryScorer *queryScorer) {
-  OrgApacheLuceneSearchHighlightSimpleSpanFragmenter *self = [OrgApacheLuceneSearchHighlightSimpleSpanFragmenter alloc];
-  OrgApacheLuceneSearchHighlightSimpleSpanFragmenter_initWithOrgApacheLuceneSearchHighlightQueryScorer_(self, queryScorer);
-  return self;
-}
 
 void OrgApacheLuceneSearchHighlightSimpleSpanFragmenter_initWithOrgApacheLuceneSearchHighlightQueryScorer_withInt_(OrgApacheLuceneSearchHighlightSimpleSpanFragmenter *self, OrgApacheLuceneSearchHighlightQueryScorer *queryScorer, jint fragmentSize) {
   NSObject_init(self);

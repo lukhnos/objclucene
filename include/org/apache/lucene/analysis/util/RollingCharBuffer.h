@@ -16,23 +16,11 @@
 #if !defined (_OrgApacheLuceneAnalysisUtilRollingCharBuffer_) && (OrgApacheLuceneAnalysisUtilRollingCharBuffer_INCLUDE_ALL || OrgApacheLuceneAnalysisUtilRollingCharBuffer_INCLUDE)
 #define _OrgApacheLuceneAnalysisUtilRollingCharBuffer_
 
-@class IOSCharArray;
-@class JavaIoReader;
-
 @interface OrgApacheLuceneAnalysisUtilRollingCharBuffer : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (void)freeBeforeWithInt:(jint)pos;
-
-- (jint)getWithInt:(jint)pos;
-
-- (IOSCharArray *)getWithInt:(jint)posStart
-                     withInt:(jint)length;
-
-- (void)resetWithJavaIoReader:(JavaIoReader *)reader;
 
 @end
 

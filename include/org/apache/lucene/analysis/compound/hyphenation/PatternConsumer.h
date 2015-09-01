@@ -16,17 +16,7 @@
 #if !defined (_OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer_) && (OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer_INCLUDE_ALL || OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer_INCLUDE)
 #define _OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer_
 
-@class JavaUtilArrayList;
-
 @protocol OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer < NSObject, JavaObject >
-
-- (void)addClassWithNSString:(NSString *)chargroup;
-
-- (void)addExceptionWithNSString:(NSString *)word
-           withJavaUtilArrayList:(JavaUtilArrayList *)hyphenatedword;
-
-- (void)addPatternWithNSString:(NSString *)pattern
-                  withNSString:(NSString *)values;
 
 @end
 

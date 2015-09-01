@@ -20,16 +20,11 @@
 #define OrgApacheLuceneQueryparserXmlBuildersSpanBuilderBase_INCLUDE 1
 #include "org/apache/lucene/queryparser/xml/builders/SpanBuilderBase.h"
 
-@class OrgApacheLuceneSearchSpansSpanQuery;
-@protocol OrgW3cDomElement;
-
 @interface OrgApacheLuceneQueryparserXmlBuildersBoostingTermBuilder : OrgApacheLuceneQueryparserXmlBuildersSpanBuilderBase
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (OrgApacheLuceneSearchSpansSpanQuery *)getSpanQueryWithOrgW3cDomElement:(id<OrgW3cDomElement>)e;
 
 @end
 

@@ -22,13 +22,9 @@
 
 - (instancetype)init;
 
-+ (NSString *)toStringWithId:(id)obj;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils)
-
-FOUNDATION_EXPORT NSString *OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_toStringWithId_(id obj);
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_init(OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils *self);
 

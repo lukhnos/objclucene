@@ -16,101 +16,28 @@
 #if !defined (_OrgApacheLuceneUtilFstUtil_) && (OrgApacheLuceneUtilFstUtil_INCLUDE_ALL || OrgApacheLuceneUtilFstUtil_INCLUDE)
 #define _OrgApacheLuceneUtilFstUtil_
 
-@class IOSCharArray;
-@class JavaIoWriter;
 @class OrgApacheLuceneUtilBytesRef;
 @class OrgApacheLuceneUtilBytesRefBuilder;
-@class OrgApacheLuceneUtilFstFST;
-@class OrgApacheLuceneUtilFstFST_Arc;
-@class OrgApacheLuceneUtilFstFST_BytesReader;
-@class OrgApacheLuceneUtilFstUtil_TopResults;
 @class OrgApacheLuceneUtilIntsRef;
 @class OrgApacheLuceneUtilIntsRefBuilder;
-@protocol JavaLangCharSequence;
-@protocol JavaUtilComparator;
 
 @interface OrgApacheLuceneUtilFstUtil : NSObject
 
 #pragma mark Public
 
-+ (id)getWithOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)fst
-       withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)input;
-
-+ (id)getWithOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)fst
-        withOrgApacheLuceneUtilIntsRef:(OrgApacheLuceneUtilIntsRef *)input;
-
-+ (OrgApacheLuceneUtilIntsRef *)getByOutputWithOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)fst
-                                                                withLong:(jlong)targetOutput;
-
-+ (OrgApacheLuceneUtilIntsRef *)getByOutputWithOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)fst
-                                                                withLong:(jlong)targetOutput
-                               withOrgApacheLuceneUtilFstFST_BytesReader:(OrgApacheLuceneUtilFstFST_BytesReader *)inArg
-                                       withOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)arc
-                                       withOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)scratchArc
-                                   withOrgApacheLuceneUtilIntsRefBuilder:(OrgApacheLuceneUtilIntsRefBuilder *)result;
-
-+ (OrgApacheLuceneUtilFstFST_Arc *)readCeilArcWithInt:(jint)label
-                        withOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)fst
-                    withOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)follow
-                    withOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)arc
-            withOrgApacheLuceneUtilFstFST_BytesReader:(OrgApacheLuceneUtilFstFST_BytesReader *)inArg;
-
-+ (OrgApacheLuceneUtilFstUtil_TopResults *)shortestPathsWithOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)fst
-                                                    withOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)fromNode
-                                                                               withId:(id)startOutput
-                                                               withJavaUtilComparator:(id<JavaUtilComparator>)comparator
-                                                                              withInt:(jint)topN
-                                                                          withBoolean:(jboolean)allowEmptyString;
-
 + (OrgApacheLuceneUtilBytesRef *)toBytesRefWithOrgApacheLuceneUtilIntsRef:(OrgApacheLuceneUtilIntsRef *)input
                                    withOrgApacheLuceneUtilBytesRefBuilder:(OrgApacheLuceneUtilBytesRefBuilder *)scratch;
 
-+ (void)toDotWithOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)fst
-                          withJavaIoWriter:(JavaIoWriter *)outArg
-                               withBoolean:(jboolean)sameRank
-                               withBoolean:(jboolean)labelStates;
-
 + (OrgApacheLuceneUtilIntsRef *)toIntsRefWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)input
                                    withOrgApacheLuceneUtilIntsRefBuilder:(OrgApacheLuceneUtilIntsRefBuilder *)scratch;
-
-+ (OrgApacheLuceneUtilIntsRef *)toUTF16WithJavaLangCharSequence:(id<JavaLangCharSequence>)s
-                          withOrgApacheLuceneUtilIntsRefBuilder:(OrgApacheLuceneUtilIntsRefBuilder *)scratch;
-
-+ (OrgApacheLuceneUtilIntsRef *)toUTF32WithCharArray:(IOSCharArray *)s
-                                             withInt:(jint)offset
-                                             withInt:(jint)length
-               withOrgApacheLuceneUtilIntsRefBuilder:(OrgApacheLuceneUtilIntsRefBuilder *)scratch;
-
-+ (OrgApacheLuceneUtilIntsRef *)toUTF32WithJavaLangCharSequence:(id<JavaLangCharSequence>)s
-                          withOrgApacheLuceneUtilIntsRefBuilder:(OrgApacheLuceneUtilIntsRefBuilder *)scratch;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilFstUtil)
 
-FOUNDATION_EXPORT id OrgApacheLuceneUtilFstUtil_getWithOrgApacheLuceneUtilFstFST_withOrgApacheLuceneUtilIntsRef_(OrgApacheLuceneUtilFstFST *fst, OrgApacheLuceneUtilIntsRef *input);
-
-FOUNDATION_EXPORT id OrgApacheLuceneUtilFstUtil_getWithOrgApacheLuceneUtilFstFST_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilFstFST *fst, OrgApacheLuceneUtilBytesRef *input);
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilIntsRef *OrgApacheLuceneUtilFstUtil_getByOutputWithOrgApacheLuceneUtilFstFST_withLong_(OrgApacheLuceneUtilFstFST *fst, jlong targetOutput);
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilIntsRef *OrgApacheLuceneUtilFstUtil_getByOutputWithOrgApacheLuceneUtilFstFST_withLong_withOrgApacheLuceneUtilFstFST_BytesReader_withOrgApacheLuceneUtilFstFST_Arc_withOrgApacheLuceneUtilFstFST_Arc_withOrgApacheLuceneUtilIntsRefBuilder_(OrgApacheLuceneUtilFstFST *fst, jlong targetOutput, OrgApacheLuceneUtilFstFST_BytesReader *inArg, OrgApacheLuceneUtilFstFST_Arc *arc, OrgApacheLuceneUtilFstFST_Arc *scratchArc, OrgApacheLuceneUtilIntsRefBuilder *result);
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilFstUtil_TopResults *OrgApacheLuceneUtilFstUtil_shortestPathsWithOrgApacheLuceneUtilFstFST_withOrgApacheLuceneUtilFstFST_Arc_withId_withJavaUtilComparator_withInt_withBoolean_(OrgApacheLuceneUtilFstFST *fst, OrgApacheLuceneUtilFstFST_Arc *fromNode, id startOutput, id<JavaUtilComparator> comparator, jint topN, jboolean allowEmptyString);
-
-FOUNDATION_EXPORT void OrgApacheLuceneUtilFstUtil_toDotWithOrgApacheLuceneUtilFstFST_withJavaIoWriter_withBoolean_withBoolean_(OrgApacheLuceneUtilFstFST *fst, JavaIoWriter *outArg, jboolean sameRank, jboolean labelStates);
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilIntsRef *OrgApacheLuceneUtilFstUtil_toUTF16WithJavaLangCharSequence_withOrgApacheLuceneUtilIntsRefBuilder_(id<JavaLangCharSequence> s, OrgApacheLuceneUtilIntsRefBuilder *scratch);
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilIntsRef *OrgApacheLuceneUtilFstUtil_toUTF32WithJavaLangCharSequence_withOrgApacheLuceneUtilIntsRefBuilder_(id<JavaLangCharSequence> s, OrgApacheLuceneUtilIntsRefBuilder *scratch);
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilIntsRef *OrgApacheLuceneUtilFstUtil_toUTF32WithCharArray_withInt_withInt_withOrgApacheLuceneUtilIntsRefBuilder_(IOSCharArray *s, jint offset, jint length, OrgApacheLuceneUtilIntsRefBuilder *scratch);
-
 FOUNDATION_EXPORT OrgApacheLuceneUtilIntsRef *OrgApacheLuceneUtilFstUtil_toIntsRefWithOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilIntsRefBuilder_(OrgApacheLuceneUtilBytesRef *input, OrgApacheLuceneUtilIntsRefBuilder *scratch);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilBytesRef *OrgApacheLuceneUtilFstUtil_toBytesRefWithOrgApacheLuceneUtilIntsRef_withOrgApacheLuceneUtilBytesRefBuilder_(OrgApacheLuceneUtilIntsRef *input, OrgApacheLuceneUtilBytesRefBuilder *scratch);
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilFstFST_Arc *OrgApacheLuceneUtilFstUtil_readCeilArcWithInt_withOrgApacheLuceneUtilFstFST_withOrgApacheLuceneUtilFstFST_Arc_withOrgApacheLuceneUtilFstFST_Arc_withOrgApacheLuceneUtilFstFST_BytesReader_(jint label, OrgApacheLuceneUtilFstFST *fst, OrgApacheLuceneUtilFstFST_Arc *follow, OrgApacheLuceneUtilFstFST_Arc *arc, OrgApacheLuceneUtilFstFST_BytesReader *inArg);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstUtil)
 
@@ -119,52 +46,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstUtil)
 #if !defined (_OrgApacheLuceneUtilFstUtil_FSTPath_) && (OrgApacheLuceneUtilFstUtil_INCLUDE_ALL || OrgApacheLuceneUtilFstUtil_FSTPath_INCLUDE)
 #define _OrgApacheLuceneUtilFstUtil_FSTPath_
 
-@class OrgApacheLuceneUtilFstFST_Arc;
-@class OrgApacheLuceneUtilIntsRefBuilder;
-@protocol JavaLangCharSequence;
-
-@interface OrgApacheLuceneUtilFstUtil_FSTPath : NSObject {
- @public
-  OrgApacheLuceneUtilFstFST_Arc *arc_;
-  id cost_;
-  OrgApacheLuceneUtilIntsRefBuilder *input_;
-  jfloat boost_;
-  id<JavaLangCharSequence> context_;
-}
+@interface OrgApacheLuceneUtilFstUtil_FSTPath : NSObject
 
 #pragma mark Public
 
-- (instancetype)initWithId:(id)cost
-withOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)arc
-withOrgApacheLuceneUtilIntsRefBuilder:(OrgApacheLuceneUtilIntsRefBuilder *)input;
-
-- (instancetype)initWithId:(id)cost
-withOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)arc
-withOrgApacheLuceneUtilIntsRefBuilder:(OrgApacheLuceneUtilIntsRefBuilder *)input
-                 withFloat:(jfloat)boost
-  withJavaLangCharSequence:(id<JavaLangCharSequence>)context;
-
-- (OrgApacheLuceneUtilFstUtil_FSTPath *)newPathWithId:(id)cost
-                withOrgApacheLuceneUtilIntsRefBuilder:(OrgApacheLuceneUtilIntsRefBuilder *)input OBJC_METHOD_FAMILY_NONE;
-
-- (NSString *)description;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilFstUtil_FSTPath)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstUtil_FSTPath, arc_, OrgApacheLuceneUtilFstFST_Arc *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstUtil_FSTPath, cost_, id)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstUtil_FSTPath, input_, OrgApacheLuceneUtilIntsRefBuilder *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstUtil_FSTPath, context_, id<JavaLangCharSequence>)
+FOUNDATION_EXPORT void OrgApacheLuceneUtilFstUtil_FSTPath_init(OrgApacheLuceneUtilFstUtil_FSTPath *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilFstUtil_FSTPath_initWithId_withOrgApacheLuceneUtilFstFST_Arc_withOrgApacheLuceneUtilIntsRefBuilder_(OrgApacheLuceneUtilFstUtil_FSTPath *self, id cost, OrgApacheLuceneUtilFstFST_Arc *arc, OrgApacheLuceneUtilIntsRefBuilder *input);
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilFstUtil_FSTPath *new_OrgApacheLuceneUtilFstUtil_FSTPath_initWithId_withOrgApacheLuceneUtilFstFST_Arc_withOrgApacheLuceneUtilIntsRefBuilder_(id cost, OrgApacheLuceneUtilFstFST_Arc *arc, OrgApacheLuceneUtilIntsRefBuilder *input) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneUtilFstUtil_FSTPath_initWithId_withOrgApacheLuceneUtilFstFST_Arc_withOrgApacheLuceneUtilIntsRefBuilder_withFloat_withJavaLangCharSequence_(OrgApacheLuceneUtilFstUtil_FSTPath *self, id cost, OrgApacheLuceneUtilFstFST_Arc *arc, OrgApacheLuceneUtilIntsRefBuilder *input, jfloat boost, id<JavaLangCharSequence> context);
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilFstUtil_FSTPath *new_OrgApacheLuceneUtilFstUtil_FSTPath_initWithId_withOrgApacheLuceneUtilFstFST_Arc_withOrgApacheLuceneUtilIntsRefBuilder_withFloat_withJavaLangCharSequence_(id cost, OrgApacheLuceneUtilFstFST_Arc *arc, OrgApacheLuceneUtilIntsRefBuilder *input, jfloat boost, id<JavaLangCharSequence> context) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstUtil_FSTPath *new_OrgApacheLuceneUtilFstUtil_FSTPath_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstUtil_FSTPath)
 
@@ -173,70 +67,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstUtil_FSTPath)
 #if !defined (_OrgApacheLuceneUtilFstUtil_TopNSearcher_) && (OrgApacheLuceneUtilFstUtil_INCLUDE_ALL || OrgApacheLuceneUtilFstUtil_TopNSearcher_INCLUDE)
 #define _OrgApacheLuceneUtilFstUtil_TopNSearcher_
 
-@class JavaUtilTreeSet;
-@class OrgApacheLuceneUtilFstFST;
-@class OrgApacheLuceneUtilFstFST_Arc;
-@class OrgApacheLuceneUtilFstUtil_FSTPath;
-@class OrgApacheLuceneUtilFstUtil_TopResults;
-@class OrgApacheLuceneUtilIntsRef;
-@class OrgApacheLuceneUtilIntsRefBuilder;
-@protocol JavaLangCharSequence;
-@protocol JavaUtilComparator;
-
-@interface OrgApacheLuceneUtilFstUtil_TopNSearcher : NSObject {
- @public
-  JavaUtilTreeSet *queue_;
-}
+@interface OrgApacheLuceneUtilFstUtil_TopNSearcher : NSObject
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)fst
-                                          withInt:(jint)topN
-                                          withInt:(jint)maxQueueDepth
-                           withJavaUtilComparator:(id<JavaUtilComparator>)comparator;
-
-- (instancetype)initWithOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)fst
-                                          withInt:(jint)topN
-                                          withInt:(jint)maxQueueDepth
-                           withJavaUtilComparator:(id<JavaUtilComparator>)comparator
-                           withJavaUtilComparator:(id<JavaUtilComparator>)pathComparator;
-
-- (void)addStartPathsWithOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)node
-                                                withId:(id)startOutput
-                                           withBoolean:(jboolean)allowEmptyString
-                 withOrgApacheLuceneUtilIntsRefBuilder:(OrgApacheLuceneUtilIntsRefBuilder *)input;
-
-- (void)addStartPathsWithOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)node
-                                                withId:(id)startOutput
-                                           withBoolean:(jboolean)allowEmptyString
-                 withOrgApacheLuceneUtilIntsRefBuilder:(OrgApacheLuceneUtilIntsRefBuilder *)input
-                                             withFloat:(jfloat)boost
-                              withJavaLangCharSequence:(id<JavaLangCharSequence>)context;
-
-- (OrgApacheLuceneUtilFstUtil_TopResults *)search;
-
-#pragma mark Protected
-
-- (jboolean)acceptResultWithOrgApacheLuceneUtilFstUtil_FSTPath:(OrgApacheLuceneUtilFstUtil_FSTPath *)path;
-
-- (jboolean)acceptResultWithOrgApacheLuceneUtilIntsRef:(OrgApacheLuceneUtilIntsRef *)input
-                                                withId:(id)output;
-
-- (void)addIfCompetitiveWithOrgApacheLuceneUtilFstUtil_FSTPath:(OrgApacheLuceneUtilFstUtil_FSTPath *)path;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilFstUtil_TopNSearcher)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstUtil_TopNSearcher, queue_, JavaUtilTreeSet *)
+FOUNDATION_EXPORT void OrgApacheLuceneUtilFstUtil_TopNSearcher_init(OrgApacheLuceneUtilFstUtil_TopNSearcher *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilFstUtil_TopNSearcher_initWithOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_(OrgApacheLuceneUtilFstUtil_TopNSearcher *self, OrgApacheLuceneUtilFstFST *fst, jint topN, jint maxQueueDepth, id<JavaUtilComparator> comparator);
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilFstUtil_TopNSearcher *new_OrgApacheLuceneUtilFstUtil_TopNSearcher_initWithOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_(OrgApacheLuceneUtilFstFST *fst, jint topN, jint maxQueueDepth, id<JavaUtilComparator> comparator) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneUtilFstUtil_TopNSearcher_initWithOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_withJavaUtilComparator_(OrgApacheLuceneUtilFstUtil_TopNSearcher *self, OrgApacheLuceneUtilFstFST *fst, jint topN, jint maxQueueDepth, id<JavaUtilComparator> comparator, id<JavaUtilComparator> pathComparator);
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilFstUtil_TopNSearcher *new_OrgApacheLuceneUtilFstUtil_TopNSearcher_initWithOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_withJavaUtilComparator_(OrgApacheLuceneUtilFstFST *fst, jint topN, jint maxQueueDepth, id<JavaUtilComparator> comparator, id<JavaUtilComparator> pathComparator) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstUtil_TopNSearcher *new_OrgApacheLuceneUtilFstUtil_TopNSearcher_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstUtil_TopNSearcher)
 
@@ -245,29 +88,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstUtil_TopNSearcher)
 #if !defined (_OrgApacheLuceneUtilFstUtil_Result_) && (OrgApacheLuceneUtilFstUtil_INCLUDE_ALL || OrgApacheLuceneUtilFstUtil_Result_INCLUDE)
 #define _OrgApacheLuceneUtilFstUtil_Result_
 
-@class OrgApacheLuceneUtilIntsRef;
-
-@interface OrgApacheLuceneUtilFstUtil_Result : NSObject {
- @public
-  OrgApacheLuceneUtilIntsRef *input_;
-  id output_;
-}
+@interface OrgApacheLuceneUtilFstUtil_Result : NSObject
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneUtilIntsRef:(OrgApacheLuceneUtilIntsRef *)input
-                                            withId:(id)output;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilFstUtil_Result)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstUtil_Result, input_, OrgApacheLuceneUtilIntsRef *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstUtil_Result, output_, id)
+FOUNDATION_EXPORT void OrgApacheLuceneUtilFstUtil_Result_init(OrgApacheLuceneUtilFstUtil_Result *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilFstUtil_Result_initWithOrgApacheLuceneUtilIntsRef_withId_(OrgApacheLuceneUtilFstUtil_Result *self, OrgApacheLuceneUtilIntsRef *input, id output);
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilFstUtil_Result *new_OrgApacheLuceneUtilFstUtil_Result_initWithOrgApacheLuceneUtilIntsRef_withId_(OrgApacheLuceneUtilIntsRef *input, id output) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstUtil_Result *new_OrgApacheLuceneUtilFstUtil_Result_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstUtil_Result)
 
@@ -280,34 +113,22 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstUtil_Result)
 #define JavaLangIterable_INCLUDE 1
 #include "java/lang/Iterable.h"
 
-@protocol JavaUtilIterator;
-@protocol JavaUtilList;
-
-@interface OrgApacheLuceneUtilFstUtil_TopResults : NSObject < JavaLangIterable > {
- @public
-  jboolean isComplete_;
-  id<JavaUtilList> topN_;
-}
+@interface OrgApacheLuceneUtilFstUtil_TopResults : NSObject < JavaLangIterable >
 
 #pragma mark Public
 
-- (id<JavaUtilIterator>)iterator;
+- (instancetype)init;
 
 #pragma mark Package-Private
-
-- (instancetype)initWithBoolean:(jboolean)isComplete
-               withJavaUtilList:(id<JavaUtilList>)topN;
 
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilFstUtil_TopResults)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstUtil_TopResults, topN_, id<JavaUtilList>)
+FOUNDATION_EXPORT void OrgApacheLuceneUtilFstUtil_TopResults_init(OrgApacheLuceneUtilFstUtil_TopResults *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilFstUtil_TopResults_initWithBoolean_withJavaUtilList_(OrgApacheLuceneUtilFstUtil_TopResults *self, jboolean isComplete, id<JavaUtilList> topN);
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilFstUtil_TopResults *new_OrgApacheLuceneUtilFstUtil_TopResults_initWithBoolean_withJavaUtilList_(jboolean isComplete, id<JavaUtilList> topN) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstUtil_TopResults *new_OrgApacheLuceneUtilFstUtil_TopResults_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstUtil_TopResults)
 

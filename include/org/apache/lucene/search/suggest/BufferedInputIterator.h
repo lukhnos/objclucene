@@ -20,49 +20,19 @@
 #define OrgApacheLuceneSearchSuggestInputIterator_INCLUDE 1
 #include "org/apache/lucene/search/suggest/InputIterator.h"
 
-@class IOSLongArray;
-@class OrgApacheLuceneUtilBytesRef;
-@class OrgApacheLuceneUtilBytesRefArray;
-@protocol JavaUtilList;
-@protocol JavaUtilSet;
-
-@interface OrgApacheLuceneSearchSuggestBufferedInputIterator : NSObject < OrgApacheLuceneSearchSuggestInputIterator > {
- @public
-  OrgApacheLuceneUtilBytesRefArray *entries_;
-  OrgApacheLuceneUtilBytesRefArray *payloads_;
-  id<JavaUtilList> contextSets_;
-  jint curPos_;
-  IOSLongArray *freqs_;
-}
+@interface OrgApacheLuceneSearchSuggestBufferedInputIterator : NSObject < OrgApacheLuceneSearchSuggestInputIterator >
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchSuggestInputIterator:(id<OrgApacheLuceneSearchSuggestInputIterator>)source;
-
-- (id<JavaUtilSet>)contexts;
-
-- (jboolean)hasContexts;
-
-- (jboolean)hasPayloads;
-
-- (OrgApacheLuceneUtilBytesRef *)next;
-
-- (OrgApacheLuceneUtilBytesRef *)payload;
-
-- (jlong)weight;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestBufferedInputIterator)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestBufferedInputIterator, entries_, OrgApacheLuceneUtilBytesRefArray *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestBufferedInputIterator, payloads_, OrgApacheLuceneUtilBytesRefArray *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestBufferedInputIterator, contextSets_, id<JavaUtilList>)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestBufferedInputIterator, freqs_, IOSLongArray *)
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestBufferedInputIterator_init(OrgApacheLuceneSearchSuggestBufferedInputIterator *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestBufferedInputIterator_initWithOrgApacheLuceneSearchSuggestInputIterator_(OrgApacheLuceneSearchSuggestBufferedInputIterator *self, id<OrgApacheLuceneSearchSuggestInputIterator> source);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestBufferedInputIterator *new_OrgApacheLuceneSearchSuggestBufferedInputIterator_initWithOrgApacheLuceneSearchSuggestInputIterator_(id<OrgApacheLuceneSearchSuggestInputIterator> source) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestBufferedInputIterator *new_OrgApacheLuceneSearchSuggestBufferedInputIterator_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestBufferedInputIterator)
 

@@ -20,45 +20,19 @@
 #define OrgApacheLuceneSearchScorer_INCLUDE 1
 #include "org/apache/lucene/search/Scorer.h"
 
-@class IOSObjectArray;
-@class OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer;
-@class OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight;
-@protocol JavaUtilMap;
+@interface OrgApacheLuceneSearchTermAutomatonScorer : OrgApacheLuceneSearchScorer
 
-@interface OrgApacheLuceneSearchTermAutomatonScorer : OrgApacheLuceneSearchScorer {
- @public
-  jint posShift_;
-}
+#pragma mark Package-Private
 
-#pragma mark Public
-
-- (instancetype)initWithOrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight:(OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight *)weight
-                     withOrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorerArray:(IOSObjectArray *)subs
-                                                                            withInt:(jint)anyTermID
-                                                                    withJavaUtilMap:(id<JavaUtilMap>)idToTerm
-                          withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer:(OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *)docScorer;
-
-- (jint)advanceWithInt:(jint)target;
-
-- (jlong)cost;
-
-- (jint)docID;
-
-- (jint)freq;
-
-- (jint)nextDoc;
-
-- (jfloat)score;
-
-- (NSString *)description;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchTermAutomatonScorer)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchTermAutomatonScorer_initWithOrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight_withOrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorerArray_withInt_withJavaUtilMap_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_(OrgApacheLuceneSearchTermAutomatonScorer *self, OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight *weight, IOSObjectArray *subs, jint anyTermID, id<JavaUtilMap> idToTerm, OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchTermAutomatonScorer_init(OrgApacheLuceneSearchTermAutomatonScorer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchTermAutomatonScorer *new_OrgApacheLuceneSearchTermAutomatonScorer_initWithOrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight_withOrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorerArray_withInt_withJavaUtilMap_withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_(OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight *weight, IOSObjectArray *subs, jint anyTermID, id<JavaUtilMap> idToTerm, OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchTermAutomatonScorer *new_OrgApacheLuceneSearchTermAutomatonScorer_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTermAutomatonScorer)
 
@@ -71,22 +45,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTermAutomatonScorer)
 #define OrgApacheLuceneUtilAutomatonRunAutomaton_INCLUDE 1
 #include "org/apache/lucene/util/automaton/RunAutomaton.h"
 
-@class OrgApacheLuceneUtilAutomatonAutomaton;
-
 @interface OrgApacheLuceneSearchTermAutomatonScorer_TermRunAutomaton : OrgApacheLuceneUtilAutomatonRunAutomaton
 
-#pragma mark Public
+#pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a
-                                                      withInt:(jint)termCount;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchTermAutomatonScorer_TermRunAutomaton)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchTermAutomatonScorer_TermRunAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(OrgApacheLuceneSearchTermAutomatonScorer_TermRunAutomaton *self, OrgApacheLuceneUtilAutomatonAutomaton *a, jint termCount);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchTermAutomatonScorer_TermRunAutomaton_init(OrgApacheLuceneSearchTermAutomatonScorer_TermRunAutomaton *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchTermAutomatonScorer_TermRunAutomaton *new_OrgApacheLuceneSearchTermAutomatonScorer_TermRunAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(OrgApacheLuceneUtilAutomatonAutomaton *a, jint termCount) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchTermAutomatonScorer_TermRunAutomaton *new_OrgApacheLuceneSearchTermAutomatonScorer_TermRunAutomaton_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTermAutomatonScorer_TermRunAutomaton)
 

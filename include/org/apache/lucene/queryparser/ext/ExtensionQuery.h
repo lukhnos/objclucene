@@ -16,29 +16,19 @@
 #if !defined (_OrgApacheLuceneQueryparserExtExtensionQuery_) && (OrgApacheLuceneQueryparserExtExtensionQuery_INCLUDE_ALL || OrgApacheLuceneQueryparserExtExtensionQuery_INCLUDE)
 #define _OrgApacheLuceneQueryparserExtExtensionQuery_
 
-@class OrgApacheLuceneQueryparserClassicQueryParser;
-
 @interface OrgApacheLuceneQueryparserExtExtensionQuery : NSObject
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneQueryparserClassicQueryParser:(OrgApacheLuceneQueryparserClassicQueryParser *)topLevelParser
-                                                        withNSString:(NSString *)field
-                                                        withNSString:(NSString *)rawQueryString;
-
-- (NSString *)getField;
-
-- (NSString *)getRawQueryString;
-
-- (OrgApacheLuceneQueryparserClassicQueryParser *)getTopLevelParser;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserExtExtensionQuery)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserExtExtensionQuery_initWithOrgApacheLuceneQueryparserClassicQueryParser_withNSString_withNSString_(OrgApacheLuceneQueryparserExtExtensionQuery *self, OrgApacheLuceneQueryparserClassicQueryParser *topLevelParser, NSString *field, NSString *rawQueryString);
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserExtExtensionQuery_init(OrgApacheLuceneQueryparserExtExtensionQuery *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserExtExtensionQuery *new_OrgApacheLuceneQueryparserExtExtensionQuery_initWithOrgApacheLuceneQueryparserClassicQueryParser_withNSString_withNSString_(OrgApacheLuceneQueryparserClassicQueryParser *topLevelParser, NSString *field, NSString *rawQueryString) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserExtExtensionQuery *new_OrgApacheLuceneQueryparserExtExtensionQuery_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserExtExtensionQuery)
 

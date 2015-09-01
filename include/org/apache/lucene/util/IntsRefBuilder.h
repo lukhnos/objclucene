@@ -17,7 +17,6 @@
 #define _OrgApacheLuceneUtilIntsRefBuilder_
 
 @class IOSIntArray;
-@class OrgApacheLuceneUtilBytesRef;
 @class OrgApacheLuceneUtilIntsRef;
 
 @interface OrgApacheLuceneUtilIntsRefBuilder : NSObject
@@ -36,8 +35,6 @@
 
 - (void)copyIntsWithOrgApacheLuceneUtilIntsRef:(OrgApacheLuceneUtilIntsRef *)ints OBJC_METHOD_FAMILY_NONE;
 
-- (void)copyUTF8BytesWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)bytes OBJC_METHOD_FAMILY_NONE;
-
 - (jboolean)isEqual:(id)obj;
 
 - (OrgApacheLuceneUtilIntsRef *)get;
@@ -48,16 +45,12 @@
 
 - (jint)intAtWithInt:(jint)offset;
 
-- (IOSIntArray *)ints;
-
 - (jint)length;
 
 - (void)setIntAtWithInt:(jint)offset
                 withInt:(jint)b;
 
 - (void)setLengthWithInt:(jint)length;
-
-- (OrgApacheLuceneUtilIntsRef *)toIntsRef;
 
 @end
 

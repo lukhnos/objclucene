@@ -38,8 +38,6 @@
 
 - (void)checkIntegrity;
 
-- (void)close;
-
 - (void)decodeTermWithLongArray:(IOSLongArray *)longs
 withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
 withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo

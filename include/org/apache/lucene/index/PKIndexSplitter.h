@@ -16,81 +16,19 @@
 #if !defined (_OrgApacheLuceneIndexPKIndexSplitter_) && (OrgApacheLuceneIndexPKIndexSplitter_INCLUDE_ALL || OrgApacheLuceneIndexPKIndexSplitter_INCLUDE)
 #define _OrgApacheLuceneIndexPKIndexSplitter_
 
-@class OrgApacheLuceneIndexIndexWriterConfig;
-@class OrgApacheLuceneIndexTerm;
-@class OrgApacheLuceneSearchFilter;
-@class OrgApacheLuceneSearchQuery;
-@class OrgApacheLuceneStoreDirectory;
-
 @interface OrgApacheLuceneIndexPKIndexSplitter : NSObject
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)input
-                    withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir1
-                    withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir2
-                      withOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)docsInFirstIndex;
-
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)input
-                    withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir1
-                    withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir2
-                      withOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)docsInFirstIndex
-            withOrgApacheLuceneIndexIndexWriterConfig:(OrgApacheLuceneIndexIndexWriterConfig *)config1
-            withOrgApacheLuceneIndexIndexWriterConfig:(OrgApacheLuceneIndexIndexWriterConfig *)config2;
-
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)input
-                    withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir1
-                    withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir2
-                       withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)docsInFirstIndex;
-
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)input
-                    withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir1
-                    withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir2
-                       withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)docsInFirstIndex
-            withOrgApacheLuceneIndexIndexWriterConfig:(OrgApacheLuceneIndexIndexWriterConfig *)config1
-            withOrgApacheLuceneIndexIndexWriterConfig:(OrgApacheLuceneIndexIndexWriterConfig *)config2;
-
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)input
-                    withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir1
-                    withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir2
-                         withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)midTerm;
-
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)input
-                    withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir1
-                    withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir2
-                         withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)midTerm
-            withOrgApacheLuceneIndexIndexWriterConfig:(OrgApacheLuceneIndexIndexWriterConfig *)config1
-            withOrgApacheLuceneIndexIndexWriterConfig:(OrgApacheLuceneIndexIndexWriterConfig *)config2;
-
-- (void)split;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexPKIndexSplitter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexPKIndexSplitter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneIndexPKIndexSplitter *self, OrgApacheLuceneStoreDirectory *input, OrgApacheLuceneStoreDirectory *dir1, OrgApacheLuceneStoreDirectory *dir2, OrgApacheLuceneSearchQuery *docsInFirstIndex);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexPKIndexSplitter_init(OrgApacheLuceneIndexPKIndexSplitter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexPKIndexSplitter *new_OrgApacheLuceneIndexPKIndexSplitter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneStoreDirectory *input, OrgApacheLuceneStoreDirectory *dir1, OrgApacheLuceneStoreDirectory *dir2, OrgApacheLuceneSearchQuery *docsInFirstIndex) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneIndexPKIndexSplitter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneSearchFilter_(OrgApacheLuceneIndexPKIndexSplitter *self, OrgApacheLuceneStoreDirectory *input, OrgApacheLuceneStoreDirectory *dir1, OrgApacheLuceneStoreDirectory *dir2, OrgApacheLuceneSearchFilter *docsInFirstIndex);
-
-FOUNDATION_EXPORT OrgApacheLuceneIndexPKIndexSplitter *new_OrgApacheLuceneIndexPKIndexSplitter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneSearchFilter_(OrgApacheLuceneStoreDirectory *input, OrgApacheLuceneStoreDirectory *dir1, OrgApacheLuceneStoreDirectory *dir2, OrgApacheLuceneSearchFilter *docsInFirstIndex) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneIndexPKIndexSplitter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexWriterConfig_withOrgApacheLuceneIndexIndexWriterConfig_(OrgApacheLuceneIndexPKIndexSplitter *self, OrgApacheLuceneStoreDirectory *input, OrgApacheLuceneStoreDirectory *dir1, OrgApacheLuceneStoreDirectory *dir2, OrgApacheLuceneSearchQuery *docsInFirstIndex, OrgApacheLuceneIndexIndexWriterConfig *config1, OrgApacheLuceneIndexIndexWriterConfig *config2);
-
-FOUNDATION_EXPORT OrgApacheLuceneIndexPKIndexSplitter *new_OrgApacheLuceneIndexPKIndexSplitter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexWriterConfig_withOrgApacheLuceneIndexIndexWriterConfig_(OrgApacheLuceneStoreDirectory *input, OrgApacheLuceneStoreDirectory *dir1, OrgApacheLuceneStoreDirectory *dir2, OrgApacheLuceneSearchQuery *docsInFirstIndex, OrgApacheLuceneIndexIndexWriterConfig *config1, OrgApacheLuceneIndexIndexWriterConfig *config2) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneIndexPKIndexSplitter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneSearchFilter_withOrgApacheLuceneIndexIndexWriterConfig_withOrgApacheLuceneIndexIndexWriterConfig_(OrgApacheLuceneIndexPKIndexSplitter *self, OrgApacheLuceneStoreDirectory *input, OrgApacheLuceneStoreDirectory *dir1, OrgApacheLuceneStoreDirectory *dir2, OrgApacheLuceneSearchFilter *docsInFirstIndex, OrgApacheLuceneIndexIndexWriterConfig *config1, OrgApacheLuceneIndexIndexWriterConfig *config2);
-
-FOUNDATION_EXPORT OrgApacheLuceneIndexPKIndexSplitter *new_OrgApacheLuceneIndexPKIndexSplitter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneSearchFilter_withOrgApacheLuceneIndexIndexWriterConfig_withOrgApacheLuceneIndexIndexWriterConfig_(OrgApacheLuceneStoreDirectory *input, OrgApacheLuceneStoreDirectory *dir1, OrgApacheLuceneStoreDirectory *dir2, OrgApacheLuceneSearchFilter *docsInFirstIndex, OrgApacheLuceneIndexIndexWriterConfig *config1, OrgApacheLuceneIndexIndexWriterConfig *config2) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneIndexPKIndexSplitter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexTerm_(OrgApacheLuceneIndexPKIndexSplitter *self, OrgApacheLuceneStoreDirectory *input, OrgApacheLuceneStoreDirectory *dir1, OrgApacheLuceneStoreDirectory *dir2, OrgApacheLuceneIndexTerm *midTerm);
-
-FOUNDATION_EXPORT OrgApacheLuceneIndexPKIndexSplitter *new_OrgApacheLuceneIndexPKIndexSplitter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexTerm_(OrgApacheLuceneStoreDirectory *input, OrgApacheLuceneStoreDirectory *dir1, OrgApacheLuceneStoreDirectory *dir2, OrgApacheLuceneIndexTerm *midTerm) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneIndexPKIndexSplitter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexTerm_withOrgApacheLuceneIndexIndexWriterConfig_withOrgApacheLuceneIndexIndexWriterConfig_(OrgApacheLuceneIndexPKIndexSplitter *self, OrgApacheLuceneStoreDirectory *input, OrgApacheLuceneStoreDirectory *dir1, OrgApacheLuceneStoreDirectory *dir2, OrgApacheLuceneIndexTerm *midTerm, OrgApacheLuceneIndexIndexWriterConfig *config1, OrgApacheLuceneIndexIndexWriterConfig *config2);
-
-FOUNDATION_EXPORT OrgApacheLuceneIndexPKIndexSplitter *new_OrgApacheLuceneIndexPKIndexSplitter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexTerm_withOrgApacheLuceneIndexIndexWriterConfig_withOrgApacheLuceneIndexIndexWriterConfig_(OrgApacheLuceneStoreDirectory *input, OrgApacheLuceneStoreDirectory *dir1, OrgApacheLuceneStoreDirectory *dir2, OrgApacheLuceneIndexTerm *midTerm, OrgApacheLuceneIndexIndexWriterConfig *config1, OrgApacheLuceneIndexIndexWriterConfig *config2) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexPKIndexSplitter *new_OrgApacheLuceneIndexPKIndexSplitter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexPKIndexSplitter)
 

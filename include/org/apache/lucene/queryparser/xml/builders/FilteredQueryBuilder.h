@@ -20,26 +20,19 @@
 #define OrgApacheLuceneQueryparserXmlQueryBuilder_INCLUDE 1
 #include "org/apache/lucene/queryparser/xml/QueryBuilder.h"
 
-@class OrgApacheLuceneSearchQuery;
-@protocol OrgApacheLuceneQueryparserXmlFilterBuilder;
-@protocol OrgW3cDomElement;
-
 @interface OrgApacheLuceneQueryparserXmlBuildersFilteredQueryBuilder : NSObject < OrgApacheLuceneQueryparserXmlQueryBuilder >
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneQueryparserXmlFilterBuilder:(id<OrgApacheLuceneQueryparserXmlFilterBuilder>)filterFactory
-                     withOrgApacheLuceneQueryparserXmlQueryBuilder:(id<OrgApacheLuceneQueryparserXmlQueryBuilder>)queryFactory;
-
-- (OrgApacheLuceneSearchQuery *)getQueryWithOrgW3cDomElement:(id<OrgW3cDomElement>)e;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserXmlBuildersFilteredQueryBuilder)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlBuildersFilteredQueryBuilder_initWithOrgApacheLuceneQueryparserXmlFilterBuilder_withOrgApacheLuceneQueryparserXmlQueryBuilder_(OrgApacheLuceneQueryparserXmlBuildersFilteredQueryBuilder *self, id<OrgApacheLuceneQueryparserXmlFilterBuilder> filterFactory, id<OrgApacheLuceneQueryparserXmlQueryBuilder> queryFactory);
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlBuildersFilteredQueryBuilder_init(OrgApacheLuceneQueryparserXmlBuildersFilteredQueryBuilder *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersFilteredQueryBuilder *new_OrgApacheLuceneQueryparserXmlBuildersFilteredQueryBuilder_initWithOrgApacheLuceneQueryparserXmlFilterBuilder_withOrgApacheLuceneQueryparserXmlQueryBuilder_(id<OrgApacheLuceneQueryparserXmlFilterBuilder> filterFactory, id<OrgApacheLuceneQueryparserXmlQueryBuilder> queryFactory) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersFilteredQueryBuilder *new_OrgApacheLuceneQueryparserXmlBuildersFilteredQueryBuilder_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlBuildersFilteredQueryBuilder)
 

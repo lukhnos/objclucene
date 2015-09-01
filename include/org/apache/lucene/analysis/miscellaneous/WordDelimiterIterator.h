@@ -16,60 +16,23 @@
 #if !defined (_OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_) && (OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_INCLUDE_ALL || OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_INCLUDE)
 #define _OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_
 
-@class IOSByteArray;
-@class IOSCharArray;
-
 #define OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_DONE -1
 
-@interface OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator : NSObject {
- @public
-  IOSCharArray *text_;
-  jint length_;
-  jint startBounds_;
-  jint endBounds_;
-  jint current_;
-  jint end_;
-  jboolean splitOnCaseChange_;
-  jboolean splitOnNumerics_;
-  jboolean stemEnglishPossessive_;
-}
+@interface OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator : NSObject
 
 #pragma mark Public
 
-+ (jbyte)getTypeWithInt:(jint)ch;
-
-#pragma mark Package-Private
-
-- (instancetype)initWithByteArray:(IOSByteArray *)charTypeTable
-                      withBoolean:(jboolean)splitOnCaseChange
-                      withBoolean:(jboolean)splitOnNumerics
-                      withBoolean:(jboolean)stemEnglishPossessive;
-
-- (jboolean)isSingleWord;
-
-- (jint)next;
-
-- (void)setTextWithCharArray:(IOSCharArray *)text
-                     withInt:(jint)length;
-
-- (jint)type;
+- (instancetype)init;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator, text_, IOSCharArray *)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator)
 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator, DONE, jint)
 
-FOUNDATION_EXPORT IOSByteArray *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_DEFAULT_WORD_DELIM_TABLE_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator, DEFAULT_WORD_DELIM_TABLE_, IOSByteArray *)
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_init(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_initWithByteArray_withBoolean_withBoolean_withBoolean_(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator *self, IOSByteArray *charTypeTable, jboolean splitOnCaseChange, jboolean splitOnNumerics, jboolean stemEnglishPossessive);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator *new_OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_initWithByteArray_withBoolean_withBoolean_withBoolean_(IOSByteArray *charTypeTable, jboolean splitOnCaseChange, jboolean splitOnNumerics, jboolean stemEnglishPossessive) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT jbyte OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_getTypeWithInt_(jint ch);
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator *new_OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator)
 

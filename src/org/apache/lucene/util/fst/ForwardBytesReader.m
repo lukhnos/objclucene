@@ -49,10 +49,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstForwardBytesReader, bytes_, IOSByteArr
   self->pos_ = (jint) pos;
 }
 
-- (jboolean)reversed {
-  return NO;
-}
-
 - (void)dealloc {
   RELEASE_(bytes_);
   [super dealloc];
@@ -66,13 +62,12 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstForwardBytesReader, bytes_, IOSByteArr
     { "skipBytesWithLong:", "skipBytes", "V", 0x1, NULL, NULL },
     { "getPosition", NULL, "J", 0x1, NULL, NULL },
     { "setPositionWithLong:", "setPosition", "V", 0x1, NULL, NULL },
-    { "reversed", NULL, "Z", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "bytes_", NULL, 0x12, "[B", NULL, NULL, .constantValue.asLong = 0 },
     { "pos_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstForwardBytesReader = { 2, "ForwardBytesReader", "org.apache.lucene.util.fst", NULL, 0x10, 7, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstForwardBytesReader = { 2, "ForwardBytesReader", "org.apache.lucene.util.fst", NULL, 0x10, 6, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilFstForwardBytesReader;
 }
 

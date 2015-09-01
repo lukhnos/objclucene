@@ -18,7 +18,6 @@
 #include "org/apache/lucene/search/ConstantScoreScorer.h"
 #include "org/apache/lucene/search/DocIdSet.h"
 #include "org/apache/lucene/search/DocIdSetIterator.h"
-#include "org/apache/lucene/search/Explanation.h"
 #include "org/apache/lucene/search/Filter.h"
 #include "org/apache/lucene/search/FilteredQuery.h"
 #include "org/apache/lucene/search/IndexSearcher.h"
@@ -85,9 +84,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFilteredQuery_RandomAccessFilter
 
 - (void)normalizeWithFloat:(jfloat)norm
                  withFloat:(jfloat)topLevelBoost;
-
-- (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-                                                                               withInt:(jint)doc;
 
 - (OrgApacheLuceneSearchScorer *)scorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
 
@@ -196,14 +192,6 @@ withOrgApacheLuceneSearchFilteredQuery_FilterStrategy:(OrgApacheLuceneSearchFilt
   return query_;
 }
 
-- (OrgApacheLuceneSearchFilter *)getFilter {
-  return filter_;
-}
-
-- (OrgApacheLuceneSearchFilteredQuery_FilterStrategy *)getFilterStrategy {
-  return self->strategy_;
-}
-
 - (NSString *)toStringWithNSString:(NSString *)s {
   JavaLangStringBuilder *buffer = [new_JavaLangStringBuilder_init() autorelease];
   [buffer appendWithNSString:@"filtered("];
@@ -257,8 +245,6 @@ withOrgApacheLuceneSearchFilteredQuery_FilterStrategy:(OrgApacheLuceneSearchFilt
     { "initWithOrgApacheLuceneSearchQuery:withOrgApacheLuceneSearchFilter:withOrgApacheLuceneSearchFilteredQuery_FilterStrategy:", "FilteredQuery", NULL, 0x1, NULL, NULL },
     { "rewriteWithOrgApacheLuceneIndexIndexReader:", "rewrite", "Lorg.apache.lucene.search.Query;", 0x1, "Ljava.io.IOException;", NULL },
     { "getQuery", NULL, "Lorg.apache.lucene.search.Query;", 0x11, NULL, NULL },
-    { "getFilter", NULL, "Lorg.apache.lucene.search.Filter;", 0x11, NULL, NULL },
-    { "getFilterStrategy", NULL, "Lorg.apache.lucene.search.FilteredQuery$FilterStrategy;", 0x1, NULL, NULL },
     { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
     { "hash", "hashCode", "I", 0x1, NULL, NULL },
@@ -273,7 +259,7 @@ withOrgApacheLuceneSearchFilteredQuery_FilterStrategy:(OrgApacheLuceneSearchFilt
     { "QUERY_FIRST_FILTER_STRATEGY_", NULL, 0x19, "Lorg.apache.lucene.search.FilteredQuery$FilterStrategy;", &OrgApacheLuceneSearchFilteredQuery_QUERY_FIRST_FILTER_STRATEGY_, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.search.FilteredQuery$FilterStrategy;", "Lorg.apache.lucene.search.FilteredQuery$RandomAccessFilterStrategy;", "Lorg.apache.lucene.search.FilteredQuery$RandomAccessFilterWrapperQuery;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchFilteredQuery = { 2, "FilteredQuery", "org.apache.lucene.search", NULL, 0x1, 9, methods, 7, fields, 0, NULL, 3, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchFilteredQuery = { 2, "FilteredQuery", "org.apache.lucene.search", NULL, 0x1, 7, methods, 7, fields, 0, NULL, 3, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneSearchFilteredQuery;
 }
 
@@ -459,31 +445,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFilteredQuery_RandomAccess
                  withFloat:(jfloat)topLevelBoost {
 }
 
-- (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-                                                                               withInt:(jint)doc {
-  OrgApacheLuceneSearchScorer *s = [self scorerWithOrgApacheLuceneIndexLeafReaderContext:context];
-  jboolean match;
-  if (s == nil) {
-    match = NO;
-  }
-  else {
-    OrgApacheLuceneSearchTwoPhaseIterator *twoPhase = [s asTwoPhaseIterator];
-    if (twoPhase == nil) {
-      match = ([s advanceWithInt:doc] == doc);
-    }
-    else {
-      match = ([((OrgApacheLuceneSearchDocIdSetIterator *) nil_chk([twoPhase approximation])) advanceWithInt:doc] == doc && [twoPhase matches]);
-    }
-  }
-  if (match) {
-    JreAssert(([((OrgApacheLuceneSearchScorer *) nil_chk(s)) score] == 0.0f), (@"org/apache/lucene/search/FilteredQuery.java:295 condition failed: assert s.score() == 0f;"));
-    return OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_(0.0f, JreStrcat("$I", @"Match on id ", doc), [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchExplanation_class_()]);
-  }
-  else {
-    return OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_(0.0f, JreStrcat("$I", @"No match on id ", doc), [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchExplanation_class_()]);
-  }
-}
-
 - (OrgApacheLuceneSearchScorer *)scorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
   OrgApacheLuceneSearchDocIdSet *set = [((OrgApacheLuceneSearchFilter *) nil_chk(this$0_->filter_)) getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:context withOrgApacheLuceneUtilBits:nil];
   if (set == nil) {
@@ -530,7 +491,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFilteredQuery_RandomAccess
     { "extractTermsWithJavaUtilSet:", "extractTerms", "V", 0x1, NULL, NULL },
     { "getValueForNormalization", NULL, "F", 0x1, "Ljava.io.IOException;", NULL },
     { "normalizeWithFloat:withFloat:", "normalize", "V", 0x1, NULL, NULL },
-    { "explainWithOrgApacheLuceneIndexLeafReaderContext:withInt:", "explain", "Lorg.apache.lucene.search.Explanation;", 0x1, "Ljava.io.IOException;", NULL },
     { "scorerWithOrgApacheLuceneIndexLeafReaderContext:", "scorer", "Lorg.apache.lucene.search.Scorer;", 0x1, "Ljava.io.IOException;", NULL },
     { "initWithOrgApacheLuceneSearchFilteredQuery_RandomAccessFilterWrapperQuery:withOrgApacheLuceneSearchQuery:", "", NULL, 0x0, NULL, NULL },
   };
@@ -538,7 +498,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFilteredQuery_RandomAccess
     { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.FilteredQuery$RandomAccessFilterWrapperQuery;", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchFilteredQuery_RandomAccessFilterWrapperQuery", "createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchFilteredQuery_RandomAccessFilterWrapperQuery_$1 = { 2, "", "org.apache.lucene.search", "FilteredQuery$RandomAccessFilterWrapperQuery", 0x8008, 6, methods, 1, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchFilteredQuery_RandomAccessFilterWrapperQuery_$1 = { 2, "", "org.apache.lucene.search", "FilteredQuery$RandomAccessFilterWrapperQuery", 0x8008, 5, methods, 1, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
   return &_OrgApacheLuceneSearchFilteredQuery_RandomAccessFilterWrapperQuery_$1;
 }
 

@@ -81,10 +81,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchEarlyTerminatingSortingCollector
   }
 }
 
-- (jboolean)terminatedEarly {
-  return [((JavaUtilConcurrentAtomicAtomicBoolean *) nil_chk(terminatedEarly_)) get];
-}
-
 - (void)dealloc {
   RELEASE_(sort_);
   RELEASE_(mergePolicySort_);
@@ -97,7 +93,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchEarlyTerminatingSortingCollector
     { "canEarlyTerminateWithOrgApacheLuceneSearchSort:withOrgApacheLuceneSearchSort:", "canEarlyTerminate", "Z", 0x9, NULL, NULL },
     { "initWithOrgApacheLuceneSearchCollector:withOrgApacheLuceneSearchSort:withInt:withOrgApacheLuceneSearchSort:", "EarlyTerminatingSortingCollector", NULL, 0x1, NULL, NULL },
     { "getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:", "getLeafCollector", "Lorg.apache.lucene.search.LeafCollector;", 0x1, "Ljava.io.IOException;", NULL },
-    { "terminatedEarly", NULL, "Z", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "sort_", NULL, 0x14, "Lorg.apache.lucene.search.Sort;", NULL, NULL, .constantValue.asLong = 0 },
@@ -105,7 +100,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchEarlyTerminatingSortingCollector
     { "mergePolicySort_", NULL, 0x12, "Lorg.apache.lucene.search.Sort;", NULL, NULL, .constantValue.asLong = 0 },
     { "terminatedEarly_", NULL, 0x12, "Ljava.util.concurrent.atomic.AtomicBoolean;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchEarlyTerminatingSortingCollector = { 2, "EarlyTerminatingSortingCollector", "org.apache.lucene.search", NULL, 0x1, 4, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchEarlyTerminatingSortingCollector = { 2, "EarlyTerminatingSortingCollector", "org.apache.lucene.search", NULL, 0x1, 3, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchEarlyTerminatingSortingCollector;
 }
 

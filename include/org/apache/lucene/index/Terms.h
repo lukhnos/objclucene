@@ -27,12 +27,6 @@
 
 - (jint)getDocCount;
 
-- (OrgApacheLuceneUtilBytesRef *)getMax;
-
-- (OrgApacheLuceneUtilBytesRef *)getMin;
-
-- (id)getStats;
-
 - (jlong)getSumDocFreq;
 
 - (jlong)getSumTotalTermFreq;

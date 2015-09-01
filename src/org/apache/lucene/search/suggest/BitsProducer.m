@@ -3,12 +3,10 @@
 //  source: ./suggest/src/java/org/apache/lucene/search/suggest/BitsProducer.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
-#include "org/apache/lucene/index/LeafReaderContext.h"
 #include "org/apache/lucene/search/suggest/BitsProducer.h"
-#include "org/apache/lucene/util/Bits.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneSearchSuggestBitsProducer
 
@@ -17,18 +15,11 @@
   return self;
 }
 
-- (id<OrgApacheLuceneUtilBits>)getBitsWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
-  // can't call an abstract method
-  [self doesNotRecognizeSelector:_cmd];
-  return 0;
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", "BitsProducer", NULL, 0x4, NULL, NULL },
-    { "getBitsWithOrgApacheLuceneIndexLeafReaderContext:", "getBits", "Lorg.apache.lucene.util.Bits;", 0x401, "Ljava.io.IOException;", NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestBitsProducer = { 2, "BitsProducer", "org.apache.lucene.search.suggest", NULL, 0x401, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestBitsProducer = { 2, "BitsProducer", "org.apache.lucene.search.suggest", NULL, 0x401, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchSuggestBitsProducer;
 }
 

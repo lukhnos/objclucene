@@ -11,7 +11,6 @@
 #include "java/lang/Exception.h"
 #include "java/lang/Float.h"
 #include "java/lang/IllegalArgumentException.h"
-#include "java/lang/Integer.h"
 #include "java/lang/InterruptedException.h"
 #include "java/lang/Math.h"
 #include "java/lang/RuntimeException.h"
@@ -21,20 +20,16 @@
 #include "java/util/Collection.h"
 #include "java/util/Collections.h"
 #include "java/util/List.h"
-#include "java/util/Set.h"
 #include "java/util/concurrent/Callable.h"
 #include "java/util/concurrent/ExecutionException.h"
 #include "java/util/concurrent/ExecutorService.h"
 #include "java/util/concurrent/Future.h"
-#include "org/apache/lucene/document/Document.h"
 #include "org/apache/lucene/index/FieldInvertState.h"
 #include "org/apache/lucene/index/IndexReader.h"
 #include "org/apache/lucene/index/IndexReaderContext.h"
 #include "org/apache/lucene/index/LeafReader.h"
 #include "org/apache/lucene/index/LeafReaderContext.h"
 #include "org/apache/lucene/index/MultiFields.h"
-#include "org/apache/lucene/index/ReaderUtil.h"
-#include "org/apache/lucene/index/StoredFieldVisitor.h"
 #include "org/apache/lucene/index/Term.h"
 #include "org/apache/lucene/index/TermContext.h"
 #include "org/apache/lucene/index/Terms.h"
@@ -43,7 +38,6 @@
 #include "org/apache/lucene/search/CollectionTerminatedException.h"
 #include "org/apache/lucene/search/Collector.h"
 #include "org/apache/lucene/search/CollectorManager.h"
-#include "org/apache/lucene/search/Explanation.h"
 #include "org/apache/lucene/search/FieldDoc.h"
 #include "org/apache/lucene/search/Filter.h"
 #include "org/apache/lucene/search/FilteredQuery.h"
@@ -59,7 +53,6 @@
 #include "org/apache/lucene/search/TopFieldCollector.h"
 #include "org/apache/lucene/search/TopFieldDocs.h"
 #include "org/apache/lucene/search/TopScoreDocCollector.h"
-#include "org/apache/lucene/search/TotalHitCountCollector.h"
 #include "org/apache/lucene/search/UsageTrackingQueryCachingPolicy.h"
 #include "org/apache/lucene/search/Weight.h"
 #include "org/apache/lucene/search/similarities/DefaultSimilarity.h"
@@ -67,7 +60,8 @@
 #include "org/apache/lucene/util/Bits.h"
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/ThreadInterruptedException.h"
-#include "org/lukhnos/portmobile/util/Objects.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @interface OrgApacheLuceneSearchIndexSearcher () {
  @public
@@ -160,11 +154,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchIndexSearcher_$1_$1)
 
 - (jfloat)computeSlopFactorWithInt:(jint)distance;
 
-- (jfloat)computePayloadFactorWithInt:(jint)doc
-                              withInt:(jint)start
-                              withInt:(jint)end
-      withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload;
-
 - (instancetype)init;
 
 @end
@@ -176,24 +165,6 @@ __attribute__((unused)) static void OrgApacheLuceneSearchIndexSearcher_$1_$2_ini
 __attribute__((unused)) static OrgApacheLuceneSearchIndexSearcher_$1_$2 *new_OrgApacheLuceneSearchIndexSearcher_$1_$2_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchIndexSearcher_$1_$2)
-
-@interface OrgApacheLuceneSearchIndexSearcher_$2 : NSObject < OrgApacheLuceneSearchCollectorManager >
-
-- (OrgApacheLuceneSearchTotalHitCountCollector *)newCollector OBJC_METHOD_FAMILY_NONE;
-
-- (JavaLangInteger *)reduceWithJavaUtilCollection:(id<JavaUtilCollection>)collectors;
-
-- (instancetype)init;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchIndexSearcher_$2)
-
-__attribute__((unused)) static void OrgApacheLuceneSearchIndexSearcher_$2_init(OrgApacheLuceneSearchIndexSearcher_$2 *self);
-
-__attribute__((unused)) static OrgApacheLuceneSearchIndexSearcher_$2 *new_OrgApacheLuceneSearchIndexSearcher_$2_init() NS_RETURNS_RETAINED;
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchIndexSearcher_$2)
 
 @interface OrgApacheLuceneSearchIndexSearcher_$3 : NSObject < OrgApacheLuceneSearchCollectorManager > {
  @public
@@ -290,22 +261,6 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchIndexSearcher)
   return OrgApacheLuceneSearchIndexSearcher_getDefaultSimilarity();
 }
 
-+ (id<OrgApacheLuceneSearchQueryCache>)getDefaultQueryCache {
-  return OrgApacheLuceneSearchIndexSearcher_getDefaultQueryCache();
-}
-
-+ (void)setDefaultQueryCacheWithOrgApacheLuceneSearchQueryCache:(id<OrgApacheLuceneSearchQueryCache>)defaultQueryCache {
-  OrgApacheLuceneSearchIndexSearcher_setDefaultQueryCacheWithOrgApacheLuceneSearchQueryCache_(defaultQueryCache);
-}
-
-+ (id<OrgApacheLuceneSearchQueryCachingPolicy>)getDefaultQueryCachingPolicy {
-  return OrgApacheLuceneSearchIndexSearcher_getDefaultQueryCachingPolicy();
-}
-
-+ (void)setDefaultQueryCachingPolicyWithOrgApacheLuceneSearchQueryCachingPolicy:(id<OrgApacheLuceneSearchQueryCachingPolicy>)defaultQueryCachingPolicy {
-  OrgApacheLuceneSearchIndexSearcher_setDefaultQueryCachingPolicyWithOrgApacheLuceneSearchQueryCachingPolicy_(defaultQueryCachingPolicy);
-}
-
 - (instancetype)initWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)r {
   OrgApacheLuceneSearchIndexSearcher_initWithOrgApacheLuceneIndexIndexReader_(self, r);
   return self;
@@ -332,10 +287,6 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchIndexSearcher)
   JreStrongAssign(&self->queryCache_, queryCache);
 }
 
-- (void)setQueryCachingPolicyWithOrgApacheLuceneSearchQueryCachingPolicy:(id<OrgApacheLuceneSearchQueryCachingPolicy>)queryCachingPolicy {
-  JreStrongAssign(&self->queryCachingPolicy_, OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_(queryCachingPolicy));
-}
-
 - (IOSObjectArray *)slicesWithJavaUtilList:(id<JavaUtilList>)leaves {
   IOSObjectArray *slices = [IOSObjectArray arrayWithLength:[((id<JavaUtilList>) nil_chk(leaves)) size] type:OrgApacheLuceneSearchIndexSearcher_LeafSlice_class_()];
   for (jint i = 0; i < slices->size_; i++) {
@@ -346,20 +297,6 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchIndexSearcher)
 
 - (OrgApacheLuceneIndexIndexReader *)getIndexReader {
   return reader_;
-}
-
-- (OrgApacheLuceneDocumentDocument *)docWithInt:(jint)docID {
-  return [((OrgApacheLuceneIndexIndexReader *) nil_chk(reader_)) documentWithInt:docID];
-}
-
-- (void)docWithInt:(jint)docID
-withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisitor *)fieldVisitor {
-  [((OrgApacheLuceneIndexIndexReader *) nil_chk(reader_)) documentWithInt:docID withOrgApacheLuceneIndexStoredFieldVisitor:fieldVisitor];
-}
-
-- (OrgApacheLuceneDocumentDocument *)docWithInt:(jint)docID
-                                withJavaUtilSet:(id<JavaUtilSet>)fieldsToLoad {
-  return [((OrgApacheLuceneIndexIndexReader *) nil_chk(reader_)) documentWithInt:docID withJavaUtilSet:fieldsToLoad];
 }
 
 - (void)setSimilarityWithOrgApacheLuceneSearchSimilaritiesSimilarity:(OrgApacheLuceneSearchSimilaritiesSimilarity *)similarity {
@@ -375,11 +312,6 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
   return (filter == nil) ? query : [new_OrgApacheLuceneSearchFilteredQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchFilter_(query, filter) autorelease];
 }
 
-- (jint)countWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query {
-  id<OrgApacheLuceneSearchCollectorManager> collectorManager = [new_OrgApacheLuceneSearchIndexSearcher_$2_init() autorelease];
-  return [((JavaLangInteger *) nil_chk([self searchWithOrgApacheLuceneSearchQuery:query withOrgApacheLuceneSearchCollectorManager:collectorManager])) intValue];
-}
-
 - (OrgApacheLuceneSearchTopDocs *)searchAfterWithOrgApacheLuceneSearchScoreDoc:(OrgApacheLuceneSearchScoreDoc *)after
                                                 withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
                                                                        withInt:(jint)numHits {
@@ -393,28 +325,9 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
   return [self searchWithOrgApacheLuceneSearchQuery:query withOrgApacheLuceneSearchCollectorManager:manager];
 }
 
-- (OrgApacheLuceneSearchTopDocs *)searchAfterWithOrgApacheLuceneSearchScoreDoc:(OrgApacheLuceneSearchScoreDoc *)after
-                                                withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-                                               withOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter
-                                                                       withInt:(jint)n {
-  return [self searchAfterWithOrgApacheLuceneSearchScoreDoc:after withOrgApacheLuceneSearchQuery:[self wrapFilterWithOrgApacheLuceneSearchQuery:query withOrgApacheLuceneSearchFilter:filter] withInt:n];
-}
-
 - (OrgApacheLuceneSearchTopDocs *)searchWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
                                                                withInt:(jint)n {
   return [self searchAfterWithOrgApacheLuceneSearchScoreDoc:nil withOrgApacheLuceneSearchQuery:query withInt:n];
-}
-
-- (OrgApacheLuceneSearchTopDocs *)searchWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-                                       withOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter
-                                                               withInt:(jint)n {
-  return [self searchWithOrgApacheLuceneSearchQuery:[self wrapFilterWithOrgApacheLuceneSearchQuery:query withOrgApacheLuceneSearchFilter:filter] withInt:n];
-}
-
-- (void)searchWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-             withOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter
-          withOrgApacheLuceneSearchCollector:(id<OrgApacheLuceneSearchCollector>)results {
-  [self searchWithOrgApacheLuceneSearchQuery:[self wrapFilterWithOrgApacheLuceneSearchQuery:query withOrgApacheLuceneSearchFilter:filter] withOrgApacheLuceneSearchCollector:results];
 }
 
 - (void)searchWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
@@ -425,33 +338,10 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 - (OrgApacheLuceneSearchTopFieldDocs *)searchWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
                                             withOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter
                                                                     withInt:(jint)n
-                                              withOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)sort {
-  return OrgApacheLuceneSearchIndexSearcher_searchWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchFilter_withInt_withOrgApacheLuceneSearchSort_withBoolean_withBoolean_(self, query, filter, n, sort, NO, NO);
-}
-
-- (OrgApacheLuceneSearchTopFieldDocs *)searchWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-                                            withOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter
-                                                                    withInt:(jint)n
                                               withOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)sort
                                                                 withBoolean:(jboolean)doDocScores
                                                                 withBoolean:(jboolean)doMaxScore {
   return OrgApacheLuceneSearchIndexSearcher_searchWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchFilter_withInt_withOrgApacheLuceneSearchSort_withBoolean_withBoolean_(self, query, filter, n, sort, doDocScores, doMaxScore);
-}
-
-- (OrgApacheLuceneSearchTopFieldDocs *)searchWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-                                                                    withInt:(jint)n
-                                              withOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)sort
-                                                                withBoolean:(jboolean)doDocScores
-                                                                withBoolean:(jboolean)doMaxScore {
-  return OrgApacheLuceneSearchIndexSearcher_searchAfterWithOrgApacheLuceneSearchFieldDoc_withOrgApacheLuceneSearchQuery_withInt_withOrgApacheLuceneSearchSort_withBoolean_withBoolean_(self, nil, query, n, sort, doDocScores, doMaxScore);
-}
-
-- (OrgApacheLuceneSearchTopFieldDocs *)searchAfterWithOrgApacheLuceneSearchScoreDoc:(OrgApacheLuceneSearchScoreDoc *)after
-                                                     withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-                                                    withOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter
-                                                                            withInt:(jint)n
-                                                      withOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)sort {
-  return OrgApacheLuceneSearchIndexSearcher_searchAfterWithOrgApacheLuceneSearchScoreDoc_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchFilter_withInt_withOrgApacheLuceneSearchSort_withBoolean_withBoolean_(self, after, query, filter, n, sort, NO, NO);
 }
 
 - (OrgApacheLuceneSearchTopFieldDocs *)searchWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
@@ -475,18 +365,6 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
                                                                         withBoolean:(jboolean)doDocScores
                                                                         withBoolean:(jboolean)doMaxScore {
   return OrgApacheLuceneSearchIndexSearcher_searchAfterWithOrgApacheLuceneSearchScoreDoc_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchFilter_withInt_withOrgApacheLuceneSearchSort_withBoolean_withBoolean_(self, after, query, filter, numHits, sort, doDocScores, doMaxScore);
-}
-
-- (OrgApacheLuceneSearchTopFieldDocs *)searchAfterWithOrgApacheLuceneSearchScoreDoc:(OrgApacheLuceneSearchScoreDoc *)after
-                                                     withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-                                                                            withInt:(jint)numHits
-                                                      withOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)sort
-                                                                        withBoolean:(jboolean)doDocScores
-                                                                        withBoolean:(jboolean)doMaxScore {
-  if (after != nil && !([after isKindOfClass:[OrgApacheLuceneSearchFieldDoc class]])) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"after must be a FieldDoc; got ", after)) autorelease];
-  }
-  return OrgApacheLuceneSearchIndexSearcher_searchAfterWithOrgApacheLuceneSearchFieldDoc_withOrgApacheLuceneSearchQuery_withInt_withOrgApacheLuceneSearchSort_withBoolean_withBoolean_(self, (OrgApacheLuceneSearchFieldDoc *) check_class_cast(after, [OrgApacheLuceneSearchFieldDoc class]), query, numHits, sort, doDocScores, doMaxScore);
 }
 
 - (OrgApacheLuceneSearchTopFieldDocs *)searchAfterWithOrgApacheLuceneSearchFieldDoc:(OrgApacheLuceneSearchFieldDoc *)after
@@ -564,23 +442,6 @@ withOrgApacheLuceneSearchCollector:(id<OrgApacheLuceneSearchCollector>)collector
     query = rewrittenQuery;
   }
   return query;
-}
-
-- (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-                                                                    withInt:(jint)doc {
-  return [self explainWithOrgApacheLuceneSearchWeight:[self createNormalizedWeightWithOrgApacheLuceneSearchQuery:query withBoolean:YES] withInt:doc];
-}
-
-- (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
-                                                                     withInt:(jint)doc {
-  jint n = OrgApacheLuceneIndexReaderUtil_subIndexWithInt_withJavaUtilList_(doc, leafContexts_);
-  OrgApacheLuceneIndexLeafReaderContext *ctx = [((id<JavaUtilList>) nil_chk(leafContexts_)) getWithInt:n];
-  jint deBasedDoc = doc - ((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(ctx))->docBase_;
-  id<OrgApacheLuceneUtilBits> liveDocs = [((OrgApacheLuceneIndexLeafReader *) nil_chk([ctx reader])) getLiveDocs];
-  if (liveDocs != nil && [liveDocs getWithInt:deBasedDoc] == NO) {
-    return OrgApacheLuceneSearchExplanation_noMatchWithNSString_withOrgApacheLuceneSearchExplanationArray_(JreStrcat("$I$", @"Document ", doc, @" is deleted"), [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchExplanation_class_()]);
-  }
-  return [((OrgApacheLuceneSearchWeight *) nil_chk(weight)) explainWithOrgApacheLuceneIndexLeafReaderContext:ctx withInt:deBasedDoc];
 }
 
 - (OrgApacheLuceneSearchWeight *)createNormalizedWeightWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
@@ -664,27 +525,7 @@ withOrgApacheLuceneSearchCollector:(id<OrgApacheLuceneSearchCollector>)collector
   return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
-+ (IOSObjectArray *)__annotations_searchAfterWithOrgApacheLuceneSearchScoreDoc_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchFilter_withInt_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_searchWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchFilter_withInt_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_searchWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchFilter_withOrgApacheLuceneSearchCollector_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_searchWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchFilter_withInt_withOrgApacheLuceneSearchSort_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 + (IOSObjectArray *)__annotations_searchWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchFilter_withInt_withOrgApacheLuceneSearchSort_withBoolean_withBoolean_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_searchAfterWithOrgApacheLuceneSearchScoreDoc_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchFilter_withInt_withOrgApacheLuceneSearchSort_ {
   return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
@@ -695,45 +536,27 @@ withOrgApacheLuceneSearchCollector:(id<OrgApacheLuceneSearchCollector>)collector
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "getDefaultSimilarity", NULL, "Lorg.apache.lucene.search.similarities.Similarity;", 0x9, NULL, NULL },
-    { "getDefaultQueryCache", NULL, "Lorg.apache.lucene.search.QueryCache;", 0x9, NULL, NULL },
-    { "setDefaultQueryCacheWithOrgApacheLuceneSearchQueryCache:", "setDefaultQueryCache", "V", 0x9, NULL, NULL },
-    { "getDefaultQueryCachingPolicy", NULL, "Lorg.apache.lucene.search.QueryCachingPolicy;", 0x9, NULL, NULL },
-    { "setDefaultQueryCachingPolicyWithOrgApacheLuceneSearchQueryCachingPolicy:", "setDefaultQueryCachingPolicy", "V", 0x9, NULL, NULL },
     { "initWithOrgApacheLuceneIndexIndexReader:", "IndexSearcher", NULL, 0x1, NULL, NULL },
     { "initWithOrgApacheLuceneIndexIndexReader:withJavaUtilConcurrentExecutorService:", "IndexSearcher", NULL, 0x1, NULL, NULL },
     { "initWithOrgApacheLuceneIndexIndexReaderContext:withJavaUtilConcurrentExecutorService:", "IndexSearcher", NULL, 0x1, NULL, NULL },
     { "initWithOrgApacheLuceneIndexIndexReaderContext:", "IndexSearcher", NULL, 0x1, NULL, NULL },
     { "setQueryCacheWithOrgApacheLuceneSearchQueryCache:", "setQueryCache", "V", 0x1, NULL, NULL },
-    { "setQueryCachingPolicyWithOrgApacheLuceneSearchQueryCachingPolicy:", "setQueryCachingPolicy", "V", 0x1, NULL, NULL },
     { "slicesWithJavaUtilList:", "slices", "[Lorg.apache.lucene.search.IndexSearcher$LeafSlice;", 0x4, NULL, NULL },
     { "getIndexReader", NULL, "Lorg.apache.lucene.index.IndexReader;", 0x1, NULL, NULL },
-    { "docWithInt:", "doc", "Lorg.apache.lucene.document.Document;", 0x1, "Ljava.io.IOException;", NULL },
-    { "docWithInt:withOrgApacheLuceneIndexStoredFieldVisitor:", "doc", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "docWithInt:withJavaUtilSet:", "doc", "Lorg.apache.lucene.document.Document;", 0x1, "Ljava.io.IOException;", NULL },
     { "setSimilarityWithOrgApacheLuceneSearchSimilaritiesSimilarity:", "setSimilarity", "V", 0x1, NULL, NULL },
     { "getSimilarityWithBoolean:", "getSimilarity", "Lorg.apache.lucene.search.similarities.Similarity;", 0x1, NULL, NULL },
     { "wrapFilterWithOrgApacheLuceneSearchQuery:withOrgApacheLuceneSearchFilter:", "wrapFilter", "Lorg.apache.lucene.search.Query;", 0x4, NULL, NULL },
-    { "countWithOrgApacheLuceneSearchQuery:", "count", "I", 0x1, "Ljava.io.IOException;", NULL },
     { "searchAfterWithOrgApacheLuceneSearchScoreDoc:withOrgApacheLuceneSearchQuery:withInt:", "searchAfter", "Lorg.apache.lucene.search.TopDocs;", 0x1, "Ljava.io.IOException;", NULL },
-    { "searchAfterWithOrgApacheLuceneSearchScoreDoc:withOrgApacheLuceneSearchQuery:withOrgApacheLuceneSearchFilter:withInt:", "searchAfter", "Lorg.apache.lucene.search.TopDocs;", 0x11, "Ljava.io.IOException;", NULL },
     { "searchWithOrgApacheLuceneSearchQuery:withInt:", "search", "Lorg.apache.lucene.search.TopDocs;", 0x1, "Ljava.io.IOException;", NULL },
-    { "searchWithOrgApacheLuceneSearchQuery:withOrgApacheLuceneSearchFilter:withInt:", "search", "Lorg.apache.lucene.search.TopDocs;", 0x11, "Ljava.io.IOException;", NULL },
-    { "searchWithOrgApacheLuceneSearchQuery:withOrgApacheLuceneSearchFilter:withOrgApacheLuceneSearchCollector:", "search", "V", 0x11, "Ljava.io.IOException;", NULL },
     { "searchWithOrgApacheLuceneSearchQuery:withOrgApacheLuceneSearchCollector:", "search", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "searchWithOrgApacheLuceneSearchQuery:withOrgApacheLuceneSearchFilter:withInt:withOrgApacheLuceneSearchSort:", "search", "Lorg.apache.lucene.search.TopFieldDocs;", 0x11, "Ljava.io.IOException;", NULL },
     { "searchWithOrgApacheLuceneSearchQuery:withOrgApacheLuceneSearchFilter:withInt:withOrgApacheLuceneSearchSort:withBoolean:withBoolean:", "search", "Lorg.apache.lucene.search.TopFieldDocs;", 0x11, "Ljava.io.IOException;", NULL },
-    { "searchWithOrgApacheLuceneSearchQuery:withInt:withOrgApacheLuceneSearchSort:withBoolean:withBoolean:", "search", "Lorg.apache.lucene.search.TopFieldDocs;", 0x11, "Ljava.io.IOException;", NULL },
-    { "searchAfterWithOrgApacheLuceneSearchScoreDoc:withOrgApacheLuceneSearchQuery:withOrgApacheLuceneSearchFilter:withInt:withOrgApacheLuceneSearchSort:", "searchAfter", "Lorg.apache.lucene.search.TopFieldDocs;", 0x11, "Ljava.io.IOException;", NULL },
     { "searchWithOrgApacheLuceneSearchQuery:withInt:withOrgApacheLuceneSearchSort:", "search", "Lorg.apache.lucene.search.TopFieldDocs;", 0x1, "Ljava.io.IOException;", NULL },
     { "searchAfterWithOrgApacheLuceneSearchScoreDoc:withOrgApacheLuceneSearchQuery:withInt:withOrgApacheLuceneSearchSort:", "searchAfter", "Lorg.apache.lucene.search.TopDocs;", 0x1, "Ljava.io.IOException;", NULL },
     { "searchAfterWithOrgApacheLuceneSearchScoreDoc:withOrgApacheLuceneSearchQuery:withOrgApacheLuceneSearchFilter:withInt:withOrgApacheLuceneSearchSort:withBoolean:withBoolean:", "searchAfter", "Lorg.apache.lucene.search.TopFieldDocs;", 0x11, "Ljava.io.IOException;", NULL },
-    { "searchAfterWithOrgApacheLuceneSearchScoreDoc:withOrgApacheLuceneSearchQuery:withInt:withOrgApacheLuceneSearchSort:withBoolean:withBoolean:", "searchAfter", "Lorg.apache.lucene.search.TopFieldDocs;", 0x11, "Ljava.io.IOException;", NULL },
     { "searchAfterWithOrgApacheLuceneSearchFieldDoc:withOrgApacheLuceneSearchQuery:withInt:withOrgApacheLuceneSearchSort:withBoolean:withBoolean:", "searchAfter", "Lorg.apache.lucene.search.TopFieldDocs;", 0x2, "Ljava.io.IOException;", NULL },
     { "searchWithOrgApacheLuceneSearchQuery:withOrgApacheLuceneSearchCollectorManager:", "search", "TT;", 0x1, "Ljava.io.IOException;", "<C::Lorg/apache/lucene/search/Collector;T:Ljava/lang/Object;>(Lorg/apache/lucene/search/Query;Lorg/apache/lucene/search/CollectorManager<TC;TT;>;)TT;" },
     { "searchWithJavaUtilList:withOrgApacheLuceneSearchWeight:withOrgApacheLuceneSearchCollector:", "search", "V", 0x4, "Ljava.io.IOException;", NULL },
     { "rewriteWithOrgApacheLuceneSearchQuery:", "rewrite", "Lorg.apache.lucene.search.Query;", 0x1, "Ljava.io.IOException;", NULL },
-    { "explainWithOrgApacheLuceneSearchQuery:withInt:", "explain", "Lorg.apache.lucene.search.Explanation;", 0x1, "Ljava.io.IOException;", NULL },
-    { "explainWithOrgApacheLuceneSearchWeight:withInt:", "explain", "Lorg.apache.lucene.search.Explanation;", 0x4, "Ljava.io.IOException;", NULL },
     { "createNormalizedWeightWithOrgApacheLuceneSearchQuery:withBoolean:", "createNormalizedWeight", "Lorg.apache.lucene.search.Weight;", 0x1, "Ljava.io.IOException;", NULL },
     { "createWeightWithOrgApacheLuceneSearchQuery:withBoolean:", "createWeight", "Lorg.apache.lucene.search.Weight;", 0x1, "Ljava.io.IOException;", NULL },
     { "getTopReaderContext", NULL, "Lorg.apache.lucene.index.IndexReaderContext;", 0x1, NULL, NULL },
@@ -756,7 +579,7 @@ withOrgApacheLuceneSearchCollector:(id<OrgApacheLuceneSearchCollector>)collector
     { "similarity_", NULL, 0x2, "Lorg.apache.lucene.search.similarities.Similarity;", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.search.IndexSearcher$LeafSlice;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchIndexSearcher = { 2, "IndexSearcher", "org.apache.lucene.search", NULL, 0x1, 46, methods, 12, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchIndexSearcher = { 2, "IndexSearcher", "org.apache.lucene.search", NULL, 0x1, 28, methods, 12, fields, 0, NULL, 1, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneSearchIndexSearcher;
 }
 
@@ -765,26 +588,6 @@ withOrgApacheLuceneSearchCollector:(id<OrgApacheLuceneSearchCollector>)collector
 OrgApacheLuceneSearchSimilaritiesSimilarity *OrgApacheLuceneSearchIndexSearcher_getDefaultSimilarity() {
   OrgApacheLuceneSearchIndexSearcher_initialize();
   return OrgApacheLuceneSearchIndexSearcher_defaultSimilarity_;
-}
-
-id<OrgApacheLuceneSearchQueryCache> OrgApacheLuceneSearchIndexSearcher_getDefaultQueryCache() {
-  OrgApacheLuceneSearchIndexSearcher_initialize();
-  return OrgApacheLuceneSearchIndexSearcher_DEFAULT_QUERY_CACHE_;
-}
-
-void OrgApacheLuceneSearchIndexSearcher_setDefaultQueryCacheWithOrgApacheLuceneSearchQueryCache_(id<OrgApacheLuceneSearchQueryCache> defaultQueryCache) {
-  OrgApacheLuceneSearchIndexSearcher_initialize();
-  JreStrongAssign(&OrgApacheLuceneSearchIndexSearcher_DEFAULT_QUERY_CACHE_, defaultQueryCache);
-}
-
-id<OrgApacheLuceneSearchQueryCachingPolicy> OrgApacheLuceneSearchIndexSearcher_getDefaultQueryCachingPolicy() {
-  OrgApacheLuceneSearchIndexSearcher_initialize();
-  return OrgApacheLuceneSearchIndexSearcher_DEFAULT_CACHING_POLICY_;
-}
-
-void OrgApacheLuceneSearchIndexSearcher_setDefaultQueryCachingPolicyWithOrgApacheLuceneSearchQueryCachingPolicy_(id<OrgApacheLuceneSearchQueryCachingPolicy> defaultQueryCachingPolicy) {
-  OrgApacheLuceneSearchIndexSearcher_initialize();
-  JreStrongAssign(&OrgApacheLuceneSearchIndexSearcher_DEFAULT_CACHING_POLICY_, defaultQueryCachingPolicy);
 }
 
 void OrgApacheLuceneSearchIndexSearcher_initWithOrgApacheLuceneIndexIndexReader_(OrgApacheLuceneSearchIndexSearcher *self, OrgApacheLuceneIndexIndexReader *r) {
@@ -995,13 +798,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchIndexSearcher_$1_$1)
   return 1.0f;
 }
 
-- (jfloat)computePayloadFactorWithInt:(jint)doc
-                              withInt:(jint)start
-                              withInt:(jint)end
-      withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload {
-  return 1.0f;
-}
-
 - (instancetype)init {
   OrgApacheLuceneSearchIndexSearcher_$1_$2_init(self);
   return self;
@@ -1011,11 +807,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchIndexSearcher_$1_$1)
   static const J2ObjcMethodInfo methods[] = {
     { "scoreWithInt:withFloat:", "score", "F", 0x1, NULL, NULL },
     { "computeSlopFactorWithInt:", "computeSlopFactor", "F", 0x1, NULL, NULL },
-    { "computePayloadFactorWithInt:withInt:withInt:withOrgApacheLuceneUtilBytesRef:", "computePayloadFactor", "F", 0x1, NULL, NULL },
     { "init", "", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchIndexSearcher_$1", "simScorerWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight:withOrgApacheLuceneIndexLeafReaderContext:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchIndexSearcher_$1_$2 = { 2, "", "org.apache.lucene.search", "IndexSearcher$", 0x8008, 4, methods, 0, NULL, 0, NULL, 0, NULL, &enclosing_method, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchIndexSearcher_$1_$2 = { 2, "", "org.apache.lucene.search", "IndexSearcher$", 0x8008, 3, methods, 0, NULL, 0, NULL, 0, NULL, &enclosing_method, NULL };
   return &_OrgApacheLuceneSearchIndexSearcher_$1_$2;
 }
 
@@ -1032,50 +827,6 @@ OrgApacheLuceneSearchIndexSearcher_$1_$2 *new_OrgApacheLuceneSearchIndexSearcher
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchIndexSearcher_$1_$2)
-
-@implementation OrgApacheLuceneSearchIndexSearcher_$2
-
-- (OrgApacheLuceneSearchTotalHitCountCollector *)newCollector {
-  return [new_OrgApacheLuceneSearchTotalHitCountCollector_init() autorelease];
-}
-
-- (JavaLangInteger *)reduceWithJavaUtilCollection:(id<JavaUtilCollection>)collectors {
-  jint total = 0;
-  for (OrgApacheLuceneSearchTotalHitCountCollector * __strong collector in nil_chk(collectors)) {
-    total += [((OrgApacheLuceneSearchTotalHitCountCollector *) nil_chk(collector)) getTotalHits];
-  }
-  return JavaLangInteger_valueOfWithInt_(total);
-}
-
-- (instancetype)init {
-  OrgApacheLuceneSearchIndexSearcher_$2_init(self);
-  return self;
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "newCollector", NULL, "Lorg.apache.lucene.search.TotalHitCountCollector;", 0x1, "Ljava.io.IOException;", NULL },
-    { "reduceWithJavaUtilCollection:", "reduce", "Ljava.lang.Integer;", 0x1, "Ljava.io.IOException;", NULL },
-    { "init", "", NULL, 0x0, NULL, NULL },
-  };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchIndexSearcher", "countWithOrgApacheLuceneSearchQuery:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchIndexSearcher_$2 = { 2, "", "org.apache.lucene.search", "IndexSearcher", 0x8008, 3, methods, 0, NULL, 0, NULL, 0, NULL, &enclosing_method, "Ljava/lang/Object;Lorg/apache/lucene/search/CollectorManager<Lorg/apache/lucene/search/TotalHitCountCollector;Ljava/lang/Integer;>;" };
-  return &_OrgApacheLuceneSearchIndexSearcher_$2;
-}
-
-@end
-
-void OrgApacheLuceneSearchIndexSearcher_$2_init(OrgApacheLuceneSearchIndexSearcher_$2 *self) {
-  NSObject_init(self);
-}
-
-OrgApacheLuceneSearchIndexSearcher_$2 *new_OrgApacheLuceneSearchIndexSearcher_$2_init() {
-  OrgApacheLuceneSearchIndexSearcher_$2 *self = [OrgApacheLuceneSearchIndexSearcher_$2 alloc];
-  OrgApacheLuceneSearchIndexSearcher_$2_init(self);
-  return self;
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchIndexSearcher_$2)
 
 @implementation OrgApacheLuceneSearchIndexSearcher_$3
 

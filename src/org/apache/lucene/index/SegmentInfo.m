@@ -3,10 +3,8 @@
 //  source: ./core/src/java/org/apache/lucene/index/SegmentInfo.java
 //
 
-#include "IOSClass.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/lang/Deprecated.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/IllegalStateException.h"
 #include "java/lang/StringBuilder.h"
@@ -120,11 +118,6 @@ __attribute__((unused)) static void OrgApacheLuceneIndexSegmentInfo_checkFileNam
   return [self toStringWithInt:0];
 }
 
-- (NSString *)toStringWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
-                                                withInt:(jint)delCount {
-  return [self toStringWithInt:delCount];
-}
-
 - (NSString *)toStringWithInt:(jint)delCount {
   JavaLangStringBuilder *s = [new_JavaLangStringBuilder_init() autorelease];
   [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([s appendWithNSString:name_])) appendWithChar:'('])) appendWithId:version__ == nil ? @"?" : version__])) appendWithChar:')'])) appendWithChar:':'];
@@ -219,10 +212,6 @@ __attribute__((unused)) static void OrgApacheLuceneIndexSegmentInfo_checkFileNam
   [super dealloc];
 }
 
-+ (IOSObjectArray *)__annotations_toStringWithOrgApacheLuceneStoreDirectory_withInt_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "setDiagnosticsWithJavaUtilMap:", "setDiagnostics", "V", 0x0, NULL, NULL },
@@ -236,7 +225,6 @@ __attribute__((unused)) static void OrgApacheLuceneIndexSegmentInfo_checkFileNam
     { "setMaxDocWithInt:", "setMaxDoc", "V", 0x0, NULL, NULL },
     { "files", NULL, "Ljava.util.Set;", 0x1, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "toStringWithOrgApacheLuceneStoreDirectory:withInt:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "toStringWithInt:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
     { "hash", "hashCode", "I", 0x1, NULL, NULL },
@@ -265,7 +253,7 @@ __attribute__((unused)) static void OrgApacheLuceneIndexSegmentInfo_checkFileNam
     { "version__", "version", 0x2, "Lorg.apache.lucene.util.Version;", NULL, NULL, .constantValue.asLong = 0 },
     { "setFiles_", NULL, 0x2, "Ljava.util.Set;", NULL, "Ljava/util/Set<Ljava/lang/String;>;", .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexSegmentInfo = { 2, "SegmentInfo", "org.apache.lucene.index", NULL, 0x11, 25, methods, 12, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexSegmentInfo = { 2, "SegmentInfo", "org.apache.lucene.index", NULL, 0x11, 24, methods, 12, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexSegmentInfo;
 }
 

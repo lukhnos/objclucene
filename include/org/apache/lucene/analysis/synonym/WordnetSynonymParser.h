@@ -20,26 +20,19 @@
 #define OrgApacheLuceneAnalysisSynonymSynonymMap_Parser_INCLUDE 1
 #include "org/apache/lucene/analysis/synonym/SynonymMap.h"
 
-@class JavaIoReader;
-@class OrgApacheLuceneAnalysisAnalyzer;
-
 @interface OrgApacheLuceneAnalysisSynonymWordnetSynonymParser : OrgApacheLuceneAnalysisSynonymSynonymMap_Parser
 
 #pragma mark Public
 
-- (instancetype)initWithBoolean:(jboolean)dedup
-                    withBoolean:(jboolean)expand
-withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
-
-- (void)parseWithJavaIoReader:(JavaIoReader *)inArg;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisSynonymWordnetSynonymParser)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisSynonymWordnetSynonymParser_initWithBoolean_withBoolean_withOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneAnalysisSynonymWordnetSynonymParser *self, jboolean dedup, jboolean expand, OrgApacheLuceneAnalysisAnalyzer *analyzer);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisSynonymWordnetSynonymParser_init(OrgApacheLuceneAnalysisSynonymWordnetSynonymParser *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisSynonymWordnetSynonymParser *new_OrgApacheLuceneAnalysisSynonymWordnetSynonymParser_initWithBoolean_withBoolean_withOrgApacheLuceneAnalysisAnalyzer_(jboolean dedup, jboolean expand, OrgApacheLuceneAnalysisAnalyzer *analyzer) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisSynonymWordnetSynonymParser *new_OrgApacheLuceneAnalysisSynonymWordnetSynonymParser_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSynonymWordnetSynonymParser)
 

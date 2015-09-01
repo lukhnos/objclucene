@@ -20,41 +20,17 @@
 #define OrgApacheLuceneSearchSpansConjunctionSpans_INCLUDE 1
 #include "org/apache/lucene/search/spans/ConjunctionSpans.h"
 
-@class OrgApacheLuceneSearchSpansSpans;
-@protocol OrgApacheLuceneSearchSpansSpanCollector;
-
-@interface OrgApacheLuceneSearchSpansContainSpans : OrgApacheLuceneSearchSpansConjunctionSpans {
- @public
-  OrgApacheLuceneSearchSpansSpans *sourceSpans_;
-  OrgApacheLuceneSearchSpansSpans *bigSpans_;
-  OrgApacheLuceneSearchSpansSpans *littleSpans_;
-}
-
-#pragma mark Public
-
-- (void)collectWithOrgApacheLuceneSearchSpansSpanCollector:(id<OrgApacheLuceneSearchSpansSpanCollector>)collector;
-
-- (jint)endPosition;
-
-- (jint)startPosition;
-
-- (jint)width;
+@interface OrgApacheLuceneSearchSpansContainSpans : OrgApacheLuceneSearchSpansConjunctionSpans
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneSearchSpansSpans:(OrgApacheLuceneSearchSpansSpans *)bigSpans
-                    withOrgApacheLuceneSearchSpansSpans:(OrgApacheLuceneSearchSpansSpans *)littleSpans
-                    withOrgApacheLuceneSearchSpansSpans:(OrgApacheLuceneSearchSpansSpans *)sourceSpans;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSpansContainSpans)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpansContainSpans, sourceSpans_, OrgApacheLuceneSearchSpansSpans *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpansContainSpans, bigSpans_, OrgApacheLuceneSearchSpansSpans *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpansContainSpans, littleSpans_, OrgApacheLuceneSearchSpansSpans *)
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansContainSpans_initWithOrgApacheLuceneSearchSpansSpans_withOrgApacheLuceneSearchSpansSpans_withOrgApacheLuceneSearchSpansSpans_(OrgApacheLuceneSearchSpansContainSpans *self, OrgApacheLuceneSearchSpansSpans *bigSpans, OrgApacheLuceneSearchSpansSpans *littleSpans, OrgApacheLuceneSearchSpansSpans *sourceSpans);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansContainSpans_init(OrgApacheLuceneSearchSpansContainSpans *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansContainSpans)
 

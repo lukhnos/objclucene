@@ -20,37 +20,17 @@
 #define OrgApacheLuceneSearchDocIdSet_INCLUDE 1
 #include "org/apache/lucene/search/DocIdSet.h"
 
-@class OrgApacheLuceneSearchDocIdSetIterator;
-@protocol JavaUtilCollection;
-@protocol OrgApacheLuceneUtilBits;
-
 @interface OrgApacheLuceneSearchFilteredDocIdSet : OrgApacheLuceneSearchDocIdSet
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchDocIdSet:(OrgApacheLuceneSearchDocIdSet *)innerSet;
-
-- (id<OrgApacheLuceneUtilBits>)bits;
-
-- (id<JavaUtilCollection>)getChildResources;
-
-- (OrgApacheLuceneSearchDocIdSet *)getDelegate;
-
-- (jboolean)isCacheable;
-
-- (OrgApacheLuceneSearchDocIdSetIterator *)iterator;
-
-- (jlong)ramBytesUsed;
-
-#pragma mark Protected
-
-- (jboolean)matchWithInt:(jint)docid;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchFilteredDocIdSet)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchFilteredDocIdSet_initWithOrgApacheLuceneSearchDocIdSet_(OrgApacheLuceneSearchFilteredDocIdSet *self, OrgApacheLuceneSearchDocIdSet *innerSet);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchFilteredDocIdSet_init(OrgApacheLuceneSearchFilteredDocIdSet *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFilteredDocIdSet)
 

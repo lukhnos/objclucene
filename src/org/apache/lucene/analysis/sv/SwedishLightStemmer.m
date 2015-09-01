@@ -3,29 +3,12 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/sv/SwedishLightStemmer.java
 //
 
-#include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/analysis/sv/SwedishLightStemmer.h"
-#include "org/apache/lucene/analysis/util/StemmerUtil.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneAnalysisSvSwedishLightStemmer
-
-- (jint)stemWithCharArray:(IOSCharArray *)s
-                  withInt:(jint)len {
-  if (len > 4 && IOSCharArray_Get(nil_chk(s), len - 1) == 's') len--;
-  if (len > 7 && (OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(s, len, @"elser") || OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(s, len, @"heten"))) return len - 5;
-  if (len > 6 && (OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(s, len, @"arne") || OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(s, len, @"erna") || OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(s, len, @"ande") || OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(s, len, @"else") || OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(s, len, @"aste") || OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(s, len, @"orna") || OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(s, len, @"aren"))) return len - 4;
-  if (len > 5 && (OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(s, len, @"are") || OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(s, len, @"ast") || OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(s, len, @"het"))) return len - 3;
-  if (len > 4 && (OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(s, len, @"ar") || OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(s, len, @"er") || OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(s, len, @"or") || OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(s, len, @"en") || OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(s, len, @"at") || OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(s, len, @"te") || OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(s, len, @"et"))) return len - 2;
-  if (len > 3) switch (IOSCharArray_Get(nil_chk(s), len - 1)) {
-    case 't':
-    case 'a':
-    case 'e':
-    case 'n':
-    return len - 1;
-  }
-  return len;
-}
 
 - (instancetype)init {
   OrgApacheLuceneAnalysisSvSwedishLightStemmer_init(self);
@@ -34,10 +17,9 @@
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "stemWithCharArray:withInt:", "stem", "I", 0x1, NULL, NULL },
     { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisSvSwedishLightStemmer = { 2, "SwedishLightStemmer", "org.apache.lucene.analysis.sv", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisSvSwedishLightStemmer = { 2, "SwedishLightStemmer", "org.apache.lucene.analysis.sv", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisSvSwedishLightStemmer;
 }
 

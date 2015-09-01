@@ -20,68 +20,19 @@
 #define OrgApacheLuceneSearchHighlightScorer_INCLUDE 1
 #include "org/apache/lucene/search/highlight/Scorer.h"
 
-@class IOSObjectArray;
-@class JavaUtilHashSet;
-@class OrgApacheLuceneAnalysisTokenStream;
-@class OrgApacheLuceneIndexIndexReader;
-@class OrgApacheLuceneSearchHighlightTextFragment;
-@class OrgApacheLuceneSearchQuery;
-
-@interface OrgApacheLuceneSearchHighlightQueryTermScorer : NSObject < OrgApacheLuceneSearchHighlightScorer > {
- @public
-  OrgApacheLuceneSearchHighlightTextFragment *currentTextFragment_;
-  JavaUtilHashSet *uniqueTermsInFragment_;
-  jfloat totalScore_;
-  jfloat maxTermWeight_;
-}
+@interface OrgApacheLuceneSearchHighlightQueryTermScorer : NSObject < OrgApacheLuceneSearchHighlightScorer >
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
-
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-               withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
-                                      withNSString:(NSString *)fieldName;
-
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-                                      withNSString:(NSString *)fieldName;
-
-- (instancetype)initWithOrgApacheLuceneSearchHighlightWeightedTermArray:(IOSObjectArray *)weightedTerms;
-
-- (void)allFragmentsProcessed;
-
-- (jfloat)getFragmentScore;
-
-- (jfloat)getMaxTermWeight;
-
-- (jfloat)getTokenScore;
-
-- (OrgApacheLuceneAnalysisTokenStream *)init__WithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tokenStream OBJC_METHOD_FAMILY_NONE;
-
-- (void)startFragmentWithOrgApacheLuceneSearchHighlightTextFragment:(OrgApacheLuceneSearchHighlightTextFragment *)newFragment;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchHighlightQueryTermScorer)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchHighlightQueryTermScorer, currentTextFragment_, OrgApacheLuceneSearchHighlightTextFragment *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchHighlightQueryTermScorer, uniqueTermsInFragment_, JavaUtilHashSet *)
+FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightQueryTermScorer_init(OrgApacheLuceneSearchHighlightQueryTermScorer *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightQueryTermScorer_initWithOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchHighlightQueryTermScorer *self, OrgApacheLuceneSearchQuery *query);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightQueryTermScorer *new_OrgApacheLuceneSearchHighlightQueryTermScorer_initWithOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchQuery *query) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightQueryTermScorer_initWithOrgApacheLuceneSearchQuery_withNSString_(OrgApacheLuceneSearchHighlightQueryTermScorer *self, OrgApacheLuceneSearchQuery *query, NSString *fieldName);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightQueryTermScorer *new_OrgApacheLuceneSearchHighlightQueryTermScorer_initWithOrgApacheLuceneSearchQuery_withNSString_(OrgApacheLuceneSearchQuery *query, NSString *fieldName) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightQueryTermScorer_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexReader_withNSString_(OrgApacheLuceneSearchHighlightQueryTermScorer *self, OrgApacheLuceneSearchQuery *query, OrgApacheLuceneIndexIndexReader *reader, NSString *fieldName);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightQueryTermScorer *new_OrgApacheLuceneSearchHighlightQueryTermScorer_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexReader_withNSString_(OrgApacheLuceneSearchQuery *query, OrgApacheLuceneIndexIndexReader *reader, NSString *fieldName) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightQueryTermScorer_initWithOrgApacheLuceneSearchHighlightWeightedTermArray_(OrgApacheLuceneSearchHighlightQueryTermScorer *self, IOSObjectArray *weightedTerms);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightQueryTermScorer *new_OrgApacheLuceneSearchHighlightQueryTermScorer_initWithOrgApacheLuceneSearchHighlightWeightedTermArray_(IOSObjectArray *weightedTerms) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightQueryTermScorer *new_OrgApacheLuceneSearchHighlightQueryTermScorer_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightQueryTermScorer)
 

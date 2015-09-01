@@ -43,8 +43,6 @@
 
 - (void)nextBuffer;
 
-- (void)reset;
-
 - (void)resetWithBoolean:(jboolean)zeroFillBuffers
              withBoolean:(jboolean)reuseFirst;
 

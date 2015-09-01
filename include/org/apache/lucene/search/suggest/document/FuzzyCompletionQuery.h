@@ -20,12 +20,6 @@
 #define OrgApacheLuceneSearchSuggestDocumentPrefixCompletionQuery_INCLUDE 1
 #include "org/apache/lucene/search/suggest/document/PrefixCompletionQuery.h"
 
-@class OrgApacheLuceneAnalysisAnalyzer;
-@class OrgApacheLuceneIndexTerm;
-@class OrgApacheLuceneSearchIndexSearcher;
-@class OrgApacheLuceneSearchSuggestBitsProducer;
-@class OrgApacheLuceneSearchWeight;
-
 #define OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_DEFAULT_UNICODE_AWARE NO
 #define OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_DEFAULT_MIN_FUZZY_LENGTH 3
 #define OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_DEFAULT_NON_FUZZY_PREFIX 1
@@ -36,27 +30,7 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
-                           withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
-
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
-                           withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-           withOrgApacheLuceneSearchSuggestBitsProducer:(OrgApacheLuceneSearchSuggestBitsProducer *)filter;
-
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
-                           withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-           withOrgApacheLuceneSearchSuggestBitsProducer:(OrgApacheLuceneSearchSuggestBitsProducer *)filter
-                                                withInt:(jint)maxEdits
-                                            withBoolean:(jboolean)transpositions
-                                                withInt:(jint)nonFuzzyPrefix
-                                                withInt:(jint)minFuzzyLength
-                                            withBoolean:(jboolean)unicodeAware
-                                                withInt:(jint)maxDeterminizedStates;
-
-- (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
-                                                                        withBoolean:(jboolean)needsScores;
-
-- (NSString *)toStringWithNSString:(NSString *)field;
+- (instancetype)init;
 
 @end
 
@@ -72,17 +46,9 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQu
 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery, DEFAULT_TRANSPOSITIONS, jboolean)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexTerm_(OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery *self, OrgApacheLuceneAnalysisAnalyzer *analyzer, OrgApacheLuceneIndexTerm *term);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_init(OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery *new_OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexTerm_(OrgApacheLuceneAnalysisAnalyzer *analyzer, OrgApacheLuceneIndexTerm *term) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexTerm_withOrgApacheLuceneSearchSuggestBitsProducer_(OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery *self, OrgApacheLuceneAnalysisAnalyzer *analyzer, OrgApacheLuceneIndexTerm *term, OrgApacheLuceneSearchSuggestBitsProducer *filter);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery *new_OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexTerm_withOrgApacheLuceneSearchSuggestBitsProducer_(OrgApacheLuceneAnalysisAnalyzer *analyzer, OrgApacheLuceneIndexTerm *term, OrgApacheLuceneSearchSuggestBitsProducer *filter) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexTerm_withOrgApacheLuceneSearchSuggestBitsProducer_withInt_withBoolean_withInt_withInt_withBoolean_withInt_(OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery *self, OrgApacheLuceneAnalysisAnalyzer *analyzer, OrgApacheLuceneIndexTerm *term, OrgApacheLuceneSearchSuggestBitsProducer *filter, jint maxEdits, jboolean transpositions, jint nonFuzzyPrefix, jint minFuzzyLength, jboolean unicodeAware, jint maxDeterminizedStates);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery *new_OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexTerm_withOrgApacheLuceneSearchSuggestBitsProducer_withInt_withBoolean_withInt_withInt_withBoolean_withInt_(OrgApacheLuceneAnalysisAnalyzer *analyzer, OrgApacheLuceneIndexTerm *term, OrgApacheLuceneSearchSuggestBitsProducer *filter, jint maxEdits, jboolean transpositions, jint nonFuzzyPrefix, jint minFuzzyLength, jboolean unicodeAware, jint maxDeterminizedStates) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery *new_OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentFuzzyCompletionQuery)
 

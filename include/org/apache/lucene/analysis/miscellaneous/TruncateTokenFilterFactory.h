@@ -20,16 +20,11 @@
 #define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
-@class OrgApacheLuceneAnalysisTokenStream;
-@protocol JavaUtilMap;
-
 @interface OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
-
-- (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
+- (instancetype)init;
 
 @end
 
@@ -38,9 +33,9 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory_PREFIX_LENGTH_KEY_;
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory, PREFIX_LENGTH_KEY_, NSString *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory *self, id<JavaUtilMap> args);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory_init(OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory *new_OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory *new_OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilterFactory)
 

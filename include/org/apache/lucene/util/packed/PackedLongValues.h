@@ -28,7 +28,6 @@
 @class IOSObjectArray;
 @class OrgApacheLuceneUtilPackedPackedLongValues_Builder;
 @class OrgApacheLuceneUtilPackedPackedLongValues_Iterator;
-@protocol JavaUtilCollection;
 
 #define OrgApacheLuceneUtilPackedPackedLongValues_DEFAULT_PAGE_SIZE 1024
 #define OrgApacheLuceneUtilPackedPackedLongValues_MIN_PAGE_SIZE 64
@@ -48,8 +47,6 @@
                                                                        withFloat:(jfloat)acceptableOverheadRatio;
 
 - (jlong)getWithLong:(jlong)index;
-
-- (id<JavaUtilCollection>)getChildResources;
 
 - (OrgApacheLuceneUtilPackedPackedLongValues_Iterator *)iterator;
 
@@ -160,7 +157,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedLongValues_Iterator)
 @class IOSLongArray;
 @class IOSObjectArray;
 @class OrgApacheLuceneUtilPackedPackedLongValues;
-@protocol JavaUtilCollection;
 
 @interface OrgApacheLuceneUtilPackedPackedLongValues_Builder : NSObject < OrgApacheLuceneUtilAccountable > {
  @public
@@ -179,8 +175,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedLongValues_Iterator)
 - (OrgApacheLuceneUtilPackedPackedLongValues_Builder *)addWithLong:(jlong)l;
 
 - (OrgApacheLuceneUtilPackedPackedLongValues *)build;
-
-- (id<JavaUtilCollection>)getChildResources;
 
 - (jlong)ramBytesUsed;
 

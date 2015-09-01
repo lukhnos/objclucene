@@ -16,33 +16,15 @@
 #if !defined (_OrgApacheLuceneSearchSuggestTstTernaryTreeNode_) && (OrgApacheLuceneSearchSuggestTstTernaryTreeNode_INCLUDE_ALL || OrgApacheLuceneSearchSuggestTstTernaryTreeNode_INCLUDE)
 #define _OrgApacheLuceneSearchSuggestTstTernaryTreeNode_
 
-@interface OrgApacheLuceneSearchSuggestTstTernaryTreeNode : NSObject {
- @public
-  jchar splitchar_;
-  OrgApacheLuceneSearchSuggestTstTernaryTreeNode *loKid_;
-  OrgApacheLuceneSearchSuggestTstTernaryTreeNode *eqKid_;
-  OrgApacheLuceneSearchSuggestTstTernaryTreeNode *hiKid_;
-  NSString *token_;
-  id val_;
-}
+@interface OrgApacheLuceneSearchSuggestTstTernaryTreeNode : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
-#pragma mark Package-Private
-
-- (jlong)sizeInBytes;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestTstTernaryTreeNode)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestTstTernaryTreeNode, loKid_, OrgApacheLuceneSearchSuggestTstTernaryTreeNode *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestTstTernaryTreeNode, eqKid_, OrgApacheLuceneSearchSuggestTstTernaryTreeNode *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestTstTernaryTreeNode, hiKid_, OrgApacheLuceneSearchSuggestTstTernaryTreeNode *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestTstTernaryTreeNode, token_, NSString *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestTstTernaryTreeNode, val_, id)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestTstTernaryTreeNode_init(OrgApacheLuceneSearchSuggestTstTernaryTreeNode *self);
 

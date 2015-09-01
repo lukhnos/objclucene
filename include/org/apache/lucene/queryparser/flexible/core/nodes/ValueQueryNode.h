@@ -22,10 +22,6 @@
 
 @protocol OrgApacheLuceneQueryparserFlexibleCoreNodesValueQueryNode < OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode, NSObject, JavaObject >
 
-- (void)setValueWithId:(id)value;
-
-- (id)getValue;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreNodesValueQueryNode)

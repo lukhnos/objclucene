@@ -3,26 +3,12 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/xml/builders/SpanTermBuilder.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "org/apache/lucene/index/Term.h"
-#include "org/apache/lucene/queryparser/xml/DOMUtils.h"
-#include "org/apache/lucene/queryparser/xml/ParserException.h"
-#include "org/apache/lucene/queryparser/xml/builders/SpanBuilderBase.h"
 #include "org/apache/lucene/queryparser/xml/builders/SpanTermBuilder.h"
-#include "org/apache/lucene/search/spans/SpanQuery.h"
-#include "org/apache/lucene/search/spans/SpanTermQuery.h"
-#include "org/w3c/dom/Element.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneQueryparserXmlBuildersSpanTermBuilder
-
-- (OrgApacheLuceneSearchSpansSpanQuery *)getSpanQueryWithOrgW3cDomElement:(id<OrgW3cDomElement>)e {
-  NSString *fieldName = OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithInheritanceOrFailWithOrgW3cDomElement_withNSString_(e, @"fieldName");
-  NSString *value = OrgApacheLuceneQueryparserXmlDOMUtils_getNonBlankTextOrFailWithOrgW3cDomElement_(e);
-  OrgApacheLuceneSearchSpansSpanTermQuery *stq = [new_OrgApacheLuceneSearchSpansSpanTermQuery_initWithOrgApacheLuceneIndexTerm_([new_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(fieldName, value) autorelease]) autorelease];
-  [stq setBoostWithFloat:OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withFloat_(e, @"boost", 1.0f)];
-  return stq;
-}
 
 - (instancetype)init {
   OrgApacheLuceneQueryparserXmlBuildersSpanTermBuilder_init(self);
@@ -31,17 +17,16 @@
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "getSpanQueryWithOrgW3cDomElement:", "getSpanQuery", "Lorg.apache.lucene.search.spans.SpanQuery;", 0x1, "Lorg.apache.lucene.queryparser.xml.ParserException;", NULL },
     { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlBuildersSpanTermBuilder = { 2, "SpanTermBuilder", "org.apache.lucene.queryparser.xml.builders", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlBuildersSpanTermBuilder = { 2, "SpanTermBuilder", "org.apache.lucene.queryparser.xml.builders", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserXmlBuildersSpanTermBuilder;
 }
 
 @end
 
 void OrgApacheLuceneQueryparserXmlBuildersSpanTermBuilder_init(OrgApacheLuceneQueryparserXmlBuildersSpanTermBuilder *self) {
-  OrgApacheLuceneQueryparserXmlBuildersSpanBuilderBase_init(self);
+  NSObject_init(self);
 }
 
 OrgApacheLuceneQueryparserXmlBuildersSpanTermBuilder *new_OrgApacheLuceneQueryparserXmlBuildersSpanTermBuilder_init() {

@@ -24,27 +24,19 @@
 #define OrgApacheLuceneAnalysisUtilMultiTermAwareComponent_INCLUDE 1
 #include "org/apache/lucene/analysis/util/MultiTermAwareComponent.h"
 
-@class OrgApacheLuceneAnalysisTokenStream;
-@class OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory;
-@protocol JavaUtilMap;
-
 @interface OrgApacheLuceneAnalysisGaIrishLowerCaseFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory < OrgApacheLuceneAnalysisUtilMultiTermAwareComponent >
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
-
-- (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
-
-- (OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory *)getMultiTermComponent;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisGaIrishLowerCaseFilterFactory)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisGaIrishLowerCaseFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisGaIrishLowerCaseFilterFactory *self, id<JavaUtilMap> args);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisGaIrishLowerCaseFilterFactory_init(OrgApacheLuceneAnalysisGaIrishLowerCaseFilterFactory *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisGaIrishLowerCaseFilterFactory *new_OrgApacheLuceneAnalysisGaIrishLowerCaseFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisGaIrishLowerCaseFilterFactory *new_OrgApacheLuceneAnalysisGaIrishLowerCaseFilterFactory_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisGaIrishLowerCaseFilterFactory)
 

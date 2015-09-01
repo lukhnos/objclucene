@@ -20,20 +20,11 @@
 #define OrgApacheLuceneIndexMergeScheduler_INCLUDE 1
 #include "org/apache/lucene/index/MergeScheduler.h"
 
-@class OrgApacheLuceneIndexIndexWriter;
-@class OrgApacheLuceneIndexMergeTriggerEnum;
-
 @interface OrgApacheLuceneIndexSerialMergeScheduler : OrgApacheLuceneIndexMergeScheduler
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (void)close;
-
-- (void)mergeWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer
-        withOrgApacheLuceneIndexMergeTriggerEnum:(OrgApacheLuceneIndexMergeTriggerEnum *)trigger
-                                     withBoolean:(jboolean)newMergesFound;
 
 @end
 

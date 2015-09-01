@@ -3,14 +3,10 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/standard/builders/GroupQueryNodeBuilder.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "org/apache/lucene/queryparser/flexible/core/QueryNodeException.h"
-#include "org/apache/lucene/queryparser/flexible/core/builders/QueryTreeBuilder.h"
-#include "org/apache/lucene/queryparser/flexible/core/nodes/GroupQueryNode.h"
-#include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNode.h"
 #include "org/apache/lucene/queryparser/flexible/standard/builders/GroupQueryNodeBuilder.h"
-#include "org/apache/lucene/search/Query.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneQueryparserFlexibleStandardBuildersGroupQueryNodeBuilder
 
@@ -19,17 +15,11 @@
   return self;
 }
 
-- (OrgApacheLuceneSearchQuery *)buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryNode {
-  OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode *groupNode = (OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode *) check_class_cast(queryNode, [OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode class]);
-  return (OrgApacheLuceneSearchQuery *) check_class_cast([((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk([((OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode *) nil_chk((groupNode))) getChild])) getTagWithNSString:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder, QUERY_TREE_BUILDER_TAGID_)], [OrgApacheLuceneSearchQuery class]);
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", "GroupQueryNodeBuilder", NULL, 0x1, NULL, NULL },
-    { "buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "build", "Lorg.apache.lucene.search.Query;", 0x1, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardBuildersGroupQueryNodeBuilder = { 2, "GroupQueryNodeBuilder", "org.apache.lucene.queryparser.flexible.standard.builders", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardBuildersGroupQueryNodeBuilder = { 2, "GroupQueryNodeBuilder", "org.apache.lucene.queryparser.flexible.standard.builders", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserFlexibleStandardBuildersGroupQueryNodeBuilder;
 }
 

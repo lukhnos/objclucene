@@ -16,21 +16,7 @@
 #if !defined (_OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery_) && (OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery_INCLUDE_ALL || OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery_INCLUDE)
 #define _OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery_
 
-@class OrgApacheLuceneSearchBooleanClause_OccurEnum;
-@class OrgApacheLuceneSearchBooleanQuery_Builder;
-@class OrgApacheLuceneSearchQuery;
-@protocol JavaUtilList;
-
 @interface OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery : NSObject
-
-#pragma mark Public
-
-+ (void)addQueriesToBooleanWithOrgApacheLuceneSearchBooleanQuery_Builder:(OrgApacheLuceneSearchBooleanQuery_Builder *)bq
-                                                        withJavaUtilList:(id<JavaUtilList>)queries
-                        withOrgApacheLuceneSearchBooleanClause_OccurEnum:(OrgApacheLuceneSearchBooleanClause_OccurEnum *)occur;
-
-+ (OrgApacheLuceneSearchQuery *)makeBooleanQueryWithJavaUtilList:(id<JavaUtilList>)queries
-                withOrgApacheLuceneSearchBooleanClause_OccurEnum:(OrgApacheLuceneSearchBooleanClause_OccurEnum *)occur;
 
 #pragma mark Package-Private
 
@@ -39,10 +25,6 @@
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery)
-
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery_addQueriesToBooleanWithOrgApacheLuceneSearchBooleanQuery_Builder_withJavaUtilList_withOrgApacheLuceneSearchBooleanClause_OccurEnum_(OrgApacheLuceneSearchBooleanQuery_Builder *bq, id<JavaUtilList> queries, OrgApacheLuceneSearchBooleanClause_OccurEnum *occur);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchQuery *OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery_makeBooleanQueryWithJavaUtilList_withOrgApacheLuceneSearchBooleanClause_OccurEnum_(id<JavaUtilList> queries, OrgApacheLuceneSearchBooleanClause_OccurEnum *occur);
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery_init(OrgApacheLuceneQueryparserSurroundQuerySrndBooleanQuery *self);
 

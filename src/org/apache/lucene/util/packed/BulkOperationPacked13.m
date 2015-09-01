@@ -15,92 +15,6 @@
   return self;
 }
 
-- (void)decodeWithLongArray:(IOSLongArray *)blocks
-                    withInt:(jint)blocksOffset
-               withIntArray:(IOSIntArray *)values
-                    withInt:(jint)valuesOffset
-                    withInt:(jint)iterations {
-  for (jint i = 0; i < iterations; ++i) {
-    jlong block0 = IOSLongArray_Get(nil_chk(blocks), blocksOffset++);
-    *IOSIntArray_GetRef(nil_chk(values), valuesOffset++) = (jint) (JreURShift64(block0, 51));
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block0, 38)) & 8191LL);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block0, 25)) & 8191LL);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block0, 12)) & 8191LL);
-    jlong block1 = IOSLongArray_Get(blocks, blocksOffset++);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreLShift64((block0 & 4095LL), 1)) | (JreURShift64(block1, 63)));
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block1, 50)) & 8191LL);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block1, 37)) & 8191LL);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block1, 24)) & 8191LL);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block1, 11)) & 8191LL);
-    jlong block2 = IOSLongArray_Get(blocks, blocksOffset++);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreLShift64((block1 & 2047LL), 2)) | (JreURShift64(block2, 62)));
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block2, 49)) & 8191LL);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block2, 36)) & 8191LL);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block2, 23)) & 8191LL);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block2, 10)) & 8191LL);
-    jlong block3 = IOSLongArray_Get(blocks, blocksOffset++);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreLShift64((block2 & 1023LL), 3)) | (JreURShift64(block3, 61)));
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block3, 48)) & 8191LL);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block3, 35)) & 8191LL);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block3, 22)) & 8191LL);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block3, 9)) & 8191LL);
-    jlong block4 = IOSLongArray_Get(blocks, blocksOffset++);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreLShift64((block3 & 511LL), 4)) | (JreURShift64(block4, 60)));
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block4, 47)) & 8191LL);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block4, 34)) & 8191LL);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block4, 21)) & 8191LL);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block4, 8)) & 8191LL);
-    jlong block5 = IOSLongArray_Get(blocks, blocksOffset++);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreLShift64((block4 & 255LL), 5)) | (JreURShift64(block5, 59)));
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block5, 46)) & 8191LL);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block5, 33)) & 8191LL);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block5, 20)) & 8191LL);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block5, 7)) & 8191LL);
-    jlong block6 = IOSLongArray_Get(blocks, blocksOffset++);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreLShift64((block5 & 127LL), 6)) | (JreURShift64(block6, 58)));
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block6, 45)) & 8191LL);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block6, 32)) & 8191LL);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block6, 19)) & 8191LL);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block6, 6)) & 8191LL);
-    jlong block7 = IOSLongArray_Get(blocks, blocksOffset++);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreLShift64((block6 & 63LL), 7)) | (JreURShift64(block7, 57)));
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block7, 44)) & 8191LL);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block7, 31)) & 8191LL);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block7, 18)) & 8191LL);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block7, 5)) & 8191LL);
-    jlong block8 = IOSLongArray_Get(blocks, blocksOffset++);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreLShift64((block7 & 31LL), 8)) | (JreURShift64(block8, 56)));
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block8, 43)) & 8191LL);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block8, 30)) & 8191LL);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block8, 17)) & 8191LL);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block8, 4)) & 8191LL);
-    jlong block9 = IOSLongArray_Get(blocks, blocksOffset++);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreLShift64((block8 & 15LL), 9)) | (JreURShift64(block9, 55)));
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block9, 42)) & 8191LL);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block9, 29)) & 8191LL);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block9, 16)) & 8191LL);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block9, 3)) & 8191LL);
-    jlong block10 = IOSLongArray_Get(blocks, blocksOffset++);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreLShift64((block9 & 7LL), 10)) | (JreURShift64(block10, 54)));
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block10, 41)) & 8191LL);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block10, 28)) & 8191LL);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block10, 15)) & 8191LL);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block10, 2)) & 8191LL);
-    jlong block11 = IOSLongArray_Get(blocks, blocksOffset++);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreLShift64((block10 & 3LL), 11)) | (JreURShift64(block11, 53)));
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block11, 40)) & 8191LL);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block11, 27)) & 8191LL);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block11, 14)) & 8191LL);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block11, 1)) & 8191LL);
-    jlong block12 = IOSLongArray_Get(blocks, blocksOffset++);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreLShift64((block11 & 1LL), 12)) | (JreURShift64(block12, 52)));
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block12, 39)) & 8191LL);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block12, 26)) & 8191LL);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block12, 13)) & 8191LL);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) (block12 & 8191LL);
-  }
-}
-
 - (void)decodeWithByteArray:(IOSByteArray *)blocks
                     withInt:(jint)blocksOffset
                withIntArray:(IOSIntArray *)values
@@ -250,12 +164,11 @@
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "init", "BulkOperationPacked13", NULL, 0x1, NULL, NULL },
-    { "decodeWithLongArray:withInt:withIntArray:withInt:withInt:", "decode", "V", 0x1, NULL, NULL },
     { "decodeWithByteArray:withInt:withIntArray:withInt:withInt:", "decode", "V", 0x1, NULL, NULL },
     { "decodeWithLongArray:withInt:withLongArray:withInt:withInt:", "decode", "V", 0x1, NULL, NULL },
     { "decodeWithByteArray:withInt:withLongArray:withInt:withInt:", "decode", "V", 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedBulkOperationPacked13 = { 2, "BulkOperationPacked13", "org.apache.lucene.util.packed", NULL, 0x10, 5, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedBulkOperationPacked13 = { 2, "BulkOperationPacked13", "org.apache.lucene.util.packed", NULL, 0x10, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilPackedBulkOperationPacked13;
 }
 

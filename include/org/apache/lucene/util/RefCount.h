@@ -29,8 +29,6 @@
 
 - (id)get;
 
-- (jint)getRefCount;
-
 - (void)incRef;
 
 #pragma mark Protected

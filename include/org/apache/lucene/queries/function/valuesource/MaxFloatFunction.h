@@ -20,31 +20,19 @@
 #define OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_INCLUDE 1
 #include "org/apache/lucene/queries/function/valuesource/MultiFloatFunction.h"
 
-@class IOSObjectArray;
-
 @interface OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction : OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValueSourceArray:(IOSObjectArray *)sources;
-
-#pragma mark Protected
-
-- (jboolean)existsWithInt:(jint)doc
-withOrgApacheLuceneQueriesFunctionFunctionValuesArray:(IOSObjectArray *)valsArr;
-
-- (jfloat)funcWithInt:(jint)doc
-withOrgApacheLuceneQueriesFunctionFunctionValuesArray:(IOSObjectArray *)valsArr;
-
-- (NSString *)name;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction_initWithOrgApacheLuceneQueriesFunctionValueSourceArray_(OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction *self, IOSObjectArray *sources);
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction_init(OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction *new_OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction_initWithOrgApacheLuceneQueriesFunctionValueSourceArray_(IOSObjectArray *sources) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction *new_OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction)
 

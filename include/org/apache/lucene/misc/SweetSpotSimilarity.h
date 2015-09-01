@@ -20,36 +20,11 @@
 #define OrgApacheLuceneSearchSimilaritiesDefaultSimilarity_INCLUDE 1
 #include "org/apache/lucene/search/similarities/DefaultSimilarity.h"
 
-@class OrgApacheLuceneIndexFieldInvertState;
-
 @interface OrgApacheLuceneMiscSweetSpotSimilarity : OrgApacheLuceneSearchSimilaritiesDefaultSimilarity
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (jfloat)baselineTfWithFloat:(jfloat)freq;
-
-- (jfloat)computeLengthNormWithInt:(jint)numTerms;
-
-- (jfloat)hyperbolicTfWithFloat:(jfloat)freq;
-
-- (jfloat)lengthNormWithOrgApacheLuceneIndexFieldInvertState:(OrgApacheLuceneIndexFieldInvertState *)state;
-
-- (void)setBaselineTfFactorsWithFloat:(jfloat)base
-                            withFloat:(jfloat)min;
-
-- (void)setHyperbolicTfFactorsWithFloat:(jfloat)min
-                              withFloat:(jfloat)max
-                             withDouble:(jdouble)base
-                              withFloat:(jfloat)xoffset;
-
-- (void)setLengthNormFactorsWithInt:(jint)min
-                            withInt:(jint)max
-                          withFloat:(jfloat)steepness
-                        withBoolean:(jboolean)discountOverlaps;
-
-- (jfloat)tfWithFloat:(jfloat)freq;
 
 @end
 

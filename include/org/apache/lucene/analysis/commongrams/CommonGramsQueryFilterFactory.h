@@ -20,25 +20,19 @@
 #define OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory_INCLUDE 1
 #include "org/apache/lucene/analysis/commongrams/CommonGramsFilterFactory.h"
 
-@class OrgApacheLuceneAnalysisTokenFilter;
-@class OrgApacheLuceneAnalysisTokenStream;
-@protocol JavaUtilMap;
-
 @interface OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory : OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
-
-- (OrgApacheLuceneAnalysisTokenFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory *self, id<JavaUtilMap> args);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory_init(OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory *new_OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory *new_OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory)
 

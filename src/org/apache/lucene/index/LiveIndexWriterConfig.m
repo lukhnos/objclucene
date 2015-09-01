@@ -55,46 +55,12 @@ J2OBJC_VOLATILE_FIELD_SETTER(OrgApacheLuceneIndexLiveIndexWriterConfig, mergedSe
   return analyzer_;
 }
 
-- (OrgApacheLuceneIndexLiveIndexWriterConfig *)setMaxBufferedDeleteTermsWithInt:(jint)maxBufferedDeleteTerms {
-  if (maxBufferedDeleteTerms != OrgApacheLuceneIndexIndexWriterConfig_DISABLE_AUTO_FLUSH && maxBufferedDeleteTerms < 1) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"maxBufferedDeleteTerms must at least be 1 when enabled") autorelease];
-  }
-  JreAssignVolatileInt(&self->maxBufferedDeleteTerms_, maxBufferedDeleteTerms);
-  return self;
-}
-
 - (jint)getMaxBufferedDeleteTerms {
   return JreLoadVolatileInt(&maxBufferedDeleteTerms_);
 }
 
-- (OrgApacheLuceneIndexLiveIndexWriterConfig *)setRAMBufferSizeMBWithDouble:(jdouble)ramBufferSizeMB {
-  @synchronized(self) {
-    if (ramBufferSizeMB != OrgApacheLuceneIndexIndexWriterConfig_DISABLE_AUTO_FLUSH && ramBufferSizeMB <= 0.0) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"ramBufferSize should be > 0.0 MB when enabled") autorelease];
-    }
-    if (ramBufferSizeMB == OrgApacheLuceneIndexIndexWriterConfig_DISABLE_AUTO_FLUSH && JreLoadVolatileInt(&maxBufferedDocs_) == OrgApacheLuceneIndexIndexWriterConfig_DISABLE_AUTO_FLUSH) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"at least one of ramBufferSize and maxBufferedDocs must be enabled") autorelease];
-    }
-    JreAssignVolatileDouble(&self->ramBufferSizeMB_, ramBufferSizeMB);
-    return self;
-  }
-}
-
 - (jdouble)getRAMBufferSizeMB {
   return JreLoadVolatileDouble(&ramBufferSizeMB_);
-}
-
-- (OrgApacheLuceneIndexLiveIndexWriterConfig *)setMaxBufferedDocsWithInt:(jint)maxBufferedDocs {
-  @synchronized(self) {
-    if (maxBufferedDocs != OrgApacheLuceneIndexIndexWriterConfig_DISABLE_AUTO_FLUSH && maxBufferedDocs < 2) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"maxBufferedDocs must at least be 2 when enabled") autorelease];
-    }
-    if (maxBufferedDocs == OrgApacheLuceneIndexIndexWriterConfig_DISABLE_AUTO_FLUSH && JreLoadVolatileDouble(&ramBufferSizeMB_) == OrgApacheLuceneIndexIndexWriterConfig_DISABLE_AUTO_FLUSH) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"at least one of ramBufferSize and maxBufferedDocs must be enabled") autorelease];
-    }
-    JreAssignVolatileInt(&self->maxBufferedDocs_, maxBufferedDocs);
-    return self;
-  }
 }
 
 - (jint)getMaxBufferedDocs {
@@ -106,11 +72,6 @@ J2OBJC_VOLATILE_FIELD_SETTER(OrgApacheLuceneIndexLiveIndexWriterConfig, mergedSe
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"mergePolicy must not be null") autorelease];
   }
   JreVolatileStrongAssign(&self->mergePolicy_, mergePolicy);
-  return self;
-}
-
-- (OrgApacheLuceneIndexLiveIndexWriterConfig *)setMergedSegmentWarmerWithOrgApacheLuceneIndexIndexWriter_IndexReaderWarmer:(OrgApacheLuceneIndexIndexWriter_IndexReaderWarmer *)mergeSegmentWarmer {
-  JreVolatileStrongAssign(&self->mergedSegmentWarmer_, mergeSegmentWarmer);
   return self;
 }
 
@@ -172,11 +133,6 @@ J2OBJC_VOLATILE_FIELD_SETTER(OrgApacheLuceneIndexLiveIndexWriterConfig, mergedSe
 
 - (OrgApacheLuceneUtilInfoStream *)getInfoStream {
   return JreLoadVolatileId(&infoStream_);
-}
-
-- (OrgApacheLuceneIndexLiveIndexWriterConfig *)setUseCompoundFileWithBoolean:(jboolean)useCompoundFile {
-  JreAssignVolatileBoolean(&self->useCompoundFile_, useCompoundFile);
-  return self;
 }
 
 - (jboolean)getUseCompoundFile {
@@ -258,14 +214,10 @@ J2OBJC_VOLATILE_FIELD_SETTER(OrgApacheLuceneIndexLiveIndexWriterConfig, mergedSe
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneAnalysisAnalyzer:", "LiveIndexWriterConfig", NULL, 0x0, NULL, NULL },
     { "getAnalyzer", NULL, "Lorg.apache.lucene.analysis.Analyzer;", 0x1, NULL, NULL },
-    { "setMaxBufferedDeleteTermsWithInt:", "setMaxBufferedDeleteTerms", "Lorg.apache.lucene.index.LiveIndexWriterConfig;", 0x1, NULL, NULL },
     { "getMaxBufferedDeleteTerms", NULL, "I", 0x1, NULL, NULL },
-    { "setRAMBufferSizeMBWithDouble:", "setRAMBufferSizeMB", "Lorg.apache.lucene.index.LiveIndexWriterConfig;", 0x21, NULL, NULL },
     { "getRAMBufferSizeMB", NULL, "D", 0x1, NULL, NULL },
-    { "setMaxBufferedDocsWithInt:", "setMaxBufferedDocs", "Lorg.apache.lucene.index.LiveIndexWriterConfig;", 0x21, NULL, NULL },
     { "getMaxBufferedDocs", NULL, "I", 0x1, NULL, NULL },
     { "setMergePolicyWithOrgApacheLuceneIndexMergePolicy:", "setMergePolicy", "Lorg.apache.lucene.index.LiveIndexWriterConfig;", 0x1, NULL, NULL },
-    { "setMergedSegmentWarmerWithOrgApacheLuceneIndexIndexWriter_IndexReaderWarmer:", "setMergedSegmentWarmer", "Lorg.apache.lucene.index.LiveIndexWriterConfig;", 0x1, NULL, NULL },
     { "getMergedSegmentWarmer", NULL, "Lorg.apache.lucene.index.IndexWriter$IndexReaderWarmer;", 0x1, NULL, NULL },
     { "getOpenMode", NULL, "Lorg.apache.lucene.index.IndexWriterConfig$OpenMode;", 0x1, NULL, NULL },
     { "getIndexDeletionPolicy", NULL, "Lorg.apache.lucene.index.IndexDeletionPolicy;", 0x1, NULL, NULL },
@@ -281,7 +233,6 @@ J2OBJC_VOLATILE_FIELD_SETTER(OrgApacheLuceneIndexLiveIndexWriterConfig, mergedSe
     { "getRAMPerThreadHardLimitMB", NULL, "I", 0x1, NULL, NULL },
     { "getFlushPolicy", NULL, "Lorg.apache.lucene.index.FlushPolicy;", 0x0, NULL, NULL },
     { "getInfoStream", NULL, "Lorg.apache.lucene.util.InfoStream;", 0x1, NULL, NULL },
-    { "setUseCompoundFileWithBoolean:", "setUseCompoundFile", "Lorg.apache.lucene.index.LiveIndexWriterConfig;", 0x1, NULL, NULL },
     { "getUseCompoundFile", NULL, "Z", 0x1, NULL, NULL },
     { "getCommitOnClose", NULL, "Z", 0x1, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
@@ -309,7 +260,7 @@ J2OBJC_VOLATILE_FIELD_SETTER(OrgApacheLuceneIndexLiveIndexWriterConfig, mergedSe
     { "useCompoundFile_", NULL, 0x44, "Z", NULL, NULL, .constantValue.asLong = 0 },
     { "commitOnClose_", NULL, 0x4, "Z", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexLiveIndexWriterConfig = { 2, "LiveIndexWriterConfig", "org.apache.lucene.index", NULL, 0x1, 29, methods, 21, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexLiveIndexWriterConfig = { 2, "LiveIndexWriterConfig", "org.apache.lucene.index", NULL, 0x1, 24, methods, 21, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexLiveIndexWriterConfig;
 }
 

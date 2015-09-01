@@ -20,33 +20,19 @@
 #define OrgApacheLuceneSearchTopDocs_INCLUDE 1
 #include "org/apache/lucene/search/TopDocs.h"
 
-@class IOSObjectArray;
-
 @interface OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs : OrgApacheLuceneSearchTopDocs
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)totalHits
-withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDocArray:(IOSObjectArray *)scoreDocs
-                  withFloat:(jfloat)maxScore;
-
-+ (OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs *)mergeWithInt:(jint)topN
-         withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsArray:(IOSObjectArray *)shardHits;
-
-- (IOSObjectArray *)scoreLookupDocs;
+- (instancetype)init;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs)
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs *OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_EMPTY_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs, EMPTY_, OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs *)
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_init(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_initWithInt_withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDocArray_withFloat_(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs *self, jint totalHits, IOSObjectArray *scoreDocs, jfloat maxScore);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs *new_OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_initWithInt_withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDocArray_withFloat_(jint totalHits, IOSObjectArray *scoreDocs, jfloat maxScore) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs *OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_mergeWithInt_withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsArray_(jint topN, IOSObjectArray *shardHits);
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs *new_OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs)
 
@@ -63,33 +49,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs)
 #define JavaLangComparable_INCLUDE 1
 #include "java/lang/Comparable.h"
 
-@protocol JavaLangCharSequence;
-
-@interface OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc : OrgApacheLuceneSearchScoreDoc < JavaLangComparable > {
- @public
-  id<JavaLangCharSequence> key_;
-  id<JavaLangCharSequence> context_;
-}
+@interface OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc : OrgApacheLuceneSearchScoreDoc < JavaLangComparable >
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)doc
-   withJavaLangCharSequence:(id<JavaLangCharSequence>)key
-   withJavaLangCharSequence:(id<JavaLangCharSequence>)context
-                  withFloat:(jfloat)score;
-
-- (jint)compareToWithId:(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc *)o;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc, key_, id<JavaLangCharSequence>)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc, context_, id<JavaLangCharSequence>)
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc_init(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc_initWithInt_withJavaLangCharSequence_withJavaLangCharSequence_withFloat_(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc *self, jint doc, id<JavaLangCharSequence> key, id<JavaLangCharSequence> context, jfloat score);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc *new_OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc_initWithInt_withJavaLangCharSequence_withJavaLangCharSequence_withFloat_(jint doc, id<JavaLangCharSequence> key, id<JavaLangCharSequence> context, jfloat score) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc *new_OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc)
 

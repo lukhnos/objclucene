@@ -16,27 +16,19 @@
 #if !defined (_OrgApacheLuceneAnalysisCompoundHyphenationHyphenation_) && (OrgApacheLuceneAnalysisCompoundHyphenationHyphenation_INCLUDE_ALL || OrgApacheLuceneAnalysisCompoundHyphenationHyphenation_INCLUDE)
 #define _OrgApacheLuceneAnalysisCompoundHyphenationHyphenation_
 
-@class IOSIntArray;
-
 @interface OrgApacheLuceneAnalysisCompoundHyphenationHyphenation : NSObject
 
 #pragma mark Public
 
-- (IOSIntArray *)getHyphenationPoints;
-
-- (jint)length;
-
-#pragma mark Package-Private
-
-- (instancetype)initWithIntArray:(IOSIntArray *)points;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisCompoundHyphenationHyphenation)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCompoundHyphenationHyphenation_initWithIntArray_(OrgApacheLuceneAnalysisCompoundHyphenationHyphenation *self, IOSIntArray *points);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCompoundHyphenationHyphenation_init(OrgApacheLuceneAnalysisCompoundHyphenationHyphenation *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundHyphenationHyphenation *new_OrgApacheLuceneAnalysisCompoundHyphenationHyphenation_initWithIntArray_(IOSIntArray *points) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundHyphenationHyphenation *new_OrgApacheLuceneAnalysisCompoundHyphenationHyphenation_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCompoundHyphenationHyphenation)
 

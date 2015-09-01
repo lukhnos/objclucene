@@ -20,22 +20,14 @@
 #define OrgApacheLuceneSearchReferenceManager_INCLUDE 1
 #include "org/apache/lucene/search/ReferenceManager.h"
 
-@class OrgApacheLuceneIndexDirectoryReader;
 @class OrgApacheLuceneIndexIndexReader;
 @class OrgApacheLuceneIndexIndexWriter;
 @class OrgApacheLuceneSearchIndexSearcher;
 @class OrgApacheLuceneSearchSearcherFactory;
-@class OrgApacheLuceneStoreDirectory;
 
 @interface OrgApacheLuceneSearchSearcherManager : OrgApacheLuceneSearchReferenceManager
 
 #pragma mark Public
-
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
-             withOrgApacheLuceneSearchSearcherFactory:(OrgApacheLuceneSearchSearcherFactory *)searcherFactory;
-
-- (instancetype)initWithOrgApacheLuceneIndexDirectoryReader:(OrgApacheLuceneIndexDirectoryReader *)reader
-                   withOrgApacheLuceneSearchSearcherFactory:(OrgApacheLuceneSearchSearcherFactory *)searcherFactory;
 
 - (instancetype)initWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer
                                             withBoolean:(jboolean)applyAllDeletes
@@ -45,15 +37,11 @@
                                                         withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
                                                         withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)previousReader;
 
-- (jboolean)isSearcherCurrent;
-
 #pragma mark Protected
 
 - (void)decRefWithId:(OrgApacheLuceneSearchIndexSearcher *)reference;
 
 - (jint)getRefCountWithId:(OrgApacheLuceneSearchIndexSearcher *)reference;
-
-- (OrgApacheLuceneSearchIndexSearcher *)refreshIfNeededWithId:(OrgApacheLuceneSearchIndexSearcher *)referenceToRefresh;
 
 - (jboolean)tryIncRefWithId:(OrgApacheLuceneSearchIndexSearcher *)reference;
 
@@ -64,14 +52,6 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSearcherManager)
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSearcherManager_initWithOrgApacheLuceneIndexIndexWriter_withBoolean_withOrgApacheLuceneSearchSearcherFactory_(OrgApacheLuceneSearchSearcherManager *self, OrgApacheLuceneIndexIndexWriter *writer, jboolean applyAllDeletes, OrgApacheLuceneSearchSearcherFactory *searcherFactory);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSearcherManager *new_OrgApacheLuceneSearchSearcherManager_initWithOrgApacheLuceneIndexIndexWriter_withBoolean_withOrgApacheLuceneSearchSearcherFactory_(OrgApacheLuceneIndexIndexWriter *writer, jboolean applyAllDeletes, OrgApacheLuceneSearchSearcherFactory *searcherFactory) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSearcherManager_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneSearchSearcherFactory_(OrgApacheLuceneSearchSearcherManager *self, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneSearchSearcherFactory *searcherFactory);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSearcherManager *new_OrgApacheLuceneSearchSearcherManager_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneSearchSearcherFactory_(OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneSearchSearcherFactory *searcherFactory) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSearcherManager_initWithOrgApacheLuceneIndexDirectoryReader_withOrgApacheLuceneSearchSearcherFactory_(OrgApacheLuceneSearchSearcherManager *self, OrgApacheLuceneIndexDirectoryReader *reader, OrgApacheLuceneSearchSearcherFactory *searcherFactory);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSearcherManager *new_OrgApacheLuceneSearchSearcherManager_initWithOrgApacheLuceneIndexDirectoryReader_withOrgApacheLuceneSearchSearcherFactory_(OrgApacheLuceneIndexDirectoryReader *reader, OrgApacheLuceneSearchSearcherFactory *searcherFactory) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchIndexSearcher *OrgApacheLuceneSearchSearcherManager_getSearcherWithOrgApacheLuceneSearchSearcherFactory_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneIndexIndexReader_(OrgApacheLuceneSearchSearcherFactory *searcherFactory, OrgApacheLuceneIndexIndexReader *reader, OrgApacheLuceneIndexIndexReader *previousReader);
 

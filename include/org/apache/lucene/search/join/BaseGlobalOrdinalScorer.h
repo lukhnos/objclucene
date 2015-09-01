@@ -20,48 +20,17 @@
 #define OrgApacheLuceneSearchScorer_INCLUDE 1
 #include "org/apache/lucene/search/Scorer.h"
 
-@class OrgApacheLuceneIndexSortedDocValues;
-@class OrgApacheLuceneSearchDocIdSetIterator;
-@class OrgApacheLuceneSearchTwoPhaseIterator;
-@class OrgApacheLuceneSearchWeight;
+@interface OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer : OrgApacheLuceneSearchScorer
 
-@interface OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer : OrgApacheLuceneSearchScorer {
- @public
-  OrgApacheLuceneIndexSortedDocValues *values_;
-  OrgApacheLuceneSearchScorer *approximationScorer_;
-  jfloat score_;
-}
+#pragma mark Package-Private
 
-#pragma mark Public
-
-- (instancetype)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
-            withOrgApacheLuceneIndexSortedDocValues:(OrgApacheLuceneIndexSortedDocValues *)values
-                    withOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)approximationScorer;
-
-- (OrgApacheLuceneSearchTwoPhaseIterator *)asTwoPhaseIterator;
-
-- (jlong)cost;
-
-- (jint)docID;
-
-- (jint)freq;
-
-- (jint)nextDoc;
-
-- (jfloat)score;
-
-#pragma mark Protected
-
-- (OrgApacheLuceneSearchTwoPhaseIterator *)createTwoPhaseIteratorWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)approximation;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer, values_, OrgApacheLuceneIndexSortedDocValues *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer, approximationScorer_, OrgApacheLuceneSearchScorer *)
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer *self, OrgApacheLuceneSearchWeight *weight, OrgApacheLuceneIndexSortedDocValues *values, OrgApacheLuceneSearchScorer *approximationScorer);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer_init(OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer)
 

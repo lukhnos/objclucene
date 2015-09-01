@@ -25,7 +25,6 @@
 @class JavaLangStringBuilder;
 @class JavaUtilBitSet;
 @class OrgApacheLuceneUtilAutomatonTransition;
-@protocol JavaUtilCollection;
 
 @interface OrgApacheLuceneUtilAutomatonAutomaton : NSObject < OrgApacheLuceneUtilAccountable >
 
@@ -53,8 +52,6 @@
 - (jint)createState;
 
 - (void)finishState;
-
-- (id<JavaUtilCollection>)getChildResources;
 
 - (void)getNextTransitionWithOrgApacheLuceneUtilAutomatonTransition:(OrgApacheLuceneUtilAutomatonTransition *)t;
 

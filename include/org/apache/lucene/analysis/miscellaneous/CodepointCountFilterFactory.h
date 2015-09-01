@@ -20,21 +20,11 @@
 #define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
-@class OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter;
-@class OrgApacheLuceneAnalysisTokenStream;
-@protocol JavaUtilMap;
-
-@interface OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory {
- @public
-  jint min_;
-  jint max_;
-}
+@interface OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
-
-- (OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
+- (instancetype)init;
 
 @end
 
@@ -46,9 +36,9 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisMiscellaneousCodepointCountFil
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory_MAX_KEY_;
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory, MAX_KEY_, NSString *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory *self, id<JavaUtilMap> args);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory_init(OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory *new_OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory *new_OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory)
 

@@ -70,7 +70,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTermQuery)
 
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneIndexTermContext;
-@class OrgApacheLuceneSearchExplanation;
 @class OrgApacheLuceneSearchIndexSearcher;
 @class OrgApacheLuceneSearchScorer;
 @class OrgApacheLuceneSearchTermQuery;
@@ -84,9 +83,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTermQuery)
                 withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                            withBoolean:(jboolean)needsScores
                    withOrgApacheLuceneIndexTermContext:(OrgApacheLuceneIndexTermContext *)termStates;
-
-- (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-                                                                               withInt:(jint)doc;
 
 - (void)extractTermsWithJavaUtilSet:(id<JavaUtilSet>)terms;
 

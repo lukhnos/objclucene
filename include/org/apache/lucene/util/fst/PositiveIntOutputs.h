@@ -38,8 +38,6 @@
 
 + (OrgApacheLuceneUtilFstPositiveIntOutputs *)getSingleton;
 
-- (NSString *)outputToStringWithId:(JavaLangLong *)output;
-
 - (jlong)ramBytesUsedWithId:(JavaLangLong *)output;
 
 - (JavaLangLong *)readWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg;

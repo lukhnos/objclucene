@@ -10,8 +10,6 @@
 #include "java/lang/ref/Reference.h"
 #include "java/lang/ref/ReferenceQueue.h"
 #include "java/lang/ref/WeakReference.h"
-#include "java/util/Collection.h"
-#include "java/util/HashMap.h"
 #include "java/util/Iterator.h"
 #include "java/util/Map.h"
 #include "java/util/NoSuchElementException.h"
@@ -98,14 +96,6 @@ id OrgApacheLuceneUtilWeakIdentityMap_NULL__;
 
 @implementation OrgApacheLuceneUtilWeakIdentityMap
 
-+ (OrgApacheLuceneUtilWeakIdentityMap *)newHashMap {
-  return OrgApacheLuceneUtilWeakIdentityMap_newHashMap();
-}
-
-+ (OrgApacheLuceneUtilWeakIdentityMap *)newHashMapWithBoolean:(jboolean)reapOnRead {
-  return OrgApacheLuceneUtilWeakIdentityMap_newHashMapWithBoolean_(reapOnRead);
-}
-
 + (OrgApacheLuceneUtilWeakIdentityMap *)newConcurrentHashMap {
   return OrgApacheLuceneUtilWeakIdentityMap_newConcurrentHashMap();
 }
@@ -125,24 +115,10 @@ id OrgApacheLuceneUtilWeakIdentityMap_NULL__;
   [self reap];
 }
 
-- (jboolean)containsKeyWithId:(id)key {
-  if (reapOnRead_) [self reap];
-  return [((id<JavaUtilMap>) nil_chk(backingStore_)) containsKeyWithId:[new_OrgApacheLuceneUtilWeakIdentityMap_IdentityWeakReference_initWithId_withJavaLangRefReferenceQueue_(key, nil) autorelease]];
-}
-
-- (id)getWithId:(id)key {
-  if (reapOnRead_) [self reap];
-  return [((id<JavaUtilMap>) nil_chk(backingStore_)) getWithId:[new_OrgApacheLuceneUtilWeakIdentityMap_IdentityWeakReference_initWithId_withJavaLangRefReferenceQueue_(key, nil) autorelease]];
-}
-
 - (id)putWithId:(id)key
          withId:(id)value {
   [self reap];
   return [((id<JavaUtilMap>) nil_chk(backingStore_)) putWithId:[new_OrgApacheLuceneUtilWeakIdentityMap_IdentityWeakReference_initWithId_withJavaLangRefReferenceQueue_(key, queue_) autorelease] withId:value];
-}
-
-- (jboolean)isEmpty {
-  return [self size] == 0;
 }
 
 - (id)removeWithId:(id)key {
@@ -150,21 +126,10 @@ id OrgApacheLuceneUtilWeakIdentityMap_NULL__;
   return [((id<JavaUtilMap>) nil_chk(backingStore_)) removeWithId:[new_OrgApacheLuceneUtilWeakIdentityMap_IdentityWeakReference_initWithId_withJavaLangRefReferenceQueue_(key, nil) autorelease]];
 }
 
-- (jint)size {
-  if ([((id<JavaUtilMap>) nil_chk(backingStore_)) isEmpty]) return 0;
-  if (reapOnRead_) [self reap];
-  return [backingStore_ size];
-}
-
 - (id<JavaUtilIterator>)keyIterator {
   [self reap];
   id<JavaUtilIterator> iterator = [((id<JavaUtilSet>) nil_chk([((id<JavaUtilMap>) nil_chk(backingStore_)) keySet])) iterator];
   return [new_OrgApacheLuceneUtilWeakIdentityMap_$1_initWithJavaUtilIterator_(iterator) autorelease];
-}
-
-- (id<JavaUtilIterator>)valueIterator {
-  if (reapOnRead_) [self reap];
-  return [((id<JavaUtilCollection>) nil_chk([((id<JavaUtilMap>) nil_chk(backingStore_)) values])) iterator];
 }
 
 - (void)reap {
@@ -189,20 +154,13 @@ id OrgApacheLuceneUtilWeakIdentityMap_NULL__;
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "newHashMap", NULL, "Lorg.apache.lucene.util.WeakIdentityMap;", 0x9, NULL, "<K:Ljava/lang/Object;V:Ljava/lang/Object;>()Lorg/apache/lucene/util/WeakIdentityMap<TK;TV;>;" },
-    { "newHashMapWithBoolean:", "newHashMap", "Lorg.apache.lucene.util.WeakIdentityMap;", 0x9, NULL, "<K:Ljava/lang/Object;V:Ljava/lang/Object;>(Z)Lorg/apache/lucene/util/WeakIdentityMap<TK;TV;>;" },
     { "newConcurrentHashMap", NULL, "Lorg.apache.lucene.util.WeakIdentityMap;", 0x9, NULL, "<K:Ljava/lang/Object;V:Ljava/lang/Object;>()Lorg/apache/lucene/util/WeakIdentityMap<TK;TV;>;" },
     { "newConcurrentHashMapWithBoolean:", "newConcurrentHashMap", "Lorg.apache.lucene.util.WeakIdentityMap;", 0x9, NULL, "<K:Ljava/lang/Object;V:Ljava/lang/Object;>(Z)Lorg/apache/lucene/util/WeakIdentityMap<TK;TV;>;" },
     { "initWithJavaUtilMap:withBoolean:", "WeakIdentityMap", NULL, 0x2, NULL, NULL },
     { "clear", NULL, "V", 0x1, NULL, NULL },
-    { "containsKeyWithId:", "containsKey", "Z", 0x1, NULL, NULL },
-    { "getWithId:", "get", "TV;", 0x1, NULL, "(Ljava/lang/Object;)TV;" },
     { "putWithId:withId:", "put", "TV;", 0x1, NULL, "(TK;TV;)TV;" },
-    { "isEmpty", NULL, "Z", 0x1, NULL, NULL },
     { "removeWithId:", "remove", "TV;", 0x1, NULL, "(Ljava/lang/Object;)TV;" },
-    { "size", NULL, "I", 0x1, NULL, NULL },
     { "keyIterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, NULL },
-    { "valueIterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, NULL },
     { "reap", NULL, "V", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -212,21 +170,11 @@ id OrgApacheLuceneUtilWeakIdentityMap_NULL__;
     { "NULL__", "NULL", 0x18, "Ljava.lang.Object;", &OrgApacheLuceneUtilWeakIdentityMap_NULL__, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.util.WeakIdentityMap$IdentityWeakReference;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilWeakIdentityMap = { 2, "WeakIdentityMap", "org.apache.lucene.util", NULL, 0x11, 15, methods, 4, fields, 0, NULL, 1, inner_classes, NULL, "<K:Ljava/lang/Object;V:Ljava/lang/Object;>Ljava/lang/Object;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilWeakIdentityMap = { 2, "WeakIdentityMap", "org.apache.lucene.util", NULL, 0x11, 8, methods, 4, fields, 0, NULL, 1, inner_classes, NULL, "<K:Ljava/lang/Object;V:Ljava/lang/Object;>Ljava/lang/Object;" };
   return &_OrgApacheLuceneUtilWeakIdentityMap;
 }
 
 @end
-
-OrgApacheLuceneUtilWeakIdentityMap *OrgApacheLuceneUtilWeakIdentityMap_newHashMap() {
-  OrgApacheLuceneUtilWeakIdentityMap_initialize();
-  return OrgApacheLuceneUtilWeakIdentityMap_newHashMapWithBoolean_(YES);
-}
-
-OrgApacheLuceneUtilWeakIdentityMap *OrgApacheLuceneUtilWeakIdentityMap_newHashMapWithBoolean_(jboolean reapOnRead) {
-  OrgApacheLuceneUtilWeakIdentityMap_initialize();
-  return [new_OrgApacheLuceneUtilWeakIdentityMap_initWithJavaUtilMap_withBoolean_([new_JavaUtilHashMap_init() autorelease], reapOnRead) autorelease];
-}
 
 OrgApacheLuceneUtilWeakIdentityMap *OrgApacheLuceneUtilWeakIdentityMap_newConcurrentHashMap() {
   OrgApacheLuceneUtilWeakIdentityMap_initialize();

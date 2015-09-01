@@ -11,7 +11,6 @@
 #include "org/apache/lucene/search/spans/ConjunctionSpans.h"
 #include "org/apache/lucene/search/spans/NearSpans.h"
 #include "org/apache/lucene/search/spans/NearSpansOrdered.h"
-#include "org/apache/lucene/search/spans/SpanCollector.h"
 #include "org/apache/lucene/search/spans/SpanNearQuery.h"
 #include "org/apache/lucene/search/spans/Spans.h"
 
@@ -90,18 +89,6 @@ __attribute__((unused)) static jint OrgApacheLuceneSearchSpansNearSpansOrdered_a
   return matchWidth_;
 }
 
-- (void)collectWithOrgApacheLuceneSearchSpansSpanCollector:(id<OrgApacheLuceneSearchSpansSpanCollector>)collector {
-  {
-    IOSObjectArray *a__ = subSpans_;
-    OrgApacheLuceneSearchSpansSpans * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
-    OrgApacheLuceneSearchSpansSpans * const *e__ = b__ + a__->size_;
-    while (b__ < e__) {
-      OrgApacheLuceneSearchSpansSpans *spans = *b__++;
-      [((OrgApacheLuceneSearchSpansSpans *) nil_chk(spans)) collectWithOrgApacheLuceneSearchSpansSpanCollector:collector];
-    }
-  }
-}
-
 - (NSString *)description {
   return JreStrcat("$$$I$I$I", @"NearSpansOrdered(", [((OrgApacheLuceneSearchSpansSpanNearQuery *) nil_chk(query_)) description], @")@", [self docID], @": ", [self startPosition], @" - ", [self endPosition]);
 }
@@ -117,7 +104,6 @@ __attribute__((unused)) static jint OrgApacheLuceneSearchSpansNearSpansOrdered_a
     { "startPosition", NULL, "I", 0x1, NULL, NULL },
     { "endPosition", NULL, "I", 0x1, NULL, NULL },
     { "width", NULL, "I", 0x1, NULL, NULL },
-    { "collectWithOrgApacheLuceneSearchSpansSpanCollector:", "collect", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -125,7 +111,7 @@ __attribute__((unused)) static jint OrgApacheLuceneSearchSpansNearSpansOrdered_a
     { "matchEnd_", NULL, 0x4, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "matchWidth_", NULL, 0x4, "I", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansNearSpansOrdered = { 2, "NearSpansOrdered", "org.apache.lucene.search.spans", NULL, 0x1, 11, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansNearSpansOrdered = { 2, "NearSpansOrdered", "org.apache.lucene.search.spans", NULL, 0x1, 10, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchSpansNearSpansOrdered;
 }
 

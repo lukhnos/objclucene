@@ -16,70 +16,19 @@
 #if !defined (_OrgApacheLuceneDocumentCompressionTools_) && (OrgApacheLuceneDocumentCompressionTools_INCLUDE_ALL || OrgApacheLuceneDocumentCompressionTools_INCLUDE)
 #define _OrgApacheLuceneDocumentCompressionTools_
 
-@class IOSByteArray;
-@class OrgApacheLuceneUtilBytesRef;
-
 @interface OrgApacheLuceneDocumentCompressionTools : NSObject
 
 #pragma mark Public
 
-+ (IOSByteArray *)compressWithByteArray:(IOSByteArray *)value;
-
-+ (IOSByteArray *)compressWithByteArray:(IOSByteArray *)value
-                                withInt:(jint)offset
-                                withInt:(jint)length;
-
-+ (IOSByteArray *)compressWithByteArray:(IOSByteArray *)value
-                                withInt:(jint)offset
-                                withInt:(jint)length
-                                withInt:(jint)compressionLevel;
-
-+ (IOSByteArray *)compressStringWithNSString:(NSString *)value;
-
-+ (IOSByteArray *)compressStringWithNSString:(NSString *)value
-                                     withInt:(jint)compressionLevel;
-
-+ (IOSByteArray *)decompressWithByteArray:(IOSByteArray *)value;
-
-+ (IOSByteArray *)decompressWithByteArray:(IOSByteArray *)value
-                                  withInt:(jint)offset
-                                  withInt:(jint)length;
-
-+ (IOSByteArray *)decompressWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)bytes;
-
-+ (NSString *)decompressStringWithByteArray:(IOSByteArray *)value;
-
-+ (NSString *)decompressStringWithByteArray:(IOSByteArray *)value
-                                    withInt:(jint)offset
-                                    withInt:(jint)length;
-
-+ (NSString *)decompressStringWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)bytes;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneDocumentCompressionTools)
 
-FOUNDATION_EXPORT IOSByteArray *OrgApacheLuceneDocumentCompressionTools_compressWithByteArray_withInt_withInt_withInt_(IOSByteArray *value, jint offset, jint length, jint compressionLevel);
+FOUNDATION_EXPORT void OrgApacheLuceneDocumentCompressionTools_init(OrgApacheLuceneDocumentCompressionTools *self);
 
-FOUNDATION_EXPORT IOSByteArray *OrgApacheLuceneDocumentCompressionTools_compressWithByteArray_withInt_withInt_(IOSByteArray *value, jint offset, jint length);
-
-FOUNDATION_EXPORT IOSByteArray *OrgApacheLuceneDocumentCompressionTools_compressWithByteArray_(IOSByteArray *value);
-
-FOUNDATION_EXPORT IOSByteArray *OrgApacheLuceneDocumentCompressionTools_compressStringWithNSString_(NSString *value);
-
-FOUNDATION_EXPORT IOSByteArray *OrgApacheLuceneDocumentCompressionTools_compressStringWithNSString_withInt_(NSString *value, jint compressionLevel);
-
-FOUNDATION_EXPORT IOSByteArray *OrgApacheLuceneDocumentCompressionTools_decompressWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilBytesRef *bytes);
-
-FOUNDATION_EXPORT IOSByteArray *OrgApacheLuceneDocumentCompressionTools_decompressWithByteArray_(IOSByteArray *value);
-
-FOUNDATION_EXPORT IOSByteArray *OrgApacheLuceneDocumentCompressionTools_decompressWithByteArray_withInt_withInt_(IOSByteArray *value, jint offset, jint length);
-
-FOUNDATION_EXPORT NSString *OrgApacheLuceneDocumentCompressionTools_decompressStringWithByteArray_(IOSByteArray *value);
-
-FOUNDATION_EXPORT NSString *OrgApacheLuceneDocumentCompressionTools_decompressStringWithByteArray_withInt_withInt_(IOSByteArray *value, jint offset, jint length);
-
-FOUNDATION_EXPORT NSString *OrgApacheLuceneDocumentCompressionTools_decompressStringWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilBytesRef *bytes);
+FOUNDATION_EXPORT OrgApacheLuceneDocumentCompressionTools *new_OrgApacheLuceneDocumentCompressionTools_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentCompressionTools)
 

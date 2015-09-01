@@ -20,34 +20,19 @@
 #define OrgApacheLuceneSearchFuzzyTermsEnum_INCLUDE 1
 #include "org/apache/lucene/search/FuzzyTermsEnum.h"
 
-@class OrgApacheLuceneIndexTerm;
-@class OrgApacheLuceneIndexTerms;
-@class OrgApacheLuceneUtilAttributeSource;
-@class OrgApacheLuceneUtilBytesRef;
-
 @interface OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum : OrgApacheLuceneSearchFuzzyTermsEnum
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms
-           withOrgApacheLuceneUtilAttributeSource:(OrgApacheLuceneUtilAttributeSource *)atts
-                     withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-                                        withFloat:(jfloat)minSimilarity
-                                          withInt:(jint)prefixLength;
-
-#pragma mark Protected
-
-- (void)maxEditDistanceChangedWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)lastTerm
-                                                      withInt:(jint)maxEdits
-                                                  withBoolean:(jboolean)init_;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneUtilAttributeSource_withOrgApacheLuceneIndexTerm_withFloat_withInt_(OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum *self, OrgApacheLuceneIndexTerms *terms, OrgApacheLuceneUtilAttributeSource *atts, OrgApacheLuceneIndexTerm *term, jfloat minSimilarity, jint prefixLength);
+FOUNDATION_EXPORT void OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum_init(OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum *new_OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneUtilAttributeSource_withOrgApacheLuceneIndexTerm_withFloat_withInt_(OrgApacheLuceneIndexTerms *terms, OrgApacheLuceneUtilAttributeSource *atts, OrgApacheLuceneIndexTerm *term, jfloat minSimilarity, jint prefixLength) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum *new_OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum)
 

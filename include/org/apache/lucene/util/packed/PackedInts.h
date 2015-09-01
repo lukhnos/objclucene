@@ -79,8 +79,6 @@
                                                                                                         withInt:(jint)version_
                                                                                                         withInt:(jint)bitsPerValue;
 
-+ (OrgApacheLuceneUtilPackedPackedInts_Reader *)getDirectReaderWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)inArg;
-
 + (OrgApacheLuceneUtilPackedPackedInts_Reader *)getDirectReaderNoHeaderWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)inArg
                                                        withOrgApacheLuceneUtilPackedPackedInts_FormatEnum:(OrgApacheLuceneUtilPackedPackedInts_FormatEnum *)format
                                                                                                   withInt:(jint)version_
@@ -101,9 +99,6 @@
 
 + (OrgApacheLuceneUtilPackedPackedInts_Reader *)getReaderWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg;
 
-+ (id<OrgApacheLuceneUtilPackedPackedInts_ReaderIterator>)getReaderIteratorWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
-                                                                                                     withInt:(jint)mem;
-
 + (id<OrgApacheLuceneUtilPackedPackedInts_ReaderIterator>)getReaderIteratorNoHeaderWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
                                                                   withOrgApacheLuceneUtilPackedPackedInts_FormatEnum:(OrgApacheLuceneUtilPackedPackedInts_FormatEnum *)format
                                                                                                              withInt:(jint)version_
@@ -116,11 +111,6 @@
                                                                                            withInt:(jint)version_
                                                                                            withInt:(jint)valueCount
                                                                                            withInt:(jint)bitsPerValue;
-
-+ (OrgApacheLuceneUtilPackedPackedInts_Writer *)getWriterWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg
-                                                                                    withInt:(jint)valueCount
-                                                                                    withInt:(jint)bitsPerValue
-                                                                                  withFloat:(jfloat)acceptableOverheadRatio;
 
 + (OrgApacheLuceneUtilPackedPackedInts_Writer *)getWriterNoHeaderWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg
                                                  withOrgApacheLuceneUtilPackedPackedInts_FormatEnum:(OrgApacheLuceneUtilPackedPackedInts_FormatEnum *)format
@@ -187,19 +177,13 @@ FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPackedInts_Reader *OrgApacheLuceneUti
 
 FOUNDATION_EXPORT id<OrgApacheLuceneUtilPackedPackedInts_ReaderIterator> OrgApacheLuceneUtilPackedPackedInts_getReaderIteratorNoHeaderWithOrgApacheLuceneStoreDataInput_withOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withInt_withInt_withInt_withInt_(OrgApacheLuceneStoreDataInput *inArg, OrgApacheLuceneUtilPackedPackedInts_FormatEnum *format, jint version_, jint valueCount, jint bitsPerValue, jint mem);
 
-FOUNDATION_EXPORT id<OrgApacheLuceneUtilPackedPackedInts_ReaderIterator> OrgApacheLuceneUtilPackedPackedInts_getReaderIteratorWithOrgApacheLuceneStoreDataInput_withInt_(OrgApacheLuceneStoreDataInput *inArg, jint mem);
-
 FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPackedInts_Reader *OrgApacheLuceneUtilPackedPackedInts_getDirectReaderNoHeaderWithOrgApacheLuceneStoreIndexInput_withOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withInt_withInt_withInt_(OrgApacheLuceneStoreIndexInput *inArg, OrgApacheLuceneUtilPackedPackedInts_FormatEnum *format, jint version_, jint valueCount, jint bitsPerValue);
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPackedInts_Reader *OrgApacheLuceneUtilPackedPackedInts_getDirectReaderWithOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneStoreIndexInput *inArg);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPackedInts_Mutable *OrgApacheLuceneUtilPackedPackedInts_getMutableWithInt_withInt_withFloat_(jint valueCount, jint bitsPerValue, jfloat acceptableOverheadRatio);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPackedInts_Mutable *OrgApacheLuceneUtilPackedPackedInts_getMutableWithInt_withInt_withOrgApacheLuceneUtilPackedPackedInts_FormatEnum_(jint valueCount, jint bitsPerValue, OrgApacheLuceneUtilPackedPackedInts_FormatEnum *format);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPackedInts_Writer *OrgApacheLuceneUtilPackedPackedInts_getWriterNoHeaderWithOrgApacheLuceneStoreDataOutput_withOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withInt_withInt_withInt_(OrgApacheLuceneStoreDataOutput *outArg, OrgApacheLuceneUtilPackedPackedInts_FormatEnum *format, jint valueCount, jint bitsPerValue, jint mem);
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPackedInts_Writer *OrgApacheLuceneUtilPackedPackedInts_getWriterWithOrgApacheLuceneStoreDataOutput_withInt_withInt_withFloat_(OrgApacheLuceneStoreDataOutput *outArg, jint valueCount, jint bitsPerValue, jfloat acceptableOverheadRatio);
 
 FOUNDATION_EXPORT jint OrgApacheLuceneUtilPackedPackedInts_bitsRequiredWithLong_(jlong maxValue);
 
@@ -257,8 +241,6 @@ typedef NS_ENUM(NSUInteger, OrgApacheLuceneUtilPackedPackedInts_Format) {
                  withInt:(jint)bitsPerValue;
 
 - (jfloat)overheadPerValueWithInt:(jint)bitsPerValue;
-
-- (jfloat)overheadRatioWithInt:(jint)bitsPerValue;
 
 #pragma mark Package-Private
 
@@ -349,12 +331,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedInts_FormatAndBits)
                     withInt:(jint)valuesOffset
                     withInt:(jint)iterations;
 
-- (void)decodeWithLongArray:(IOSLongArray *)blocks
-                    withInt:(jint)blocksOffset
-               withIntArray:(IOSIntArray *)values
-                    withInt:(jint)valuesOffset
-                    withInt:(jint)iterations;
-
 - (void)decodeWithByteArray:(IOSByteArray *)blocks
                     withInt:(jint)blocksOffset
                withIntArray:(IOSIntArray *)values
@@ -378,8 +354,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedInts_Decoder)
 
 @protocol OrgApacheLuceneUtilPackedPackedInts_Encoder < NSObject, JavaObject >
 
-- (jint)longBlockCount;
-
 - (jint)longValueCount;
 
 - (jint)byteBlockCount;
@@ -397,12 +371,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedInts_Decoder)
               withByteArray:(IOSByteArray *)blocks
                     withInt:(jint)blocksOffset
                     withInt:(jint)iterations;
-
-- (void)encodeWithIntArray:(IOSIntArray *)values
-                   withInt:(jint)valuesOffset
-             withLongArray:(IOSLongArray *)blocks
-                   withInt:(jint)blocksOffset
-                   withInt:(jint)iterations;
 
 - (void)encodeWithIntArray:(IOSIntArray *)values
                    withInt:(jint)valuesOffset
@@ -430,7 +398,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedInts_Encoder)
 #include "org/apache/lucene/util/Accountable.h"
 
 @class IOSLongArray;
-@protocol JavaUtilCollection;
 
 @interface OrgApacheLuceneUtilPackedPackedInts_Reader : OrgApacheLuceneIndexNumericDocValues < OrgApacheLuceneUtilAccountable >
 
@@ -442,8 +409,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedInts_Encoder)
      withLongArray:(IOSLongArray *)arr
            withInt:(jint)off
            withInt:(jint)len;
-
-- (id<JavaUtilCollection>)getChildResources;
 
 - (jint)size;
 
@@ -468,12 +433,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedInts_Reader)
 
 - (OrgApacheLuceneUtilLongsRef *)nextWithInt:(jint)count;
 
-- (jint)getBitsPerValue;
-
-- (jint)size;
-
-- (jint)ord;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilPackedPackedInts_ReaderIterator)
@@ -496,11 +455,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedInts_ReaderIterator)
 
 #pragma mark Public
 
-- (jint)getBitsPerValue;
-
 - (jlong)next;
-
-- (jint)size;
 
 #pragma mark Protected
 
@@ -574,8 +529,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedInts_Mutable)
 }
 
 #pragma mark Public
-
-- (jlong)getWithInt:(jint)index;
 
 - (jint)size;
 

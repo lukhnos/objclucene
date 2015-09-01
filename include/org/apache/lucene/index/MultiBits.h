@@ -22,8 +22,6 @@
 
 @class IOSIntArray;
 @class IOSObjectArray;
-@class OrgApacheLuceneIndexMultiBits_SubResult;
-@class OrgApacheLuceneIndexReaderSlice;
 
 @interface OrgApacheLuceneIndexMultiBits : NSObject < OrgApacheLuceneUtilBits >
 
@@ -34,8 +32,6 @@
                                          withBoolean:(jboolean)defaultValue;
 
 - (jboolean)getWithInt:(jint)doc;
-
-- (OrgApacheLuceneIndexMultiBits_SubResult *)getMatchingSubWithOrgApacheLuceneIndexReaderSlice:(OrgApacheLuceneIndexReaderSlice *)slice;
 
 - (jint)length;
 
@@ -56,13 +52,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiBits)
 #if !defined (_OrgApacheLuceneIndexMultiBits_SubResult_) && (OrgApacheLuceneIndexMultiBits_INCLUDE_ALL || OrgApacheLuceneIndexMultiBits_SubResult_INCLUDE)
 #define _OrgApacheLuceneIndexMultiBits_SubResult_
 
-@protocol OrgApacheLuceneUtilBits;
-
-@interface OrgApacheLuceneIndexMultiBits_SubResult : NSObject {
- @public
-  jboolean matches_;
-  id<OrgApacheLuceneUtilBits> result_;
-}
+@interface OrgApacheLuceneIndexMultiBits_SubResult : NSObject
 
 #pragma mark Public
 
@@ -71,8 +61,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiBits)
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexMultiBits_SubResult)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiBits_SubResult, result_, id<OrgApacheLuceneUtilBits>)
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexMultiBits_SubResult_init(OrgApacheLuceneIndexMultiBits_SubResult *self);
 

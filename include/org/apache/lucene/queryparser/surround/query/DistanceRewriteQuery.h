@@ -20,30 +20,19 @@
 #define OrgApacheLuceneQueryparserSurroundQueryRewriteQuery_INCLUDE 1
 #include "org/apache/lucene/queryparser/surround/query/RewriteQuery.h"
 
-@class OrgApacheLuceneIndexIndexReader;
-@class OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory;
-@class OrgApacheLuceneQueryparserSurroundQueryDistanceQuery;
-@class OrgApacheLuceneSearchQuery;
-
 @interface OrgApacheLuceneQueryparserSurroundQueryDistanceRewriteQuery : OrgApacheLuceneQueryparserSurroundQueryRewriteQuery
-
-#pragma mark Public
-
-- (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneQueryparserSurroundQueryDistanceQuery:(OrgApacheLuceneQueryparserSurroundQueryDistanceQuery *)srndQuery
-                                                                withNSString:(NSString *)fieldName
-                withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *)qf;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserSurroundQueryDistanceRewriteQuery)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundQueryDistanceRewriteQuery_initWithOrgApacheLuceneQueryparserSurroundQueryDistanceQuery_withNSString_withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_(OrgApacheLuceneQueryparserSurroundQueryDistanceRewriteQuery *self, OrgApacheLuceneQueryparserSurroundQueryDistanceQuery *srndQuery, NSString *fieldName, OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *qf);
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundQueryDistanceRewriteQuery_init(OrgApacheLuceneQueryparserSurroundQueryDistanceRewriteQuery *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQueryDistanceRewriteQuery *new_OrgApacheLuceneQueryparserSurroundQueryDistanceRewriteQuery_initWithOrgApacheLuceneQueryparserSurroundQueryDistanceQuery_withNSString_withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_(OrgApacheLuceneQueryparserSurroundQueryDistanceQuery *srndQuery, NSString *fieldName, OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *qf) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQueryDistanceRewriteQuery *new_OrgApacheLuceneQueryparserSurroundQueryDistanceRewriteQuery_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundQueryDistanceRewriteQuery)
 

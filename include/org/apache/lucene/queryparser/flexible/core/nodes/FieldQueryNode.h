@@ -28,75 +28,19 @@
 #define OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode_INCLUDE 1
 #include "org/apache/lucene/queryparser/flexible/core/nodes/TextableQueryNode.h"
 
-@protocol JavaLangCharSequence;
-@protocol OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax;
-
-@interface OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl < OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode, OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode > {
- @public
-  id<JavaLangCharSequence> field_;
-  id<JavaLangCharSequence> text_;
-  jint begin_;
-  jint end_;
-  jint positionIncrement_;
-}
+@interface OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl < OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode, OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode >
 
 #pragma mark Public
 
-- (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)field
-                    withJavaLangCharSequence:(id<JavaLangCharSequence>)text
-                                     withInt:(jint)begin
-                                     withInt:(jint)end;
-
-- (OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *)cloneTree;
-
-- (jint)getBegin;
-
-- (jint)getEnd;
-
-- (id<JavaLangCharSequence>)getField;
-
-- (NSString *)getFieldAsString;
-
-- (jint)getPositionIncrement;
-
-- (id<JavaLangCharSequence>)getText;
-
-- (NSString *)getTextAsString;
-
-- (id<JavaLangCharSequence>)getValue;
-
-- (void)setBeginWithInt:(jint)begin;
-
-- (void)setEndWithInt:(jint)end;
-
-- (void)setFieldWithJavaLangCharSequence:(id<JavaLangCharSequence>)field;
-
-- (void)setPositionIncrementWithInt:(jint)pi;
-
-- (void)setTextWithJavaLangCharSequence:(id<JavaLangCharSequence>)text;
-
-- (void)setValueWithId:(id<JavaLangCharSequence>)value;
-
-- (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escaper;
-
-- (NSString *)description;
-
-#pragma mark Protected
-
-- (id<JavaLangCharSequence>)getTermEscapedWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escaper;
-
-- (id<JavaLangCharSequence>)getTermEscapeQuotedWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escaper;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode, field_, id<JavaLangCharSequence>)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode, text_, id<JavaLangCharSequence>)
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode_init(OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_withInt_withInt_(OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *self, id<JavaLangCharSequence> field, id<JavaLangCharSequence> text, jint begin, jint end);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_withInt_withInt_(id<JavaLangCharSequence> field, id<JavaLangCharSequence> text, jint begin, jint end) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode)
 

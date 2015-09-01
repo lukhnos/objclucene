@@ -24,24 +24,9 @@
 #define OrgApacheLuceneSearchJoinBitSetProducer_INCLUDE 1
 #include "org/apache/lucene/search/join/BitSetProducer.h"
 
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneSearchDocIdSet;
-@class OrgApacheLuceneUtilBitDocIdSet;
-@class OrgApacheLuceneUtilBitSet;
-@protocol OrgApacheLuceneUtilBits;
-
 @interface OrgApacheLuceneSearchJoinBitDocIdSetFilter : OrgApacheLuceneSearchFilter < OrgApacheLuceneSearchJoinBitSetProducer >
 
 #pragma mark Public
-
-- (OrgApacheLuceneUtilBitSet *)getBitSetWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
-
-- (OrgApacheLuceneUtilBitDocIdSet *)getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
-
-- (OrgApacheLuceneSearchDocIdSet *)getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-                                                            withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)acceptDocs;
-
-#pragma mark Protected
 
 - (instancetype)init;
 

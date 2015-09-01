@@ -8,7 +8,6 @@
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
-#include "java/io/Reader.h"
 #include "java/lang/Double.h"
 #include "java/lang/Float.h"
 #include "java/lang/Integer.h"
@@ -189,10 +188,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsStoredFieldsWriter)
   return numericValue_;
 }
 
-- (JavaIoReader *)readerValue {
-  return nil;
-}
-
 - (jfloat)boost {
   return 1.0f;
 }
@@ -243,7 +238,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsStoredFieldsWriter)
     { "binaryValue", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
     { "stringValue", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
     { "numericValue", NULL, "Ljava.lang.Number;", 0x1, NULL, NULL },
-    { "readerValue", NULL, "Ljava.io.Reader;", 0x1, NULL, NULL },
     { "boost", NULL, "F", 0x1, NULL, NULL },
     { "tokenStreamWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneAnalysisTokenStream:", "tokenStream", "Lorg.apache.lucene.analysis.TokenStream;", 0x1, "Ljava.io.IOException;", NULL },
     { "resetWithOrgApacheLuceneIndexFieldInfo:", "reset", "V", 0x0, NULL, NULL },
@@ -257,7 +251,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsStoredFieldsWriter)
     { "currentField_", NULL, 0x0, "Lorg.apache.lucene.index.FieldInfo;", NULL, NULL, .constantValue.asLong = 0 },
     { "remapper_", NULL, 0x0, "Lorg.apache.lucene.index.FieldInfos;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsStoredFieldsWriter_MergeVisitor = { 2, "MergeVisitor", "org.apache.lucene.codecs", "StoredFieldsWriter", 0x4, 18, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsStoredFieldsWriter_MergeVisitor = { 2, "MergeVisitor", "org.apache.lucene.codecs", "StoredFieldsWriter", 0x4, 17, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneCodecsStoredFieldsWriter_MergeVisitor;
 }
 

@@ -49,14 +49,6 @@ withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)str
   return isNewFrag;
 }
 
-- (jint)getFragmentSize {
-  return fragmentSize_;
-}
-
-- (void)setFragmentSizeWithInt:(jint)size {
-  fragmentSize_ = size;
-}
-
 - (void)dealloc {
   RELEASE_(offsetAtt_);
   [super dealloc];
@@ -68,8 +60,6 @@ withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)str
     { "initWithInt:", "SimpleFragmenter", NULL, 0x1, NULL, NULL },
     { "startWithNSString:withOrgApacheLuceneAnalysisTokenStream:", "start", "V", 0x1, NULL, NULL },
     { "isNewFragment", NULL, "Z", 0x1, NULL, NULL },
-    { "getFragmentSize", NULL, "I", 0x1, NULL, NULL },
-    { "setFragmentSizeWithInt:", "setFragmentSize", "V", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "DEFAULT_FRAGMENT_SIZE", "DEFAULT_FRAGMENT_SIZE", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneSearchHighlightSimpleFragmenter_DEFAULT_FRAGMENT_SIZE },
@@ -77,7 +67,7 @@ withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)str
     { "fragmentSize_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "offsetAtt_", NULL, 0x2, "Lorg.apache.lucene.analysis.tokenattributes.OffsetAttribute;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightSimpleFragmenter = { 2, "SimpleFragmenter", "org.apache.lucene.search.highlight", NULL, 0x1, 6, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightSimpleFragmenter = { 2, "SimpleFragmenter", "org.apache.lucene.search.highlight", NULL, 0x1, 4, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchHighlightSimpleFragmenter;
 }
 

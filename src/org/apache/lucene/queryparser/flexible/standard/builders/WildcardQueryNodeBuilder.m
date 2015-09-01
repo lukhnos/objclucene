@@ -3,16 +3,10 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/standard/builders/WildcardQueryNodeBuilder.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "org/apache/lucene/index/Term.h"
-#include "org/apache/lucene/queryparser/flexible/core/QueryNodeException.h"
-#include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNode.h"
 #include "org/apache/lucene/queryparser/flexible/standard/builders/WildcardQueryNodeBuilder.h"
-#include "org/apache/lucene/queryparser/flexible/standard/nodes/WildcardQueryNode.h"
-#include "org/apache/lucene/queryparser/flexible/standard/processors/MultiTermRewriteMethodProcessor.h"
-#include "org/apache/lucene/search/MultiTermQuery.h"
-#include "org/apache/lucene/search/WildcardQuery.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneQueryparserFlexibleStandardBuildersWildcardQueryNodeBuilder
 
@@ -21,22 +15,11 @@
   return self;
 }
 
-- (OrgApacheLuceneSearchWildcardQuery *)buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryNode {
-  OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode *wildcardNode = (OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode *) check_class_cast(queryNode, [OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode class]);
-  OrgApacheLuceneSearchWildcardQuery *q = [new_OrgApacheLuceneSearchWildcardQuery_initWithOrgApacheLuceneIndexTerm_([new_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_([((OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode *) nil_chk(wildcardNode)) getFieldAsString], [wildcardNode getTextAsString]) autorelease]) autorelease];
-  OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *method = (OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *) check_class_cast([((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(queryNode)) getTagWithNSString:OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiTermRewriteMethodProcessor_TAG_ID_], [OrgApacheLuceneSearchMultiTermQuery_RewriteMethod class]);
-  if (method != nil) {
-    [q setRewriteMethodWithOrgApacheLuceneSearchMultiTermQuery_RewriteMethod:method];
-  }
-  return q;
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", "WildcardQueryNodeBuilder", NULL, 0x1, NULL, NULL },
-    { "buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "build", "Lorg.apache.lucene.search.WildcardQuery;", 0x1, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardBuildersWildcardQueryNodeBuilder = { 2, "WildcardQueryNodeBuilder", "org.apache.lucene.queryparser.flexible.standard.builders", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardBuildersWildcardQueryNodeBuilder = { 2, "WildcardQueryNodeBuilder", "org.apache.lucene.queryparser.flexible.standard.builders", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserFlexibleStandardBuildersWildcardQueryNodeBuilder;
 }
 

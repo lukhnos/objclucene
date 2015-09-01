@@ -16,28 +16,19 @@
 #if !defined (_OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer_) && (OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer_INCLUDE_ALL || OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer_INCLUDE)
 #define _OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer_
 
-@class IOSCharArray;
-
-@interface OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer : NSObject {
- @public
-  jboolean useBokmaal_;
-  jboolean useNynorsk_;
-}
+@interface OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer : NSObject
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)flags;
-
-- (jint)stemWithCharArray:(IOSCharArray *)s
-                  withInt:(jint)len;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer_initWithInt_(OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer *self, jint flags);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer_init(OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer *new_OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer_initWithInt_(jint flags) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer *new_OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer)
 

@@ -26,16 +26,12 @@
 @class OrgApacheLuceneStoreIndexOutput;
 @class OrgApacheLuceneStoreLock;
 @protocol JavaUtilCollection;
-@protocol JavaUtilSet;
 
 @interface OrgApacheLuceneStoreFileSwitchDirectory : OrgApacheLuceneStoreDirectory
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilSet:(id<JavaUtilSet>)primaryExtensions
-  withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)primaryDir
-  withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)secondaryDir
-                        withBoolean:(jboolean)doClose;
+- (instancetype)init;
 
 - (void)close;
 
@@ -68,11 +64,11 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneStoreFileSwitchDirectory)
 
-FOUNDATION_EXPORT void OrgApacheLuceneStoreFileSwitchDirectory_initWithJavaUtilSet_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withBoolean_(OrgApacheLuceneStoreFileSwitchDirectory *self, id<JavaUtilSet> primaryExtensions, OrgApacheLuceneStoreDirectory *primaryDir, OrgApacheLuceneStoreDirectory *secondaryDir, jboolean doClose);
-
-FOUNDATION_EXPORT OrgApacheLuceneStoreFileSwitchDirectory *new_OrgApacheLuceneStoreFileSwitchDirectory_initWithJavaUtilSet_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withBoolean_(id<JavaUtilSet> primaryExtensions, OrgApacheLuceneStoreDirectory *primaryDir, OrgApacheLuceneStoreDirectory *secondaryDir, jboolean doClose) NS_RETURNS_RETAINED;
-
 FOUNDATION_EXPORT NSString *OrgApacheLuceneStoreFileSwitchDirectory_getExtensionWithNSString_(NSString *name);
+
+FOUNDATION_EXPORT void OrgApacheLuceneStoreFileSwitchDirectory_init(OrgApacheLuceneStoreFileSwitchDirectory *self);
+
+FOUNDATION_EXPORT OrgApacheLuceneStoreFileSwitchDirectory *new_OrgApacheLuceneStoreFileSwitchDirectory_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreFileSwitchDirectory)
 

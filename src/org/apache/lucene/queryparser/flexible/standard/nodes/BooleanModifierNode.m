@@ -4,21 +4,20 @@
 //
 
 #include "J2ObjC_source.h"
-#include "org/apache/lucene/queryparser/flexible/core/nodes/ModifierQueryNode.h"
-#include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNode.h"
 #include "org/apache/lucene/queryparser/flexible/standard/nodes/BooleanModifierNode.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneQueryparserFlexibleStandardNodesBooleanModifierNode
 
-- (instancetype)initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)node
-withOrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_ModifierEnum:(OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_ModifierEnum *)mod {
-  OrgApacheLuceneQueryparserFlexibleStandardNodesBooleanModifierNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_withOrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_ModifierEnum_(self, node, mod);
+- (instancetype)init {
+  OrgApacheLuceneQueryparserFlexibleStandardNodesBooleanModifierNode_init(self);
   return self;
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:withOrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_ModifierEnum:", "BooleanModifierNode", NULL, 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardNodesBooleanModifierNode = { 2, "BooleanModifierNode", "org.apache.lucene.queryparser.flexible.standard.nodes", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserFlexibleStandardNodesBooleanModifierNode;
@@ -26,13 +25,13 @@ withOrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_ModifierEnum:(O
 
 @end
 
-void OrgApacheLuceneQueryparserFlexibleStandardNodesBooleanModifierNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_withOrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_ModifierEnum_(OrgApacheLuceneQueryparserFlexibleStandardNodesBooleanModifierNode *self, id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> node, OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_ModifierEnum *mod) {
-  OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_withOrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_ModifierEnum_(self, node, mod);
+void OrgApacheLuceneQueryparserFlexibleStandardNodesBooleanModifierNode_init(OrgApacheLuceneQueryparserFlexibleStandardNodesBooleanModifierNode *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneQueryparserFlexibleStandardNodesBooleanModifierNode *new_OrgApacheLuceneQueryparserFlexibleStandardNodesBooleanModifierNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_withOrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_ModifierEnum_(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> node, OrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_ModifierEnum *mod) {
+OrgApacheLuceneQueryparserFlexibleStandardNodesBooleanModifierNode *new_OrgApacheLuceneQueryparserFlexibleStandardNodesBooleanModifierNode_init() {
   OrgApacheLuceneQueryparserFlexibleStandardNodesBooleanModifierNode *self = [OrgApacheLuceneQueryparserFlexibleStandardNodesBooleanModifierNode alloc];
-  OrgApacheLuceneQueryparserFlexibleStandardNodesBooleanModifierNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_withOrgApacheLuceneQueryparserFlexibleCoreNodesModifierQueryNode_ModifierEnum_(self, node, mod);
+  OrgApacheLuceneQueryparserFlexibleStandardNodesBooleanModifierNode_init(self);
   return self;
 }
 

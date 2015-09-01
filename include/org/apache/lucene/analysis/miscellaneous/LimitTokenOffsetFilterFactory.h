@@ -20,16 +20,11 @@
 #define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
-@class OrgApacheLuceneAnalysisTokenStream;
-@protocol JavaUtilMap;
-
 @interface OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
-
-- (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
+- (instancetype)init;
 
 @end
 
@@ -41,9 +36,9 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetF
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory_CONSUME_ALL_TOKENS_KEY_;
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory, CONSUME_ALL_TOKENS_KEY_, NSString *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory *self, id<JavaUtilMap> args);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory_init(OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory *new_OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory *new_OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory)
 

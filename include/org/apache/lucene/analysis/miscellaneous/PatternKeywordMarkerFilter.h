@@ -20,27 +20,19 @@
 #define OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilter_INCLUDE 1
 #include "org/apache/lucene/analysis/miscellaneous/KeywordMarkerFilter.h"
 
-@class JavaUtilRegexPattern;
-@class OrgApacheLuceneAnalysisTokenStream;
-
 @interface OrgApacheLuceneAnalysisMiscellaneousPatternKeywordMarkerFilter : OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
-                                  withJavaUtilRegexPattern:(JavaUtilRegexPattern *)pattern;
-
-#pragma mark Protected
-
-- (jboolean)isKeyword;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousPatternKeywordMarkerFilter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousPatternKeywordMarkerFilter_initWithOrgApacheLuceneAnalysisTokenStream_withJavaUtilRegexPattern_(OrgApacheLuceneAnalysisMiscellaneousPatternKeywordMarkerFilter *self, OrgApacheLuceneAnalysisTokenStream *inArg, JavaUtilRegexPattern *pattern);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousPatternKeywordMarkerFilter_init(OrgApacheLuceneAnalysisMiscellaneousPatternKeywordMarkerFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousPatternKeywordMarkerFilter *new_OrgApacheLuceneAnalysisMiscellaneousPatternKeywordMarkerFilter_initWithOrgApacheLuceneAnalysisTokenStream_withJavaUtilRegexPattern_(OrgApacheLuceneAnalysisTokenStream *inArg, JavaUtilRegexPattern *pattern) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousPatternKeywordMarkerFilter *new_OrgApacheLuceneAnalysisMiscellaneousPatternKeywordMarkerFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousPatternKeywordMarkerFilter)
 

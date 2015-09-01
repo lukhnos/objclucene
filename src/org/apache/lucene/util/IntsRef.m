@@ -9,7 +9,6 @@
 #include "java/lang/Integer.h"
 #include "java/lang/Math.h"
 #include "java/lang/StringBuilder.h"
-#include "java/util/Arrays.h"
 #include "org/apache/lucene/util/IntsRef.h"
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilIntsRef)
@@ -20,11 +19,6 @@ IOSIntArray *OrgApacheLuceneUtilIntsRef_EMPTY_INTS_;
 
 - (instancetype)init {
   OrgApacheLuceneUtilIntsRef_init(self);
-  return self;
-}
-
-- (instancetype)initWithInt:(jint)capacity {
-  OrgApacheLuceneUtilIntsRef_initWithInt_(self, capacity);
   return self;
 }
 
@@ -111,10 +105,6 @@ IOSIntArray *OrgApacheLuceneUtilIntsRef_EMPTY_INTS_;
   return [sb description];
 }
 
-+ (OrgApacheLuceneUtilIntsRef *)deepCopyOfWithOrgApacheLuceneUtilIntsRef:(OrgApacheLuceneUtilIntsRef *)other {
-  return OrgApacheLuceneUtilIntsRef_deepCopyOfWithOrgApacheLuceneUtilIntsRef_(other);
-}
-
 - (jboolean)isValid {
   if (ints_ == nil) {
     @throw [new_JavaLangIllegalStateException_initWithNSString_(@"ints is null") autorelease];
@@ -159,7 +149,6 @@ IOSIntArray *OrgApacheLuceneUtilIntsRef_EMPTY_INTS_;
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "init", "IntsRef", NULL, 0x1, NULL, NULL },
-    { "initWithInt:", "IntsRef", NULL, 0x1, NULL, NULL },
     { "initWithIntArray:withInt:withInt:", "IntsRef", NULL, 0x1, NULL, NULL },
     { "clone", NULL, "Lorg.apache.lucene.util.IntsRef;", 0x1, NULL, NULL },
     { "hash", "hashCode", "I", 0x1, NULL, NULL },
@@ -167,7 +156,6 @@ IOSIntArray *OrgApacheLuceneUtilIntsRef_EMPTY_INTS_;
     { "intsEqualsWithOrgApacheLuceneUtilIntsRef:", "intsEquals", "Z", 0x1, NULL, NULL },
     { "compareToWithId:", "compareTo", "I", 0x1, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "deepCopyOfWithOrgApacheLuceneUtilIntsRef:", "deepCopyOf", "Lorg.apache.lucene.util.IntsRef;", 0x9, NULL, NULL },
     { "isValid", NULL, "Z", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -176,7 +164,7 @@ IOSIntArray *OrgApacheLuceneUtilIntsRef_EMPTY_INTS_;
     { "offset_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "length_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilIntsRef = { 2, "IntsRef", "org.apache.lucene.util", NULL, 0x11, 11, methods, 4, fields, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/lang/Comparable<Lorg/apache/lucene/util/IntsRef;>;Ljava/lang/Cloneable;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilIntsRef = { 2, "IntsRef", "org.apache.lucene.util", NULL, 0x11, 9, methods, 4, fields, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/lang/Comparable<Lorg/apache/lucene/util/IntsRef;>;Ljava/lang/Cloneable;" };
   return &_OrgApacheLuceneUtilIntsRef;
 }
 
@@ -193,17 +181,6 @@ OrgApacheLuceneUtilIntsRef *new_OrgApacheLuceneUtilIntsRef_init() {
   return self;
 }
 
-void OrgApacheLuceneUtilIntsRef_initWithInt_(OrgApacheLuceneUtilIntsRef *self, jint capacity) {
-  NSObject_init(self);
-  JreStrongAssignAndConsume(&self->ints_, [IOSIntArray newArrayWithLength:capacity]);
-}
-
-OrgApacheLuceneUtilIntsRef *new_OrgApacheLuceneUtilIntsRef_initWithInt_(jint capacity) {
-  OrgApacheLuceneUtilIntsRef *self = [OrgApacheLuceneUtilIntsRef alloc];
-  OrgApacheLuceneUtilIntsRef_initWithInt_(self, capacity);
-  return self;
-}
-
 void OrgApacheLuceneUtilIntsRef_initWithIntArray_withInt_withInt_(OrgApacheLuceneUtilIntsRef *self, IOSIntArray *ints, jint offset, jint length) {
   NSObject_init(self);
   JreStrongAssign(&self->ints_, ints);
@@ -216,11 +193,6 @@ OrgApacheLuceneUtilIntsRef *new_OrgApacheLuceneUtilIntsRef_initWithIntArray_with
   OrgApacheLuceneUtilIntsRef *self = [OrgApacheLuceneUtilIntsRef alloc];
   OrgApacheLuceneUtilIntsRef_initWithIntArray_withInt_withInt_(self, ints, offset, length);
   return self;
-}
-
-OrgApacheLuceneUtilIntsRef *OrgApacheLuceneUtilIntsRef_deepCopyOfWithOrgApacheLuceneUtilIntsRef_(OrgApacheLuceneUtilIntsRef *other) {
-  OrgApacheLuceneUtilIntsRef_initialize();
-  return [new_OrgApacheLuceneUtilIntsRef_initWithIntArray_withInt_withInt_(JavaUtilArrays_copyOfRangeWithIntArray_withInt_withInt_(((OrgApacheLuceneUtilIntsRef *) nil_chk(other))->ints_, other->offset_, other->offset_ + other->length_), 0, other->length_) autorelease];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilIntsRef)

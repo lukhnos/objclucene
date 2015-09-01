@@ -20,41 +20,19 @@
 #define OrgApacheLuceneUtilAccountable_INCLUDE 1
 #include "org/apache/lucene/util/Accountable.h"
 
-@class OrgApacheLuceneSearchSuggestDocumentCompletionScorer;
-@class OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector;
-@class OrgApacheLuceneStoreIndexInput;
-@protocol JavaUtilCollection;
-@protocol OrgApacheLuceneUtilBits;
-
 @interface OrgApacheLuceneSearchSuggestDocumentNRTSuggester : NSObject < OrgApacheLuceneUtilAccountable >
 
 #pragma mark Public
 
-- (id<JavaUtilCollection>)getChildResources;
-
-+ (OrgApacheLuceneSearchSuggestDocumentNRTSuggester *)load__WithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)input;
-
-- (void)lookupWithOrgApacheLuceneSearchSuggestDocumentCompletionScorer:(OrgApacheLuceneSearchSuggestDocumentCompletionScorer *)scorer
-                                           withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)acceptDocs
-       withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector:(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector *)collector;
-
-- (jlong)ramBytesUsed;
-
-#pragma mark Package-Private
-
-+ (jlong)decodeWithLong:(jlong)output;
-
-+ (jlong)encodeWithLong:(jlong)input;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestDocumentNRTSuggester)
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentNRTSuggester *OrgApacheLuceneSearchSuggestDocumentNRTSuggester_load__WithOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneStoreIndexInput *input);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentNRTSuggester_init(OrgApacheLuceneSearchSuggestDocumentNRTSuggester *self);
 
-FOUNDATION_EXPORT jlong OrgApacheLuceneSearchSuggestDocumentNRTSuggester_encodeWithLong_(jlong input);
-
-FOUNDATION_EXPORT jlong OrgApacheLuceneSearchSuggestDocumentNRTSuggester_decodeWithLong_(jlong output);
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentNRTSuggester *new_OrgApacheLuceneSearchSuggestDocumentNRTSuggester_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentNRTSuggester)
 
@@ -63,35 +41,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentNRTSuggester)
 #if !defined (_OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor_) && (OrgApacheLuceneSearchSuggestDocumentNRTSuggester_INCLUDE_ALL || OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor_INCLUDE)
 #define _OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor_
 
-@class OrgApacheLuceneUtilBytesRef;
-@class OrgApacheLuceneUtilCharsRefBuilder;
-
 @interface OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor : NSObject
 
 #pragma mark Package-Private
 
 - (instancetype)init;
 
-+ (OrgApacheLuceneUtilBytesRef *)makeWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)surface
-                                                             withInt:(jint)docID
-                                                             withInt:(jint)payloadSep;
-
-+ (jint)parseDocIDWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)output
-                                          withInt:(jint)payloadSepIndex;
-
-+ (jint)parseSurfaceFormWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)output
-                                                withInt:(jint)payloadSep
-                 withOrgApacheLuceneUtilCharsRefBuilder:(OrgApacheLuceneUtilCharsRefBuilder *)spare;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor)
-
-FOUNDATION_EXPORT jint OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor_parseSurfaceFormWithOrgApacheLuceneUtilBytesRef_withInt_withOrgApacheLuceneUtilCharsRefBuilder_(OrgApacheLuceneUtilBytesRef *output, jint payloadSep, OrgApacheLuceneUtilCharsRefBuilder *spare);
-
-FOUNDATION_EXPORT jint OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor_parseDocIDWithOrgApacheLuceneUtilBytesRef_withInt_(OrgApacheLuceneUtilBytesRef *output, jint payloadSepIndex);
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilBytesRef *OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor_makeWithOrgApacheLuceneUtilBytesRef_withInt_withInt_(OrgApacheLuceneUtilBytesRef *surface, jint docID, jint payloadSep);
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor_init(OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor *self);
 

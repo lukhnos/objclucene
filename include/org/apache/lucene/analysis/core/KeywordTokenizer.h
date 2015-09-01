@@ -20,8 +20,6 @@
 #define OrgApacheLuceneAnalysisTokenizer_INCLUDE 1
 #include "org/apache/lucene/analysis/Tokenizer.h"
 
-@class OrgApacheLuceneUtilAttributeFactory;
-
 #define OrgApacheLuceneAnalysisCoreKeywordTokenizer_DEFAULT_BUFFER_SIZE 256
 
 @interface OrgApacheLuceneAnalysisCoreKeywordTokenizer : OrgApacheLuceneAnalysisTokenizer
@@ -29,17 +27,6 @@
 #pragma mark Public
 
 - (instancetype)init;
-
-- (instancetype)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory
-                                                    withInt:(jint)bufferSize;
-
-- (instancetype)initWithInt:(jint)bufferSize;
-
-- (void)end;
-
-- (jboolean)incrementToken;
-
-- (void)reset;
 
 @end
 
@@ -50,14 +37,6 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisCoreKeywordTokenizer, DEFAULT_
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCoreKeywordTokenizer_init(OrgApacheLuceneAnalysisCoreKeywordTokenizer *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreKeywordTokenizer *new_OrgApacheLuceneAnalysisCoreKeywordTokenizer_init() NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCoreKeywordTokenizer_initWithInt_(OrgApacheLuceneAnalysisCoreKeywordTokenizer *self, jint bufferSize);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreKeywordTokenizer *new_OrgApacheLuceneAnalysisCoreKeywordTokenizer_initWithInt_(jint bufferSize) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCoreKeywordTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_(OrgApacheLuceneAnalysisCoreKeywordTokenizer *self, OrgApacheLuceneUtilAttributeFactory *factory, jint bufferSize);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreKeywordTokenizer *new_OrgApacheLuceneAnalysisCoreKeywordTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_(OrgApacheLuceneUtilAttributeFactory *factory, jint bufferSize) NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCoreKeywordTokenizer)
 

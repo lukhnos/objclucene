@@ -7,8 +7,6 @@
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
 #include "java/lang/IllegalArgumentException.h"
-#include "java/util/ArrayList.h"
-#include "java/util/Collection.h"
 #include "java/util/List.h"
 #include "org/apache/lucene/search/DisiPriorityQueue.h"
 #include "org/apache/lucene/search/DisiWrapper.h"
@@ -132,14 +130,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDisjunctionScorer_$1)
   return 0;
 }
 
-- (id<JavaUtilCollection>)getChildren {
-  JavaUtilArrayList *children = [new_JavaUtilArrayList_init() autorelease];
-  for (OrgApacheLuceneSearchDisiWrapper * __strong scorer in nil_chk(subScorers_)) {
-    [children addWithId:[new_OrgApacheLuceneSearchScorer_ChildScorer_initWithOrgApacheLuceneSearchScorer_withNSString_(((OrgApacheLuceneSearchDisiWrapper *) nil_chk(scorer))->iterator_, @"SHOULD") autorelease]];
-  }
-  return children;
-}
-
 - (void)dealloc {
   RELEASE_(subScorers_);
   RELEASE_(topScorers_);
@@ -157,7 +147,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDisjunctionScorer_$1)
     { "freq", NULL, "I", 0x11, "Ljava.io.IOException;", NULL },
     { "score", NULL, "F", 0x11, "Ljava.io.IOException;", NULL },
     { "scoreWithOrgApacheLuceneSearchDisiWrapper:", "score", "F", 0x404, "Ljava.io.IOException;", NULL },
-    { "getChildren", NULL, "Ljava.util.Collection;", 0x11, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "needsScores_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
@@ -165,7 +154,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDisjunctionScorer_$1)
     { "cost_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
     { "topScorers_", NULL, 0x2, "Lorg.apache.lucene.search.DisiWrapper;", NULL, "Lorg/apache/lucene/search/DisiWrapper<Lorg/apache/lucene/search/Scorer;>;", .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchDisjunctionScorer = { 2, "DisjunctionScorer", "org.apache.lucene.search", NULL, 0x400, 10, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchDisjunctionScorer = { 2, "DisjunctionScorer", "org.apache.lucene.search", NULL, 0x400, 9, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchDisjunctionScorer;
 }
 

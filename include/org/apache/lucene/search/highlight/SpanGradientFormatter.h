@@ -20,28 +20,19 @@
 #define OrgApacheLuceneSearchHighlightGradientFormatter_INCLUDE 1
 #include "org/apache/lucene/search/highlight/GradientFormatter.h"
 
-@class OrgApacheLuceneSearchHighlightTokenGroup;
-
 @interface OrgApacheLuceneSearchHighlightSpanGradientFormatter : OrgApacheLuceneSearchHighlightGradientFormatter
 
 #pragma mark Public
 
-- (instancetype)initWithFloat:(jfloat)maxScore
-                 withNSString:(NSString *)minForegroundColor
-                 withNSString:(NSString *)maxForegroundColor
-                 withNSString:(NSString *)minBackgroundColor
-                 withNSString:(NSString *)maxBackgroundColor;
-
-- (NSString *)highlightTermWithNSString:(NSString *)originalText
-withOrgApacheLuceneSearchHighlightTokenGroup:(OrgApacheLuceneSearchHighlightTokenGroup *)tokenGroup;
+- (instancetype)init;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneSearchHighlightSpanGradientFormatter)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchHighlightSpanGradientFormatter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightSpanGradientFormatter_initWithFloat_withNSString_withNSString_withNSString_withNSString_(OrgApacheLuceneSearchHighlightSpanGradientFormatter *self, jfloat maxScore, NSString *minForegroundColor, NSString *maxForegroundColor, NSString *minBackgroundColor, NSString *maxBackgroundColor);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightSpanGradientFormatter_init(OrgApacheLuceneSearchHighlightSpanGradientFormatter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightSpanGradientFormatter *new_OrgApacheLuceneSearchHighlightSpanGradientFormatter_initWithFloat_withNSString_withNSString_withNSString_withNSString_(jfloat maxScore, NSString *minForegroundColor, NSString *maxForegroundColor, NSString *minBackgroundColor, NSString *maxBackgroundColor) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightSpanGradientFormatter *new_OrgApacheLuceneSearchHighlightSpanGradientFormatter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightSpanGradientFormatter)
 

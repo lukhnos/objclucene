@@ -29,7 +29,6 @@
 @class OrgApacheLuceneIndexSegmentReadState;
 @class OrgApacheLuceneStoreDataInput;
 @class OrgApacheLuceneStoreIndexInput;
-@protocol JavaUtilCollection;
 
 @interface OrgApacheLuceneCodecsLucene50Lucene50PostingsReader : OrgApacheLuceneCodecsPostingsReaderBase {
  @public
@@ -49,8 +48,6 @@ withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
 withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo
 withOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)_termState
                     withBoolean:(jboolean)absolute;
-
-- (id<JavaUtilCollection>)getChildResources;
 
 - (void)init__WithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)termsIn
         withOrgApacheLuceneIndexSegmentReadState:(OrgApacheLuceneIndexSegmentReadState *)state OBJC_METHOD_FAMILY_NONE;

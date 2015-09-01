@@ -3,169 +3,37 @@
 //  source: ./sandbox/src/java/org/apache/lucene/search/GeoPointInBBoxQueryImpl.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
-#include "java/lang/Double.h"
-#include "java/lang/StringBuilder.h"
-#include "java/lang/UnsupportedOperationException.h"
-#include "org/apache/lucene/index/Terms.h"
-#include "org/apache/lucene/index/TermsEnum.h"
 #include "org/apache/lucene/search/GeoPointInBBoxQueryImpl.h"
-#include "org/apache/lucene/search/GeoPointTermQuery.h"
-#include "org/apache/lucene/search/GeoPointTermsEnum.h"
-#include "org/apache/lucene/search/MultiTermQuery.h"
-#include "org/apache/lucene/search/Query.h"
-#include "org/apache/lucene/util/AttributeSource.h"
-#include "org/apache/lucene/util/GeoUtils.h"
-#include "org/apache/lucene/util/ToStringUtils.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneSearchGeoPointInBBoxQueryImpl
 
-- (instancetype)initWithNSString:(NSString *)field
-                      withDouble:(jdouble)minLon
-                      withDouble:(jdouble)minLat
-                      withDouble:(jdouble)maxLon
-                      withDouble:(jdouble)maxLat {
-  OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_initWithNSString_withDouble_withDouble_withDouble_withDouble_(self, field, minLon, minLat, maxLon, maxLat);
+- (instancetype)init {
+  OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_init(self);
   return self;
-}
-
-- (OrgApacheLuceneIndexTermsEnum *)getTermsEnumWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms
-                                      withOrgApacheLuceneUtilAttributeSource:(OrgApacheLuceneUtilAttributeSource *)atts {
-  return [new_OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_GeoPointInBBoxTermsEnum_initWithOrgApacheLuceneSearchGeoPointInBBoxQueryImpl_withOrgApacheLuceneIndexTermsEnum_withDouble_withDouble_withDouble_withDouble_(self, [((OrgApacheLuceneIndexTerms *) nil_chk(terms)) iterator], minLon_, minLat_, maxLon_, maxLat_) autorelease];
-}
-
-- (void)setRewriteMethodWithOrgApacheLuceneSearchMultiTermQuery_RewriteMethod:(OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *)method {
-  @throw [new_JavaLangUnsupportedOperationException_initWithNSString_(@"cannot change rewrite method") autorelease];
-}
-
-- (jboolean)isEqual:(id)o {
-  if (self == o) return YES;
-  if (o == nil || [self getClass] != [o getClass]) return NO;
-  if (![super isEqual:o]) return NO;
-  OrgApacheLuceneSearchGeoPointInBBoxQueryImpl *that = (OrgApacheLuceneSearchGeoPointInBBoxQueryImpl *) check_class_cast(o, [OrgApacheLuceneSearchGeoPointInBBoxQueryImpl class]);
-  if (JavaLangDouble_compareWithDouble_withDouble_(((OrgApacheLuceneSearchGeoPointInBBoxQueryImpl *) nil_chk(that))->maxLat_, maxLat_) != 0) return NO;
-  if (JavaLangDouble_compareWithDouble_withDouble_(that->maxLon_, maxLon_) != 0) return NO;
-  if (JavaLangDouble_compareWithDouble_withDouble_(that->minLat_, minLat_) != 0) return NO;
-  if (JavaLangDouble_compareWithDouble_withDouble_(that->minLon_, minLon_) != 0) return NO;
-  return YES;
-}
-
-- (NSUInteger)hash {
-  jint result = ((jint) [super hash]);
-  jlong temp;
-  temp = JavaLangDouble_doubleToLongBitsWithDouble_(minLon_);
-  result = 31 * result + (jint) (temp ^ (JreURShift64(temp, 32)));
-  temp = JavaLangDouble_doubleToLongBitsWithDouble_(minLat_);
-  result = 31 * result + (jint) (temp ^ (JreURShift64(temp, 32)));
-  temp = JavaLangDouble_doubleToLongBitsWithDouble_(maxLon_);
-  result = 31 * result + (jint) (temp ^ (JreURShift64(temp, 32)));
-  temp = JavaLangDouble_doubleToLongBitsWithDouble_(maxLat_);
-  result = 31 * result + (jint) (temp ^ (JreURShift64(temp, 32)));
-  return result;
-}
-
-- (NSString *)toStringWithNSString:(NSString *)field {
-  JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
-  [sb appendWithNSString:[[self getClass] getSimpleName]];
-  [sb appendWithChar:':'];
-  if (![((NSString *) nil_chk([self getField])) isEqual:field]) {
-    [sb appendWithNSString:@" field="];
-    [sb appendWithNSString:[self getField]];
-    [sb appendWithChar:':'];
-  }
-  return [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:@" Lower Left: ["])) appendWithDouble:minLon_])) appendWithChar:','])) appendWithDouble:minLat_])) appendWithChar:']'])) appendWithNSString:@" Upper Right: ["])) appendWithDouble:maxLon_])) appendWithChar:','])) appendWithDouble:maxLat_])) appendWithNSString:@"]"])) appendWithNSString:OrgApacheLuceneUtilToStringUtils_boostWithFloat_([self getBoost])])) description];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withDouble:withDouble:withDouble:withDouble:", "GeoPointInBBoxQueryImpl", NULL, 0x0, NULL, NULL },
-    { "getTermsEnumWithOrgApacheLuceneIndexTerms:withOrgApacheLuceneUtilAttributeSource:", "getTermsEnum", "Lorg.apache.lucene.index.TermsEnum;", 0x4, "Ljava.io.IOException;", NULL },
-    { "setRewriteMethodWithOrgApacheLuceneSearchMultiTermQuery_RewriteMethod:", "setRewriteMethod", "V", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x0, NULL, NULL },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.search.GeoPointInBBoxQueryImpl$GeoPointInBBoxTermsEnum;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchGeoPointInBBoxQueryImpl = { 2, "GeoPointInBBoxQueryImpl", "org.apache.lucene.search", NULL, 0x0, 6, methods, 0, NULL, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchGeoPointInBBoxQueryImpl = { 2, "GeoPointInBBoxQueryImpl", "org.apache.lucene.search", NULL, 0x0, 1, methods, 0, NULL, 0, NULL, 1, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneSearchGeoPointInBBoxQueryImpl;
 }
 
 @end
 
-void OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_initWithNSString_withDouble_withDouble_withDouble_withDouble_(OrgApacheLuceneSearchGeoPointInBBoxQueryImpl *self, NSString *field, jdouble minLon, jdouble minLat, jdouble maxLon, jdouble maxLat) {
-  OrgApacheLuceneSearchGeoPointTermQuery_initWithNSString_withDouble_withDouble_withDouble_withDouble_(self, field, minLon, minLat, maxLon, maxLat);
+void OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_init(OrgApacheLuceneSearchGeoPointInBBoxQueryImpl *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneSearchGeoPointInBBoxQueryImpl *new_OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_initWithNSString_withDouble_withDouble_withDouble_withDouble_(NSString *field, jdouble minLon, jdouble minLat, jdouble maxLon, jdouble maxLat) {
+OrgApacheLuceneSearchGeoPointInBBoxQueryImpl *new_OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_init() {
   OrgApacheLuceneSearchGeoPointInBBoxQueryImpl *self = [OrgApacheLuceneSearchGeoPointInBBoxQueryImpl alloc];
-  OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_initWithNSString_withDouble_withDouble_withDouble_withDouble_(self, field, minLon, minLat, maxLon, maxLat);
+  OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_init(self);
   return self;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchGeoPointInBBoxQueryImpl)
-
-@implementation OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_GeoPointInBBoxTermsEnum
-
-- (instancetype)initWithOrgApacheLuceneSearchGeoPointInBBoxQueryImpl:(OrgApacheLuceneSearchGeoPointInBBoxQueryImpl *)outer$
-                                   withOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)tenum
-                                                          withDouble:(jdouble)minLon
-                                                          withDouble:(jdouble)minLat
-                                                          withDouble:(jdouble)maxLon
-                                                          withDouble:(jdouble)maxLat {
-  OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_GeoPointInBBoxTermsEnum_initWithOrgApacheLuceneSearchGeoPointInBBoxQueryImpl_withOrgApacheLuceneIndexTermsEnum_withDouble_withDouble_withDouble_withDouble_(self, outer$, tenum, minLon, minLat, maxLon, maxLat);
-  return self;
-}
-
-- (jboolean)cellCrossesWithDouble:(jdouble)minLon
-                       withDouble:(jdouble)minLat
-                       withDouble:(jdouble)maxLon
-                       withDouble:(jdouble)maxLat {
-  return OrgApacheLuceneUtilGeoUtils_rectCrossesWithDouble_withDouble_withDouble_withDouble_withDouble_withDouble_withDouble_withDouble_(minLon, minLat, maxLon, maxLat, self->minLon_, self->minLat_, self->maxLon_, self->maxLat_);
-}
-
-- (jboolean)cellWithinWithDouble:(jdouble)minLon
-                      withDouble:(jdouble)minLat
-                      withDouble:(jdouble)maxLon
-                      withDouble:(jdouble)maxLat {
-  return OrgApacheLuceneUtilGeoUtils_rectWithinWithDouble_withDouble_withDouble_withDouble_withDouble_withDouble_withDouble_withDouble_(minLon, minLat, maxLon, maxLat, self->minLon_, self->minLat_, self->maxLon_, self->maxLat_);
-}
-
-- (jboolean)cellIntersectsShapeWithDouble:(jdouble)minLon
-                               withDouble:(jdouble)minLat
-                               withDouble:(jdouble)maxLon
-                               withDouble:(jdouble)maxLat {
-  return [self cellIntersectsMBRWithDouble:minLon withDouble:minLat withDouble:maxLon withDouble:maxLat];
-}
-
-- (jboolean)postFilterWithDouble:(jdouble)lon
-                      withDouble:(jdouble)lat {
-  return OrgApacheLuceneUtilGeoUtils_bboxContainsWithDouble_withDouble_withDouble_withDouble_withDouble_withDouble_(lon, lat, minLon_, minLat_, maxLon_, maxLat_);
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchGeoPointInBBoxQueryImpl:withOrgApacheLuceneIndexTermsEnum:withDouble:withDouble:withDouble:withDouble:", "GeoPointInBBoxTermsEnum", NULL, 0x4, NULL, NULL },
-    { "cellCrossesWithDouble:withDouble:withDouble:withDouble:", "cellCrosses", "Z", 0x4, NULL, NULL },
-    { "cellWithinWithDouble:withDouble:withDouble:withDouble:", "cellWithin", "Z", 0x4, NULL, NULL },
-    { "cellIntersectsShapeWithDouble:withDouble:withDouble:withDouble:", "cellIntersectsShape", "Z", 0x4, NULL, NULL },
-    { "postFilterWithDouble:withDouble:", "postFilter", "Z", 0x4, NULL, NULL },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_GeoPointInBBoxTermsEnum = { 2, "GeoPointInBBoxTermsEnum", "org.apache.lucene.search", "GeoPointInBBoxQueryImpl", 0x4, 5, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_GeoPointInBBoxTermsEnum;
-}
-
-@end
-
-void OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_GeoPointInBBoxTermsEnum_initWithOrgApacheLuceneSearchGeoPointInBBoxQueryImpl_withOrgApacheLuceneIndexTermsEnum_withDouble_withDouble_withDouble_withDouble_(OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_GeoPointInBBoxTermsEnum *self, OrgApacheLuceneSearchGeoPointInBBoxQueryImpl *outer$, OrgApacheLuceneIndexTermsEnum *tenum, jdouble minLon, jdouble minLat, jdouble maxLon, jdouble maxLat) {
-  OrgApacheLuceneSearchGeoPointTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withDouble_withDouble_withDouble_withDouble_(self, tenum, minLon, minLat, maxLon, maxLat);
-}
-
-OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_GeoPointInBBoxTermsEnum *new_OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_GeoPointInBBoxTermsEnum_initWithOrgApacheLuceneSearchGeoPointInBBoxQueryImpl_withOrgApacheLuceneIndexTermsEnum_withDouble_withDouble_withDouble_withDouble_(OrgApacheLuceneSearchGeoPointInBBoxQueryImpl *outer$, OrgApacheLuceneIndexTermsEnum *tenum, jdouble minLon, jdouble minLat, jdouble maxLon, jdouble maxLat) {
-  OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_GeoPointInBBoxTermsEnum *self = [OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_GeoPointInBBoxTermsEnum alloc];
-  OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_GeoPointInBBoxTermsEnum_initWithOrgApacheLuceneSearchGeoPointInBBoxQueryImpl_withOrgApacheLuceneIndexTermsEnum_withDouble_withDouble_withDouble_withDouble_(self, outer$, tenum, minLon, minLat, maxLon, maxLat);
-  return self;
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_GeoPointInBBoxTermsEnum)

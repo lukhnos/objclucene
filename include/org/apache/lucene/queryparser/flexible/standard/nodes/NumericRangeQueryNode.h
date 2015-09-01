@@ -20,41 +20,19 @@
 #define OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode_INCLUDE 1
 #include "org/apache/lucene/queryparser/flexible/standard/nodes/AbstractRangeQueryNode.h"
 
-@class OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig;
-@class OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode;
-
-@interface OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode : OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode {
- @public
-  OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *numericConfig_;
-}
+@interface OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode : OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode:(OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode *)lower
-                    withOrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode:(OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode *)upper
-                                                                            withBoolean:(jboolean)lowerInclusive
-                                                                            withBoolean:(jboolean)upperInclusive
-                      withOrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig:(OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *)numericConfig;
-
-- (OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *)getNumericConfig;
-
-- (void)setBoundsWithOrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode:(OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode *)lower
-                 withOrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode:(OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode *)upper
-                                                                         withBoolean:(jboolean)lowerInclusive
-                                                                         withBoolean:(jboolean)upperInclusive
-                   withOrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig:(OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *)numericConfig;
-
-- (NSString *)description;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode, numericConfig_, OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *)
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode_init(OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode_initWithOrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode_withOrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode_withBoolean_withBoolean_withOrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig_(OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode *self, OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode *lower, OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode *upper, jboolean lowerInclusive, jboolean upperInclusive, OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *numericConfig);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode *new_OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode_initWithOrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode_withOrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode_withBoolean_withBoolean_withOrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig_(OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode *lower, OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode *upper, jboolean lowerInclusive, jboolean upperInclusive, OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *numericConfig) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode *new_OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardNodesNumericRangeQueryNode)
 

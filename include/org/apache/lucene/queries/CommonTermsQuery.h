@@ -42,16 +42,7 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchBooleanClause_OccurEnum:(OrgApacheLuceneSearchBooleanClause_OccurEnum *)highFreqOccur
-                    withOrgApacheLuceneSearchBooleanClause_OccurEnum:(OrgApacheLuceneSearchBooleanClause_OccurEnum *)lowFreqOccur
-                                                           withFloat:(jfloat)maxTermFrequency;
-
-- (instancetype)initWithOrgApacheLuceneSearchBooleanClause_OccurEnum:(OrgApacheLuceneSearchBooleanClause_OccurEnum *)highFreqOccur
-                    withOrgApacheLuceneSearchBooleanClause_OccurEnum:(OrgApacheLuceneSearchBooleanClause_OccurEnum *)lowFreqOccur
-                                                           withFloat:(jfloat)maxTermFrequency
-                                                         withBoolean:(jboolean)disableCoord;
-
-- (void)addWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
+- (instancetype)init;
 
 - (void)collectTermContextWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
                                              withJavaUtilList:(id<JavaUtilList>)leaves
@@ -66,13 +57,7 @@
 
 - (NSUInteger)hash;
 
-- (jboolean)isCoordDisabled;
-
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
-
-- (void)setHighFreqMinimumNumberShouldMatchWithFloat:(jfloat)min;
-
-- (void)setLowFreqMinimumNumberShouldMatchWithFloat:(jfloat)min;
 
 - (NSString *)toStringWithNSString:(NSString *)field;
 
@@ -97,13 +82,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesCommonTermsQuery, terms_, id<JavaUtilL
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesCommonTermsQuery, lowFreqOccur_, OrgApacheLuceneSearchBooleanClause_OccurEnum *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesCommonTermsQuery, highFreqOccur_, OrgApacheLuceneSearchBooleanClause_OccurEnum *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesCommonTermsQuery_initWithOrgApacheLuceneSearchBooleanClause_OccurEnum_withOrgApacheLuceneSearchBooleanClause_OccurEnum_withFloat_(OrgApacheLuceneQueriesCommonTermsQuery *self, OrgApacheLuceneSearchBooleanClause_OccurEnum *highFreqOccur, OrgApacheLuceneSearchBooleanClause_OccurEnum *lowFreqOccur, jfloat maxTermFrequency);
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesCommonTermsQuery_init(OrgApacheLuceneQueriesCommonTermsQuery *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueriesCommonTermsQuery *new_OrgApacheLuceneQueriesCommonTermsQuery_initWithOrgApacheLuceneSearchBooleanClause_OccurEnum_withOrgApacheLuceneSearchBooleanClause_OccurEnum_withFloat_(OrgApacheLuceneSearchBooleanClause_OccurEnum *highFreqOccur, OrgApacheLuceneSearchBooleanClause_OccurEnum *lowFreqOccur, jfloat maxTermFrequency) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesCommonTermsQuery_initWithOrgApacheLuceneSearchBooleanClause_OccurEnum_withOrgApacheLuceneSearchBooleanClause_OccurEnum_withFloat_withBoolean_(OrgApacheLuceneQueriesCommonTermsQuery *self, OrgApacheLuceneSearchBooleanClause_OccurEnum *highFreqOccur, OrgApacheLuceneSearchBooleanClause_OccurEnum *lowFreqOccur, jfloat maxTermFrequency, jboolean disableCoord);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueriesCommonTermsQuery *new_OrgApacheLuceneQueriesCommonTermsQuery_initWithOrgApacheLuceneSearchBooleanClause_OccurEnum_withOrgApacheLuceneSearchBooleanClause_OccurEnum_withFloat_withBoolean_(OrgApacheLuceneSearchBooleanClause_OccurEnum *highFreqOccur, OrgApacheLuceneSearchBooleanClause_OccurEnum *lowFreqOccur, jfloat maxTermFrequency, jboolean disableCoord) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueriesCommonTermsQuery *new_OrgApacheLuceneQueriesCommonTermsQuery_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesCommonTermsQuery)
 

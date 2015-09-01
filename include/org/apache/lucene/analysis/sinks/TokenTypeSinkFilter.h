@@ -20,23 +20,19 @@
 #define OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter_INCLUDE 1
 #include "org/apache/lucene/analysis/sinks/TeeSinkTokenFilter.h"
 
-@class OrgApacheLuceneUtilAttributeSource;
-
 @interface OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter : OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)typeToMatch;
-
-- (jboolean)acceptWithOrgApacheLuceneUtilAttributeSource:(OrgApacheLuceneUtilAttributeSource *)source;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter_initWithNSString_(OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter *self, NSString *typeToMatch);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter_init(OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter *new_OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter_initWithNSString_(NSString *typeToMatch) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter *new_OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSinksTokenTypeSinkFilter)
 

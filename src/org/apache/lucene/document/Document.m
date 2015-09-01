@@ -11,7 +11,6 @@
 #include "java/util/List.h"
 #include "org/apache/lucene/document/Document.h"
 #include "org/apache/lucene/index/IndexableField.h"
-#include "org/apache/lucene/util/BytesRef.h"
 
 @interface OrgApacheLuceneDocumentDocument () {
  @public
@@ -42,52 +41,6 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneDocumentDocument)
   [((id<JavaUtilList>) nil_chk(fields_)) addWithId:field];
 }
 
-- (void)removeFieldWithNSString:(NSString *)name {
-  id<JavaUtilIterator> it = [((id<JavaUtilList>) nil_chk(fields_)) iterator];
-  while ([((id<JavaUtilIterator>) nil_chk(it)) hasNext]) {
-    id<OrgApacheLuceneIndexIndexableField> field = [it next];
-    if ([((NSString *) nil_chk([((id<OrgApacheLuceneIndexIndexableField>) nil_chk(field)) name])) isEqual:name]) {
-      [it remove];
-      return;
-    }
-  }
-}
-
-- (void)removeFieldsWithNSString:(NSString *)name {
-  id<JavaUtilIterator> it = [((id<JavaUtilList>) nil_chk(fields_)) iterator];
-  while ([((id<JavaUtilIterator>) nil_chk(it)) hasNext]) {
-    id<OrgApacheLuceneIndexIndexableField> field = [it next];
-    if ([((NSString *) nil_chk([((id<OrgApacheLuceneIndexIndexableField>) nil_chk(field)) name])) isEqual:name]) {
-      [it remove];
-    }
-  }
-}
-
-- (IOSObjectArray *)getBinaryValuesWithNSString:(NSString *)name {
-  id<JavaUtilList> result = [new_JavaUtilArrayList_init() autorelease];
-  for (id<OrgApacheLuceneIndexIndexableField> __strong field in nil_chk(fields_)) {
-    if ([((NSString *) nil_chk([((id<OrgApacheLuceneIndexIndexableField>) nil_chk(field)) name])) isEqual:name]) {
-      OrgApacheLuceneUtilBytesRef *bytes = [field binaryValue];
-      if (bytes != nil) {
-        [result addWithId:bytes];
-      }
-    }
-  }
-  return [result toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:[result size] type:OrgApacheLuceneUtilBytesRef_class_()]];
-}
-
-- (OrgApacheLuceneUtilBytesRef *)getBinaryValueWithNSString:(NSString *)name {
-  for (id<OrgApacheLuceneIndexIndexableField> __strong field in nil_chk(fields_)) {
-    if ([((NSString *) nil_chk([((id<OrgApacheLuceneIndexIndexableField>) nil_chk(field)) name])) isEqual:name]) {
-      OrgApacheLuceneUtilBytesRef *bytes = [field binaryValue];
-      if (bytes != nil) {
-        return bytes;
-      }
-    }
-  }
-  return nil;
-}
-
 - (id<OrgApacheLuceneIndexIndexableField>)getFieldWithNSString:(NSString *)name {
   for (id<OrgApacheLuceneIndexIndexableField> __strong field in nil_chk(fields_)) {
     if ([((NSString *) nil_chk([((id<OrgApacheLuceneIndexIndexableField>) nil_chk(field)) name])) isEqual:name]) {
@@ -105,23 +58,6 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneDocumentDocument)
     }
   }
   return [result toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:[result size] type:OrgApacheLuceneIndexIndexableField_class_()]];
-}
-
-- (id<JavaUtilList>)getFields {
-  return fields_;
-}
-
-- (IOSObjectArray *)getValuesWithNSString:(NSString *)name {
-  id<JavaUtilList> result = [new_JavaUtilArrayList_init() autorelease];
-  for (id<OrgApacheLuceneIndexIndexableField> __strong field in nil_chk(fields_)) {
-    if ([((NSString *) nil_chk([((id<OrgApacheLuceneIndexIndexableField>) nil_chk(field)) name])) isEqual:name] && [field stringValue] != nil) {
-      [result addWithId:[field stringValue]];
-    }
-  }
-  if ([result size] == 0) {
-    return OrgApacheLuceneDocumentDocument_NO_STRINGS_;
-  }
-  return [result toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:[result size] type:NSString_class_()]];
 }
 
 - (NSString *)getWithNSString:(NSString *)name {
@@ -168,14 +104,8 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneDocumentDocument)
     { "init", "Document", NULL, 0x1, NULL, NULL },
     { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, NULL },
     { "addWithOrgApacheLuceneIndexIndexableField:", "add", "V", 0x11, NULL, NULL },
-    { "removeFieldWithNSString:", "removeField", "V", 0x11, NULL, NULL },
-    { "removeFieldsWithNSString:", "removeFields", "V", 0x11, NULL, NULL },
-    { "getBinaryValuesWithNSString:", "getBinaryValues", "[Lorg.apache.lucene.util.BytesRef;", 0x11, NULL, NULL },
-    { "getBinaryValueWithNSString:", "getBinaryValue", "Lorg.apache.lucene.util.BytesRef;", 0x11, NULL, NULL },
     { "getFieldWithNSString:", "getField", "Lorg.apache.lucene.index.IndexableField;", 0x11, NULL, NULL },
     { "getFieldsWithNSString:", "getFields", "[Lorg.apache.lucene.index.IndexableField;", 0x1, NULL, NULL },
-    { "getFields", NULL, "Ljava.util.List;", 0x11, NULL, NULL },
-    { "getValuesWithNSString:", "getValues", "[Ljava.lang.String;", 0x11, NULL, NULL },
     { "getWithNSString:", "get", "Ljava.lang.String;", 0x11, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x11, NULL, NULL },
   };
@@ -183,7 +113,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneDocumentDocument)
     { "fields_", NULL, 0x12, "Ljava.util.List;", NULL, "Ljava/util/List<Lorg/apache/lucene/index/IndexableField;>;", .constantValue.asLong = 0 },
     { "NO_STRINGS_", NULL, 0x1a, "[Ljava.lang.String;", &OrgApacheLuceneDocumentDocument_NO_STRINGS_, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneDocumentDocument = { 2, "Document", "org.apache.lucene.document", NULL, 0x11, 13, methods, 2, fields, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/lang/Iterable<Lorg/apache/lucene/index/IndexableField;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneDocumentDocument = { 2, "Document", "org.apache.lucene.document", NULL, 0x11, 7, methods, 2, fields, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/lang/Iterable<Lorg/apache/lucene/index/IndexableField;>;" };
   return &_OrgApacheLuceneDocumentDocument;
 }
 

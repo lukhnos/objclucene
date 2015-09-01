@@ -20,31 +20,19 @@
 #define OrgApacheLuceneQueryparserXmlQueryBuilder_INCLUDE 1
 #include "org/apache/lucene/queryparser/xml/QueryBuilder.h"
 
-@class OrgApacheLuceneSearchBooleanClause_OccurEnum;
-@class OrgApacheLuceneSearchQuery;
-@protocol OrgW3cDomElement;
-
 @interface OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder : NSObject < OrgApacheLuceneQueryparserXmlQueryBuilder >
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneQueryparserXmlQueryBuilder:(id<OrgApacheLuceneQueryparserXmlQueryBuilder>)factory;
-
-- (OrgApacheLuceneSearchQuery *)getQueryWithOrgW3cDomElement:(id<OrgW3cDomElement>)e;
-
-#pragma mark Package-Private
-
-+ (OrgApacheLuceneSearchBooleanClause_OccurEnum *)getOccursValueWithOrgW3cDomElement:(id<OrgW3cDomElement>)clauseElem;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder_initWithOrgApacheLuceneQueryparserXmlQueryBuilder_(OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder *self, id<OrgApacheLuceneQueryparserXmlQueryBuilder> factory);
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder_init(OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder *new_OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder_initWithOrgApacheLuceneQueryparserXmlQueryBuilder_(id<OrgApacheLuceneQueryparserXmlQueryBuilder> factory) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchBooleanClause_OccurEnum *OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder_getOccursValueWithOrgW3cDomElement_(id<OrgW3cDomElement> clauseElem);
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder *new_OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlBuildersBooleanQueryBuilder)
 

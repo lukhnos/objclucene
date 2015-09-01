@@ -20,31 +20,19 @@
 #define OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_INCLUDE 1
 #include "org/apache/lucene/queries/function/valuesource/MultiFunction.h"
 
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneQueriesFunctionFunctionValues;
-@protocol JavaUtilList;
-@protocol JavaUtilMap;
-
 @interface OrgApacheLuceneQueriesFunctionValuesourceDefFunction : OrgApacheLuceneQueriesFunctionValuesourceMultiFunction
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)sources;
-
-- (OrgApacheLuceneQueriesFunctionFunctionValues *)getValuesWithJavaUtilMap:(id<JavaUtilMap>)fcontext
-                                 withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext;
-
-#pragma mark Protected
-
-- (NSString *)name;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceDefFunction)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceDefFunction_initWithJavaUtilList_(OrgApacheLuceneQueriesFunctionValuesourceDefFunction *self, id<JavaUtilList> sources);
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceDefFunction_init(OrgApacheLuceneQueriesFunctionValuesourceDefFunction *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceDefFunction *new_OrgApacheLuceneQueriesFunctionValuesourceDefFunction_initWithJavaUtilList_(id<JavaUtilList> sources) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceDefFunction *new_OrgApacheLuceneQueriesFunctionValuesourceDefFunction_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceDefFunction)
 

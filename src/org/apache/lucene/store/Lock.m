@@ -10,11 +10,6 @@
 
 @implementation OrgApacheLuceneStoreLock
 
-- (void)close {
-  // can't call an abstract method
-  [self doesNotRecognizeSelector:_cmd];
-}
-
 - (void)ensureValid {
   // can't call an abstract method
   [self doesNotRecognizeSelector:_cmd];
@@ -27,11 +22,10 @@
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "close", NULL, "V", 0x401, "Ljava.io.IOException;", NULL },
     { "ensureValid", NULL, "V", 0x401, "Ljava.io.IOException;", NULL },
     { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreLock = { 2, "Lock", "org.apache.lucene.store", NULL, 0x401, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreLock = { 2, "Lock", "org.apache.lucene.store", NULL, 0x401, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneStoreLock;
 }
 

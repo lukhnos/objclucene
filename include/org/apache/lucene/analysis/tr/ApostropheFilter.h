@@ -20,23 +20,19 @@
 #define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
-@class OrgApacheLuceneAnalysisTokenStream;
-
 @interface OrgApacheLuceneAnalysisTrApostropheFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
-
-- (jboolean)incrementToken;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisTrApostropheFilter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisTrApostropheFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTrApostropheFilter *self, OrgApacheLuceneAnalysisTokenStream *inArg);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisTrApostropheFilter_init(OrgApacheLuceneAnalysisTrApostropheFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisTrApostropheFilter *new_OrgApacheLuceneAnalysisTrApostropheFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisTrApostropheFilter *new_OrgApacheLuceneAnalysisTrApostropheFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTrApostropheFilter)
 

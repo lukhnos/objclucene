@@ -20,106 +20,26 @@
 #define JavaIoCloseable_INCLUDE 1
 #include "java/io/Closeable.h"
 
-@class IOSObjectArray;
-@class OrgApacheLuceneIndexIndexReader;
-@class OrgApacheLuceneIndexIndexWriterConfig;
-@class OrgApacheLuceneSearchIndexSearcher;
-@class OrgApacheLuceneSearchSpellSuggestModeEnum;
-@class OrgApacheLuceneStoreDirectory;
-@protocol JavaUtilComparator;
-@protocol OrgApacheLuceneSearchSpellDictionary;
-@protocol OrgApacheLuceneSearchSpellStringDistance;
-
 #define OrgApacheLuceneSearchSpellSpellChecker_DEFAULT_ACCURACY 0.5f
 
-@interface OrgApacheLuceneSearchSpellSpellChecker : NSObject < JavaIoCloseable > {
- @public
-  OrgApacheLuceneStoreDirectory *spellIndex_;
-}
+@interface OrgApacheLuceneSearchSpellSpellChecker : NSObject < JavaIoCloseable >
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)spellIndex;
-
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)spellIndex
-         withOrgApacheLuceneSearchSpellStringDistance:(id<OrgApacheLuceneSearchSpellStringDistance>)sd;
-
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)spellIndex
-         withOrgApacheLuceneSearchSpellStringDistance:(id<OrgApacheLuceneSearchSpellStringDistance>)sd
-                               withJavaUtilComparator:(id<JavaUtilComparator>)comparator;
-
-- (void)clearIndex;
-
-- (void)close;
-
-- (jboolean)existWithNSString:(NSString *)word;
-
-- (jfloat)getAccuracy;
-
-- (id<JavaUtilComparator>)getComparator;
-
-- (id<OrgApacheLuceneSearchSpellStringDistance>)getStringDistance;
-
-- (void)indexDictionaryWithOrgApacheLuceneSearchSpellDictionary:(id<OrgApacheLuceneSearchSpellDictionary>)dict
-                      withOrgApacheLuceneIndexIndexWriterConfig:(OrgApacheLuceneIndexIndexWriterConfig *)config
-                                                    withBoolean:(jboolean)fullMerge;
-
-- (void)setAccuracyWithFloat:(jfloat)acc;
-
-- (void)setComparatorWithJavaUtilComparator:(id<JavaUtilComparator>)comparator;
-
-- (void)setSpellIndexWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)spellIndexDir;
-
-- (void)setStringDistanceWithOrgApacheLuceneSearchSpellStringDistance:(id<OrgApacheLuceneSearchSpellStringDistance>)sd;
-
-- (IOSObjectArray *)suggestSimilarWithNSString:(NSString *)word
-                                       withInt:(jint)numSug;
-
-- (IOSObjectArray *)suggestSimilarWithNSString:(NSString *)word
-                                       withInt:(jint)numSug
-                                     withFloat:(jfloat)accuracy;
-
-- (IOSObjectArray *)suggestSimilarWithNSString:(NSString *)word
-                                       withInt:(jint)numSug
-           withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)ir
-                                  withNSString:(NSString *)field
- withOrgApacheLuceneSearchSpellSuggestModeEnum:(OrgApacheLuceneSearchSpellSuggestModeEnum *)suggestMode;
-
-- (IOSObjectArray *)suggestSimilarWithNSString:(NSString *)word
-                                       withInt:(jint)numSug
-           withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)ir
-                                  withNSString:(NSString *)field
- withOrgApacheLuceneSearchSpellSuggestModeEnum:(OrgApacheLuceneSearchSpellSuggestModeEnum *)suggestMode
-                                     withFloat:(jfloat)accuracy;
-
-#pragma mark Package-Private
-
-- (OrgApacheLuceneSearchIndexSearcher *)createSearcherWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir;
-
-- (jboolean)isClosed;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSpellSpellChecker)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpellSpellChecker, spellIndex_, OrgApacheLuceneStoreDirectory *)
 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchSpellSpellChecker, DEFAULT_ACCURACY, jfloat)
 
 FOUNDATION_EXPORT NSString *OrgApacheLuceneSearchSpellSpellChecker_F_WORD_;
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchSpellSpellChecker, F_WORD_, NSString *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSpellSpellChecker_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneSearchSpellStringDistance_(OrgApacheLuceneSearchSpellSpellChecker *self, OrgApacheLuceneStoreDirectory *spellIndex, id<OrgApacheLuceneSearchSpellStringDistance> sd);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSpellSpellChecker_init(OrgApacheLuceneSearchSpellSpellChecker *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSpellSpellChecker *new_OrgApacheLuceneSearchSpellSpellChecker_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneSearchSpellStringDistance_(OrgApacheLuceneStoreDirectory *spellIndex, id<OrgApacheLuceneSearchSpellStringDistance> sd) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSpellSpellChecker_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneSearchSpellSpellChecker *self, OrgApacheLuceneStoreDirectory *spellIndex);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSpellSpellChecker *new_OrgApacheLuceneSearchSpellSpellChecker_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *spellIndex) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSpellSpellChecker_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneSearchSpellStringDistance_withJavaUtilComparator_(OrgApacheLuceneSearchSpellSpellChecker *self, OrgApacheLuceneStoreDirectory *spellIndex, id<OrgApacheLuceneSearchSpellStringDistance> sd, id<JavaUtilComparator> comparator);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSpellSpellChecker *new_OrgApacheLuceneSearchSpellSpellChecker_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneSearchSpellStringDistance_withJavaUtilComparator_(OrgApacheLuceneStoreDirectory *spellIndex, id<OrgApacheLuceneSearchSpellStringDistance> sd, id<JavaUtilComparator> comparator) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpellSpellChecker *new_OrgApacheLuceneSearchSpellSpellChecker_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpellSpellChecker)
 

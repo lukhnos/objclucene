@@ -6,7 +6,6 @@
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/CharSequence.h"
-#include "java/lang/StringBuilder.h"
 #include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
 
 @interface OrgApacheLuceneAnalysisTokenattributesCharTermAttribute : NSObject
@@ -23,13 +22,10 @@
     { "setLengthWithInt:", "setLength", "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", 0x401, NULL, NULL },
     { "setEmpty", NULL, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", 0x401, NULL, NULL },
     { "appendWithJavaLangCharSequence:", "append", "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", 0x401, NULL, NULL },
-    { "appendWithJavaLangCharSequence:withInt:withInt:", "append", "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", 0x401, NULL, NULL },
-    { "appendWithChar:", "append", "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", 0x401, NULL, NULL },
     { "appendWithNSString:", "append", "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", 0x401, NULL, NULL },
-    { "appendWithJavaLangStringBuilder:", "append", "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", 0x401, NULL, NULL },
     { "appendWithOrgApacheLuceneAnalysisTokenattributesCharTermAttribute:", "append", "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", 0x401, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisTokenattributesCharTermAttribute = { 2, "CharTermAttribute", "org.apache.lucene.analysis.tokenattributes", NULL, 0x609, 11, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisTokenattributesCharTermAttribute = { 2, "CharTermAttribute", "org.apache.lucene.analysis.tokenattributes", NULL, 0x609, 8, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisTokenattributesCharTermAttribute;
 }
 

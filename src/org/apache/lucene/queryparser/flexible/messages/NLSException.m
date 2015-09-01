@@ -4,8 +4,9 @@
 //
 
 #include "J2ObjC_source.h"
-#include "org/apache/lucene/queryparser/flexible/messages/Message.h"
 #include "org/apache/lucene/queryparser/flexible/messages/NLSException.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @interface OrgApacheLuceneQueryparserFlexibleMessagesNLSException : NSObject
 
@@ -14,10 +15,7 @@
 @implementation OrgApacheLuceneQueryparserFlexibleMessagesNLSException
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getMessageObject", NULL, "Lorg.apache.lucene.queryparser.flexible.messages.Message;", 0x401, NULL, NULL },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleMessagesNLSException = { 2, "NLSException", "org.apache.lucene.queryparser.flexible.messages", NULL, 0x609, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleMessagesNLSException = { 2, "NLSException", "org.apache.lucene.queryparser.flexible.messages", NULL, 0x609, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserFlexibleMessagesNLSException;
 }
 

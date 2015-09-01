@@ -20,45 +20,15 @@
 #define OrgApacheLuceneSearchFilterCachingPolicy_INCLUDE 1
 #include "org/apache/lucene/search/FilterCachingPolicy.h"
 
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneSearchDocIdSet;
-@class OrgApacheLuceneSearchFilter;
-
 @interface OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy : NSObject < OrgApacheLuceneSearchFilterCachingPolicy >
 
 #pragma mark Public
 
 - (instancetype)init;
 
-- (instancetype)initWithFloat:(jfloat)minSizeRatio
-                      withInt:(jint)historySize
-                      withInt:(jint)minFrequencyCostlyFilters
-                      withInt:(jint)minFrequencyCheapFilters
-                      withInt:(jint)minFrequencyOtherFilters;
-
-- (void)onUseWithOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter;
-
-- (jboolean)shouldCacheWithOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter
-             withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-                     withOrgApacheLuceneSearchDocIdSet:(OrgApacheLuceneSearchDocIdSet *)set;
-
-#pragma mark Package-Private
-
-+ (jboolean)isCheapToCacheWithOrgApacheLuceneSearchDocIdSet:(OrgApacheLuceneSearchDocIdSet *)set;
-
-+ (jboolean)isCostlyWithOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy)
-
-FOUNDATION_EXPORT jboolean OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy_isCostlyWithOrgApacheLuceneSearchFilter_(OrgApacheLuceneSearchFilter *filter);
-
-FOUNDATION_EXPORT jboolean OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy_isCheapToCacheWithOrgApacheLuceneSearchDocIdSet_(OrgApacheLuceneSearchDocIdSet *set);
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy_initWithFloat_withInt_withInt_withInt_withInt_(OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy *self, jfloat minSizeRatio, jint historySize, jint minFrequencyCostlyFilters, jint minFrequencyCheapFilters, jint minFrequencyOtherFilters);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy *new_OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy_initWithFloat_withInt_withInt_withInt_withInt_(jfloat minSizeRatio, jint historySize, jint minFrequencyCostlyFilters, jint minFrequencyCheapFilters, jint minFrequencyOtherFilters) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy_init(OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy *self);
 

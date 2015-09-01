@@ -20,25 +20,11 @@
 #define OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_INCLUDE 1
 #include "org/apache/lucene/analysis/util/StopwordAnalyzerBase.h"
 
-@class OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;
-@class OrgApacheLuceneAnalysisUtilCharArraySet;
-
 @interface OrgApacheLuceneAnalysisHiHindiAnalyzer : OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords;
-
-- (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords
-                    withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stemExclusionSet;
-
-+ (OrgApacheLuceneAnalysisUtilCharArraySet *)getDefaultStopSet;
-
-#pragma mark Protected
-
-- (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)createComponentsWithNSString:(NSString *)fieldName;
 
 @end
 
@@ -46,16 +32,6 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisHiHindiAnalyzer)
 
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisHiHindiAnalyzer_DEFAULT_STOPWORD_FILE_;
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisHiHindiAnalyzer, DEFAULT_STOPWORD_FILE_, NSString *)
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisHiHindiAnalyzer_getDefaultStopSet();
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisHiHindiAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisHiHindiAnalyzer *self, OrgApacheLuceneAnalysisUtilCharArraySet *stopwords, OrgApacheLuceneAnalysisUtilCharArraySet *stemExclusionSet);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisHiHindiAnalyzer *new_OrgApacheLuceneAnalysisHiHindiAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisUtilCharArraySet *stopwords, OrgApacheLuceneAnalysisUtilCharArraySet *stemExclusionSet) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisHiHindiAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisHiHindiAnalyzer *self, OrgApacheLuceneAnalysisUtilCharArraySet *stopwords);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisHiHindiAnalyzer *new_OrgApacheLuceneAnalysisHiHindiAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisUtilCharArraySet *stopwords) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisHiHindiAnalyzer_init(OrgApacheLuceneAnalysisHiHindiAnalyzer *self);
 

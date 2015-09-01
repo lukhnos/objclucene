@@ -15,34 +15,6 @@
   return self;
 }
 
-- (void)decodeWithLongArray:(IOSLongArray *)blocks
-                    withInt:(jint)blocksOffset
-               withIntArray:(IOSIntArray *)values
-                    withInt:(jint)valuesOffset
-                    withInt:(jint)iterations {
-  for (jint i = 0; i < iterations; ++i) {
-    jlong block0 = IOSLongArray_Get(nil_chk(blocks), blocksOffset++);
-    *IOSIntArray_GetRef(nil_chk(values), valuesOffset++) = (jint) (JreURShift64(block0, 52));
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block0, 40)) & 4095LL);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block0, 28)) & 4095LL);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block0, 16)) & 4095LL);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block0, 4)) & 4095LL);
-    jlong block1 = IOSLongArray_Get(blocks, blocksOffset++);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreLShift64((block0 & 15LL), 8)) | (JreURShift64(block1, 56)));
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block1, 44)) & 4095LL);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block1, 32)) & 4095LL);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block1, 20)) & 4095LL);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block1, 8)) & 4095LL);
-    jlong block2 = IOSLongArray_Get(blocks, blocksOffset++);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreLShift64((block1 & 255LL), 4)) | (JreURShift64(block2, 60)));
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block2, 48)) & 4095LL);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block2, 36)) & 4095LL);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block2, 24)) & 4095LL);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) ((JreURShift64(block2, 12)) & 4095LL);
-    *IOSIntArray_GetRef(values, valuesOffset++) = (jint) (block2 & 4095LL);
-  }
-}
-
 - (void)decodeWithByteArray:(IOSByteArray *)blocks
                     withInt:(jint)blocksOffset
                withIntArray:(IOSIntArray *)values
@@ -102,12 +74,11 @@
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "init", "BulkOperationPacked12", NULL, 0x1, NULL, NULL },
-    { "decodeWithLongArray:withInt:withIntArray:withInt:withInt:", "decode", "V", 0x1, NULL, NULL },
     { "decodeWithByteArray:withInt:withIntArray:withInt:withInt:", "decode", "V", 0x1, NULL, NULL },
     { "decodeWithLongArray:withInt:withLongArray:withInt:withInt:", "decode", "V", 0x1, NULL, NULL },
     { "decodeWithByteArray:withInt:withLongArray:withInt:withInt:", "decode", "V", 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedBulkOperationPacked12 = { 2, "BulkOperationPacked12", "org.apache.lucene.util.packed", NULL, 0x10, 5, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedBulkOperationPacked12 = { 2, "BulkOperationPacked12", "org.apache.lucene.util.packed", NULL, 0x10, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilPackedBulkOperationPacked12;
 }
 

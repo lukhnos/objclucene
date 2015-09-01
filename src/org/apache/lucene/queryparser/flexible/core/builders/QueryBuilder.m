@@ -3,11 +3,10 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/core/builders/QueryBuilder.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "org/apache/lucene/queryparser/flexible/core/QueryNodeException.h"
 #include "org/apache/lucene/queryparser/flexible/core/builders/QueryBuilder.h"
-#include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNode.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @interface OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder : NSObject
 
@@ -16,10 +15,7 @@
 @implementation OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "build", "Ljava.lang.Object;", 0x401, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder = { 2, "QueryBuilder", "org.apache.lucene.queryparser.flexible.core.builders", NULL, 0x609, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder = { 2, "QueryBuilder", "org.apache.lucene.queryparser.flexible.core.builders", NULL, 0x609, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder;
 }
 

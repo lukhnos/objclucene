@@ -20,40 +20,19 @@
 #define OrgApacheLuceneAnalysisCharfilterBaseCharFilter_INCLUDE 1
 #include "org/apache/lucene/analysis/charfilter/BaseCharFilter.h"
 
-@class IOSCharArray;
-@class JavaIoReader;
-@class JavaUtilRegexPattern;
-@protocol JavaLangCharSequence;
-
 @interface OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter : OrgApacheLuceneAnalysisCharfilterBaseCharFilter
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilRegexPattern:(JavaUtilRegexPattern *)pattern
-                                withNSString:(NSString *)replacement
-                            withJavaIoReader:(JavaIoReader *)inArg;
-
-- (jint)read;
-
-- (jint)readWithCharArray:(IOSCharArray *)cbuf
-                  withInt:(jint)off
-                  withInt:(jint)len;
-
-#pragma mark Protected
-
-- (jint)correctWithInt:(jint)currentOff;
-
-#pragma mark Package-Private
-
-- (id<JavaLangCharSequence>)processPatternWithJavaLangCharSequence:(id<JavaLangCharSequence>)input;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter_initWithJavaUtilRegexPattern_withNSString_withJavaIoReader_(OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter *self, JavaUtilRegexPattern *pattern, NSString *replacement, JavaIoReader *inArg);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter_init(OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter *new_OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter_initWithJavaUtilRegexPattern_withNSString_withJavaIoReader_(JavaUtilRegexPattern *pattern, NSString *replacement, JavaIoReader *inArg) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter *new_OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPatternPatternReplaceCharFilter)
 

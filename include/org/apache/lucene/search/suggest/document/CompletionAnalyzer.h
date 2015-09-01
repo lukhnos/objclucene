@@ -20,9 +20,6 @@
 #define OrgApacheLuceneAnalysisAnalyzerWrapper_INCLUDE 1
 #include "org/apache/lucene/analysis/AnalyzerWrapper.h"
 
-@class OrgApacheLuceneAnalysisAnalyzer;
-@class OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;
-
 #define OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_SEP_LABEL 31
 #define OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_HOLE_CHARACTER 30
 #define OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_DEFAULT_MAX_GRAPH_EXPANSIONS 10000
@@ -33,30 +30,7 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
-
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
-                                            withBoolean:(jboolean)preserveSep
-                                            withBoolean:(jboolean)preservePositionIncrements;
-
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
-                                            withBoolean:(jboolean)preserveSep
-                                            withBoolean:(jboolean)preservePositionIncrements
-                                                withInt:(jint)maxGraphExpansions;
-
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
-                                                withInt:(jint)maxGraphExpansions;
-
-- (jboolean)preservePositionIncrements;
-
-- (jboolean)preserveSep;
-
-#pragma mark Protected
-
-- (OrgApacheLuceneAnalysisAnalyzer *)getWrappedAnalyzerWithNSString:(NSString *)fieldName;
-
-- (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)wrapComponentsWithNSString:(NSString *)fieldName
-                            withOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents:(OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)components;
+- (instancetype)init;
 
 @end
 
@@ -72,21 +46,9 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchSuggestDocumentCompletionAnalyze
 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer, DEFAULT_PRESERVE_POSITION_INCREMENTS, jboolean)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_withBoolean_withBoolean_withInt_(OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer *self, OrgApacheLuceneAnalysisAnalyzer *analyzer, jboolean preserveSep, jboolean preservePositionIncrements, jint maxGraphExpansions);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_init(OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer *new_OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_withBoolean_withBoolean_withInt_(OrgApacheLuceneAnalysisAnalyzer *analyzer, jboolean preserveSep, jboolean preservePositionIncrements, jint maxGraphExpansions) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer *self, OrgApacheLuceneAnalysisAnalyzer *analyzer);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer *new_OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneAnalysisAnalyzer *analyzer) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_withBoolean_withBoolean_(OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer *self, OrgApacheLuceneAnalysisAnalyzer *analyzer, jboolean preserveSep, jboolean preservePositionIncrements);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer *new_OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_withBoolean_withBoolean_(OrgApacheLuceneAnalysisAnalyzer *analyzer, jboolean preserveSep, jboolean preservePositionIncrements) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_withInt_(OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer *self, OrgApacheLuceneAnalysisAnalyzer *analyzer, jint maxGraphExpansions);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer *new_OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_withInt_(OrgApacheLuceneAnalysisAnalyzer *analyzer, jint maxGraphExpansions) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer *new_OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer)
 

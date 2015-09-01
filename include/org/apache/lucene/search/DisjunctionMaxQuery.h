@@ -24,7 +24,6 @@
 #define JavaLangIterable_INCLUDE 1
 #include "java/lang/Iterable.h"
 
-@class JavaUtilArrayList;
 @class OrgApacheLuceneIndexIndexReader;
 @class OrgApacheLuceneSearchIndexSearcher;
 @class OrgApacheLuceneSearchWeight;
@@ -38,11 +37,7 @@
 - (instancetype)initWithJavaUtilCollection:(id<JavaUtilCollection>)disjuncts
                                  withFloat:(jfloat)tieBreakerMultiplier;
 
-- (instancetype)initWithFloat:(jfloat)tieBreakerMultiplier;
-
 - (void)addWithJavaUtilCollection:(id<JavaUtilCollection>)disjuncts;
-
-- (void)addWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
 
 - (OrgApacheLuceneSearchDisjunctionMaxQuery *)clone;
 
@@ -50,10 +45,6 @@
                                                                         withBoolean:(jboolean)needsScores;
 
 - (jboolean)isEqual:(id)o;
-
-- (JavaUtilArrayList *)getDisjuncts;
-
-- (jfloat)getTieBreakerMultiplier;
 
 - (NSUInteger)hash;
 
@@ -69,10 +60,6 @@
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchDisjunctionMaxQuery)
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchDisjunctionMaxQuery_initWithFloat_(OrgApacheLuceneSearchDisjunctionMaxQuery *self, jfloat tieBreakerMultiplier);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchDisjunctionMaxQuery *new_OrgApacheLuceneSearchDisjunctionMaxQuery_initWithFloat_(jfloat tieBreakerMultiplier) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchDisjunctionMaxQuery_initWithJavaUtilCollection_withFloat_(OrgApacheLuceneSearchDisjunctionMaxQuery *self, id<JavaUtilCollection> disjuncts, jfloat tieBreakerMultiplier);
 
@@ -92,7 +79,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDisjunctionMaxQuery)
 @class JavaUtilArrayList;
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneSearchDisjunctionMaxQuery;
-@class OrgApacheLuceneSearchExplanation;
 @class OrgApacheLuceneSearchIndexSearcher;
 @class OrgApacheLuceneSearchScorer;
 @protocol JavaUtilSet;
@@ -107,9 +93,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDisjunctionMaxQuery)
 - (instancetype)initWithOrgApacheLuceneSearchDisjunctionMaxQuery:(OrgApacheLuceneSearchDisjunctionMaxQuery *)outer$
                           withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                      withBoolean:(jboolean)needsScores;
-
-- (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-                                                                               withInt:(jint)doc;
 
 - (void)extractTermsWithJavaUtilSet:(id<JavaUtilSet>)terms;
 

@@ -4,45 +4,34 @@
 //
 
 #include "J2ObjC_source.h"
-#include "java/lang/IllegalArgumentException.h"
-#include "java/util/Map.h"
-#include "org/apache/lucene/analysis/TokenStream.h"
-#include "org/apache/lucene/analysis/miscellaneous/HyphenatedWordsFilter.h"
 #include "org/apache/lucene/analysis/miscellaneous/HyphenatedWordsFilterFactory.h"
-#include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilterFactory
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args {
-  OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilterFactory_initWithJavaUtilMap_(self, args);
+- (instancetype)init {
+  OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilterFactory_init(self);
   return self;
-}
-
-- (OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  return [new_OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter_initWithOrgApacheLuceneAnalysisTokenStream_(input) autorelease];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "HyphenatedWordsFilterFactory", NULL, 0x1, NULL, NULL },
-    { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.miscellaneous.HyphenatedWordsFilter;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilterFactory = { 2, "HyphenatedWordsFilterFactory", "org.apache.lucene.analysis.miscellaneous", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilterFactory = { 2, "HyphenatedWordsFilterFactory", "org.apache.lucene.analysis.miscellaneous", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilterFactory;
 }
 
 @end
 
-void OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilterFactory *self, id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
-  if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
-  }
+void OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilterFactory_init(OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilterFactory *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilterFactory *new_OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilterFactory *new_OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilterFactory_init() {
   OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilterFactory *self = [OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilterFactory alloc];
-  OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilterFactory_initWithJavaUtilMap_(self, args);
+  OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilterFactory_init(self);
   return self;
 }
 

@@ -20,25 +20,19 @@
 #define OrgApacheLuceneSearchDocIdSet_INCLUDE 1
 #include "org/apache/lucene/search/DocIdSet.h"
 
-@class OrgApacheLuceneSearchDocIdSetIterator;
-
 @interface OrgApacheLuceneUtilRoaringDocIdSet : OrgApacheLuceneSearchDocIdSet
 
 #pragma mark Public
 
-- (jint)cardinality;
-
-- (jboolean)isCacheable;
-
-- (OrgApacheLuceneSearchDocIdSetIterator *)iterator;
-
-- (jlong)ramBytesUsed;
-
-- (NSString *)description;
+- (instancetype)init;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneUtilRoaringDocIdSet)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilRoaringDocIdSet)
+
+FOUNDATION_EXPORT void OrgApacheLuceneUtilRoaringDocIdSet_init(OrgApacheLuceneUtilRoaringDocIdSet *self);
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilRoaringDocIdSet *new_OrgApacheLuceneUtilRoaringDocIdSet_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilRoaringDocIdSet)
 
@@ -47,28 +41,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilRoaringDocIdSet)
 #if !defined (_OrgApacheLuceneUtilRoaringDocIdSet_Builder_) && (OrgApacheLuceneUtilRoaringDocIdSet_INCLUDE_ALL || OrgApacheLuceneUtilRoaringDocIdSet_Builder_INCLUDE)
 #define _OrgApacheLuceneUtilRoaringDocIdSet_Builder_
 
-@class OrgApacheLuceneSearchDocIdSetIterator;
-@class OrgApacheLuceneUtilRoaringDocIdSet;
-
 @interface OrgApacheLuceneUtilRoaringDocIdSet_Builder : NSObject
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)maxDoc;
-
-- (OrgApacheLuceneUtilRoaringDocIdSet_Builder *)addWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)disi;
-
-- (OrgApacheLuceneUtilRoaringDocIdSet_Builder *)addWithInt:(jint)docId;
-
-- (OrgApacheLuceneUtilRoaringDocIdSet *)build;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilRoaringDocIdSet_Builder)
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilRoaringDocIdSet_Builder_initWithInt_(OrgApacheLuceneUtilRoaringDocIdSet_Builder *self, jint maxDoc);
+FOUNDATION_EXPORT void OrgApacheLuceneUtilRoaringDocIdSet_Builder_init(OrgApacheLuceneUtilRoaringDocIdSet_Builder *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilRoaringDocIdSet_Builder *new_OrgApacheLuceneUtilRoaringDocIdSet_Builder_initWithInt_(jint maxDoc) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilRoaringDocIdSet_Builder *new_OrgApacheLuceneUtilRoaringDocIdSet_Builder_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilRoaringDocIdSet_Builder)
 

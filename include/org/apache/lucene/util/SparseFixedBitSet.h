@@ -28,60 +28,19 @@
 #define OrgApacheLuceneUtilAccountable_INCLUDE 1
 #include "org/apache/lucene/util/Accountable.h"
 
-@class IOSLongArray;
-@class IOSObjectArray;
-@class OrgApacheLuceneSearchDocIdSetIterator;
-
-@interface OrgApacheLuceneUtilSparseFixedBitSet : OrgApacheLuceneUtilBitSet < OrgApacheLuceneUtilBits, OrgApacheLuceneUtilAccountable > {
- @public
-  IOSLongArray *indices_;
-  IOSObjectArray *bits_;
-  jint length_;
-  jint nonZeroLongCount_;
-  jlong ramBytesUsed_;
-}
+@interface OrgApacheLuceneUtilSparseFixedBitSet : OrgApacheLuceneUtilBitSet < OrgApacheLuceneUtilBits, OrgApacheLuceneUtilAccountable >
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)length;
-
-- (void)and__WithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)it;
-
-- (jint)approximateCardinality;
-
-- (jint)cardinality;
-
-- (void)clearWithInt:(jint)i;
-
-- (void)clearWithInt:(jint)from
-             withInt:(jint)to;
-
-- (jboolean)getWithInt:(jint)i;
-
-- (jint)length;
-
-- (jint)nextSetBitWithInt:(jint)i;
-
-- (void)or__WithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)it;
-
-- (jint)prevSetBitWithInt:(jint)i;
-
-- (jlong)ramBytesUsed;
-
-- (void)setWithInt:(jint)i;
-
-- (NSString *)description;
+- (instancetype)init;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneUtilSparseFixedBitSet)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilSparseFixedBitSet)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilSparseFixedBitSet, indices_, IOSLongArray *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilSparseFixedBitSet, bits_, IOSObjectArray *)
+FOUNDATION_EXPORT void OrgApacheLuceneUtilSparseFixedBitSet_init(OrgApacheLuceneUtilSparseFixedBitSet *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilSparseFixedBitSet_initWithInt_(OrgApacheLuceneUtilSparseFixedBitSet *self, jint length);
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilSparseFixedBitSet *new_OrgApacheLuceneUtilSparseFixedBitSet_initWithInt_(jint length) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilSparseFixedBitSet *new_OrgApacheLuceneUtilSparseFixedBitSet_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilSparseFixedBitSet)
 

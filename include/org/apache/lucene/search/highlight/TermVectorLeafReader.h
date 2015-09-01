@@ -29,7 +29,6 @@
 @class OrgApacheLuceneIndexSortedSetDocValues;
 @class OrgApacheLuceneIndexStoredFieldVisitor;
 @class OrgApacheLuceneIndexTerms;
-@protocol OrgApacheLuceneIndexLeafReader_CoreClosedListener;
 @protocol OrgApacheLuceneUtilBits;
 
 @interface OrgApacheLuceneSearchHighlightTermVectorLeafReader : OrgApacheLuceneIndexLeafReader
@@ -38,8 +37,6 @@
 
 - (instancetype)initWithNSString:(NSString *)field
    withOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms;
-
-- (void)addCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:(id<OrgApacheLuceneIndexLeafReader_CoreClosedListener>)listener;
 
 - (void)checkIntegrity;
 
@@ -71,8 +68,6 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 - (jint)maxDoc;
 
 - (jint)numDocs;
-
-- (void)removeCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:(id<OrgApacheLuceneIndexLeafReader_CoreClosedListener>)listener;
 
 #pragma mark Protected
 

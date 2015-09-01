@@ -20,43 +20,19 @@
 #define OrgApacheLuceneSearchFilter_INCLUDE 1
 #include "org/apache/lucene/search/Filter.h"
 
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneSearchDocIdSet;
-@protocol OrgApacheLuceneUtilBits;
-
 @interface OrgApacheLuceneSearchFieldValueFilter : OrgApacheLuceneSearchFilter
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field;
-
-- (instancetype)initWithNSString:(NSString *)field
-                     withBoolean:(jboolean)negate;
-
-- (jboolean)isEqual:(id)obj;
-
-- (NSString *)field;
-
-- (OrgApacheLuceneSearchDocIdSet *)getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-                                                            withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)acceptDocs;
-
-- (NSUInteger)hash;
-
-- (jboolean)negate;
-
-- (NSString *)toStringWithNSString:(NSString *)defaultField;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchFieldValueFilter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchFieldValueFilter_initWithNSString_(OrgApacheLuceneSearchFieldValueFilter *self, NSString *field);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchFieldValueFilter_init(OrgApacheLuceneSearchFieldValueFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchFieldValueFilter *new_OrgApacheLuceneSearchFieldValueFilter_initWithNSString_(NSString *field) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchFieldValueFilter_initWithNSString_withBoolean_(OrgApacheLuceneSearchFieldValueFilter *self, NSString *field, jboolean negate);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchFieldValueFilter *new_OrgApacheLuceneSearchFieldValueFilter_initWithNSString_withBoolean_(NSString *field, jboolean negate) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchFieldValueFilter *new_OrgApacheLuceneSearchFieldValueFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldValueFilter)
 

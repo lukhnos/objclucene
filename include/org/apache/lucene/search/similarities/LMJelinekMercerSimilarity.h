@@ -20,46 +20,19 @@
 #define OrgApacheLuceneSearchSimilaritiesLMSimilarity_INCLUDE 1
 #include "org/apache/lucene/search/similarities/LMSimilarity.h"
 
-@class OrgApacheLuceneSearchSimilaritiesBasicStats;
-@protocol JavaUtilList;
-@protocol OrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel;
-
 @interface OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity : OrgApacheLuceneSearchSimilaritiesLMSimilarity
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel:(id<OrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel>)collectionModel
-                                                                            withFloat:(jfloat)lambda;
-
-- (instancetype)initWithFloat:(jfloat)lambda;
-
-- (jfloat)getLambda;
-
-- (NSString *)getName;
-
-#pragma mark Protected
-
-- (void)explainWithJavaUtilList:(id<JavaUtilList>)subs
-withOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
-                        withInt:(jint)doc
-                      withFloat:(jfloat)freq
-                      withFloat:(jfloat)docLen;
-
-- (jfloat)scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
-                                                     withFloat:(jfloat)freq
-                                                     withFloat:(jfloat)docLen;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity_initWithOrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel_withFloat_(OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity *self, id<OrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel> collectionModel, jfloat lambda);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity_init(OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity *new_OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity_initWithOrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel_withFloat_(id<OrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel> collectionModel, jfloat lambda) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity_initWithFloat_(OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity *self, jfloat lambda);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity *new_OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity_initWithFloat_(jfloat lambda) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity *new_OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesLMJelinekMercerSimilarity)
 

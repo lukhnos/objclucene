@@ -43,8 +43,6 @@
 
 - (jlong)fileLengthWithNSString:(NSString *)name;
 
-- (OrgApacheLuceneStoreDirectory *)getDelegate;
-
 - (IOSObjectArray *)listAll;
 
 - (OrgApacheLuceneStoreLock *)obtainLockWithNSString:(NSString *)name;

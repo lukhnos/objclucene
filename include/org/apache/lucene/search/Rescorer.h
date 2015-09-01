@@ -16,23 +16,11 @@
 #if !defined (_OrgApacheLuceneSearchRescorer_) && (OrgApacheLuceneSearchRescorer_INCLUDE_ALL || OrgApacheLuceneSearchRescorer_INCLUDE)
 #define _OrgApacheLuceneSearchRescorer_
 
-@class OrgApacheLuceneSearchExplanation;
-@class OrgApacheLuceneSearchIndexSearcher;
-@class OrgApacheLuceneSearchTopDocs;
-
 @interface OrgApacheLuceneSearchRescorer : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
-                                               withOrgApacheLuceneSearchExplanation:(OrgApacheLuceneSearchExplanation *)firstPassExplanation
-                                                                            withInt:(jint)docID;
-
-- (OrgApacheLuceneSearchTopDocs *)rescoreWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
-                                               withOrgApacheLuceneSearchTopDocs:(OrgApacheLuceneSearchTopDocs *)firstPassTopDocs
-                                                                        withInt:(jint)topN;
 
 @end
 

@@ -60,22 +60,10 @@
 + (OrgApacheLuceneIndexSortedDocValues *)getSortedWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader
                                                                         withNSString:(NSString *)field;
 
-+ (OrgApacheLuceneIndexSortedNumericDocValues *)getSortedNumericWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader
-                                                                                      withNSString:(NSString *)field;
-
-+ (OrgApacheLuceneIndexSortedSetDocValues *)getSortedSetWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader
-                                                                              withNSString:(NSString *)field;
-
 + (OrgApacheLuceneIndexSortedNumericDocValues *)singletonWithOrgApacheLuceneIndexNumericDocValues:(OrgApacheLuceneIndexNumericDocValues *)dv
                                                                       withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)docsWithField;
 
 + (OrgApacheLuceneIndexRandomAccessOrds *)singletonWithOrgApacheLuceneIndexSortedDocValues:(OrgApacheLuceneIndexSortedDocValues *)dv;
-
-+ (OrgApacheLuceneIndexNumericDocValues *)unwrapSingletonWithOrgApacheLuceneIndexSortedNumericDocValues:(OrgApacheLuceneIndexSortedNumericDocValues *)dv;
-
-+ (OrgApacheLuceneIndexSortedDocValues *)unwrapSingletonWithOrgApacheLuceneIndexSortedSetDocValues:(OrgApacheLuceneIndexSortedSetDocValues *)dv;
-
-+ (id<OrgApacheLuceneUtilBits>)unwrapSingletonBitsWithOrgApacheLuceneIndexSortedNumericDocValues:(OrgApacheLuceneIndexSortedNumericDocValues *)dv;
 
 @end
 
@@ -93,12 +81,6 @@ FOUNDATION_EXPORT OrgApacheLuceneIndexRandomAccessOrds *OrgApacheLuceneIndexDocV
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexRandomAccessOrds *OrgApacheLuceneIndexDocValues_singletonWithOrgApacheLuceneIndexSortedDocValues_(OrgApacheLuceneIndexSortedDocValues *dv);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexSortedDocValues *OrgApacheLuceneIndexDocValues_unwrapSingletonWithOrgApacheLuceneIndexSortedSetDocValues_(OrgApacheLuceneIndexSortedSetDocValues *dv);
-
-FOUNDATION_EXPORT OrgApacheLuceneIndexNumericDocValues *OrgApacheLuceneIndexDocValues_unwrapSingletonWithOrgApacheLuceneIndexSortedNumericDocValues_(OrgApacheLuceneIndexSortedNumericDocValues *dv);
-
-FOUNDATION_EXPORT id<OrgApacheLuceneUtilBits> OrgApacheLuceneIndexDocValues_unwrapSingletonBitsWithOrgApacheLuceneIndexSortedNumericDocValues_(OrgApacheLuceneIndexSortedNumericDocValues *dv);
-
 FOUNDATION_EXPORT OrgApacheLuceneIndexSortedNumericDocValues *OrgApacheLuceneIndexDocValues_singletonWithOrgApacheLuceneIndexNumericDocValues_withOrgApacheLuceneUtilBits_(OrgApacheLuceneIndexNumericDocValues *dv, id<OrgApacheLuceneUtilBits> docsWithField);
 
 FOUNDATION_EXPORT id<OrgApacheLuceneUtilBits> OrgApacheLuceneIndexDocValues_docsWithValueWithOrgApacheLuceneIndexSortedDocValues_withInt_(OrgApacheLuceneIndexSortedDocValues *dv, jint maxDoc);
@@ -112,10 +94,6 @@ FOUNDATION_EXPORT OrgApacheLuceneIndexNumericDocValues *OrgApacheLuceneIndexDocV
 FOUNDATION_EXPORT OrgApacheLuceneIndexBinaryDocValues *OrgApacheLuceneIndexDocValues_getBinaryWithOrgApacheLuceneIndexLeafReader_withNSString_(OrgApacheLuceneIndexLeafReader *reader, NSString *field);
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexSortedDocValues *OrgApacheLuceneIndexDocValues_getSortedWithOrgApacheLuceneIndexLeafReader_withNSString_(OrgApacheLuceneIndexLeafReader *reader, NSString *field);
-
-FOUNDATION_EXPORT OrgApacheLuceneIndexSortedNumericDocValues *OrgApacheLuceneIndexDocValues_getSortedNumericWithOrgApacheLuceneIndexLeafReader_withNSString_(OrgApacheLuceneIndexLeafReader *reader, NSString *field);
-
-FOUNDATION_EXPORT OrgApacheLuceneIndexSortedSetDocValues *OrgApacheLuceneIndexDocValues_getSortedSetWithOrgApacheLuceneIndexLeafReader_withNSString_(OrgApacheLuceneIndexLeafReader *reader, NSString *field);
 
 FOUNDATION_EXPORT id<OrgApacheLuceneUtilBits> OrgApacheLuceneIndexDocValues_getDocsWithFieldWithOrgApacheLuceneIndexLeafReader_withNSString_(OrgApacheLuceneIndexLeafReader *reader, NSString *field);
 

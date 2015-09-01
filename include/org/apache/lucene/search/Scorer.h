@@ -22,7 +22,6 @@
 
 @class OrgApacheLuceneSearchTwoPhaseIterator;
 @class OrgApacheLuceneSearchWeight;
-@protocol JavaUtilCollection;
 
 @interface OrgApacheLuceneSearchScorer : OrgApacheLuceneSearchDocIdSetIterator {
  @public
@@ -34,10 +33,6 @@
 - (OrgApacheLuceneSearchTwoPhaseIterator *)asTwoPhaseIterator;
 
 - (jint)freq;
-
-- (id<JavaUtilCollection>)getChildren;
-
-- (OrgApacheLuceneSearchWeight *)getWeight;
 
 - (jfloat)score;
 

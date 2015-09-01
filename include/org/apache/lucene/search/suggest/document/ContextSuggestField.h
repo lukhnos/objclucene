@@ -20,11 +20,6 @@
 #define OrgApacheLuceneSearchSuggestDocumentSuggestField_INCLUDE 1
 #include "org/apache/lucene/search/suggest/document/SuggestField.h"
 
-@class IOSObjectArray;
-@class OrgApacheLuceneAnalysisTokenStream;
-@class OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream;
-@protocol JavaLangIterable;
-
 #define OrgApacheLuceneSearchSuggestDocumentContextSuggestField_CONTEXT_SEPARATOR 29
 #define OrgApacheLuceneSearchSuggestDocumentContextSuggestField_TYPE 1
 
@@ -32,18 +27,7 @@
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)name
-                    withNSString:(NSString *)value
-                         withInt:(jint)weight
-   withJavaLangCharSequenceArray:(IOSObjectArray *)contexts;
-
-#pragma mark Protected
-
-- (id<JavaLangIterable>)contexts;
-
-- (jbyte)type;
-
-- (OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *)wrapTokenStreamWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)stream;
+- (instancetype)init;
 
 @end
 
@@ -53,9 +37,9 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchSuggestDocumentContextSuggestFie
 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchSuggestDocumentContextSuggestField, TYPE, jbyte)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentContextSuggestField_initWithNSString_withNSString_withInt_withJavaLangCharSequenceArray_(OrgApacheLuceneSearchSuggestDocumentContextSuggestField *self, NSString *name, NSString *value, jint weight, IOSObjectArray *contexts);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentContextSuggestField_init(OrgApacheLuceneSearchSuggestDocumentContextSuggestField *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentContextSuggestField *new_OrgApacheLuceneSearchSuggestDocumentContextSuggestField_initWithNSString_withNSString_withInt_withJavaLangCharSequenceArray_(NSString *name, NSString *value, jint weight, IOSObjectArray *contexts) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentContextSuggestField *new_OrgApacheLuceneSearchSuggestDocumentContextSuggestField_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentContextSuggestField)
 

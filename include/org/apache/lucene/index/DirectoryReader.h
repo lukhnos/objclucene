@@ -21,10 +21,8 @@
 #include "org/apache/lucene/index/BaseCompositeReader.h"
 
 @class IOSObjectArray;
-@class OrgApacheLuceneIndexIndexCommit;
 @class OrgApacheLuceneIndexIndexWriter;
 @class OrgApacheLuceneStoreDirectory;
-@protocol JavaUtilList;
 
 @interface OrgApacheLuceneIndexDirectoryReader : OrgApacheLuceneIndexBaseCompositeReader {
  @public
@@ -35,43 +33,19 @@
 
 - (OrgApacheLuceneStoreDirectory *)directory;
 
-- (OrgApacheLuceneIndexIndexCommit *)getIndexCommit;
-
 - (jlong)getVersion;
 
 + (jboolean)indexExistsWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory;
 
-- (jboolean)isCurrent;
-
-+ (id<JavaUtilList>)listCommitsWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir;
-
 + (OrgApacheLuceneIndexDirectoryReader *)openWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory;
-
-+ (OrgApacheLuceneIndexDirectoryReader *)openWithOrgApacheLuceneIndexIndexCommit:(OrgApacheLuceneIndexIndexCommit *)commit;
 
 + (OrgApacheLuceneIndexDirectoryReader *)openWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer
                                                                      withBoolean:(jboolean)applyAllDeletes;
-
-+ (OrgApacheLuceneIndexDirectoryReader *)openIfChangedWithOrgApacheLuceneIndexDirectoryReader:(OrgApacheLuceneIndexDirectoryReader *)oldReader;
-
-+ (OrgApacheLuceneIndexDirectoryReader *)openIfChangedWithOrgApacheLuceneIndexDirectoryReader:(OrgApacheLuceneIndexDirectoryReader *)oldReader
-                                                          withOrgApacheLuceneIndexIndexCommit:(OrgApacheLuceneIndexIndexCommit *)commit;
-
-+ (OrgApacheLuceneIndexDirectoryReader *)openIfChangedWithOrgApacheLuceneIndexDirectoryReader:(OrgApacheLuceneIndexDirectoryReader *)oldReader
-                                                          withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer
-                                                                                  withBoolean:(jboolean)applyAllDeletes;
 
 #pragma mark Protected
 
 - (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory
               withOrgApacheLuceneIndexLeafReaderArray:(IOSObjectArray *)segmentReaders;
-
-- (OrgApacheLuceneIndexDirectoryReader *)doOpenIfChanged;
-
-- (OrgApacheLuceneIndexDirectoryReader *)doOpenIfChangedWithOrgApacheLuceneIndexIndexCommit:(OrgApacheLuceneIndexIndexCommit *)commit;
-
-- (OrgApacheLuceneIndexDirectoryReader *)doOpenIfChangedWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer
-                                                                                withBoolean:(jboolean)applyAllDeletes;
 
 @end
 
@@ -82,16 +56,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDirectoryReader, directory_, OrgApacheLu
 FOUNDATION_EXPORT OrgApacheLuceneIndexDirectoryReader *OrgApacheLuceneIndexDirectoryReader_openWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *directory);
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexDirectoryReader *OrgApacheLuceneIndexDirectoryReader_openWithOrgApacheLuceneIndexIndexWriter_withBoolean_(OrgApacheLuceneIndexIndexWriter *writer, jboolean applyAllDeletes);
-
-FOUNDATION_EXPORT OrgApacheLuceneIndexDirectoryReader *OrgApacheLuceneIndexDirectoryReader_openWithOrgApacheLuceneIndexIndexCommit_(OrgApacheLuceneIndexIndexCommit *commit);
-
-FOUNDATION_EXPORT OrgApacheLuceneIndexDirectoryReader *OrgApacheLuceneIndexDirectoryReader_openIfChangedWithOrgApacheLuceneIndexDirectoryReader_(OrgApacheLuceneIndexDirectoryReader *oldReader);
-
-FOUNDATION_EXPORT OrgApacheLuceneIndexDirectoryReader *OrgApacheLuceneIndexDirectoryReader_openIfChangedWithOrgApacheLuceneIndexDirectoryReader_withOrgApacheLuceneIndexIndexCommit_(OrgApacheLuceneIndexDirectoryReader *oldReader, OrgApacheLuceneIndexIndexCommit *commit);
-
-FOUNDATION_EXPORT OrgApacheLuceneIndexDirectoryReader *OrgApacheLuceneIndexDirectoryReader_openIfChangedWithOrgApacheLuceneIndexDirectoryReader_withOrgApacheLuceneIndexIndexWriter_withBoolean_(OrgApacheLuceneIndexDirectoryReader *oldReader, OrgApacheLuceneIndexIndexWriter *writer, jboolean applyAllDeletes);
-
-FOUNDATION_EXPORT id<JavaUtilList> OrgApacheLuceneIndexDirectoryReader_listCommitsWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *dir);
 
 FOUNDATION_EXPORT jboolean OrgApacheLuceneIndexDirectoryReader_indexExistsWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *directory);
 

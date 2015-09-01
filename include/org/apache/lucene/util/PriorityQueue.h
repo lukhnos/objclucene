@@ -35,8 +35,6 @@
 
 - (id)pop;
 
-- (jboolean)removeWithId:(id)element;
-
 - (jint)size;
 
 - (id)top;

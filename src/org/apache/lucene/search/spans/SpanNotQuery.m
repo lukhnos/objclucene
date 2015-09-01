@@ -84,19 +84,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanNotQuery_SpanNotWeight_
 @implementation OrgApacheLuceneSearchSpansSpanNotQuery
 
 - (instancetype)initWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)include
-                    withOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)exclude {
-  OrgApacheLuceneSearchSpansSpanNotQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withOrgApacheLuceneSearchSpansSpanQuery_(self, include, exclude);
-  return self;
-}
-
-- (instancetype)initWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)include
-                    withOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)exclude
-                                                    withInt:(jint)dist {
-  OrgApacheLuceneSearchSpansSpanNotQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withOrgApacheLuceneSearchSpansSpanQuery_withInt_(self, include, exclude, dist);
-  return self;
-}
-
-- (instancetype)initWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)include
                     withOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)exclude
                                                     withInt:(jint)pre
                                                     withInt:(jint)post {
@@ -191,8 +178,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanNotQuery_SpanNotWeight_
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchSpansSpanQuery:withOrgApacheLuceneSearchSpansSpanQuery:", "SpanNotQuery", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneSearchSpansSpanQuery:withOrgApacheLuceneSearchSpansSpanQuery:withInt:", "SpanNotQuery", NULL, 0x1, NULL, NULL },
     { "initWithOrgApacheLuceneSearchSpansSpanQuery:withOrgApacheLuceneSearchSpansSpanQuery:withInt:withInt:", "SpanNotQuery", NULL, 0x1, NULL, NULL },
     { "getInclude", NULL, "Lorg.apache.lucene.search.spans.SpanQuery;", 0x1, NULL, NULL },
     { "getExclude", NULL, "Lorg.apache.lucene.search.spans.SpanQuery;", 0x1, NULL, NULL },
@@ -211,31 +196,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanNotQuery_SpanNotWeight_
     { "post_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.search.spans.SpanNotQuery$SpanNotWeight;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpanNotQuery = { 2, "SpanNotQuery", "org.apache.lucene.search.spans", NULL, 0x1, 12, methods, 4, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpanNotQuery = { 2, "SpanNotQuery", "org.apache.lucene.search.spans", NULL, 0x1, 10, methods, 4, fields, 0, NULL, 1, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneSearchSpansSpanNotQuery;
 }
 
 @end
-
-void OrgApacheLuceneSearchSpansSpanNotQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withOrgApacheLuceneSearchSpansSpanQuery_(OrgApacheLuceneSearchSpansSpanNotQuery *self, OrgApacheLuceneSearchSpansSpanQuery *include, OrgApacheLuceneSearchSpansSpanQuery *exclude) {
-  OrgApacheLuceneSearchSpansSpanNotQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withOrgApacheLuceneSearchSpansSpanQuery_withInt_withInt_(self, include, exclude, 0, 0);
-}
-
-OrgApacheLuceneSearchSpansSpanNotQuery *new_OrgApacheLuceneSearchSpansSpanNotQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withOrgApacheLuceneSearchSpansSpanQuery_(OrgApacheLuceneSearchSpansSpanQuery *include, OrgApacheLuceneSearchSpansSpanQuery *exclude) {
-  OrgApacheLuceneSearchSpansSpanNotQuery *self = [OrgApacheLuceneSearchSpansSpanNotQuery alloc];
-  OrgApacheLuceneSearchSpansSpanNotQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withOrgApacheLuceneSearchSpansSpanQuery_(self, include, exclude);
-  return self;
-}
-
-void OrgApacheLuceneSearchSpansSpanNotQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withOrgApacheLuceneSearchSpansSpanQuery_withInt_(OrgApacheLuceneSearchSpansSpanNotQuery *self, OrgApacheLuceneSearchSpansSpanQuery *include, OrgApacheLuceneSearchSpansSpanQuery *exclude, jint dist) {
-  OrgApacheLuceneSearchSpansSpanNotQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withOrgApacheLuceneSearchSpansSpanQuery_withInt_withInt_(self, include, exclude, dist, dist);
-}
-
-OrgApacheLuceneSearchSpansSpanNotQuery *new_OrgApacheLuceneSearchSpansSpanNotQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withOrgApacheLuceneSearchSpansSpanQuery_withInt_(OrgApacheLuceneSearchSpansSpanQuery *include, OrgApacheLuceneSearchSpansSpanQuery *exclude, jint dist) {
-  OrgApacheLuceneSearchSpansSpanNotQuery *self = [OrgApacheLuceneSearchSpansSpanNotQuery alloc];
-  OrgApacheLuceneSearchSpansSpanNotQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withOrgApacheLuceneSearchSpansSpanQuery_withInt_(self, include, exclude, dist);
-  return self;
-}
 
 void OrgApacheLuceneSearchSpansSpanNotQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withOrgApacheLuceneSearchSpansSpanQuery_withInt_withInt_(OrgApacheLuceneSearchSpansSpanNotQuery *self, OrgApacheLuceneSearchSpansSpanQuery *include, OrgApacheLuceneSearchSpansSpanQuery *exclude, jint pre, jint post) {
   OrgApacheLuceneSearchSpansSpanQuery_init(self);

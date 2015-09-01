@@ -20,42 +20,23 @@
 #define OrgApacheLuceneDocumentField_INCLUDE 1
 #include "org/apache/lucene/document/Field.h"
 
-@class OrgApacheLuceneAnalysisAnalyzer;
-@class OrgApacheLuceneAnalysisTokenStream;
-@class OrgApacheLuceneDocumentFieldType;
-@class OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream;
-
 #define OrgApacheLuceneSearchSuggestDocumentSuggestField_TYPE 0
 
 @interface OrgApacheLuceneSearchSuggestDocumentSuggestField : OrgApacheLuceneDocumentField
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)name
-                    withNSString:(NSString *)value
-                         withInt:(jint)weight;
-
-- (OrgApacheLuceneAnalysisTokenStream *)tokenStreamWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
-                                                withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)reuse;
-
-#pragma mark Protected
-
-- (jbyte)type;
-
-- (OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *)wrapTokenStreamWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)stream;
+- (instancetype)init;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneSearchSuggestDocumentSuggestField)
-
-FOUNDATION_EXPORT OrgApacheLuceneDocumentFieldType *OrgApacheLuceneSearchSuggestDocumentSuggestField_FIELD_TYPE_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchSuggestDocumentSuggestField, FIELD_TYPE_, OrgApacheLuceneDocumentFieldType *)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestDocumentSuggestField)
 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchSuggestDocumentSuggestField, TYPE, jbyte)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentSuggestField_initWithNSString_withNSString_withInt_(OrgApacheLuceneSearchSuggestDocumentSuggestField *self, NSString *name, NSString *value, jint weight);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentSuggestField_init(OrgApacheLuceneSearchSuggestDocumentSuggestField *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentSuggestField *new_OrgApacheLuceneSearchSuggestDocumentSuggestField_initWithNSString_withNSString_withInt_(NSString *name, NSString *value, jint weight) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentSuggestField *new_OrgApacheLuceneSearchSuggestDocumentSuggestField_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentSuggestField)
 

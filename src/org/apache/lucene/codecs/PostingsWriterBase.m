@@ -53,11 +53,6 @@ withOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)s
   return 0;
 }
 
-- (void)close {
-  // can't call an abstract method
-  [self doesNotRecognizeSelector:_cmd];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "init", "PostingsWriterBase", NULL, 0x4, NULL, NULL },
@@ -65,9 +60,8 @@ withOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)s
     { "writeTermWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneIndexTermsEnum:withOrgApacheLuceneUtilFixedBitSet:", "writeTerm", "Lorg.apache.lucene.codecs.BlockTermState;", 0x401, "Ljava.io.IOException;", NULL },
     { "encodeTermWithLongArray:withOrgApacheLuceneStoreDataOutput:withOrgApacheLuceneIndexFieldInfo:withOrgApacheLuceneCodecsBlockTermState:withBoolean:", "encodeTerm", "V", 0x401, "Ljava.io.IOException;", NULL },
     { "setFieldWithOrgApacheLuceneIndexFieldInfo:", "setField", "I", 0x401, NULL, NULL },
-    { "close", NULL, "V", 0x401, "Ljava.io.IOException;", NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsPostingsWriterBase = { 2, "PostingsWriterBase", "org.apache.lucene.codecs", NULL, 0x401, 6, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsPostingsWriterBase = { 2, "PostingsWriterBase", "org.apache.lucene.codecs", NULL, 0x401, 5, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneCodecsPostingsWriterBase;
 }
 

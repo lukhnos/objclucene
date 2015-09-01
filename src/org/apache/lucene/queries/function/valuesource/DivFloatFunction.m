@@ -4,48 +4,34 @@
 //
 
 #include "J2ObjC_source.h"
-#include "org/apache/lucene/queries/function/FunctionValues.h"
-#include "org/apache/lucene/queries/function/ValueSource.h"
 #include "org/apache/lucene/queries/function/valuesource/DivFloatFunction.h"
-#include "org/apache/lucene/queries/function/valuesource/DualFloatFunction.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction
 
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)a
-                    withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)b {
-  OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction_initWithOrgApacheLuceneQueriesFunctionValueSource_withOrgApacheLuceneQueriesFunctionValueSource_(self, a, b);
+- (instancetype)init {
+  OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction_init(self);
   return self;
-}
-
-- (NSString *)name {
-  return @"div";
-}
-
-- (jfloat)funcWithInt:(jint)doc
-withOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)aVals
-withOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)bVals {
-  return [((OrgApacheLuceneQueriesFunctionFunctionValues *) nil_chk(aVals)) floatValWithInt:doc] / [((OrgApacheLuceneQueriesFunctionFunctionValues *) nil_chk(bVals)) floatValWithInt:doc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneQueriesFunctionValueSource:withOrgApacheLuceneQueriesFunctionValueSource:", "DivFloatFunction", NULL, 0x1, NULL, NULL },
-    { "name", NULL, "Ljava.lang.String;", 0x4, NULL, NULL },
-    { "funcWithInt:withOrgApacheLuceneQueriesFunctionFunctionValues:withOrgApacheLuceneQueriesFunctionFunctionValues:", "func", "F", 0x4, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction = { 2, "DivFloatFunction", "org.apache.lucene.queries.function.valuesource", NULL, 0x1, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction = { 2, "DivFloatFunction", "org.apache.lucene.queries.function.valuesource", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction;
 }
 
 @end
 
-void OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction_initWithOrgApacheLuceneQueriesFunctionValueSource_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction *self, OrgApacheLuceneQueriesFunctionValueSource *a, OrgApacheLuceneQueriesFunctionValueSource *b) {
-  OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_initWithOrgApacheLuceneQueriesFunctionValueSource_withOrgApacheLuceneQueriesFunctionValueSource_(self, a, b);
+void OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction_init(OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction *new_OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction_initWithOrgApacheLuceneQueriesFunctionValueSource_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValueSource *a, OrgApacheLuceneQueriesFunctionValueSource *b) {
+OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction *new_OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction_init() {
   OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction *self = [OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction alloc];
-  OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction_initWithOrgApacheLuceneQueriesFunctionValueSource_withOrgApacheLuceneQueriesFunctionValueSource_(self, a, b);
+  OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction_init(self);
   return self;
 }
 

@@ -24,45 +24,19 @@
 #define OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery_INCLUDE 1
 #include "org/apache/lucene/queryparser/surround/query/DistanceSubQuery.h"
 
-@class OrgApacheLuceneIndexIndexReader;
-@class OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory;
-@class OrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory;
-@class OrgApacheLuceneSearchQuery;
-@protocol JavaUtilList;
-
 @interface OrgApacheLuceneQueryparserSurroundQueryDistanceQuery : OrgApacheLuceneQueryparserSurroundQueryComposedQuery < OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery >
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)queries
-                         withBoolean:(jboolean)infix
-                             withInt:(jint)opDistance
-                        withNSString:(NSString *)opName
-                         withBoolean:(jboolean)ordered;
-
-- (void)addSpanQueriesWithOrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory:(OrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory *)sncf;
-
-- (NSString *)distanceSubQueryNotAllowed;
-
-- (jint)getOpDistance;
-
-- (OrgApacheLuceneSearchQuery *)getSpanNearQueryWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
-                                                                       withNSString:(NSString *)fieldName
-                                                                          withFloat:(jfloat)boost
-                       withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *)qf;
-
-- (OrgApacheLuceneSearchQuery *)makeLuceneQueryFieldNoBoostWithNSString:(NSString *)fieldName
-           withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *)qf;
-
-- (jboolean)subQueriesOrdered;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserSurroundQueryDistanceQuery)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundQueryDistanceQuery_initWithJavaUtilList_withBoolean_withInt_withNSString_withBoolean_(OrgApacheLuceneQueryparserSurroundQueryDistanceQuery *self, id<JavaUtilList> queries, jboolean infix, jint opDistance, NSString *opName, jboolean ordered);
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundQueryDistanceQuery_init(OrgApacheLuceneQueryparserSurroundQueryDistanceQuery *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQueryDistanceQuery *new_OrgApacheLuceneQueryparserSurroundQueryDistanceQuery_initWithJavaUtilList_withBoolean_withInt_withNSString_withBoolean_(id<JavaUtilList> queries, jboolean infix, jint opDistance, NSString *opName, jboolean ordered) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQueryDistanceQuery *new_OrgApacheLuceneQueryparserSurroundQueryDistanceQuery_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundQueryDistanceQuery)
 

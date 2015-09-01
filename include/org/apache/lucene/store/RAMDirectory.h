@@ -26,7 +26,6 @@
 
 @class IOSObjectArray;
 @class JavaUtilConcurrentAtomicAtomicLong;
-@class OrgApacheLuceneStoreFSDirectory;
 @class OrgApacheLuceneStoreIOContext;
 @class OrgApacheLuceneStoreIndexInput;
 @class OrgApacheLuceneStoreIndexOutput;
@@ -45,9 +44,6 @@
 
 - (instancetype)init;
 
-- (instancetype)initWithOrgApacheLuceneStoreFSDirectory:(OrgApacheLuceneStoreFSDirectory *)dir
-                      withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
-
 - (instancetype)initWithOrgApacheLuceneStoreLockFactory:(OrgApacheLuceneStoreLockFactory *)lockFactory;
 
 - (void)close;
@@ -58,10 +54,6 @@
 - (void)deleteFileWithNSString:(NSString *)name;
 
 - (jlong)fileLengthWithNSString:(NSString *)name;
-
-- (jboolean)fileNameExistsWithNSString:(NSString *)name;
-
-- (id<JavaUtilCollection>)getChildResources;
 
 - (IOSObjectArray *)listAll;
 
@@ -93,10 +85,6 @@ FOUNDATION_EXPORT OrgApacheLuceneStoreRAMDirectory *new_OrgApacheLuceneStoreRAMD
 FOUNDATION_EXPORT void OrgApacheLuceneStoreRAMDirectory_initWithOrgApacheLuceneStoreLockFactory_(OrgApacheLuceneStoreRAMDirectory *self, OrgApacheLuceneStoreLockFactory *lockFactory);
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreRAMDirectory *new_OrgApacheLuceneStoreRAMDirectory_initWithOrgApacheLuceneStoreLockFactory_(OrgApacheLuceneStoreLockFactory *lockFactory) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneStoreRAMDirectory_initWithOrgApacheLuceneStoreFSDirectory_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneStoreRAMDirectory *self, OrgApacheLuceneStoreFSDirectory *dir, OrgApacheLuceneStoreIOContext *context);
-
-FOUNDATION_EXPORT OrgApacheLuceneStoreRAMDirectory *new_OrgApacheLuceneStoreRAMDirectory_initWithOrgApacheLuceneStoreFSDirectory_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneStoreFSDirectory *dir, OrgApacheLuceneStoreIOContext *context) NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreRAMDirectory)
 

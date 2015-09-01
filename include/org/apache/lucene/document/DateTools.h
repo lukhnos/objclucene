@@ -24,18 +24,13 @@
 
 #pragma mark Public
 
-+ (NSString *)dateToStringWithJavaUtilDate:(JavaUtilDate *)date
-withOrgApacheLuceneDocumentDateTools_ResolutionEnum:(OrgApacheLuceneDocumentDateTools_ResolutionEnum *)resolution;
+- (instancetype)init;
 
-+ (JavaUtilDate *)roundWithJavaUtilDate:(JavaUtilDate *)date
++ (NSString *)dateToStringWithJavaUtilDate:(JavaUtilDate *)date
 withOrgApacheLuceneDocumentDateTools_ResolutionEnum:(OrgApacheLuceneDocumentDateTools_ResolutionEnum *)resolution;
 
 + (jlong)roundWithLong:(jlong)time
 withOrgApacheLuceneDocumentDateTools_ResolutionEnum:(OrgApacheLuceneDocumentDateTools_ResolutionEnum *)resolution;
-
-+ (JavaUtilDate *)stringToDateWithNSString:(NSString *)dateString;
-
-+ (jlong)stringToTimeWithNSString:(NSString *)dateString;
 
 + (NSString *)timeToStringWithLong:(jlong)time
 withOrgApacheLuceneDocumentDateTools_ResolutionEnum:(OrgApacheLuceneDocumentDateTools_ResolutionEnum *)resolution;
@@ -51,13 +46,11 @@ FOUNDATION_EXPORT NSString *OrgApacheLuceneDocumentDateTools_dateToStringWithJav
 
 FOUNDATION_EXPORT NSString *OrgApacheLuceneDocumentDateTools_timeToStringWithLong_withOrgApacheLuceneDocumentDateTools_ResolutionEnum_(jlong time, OrgApacheLuceneDocumentDateTools_ResolutionEnum *resolution);
 
-FOUNDATION_EXPORT jlong OrgApacheLuceneDocumentDateTools_stringToTimeWithNSString_(NSString *dateString);
-
-FOUNDATION_EXPORT JavaUtilDate *OrgApacheLuceneDocumentDateTools_stringToDateWithNSString_(NSString *dateString);
-
-FOUNDATION_EXPORT JavaUtilDate *OrgApacheLuceneDocumentDateTools_roundWithJavaUtilDate_withOrgApacheLuceneDocumentDateTools_ResolutionEnum_(JavaUtilDate *date, OrgApacheLuceneDocumentDateTools_ResolutionEnum *resolution);
-
 FOUNDATION_EXPORT jlong OrgApacheLuceneDocumentDateTools_roundWithLong_withOrgApacheLuceneDocumentDateTools_ResolutionEnum_(jlong time, OrgApacheLuceneDocumentDateTools_ResolutionEnum *resolution);
+
+FOUNDATION_EXPORT void OrgApacheLuceneDocumentDateTools_init(OrgApacheLuceneDocumentDateTools *self);
+
+FOUNDATION_EXPORT OrgApacheLuceneDocumentDateTools *new_OrgApacheLuceneDocumentDateTools_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentDateTools)
 

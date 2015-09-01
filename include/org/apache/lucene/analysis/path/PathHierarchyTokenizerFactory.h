@@ -20,25 +20,19 @@
 #define OrgApacheLuceneAnalysisUtilTokenizerFactory_INCLUDE 1
 #include "org/apache/lucene/analysis/util/TokenizerFactory.h"
 
-@class OrgApacheLuceneAnalysisTokenizer;
-@class OrgApacheLuceneUtilAttributeFactory;
-@protocol JavaUtilMap;
-
 @interface OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory : OrgApacheLuceneAnalysisUtilTokenizerFactory
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
-
-- (OrgApacheLuceneAnalysisTokenizer *)createWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory *self, id<JavaUtilMap> args);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory_init(OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory *new_OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory *new_OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory)
 

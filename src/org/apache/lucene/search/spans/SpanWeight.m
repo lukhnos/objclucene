@@ -19,7 +19,6 @@
 #include "org/apache/lucene/index/TermContext.h"
 #include "org/apache/lucene/index/Terms.h"
 #include "org/apache/lucene/search/CollectionStatistics.h"
-#include "org/apache/lucene/search/Explanation.h"
 #include "org/apache/lucene/search/IndexSearcher.h"
 #include "org/apache/lucene/search/Query.h"
 #include "org/apache/lucene/search/Scorer.h"
@@ -140,22 +139,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanWeight_Postings_$3Enum)
   return simWeight_ == nil ? nil : [((OrgApacheLuceneSearchSimilaritiesSimilarity *) nil_chk(similarity_)) simScorerWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight:simWeight_ withOrgApacheLuceneIndexLeafReaderContext:context];
 }
 
-- (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-                                                                               withInt:(jint)doc {
-  OrgApacheLuceneSearchSpansSpanScorer *scorer = (OrgApacheLuceneSearchSpansSpanScorer *) check_class_cast([self scorerWithOrgApacheLuceneIndexLeafReaderContext:context], [OrgApacheLuceneSearchSpansSpanScorer class]);
-  if (scorer != nil) {
-    jint newDoc = [scorer advanceWithInt:doc];
-    if (newDoc == doc) {
-      jfloat freq = [scorer sloppyFreq];
-      OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer = [((OrgApacheLuceneSearchSimilaritiesSimilarity *) nil_chk(similarity_)) simScorerWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight:simWeight_ withOrgApacheLuceneIndexLeafReaderContext:context];
-      OrgApacheLuceneSearchExplanation *freqExplanation = OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_(freq, JreStrcat("$F", @"phraseFreq=", freq), [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchExplanation_class_()]);
-      OrgApacheLuceneSearchExplanation *scoreExplanation = [((OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *) nil_chk(docScorer)) explainWithInt:doc withOrgApacheLuceneSearchExplanation:freqExplanation];
-      return OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_([((OrgApacheLuceneSearchExplanation *) nil_chk(scoreExplanation)) getValue], JreStrcat("$@$I$$$", @"weight(", [self getQuery], @" in ", doc, @") [", [[similarity_ getClass] getSimpleName], @"], result of:"), [IOSObjectArray arrayWithObjects:(id[]){ scoreExplanation } count:1 type:OrgApacheLuceneSearchExplanation_class_()]);
-    }
-  }
-  return OrgApacheLuceneSearchExplanation_noMatchWithNSString_withOrgApacheLuceneSearchExplanationArray_(@"no matching term", [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchExplanation_class_()]);
-}
-
 - (void)dealloc {
   RELEASE_(similarity_);
   RELEASE_(simWeight_);
@@ -173,7 +156,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanWeight_Postings_$3Enum)
     { "normalizeWithFloat:withFloat:", "normalize", "V", 0x1, NULL, NULL },
     { "scorerWithOrgApacheLuceneIndexLeafReaderContext:", "scorer", "Lorg.apache.lucene.search.Scorer;", 0x1, "Ljava.io.IOException;", NULL },
     { "getSimScorerWithOrgApacheLuceneIndexLeafReaderContext:", "getSimScorer", "Lorg.apache.lucene.search.similarities.Similarity$SimScorer;", 0x1, "Ljava.io.IOException;", NULL },
-    { "explainWithOrgApacheLuceneIndexLeafReaderContext:withInt:", "explain", "Lorg.apache.lucene.search.Explanation;", 0x1, "Ljava.io.IOException;", NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "similarity_", NULL, 0x14, "Lorg.apache.lucene.search.similarities.Similarity;", NULL, NULL, .constantValue.asLong = 0 },
@@ -181,7 +163,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanWeight_Postings_$3Enum)
     { "field_", NULL, 0x14, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.search.spans.SpanWeight$Postings;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpanWeight = { 2, "SpanWeight", "org.apache.lucene.search.spans", NULL, 0x401, 9, methods, 3, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpanWeight = { 2, "SpanWeight", "org.apache.lucene.search.spans", NULL, 0x401, 8, methods, 3, fields, 0, NULL, 1, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneSearchSpansSpanWeight;
 }
 
@@ -218,11 +200,6 @@ OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum *OrgApacheLuceneSearchSpansSpa
   // can't call an abstract method
   [self doesNotRecognizeSelector:_cmd];
   return 0;
-}
-
-- (OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum *)atLeastWithOrgApacheLuceneSearchSpansSpanWeight_PostingsEnum:(OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum *)postings {
-  if ([((OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum *) nil_chk(postings)) compareToWithId:self] > 0) return postings;
-  return self;
 }
 
 - (instancetype)initWithNSString:(NSString *)__name
@@ -272,7 +249,6 @@ OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum *OrgApacheLuceneSearchSpansSpa
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "getRequiredPostings", NULL, "I", 0x401, NULL, NULL },
-    { "atLeastWithOrgApacheLuceneSearchSpansSpanWeight_PostingsEnum:", "atLeast", "Lorg.apache.lucene.search.spans.SpanWeight$Postings;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "POSITIONS", "POSITIONS", 0x4019, "Lorg.apache.lucene.search.spans.SpanWeight$Postings;", &OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum_POSITIONS, NULL, .constantValue.asLong = 0 },
@@ -280,7 +256,7 @@ OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum *OrgApacheLuceneSearchSpansSpa
     { "OFFSETS", "OFFSETS", 0x4019, "Lorg.apache.lucene.search.spans.SpanWeight$Postings;", &OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum_OFFSETS, NULL, .constantValue.asLong = 0 },
   };
   static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.spans.SpanWeight$Postings;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum = { 2, "Postings", "org.apache.lucene.search.spans", "SpanWeight", 0x4409, 2, methods, 3, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/search/spans/SpanWeight$Postings;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum = { 2, "Postings", "org.apache.lucene.search.spans", "SpanWeight", 0x4409, 1, methods, 3, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/search/spans/SpanWeight$Postings;>;" };
   return &_OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum;
 }
 

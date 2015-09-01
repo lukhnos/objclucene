@@ -420,9 +420,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldComparator_DocComparator)
 #pragma mark Public
 
 - (instancetype)initWithInt:(jint)numHits
-               withNSString:(NSString *)field;
-
-- (instancetype)initWithInt:(jint)numHits
                withNSString:(NSString *)field
                 withBoolean:(jboolean)sortMissingLast;
 
@@ -464,10 +461,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchFieldComparator_TermOrdValComparator, r
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchFieldComparator_TermOrdValComparator, termsIndex_, OrgApacheLuceneIndexSortedDocValues *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchFieldComparator_TermOrdValComparator, bottomValue_, OrgApacheLuceneUtilBytesRef *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchFieldComparator_TermOrdValComparator, topValue_, OrgApacheLuceneUtilBytesRef *)
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchFieldComparator_TermOrdValComparator_initWithInt_withNSString_(OrgApacheLuceneSearchFieldComparator_TermOrdValComparator *self, jint numHits, NSString *field);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchFieldComparator_TermOrdValComparator *new_OrgApacheLuceneSearchFieldComparator_TermOrdValComparator_initWithInt_withNSString_(jint numHits, NSString *field) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchFieldComparator_TermOrdValComparator_initWithInt_withNSString_withBoolean_(OrgApacheLuceneSearchFieldComparator_TermOrdValComparator *self, jint numHits, NSString *field, jboolean sortMissingLast);
 

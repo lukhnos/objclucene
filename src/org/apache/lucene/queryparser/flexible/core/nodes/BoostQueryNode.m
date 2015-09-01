@@ -3,112 +3,36 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/core/nodes/BoostQueryNode.java
 //
 
-#include "IOSClass.h"
-#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/lang/CharSequence.h"
-#include "java/lang/CloneNotSupportedException.h"
-#include "java/lang/Float.h"
-#include "java/util/List.h"
-#include "org/apache/lucene/queryparser/flexible/core/QueryNodeError.h"
-#include "org/apache/lucene/queryparser/flexible/core/messages/QueryParserMessages.h"
 #include "org/apache/lucene/queryparser/flexible/core/nodes/BoostQueryNode.h"
-#include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNode.h"
-#include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNodeImpl.h"
-#include "org/apache/lucene/queryparser/flexible/core/parser/EscapeQuerySyntax.h"
-#include "org/apache/lucene/queryparser/flexible/messages/MessageImpl.h"
 
-@interface OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode () {
- @public
-  jfloat value_;
-}
-
-- (id<JavaLangCharSequence>)getValueString;
-
-@end
-
-__attribute__((unused)) static id<JavaLangCharSequence> OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode_getValueString(OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode *self);
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode
 
-- (instancetype)initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)query
-                                                                   withFloat:(jfloat)value {
-  OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_withFloat_(self, query, value);
+- (instancetype)init {
+  OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode_init(self);
   return self;
-}
-
-- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)getChild {
-  id<JavaUtilList> children = [self getChildren];
-  if (children == nil || [children size] == 0) {
-    return nil;
-  }
-  return [((id<JavaUtilList>) nil_chk(children)) getWithInt:0];
-}
-
-- (jfloat)getValue {
-  return self->value_;
-}
-
-- (id<JavaLangCharSequence>)getValueString {
-  return OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode_getValueString(self);
-}
-
-- (NSString *)description {
-  return JreStrcat("$@$$$", @"<boost value='", OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode_getValueString(self), @"'>\n", [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk([self getChild])) description], @"\n</boost>");
-}
-
-- (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escapeSyntaxParser {
-  if ([self getChild] == nil) return @"";
-  return JreStrcat("@C@", [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk([self getChild])) toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:escapeSyntaxParser], '^', OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode_getValueString(self));
-}
-
-- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)cloneTree {
-  OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode *clone = (OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode *) check_class_cast([super cloneTree], [OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode class]);
-  ((OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode *) nil_chk(clone))->value_ = self->value_;
-  return clone;
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:withFloat:", "BoostQueryNode", NULL, 0x1, NULL, NULL },
-    { "getChild", NULL, "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x1, NULL, NULL },
-    { "getValue", NULL, "F", 0x1, NULL, NULL },
-    { "getValueString", NULL, "Ljava.lang.CharSequence;", 0x2, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:", "toQueryString", "Ljava.lang.CharSequence;", 0x1, NULL, NULL },
-    { "cloneTree", NULL, "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x1, "Ljava.lang.CloneNotSupportedException;", NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "value_", NULL, 0x2, "F", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode = { 2, "BoostQueryNode", "org.apache.lucene.queryparser.flexible.core.nodes", NULL, 0x1, 7, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode = { 2, "BoostQueryNode", "org.apache.lucene.queryparser.flexible.core.nodes", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode;
 }
 
 @end
 
-void OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_withFloat_(OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode *self, id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> query, jfloat value) {
-  OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_init(self);
-  self->value_ = 0;
-  if (query == nil) {
-    @throw [new_OrgApacheLuceneQueryparserFlexibleCoreQueryNodeError_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_([new_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_withNSObjectArray_(JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, NODE_ACTION_NOT_SUPPORTED_), [IOSObjectArray arrayWithObjects:(id[]){ @"query", @"null" } count:2 type:NSObject_class_()]) autorelease]) autorelease];
-  }
-  self->value_ = value;
-  [self setLeafWithBoolean:NO];
-  [self allocate];
-  [self addWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:query];
+void OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode_init(OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_withFloat_(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> query, jfloat value) {
+OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode_init() {
   OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode *self = [OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode alloc];
-  OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_withFloat_(self, query, value);
+  OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode_init(self);
   return self;
-}
-
-id<JavaLangCharSequence> OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode_getValueString(OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode *self) {
-  JavaLangFloat *f = JavaLangFloat_valueOfWithFloat_(self->value_);
-  if ([f floatValue] == [f longLongValue]) return JreStrcat("J", [f longLongValue]);
-  else return JreStrcat("@", f);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode)

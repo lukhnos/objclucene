@@ -25,13 +25,9 @@
 
 - (instancetype)init;
 
-- (jdouble)getMBPerSec;
-
 - (jlong)getMinPauseCheckBytes;
 
 - (jlong)pauseWithLong:(jlong)bytes;
-
-- (void)setMBPerSecWithDouble:(jdouble)mbPerSec;
 
 @end
 
@@ -50,23 +46,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreRateLimiter)
 
 #pragma mark Public
 
-- (instancetype)initWithDouble:(jdouble)mbPerSec;
-
-- (jdouble)getMBPerSec;
-
-- (jlong)getMinPauseCheckBytes;
-
-- (jlong)pauseWithLong:(jlong)bytes;
-
-- (void)setMBPerSecWithDouble:(jdouble)mbPerSec;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter_initWithDouble_(OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter *self, jdouble mbPerSec);
+FOUNDATION_EXPORT void OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter_init(OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter *new_OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter_initWithDouble_(jdouble mbPerSec) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter *new_OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter)
 

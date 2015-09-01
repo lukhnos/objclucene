@@ -191,16 +191,6 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)b {
   JavaUtilArrays_fillWithIntArray_withInt_(ids_, -1);
 }
 
-- (void)clear {
-  [self clearWithBoolean:YES];
-}
-
-- (void)close {
-  [self clearWithBoolean:YES];
-  JreStrongAssign(&ids_, nil);
-  [((OrgApacheLuceneUtilCounter *) nil_chk(bytesUsed_)) addAndGetWithLong:OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT * -hashSize_];
-}
-
 - (jint)addWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)bytes {
   JreAssert((bytesStart_ != nil), (@"Bytesstart is null - not initialized"));
   jint length = ((OrgApacheLuceneUtilBytesRef *) nil_chk(bytes))->length_;
@@ -242,10 +232,6 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)b {
     return e;
   }
   return -(e + 1);
-}
-
-- (jint)findWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)bytes {
-  return IOSIntArray_Get(nil_chk(ids_), OrgApacheLuceneUtilBytesRefHash_findHashWithOrgApacheLuceneUtilBytesRef_(self, bytes));
 }
 
 - (jint)findHashWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)bytes {
@@ -331,10 +317,7 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)b {
     { "equalsWithInt:withOrgApacheLuceneUtilBytesRef:", "equals", "Z", 0x2, NULL, NULL },
     { "shrinkWithInt:", "shrink", "Z", 0x2, NULL, NULL },
     { "clearWithBoolean:", "clear", "V", 0x1, NULL, NULL },
-    { "clear", NULL, "V", 0x1, NULL, NULL },
-    { "close", NULL, "V", 0x1, NULL, NULL },
     { "addWithOrgApacheLuceneUtilBytesRef:", "add", "I", 0x1, NULL, NULL },
-    { "findWithOrgApacheLuceneUtilBytesRef:", "find", "I", 0x1, NULL, NULL },
     { "findHashWithOrgApacheLuceneUtilBytesRef:", "findHash", "I", 0x2, NULL, NULL },
     { "addByPoolOffsetWithInt:", "addByPoolOffset", "I", 0x1, NULL, NULL },
     { "rehashWithInt:withBoolean:", "rehash", "V", 0x2, NULL, NULL },
@@ -357,7 +340,7 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)b {
     { "bytesUsed_", NULL, 0x2, "Lorg.apache.lucene.util.Counter;", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.util.BytesRefHash$MaxBytesLengthExceededException;", "Lorg.apache.lucene.util.BytesRefHash$BytesStartArray;", "Lorg.apache.lucene.util.BytesRefHash$DirectBytesStartArray;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilBytesRefHash = { 2, "BytesRefHash", "org.apache.lucene.util", NULL, 0x11, 20, methods, 12, fields, 0, NULL, 3, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilBytesRefHash = { 2, "BytesRefHash", "org.apache.lucene.util", NULL, 0x11, 17, methods, 12, fields, 0, NULL, 3, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneUtilBytesRefHash;
 }
 

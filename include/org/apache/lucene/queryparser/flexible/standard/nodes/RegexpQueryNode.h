@@ -28,44 +28,19 @@
 #define OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_INCLUDE 1
 #include "org/apache/lucene/queryparser/flexible/core/nodes/FieldableNode.h"
 
-@class OrgApacheLuceneUtilBytesRef;
-@protocol JavaLangCharSequence;
-@protocol OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax;
-
 @interface OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl < OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode, OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode >
 
 #pragma mark Public
 
-- (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)field
-                    withJavaLangCharSequence:(id<JavaLangCharSequence>)text
-                                     withInt:(jint)begin
-                                     withInt:(jint)end;
-
-- (OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode *)cloneTree;
-
-- (id<JavaLangCharSequence>)getField;
-
-- (NSString *)getFieldAsString;
-
-- (id<JavaLangCharSequence>)getText;
-
-- (void)setFieldWithJavaLangCharSequence:(id<JavaLangCharSequence>)field;
-
-- (void)setTextWithJavaLangCharSequence:(id<JavaLangCharSequence>)text;
-
-- (OrgApacheLuceneUtilBytesRef *)textToBytesRef;
-
-- (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escapeSyntaxParser;
-
-- (NSString *)description;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_withInt_withInt_(OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode *self, id<JavaLangCharSequence> field, id<JavaLangCharSequence> text, jint begin, jint end);
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode_init(OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode *new_OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_withInt_withInt_(id<JavaLangCharSequence> field, id<JavaLangCharSequence> text, jint begin, jint end) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode *new_OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode)
 

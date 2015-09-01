@@ -20,25 +20,19 @@
 #define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
-@class OrgApacheLuceneAnalysisArArabicStemFilter;
-@class OrgApacheLuceneAnalysisTokenStream;
-@protocol JavaUtilMap;
-
 @interface OrgApacheLuceneAnalysisArArabicStemFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
-
-- (OrgApacheLuceneAnalysisArArabicStemFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisArArabicStemFilterFactory)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisArArabicStemFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisArArabicStemFilterFactory *self, id<JavaUtilMap> args);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisArArabicStemFilterFactory_init(OrgApacheLuceneAnalysisArArabicStemFilterFactory *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisArArabicStemFilterFactory *new_OrgApacheLuceneAnalysisArArabicStemFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisArArabicStemFilterFactory *new_OrgApacheLuceneAnalysisArArabicStemFilterFactory_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisArArabicStemFilterFactory)
 

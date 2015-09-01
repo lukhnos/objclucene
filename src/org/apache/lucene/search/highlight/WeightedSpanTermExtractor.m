@@ -391,11 +391,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightWeightedSpanTermExtract
 }
 
 - (id<JavaUtilMap>)getWeightedSpanTermsWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-                               withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tokenStream {
-  return [self getWeightedSpanTermsWithOrgApacheLuceneSearchQuery:query withOrgApacheLuceneAnalysisTokenStream:tokenStream withNSString:nil];
-}
-
-- (id<JavaUtilMap>)getWeightedSpanTermsWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
                                withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tokenStream
                                                          withNSString:(NSString *)fieldName {
   if (fieldName != nil) {
@@ -533,16 +528,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightWeightedSpanTermExtract
   }
 }
 
-- (jboolean)getExpandMultiTermQuery {
-  return expandMultiTermQuery_;
-}
-
 - (void)setExpandMultiTermQueryWithBoolean:(jboolean)expandMultiTermQuery {
   self->expandMultiTermQuery_ = expandMultiTermQuery;
-}
-
-- (jboolean)isUsePayloads {
-  return usePayloads_;
 }
 
 - (void)setUsePayloadsWithBoolean:(jboolean)usePayloads {
@@ -584,14 +571,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightWeightedSpanTermExtract
     { "extractWeightedTermsWithJavaUtilMap:withOrgApacheLuceneSearchQuery:", "extractWeightedTerms", "V", 0x4, "Ljava.io.IOException;", NULL },
     { "fieldNameComparatorWithNSString:", "fieldNameComparator", "Z", 0x4, NULL, NULL },
     { "getLeafContext", NULL, "Lorg.apache.lucene.index.LeafReaderContext;", 0x4, "Ljava.io.IOException;", NULL },
-    { "getWeightedSpanTermsWithOrgApacheLuceneSearchQuery:withOrgApacheLuceneAnalysisTokenStream:", "getWeightedSpanTerms", "Ljava.util.Map;", 0x1, "Ljava.io.IOException;", NULL },
     { "getWeightedSpanTermsWithOrgApacheLuceneSearchQuery:withOrgApacheLuceneAnalysisTokenStream:withNSString:", "getWeightedSpanTerms", "Ljava.util.Map;", 0x1, "Ljava.io.IOException;", NULL },
     { "getWeightedSpanTermsWithScoresWithOrgApacheLuceneSearchQuery:withOrgApacheLuceneAnalysisTokenStream:withNSString:withOrgApacheLuceneIndexIndexReader:", "getWeightedSpanTermsWithScores", "Ljava.util.Map;", 0x1, "Ljava.io.IOException;", NULL },
     { "collectSpanQueryFieldsWithOrgApacheLuceneSearchSpansSpanQuery:withJavaUtilSet:", "collectSpanQueryFields", "V", 0x4, NULL, NULL },
     { "mustRewriteQueryWithOrgApacheLuceneSearchSpansSpanQuery:", "mustRewriteQuery", "Z", 0x4, NULL, NULL },
-    { "getExpandMultiTermQuery", NULL, "Z", 0x1, NULL, NULL },
     { "setExpandMultiTermQueryWithBoolean:", "setExpandMultiTermQuery", "V", 0x1, NULL, NULL },
-    { "isUsePayloads", NULL, "Z", 0x1, NULL, NULL },
     { "setUsePayloadsWithBoolean:", "setUsePayloads", "V", 0x1, NULL, NULL },
     { "isCachedTokenStream", NULL, "Z", 0x1, NULL, NULL },
     { "getTokenStream", NULL, "Lorg.apache.lucene.analysis.TokenStream;", 0x1, NULL, NULL },
@@ -610,7 +594,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightWeightedSpanTermExtract
     { "internalReader_", NULL, 0x2, "Lorg.apache.lucene.index.LeafReader;", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.search.highlight.WeightedSpanTermExtractor$DelegatingLeafReader;", "Lorg.apache.lucene.search.highlight.WeightedSpanTermExtractor$PositionCheckingMap;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor = { 2, "WeightedSpanTermExtractor", "org.apache.lucene.search.highlight", NULL, 0x1, 21, methods, 9, fields, 0, NULL, 2, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor = { 2, "WeightedSpanTermExtractor", "org.apache.lucene.search.highlight", NULL, 0x1, 18, methods, 9, fields, 0, NULL, 2, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor;
 }
 

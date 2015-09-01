@@ -54,11 +54,6 @@
 
 + (NSString *)toStringWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)termText;
 
-#pragma mark Package-Private
-
-- (void)setWithNSString:(NSString *)fld
-withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)bytes;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexTerm)

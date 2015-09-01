@@ -87,12 +87,6 @@ __attribute__((unused)) static NSString *OrgApacheLuceneIndexTerm_text(OrgApache
   }
 }
 
-- (void)setWithNSString:(NSString *)fld
-withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)bytes {
-  JreStrongAssign(&field_, fld);
-  JreStrongAssign(&self->bytes_, bytes);
-}
-
 - (NSString *)description {
   return JreStrcat("$C$", field_, ':', OrgApacheLuceneIndexTerm_text(self));
 }
@@ -115,14 +109,13 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)bytes {
     { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
     { "hash", "hashCode", "I", 0x1, NULL, NULL },
     { "compareToWithId:", "compareTo", "I", 0x11, NULL, NULL },
-    { "setWithNSString:withOrgApacheLuceneUtilBytesRef:", "set", "V", 0x10, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x11, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "field_", NULL, 0x0, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
     { "bytes_", NULL, 0x0, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexTerm = { 2, "Term", "org.apache.lucene.index", NULL, 0x11, 12, methods, 2, fields, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/lang/Comparable<Lorg/apache/lucene/index/Term;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexTerm = { 2, "Term", "org.apache.lucene.index", NULL, 0x11, 11, methods, 2, fields, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/lang/Comparable<Lorg/apache/lucene/index/Term;>;" };
   return &_OrgApacheLuceneIndexTerm;
 }
 

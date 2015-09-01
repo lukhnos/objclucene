@@ -20,60 +20,19 @@
 #define OrgApacheLuceneCodecsDocValuesProducer_INCLUDE 1
 #include "org/apache/lucene/codecs/DocValuesProducer.h"
 
-@class OrgApacheLuceneIndexBinaryDocValues;
-@class OrgApacheLuceneIndexFieldInfo;
-@class OrgApacheLuceneIndexNumericDocValues;
-@class OrgApacheLuceneIndexSegmentReadState;
-@class OrgApacheLuceneIndexSortedDocValues;
-@class OrgApacheLuceneIndexSortedNumericDocValues;
-@class OrgApacheLuceneIndexSortedSetDocValues;
-@protocol JavaUtilCollection;
-@protocol OrgApacheLuceneUtilBits;
-
 @interface OrgApacheLuceneRangetreeRangeTreeDocValuesProducer : OrgApacheLuceneCodecsDocValuesProducer
-
-#pragma mark Public
-
-- (instancetype)initWithOrgApacheLuceneCodecsDocValuesProducer:(OrgApacheLuceneCodecsDocValuesProducer *)delegate
-                      withOrgApacheLuceneIndexSegmentReadState:(OrgApacheLuceneIndexSegmentReadState *)state;
-
-- (void)checkIntegrity;
-
-- (void)close;
-
-- (OrgApacheLuceneIndexBinaryDocValues *)getBinaryWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)field;
-
-- (id<JavaUtilCollection>)getChildResources;
-
-- (id<OrgApacheLuceneUtilBits>)getDocsWithFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)field;
-
-- (OrgApacheLuceneCodecsDocValuesProducer *)getMergeInstance;
-
-- (OrgApacheLuceneIndexNumericDocValues *)getNumericWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)field;
-
-- (OrgApacheLuceneIndexSortedDocValues *)getSortedWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)field;
-
-- (OrgApacheLuceneIndexSortedNumericDocValues *)getSortedNumericWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)field;
-
-- (OrgApacheLuceneIndexSortedSetDocValues *)getSortedSetWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)field;
-
-- (jlong)ramBytesUsed;
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneRangetreeRangeTreeDocValuesProducer:(OrgApacheLuceneRangetreeRangeTreeDocValuesProducer *)orig;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneRangetreeRangeTreeDocValuesProducer)
 
-FOUNDATION_EXPORT void OrgApacheLuceneRangetreeRangeTreeDocValuesProducer_initWithOrgApacheLuceneCodecsDocValuesProducer_withOrgApacheLuceneIndexSegmentReadState_(OrgApacheLuceneRangetreeRangeTreeDocValuesProducer *self, OrgApacheLuceneCodecsDocValuesProducer *delegate, OrgApacheLuceneIndexSegmentReadState *state);
+FOUNDATION_EXPORT void OrgApacheLuceneRangetreeRangeTreeDocValuesProducer_init(OrgApacheLuceneRangetreeRangeTreeDocValuesProducer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneRangetreeRangeTreeDocValuesProducer *new_OrgApacheLuceneRangetreeRangeTreeDocValuesProducer_initWithOrgApacheLuceneCodecsDocValuesProducer_withOrgApacheLuceneIndexSegmentReadState_(OrgApacheLuceneCodecsDocValuesProducer *delegate, OrgApacheLuceneIndexSegmentReadState *state) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneRangetreeRangeTreeDocValuesProducer_initWithOrgApacheLuceneRangetreeRangeTreeDocValuesProducer_(OrgApacheLuceneRangetreeRangeTreeDocValuesProducer *self, OrgApacheLuceneRangetreeRangeTreeDocValuesProducer *orig);
-
-FOUNDATION_EXPORT OrgApacheLuceneRangetreeRangeTreeDocValuesProducer *new_OrgApacheLuceneRangetreeRangeTreeDocValuesProducer_initWithOrgApacheLuceneRangetreeRangeTreeDocValuesProducer_(OrgApacheLuceneRangetreeRangeTreeDocValuesProducer *orig) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneRangetreeRangeTreeDocValuesProducer *new_OrgApacheLuceneRangetreeRangeTreeDocValuesProducer_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeRangeTreeDocValuesProducer)
 

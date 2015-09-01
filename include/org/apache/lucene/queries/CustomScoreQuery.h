@@ -20,11 +20,9 @@
 #define OrgApacheLuceneSearchQuery_INCLUDE 1
 #include "org/apache/lucene/search/Query.h"
 
-@class IOSObjectArray;
 @class OrgApacheLuceneIndexIndexReader;
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneQueriesCustomScoreProvider;
-@class OrgApacheLuceneQueriesFunctionFunctionQuery;
 @class OrgApacheLuceneSearchIndexSearcher;
 @class OrgApacheLuceneSearchWeight;
 
@@ -32,13 +30,7 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)subQuery;
-
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)subQuery
-   withOrgApacheLuceneQueriesFunctionFunctionQuery:(OrgApacheLuceneQueriesFunctionFunctionQuery *)scoringQuery;
-
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)subQuery
-withOrgApacheLuceneQueriesFunctionFunctionQueryArray:(IOSObjectArray *)scoringQueries;
+- (instancetype)init;
 
 - (OrgApacheLuceneQueriesCustomScoreQuery *)clone;
 
@@ -47,19 +39,13 @@ withOrgApacheLuceneQueriesFunctionFunctionQueryArray:(IOSObjectArray *)scoringQu
 
 - (jboolean)isEqual:(id)o;
 
-- (IOSObjectArray *)getScoringQueries;
-
 - (OrgApacheLuceneSearchQuery *)getSubQuery;
 
 - (NSUInteger)hash;
 
-- (jboolean)isStrict;
-
 - (NSString *)name;
 
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
-
-- (void)setStrictWithBoolean:(jboolean)strict;
 
 - (NSString *)toStringWithNSString:(NSString *)field;
 
@@ -71,17 +57,9 @@ withOrgApacheLuceneQueriesFunctionFunctionQueryArray:(IOSObjectArray *)scoringQu
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesCustomScoreQuery)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesCustomScoreQuery_initWithOrgApacheLuceneSearchQuery_(OrgApacheLuceneQueriesCustomScoreQuery *self, OrgApacheLuceneSearchQuery *subQuery);
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesCustomScoreQuery_init(OrgApacheLuceneQueriesCustomScoreQuery *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueriesCustomScoreQuery *new_OrgApacheLuceneQueriesCustomScoreQuery_initWithOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchQuery *subQuery) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesCustomScoreQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneQueriesFunctionFunctionQuery_(OrgApacheLuceneQueriesCustomScoreQuery *self, OrgApacheLuceneSearchQuery *subQuery, OrgApacheLuceneQueriesFunctionFunctionQuery *scoringQuery);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueriesCustomScoreQuery *new_OrgApacheLuceneQueriesCustomScoreQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneQueriesFunctionFunctionQuery_(OrgApacheLuceneSearchQuery *subQuery, OrgApacheLuceneQueriesFunctionFunctionQuery *scoringQuery) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesCustomScoreQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneQueriesFunctionFunctionQueryArray_(OrgApacheLuceneQueriesCustomScoreQuery *self, OrgApacheLuceneSearchQuery *subQuery, IOSObjectArray *scoringQueries);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueriesCustomScoreQuery *new_OrgApacheLuceneQueriesCustomScoreQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneQueriesFunctionFunctionQueryArray_(OrgApacheLuceneSearchQuery *subQuery, IOSObjectArray *scoringQueries) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueriesCustomScoreQuery *new_OrgApacheLuceneQueriesCustomScoreQuery_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesCustomScoreQuery)
 

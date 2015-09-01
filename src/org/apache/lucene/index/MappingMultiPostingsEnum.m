@@ -49,14 +49,6 @@ withOrgApacheLuceneIndexMergeState:(OrgApacheLuceneIndexMergeState *)mergeState 
   return self;
 }
 
-- (jint)getNumSubs {
-  return numSubs_;
-}
-
-- (IOSObjectArray *)getSubs {
-  return subs_;
-}
-
 - (jint)freq {
   return [((OrgApacheLuceneIndexPostingsEnum *) nil_chk(current_)) freq];
 }
@@ -148,8 +140,6 @@ withOrgApacheLuceneIndexMergeState:(OrgApacheLuceneIndexMergeState *)mergeState 
   static const J2ObjcMethodInfo methods[] = {
     { "initWithNSString:withOrgApacheLuceneIndexMergeState:", "MappingMultiPostingsEnum", NULL, 0x1, NULL, NULL },
     { "resetWithOrgApacheLuceneIndexMultiPostingsEnum:", "reset", "Lorg.apache.lucene.index.MappingMultiPostingsEnum;", 0x0, NULL, NULL },
-    { "getNumSubs", NULL, "I", 0x1, NULL, NULL },
-    { "getSubs", NULL, "[Lorg.apache.lucene.index.MultiPostingsEnum$EnumWithSlice;", 0x1, NULL, NULL },
     { "freq", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
     { "docID", NULL, "I", 0x1, NULL, NULL },
     { "advanceWithInt:", "advance", "I", 0x1, NULL, NULL },
@@ -172,7 +162,7 @@ withOrgApacheLuceneIndexMergeState:(OrgApacheLuceneIndexMergeState *)mergeState 
     { "multiDocsAndPositionsEnum_", NULL, 0x0, "Lorg.apache.lucene.index.MultiPostingsEnum;", NULL, NULL, .constantValue.asLong = 0 },
     { "field_", NULL, 0x10, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMappingMultiPostingsEnum = { 2, "MappingMultiPostingsEnum", "org.apache.lucene.index", NULL, 0x10, 13, methods, 10, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMappingMultiPostingsEnum = { 2, "MappingMultiPostingsEnum", "org.apache.lucene.index", NULL, 0x10, 11, methods, 10, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexMappingMultiPostingsEnum;
 }
 

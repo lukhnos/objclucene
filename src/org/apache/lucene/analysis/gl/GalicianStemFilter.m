@@ -3,85 +3,35 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/gl/GalicianStemFilter.java
 //
 
-#include "IOSClass.h"
-#include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
-#include "org/apache/lucene/analysis/TokenFilter.h"
-#include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/gl/GalicianStemFilter.h"
-#include "org/apache/lucene/analysis/gl/GalicianStemmer.h"
-#include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
-#include "org/apache/lucene/analysis/tokenattributes/KeywordAttribute.h"
-#include "org/apache/lucene/util/AttributeSource.h"
 
-@interface OrgApacheLuceneAnalysisGlGalicianStemFilter () {
- @public
-  OrgApacheLuceneAnalysisGlGalicianStemmer *stemmer_;
-  id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute> termAtt_;
-  id<OrgApacheLuceneAnalysisTokenattributesKeywordAttribute> keywordAttr_;
-}
-
-@end
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisGlGalicianStemFilter, stemmer_, OrgApacheLuceneAnalysisGlGalicianStemmer *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisGlGalicianStemFilter, termAtt_, id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisGlGalicianStemFilter, keywordAttr_, id<OrgApacheLuceneAnalysisTokenattributesKeywordAttribute>)
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneAnalysisGlGalicianStemFilter
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  OrgApacheLuceneAnalysisGlGalicianStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, input);
+- (instancetype)init {
+  OrgApacheLuceneAnalysisGlGalicianStemFilter_init(self);
   return self;
-}
-
-- (jboolean)incrementToken {
-  if ([((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
-    if (![((id<OrgApacheLuceneAnalysisTokenattributesKeywordAttribute>) nil_chk(keywordAttr_)) isKeyword]) {
-      jint len = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) length];
-      jint newlen = [((OrgApacheLuceneAnalysisGlGalicianStemmer *) nil_chk(stemmer_)) stemWithCharArray:[termAtt_ resizeBufferWithInt:len + 1] withInt:len];
-      [termAtt_ setLengthWithInt:newlen];
-    }
-    return YES;
-  }
-  else {
-    return NO;
-  }
-}
-
-- (void)dealloc {
-  RELEASE_(stemmer_);
-  RELEASE_(termAtt_);
-  RELEASE_(keywordAttr_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:", "GalicianStemFilter", NULL, 0x1, NULL, NULL },
-    { "incrementToken", NULL, "Z", 0x1, "Ljava.io.IOException;", NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "stemmer_", NULL, 0x12, "Lorg.apache.lucene.analysis.gl.GalicianStemmer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "termAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "keywordAttr_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.KeywordAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisGlGalicianStemFilter = { 2, "GalicianStemFilter", "org.apache.lucene.analysis.gl", NULL, 0x11, 2, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisGlGalicianStemFilter = { 2, "GalicianStemFilter", "org.apache.lucene.analysis.gl", NULL, 0x11, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisGlGalicianStemFilter;
 }
 
 @end
 
-void OrgApacheLuceneAnalysisGlGalicianStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisGlGalicianStemFilter *self, OrgApacheLuceneAnalysisTokenStream *input) {
-  OrgApacheLuceneAnalysisTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, input);
-  JreStrongAssignAndConsume(&self->stemmer_, new_OrgApacheLuceneAnalysisGlGalicianStemmer_init());
-  JreStrongAssign(&self->termAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()]);
-  JreStrongAssign(&self->keywordAttr_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesKeywordAttribute_class_()]);
+void OrgApacheLuceneAnalysisGlGalicianStemFilter_init(OrgApacheLuceneAnalysisGlGalicianStemFilter *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneAnalysisGlGalicianStemFilter *new_OrgApacheLuceneAnalysisGlGalicianStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) {
+OrgApacheLuceneAnalysisGlGalicianStemFilter *new_OrgApacheLuceneAnalysisGlGalicianStemFilter_init() {
   OrgApacheLuceneAnalysisGlGalicianStemFilter *self = [OrgApacheLuceneAnalysisGlGalicianStemFilter alloc];
-  OrgApacheLuceneAnalysisGlGalicianStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, input);
+  OrgApacheLuceneAnalysisGlGalicianStemFilter_init(self);
   return self;
 }
 

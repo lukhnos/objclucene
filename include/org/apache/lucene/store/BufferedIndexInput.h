@@ -26,7 +26,6 @@
 
 @class IOSByteArray;
 @class OrgApacheLuceneStoreIOContext;
-@class OrgApacheLuceneStoreIndexOutput;
 
 #define OrgApacheLuceneStoreBufferedIndexInput_BUFFER_SIZE 1024
 #define OrgApacheLuceneStoreBufferedIndexInput_MIN_BUFFER_SIZE 8
@@ -38,8 +37,6 @@
 }
 
 #pragma mark Public
-
-- (instancetype)initWithNSString:(NSString *)resourceDesc;
 
 - (instancetype)initWithNSString:(NSString *)resourceDesc
                          withInt:(jint)bufferSize;
@@ -99,9 +96,6 @@ withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
 
 #pragma mark Protected
 
-- (jint)flushBufferWithOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)outArg
-                                              withLong:(jlong)numBytes;
-
 - (void)newBufferWithByteArray:(IOSByteArray *)newBuffer OBJC_METHOD_FAMILY_NONE;
 
 - (void)readInternalWithByteArray:(IOSByteArray *)b
@@ -121,8 +115,6 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneStoreBufferedIndexInput, BUFFER_SIZE, 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneStoreBufferedIndexInput, MIN_BUFFER_SIZE, jint)
 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneStoreBufferedIndexInput, MERGE_BUFFER_SIZE, jint)
-
-FOUNDATION_EXPORT void OrgApacheLuceneStoreBufferedIndexInput_initWithNSString_(OrgApacheLuceneStoreBufferedIndexInput *self, NSString *resourceDesc);
 
 FOUNDATION_EXPORT void OrgApacheLuceneStoreBufferedIndexInput_initWithNSString_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneStoreBufferedIndexInput *self, NSString *resourceDesc, OrgApacheLuceneStoreIOContext *context);
 

@@ -19,7 +19,6 @@
 @class IOSByteArray;
 @class IOSCharArray;
 @class OrgApacheLuceneUtilBytesRef;
-@protocol JavaLangCharSequence;
 
 @interface OrgApacheLuceneUtilBytesRefBuilder : NSObject
 
@@ -43,10 +42,6 @@
 
 - (void)clear;
 
-- (void)copyBytesWithByteArray:(IOSByteArray *)b
-                       withInt:(jint)off
-                       withInt:(jint)len OBJC_METHOD_FAMILY_NONE;
-
 - (void)copyBytesWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)ref OBJC_METHOD_FAMILY_NONE;
 
 - (void)copyBytesWithOrgApacheLuceneUtilBytesRefBuilder:(OrgApacheLuceneUtilBytesRefBuilder *)builder OBJC_METHOD_FAMILY_NONE;
@@ -54,12 +49,6 @@
 - (void)copyCharsWithCharArray:(IOSCharArray *)text
                        withInt:(jint)off
                        withInt:(jint)len OBJC_METHOD_FAMILY_NONE;
-
-- (void)copyCharsWithJavaLangCharSequence:(id<JavaLangCharSequence>)text OBJC_METHOD_FAMILY_NONE;
-
-- (void)copyCharsWithJavaLangCharSequence:(id<JavaLangCharSequence>)text
-                                  withInt:(jint)off
-                                  withInt:(jint)len OBJC_METHOD_FAMILY_NONE;
 
 - (jboolean)isEqual:(id)obj;
 

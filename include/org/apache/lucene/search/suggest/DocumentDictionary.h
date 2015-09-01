@@ -84,7 +84,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentDictionary)
 @class OrgApacheLuceneDocumentDocument;
 @class OrgApacheLuceneSearchSuggestDocumentDictionary;
 @class OrgApacheLuceneUtilBytesRef;
-@protocol JavaUtilSet;
 
 @interface OrgApacheLuceneSearchSuggestDocumentDictionary_DocumentInputIterator : NSObject < OrgApacheLuceneSearchSuggestInputIterator > {
  @public
@@ -98,17 +97,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentDictionary)
                                                            withBoolean:(jboolean)hasPayloads
                                                            withBoolean:(jboolean)hasContexts;
 
-- (id<JavaUtilSet>)contexts;
-
-- (jboolean)hasContexts;
-
-- (jboolean)hasPayloads;
-
 - (OrgApacheLuceneUtilBytesRef *)next;
-
-- (OrgApacheLuceneUtilBytesRef *)payload;
-
-- (jlong)weight;
 
 #pragma mark Protected
 

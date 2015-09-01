@@ -20,33 +20,19 @@
 #define OrgApacheLuceneSearchQuery_INCLUDE 1
 #include "org/apache/lucene/search/Query.h"
 
-@class OrgApacheLuceneSearchIndexSearcher;
-@class OrgApacheLuceneSearchWeight;
-
 @interface OrgApacheLuceneQueriesBoostingQuery : OrgApacheLuceneSearchQuery
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)match
-                    withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)context
-                                         withFloat:(jfloat)boost;
-
-- (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
-                                                                        withBoolean:(jboolean)needsScores;
-
-- (jboolean)isEqual:(id)obj;
-
-- (NSUInteger)hash;
-
-- (NSString *)toStringWithNSString:(NSString *)field;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesBoostingQuery)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesBoostingQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_withFloat_(OrgApacheLuceneQueriesBoostingQuery *self, OrgApacheLuceneSearchQuery *match, OrgApacheLuceneSearchQuery *context, jfloat boost);
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesBoostingQuery_init(OrgApacheLuceneQueriesBoostingQuery *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueriesBoostingQuery *new_OrgApacheLuceneQueriesBoostingQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_withFloat_(OrgApacheLuceneSearchQuery *match, OrgApacheLuceneSearchQuery *context, jfloat boost) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueriesBoostingQuery *new_OrgApacheLuceneQueriesBoostingQuery_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesBoostingQuery)
 

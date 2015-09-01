@@ -14,10 +14,9 @@
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "getFlags", NULL, "I", 0x401, NULL, NULL },
     { "setFlagsWithInt:", "setFlags", "V", 0x401, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisTokenattributesFlagsAttribute = { 2, "FlagsAttribute", "org.apache.lucene.analysis.tokenattributes", NULL, 0x609, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisTokenattributesFlagsAttribute = { 2, "FlagsAttribute", "org.apache.lucene.analysis.tokenattributes", NULL, 0x609, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisTokenattributesFlagsAttribute;
 }
 

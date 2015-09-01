@@ -20,53 +20,17 @@
 #define OrgApacheLuceneCodecsCodec_INCLUDE 1
 #include "org/apache/lucene/codecs/Codec.h"
 
-@class OrgApacheLuceneCodecsCompoundFormat;
-@class OrgApacheLuceneCodecsDocValuesFormat;
-@class OrgApacheLuceneCodecsFieldInfosFormat;
-@class OrgApacheLuceneCodecsLiveDocsFormat;
-@class OrgApacheLuceneCodecsNormsFormat;
-@class OrgApacheLuceneCodecsPostingsFormat;
-@class OrgApacheLuceneCodecsSegmentInfoFormat;
-@class OrgApacheLuceneCodecsStoredFieldsFormat;
-@class OrgApacheLuceneCodecsTermVectorsFormat;
-
-@interface OrgApacheLuceneCodecsFilterCodec : OrgApacheLuceneCodecsCodec {
- @public
-  OrgApacheLuceneCodecsCodec *delegate_;
-}
+@interface OrgApacheLuceneCodecsFilterCodec : OrgApacheLuceneCodecsCodec
 
 #pragma mark Public
 
-- (OrgApacheLuceneCodecsCompoundFormat *)compoundFormat;
-
-- (OrgApacheLuceneCodecsDocValuesFormat *)docValuesFormat;
-
-- (OrgApacheLuceneCodecsFieldInfosFormat *)fieldInfosFormat;
-
-- (OrgApacheLuceneCodecsLiveDocsFormat *)liveDocsFormat;
-
-- (OrgApacheLuceneCodecsNormsFormat *)normsFormat;
-
-- (OrgApacheLuceneCodecsPostingsFormat *)postingsFormat;
-
-- (OrgApacheLuceneCodecsSegmentInfoFormat *)segmentInfoFormat;
-
-- (OrgApacheLuceneCodecsStoredFieldsFormat *)storedFieldsFormat;
-
-- (OrgApacheLuceneCodecsTermVectorsFormat *)termVectorsFormat;
-
-#pragma mark Protected
-
-- (instancetype)initWithNSString:(NSString *)name
-  withOrgApacheLuceneCodecsCodec:(OrgApacheLuceneCodecsCodec *)delegate;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsFilterCodec)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsFilterCodec, delegate_, OrgApacheLuceneCodecsCodec *)
-
-FOUNDATION_EXPORT void OrgApacheLuceneCodecsFilterCodec_initWithNSString_withOrgApacheLuceneCodecsCodec_(OrgApacheLuceneCodecsFilterCodec *self, NSString *name, OrgApacheLuceneCodecsCodec *delegate);
+FOUNDATION_EXPORT void OrgApacheLuceneCodecsFilterCodec_init(OrgApacheLuceneCodecsFilterCodec *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsFilterCodec)
 

@@ -32,8 +32,6 @@
 
 - (OrgApacheLuceneUtilIntsRef *)next;
 
-- (jint)size;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator)

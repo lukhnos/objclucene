@@ -3,18 +3,10 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/standard/builders/TermRangeQueryNodeBuilder.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/lang/CharSequence.h"
-#include "org/apache/lucene/queryparser/flexible/core/QueryNodeException.h"
-#include "org/apache/lucene/queryparser/flexible/core/nodes/FieldQueryNode.h"
-#include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNode.h"
-#include "org/apache/lucene/queryparser/flexible/core/util/StringUtils.h"
 #include "org/apache/lucene/queryparser/flexible/standard/builders/TermRangeQueryNodeBuilder.h"
-#include "org/apache/lucene/queryparser/flexible/standard/nodes/TermRangeQueryNode.h"
-#include "org/apache/lucene/queryparser/flexible/standard/processors/MultiTermRewriteMethodProcessor.h"
-#include "org/apache/lucene/search/MultiTermQuery.h"
-#include "org/apache/lucene/search/TermRangeQuery.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneQueryparserFlexibleStandardBuildersTermRangeQueryNodeBuilder
 
@@ -23,33 +15,11 @@
   return self;
 }
 
-- (OrgApacheLuceneSearchTermRangeQuery *)buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryNode {
-  OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode *rangeNode = (OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode *) check_class_cast(queryNode, [OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode class]);
-  OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *upper = [((OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode *) nil_chk(rangeNode)) getUpperBound];
-  OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *lower = [rangeNode getLowerBound];
-  NSString *field = OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_toStringWithId_([rangeNode getField]);
-  NSString *lowerText = [((OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) nil_chk(lower)) getTextAsString];
-  NSString *upperText = [((OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) nil_chk(upper)) getTextAsString];
-  if (((jint) [((NSString *) nil_chk(lowerText)) length]) == 0) {
-    lowerText = nil;
-  }
-  if (((jint) [((NSString *) nil_chk(upperText)) length]) == 0) {
-    upperText = nil;
-  }
-  OrgApacheLuceneSearchTermRangeQuery *rangeQuery = OrgApacheLuceneSearchTermRangeQuery_newStringRangeWithNSString_withNSString_withNSString_withBoolean_withBoolean_(field, lowerText, upperText, [rangeNode isLowerInclusive], [rangeNode isUpperInclusive]);
-  OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *method = (OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *) check_class_cast([((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(queryNode)) getTagWithNSString:OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiTermRewriteMethodProcessor_TAG_ID_], [OrgApacheLuceneSearchMultiTermQuery_RewriteMethod class]);
-  if (method != nil) {
-    [((OrgApacheLuceneSearchTermRangeQuery *) nil_chk(rangeQuery)) setRewriteMethodWithOrgApacheLuceneSearchMultiTermQuery_RewriteMethod:method];
-  }
-  return rangeQuery;
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", "TermRangeQueryNodeBuilder", NULL, 0x1, NULL, NULL },
-    { "buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "build", "Lorg.apache.lucene.search.TermRangeQuery;", 0x1, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardBuildersTermRangeQueryNodeBuilder = { 2, "TermRangeQueryNodeBuilder", "org.apache.lucene.queryparser.flexible.standard.builders", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardBuildersTermRangeQueryNodeBuilder = { 2, "TermRangeQueryNodeBuilder", "org.apache.lucene.queryparser.flexible.standard.builders", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserFlexibleStandardBuildersTermRangeQueryNodeBuilder;
 }
 

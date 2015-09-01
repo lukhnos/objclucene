@@ -36,10 +36,6 @@
 
 - (jboolean)onOrAfterWithOrgApacheLuceneUtilVersion:(OrgApacheLuceneUtilVersion *)other;
 
-+ (OrgApacheLuceneUtilVersion *)parseWithNSString:(NSString *)version_;
-
-+ (OrgApacheLuceneUtilVersion *)parseLenientlyWithNSString:(NSString *)version_;
-
 - (NSString *)description;
 
 @end
@@ -171,10 +167,6 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilVersion, LUCENE_4_8_, OrgApacheLuc
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_9_;
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilVersion, LUCENE_4_9_, OrgApacheLuceneUtilVersion *)
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_parseWithNSString_(NSString *version_);
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_parseLenientlyWithNSString_(NSString *version_);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_fromBitsWithInt_withInt_withInt_(jint major, jint minor, jint bugfix);
 

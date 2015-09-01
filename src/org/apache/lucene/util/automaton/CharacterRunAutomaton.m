@@ -3,79 +3,35 @@
 //  source: ./core/src/java/org/apache/lucene/util/automaton/CharacterRunAutomaton.java
 //
 
-#include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/lang/Character.h"
-#include "org/apache/lucene/util/automaton/Automaton.h"
 #include "org/apache/lucene/util/automaton/CharacterRunAutomaton.h"
-#include "org/apache/lucene/util/automaton/Operations.h"
-#include "org/apache/lucene/util/automaton/RunAutomaton.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneUtilAutomatonCharacterRunAutomaton
 
-- (instancetype)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a {
-  OrgApacheLuceneUtilAutomatonCharacterRunAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_(self, a);
+- (instancetype)init {
+  OrgApacheLuceneUtilAutomatonCharacterRunAutomaton_init(self);
   return self;
-}
-
-- (instancetype)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a
-                                                      withInt:(jint)maxDeterminizedStates {
-  OrgApacheLuceneUtilAutomatonCharacterRunAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(self, a, maxDeterminizedStates);
-  return self;
-}
-
-- (jboolean)runWithNSString:(NSString *)s {
-  jint p = initial_;
-  jint l = ((jint) [((NSString *) nil_chk(s)) length]);
-  for (jint i = 0, cp = 0; i < l; i += JavaLangCharacter_charCountWithInt_(cp)) {
-    p = [self stepWithInt:p withInt:cp = [s codePointAt:i]];
-    if (p == -1) return NO;
-  }
-  return IOSBooleanArray_Get(nil_chk(accept_), p);
-}
-
-- (jboolean)runWithCharArray:(IOSCharArray *)s
-                     withInt:(jint)offset
-                     withInt:(jint)length {
-  jint p = initial_;
-  jint l = offset + length;
-  for (jint i = offset, cp = 0; i < l; i += JavaLangCharacter_charCountWithInt_(cp)) {
-    p = [self stepWithInt:p withInt:cp = JavaLangCharacter_codePointAtWithCharArray_withInt_withInt_(s, i, l)];
-    if (p == -1) return NO;
-  }
-  return IOSBooleanArray_Get(nil_chk(accept_), p);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilAutomatonAutomaton:", "CharacterRunAutomaton", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilAutomatonAutomaton:withInt:", "CharacterRunAutomaton", NULL, 0x1, NULL, NULL },
-    { "runWithNSString:", "run", "Z", 0x1, NULL, NULL },
-    { "runWithCharArray:withInt:withInt:", "run", "Z", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonCharacterRunAutomaton = { 2, "CharacterRunAutomaton", "org.apache.lucene.util.automaton", NULL, 0x1, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonCharacterRunAutomaton = { 2, "CharacterRunAutomaton", "org.apache.lucene.util.automaton", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilAutomatonCharacterRunAutomaton;
 }
 
 @end
 
-void OrgApacheLuceneUtilAutomatonCharacterRunAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneUtilAutomatonCharacterRunAutomaton *self, OrgApacheLuceneUtilAutomatonAutomaton *a) {
-  OrgApacheLuceneUtilAutomatonCharacterRunAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(self, a, OrgApacheLuceneUtilAutomatonOperations_DEFAULT_MAX_DETERMINIZED_STATES);
+void OrgApacheLuceneUtilAutomatonCharacterRunAutomaton_init(OrgApacheLuceneUtilAutomatonCharacterRunAutomaton *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneUtilAutomatonCharacterRunAutomaton *new_OrgApacheLuceneUtilAutomatonCharacterRunAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneUtilAutomatonAutomaton *a) {
+OrgApacheLuceneUtilAutomatonCharacterRunAutomaton *new_OrgApacheLuceneUtilAutomatonCharacterRunAutomaton_init() {
   OrgApacheLuceneUtilAutomatonCharacterRunAutomaton *self = [OrgApacheLuceneUtilAutomatonCharacterRunAutomaton alloc];
-  OrgApacheLuceneUtilAutomatonCharacterRunAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_(self, a);
-  return self;
-}
-
-void OrgApacheLuceneUtilAutomatonCharacterRunAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(OrgApacheLuceneUtilAutomatonCharacterRunAutomaton *self, OrgApacheLuceneUtilAutomatonAutomaton *a, jint maxDeterminizedStates) {
-  OrgApacheLuceneUtilAutomatonRunAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_withBoolean_withInt_(self, a, JavaLangCharacter_MAX_CODE_POINT, NO, maxDeterminizedStates);
-}
-
-OrgApacheLuceneUtilAutomatonCharacterRunAutomaton *new_OrgApacheLuceneUtilAutomatonCharacterRunAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(OrgApacheLuceneUtilAutomatonAutomaton *a, jint maxDeterminizedStates) {
-  OrgApacheLuceneUtilAutomatonCharacterRunAutomaton *self = [OrgApacheLuceneUtilAutomatonCharacterRunAutomaton alloc];
-  OrgApacheLuceneUtilAutomatonCharacterRunAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(self, a, maxDeterminizedStates);
+  OrgApacheLuceneUtilAutomatonCharacterRunAutomaton_init(self);
   return self;
 }
 

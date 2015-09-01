@@ -222,11 +222,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSegmentCommitInfo, genUpdatesFiles_, id<
   self->delCount_ = delCount;
 }
 
-- (NSString *)toStringWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
-                                                withInt:(jint)pendingDelCount {
-  return [self toStringWithInt:pendingDelCount];
-}
-
 - (NSString *)toStringWithInt:(jint)pendingDelCount {
   NSString *s = [((OrgApacheLuceneIndexSegmentInfo *) nil_chk(info_)) toStringWithInt:delCount_ + pendingDelCount];
   if (delGen_ != -1) {
@@ -272,10 +267,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSegmentCommitInfo, genUpdatesFiles_, id<
   return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
-+ (IOSObjectArray *)__annotations_toStringWithOrgApacheLuceneStoreDirectory_withInt_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 + (IOSObjectArray *)__annotations_genUpdatesFiles_ {
   return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
@@ -314,7 +305,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSegmentCommitInfo, genUpdatesFiles_, id<
     { "getDelGen", NULL, "J", 0x1, NULL, NULL },
     { "getDelCount", NULL, "I", 0x1, NULL, NULL },
     { "setDelCountWithInt:", "setDelCount", "V", 0x0, NULL, NULL },
-    { "toStringWithOrgApacheLuceneStoreDirectory:withInt:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "toStringWithInt:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "clone", NULL, "Lorg.apache.lucene.index.SegmentCommitInfo;", 0x1, NULL, NULL },
@@ -334,7 +324,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSegmentCommitInfo, genUpdatesFiles_, id<
     { "sizeInBytes_", NULL, 0x42, "J", NULL, NULL, .constantValue.asLong = 0 },
     { "bufferedDeletesGen_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexSegmentCommitInfo = { 2, "SegmentCommitInfo", "org.apache.lucene.index", NULL, 0x1, 36, methods, 13, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexSegmentCommitInfo = { 2, "SegmentCommitInfo", "org.apache.lucene.index", NULL, 0x1, 35, methods, 13, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexSegmentCommitInfo;
 }
 

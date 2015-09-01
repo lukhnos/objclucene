@@ -3,152 +3,51 @@
 //  source: ./core/src/java/org/apache/lucene/index/ExitableDirectoryReader.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
-#include "java/lang/RuntimeException.h"
-#include "java/lang/Thread.h"
-#include "org/apache/lucene/index/DirectoryReader.h"
 #include "org/apache/lucene/index/ExitableDirectoryReader.h"
-#include "org/apache/lucene/index/Fields.h"
-#include "org/apache/lucene/index/FilterDirectoryReader.h"
-#include "org/apache/lucene/index/FilterLeafReader.h"
-#include "org/apache/lucene/index/LeafReader.h"
-#include "org/apache/lucene/index/QueryTimeout.h"
-#include "org/apache/lucene/index/Terms.h"
-#include "org/apache/lucene/index/TermsEnum.h"
-#include "org/apache/lucene/util/BytesRef.h"
-#include "org/apache/lucene/util/automaton/CompiledAutomaton.h"
 
-@interface OrgApacheLuceneIndexExitableDirectoryReader () {
- @public
-  id<OrgApacheLuceneIndexQueryTimeout> queryTimeout_;
-}
-
-@end
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexExitableDirectoryReader, queryTimeout_, id<OrgApacheLuceneIndexQueryTimeout>)
-
-@interface OrgApacheLuceneIndexExitableDirectoryReader_ExitableSubReaderWrapper () {
- @public
-  id<OrgApacheLuceneIndexQueryTimeout> queryTimeout_;
-}
-
-@end
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexExitableDirectoryReader_ExitableSubReaderWrapper, queryTimeout_, id<OrgApacheLuceneIndexQueryTimeout>)
-
-@interface OrgApacheLuceneIndexExitableDirectoryReader_ExitableFilterAtomicReader () {
- @public
-  id<OrgApacheLuceneIndexQueryTimeout> queryTimeout_;
-}
-
-@end
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexExitableDirectoryReader_ExitableFilterAtomicReader, queryTimeout_, id<OrgApacheLuceneIndexQueryTimeout>)
-
-@interface OrgApacheLuceneIndexExitableDirectoryReader_ExitableFields () {
- @public
-  id<OrgApacheLuceneIndexQueryTimeout> queryTimeout_;
-}
-
-@end
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexExitableDirectoryReader_ExitableFields, queryTimeout_, id<OrgApacheLuceneIndexQueryTimeout>)
-
-@interface OrgApacheLuceneIndexExitableDirectoryReader_ExitableTerms () {
- @public
-  id<OrgApacheLuceneIndexQueryTimeout> queryTimeout_;
-}
-
-@end
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexExitableDirectoryReader_ExitableTerms, queryTimeout_, id<OrgApacheLuceneIndexQueryTimeout>)
-
-@interface OrgApacheLuceneIndexExitableDirectoryReader_ExitableTermsEnum () {
- @public
-  id<OrgApacheLuceneIndexQueryTimeout> queryTimeout_;
-}
-
-- (void)checkAndThrow;
-
-@end
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexExitableDirectoryReader_ExitableTermsEnum, queryTimeout_, id<OrgApacheLuceneIndexQueryTimeout>)
-
-__attribute__((unused)) static void OrgApacheLuceneIndexExitableDirectoryReader_ExitableTermsEnum_checkAndThrow(OrgApacheLuceneIndexExitableDirectoryReader_ExitableTermsEnum *self);
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneIndexExitableDirectoryReader
 
-- (instancetype)initWithOrgApacheLuceneIndexDirectoryReader:(OrgApacheLuceneIndexDirectoryReader *)inArg
-                       withOrgApacheLuceneIndexQueryTimeout:(id<OrgApacheLuceneIndexQueryTimeout>)queryTimeout {
-  OrgApacheLuceneIndexExitableDirectoryReader_initWithOrgApacheLuceneIndexDirectoryReader_withOrgApacheLuceneIndexQueryTimeout_(self, inArg, queryTimeout);
+- (instancetype)init {
+  OrgApacheLuceneIndexExitableDirectoryReader_init(self);
   return self;
-}
-
-- (OrgApacheLuceneIndexDirectoryReader *)doWrapDirectoryReaderWithOrgApacheLuceneIndexDirectoryReader:(OrgApacheLuceneIndexDirectoryReader *)inArg {
-  return [new_OrgApacheLuceneIndexExitableDirectoryReader_initWithOrgApacheLuceneIndexDirectoryReader_withOrgApacheLuceneIndexQueryTimeout_(inArg, queryTimeout_) autorelease];
-}
-
-+ (OrgApacheLuceneIndexDirectoryReader *)wrapWithOrgApacheLuceneIndexDirectoryReader:(OrgApacheLuceneIndexDirectoryReader *)inArg
-                                                withOrgApacheLuceneIndexQueryTimeout:(id<OrgApacheLuceneIndexQueryTimeout>)queryTimeout {
-  return OrgApacheLuceneIndexExitableDirectoryReader_wrapWithOrgApacheLuceneIndexDirectoryReader_withOrgApacheLuceneIndexQueryTimeout_(inArg, queryTimeout);
-}
-
-- (NSString *)description {
-  return JreStrcat("$$C", @"ExitableDirectoryReader(", [((OrgApacheLuceneIndexDirectoryReader *) nil_chk(in_)) description], ')');
-}
-
-- (void)dealloc {
-  RELEASE_(queryTimeout_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexDirectoryReader:withOrgApacheLuceneIndexQueryTimeout:", "ExitableDirectoryReader", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "doWrapDirectoryReaderWithOrgApacheLuceneIndexDirectoryReader:", "doWrapDirectoryReader", "Lorg.apache.lucene.index.DirectoryReader;", 0x4, "Ljava.io.IOException;", NULL },
-    { "wrapWithOrgApacheLuceneIndexDirectoryReader:withOrgApacheLuceneIndexQueryTimeout:", "wrap", "Lorg.apache.lucene.index.DirectoryReader;", 0x9, "Ljava.io.IOException;", NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "queryTimeout_", NULL, 0x2, "Lorg.apache.lucene.index.QueryTimeout;", NULL, NULL, .constantValue.asLong = 0 },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.index.ExitableDirectoryReader$ExitingReaderException;", "Lorg.apache.lucene.index.ExitableDirectoryReader$ExitableSubReaderWrapper;", "Lorg.apache.lucene.index.ExitableDirectoryReader$ExitableFilterAtomicReader;", "Lorg.apache.lucene.index.ExitableDirectoryReader$ExitableFields;", "Lorg.apache.lucene.index.ExitableDirectoryReader$ExitableTerms;", "Lorg.apache.lucene.index.ExitableDirectoryReader$ExitableTermsEnum;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexExitableDirectoryReader = { 2, "ExitableDirectoryReader", "org.apache.lucene.index", NULL, 0x1, 4, methods, 1, fields, 0, NULL, 6, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexExitableDirectoryReader = { 2, "ExitableDirectoryReader", "org.apache.lucene.index", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 6, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneIndexExitableDirectoryReader;
 }
 
 @end
 
-void OrgApacheLuceneIndexExitableDirectoryReader_initWithOrgApacheLuceneIndexDirectoryReader_withOrgApacheLuceneIndexQueryTimeout_(OrgApacheLuceneIndexExitableDirectoryReader *self, OrgApacheLuceneIndexDirectoryReader *inArg, id<OrgApacheLuceneIndexQueryTimeout> queryTimeout) {
-  OrgApacheLuceneIndexFilterDirectoryReader_initWithOrgApacheLuceneIndexDirectoryReader_withOrgApacheLuceneIndexFilterDirectoryReader_SubReaderWrapper_(self, inArg, [new_OrgApacheLuceneIndexExitableDirectoryReader_ExitableSubReaderWrapper_initWithOrgApacheLuceneIndexQueryTimeout_(queryTimeout) autorelease]);
-  JreStrongAssign(&self->queryTimeout_, queryTimeout);
+void OrgApacheLuceneIndexExitableDirectoryReader_init(OrgApacheLuceneIndexExitableDirectoryReader *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneIndexExitableDirectoryReader *new_OrgApacheLuceneIndexExitableDirectoryReader_initWithOrgApacheLuceneIndexDirectoryReader_withOrgApacheLuceneIndexQueryTimeout_(OrgApacheLuceneIndexDirectoryReader *inArg, id<OrgApacheLuceneIndexQueryTimeout> queryTimeout) {
+OrgApacheLuceneIndexExitableDirectoryReader *new_OrgApacheLuceneIndexExitableDirectoryReader_init() {
   OrgApacheLuceneIndexExitableDirectoryReader *self = [OrgApacheLuceneIndexExitableDirectoryReader alloc];
-  OrgApacheLuceneIndexExitableDirectoryReader_initWithOrgApacheLuceneIndexDirectoryReader_withOrgApacheLuceneIndexQueryTimeout_(self, inArg, queryTimeout);
+  OrgApacheLuceneIndexExitableDirectoryReader_init(self);
   return self;
-}
-
-OrgApacheLuceneIndexDirectoryReader *OrgApacheLuceneIndexExitableDirectoryReader_wrapWithOrgApacheLuceneIndexDirectoryReader_withOrgApacheLuceneIndexQueryTimeout_(OrgApacheLuceneIndexDirectoryReader *inArg, id<OrgApacheLuceneIndexQueryTimeout> queryTimeout) {
-  OrgApacheLuceneIndexExitableDirectoryReader_initialize();
-  return [new_OrgApacheLuceneIndexExitableDirectoryReader_initWithOrgApacheLuceneIndexDirectoryReader_withOrgApacheLuceneIndexQueryTimeout_(inArg, queryTimeout) autorelease];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexExitableDirectoryReader)
 
 @implementation OrgApacheLuceneIndexExitableDirectoryReader_ExitingReaderException
 
-- (instancetype)initWithNSString:(NSString *)msg {
-  OrgApacheLuceneIndexExitableDirectoryReader_ExitingReaderException_initWithNSString_(self, msg);
+- (instancetype)init {
+  OrgApacheLuceneIndexExitableDirectoryReader_ExitingReaderException_init(self);
   return self;
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:", "ExitingReaderException", NULL, 0x0, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneIndexExitableDirectoryReader_ExitingReaderException = { 2, "ExitingReaderException", "org.apache.lucene.index", "ExitableDirectoryReader", 0x9, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexExitableDirectoryReader_ExitingReaderException;
@@ -156,13 +55,13 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexExitableDirectoryReader)
 
 @end
 
-void OrgApacheLuceneIndexExitableDirectoryReader_ExitingReaderException_initWithNSString_(OrgApacheLuceneIndexExitableDirectoryReader_ExitingReaderException *self, NSString *msg) {
-  JavaLangRuntimeException_initWithNSString_(self, msg);
+void OrgApacheLuceneIndexExitableDirectoryReader_ExitingReaderException_init(OrgApacheLuceneIndexExitableDirectoryReader_ExitingReaderException *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneIndexExitableDirectoryReader_ExitingReaderException *new_OrgApacheLuceneIndexExitableDirectoryReader_ExitingReaderException_initWithNSString_(NSString *msg) {
+OrgApacheLuceneIndexExitableDirectoryReader_ExitingReaderException *new_OrgApacheLuceneIndexExitableDirectoryReader_ExitingReaderException_init() {
   OrgApacheLuceneIndexExitableDirectoryReader_ExitingReaderException *self = [OrgApacheLuceneIndexExitableDirectoryReader_ExitingReaderException alloc];
-  OrgApacheLuceneIndexExitableDirectoryReader_ExitingReaderException_initWithNSString_(self, msg);
+  OrgApacheLuceneIndexExitableDirectoryReader_ExitingReaderException_init(self);
   return self;
 }
 
@@ -170,42 +69,28 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexExitableDirectoryReader_Exi
 
 @implementation OrgApacheLuceneIndexExitableDirectoryReader_ExitableSubReaderWrapper
 
-- (instancetype)initWithOrgApacheLuceneIndexQueryTimeout:(id<OrgApacheLuceneIndexQueryTimeout>)queryTimeout {
-  OrgApacheLuceneIndexExitableDirectoryReader_ExitableSubReaderWrapper_initWithOrgApacheLuceneIndexQueryTimeout_(self, queryTimeout);
+- (instancetype)init {
+  OrgApacheLuceneIndexExitableDirectoryReader_ExitableSubReaderWrapper_init(self);
   return self;
-}
-
-- (OrgApacheLuceneIndexLeafReader *)wrapWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader {
-  return [new_OrgApacheLuceneIndexExitableDirectoryReader_ExitableFilterAtomicReader_initWithOrgApacheLuceneIndexLeafReader_withOrgApacheLuceneIndexQueryTimeout_(reader, queryTimeout_) autorelease];
-}
-
-- (void)dealloc {
-  RELEASE_(queryTimeout_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexQueryTimeout:", "ExitableSubReaderWrapper", NULL, 0x1, NULL, NULL },
-    { "wrapWithOrgApacheLuceneIndexLeafReader:", "wrap", "Lorg.apache.lucene.index.LeafReader;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "queryTimeout_", NULL, 0x2, "Lorg.apache.lucene.index.QueryTimeout;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexExitableDirectoryReader_ExitableSubReaderWrapper = { 2, "ExitableSubReaderWrapper", "org.apache.lucene.index", "ExitableDirectoryReader", 0x9, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexExitableDirectoryReader_ExitableSubReaderWrapper = { 2, "ExitableSubReaderWrapper", "org.apache.lucene.index", "ExitableDirectoryReader", 0x9, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexExitableDirectoryReader_ExitableSubReaderWrapper;
 }
 
 @end
 
-void OrgApacheLuceneIndexExitableDirectoryReader_ExitableSubReaderWrapper_initWithOrgApacheLuceneIndexQueryTimeout_(OrgApacheLuceneIndexExitableDirectoryReader_ExitableSubReaderWrapper *self, id<OrgApacheLuceneIndexQueryTimeout> queryTimeout) {
-  OrgApacheLuceneIndexFilterDirectoryReader_SubReaderWrapper_init(self);
-  JreStrongAssign(&self->queryTimeout_, queryTimeout);
+void OrgApacheLuceneIndexExitableDirectoryReader_ExitableSubReaderWrapper_init(OrgApacheLuceneIndexExitableDirectoryReader_ExitableSubReaderWrapper *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneIndexExitableDirectoryReader_ExitableSubReaderWrapper *new_OrgApacheLuceneIndexExitableDirectoryReader_ExitableSubReaderWrapper_initWithOrgApacheLuceneIndexQueryTimeout_(id<OrgApacheLuceneIndexQueryTimeout> queryTimeout) {
+OrgApacheLuceneIndexExitableDirectoryReader_ExitableSubReaderWrapper *new_OrgApacheLuceneIndexExitableDirectoryReader_ExitableSubReaderWrapper_init() {
   OrgApacheLuceneIndexExitableDirectoryReader_ExitableSubReaderWrapper *self = [OrgApacheLuceneIndexExitableDirectoryReader_ExitableSubReaderWrapper alloc];
-  OrgApacheLuceneIndexExitableDirectoryReader_ExitableSubReaderWrapper_initWithOrgApacheLuceneIndexQueryTimeout_(self, queryTimeout);
+  OrgApacheLuceneIndexExitableDirectoryReader_ExitableSubReaderWrapper_init(self);
   return self;
 }
 
@@ -213,53 +98,28 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexExitableDirectoryReader_Exi
 
 @implementation OrgApacheLuceneIndexExitableDirectoryReader_ExitableFilterAtomicReader
 
-- (instancetype)initWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)inArg
-                  withOrgApacheLuceneIndexQueryTimeout:(id<OrgApacheLuceneIndexQueryTimeout>)queryTimeout {
-  OrgApacheLuceneIndexExitableDirectoryReader_ExitableFilterAtomicReader_initWithOrgApacheLuceneIndexLeafReader_withOrgApacheLuceneIndexQueryTimeout_(self, inArg, queryTimeout);
+- (instancetype)init {
+  OrgApacheLuceneIndexExitableDirectoryReader_ExitableFilterAtomicReader_init(self);
   return self;
-}
-
-- (OrgApacheLuceneIndexFields *)fields {
-  return [new_OrgApacheLuceneIndexExitableDirectoryReader_ExitableFields_initWithOrgApacheLuceneIndexFields_withOrgApacheLuceneIndexQueryTimeout_([super fields], queryTimeout_) autorelease];
-}
-
-- (id)getCoreCacheKey {
-  return [((OrgApacheLuceneIndexLeafReader *) nil_chk(in_)) getCoreCacheKey];
-}
-
-- (id)getCombinedCoreAndDeletesKey {
-  return [((OrgApacheLuceneIndexLeafReader *) nil_chk(in_)) getCombinedCoreAndDeletesKey];
-}
-
-- (void)dealloc {
-  RELEASE_(queryTimeout_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexLeafReader:withOrgApacheLuceneIndexQueryTimeout:", "ExitableFilterAtomicReader", NULL, 0x1, NULL, NULL },
-    { "fields", NULL, "Lorg.apache.lucene.index.Fields;", 0x1, "Ljava.io.IOException;", NULL },
-    { "getCoreCacheKey", NULL, "Ljava.lang.Object;", 0x1, NULL, NULL },
-    { "getCombinedCoreAndDeletesKey", NULL, "Ljava.lang.Object;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "queryTimeout_", NULL, 0x2, "Lorg.apache.lucene.index.QueryTimeout;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexExitableDirectoryReader_ExitableFilterAtomicReader = { 2, "ExitableFilterAtomicReader", "org.apache.lucene.index", "ExitableDirectoryReader", 0x9, 4, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexExitableDirectoryReader_ExitableFilterAtomicReader = { 2, "ExitableFilterAtomicReader", "org.apache.lucene.index", "ExitableDirectoryReader", 0x9, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexExitableDirectoryReader_ExitableFilterAtomicReader;
 }
 
 @end
 
-void OrgApacheLuceneIndexExitableDirectoryReader_ExitableFilterAtomicReader_initWithOrgApacheLuceneIndexLeafReader_withOrgApacheLuceneIndexQueryTimeout_(OrgApacheLuceneIndexExitableDirectoryReader_ExitableFilterAtomicReader *self, OrgApacheLuceneIndexLeafReader *inArg, id<OrgApacheLuceneIndexQueryTimeout> queryTimeout) {
-  OrgApacheLuceneIndexFilterLeafReader_initWithOrgApacheLuceneIndexLeafReader_(self, inArg);
-  JreStrongAssign(&self->queryTimeout_, queryTimeout);
+void OrgApacheLuceneIndexExitableDirectoryReader_ExitableFilterAtomicReader_init(OrgApacheLuceneIndexExitableDirectoryReader_ExitableFilterAtomicReader *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneIndexExitableDirectoryReader_ExitableFilterAtomicReader *new_OrgApacheLuceneIndexExitableDirectoryReader_ExitableFilterAtomicReader_initWithOrgApacheLuceneIndexLeafReader_withOrgApacheLuceneIndexQueryTimeout_(OrgApacheLuceneIndexLeafReader *inArg, id<OrgApacheLuceneIndexQueryTimeout> queryTimeout) {
+OrgApacheLuceneIndexExitableDirectoryReader_ExitableFilterAtomicReader *new_OrgApacheLuceneIndexExitableDirectoryReader_ExitableFilterAtomicReader_init() {
   OrgApacheLuceneIndexExitableDirectoryReader_ExitableFilterAtomicReader *self = [OrgApacheLuceneIndexExitableDirectoryReader_ExitableFilterAtomicReader alloc];
-  OrgApacheLuceneIndexExitableDirectoryReader_ExitableFilterAtomicReader_initWithOrgApacheLuceneIndexLeafReader_withOrgApacheLuceneIndexQueryTimeout_(self, inArg, queryTimeout);
+  OrgApacheLuceneIndexExitableDirectoryReader_ExitableFilterAtomicReader_init(self);
   return self;
 }
 
@@ -267,23 +127,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexExitableDirectoryReader_Exi
 
 @implementation OrgApacheLuceneIndexExitableDirectoryReader_ExitableFields
 
-- (instancetype)initWithOrgApacheLuceneIndexFields:(OrgApacheLuceneIndexFields *)fields
-              withOrgApacheLuceneIndexQueryTimeout:(id<OrgApacheLuceneIndexQueryTimeout>)queryTimeout {
-  OrgApacheLuceneIndexExitableDirectoryReader_ExitableFields_initWithOrgApacheLuceneIndexFields_withOrgApacheLuceneIndexQueryTimeout_(self, fields, queryTimeout);
+- (instancetype)init {
+  OrgApacheLuceneIndexExitableDirectoryReader_ExitableFields_init(self);
   return self;
-}
-
-- (OrgApacheLuceneIndexTerms *)termsWithNSString:(NSString *)field {
-  OrgApacheLuceneIndexTerms *terms = [((OrgApacheLuceneIndexFields *) nil_chk(in_)) termsWithNSString:field];
-  if (terms == nil) {
-    return nil;
-  }
-  return [new_OrgApacheLuceneIndexExitableDirectoryReader_ExitableTerms_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneIndexQueryTimeout_(terms, queryTimeout_) autorelease];
-}
-
-- (void)dealloc {
-  RELEASE_(queryTimeout_);
-  [super dealloc];
 }
 
 - (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
@@ -292,26 +138,21 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexExitableDirectoryReader_Exi
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexFields:withOrgApacheLuceneIndexQueryTimeout:", "ExitableFields", NULL, 0x1, NULL, NULL },
-    { "termsWithNSString:", "terms", "Lorg.apache.lucene.index.Terms;", 0x1, "Ljava.io.IOException;", NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "queryTimeout_", NULL, 0x2, "Lorg.apache.lucene.index.QueryTimeout;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexExitableDirectoryReader_ExitableFields = { 2, "ExitableFields", "org.apache.lucene.index", "ExitableDirectoryReader", 0x9, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexExitableDirectoryReader_ExitableFields = { 2, "ExitableFields", "org.apache.lucene.index", "ExitableDirectoryReader", 0x9, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexExitableDirectoryReader_ExitableFields;
 }
 
 @end
 
-void OrgApacheLuceneIndexExitableDirectoryReader_ExitableFields_initWithOrgApacheLuceneIndexFields_withOrgApacheLuceneIndexQueryTimeout_(OrgApacheLuceneIndexExitableDirectoryReader_ExitableFields *self, OrgApacheLuceneIndexFields *fields, id<OrgApacheLuceneIndexQueryTimeout> queryTimeout) {
-  OrgApacheLuceneIndexFilterLeafReader_FilterFields_initWithOrgApacheLuceneIndexFields_(self, fields);
-  JreStrongAssign(&self->queryTimeout_, queryTimeout);
+void OrgApacheLuceneIndexExitableDirectoryReader_ExitableFields_init(OrgApacheLuceneIndexExitableDirectoryReader_ExitableFields *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneIndexExitableDirectoryReader_ExitableFields *new_OrgApacheLuceneIndexExitableDirectoryReader_ExitableFields_initWithOrgApacheLuceneIndexFields_withOrgApacheLuceneIndexQueryTimeout_(OrgApacheLuceneIndexFields *fields, id<OrgApacheLuceneIndexQueryTimeout> queryTimeout) {
+OrgApacheLuceneIndexExitableDirectoryReader_ExitableFields *new_OrgApacheLuceneIndexExitableDirectoryReader_ExitableFields_init() {
   OrgApacheLuceneIndexExitableDirectoryReader_ExitableFields *self = [OrgApacheLuceneIndexExitableDirectoryReader_ExitableFields alloc];
-  OrgApacheLuceneIndexExitableDirectoryReader_ExitableFields_initWithOrgApacheLuceneIndexFields_withOrgApacheLuceneIndexQueryTimeout_(self, fields, queryTimeout);
+  OrgApacheLuceneIndexExitableDirectoryReader_ExitableFields_init(self);
   return self;
 }
 
@@ -319,49 +160,28 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexExitableDirectoryReader_Exi
 
 @implementation OrgApacheLuceneIndexExitableDirectoryReader_ExitableTerms
 
-- (instancetype)initWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms
-             withOrgApacheLuceneIndexQueryTimeout:(id<OrgApacheLuceneIndexQueryTimeout>)queryTimeout {
-  OrgApacheLuceneIndexExitableDirectoryReader_ExitableTerms_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneIndexQueryTimeout_(self, terms, queryTimeout);
+- (instancetype)init {
+  OrgApacheLuceneIndexExitableDirectoryReader_ExitableTerms_init(self);
   return self;
-}
-
-- (OrgApacheLuceneIndexTermsEnum *)intersectWithOrgApacheLuceneUtilAutomatonCompiledAutomaton:(OrgApacheLuceneUtilAutomatonCompiledAutomaton *)compiled
-                                                              withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)startTerm {
-  return [new_OrgApacheLuceneIndexExitableDirectoryReader_ExitableTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneIndexQueryTimeout_([((OrgApacheLuceneIndexTerms *) nil_chk(in_)) intersectWithOrgApacheLuceneUtilAutomatonCompiledAutomaton:compiled withOrgApacheLuceneUtilBytesRef:startTerm], queryTimeout_) autorelease];
-}
-
-- (OrgApacheLuceneIndexTermsEnum *)iterator {
-  return [new_OrgApacheLuceneIndexExitableDirectoryReader_ExitableTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneIndexQueryTimeout_([((OrgApacheLuceneIndexTerms *) nil_chk(in_)) iterator], queryTimeout_) autorelease];
-}
-
-- (void)dealloc {
-  RELEASE_(queryTimeout_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexTerms:withOrgApacheLuceneIndexQueryTimeout:", "ExitableTerms", NULL, 0x1, NULL, NULL },
-    { "intersectWithOrgApacheLuceneUtilAutomatonCompiledAutomaton:withOrgApacheLuceneUtilBytesRef:", "intersect", "Lorg.apache.lucene.index.TermsEnum;", 0x1, "Ljava.io.IOException;", NULL },
-    { "iterator", NULL, "Lorg.apache.lucene.index.TermsEnum;", 0x1, "Ljava.io.IOException;", NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "queryTimeout_", NULL, 0x2, "Lorg.apache.lucene.index.QueryTimeout;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexExitableDirectoryReader_ExitableTerms = { 2, "ExitableTerms", "org.apache.lucene.index", "ExitableDirectoryReader", 0x9, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexExitableDirectoryReader_ExitableTerms = { 2, "ExitableTerms", "org.apache.lucene.index", "ExitableDirectoryReader", 0x9, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexExitableDirectoryReader_ExitableTerms;
 }
 
 @end
 
-void OrgApacheLuceneIndexExitableDirectoryReader_ExitableTerms_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneIndexQueryTimeout_(OrgApacheLuceneIndexExitableDirectoryReader_ExitableTerms *self, OrgApacheLuceneIndexTerms *terms, id<OrgApacheLuceneIndexQueryTimeout> queryTimeout) {
-  OrgApacheLuceneIndexFilterLeafReader_FilterTerms_initWithOrgApacheLuceneIndexTerms_(self, terms);
-  JreStrongAssign(&self->queryTimeout_, queryTimeout);
+void OrgApacheLuceneIndexExitableDirectoryReader_ExitableTerms_init(OrgApacheLuceneIndexExitableDirectoryReader_ExitableTerms *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneIndexExitableDirectoryReader_ExitableTerms *new_OrgApacheLuceneIndexExitableDirectoryReader_ExitableTerms_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneIndexQueryTimeout_(OrgApacheLuceneIndexTerms *terms, id<OrgApacheLuceneIndexQueryTimeout> queryTimeout) {
+OrgApacheLuceneIndexExitableDirectoryReader_ExitableTerms *new_OrgApacheLuceneIndexExitableDirectoryReader_ExitableTerms_init() {
   OrgApacheLuceneIndexExitableDirectoryReader_ExitableTerms *self = [OrgApacheLuceneIndexExitableDirectoryReader_ExitableTerms alloc];
-  OrgApacheLuceneIndexExitableDirectoryReader_ExitableTerms_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneIndexQueryTimeout_(self, terms, queryTimeout);
+  OrgApacheLuceneIndexExitableDirectoryReader_ExitableTerms_init(self);
   return self;
 }
 
@@ -369,60 +189,29 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexExitableDirectoryReader_Exi
 
 @implementation OrgApacheLuceneIndexExitableDirectoryReader_ExitableTermsEnum
 
-- (instancetype)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)termsEnum
-                 withOrgApacheLuceneIndexQueryTimeout:(id<OrgApacheLuceneIndexQueryTimeout>)queryTimeout {
-  OrgApacheLuceneIndexExitableDirectoryReader_ExitableTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneIndexQueryTimeout_(self, termsEnum, queryTimeout);
+- (instancetype)init {
+  OrgApacheLuceneIndexExitableDirectoryReader_ExitableTermsEnum_init(self);
   return self;
-}
-
-- (void)checkAndThrow {
-  OrgApacheLuceneIndexExitableDirectoryReader_ExitableTermsEnum_checkAndThrow(self);
-}
-
-- (OrgApacheLuceneUtilBytesRef *)next {
-  OrgApacheLuceneIndexExitableDirectoryReader_ExitableTermsEnum_checkAndThrow(self);
-  return [((OrgApacheLuceneIndexTermsEnum *) nil_chk(in_)) next];
-}
-
-- (void)dealloc {
-  RELEASE_(queryTimeout_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexTermsEnum:withOrgApacheLuceneIndexQueryTimeout:", "ExitableTermsEnum", NULL, 0x1, NULL, NULL },
-    { "checkAndThrow", NULL, "V", 0x2, NULL, NULL },
-    { "next", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "queryTimeout_", NULL, 0x2, "Lorg.apache.lucene.index.QueryTimeout;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexExitableDirectoryReader_ExitableTermsEnum = { 2, "ExitableTermsEnum", "org.apache.lucene.index", "ExitableDirectoryReader", 0x9, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexExitableDirectoryReader_ExitableTermsEnum = { 2, "ExitableTermsEnum", "org.apache.lucene.index", "ExitableDirectoryReader", 0x9, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexExitableDirectoryReader_ExitableTermsEnum;
 }
 
 @end
 
-void OrgApacheLuceneIndexExitableDirectoryReader_ExitableTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneIndexQueryTimeout_(OrgApacheLuceneIndexExitableDirectoryReader_ExitableTermsEnum *self, OrgApacheLuceneIndexTermsEnum *termsEnum, id<OrgApacheLuceneIndexQueryTimeout> queryTimeout) {
-  OrgApacheLuceneIndexFilterLeafReader_FilterTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_(self, termsEnum);
-  JreStrongAssign(&self->queryTimeout_, queryTimeout);
-  OrgApacheLuceneIndexExitableDirectoryReader_ExitableTermsEnum_checkAndThrow(self);
+void OrgApacheLuceneIndexExitableDirectoryReader_ExitableTermsEnum_init(OrgApacheLuceneIndexExitableDirectoryReader_ExitableTermsEnum *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneIndexExitableDirectoryReader_ExitableTermsEnum *new_OrgApacheLuceneIndexExitableDirectoryReader_ExitableTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneIndexQueryTimeout_(OrgApacheLuceneIndexTermsEnum *termsEnum, id<OrgApacheLuceneIndexQueryTimeout> queryTimeout) {
+OrgApacheLuceneIndexExitableDirectoryReader_ExitableTermsEnum *new_OrgApacheLuceneIndexExitableDirectoryReader_ExitableTermsEnum_init() {
   OrgApacheLuceneIndexExitableDirectoryReader_ExitableTermsEnum *self = [OrgApacheLuceneIndexExitableDirectoryReader_ExitableTermsEnum alloc];
-  OrgApacheLuceneIndexExitableDirectoryReader_ExitableTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneIndexQueryTimeout_(self, termsEnum, queryTimeout);
+  OrgApacheLuceneIndexExitableDirectoryReader_ExitableTermsEnum_init(self);
   return self;
-}
-
-void OrgApacheLuceneIndexExitableDirectoryReader_ExitableTermsEnum_checkAndThrow(OrgApacheLuceneIndexExitableDirectoryReader_ExitableTermsEnum *self) {
-  if ([((id<OrgApacheLuceneIndexQueryTimeout>) nil_chk(self->queryTimeout_)) shouldExit]) {
-    @throw [new_OrgApacheLuceneIndexExitableDirectoryReader_ExitingReaderException_initWithNSString_(JreStrcat("$$$@", @"The request took too long to iterate over terms. Timeout: ", [self->queryTimeout_ description], @", TermsEnum=", self->in_)) autorelease];
-  }
-  else if (JavaLangThread_interrupted()) {
-    @throw [new_OrgApacheLuceneIndexExitableDirectoryReader_ExitingReaderException_initWithNSString_(JreStrcat("$@", @"Interrupted while iterating over terms. TermsEnum=", self->in_)) autorelease];
-  }
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexExitableDirectoryReader_ExitableTermsEnum)

@@ -43,14 +43,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreTrackingDirectoryWrapper, createdFileNam
   return output;
 }
 
-- (void)copyFromWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)from
-                                     withNSString:(NSString *)src
-                                     withNSString:(NSString *)dest
-                withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
-  [((OrgApacheLuceneStoreDirectory *) nil_chk(in_)) copyFromWithOrgApacheLuceneStoreDirectory:from withNSString:src withNSString:dest withOrgApacheLuceneStoreIOContext:context];
-  [((id<JavaUtilSet>) nil_chk(createdFileNames_)) addWithId:dest];
-}
-
 - (void)renameFileWithNSString:(NSString *)source
                   withNSString:(NSString *)dest {
   [((OrgApacheLuceneStoreDirectory *) nil_chk(in_)) renameFileWithNSString:source withNSString:dest];
@@ -74,14 +66,13 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreTrackingDirectoryWrapper, createdFileNam
     { "initWithOrgApacheLuceneStoreDirectory:", "TrackingDirectoryWrapper", NULL, 0x1, NULL, NULL },
     { "deleteFileWithNSString:", "deleteFile", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "createOutputWithNSString:withOrgApacheLuceneStoreIOContext:", "createOutput", "Lorg.apache.lucene.store.IndexOutput;", 0x1, "Ljava.io.IOException;", NULL },
-    { "copyFromWithOrgApacheLuceneStoreDirectory:withNSString:withNSString:withOrgApacheLuceneStoreIOContext:", "copyFrom", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "renameFileWithNSString:withNSString:", "renameFile", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "getCreatedFiles", NULL, "Ljava.util.Set;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "createdFileNames_", NULL, 0x12, "Ljava.util.Set;", NULL, "Ljava/util/Set<Ljava/lang/String;>;", .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreTrackingDirectoryWrapper = { 2, "TrackingDirectoryWrapper", "org.apache.lucene.store", NULL, 0x11, 6, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreTrackingDirectoryWrapper = { 2, "TrackingDirectoryWrapper", "org.apache.lucene.store", NULL, 0x11, 5, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneStoreTrackingDirectoryWrapper;
 }
 

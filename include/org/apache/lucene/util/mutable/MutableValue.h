@@ -20,34 +20,11 @@
 #define JavaLangComparable_INCLUDE 1
 #include "java/lang/Comparable.h"
 
-@interface OrgApacheLuceneUtilMutableMutableValue : NSObject < JavaLangComparable > {
- @public
-  jboolean exists_;
-}
+@interface OrgApacheLuceneUtilMutableMutableValue : NSObject < JavaLangComparable >
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (jint)compareSameTypeWithId:(id)other;
-
-- (jint)compareToWithId:(OrgApacheLuceneUtilMutableMutableValue *)other;
-
-- (void)copy__WithOrgApacheLuceneUtilMutableMutableValue:(OrgApacheLuceneUtilMutableMutableValue *)source OBJC_METHOD_FAMILY_NONE;
-
-- (OrgApacheLuceneUtilMutableMutableValue *)duplicate;
-
-- (jboolean)isEqual:(id)other;
-
-- (jboolean)equalsSameTypeWithId:(id)other;
-
-- (jboolean)exists;
-
-- (NSUInteger)hash;
-
-- (id)toObject;
-
-- (NSString *)description;
 
 @end
 

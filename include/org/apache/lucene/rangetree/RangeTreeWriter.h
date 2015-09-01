@@ -16,33 +16,15 @@
 #if !defined (_OrgApacheLuceneRangetreeRangeTreeWriter_) && (OrgApacheLuceneRangetreeRangeTreeWriter_INCLUDE_ALL || OrgApacheLuceneRangetreeRangeTreeWriter_INCLUDE)
 #define _OrgApacheLuceneRangetreeRangeTreeWriter_
 
-@class OrgApacheLuceneStoreIndexOutput;
-@protocol OrgApacheLuceneRangetreeSliceWriter;
-
 #define OrgApacheLuceneRangetreeRangeTreeWriter_BYTES_PER_DOC 20
 #define OrgApacheLuceneRangetreeRangeTreeWriter_DEFAULT_MAX_VALUES_IN_LEAF_NODE 1024
 #define OrgApacheLuceneRangetreeRangeTreeWriter_DEFAULT_MAX_VALUES_SORT_IN_HEAP 131072
 
 @interface OrgApacheLuceneRangetreeRangeTreeWriter : NSObject
 
-#pragma mark Public
-
-- (instancetype)init;
-
-- (instancetype)initWithInt:(jint)maxValuesInLeafNode
-                    withInt:(jint)maxValuesSortInHeap;
-
-- (jlong)finishWithOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)outArg;
-
-+ (void)verifyParamsWithInt:(jint)maxValuesInLeafNode
-                    withInt:(jint)maxValuesSortInHeap;
-
 #pragma mark Package-Private
 
-- (void)addWithLong:(jlong)value
-            withInt:(jint)docID;
-
-- (id<OrgApacheLuceneRangetreeSliceWriter>)getWriterWithLong:(jlong)count;
+- (instancetype)init;
 
 @end
 
@@ -57,12 +39,6 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneRangetreeRangeTreeWriter, DEFAULT_MAX_
 FOUNDATION_EXPORT void OrgApacheLuceneRangetreeRangeTreeWriter_init(OrgApacheLuceneRangetreeRangeTreeWriter *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneRangetreeRangeTreeWriter *new_OrgApacheLuceneRangetreeRangeTreeWriter_init() NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneRangetreeRangeTreeWriter_initWithInt_withInt_(OrgApacheLuceneRangetreeRangeTreeWriter *self, jint maxValuesInLeafNode, jint maxValuesSortInHeap);
-
-FOUNDATION_EXPORT OrgApacheLuceneRangetreeRangeTreeWriter *new_OrgApacheLuceneRangetreeRangeTreeWriter_initWithInt_withInt_(jint maxValuesInLeafNode, jint maxValuesSortInHeap) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneRangetreeRangeTreeWriter_verifyParamsWithInt_withInt_(jint maxValuesInLeafNode, jint maxValuesSortInHeap);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeRangeTreeWriter)
 

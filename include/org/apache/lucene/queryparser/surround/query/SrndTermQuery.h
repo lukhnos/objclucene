@@ -20,34 +20,19 @@
 #define OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_INCLUDE 1
 #include "org/apache/lucene/queryparser/surround/query/SimpleTerm.h"
 
-@class OrgApacheLuceneIndexIndexReader;
-@class OrgApacheLuceneIndexTerm;
-@protocol OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor;
-
 @interface OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery : OrgApacheLuceneQueryparserSurroundQuerySimpleTerm
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)termText
-                     withBoolean:(jboolean)quoted;
-
-- (OrgApacheLuceneIndexTerm *)getLuceneTermWithNSString:(NSString *)fieldName;
-
-- (NSString *)getTermText;
-
-- (NSString *)toStringUnquoted;
-
-- (void)visitMatchingTermsWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
-                                                 withNSString:(NSString *)fieldName
-withOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor:(id<OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor>)mtv;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery_initWithNSString_withBoolean_(OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery *self, NSString *termText, jboolean quoted);
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery_init(OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery *new_OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery_initWithNSString_withBoolean_(NSString *termText, jboolean quoted) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery *new_OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundQuerySrndTermQuery)
 

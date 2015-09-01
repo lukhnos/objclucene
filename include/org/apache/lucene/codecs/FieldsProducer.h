@@ -34,8 +34,6 @@
 
 - (void)checkIntegrity;
 
-- (void)close;
-
 - (OrgApacheLuceneCodecsFieldsProducer *)getMergeInstance;
 
 #pragma mark Protected

@@ -19,24 +19,11 @@
 #if !defined (_OrgApacheLuceneSearchSimilaritiesNormalization_) && (OrgApacheLuceneSearchSimilaritiesNormalization_INCLUDE_ALL || OrgApacheLuceneSearchSimilaritiesNormalization_INCLUDE)
 #define _OrgApacheLuceneSearchSimilaritiesNormalization_
 
-@class OrgApacheLuceneSearchExplanation;
-@class OrgApacheLuceneSearchSimilaritiesBasicStats;
-
 @interface OrgApacheLuceneSearchSimilaritiesNormalization : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
-                                                                                   withFloat:(jfloat)tf
-                                                                                   withFloat:(jfloat)len;
-
-- (jfloat)tfnWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
-                                                   withFloat:(jfloat)tf
-                                                   withFloat:(jfloat)len;
-
-- (NSString *)description;
 
 @end
 
@@ -51,24 +38,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesNormalization)
 #if !defined (_OrgApacheLuceneSearchSimilaritiesNormalization_NoNormalization_) && (OrgApacheLuceneSearchSimilaritiesNormalization_INCLUDE_ALL || OrgApacheLuceneSearchSimilaritiesNormalization_NoNormalization_INCLUDE)
 #define _OrgApacheLuceneSearchSimilaritiesNormalization_NoNormalization_
 
-@class OrgApacheLuceneSearchExplanation;
-@class OrgApacheLuceneSearchSimilaritiesBasicStats;
-
 @interface OrgApacheLuceneSearchSimilaritiesNormalization_NoNormalization : OrgApacheLuceneSearchSimilaritiesNormalization
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
-                                                                                   withFloat:(jfloat)tf
-                                                                                   withFloat:(jfloat)len;
-
-- (jfloat)tfnWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
-                                                   withFloat:(jfloat)tf
-                                                   withFloat:(jfloat)len;
-
-- (NSString *)description;
 
 @end
 

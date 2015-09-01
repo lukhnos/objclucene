@@ -26,8 +26,6 @@
 
 - (instancetype)init;
 
-- (void)close;
-
 - (void)ensureValid;
 
 @end

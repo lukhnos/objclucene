@@ -20,37 +20,23 @@
 
 #pragma mark Public
 
+- (instancetype)init;
+
 + (jfloat)byte315ToFloatWithByte:(jbyte)b;
 
-+ (jfloat)byte52ToFloatWithByte:(jbyte)b;
-
-+ (jfloat)byteToFloatWithByte:(jbyte)b
-                      withInt:(jint)numMantissaBits
-                      withInt:(jint)zeroExp;
-
-+ (jbyte)floatToByteWithFloat:(jfloat)f
-                      withInt:(jint)numMantissaBits
-                      withInt:(jint)zeroExp;
-
 + (jbyte)floatToByte315WithFloat:(jfloat)f;
-
-+ (jbyte)floatToByte52WithFloat:(jfloat)f;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilSmallFloat)
 
-FOUNDATION_EXPORT jbyte OrgApacheLuceneUtilSmallFloat_floatToByteWithFloat_withInt_withInt_(jfloat f, jint numMantissaBits, jint zeroExp);
-
-FOUNDATION_EXPORT jfloat OrgApacheLuceneUtilSmallFloat_byteToFloatWithByte_withInt_withInt_(jbyte b, jint numMantissaBits, jint zeroExp);
-
 FOUNDATION_EXPORT jbyte OrgApacheLuceneUtilSmallFloat_floatToByte315WithFloat_(jfloat f);
 
 FOUNDATION_EXPORT jfloat OrgApacheLuceneUtilSmallFloat_byte315ToFloatWithByte_(jbyte b);
 
-FOUNDATION_EXPORT jbyte OrgApacheLuceneUtilSmallFloat_floatToByte52WithFloat_(jfloat f);
+FOUNDATION_EXPORT void OrgApacheLuceneUtilSmallFloat_init(OrgApacheLuceneUtilSmallFloat *self);
 
-FOUNDATION_EXPORT jfloat OrgApacheLuceneUtilSmallFloat_byte52ToFloatWithByte_(jbyte b);
+FOUNDATION_EXPORT OrgApacheLuceneUtilSmallFloat *new_OrgApacheLuceneUtilSmallFloat_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilSmallFloat)
 

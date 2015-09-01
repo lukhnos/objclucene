@@ -4,8 +4,9 @@
 //
 
 #include "J2ObjC_source.h"
-#include "java/lang/CharSequence.h"
 #include "org/apache/lucene/queryparser/flexible/core/nodes/FieldableNode.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode : NSObject
 
@@ -14,11 +15,7 @@
 @implementation OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getField", NULL, "Ljava.lang.CharSequence;", 0x401, NULL, NULL },
-    { "setFieldWithJavaLangCharSequence:", "setField", "V", 0x401, NULL, NULL },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode = { 2, "FieldableNode", "org.apache.lucene.queryparser.flexible.core.nodes", NULL, 0x609, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode = { 2, "FieldableNode", "org.apache.lucene.queryparser.flexible.core.nodes", NULL, 0x609, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode;
 }
 

@@ -4,306 +4,44 @@
 //
 
 #include "IOSClass.h"
-#include "IOSObjectArray.h"
-#include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Deprecated.h"
-#include "java/lang/IllegalArgumentException.h"
-#include "java/lang/StringBuilder.h"
-#include "java/lang/System.h"
-#include "java/util/ArrayList.h"
-#include "java/util/Arrays.h"
-#include "java/util/Collection.h"
-#include "java/util/Collections.h"
-#include "java/util/Iterator.h"
-#include "java/util/List.h"
-#include "org/apache/lucene/index/Fields.h"
-#include "org/apache/lucene/index/LeafReader.h"
-#include "org/apache/lucene/index/LeafReaderContext.h"
-#include "org/apache/lucene/index/PostingsEnum.h"
-#include "org/apache/lucene/index/Term.h"
-#include "org/apache/lucene/index/Terms.h"
-#include "org/apache/lucene/index/TermsEnum.h"
 #include "org/apache/lucene/queries/TermsFilter.h"
-#include "org/apache/lucene/search/BitsFilteredDocIdSet.h"
-#include "org/apache/lucene/search/DocIdSet.h"
-#include "org/apache/lucene/search/Filter.h"
 #include "org/apache/lucene/util/Accountable.h"
-#include "org/apache/lucene/util/ArrayUtil.h"
-#include "org/apache/lucene/util/BitDocIdSet.h"
-#include "org/apache/lucene/util/Bits.h"
-#include "org/apache/lucene/util/BytesRef.h"
-#include "org/apache/lucene/util/RamUsageEstimator.h"
 
-@class OrgApacheLuceneQueriesTermsFilter_FieldAndTermEnum;
+#pragma clang diagnostic ignored "-Wprotocol"
 
-#define OrgApacheLuceneQueriesTermsFilter_PRIME 31
-
-@interface OrgApacheLuceneQueriesTermsFilter () {
- @public
-  IOSIntArray *offsets_;
-  IOSByteArray *termsBytes_;
-  IOSObjectArray *termsAndFields_;
-  jint hashCode_;
-}
-
-- (instancetype)initWithOrgApacheLuceneQueriesTermsFilter_FieldAndTermEnum:(OrgApacheLuceneQueriesTermsFilter_FieldAndTermEnum *)iter
-                                                                   withInt:(jint)length;
-
-+ (id<JavaUtilList>)sortWithJavaUtilList:(id<JavaUtilList>)toSort;
-
-@end
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesTermsFilter, offsets_, IOSIntArray *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesTermsFilter, termsBytes_, IOSByteArray *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesTermsFilter, termsAndFields_, IOSObjectArray *)
-
-static jlong OrgApacheLuceneQueriesTermsFilter_BASE_RAM_BYTES_USED_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueriesTermsFilter, BASE_RAM_BYTES_USED_, jlong)
-
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueriesTermsFilter, PRIME, jint)
-
-__attribute__((unused)) static void OrgApacheLuceneQueriesTermsFilter_initWithOrgApacheLuceneQueriesTermsFilter_FieldAndTermEnum_withInt_(OrgApacheLuceneQueriesTermsFilter *self, OrgApacheLuceneQueriesTermsFilter_FieldAndTermEnum *iter, jint length);
-
-__attribute__((unused)) static OrgApacheLuceneQueriesTermsFilter *new_OrgApacheLuceneQueriesTermsFilter_initWithOrgApacheLuceneQueriesTermsFilter_FieldAndTermEnum_withInt_(OrgApacheLuceneQueriesTermsFilter_FieldAndTermEnum *iter, jint length) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static id<JavaUtilList> OrgApacheLuceneQueriesTermsFilter_sortWithJavaUtilList_(id<JavaUtilList> toSort);
-
-@interface OrgApacheLuceneQueriesTermsFilter_TermsAndField : NSObject < OrgApacheLuceneUtilAccountable > {
- @public
-  jint start_;
-  jint end_;
-  NSString *field_;
-}
-
-- (instancetype)initWithInt:(jint)start
-                    withInt:(jint)end
-               withNSString:(NSString *)field;
-
-- (jlong)ramBytesUsed;
-
-- (id<JavaUtilCollection>)getChildResources;
-
-- (NSUInteger)hash;
-
-- (jboolean)isEqual:(id)obj;
-
-@end
-
-J2OBJC_STATIC_INIT(OrgApacheLuceneQueriesTermsFilter_TermsAndField)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesTermsFilter_TermsAndField, field_, NSString *)
-
-static jlong OrgApacheLuceneQueriesTermsFilter_TermsAndField_BASE_RAM_BYTES_USED_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueriesTermsFilter_TermsAndField, BASE_RAM_BYTES_USED_, jlong)
-
-__attribute__((unused)) static void OrgApacheLuceneQueriesTermsFilter_TermsAndField_initWithInt_withInt_withNSString_(OrgApacheLuceneQueriesTermsFilter_TermsAndField *self, jint start, jint end, NSString *field);
-
-__attribute__((unused)) static OrgApacheLuceneQueriesTermsFilter_TermsAndField *new_OrgApacheLuceneQueriesTermsFilter_TermsAndField_initWithInt_withInt_withNSString_(jint start, jint end, NSString *field) NS_RETURNS_RETAINED;
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesTermsFilter_TermsAndField)
-
-@interface OrgApacheLuceneQueriesTermsFilter_FieldAndTermEnum : NSObject {
- @public
-  NSString *field_;
-}
-
-- (OrgApacheLuceneUtilBytesRef *)next;
+@interface OrgApacheLuceneQueriesTermsFilter_TermsAndField : NSObject < OrgApacheLuceneUtilAccountable >
 
 - (instancetype)init;
 
-- (instancetype)initWithNSString:(NSString *)field;
+@end
 
-- (NSString *)field;
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesTermsFilter_TermsAndField)
+
+__attribute__((unused)) static void OrgApacheLuceneQueriesTermsFilter_TermsAndField_init(OrgApacheLuceneQueriesTermsFilter_TermsAndField *self);
+
+__attribute__((unused)) static OrgApacheLuceneQueriesTermsFilter_TermsAndField *new_OrgApacheLuceneQueriesTermsFilter_TermsAndField_init() NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesTermsFilter_TermsAndField)
+
+@interface OrgApacheLuceneQueriesTermsFilter_FieldAndTermEnum : NSObject
+
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesTermsFilter_FieldAndTermEnum)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesTermsFilter_FieldAndTermEnum, field_, NSString *)
-
 __attribute__((unused)) static void OrgApacheLuceneQueriesTermsFilter_FieldAndTermEnum_init(OrgApacheLuceneQueriesTermsFilter_FieldAndTermEnum *self);
-
-__attribute__((unused)) static void OrgApacheLuceneQueriesTermsFilter_FieldAndTermEnum_initWithNSString_(OrgApacheLuceneQueriesTermsFilter_FieldAndTermEnum *self, NSString *field);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesTermsFilter_FieldAndTermEnum)
 
-@interface OrgApacheLuceneQueriesTermsFilter_$1 : OrgApacheLuceneQueriesTermsFilter_FieldAndTermEnum {
- @public
-  id<JavaUtilIterator> iter_;
-  id<JavaUtilList> val$terms_;
-}
-
-- (OrgApacheLuceneUtilBytesRef *)next;
-
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)capture$0;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesTermsFilter_$1)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesTermsFilter_$1, iter_, id<JavaUtilIterator>)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesTermsFilter_$1, val$terms_, id<JavaUtilList>)
-
-__attribute__((unused)) static void OrgApacheLuceneQueriesTermsFilter_$1_initWithJavaUtilList_(OrgApacheLuceneQueriesTermsFilter_$1 *self, id<JavaUtilList> capture$0);
-
-__attribute__((unused)) static OrgApacheLuceneQueriesTermsFilter_$1 *new_OrgApacheLuceneQueriesTermsFilter_$1_initWithJavaUtilList_(id<JavaUtilList> capture$0) NS_RETURNS_RETAINED;
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesTermsFilter_$1)
-
-@interface OrgApacheLuceneQueriesTermsFilter_$2 : OrgApacheLuceneQueriesTermsFilter_FieldAndTermEnum {
- @public
-  id<JavaUtilIterator> iter_;
-  id<JavaUtilList> val$terms_;
-}
-
-- (OrgApacheLuceneUtilBytesRef *)next;
-
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)capture$0
-                        withNSString:(NSString *)arg$0;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesTermsFilter_$2)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesTermsFilter_$2, iter_, id<JavaUtilIterator>)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesTermsFilter_$2, val$terms_, id<JavaUtilList>)
-
-__attribute__((unused)) static void OrgApacheLuceneQueriesTermsFilter_$2_initWithJavaUtilList_withNSString_(OrgApacheLuceneQueriesTermsFilter_$2 *self, id<JavaUtilList> capture$0, NSString *arg$0);
-
-__attribute__((unused)) static OrgApacheLuceneQueriesTermsFilter_$2 *new_OrgApacheLuceneQueriesTermsFilter_$2_initWithJavaUtilList_withNSString_(id<JavaUtilList> capture$0, NSString *arg$0) NS_RETURNS_RETAINED;
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesTermsFilter_$2)
-
-J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneQueriesTermsFilter)
-
 @implementation OrgApacheLuceneQueriesTermsFilter
 
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)terms {
-  OrgApacheLuceneQueriesTermsFilter_initWithJavaUtilList_(self, terms);
+- (instancetype)init {
+  OrgApacheLuceneQueriesTermsFilter_init(self);
   return self;
-}
-
-- (instancetype)initWithNSString:(NSString *)field
-                withJavaUtilList:(id<JavaUtilList>)terms {
-  OrgApacheLuceneQueriesTermsFilter_initWithNSString_withJavaUtilList_(self, field, terms);
-  return self;
-}
-
-- (instancetype)initWithNSString:(NSString *)field
-withOrgApacheLuceneUtilBytesRefArray:(IOSObjectArray *)terms {
-  OrgApacheLuceneQueriesTermsFilter_initWithNSString_withOrgApacheLuceneUtilBytesRefArray_(self, field, terms);
-  return self;
-}
-
-- (instancetype)initWithOrgApacheLuceneIndexTermArray:(IOSObjectArray *)terms {
-  OrgApacheLuceneQueriesTermsFilter_initWithOrgApacheLuceneIndexTermArray_(self, terms);
-  return self;
-}
-
-- (instancetype)initWithOrgApacheLuceneQueriesTermsFilter_FieldAndTermEnum:(OrgApacheLuceneQueriesTermsFilter_FieldAndTermEnum *)iter
-                                                                   withInt:(jint)length {
-  OrgApacheLuceneQueriesTermsFilter_initWithOrgApacheLuceneQueriesTermsFilter_FieldAndTermEnum_withInt_(self, iter, length);
-  return self;
-}
-
-- (jlong)ramBytesUsed {
-  return OrgApacheLuceneQueriesTermsFilter_BASE_RAM_BYTES_USED_ + OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithOrgApacheLuceneUtilAccountableArray_(termsAndFields_) + OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithByteArray_(termsBytes_) + OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithIntArray_(offsets_);
-}
-
-- (id<JavaUtilCollection>)getChildResources {
-  return JavaUtilCollections_emptyList();
-}
-
-- (OrgApacheLuceneSearchDocIdSet *)getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-                                                            withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)acceptDocs {
-  OrgApacheLuceneIndexLeafReader *reader = [((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader];
-  OrgApacheLuceneUtilBitDocIdSet_Builder *builder = [new_OrgApacheLuceneUtilBitDocIdSet_Builder_initWithInt_([((OrgApacheLuceneIndexLeafReader *) nil_chk(reader)) maxDoc]) autorelease];
-  OrgApacheLuceneIndexFields *fields = [reader fields];
-  OrgApacheLuceneUtilBytesRef *spare = [new_OrgApacheLuceneUtilBytesRef_initWithByteArray_(self->termsBytes_) autorelease];
-  OrgApacheLuceneIndexTerms *terms = nil;
-  OrgApacheLuceneIndexTermsEnum *termsEnum = nil;
-  OrgApacheLuceneIndexPostingsEnum *docs = nil;
-  {
-    IOSObjectArray *a__ = self->termsAndFields_;
-    OrgApacheLuceneQueriesTermsFilter_TermsAndField * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
-    OrgApacheLuceneQueriesTermsFilter_TermsAndField * const *e__ = b__ + a__->size_;
-    while (b__ < e__) {
-      OrgApacheLuceneQueriesTermsFilter_TermsAndField *termsAndField = *b__++;
-      if ((terms = [((OrgApacheLuceneIndexFields *) nil_chk(fields)) termsWithNSString:((OrgApacheLuceneQueriesTermsFilter_TermsAndField *) nil_chk(termsAndField))->field_]) != nil) {
-        termsEnum = [((OrgApacheLuceneIndexTerms *) nil_chk(terms)) iterator];
-        for (jint i = termsAndField->start_; i < termsAndField->end_; i++) {
-          spare->offset_ = IOSIntArray_Get(nil_chk(offsets_), i);
-          spare->length_ = IOSIntArray_Get(offsets_, i + 1) - IOSIntArray_Get(offsets_, i);
-          if ([((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum)) seekExactWithOrgApacheLuceneUtilBytesRef:spare]) {
-            docs = [termsEnum postingsWithOrgApacheLuceneIndexPostingsEnum:docs withInt:OrgApacheLuceneIndexPostingsEnum_NONE];
-            [builder or__WithOrgApacheLuceneSearchDocIdSetIterator:docs];
-          }
-        }
-      }
-    }
-  }
-  return OrgApacheLuceneSearchBitsFilteredDocIdSet_wrapWithOrgApacheLuceneSearchDocIdSet_withOrgApacheLuceneUtilBits_([builder build], acceptDocs);
-}
-
-- (jboolean)isEqual:(id)obj {
-  if (self == obj) {
-    return YES;
-  }
-  if ([super isEqual:obj] == NO) {
-    return NO;
-  }
-  OrgApacheLuceneQueriesTermsFilter *test = (OrgApacheLuceneQueriesTermsFilter *) check_class_cast(obj, [OrgApacheLuceneQueriesTermsFilter class]);
-  if (((OrgApacheLuceneQueriesTermsFilter *) nil_chk(test))->hashCode_ == hashCode_ && JavaUtilArrays_equalsWithNSObjectArray_withNSObjectArray_(termsAndFields_, test->termsAndFields_)) {
-    jint lastOffset = ((OrgApacheLuceneQueriesTermsFilter_TermsAndField *) nil_chk(IOSObjectArray_Get(termsAndFields_, ((IOSObjectArray *) nil_chk(termsAndFields_))->size_ - 1)))->end_;
-    if (OrgApacheLuceneUtilArrayUtil_equalsWithIntArray_withInt_withIntArray_withInt_withInt_(offsets_, 0, test->offsets_, 0, lastOffset + 1)) {
-      return OrgApacheLuceneUtilArrayUtil_equalsWithByteArray_withInt_withByteArray_withInt_withInt_(termsBytes_, 0, test->termsBytes_, 0, IOSIntArray_Get(nil_chk(offsets_), lastOffset));
-    }
-  }
-  return NO;
-}
-
-- (NSUInteger)hash {
-  return 31 * ((jint) [super hash]) + hashCode_;
-}
-
-- (NSString *)toStringWithNSString:(NSString *)defaultField {
-  JavaLangStringBuilder *builder = [new_JavaLangStringBuilder_init() autorelease];
-  OrgApacheLuceneUtilBytesRef *spare = [new_OrgApacheLuceneUtilBytesRef_initWithByteArray_(termsBytes_) autorelease];
-  jboolean first = YES;
-  for (jint i = 0; i < ((IOSObjectArray *) nil_chk(termsAndFields_))->size_; i++) {
-    OrgApacheLuceneQueriesTermsFilter_TermsAndField *current = IOSObjectArray_Get(termsAndFields_, i);
-    for (jint j = ((OrgApacheLuceneQueriesTermsFilter_TermsAndField *) nil_chk(current))->start_; j < current->end_; j++) {
-      spare->offset_ = IOSIntArray_Get(nil_chk(offsets_), j);
-      spare->length_ = IOSIntArray_Get(offsets_, j + 1) - IOSIntArray_Get(offsets_, j);
-      if (!first) {
-        [builder appendWithChar:' '];
-      }
-      first = NO;
-      [((JavaLangStringBuilder *) nil_chk([builder appendWithNSString:current->field_])) appendWithChar:':'];
-      [builder appendWithNSString:[spare utf8ToString]];
-    }
-  }
-  return [builder description];
-}
-
-+ (id<JavaUtilList>)sortWithJavaUtilList:(id<JavaUtilList>)toSort {
-  return OrgApacheLuceneQueriesTermsFilter_sortWithJavaUtilList_(toSort);
-}
-
-- (void)dealloc {
-  RELEASE_(offsets_);
-  RELEASE_(termsBytes_);
-  RELEASE_(termsAndFields_);
-  [super dealloc];
-}
-
-+ (void)initialize {
-  if (self == [OrgApacheLuceneQueriesTermsFilter class]) {
-    OrgApacheLuceneQueriesTermsFilter_BASE_RAM_BYTES_USED_ = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneQueriesTermsFilter_class_());
-    J2OBJC_SET_INITIALIZED(OrgApacheLuceneQueriesTermsFilter)
-  }
 }
 
 + (IOSObjectArray *)__annotations {
@@ -312,226 +50,51 @@ withOrgApacheLuceneUtilBytesRefArray:(IOSObjectArray *)terms {
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilList:", "TermsFilter", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withJavaUtilList:", "TermsFilter", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withOrgApacheLuceneUtilBytesRefArray:", "TermsFilter", NULL, 0x81, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexTermArray:", "TermsFilter", NULL, 0x81, NULL, NULL },
-    { "initWithOrgApacheLuceneQueriesTermsFilter_FieldAndTermEnum:withInt:", "TermsFilter", NULL, 0x2, NULL, NULL },
-    { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
-    { "getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:withOrgApacheLuceneUtilBits:", "getDocIdSet", "Lorg.apache.lucene.search.DocIdSet;", 0x1, "Ljava.io.IOException;", NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "sortWithJavaUtilList:", "sort", "Ljava.util.List;", 0xa, NULL, "<T::Ljava/lang/Comparable<-TT;>;>(Ljava/util/List<TT;>;)Ljava/util/List<TT;>;" },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "BASE_RAM_BYTES_USED_", NULL, 0x1a, "J", &OrgApacheLuceneQueriesTermsFilter_BASE_RAM_BYTES_USED_, NULL, .constantValue.asLong = 0 },
-    { "offsets_", NULL, 0x12, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "termsBytes_", NULL, 0x12, "[B", NULL, NULL, .constantValue.asLong = 0 },
-    { "termsAndFields_", NULL, 0x12, "[Lorg.apache.lucene.queries.TermsFilter$TermsAndField;", NULL, NULL, .constantValue.asLong = 0 },
-    { "hashCode_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "PRIME", "PRIME", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneQueriesTermsFilter_PRIME },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.queries.TermsFilter$TermsAndField;", "Lorg.apache.lucene.queries.TermsFilter$FieldAndTermEnum;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesTermsFilter = { 2, "TermsFilter", "org.apache.lucene.queries", NULL, 0x11, 12, methods, 6, fields, 0, NULL, 2, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesTermsFilter = { 2, "TermsFilter", "org.apache.lucene.queries", NULL, 0x11, 1, methods, 0, NULL, 0, NULL, 2, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneQueriesTermsFilter;
 }
 
 @end
 
-void OrgApacheLuceneQueriesTermsFilter_initWithJavaUtilList_(OrgApacheLuceneQueriesTermsFilter *self, id<JavaUtilList> terms) {
-  OrgApacheLuceneQueriesTermsFilter_initWithOrgApacheLuceneQueriesTermsFilter_FieldAndTermEnum_withInt_(self, [new_OrgApacheLuceneQueriesTermsFilter_$1_initWithJavaUtilList_(terms) autorelease], [((id<JavaUtilList>) nil_chk(terms)) size]);
+void OrgApacheLuceneQueriesTermsFilter_init(OrgApacheLuceneQueriesTermsFilter *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneQueriesTermsFilter *new_OrgApacheLuceneQueriesTermsFilter_initWithJavaUtilList_(id<JavaUtilList> terms) {
+OrgApacheLuceneQueriesTermsFilter *new_OrgApacheLuceneQueriesTermsFilter_init() {
   OrgApacheLuceneQueriesTermsFilter *self = [OrgApacheLuceneQueriesTermsFilter alloc];
-  OrgApacheLuceneQueriesTermsFilter_initWithJavaUtilList_(self, terms);
+  OrgApacheLuceneQueriesTermsFilter_init(self);
   return self;
-}
-
-void OrgApacheLuceneQueriesTermsFilter_initWithNSString_withJavaUtilList_(OrgApacheLuceneQueriesTermsFilter *self, NSString *field, id<JavaUtilList> terms) {
-  OrgApacheLuceneQueriesTermsFilter_initWithOrgApacheLuceneQueriesTermsFilter_FieldAndTermEnum_withInt_(self, [new_OrgApacheLuceneQueriesTermsFilter_$2_initWithJavaUtilList_withNSString_(terms, field) autorelease], [((id<JavaUtilList>) nil_chk(terms)) size]);
-}
-
-OrgApacheLuceneQueriesTermsFilter *new_OrgApacheLuceneQueriesTermsFilter_initWithNSString_withJavaUtilList_(NSString *field, id<JavaUtilList> terms) {
-  OrgApacheLuceneQueriesTermsFilter *self = [OrgApacheLuceneQueriesTermsFilter alloc];
-  OrgApacheLuceneQueriesTermsFilter_initWithNSString_withJavaUtilList_(self, field, terms);
-  return self;
-}
-
-void OrgApacheLuceneQueriesTermsFilter_initWithNSString_withOrgApacheLuceneUtilBytesRefArray_(OrgApacheLuceneQueriesTermsFilter *self, NSString *field, IOSObjectArray *terms) {
-  OrgApacheLuceneQueriesTermsFilter_initWithNSString_withJavaUtilList_(self, field, JavaUtilArrays_asListWithNSObjectArray_(terms));
-}
-
-OrgApacheLuceneQueriesTermsFilter *new_OrgApacheLuceneQueriesTermsFilter_initWithNSString_withOrgApacheLuceneUtilBytesRefArray_(NSString *field, IOSObjectArray *terms) {
-  OrgApacheLuceneQueriesTermsFilter *self = [OrgApacheLuceneQueriesTermsFilter alloc];
-  OrgApacheLuceneQueriesTermsFilter_initWithNSString_withOrgApacheLuceneUtilBytesRefArray_(self, field, terms);
-  return self;
-}
-
-void OrgApacheLuceneQueriesTermsFilter_initWithOrgApacheLuceneIndexTermArray_(OrgApacheLuceneQueriesTermsFilter *self, IOSObjectArray *terms) {
-  OrgApacheLuceneQueriesTermsFilter_initWithJavaUtilList_(self, JavaUtilArrays_asListWithNSObjectArray_(terms));
-}
-
-OrgApacheLuceneQueriesTermsFilter *new_OrgApacheLuceneQueriesTermsFilter_initWithOrgApacheLuceneIndexTermArray_(IOSObjectArray *terms) {
-  OrgApacheLuceneQueriesTermsFilter *self = [OrgApacheLuceneQueriesTermsFilter alloc];
-  OrgApacheLuceneQueriesTermsFilter_initWithOrgApacheLuceneIndexTermArray_(self, terms);
-  return self;
-}
-
-void OrgApacheLuceneQueriesTermsFilter_initWithOrgApacheLuceneQueriesTermsFilter_FieldAndTermEnum_withInt_(OrgApacheLuceneQueriesTermsFilter *self, OrgApacheLuceneQueriesTermsFilter_FieldAndTermEnum *iter, jint length) {
-  OrgApacheLuceneSearchFilter_init(self);
-  jint hash_ = 9;
-  IOSByteArray *serializedTerms = [IOSByteArray arrayWithLength:0];
-  JreStrongAssignAndConsume(&self->offsets_, [IOSIntArray newArrayWithLength:length + 1]);
-  jint lastEndOffset = 0;
-  jint index = 0;
-  JavaUtilArrayList *termsAndFields = [new_JavaUtilArrayList_init() autorelease];
-  OrgApacheLuceneQueriesTermsFilter_TermsAndField *lastTermsAndField = nil;
-  OrgApacheLuceneUtilBytesRef *previousTerm = nil;
-  NSString *previousField = nil;
-  OrgApacheLuceneUtilBytesRef *currentTerm;
-  NSString *currentField;
-  while ((currentTerm = [((OrgApacheLuceneQueriesTermsFilter_FieldAndTermEnum *) nil_chk(iter)) next]) != nil) {
-    currentField = [iter field];
-    if (currentField == nil) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"Field must not be null") autorelease];
-    }
-    if (previousField != nil) {
-      if ([previousField isEqual:currentField]) {
-        if ([((OrgApacheLuceneUtilBytesRef *) nil_chk(previousTerm)) bytesEqualsWithOrgApacheLuceneUtilBytesRef:currentTerm]) {
-          continue;
-        }
-      }
-      else {
-        jint start = lastTermsAndField == nil ? 0 : lastTermsAndField->end_;
-        lastTermsAndField = [new_OrgApacheLuceneQueriesTermsFilter_TermsAndField_initWithInt_withInt_withNSString_(start, index, previousField) autorelease];
-        [termsAndFields addWithId:lastTermsAndField];
-      }
-    }
-    hash_ = OrgApacheLuceneQueriesTermsFilter_PRIME * hash_ + ((jint) [((NSString *) nil_chk(currentField)) hash]);
-    hash_ = OrgApacheLuceneQueriesTermsFilter_PRIME * hash_ + ((jint) [((OrgApacheLuceneUtilBytesRef *) nil_chk(currentTerm)) hash]);
-    if (serializedTerms->size_ < lastEndOffset + currentTerm->length_) {
-      serializedTerms = OrgApacheLuceneUtilArrayUtil_growWithByteArray_withInt_(serializedTerms, lastEndOffset + currentTerm->length_);
-    }
-    JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(currentTerm->bytes_, currentTerm->offset_, serializedTerms, lastEndOffset, currentTerm->length_);
-    *IOSIntArray_GetRef(self->offsets_, index) = lastEndOffset;
-    lastEndOffset += currentTerm->length_;
-    index++;
-    previousTerm = currentTerm;
-    previousField = currentField;
-  }
-  *IOSIntArray_GetRef(self->offsets_, index) = lastEndOffset;
-  jint start = lastTermsAndField == nil ? 0 : lastTermsAndField->end_;
-  lastTermsAndField = [new_OrgApacheLuceneQueriesTermsFilter_TermsAndField_initWithInt_withInt_withNSString_(start, index, previousField) autorelease];
-  [termsAndFields addWithId:lastTermsAndField];
-  JreStrongAssign(&self->termsBytes_, OrgApacheLuceneUtilArrayUtil_shrinkWithByteArray_withInt_(serializedTerms, lastEndOffset));
-  JreStrongAssign(&self->termsAndFields_, [termsAndFields toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:[termsAndFields size] type:OrgApacheLuceneQueriesTermsFilter_TermsAndField_class_()]]);
-  self->hashCode_ = hash_;
-}
-
-OrgApacheLuceneQueriesTermsFilter *new_OrgApacheLuceneQueriesTermsFilter_initWithOrgApacheLuceneQueriesTermsFilter_FieldAndTermEnum_withInt_(OrgApacheLuceneQueriesTermsFilter_FieldAndTermEnum *iter, jint length) {
-  OrgApacheLuceneQueriesTermsFilter *self = [OrgApacheLuceneQueriesTermsFilter alloc];
-  OrgApacheLuceneQueriesTermsFilter_initWithOrgApacheLuceneQueriesTermsFilter_FieldAndTermEnum_withInt_(self, iter, length);
-  return self;
-}
-
-id<JavaUtilList> OrgApacheLuceneQueriesTermsFilter_sortWithJavaUtilList_(id<JavaUtilList> toSort) {
-  OrgApacheLuceneQueriesTermsFilter_initialize();
-  if ([((id<JavaUtilList>) nil_chk(toSort)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"no terms provided") autorelease];
-  }
-  JavaUtilCollections_sortWithJavaUtilList_(toSort);
-  return toSort;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesTermsFilter)
 
-J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneQueriesTermsFilter_TermsAndField)
-
 @implementation OrgApacheLuceneQueriesTermsFilter_TermsAndField
 
-- (instancetype)initWithInt:(jint)start
-                    withInt:(jint)end
-               withNSString:(NSString *)field {
-  OrgApacheLuceneQueriesTermsFilter_TermsAndField_initWithInt_withInt_withNSString_(self, start, end, field);
+- (instancetype)init {
+  OrgApacheLuceneQueriesTermsFilter_TermsAndField_init(self);
   return self;
-}
-
-- (jlong)ramBytesUsed {
-  return OrgApacheLuceneQueriesTermsFilter_TermsAndField_BASE_RAM_BYTES_USED_ + ((jint) [((NSString *) nil_chk(field_)) length]) * OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_CHAR;
-}
-
-- (id<JavaUtilCollection>)getChildResources {
-  return JavaUtilCollections_emptyList();
-}
-
-- (NSUInteger)hash {
-  jint prime = 31;
-  jint result = 1;
-  result = prime * result + ((field_ == nil) ? 0 : ((jint) [field_ hash]));
-  result = prime * result + end_;
-  result = prime * result + start_;
-  return result;
-}
-
-- (jboolean)isEqual:(id)obj {
-  if (self == obj) return YES;
-  if (obj == nil) return NO;
-  if ([self getClass] != [nil_chk(obj) getClass]) return NO;
-  OrgApacheLuceneQueriesTermsFilter_TermsAndField *other = (OrgApacheLuceneQueriesTermsFilter_TermsAndField *) check_class_cast(obj, [OrgApacheLuceneQueriesTermsFilter_TermsAndField class]);
-  if (field_ == nil) {
-    if (other->field_ != nil) return NO;
-  }
-  else if (![field_ isEqual:other->field_]) return NO;
-  if (end_ != other->end_) return NO;
-  if (start_ != other->start_) return NO;
-  return YES;
-}
-
-- (void)dealloc {
-  RELEASE_(field_);
-  [super dealloc];
-}
-
-+ (void)initialize {
-  if (self == [OrgApacheLuceneQueriesTermsFilter_TermsAndField class]) {
-    OrgApacheLuceneQueriesTermsFilter_TermsAndField_BASE_RAM_BYTES_USED_ = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(OrgApacheLuceneQueriesTermsFilter_TermsAndField_class_()) + OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_(NSString_class_()) + JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_ARRAY_HEADER_);
-    J2OBJC_SET_INITIALIZED(OrgApacheLuceneQueriesTermsFilter_TermsAndField)
-  }
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withInt:withNSString:", "TermsAndField", NULL, 0x0, NULL, NULL },
-    { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x2, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "BASE_RAM_BYTES_USED_", NULL, 0x1a, "J", &OrgApacheLuceneQueriesTermsFilter_TermsAndField_BASE_RAM_BYTES_USED_, NULL, .constantValue.asLong = 0 },
-    { "start_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "end_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "field_", NULL, 0x10, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesTermsFilter_TermsAndField = { 2, "TermsAndField", "org.apache.lucene.queries", "TermsFilter", 0x1a, 5, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesTermsFilter_TermsAndField = { 2, "TermsAndField", "org.apache.lucene.queries", "TermsFilter", 0x1a, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueriesTermsFilter_TermsAndField;
 }
 
 @end
 
-void OrgApacheLuceneQueriesTermsFilter_TermsAndField_initWithInt_withInt_withNSString_(OrgApacheLuceneQueriesTermsFilter_TermsAndField *self, jint start, jint end, NSString *field) {
+void OrgApacheLuceneQueriesTermsFilter_TermsAndField_init(OrgApacheLuceneQueriesTermsFilter_TermsAndField *self) {
   NSObject_init(self);
-  self->start_ = start;
-  self->end_ = end;
-  JreStrongAssign(&self->field_, field);
 }
 
-OrgApacheLuceneQueriesTermsFilter_TermsAndField *new_OrgApacheLuceneQueriesTermsFilter_TermsAndField_initWithInt_withInt_withNSString_(jint start, jint end, NSString *field) {
+OrgApacheLuceneQueriesTermsFilter_TermsAndField *new_OrgApacheLuceneQueriesTermsFilter_TermsAndField_init() {
   OrgApacheLuceneQueriesTermsFilter_TermsAndField *self = [OrgApacheLuceneQueriesTermsFilter_TermsAndField alloc];
-  OrgApacheLuceneQueriesTermsFilter_TermsAndField_initWithInt_withInt_withNSString_(self, start, end, field);
+  OrgApacheLuceneQueriesTermsFilter_TermsAndField_init(self);
   return self;
 }
 
@@ -539,42 +102,16 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesTermsFilter_TermsAndField
 
 @implementation OrgApacheLuceneQueriesTermsFilter_FieldAndTermEnum
 
-- (OrgApacheLuceneUtilBytesRef *)next {
-  // can't call an abstract method
-  [self doesNotRecognizeSelector:_cmd];
-  return 0;
-}
-
 - (instancetype)init {
   OrgApacheLuceneQueriesTermsFilter_FieldAndTermEnum_init(self);
   return self;
 }
 
-- (instancetype)initWithNSString:(NSString *)field {
-  OrgApacheLuceneQueriesTermsFilter_FieldAndTermEnum_initWithNSString_(self, field);
-  return self;
-}
-
-- (NSString *)field {
-  return field_;
-}
-
-- (void)dealloc {
-  RELEASE_(field_);
-  [super dealloc];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "next", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x401, NULL, NULL },
-    { "init", "FieldAndTermEnum", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:", "FieldAndTermEnum", NULL, 0x1, NULL, NULL },
-    { "field", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x2, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "field_", NULL, 0x4, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesTermsFilter_FieldAndTermEnum = { 2, "FieldAndTermEnum", "org.apache.lucene.queries", "TermsFilter", 0x40a, 4, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesTermsFilter_FieldAndTermEnum = { 2, "FieldAndTermEnum", "org.apache.lucene.queries", "TermsFilter", 0x40a, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueriesTermsFilter_FieldAndTermEnum;
 }
 
@@ -584,112 +121,4 @@ void OrgApacheLuceneQueriesTermsFilter_FieldAndTermEnum_init(OrgApacheLuceneQuer
   NSObject_init(self);
 }
 
-void OrgApacheLuceneQueriesTermsFilter_FieldAndTermEnum_initWithNSString_(OrgApacheLuceneQueriesTermsFilter_FieldAndTermEnum *self, NSString *field) {
-  NSObject_init(self);
-  JreStrongAssign(&self->field_, field);
-}
-
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesTermsFilter_FieldAndTermEnum)
-
-@implementation OrgApacheLuceneQueriesTermsFilter_$1
-
-- (OrgApacheLuceneUtilBytesRef *)next {
-  if ([((id<JavaUtilIterator>) nil_chk(iter_)) hasNext]) {
-    OrgApacheLuceneIndexTerm *next = [iter_ next];
-    JreStrongAssign(&field_, [((OrgApacheLuceneIndexTerm *) nil_chk(next)) field]);
-    return [next bytes];
-  }
-  return nil;
-}
-
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)capture$0 {
-  OrgApacheLuceneQueriesTermsFilter_$1_initWithJavaUtilList_(self, capture$0);
-  return self;
-}
-
-- (void)dealloc {
-  RELEASE_(iter_);
-  RELEASE_(val$terms_);
-  [super dealloc];
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "next", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "initWithJavaUtilList:", "", NULL, 0x0, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "iter_", NULL, 0x10, "Ljava.util.Iterator;", NULL, "Ljava/util/Iterator<Lorg/apache/lucene/index/Term;>;", .constantValue.asLong = 0 },
-    { "val$terms_", NULL, 0x1012, "Ljava.util.List;", NULL, "Ljava/util/List<Lorg/apache/lucene/index/Term;>;", .constantValue.asLong = 0 },
-  };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneQueriesTermsFilter", "initWithJavaUtilList:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesTermsFilter_$1 = { 2, "", "org.apache.lucene.queries", "TermsFilter", 0x8008, 2, methods, 2, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneQueriesTermsFilter_$1;
-}
-
-@end
-
-void OrgApacheLuceneQueriesTermsFilter_$1_initWithJavaUtilList_(OrgApacheLuceneQueriesTermsFilter_$1 *self, id<JavaUtilList> capture$0) {
-  JreStrongAssign(&self->val$terms_, capture$0);
-  OrgApacheLuceneQueriesTermsFilter_FieldAndTermEnum_init(self);
-  JreStrongAssign(&self->iter_, [((id<JavaUtilList>) nil_chk(OrgApacheLuceneQueriesTermsFilter_sortWithJavaUtilList_(self->val$terms_))) iterator]);
-}
-
-OrgApacheLuceneQueriesTermsFilter_$1 *new_OrgApacheLuceneQueriesTermsFilter_$1_initWithJavaUtilList_(id<JavaUtilList> capture$0) {
-  OrgApacheLuceneQueriesTermsFilter_$1 *self = [OrgApacheLuceneQueriesTermsFilter_$1 alloc];
-  OrgApacheLuceneQueriesTermsFilter_$1_initWithJavaUtilList_(self, capture$0);
-  return self;
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesTermsFilter_$1)
-
-@implementation OrgApacheLuceneQueriesTermsFilter_$2
-
-- (OrgApacheLuceneUtilBytesRef *)next {
-  if ([((id<JavaUtilIterator>) nil_chk(iter_)) hasNext]) {
-    return [iter_ next];
-  }
-  return nil;
-}
-
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)capture$0
-                        withNSString:(NSString *)arg$0 {
-  OrgApacheLuceneQueriesTermsFilter_$2_initWithJavaUtilList_withNSString_(self, capture$0, arg$0);
-  return self;
-}
-
-- (void)dealloc {
-  RELEASE_(iter_);
-  RELEASE_(val$terms_);
-  [super dealloc];
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "next", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "initWithJavaUtilList:withNSString:", "", NULL, 0x0, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "iter_", NULL, 0x10, "Ljava.util.Iterator;", NULL, "Ljava/util/Iterator<Lorg/apache/lucene/util/BytesRef;>;", .constantValue.asLong = 0 },
-    { "val$terms_", NULL, 0x1012, "Ljava.util.List;", NULL, "Ljava/util/List<Lorg/apache/lucene/util/BytesRef;>;", .constantValue.asLong = 0 },
-  };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneQueriesTermsFilter", "initWithNSString:withJavaUtilList:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesTermsFilter_$2 = { 2, "", "org.apache.lucene.queries", "TermsFilter", 0x8008, 2, methods, 2, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneQueriesTermsFilter_$2;
-}
-
-@end
-
-void OrgApacheLuceneQueriesTermsFilter_$2_initWithJavaUtilList_withNSString_(OrgApacheLuceneQueriesTermsFilter_$2 *self, id<JavaUtilList> capture$0, NSString *arg$0) {
-  JreStrongAssign(&self->val$terms_, capture$0);
-  OrgApacheLuceneQueriesTermsFilter_FieldAndTermEnum_initWithNSString_(self, arg$0);
-  JreStrongAssign(&self->iter_, [((id<JavaUtilList>) nil_chk(OrgApacheLuceneQueriesTermsFilter_sortWithJavaUtilList_(self->val$terms_))) iterator]);
-}
-
-OrgApacheLuceneQueriesTermsFilter_$2 *new_OrgApacheLuceneQueriesTermsFilter_$2_initWithJavaUtilList_withNSString_(id<JavaUtilList> capture$0, NSString *arg$0) {
-  OrgApacheLuceneQueriesTermsFilter_$2 *self = [OrgApacheLuceneQueriesTermsFilter_$2 alloc];
-  OrgApacheLuceneQueriesTermsFilter_$2_initWithJavaUtilList_withNSString_(self, capture$0, arg$0);
-  return self;
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesTermsFilter_$2)

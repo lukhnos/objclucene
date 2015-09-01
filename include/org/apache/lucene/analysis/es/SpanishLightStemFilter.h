@@ -20,23 +20,19 @@
 #define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
-@class OrgApacheLuceneAnalysisTokenStream;
-
 @interface OrgApacheLuceneAnalysisEsSpanishLightStemFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
-
-- (jboolean)incrementToken;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisEsSpanishLightStemFilter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisEsSpanishLightStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisEsSpanishLightStemFilter *self, OrgApacheLuceneAnalysisTokenStream *input);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisEsSpanishLightStemFilter_init(OrgApacheLuceneAnalysisEsSpanishLightStemFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisEsSpanishLightStemFilter *new_OrgApacheLuceneAnalysisEsSpanishLightStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisEsSpanishLightStemFilter *new_OrgApacheLuceneAnalysisEsSpanishLightStemFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisEsSpanishLightStemFilter)
 

@@ -16,38 +16,19 @@
 #if !defined (_OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig_) && (OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig_INCLUDE)
 #define _OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig_
 
-@class JavaTextNumberFormat;
-@class OrgApacheLuceneDocumentFieldType_NumericTypeEnum;
-
 @interface OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig : NSObject
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)precisionStep
-   withJavaTextNumberFormat:(JavaTextNumberFormat *)format
-withOrgApacheLuceneDocumentFieldType_NumericTypeEnum:(OrgApacheLuceneDocumentFieldType_NumericTypeEnum *)type;
-
-- (jboolean)isEqual:(id)obj;
-
-- (JavaTextNumberFormat *)getNumberFormat;
-
-- (jint)getPrecisionStep;
-
-- (OrgApacheLuceneDocumentFieldType_NumericTypeEnum *)getType;
-
-- (void)setNumberFormatWithJavaTextNumberFormat:(JavaTextNumberFormat *)format;
-
-- (void)setPrecisionStepWithInt:(jint)precisionStep;
-
-- (void)setTypeWithOrgApacheLuceneDocumentFieldType_NumericTypeEnum:(OrgApacheLuceneDocumentFieldType_NumericTypeEnum *)type;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig_initWithInt_withJavaTextNumberFormat_withOrgApacheLuceneDocumentFieldType_NumericTypeEnum_(OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *self, jint precisionStep, JavaTextNumberFormat *format, OrgApacheLuceneDocumentFieldType_NumericTypeEnum *type);
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig_init(OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *new_OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig_initWithInt_withJavaTextNumberFormat_withOrgApacheLuceneDocumentFieldType_NumericTypeEnum_(jint precisionStep, JavaTextNumberFormat *format, OrgApacheLuceneDocumentFieldType_NumericTypeEnum *type) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *new_OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig)
 

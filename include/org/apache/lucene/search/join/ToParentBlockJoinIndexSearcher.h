@@ -20,38 +20,19 @@
 #define OrgApacheLuceneSearchIndexSearcher_INCLUDE 1
 #include "org/apache/lucene/search/IndexSearcher.h"
 
-@class OrgApacheLuceneIndexIndexReader;
-@class OrgApacheLuceneSearchWeight;
-@protocol JavaUtilConcurrentExecutorService;
-@protocol JavaUtilList;
-@protocol OrgApacheLuceneSearchCollector;
-
 @interface OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher : OrgApacheLuceneSearchIndexSearcher
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)r;
-
-- (instancetype)initWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)r
-                  withJavaUtilConcurrentExecutorService:(id<JavaUtilConcurrentExecutorService>)executor;
-
-#pragma mark Protected
-
-- (void)searchWithJavaUtilList:(id<JavaUtilList>)leaves
-withOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
-withOrgApacheLuceneSearchCollector:(id<OrgApacheLuceneSearchCollector>)collector;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher_initWithOrgApacheLuceneIndexIndexReader_withJavaUtilConcurrentExecutorService_(OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher *self, OrgApacheLuceneIndexIndexReader *r, id<JavaUtilConcurrentExecutorService> executor);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher_init(OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher *new_OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher_initWithOrgApacheLuceneIndexIndexReader_withJavaUtilConcurrentExecutorService_(OrgApacheLuceneIndexIndexReader *r, id<JavaUtilConcurrentExecutorService> executor) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher_initWithOrgApacheLuceneIndexIndexReader_(OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher *self, OrgApacheLuceneIndexIndexReader *r);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher *new_OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher_initWithOrgApacheLuceneIndexIndexReader_(OrgApacheLuceneIndexIndexReader *r) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher *new_OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinToParentBlockJoinIndexSearcher)
 

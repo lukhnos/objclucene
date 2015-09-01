@@ -18,10 +18,8 @@
 
 @class IOSClass;
 @class IOSObjectArray;
-@class JavaIoBufferedReader;
 @class JavaIoFileInputStream;
 @class JavaIoFileOutputStream;
-@class JavaNioCharsetCharset;
 @class OrgLukhnosPortmobileFileAttributeBasicFileAttributes;
 @class OrgLukhnosPortmobileFilePath;
 @class OrgLukhnosPortmobileFileStandardOpenOptionEnum;
@@ -35,22 +33,9 @@
 
 - (instancetype)init;
 
-+ (OrgLukhnosPortmobileFilePath *)copy__WithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)source
-                                        withOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)target
-                     withOrgLukhnosPortmobileFileStandardCopyOptionArray:(IOSObjectArray *)ignored OBJC_METHOD_FAMILY_NONE;
-
 + (OrgLukhnosPortmobileFilePath *)createDirectoriesWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)dir;
 
 + (OrgLukhnosPortmobileFilePath *)createFileWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path;
-
-+ (OrgLukhnosPortmobileFilePath *)createTempDirectoryWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path
-                                                                         withNSString:(NSString *)prefix;
-
-+ (OrgLukhnosPortmobileFilePath *)createTempDirectoryWithNSString:(NSString *)prefix;
-
-+ (OrgLukhnosPortmobileFilePath *)createTempFileWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)dir
-                                                                    withNSString:(NSString *)prefix
-                                                                    withNSString:(NSString *)suffix;
 
 + (void)delete__WithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path;
 
@@ -60,14 +45,9 @@
 
 + (jboolean)isDirectoryWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path;
 
-+ (jboolean)isWritableWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path;
-
 + (OrgLukhnosPortmobileFilePath *)moveWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)source
                                       withOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)target
                    withOrgLukhnosPortmobileFileStandardCopyOptionArray:(IOSObjectArray *)ignored;
-
-+ (JavaIoBufferedReader *)newBufferedReaderWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path
-                                                  withJavaNioCharsetCharset:(JavaNioCharsetCharset *)charset OBJC_METHOD_FAMILY_NONE;
 
 + (id<JavaNioChannelsSeekableByteChannel>)newByteChannelWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path
                                       withOrgLukhnosPortmobileFileStandardOpenOptionEnum:(OrgLukhnosPortmobileFileStandardOpenOptionEnum *)mustBeReadOnly OBJC_METHOD_FAMILY_NONE;
@@ -106,31 +86,19 @@ FOUNDATION_EXPORT jboolean OrgLukhnosPortmobileFileFiles_notExistsWithOrgLukhnos
 
 FOUNDATION_EXPORT jboolean OrgLukhnosPortmobileFileFiles_isDirectoryWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *path);
 
-FOUNDATION_EXPORT jboolean OrgLukhnosPortmobileFileFiles_isWritableWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *path);
-
 FOUNDATION_EXPORT JavaIoFileOutputStream *OrgLukhnosPortmobileFileFiles_newOutputStreamWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *path);
 
 FOUNDATION_EXPORT JavaIoFileInputStream *OrgLukhnosPortmobileFileFiles_newInputStreamWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *path);
 
-FOUNDATION_EXPORT JavaIoBufferedReader *OrgLukhnosPortmobileFileFiles_newBufferedReaderWithOrgLukhnosPortmobileFilePath_withJavaNioCharsetCharset_(OrgLukhnosPortmobileFilePath *path, JavaNioCharsetCharset *charset);
-
 FOUNDATION_EXPORT id<OrgLukhnosPortmobileFileDirectoryStream> OrgLukhnosPortmobileFileFiles_newDirectoryStreamWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *dir);
 
 FOUNDATION_EXPORT jboolean OrgLukhnosPortmobileFileFiles_deleteIfExistsWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *path);
-
-FOUNDATION_EXPORT OrgLukhnosPortmobileFilePath *OrgLukhnosPortmobileFileFiles_createTempFileWithOrgLukhnosPortmobileFilePath_withNSString_withNSString_(OrgLukhnosPortmobileFilePath *dir, NSString *prefix, NSString *suffix);
-
-FOUNDATION_EXPORT OrgLukhnosPortmobileFilePath *OrgLukhnosPortmobileFileFiles_copy__WithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileStandardCopyOptionArray_(OrgLukhnosPortmobileFilePath *source, OrgLukhnosPortmobileFilePath *target, IOSObjectArray *ignored);
 
 FOUNDATION_EXPORT void OrgLukhnosPortmobileFileFiles_delete__WithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *path);
 
 FOUNDATION_EXPORT OrgLukhnosPortmobileFilePath *OrgLukhnosPortmobileFileFiles_moveWithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileStandardCopyOptionArray_(OrgLukhnosPortmobileFilePath *source, OrgLukhnosPortmobileFilePath *target, IOSObjectArray *ignored);
 
 FOUNDATION_EXPORT OrgLukhnosPortmobileFilePath *OrgLukhnosPortmobileFileFiles_walkFileTreeWithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileFileVisitor_(OrgLukhnosPortmobileFilePath *start, id<OrgLukhnosPortmobileFileFileVisitor> visitor);
-
-FOUNDATION_EXPORT OrgLukhnosPortmobileFilePath *OrgLukhnosPortmobileFileFiles_createTempDirectoryWithNSString_(NSString *prefix);
-
-FOUNDATION_EXPORT OrgLukhnosPortmobileFilePath *OrgLukhnosPortmobileFileFiles_createTempDirectoryWithOrgLukhnosPortmobileFilePath_withNSString_(OrgLukhnosPortmobileFilePath *path, NSString *prefix);
 
 FOUNDATION_EXPORT OrgLukhnosPortmobileFileAttributeBasicFileAttributes *OrgLukhnosPortmobileFileFiles_readAttributesWithOrgLukhnosPortmobileFilePath_withIOSClass_(OrgLukhnosPortmobileFilePath *path, IOSClass *clz);
 

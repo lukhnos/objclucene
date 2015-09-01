@@ -237,20 +237,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttri
   return [((OrgApacheLuceneIndexTermsEnum *) nil_chk(actualEnum_)) seekCeilWithOrgApacheLuceneUtilBytesRef:text];
 }
 
-- (void)seekExactWithLong:(jlong)ord {
-  [((OrgApacheLuceneIndexTermsEnum *) nil_chk(actualEnum_)) seekExactWithLong:ord];
-}
-
 - (OrgApacheLuceneUtilBytesRef *)term {
   return [((OrgApacheLuceneIndexTermsEnum *) nil_chk(actualEnum_)) term];
-}
-
-- (jfloat)getMinSimilarity {
-  return minSimilarity_;
-}
-
-- (jfloat)getScaleFactor {
-  return scale_factor_;
 }
 
 - (void)dealloc {
@@ -287,10 +275,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttri
     { "ord", NULL, "J", 0x1, "Ljava.io.IOException;", NULL },
     { "seekExactWithOrgApacheLuceneUtilBytesRef:", "seekExact", "Z", 0x1, "Ljava.io.IOException;", NULL },
     { "seekCeilWithOrgApacheLuceneUtilBytesRef:", "seekCeil", "Lorg.apache.lucene.index.TermsEnum$SeekStatus;", 0x1, "Ljava.io.IOException;", NULL },
-    { "seekExactWithLong:", "seekExact", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "term", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
-    { "getMinSimilarity", NULL, "F", 0x1, NULL, NULL },
-    { "getScaleFactor", NULL, "F", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "actualEnum_", NULL, 0x2, "Lorg.apache.lucene.index.TermsEnum;", NULL, NULL, .constantValue.asLong = 0 },
@@ -314,7 +299,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchFuzzyTermsEnum_LevenshteinAutomataAttri
     { "queuedBottom_", NULL, 0x2, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.search.FuzzyTermsEnum$AutomatonFuzzyTermsEnum;", "Lorg.apache.lucene.search.FuzzyTermsEnum$LevenshteinAutomataAttribute;", "Lorg.apache.lucene.search.FuzzyTermsEnum$LevenshteinAutomataAttributeImpl;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchFuzzyTermsEnum = { 2, "FuzzyTermsEnum", "org.apache.lucene.search", NULL, 0x1, 21, methods, 19, fields, 0, NULL, 3, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchFuzzyTermsEnum = { 2, "FuzzyTermsEnum", "org.apache.lucene.search", NULL, 0x1, 18, methods, 19, fields, 0, NULL, 3, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneSearchFuzzyTermsEnum;
 }
 

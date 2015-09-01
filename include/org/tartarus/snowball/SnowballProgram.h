@@ -16,106 +16,15 @@
 #if !defined (_OrgTartarusSnowballSnowballProgram_) && (OrgTartarusSnowballSnowballProgram_INCLUDE_ALL || OrgTartarusSnowballSnowballProgram_INCLUDE)
 #define _OrgTartarusSnowballSnowballProgram_
 
-@class IOSCharArray;
-@class IOSObjectArray;
-@class JavaLangStringBuilder;
-@protocol JavaLangCharSequence;
-
-@interface OrgTartarusSnowballSnowballProgram : NSObject {
- @public
-  jint cursor_;
-  jint limit_;
-  jint limit_backward_;
-  jint bra_;
-  jint ket_;
-}
+@interface OrgTartarusSnowballSnowballProgram : NSObject
 
 #pragma mark Public
 
-- (NSString *)getCurrent;
-
-- (IOSCharArray *)getCurrentBuffer;
-
-- (jint)getCurrentBufferLength;
-
-- (void)setCurrentWithCharArray:(IOSCharArray *)text
-                        withInt:(jint)length;
-
-- (void)setCurrentWithNSString:(NSString *)value;
-
-- (jboolean)stem;
-
-#pragma mark Protected
-
 - (instancetype)init;
-
-- (JavaLangStringBuilder *)assign_toWithJavaLangStringBuilder:(JavaLangStringBuilder *)s;
-
-- (void)copy_fromWithOrgTartarusSnowballSnowballProgram:(OrgTartarusSnowballSnowballProgram *)other OBJC_METHOD_FAMILY_NONE;
-
-- (jboolean)eq_sWithInt:(jint)s_size
-withJavaLangCharSequence:(id<JavaLangCharSequence>)s;
-
-- (jboolean)eq_s_bWithInt:(jint)s_size
- withJavaLangCharSequence:(id<JavaLangCharSequence>)s;
-
-- (jboolean)eq_vWithJavaLangCharSequence:(id<JavaLangCharSequence>)s;
-
-- (jboolean)eq_v_bWithJavaLangCharSequence:(id<JavaLangCharSequence>)s;
-
-- (jint)find_amongWithOrgTartarusSnowballAmongArray:(IOSObjectArray *)v
-                                            withInt:(jint)v_size;
-
-- (jint)find_among_bWithOrgTartarusSnowballAmongArray:(IOSObjectArray *)v
-                                              withInt:(jint)v_size;
-
-- (jboolean)in_groupingWithCharArray:(IOSCharArray *)s
-                             withInt:(jint)min
-                             withInt:(jint)max;
-
-- (jboolean)in_grouping_bWithCharArray:(IOSCharArray *)s
-                               withInt:(jint)min
-                               withInt:(jint)max;
-
-- (jboolean)in_rangeWithInt:(jint)min
-                    withInt:(jint)max;
-
-- (jboolean)in_range_bWithInt:(jint)min
-                      withInt:(jint)max;
-
-- (void)insertWithInt:(jint)c_bra
-              withInt:(jint)c_ket
-withJavaLangCharSequence:(id<JavaLangCharSequence>)s;
-
-- (jboolean)out_groupingWithCharArray:(IOSCharArray *)s
-                              withInt:(jint)min
-                              withInt:(jint)max;
-
-- (jboolean)out_grouping_bWithCharArray:(IOSCharArray *)s
-                                withInt:(jint)min
-                                withInt:(jint)max;
-
-- (jboolean)out_rangeWithInt:(jint)min
-                     withInt:(jint)max;
-
-- (jboolean)out_range_bWithInt:(jint)min
-                       withInt:(jint)max;
-
-- (jint)replace_sWithInt:(jint)c_bra
-                 withInt:(jint)c_ket
-withJavaLangCharSequence:(id<JavaLangCharSequence>)s;
-
-- (void)slice_check;
-
-- (void)slice_del;
-
-- (void)slice_fromWithJavaLangCharSequence:(id<JavaLangCharSequence>)s;
-
-- (JavaLangStringBuilder *)slice_toWithJavaLangStringBuilder:(JavaLangStringBuilder *)s;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgTartarusSnowballSnowballProgram)
+J2OBJC_EMPTY_STATIC_INIT(OrgTartarusSnowballSnowballProgram)
 
 FOUNDATION_EXPORT void OrgTartarusSnowballSnowballProgram_init(OrgTartarusSnowballSnowballProgram *self);
 

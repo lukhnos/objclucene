@@ -58,8 +58,6 @@
                   withInt:(jint)off
                   withInt:(jint)length;
 
-- (void)reset;
-
 - (void)resetWithBoolean:(jboolean)zeroFillBuffers
              withBoolean:(jboolean)reuseFirst;
 
@@ -101,7 +99,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilByteBlockPool)
 
 @class IOSByteArray;
 @class IOSObjectArray;
-@protocol JavaUtilList;
 
 @interface OrgApacheLuceneUtilByteBlockPool_Allocator : NSObject {
  @public
@@ -117,8 +114,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilByteBlockPool)
 - (void)recycleByteBlocksWithByteArray2:(IOSObjectArray *)blocks
                                 withInt:(jint)start
                                 withInt:(jint)end;
-
-- (void)recycleByteBlocksWithJavaUtilList:(id<JavaUtilList>)blocks;
 
 @end
 

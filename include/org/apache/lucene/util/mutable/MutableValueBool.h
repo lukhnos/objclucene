@@ -20,26 +20,11 @@
 #define OrgApacheLuceneUtilMutableMutableValue_INCLUDE 1
 #include "org/apache/lucene/util/mutable/MutableValue.h"
 
-@interface OrgApacheLuceneUtilMutableMutableValueBool : OrgApacheLuceneUtilMutableMutableValue {
- @public
-  jboolean value_;
-}
+@interface OrgApacheLuceneUtilMutableMutableValueBool : OrgApacheLuceneUtilMutableMutableValue
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (jint)compareSameTypeWithId:(id)other;
-
-- (void)copy__WithOrgApacheLuceneUtilMutableMutableValue:(OrgApacheLuceneUtilMutableMutableValue *)source OBJC_METHOD_FAMILY_NONE;
-
-- (OrgApacheLuceneUtilMutableMutableValue *)duplicate;
-
-- (jboolean)equalsSameTypeWithId:(id)other;
-
-- (NSUInteger)hash;
-
-- (id)toObject;
 
 @end
 

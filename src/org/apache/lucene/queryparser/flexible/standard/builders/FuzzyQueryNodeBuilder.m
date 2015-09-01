@@ -3,14 +3,10 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/standard/builders/FuzzyQueryNodeBuilder.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "org/apache/lucene/index/Term.h"
-#include "org/apache/lucene/queryparser/flexible/core/QueryNodeException.h"
-#include "org/apache/lucene/queryparser/flexible/core/nodes/FuzzyQueryNode.h"
-#include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNode.h"
 #include "org/apache/lucene/queryparser/flexible/standard/builders/FuzzyQueryNodeBuilder.h"
-#include "org/apache/lucene/search/FuzzyQuery.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneQueryparserFlexibleStandardBuildersFuzzyQueryNodeBuilder
 
@@ -19,19 +15,11 @@
   return self;
 }
 
-- (OrgApacheLuceneSearchFuzzyQuery *)buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryNode {
-  OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode *fuzzyNode = (OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode *) check_class_cast(queryNode, [OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode class]);
-  NSString *text = [((OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode *) nil_chk(fuzzyNode)) getTextAsString];
-  jint numEdits = OrgApacheLuceneSearchFuzzyQuery_floatToEditsWithFloat_withInt_([fuzzyNode getSimilarity], [text codePointCount:0 endIndex:((jint) [((NSString *) nil_chk(text)) length])]);
-  return [new_OrgApacheLuceneSearchFuzzyQuery_initWithOrgApacheLuceneIndexTerm_withInt_withInt_([new_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_([fuzzyNode getFieldAsString], [fuzzyNode getTextAsString]) autorelease], numEdits, [fuzzyNode getPrefixLength]) autorelease];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", "FuzzyQueryNodeBuilder", NULL, 0x1, NULL, NULL },
-    { "buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "build", "Lorg.apache.lucene.search.FuzzyQuery;", 0x1, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardBuildersFuzzyQueryNodeBuilder = { 2, "FuzzyQueryNodeBuilder", "org.apache.lucene.queryparser.flexible.standard.builders", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardBuildersFuzzyQueryNodeBuilder = { 2, "FuzzyQueryNodeBuilder", "org.apache.lucene.queryparser.flexible.standard.builders", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserFlexibleStandardBuildersFuzzyQueryNodeBuilder;
 }
 

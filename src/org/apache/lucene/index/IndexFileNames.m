@@ -51,11 +51,6 @@ JavaUtilRegexPattern *OrgApacheLuceneIndexIndexFileNames_CODEC_FILE_PATTERN_;
   return OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(segmentName, segmentSuffix, ext);
 }
 
-+ (jboolean)matchesExtensionWithNSString:(NSString *)filename
-                            withNSString:(NSString *)ext {
-  return OrgApacheLuceneIndexIndexFileNames_matchesExtensionWithNSString_withNSString_(filename, ext);
-}
-
 + (jint)indexOfSegmentNameWithNSString:(NSString *)filename {
   return OrgApacheLuceneIndexIndexFileNames_indexOfSegmentNameWithNSString_(filename);
 }
@@ -76,10 +71,6 @@ JavaUtilRegexPattern *OrgApacheLuceneIndexIndexFileNames_CODEC_FILE_PATTERN_;
   return OrgApacheLuceneIndexIndexFileNames_stripExtensionWithNSString_(filename);
 }
 
-+ (NSString *)getExtensionWithNSString:(NSString *)filename {
-  return OrgApacheLuceneIndexIndexFileNames_getExtensionWithNSString_(filename);
-}
-
 + (void)initialize {
   if (self == [OrgApacheLuceneIndexIndexFileNames class]) {
     JreStrongAssign(&OrgApacheLuceneIndexIndexFileNames_CODEC_FILE_PATTERN_, JavaUtilRegexPattern_compileWithNSString_(@"_[a-z0-9]+(_.*)?\\..*"));
@@ -92,13 +83,11 @@ JavaUtilRegexPattern *OrgApacheLuceneIndexIndexFileNames_CODEC_FILE_PATTERN_;
     { "init", "IndexFileNames", NULL, 0x2, NULL, NULL },
     { "fileNameFromGenerationWithNSString:withNSString:withLong:", "fileNameFromGeneration", "Ljava.lang.String;", 0x9, NULL, NULL },
     { "segmentFileNameWithNSString:withNSString:withNSString:", "segmentFileName", "Ljava.lang.String;", 0x9, NULL, NULL },
-    { "matchesExtensionWithNSString:withNSString:", "matchesExtension", "Z", 0x9, NULL, NULL },
     { "indexOfSegmentNameWithNSString:", "indexOfSegmentName", "I", 0xa, NULL, NULL },
     { "stripSegmentNameWithNSString:", "stripSegmentName", "Ljava.lang.String;", 0x9, NULL, NULL },
     { "parseGenerationWithNSString:", "parseGeneration", "J", 0x9, NULL, NULL },
     { "parseSegmentNameWithNSString:", "parseSegmentName", "Ljava.lang.String;", 0x9, NULL, NULL },
     { "stripExtensionWithNSString:", "stripExtension", "Ljava.lang.String;", 0x9, NULL, NULL },
-    { "getExtensionWithNSString:", "getExtension", "Ljava.lang.String;", 0x9, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "SEGMENTS_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneIndexIndexFileNames_SEGMENTS_, NULL, .constantValue.asLong = 0 },
@@ -106,7 +95,7 @@ JavaUtilRegexPattern *OrgApacheLuceneIndexIndexFileNames_CODEC_FILE_PATTERN_;
     { "OLD_SEGMENTS_GEN_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneIndexIndexFileNames_OLD_SEGMENTS_GEN_, NULL, .constantValue.asLong = 0 },
     { "CODEC_FILE_PATTERN_", NULL, 0x19, "Ljava.util.regex.Pattern;", &OrgApacheLuceneIndexIndexFileNames_CODEC_FILE_PATTERN_, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexFileNames = { 2, "IndexFileNames", "org.apache.lucene.index", NULL, 0x11, 10, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexFileNames = { 2, "IndexFileNames", "org.apache.lucene.index", NULL, 0x11, 8, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexIndexFileNames;
 }
 
@@ -159,11 +148,6 @@ NSString *OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSS
   }
 }
 
-jboolean OrgApacheLuceneIndexIndexFileNames_matchesExtensionWithNSString_withNSString_(NSString *filename, NSString *ext) {
-  OrgApacheLuceneIndexIndexFileNames_initialize();
-  return [((NSString *) nil_chk(filename)) hasSuffix:JreStrcat("C$", '.', ext)];
-}
-
 jint OrgApacheLuceneIndexIndexFileNames_indexOfSegmentNameWithNSString_(NSString *filename) {
   OrgApacheLuceneIndexIndexFileNames_initialize();
   jint idx = [((NSString *) nil_chk(filename)) indexOf:'_' fromIndex:1];
@@ -210,17 +194,6 @@ NSString *OrgApacheLuceneIndexIndexFileNames_stripExtensionWithNSString_(NSStrin
     filename = [filename substring:0 endIndex:idx];
   }
   return filename;
-}
-
-NSString *OrgApacheLuceneIndexIndexFileNames_getExtensionWithNSString_(NSString *filename) {
-  OrgApacheLuceneIndexIndexFileNames_initialize();
-  jint idx = [((NSString *) nil_chk(filename)) indexOf:'.'];
-  if (idx == -1) {
-    return nil;
-  }
-  else {
-    return [filename substring:idx + 1 endIndex:((jint) [filename length])];
-  }
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexIndexFileNames)

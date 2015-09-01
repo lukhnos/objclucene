@@ -20,25 +20,19 @@
 #define OrgApacheLuceneAnalysisUtilFilteringTokenFilter_INCLUDE 1
 #include "org/apache/lucene/analysis/util/FilteringTokenFilter.h"
 
-@class OrgApacheLuceneAnalysisTokenStream;
-
 @interface OrgApacheLuceneAnalysisMiscellaneousLengthFilter : OrgApacheLuceneAnalysisUtilFilteringTokenFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
-                                                   withInt:(jint)min
-                                                   withInt:(jint)max;
-
-- (jboolean)accept;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousLengthFilter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousLengthFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(OrgApacheLuceneAnalysisMiscellaneousLengthFilter *self, OrgApacheLuceneAnalysisTokenStream *inArg, jint min, jint max);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousLengthFilter_init(OrgApacheLuceneAnalysisMiscellaneousLengthFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousLengthFilter *new_OrgApacheLuceneAnalysisMiscellaneousLengthFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(OrgApacheLuceneAnalysisTokenStream *inArg, jint min, jint max) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousLengthFilter *new_OrgApacheLuceneAnalysisMiscellaneousLengthFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousLengthFilter)
 

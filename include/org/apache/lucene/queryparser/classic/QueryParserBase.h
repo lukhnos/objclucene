@@ -68,35 +68,7 @@
 
 #pragma mark Public
 
-+ (NSString *)escapeWithNSString:(NSString *)s;
-
-- (jboolean)getAllowLeadingWildcard;
-
-- (jboolean)getAnalyzeRangeTerms;
-
-- (jboolean)getAutoGeneratePhraseQueries;
-
 - (OrgApacheLuceneDocumentDateTools_ResolutionEnum *)getDateResolutionWithNSString:(NSString *)fieldName;
-
-- (OrgApacheLuceneQueryparserClassicQueryParser_OperatorEnum *)getDefaultOperator;
-
-- (NSString *)getField;
-
-- (jfloat)getFuzzyMinSim;
-
-- (jint)getFuzzyPrefixLength;
-
-- (JavaUtilLocale *)getLocale;
-
-- (jboolean)getLowercaseExpandedTerms;
-
-- (jint)getMaxDeterminizedStates;
-
-- (OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *)getMultiTermRewriteMethod;
-
-- (jint)getPhraseSlop;
-
-- (JavaUtilTimeZone *)getTimeZone;
 
 - (void)init__WithNSString:(NSString *)f
 withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)a OBJC_METHOD_FAMILY_NONE;
@@ -105,34 +77,7 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)a OBJC_ME
 
 - (void)ReInitWithOrgApacheLuceneQueryparserClassicCharStream:(id<OrgApacheLuceneQueryparserClassicCharStream>)stream;
 
-- (void)setAllowLeadingWildcardWithBoolean:(jboolean)allowLeadingWildcard;
-
-- (void)setAnalyzeRangeTermsWithBoolean:(jboolean)analyzeRangeTerms;
-
 - (void)setAutoGeneratePhraseQueriesWithBoolean:(jboolean)value;
-
-- (void)setDateResolutionWithOrgApacheLuceneDocumentDateTools_ResolutionEnum:(OrgApacheLuceneDocumentDateTools_ResolutionEnum *)dateResolution;
-
-- (void)setDateResolutionWithNSString:(NSString *)fieldName
-withOrgApacheLuceneDocumentDateTools_ResolutionEnum:(OrgApacheLuceneDocumentDateTools_ResolutionEnum *)dateResolution;
-
-- (void)setDefaultOperatorWithOrgApacheLuceneQueryparserClassicQueryParser_OperatorEnum:(OrgApacheLuceneQueryparserClassicQueryParser_OperatorEnum *)op;
-
-- (void)setFuzzyMinSimWithFloat:(jfloat)fuzzyMinSim;
-
-- (void)setFuzzyPrefixLengthWithInt:(jint)fuzzyPrefixLength;
-
-- (void)setLocaleWithJavaUtilLocale:(JavaUtilLocale *)locale;
-
-- (void)setLowercaseExpandedTermsWithBoolean:(jboolean)lowercaseExpandedTerms;
-
-- (void)setMaxDeterminizedStatesWithInt:(jint)maxDeterminizedStates;
-
-- (void)setMultiTermRewriteMethodWithOrgApacheLuceneSearchMultiTermQuery_RewriteMethod:(OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *)method;
-
-- (void)setPhraseSlopWithInt:(jint)phraseSlop;
-
-- (void)setTimeZoneWithJavaUtilTimeZone:(JavaUtilTimeZone *)timeZone;
 
 - (OrgApacheLuceneSearchQuery *)TopLevelQueryWithNSString:(NSString *)field;
 
@@ -265,8 +210,6 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserClassicQueryParserBase, OR_
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserClassicQueryParserBase_init(OrgApacheLuceneQueryparserClassicQueryParserBase *self);
 
 FOUNDATION_EXPORT jint OrgApacheLuceneQueryparserClassicQueryParserBase_hexToIntWithChar_(jchar c);
-
-FOUNDATION_EXPORT NSString *OrgApacheLuceneQueryparserClassicQueryParserBase_escapeWithNSString_(NSString *s);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserClassicQueryParserBase)
 

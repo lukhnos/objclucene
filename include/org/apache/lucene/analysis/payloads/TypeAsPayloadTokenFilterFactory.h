@@ -20,25 +20,19 @@
 #define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
-@class OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter;
-@class OrgApacheLuceneAnalysisTokenStream;
-@protocol JavaUtilMap;
-
 @interface OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
-
-- (OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilterFactory)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilterFactory *self, id<JavaUtilMap> args);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilterFactory_init(OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilterFactory *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilterFactory *new_OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilterFactory *new_OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilterFactory_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilterFactory)
 

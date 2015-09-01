@@ -16,21 +16,19 @@
 #if !defined (_OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_) && (OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_INCLUDE_ALL || OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_INCLUDE)
 #define _OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_
 
-@class OrgApacheLuceneUtilFstFST;
-@protocol JavaUtilMap;
+@interface OrgApacheLuceneAnalysisCharfilterNormalizeCharMap : NSObject
 
-@interface OrgApacheLuceneAnalysisCharfilterNormalizeCharMap : NSObject {
- @public
-  OrgApacheLuceneUtilFstFST *map_;
-  id<JavaUtilMap> cachedRootArcs_;
-}
+#pragma mark Public
+
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisCharfilterNormalizeCharMap)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCharfilterNormalizeCharMap, map_, OrgApacheLuceneUtilFstFST *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCharfilterNormalizeCharMap, cachedRootArcs_, id<JavaUtilMap>)
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_init(OrgApacheLuceneAnalysisCharfilterNormalizeCharMap *self);
+
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCharfilterNormalizeCharMap *new_OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCharfilterNormalizeCharMap)
 
@@ -39,18 +37,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCharfilterNormalizeCharMap)
 #if !defined (_OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder_) && (OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_INCLUDE_ALL || OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder_INCLUDE)
 #define _OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder_
 
-@class OrgApacheLuceneAnalysisCharfilterNormalizeCharMap;
-
 @interface OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (void)addWithNSString:(NSString *)match
-           withNSString:(NSString *)replacement;
-
-- (OrgApacheLuceneAnalysisCharfilterNormalizeCharMap *)build;
 
 @end
 

@@ -20,20 +20,11 @@
 #define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
-@class OrgApacheLuceneAnalysisTokenStream;
-@protocol JavaUtilMap;
-
-@interface OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory {
- @public
-  jint maxTokenPosition_;
-  jboolean consumeAllTokens_;
-}
+@interface OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
-
-- (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
+- (instancetype)init;
 
 @end
 
@@ -45,9 +36,9 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositio
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_CONSUME_ALL_TOKENS_KEY_;
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory, CONSUME_ALL_TOKENS_KEY_, NSString *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory *self, id<JavaUtilMap> args);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_init(OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory *new_OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory *new_OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilterFactory)
 

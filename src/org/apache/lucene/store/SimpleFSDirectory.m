@@ -16,7 +16,6 @@
 #include "org/apache/lucene/store/BaseDirectory.h"
 #include "org/apache/lucene/store/BufferedIndexInput.h"
 #include "org/apache/lucene/store/FSDirectory.h"
-#include "org/apache/lucene/store/FSLockFactory.h"
 #include "org/apache/lucene/store/IOContext.h"
 #include "org/apache/lucene/store/IndexInput.h"
 #include "org/apache/lucene/store/LockFactory.h"
@@ -48,11 +47,6 @@ __attribute__((unused)) static jlong OrgApacheLuceneStoreSimpleFSDirectory_Simpl
   return self;
 }
 
-- (instancetype)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path {
-  OrgApacheLuceneStoreSimpleFSDirectory_initWithOrgLukhnosPortmobileFilePath_(self, path);
-  return self;
-}
-
 - (OrgApacheLuceneStoreIndexInput *)openInputWithNSString:(NSString *)name
                         withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
   [self ensureOpen];
@@ -64,11 +58,10 @@ __attribute__((unused)) static jlong OrgApacheLuceneStoreSimpleFSDirectory_Simpl
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgLukhnosPortmobileFilePath:withOrgApacheLuceneStoreLockFactory:", "SimpleFSDirectory", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgLukhnosPortmobileFilePath:", "SimpleFSDirectory", NULL, 0x1, "Ljava.io.IOException;", NULL },
     { "openInputWithNSString:withOrgApacheLuceneStoreIOContext:", "openInput", "Lorg.apache.lucene.store.IndexInput;", 0x1, "Ljava.io.IOException;", NULL },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.store.SimpleFSDirectory$SimpleFSIndexInput;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreSimpleFSDirectory = { 2, "SimpleFSDirectory", "org.apache.lucene.store", NULL, 0x1, 3, methods, 0, NULL, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreSimpleFSDirectory = { 2, "SimpleFSDirectory", "org.apache.lucene.store", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 1, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneStoreSimpleFSDirectory;
 }
 
@@ -81,16 +74,6 @@ void OrgApacheLuceneStoreSimpleFSDirectory_initWithOrgLukhnosPortmobileFilePath_
 OrgApacheLuceneStoreSimpleFSDirectory *new_OrgApacheLuceneStoreSimpleFSDirectory_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneStoreLockFactory_(OrgLukhnosPortmobileFilePath *path, OrgApacheLuceneStoreLockFactory *lockFactory) {
   OrgApacheLuceneStoreSimpleFSDirectory *self = [OrgApacheLuceneStoreSimpleFSDirectory alloc];
   OrgApacheLuceneStoreSimpleFSDirectory_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneStoreLockFactory_(self, path, lockFactory);
-  return self;
-}
-
-void OrgApacheLuceneStoreSimpleFSDirectory_initWithOrgLukhnosPortmobileFilePath_(OrgApacheLuceneStoreSimpleFSDirectory *self, OrgLukhnosPortmobileFilePath *path) {
-  OrgApacheLuceneStoreSimpleFSDirectory_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneStoreLockFactory_(self, path, OrgApacheLuceneStoreFSLockFactory_getDefault());
-}
-
-OrgApacheLuceneStoreSimpleFSDirectory *new_OrgApacheLuceneStoreSimpleFSDirectory_initWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *path) {
-  OrgApacheLuceneStoreSimpleFSDirectory *self = [OrgApacheLuceneStoreSimpleFSDirectory alloc];
-  OrgApacheLuceneStoreSimpleFSDirectory_initWithOrgLukhnosPortmobileFilePath_(self, path);
   return self;
 }
 

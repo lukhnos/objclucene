@@ -16,45 +16,7 @@
 #if !defined (_OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_) && (OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_INCLUDE)
 #define _OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_
 
-@protocol JavaLangCharSequence;
-@protocol JavaUtilList;
-@protocol JavaUtilMap;
-@protocol OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax;
-
 @protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode < NSObject, JavaObject >
-
-- (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escapeSyntaxParser;
-
-- (NSString *)description;
-
-- (id<JavaUtilList>)getChildren;
-
-- (jboolean)isLeaf;
-
-- (jboolean)containsTagWithNSString:(NSString *)tagName;
-
-- (id)getTagWithNSString:(NSString *)tagName;
-
-- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)getParent;
-
-- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)cloneTree;
-
-- (void)addWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)child;
-
-- (void)addWithJavaUtilList:(id<JavaUtilList>)children;
-
-- (void)setWithJavaUtilList:(id<JavaUtilList>)children;
-
-- (void)setTagWithNSString:(NSString *)tagName
-                    withId:(id)value;
-
-- (void)unsetTagWithNSString:(NSString *)tagName;
-
-- (id<JavaUtilMap>)getTagMap;
-
-- (void)removeFromParent;
-
-- (void)removeChildrenWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)childNode;
 
 @end
 

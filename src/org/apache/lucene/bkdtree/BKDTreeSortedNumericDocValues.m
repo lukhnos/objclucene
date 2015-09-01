@@ -4,67 +4,34 @@
 //
 
 #include "J2ObjC_source.h"
-#include "org/apache/lucene/bkdtree/BKDTreeReader.h"
 #include "org/apache/lucene/bkdtree/BKDTreeSortedNumericDocValues.h"
-#include "org/apache/lucene/index/SortedNumericDocValues.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues
 
-- (instancetype)initWithOrgApacheLuceneBkdtreeBKDTreeReader:(OrgApacheLuceneBkdtreeBKDTreeReader *)bkdTreeReader
-             withOrgApacheLuceneIndexSortedNumericDocValues:(OrgApacheLuceneIndexSortedNumericDocValues *)delegate {
-  OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues_initWithOrgApacheLuceneBkdtreeBKDTreeReader_withOrgApacheLuceneIndexSortedNumericDocValues_(self, bkdTreeReader, delegate);
+- (instancetype)init {
+  OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues_init(self);
   return self;
-}
-
-- (OrgApacheLuceneBkdtreeBKDTreeReader *)getBKDTreeReader {
-  return bkdTreeReader_;
-}
-
-- (void)setDocumentWithInt:(jint)doc {
-  [((OrgApacheLuceneIndexSortedNumericDocValues *) nil_chk(delegate_)) setDocumentWithInt:doc];
-}
-
-- (jlong)valueAtWithInt:(jint)index {
-  return [((OrgApacheLuceneIndexSortedNumericDocValues *) nil_chk(delegate_)) valueAtWithInt:index];
-}
-
-- (jint)count {
-  return [((OrgApacheLuceneIndexSortedNumericDocValues *) nil_chk(delegate_)) count];
-}
-
-- (void)dealloc {
-  RELEASE_(bkdTreeReader_);
-  RELEASE_(delegate_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneBkdtreeBKDTreeReader:withOrgApacheLuceneIndexSortedNumericDocValues:", "BKDTreeSortedNumericDocValues", NULL, 0x1, NULL, NULL },
-    { "getBKDTreeReader", NULL, "Lorg.apache.lucene.bkdtree.BKDTreeReader;", 0x1, NULL, NULL },
-    { "setDocumentWithInt:", "setDocument", "V", 0x1, NULL, NULL },
-    { "valueAtWithInt:", "valueAt", "J", 0x1, NULL, NULL },
-    { "count", NULL, "I", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x0, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "bkdTreeReader_", NULL, 0x10, "Lorg.apache.lucene.bkdtree.BKDTreeReader;", NULL, NULL, .constantValue.asLong = 0 },
-    { "delegate_", NULL, 0x10, "Lorg.apache.lucene.index.SortedNumericDocValues;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues = { 2, "BKDTreeSortedNumericDocValues", "org.apache.lucene.bkdtree", NULL, 0x0, 5, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues = { 2, "BKDTreeSortedNumericDocValues", "org.apache.lucene.bkdtree", NULL, 0x0, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues;
 }
 
 @end
 
-void OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues_initWithOrgApacheLuceneBkdtreeBKDTreeReader_withOrgApacheLuceneIndexSortedNumericDocValues_(OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues *self, OrgApacheLuceneBkdtreeBKDTreeReader *bkdTreeReader, OrgApacheLuceneIndexSortedNumericDocValues *delegate) {
-  OrgApacheLuceneIndexSortedNumericDocValues_init(self);
-  JreStrongAssign(&self->bkdTreeReader_, bkdTreeReader);
-  JreStrongAssign(&self->delegate_, delegate);
+void OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues_init(OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues *new_OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues_initWithOrgApacheLuceneBkdtreeBKDTreeReader_withOrgApacheLuceneIndexSortedNumericDocValues_(OrgApacheLuceneBkdtreeBKDTreeReader *bkdTreeReader, OrgApacheLuceneIndexSortedNumericDocValues *delegate) {
+OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues *new_OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues_init() {
   OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues *self = [OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues alloc];
-  OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues_initWithOrgApacheLuceneBkdtreeBKDTreeReader_withOrgApacheLuceneIndexSortedNumericDocValues_(self, bkdTreeReader, delegate);
+  OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues_init(self);
   return self;
 }
 

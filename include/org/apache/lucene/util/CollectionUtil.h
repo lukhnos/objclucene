@@ -23,6 +23,8 @@
 
 #pragma mark Public
 
+- (instancetype)init;
+
 + (void)introSortWithJavaUtilList:(id<JavaUtilList>)list;
 
 + (void)introSortWithJavaUtilList:(id<JavaUtilList>)list
@@ -44,6 +46,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilCollectionUtil_introSortWithJavaUtilLi
 FOUNDATION_EXPORT void OrgApacheLuceneUtilCollectionUtil_timSortWithJavaUtilList_withJavaUtilComparator_(id<JavaUtilList> list, id<JavaUtilComparator> comp);
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilCollectionUtil_timSortWithJavaUtilList_(id<JavaUtilList> list);
+
+FOUNDATION_EXPORT void OrgApacheLuceneUtilCollectionUtil_init(OrgApacheLuceneUtilCollectionUtil *self);
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilCollectionUtil *new_OrgApacheLuceneUtilCollectionUtil_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilCollectionUtil)
 

@@ -31,10 +31,6 @@
   return value;
 }
 
-- (void)removeWithIOSClass:(IOSClass *)type {
-  [((id<JavaUtilMap>) nil_chk(cache_)) removeWithId:type];
-}
-
 - (void)dealloc {
   RELEASE_(defaultCachedMember_);
   RELEASE_(cache_);
@@ -46,14 +42,13 @@
     { "init", "ClassValue", NULL, 0x4, NULL, NULL },
     { "computeValueWithIOSClass:", "computeValue", "TT;", 0x404, NULL, "(Ljava/lang/Class<*>;)TT;" },
     { "getWithIOSClass:", "get", "TT;", 0x1, NULL, "(Ljava/lang/Class<*>;)TT;" },
-    { "removeWithIOSClass:", "remove", "V", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "defaultCached_", NULL, 0x0, "Z", NULL, NULL, .constantValue.asLong = 0 },
     { "defaultCachedMember_", NULL, 0x0, "TT;", NULL, "TT;", .constantValue.asLong = 0 },
     { "cache_", NULL, 0x0, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/Class<*>;TT;>;", .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgLukhnosPortmobileLangClassValue = { 2, "ClassValue", "org.lukhnos.portmobile.lang", NULL, 0x401, 4, methods, 3, fields, 0, NULL, 0, NULL, NULL, "<T:Ljava/lang/Object;>Ljava/lang/Object;" };
+  static const J2ObjcClassInfo _OrgLukhnosPortmobileLangClassValue = { 2, "ClassValue", "org.lukhnos.portmobile.lang", NULL, 0x401, 3, methods, 3, fields, 0, NULL, 0, NULL, NULL, "<T:Ljava/lang/Object;>Ljava/lang/Object;" };
   return &_OrgLukhnosPortmobileLangClassValue;
 }
 

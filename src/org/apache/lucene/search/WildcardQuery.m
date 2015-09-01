@@ -20,11 +20,6 @@
 
 @implementation OrgApacheLuceneSearchWildcardQuery
 
-- (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term {
-  OrgApacheLuceneSearchWildcardQuery_initWithOrgApacheLuceneIndexTerm_(self, term);
-  return self;
-}
-
 - (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
                                          withInt:(jint)maxDeterminizedStates {
   OrgApacheLuceneSearchWildcardQuery_initWithOrgApacheLuceneIndexTerm_withInt_(self, term, maxDeterminizedStates);
@@ -33,10 +28,6 @@
 
 + (OrgApacheLuceneUtilAutomatonAutomaton *)toAutomatonWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)wildcardquery {
   return OrgApacheLuceneSearchWildcardQuery_toAutomatonWithOrgApacheLuceneIndexTerm_(wildcardquery);
-}
-
-- (OrgApacheLuceneIndexTerm *)getTerm {
-  return term_;
 }
 
 - (NSString *)toStringWithNSString:(NSString *)field {
@@ -52,10 +43,8 @@
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexTerm:", "WildcardQuery", NULL, 0x1, NULL, NULL },
     { "initWithOrgApacheLuceneIndexTerm:withInt:", "WildcardQuery", NULL, 0x1, NULL, NULL },
     { "toAutomatonWithOrgApacheLuceneIndexTerm:", "toAutomaton", "Lorg.apache.lucene.util.automaton.Automaton;", 0x9, NULL, NULL },
-    { "getTerm", NULL, "Lorg.apache.lucene.index.Term;", 0x1, NULL, NULL },
     { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -63,21 +52,11 @@
     { "WILDCARD_CHAR", "WILDCARD_CHAR", 0x19, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneSearchWildcardQuery_WILDCARD_CHAR },
     { "WILDCARD_ESCAPE", "WILDCARD_ESCAPE", 0x19, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneSearchWildcardQuery_WILDCARD_ESCAPE },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchWildcardQuery = { 2, "WildcardQuery", "org.apache.lucene.search", NULL, 0x1, 5, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchWildcardQuery = { 2, "WildcardQuery", "org.apache.lucene.search", NULL, 0x1, 3, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchWildcardQuery;
 }
 
 @end
-
-void OrgApacheLuceneSearchWildcardQuery_initWithOrgApacheLuceneIndexTerm_(OrgApacheLuceneSearchWildcardQuery *self, OrgApacheLuceneIndexTerm *term) {
-  OrgApacheLuceneSearchAutomatonQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneUtilAutomatonAutomaton_(self, term, OrgApacheLuceneSearchWildcardQuery_toAutomatonWithOrgApacheLuceneIndexTerm_(term));
-}
-
-OrgApacheLuceneSearchWildcardQuery *new_OrgApacheLuceneSearchWildcardQuery_initWithOrgApacheLuceneIndexTerm_(OrgApacheLuceneIndexTerm *term) {
-  OrgApacheLuceneSearchWildcardQuery *self = [OrgApacheLuceneSearchWildcardQuery alloc];
-  OrgApacheLuceneSearchWildcardQuery_initWithOrgApacheLuceneIndexTerm_(self, term);
-  return self;
-}
 
 void OrgApacheLuceneSearchWildcardQuery_initWithOrgApacheLuceneIndexTerm_withInt_(OrgApacheLuceneSearchWildcardQuery *self, OrgApacheLuceneIndexTerm *term, jint maxDeterminizedStates) {
   OrgApacheLuceneSearchAutomatonQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneUtilAutomatonAutomaton_withInt_(self, term, OrgApacheLuceneSearchWildcardQuery_toAutomatonWithOrgApacheLuceneIndexTerm_(term), maxDeterminizedStates);

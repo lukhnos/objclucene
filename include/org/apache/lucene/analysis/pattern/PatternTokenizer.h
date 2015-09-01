@@ -20,43 +20,19 @@
 #define OrgApacheLuceneAnalysisTokenizer_INCLUDE 1
 #include "org/apache/lucene/analysis/Tokenizer.h"
 
-@class IOSCharArray;
-@class JavaUtilRegexPattern;
-@class OrgApacheLuceneUtilAttributeFactory;
-
-@interface OrgApacheLuceneAnalysisPatternPatternTokenizer : OrgApacheLuceneAnalysisTokenizer {
- @public
-  IOSCharArray *buffer_;
-}
+@interface OrgApacheLuceneAnalysisPatternPatternTokenizer : OrgApacheLuceneAnalysisTokenizer
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory
-                                   withJavaUtilRegexPattern:(JavaUtilRegexPattern *)pattern
-                                                    withInt:(jint)group;
-
-- (instancetype)initWithJavaUtilRegexPattern:(JavaUtilRegexPattern *)pattern
-                                     withInt:(jint)group;
-
-- (void)end;
-
-- (jboolean)incrementToken;
-
-- (void)reset;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisPatternPatternTokenizer)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPatternPatternTokenizer, buffer_, IOSCharArray *)
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPatternPatternTokenizer_init(OrgApacheLuceneAnalysisPatternPatternTokenizer *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPatternPatternTokenizer_initWithJavaUtilRegexPattern_withInt_(OrgApacheLuceneAnalysisPatternPatternTokenizer *self, JavaUtilRegexPattern *pattern, jint group);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisPatternPatternTokenizer *new_OrgApacheLuceneAnalysisPatternPatternTokenizer_initWithJavaUtilRegexPattern_withInt_(JavaUtilRegexPattern *pattern, jint group) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPatternPatternTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withJavaUtilRegexPattern_withInt_(OrgApacheLuceneAnalysisPatternPatternTokenizer *self, OrgApacheLuceneUtilAttributeFactory *factory, JavaUtilRegexPattern *pattern, jint group);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisPatternPatternTokenizer *new_OrgApacheLuceneAnalysisPatternPatternTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withJavaUtilRegexPattern_withInt_(OrgApacheLuceneUtilAttributeFactory *factory, JavaUtilRegexPattern *pattern, jint group) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPatternPatternTokenizer *new_OrgApacheLuceneAnalysisPatternPatternTokenizer_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPatternPatternTokenizer)
 

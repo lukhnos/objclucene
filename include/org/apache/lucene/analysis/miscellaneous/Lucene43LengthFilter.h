@@ -20,26 +20,19 @@
 #define OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter_INCLUDE 1
 #include "org/apache/lucene/analysis/util/Lucene43FilteringTokenFilter.h"
 
-@class OrgApacheLuceneAnalysisTokenStream;
-
 @interface OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter : OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter
 
 #pragma mark Public
 
-- (instancetype)initWithBoolean:(jboolean)enablePositionIncrements
-withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
-                        withInt:(jint)min
-                        withInt:(jint)max;
-
-- (jboolean)accept;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter_initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter *self, jboolean enablePositionIncrements, OrgApacheLuceneAnalysisTokenStream *inArg, jint min, jint max);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter_init(OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter *new_OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter_initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(jboolean enablePositionIncrements, OrgApacheLuceneAnalysisTokenStream *inArg, jint min, jint max) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter *new_OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter)
 

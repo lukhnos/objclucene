@@ -33,12 +33,6 @@
 - (instancetype)initWithOrgApacheLuceneUtilAutomatonRegExp:(OrgApacheLuceneUtilAutomatonRegExp *)regExp
 withOrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException:(OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException *)cause;
 
-- (OrgApacheLuceneUtilAutomatonAutomaton *)getAutomaton;
-
-- (jint)getMaxDeterminizedStates;
-
-- (OrgApacheLuceneUtilAutomatonRegExp *)getRegExp;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException)

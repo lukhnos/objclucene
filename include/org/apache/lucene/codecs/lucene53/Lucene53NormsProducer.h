@@ -23,7 +23,6 @@
 @class OrgApacheLuceneIndexFieldInfo;
 @class OrgApacheLuceneIndexNumericDocValues;
 @class OrgApacheLuceneIndexSegmentReadState;
-@protocol JavaUtilCollection;
 
 @interface OrgApacheLuceneCodecsLucene53Lucene53NormsProducer : OrgApacheLuceneCodecsNormsProducer
 
@@ -32,8 +31,6 @@
 - (void)checkIntegrity;
 
 - (void)close;
-
-- (id<JavaUtilCollection>)getChildResources;
 
 - (OrgApacheLuceneIndexNumericDocValues *)getNormsWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)field;
 

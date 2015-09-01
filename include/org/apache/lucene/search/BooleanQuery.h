@@ -24,10 +24,7 @@
 #define JavaLangIterable_INCLUDE 1
 #include "java/lang/Iterable.h"
 
-@class IOSObjectArray;
 @class OrgApacheLuceneIndexIndexReader;
-@class OrgApacheLuceneSearchBooleanClause;
-@class OrgApacheLuceneSearchBooleanClause_OccurEnum;
 @class OrgApacheLuceneSearchIndexSearcher;
 @class OrgApacheLuceneSearchWeight;
 @protocol JavaUtilIterator;
@@ -41,11 +38,6 @@
 
 - (instancetype)initWithBoolean:(jboolean)disableCoord;
 
-- (void)addWithOrgApacheLuceneSearchBooleanClause:(OrgApacheLuceneSearchBooleanClause *)clause;
-
-- (void)addWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-withOrgApacheLuceneSearchBooleanClause_OccurEnum:(OrgApacheLuceneSearchBooleanClause_OccurEnum *)occur;
-
 - (id<JavaUtilList>)clauses;
 
 - (OrgApacheLuceneSearchBooleanQuery *)clone;
@@ -54,8 +46,6 @@ withOrgApacheLuceneSearchBooleanClause_OccurEnum:(OrgApacheLuceneSearchBooleanCl
                                                                         withBoolean:(jboolean)needsScores;
 
 - (jboolean)isEqual:(id)o;
-
-- (IOSObjectArray *)getClauses;
 
 + (jint)getMaxClauseCount;
 
@@ -69,10 +59,6 @@ withOrgApacheLuceneSearchBooleanClause_OccurEnum:(OrgApacheLuceneSearchBooleanCl
 
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
 
-+ (void)setMaxClauseCountWithInt:(jint)maxClauseCount;
-
-- (void)setMinimumNumberShouldMatchWithInt:(jint)min;
-
 - (NSString *)toStringWithNSString:(NSString *)field;
 
 #pragma mark Package-Private
@@ -83,8 +69,6 @@ withOrgApacheLuceneSearchBooleanClause_OccurEnum:(OrgApacheLuceneSearchBooleanCl
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchBooleanQuery)
 
 FOUNDATION_EXPORT jint OrgApacheLuceneSearchBooleanQuery_getMaxClauseCount();
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchBooleanQuery_setMaxClauseCountWithInt_(jint maxClauseCount);
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchBooleanQuery_init(OrgApacheLuceneSearchBooleanQuery *self);
 

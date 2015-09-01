@@ -52,10 +52,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilRefCount, refCount_, JavaUtilConcurrentAt
   return object_;
 }
 
-- (jint)getRefCount {
-  return [((JavaUtilConcurrentAtomicAtomicInteger *) nil_chk(refCount_)) get];
-}
-
 - (void)incRef {
   [((JavaUtilConcurrentAtomicAtomicInteger *) nil_chk(refCount_)) incrementAndGet];
 }
@@ -72,14 +68,13 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilRefCount, refCount_, JavaUtilConcurrentAt
     { "release__", "release", "V", 0x4, "Ljava.io.IOException;", NULL },
     { "decRef", NULL, "V", 0x11, "Ljava.io.IOException;", NULL },
     { "get", NULL, "TT;", 0x11, NULL, "()TT;" },
-    { "getRefCount", NULL, "I", 0x11, NULL, NULL },
     { "incRef", NULL, "V", 0x11, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "refCount_", NULL, 0x12, "Ljava.util.concurrent.atomic.AtomicInteger;", NULL, NULL, .constantValue.asLong = 0 },
     { "object_", NULL, 0x14, "TT;", NULL, "TT;", .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilRefCount = { 2, "RefCount", "org.apache.lucene.util", NULL, 0x1, 6, methods, 2, fields, 0, NULL, 0, NULL, NULL, "<T:Ljava/lang/Object;>Ljava/lang/Object;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilRefCount = { 2, "RefCount", "org.apache.lucene.util", NULL, 0x1, 5, methods, 2, fields, 0, NULL, 0, NULL, NULL, "<T:Ljava/lang/Object;>Ljava/lang/Object;" };
   return &_OrgApacheLuceneUtilRefCount;
 }
 

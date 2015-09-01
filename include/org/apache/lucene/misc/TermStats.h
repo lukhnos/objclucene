@@ -16,39 +16,19 @@
 #if !defined (_OrgApacheLuceneMiscTermStats_) && (OrgApacheLuceneMiscTermStats_INCLUDE_ALL || OrgApacheLuceneMiscTermStats_INCLUDE)
 #define _OrgApacheLuceneMiscTermStats_
 
-@class OrgApacheLuceneUtilBytesRef;
-
-@interface OrgApacheLuceneMiscTermStats : NSObject {
- @public
-  OrgApacheLuceneUtilBytesRef *termtext_;
-  NSString *field_;
-  jint docFreq_;
-  jlong totalTermFreq_;
-}
+@interface OrgApacheLuceneMiscTermStats : NSObject
 
 #pragma mark Public
 
-- (NSString *)description;
-
-#pragma mark Package-Private
-
-- (instancetype)initWithNSString:(NSString *)field
- withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)termtext
-                         withInt:(jint)df
-                        withLong:(jlong)tf;
-
-- (NSString *)getTermText;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneMiscTermStats)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneMiscTermStats, termtext_, OrgApacheLuceneUtilBytesRef *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneMiscTermStats, field_, NSString *)
+FOUNDATION_EXPORT void OrgApacheLuceneMiscTermStats_init(OrgApacheLuceneMiscTermStats *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneMiscTermStats_initWithNSString_withOrgApacheLuceneUtilBytesRef_withInt_withLong_(OrgApacheLuceneMiscTermStats *self, NSString *field, OrgApacheLuceneUtilBytesRef *termtext, jint df, jlong tf);
-
-FOUNDATION_EXPORT OrgApacheLuceneMiscTermStats *new_OrgApacheLuceneMiscTermStats_initWithNSString_withOrgApacheLuceneUtilBytesRef_withInt_withLong_(NSString *field, OrgApacheLuceneUtilBytesRef *termtext, jint df, jlong tf) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneMiscTermStats *new_OrgApacheLuceneMiscTermStats_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneMiscTermStats)
 

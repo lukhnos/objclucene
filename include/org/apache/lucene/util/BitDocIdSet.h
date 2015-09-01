@@ -34,8 +34,6 @@
 
 - (OrgApacheLuceneUtilBitSet *)bits;
 
-- (jboolean)isCacheable;
-
 - (OrgApacheLuceneSearchDocIdSetIterator *)iterator;
 
 - (jlong)ramBytesUsed;
@@ -61,43 +59,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilBitDocIdSet)
 #if !defined (_OrgApacheLuceneUtilBitDocIdSet_Builder_) && (OrgApacheLuceneUtilBitDocIdSet_INCLUDE_ALL || OrgApacheLuceneUtilBitDocIdSet_Builder_INCLUDE)
 #define _OrgApacheLuceneUtilBitDocIdSet_Builder_
 
-@class OrgApacheLuceneSearchDocIdSetIterator;
-@class OrgApacheLuceneUtilBitDocIdSet;
-
 @interface OrgApacheLuceneUtilBitDocIdSet_Builder : NSObject
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)maxDoc;
-
-- (instancetype)initWithInt:(jint)maxDoc
-                withBoolean:(jboolean)full;
-
-- (void)and__WithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)it;
-
-- (void)andNotWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)it;
-
-- (OrgApacheLuceneUtilBitDocIdSet *)build;
-
-- (jboolean)isDefinitelyEmpty;
-
-- (void)or__WithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)it;
-
-#pragma mark Package-Private
-
-- (jboolean)dense;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilBitDocIdSet_Builder)
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilBitDocIdSet_Builder_initWithInt_withBoolean_(OrgApacheLuceneUtilBitDocIdSet_Builder *self, jint maxDoc, jboolean full);
+FOUNDATION_EXPORT void OrgApacheLuceneUtilBitDocIdSet_Builder_init(OrgApacheLuceneUtilBitDocIdSet_Builder *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilBitDocIdSet_Builder *new_OrgApacheLuceneUtilBitDocIdSet_Builder_initWithInt_withBoolean_(jint maxDoc, jboolean full) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneUtilBitDocIdSet_Builder_initWithInt_(OrgApacheLuceneUtilBitDocIdSet_Builder *self, jint maxDoc);
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilBitDocIdSet_Builder *new_OrgApacheLuceneUtilBitDocIdSet_Builder_initWithInt_(jint maxDoc) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilBitDocIdSet_Builder *new_OrgApacheLuceneUtilBitDocIdSet_Builder_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilBitDocIdSet_Builder)
 

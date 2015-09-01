@@ -20,27 +20,19 @@
 #define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
-@class OrgApacheLuceneAnalysisTokenStream;
-
-@interface OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter : OrgApacheLuceneAnalysisTokenFilter {
- @public
-  jboolean updateOffsets_;
-}
+@interface OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
-                                               withBoolean:(jboolean)updateOffsets;
-
-- (jboolean)incrementToken;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_(OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter *self, OrgApacheLuceneAnalysisTokenStream *inArg, jboolean updateOffsets);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter_init(OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter *new_OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_(OrgApacheLuceneAnalysisTokenStream *inArg, jboolean updateOffsets) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter *new_OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter)
 

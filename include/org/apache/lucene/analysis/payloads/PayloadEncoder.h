@@ -16,16 +16,7 @@
 #if !defined (_OrgApacheLuceneAnalysisPayloadsPayloadEncoder_) && (OrgApacheLuceneAnalysisPayloadsPayloadEncoder_INCLUDE_ALL || OrgApacheLuceneAnalysisPayloadsPayloadEncoder_INCLUDE)
 #define _OrgApacheLuceneAnalysisPayloadsPayloadEncoder_
 
-@class IOSCharArray;
-@class OrgApacheLuceneUtilBytesRef;
-
 @protocol OrgApacheLuceneAnalysisPayloadsPayloadEncoder < NSObject, JavaObject >
-
-- (OrgApacheLuceneUtilBytesRef *)encodeWithCharArray:(IOSCharArray *)buffer;
-
-- (OrgApacheLuceneUtilBytesRef *)encodeWithCharArray:(IOSCharArray *)buffer
-                                             withInt:(jint)offset
-                                             withInt:(jint)length;
 
 @end
 

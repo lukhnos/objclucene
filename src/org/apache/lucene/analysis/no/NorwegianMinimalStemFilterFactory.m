@@ -4,70 +4,34 @@
 //
 
 #include "J2ObjC_source.h"
-#include "java/lang/IllegalArgumentException.h"
-#include "java/util/Map.h"
-#include "org/apache/lucene/analysis/TokenStream.h"
-#include "org/apache/lucene/analysis/no/NorwegianLightStemmer.h"
-#include "org/apache/lucene/analysis/no/NorwegianMinimalStemFilter.h"
 #include "org/apache/lucene/analysis/no/NorwegianMinimalStemFilterFactory.h"
-#include "org/apache/lucene/analysis/util/AbstractAnalysisFactory.h"
-#include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
-@interface OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilterFactory () {
- @public
-  jint flags_;
-}
-
-@end
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilterFactory
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args {
-  OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilterFactory_initWithJavaUtilMap_(self, args);
+- (instancetype)init {
+  OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilterFactory_init(self);
   return self;
-}
-
-- (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  return [new_OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(input, flags_) autorelease];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "NorwegianMinimalStemFilterFactory", NULL, 0x1, NULL, NULL },
-    { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.TokenStream;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "flags_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilterFactory = { 2, "NorwegianMinimalStemFilterFactory", "org.apache.lucene.analysis.no", NULL, 0x1, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilterFactory = { 2, "NorwegianMinimalStemFilterFactory", "org.apache.lucene.analysis.no", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilterFactory;
 }
 
 @end
 
-void OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilterFactory *self, id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
-  NSString *variant = [self getWithJavaUtilMap:args withNSString:@"variant"];
-  if (variant == nil || [@"nb" isEqual:variant]) {
-    self->flags_ = OrgApacheLuceneAnalysisNoNorwegianLightStemmer_BOKMAAL;
-  }
-  else if ([@"nn" isEqual:variant]) {
-    self->flags_ = OrgApacheLuceneAnalysisNoNorwegianLightStemmer_NYNORSK;
-  }
-  else if ([@"no" isEqual:variant]) {
-    self->flags_ = OrgApacheLuceneAnalysisNoNorwegianLightStemmer_BOKMAAL | OrgApacheLuceneAnalysisNoNorwegianLightStemmer_NYNORSK;
-  }
-  else {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$", @"invalid variant: ", variant)) autorelease];
-  }
-  if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
-  }
+void OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilterFactory_init(OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilterFactory *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilterFactory *new_OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilterFactory *new_OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilterFactory_init() {
   OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilterFactory *self = [OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilterFactory alloc];
-  OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilterFactory_initWithJavaUtilMap_(self, args);
+  OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilterFactory_init(self);
   return self;
 }
 

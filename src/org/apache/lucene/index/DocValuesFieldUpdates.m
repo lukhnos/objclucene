@@ -44,18 +44,6 @@ withOrgApacheLuceneIndexDocValuesTypeEnum:(OrgApacheLuceneIndexDocValuesTypeEnum
   [self doesNotRecognizeSelector:_cmd];
 }
 
-- (jboolean)any {
-  // can't call an abstract method
-  [self doesNotRecognizeSelector:_cmd];
-  return 0;
-}
-
-- (jlong)ramBytesPerDoc {
-  // can't call an abstract method
-  [self doesNotRecognizeSelector:_cmd];
-  return 0;
-}
-
 - (void)dealloc {
   RELEASE_(field_);
   RELEASE_(type_);
@@ -69,8 +57,6 @@ withOrgApacheLuceneIndexDocValuesTypeEnum:(OrgApacheLuceneIndexDocValuesTypeEnum
     { "addWithInt:withId:", "add", "V", 0x401, NULL, NULL },
     { "iterator", NULL, "Lorg.apache.lucene.index.DocValuesFieldUpdates$Iterator;", 0x401, NULL, NULL },
     { "mergeWithOrgApacheLuceneIndexDocValuesFieldUpdates:", "merge", "V", 0x401, NULL, NULL },
-    { "any", NULL, "Z", 0x401, NULL, NULL },
-    { "ramBytesPerDoc", NULL, "J", 0x401, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "PAGE_SIZE", "PAGE_SIZE", 0x1c, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneIndexDocValuesFieldUpdates_PAGE_SIZE },
@@ -78,7 +64,7 @@ withOrgApacheLuceneIndexDocValuesTypeEnum:(OrgApacheLuceneIndexDocValuesTypeEnum
     { "type_", NULL, 0x10, "Lorg.apache.lucene.index.DocValuesType;", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.index.DocValuesFieldUpdates$Iterator;", "Lorg.apache.lucene.index.DocValuesFieldUpdates$Container;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocValuesFieldUpdates = { 2, "DocValuesFieldUpdates", "org.apache.lucene.index", NULL, 0x400, 7, methods, 3, fields, 0, NULL, 2, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocValuesFieldUpdates = { 2, "DocValuesFieldUpdates", "org.apache.lucene.index", NULL, 0x400, 5, methods, 3, fields, 0, NULL, 2, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneIndexDocValuesFieldUpdates;
 }
 
@@ -170,17 +156,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocValuesFieldUpdates_Itera
   return [((id<JavaUtilMap>) nil_chk(numericDVUpdates_)) size] + [((id<JavaUtilMap>) nil_chk(binaryDVUpdates_)) size];
 }
 
-- (jlong)ramBytesPerDoc {
-  jlong ramBytesPerDoc = 0;
-  for (OrgApacheLuceneIndexNumericDocValuesFieldUpdates * __strong updates in nil_chk([((id<JavaUtilMap>) nil_chk(numericDVUpdates_)) values])) {
-    ramBytesPerDoc += [((OrgApacheLuceneIndexNumericDocValuesFieldUpdates *) nil_chk(updates)) ramBytesPerDoc];
-  }
-  for (OrgApacheLuceneIndexBinaryDocValuesFieldUpdates * __strong updates in nil_chk([((id<JavaUtilMap>) nil_chk(binaryDVUpdates_)) values])) {
-    ramBytesPerDoc += [((OrgApacheLuceneIndexBinaryDocValuesFieldUpdates *) nil_chk(updates)) ramBytesPerDoc];
-  }
-  return ramBytesPerDoc;
-}
-
 - (OrgApacheLuceneIndexDocValuesFieldUpdates *)getUpdatesWithNSString:(NSString *)field
                             withOrgApacheLuceneIndexDocValuesTypeEnum:(OrgApacheLuceneIndexDocValuesTypeEnum *)type {
   switch ([type ordinal]) {
@@ -235,7 +210,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocValuesFieldUpdates_Itera
   static const J2ObjcMethodInfo methods[] = {
     { "any", NULL, "Z", 0x0, NULL, NULL },
     { "size", NULL, "I", 0x0, NULL, NULL },
-    { "ramBytesPerDoc", NULL, "J", 0x0, NULL, NULL },
     { "getUpdatesWithNSString:withOrgApacheLuceneIndexDocValuesTypeEnum:", "getUpdates", "Lorg.apache.lucene.index.DocValuesFieldUpdates;", 0x0, NULL, NULL },
     { "newUpdatesWithNSString:withOrgApacheLuceneIndexDocValuesTypeEnum:withInt:", "newUpdates", "Lorg.apache.lucene.index.DocValuesFieldUpdates;", 0x0, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
@@ -245,7 +219,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocValuesFieldUpdates_Itera
     { "numericDVUpdates_", NULL, 0x10, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/index/NumericDocValuesFieldUpdates;>;", .constantValue.asLong = 0 },
     { "binaryDVUpdates_", NULL, 0x10, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/index/BinaryDocValuesFieldUpdates;>;", .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocValuesFieldUpdates_Container = { 2, "Container", "org.apache.lucene.index", "DocValuesFieldUpdates", 0x8, 7, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocValuesFieldUpdates_Container = { 2, "Container", "org.apache.lucene.index", "DocValuesFieldUpdates", 0x8, 6, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexDocValuesFieldUpdates_Container;
 }
 

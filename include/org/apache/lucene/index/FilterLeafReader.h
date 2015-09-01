@@ -28,7 +28,6 @@
 @class OrgApacheLuceneIndexSortedNumericDocValues;
 @class OrgApacheLuceneIndexSortedSetDocValues;
 @class OrgApacheLuceneIndexStoredFieldVisitor;
-@protocol OrgApacheLuceneIndexLeafReader_CoreClosedListener;
 @protocol OrgApacheLuceneUtilBits;
 
 @interface OrgApacheLuceneIndexFilterLeafReader : OrgApacheLuceneIndexLeafReader {
@@ -40,8 +39,6 @@
 
 - (instancetype)initWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)inArg;
 
-- (void)addCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:(id<OrgApacheLuceneIndexLeafReader_CoreClosedListener>)listener;
-
 - (void)checkIntegrity;
 
 - (void)documentWithInt:(jint)docID
@@ -50,8 +47,6 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 - (OrgApacheLuceneIndexFields *)fields;
 
 - (OrgApacheLuceneIndexBinaryDocValues *)getBinaryDocValuesWithNSString:(NSString *)field;
-
-- (OrgApacheLuceneIndexLeafReader *)getDelegate;
 
 - (id<OrgApacheLuceneUtilBits>)getDocsWithFieldWithNSString:(NSString *)field;
 
@@ -74,8 +69,6 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 - (jint)maxDoc;
 
 - (jint)numDocs;
-
-- (void)removeCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:(id<OrgApacheLuceneIndexLeafReader_CoreClosedListener>)listener;
 
 - (NSString *)description;
 
@@ -163,8 +156,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFilterLeafReader_FilterFields)
 
 - (jint)getDocCount;
 
-- (id)getStats;
-
 - (jlong)getSumDocFreq;
 
 - (jlong)getSumTotalTermFreq;
@@ -229,8 +220,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFilterLeafReader_FilterTerms)
 
 - (OrgApacheLuceneIndexTermsEnum_SeekStatusEnum *)seekCeilWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)text;
 
-- (void)seekExactWithLong:(jlong)ord;
-
 - (OrgApacheLuceneUtilBytesRef *)term;
 
 - (jlong)totalTermFreq;
@@ -256,7 +245,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFilterLeafReader_FilterTermsEnum)
 #define OrgApacheLuceneIndexPostingsEnum_INCLUDE 1
 #include "org/apache/lucene/index/PostingsEnum.h"
 
-@class OrgApacheLuceneUtilAttributeSource;
 @class OrgApacheLuceneUtilBytesRef;
 
 @interface OrgApacheLuceneIndexFilterLeafReader_FilterPostingsEnum : OrgApacheLuceneIndexPostingsEnum {
@@ -269,8 +257,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFilterLeafReader_FilterTermsEnum)
 - (instancetype)initWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)inArg;
 
 - (jint)advanceWithInt:(jint)target;
-
-- (OrgApacheLuceneUtilAttributeSource *)attributes;
 
 - (jlong)cost;
 

@@ -20,47 +20,17 @@
 #define OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_INCLUDE 1
 #include "org/apache/lucene/analysis/util/AbstractAnalysisFactory.h"
 
-@class IOSClass;
-@class JavaLangClassLoader;
-@class OrgApacheLuceneAnalysisTokenizer;
-@class OrgApacheLuceneUtilAttributeFactory;
-@protocol JavaUtilMap;
-@protocol JavaUtilSet;
-
 @interface OrgApacheLuceneAnalysisUtilTokenizerFactory : OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory
 
 #pragma mark Public
 
-+ (id<JavaUtilSet>)availableTokenizers;
-
-- (OrgApacheLuceneAnalysisTokenizer *)create;
-
-- (OrgApacheLuceneAnalysisTokenizer *)createWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory;
-
-+ (OrgApacheLuceneAnalysisUtilTokenizerFactory *)forNameWithNSString:(NSString *)name
-                                                     withJavaUtilMap:(id<JavaUtilMap>)args;
-
-+ (IOSClass *)lookupClassWithNSString:(NSString *)name;
-
-+ (void)reloadTokenizersWithJavaLangClassLoader:(JavaLangClassLoader *)classloader;
-
-#pragma mark Protected
-
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
+- (instancetype)init;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisUtilTokenizerFactory)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisUtilTokenizerFactory)
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilTokenizerFactory *OrgApacheLuceneAnalysisUtilTokenizerFactory_forNameWithNSString_withJavaUtilMap_(NSString *name, id<JavaUtilMap> args);
-
-FOUNDATION_EXPORT IOSClass *OrgApacheLuceneAnalysisUtilTokenizerFactory_lookupClassWithNSString_(NSString *name);
-
-FOUNDATION_EXPORT id<JavaUtilSet> OrgApacheLuceneAnalysisUtilTokenizerFactory_availableTokenizers();
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisUtilTokenizerFactory_reloadTokenizersWithJavaLangClassLoader_(JavaLangClassLoader *classloader);
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisUtilTokenizerFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisUtilTokenizerFactory *self, id<JavaUtilMap> args);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisUtilTokenizerFactory_init(OrgApacheLuceneAnalysisUtilTokenizerFactory *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilTokenizerFactory)
 

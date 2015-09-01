@@ -16,15 +16,9 @@
 #if !defined (_OrgApacheLuceneQueryparserClassicCharStream_) && (OrgApacheLuceneQueryparserClassicCharStream_INCLUDE_ALL || OrgApacheLuceneQueryparserClassicCharStream_INCLUDE)
 #define _OrgApacheLuceneQueryparserClassicCharStream_
 
-@class IOSCharArray;
-
 @protocol OrgApacheLuceneQueryparserClassicCharStream < NSObject, JavaObject >
 
 - (jchar)readChar;
-
-- (jint)getColumn;
-
-- (jint)getLine;
 
 - (jint)getEndColumn;
 
@@ -39,10 +33,6 @@
 - (jchar)BeginToken;
 
 - (NSString *)GetImage;
-
-- (IOSCharArray *)GetSuffixWithInt:(jint)len;
-
-- (void)Done;
 
 @end
 

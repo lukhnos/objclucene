@@ -16,16 +16,6 @@
 #include "org/apache/lucene/util/IntroSorter.h"
 #include "org/apache/lucene/util/TimSorter.h"
 
-@interface OrgApacheLuceneUtilCollectionUtil ()
-
-- (instancetype)init;
-
-@end
-
-__attribute__((unused)) static void OrgApacheLuceneUtilCollectionUtil_init(OrgApacheLuceneUtilCollectionUtil *self);
-
-__attribute__((unused)) static OrgApacheLuceneUtilCollectionUtil *new_OrgApacheLuceneUtilCollectionUtil_init() NS_RETURNS_RETAINED;
-
 @interface OrgApacheLuceneUtilCollectionUtil_ListIntroSorter : OrgApacheLuceneUtilIntroSorter {
  @public
   id pivot_;
@@ -105,11 +95,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilCollectionUtil_ListTimSorter)
 
 @implementation OrgApacheLuceneUtilCollectionUtil
 
-- (instancetype)init {
-  OrgApacheLuceneUtilCollectionUtil_init(self);
-  return self;
-}
-
 + (void)introSortWithJavaUtilList:(id<JavaUtilList>)list
            withJavaUtilComparator:(id<JavaUtilComparator>)comp {
   OrgApacheLuceneUtilCollectionUtil_introSortWithJavaUtilList_withJavaUtilComparator_(list, comp);
@@ -128,13 +113,18 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilCollectionUtil_ListTimSorter)
   OrgApacheLuceneUtilCollectionUtil_timSortWithJavaUtilList_(list);
 }
 
+- (instancetype)init {
+  OrgApacheLuceneUtilCollectionUtil_init(self);
+  return self;
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", "CollectionUtil", NULL, 0x2, NULL, NULL },
     { "introSortWithJavaUtilList:withJavaUtilComparator:", "introSort", "V", 0x9, NULL, "<T:Ljava/lang/Object;>(Ljava/util/List<TT;>;Ljava/util/Comparator<-TT;>;)V" },
     { "introSortWithJavaUtilList:", "introSort", "V", 0x9, NULL, "<T::Ljava/lang/Comparable<-TT;>;>(Ljava/util/List<TT;>;)V" },
     { "timSortWithJavaUtilList:withJavaUtilComparator:", "timSort", "V", 0x9, NULL, "<T:Ljava/lang/Object;>(Ljava/util/List<TT;>;Ljava/util/Comparator<-TT;>;)V" },
     { "timSortWithJavaUtilList:", "timSort", "V", 0x9, NULL, "<T::Ljava/lang/Comparable<-TT;>;>(Ljava/util/List<TT;>;)V" },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.util.CollectionUtil$ListIntroSorter;", "Lorg.apache.lucene.util.CollectionUtil$ListTimSorter;"};
   static const J2ObjcClassInfo _OrgApacheLuceneUtilCollectionUtil = { 2, "CollectionUtil", "org.apache.lucene.util", NULL, 0x11, 5, methods, 0, NULL, 0, NULL, 2, inner_classes, NULL, NULL };
@@ -142,16 +132,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilCollectionUtil_ListTimSorter)
 }
 
 @end
-
-void OrgApacheLuceneUtilCollectionUtil_init(OrgApacheLuceneUtilCollectionUtil *self) {
-  NSObject_init(self);
-}
-
-OrgApacheLuceneUtilCollectionUtil *new_OrgApacheLuceneUtilCollectionUtil_init() {
-  OrgApacheLuceneUtilCollectionUtil *self = [OrgApacheLuceneUtilCollectionUtil alloc];
-  OrgApacheLuceneUtilCollectionUtil_init(self);
-  return self;
-}
 
 void OrgApacheLuceneUtilCollectionUtil_introSortWithJavaUtilList_withJavaUtilComparator_(id<JavaUtilList> list, id<JavaUtilComparator> comp) {
   OrgApacheLuceneUtilCollectionUtil_initialize();
@@ -179,6 +159,16 @@ void OrgApacheLuceneUtilCollectionUtil_timSortWithJavaUtilList_(id<JavaUtilList>
   jint size = [((id<JavaUtilList>) nil_chk(list)) size];
   if (size <= 1) return;
   OrgApacheLuceneUtilCollectionUtil_timSortWithJavaUtilList_withJavaUtilComparator_(list, OrgApacheLuceneUtilArrayUtil_naturalComparator());
+}
+
+void OrgApacheLuceneUtilCollectionUtil_init(OrgApacheLuceneUtilCollectionUtil *self) {
+  NSObject_init(self);
+}
+
+OrgApacheLuceneUtilCollectionUtil *new_OrgApacheLuceneUtilCollectionUtil_init() {
+  OrgApacheLuceneUtilCollectionUtil *self = [OrgApacheLuceneUtilCollectionUtil alloc];
+  OrgApacheLuceneUtilCollectionUtil_init(self);
+  return self;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilCollectionUtil)

@@ -20,20 +20,11 @@
 #define JavaLangException_INCLUDE 1
 #include "java/lang/Exception.h"
 
-@class JavaLangThrowable;
-
 @interface OrgApacheLuceneQueryparserXmlParserException : JavaLangException
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (instancetype)initWithNSString:(NSString *)message;
-
-- (instancetype)initWithNSString:(NSString *)message
-           withJavaLangThrowable:(JavaLangThrowable *)cause;
-
-- (instancetype)initWithJavaLangThrowable:(JavaLangThrowable *)cause;
 
 @end
 
@@ -42,18 +33,6 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserXmlParserException)
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlParserException_init(OrgApacheLuceneQueryparserXmlParserException *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlParserException *new_OrgApacheLuceneQueryparserXmlParserException_init() NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlParserException_initWithNSString_(OrgApacheLuceneQueryparserXmlParserException *self, NSString *message);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlParserException *new_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_(NSString *message) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlParserException_initWithNSString_withJavaLangThrowable_(OrgApacheLuceneQueryparserXmlParserException *self, NSString *message, JavaLangThrowable *cause);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlParserException *new_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_withJavaLangThrowable_(NSString *message, JavaLangThrowable *cause) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlParserException_initWithJavaLangThrowable_(OrgApacheLuceneQueryparserXmlParserException *self, JavaLangThrowable *cause);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlParserException *new_OrgApacheLuceneQueryparserXmlParserException_initWithJavaLangThrowable_(JavaLangThrowable *cause) NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlParserException)
 

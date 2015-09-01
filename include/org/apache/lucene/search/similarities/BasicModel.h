@@ -16,22 +16,11 @@
 #if !defined (_OrgApacheLuceneSearchSimilaritiesBasicModel_) && (OrgApacheLuceneSearchSimilaritiesBasicModel_INCLUDE_ALL || OrgApacheLuceneSearchSimilaritiesBasicModel_INCLUDE)
 #define _OrgApacheLuceneSearchSimilaritiesBasicModel_
 
-@class OrgApacheLuceneSearchExplanation;
-@class OrgApacheLuceneSearchSimilaritiesBasicStats;
-
 @interface OrgApacheLuceneSearchSimilaritiesBasicModel : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
-                                                                                   withFloat:(jfloat)tfn;
-
-- (jfloat)scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
-                                                     withFloat:(jfloat)tfn;
-
-- (NSString *)description;
 
 @end
 

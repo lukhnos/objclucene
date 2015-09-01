@@ -49,10 +49,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexLeafReaderContext, leaves_, id<JavaUtilL
   return leaves_;
 }
 
-- (id<JavaUtilList>)children {
-  return nil;
-}
-
 - (OrgApacheLuceneIndexLeafReader *)reader {
   return reader_;
 }
@@ -72,7 +68,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexLeafReaderContext, leaves_, id<JavaUtilL
     { "initWithOrgApacheLuceneIndexCompositeReaderContext:withOrgApacheLuceneIndexLeafReader:withInt:withInt:withInt:withInt:", "LeafReaderContext", NULL, 0x0, NULL, NULL },
     { "initWithOrgApacheLuceneIndexLeafReader:", "LeafReaderContext", NULL, 0x0, NULL, NULL },
     { "leaves", NULL, "Ljava.util.List;", 0x1, NULL, NULL },
-    { "children", NULL, "Ljava.util.List;", 0x1, NULL, NULL },
     { "reader", NULL, "Lorg.apache.lucene.index.LeafReader;", 0x1, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
   };
@@ -82,7 +77,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexLeafReaderContext, leaves_, id<JavaUtilL
     { "reader_", NULL, 0x12, "Lorg.apache.lucene.index.LeafReader;", NULL, NULL, .constantValue.asLong = 0 },
     { "leaves_", NULL, 0x12, "Ljava.util.List;", NULL, "Ljava/util/List<Lorg/apache/lucene/index/LeafReaderContext;>;", .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexLeafReaderContext = { 2, "LeafReaderContext", "org.apache.lucene.index", NULL, 0x11, 6, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexLeafReaderContext = { 2, "LeafReaderContext", "org.apache.lucene.index", NULL, 0x11, 5, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexLeafReaderContext;
 }
 

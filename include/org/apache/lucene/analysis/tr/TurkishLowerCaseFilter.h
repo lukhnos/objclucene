@@ -20,23 +20,19 @@
 #define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
-@class OrgApacheLuceneAnalysisTokenStream;
-
 @interface OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
-
-- (jboolean)incrementToken;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter *self, OrgApacheLuceneAnalysisTokenStream *inArg);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_init(OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter *new_OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter *new_OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter)
 

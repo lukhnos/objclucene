@@ -20,24 +20,12 @@
 #define OrgApacheLuceneIndexPostingsEnum_INCLUDE 1
 #include "org/apache/lucene/index/PostingsEnum.h"
 
-@class OrgApacheLuceneUtilBytesRef;
-
 #define OrgApacheLuceneIndexDocsEnum_FLAG_NONE 0
 #define OrgApacheLuceneIndexDocsEnum_FLAG_FREQS 1
 
 @interface OrgApacheLuceneIndexDocsEnum : OrgApacheLuceneIndexPostingsEnum
 
 #pragma mark Public
-
-- (jint)endOffset;
-
-- (OrgApacheLuceneUtilBytesRef *)getPayload;
-
-- (jint)nextPosition;
-
-- (jint)startOffset;
-
-#pragma mark Protected
 
 - (instancetype)init;
 

@@ -187,11 +187,6 @@ __attribute__((unused)) static void OrgApacheLuceneUtilSorter_rotateWithInt_with
 }
 
 - (void)binarySortWithInt:(jint)from
-                  withInt:(jint)to {
-  [self binarySortWithInt:from withInt:to withInt:from + 1];
-}
-
-- (void)binarySortWithInt:(jint)from
                   withInt:(jint)to
                   withInt:(jint)i {
   for (; i < to; ++i) {
@@ -296,7 +291,6 @@ __attribute__((unused)) static void OrgApacheLuceneUtilSorter_rotateWithInt_with
     { "rotateWithInt:withInt:withInt:", "rotate", "V", 0x10, NULL, NULL },
     { "doRotateWithInt:withInt:withInt:", "doRotate", "V", 0x0, NULL, NULL },
     { "insertionSortWithInt:withInt:", "insertionSort", "V", 0x0, NULL, NULL },
-    { "binarySortWithInt:withInt:", "binarySort", "V", 0x0, NULL, NULL },
     { "binarySortWithInt:withInt:withInt:", "binarySort", "V", 0x0, NULL, NULL },
     { "heapSortWithInt:withInt:", "heapSort", "V", 0x0, NULL, NULL },
     { "heapifyWithInt:withInt:", "heapify", "V", 0x0, NULL, NULL },
@@ -307,7 +301,7 @@ __attribute__((unused)) static void OrgApacheLuceneUtilSorter_rotateWithInt_with
   static const J2ObjcFieldInfo fields[] = {
     { "THRESHOLD", "THRESHOLD", 0x18, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilSorter_THRESHOLD },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilSorter = { 2, "Sorter", "org.apache.lucene.util", NULL, 0x401, 21, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilSorter = { 2, "Sorter", "org.apache.lucene.util", NULL, 0x401, 20, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilSorter;
 }
 

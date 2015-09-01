@@ -20,23 +20,19 @@
 #define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
-@class OrgApacheLuceneAnalysisTokenStream;
-
 @interface OrgApacheLuceneAnalysisHuHungarianLightStemFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
-
-- (jboolean)incrementToken;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisHuHungarianLightStemFilter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisHuHungarianLightStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisHuHungarianLightStemFilter *self, OrgApacheLuceneAnalysisTokenStream *input);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisHuHungarianLightStemFilter_init(OrgApacheLuceneAnalysisHuHungarianLightStemFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisHuHungarianLightStemFilter *new_OrgApacheLuceneAnalysisHuHungarianLightStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisHuHungarianLightStemFilter *new_OrgApacheLuceneAnalysisHuHungarianLightStemFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisHuHungarianLightStemFilter)
 

@@ -20,32 +20,19 @@
 #define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
-@class OrgApacheLuceneAnalysisTokenStream;
-
 @interface OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-                                                   withInt:(jint)maxStartOffset;
-
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-                                                   withInt:(jint)maxStartOffset
-                                               withBoolean:(jboolean)consumeAllTokens;
-
-- (jboolean)incrementToken;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter *self, OrgApacheLuceneAnalysisTokenStream *input, jint maxStartOffset);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter_init(OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter *new_OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(OrgApacheLuceneAnalysisTokenStream *input, jint maxStartOffset) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withBoolean_(OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter *self, OrgApacheLuceneAnalysisTokenStream *input, jint maxStartOffset, jboolean consumeAllTokens);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter *new_OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withBoolean_(OrgApacheLuceneAnalysisTokenStream *input, jint maxStartOffset, jboolean consumeAllTokens) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter *new_OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter)
 

@@ -57,8 +57,6 @@
 
 + (id<JavaUtilComparator>)getUTF8SortedAsUnicodeComparator;
 
-+ (id<JavaUtilComparator>)getUTF8SortedAsUTF16Comparator;
-
 - (NSUInteger)hash;
 
 - (jboolean)isValid;
@@ -97,8 +95,6 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_
 FOUNDATION_EXPORT OrgApacheLuceneUtilBytesRef *new_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_(id<JavaLangCharSequence> text) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT id<JavaUtilComparator> OrgApacheLuceneUtilBytesRef_getUTF8SortedAsUnicodeComparator();
-
-FOUNDATION_EXPORT id<JavaUtilComparator> OrgApacheLuceneUtilBytesRef_getUTF8SortedAsUTF16Comparator();
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilBytesRef *OrgApacheLuceneUtilBytesRef_deepCopyOfWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilBytesRef *other);
 

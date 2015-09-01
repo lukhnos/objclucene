@@ -42,17 +42,9 @@
 
 - (instancetype)initWithOrgApacheLuceneQueryparserClassicCharStream:(id<OrgApacheLuceneQueryparserClassicCharStream>)stream;
 
-- (instancetype)initWithOrgApacheLuceneQueryparserClassicCharStream:(id<OrgApacheLuceneQueryparserClassicCharStream>)stream
-                                                            withInt:(jint)lexState;
-
 - (OrgApacheLuceneQueryparserClassicToken *)getNextToken;
 
 - (void)ReInitWithOrgApacheLuceneQueryparserClassicCharStream:(id<OrgApacheLuceneQueryparserClassicCharStream>)stream;
-
-- (void)ReInitWithOrgApacheLuceneQueryparserClassicCharStream:(id<OrgApacheLuceneQueryparserClassicCharStream>)stream
-                                                      withInt:(jint)lexState;
-
-- (void)SwitchToWithInt:(jint)lexState;
 
 #pragma mark Protected
 
@@ -97,10 +89,6 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserClassicQueryParserTokenMana
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserClassicQueryParserTokenManager_initWithOrgApacheLuceneQueryparserClassicCharStream_(OrgApacheLuceneQueryparserClassicQueryParserTokenManager *self, id<OrgApacheLuceneQueryparserClassicCharStream> stream);
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserClassicQueryParserTokenManager *new_OrgApacheLuceneQueryparserClassicQueryParserTokenManager_initWithOrgApacheLuceneQueryparserClassicCharStream_(id<OrgApacheLuceneQueryparserClassicCharStream> stream) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserClassicQueryParserTokenManager_initWithOrgApacheLuceneQueryparserClassicCharStream_withInt_(OrgApacheLuceneQueryparserClassicQueryParserTokenManager *self, id<OrgApacheLuceneQueryparserClassicCharStream> stream, jint lexState);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserClassicQueryParserTokenManager *new_OrgApacheLuceneQueryparserClassicQueryParserTokenManager_initWithOrgApacheLuceneQueryparserClassicCharStream_withInt_(id<OrgApacheLuceneQueryparserClassicCharStream> stream, jint lexState) NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserClassicQueryParserTokenManager)
 

@@ -20,28 +20,19 @@
 #define OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_INCLUDE 1
 #include "org/apache/lucene/queries/function/valuesource/MultiFloatFunction.h"
 
-@class IOSObjectArray;
-
 @interface OrgApacheLuceneQueriesFunctionValuesourceSumFloatFunction : OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValueSourceArray:(IOSObjectArray *)sources;
-
-#pragma mark Protected
-
-- (jfloat)funcWithInt:(jint)doc
-withOrgApacheLuceneQueriesFunctionFunctionValuesArray:(IOSObjectArray *)valsArr;
-
-- (NSString *)name;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceSumFloatFunction)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceSumFloatFunction_initWithOrgApacheLuceneQueriesFunctionValueSourceArray_(OrgApacheLuceneQueriesFunctionValuesourceSumFloatFunction *self, IOSObjectArray *sources);
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceSumFloatFunction_init(OrgApacheLuceneQueriesFunctionValuesourceSumFloatFunction *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceSumFloatFunction *new_OrgApacheLuceneQueriesFunctionValuesourceSumFloatFunction_initWithOrgApacheLuceneQueriesFunctionValueSourceArray_(IOSObjectArray *sources) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceSumFloatFunction *new_OrgApacheLuceneQueriesFunctionValuesourceSumFloatFunction_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceSumFloatFunction)
 

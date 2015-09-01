@@ -35,11 +35,6 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
-
-- (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-                                         withInt:(jint)maxEdits;
-
 - (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
                                          withInt:(jint)maxEdits
                                          withInt:(jint)prefixLength;
@@ -55,13 +50,7 @@
 + (jint)floatToEditsWithFloat:(jfloat)minimumSimilarity
                       withInt:(jint)termLen;
 
-- (jint)getMaxEdits;
-
-- (jint)getPrefixLength;
-
 - (OrgApacheLuceneIndexTerm *)getTerm;
-
-- (jboolean)getTranspositions;
 
 - (NSUInteger)hash;
 
@@ -93,14 +82,6 @@ FOUNDATION_EXPORT OrgApacheLuceneSearchFuzzyQuery *new_OrgApacheLuceneSearchFuzz
 FOUNDATION_EXPORT void OrgApacheLuceneSearchFuzzyQuery_initWithOrgApacheLuceneIndexTerm_withInt_withInt_(OrgApacheLuceneSearchFuzzyQuery *self, OrgApacheLuceneIndexTerm *term, jint maxEdits, jint prefixLength);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchFuzzyQuery *new_OrgApacheLuceneSearchFuzzyQuery_initWithOrgApacheLuceneIndexTerm_withInt_withInt_(OrgApacheLuceneIndexTerm *term, jint maxEdits, jint prefixLength) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchFuzzyQuery_initWithOrgApacheLuceneIndexTerm_withInt_(OrgApacheLuceneSearchFuzzyQuery *self, OrgApacheLuceneIndexTerm *term, jint maxEdits);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchFuzzyQuery *new_OrgApacheLuceneSearchFuzzyQuery_initWithOrgApacheLuceneIndexTerm_withInt_(OrgApacheLuceneIndexTerm *term, jint maxEdits) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchFuzzyQuery_initWithOrgApacheLuceneIndexTerm_(OrgApacheLuceneSearchFuzzyQuery *self, OrgApacheLuceneIndexTerm *term);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchFuzzyQuery *new_OrgApacheLuceneSearchFuzzyQuery_initWithOrgApacheLuceneIndexTerm_(OrgApacheLuceneIndexTerm *term) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT jint OrgApacheLuceneSearchFuzzyQuery_floatToEditsWithFloat_withInt_(jfloat minimumSimilarity, jint termLen);
 

@@ -9,7 +9,6 @@
 #include "org/apache/lucene/index/FieldInvertState.h"
 #include "org/apache/lucene/search/similarities/DefaultSimilarity.h"
 #include "org/apache/lucene/search/similarities/TFIDFSimilarity.h"
-#include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/SmallFloat.h"
 
 static IOSFloatArray *OrgApacheLuceneSearchSimilaritiesDefaultSimilarity_NORM_TABLE_;
@@ -56,24 +55,9 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchSimilaritiesDefaultSimilarity)
   return 1.0f / (distance + 1);
 }
 
-- (jfloat)scorePayloadWithInt:(jint)doc
-                      withInt:(jint)start
-                      withInt:(jint)end
-withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload {
-  return 1;
-}
-
 - (jfloat)idfWithLong:(jlong)docFreq
              withLong:(jlong)numDocs {
   return (jfloat) (JavaLangMath_logWithDouble_(numDocs / (jdouble) (docFreq + 1)) + 1.0);
-}
-
-- (void)setDiscountOverlapsWithBoolean:(jboolean)v {
-  discountOverlaps_ = v;
-}
-
-- (jboolean)getDiscountOverlaps {
-  return discountOverlaps_;
 }
 
 - (NSString *)description {
@@ -102,17 +86,14 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload {
     { "lengthNormWithOrgApacheLuceneIndexFieldInvertState:", "lengthNorm", "F", 0x1, NULL, NULL },
     { "tfWithFloat:", "tf", "F", 0x1, NULL, NULL },
     { "sloppyFreqWithInt:", "sloppyFreq", "F", 0x1, NULL, NULL },
-    { "scorePayloadWithInt:withInt:withInt:withOrgApacheLuceneUtilBytesRef:", "scorePayload", "F", 0x1, NULL, NULL },
     { "idfWithLong:withLong:", "idf", "F", 0x1, NULL, NULL },
-    { "setDiscountOverlapsWithBoolean:", "setDiscountOverlaps", "V", 0x1, NULL, NULL },
-    { "getDiscountOverlaps", NULL, "Z", 0x1, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "NORM_TABLE_", NULL, 0x1a, "[F", &OrgApacheLuceneSearchSimilaritiesDefaultSimilarity_NORM_TABLE_, NULL, .constantValue.asLong = 0 },
     { "discountOverlaps_", NULL, 0x4, "Z", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesDefaultSimilarity = { 2, "DefaultSimilarity", "org.apache.lucene.search.similarities", NULL, 0x1, 13, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesDefaultSimilarity = { 2, "DefaultSimilarity", "org.apache.lucene.search.similarities", NULL, 0x1, 10, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchSimilaritiesDefaultSimilarity;
 }
 

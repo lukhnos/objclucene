@@ -25,14 +25,12 @@
 #include "org/apache/lucene/util/Accountable.h"
 
 @class OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader;
-@class OrgApacheLuceneCodecsBlocktreeStats;
 @class OrgApacheLuceneIndexFieldInfo;
 @class OrgApacheLuceneIndexTermsEnum;
 @class OrgApacheLuceneStoreIndexInput;
 @class OrgApacheLuceneUtilAutomatonCompiledAutomaton;
 @class OrgApacheLuceneUtilBytesRef;
 @class OrgApacheLuceneUtilFstFST;
-@protocol JavaUtilCollection;
 
 @interface OrgApacheLuceneCodecsBlocktreeFieldReader : OrgApacheLuceneIndexTerms < OrgApacheLuceneUtilAccountable > {
  @public
@@ -53,15 +51,7 @@
 
 #pragma mark Public
 
-- (id<JavaUtilCollection>)getChildResources;
-
 - (jint)getDocCount;
-
-- (OrgApacheLuceneUtilBytesRef *)getMax;
-
-- (OrgApacheLuceneUtilBytesRef *)getMin;
-
-- (OrgApacheLuceneCodecsBlocktreeStats *)getStats;
 
 - (jlong)getSumDocFreq;
 

@@ -50,8 +50,6 @@
 
 - (jboolean)seekExactWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term;
 
-- (void)seekExactWithLong:(jlong)ord;
-
 - (OrgApacheLuceneUtilBytesRef *)term;
 
 - (NSString *)description;

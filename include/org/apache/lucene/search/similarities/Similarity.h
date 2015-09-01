@@ -56,24 +56,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesSimilarity)
 #if !defined (_OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_) && (OrgApacheLuceneSearchSimilaritiesSimilarity_INCLUDE_ALL || OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_INCLUDE)
 #define _OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_
 
-@class OrgApacheLuceneSearchExplanation;
-@class OrgApacheLuceneUtilBytesRef;
-
 @interface OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
-- (jfloat)computePayloadFactorWithInt:(jint)doc
-                              withInt:(jint)start
-                              withInt:(jint)end
-      withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload;
-
 - (jfloat)computeSlopFactorWithInt:(jint)distance;
-
-- (OrgApacheLuceneSearchExplanation *)explainWithInt:(jint)doc
-                withOrgApacheLuceneSearchExplanation:(OrgApacheLuceneSearchExplanation *)freq;
 
 - (jfloat)scoreWithInt:(jint)doc
              withFloat:(jfloat)freq;

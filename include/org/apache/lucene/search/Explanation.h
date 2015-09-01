@@ -29,8 +29,6 @@
 
 - (jfloat)getValue;
 
-- (jboolean)isMatch;
-
 + (OrgApacheLuceneSearchExplanation *)matchWithFloat:(jfloat)value
                                         withNSString:(NSString *)description_
                               withJavaUtilCollection:(id<JavaUtilCollection>)details;
@@ -38,14 +36,6 @@
 + (OrgApacheLuceneSearchExplanation *)matchWithFloat:(jfloat)value
                                         withNSString:(NSString *)description_
            withOrgApacheLuceneSearchExplanationArray:(IOSObjectArray *)details;
-
-+ (OrgApacheLuceneSearchExplanation *)noMatchWithNSString:(NSString *)description_
-                                   withJavaUtilCollection:(id<JavaUtilCollection>)details;
-
-+ (OrgApacheLuceneSearchExplanation *)noMatchWithNSString:(NSString *)description_
-                withOrgApacheLuceneSearchExplanationArray:(IOSObjectArray *)details;
-
-- (NSString *)toHtml;
 
 - (NSString *)description;
 
@@ -56,10 +46,6 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchExplanation)
 FOUNDATION_EXPORT OrgApacheLuceneSearchExplanation *OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withJavaUtilCollection_(jfloat value, NSString *description_, id<JavaUtilCollection> details);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchExplanation *OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_(jfloat value, NSString *description_, IOSObjectArray *details);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchExplanation *OrgApacheLuceneSearchExplanation_noMatchWithNSString_withJavaUtilCollection_(NSString *description_, id<JavaUtilCollection> details);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchExplanation *OrgApacheLuceneSearchExplanation_noMatchWithNSString_withOrgApacheLuceneSearchExplanationArray_(NSString *description_, IOSObjectArray *details);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchExplanation)
 

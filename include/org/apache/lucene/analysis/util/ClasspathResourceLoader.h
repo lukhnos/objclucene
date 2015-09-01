@@ -20,27 +20,11 @@
 #define OrgApacheLuceneAnalysisUtilResourceLoader_INCLUDE 1
 #include "org/apache/lucene/analysis/util/ResourceLoader.h"
 
-@class IOSClass;
-@class JavaIoInputStream;
-@class JavaLangClassLoader;
-
 @interface OrgApacheLuceneAnalysisUtilClasspathResourceLoader : NSObject < OrgApacheLuceneAnalysisUtilResourceLoader >
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (instancetype)initWithIOSClass:(IOSClass *)clazz;
-
-- (instancetype)initWithJavaLangClassLoader:(JavaLangClassLoader *)loader;
-
-- (IOSClass *)findClassWithNSString:(NSString *)cname
-                       withIOSClass:(IOSClass *)expectedType;
-
-- (id)newInstanceWithNSString:(NSString *)cname
-                 withIOSClass:(IOSClass *)expectedType OBJC_METHOD_FAMILY_NONE;
-
-- (JavaIoInputStream *)openResourceWithNSString:(NSString *)resource;
 
 @end
 
@@ -49,14 +33,6 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisUtilClasspathResourceLoader)
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisUtilClasspathResourceLoader_init(OrgApacheLuceneAnalysisUtilClasspathResourceLoader *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilClasspathResourceLoader *new_OrgApacheLuceneAnalysisUtilClasspathResourceLoader_init() NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisUtilClasspathResourceLoader_initWithJavaLangClassLoader_(OrgApacheLuceneAnalysisUtilClasspathResourceLoader *self, JavaLangClassLoader *loader);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilClasspathResourceLoader *new_OrgApacheLuceneAnalysisUtilClasspathResourceLoader_initWithJavaLangClassLoader_(JavaLangClassLoader *loader) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisUtilClasspathResourceLoader_initWithIOSClass_(OrgApacheLuceneAnalysisUtilClasspathResourceLoader *self, IOSClass *clazz);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilClasspathResourceLoader *new_OrgApacheLuceneAnalysisUtilClasspathResourceLoader_initWithIOSClass_(IOSClass *clazz) NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilClasspathResourceLoader)
 

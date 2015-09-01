@@ -20,48 +20,19 @@
 #define OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource_INCLUDE 1
 #include "org/apache/lucene/queries/function/valuesource/FieldCacheSource.h"
 
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneQueriesFunctionFunctionValues;
-@class OrgApacheLuceneSearchSortField;
-@class OrgApacheLuceneSearchSortedSetSelector_TypeEnum;
-@protocol JavaUtilMap;
-
-@interface OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource : OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource {
- @public
-  OrgApacheLuceneSearchSortedSetSelector_TypeEnum *selector_;
-}
+@interface OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource : OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field;
-
-- (instancetype)initWithNSString:(NSString *)field
-withOrgApacheLuceneSearchSortedSetSelector_TypeEnum:(OrgApacheLuceneSearchSortedSetSelector_TypeEnum *)selector;
-
-- (NSString *)description__;
-
-- (jboolean)isEqual:(id)obj;
-
-- (OrgApacheLuceneSearchSortField *)getSortFieldWithBoolean:(jboolean)reverse;
-
-- (OrgApacheLuceneQueriesFunctionFunctionValues *)getValuesWithJavaUtilMap:(id<JavaUtilMap>)context
-                                 withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext;
-
-- (NSUInteger)hash;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource, selector_, OrgApacheLuceneSearchSortedSetSelector_TypeEnum *)
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource_init(OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource_initWithNSString_(OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource *self, NSString *field);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource *new_OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource_initWithNSString_(NSString *field) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource_initWithNSString_withOrgApacheLuceneSearchSortedSetSelector_TypeEnum_(OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource *self, NSString *field, OrgApacheLuceneSearchSortedSetSelector_TypeEnum *selector);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource *new_OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource_initWithNSString_withOrgApacheLuceneSearchSortedSetSelector_TypeEnum_(NSString *field, OrgApacheLuceneSearchSortedSetSelector_TypeEnum *selector) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource *new_OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceSortedSetFieldSource)
 

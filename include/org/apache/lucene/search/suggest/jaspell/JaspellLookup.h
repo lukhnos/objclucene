@@ -24,48 +24,15 @@
 #define OrgApacheLuceneUtilAccountable_INCLUDE 1
 #include "org/apache/lucene/util/Accountable.h"
 
-@class OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie;
-@class OrgApacheLuceneStoreDataInput;
-@class OrgApacheLuceneStoreDataOutput;
-@protocol JavaLangCharSequence;
-@protocol JavaUtilList;
-@protocol JavaUtilSet;
-@protocol OrgApacheLuceneSearchSuggestInputIterator;
-
-@interface OrgApacheLuceneSearchSuggestJaspellJaspellLookup : OrgApacheLuceneSearchSuggestLookup < OrgApacheLuceneUtilAccountable > {
- @public
-  OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie *trie_;
-}
+@interface OrgApacheLuceneSearchSuggestJaspellJaspellLookup : OrgApacheLuceneSearchSuggestLookup < OrgApacheLuceneUtilAccountable >
 
 #pragma mark Public
 
 - (instancetype)init;
 
-- (jboolean)addWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
-                                 withId:(id)value;
-
-- (void)buildWithOrgApacheLuceneSearchSuggestInputIterator:(id<OrgApacheLuceneSearchSuggestInputIterator>)iterator;
-
-- (id)getWithJavaLangCharSequence:(id<JavaLangCharSequence>)key;
-
-- (jlong)getCount;
-
-- (jboolean)load__WithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)input;
-
-- (id<JavaUtilList>)lookupWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
-                                   withJavaUtilSet:(id<JavaUtilSet>)contexts
-                                       withBoolean:(jboolean)onlyMorePopular
-                                           withInt:(jint)num;
-
-- (jlong)ramBytesUsed;
-
-- (jboolean)storeWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)output;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestJaspellJaspellLookup)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestJaspellJaspellLookup, trie_, OrgApacheLuceneSearchSuggestJaspellJaspellTernarySearchTrie *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestJaspellJaspellLookup_init(OrgApacheLuceneSearchSuggestJaspellJaspellLookup *self);
 

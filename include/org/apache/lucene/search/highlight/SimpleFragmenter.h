@@ -30,11 +30,7 @@
 
 - (instancetype)initWithInt:(jint)fragmentSize;
 
-- (jint)getFragmentSize;
-
 - (jboolean)isNewFragment;
-
-- (void)setFragmentSizeWithInt:(jint)size;
 
 - (void)startWithNSString:(NSString *)originalText
 withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)stream;

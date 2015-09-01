@@ -6,15 +6,7 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/queryparser/flexible/core/config/ConfigurationKey.h"
 
-@interface OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey ()
-
-- (instancetype)init;
-
-@end
-
-__attribute__((unused)) static void OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey_init(OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey *self);
-
-__attribute__((unused)) static OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey *new_OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey_init() NS_RETURNS_RETAINED;
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey
 
@@ -23,16 +15,11 @@ __attribute__((unused)) static OrgApacheLuceneQueryparserFlexibleCoreConfigConfi
   return self;
 }
 
-+ (OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey *)newInstance {
-  return OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey_newInstance();
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", "ConfigurationKey", NULL, 0x2, NULL, NULL },
-    { "newInstance", NULL, "Lorg.apache.lucene.queryparser.flexible.core.config.ConfigurationKey;", 0x9, NULL, "<T:Ljava/lang/Object;>()Lorg/apache/lucene/queryparser/flexible/core/config/ConfigurationKey<TT;>;" },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey = { 2, "ConfigurationKey", "org.apache.lucene.queryparser.flexible.core.config", NULL, 0x11, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, "<T:Ljava/lang/Object;>Ljava/lang/Object;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey = { 2, "ConfigurationKey", "org.apache.lucene.queryparser.flexible.core.config", NULL, 0x11, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, "<T:Ljava/lang/Object;>Ljava/lang/Object;" };
   return &_OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey;
 }
 
@@ -46,11 +33,6 @@ OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey *new_OrgApacheLucen
   OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey *self = [OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey alloc];
   OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey_init(self);
   return self;
-}
-
-OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey *OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey_newInstance() {
-  OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey_initialize();
-  return [new_OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey_init() autorelease];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey)

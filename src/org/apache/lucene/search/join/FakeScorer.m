@@ -3,12 +3,10 @@
 //  source: ./join/src/java/org/apache/lucene/search/join/FakeScorer.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
-#include "java/lang/UnsupportedOperationException.h"
-#include "org/apache/lucene/search/Scorer.h"
 #include "org/apache/lucene/search/join/FakeScorer.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneSearchJoinFakeScorer
 
@@ -17,55 +15,18 @@
   return self;
 }
 
-- (jint)docID {
-  return doc_;
-}
-
-- (jint)nextDoc {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
-}
-
-- (jint)advanceWithInt:(jint)target {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
-}
-
-- (jlong)cost {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
-}
-
-- (jint)freq {
-  return freq_;
-}
-
-- (jfloat)score {
-  return score_;
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", "FakeScorer", NULL, 0x0, NULL, NULL },
-    { "docID", NULL, "I", 0x1, NULL, NULL },
-    { "nextDoc", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "advanceWithInt:", "advance", "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "cost", NULL, "J", 0x1, NULL, NULL },
-    { "freq", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "score", NULL, "F", 0x1, "Ljava.io.IOException;", NULL },
+    { "init", NULL, NULL, 0x0, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "score_", NULL, 0x0, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "doc_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "freq_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinFakeScorer = { 2, "FakeScorer", "org.apache.lucene.search.join", NULL, 0x0, 7, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinFakeScorer = { 2, "FakeScorer", "org.apache.lucene.search.join", NULL, 0x0, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchJoinFakeScorer;
 }
 
 @end
 
 void OrgApacheLuceneSearchJoinFakeScorer_init(OrgApacheLuceneSearchJoinFakeScorer *self) {
-  OrgApacheLuceneSearchScorer_initWithOrgApacheLuceneSearchWeight_(self, nil);
-  self->doc_ = -1;
-  self->freq_ = 1;
+  NSObject_init(self);
 }
 
 OrgApacheLuceneSearchJoinFakeScorer *new_OrgApacheLuceneSearchJoinFakeScorer_init() {

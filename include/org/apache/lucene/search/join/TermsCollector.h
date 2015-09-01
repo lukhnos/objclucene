@@ -26,37 +26,17 @@
 #define OrgApacheLuceneSearchSimpleCollector_INCLUDE 1
 #include "org/apache/lucene/search/SimpleCollector.h"
 
-@class OrgApacheLuceneUtilBytesRefHash;
-
-@interface OrgApacheLuceneSearchJoinTermsCollector : OrgApacheLuceneSearchSimpleCollector {
- @public
-  NSString *field_;
-  OrgApacheLuceneUtilBytesRefHash *collectorTerms_;
-}
-
-#pragma mark Public
-
-- (OrgApacheLuceneUtilBytesRefHash *)getCollectorTerms;
-
-- (jboolean)needsScores;
+@interface OrgApacheLuceneSearchJoinTermsCollector : OrgApacheLuceneSearchSimpleCollector
 
 #pragma mark Package-Private
 
-- (instancetype)initWithNSString:(NSString *)field;
-
-+ (OrgApacheLuceneSearchJoinTermsCollector *)createWithNSString:(NSString *)field
-                                                    withBoolean:(jboolean)multipleValuesPerDocument;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinTermsCollector)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinTermsCollector, field_, NSString *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinTermsCollector, collectorTerms_, OrgApacheLuceneUtilBytesRefHash *)
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinTermsCollector_initWithNSString_(OrgApacheLuceneSearchJoinTermsCollector *self, NSString *field);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchJoinTermsCollector *OrgApacheLuceneSearchJoinTermsCollector_createWithNSString_withBoolean_(NSString *field, jboolean multipleValuesPerDocument);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinTermsCollector_init(OrgApacheLuceneSearchJoinTermsCollector *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinTermsCollector)
 
@@ -65,35 +45,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinTermsCollector)
 #if !defined (_OrgApacheLuceneSearchJoinTermsCollector_MV_) && (OrgApacheLuceneSearchJoinTermsCollector_INCLUDE_ALL || OrgApacheLuceneSearchJoinTermsCollector_MV_INCLUDE)
 #define _OrgApacheLuceneSearchJoinTermsCollector_MV_
 
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneUtilBytesRef;
-
-@interface OrgApacheLuceneSearchJoinTermsCollector_MV : OrgApacheLuceneSearchJoinTermsCollector {
- @public
-  OrgApacheLuceneUtilBytesRef *scratch_;
-}
-
-#pragma mark Public
-
-- (void)collectWithInt:(jint)doc;
-
-#pragma mark Protected
-
-- (void)doSetNextReaderWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
+@interface OrgApacheLuceneSearchJoinTermsCollector_MV : OrgApacheLuceneSearchJoinTermsCollector
 
 #pragma mark Package-Private
 
-- (instancetype)initWithNSString:(NSString *)field;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinTermsCollector_MV)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinTermsCollector_MV, scratch_, OrgApacheLuceneUtilBytesRef *)
+FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinTermsCollector_MV_init(OrgApacheLuceneSearchJoinTermsCollector_MV *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinTermsCollector_MV_initWithNSString_(OrgApacheLuceneSearchJoinTermsCollector_MV *self, NSString *field);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchJoinTermsCollector_MV *new_OrgApacheLuceneSearchJoinTermsCollector_MV_initWithNSString_(NSString *field) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchJoinTermsCollector_MV *new_OrgApacheLuceneSearchJoinTermsCollector_MV_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinTermsCollector_MV)
 
@@ -102,35 +66,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinTermsCollector_MV)
 #if !defined (_OrgApacheLuceneSearchJoinTermsCollector_SV_) && (OrgApacheLuceneSearchJoinTermsCollector_INCLUDE_ALL || OrgApacheLuceneSearchJoinTermsCollector_SV_INCLUDE)
 #define _OrgApacheLuceneSearchJoinTermsCollector_SV_
 
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneUtilBytesRef;
-
-@interface OrgApacheLuceneSearchJoinTermsCollector_SV : OrgApacheLuceneSearchJoinTermsCollector {
- @public
-  OrgApacheLuceneUtilBytesRef *spare_;
-}
-
-#pragma mark Public
-
-- (void)collectWithInt:(jint)doc;
-
-#pragma mark Protected
-
-- (void)doSetNextReaderWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
+@interface OrgApacheLuceneSearchJoinTermsCollector_SV : OrgApacheLuceneSearchJoinTermsCollector
 
 #pragma mark Package-Private
 
-- (instancetype)initWithNSString:(NSString *)field;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinTermsCollector_SV)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinTermsCollector_SV, spare_, OrgApacheLuceneUtilBytesRef *)
+FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinTermsCollector_SV_init(OrgApacheLuceneSearchJoinTermsCollector_SV *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinTermsCollector_SV_initWithNSString_(OrgApacheLuceneSearchJoinTermsCollector_SV *self, NSString *field);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchJoinTermsCollector_SV *new_OrgApacheLuceneSearchJoinTermsCollector_SV_initWithNSString_(NSString *field) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchJoinTermsCollector_SV *new_OrgApacheLuceneSearchJoinTermsCollector_SV_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinTermsCollector_SV)
 

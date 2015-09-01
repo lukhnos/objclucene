@@ -19,9 +19,6 @@
 #include "java/lang/System.h"
 #include "java/lang/Throwable.h"
 #include "java/util/Arrays.h"
-#include "java/util/Collection.h"
-#include "java/util/Collections.h"
-#include "java/util/Set.h"
 #include "org/apache/lucene/codecs/CodecUtil.h"
 #include "org/apache/lucene/codecs/StoredFieldsReader.h"
 #include "org/apache/lucene/codecs/compressing/CompressingStoredFieldsIndexReader.h"
@@ -42,8 +39,6 @@
 #include "org/apache/lucene/store/Directory.h"
 #include "org/apache/lucene/store/IOContext.h"
 #include "org/apache/lucene/store/IndexInput.h"
-#include "org/apache/lucene/util/Accountable.h"
-#include "org/apache/lucene/util/Accountables.h"
 #include "org/apache/lucene/util/ArrayUtil.h"
 #include "org/apache/lucene/util/BitUtil.h"
 #include "org/apache/lucene/util/BytesRef.h"
@@ -321,10 +316,6 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
   return [((OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader *) nil_chk(indexReader_)) ramBytesUsed];
 }
 
-- (id<JavaUtilCollection>)getChildResources {
-  return JavaUtilCollections_singletonWithId_(OrgApacheLuceneUtilAccountables_namedAccountableWithNSString_withOrgApacheLuceneUtilAccountable_(@"stored field index", indexReader_));
-}
-
 - (void)checkIntegrity {
   OrgApacheLuceneCodecsCodecUtil_checksumEntireFileWithOrgApacheLuceneStoreIndexInput_(fieldsStream_);
 }
@@ -368,7 +359,6 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
     { "getNumDirtyChunks", NULL, "J", 0x0, NULL, NULL },
     { "getPackedIntsVersion", NULL, "I", 0x0, NULL, NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
     { "checkIntegrity", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
   };
@@ -390,7 +380,7 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
     { "closed_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.codecs.compressing.CompressingStoredFieldsReader$SerializedDocument;", "Lorg.apache.lucene.codecs.compressing.CompressingStoredFieldsReader$BlockState;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader = { 2, "CompressingStoredFieldsReader", "org.apache.lucene.codecs.compressing", NULL, 0x11, 26, methods, 15, fields, 0, NULL, 2, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader = { 2, "CompressingStoredFieldsReader", "org.apache.lucene.codecs.compressing", NULL, 0x11, 25, methods, 15, fields, 0, NULL, 2, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader;
 }
 

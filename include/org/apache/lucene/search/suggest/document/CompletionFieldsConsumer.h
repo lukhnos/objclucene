@@ -20,30 +20,19 @@
 #define OrgApacheLuceneCodecsFieldsConsumer_INCLUDE 1
 #include "org/apache/lucene/codecs/FieldsConsumer.h"
 
-@class OrgApacheLuceneCodecsPostingsFormat;
-@class OrgApacheLuceneIndexFields;
-@class OrgApacheLuceneIndexSegmentWriteState;
-
 @interface OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer : OrgApacheLuceneCodecsFieldsConsumer
-
-#pragma mark Public
-
-- (void)close;
-
-- (void)writeWithOrgApacheLuceneIndexFields:(OrgApacheLuceneIndexFields *)fields;
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneCodecsPostingsFormat:(OrgApacheLuceneCodecsPostingsFormat *)delegatePostingsFormat
-                  withOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_initWithOrgApacheLuceneCodecsPostingsFormat_withOrgApacheLuceneIndexSegmentWriteState_(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer *self, OrgApacheLuceneCodecsPostingsFormat *delegatePostingsFormat, OrgApacheLuceneIndexSegmentWriteState *state);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_init(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer *new_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_initWithOrgApacheLuceneCodecsPostingsFormat_withOrgApacheLuceneIndexSegmentWriteState_(OrgApacheLuceneCodecsPostingsFormat *delegatePostingsFormat, OrgApacheLuceneIndexSegmentWriteState *state) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer *new_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer)
 

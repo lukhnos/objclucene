@@ -20,31 +20,19 @@
 #define OrgApacheLuceneSearchQuery_INCLUDE 1
 #include "org/apache/lucene/search/Query.h"
 
-@class OrgApacheLuceneSearchIndexSearcher;
-@class OrgApacheLuceneSearchWeight;
-
 @interface OrgApacheLuceneSearchFieldValueQuery : OrgApacheLuceneSearchQuery
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field;
-
-- (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
-                                                                        withBoolean:(jboolean)needsScores;
-
-- (jboolean)isEqual:(id)obj;
-
-- (NSUInteger)hash;
-
-- (NSString *)toStringWithNSString:(NSString *)field;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchFieldValueQuery)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchFieldValueQuery_initWithNSString_(OrgApacheLuceneSearchFieldValueQuery *self, NSString *field);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchFieldValueQuery_init(OrgApacheLuceneSearchFieldValueQuery *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchFieldValueQuery *new_OrgApacheLuceneSearchFieldValueQuery_initWithNSString_(NSString *field) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchFieldValueQuery *new_OrgApacheLuceneSearchFieldValueQuery_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldValueQuery)
 

@@ -12,7 +12,6 @@
 #include "java/io/PrintStream.h"
 #include "java/lang/Character.h"
 #include "java/lang/CloneNotSupportedException.h"
-#include "java/lang/Deprecated.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/IllegalStateException.h"
 #include "java/lang/Integer.h"
@@ -97,10 +96,6 @@ __attribute__((unused)) static void OrgApacheLuceneIndexSegmentInfos_messageWith
 
 __attribute__((unused)) static void OrgApacheLuceneIndexSegmentInfos_rollbackCommitWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexSegmentInfos *self, OrgApacheLuceneStoreDirectory *dir);
 
-__attribute__((unused)) static void OrgApacheLuceneIndexSegmentInfos_prepareCommitWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexSegmentInfos *self, OrgApacheLuceneStoreDirectory *dir);
-
-__attribute__((unused)) static NSString *OrgApacheLuceneIndexSegmentInfos_finishCommitWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexSegmentInfos *self, OrgApacheLuceneStoreDirectory *dir);
-
 @interface OrgApacheLuceneIndexSegmentInfos_$1 : OrgApacheLuceneIndexSegmentInfos_FindSegmentsFile
 
 - (OrgApacheLuceneIndexSegmentInfos *)doBodyWithNSString:(NSString *)segmentFileName;
@@ -134,16 +129,8 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexSegmentInfos)
   return OrgApacheLuceneIndexSegmentInfos_getLastCommitGenerationWithNSStringArray_(files);
 }
 
-+ (jlong)getLastCommitGenerationWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory {
-  return OrgApacheLuceneIndexSegmentInfos_getLastCommitGenerationWithOrgApacheLuceneStoreDirectory_(directory);
-}
-
 + (NSString *)getLastCommitSegmentsFileNameWithNSStringArray:(IOSObjectArray *)files {
   return OrgApacheLuceneIndexSegmentInfos_getLastCommitSegmentsFileNameWithNSStringArray_(files);
-}
-
-+ (NSString *)getLastCommitSegmentsFileNameWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory {
-  return OrgApacheLuceneIndexSegmentInfos_getLastCommitSegmentsFileNameWithOrgApacheLuceneStoreDirectory_(directory);
 }
 
 - (NSString *)getSegmentsFileName {
@@ -156,10 +143,6 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexSegmentInfos)
 
 - (jlong)getNextPendingGeneration {
   return OrgApacheLuceneIndexSegmentInfos_getNextPendingGeneration(self);
-}
-
-- (IOSByteArray *)getId {
-  return id__ == nil ? nil : [id__ clone];
 }
 
 + (OrgApacheLuceneIndexSegmentInfos *)readCommitWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory
@@ -208,14 +191,6 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexSegmentInfos)
   return lastGeneration_;
 }
 
-+ (void)setInfoStreamWithJavaIoPrintStream:(JavaIoPrintStream *)infoStream {
-  OrgApacheLuceneIndexSegmentInfos_setInfoStreamWithJavaIoPrintStream_(infoStream);
-}
-
-+ (JavaIoPrintStream *)getInfoStream {
-  return OrgApacheLuceneIndexSegmentInfos_getInfoStream();
-}
-
 + (void)messageWithNSString:(NSString *)message {
   OrgApacheLuceneIndexSegmentInfos_messageWithNSString_(message);
 }
@@ -241,12 +216,10 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexSegmentInfos)
 }
 
 - (void)prepareCommitWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir {
-  OrgApacheLuceneIndexSegmentInfos_prepareCommitWithOrgApacheLuceneStoreDirectory_(self, dir);
-}
-
-- (id<JavaUtilCollection>)filesWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
-                                                     withBoolean:(jboolean)includeSegmentsFile {
-  return [self filesWithBoolean:includeSegmentsFile];
+  if (pendingCommit_) {
+    @throw [new_JavaLangIllegalStateException_initWithNSString_(@"prepareCommit was already called") autorelease];
+  }
+  OrgApacheLuceneIndexSegmentInfos_writeWithOrgApacheLuceneStoreDirectory_(self, dir);
 }
 
 - (id<JavaUtilCollection>)filesWithBoolean:(jboolean)includeSegmentsFile {
@@ -266,16 +239,25 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexSegmentInfos)
 }
 
 - (NSString *)finishCommitWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir {
-  return OrgApacheLuceneIndexSegmentInfos_finishCommitWithOrgApacheLuceneStoreDirectory_(self, dir);
-}
-
-- (void)commitWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir {
-  OrgApacheLuceneIndexSegmentInfos_prepareCommitWithOrgApacheLuceneStoreDirectory_(self, dir);
-  OrgApacheLuceneIndexSegmentInfos_finishCommitWithOrgApacheLuceneStoreDirectory_(self, dir);
-}
-
-- (NSString *)toStringWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir {
-  return [self description];
+  if (pendingCommit_ == NO) {
+    @throw [new_JavaLangIllegalStateException_initWithNSString_(@"prepareCommit was not called") autorelease];
+  }
+  jboolean success = NO;
+  NSString *dest;
+  @try {
+    NSString *src = OrgApacheLuceneIndexIndexFileNames_fileNameFromGenerationWithNSString_withNSString_withLong_(OrgApacheLuceneIndexIndexFileNames_PENDING_SEGMENTS_, @"", generation_);
+    dest = OrgApacheLuceneIndexIndexFileNames_fileNameFromGenerationWithNSString_withNSString_withLong_(OrgApacheLuceneIndexIndexFileNames_SEGMENTS_, @"", generation_);
+    [((OrgApacheLuceneStoreDirectory *) nil_chk(dir)) renameFileWithNSString:src withNSString:dest];
+    success = YES;
+  }
+  @finally {
+    if (!success) {
+      OrgApacheLuceneIndexSegmentInfos_rollbackCommitWithOrgApacheLuceneStoreDirectory_(self, dir);
+    }
+  }
+  pendingCommit_ = NO;
+  lastGeneration_ = generation_;
+  return dest;
 }
 
 - (NSString *)description {
@@ -294,16 +276,6 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexSegmentInfos)
 
 - (id<JavaUtilMap>)getUserData {
   return userData_;
-}
-
-- (void)setUserDataWithJavaUtilMap:(id<JavaUtilMap>)data {
-  if (data == nil) {
-    JreStrongAssign(&userData_, JavaUtilCollections_emptyMap());
-  }
-  else {
-    JreStrongAssign(&userData_, data);
-  }
-  [self changed];
 }
 
 - (void)replaceWithOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)other {
@@ -406,14 +378,6 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexSegmentInfos)
   return [((id<JavaUtilList>) nil_chk(segments_)) indexOfWithId:si];
 }
 
-- (OrgApacheLuceneUtilVersion *)getCommitLuceneVersion {
-  return luceneVersion_;
-}
-
-- (OrgApacheLuceneUtilVersion *)getMinSegmentLuceneVersion {
-  return minSegmentLuceneVersion_;
-}
-
 - (void)dealloc {
   RELEASE_(userData_);
   RELEASE_(segments_);
@@ -439,26 +403,15 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexSegmentInfos)
   }
 }
 
-+ (IOSObjectArray *)__annotations_filesWithOrgApacheLuceneStoreDirectory_withBoolean_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_toStringWithOrgApacheLuceneStoreDirectory_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "init", "SegmentInfos", NULL, 0x1, NULL, NULL },
     { "infoWithInt:", "info", "Lorg.apache.lucene.index.SegmentCommitInfo;", 0x1, NULL, NULL },
     { "getLastCommitGenerationWithNSStringArray:", "getLastCommitGeneration", "J", 0x9, NULL, NULL },
-    { "getLastCommitGenerationWithOrgApacheLuceneStoreDirectory:", "getLastCommitGeneration", "J", 0x9, "Ljava.io.IOException;", NULL },
     { "getLastCommitSegmentsFileNameWithNSStringArray:", "getLastCommitSegmentsFileName", "Ljava.lang.String;", 0x9, NULL, NULL },
-    { "getLastCommitSegmentsFileNameWithOrgApacheLuceneStoreDirectory:", "getLastCommitSegmentsFileName", "Ljava.lang.String;", 0x9, "Ljava.io.IOException;", NULL },
     { "getSegmentsFileName", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
     { "generationFromSegmentsFileNameWithNSString:", "generationFromSegmentsFileName", "J", 0x9, NULL, NULL },
     { "getNextPendingGeneration", NULL, "J", 0x2, NULL, NULL },
-    { "getId", NULL, "[B", 0x1, NULL, NULL },
     { "readCommitWithOrgApacheLuceneStoreDirectory:withNSString:", "readCommit", "Lorg.apache.lucene.index.SegmentInfos;", 0x19, "Ljava.io.IOException;", NULL },
     { "readCodecWithOrgApacheLuceneStoreDataInput:withBoolean:", "readCodec", "Lorg.apache.lucene.codecs.Codec;", 0xa, "Ljava.io.IOException;", NULL },
     { "readLatestCommitWithOrgApacheLuceneStoreDirectory:", "readLatestCommit", "Lorg.apache.lucene.index.SegmentInfos;", 0x19, "Ljava.io.IOException;", NULL },
@@ -467,22 +420,16 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexSegmentInfos)
     { "getVersion", NULL, "J", 0x1, NULL, NULL },
     { "getGeneration", NULL, "J", 0x1, NULL, NULL },
     { "getLastGeneration", NULL, "J", 0x1, NULL, NULL },
-    { "setInfoStreamWithJavaIoPrintStream:", "setInfoStream", "V", 0x9, NULL, NULL },
-    { "getInfoStream", NULL, "Ljava.io.PrintStream;", 0x9, NULL, NULL },
     { "messageWithNSString:", "message", "V", 0xa, NULL, NULL },
     { "updateGenerationWithOrgApacheLuceneIndexSegmentInfos:", "updateGeneration", "V", 0x0, NULL, NULL },
     { "updateGenerationVersionAndCounterWithOrgApacheLuceneIndexSegmentInfos:", "updateGenerationVersionAndCounter", "V", 0x0, NULL, NULL },
     { "setNextWriteGenerationWithLong:", "setNextWriteGeneration", "V", 0x0, NULL, NULL },
     { "rollbackCommitWithOrgApacheLuceneStoreDirectory:", "rollbackCommit", "V", 0x10, NULL, NULL },
     { "prepareCommitWithOrgApacheLuceneStoreDirectory:", "prepareCommit", "V", 0x10, "Ljava.io.IOException;", NULL },
-    { "filesWithOrgApacheLuceneStoreDirectory:withBoolean:", "files", "Ljava.util.Collection;", 0x11, "Ljava.io.IOException;", NULL },
     { "filesWithBoolean:", "files", "Ljava.util.Collection;", 0x1, "Ljava.io.IOException;", NULL },
     { "finishCommitWithOrgApacheLuceneStoreDirectory:", "finishCommit", "Ljava.lang.String;", 0x10, "Ljava.io.IOException;", NULL },
-    { "commitWithOrgApacheLuceneStoreDirectory:", "commit", "V", 0x10, "Ljava.io.IOException;", NULL },
-    { "toStringWithOrgApacheLuceneStoreDirectory:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "getUserData", NULL, "Ljava.util.Map;", 0x1, NULL, NULL },
-    { "setUserDataWithJavaUtilMap:", "setUserData", "V", 0x0, NULL, NULL },
     { "replaceWithOrgApacheLuceneIndexSegmentInfos:", "replace", "V", 0x0, NULL, NULL },
     { "totalMaxDoc", NULL, "I", 0x1, NULL, NULL },
     { "changed", NULL, "V", 0x1, NULL, NULL },
@@ -499,8 +446,6 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexSegmentInfos)
     { "removeWithInt:", "remove", "V", 0x0, NULL, NULL },
     { "containsWithOrgApacheLuceneIndexSegmentCommitInfo:", "contains", "Z", 0x0, NULL, NULL },
     { "indexOfWithOrgApacheLuceneIndexSegmentCommitInfo:", "indexOf", "I", 0x0, NULL, NULL },
-    { "getCommitLuceneVersion", NULL, "Lorg.apache.lucene.util.Version;", 0x1, NULL, NULL },
-    { "getMinSegmentLuceneVersion", NULL, "Lorg.apache.lucene.util.Version;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "VERSION_40", "VERSION_40", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneIndexSegmentInfos_VERSION_40 },
@@ -525,7 +470,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexSegmentInfos)
     { "pendingCommit_", NULL, 0x0, "Z", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.index.SegmentInfos$FindSegmentsFile;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexSegmentInfos = { 2, "SegmentInfos", "org.apache.lucene.index", NULL, 0x11, 52, methods, 20, fields, 0, NULL, 1, inner_classes, NULL, "Ljava/lang/Object;Ljava/lang/Cloneable;Ljava/lang/Iterable<Lorg/apache/lucene/index/SegmentCommitInfo;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexSegmentInfos = { 2, "SegmentInfos", "org.apache.lucene.index", NULL, 0x11, 41, methods, 20, fields, 0, NULL, 1, inner_classes, NULL, "Ljava/lang/Object;Ljava/lang/Cloneable;Ljava/lang/Iterable<Lorg/apache/lucene/index/SegmentCommitInfo;>;" };
   return &_OrgApacheLuceneIndexSegmentInfos;
 }
 
@@ -563,19 +508,9 @@ jlong OrgApacheLuceneIndexSegmentInfos_getLastCommitGenerationWithNSStringArray_
   return max;
 }
 
-jlong OrgApacheLuceneIndexSegmentInfos_getLastCommitGenerationWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *directory) {
-  OrgApacheLuceneIndexSegmentInfos_initialize();
-  return OrgApacheLuceneIndexSegmentInfos_getLastCommitGenerationWithNSStringArray_([((OrgApacheLuceneStoreDirectory *) nil_chk(directory)) listAll]);
-}
-
 NSString *OrgApacheLuceneIndexSegmentInfos_getLastCommitSegmentsFileNameWithNSStringArray_(IOSObjectArray *files) {
   OrgApacheLuceneIndexSegmentInfos_initialize();
   return OrgApacheLuceneIndexIndexFileNames_fileNameFromGenerationWithNSString_withNSString_withLong_(OrgApacheLuceneIndexIndexFileNames_SEGMENTS_, @"", OrgApacheLuceneIndexSegmentInfos_getLastCommitGenerationWithNSStringArray_(files));
-}
-
-NSString *OrgApacheLuceneIndexSegmentInfos_getLastCommitSegmentsFileNameWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *directory) {
-  OrgApacheLuceneIndexSegmentInfos_initialize();
-  return OrgApacheLuceneIndexIndexFileNames_fileNameFromGenerationWithNSString_withNSString_withLong_(OrgApacheLuceneIndexIndexFileNames_SEGMENTS_, @"", OrgApacheLuceneIndexSegmentInfos_getLastCommitGenerationWithOrgApacheLuceneStoreDirectory_(directory));
 }
 
 jlong OrgApacheLuceneIndexSegmentInfos_generationFromSegmentsFileNameWithNSString_(NSString *fileName) {
@@ -879,16 +814,6 @@ void OrgApacheLuceneIndexSegmentInfos_writeWithOrgApacheLuceneStoreDirectory_(Or
   }
 }
 
-void OrgApacheLuceneIndexSegmentInfos_setInfoStreamWithJavaIoPrintStream_(JavaIoPrintStream *infoStream) {
-  OrgApacheLuceneIndexSegmentInfos_initialize();
-  JreStrongAssign(&OrgApacheLuceneIndexSegmentInfos_infoStream_, infoStream);
-}
-
-JavaIoPrintStream *OrgApacheLuceneIndexSegmentInfos_getInfoStream() {
-  OrgApacheLuceneIndexSegmentInfos_initialize();
-  return OrgApacheLuceneIndexSegmentInfos_infoStream_;
-}
-
 void OrgApacheLuceneIndexSegmentInfos_messageWithNSString_(NSString *message) {
   OrgApacheLuceneIndexSegmentInfos_initialize();
   [((JavaIoPrintStream *) nil_chk(OrgApacheLuceneIndexSegmentInfos_infoStream_)) printlnWithNSString:JreStrcat("$$$$", @"SIS [", [((JavaLangThread *) nil_chk(JavaLangThread_currentThread())) getName], @"]: ", message)];
@@ -900,35 +825,6 @@ void OrgApacheLuceneIndexSegmentInfos_rollbackCommitWithOrgApacheLuceneStoreDire
     NSString *pending = OrgApacheLuceneIndexIndexFileNames_fileNameFromGenerationWithNSString_withNSString_withLong_(OrgApacheLuceneIndexIndexFileNames_PENDING_SEGMENTS_, @"", self->generation_);
     OrgApacheLuceneUtilIOUtils_deleteFilesIgnoringExceptionsWithOrgApacheLuceneStoreDirectory_withNSStringArray_(dir, [IOSObjectArray arrayWithObjects:(id[]){ pending } count:1 type:NSString_class_()]);
   }
-}
-
-void OrgApacheLuceneIndexSegmentInfos_prepareCommitWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexSegmentInfos *self, OrgApacheLuceneStoreDirectory *dir) {
-  if (self->pendingCommit_) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(@"prepareCommit was already called") autorelease];
-  }
-  OrgApacheLuceneIndexSegmentInfos_writeWithOrgApacheLuceneStoreDirectory_(self, dir);
-}
-
-NSString *OrgApacheLuceneIndexSegmentInfos_finishCommitWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexSegmentInfos *self, OrgApacheLuceneStoreDirectory *dir) {
-  if (self->pendingCommit_ == NO) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(@"prepareCommit was not called") autorelease];
-  }
-  jboolean success = NO;
-  NSString *dest;
-  @try {
-    NSString *src = OrgApacheLuceneIndexIndexFileNames_fileNameFromGenerationWithNSString_withNSString_withLong_(OrgApacheLuceneIndexIndexFileNames_PENDING_SEGMENTS_, @"", self->generation_);
-    dest = OrgApacheLuceneIndexIndexFileNames_fileNameFromGenerationWithNSString_withNSString_withLong_(OrgApacheLuceneIndexIndexFileNames_SEGMENTS_, @"", self->generation_);
-    [((OrgApacheLuceneStoreDirectory *) nil_chk(dir)) renameFileWithNSString:src withNSString:dest];
-    success = YES;
-  }
-  @finally {
-    if (!success) {
-      OrgApacheLuceneIndexSegmentInfos_rollbackCommitWithOrgApacheLuceneStoreDirectory_(self, dir);
-    }
-  }
-  self->pendingCommit_ = NO;
-  self->lastGeneration_ = self->generation_;
-  return dest;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSegmentInfos)

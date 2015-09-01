@@ -20,31 +20,19 @@
 #define OrgApacheLuceneSearchSuggestBufferedInputIterator_INCLUDE 1
 #include "org/apache/lucene/search/suggest/BufferedInputIterator.h"
 
-@class OrgApacheLuceneUtilBytesRef;
-@protocol JavaUtilSet;
-@protocol OrgApacheLuceneSearchSuggestInputIterator;
-
 @interface OrgApacheLuceneSearchSuggestUnsortedInputIterator : OrgApacheLuceneSearchSuggestBufferedInputIterator
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchSuggestInputIterator:(id<OrgApacheLuceneSearchSuggestInputIterator>)source;
-
-- (id<JavaUtilSet>)contexts;
-
-- (OrgApacheLuceneUtilBytesRef *)next;
-
-- (OrgApacheLuceneUtilBytesRef *)payload;
-
-- (jlong)weight;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestUnsortedInputIterator)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestUnsortedInputIterator_initWithOrgApacheLuceneSearchSuggestInputIterator_(OrgApacheLuceneSearchSuggestUnsortedInputIterator *self, id<OrgApacheLuceneSearchSuggestInputIterator> source);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestUnsortedInputIterator_init(OrgApacheLuceneSearchSuggestUnsortedInputIterator *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestUnsortedInputIterator *new_OrgApacheLuceneSearchSuggestUnsortedInputIterator_initWithOrgApacheLuceneSearchSuggestInputIterator_(id<OrgApacheLuceneSearchSuggestInputIterator> source) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestUnsortedInputIterator *new_OrgApacheLuceneSearchSuggestUnsortedInputIterator_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestUnsortedInputIterator)
 

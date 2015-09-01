@@ -16,12 +16,8 @@
 #if !defined (_OrgApacheLuceneIndexMemoryMemoryIndex_) && (OrgApacheLuceneIndexMemoryMemoryIndex_INCLUDE_ALL || OrgApacheLuceneIndexMemoryMemoryIndex_INCLUDE)
 #define _OrgApacheLuceneIndexMemoryMemoryIndex_
 
-@class OrgApacheLuceneAnalysisAnalyzer;
 @class OrgApacheLuceneAnalysisTokenStream;
 @class OrgApacheLuceneSearchIndexSearcher;
-@class OrgApacheLuceneSearchQuery;
-@class OrgApacheLuceneSearchSimilaritiesSimilarity;
-@protocol JavaUtilCollection;
 
 @interface OrgApacheLuceneIndexMemoryMemoryIndex : NSObject
 
@@ -33,10 +29,6 @@
 
 - (instancetype)initWithBoolean:(jboolean)storeOffsets
                     withBoolean:(jboolean)storePayloads;
-
-- (void)addFieldWithNSString:(NSString *)fieldName
-                withNSString:(NSString *)text
-withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
 
 - (void)addFieldWithNSString:(NSString *)fieldName
 withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)stream;
@@ -57,16 +49,6 @@ withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tok
                      withInt:(jint)offsetGap;
 
 - (OrgApacheLuceneSearchIndexSearcher *)createSearcher;
-
-- (void)freeze;
-
-- (OrgApacheLuceneAnalysisTokenStream *)keywordTokenStreamWithJavaUtilCollection:(id<JavaUtilCollection>)keywords;
-
-- (void)reset;
-
-- (jfloat)searchWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
-
-- (void)setSimilarityWithOrgApacheLuceneSearchSimilaritiesSimilarity:(OrgApacheLuceneSearchSimilaritiesSimilarity *)similarity;
 
 - (NSString *)description;
 

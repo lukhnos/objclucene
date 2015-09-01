@@ -34,8 +34,6 @@
 
 #pragma mark Public
 
-- (void)close;
-
 - (void)encodeTermWithLongArray:(IOSLongArray *)longs
 withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg
 withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo

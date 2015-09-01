@@ -3,101 +3,35 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/xml/CorePlusExtensionsParser.java
 //
 
-#include "IOSClass.h"
-#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "org/apache/lucene/analysis/Analyzer.h"
-#include "org/apache/lucene/queryparser/classic/QueryParser.h"
-#include "org/apache/lucene/queryparser/xml/CoreParser.h"
 #include "org/apache/lucene/queryparser/xml/CorePlusExtensionsParser.h"
-#include "org/apache/lucene/queryparser/xml/FilterBuilderFactory.h"
-#include "org/apache/lucene/queryparser/xml/QueryBuilderFactory.h"
-#include "org/apache/lucene/queryparser/xml/builders/BooleanFilterBuilder.h"
-#include "org/apache/lucene/queryparser/xml/builders/BoostingQueryBuilder.h"
-#include "org/apache/lucene/queryparser/xml/builders/DuplicateFilterBuilder.h"
-#include "org/apache/lucene/queryparser/xml/builders/FuzzyLikeThisQueryBuilder.h"
-#include "org/apache/lucene/queryparser/xml/builders/LikeThisQueryBuilder.h"
-#include "org/apache/lucene/queryparser/xml/builders/TermsFilterBuilder.h"
 
-@interface OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser ()
-
-- (instancetype)initWithNSString:(NSString *)defaultField
-withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
-withOrgApacheLuceneQueryparserClassicQueryParser:(OrgApacheLuceneQueryparserClassicQueryParser *)parser;
-
-@end
-
-__attribute__((unused)) static void OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneQueryparserClassicQueryParser_(OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser *self, NSString *defaultField, OrgApacheLuceneAnalysisAnalyzer *analyzer, OrgApacheLuceneQueryparserClassicQueryParser *parser);
-
-__attribute__((unused)) static OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser *new_OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneQueryparserClassicQueryParser_(NSString *defaultField, OrgApacheLuceneAnalysisAnalyzer *analyzer, OrgApacheLuceneQueryparserClassicQueryParser *parser) NS_RETURNS_RETAINED;
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser
 
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
-       withOrgApacheLuceneQueryparserClassicQueryParser:(OrgApacheLuceneQueryparserClassicQueryParser *)parser {
-  OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneQueryparserClassicQueryParser_(self, analyzer, parser);
-  return self;
-}
-
-- (instancetype)initWithNSString:(NSString *)defaultField
-withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer {
-  OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_(self, defaultField, analyzer);
-  return self;
-}
-
-- (instancetype)initWithNSString:(NSString *)defaultField
-withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
-withOrgApacheLuceneQueryparserClassicQueryParser:(OrgApacheLuceneQueryparserClassicQueryParser *)parser {
-  OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneQueryparserClassicQueryParser_(self, defaultField, analyzer, parser);
+- (instancetype)init {
+  OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser_init(self);
   return self;
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneQueryparserClassicQueryParser:", "CorePlusExtensionsParser", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withOrgApacheLuceneAnalysisAnalyzer:", "CorePlusExtensionsParser", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneQueryparserClassicQueryParser:", "CorePlusExtensionsParser", NULL, 0x2, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser = { 2, "CorePlusExtensionsParser", "org.apache.lucene.queryparser.xml", NULL, 0x1, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser = { 2, "CorePlusExtensionsParser", "org.apache.lucene.queryparser.xml", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser;
 }
 
 @end
 
-void OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneQueryparserClassicQueryParser_(OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser *self, OrgApacheLuceneAnalysisAnalyzer *analyzer, OrgApacheLuceneQueryparserClassicQueryParser *parser) {
-  OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneQueryparserClassicQueryParser_(self, nil, analyzer, parser);
+void OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser_init(OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser *new_OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneQueryparserClassicQueryParser_(OrgApacheLuceneAnalysisAnalyzer *analyzer, OrgApacheLuceneQueryparserClassicQueryParser *parser) {
+OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser *new_OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser_init() {
   OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser *self = [OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser alloc];
-  OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneQueryparserClassicQueryParser_(self, analyzer, parser);
-  return self;
-}
-
-void OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser *self, NSString *defaultField, OrgApacheLuceneAnalysisAnalyzer *analyzer) {
-  OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneQueryparserClassicQueryParser_(self, defaultField, analyzer, nil);
-}
-
-OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser *new_OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_(NSString *defaultField, OrgApacheLuceneAnalysisAnalyzer *analyzer) {
-  OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser *self = [OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser alloc];
-  OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_(self, defaultField, analyzer);
-  return self;
-}
-
-void OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneQueryparserClassicQueryParser_(OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser *self, NSString *defaultField, OrgApacheLuceneAnalysisAnalyzer *analyzer, OrgApacheLuceneQueryparserClassicQueryParser *parser) {
-  OrgApacheLuceneQueryparserXmlCoreParser_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneQueryparserClassicQueryParser_(self, defaultField, analyzer, parser);
-  [((OrgApacheLuceneQueryparserXmlFilterBuilderFactory *) nil_chk(self->filterFactory_)) addBuilderWithNSString:@"TermsFilter" withOrgApacheLuceneQueryparserXmlFilterBuilder:[new_OrgApacheLuceneQueryparserXmlBuildersTermsFilterBuilder_initWithOrgApacheLuceneAnalysisAnalyzer_(analyzer) autorelease]];
-  [self->filterFactory_ addBuilderWithNSString:@"BooleanFilter" withOrgApacheLuceneQueryparserXmlFilterBuilder:[new_OrgApacheLuceneQueryparserXmlBuildersBooleanFilterBuilder_initWithOrgApacheLuceneQueryparserXmlFilterBuilder_(self->filterFactory_) autorelease]];
-  [self->filterFactory_ addBuilderWithNSString:@"DuplicateFilter" withOrgApacheLuceneQueryparserXmlFilterBuilder:[new_OrgApacheLuceneQueryparserXmlBuildersDuplicateFilterBuilder_init() autorelease]];
-  IOSObjectArray *fields = [IOSObjectArray arrayWithObjects:(id[]){ @"contents" } count:1 type:NSString_class_()];
-  [((OrgApacheLuceneQueryparserXmlQueryBuilderFactory *) nil_chk(self->queryFactory_)) addBuilderWithNSString:@"LikeThisQuery" withOrgApacheLuceneQueryparserXmlQueryBuilder:[new_OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder_initWithOrgApacheLuceneAnalysisAnalyzer_withNSStringArray_(analyzer, fields) autorelease]];
-  [self->queryFactory_ addBuilderWithNSString:@"BoostingQuery" withOrgApacheLuceneQueryparserXmlQueryBuilder:[new_OrgApacheLuceneQueryparserXmlBuildersBoostingQueryBuilder_initWithOrgApacheLuceneQueryparserXmlQueryBuilder_(self->queryFactory_) autorelease]];
-  [self->queryFactory_ addBuilderWithNSString:@"FuzzyLikeThisQuery" withOrgApacheLuceneQueryparserXmlQueryBuilder:[new_OrgApacheLuceneQueryparserXmlBuildersFuzzyLikeThisQueryBuilder_initWithOrgApacheLuceneAnalysisAnalyzer_(analyzer) autorelease]];
-}
-
-OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser *new_OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneQueryparserClassicQueryParser_(NSString *defaultField, OrgApacheLuceneAnalysisAnalyzer *analyzer, OrgApacheLuceneQueryparserClassicQueryParser *parser) {
-  OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser *self = [OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser alloc];
-  OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneQueryparserClassicQueryParser_(self, defaultField, analyzer, parser);
+  OrgApacheLuceneQueryparserXmlCorePlusExtensionsParser_init(self);
   return self;
 }
 

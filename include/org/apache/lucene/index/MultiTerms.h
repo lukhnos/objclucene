@@ -34,14 +34,6 @@
 
 - (jint)getDocCount;
 
-- (OrgApacheLuceneUtilBytesRef *)getMax;
-
-- (OrgApacheLuceneUtilBytesRef *)getMin;
-
-- (IOSObjectArray *)getSubSlices;
-
-- (IOSObjectArray *)getSubTerms;
-
 - (jlong)getSumDocFreq;
 
 - (jlong)getSumTotalTermFreq;

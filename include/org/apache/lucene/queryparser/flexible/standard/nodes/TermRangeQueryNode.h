@@ -20,24 +20,19 @@
 #define OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode_INCLUDE 1
 #include "org/apache/lucene/queryparser/flexible/standard/nodes/AbstractRangeQueryNode.h"
 
-@class OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode;
-
 @interface OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode : OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode:(OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *)lower
-                    withOrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode:(OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *)upper
-                                                                      withBoolean:(jboolean)lowerInclusive
-                                                                      withBoolean:(jboolean)upperInclusive;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode_withOrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode_withBoolean_withBoolean_(OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode *self, OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *lower, OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *upper, jboolean lowerInclusive, jboolean upperInclusive);
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode_init(OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode *new_OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode_withOrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode_withBoolean_withBoolean_(OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *lower, OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *upper, jboolean lowerInclusive, jboolean upperInclusive) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode *new_OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode)
 

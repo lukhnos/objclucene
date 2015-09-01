@@ -27,7 +27,6 @@
 @class IOSByteArray;
 @class OrgApacheLuceneStoreDataInput;
 @class OrgApacheLuceneUtilFstFST_BytesReader;
-@protocol JavaUtilCollection;
 
 @interface OrgApacheLuceneUtilFstBytesStore : OrgApacheLuceneStoreDataOutput < OrgApacheLuceneUtilAccountable >
 
@@ -44,8 +43,6 @@
                   withInt:(jint)len OBJC_METHOD_FAMILY_NONE;
 
 - (void)finish;
-
-- (id<JavaUtilCollection>)getChildResources;
 
 - (OrgApacheLuceneUtilFstFST_BytesReader *)getForwardReader;
 
@@ -66,15 +63,9 @@
 
 - (void)writeByteWithByte:(jbyte)b;
 
-- (void)writeByteWithInt:(jint)dest
-                withByte:(jbyte)b;
-
 - (void)writeBytesWithByteArray:(IOSByteArray *)b
                         withInt:(jint)offset
                         withInt:(jint)len;
-
-- (void)writeIntWithLong:(jlong)pos
-                 withInt:(jint)value;
 
 - (void)writeToWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg;
 

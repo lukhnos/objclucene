@@ -16,45 +16,11 @@
 #if !defined (_OrgApacheLuceneQueryparserSurroundQuerySrndQuery_) && (OrgApacheLuceneQueryparserSurroundQuerySrndQuery_INCLUDE_ALL || OrgApacheLuceneQueryparserSurroundQuerySrndQuery_INCLUDE)
 #define _OrgApacheLuceneQueryparserSurroundQuerySrndQuery_
 
-@class JavaLangStringBuilder;
-@class OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory;
-@class OrgApacheLuceneSearchQuery;
-
 @interface OrgApacheLuceneQueryparserSurroundQuerySrndQuery : NSObject < NSCopying >
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (OrgApacheLuceneQueryparserSurroundQuerySrndQuery *)clone;
-
-- (jboolean)isEqual:(id)obj;
-
-- (jfloat)getWeight;
-
-- (NSString *)getWeightOperator;
-
-- (NSString *)getWeightString;
-
-- (NSUInteger)hash;
-
-- (jboolean)isFieldsSubQueryAcceptable;
-
-- (jboolean)isWeighted;
-
-- (OrgApacheLuceneSearchQuery *)makeLuceneQueryFieldWithNSString:(NSString *)fieldName
-    withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *)qf;
-
-- (OrgApacheLuceneSearchQuery *)makeLuceneQueryFieldNoBoostWithNSString:(NSString *)fieldName
-           withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *)qf;
-
-- (void)setWeightWithFloat:(jfloat)w;
-
-- (NSString *)description;
-
-#pragma mark Protected
-
-- (void)weightToStringWithJavaLangStringBuilder:(JavaLangStringBuilder *)r;
 
 @end
 

@@ -16,21 +16,15 @@
 #if !defined (_OrgApacheLuceneStoreLockVerifyServer_) && (OrgApacheLuceneStoreLockVerifyServer_INCLUDE_ALL || OrgApacheLuceneStoreLockVerifyServer_INCLUDE)
 #define _OrgApacheLuceneStoreLockVerifyServer_
 
-@class IOSObjectArray;
-
 @interface OrgApacheLuceneStoreLockVerifyServer : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
-+ (void)mainWithNSStringArray:(IOSObjectArray *)args;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneStoreLockVerifyServer)
-
-FOUNDATION_EXPORT void OrgApacheLuceneStoreLockVerifyServer_mainWithNSStringArray_(IOSObjectArray *args);
 
 FOUNDATION_EXPORT void OrgApacheLuceneStoreLockVerifyServer_init(OrgApacheLuceneStoreLockVerifyServer *self);
 

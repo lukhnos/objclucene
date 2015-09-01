@@ -8,9 +8,6 @@
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "java/lang/Math.h"
-#include "java/util/Collection.h"
-#include "java/util/Collections.h"
-#include "java/util/List.h"
 #include "org/apache/lucene/util/LongValues.h"
 #include "org/apache/lucene/util/RamUsageEstimator.h"
 #include "org/apache/lucene/util/packed/AbstractPagedMutable.h"
@@ -27,8 +24,6 @@ __attribute__((unused)) static jint OrgApacheLuceneUtilPackedAbstractPagedMutabl
 __attribute__((unused)) static jint OrgApacheLuceneUtilPackedAbstractPagedMutable_indexInPageWithLong_(OrgApacheLuceneUtilPackedAbstractPagedMutable *self, jlong index);
 
 __attribute__((unused)) static id OrgApacheLuceneUtilPackedAbstractPagedMutable_resizeWithLong_(OrgApacheLuceneUtilPackedAbstractPagedMutable *self, jlong newSize);
-
-__attribute__((unused)) static id OrgApacheLuceneUtilPackedAbstractPagedMutable_growWithLong_(OrgApacheLuceneUtilPackedAbstractPagedMutable *self, jlong minSize);
 
 @implementation OrgApacheLuceneUtilPackedAbstractPagedMutable
 
@@ -108,10 +103,6 @@ __attribute__((unused)) static id OrgApacheLuceneUtilPackedAbstractPagedMutable_
   return bytesUsed;
 }
 
-- (id<JavaUtilCollection>)getChildResources {
-  return JavaUtilCollections_emptyList();
-}
-
 - (id)newUnfilledCopyWithLong:(jlong)newSize {
   // can't call an abstract method
   [self doesNotRecognizeSelector:_cmd];
@@ -123,11 +114,17 @@ __attribute__((unused)) static id OrgApacheLuceneUtilPackedAbstractPagedMutable_
 }
 
 - (id)growWithLong:(jlong)minSize {
-  return OrgApacheLuceneUtilPackedAbstractPagedMutable_growWithLong_(self, minSize);
-}
-
-- (id)grow {
-  return OrgApacheLuceneUtilPackedAbstractPagedMutable_growWithLong_(self, OrgApacheLuceneUtilPackedAbstractPagedMutable_size(self) + 1);
+  JreAssert((minSize >= 0), (@"org/apache/lucene/util/packed/AbstractPagedMutable.java:149 condition failed: assert minSize >= 0;"));
+  if (minSize <= OrgApacheLuceneUtilPackedAbstractPagedMutable_size(self)) {
+    OrgApacheLuceneUtilPackedAbstractPagedMutable *result = (OrgApacheLuceneUtilPackedAbstractPagedMutable *) check_class_cast(self, [OrgApacheLuceneUtilPackedAbstractPagedMutable class]);
+    return result;
+  }
+  jlong extra = JreURShift64(minSize, 3);
+  if (extra < 3) {
+    extra = 3;
+  }
+  jlong newSize = minSize + extra;
+  return OrgApacheLuceneUtilPackedAbstractPagedMutable_resizeWithLong_(self, newSize);
 }
 
 - (NSString *)description {
@@ -153,11 +150,9 @@ __attribute__((unused)) static id OrgApacheLuceneUtilPackedAbstractPagedMutable_
     { "setWithLong:withLong:", "set", "V", 0x11, NULL, NULL },
     { "baseRamBytesUsed", NULL, "J", 0x4, NULL, NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
     { "newUnfilledCopyWithLong:", "newUnfilledCopy", "TT;", 0x404, NULL, "(J)TT;" },
     { "resizeWithLong:", "resize", "TT;", 0x11, NULL, "(J)TT;" },
     { "growWithLong:", "grow", "TT;", 0x11, NULL, "(J)TT;" },
-    { "grow", NULL, "TT;", 0x11, NULL, "()TT;" },
     { "description", "toString", "Ljava.lang.String;", 0x11, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -169,7 +164,7 @@ __attribute__((unused)) static id OrgApacheLuceneUtilPackedAbstractPagedMutable_
     { "subMutables_", NULL, 0x10, "[Lorg.apache.lucene.util.packed.PackedInts$Mutable;", NULL, NULL, .constantValue.asLong = 0 },
     { "bitsPerValue_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedAbstractPagedMutable = { 2, "AbstractPagedMutable", "org.apache.lucene.util.packed", NULL, 0x400, 18, methods, 7, fields, 0, NULL, 0, NULL, NULL, "<T:Lorg/apache/lucene/util/packed/AbstractPagedMutable<TT;>;>Lorg/apache/lucene/util/LongValues;Lorg/apache/lucene/util/Accountable;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedAbstractPagedMutable = { 2, "AbstractPagedMutable", "org.apache.lucene.util.packed", NULL, 0x400, 16, methods, 7, fields, 0, NULL, 0, NULL, NULL, "<T:Lorg/apache/lucene/util/packed/AbstractPagedMutable<TT;>;>Lorg/apache/lucene/util/LongValues;Lorg/apache/lucene/util/Accountable;" };
   return &_OrgApacheLuceneUtilPackedAbstractPagedMutable;
 }
 
@@ -220,20 +215,6 @@ id OrgApacheLuceneUtilPackedAbstractPagedMutable_resizeWithLong_(OrgApacheLucene
     }
   }
   return copy_;
-}
-
-id OrgApacheLuceneUtilPackedAbstractPagedMutable_growWithLong_(OrgApacheLuceneUtilPackedAbstractPagedMutable *self, jlong minSize) {
-  JreAssert((minSize >= 0), (@"org/apache/lucene/util/packed/AbstractPagedMutable.java:149 condition failed: assert minSize >= 0;"));
-  if (minSize <= OrgApacheLuceneUtilPackedAbstractPagedMutable_size(self)) {
-    OrgApacheLuceneUtilPackedAbstractPagedMutable *result = (OrgApacheLuceneUtilPackedAbstractPagedMutable *) check_class_cast(self, [OrgApacheLuceneUtilPackedAbstractPagedMutable class]);
-    return result;
-  }
-  jlong extra = JreURShift64(minSize, 3);
-  if (extra < 3) {
-    extra = 3;
-  }
-  jlong newSize = minSize + extra;
-  return OrgApacheLuceneUtilPackedAbstractPagedMutable_resizeWithLong_(self, newSize);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedAbstractPagedMutable)

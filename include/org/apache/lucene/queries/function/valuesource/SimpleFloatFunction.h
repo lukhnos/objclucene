@@ -20,30 +20,17 @@
 #define OrgApacheLuceneQueriesFunctionValuesourceSingleFunction_INCLUDE 1
 #include "org/apache/lucene/queries/function/valuesource/SingleFunction.h"
 
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneQueriesFunctionFunctionValues;
-@class OrgApacheLuceneQueriesFunctionValueSource;
-@protocol JavaUtilMap;
-
 @interface OrgApacheLuceneQueriesFunctionValuesourceSimpleFloatFunction : OrgApacheLuceneQueriesFunctionValuesourceSingleFunction
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)source;
-
-- (OrgApacheLuceneQueriesFunctionFunctionValues *)getValuesWithJavaUtilMap:(id<JavaUtilMap>)context
-                                 withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext;
-
-#pragma mark Protected
-
-- (jfloat)funcWithInt:(jint)doc
-withOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)vals;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceSimpleFloatFunction)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceSimpleFloatFunction_initWithOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceSimpleFloatFunction *self, OrgApacheLuceneQueriesFunctionValueSource *source);
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceSimpleFloatFunction_init(OrgApacheLuceneQueriesFunctionValuesourceSimpleFloatFunction *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceSimpleFloatFunction)
 

@@ -208,10 +208,9 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilAutomatonSortedIntSet, TREE_MAP_CU
     { "TREE_MAP_CUTOVER", "TREE_MAP_CUTOVER", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilAutomatonSortedIntSet_TREE_MAP_CUTOVER },
     { "map_", NULL, 0x12, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/Integer;Ljava/lang/Integer;>;", .constantValue.asLong = 0 },
     { "useTreeMap_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "state_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.util.automaton.SortedIntSet$FrozenIntSet;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonSortedIntSet = { 2, "SortedIntSet", "org.apache.lucene.util.automaton", NULL, 0x10, 8, methods, 8, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonSortedIntSet = { 2, "SortedIntSet", "org.apache.lucene.util.automaton", NULL, 0x10, 8, methods, 7, fields, 0, NULL, 1, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneUtilAutomatonSortedIntSet;
 }
 

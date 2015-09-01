@@ -74,7 +74,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinToChildBlockJoinQuery)
 
 @class OrgApacheLuceneSearchWeight;
 @class OrgApacheLuceneUtilBitSet;
-@protocol JavaUtilCollection;
 
 @interface OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinScorer : OrgApacheLuceneSearchScorer
 
@@ -93,15 +92,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinToChildBlockJoinQuery)
 
 - (jint)freq;
 
-- (id<JavaUtilCollection>)getChildren;
-
 - (jint)nextDoc;
 
 - (jfloat)score;
-
-#pragma mark Package-Private
-
-- (jint)getParentDoc;
 
 @end
 

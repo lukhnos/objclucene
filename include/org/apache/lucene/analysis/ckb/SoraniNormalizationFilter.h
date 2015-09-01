@@ -20,23 +20,19 @@
 #define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
-@class OrgApacheLuceneAnalysisTokenStream;
-
 @interface OrgApacheLuceneAnalysisCkbSoraniNormalizationFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
-
-- (jboolean)incrementToken;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisCkbSoraniNormalizationFilter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCkbSoraniNormalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisCkbSoraniNormalizationFilter *self, OrgApacheLuceneAnalysisTokenStream *input);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCkbSoraniNormalizationFilter_init(OrgApacheLuceneAnalysisCkbSoraniNormalizationFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCkbSoraniNormalizationFilter *new_OrgApacheLuceneAnalysisCkbSoraniNormalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCkbSoraniNormalizationFilter *new_OrgApacheLuceneAnalysisCkbSoraniNormalizationFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCkbSoraniNormalizationFilter)
 

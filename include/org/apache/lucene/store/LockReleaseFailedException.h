@@ -20,28 +20,19 @@
 #define JavaIoIOException_INCLUDE 1
 #include "java/io/IOException.h"
 
-@class JavaLangThrowable;
-
 @interface OrgApacheLuceneStoreLockReleaseFailedException : JavaIoIOException
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)message;
-
-- (instancetype)initWithNSString:(NSString *)message
-           withJavaLangThrowable:(JavaLangThrowable *)cause;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneStoreLockReleaseFailedException)
 
-FOUNDATION_EXPORT void OrgApacheLuceneStoreLockReleaseFailedException_initWithNSString_(OrgApacheLuceneStoreLockReleaseFailedException *self, NSString *message);
+FOUNDATION_EXPORT void OrgApacheLuceneStoreLockReleaseFailedException_init(OrgApacheLuceneStoreLockReleaseFailedException *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneStoreLockReleaseFailedException *new_OrgApacheLuceneStoreLockReleaseFailedException_initWithNSString_(NSString *message) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneStoreLockReleaseFailedException_initWithNSString_withJavaLangThrowable_(OrgApacheLuceneStoreLockReleaseFailedException *self, NSString *message, JavaLangThrowable *cause);
-
-FOUNDATION_EXPORT OrgApacheLuceneStoreLockReleaseFailedException *new_OrgApacheLuceneStoreLockReleaseFailedException_initWithNSString_withJavaLangThrowable_(NSString *message, JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneStoreLockReleaseFailedException *new_OrgApacheLuceneStoreLockReleaseFailedException_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreLockReleaseFailedException)
 

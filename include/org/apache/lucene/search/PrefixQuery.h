@@ -32,8 +32,6 @@
 
 - (jboolean)isEqual:(id)obj;
 
-- (OrgApacheLuceneIndexTerm *)getPrefix;
-
 - (NSUInteger)hash;
 
 + (OrgApacheLuceneUtilAutomatonAutomaton *)toAutomatonWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)prefix;

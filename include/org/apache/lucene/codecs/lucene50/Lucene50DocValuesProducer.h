@@ -39,7 +39,6 @@
 @class OrgApacheLuceneIndexSortedSetDocValues;
 @class OrgApacheLuceneStoreIndexInput;
 @class OrgApacheLuceneUtilLongValues;
-@protocol JavaUtilCollection;
 @protocol OrgApacheLuceneUtilBits;
 
 @interface OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer : OrgApacheLuceneCodecsDocValuesProducer < JavaIoCloseable >
@@ -51,8 +50,6 @@
 - (void)close;
 
 - (OrgApacheLuceneIndexBinaryDocValues *)getBinaryWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)field;
-
-- (id<JavaUtilCollection>)getChildResources;
 
 - (id<OrgApacheLuceneUtilBits>)getDocsWithFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)field;
 
@@ -223,7 +220,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50DocValuesProduce
 
 @class OrgApacheLuceneUtilPackedMonotonicBlockPackedReader;
 @class OrgApacheLuceneUtilPagedBytes_Reader;
-@protocol JavaUtilCollection;
 
 @interface OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_ReverseTermsIndex : NSObject < OrgApacheLuceneUtilAccountable > {
  @public
@@ -232,8 +228,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene50Lucene50DocValuesProduce
 }
 
 #pragma mark Public
-
-- (id<JavaUtilCollection>)getChildResources;
 
 - (jlong)ramBytesUsed;
 

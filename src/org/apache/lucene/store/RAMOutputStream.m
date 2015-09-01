@@ -9,9 +9,6 @@
 #include "java/io/IOException.h"
 #include "java/lang/IllegalStateException.h"
 #include "java/lang/System.h"
-#include "java/util/Collection.h"
-#include "java/util/Collections.h"
-#include "java/util/Set.h"
 #include "java/util/zip/CRC32.h"
 #include "java/util/zip/Checksum.h"
 #include "org/apache/lucene/store/BufferedChecksum.h"
@@ -19,8 +16,6 @@
 #include "org/apache/lucene/store/IndexOutput.h"
 #include "org/apache/lucene/store/RAMFile.h"
 #include "org/apache/lucene/store/RAMOutputStream.h"
-#include "org/apache/lucene/util/Accountable.h"
-#include "org/apache/lucene/util/Accountables.h"
 
 @interface OrgApacheLuceneStoreRAMOutputStream () {
  @public
@@ -170,10 +165,6 @@ __attribute__((unused)) static void OrgApacheLuceneStoreRAMOutputStream_setFileL
   return (jlong) [((OrgApacheLuceneStoreRAMFile *) nil_chk(file_)) numBuffers] * (jlong) OrgApacheLuceneStoreRAMOutputStream_BUFFER_SIZE;
 }
 
-- (id<JavaUtilCollection>)getChildResources {
-  return JavaUtilCollections_singletonWithId_(OrgApacheLuceneUtilAccountables_namedAccountableWithNSString_withOrgApacheLuceneUtilAccountable_(@"file", file_));
-}
-
 - (jlong)getChecksum {
   if (crc_ == nil) {
     @throw [new_JavaLangIllegalStateException_initWithNSString_(@"internal RAMOutputStream created with checksum disabled") autorelease];
@@ -206,7 +197,6 @@ __attribute__((unused)) static void OrgApacheLuceneStoreRAMOutputStream_setFileL
     { "flush", NULL, "V", 0x4, "Ljava.io.IOException;", NULL },
     { "getFilePointer", NULL, "J", 0x1, NULL, NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
     { "getChecksum", NULL, "J", 0x1, "Ljava.io.IOException;", NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -219,7 +209,7 @@ __attribute__((unused)) static void OrgApacheLuceneStoreRAMOutputStream_setFileL
     { "bufferLength_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "crc_", NULL, 0x12, "Ljava.util.zip.Checksum;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreRAMOutputStream = { 2, "RAMOutputStream", "org.apache.lucene.store", NULL, 0x1, 16, methods, 8, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreRAMOutputStream = { 2, "RAMOutputStream", "org.apache.lucene.store", NULL, 0x1, 15, methods, 8, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneStoreRAMOutputStream;
 }
 

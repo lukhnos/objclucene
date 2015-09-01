@@ -3,26 +3,12 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/fr/FrenchMinimalStemmer.java
 //
 
-#include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/analysis/fr/FrenchMinimalStemmer.h"
 
-@implementation OrgApacheLuceneAnalysisFrFrenchMinimalStemmer
+#pragma clang diagnostic ignored "-Wprotocol"
 
-- (jint)stemWithCharArray:(IOSCharArray *)s
-                  withInt:(jint)len {
-  if (len < 6) return len;
-  if (IOSCharArray_Get(nil_chk(s), len - 1) == 'x') {
-    if (IOSCharArray_Get(s, len - 3) == 'a' && IOSCharArray_Get(s, len - 2) == 'u') *IOSCharArray_GetRef(s, len - 2) = 'l';
-    return len - 1;
-  }
-  if (IOSCharArray_Get(s, len - 1) == 's') len--;
-  if (IOSCharArray_Get(s, len - 1) == 'r') len--;
-  if (IOSCharArray_Get(s, len - 1) == 'e') len--;
-  if (IOSCharArray_Get(s, len - 1) == 0x00e9) len--;
-  if (IOSCharArray_Get(s, len - 1) == IOSCharArray_Get(s, len - 2)) len--;
-  return len;
-}
+@implementation OrgApacheLuceneAnalysisFrFrenchMinimalStemmer
 
 - (instancetype)init {
   OrgApacheLuceneAnalysisFrFrenchMinimalStemmer_init(self);
@@ -31,10 +17,9 @@
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "stemWithCharArray:withInt:", "stem", "I", 0x1, NULL, NULL },
     { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisFrFrenchMinimalStemmer = { 2, "FrenchMinimalStemmer", "org.apache.lucene.analysis.fr", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisFrFrenchMinimalStemmer = { 2, "FrenchMinimalStemmer", "org.apache.lucene.analysis.fr", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisFrFrenchMinimalStemmer;
 }
 

@@ -18,7 +18,6 @@
 #include "org/apache/lucene/analysis/tokenattributes/OffsetAttribute.h"
 #include "org/apache/lucene/analysis/tokenattributes/PositionIncrementAttribute.h"
 #include "org/apache/lucene/analysis/tokenattributes/TypeAttribute.h"
-#include "org/apache/lucene/util/AttributeFactory.h"
 #include "org/apache/lucene/util/AttributeSource.h"
 
 @interface OrgApacheLuceneAnalysisStandardStandardTokenizer () {
@@ -63,17 +62,8 @@ IOSObjectArray *OrgApacheLuceneAnalysisStandardStandardTokenizer_TOKEN_TYPES_;
   }
 }
 
-- (jint)getMaxTokenLength {
-  return maxTokenLength_;
-}
-
 - (instancetype)init {
   OrgApacheLuceneAnalysisStandardStandardTokenizer_init(self);
-  return self;
-}
-
-- (instancetype)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory {
-  OrgApacheLuceneAnalysisStandardStandardTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(self, factory);
   return self;
 }
 
@@ -162,9 +152,7 @@ IOSObjectArray *OrgApacheLuceneAnalysisStandardStandardTokenizer_TOKEN_TYPES_;
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "setMaxTokenLengthWithInt:", "setMaxTokenLength", "V", 0x1, NULL, NULL },
-    { "getMaxTokenLength", NULL, "I", 0x1, NULL, NULL },
     { "init", "StandardTokenizer", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilAttributeFactory:", "StandardTokenizer", NULL, 0x1, NULL, NULL },
     { "init__", "init", "V", 0x2, NULL, NULL },
     { "incrementToken", NULL, "Z", 0x11, "Ljava.io.IOException;", NULL },
     { "end", NULL, "V", 0x11, "Ljava.io.IOException;", NULL },
@@ -196,7 +184,7 @@ IOSObjectArray *OrgApacheLuceneAnalysisStandardStandardTokenizer_TOKEN_TYPES_;
     { "posIncrAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;", NULL, NULL, .constantValue.asLong = 0 },
     { "typeAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.TypeAttribute;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisStandardStandardTokenizer = { 2, "StandardTokenizer", "org.apache.lucene.analysis.standard", NULL, 0x11, 9, methods, 23, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisStandardStandardTokenizer = { 2, "StandardTokenizer", "org.apache.lucene.analysis.standard", NULL, 0x11, 7, methods, 23, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisStandardStandardTokenizer;
 }
 
@@ -215,22 +203,6 @@ void OrgApacheLuceneAnalysisStandardStandardTokenizer_init(OrgApacheLuceneAnalys
 OrgApacheLuceneAnalysisStandardStandardTokenizer *new_OrgApacheLuceneAnalysisStandardStandardTokenizer_init() {
   OrgApacheLuceneAnalysisStandardStandardTokenizer *self = [OrgApacheLuceneAnalysisStandardStandardTokenizer alloc];
   OrgApacheLuceneAnalysisStandardStandardTokenizer_init(self);
-  return self;
-}
-
-void OrgApacheLuceneAnalysisStandardStandardTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(OrgApacheLuceneAnalysisStandardStandardTokenizer *self, OrgApacheLuceneUtilAttributeFactory *factory) {
-  OrgApacheLuceneAnalysisTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(self, factory);
-  self->maxTokenLength_ = OrgApacheLuceneAnalysisStandardStandardAnalyzer_DEFAULT_MAX_TOKEN_LENGTH;
-  JreStrongAssign(&self->termAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()]);
-  JreStrongAssign(&self->offsetAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_class_()]);
-  JreStrongAssign(&self->posIncrAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_class_()]);
-  JreStrongAssign(&self->typeAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesTypeAttribute_class_()]);
-  OrgApacheLuceneAnalysisStandardStandardTokenizer_init__(self);
-}
-
-OrgApacheLuceneAnalysisStandardStandardTokenizer *new_OrgApacheLuceneAnalysisStandardStandardTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(OrgApacheLuceneUtilAttributeFactory *factory) {
-  OrgApacheLuceneAnalysisStandardStandardTokenizer *self = [OrgApacheLuceneAnalysisStandardStandardTokenizer alloc];
-  OrgApacheLuceneAnalysisStandardStandardTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(self, factory);
   return self;
 }
 

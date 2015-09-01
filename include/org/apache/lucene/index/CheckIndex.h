@@ -20,125 +20,19 @@
 #define JavaIoCloseable_INCLUDE 1
 #include "java/io/Closeable.h"
 
-@class IOSObjectArray;
-@class JavaIoPrintStream;
-@class OrgApacheLuceneIndexCheckIndex_Status;
-@class OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus;
-@class OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus;
-@class OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus;
-@class OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus;
-@class OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus;
-@class OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus;
-@class OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus;
-@class OrgApacheLuceneIndexCodecReader;
-@class OrgApacheLuceneStoreDirectory;
-@class OrgApacheLuceneStoreLock;
-@protocol JavaUtilList;
-
 @interface OrgApacheLuceneIndexCheckIndex : NSObject < JavaIoCloseable >
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir;
-
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
-                         withOrgApacheLuceneStoreLock:(OrgApacheLuceneStoreLock *)writeLock;
-
-- (OrgApacheLuceneIndexCheckIndex_Status *)checkIndex;
-
-- (OrgApacheLuceneIndexCheckIndex_Status *)checkIndexWithJavaUtilList:(id<JavaUtilList>)onlySegments;
-
-- (void)close;
-
-- (void)exorciseIndexWithOrgApacheLuceneIndexCheckIndex_Status:(OrgApacheLuceneIndexCheckIndex_Status *)result;
-
-- (jboolean)getChecksumsOnly;
-
-- (jboolean)getCrossCheckTermVectors;
-
-- (jboolean)getFailFast;
-
-+ (void)mainWithNSStringArray:(IOSObjectArray *)args;
-
-- (void)setChecksumsOnlyWithBoolean:(jboolean)v;
-
-- (void)setCrossCheckTermVectorsWithBoolean:(jboolean)v;
-
-- (void)setFailFastWithBoolean:(jboolean)v;
-
-- (void)setInfoStreamWithJavaIoPrintStream:(JavaIoPrintStream *)outArg;
-
-- (void)setInfoStreamWithJavaIoPrintStream:(JavaIoPrintStream *)outArg
-                               withBoolean:(jboolean)verbose;
-
-+ (OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus *)testDocValuesWithOrgApacheLuceneIndexCodecReader:(OrgApacheLuceneIndexCodecReader *)reader
-                                                                                      withJavaIoPrintStream:(JavaIoPrintStream *)infoStream
-                                                                                                withBoolean:(jboolean)failFast;
-
-+ (OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus *)testFieldInfosWithOrgApacheLuceneIndexCodecReader:(OrgApacheLuceneIndexCodecReader *)reader
-                                                                                       withJavaIoPrintStream:(JavaIoPrintStream *)infoStream
-                                                                                                 withBoolean:(jboolean)failFast;
-
-+ (OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus *)testFieldNormsWithOrgApacheLuceneIndexCodecReader:(OrgApacheLuceneIndexCodecReader *)reader
-                                                                                       withJavaIoPrintStream:(JavaIoPrintStream *)infoStream
-                                                                                                 withBoolean:(jboolean)failFast;
-
-+ (OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus *)testLiveDocsWithOrgApacheLuceneIndexCodecReader:(OrgApacheLuceneIndexCodecReader *)reader
-                                                                                   withJavaIoPrintStream:(JavaIoPrintStream *)infoStream
-                                                                                             withBoolean:(jboolean)failFast;
-
-+ (OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus *)testPostingsWithOrgApacheLuceneIndexCodecReader:(OrgApacheLuceneIndexCodecReader *)reader
-                                                                                     withJavaIoPrintStream:(JavaIoPrintStream *)infoStream;
-
-+ (OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus *)testPostingsWithOrgApacheLuceneIndexCodecReader:(OrgApacheLuceneIndexCodecReader *)reader
-                                                                                     withJavaIoPrintStream:(JavaIoPrintStream *)infoStream
-                                                                                               withBoolean:(jboolean)verbose
-                                                                                               withBoolean:(jboolean)failFast;
-
-+ (OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus *)testStoredFieldsWithOrgApacheLuceneIndexCodecReader:(OrgApacheLuceneIndexCodecReader *)reader
-                                                                                           withJavaIoPrintStream:(JavaIoPrintStream *)infoStream
-                                                                                                     withBoolean:(jboolean)failFast;
-
-+ (OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus *)testTermVectorsWithOrgApacheLuceneIndexCodecReader:(OrgApacheLuceneIndexCodecReader *)reader
-                                                                                         withJavaIoPrintStream:(JavaIoPrintStream *)infoStream;
-
-+ (OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus *)testTermVectorsWithOrgApacheLuceneIndexCodecReader:(OrgApacheLuceneIndexCodecReader *)reader
-                                                                                         withJavaIoPrintStream:(JavaIoPrintStream *)infoStream
-                                                                                                   withBoolean:(jboolean)verbose
-                                                                                                   withBoolean:(jboolean)crossCheckTermVectors
-                                                                                                   withBoolean:(jboolean)failFast;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexCheckIndex)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexCheckIndex_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexCheckIndex *self, OrgApacheLuceneStoreDirectory *dir);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexCheckIndex_init(OrgApacheLuceneIndexCheckIndex *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexCheckIndex *new_OrgApacheLuceneIndexCheckIndex_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *dir) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneIndexCheckIndex_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreLock_(OrgApacheLuceneIndexCheckIndex *self, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneStoreLock *writeLock);
-
-FOUNDATION_EXPORT OrgApacheLuceneIndexCheckIndex *new_OrgApacheLuceneIndexCheckIndex_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreLock_(OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneStoreLock *writeLock) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus *OrgApacheLuceneIndexCheckIndex_testLiveDocsWithOrgApacheLuceneIndexCodecReader_withJavaIoPrintStream_withBoolean_(OrgApacheLuceneIndexCodecReader *reader, JavaIoPrintStream *infoStream, jboolean failFast);
-
-FOUNDATION_EXPORT OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus *OrgApacheLuceneIndexCheckIndex_testFieldInfosWithOrgApacheLuceneIndexCodecReader_withJavaIoPrintStream_withBoolean_(OrgApacheLuceneIndexCodecReader *reader, JavaIoPrintStream *infoStream, jboolean failFast);
-
-FOUNDATION_EXPORT OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus *OrgApacheLuceneIndexCheckIndex_testFieldNormsWithOrgApacheLuceneIndexCodecReader_withJavaIoPrintStream_withBoolean_(OrgApacheLuceneIndexCodecReader *reader, JavaIoPrintStream *infoStream, jboolean failFast);
-
-FOUNDATION_EXPORT OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus *OrgApacheLuceneIndexCheckIndex_testPostingsWithOrgApacheLuceneIndexCodecReader_withJavaIoPrintStream_(OrgApacheLuceneIndexCodecReader *reader, JavaIoPrintStream *infoStream);
-
-FOUNDATION_EXPORT OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus *OrgApacheLuceneIndexCheckIndex_testPostingsWithOrgApacheLuceneIndexCodecReader_withJavaIoPrintStream_withBoolean_withBoolean_(OrgApacheLuceneIndexCodecReader *reader, JavaIoPrintStream *infoStream, jboolean verbose, jboolean failFast);
-
-FOUNDATION_EXPORT OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus *OrgApacheLuceneIndexCheckIndex_testStoredFieldsWithOrgApacheLuceneIndexCodecReader_withJavaIoPrintStream_withBoolean_(OrgApacheLuceneIndexCodecReader *reader, JavaIoPrintStream *infoStream, jboolean failFast);
-
-FOUNDATION_EXPORT OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus *OrgApacheLuceneIndexCheckIndex_testDocValuesWithOrgApacheLuceneIndexCodecReader_withJavaIoPrintStream_withBoolean_(OrgApacheLuceneIndexCodecReader *reader, JavaIoPrintStream *infoStream, jboolean failFast);
-
-FOUNDATION_EXPORT OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus *OrgApacheLuceneIndexCheckIndex_testTermVectorsWithOrgApacheLuceneIndexCodecReader_withJavaIoPrintStream_(OrgApacheLuceneIndexCodecReader *reader, JavaIoPrintStream *infoStream);
-
-FOUNDATION_EXPORT OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus *OrgApacheLuceneIndexCheckIndex_testTermVectorsWithOrgApacheLuceneIndexCodecReader_withJavaIoPrintStream_withBoolean_withBoolean_withBoolean_(OrgApacheLuceneIndexCodecReader *reader, JavaIoPrintStream *infoStream, jboolean verbose, jboolean crossCheckTermVectors, jboolean failFast);
-
-FOUNDATION_EXPORT void OrgApacheLuceneIndexCheckIndex_mainWithNSStringArray_(IOSObjectArray *args);
+FOUNDATION_EXPORT OrgApacheLuceneIndexCheckIndex *new_OrgApacheLuceneIndexCheckIndex_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCheckIndex)
 
@@ -147,46 +41,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCheckIndex)
 #if !defined (_OrgApacheLuceneIndexCheckIndex_Status_) && (OrgApacheLuceneIndexCheckIndex_INCLUDE_ALL || OrgApacheLuceneIndexCheckIndex_Status_INCLUDE)
 #define _OrgApacheLuceneIndexCheckIndex_Status_
 
-@class OrgApacheLuceneIndexSegmentInfos;
-@class OrgApacheLuceneStoreDirectory;
-@protocol JavaUtilList;
-@protocol JavaUtilMap;
+@interface OrgApacheLuceneIndexCheckIndex_Status : NSObject
 
-@interface OrgApacheLuceneIndexCheckIndex_Status : NSObject {
- @public
-  jboolean clean_;
-  jboolean missingSegments_;
-  jboolean cantOpenSegments_;
-  jboolean missingSegmentVersion_;
-  NSString *segmentsFileName_;
-  jint numSegments_;
-  id<JavaUtilList> segmentsChecked_;
-  jboolean toolOutOfDate_;
-  id<JavaUtilList> segmentInfos_;
-  OrgApacheLuceneStoreDirectory *dir_;
-  OrgApacheLuceneIndexSegmentInfos *newSegments_;
-  jint totLoseDocCount_;
-  jint numBadSegments_;
-  jboolean partial_;
-  jint maxSegmentName_;
-  jboolean validCounter_;
-  id<JavaUtilMap> userData_;
-}
-
-#pragma mark Package-Private
+#pragma mark Public
 
 - (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexCheckIndex_Status)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCheckIndex_Status, segmentsFileName_, NSString *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCheckIndex_Status, segmentsChecked_, id<JavaUtilList>)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCheckIndex_Status, segmentInfos_, id<JavaUtilList>)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCheckIndex_Status, dir_, OrgApacheLuceneStoreDirectory *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCheckIndex_Status, newSegments_, OrgApacheLuceneIndexSegmentInfos *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCheckIndex_Status, userData_, id<JavaUtilMap>)
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexCheckIndex_Status_init(OrgApacheLuceneIndexCheckIndex_Status *self);
 
@@ -199,58 +62,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCheckIndex_Status)
 #if !defined (_OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus_) && (OrgApacheLuceneIndexCheckIndex_INCLUDE_ALL || OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus_INCLUDE)
 #define _OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus_
 
-@class OrgApacheLuceneCodecsCodec;
-@class OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus;
-@class OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus;
-@class OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus;
-@class OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus;
-@class OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus;
-@class OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus;
-@class OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus;
-@class OrgApacheLuceneUtilVersion;
-@protocol JavaUtilMap;
+@interface OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus : NSObject
 
-@interface OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus : NSObject {
- @public
-  NSString *name_;
-  OrgApacheLuceneCodecsCodec *codec_;
-  jint maxDoc_;
-  jboolean compound_;
-  jint numFiles_;
-  jdouble sizeMB_;
-  jboolean hasDeletions_;
-  jlong deletionsGen_;
-  jboolean openReaderPassed_;
-  id<JavaUtilMap> diagnostics_;
-  OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus *liveDocStatus_;
-  OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus *fieldInfoStatus_;
-  OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus *fieldNormStatus_;
-  OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus *termIndexStatus_;
-  OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus *storedFieldStatus_;
-  OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus *termVectorStatus_;
-  OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus *docValuesStatus_;
-  OrgApacheLuceneUtilVersion *version__;
-}
-
-#pragma mark Package-Private
+#pragma mark Public
 
 - (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus, name_, NSString *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus, codec_, OrgApacheLuceneCodecsCodec *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus, diagnostics_, id<JavaUtilMap>)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus, liveDocStatus_, OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus, fieldInfoStatus_, OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus, fieldNormStatus_, OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus, termIndexStatus_, OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus, storedFieldStatus_, OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus, termVectorStatus_, OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus, docValuesStatus_, OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus, version__, OrgApacheLuceneUtilVersion *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus_init(OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStatus *self);
 
@@ -263,19 +83,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCheckIndex_Status_SegmentInfoStat
 #if !defined (_OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus_) && (OrgApacheLuceneIndexCheckIndex_INCLUDE_ALL || OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus_INCLUDE)
 #define _OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus_
 
-@class JavaLangThrowable;
+@interface OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus : NSObject
 
-@interface OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus : NSObject {
- @public
-  jint numDeleted_;
-  JavaLangThrowable *error_;
-}
+#pragma mark Public
+
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus, error_, JavaLangThrowable *)
+FOUNDATION_EXPORT void OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus_init(OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus *self);
+
+FOUNDATION_EXPORT OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus *new_OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus)
 
@@ -284,19 +104,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCheckIndex_Status_LiveDocStatus)
 #if !defined (_OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus_) && (OrgApacheLuceneIndexCheckIndex_INCLUDE_ALL || OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus_INCLUDE)
 #define _OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus_
 
-@class JavaLangThrowable;
+@interface OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus : NSObject
 
-@interface OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus : NSObject {
- @public
-  jlong totFields_;
-  JavaLangThrowable *error_;
-}
+#pragma mark Public
+
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus, error_, JavaLangThrowable *)
+FOUNDATION_EXPORT void OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus_init(OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus *self);
+
+FOUNDATION_EXPORT OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus *new_OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus)
 
@@ -305,19 +125,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCheckIndex_Status_FieldInfoStatus
 #if !defined (_OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus_) && (OrgApacheLuceneIndexCheckIndex_INCLUDE_ALL || OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus_INCLUDE)
 #define _OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus_
 
-@class JavaLangThrowable;
+@interface OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus : NSObject
 
-@interface OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus : NSObject {
- @public
-  jlong totFields_;
-  JavaLangThrowable *error_;
-}
+#pragma mark Public
+
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus, error_, JavaLangThrowable *)
+FOUNDATION_EXPORT void OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus_init(OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus *self);
+
+FOUNDATION_EXPORT OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus *new_OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus)
 
@@ -326,29 +146,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCheckIndex_Status_FieldNormStatus
 #if !defined (_OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus_) && (OrgApacheLuceneIndexCheckIndex_INCLUDE_ALL || OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus_INCLUDE)
 #define _OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus_
 
-@class JavaLangThrowable;
-@protocol JavaUtilMap;
+@interface OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus : NSObject
 
-@interface OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus : NSObject {
- @public
-  jlong termCount_;
-  jlong delTermCount_;
-  jlong totFreq_;
-  jlong totPos_;
-  JavaLangThrowable *error_;
-  id<JavaUtilMap> blockTreeStats_;
-}
-
-#pragma mark Package-Private
+#pragma mark Public
 
 - (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus, error_, JavaLangThrowable *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus, blockTreeStats_, id<JavaUtilMap>)
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus_init(OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus *self);
 
@@ -361,24 +167,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCheckIndex_Status_TermIndexStatus
 #if !defined (_OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus_) && (OrgApacheLuceneIndexCheckIndex_INCLUDE_ALL || OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus_INCLUDE)
 #define _OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus_
 
-@class JavaLangThrowable;
+@interface OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus : NSObject
 
-@interface OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus : NSObject {
- @public
-  jint docCount_;
-  jlong totFields_;
-  JavaLangThrowable *error_;
-}
-
-#pragma mark Package-Private
+#pragma mark Public
 
 - (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus, error_, JavaLangThrowable *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus_init(OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStatus *self);
 
@@ -391,24 +188,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCheckIndex_Status_StoredFieldStat
 #if !defined (_OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus_) && (OrgApacheLuceneIndexCheckIndex_INCLUDE_ALL || OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus_INCLUDE)
 #define _OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus_
 
-@class JavaLangThrowable;
+@interface OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus : NSObject
 
-@interface OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus : NSObject {
- @public
-  jint docCount_;
-  jlong totVectors_;
-  JavaLangThrowable *error_;
-}
-
-#pragma mark Package-Private
+#pragma mark Public
 
 - (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus, error_, JavaLangThrowable *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus_init(OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatus *self);
 
@@ -421,28 +209,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCheckIndex_Status_TermVectorStatu
 #if !defined (_OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus_) && (OrgApacheLuceneIndexCheckIndex_INCLUDE_ALL || OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus_INCLUDE)
 #define _OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus_
 
-@class JavaLangThrowable;
+@interface OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus : NSObject
 
-@interface OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus : NSObject {
- @public
-  jlong totalValueFields_;
-  jlong totalNumericFields_;
-  jlong totalBinaryFields_;
-  jlong totalSortedFields_;
-  jlong totalSortedNumericFields_;
-  jlong totalSortedSetFields_;
-  JavaLangThrowable *error_;
-}
-
-#pragma mark Package-Private
+#pragma mark Public
 
 - (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus, error_, JavaLangThrowable *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus_init(OrgApacheLuceneIndexCheckIndex_Status_DocValuesStatus *self);
 

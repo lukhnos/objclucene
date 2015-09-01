@@ -20,44 +20,23 @@
 #define OrgApacheLuceneDocumentField_INCLUDE 1
 #include "org/apache/lucene/document/Field.h"
 
-@class OrgApacheLuceneDocumentFieldType;
-@class OrgApacheLuceneDocumentField_StoreEnum;
-
 #define OrgApacheLuceneDocumentGeoPointField_PRECISION_STEP 9
 
 @interface OrgApacheLuceneDocumentGeoPointField : OrgApacheLuceneDocumentField
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)name
-                      withDouble:(jdouble)lon
-                      withDouble:(jdouble)lat
-withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type;
-
-- (instancetype)initWithNSString:(NSString *)name
-                      withDouble:(jdouble)lon
-                      withDouble:(jdouble)lat
-withOrgApacheLuceneDocumentField_StoreEnum:(OrgApacheLuceneDocumentField_StoreEnum *)stored;
+- (instancetype)init;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneDocumentGeoPointField)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneDocumentGeoPointField)
 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneDocumentGeoPointField, PRECISION_STEP, jint)
 
-FOUNDATION_EXPORT OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentGeoPointField_TYPE_NOT_STORED_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneDocumentGeoPointField, TYPE_NOT_STORED_, OrgApacheLuceneDocumentFieldType *)
+FOUNDATION_EXPORT void OrgApacheLuceneDocumentGeoPointField_init(OrgApacheLuceneDocumentGeoPointField *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentGeoPointField_TYPE_STORED_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneDocumentGeoPointField, TYPE_STORED_, OrgApacheLuceneDocumentFieldType *)
-
-FOUNDATION_EXPORT void OrgApacheLuceneDocumentGeoPointField_initWithNSString_withDouble_withDouble_withOrgApacheLuceneDocumentField_StoreEnum_(OrgApacheLuceneDocumentGeoPointField *self, NSString *name, jdouble lon, jdouble lat, OrgApacheLuceneDocumentField_StoreEnum *stored);
-
-FOUNDATION_EXPORT OrgApacheLuceneDocumentGeoPointField *new_OrgApacheLuceneDocumentGeoPointField_initWithNSString_withDouble_withDouble_withOrgApacheLuceneDocumentField_StoreEnum_(NSString *name, jdouble lon, jdouble lat, OrgApacheLuceneDocumentField_StoreEnum *stored) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneDocumentGeoPointField_initWithNSString_withDouble_withDouble_withOrgApacheLuceneDocumentFieldType_(OrgApacheLuceneDocumentGeoPointField *self, NSString *name, jdouble lon, jdouble lat, OrgApacheLuceneDocumentFieldType *type);
-
-FOUNDATION_EXPORT OrgApacheLuceneDocumentGeoPointField *new_OrgApacheLuceneDocumentGeoPointField_initWithNSString_withDouble_withDouble_withOrgApacheLuceneDocumentFieldType_(NSString *name, jdouble lon, jdouble lat, OrgApacheLuceneDocumentFieldType *type) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneDocumentGeoPointField *new_OrgApacheLuceneDocumentGeoPointField_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentGeoPointField)
 

@@ -20,9 +20,6 @@
 #define OrgApacheLuceneUtilAccountable_INCLUDE 1
 #include "org/apache/lucene/util/Accountable.h"
 
-@protocol JavaUtilCollection;
-@protocol JavaUtilMap;
-
 @interface OrgApacheLuceneUtilFrequencyTrackingRingBuffer : NSObject < OrgApacheLuceneUtilAccountable >
 
 #pragma mark Public
@@ -30,17 +27,7 @@
 - (instancetype)initWithInt:(jint)maxSize
                     withInt:(jint)sentinel;
 
-- (void)addWithInt:(jint)i;
-
-- (jint)frequencyWithInt:(jint)key;
-
-- (id<JavaUtilCollection>)getChildResources;
-
 - (jlong)ramBytesUsed;
-
-#pragma mark Package-Private
-
-- (id<JavaUtilMap>)asFrequencyMap;
 
 @end
 

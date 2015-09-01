@@ -22,16 +22,6 @@
 
 @protocol OrgApacheLuceneBkdtreeLatLonReader < JavaIoCloseable, NSObject, JavaObject >
 
-- (jboolean)next;
-
-- (jint)latEnc;
-
-- (jint)lonEnc;
-
-- (jlong)ord;
-
-- (jint)docID;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneBkdtreeLatLonReader)

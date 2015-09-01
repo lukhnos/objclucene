@@ -6,9 +6,6 @@
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
-#include "java/util/Collection.h"
-#include "java/util/Collections.h"
-#include "java/util/Set.h"
 #include "org/apache/lucene/search/DocIdSetIterator.h"
 #include "org/apache/lucene/search/ReqExclScorer.h"
 #include "org/apache/lucene/search/Scorer.h"
@@ -112,10 +109,6 @@ withOrgApacheLuceneSearchTwoPhaseIterator:(OrgApacheLuceneSearchTwoPhaseIterator
   return [((OrgApacheLuceneSearchScorer *) nil_chk(reqScorer_)) score];
 }
 
-- (id<JavaUtilCollection>)getChildren {
-  return JavaUtilCollections_singletonWithId_([new_OrgApacheLuceneSearchScorer_ChildScorer_initWithOrgApacheLuceneSearchScorer_withNSString_(reqScorer_, @"MUST") autorelease]);
-}
-
 - (jint)advanceWithInt:(jint)target {
   return OrgApacheLuceneSearchReqExclScorer_toNonExcludedWithInt_(self, [((OrgApacheLuceneSearchDocIdSetIterator *) nil_chk(reqApproximation_)) advanceWithInt:target]);
 }
@@ -147,7 +140,6 @@ withOrgApacheLuceneSearchTwoPhaseIterator:(OrgApacheLuceneSearchTwoPhaseIterator
     { "freq", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
     { "cost", NULL, "J", 0x1, NULL, NULL },
     { "score", NULL, "F", 0x1, "Ljava.io.IOException;", NULL },
-    { "getChildren", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
     { "advanceWithInt:", "advance", "I", 0x1, "Ljava.io.IOException;", NULL },
     { "asTwoPhaseIterator", NULL, "Lorg.apache.lucene.search.TwoPhaseIterator;", 0x1, NULL, NULL },
   };
@@ -158,7 +150,7 @@ withOrgApacheLuceneSearchTwoPhaseIterator:(OrgApacheLuceneSearchTwoPhaseIterator
     { "reqTwoPhaseIterator_", NULL, 0x12, "Lorg.apache.lucene.search.TwoPhaseIterator;", NULL, NULL, .constantValue.asLong = 0 },
     { "exclTwoPhaseIterator_", NULL, 0x12, "Lorg.apache.lucene.search.TwoPhaseIterator;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchReqExclScorer = { 2, "ReqExclScorer", "org.apache.lucene.search", NULL, 0x0, 12, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchReqExclScorer = { 2, "ReqExclScorer", "org.apache.lucene.search", NULL, 0x0, 11, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchReqExclScorer;
 }
 

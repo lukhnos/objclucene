@@ -12,21 +12,11 @@
 #include "org/apache/lucene/util/Constants.h"
 #include "org/apache/lucene/util/Version.h"
 
-@interface OrgApacheLuceneUtilConstants ()
-
-- (instancetype)init;
-
-@end
-
 static jint OrgApacheLuceneUtilConstants_JVM_MAJOR_VERSION_;
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilConstants, JVM_MAJOR_VERSION_, jint)
 
 static jint OrgApacheLuceneUtilConstants_JVM_MINOR_VERSION_;
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilConstants, JVM_MINOR_VERSION_, jint)
-
-__attribute__((unused)) static void OrgApacheLuceneUtilConstants_init(OrgApacheLuceneUtilConstants *self);
-
-__attribute__((unused)) static OrgApacheLuceneUtilConstants *new_OrgApacheLuceneUtilConstants_init() NS_RETURNS_RETAINED;
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilConstants)
 
@@ -115,7 +105,7 @@ NSString *OrgApacheLuceneUtilConstants_LUCENE_VERSION_;
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", "Constants", NULL, 0x2, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "JVM_VENDOR_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneUtilConstants_JVM_VENDOR_, NULL, .constantValue.asLong = 0 },

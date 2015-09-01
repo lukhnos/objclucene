@@ -20,26 +20,19 @@
 #define OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource_INCLUDE 1
 #include "org/apache/lucene/queries/function/valuesource/FieldCacheSource.h"
 
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneQueriesFunctionFunctionValues;
-@protocol JavaUtilMap;
-
 @interface OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource : OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field;
-
-- (OrgApacheLuceneQueriesFunctionFunctionValues *)getValuesWithJavaUtilMap:(id<JavaUtilMap>)context
-                                 withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_initWithNSString_(OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource *self, NSString *field);
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_init(OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource *new_OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_initWithNSString_(NSString *field) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource *new_OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceBytesRefFieldSource)
 

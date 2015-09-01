@@ -20,24 +20,11 @@
 #define OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_INCLUDE 1
 #include "org/apache/lucene/queryparser/flexible/core/processors/QueryNodeProcessorImpl.h"
 
-@protocol JavaUtilList;
-@protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
-
 @interface OrgApacheLuceneQueryparserFlexibleStandardProcessorsAllowLeadingWildcardProcessor : OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)processWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryTree;
-
-#pragma mark Protected
-
-- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)postProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)node;
-
-- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)preProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)node;
-
-- (id<JavaUtilList>)setChildrenOrderWithJavaUtilList:(id<JavaUtilList>)children;
 
 @end
 

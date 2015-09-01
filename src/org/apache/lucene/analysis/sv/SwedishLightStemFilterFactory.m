@@ -4,45 +4,34 @@
 //
 
 #include "J2ObjC_source.h"
-#include "java/lang/IllegalArgumentException.h"
-#include "java/util/Map.h"
-#include "org/apache/lucene/analysis/TokenStream.h"
-#include "org/apache/lucene/analysis/sv/SwedishLightStemFilter.h"
 #include "org/apache/lucene/analysis/sv/SwedishLightStemFilterFactory.h"
-#include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneAnalysisSvSwedishLightStemFilterFactory
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args {
-  OrgApacheLuceneAnalysisSvSwedishLightStemFilterFactory_initWithJavaUtilMap_(self, args);
+- (instancetype)init {
+  OrgApacheLuceneAnalysisSvSwedishLightStemFilterFactory_init(self);
   return self;
-}
-
-- (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  return [new_OrgApacheLuceneAnalysisSvSwedishLightStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(input) autorelease];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "SwedishLightStemFilterFactory", NULL, 0x1, NULL, NULL },
-    { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.TokenStream;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisSvSwedishLightStemFilterFactory = { 2, "SwedishLightStemFilterFactory", "org.apache.lucene.analysis.sv", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisSvSwedishLightStemFilterFactory = { 2, "SwedishLightStemFilterFactory", "org.apache.lucene.analysis.sv", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisSvSwedishLightStemFilterFactory;
 }
 
 @end
 
-void OrgApacheLuceneAnalysisSvSwedishLightStemFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisSvSwedishLightStemFilterFactory *self, id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
-  if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
-  }
+void OrgApacheLuceneAnalysisSvSwedishLightStemFilterFactory_init(OrgApacheLuceneAnalysisSvSwedishLightStemFilterFactory *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneAnalysisSvSwedishLightStemFilterFactory *new_OrgApacheLuceneAnalysisSvSwedishLightStemFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+OrgApacheLuceneAnalysisSvSwedishLightStemFilterFactory *new_OrgApacheLuceneAnalysisSvSwedishLightStemFilterFactory_init() {
   OrgApacheLuceneAnalysisSvSwedishLightStemFilterFactory *self = [OrgApacheLuceneAnalysisSvSwedishLightStemFilterFactory alloc];
-  OrgApacheLuceneAnalysisSvSwedishLightStemFilterFactory_initWithJavaUtilMap_(self, args);
+  OrgApacheLuceneAnalysisSvSwedishLightStemFilterFactory_init(self);
   return self;
 }
 

@@ -28,9 +28,6 @@
 - (OrgLukhnosPortmobileFileFileVisitResultEnum *)visitFileWithId:(id)file
         withOrgLukhnosPortmobileFileAttributeBasicFileAttributes:(OrgLukhnosPortmobileFileAttributeBasicFileAttributes *)attrs;
 
-- (OrgLukhnosPortmobileFileFileVisitResultEnum *)visitFileFailedWithId:(id)file
-                                                 withJavaIoIOException:(JavaIoIOException *)exc;
-
 - (OrgLukhnosPortmobileFileFileVisitResultEnum *)postVisitDirectoryWithId:(id)dir
                                                     withJavaIoIOException:(JavaIoIOException *)exc;
 

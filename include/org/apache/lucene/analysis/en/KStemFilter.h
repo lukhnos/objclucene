@@ -20,13 +20,11 @@
 #define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
-@class OrgApacheLuceneAnalysisTokenStream;
-
 @interface OrgApacheLuceneAnalysisEnKStemFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
+- (instancetype)init;
 
 - (jboolean)incrementToken;
 
@@ -34,9 +32,9 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisEnKStemFilter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisEnKStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisEnKStemFilter *self, OrgApacheLuceneAnalysisTokenStream *inArg);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisEnKStemFilter_init(OrgApacheLuceneAnalysisEnKStemFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisEnKStemFilter *new_OrgApacheLuceneAnalysisEnKStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisEnKStemFilter *new_OrgApacheLuceneAnalysisEnKStemFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisEnKStemFilter)
 

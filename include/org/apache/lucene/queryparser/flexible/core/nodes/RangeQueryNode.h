@@ -20,17 +20,7 @@
 #define OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_INCLUDE 1
 #include "org/apache/lucene/queryparser/flexible/core/nodes/FieldableNode.h"
 
-@protocol OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode;
-
 @protocol OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode < OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode, NSObject, JavaObject >
-
-- (id)getLowerBound;
-
-- (id)getUpperBound;
-
-- (jboolean)isLowerInclusive;
-
-- (jboolean)isUpperInclusive;
 
 @end
 

@@ -116,10 +116,6 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg {
   return OrgApacheLuceneUtilFstPositiveIntOutputs_NO_OUTPUT_;
 }
 
-- (NSString *)outputToStringWithId:(JavaLangLong *)output {
-  return [((JavaLangLong *) nil_chk(output)) description];
-}
-
 - (NSString *)description {
   return @"PositiveIntOutputs";
 }
@@ -147,7 +143,6 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg {
     { "readWithOrgApacheLuceneStoreDataInput:", "read", "Ljava.lang.Long;", 0x1, "Ljava.io.IOException;", NULL },
     { "validWithJavaLangLong:", "valid", "Z", 0x2, NULL, NULL },
     { "getNoOutput", NULL, "Ljava.lang.Long;", 0x1, NULL, NULL },
-    { "outputToStringWithId:", "outputToString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "ramBytesUsedWithId:", "ramBytesUsed", "J", 0x1, NULL, NULL },
   };
@@ -156,7 +151,7 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg {
     { "singleton_", NULL, 0x1a, "Lorg.apache.lucene.util.fst.PositiveIntOutputs;", &OrgApacheLuceneUtilFstPositiveIntOutputs_singleton_, NULL, .constantValue.asLong = 0 },
   };
   static const char *superclass_type_args[] = {"Ljava.lang.Long;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstPositiveIntOutputs = { 2, "PositiveIntOutputs", "org.apache.lucene.util.fst", NULL, 0x11, 12, methods, 2, fields, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/util/fst/Outputs<Ljava/lang/Long;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstPositiveIntOutputs = { 2, "PositiveIntOutputs", "org.apache.lucene.util.fst", NULL, 0x11, 11, methods, 2, fields, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/util/fst/Outputs<Ljava/lang/Long;>;" };
   return &_OrgApacheLuceneUtilFstPositiveIntOutputs;
 }
 

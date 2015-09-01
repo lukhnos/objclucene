@@ -16,61 +16,13 @@
 #if !defined (_OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_) && (OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_INCLUDE)
 #define _OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_
 
-@class JavaUtilLocale;
-@class OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum;
-@protocol JavaLangCharSequence;
-
 @protocol OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax < NSObject, JavaObject >
-
-- (id<JavaLangCharSequence>)escapeWithJavaLangCharSequence:(id<JavaLangCharSequence>)text
-                                        withJavaUtilLocale:(JavaUtilLocale *)locale
-withOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum:(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum *)type;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax)
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax)
-
-#endif
-
-#if !defined (_OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum_) && (OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum_INCLUDE)
-#define _OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum_
-
-#define JavaLangEnum_RESTRICT 1
-#define JavaLangEnum_INCLUDE 1
-#include "java/lang/Enum.h"
-
-typedef NS_ENUM(NSUInteger, OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type) {
-  OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_STRING = 0,
-  OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_NORMAL = 1,
-};
-
-@interface OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum : JavaLangEnum < NSCopying >
-
-#pragma mark Package-Private
-
-+ (IOSObjectArray *)values;
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum_values();
-
-+ (OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum *)valueOfWithNSString:(NSString *)name;
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum *OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum_valueOfWithNSString_(NSString *name);
-
-- (id)copyWithZone:(NSZone *)zone;
-
-@end
-
-J2OBJC_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum)
-
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum *OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum_values_[];
-
-#define OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum_STRING OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum_values_[OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_STRING]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum, STRING)
-
-#define OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum_NORMAL OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum_values_[OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_NORMAL]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum, NORMAL)
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum)
 
 #endif
 

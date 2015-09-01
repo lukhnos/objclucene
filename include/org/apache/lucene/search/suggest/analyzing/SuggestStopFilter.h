@@ -20,29 +20,19 @@
 #define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
-@class OrgApacheLuceneAnalysisTokenStream;
-@class OrgApacheLuceneAnalysisUtilCharArraySet;
-
 @interface OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-               withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopWords;
-
-- (void)end;
-
-- (jboolean)incrementToken;
-
-- (void)reset;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter *self, OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisUtilCharArraySet *stopWords);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter_init(OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter *new_OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisUtilCharArraySet *stopWords) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter *new_OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter)
 

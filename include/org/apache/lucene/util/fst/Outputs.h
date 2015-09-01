@@ -36,8 +36,6 @@
 - (id)mergeWithId:(id)first
            withId:(id)second;
 
-- (NSString *)outputToStringWithId:(id)output;
-
 - (jlong)ramBytesUsedWithId:(id)output;
 
 - (id)readWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg;

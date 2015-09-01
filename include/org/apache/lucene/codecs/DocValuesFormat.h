@@ -20,18 +20,14 @@
 #define OrgApacheLuceneUtilNamedSPILoader_NamedSPI_INCLUDE 1
 #include "org/apache/lucene/util/NamedSPILoader.h"
 
-@class JavaLangClassLoader;
 @class OrgApacheLuceneCodecsDocValuesConsumer;
 @class OrgApacheLuceneCodecsDocValuesProducer;
 @class OrgApacheLuceneIndexSegmentReadState;
 @class OrgApacheLuceneIndexSegmentWriteState;
-@protocol JavaUtilSet;
 
 @interface OrgApacheLuceneCodecsDocValuesFormat : NSObject < OrgApacheLuceneUtilNamedSPILoader_NamedSPI >
 
 #pragma mark Public
-
-+ (id<JavaUtilSet>)availableDocValuesFormats;
 
 - (OrgApacheLuceneCodecsDocValuesConsumer *)fieldsConsumerWithOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state;
 
@@ -40,8 +36,6 @@
 + (OrgApacheLuceneCodecsDocValuesFormat *)forNameWithNSString:(NSString *)name;
 
 - (NSString *)getName;
-
-+ (void)reloadDocValuesFormatsWithJavaLangClassLoader:(JavaLangClassLoader *)classloader;
 
 - (NSString *)description;
 
@@ -56,10 +50,6 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsDocValuesFormat)
 FOUNDATION_EXPORT void OrgApacheLuceneCodecsDocValuesFormat_initWithNSString_(OrgApacheLuceneCodecsDocValuesFormat *self, NSString *name);
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsDocValuesFormat *OrgApacheLuceneCodecsDocValuesFormat_forNameWithNSString_(NSString *name);
-
-FOUNDATION_EXPORT id<JavaUtilSet> OrgApacheLuceneCodecsDocValuesFormat_availableDocValuesFormats();
-
-FOUNDATION_EXPORT void OrgApacheLuceneCodecsDocValuesFormat_reloadDocValuesFormatsWithJavaLangClassLoader_(JavaLangClassLoader *classloader);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsDocValuesFormat)
 

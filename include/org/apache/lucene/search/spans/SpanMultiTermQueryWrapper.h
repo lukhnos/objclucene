@@ -23,53 +23,19 @@
 #define OrgApacheLuceneSearchSpansSpanQuery_INCLUDE 1
 #include "org/apache/lucene/search/spans/SpanQuery.h"
 
-@class OrgApacheLuceneIndexIndexReader;
-@class OrgApacheLuceneSearchIndexSearcher;
-@class OrgApacheLuceneSearchMultiTermQuery;
-@class OrgApacheLuceneSearchQuery;
-@class OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SpanRewriteMethod;
-@class OrgApacheLuceneSearchSpansSpanWeight;
-
-@interface OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper : OrgApacheLuceneSearchSpansSpanQuery {
- @public
-  OrgApacheLuceneSearchMultiTermQuery *query_;
-}
+@interface OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper : OrgApacheLuceneSearchSpansSpanQuery
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchMultiTermQuery:(OrgApacheLuceneSearchMultiTermQuery *)query;
-
-- (OrgApacheLuceneSearchSpansSpanWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
-                                                                                 withBoolean:(jboolean)needsScores;
-
-- (jboolean)isEqual:(id)obj;
-
-- (NSString *)getField;
-
-- (OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SpanRewriteMethod *)getRewriteMethod;
-
-- (OrgApacheLuceneSearchQuery *)getWrappedQuery;
-
-- (NSUInteger)hash;
-
-- (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
-
-- (void)setRewriteMethodWithOrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SpanRewriteMethod:(OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SpanRewriteMethod *)rewriteMethod;
-
-- (NSString *)toStringWithNSString:(NSString *)field;
+- (instancetype)init;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper, query_, id)
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_init(OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SpanRewriteMethod *OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SCORING_SPAN_QUERY_REWRITE_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper, SCORING_SPAN_QUERY_REWRITE_, OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SpanRewriteMethod *)
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_initWithOrgApacheLuceneSearchMultiTermQuery_(OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper *self, OrgApacheLuceneSearchMultiTermQuery *query);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper *new_OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_initWithOrgApacheLuceneSearchMultiTermQuery_(OrgApacheLuceneSearchMultiTermQuery *query) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper *new_OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper)
 
@@ -82,18 +48,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper)
 #define OrgApacheLuceneSearchMultiTermQuery_RewriteMethod_INCLUDE 1
 #include "org/apache/lucene/search/MultiTermQuery.h"
 
-@class OrgApacheLuceneIndexIndexReader;
-@class OrgApacheLuceneSearchMultiTermQuery;
-@class OrgApacheLuceneSearchSpansSpanQuery;
-
 @interface OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SpanRewriteMethod : OrgApacheLuceneSearchMultiTermQuery_RewriteMethod
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (OrgApacheLuceneSearchSpansSpanQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
-                                            withOrgApacheLuceneSearchMultiTermQuery:(OrgApacheLuceneSearchMultiTermQuery *)query;
 
 @end
 
@@ -108,32 +67,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_S
 #if !defined (_OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite_) && (OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_INCLUDE_ALL || OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite_INCLUDE)
 #define _OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite_
 
-@class OrgApacheLuceneIndexIndexReader;
-@class OrgApacheLuceneSearchMultiTermQuery;
-@class OrgApacheLuceneSearchSpansSpanQuery;
-
 @interface OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite : OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SpanRewriteMethod
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)size;
-
-- (jboolean)isEqual:(id)obj;
-
-- (jint)getSize;
-
-- (NSUInteger)hash;
-
-- (OrgApacheLuceneSearchSpansSpanQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
-                                            withOrgApacheLuceneSearchMultiTermQuery:(OrgApacheLuceneSearchMultiTermQuery *)query;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite_initWithInt_(OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite *self, jint size);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite_init(OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite *new_OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite_initWithInt_(jint size) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite *new_OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite)
 

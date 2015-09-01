@@ -20,23 +20,19 @@
 #define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
-@class OrgApacheLuceneAnalysisTokenStream;
-
 @interface OrgApacheLuceneAnalysisRuRussianLightStemFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
-
-- (jboolean)incrementToken;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisRuRussianLightStemFilter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisRuRussianLightStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisRuRussianLightStemFilter *self, OrgApacheLuceneAnalysisTokenStream *input);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisRuRussianLightStemFilter_init(OrgApacheLuceneAnalysisRuRussianLightStemFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisRuRussianLightStemFilter *new_OrgApacheLuceneAnalysisRuRussianLightStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisRuRussianLightStemFilter *new_OrgApacheLuceneAnalysisRuRussianLightStemFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisRuRussianLightStemFilter)
 

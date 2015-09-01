@@ -20,60 +20,19 @@
 #define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
-@class JavaUtilLinkedList;
-@class OrgApacheLuceneAnalysisTokenStream;
-@class OrgApacheLuceneAnalysisUtilCharArraySet;
-@protocol OrgApacheLuceneAnalysisTokenattributesCharTermAttribute;
-@protocol OrgApacheLuceneAnalysisTokenattributesOffsetAttribute;
-
 #define OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_DEFAULT_MIN_WORD_SIZE 5
 #define OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_DEFAULT_MIN_SUBWORD_SIZE 2
 #define OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_DEFAULT_MAX_SUBWORD_SIZE 15
 
-@interface OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase : OrgApacheLuceneAnalysisTokenFilter {
- @public
-  OrgApacheLuceneAnalysisUtilCharArraySet *dictionary_;
-  JavaUtilLinkedList *tokens_;
-  jint minWordSize_;
-  jint minSubwordSize_;
-  jint maxSubwordSize_;
-  jboolean onlyLongestMatch_;
-  id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute> termAtt_;
-  id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute> offsetAtt_;
-}
+@interface OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
-- (jboolean)incrementToken;
-
-- (void)reset;
-
-#pragma mark Protected
-
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-               withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)dictionary;
-
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-               withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)dictionary
-                                               withBoolean:(jboolean)onlyLongestMatch;
-
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-               withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)dictionary
-                                                   withInt:(jint)minWordSize
-                                                   withInt:(jint)minSubwordSize
-                                                   withInt:(jint)maxSubwordSize
-                                               withBoolean:(jboolean)onlyLongestMatch;
-
-- (void)decompose;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase, dictionary_, OrgApacheLuceneAnalysisUtilCharArraySet *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase, tokens_, JavaUtilLinkedList *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase, termAtt_, id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase, offsetAtt_, id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>)
 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase, DEFAULT_MIN_WORD_SIZE, jint)
 
@@ -81,45 +40,9 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilte
 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase, DEFAULT_MAX_SUBWORD_SIZE, jint)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_withBoolean_(OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase *self, OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisUtilCharArraySet *dictionary, jboolean onlyLongestMatch);
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase *self, OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisUtilCharArraySet *dictionary);
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_withInt_withInt_withInt_withBoolean_(OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase *self, OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisUtilCharArraySet *dictionary, jint minWordSize, jint minSubwordSize, jint maxSubwordSize, jboolean onlyLongestMatch);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_init(OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase)
-
-#endif
-
-#if !defined (_OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_CompoundToken_) && (OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_INCLUDE_ALL || OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_CompoundToken_INCLUDE)
-#define _OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_CompoundToken_
-
-@class OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase;
-@protocol JavaLangCharSequence;
-
-@interface OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_CompoundToken : NSObject {
- @public
-  id<JavaLangCharSequence> txt_;
-  jint startOffset_, endOffset_;
-}
-
-#pragma mark Public
-
-- (instancetype)initWithOrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase:(OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase *)outer$
-                                                                           withInt:(jint)offset
-                                                                           withInt:(jint)length;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_CompoundToken)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_CompoundToken, txt_, id<JavaLangCharSequence>)
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_CompoundToken_initWithOrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_withInt_withInt_(OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_CompoundToken *self, OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase *outer$, jint offset, jint length);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_CompoundToken *new_OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_CompoundToken_initWithOrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_withInt_withInt_(OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase *outer$, jint offset, jint length) NS_RETURNS_RETAINED;
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_CompoundToken)
 
 #endif
 

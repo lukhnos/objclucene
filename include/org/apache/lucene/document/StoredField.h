@@ -22,7 +22,6 @@
 
 @class IOSByteArray;
 @class OrgApacheLuceneDocumentFieldType;
-@class OrgApacheLuceneUtilBytesRef;
 
 @interface OrgApacheLuceneDocumentStoredField : OrgApacheLuceneDocumentField
 
@@ -30,14 +29,6 @@
 
 - (instancetype)initWithNSString:(NSString *)name
                    withByteArray:(IOSByteArray *)value;
-
-- (instancetype)initWithNSString:(NSString *)name
-                   withByteArray:(IOSByteArray *)value
-                         withInt:(jint)offset
-                         withInt:(jint)length;
-
-- (instancetype)initWithNSString:(NSString *)name
- withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)value;
 
 - (instancetype)initWithNSString:(NSString *)name
                       withDouble:(jdouble)value;
@@ -51,9 +42,6 @@
 - (instancetype)initWithNSString:(NSString *)name
                         withLong:(jlong)value;
 
-- (instancetype)initWithNSString:(NSString *)name
-                    withNSString:(NSString *)value;
-
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneDocumentStoredField)
@@ -64,18 +52,6 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneDocumentStoredField, TYPE_, OrgApacheL
 FOUNDATION_EXPORT void OrgApacheLuceneDocumentStoredField_initWithNSString_withByteArray_(OrgApacheLuceneDocumentStoredField *self, NSString *name, IOSByteArray *value);
 
 FOUNDATION_EXPORT OrgApacheLuceneDocumentStoredField *new_OrgApacheLuceneDocumentStoredField_initWithNSString_withByteArray_(NSString *name, IOSByteArray *value) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneDocumentStoredField_initWithNSString_withByteArray_withInt_withInt_(OrgApacheLuceneDocumentStoredField *self, NSString *name, IOSByteArray *value, jint offset, jint length);
-
-FOUNDATION_EXPORT OrgApacheLuceneDocumentStoredField *new_OrgApacheLuceneDocumentStoredField_initWithNSString_withByteArray_withInt_withInt_(NSString *name, IOSByteArray *value, jint offset, jint length) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneDocumentStoredField_initWithNSString_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneDocumentStoredField *self, NSString *name, OrgApacheLuceneUtilBytesRef *value);
-
-FOUNDATION_EXPORT OrgApacheLuceneDocumentStoredField *new_OrgApacheLuceneDocumentStoredField_initWithNSString_withOrgApacheLuceneUtilBytesRef_(NSString *name, OrgApacheLuceneUtilBytesRef *value) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneDocumentStoredField_initWithNSString_withNSString_(OrgApacheLuceneDocumentStoredField *self, NSString *name, NSString *value);
-
-FOUNDATION_EXPORT OrgApacheLuceneDocumentStoredField *new_OrgApacheLuceneDocumentStoredField_initWithNSString_withNSString_(NSString *name, NSString *value) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT void OrgApacheLuceneDocumentStoredField_initWithNSString_withInt_(OrgApacheLuceneDocumentStoredField *self, NSString *name, jint value);
 

@@ -44,10 +44,6 @@
 
 - (instancetype)initWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)skipStream
                                                withInt:(jint)maxSkipLevels
-                                               withInt:(jint)skipInterval;
-
-- (instancetype)initWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)skipStream
-                                               withInt:(jint)maxSkipLevels
                                                withInt:(jint)skipInterval
                                                withInt:(jint)skipMultiplier;
 
@@ -65,8 +61,6 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsMultiLevelSkipListReader)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsMultiLevelSkipListReader, skipDoc_, IOSIntArray *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneCodecsMultiLevelSkipListReader_initWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withInt_(OrgApacheLuceneCodecsMultiLevelSkipListReader *self, OrgApacheLuceneStoreIndexInput *skipStream, jint maxSkipLevels, jint skipInterval, jint skipMultiplier);
-
-FOUNDATION_EXPORT void OrgApacheLuceneCodecsMultiLevelSkipListReader_initWithOrgApacheLuceneStoreIndexInput_withInt_withInt_(OrgApacheLuceneCodecsMultiLevelSkipListReader *self, OrgApacheLuceneStoreIndexInput *skipStream, jint maxSkipLevels, jint skipInterval);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsMultiLevelSkipListReader)
 

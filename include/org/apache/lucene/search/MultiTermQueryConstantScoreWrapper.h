@@ -36,8 +36,6 @@
 
 - (jboolean)isEqual:(id)o;
 
-- (NSString *)getField;
-
 - (NSUInteger)hash;
 
 - (NSString *)toStringWithNSString:(NSString *)field;

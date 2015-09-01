@@ -20,15 +20,11 @@
 #define OrgApacheLuceneAnalysisTokenizer_INCLUDE 1
 #include "org/apache/lucene/analysis/Tokenizer.h"
 
-@class OrgApacheLuceneUtilAttributeFactory;
-
 @interface OrgApacheLuceneAnalysisUtilCharTokenizer : OrgApacheLuceneAnalysisTokenizer
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (instancetype)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory;
 
 - (void)end;
 
@@ -47,8 +43,6 @@
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisUtilCharTokenizer)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisUtilCharTokenizer_init(OrgApacheLuceneAnalysisUtilCharTokenizer *self);
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisUtilCharTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(OrgApacheLuceneAnalysisUtilCharTokenizer *self, OrgApacheLuceneUtilAttributeFactory *factory);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilCharTokenizer)
 

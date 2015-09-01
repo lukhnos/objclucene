@@ -31,8 +31,6 @@
   jint k_;
 }
 
-- (jchar)finalChar;
-
 - (jchar)penultChar;
 
 - (jboolean)isVowelWithInt:(jint)index;
@@ -220,10 +218,6 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisEnKStemmer)
 
 @implementation OrgApacheLuceneAnalysisEnKStemmer
 
-- (jchar)finalChar {
-  return [((OrgApacheLuceneAnalysisUtilOpenStringBuilder *) nil_chk(word_)) charAtWithInt:k_];
-}
-
 - (jchar)penultChar {
   return OrgApacheLuceneAnalysisEnKStemmer_penultChar(self);
 }
@@ -363,37 +357,8 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisEnKStemmer)
   OrgApacheLuceneAnalysisEnKStemmer_iveEndings(self);
 }
 
-- (instancetype)init {
-  OrgApacheLuceneAnalysisEnKStemmer_init(self);
-  return self;
-}
-
-- (NSString *)stemWithNSString:(NSString *)term {
-  jboolean changed = [self stemWithCharArray:[((NSString *) nil_chk(term)) toCharArray] withInt:((jint) [term length])];
-  if (!changed) return term;
-  return [self asString];
-}
-
-- (NSString *)asString {
-  NSString *s = [self getString];
-  if (s != nil) return s;
-  return [((OrgApacheLuceneAnalysisUtilOpenStringBuilder *) nil_chk(word_)) description];
-}
-
 - (id<JavaLangCharSequence>)asCharSequence {
   return result_ != nil ? result_ : word_;
-}
-
-- (NSString *)getString {
-  return result_;
-}
-
-- (IOSCharArray *)getChars {
-  return [((OrgApacheLuceneAnalysisUtilOpenStringBuilder *) nil_chk(word_)) getArray];
-}
-
-- (jint)getLength {
-  return [((OrgApacheLuceneAnalysisUtilOpenStringBuilder *) nil_chk(word_)) length];
 }
 
 - (jboolean)matched {
@@ -468,6 +433,11 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisEnKStemmer)
   return YES;
 }
 
+- (instancetype)init {
+  OrgApacheLuceneAnalysisEnKStemmer_init(self);
+  return self;
+}
+
 - (void)dealloc {
   RELEASE_(word_);
   RELEASE_(matchedEntry_);
@@ -493,7 +463,6 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisEnKStemmer)
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "finalChar", NULL, "C", 0x2, NULL, NULL },
     { "penultChar", NULL, "C", 0x2, NULL, NULL },
     { "isVowelWithInt:", "isVowel", "Z", 0x2, NULL, NULL },
     { "isConsWithInt:", "isCons", "Z", 0x2, NULL, NULL },
@@ -527,15 +496,10 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisEnKStemmer)
     { "lyEndings", NULL, "V", 0x2, NULL, NULL },
     { "alEndings", NULL, "V", 0x2, NULL, NULL },
     { "iveEndings", NULL, "V", 0x2, NULL, NULL },
-    { "init", "KStemmer", NULL, 0x0, NULL, NULL },
-    { "stemWithNSString:", "stem", "Ljava.lang.String;", 0x0, NULL, NULL },
-    { "asString", NULL, "Ljava.lang.String;", 0x0, NULL, NULL },
     { "asCharSequence", NULL, "Ljava.lang.CharSequence;", 0x0, NULL, NULL },
-    { "getString", NULL, "Ljava.lang.String;", 0x0, NULL, NULL },
-    { "getChars", NULL, "[C", 0x0, NULL, NULL },
-    { "getLength", NULL, "I", 0x0, NULL, NULL },
     { "matched", NULL, "Z", 0x2, NULL, NULL },
     { "stemWithCharArray:withInt:", "stem", "Z", 0x0, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "MaxWordLen", "MaxWordLen", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisEnKStemmer_MaxWordLen },
@@ -556,7 +520,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisEnKStemmer)
     { "result_", NULL, 0x0, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.analysis.en.KStemmer$DictEntry;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisEnKStemmer = { 2, "KStemmer", "org.apache.lucene.analysis.en", NULL, 0x1, 43, methods, 16, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisEnKStemmer = { 2, "KStemmer", "org.apache.lucene.analysis.en", NULL, 0x1, 37, methods, 16, fields, 0, NULL, 1, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneAnalysisEnKStemmer;
 }
 
@@ -1302,6 +1266,10 @@ void OrgApacheLuceneAnalysisEnKStemmer_iveEndings(OrgApacheLuceneAnalysisEnKStem
   return;
 }
 
+jboolean OrgApacheLuceneAnalysisEnKStemmer_matched(OrgApacheLuceneAnalysisEnKStemmer *self) {
+  return self->matchedEntry_ != nil;
+}
+
 void OrgApacheLuceneAnalysisEnKStemmer_init(OrgApacheLuceneAnalysisEnKStemmer *self) {
   NSObject_init(self);
   JreStrongAssignAndConsume(&self->word_, new_OrgApacheLuceneAnalysisUtilOpenStringBuilder_init());
@@ -1312,10 +1280,6 @@ OrgApacheLuceneAnalysisEnKStemmer *new_OrgApacheLuceneAnalysisEnKStemmer_init() 
   OrgApacheLuceneAnalysisEnKStemmer *self = [OrgApacheLuceneAnalysisEnKStemmer alloc];
   OrgApacheLuceneAnalysisEnKStemmer_init(self);
   return self;
-}
-
-jboolean OrgApacheLuceneAnalysisEnKStemmer_matched(OrgApacheLuceneAnalysisEnKStemmer *self) {
-  return self->matchedEntry_ != nil;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisEnKStemmer)

@@ -49,28 +49,6 @@ __attribute__((unused)) static void OrgApacheLuceneQueryparserClassicFastCharStr
   return [NSString stringWithCharacters:buffer_ offset:tokenStart_ length:bufferPosition_ - tokenStart_];
 }
 
-- (IOSCharArray *)GetSuffixWithInt:(jint)len {
-  IOSCharArray *value = [IOSCharArray arrayWithLength:len];
-  JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(buffer_, bufferPosition_ - len, value, 0, len);
-  return value;
-}
-
-- (void)Done {
-  @try {
-    [((JavaIoReader *) nil_chk(input_)) close];
-  }
-  @catch (JavaIoIOException *e) {
-  }
-}
-
-- (jint)getColumn {
-  return bufferStart_ + bufferPosition_;
-}
-
-- (jint)getLine {
-  return 1;
-}
-
 - (jint)getEndColumn {
   return bufferStart_ + bufferPosition_;
 }
@@ -101,10 +79,6 @@ __attribute__((unused)) static void OrgApacheLuceneQueryparserClassicFastCharStr
     { "BeginToken", NULL, "C", 0x11, "Ljava.io.IOException;", NULL },
     { "backupWithInt:", "backup", "V", 0x11, NULL, NULL },
     { "GetImage", NULL, "Ljava.lang.String;", 0x11, NULL, NULL },
-    { "GetSuffixWithInt:", "GetSuffix", "[C", 0x11, NULL, NULL },
-    { "Done", NULL, "V", 0x11, NULL, NULL },
-    { "getColumn", NULL, "I", 0x11, NULL, NULL },
-    { "getLine", NULL, "I", 0x11, NULL, NULL },
     { "getEndColumn", NULL, "I", 0x11, NULL, NULL },
     { "getEndLine", NULL, "I", 0x11, NULL, NULL },
     { "getBeginColumn", NULL, "I", 0x11, NULL, NULL },
@@ -118,7 +92,7 @@ __attribute__((unused)) static void OrgApacheLuceneQueryparserClassicFastCharStr
     { "bufferStart_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "input_", NULL, 0x0, "Ljava.io.Reader;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserClassicFastCharStream = { 2, "FastCharStream", "org.apache.lucene.queryparser.classic", NULL, 0x11, 14, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserClassicFastCharStream = { 2, "FastCharStream", "org.apache.lucene.queryparser.classic", NULL, 0x11, 10, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserClassicFastCharStream;
 }
 

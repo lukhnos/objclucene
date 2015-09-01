@@ -3,84 +3,35 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/ckb/SoraniStemFilter.java
 //
 
-#include "IOSClass.h"
-#include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
-#include "org/apache/lucene/analysis/TokenFilter.h"
-#include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/ckb/SoraniStemFilter.h"
-#include "org/apache/lucene/analysis/ckb/SoraniStemmer.h"
-#include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
-#include "org/apache/lucene/analysis/tokenattributes/KeywordAttribute.h"
-#include "org/apache/lucene/util/AttributeSource.h"
 
-@interface OrgApacheLuceneAnalysisCkbSoraniStemFilter () {
- @public
-  OrgApacheLuceneAnalysisCkbSoraniStemmer *stemmer_;
-  id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute> termAtt_;
-  id<OrgApacheLuceneAnalysisTokenattributesKeywordAttribute> keywordAttr_;
-}
-
-@end
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCkbSoraniStemFilter, stemmer_, OrgApacheLuceneAnalysisCkbSoraniStemmer *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCkbSoraniStemFilter, termAtt_, id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCkbSoraniStemFilter, keywordAttr_, id<OrgApacheLuceneAnalysisTokenattributesKeywordAttribute>)
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneAnalysisCkbSoraniStemFilter
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  OrgApacheLuceneAnalysisCkbSoraniStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, input);
+- (instancetype)init {
+  OrgApacheLuceneAnalysisCkbSoraniStemFilter_init(self);
   return self;
-}
-
-- (jboolean)incrementToken {
-  if ([((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
-    if (![((id<OrgApacheLuceneAnalysisTokenattributesKeywordAttribute>) nil_chk(keywordAttr_)) isKeyword]) {
-      jint newlen = [((OrgApacheLuceneAnalysisCkbSoraniStemmer *) nil_chk(stemmer_)) stemWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer] withInt:[termAtt_ length]];
-      [termAtt_ setLengthWithInt:newlen];
-    }
-    return YES;
-  }
-  else {
-    return NO;
-  }
-}
-
-- (void)dealloc {
-  RELEASE_(stemmer_);
-  RELEASE_(termAtt_);
-  RELEASE_(keywordAttr_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:", "SoraniStemFilter", NULL, 0x1, NULL, NULL },
-    { "incrementToken", NULL, "Z", 0x1, "Ljava.io.IOException;", NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "stemmer_", NULL, 0x12, "Lorg.apache.lucene.analysis.ckb.SoraniStemmer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "termAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "keywordAttr_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.KeywordAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCkbSoraniStemFilter = { 2, "SoraniStemFilter", "org.apache.lucene.analysis.ckb", NULL, 0x11, 2, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCkbSoraniStemFilter = { 2, "SoraniStemFilter", "org.apache.lucene.analysis.ckb", NULL, 0x11, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisCkbSoraniStemFilter;
 }
 
 @end
 
-void OrgApacheLuceneAnalysisCkbSoraniStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisCkbSoraniStemFilter *self, OrgApacheLuceneAnalysisTokenStream *input) {
-  OrgApacheLuceneAnalysisTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, input);
-  JreStrongAssignAndConsume(&self->stemmer_, new_OrgApacheLuceneAnalysisCkbSoraniStemmer_init());
-  JreStrongAssign(&self->termAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()]);
-  JreStrongAssign(&self->keywordAttr_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesKeywordAttribute_class_()]);
+void OrgApacheLuceneAnalysisCkbSoraniStemFilter_init(OrgApacheLuceneAnalysisCkbSoraniStemFilter *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneAnalysisCkbSoraniStemFilter *new_OrgApacheLuceneAnalysisCkbSoraniStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) {
+OrgApacheLuceneAnalysisCkbSoraniStemFilter *new_OrgApacheLuceneAnalysisCkbSoraniStemFilter_init() {
   OrgApacheLuceneAnalysisCkbSoraniStemFilter *self = [OrgApacheLuceneAnalysisCkbSoraniStemFilter alloc];
-  OrgApacheLuceneAnalysisCkbSoraniStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, input);
+  OrgApacheLuceneAnalysisCkbSoraniStemFilter_init(self);
   return self;
 }
 

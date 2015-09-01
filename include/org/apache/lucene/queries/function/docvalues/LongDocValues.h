@@ -20,59 +20,17 @@
 #define OrgApacheLuceneQueriesFunctionFunctionValues_INCLUDE 1
 #include "org/apache/lucene/queries/function/FunctionValues.h"
 
-@class OrgApacheLuceneIndexIndexReader;
-@class OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller;
-@class OrgApacheLuceneQueriesFunctionValueSource;
-@class OrgApacheLuceneQueriesFunctionValueSourceScorer;
-
-@interface OrgApacheLuceneQueriesFunctionDocvaluesLongDocValues : OrgApacheLuceneQueriesFunctionFunctionValues {
- @public
-  OrgApacheLuceneQueriesFunctionValueSource *vs_;
-}
+@interface OrgApacheLuceneQueriesFunctionDocvaluesLongDocValues : OrgApacheLuceneQueriesFunctionFunctionValues
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)vs;
-
-- (jboolean)boolValWithInt:(jint)doc;
-
-- (jbyte)byteValWithInt:(jint)doc;
-
-- (jdouble)doubleValWithInt:(jint)doc;
-
-- (jfloat)floatValWithInt:(jint)doc;
-
-- (OrgApacheLuceneQueriesFunctionValueSourceScorer *)getRangeScorerWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
-                                                                                          withNSString:(NSString *)lowerVal
-                                                                                          withNSString:(NSString *)upperVal
-                                                                                           withBoolean:(jboolean)includeLower
-                                                                                           withBoolean:(jboolean)includeUpper;
-
-- (OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller *)getValueFiller;
-
-- (jint)intValWithInt:(jint)doc;
-
-- (jlong)longValWithInt:(jint)doc;
-
-- (id)objectValWithInt:(jint)doc;
-
-- (jshort)shortValWithInt:(jint)doc;
-
-- (NSString *)strValWithInt:(jint)doc;
-
-- (NSString *)toStringWithInt:(jint)doc;
-
-#pragma mark Protected
-
-- (jlong)externalToLongWithNSString:(NSString *)extVal;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionDocvaluesLongDocValues)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionDocvaluesLongDocValues, vs_, OrgApacheLuceneQueriesFunctionValueSource *)
-
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionDocvaluesLongDocValues_initWithOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionDocvaluesLongDocValues *self, OrgApacheLuceneQueriesFunctionValueSource *vs);
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionDocvaluesLongDocValues_init(OrgApacheLuceneQueriesFunctionDocvaluesLongDocValues *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionDocvaluesLongDocValues)
 

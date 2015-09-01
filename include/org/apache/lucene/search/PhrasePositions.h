@@ -26,7 +26,6 @@
   jint offset_;
   jint ord_;
   OrgApacheLuceneIndexPostingsEnum *postings_;
-  OrgApacheLuceneSearchPhrasePositions *next_;
   jint rptGroup_;
   jint rptInd_;
   IOSObjectArray *terms_;
@@ -52,7 +51,6 @@
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchPhrasePositions)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchPhrasePositions, postings_, OrgApacheLuceneIndexPostingsEnum *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchPhrasePositions, next_, OrgApacheLuceneSearchPhrasePositions *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchPhrasePositions, terms_, IOSObjectArray *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchPhrasePositions_initWithOrgApacheLuceneIndexPostingsEnum_withInt_withInt_withOrgApacheLuceneIndexTermArray_(OrgApacheLuceneSearchPhrasePositions *self, OrgApacheLuceneIndexPostingsEnum *postings, jint o, jint ord, IOSObjectArray *terms);

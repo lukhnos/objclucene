@@ -20,38 +20,19 @@
 #define OrgApacheLuceneAnalysisUtilResourceLoader_INCLUDE 1
 #include "org/apache/lucene/analysis/util/ResourceLoader.h"
 
-@class IOSClass;
-@class JavaIoInputStream;
-@class OrgLukhnosPortmobileFilePath;
-
 @interface OrgApacheLuceneAnalysisUtilFilesystemResourceLoader : NSObject < OrgApacheLuceneAnalysisUtilResourceLoader >
 
 #pragma mark Public
 
-- (instancetype)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)baseDirectory;
-
-- (instancetype)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)baseDirectory
-       withOrgApacheLuceneAnalysisUtilResourceLoader:(id<OrgApacheLuceneAnalysisUtilResourceLoader>)delegate;
-
-- (IOSClass *)findClassWithNSString:(NSString *)cname
-                       withIOSClass:(IOSClass *)expectedType;
-
-- (id)newInstanceWithNSString:(NSString *)cname
-                 withIOSClass:(IOSClass *)expectedType OBJC_METHOD_FAMILY_NONE;
-
-- (JavaIoInputStream *)openResourceWithNSString:(NSString *)resource;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisUtilFilesystemResourceLoader)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_initWithOrgLukhnosPortmobileFilePath_(OrgApacheLuceneAnalysisUtilFilesystemResourceLoader *self, OrgLukhnosPortmobileFilePath *baseDirectory);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_init(OrgApacheLuceneAnalysisUtilFilesystemResourceLoader *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilFilesystemResourceLoader *new_OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_initWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *baseDirectory) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneAnalysisUtilResourceLoader_(OrgApacheLuceneAnalysisUtilFilesystemResourceLoader *self, OrgLukhnosPortmobileFilePath *baseDirectory, id<OrgApacheLuceneAnalysisUtilResourceLoader> delegate);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilFilesystemResourceLoader *new_OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneAnalysisUtilResourceLoader_(OrgLukhnosPortmobileFilePath *baseDirectory, id<OrgApacheLuceneAnalysisUtilResourceLoader> delegate) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilFilesystemResourceLoader *new_OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilFilesystemResourceLoader)
 

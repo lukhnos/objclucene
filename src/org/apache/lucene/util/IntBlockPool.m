@@ -88,10 +88,6 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilIntBlockPool)
   return self;
 }
 
-- (void)reset {
-  [self resetWithBoolean:YES withBoolean:YES];
-}
-
 - (void)resetWithBoolean:(jboolean)zeroFillBuffers
              withBoolean:(jboolean)reuseFirst {
   if (bufferUpto_ != -1) {
@@ -166,7 +162,6 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilIntBlockPool)
   static const J2ObjcMethodInfo methods[] = {
     { "init", "IntBlockPool", NULL, 0x1, NULL, NULL },
     { "initWithOrgApacheLuceneUtilIntBlockPool_Allocator:", "IntBlockPool", NULL, 0x1, NULL, NULL },
-    { "reset", NULL, "V", 0x1, NULL, NULL },
     { "resetWithBoolean:withBoolean:", "reset", "V", 0x1, NULL, NULL },
     { "nextBuffer", NULL, "V", 0x1, NULL, NULL },
     { "newSliceWithInt:", "newSlice", "I", 0x2, NULL, NULL },
@@ -188,7 +183,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilIntBlockPool)
     { "FIRST_LEVEL_SIZE_", NULL, 0x1a, "I", &OrgApacheLuceneUtilIntBlockPool_FIRST_LEVEL_SIZE_, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.util.IntBlockPool$Allocator;", "Lorg.apache.lucene.util.IntBlockPool$DirectAllocator;", "Lorg.apache.lucene.util.IntBlockPool$SliceWriter;", "Lorg.apache.lucene.util.IntBlockPool$SliceReader;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilIntBlockPool = { 2, "IntBlockPool", "org.apache.lucene.util", NULL, 0x11, 8, methods, 12, fields, 0, NULL, 4, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilIntBlockPool = { 2, "IntBlockPool", "org.apache.lucene.util", NULL, 0x11, 7, methods, 12, fields, 0, NULL, 4, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneUtilIntBlockPool;
 }
 

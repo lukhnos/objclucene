@@ -24,11 +24,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreByteArrayDataInput, bytes_, IOSByteArray
 
 @implementation OrgApacheLuceneStoreByteArrayDataInput
 
-- (instancetype)initWithByteArray:(IOSByteArray *)bytes {
-  OrgApacheLuceneStoreByteArrayDataInput_initWithByteArray_(self, bytes);
-  return self;
-}
-
 - (instancetype)initWithByteArray:(IOSByteArray *)bytes
                           withInt:(jint)offset
                           withInt:(jint)len {
@@ -63,14 +58,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreByteArrayDataInput, bytes_, IOSByteArray
   JreStrongAssign(&self->bytes_, bytes);
   pos_ = offset;
   limit_ = offset + len;
-}
-
-- (jint)length {
-  return limit_;
-}
-
-- (jboolean)eof {
-  return pos_ == limit_;
 }
 
 - (void)skipBytesWithLong:(jlong)count {
@@ -169,7 +156,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreByteArrayDataInput, bytes_, IOSByteArray
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithByteArray:", "ByteArrayDataInput", NULL, 0x1, NULL, NULL },
     { "initWithByteArray:withInt:withInt:", "ByteArrayDataInput", NULL, 0x1, NULL, NULL },
     { "init", "ByteArrayDataInput", NULL, 0x1, NULL, NULL },
     { "resetWithByteArray:", "reset", "V", 0x1, NULL, NULL },
@@ -177,8 +163,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreByteArrayDataInput, bytes_, IOSByteArray
     { "getPosition", NULL, "I", 0x1, NULL, NULL },
     { "setPositionWithInt:", "setPosition", "V", 0x1, NULL, NULL },
     { "resetWithByteArray:withInt:withInt:", "reset", "V", 0x1, NULL, NULL },
-    { "length", NULL, "I", 0x1, NULL, NULL },
-    { "eof", NULL, "Z", 0x1, NULL, NULL },
     { "skipBytesWithLong:", "skipBytes", "V", 0x1, NULL, NULL },
     { "readShort", NULL, "S", 0x1, NULL, NULL },
     { "readInt", NULL, "I", 0x1, NULL, NULL },
@@ -193,22 +177,11 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreByteArrayDataInput, bytes_, IOSByteArray
     { "pos_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "limit_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreByteArrayDataInput = { 2, "ByteArrayDataInput", "org.apache.lucene.store", NULL, 0x11, 18, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreByteArrayDataInput = { 2, "ByteArrayDataInput", "org.apache.lucene.store", NULL, 0x11, 15, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneStoreByteArrayDataInput;
 }
 
 @end
-
-void OrgApacheLuceneStoreByteArrayDataInput_initWithByteArray_(OrgApacheLuceneStoreByteArrayDataInput *self, IOSByteArray *bytes) {
-  OrgApacheLuceneStoreDataInput_init(self);
-  [self resetWithByteArray:bytes];
-}
-
-OrgApacheLuceneStoreByteArrayDataInput *new_OrgApacheLuceneStoreByteArrayDataInput_initWithByteArray_(IOSByteArray *bytes) {
-  OrgApacheLuceneStoreByteArrayDataInput *self = [OrgApacheLuceneStoreByteArrayDataInput alloc];
-  OrgApacheLuceneStoreByteArrayDataInput_initWithByteArray_(self, bytes);
-  return self;
-}
 
 void OrgApacheLuceneStoreByteArrayDataInput_initWithByteArray_withInt_withInt_(OrgApacheLuceneStoreByteArrayDataInput *self, IOSByteArray *bytes, jint offset, jint len) {
   OrgApacheLuceneStoreDataInput_init(self);

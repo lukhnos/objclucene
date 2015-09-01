@@ -16,25 +16,15 @@
 #if !defined (_OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_) && (OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_INCLUDE_ALL || OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_INCLUDE)
 #define _OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_
 
-@class OrgApacheLuceneSearchDocIdSetIterator;
-
 @interface OrgApacheLuceneSearchTwoPhaseDocIdSetIterator : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
-- (OrgApacheLuceneSearchDocIdSetIterator *)approximation;
-
-+ (OrgApacheLuceneSearchDocIdSetIterator *)asDocIdSetIteratorWithOrgApacheLuceneSearchTwoPhaseDocIdSetIterator:(OrgApacheLuceneSearchTwoPhaseDocIdSetIterator *)twoPhaseIterator;
-
-- (jboolean)matches;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchTwoPhaseDocIdSetIterator)
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchDocIdSetIterator *OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_asDocIdSetIteratorWithOrgApacheLuceneSearchTwoPhaseDocIdSetIterator_(OrgApacheLuceneSearchTwoPhaseDocIdSetIterator *twoPhaseIterator);
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchTwoPhaseDocIdSetIterator_init(OrgApacheLuceneSearchTwoPhaseDocIdSetIterator *self);
 

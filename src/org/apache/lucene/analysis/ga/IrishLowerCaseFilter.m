@@ -3,113 +3,36 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/ga/IrishLowerCaseFilter.java
 //
 
-#include "IOSClass.h"
-#include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
-#include "java/lang/Character.h"
-#include "org/apache/lucene/analysis/TokenFilter.h"
-#include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/ga/IrishLowerCaseFilter.h"
-#include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
-#include "org/apache/lucene/util/AttributeSource.h"
 
-@interface OrgApacheLuceneAnalysisGaIrishLowerCaseFilter () {
- @public
-  id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute> termAtt_;
-}
-
-- (jboolean)isUpperVowelWithInt:(jint)v;
-
-@end
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisGaIrishLowerCaseFilter, termAtt_, id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)
-
-__attribute__((unused)) static jboolean OrgApacheLuceneAnalysisGaIrishLowerCaseFilter_isUpperVowelWithInt_(OrgApacheLuceneAnalysisGaIrishLowerCaseFilter *self, jint v);
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneAnalysisGaIrishLowerCaseFilter
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg {
-  OrgApacheLuceneAnalysisGaIrishLowerCaseFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, inArg);
+- (instancetype)init {
+  OrgApacheLuceneAnalysisGaIrishLowerCaseFilter_init(self);
   return self;
-}
-
-- (jboolean)incrementToken {
-  if ([((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
-    IOSCharArray *chArray = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer];
-    jint chLen = [termAtt_ length];
-    jint idx = 0;
-    if (chLen > 1 && (IOSCharArray_Get(nil_chk(chArray), 0) == 'n' || IOSCharArray_Get(chArray, 0) == 't') && OrgApacheLuceneAnalysisGaIrishLowerCaseFilter_isUpperVowelWithInt_(self, IOSCharArray_Get(chArray, 1))) {
-      chArray = [termAtt_ resizeBufferWithInt:chLen + 1];
-      for (jint i = chLen; i > 1; i--) {
-        *IOSCharArray_GetRef(nil_chk(chArray), i) = IOSCharArray_Get(chArray, i - 1);
-      }
-      *IOSCharArray_GetRef(nil_chk(chArray), 1) = '-';
-      [termAtt_ setLengthWithInt:chLen + 1];
-      idx = 2;
-      chLen = chLen + 1;
-    }
-    for (jint i = idx; i < chLen; ) {
-      i += JavaLangCharacter_toCharsWithInt_withCharArray_withInt_(JavaLangCharacter_toLowerCaseWithChar_(IOSCharArray_Get(nil_chk(chArray), i)), chArray, i);
-    }
-    return YES;
-  }
-  else {
-    return NO;
-  }
-}
-
-- (jboolean)isUpperVowelWithInt:(jint)v {
-  return OrgApacheLuceneAnalysisGaIrishLowerCaseFilter_isUpperVowelWithInt_(self, v);
-}
-
-- (void)dealloc {
-  RELEASE_(termAtt_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:", "IrishLowerCaseFilter", NULL, 0x1, NULL, NULL },
-    { "incrementToken", NULL, "Z", 0x1, "Ljava.io.IOException;", NULL },
-    { "isUpperVowelWithInt:", "isUpperVowel", "Z", 0x2, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "termAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisGaIrishLowerCaseFilter = { 2, "IrishLowerCaseFilter", "org.apache.lucene.analysis.ga", NULL, 0x11, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisGaIrishLowerCaseFilter = { 2, "IrishLowerCaseFilter", "org.apache.lucene.analysis.ga", NULL, 0x11, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisGaIrishLowerCaseFilter;
 }
 
 @end
 
-void OrgApacheLuceneAnalysisGaIrishLowerCaseFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisGaIrishLowerCaseFilter *self, OrgApacheLuceneAnalysisTokenStream *inArg) {
-  OrgApacheLuceneAnalysisTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, inArg);
-  JreStrongAssign(&self->termAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()]);
+void OrgApacheLuceneAnalysisGaIrishLowerCaseFilter_init(OrgApacheLuceneAnalysisGaIrishLowerCaseFilter *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneAnalysisGaIrishLowerCaseFilter *new_OrgApacheLuceneAnalysisGaIrishLowerCaseFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg) {
+OrgApacheLuceneAnalysisGaIrishLowerCaseFilter *new_OrgApacheLuceneAnalysisGaIrishLowerCaseFilter_init() {
   OrgApacheLuceneAnalysisGaIrishLowerCaseFilter *self = [OrgApacheLuceneAnalysisGaIrishLowerCaseFilter alloc];
-  OrgApacheLuceneAnalysisGaIrishLowerCaseFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, inArg);
+  OrgApacheLuceneAnalysisGaIrishLowerCaseFilter_init(self);
   return self;
-}
-
-jboolean OrgApacheLuceneAnalysisGaIrishLowerCaseFilter_isUpperVowelWithInt_(OrgApacheLuceneAnalysisGaIrishLowerCaseFilter *self, jint v) {
-  switch (v) {
-    case 'A':
-    case 'E':
-    case 'I':
-    case 'O':
-    case 'U':
-    case 0x00c1:
-    case 0x00c9:
-    case 0x00cd:
-    case 0x00d3:
-    case 0x00da:
-    return YES;
-    default:
-    return NO;
-  }
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisGaIrishLowerCaseFilter)

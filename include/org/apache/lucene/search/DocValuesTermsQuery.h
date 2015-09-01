@@ -20,48 +20,19 @@
 #define OrgApacheLuceneSearchQuery_INCLUDE 1
 #include "org/apache/lucene/search/Query.h"
 
-@class IOSObjectArray;
-@class OrgApacheLuceneSearchIndexSearcher;
-@class OrgApacheLuceneSearchWeight;
-@protocol JavaUtilCollection;
-
 @interface OrgApacheLuceneSearchDocValuesTermsQuery : OrgApacheLuceneSearchQuery
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field
-withOrgApacheLuceneUtilBytesRefArray:(IOSObjectArray *)terms;
-
-- (instancetype)initWithNSString:(NSString *)field
-          withJavaUtilCollection:(id<JavaUtilCollection>)terms;
-
-- (instancetype)initWithNSString:(NSString *)field
-               withNSStringArray:(IOSObjectArray *)terms;
-
-- (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
-                                                                        withBoolean:(jboolean)needsScores;
-
-- (jboolean)isEqual:(id)obj;
-
-- (NSUInteger)hash;
-
-- (NSString *)toStringWithNSString:(NSString *)defaultField;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchDocValuesTermsQuery)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchDocValuesTermsQuery_initWithNSString_withJavaUtilCollection_(OrgApacheLuceneSearchDocValuesTermsQuery *self, NSString *field, id<JavaUtilCollection> terms);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchDocValuesTermsQuery_init(OrgApacheLuceneSearchDocValuesTermsQuery *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchDocValuesTermsQuery *new_OrgApacheLuceneSearchDocValuesTermsQuery_initWithNSString_withJavaUtilCollection_(NSString *field, id<JavaUtilCollection> terms) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchDocValuesTermsQuery_initWithNSString_withOrgApacheLuceneUtilBytesRefArray_(OrgApacheLuceneSearchDocValuesTermsQuery *self, NSString *field, IOSObjectArray *terms);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchDocValuesTermsQuery *new_OrgApacheLuceneSearchDocValuesTermsQuery_initWithNSString_withOrgApacheLuceneUtilBytesRefArray_(NSString *field, IOSObjectArray *terms) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchDocValuesTermsQuery_initWithNSString_withNSStringArray_(OrgApacheLuceneSearchDocValuesTermsQuery *self, NSString *field, IOSObjectArray *terms);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchDocValuesTermsQuery *new_OrgApacheLuceneSearchDocValuesTermsQuery_initWithNSString_withNSStringArray_(NSString *field, IOSObjectArray *terms) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchDocValuesTermsQuery *new_OrgApacheLuceneSearchDocValuesTermsQuery_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocValuesTermsQuery)
 

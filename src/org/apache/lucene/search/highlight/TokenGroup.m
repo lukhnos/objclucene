@@ -87,14 +87,6 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchHighlightTokenGroup, MAX_NUM_TOK
   tot_ = 0;
 }
 
-- (OrgApacheLuceneAnalysisToken *)getTokenWithInt:(jint)index {
-  return IOSObjectArray_Get(nil_chk(tokens_), index);
-}
-
-- (jfloat)getScoreWithInt:(jint)index {
-  return IOSFloatArray_Get(nil_chk(scores_), index);
-}
-
 - (jint)getStartOffset {
   return matchStartOffset_;
 }
@@ -125,8 +117,6 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchHighlightTokenGroup, MAX_NUM_TOK
     { "addTokenWithFloat:", "addToken", "V", 0x0, NULL, NULL },
     { "isDistinct", NULL, "Z", 0x0, NULL, NULL },
     { "clear", NULL, "V", 0x0, NULL, NULL },
-    { "getTokenWithInt:", "getToken", "Lorg.apache.lucene.analysis.Token;", 0x1, NULL, NULL },
-    { "getScoreWithInt:", "getScore", "F", 0x1, NULL, NULL },
     { "getStartOffset", NULL, "I", 0x1, NULL, NULL },
     { "getEndOffset", NULL, "I", 0x1, NULL, NULL },
     { "getNumTokens", NULL, "I", 0x1, NULL, NULL },
@@ -145,7 +135,7 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchHighlightTokenGroup, MAX_NUM_TOK
     { "offsetAtt_", NULL, 0x2, "Lorg.apache.lucene.analysis.tokenattributes.OffsetAttribute;", NULL, NULL, .constantValue.asLong = 0 },
     { "termAtt_", NULL, 0x2, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightTokenGroup = { 2, "TokenGroup", "org.apache.lucene.search.highlight", NULL, 0x1, 10, methods, 11, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightTokenGroup = { 2, "TokenGroup", "org.apache.lucene.search.highlight", NULL, 0x1, 8, methods, 11, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchHighlightTokenGroup;
 }
 

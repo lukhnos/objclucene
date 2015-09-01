@@ -4,57 +4,41 @@
 //
 
 #include "J2ObjC_source.h"
-#include "java/lang/IllegalArgumentException.h"
-#include "java/util/Map.h"
-#include "org/apache/lucene/analysis/TokenStream.h"
-#include "org/apache/lucene/analysis/miscellaneous/CodepointCountFilter.h"
 #include "org/apache/lucene/analysis/miscellaneous/CodepointCountFilterFactory.h"
-#include "org/apache/lucene/analysis/util/AbstractAnalysisFactory.h"
-#include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 NSString *OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory_MIN_KEY_ = @"min";
 NSString *OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory_MAX_KEY_ = @"max";
 
 @implementation OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args {
-  OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory_initWithJavaUtilMap_(self, args);
+- (instancetype)init {
+  OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory_init(self);
   return self;
-}
-
-- (OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  return [new_OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(input, min_, max_) autorelease];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "CodepointCountFilterFactory", NULL, 0x1, NULL, NULL },
-    { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.miscellaneous.CodepointCountFilter;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "min_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "max_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "MIN_KEY_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory_MIN_KEY_, NULL, .constantValue.asLong = 0 },
     { "MAX_KEY_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory_MAX_KEY_, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory = { 2, "CodepointCountFilterFactory", "org.apache.lucene.analysis.miscellaneous", NULL, 0x1, 2, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory = { 2, "CodepointCountFilterFactory", "org.apache.lucene.analysis.miscellaneous", NULL, 0x1, 1, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory;
 }
 
 @end
 
-void OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory *self, id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
-  self->min_ = [self requireIntWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory_MIN_KEY_];
-  self->max_ = [self requireIntWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory_MAX_KEY_];
-  if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
-  }
+void OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory_init(OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory *new_OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory *new_OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory_init() {
   OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory *self = [OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory alloc];
-  OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory_initWithJavaUtilMap_(self, args);
+  OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilterFactory_init(self);
   return self;
 }
 

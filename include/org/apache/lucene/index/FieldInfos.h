@@ -83,11 +83,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFieldInfos)
                      withInt:(jint)preferredFieldNumber
 withOrgApacheLuceneIndexDocValuesTypeEnum:(OrgApacheLuceneIndexDocValuesTypeEnum *)dvType;
 
-- (void)clear;
-
-- (jboolean)containsWithNSString:(NSString *)fieldName
-withOrgApacheLuceneIndexDocValuesTypeEnum:(OrgApacheLuceneIndexDocValuesTypeEnum *)dvType;
-
 - (void)setDocValuesTypeWithInt:(jint)number
                    withNSString:(NSString *)name
 withOrgApacheLuceneIndexDocValuesTypeEnum:(OrgApacheLuceneIndexDocValuesTypeEnum *)dvType;

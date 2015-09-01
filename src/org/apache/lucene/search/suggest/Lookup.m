@@ -4,29 +4,13 @@
 //
 
 #include "IOSClass.h"
-#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/Closeable.h"
-#include "java/io/IOException.h"
-#include "java/io/InputStream.h"
-#include "java/io/OutputStream.h"
 #include "java/lang/CharSequence.h"
 #include "java/lang/Math.h"
-#include "java/util/Collection.h"
-#include "java/util/Collections.h"
 #include "java/util/Comparator.h"
-#include "java/util/List.h"
 #include "java/util/Set.h"
-#include "org/apache/lucene/search/spell/Dictionary.h"
-#include "org/apache/lucene/search/suggest/InputIterator.h"
 #include "org/apache/lucene/search/suggest/Lookup.h"
-#include "org/apache/lucene/store/DataInput.h"
-#include "org/apache/lucene/store/DataOutput.h"
-#include "org/apache/lucene/store/InputStreamDataInput.h"
-#include "org/apache/lucene/store/OutputStreamDataOutput.h"
 #include "org/apache/lucene/util/BytesRef.h"
-#include "org/apache/lucene/util/IOUtils.h"
-#include "org/apache/lucene/util/PriorityQueue.h"
 
 #pragma clang diagnostic ignored "-Wprotocol"
 
@@ -58,72 +42,6 @@ id<JavaUtilComparator> OrgApacheLuceneSearchSuggestLookup_CHARSEQUENCE_COMPARATO
   return self;
 }
 
-- (void)buildWithOrgApacheLuceneSearchSpellDictionary:(id<OrgApacheLuceneSearchSpellDictionary>)dict {
-  [self buildWithOrgApacheLuceneSearchSuggestInputIterator:[((id<OrgApacheLuceneSearchSpellDictionary>) nil_chk(dict)) getEntryIterator]];
-}
-
-- (jboolean)load__WithJavaIoInputStream:(JavaIoInputStream *)input {
-  OrgApacheLuceneStoreDataInput *dataIn = [new_OrgApacheLuceneStoreInputStreamDataInput_initWithJavaIoInputStream_(input) autorelease];
-  @try {
-    return [self load__WithOrgApacheLuceneStoreDataInput:dataIn];
-  }
-  @finally {
-    OrgApacheLuceneUtilIOUtils_closeWithJavaIoCloseableArray_([IOSObjectArray arrayWithObjects:(id[]){ input } count:1 type:JavaIoCloseable_class_()]);
-  }
-}
-
-- (jboolean)storeWithJavaIoOutputStream:(JavaIoOutputStream *)output {
-  OrgApacheLuceneStoreDataOutput *dataOut = [new_OrgApacheLuceneStoreOutputStreamDataOutput_initWithJavaIoOutputStream_(output) autorelease];
-  @try {
-    return [self storeWithOrgApacheLuceneStoreDataOutput:dataOut];
-  }
-  @finally {
-    OrgApacheLuceneUtilIOUtils_closeWithJavaIoCloseableArray_([IOSObjectArray arrayWithObjects:(id[]){ output } count:1 type:JavaIoCloseable_class_()]);
-  }
-}
-
-- (jlong)getCount {
-  // can't call an abstract method
-  [self doesNotRecognizeSelector:_cmd];
-  return 0;
-}
-
-- (void)buildWithOrgApacheLuceneSearchSuggestInputIterator:(id<OrgApacheLuceneSearchSuggestInputIterator>)inputIterator {
-  // can't call an abstract method
-  [self doesNotRecognizeSelector:_cmd];
-}
-
-- (id<JavaUtilList>)lookupWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
-                                       withBoolean:(jboolean)onlyMorePopular
-                                           withInt:(jint)num {
-  return [self lookupWithJavaLangCharSequence:key withJavaUtilSet:nil withBoolean:onlyMorePopular withInt:num];
-}
-
-- (id<JavaUtilList>)lookupWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
-                                   withJavaUtilSet:(id<JavaUtilSet>)contexts
-                                       withBoolean:(jboolean)onlyMorePopular
-                                           withInt:(jint)num {
-  // can't call an abstract method
-  [self doesNotRecognizeSelector:_cmd];
-  return 0;
-}
-
-- (jboolean)storeWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)output {
-  // can't call an abstract method
-  [self doesNotRecognizeSelector:_cmd];
-  return 0;
-}
-
-- (jboolean)load__WithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)input {
-  // can't call an abstract method
-  [self doesNotRecognizeSelector:_cmd];
-  return 0;
-}
-
-- (id<JavaUtilCollection>)getChildResources {
-  return JavaUtilCollections_emptyList();
-}
-
 + (void)initialize {
   if (self == [OrgApacheLuceneSearchSuggestLookup class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneSearchSuggestLookup_CHARSEQUENCE_COMPARATOR_, new_OrgApacheLuceneSearchSuggestLookup_CharSequenceComparator_init());
@@ -134,22 +52,12 @@ id<JavaUtilComparator> OrgApacheLuceneSearchSuggestLookup_CHARSEQUENCE_COMPARATO
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "init", "Lookup", NULL, 0x1, NULL, NULL },
-    { "buildWithOrgApacheLuceneSearchSpellDictionary:", "build", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "load__WithJavaIoInputStream:", "load", "Z", 0x1, "Ljava.io.IOException;", NULL },
-    { "storeWithJavaIoOutputStream:", "store", "Z", 0x1, "Ljava.io.IOException;", NULL },
-    { "getCount", NULL, "J", 0x401, "Ljava.io.IOException;", NULL },
-    { "buildWithOrgApacheLuceneSearchSuggestInputIterator:", "build", "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "lookupWithJavaLangCharSequence:withBoolean:withInt:", "lookup", "Ljava.util.List;", 0x1, "Ljava.io.IOException;", NULL },
-    { "lookupWithJavaLangCharSequence:withJavaUtilSet:withBoolean:withInt:", "lookup", "Ljava.util.List;", 0x401, "Ljava.io.IOException;", NULL },
-    { "storeWithOrgApacheLuceneStoreDataOutput:", "store", "Z", 0x401, "Ljava.io.IOException;", NULL },
-    { "load__WithOrgApacheLuceneStoreDataInput:", "load", "Z", 0x401, "Ljava.io.IOException;", NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "CHARSEQUENCE_COMPARATOR_", NULL, 0x19, "Ljava.util.Comparator;", &OrgApacheLuceneSearchSuggestLookup_CHARSEQUENCE_COMPARATOR_, "Ljava/util/Comparator<Ljava/lang/CharSequence;>;", .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.search.suggest.Lookup$LookupResult;", "Lorg.apache.lucene.search.suggest.Lookup$CharSequenceComparator;", "Lorg.apache.lucene.search.suggest.Lookup$LookupPriorityQueue;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestLookup = { 2, "Lookup", "org.apache.lucene.search.suggest", NULL, 0x401, 11, methods, 1, fields, 0, NULL, 3, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestLookup = { 2, "Lookup", "org.apache.lucene.search.suggest", NULL, 0x401, 1, methods, 1, fields, 0, NULL, 3, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneSearchSuggestLookup;
 }
 
@@ -164,38 +72,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestLookup)
 @implementation OrgApacheLuceneSearchSuggestLookup_LookupResult
 
 - (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
-                                    withLong:(jlong)value {
-  OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withLong_(self, key, value);
-  return self;
-}
-
-- (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
-                                    withLong:(jlong)value
-             withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload {
-  OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withLong_withOrgApacheLuceneUtilBytesRef_(self, key, value, payload);
-  return self;
-}
-
-- (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
-                                      withId:(id)highlightKey
-                                    withLong:(jlong)value
-             withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload {
-  OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withId_withLong_withOrgApacheLuceneUtilBytesRef_(self, key, highlightKey, value, payload);
-  return self;
-}
-
-- (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
                                     withLong:(jlong)value
              withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload
                              withJavaUtilSet:(id<JavaUtilSet>)contexts {
   OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withLong_withOrgApacheLuceneUtilBytesRef_withJavaUtilSet_(self, key, value, payload, contexts);
-  return self;
-}
-
-- (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
-                                    withLong:(jlong)value
-                             withJavaUtilSet:(id<JavaUtilSet>)contexts {
-  OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withLong_withJavaUtilSet_(self, key, value, contexts);
   return self;
 }
 
@@ -227,11 +107,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestLookup)
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaLangCharSequence:withLong:", "LookupResult", NULL, 0x1, NULL, NULL },
-    { "initWithJavaLangCharSequence:withLong:withOrgApacheLuceneUtilBytesRef:", "LookupResult", NULL, 0x1, NULL, NULL },
-    { "initWithJavaLangCharSequence:withId:withLong:withOrgApacheLuceneUtilBytesRef:", "LookupResult", NULL, 0x1, NULL, NULL },
     { "initWithJavaLangCharSequence:withLong:withOrgApacheLuceneUtilBytesRef:withJavaUtilSet:", "LookupResult", NULL, 0x1, NULL, NULL },
-    { "initWithJavaLangCharSequence:withLong:withJavaUtilSet:", "LookupResult", NULL, 0x1, NULL, NULL },
     { "initWithJavaLangCharSequence:withId:withLong:withOrgApacheLuceneUtilBytesRef:withJavaUtilSet:", "LookupResult", NULL, 0x1, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "compareToWithId:", "compareTo", "I", 0x1, NULL, NULL },
@@ -243,41 +119,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestLookup)
     { "payload_", NULL, 0x11, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
     { "contexts_", NULL, 0x11, "Ljava.util.Set;", NULL, "Ljava/util/Set<Lorg/apache/lucene/util/BytesRef;>;", .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestLookup_LookupResult = { 2, "LookupResult", "org.apache.lucene.search.suggest", "Lookup", 0x19, 8, methods, 5, fields, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/lang/Comparable<Lorg/apache/lucene/search/suggest/Lookup$LookupResult;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestLookup_LookupResult = { 2, "LookupResult", "org.apache.lucene.search.suggest", "Lookup", 0x19, 4, methods, 5, fields, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/lang/Comparable<Lorg/apache/lucene/search/suggest/Lookup$LookupResult;>;" };
   return &_OrgApacheLuceneSearchSuggestLookup_LookupResult;
 }
 
 @end
-
-void OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withLong_(OrgApacheLuceneSearchSuggestLookup_LookupResult *self, id<JavaLangCharSequence> key, jlong value) {
-  OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withId_withLong_withOrgApacheLuceneUtilBytesRef_withJavaUtilSet_(self, key, nil, value, nil, nil);
-}
-
-OrgApacheLuceneSearchSuggestLookup_LookupResult *new_OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withLong_(id<JavaLangCharSequence> key, jlong value) {
-  OrgApacheLuceneSearchSuggestLookup_LookupResult *self = [OrgApacheLuceneSearchSuggestLookup_LookupResult alloc];
-  OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withLong_(self, key, value);
-  return self;
-}
-
-void OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withLong_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneSearchSuggestLookup_LookupResult *self, id<JavaLangCharSequence> key, jlong value, OrgApacheLuceneUtilBytesRef *payload) {
-  OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withId_withLong_withOrgApacheLuceneUtilBytesRef_withJavaUtilSet_(self, key, nil, value, payload, nil);
-}
-
-OrgApacheLuceneSearchSuggestLookup_LookupResult *new_OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withLong_withOrgApacheLuceneUtilBytesRef_(id<JavaLangCharSequence> key, jlong value, OrgApacheLuceneUtilBytesRef *payload) {
-  OrgApacheLuceneSearchSuggestLookup_LookupResult *self = [OrgApacheLuceneSearchSuggestLookup_LookupResult alloc];
-  OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withLong_withOrgApacheLuceneUtilBytesRef_(self, key, value, payload);
-  return self;
-}
-
-void OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withId_withLong_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneSearchSuggestLookup_LookupResult *self, id<JavaLangCharSequence> key, id highlightKey, jlong value, OrgApacheLuceneUtilBytesRef *payload) {
-  OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withId_withLong_withOrgApacheLuceneUtilBytesRef_withJavaUtilSet_(self, key, highlightKey, value, payload, nil);
-}
-
-OrgApacheLuceneSearchSuggestLookup_LookupResult *new_OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withId_withLong_withOrgApacheLuceneUtilBytesRef_(id<JavaLangCharSequence> key, id highlightKey, jlong value, OrgApacheLuceneUtilBytesRef *payload) {
-  OrgApacheLuceneSearchSuggestLookup_LookupResult *self = [OrgApacheLuceneSearchSuggestLookup_LookupResult alloc];
-  OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withId_withLong_withOrgApacheLuceneUtilBytesRef_(self, key, highlightKey, value, payload);
-  return self;
-}
 
 void OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withLong_withOrgApacheLuceneUtilBytesRef_withJavaUtilSet_(OrgApacheLuceneSearchSuggestLookup_LookupResult *self, id<JavaLangCharSequence> key, jlong value, OrgApacheLuceneUtilBytesRef *payload, id<JavaUtilSet> contexts) {
   OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withId_withLong_withOrgApacheLuceneUtilBytesRef_withJavaUtilSet_(self, key, nil, value, payload, contexts);
@@ -286,16 +132,6 @@ void OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequenc
 OrgApacheLuceneSearchSuggestLookup_LookupResult *new_OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withLong_withOrgApacheLuceneUtilBytesRef_withJavaUtilSet_(id<JavaLangCharSequence> key, jlong value, OrgApacheLuceneUtilBytesRef *payload, id<JavaUtilSet> contexts) {
   OrgApacheLuceneSearchSuggestLookup_LookupResult *self = [OrgApacheLuceneSearchSuggestLookup_LookupResult alloc];
   OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withLong_withOrgApacheLuceneUtilBytesRef_withJavaUtilSet_(self, key, value, payload, contexts);
-  return self;
-}
-
-void OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withLong_withJavaUtilSet_(OrgApacheLuceneSearchSuggestLookup_LookupResult *self, id<JavaLangCharSequence> key, jlong value, id<JavaUtilSet> contexts) {
-  OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withId_withLong_withOrgApacheLuceneUtilBytesRef_withJavaUtilSet_(self, key, nil, value, nil, contexts);
-}
-
-OrgApacheLuceneSearchSuggestLookup_LookupResult *new_OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withLong_withJavaUtilSet_(id<JavaLangCharSequence> key, jlong value, id<JavaUtilSet> contexts) {
-  OrgApacheLuceneSearchSuggestLookup_LookupResult *self = [OrgApacheLuceneSearchSuggestLookup_LookupResult alloc];
-  OrgApacheLuceneSearchSuggestLookup_LookupResult_initWithJavaLangCharSequence_withLong_withJavaUtilSet_(self, key, value, contexts);
   return self;
 }
 
@@ -362,45 +198,29 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestLookup_CharSequence
 
 @implementation OrgApacheLuceneSearchSuggestLookup_LookupPriorityQueue
 
-- (instancetype)initWithInt:(jint)size {
-  OrgApacheLuceneSearchSuggestLookup_LookupPriorityQueue_initWithInt_(self, size);
+- (instancetype)init {
+  OrgApacheLuceneSearchSuggestLookup_LookupPriorityQueue_init(self);
   return self;
-}
-
-- (jboolean)lessThanWithId:(OrgApacheLuceneSearchSuggestLookup_LookupResult *)a
-                    withId:(OrgApacheLuceneSearchSuggestLookup_LookupResult *)b {
-  return ((OrgApacheLuceneSearchSuggestLookup_LookupResult *) nil_chk(a))->value_ < ((OrgApacheLuceneSearchSuggestLookup_LookupResult *) nil_chk(b))->value_;
-}
-
-- (IOSObjectArray *)getResults {
-  jint size = [self size];
-  IOSObjectArray *res = [IOSObjectArray arrayWithLength:size type:OrgApacheLuceneSearchSuggestLookup_LookupResult_class_()];
-  for (jint i = size - 1; i >= 0; i--) {
-    IOSObjectArray_Set(res, i, [self pop]);
-  }
-  return res;
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "LookupPriorityQueue", NULL, 0x1, NULL, NULL },
-    { "lessThanWithId:withId:", "lessThan", "Z", 0x4, NULL, NULL },
-    { "getResults", NULL, "[Lorg.apache.lucene.search.suggest.Lookup$LookupResult;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
   static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.suggest.Lookup$LookupResult;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestLookup_LookupPriorityQueue = { 2, "LookupPriorityQueue", "org.apache.lucene.search.suggest", "Lookup", 0x19, 3, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/search/suggest/Lookup$LookupResult;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestLookup_LookupPriorityQueue = { 2, "LookupPriorityQueue", "org.apache.lucene.search.suggest", "Lookup", 0x19, 1, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/util/PriorityQueue<Lorg/apache/lucene/search/suggest/Lookup$LookupResult;>;" };
   return &_OrgApacheLuceneSearchSuggestLookup_LookupPriorityQueue;
 }
 
 @end
 
-void OrgApacheLuceneSearchSuggestLookup_LookupPriorityQueue_initWithInt_(OrgApacheLuceneSearchSuggestLookup_LookupPriorityQueue *self, jint size) {
-  OrgApacheLuceneUtilPriorityQueue_initWithInt_(self, size);
+void OrgApacheLuceneSearchSuggestLookup_LookupPriorityQueue_init(OrgApacheLuceneSearchSuggestLookup_LookupPriorityQueue *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneSearchSuggestLookup_LookupPriorityQueue *new_OrgApacheLuceneSearchSuggestLookup_LookupPriorityQueue_initWithInt_(jint size) {
+OrgApacheLuceneSearchSuggestLookup_LookupPriorityQueue *new_OrgApacheLuceneSearchSuggestLookup_LookupPriorityQueue_init() {
   OrgApacheLuceneSearchSuggestLookup_LookupPriorityQueue *self = [OrgApacheLuceneSearchSuggestLookup_LookupPriorityQueue alloc];
-  OrgApacheLuceneSearchSuggestLookup_LookupPriorityQueue_initWithInt_(self, size);
+  OrgApacheLuceneSearchSuggestLookup_LookupPriorityQueue_init(self);
   return self;
 }
 

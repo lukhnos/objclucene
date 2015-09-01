@@ -24,27 +24,19 @@
 #define OrgApacheLuceneAnalysisUtilMultiTermAwareComponent_INCLUDE 1
 #include "org/apache/lucene/analysis/util/MultiTermAwareComponent.h"
 
-@class OrgApacheLuceneAnalysisTokenStream;
-@class OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory;
-@protocol JavaUtilMap;
-
 @interface OrgApacheLuceneAnalysisInIndicNormalizationFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory < OrgApacheLuceneAnalysisUtilMultiTermAwareComponent >
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
-
-- (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
-
-- (OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory *)getMultiTermComponent;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisInIndicNormalizationFilterFactory)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisInIndicNormalizationFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisInIndicNormalizationFilterFactory *self, id<JavaUtilMap> args);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisInIndicNormalizationFilterFactory_init(OrgApacheLuceneAnalysisInIndicNormalizationFilterFactory *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisInIndicNormalizationFilterFactory *new_OrgApacheLuceneAnalysisInIndicNormalizationFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisInIndicNormalizationFilterFactory *new_OrgApacheLuceneAnalysisInIndicNormalizationFilterFactory_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisInIndicNormalizationFilterFactory)
 

@@ -51,10 +51,6 @@
 
 - (void)writeStringWithNSString:(NSString *)s;
 
-- (void)writeStringSetWithJavaUtilSet:(id<JavaUtilSet>)set;
-
-- (void)writeStringStringMapWithJavaUtilMap:(id<JavaUtilMap>)map;
-
 - (void)writeVIntWithInt:(jint)i;
 
 - (void)writeVLongWithLong:(jlong)i;

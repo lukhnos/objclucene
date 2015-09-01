@@ -17,15 +17,12 @@
 #define _OrgApacheLuceneCodecsBlocktreeStats_
 
 @class IOSIntArray;
-@class OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame;
-@class OrgApacheLuceneUtilBytesRef;
 
 @interface OrgApacheLuceneCodecsBlocktreeStats : NSObject {
  @public
   jlong indexNumBytes_;
   jlong totalTermCount_;
   jlong totalTermBytes_;
-  jint nonFloorBlockCount_;
   jint floorBlockCount_;
   jint floorSubBlockCount_;
   jint mixedBlockCount_;
@@ -36,39 +33,23 @@
   jlong totalBlockSuffixBytes_;
   jlong totalBlockStatsBytes_;
   jlong totalBlockOtherBytes_;
-  NSString *segment_;
-  NSString *field_;
 }
 
 #pragma mark Public
 
+- (instancetype)init;
+
 - (NSString *)description;
-
-#pragma mark Package-Private
-
-- (instancetype)initWithNSString:(NSString *)segment
-                    withNSString:(NSString *)field;
-
-- (void)endBlockWithOrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame:(OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *)frame;
-
-- (void)finish;
-
-- (void)startBlockWithOrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame:(OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *)frame
-                                                              withBoolean:(jboolean)isFloor;
-
-- (void)termWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsBlocktreeStats)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsBlocktreeStats, blockCountByPrefixLen_, IOSIntArray *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsBlocktreeStats, segment_, NSString *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsBlocktreeStats, field_, NSString *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneCodecsBlocktreeStats_initWithNSString_withNSString_(OrgApacheLuceneCodecsBlocktreeStats *self, NSString *segment, NSString *field);
+FOUNDATION_EXPORT void OrgApacheLuceneCodecsBlocktreeStats_init(OrgApacheLuceneCodecsBlocktreeStats *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneCodecsBlocktreeStats *new_OrgApacheLuceneCodecsBlocktreeStats_initWithNSString_withNSString_(NSString *segment, NSString *field) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneCodecsBlocktreeStats *new_OrgApacheLuceneCodecsBlocktreeStats_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsBlocktreeStats)
 

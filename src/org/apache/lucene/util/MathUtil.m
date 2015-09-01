@@ -4,37 +4,16 @@
 //
 
 #include "J2ObjC_source.h"
-#include "java/lang/Double.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Long.h"
 #include "java/lang/Math.h"
 #include "org/apache/lucene/util/MathUtil.h"
 
-@interface OrgApacheLuceneUtilMathUtil ()
-
-- (instancetype)init;
-
-@end
-
-__attribute__((unused)) static void OrgApacheLuceneUtilMathUtil_init(OrgApacheLuceneUtilMathUtil *self);
-
-__attribute__((unused)) static OrgApacheLuceneUtilMathUtil *new_OrgApacheLuceneUtilMathUtil_init() NS_RETURNS_RETAINED;
-
 @implementation OrgApacheLuceneUtilMathUtil
-
-- (instancetype)init {
-  OrgApacheLuceneUtilMathUtil_init(self);
-  return self;
-}
 
 + (jint)logWithLong:(jlong)x
             withInt:(jint)base {
   return OrgApacheLuceneUtilMathUtil_logWithLong_withInt_(x, base);
-}
-
-+ (jdouble)logWithDouble:(jdouble)base
-              withDouble:(jdouble)x {
-  return OrgApacheLuceneUtilMathUtil_logWithDouble_withDouble_(base, x);
 }
 
 + (jlong)gcdWithLong:(jlong)a
@@ -42,43 +21,22 @@ __attribute__((unused)) static OrgApacheLuceneUtilMathUtil *new_OrgApacheLuceneU
   return OrgApacheLuceneUtilMathUtil_gcdWithLong_withLong_(a, b);
 }
 
-+ (jdouble)asinhWithDouble:(jdouble)a {
-  return OrgApacheLuceneUtilMathUtil_asinhWithDouble_(a);
-}
-
-+ (jdouble)acoshWithDouble:(jdouble)a {
-  return OrgApacheLuceneUtilMathUtil_acoshWithDouble_(a);
-}
-
-+ (jdouble)atanhWithDouble:(jdouble)a {
-  return OrgApacheLuceneUtilMathUtil_atanhWithDouble_(a);
+- (instancetype)init {
+  OrgApacheLuceneUtilMathUtil_init(self);
+  return self;
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", "MathUtil", NULL, 0x2, NULL, NULL },
     { "logWithLong:withInt:", "log", "I", 0x9, NULL, NULL },
-    { "logWithDouble:withDouble:", "log", "D", 0x9, NULL, NULL },
     { "gcdWithLong:withLong:", "gcd", "J", 0x9, NULL, NULL },
-    { "asinhWithDouble:", "asinh", "D", 0x9, NULL, NULL },
-    { "acoshWithDouble:", "acosh", "D", 0x9, NULL, NULL },
-    { "atanhWithDouble:", "atanh", "D", 0x9, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilMathUtil = { 2, "MathUtil", "org.apache.lucene.util", NULL, 0x11, 7, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilMathUtil = { 2, "MathUtil", "org.apache.lucene.util", NULL, 0x11, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilMathUtil;
 }
 
 @end
-
-void OrgApacheLuceneUtilMathUtil_init(OrgApacheLuceneUtilMathUtil *self) {
-  NSObject_init(self);
-}
-
-OrgApacheLuceneUtilMathUtil *new_OrgApacheLuceneUtilMathUtil_init() {
-  OrgApacheLuceneUtilMathUtil *self = [OrgApacheLuceneUtilMathUtil alloc];
-  OrgApacheLuceneUtilMathUtil_init(self);
-  return self;
-}
 
 jint OrgApacheLuceneUtilMathUtil_logWithLong_withInt_(jlong x, jint base) {
   OrgApacheLuceneUtilMathUtil_initialize();
@@ -91,11 +49,6 @@ jint OrgApacheLuceneUtilMathUtil_logWithLong_withInt_(jlong x, jint base) {
     ret++;
   }
   return ret;
-}
-
-jdouble OrgApacheLuceneUtilMathUtil_logWithDouble_withDouble_(jdouble base, jdouble x) {
-  OrgApacheLuceneUtilMathUtil_initialize();
-  return JavaLangMath_logWithDouble_(x) / JavaLangMath_logWithDouble_(base);
 }
 
 jlong OrgApacheLuceneUtilMathUtil_gcdWithLong_withLong_(jlong a, jlong b) {
@@ -128,35 +81,14 @@ jlong OrgApacheLuceneUtilMathUtil_gcdWithLong_withLong_(jlong a, jlong b) {
   return JreLShift64(a, commonTrailingZeros);
 }
 
-jdouble OrgApacheLuceneUtilMathUtil_asinhWithDouble_(jdouble a) {
-  OrgApacheLuceneUtilMathUtil_initialize();
-  jdouble sign;
-  if (JavaLangDouble_doubleToRawLongBitsWithDouble_(a) < 0) {
-    a = JavaLangMath_absWithDouble_(a);
-    sign = -1.0;
-  }
-  else {
-    sign = 1.0;
-  }
-  return sign * JavaLangMath_logWithDouble_(JavaLangMath_sqrtWithDouble_(a * a + 1.0) + a);
+void OrgApacheLuceneUtilMathUtil_init(OrgApacheLuceneUtilMathUtil *self) {
+  NSObject_init(self);
 }
 
-jdouble OrgApacheLuceneUtilMathUtil_acoshWithDouble_(jdouble a) {
-  OrgApacheLuceneUtilMathUtil_initialize();
-  return JavaLangMath_logWithDouble_(JavaLangMath_sqrtWithDouble_(a * a - 1.0) + a);
-}
-
-jdouble OrgApacheLuceneUtilMathUtil_atanhWithDouble_(jdouble a) {
-  OrgApacheLuceneUtilMathUtil_initialize();
-  jdouble mult;
-  if (JavaLangDouble_doubleToRawLongBitsWithDouble_(a) < 0) {
-    a = JavaLangMath_absWithDouble_(a);
-    mult = -0.5;
-  }
-  else {
-    mult = 0.5;
-  }
-  return mult * JavaLangMath_logWithDouble_((1.0 + a) / (1.0 - a));
+OrgApacheLuceneUtilMathUtil *new_OrgApacheLuceneUtilMathUtil_init() {
+  OrgApacheLuceneUtilMathUtil *self = [OrgApacheLuceneUtilMathUtil alloc];
+  OrgApacheLuceneUtilMathUtil_init(self);
+  return self;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilMathUtil)

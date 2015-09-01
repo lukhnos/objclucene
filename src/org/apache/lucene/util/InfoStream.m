@@ -4,7 +4,6 @@
 //
 
 #include "J2ObjC_source.h"
-#include "java/lang/IllegalArgumentException.h"
 #include "org/apache/lucene/util/InfoStream.h"
 
 #pragma clang diagnostic ignored "-Wprotocol"
@@ -56,10 +55,6 @@ OrgApacheLuceneUtilInfoStream *OrgApacheLuceneUtilInfoStream_NO_OUTPUT_;
   return OrgApacheLuceneUtilInfoStream_getDefault();
 }
 
-+ (void)setDefaultWithOrgApacheLuceneUtilInfoStream:(OrgApacheLuceneUtilInfoStream *)infoStream {
-  OrgApacheLuceneUtilInfoStream_setDefaultWithOrgApacheLuceneUtilInfoStream_(infoStream);
-}
-
 - (instancetype)init {
   OrgApacheLuceneUtilInfoStream_init(self);
   return self;
@@ -78,7 +73,6 @@ OrgApacheLuceneUtilInfoStream *OrgApacheLuceneUtilInfoStream_NO_OUTPUT_;
     { "messageWithNSString:withNSString:", "message", "V", 0x401, NULL, NULL },
     { "isEnabledWithNSString:", "isEnabled", "Z", 0x401, NULL, NULL },
     { "getDefault", NULL, "Lorg.apache.lucene.util.InfoStream;", 0x29, NULL, NULL },
-    { "setDefaultWithOrgApacheLuceneUtilInfoStream:", "setDefault", "V", 0x29, NULL, NULL },
     { "init", NULL, NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -86,7 +80,7 @@ OrgApacheLuceneUtilInfoStream *OrgApacheLuceneUtilInfoStream_NO_OUTPUT_;
     { "defaultInfoStream_", NULL, 0xa, "Lorg.apache.lucene.util.InfoStream;", &OrgApacheLuceneUtilInfoStream_defaultInfoStream_, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.util.InfoStream$NoOutput;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilInfoStream = { 2, "InfoStream", "org.apache.lucene.util", NULL, 0x401, 5, methods, 2, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilInfoStream = { 2, "InfoStream", "org.apache.lucene.util", NULL, 0x401, 4, methods, 2, fields, 0, NULL, 1, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneUtilInfoStream;
 }
 
@@ -96,16 +90,6 @@ OrgApacheLuceneUtilInfoStream *OrgApacheLuceneUtilInfoStream_getDefault() {
   OrgApacheLuceneUtilInfoStream_initialize();
   @synchronized(OrgApacheLuceneUtilInfoStream_class_()) {
     return OrgApacheLuceneUtilInfoStream_defaultInfoStream_;
-  }
-}
-
-void OrgApacheLuceneUtilInfoStream_setDefaultWithOrgApacheLuceneUtilInfoStream_(OrgApacheLuceneUtilInfoStream *infoStream) {
-  OrgApacheLuceneUtilInfoStream_initialize();
-  @synchronized(OrgApacheLuceneUtilInfoStream_class_()) {
-    if (infoStream == nil) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"Cannot set InfoStream default implementation to null. To disable logging use InfoStream.NO_OUTPUT") autorelease];
-    }
-    JreStrongAssign(&OrgApacheLuceneUtilInfoStream_defaultInfoStream_, infoStream);
   }
 }
 

@@ -16,8 +16,6 @@
 #if !defined (_OrgApacheLuceneAnalysisFaPersianNormalizer_) && (OrgApacheLuceneAnalysisFaPersianNormalizer_INCLUDE_ALL || OrgApacheLuceneAnalysisFaPersianNormalizer_INCLUDE)
 #define _OrgApacheLuceneAnalysisFaPersianNormalizer_
 
-@class IOSCharArray;
-
 #define OrgApacheLuceneAnalysisFaPersianNormalizer_YEH 0x064a
 #define OrgApacheLuceneAnalysisFaPersianNormalizer_FARSI_YEH 0x06cc
 #define OrgApacheLuceneAnalysisFaPersianNormalizer_YEH_BARREE 0x06d2
@@ -33,9 +31,6 @@
 #pragma mark Public
 
 - (instancetype)init;
-
-- (jint)normalizeWithCharArray:(IOSCharArray *)s
-                       withInt:(jint)len;
 
 @end
 

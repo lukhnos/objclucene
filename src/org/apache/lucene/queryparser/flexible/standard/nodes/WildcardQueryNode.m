@@ -3,79 +3,35 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/standard/nodes/WildcardQueryNode.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/lang/CharSequence.h"
-#include "java/lang/CloneNotSupportedException.h"
-#include "org/apache/lucene/queryparser/flexible/core/nodes/FieldQueryNode.h"
-#include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNodeImpl.h"
-#include "org/apache/lucene/queryparser/flexible/core/parser/EscapeQuerySyntax.h"
 #include "org/apache/lucene/queryparser/flexible/standard/nodes/WildcardQueryNode.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode
 
-- (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)field
-                    withJavaLangCharSequence:(id<JavaLangCharSequence>)text
-                                     withInt:(jint)begin
-                                     withInt:(jint)end {
-  OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_withInt_withInt_(self, field, text, begin, end);
+- (instancetype)init {
+  OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode_init(self);
   return self;
-}
-
-- (instancetype)initWithOrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode:(OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *)fqn {
-  OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode_(self, fqn);
-  return self;
-}
-
-- (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escaper {
-  if ([self isDefaultFieldWithJavaLangCharSequence:self->field_]) {
-    return self->text_;
-  }
-  else {
-    return JreStrcat("@C@", self->field_, ':', self->text_);
-  }
-}
-
-- (NSString *)description {
-  return JreStrcat("$@$@$", @"<wildcard field='", self->field_, @"' term='", self->text_, @"'/>");
-}
-
-- (OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode *)cloneTree {
-  OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode *clone = (OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode *) check_class_cast([super cloneTree], [OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode class]);
-  return clone;
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaLangCharSequence:withJavaLangCharSequence:withInt:withInt:", "WildcardQueryNode", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode:", "WildcardQueryNode", NULL, 0x1, NULL, NULL },
-    { "toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:", "toQueryString", "Ljava.lang.CharSequence;", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "cloneTree", NULL, "Lorg.apache.lucene.queryparser.flexible.standard.nodes.WildcardQueryNode;", 0x1, "Ljava.lang.CloneNotSupportedException;", NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode = { 2, "WildcardQueryNode", "org.apache.lucene.queryparser.flexible.standard.nodes", NULL, 0x1, 5, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode = { 2, "WildcardQueryNode", "org.apache.lucene.queryparser.flexible.standard.nodes", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode;
 }
 
 @end
 
-void OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_withInt_withInt_(OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode *self, id<JavaLangCharSequence> field, id<JavaLangCharSequence> text, jint begin, jint end) {
-  OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_withInt_withInt_(self, field, text, begin, end);
+void OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode_init(OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode *new_OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_withInt_withInt_(id<JavaLangCharSequence> field, id<JavaLangCharSequence> text, jint begin, jint end) {
+OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode *new_OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode_init() {
   OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode *self = [OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode alloc];
-  OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_withInt_withInt_(self, field, text, begin, end);
-  return self;
-}
-
-void OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode_(OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode *self, OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *fqn) {
-  OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_withInt_withInt_(self, [((OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) nil_chk(fqn)) getField], [fqn getText], [fqn getBegin], [fqn getEnd]);
-}
-
-OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode *new_OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode_(OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *fqn) {
-  OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode *self = [OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode alloc];
-  OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode_(self, fqn);
+  OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode_init(self);
   return self;
 }
 

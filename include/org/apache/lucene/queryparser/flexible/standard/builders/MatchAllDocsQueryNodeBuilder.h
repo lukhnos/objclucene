@@ -20,16 +20,11 @@
 #define OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardQueryBuilder_INCLUDE 1
 #include "org/apache/lucene/queryparser/flexible/standard/builders/StandardQueryBuilder.h"
 
-@class OrgApacheLuceneSearchMatchAllDocsQuery;
-@protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
-
 @interface OrgApacheLuceneQueryparserFlexibleStandardBuildersMatchAllDocsQueryNodeBuilder : NSObject < OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardQueryBuilder >
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (OrgApacheLuceneSearchMatchAllDocsQuery *)buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryNode;
 
 @end
 

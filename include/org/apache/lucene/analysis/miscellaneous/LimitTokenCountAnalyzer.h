@@ -20,40 +20,19 @@
 #define OrgApacheLuceneAnalysisAnalyzerWrapper_INCLUDE 1
 #include "org/apache/lucene/analysis/AnalyzerWrapper.h"
 
-@class OrgApacheLuceneAnalysisAnalyzer;
-@class OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;
-
 @interface OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountAnalyzer : OrgApacheLuceneAnalysisAnalyzerWrapper
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)delegate
-                                                withInt:(jint)maxTokenCount;
-
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)delegate
-                                                withInt:(jint)maxTokenCount
-                                            withBoolean:(jboolean)consumeAllTokens;
-
-- (NSString *)description;
-
-#pragma mark Protected
-
-- (OrgApacheLuceneAnalysisAnalyzer *)getWrappedAnalyzerWithNSString:(NSString *)fieldName;
-
-- (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)wrapComponentsWithNSString:(NSString *)fieldName
-                            withOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents:(OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)components;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountAnalyzer)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_withInt_(OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountAnalyzer *self, OrgApacheLuceneAnalysisAnalyzer *delegate, jint maxTokenCount);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountAnalyzer_init(OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountAnalyzer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountAnalyzer *new_OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_withInt_(OrgApacheLuceneAnalysisAnalyzer *delegate, jint maxTokenCount) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_withInt_withBoolean_(OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountAnalyzer *self, OrgApacheLuceneAnalysisAnalyzer *delegate, jint maxTokenCount, jboolean consumeAllTokens);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountAnalyzer *new_OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_withInt_withBoolean_(OrgApacheLuceneAnalysisAnalyzer *delegate, jint maxTokenCount, jboolean consumeAllTokens) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountAnalyzer *new_OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountAnalyzer_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountAnalyzer)
 

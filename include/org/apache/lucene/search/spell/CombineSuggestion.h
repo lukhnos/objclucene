@@ -16,30 +16,19 @@
 #if !defined (_OrgApacheLuceneSearchSpellCombineSuggestion_) && (OrgApacheLuceneSearchSpellCombineSuggestion_INCLUDE_ALL || OrgApacheLuceneSearchSpellCombineSuggestion_INCLUDE)
 #define _OrgApacheLuceneSearchSpellCombineSuggestion_
 
-@class IOSIntArray;
-@class OrgApacheLuceneSearchSpellSuggestWord;
-
-@interface OrgApacheLuceneSearchSpellCombineSuggestion : NSObject {
- @public
-  IOSIntArray *originalTermIndexes_;
-  OrgApacheLuceneSearchSpellSuggestWord *suggestion_;
-}
+@interface OrgApacheLuceneSearchSpellCombineSuggestion : NSObject
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchSpellSuggestWord:(OrgApacheLuceneSearchSpellSuggestWord *)suggestion
-                                                 withIntArray:(IOSIntArray *)originalTermIndexes;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSpellCombineSuggestion)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpellCombineSuggestion, originalTermIndexes_, IOSIntArray *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpellCombineSuggestion, suggestion_, OrgApacheLuceneSearchSpellSuggestWord *)
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSpellCombineSuggestion_init(OrgApacheLuceneSearchSpellCombineSuggestion *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSpellCombineSuggestion_initWithOrgApacheLuceneSearchSpellSuggestWord_withIntArray_(OrgApacheLuceneSearchSpellCombineSuggestion *self, OrgApacheLuceneSearchSpellSuggestWord *suggestion, IOSIntArray *originalTermIndexes);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSpellCombineSuggestion *new_OrgApacheLuceneSearchSpellCombineSuggestion_initWithOrgApacheLuceneSearchSpellSuggestWord_withIntArray_(OrgApacheLuceneSearchSpellSuggestWord *suggestion, IOSIntArray *originalTermIndexes) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpellCombineSuggestion *new_OrgApacheLuceneSearchSpellCombineSuggestion_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpellCombineSuggestion)
 

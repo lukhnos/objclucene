@@ -16,21 +16,15 @@
 #if !defined (_OrgApacheLuceneMiscIndexMergeTool_) && (OrgApacheLuceneMiscIndexMergeTool_INCLUDE_ALL || OrgApacheLuceneMiscIndexMergeTool_INCLUDE)
 #define _OrgApacheLuceneMiscIndexMergeTool_
 
-@class IOSObjectArray;
-
 @interface OrgApacheLuceneMiscIndexMergeTool : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
-+ (void)mainWithNSStringArray:(IOSObjectArray *)args;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneMiscIndexMergeTool)
-
-FOUNDATION_EXPORT void OrgApacheLuceneMiscIndexMergeTool_mainWithNSStringArray_(IOSObjectArray *args);
 
 FOUNDATION_EXPORT void OrgApacheLuceneMiscIndexMergeTool_init(OrgApacheLuceneMiscIndexMergeTool *self);
 

@@ -16,11 +16,7 @@
 #if !defined (_OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener_) && (OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener_INCLUDE)
 #define _OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener_
 
-@class OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig;
-
 @protocol OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener < NSObject, JavaObject >
-
-- (void)buildFieldConfigWithOrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig:(OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig *)fieldConfig;
 
 @end
 

@@ -24,30 +24,19 @@
 #define OrgApacheLuceneAnalysisUtilResourceLoaderAware_INCLUDE 1
 #include "org/apache/lucene/analysis/util/ResourceLoaderAware.h"
 
-@class OrgApacheLuceneAnalysisTokenStream;
-@protocol JavaUtilMap;
-@protocol JavaUtilSet;
-@protocol OrgApacheLuceneAnalysisUtilResourceLoader;
-
 @interface OrgApacheLuceneAnalysisCoreTypeTokenFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory < OrgApacheLuceneAnalysisUtilResourceLoaderAware >
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
-
-- (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
-
-- (id<JavaUtilSet>)getStopTypes;
-
-- (void)informWithOrgApacheLuceneAnalysisUtilResourceLoader:(id<OrgApacheLuceneAnalysisUtilResourceLoader>)loader;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisCoreTypeTokenFilterFactory)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCoreTypeTokenFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisCoreTypeTokenFilterFactory *self, id<JavaUtilMap> args);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCoreTypeTokenFilterFactory_init(OrgApacheLuceneAnalysisCoreTypeTokenFilterFactory *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreTypeTokenFilterFactory *new_OrgApacheLuceneAnalysisCoreTypeTokenFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreTypeTokenFilterFactory *new_OrgApacheLuceneAnalysisCoreTypeTokenFilterFactory_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCoreTypeTokenFilterFactory)
 

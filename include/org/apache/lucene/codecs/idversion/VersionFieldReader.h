@@ -31,7 +31,6 @@
 @class OrgApacheLuceneUtilBytesRef;
 @class OrgApacheLuceneUtilFstFST;
 @class OrgApacheLuceneUtilFstPairOutputs_Pair;
-@protocol JavaUtilCollection;
 
 @interface OrgApacheLuceneCodecsIdversionVersionFieldReader : OrgApacheLuceneIndexTerms < OrgApacheLuceneUtilAccountable > {
  @public
@@ -52,13 +51,7 @@
 
 #pragma mark Public
 
-- (id<JavaUtilCollection>)getChildResources;
-
 - (jint)getDocCount;
-
-- (OrgApacheLuceneUtilBytesRef *)getMax;
-
-- (OrgApacheLuceneUtilBytesRef *)getMin;
 
 - (jlong)getSumDocFreq;
 

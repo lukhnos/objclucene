@@ -5,7 +5,6 @@
 
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/lang/UnsupportedOperationException.h"
 #include "org/apache/lucene/util/packed/BulkOperation.h"
 #include "org/apache/lucene/util/packed/BulkOperationPacked.h"
 #include "org/apache/lucene/util/packed/PackedInts.h"
@@ -92,28 +91,6 @@
   JreAssert((bitsLeft == bitsPerValue_), (@"org/apache/lucene/util/packed/BulkOperationPacked.java:121 condition failed: assert bitsLeft == bitsPerValue;"));
 }
 
-- (void)decodeWithLongArray:(IOSLongArray *)blocks
-                    withInt:(jint)blocksOffset
-               withIntArray:(IOSIntArray *)values
-                    withInt:(jint)valuesOffset
-                    withInt:(jint)iterations {
-  if (bitsPerValue_ > 32) {
-    @throw [new_JavaLangUnsupportedOperationException_initWithNSString_(JreStrcat("$I$", @"Cannot decode ", bitsPerValue_, @"-bits values into an int[]")) autorelease];
-  }
-  jint bitsLeft = 64;
-  for (jint i = 0; i < longValueCount_ * iterations; ++i) {
-    bitsLeft -= bitsPerValue_;
-    if (bitsLeft < 0) {
-      jint unseq$1 = blocksOffset++;
-      *IOSIntArray_GetRef(nil_chk(values), valuesOffset++) = (jint) ((JreLShift64((IOSLongArray_Get(nil_chk(blocks), unseq$1) & ((JreLShift64(1LL, (bitsPerValue_ + bitsLeft))) - 1)), -bitsLeft)) | (JreURShift64(IOSLongArray_Get(blocks, blocksOffset), (64 + bitsLeft))));
-      bitsLeft += 64;
-    }
-    else {
-      *IOSIntArray_GetRef(nil_chk(values), valuesOffset++) = (jint) ((JreURShift64(IOSLongArray_Get(nil_chk(blocks), blocksOffset), bitsLeft)) & mask_);
-    }
-  }
-}
-
 - (void)decodeWithByteArray:(IOSByteArray *)blocks
                     withInt:(jint)blocksOffset
                withIntArray:(IOSIntArray *)values
@@ -163,33 +140,6 @@
       nextBlock |= JreURShift64(IOSLongArray_Get(nil_chk(values), valuesOffset), -bitsLeft);
       *IOSLongArray_GetRef(nil_chk(blocks), blocksOffset++) = nextBlock;
       nextBlock = JreLShift64((IOSLongArray_Get(values, valuesOffset++) & ((JreLShift64(1LL, -bitsLeft)) - 1)), (64 + bitsLeft));
-      bitsLeft += 64;
-    }
-  }
-}
-
-- (void)encodeWithIntArray:(IOSIntArray *)values
-                   withInt:(jint)valuesOffset
-             withLongArray:(IOSLongArray *)blocks
-                   withInt:(jint)blocksOffset
-                   withInt:(jint)iterations {
-  jlong nextBlock = 0;
-  jint bitsLeft = 64;
-  for (jint i = 0; i < longValueCount_ * iterations; ++i) {
-    bitsLeft -= bitsPerValue_;
-    if (bitsLeft > 0) {
-      nextBlock |= JreLShift64((IOSIntArray_Get(nil_chk(values), valuesOffset++) & (jlong) 0xFFFFFFFFLL), bitsLeft);
-    }
-    else if (bitsLeft == 0) {
-      nextBlock |= (IOSIntArray_Get(nil_chk(values), valuesOffset++) & (jlong) 0xFFFFFFFFLL);
-      *IOSLongArray_GetRef(nil_chk(blocks), blocksOffset++) = nextBlock;
-      nextBlock = 0;
-      bitsLeft = 64;
-    }
-    else {
-      nextBlock |= JreURShift64((IOSIntArray_Get(nil_chk(values), valuesOffset) & (jlong) 0xFFFFFFFFLL), -bitsLeft);
-      *IOSLongArray_GetRef(nil_chk(blocks), blocksOffset++) = nextBlock;
-      nextBlock = JreLShift64((IOSIntArray_Get(values, valuesOffset++) & ((JreLShift64(1LL, -bitsLeft)) - 1)), (64 + bitsLeft));
       bitsLeft += 64;
     }
   }
@@ -260,10 +210,8 @@
     { "byteValueCount", NULL, "I", 0x1, NULL, NULL },
     { "decodeWithLongArray:withInt:withLongArray:withInt:withInt:", "decode", "V", 0x1, NULL, NULL },
     { "decodeWithByteArray:withInt:withLongArray:withInt:withInt:", "decode", "V", 0x1, NULL, NULL },
-    { "decodeWithLongArray:withInt:withIntArray:withInt:withInt:", "decode", "V", 0x1, NULL, NULL },
     { "decodeWithByteArray:withInt:withIntArray:withInt:withInt:", "decode", "V", 0x1, NULL, NULL },
     { "encodeWithLongArray:withInt:withLongArray:withInt:withInt:", "encode", "V", 0x1, NULL, NULL },
-    { "encodeWithIntArray:withInt:withLongArray:withInt:withInt:", "encode", "V", 0x1, NULL, NULL },
     { "encodeWithLongArray:withInt:withByteArray:withInt:withInt:", "encode", "V", 0x1, NULL, NULL },
     { "encodeWithIntArray:withInt:withByteArray:withInt:withInt:", "encode", "V", 0x1, NULL, NULL },
   };
@@ -276,7 +224,7 @@
     { "mask_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
     { "intMask_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedBulkOperationPacked = { 2, "BulkOperationPacked", "org.apache.lucene.util.packed", NULL, 0x0, 13, methods, 7, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedBulkOperationPacked = { 2, "BulkOperationPacked", "org.apache.lucene.util.packed", NULL, 0x0, 11, methods, 7, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilPackedBulkOperationPacked;
 }
 

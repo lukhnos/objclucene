@@ -20,28 +20,19 @@
 #define OrgApacheLuceneQueryparserSurroundQueryComposedQuery_INCLUDE 1
 #include "org/apache/lucene/queryparser/surround/query/ComposedQuery.h"
 
-@class OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory;
-@class OrgApacheLuceneSearchQuery;
-@protocol JavaUtilList;
-
 @interface OrgApacheLuceneQueryparserSurroundQueryAndQuery : OrgApacheLuceneQueryparserSurroundQueryComposedQuery
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)queries
-                         withBoolean:(jboolean)inf
-                        withNSString:(NSString *)opName;
-
-- (OrgApacheLuceneSearchQuery *)makeLuceneQueryFieldNoBoostWithNSString:(NSString *)fieldName
-           withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *)qf;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserSurroundQueryAndQuery)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundQueryAndQuery_initWithJavaUtilList_withBoolean_withNSString_(OrgApacheLuceneQueryparserSurroundQueryAndQuery *self, id<JavaUtilList> queries, jboolean inf, NSString *opName);
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundQueryAndQuery_init(OrgApacheLuceneQueryparserSurroundQueryAndQuery *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQueryAndQuery *new_OrgApacheLuceneQueryparserSurroundQueryAndQuery_initWithJavaUtilList_withBoolean_withNSString_(id<JavaUtilList> queries, jboolean inf, NSString *opName) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQueryAndQuery *new_OrgApacheLuceneQueryparserSurroundQueryAndQuery_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundQueryAndQuery)
 

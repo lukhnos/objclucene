@@ -20,9 +20,6 @@
 #define OrgApacheLuceneIndexLogMergePolicy_INCLUDE 1
 #include "org/apache/lucene/index/LogMergePolicy.h"
 
-@class OrgApacheLuceneIndexIndexWriter;
-@class OrgApacheLuceneIndexSegmentCommitInfo;
-
 #define OrgApacheLuceneIndexLogByteSizeMergePolicy_DEFAULT_MIN_MERGE_MB 1.6
 #define OrgApacheLuceneIndexLogByteSizeMergePolicy_DEFAULT_MAX_MERGE_MB 2048.0
 #define OrgApacheLuceneIndexLogByteSizeMergePolicy_DEFAULT_MAX_MERGE_MB_FOR_FORCED_MERGE 9.223372036854776E18
@@ -32,23 +29,6 @@
 #pragma mark Public
 
 - (instancetype)init;
-
-- (jdouble)getMaxMergeMB;
-
-- (jdouble)getMaxMergeMBForForcedMerge;
-
-- (jdouble)getMinMergeMB;
-
-- (void)setMaxMergeMBWithDouble:(jdouble)mb;
-
-- (void)setMaxMergeMBForForcedMergeWithDouble:(jdouble)mb;
-
-- (void)setMinMergeMBWithDouble:(jdouble)mb;
-
-#pragma mark Protected
-
-- (jlong)sizeWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)info
-                   withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer;
 
 @end
 

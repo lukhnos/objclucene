@@ -29,7 +29,6 @@
 #include "java/lang/Appendable.h"
 
 @class IOSCharArray;
-@class JavaLangStringBuilder;
 
 @protocol OrgApacheLuceneAnalysisTokenattributesCharTermAttribute < OrgApacheLuceneUtilAttribute, JavaLangCharSequence, JavaLangAppendable, NSObject, JavaObject >
 
@@ -47,15 +46,7 @@
 
 - (id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)appendWithJavaLangCharSequence:(id<JavaLangCharSequence>)csq;
 
-- (id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)appendWithJavaLangCharSequence:(id<JavaLangCharSequence>)csq
-                                                                                      withInt:(jint)start
-                                                                                      withInt:(jint)end;
-
-- (id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)appendWithChar:(jchar)c;
-
 - (id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)appendWithNSString:(NSString *)s;
-
-- (id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)appendWithJavaLangStringBuilder:(JavaLangStringBuilder *)sb;
 
 - (id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)appendWithOrgApacheLuceneAnalysisTokenattributesCharTermAttribute:(id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)termAtt;
 

@@ -23,7 +23,6 @@
 @class IOSIntArray;
 @class IOSObjectArray;
 @class OrgApacheLuceneIndexIndexReader;
-@class OrgApacheLuceneIndexTerm;
 @class OrgApacheLuceneSearchIndexSearcher;
 @class OrgApacheLuceneSearchWeight;
 @protocol JavaUtilList;
@@ -33,8 +32,6 @@
 #pragma mark Public
 
 - (instancetype)init;
-
-- (void)addWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
 
 - (void)addWithOrgApacheLuceneIndexTermArray:(IOSObjectArray *)terms;
 

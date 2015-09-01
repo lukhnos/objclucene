@@ -20,38 +20,19 @@
 #define OrgApacheLuceneDocumentField_INCLUDE 1
 #include "org/apache/lucene/document/Field.h"
 
-@class OrgApacheLuceneDocumentFieldType;
-@class OrgApacheLuceneDocumentField_StoreEnum;
-
 @interface OrgApacheLuceneDocumentLongField : OrgApacheLuceneDocumentField
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)name
-                        withLong:(jlong)value
-withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type;
-
-- (instancetype)initWithNSString:(NSString *)name
-                        withLong:(jlong)value
-withOrgApacheLuceneDocumentField_StoreEnum:(OrgApacheLuceneDocumentField_StoreEnum *)stored;
+- (instancetype)init;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneDocumentLongField)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneDocumentLongField)
 
-FOUNDATION_EXPORT OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentLongField_TYPE_NOT_STORED_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneDocumentLongField, TYPE_NOT_STORED_, OrgApacheLuceneDocumentFieldType *)
+FOUNDATION_EXPORT void OrgApacheLuceneDocumentLongField_init(OrgApacheLuceneDocumentLongField *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentLongField_TYPE_STORED_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneDocumentLongField, TYPE_STORED_, OrgApacheLuceneDocumentFieldType *)
-
-FOUNDATION_EXPORT void OrgApacheLuceneDocumentLongField_initWithNSString_withLong_withOrgApacheLuceneDocumentField_StoreEnum_(OrgApacheLuceneDocumentLongField *self, NSString *name, jlong value, OrgApacheLuceneDocumentField_StoreEnum *stored);
-
-FOUNDATION_EXPORT OrgApacheLuceneDocumentLongField *new_OrgApacheLuceneDocumentLongField_initWithNSString_withLong_withOrgApacheLuceneDocumentField_StoreEnum_(NSString *name, jlong value, OrgApacheLuceneDocumentField_StoreEnum *stored) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneDocumentLongField_initWithNSString_withLong_withOrgApacheLuceneDocumentFieldType_(OrgApacheLuceneDocumentLongField *self, NSString *name, jlong value, OrgApacheLuceneDocumentFieldType *type);
-
-FOUNDATION_EXPORT OrgApacheLuceneDocumentLongField *new_OrgApacheLuceneDocumentLongField_initWithNSString_withLong_withOrgApacheLuceneDocumentFieldType_(NSString *name, jlong value, OrgApacheLuceneDocumentFieldType *type) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneDocumentLongField *new_OrgApacheLuceneDocumentLongField_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentLongField)
 

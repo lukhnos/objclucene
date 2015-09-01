@@ -20,26 +20,11 @@
 #define OrgApacheLuceneSearchSimilaritiesNormalization_INCLUDE 1
 #include "org/apache/lucene/search/similarities/Normalization.h"
 
-@class OrgApacheLuceneSearchSimilaritiesBasicStats;
-
-@interface OrgApacheLuceneSearchSimilaritiesNormalizationZ : OrgApacheLuceneSearchSimilaritiesNormalization {
- @public
-  jfloat z_;
-}
+@interface OrgApacheLuceneSearchSimilaritiesNormalizationZ : OrgApacheLuceneSearchSimilaritiesNormalization
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (instancetype)initWithFloat:(jfloat)z;
-
-- (jfloat)getZ;
-
-- (jfloat)tfnWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
-                                                   withFloat:(jfloat)tf
-                                                   withFloat:(jfloat)len;
-
-- (NSString *)description;
 
 @end
 
@@ -48,10 +33,6 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSimilaritiesNormalizationZ)
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesNormalizationZ_init(OrgApacheLuceneSearchSimilaritiesNormalizationZ *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesNormalizationZ *new_OrgApacheLuceneSearchSimilaritiesNormalizationZ_init() NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesNormalizationZ_initWithFloat_(OrgApacheLuceneSearchSimilaritiesNormalizationZ *self, jfloat z);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesNormalizationZ *new_OrgApacheLuceneSearchSimilaritiesNormalizationZ_initWithFloat_(jfloat z) NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesNormalizationZ)
 

@@ -20,20 +20,11 @@
 #define OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor_INCLUDE 1
 #include "org/apache/lucene/queryparser/flexible/core/processors/QueryNodeProcessor.h"
 
-@class OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler;
-@protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
-
 @interface OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor : NSObject < OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor >
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *)getQueryConfigHandler;
-
-- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)processWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryTree;
-
-- (void)setQueryConfigHandlerWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler:(OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *)queryConfigHandler;
 
 @end
 

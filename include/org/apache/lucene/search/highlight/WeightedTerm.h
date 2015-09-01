@@ -27,13 +27,7 @@
 - (instancetype)initWithFloat:(jfloat)weight
                  withNSString:(NSString *)term;
 
-- (NSString *)getTerm;
-
 - (jfloat)getWeight;
-
-- (void)setTermWithNSString:(NSString *)term;
-
-- (void)setWeightWithFloat:(jfloat)weight;
 
 @end
 

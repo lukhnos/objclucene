@@ -4,75 +4,34 @@
 //
 
 #include "J2ObjC_source.h"
-#include "java/lang/IllegalArgumentException.h"
-#include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/miscellaneous/LengthFilter.h"
-#include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
-#include "org/apache/lucene/analysis/util/FilteringTokenFilter.h"
-#include "org/apache/lucene/util/AttributeSource.h"
 
-@interface OrgApacheLuceneAnalysisMiscellaneousLengthFilter () {
- @public
-  jint min_;
-  jint max_;
-  id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute> termAtt_;
-}
-
-@end
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousLengthFilter, termAtt_, id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneAnalysisMiscellaneousLengthFilter
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
-                                                   withInt:(jint)min
-                                                   withInt:(jint)max {
-  OrgApacheLuceneAnalysisMiscellaneousLengthFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(self, inArg, min, max);
+- (instancetype)init {
+  OrgApacheLuceneAnalysisMiscellaneousLengthFilter_init(self);
   return self;
-}
-
-- (jboolean)accept {
-  jint len = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) length];
-  return (len >= min_ && len <= max_);
-}
-
-- (void)dealloc {
-  RELEASE_(termAtt_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withInt:withInt:", "LengthFilter", NULL, 0x1, NULL, NULL },
-    { "accept", NULL, "Z", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "min_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "max_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "termAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousLengthFilter = { 2, "LengthFilter", "org.apache.lucene.analysis.miscellaneous", NULL, 0x11, 2, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousLengthFilter = { 2, "LengthFilter", "org.apache.lucene.analysis.miscellaneous", NULL, 0x11, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisMiscellaneousLengthFilter;
 }
 
 @end
 
-void OrgApacheLuceneAnalysisMiscellaneousLengthFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(OrgApacheLuceneAnalysisMiscellaneousLengthFilter *self, OrgApacheLuceneAnalysisTokenStream *inArg, jint min, jint max) {
-  OrgApacheLuceneAnalysisUtilFilteringTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, inArg);
-  JreStrongAssign(&self->termAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()]);
-  if (min < 0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"minimum length must be greater than or equal to zero") autorelease];
-  }
-  if (min > max) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"maximum length must not be greater than minimum length") autorelease];
-  }
-  self->min_ = min;
-  self->max_ = max;
+void OrgApacheLuceneAnalysisMiscellaneousLengthFilter_init(OrgApacheLuceneAnalysisMiscellaneousLengthFilter *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneAnalysisMiscellaneousLengthFilter *new_OrgApacheLuceneAnalysisMiscellaneousLengthFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(OrgApacheLuceneAnalysisTokenStream *inArg, jint min, jint max) {
+OrgApacheLuceneAnalysisMiscellaneousLengthFilter *new_OrgApacheLuceneAnalysisMiscellaneousLengthFilter_init() {
   OrgApacheLuceneAnalysisMiscellaneousLengthFilter *self = [OrgApacheLuceneAnalysisMiscellaneousLengthFilter alloc];
-  OrgApacheLuceneAnalysisMiscellaneousLengthFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(self, inArg, min, max);
+  OrgApacheLuceneAnalysisMiscellaneousLengthFilter_init(self);
   return self;
 }
 

@@ -20,32 +20,17 @@
 #define OrgApacheLuceneSearchMultiTermQuery_INCLUDE 1
 #include "org/apache/lucene/search/MultiTermQuery.h"
 
-@class OrgApacheLuceneSearchMultiTermQuery_RewriteMethod;
+@interface OrgApacheLuceneSearchGeoPointTermQuery : OrgApacheLuceneSearchMultiTermQuery
 
-@interface OrgApacheLuceneSearchGeoPointTermQuery : OrgApacheLuceneSearchMultiTermQuery {
- @public
-  jdouble minLon_;
-  jdouble minLat_;
-  jdouble maxLon_;
-  jdouble maxLat_;
-}
+#pragma mark Package-Private
 
-#pragma mark Public
-
-- (instancetype)initWithNSString:(NSString *)field
-                      withDouble:(jdouble)minLon
-                      withDouble:(jdouble)minLat
-                      withDouble:(jdouble)maxLon
-                      withDouble:(jdouble)maxLat;
+- (instancetype)init;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneSearchGeoPointTermQuery)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchGeoPointTermQuery)
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *OrgApacheLuceneSearchGeoPointTermQuery_GEO_CONSTANT_SCORE_REWRITE_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchGeoPointTermQuery, GEO_CONSTANT_SCORE_REWRITE_, OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *)
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchGeoPointTermQuery_initWithNSString_withDouble_withDouble_withDouble_withDouble_(OrgApacheLuceneSearchGeoPointTermQuery *self, NSString *field, jdouble minLon, jdouble minLat, jdouble maxLon, jdouble maxLat);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchGeoPointTermQuery_init(OrgApacheLuceneSearchGeoPointTermQuery *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchGeoPointTermQuery)
 

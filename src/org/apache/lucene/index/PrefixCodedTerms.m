@@ -9,9 +9,6 @@
 #include "java/io/IOException.h"
 #include "java/lang/Math.h"
 #include "java/lang/RuntimeException.h"
-#include "java/util/Collection.h"
-#include "java/util/Collections.h"
-#include "java/util/List.h"
 #include "org/apache/lucene/index/FieldTermIterator.h"
 #include "org/apache/lucene/index/PrefixCodedTerms.h"
 #include "org/apache/lucene/index/Term.h"
@@ -88,10 +85,6 @@ __attribute__((unused)) static void OrgApacheLuceneIndexPrefixCodedTerms_TermIte
   return [((OrgApacheLuceneStoreRAMFile *) nil_chk(buffer_)) ramBytesUsed] + 2 * OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_LONG;
 }
 
-- (id<JavaUtilCollection>)getChildResources {
-  return JavaUtilCollections_emptyList();
-}
-
 - (void)setDelGenWithLong:(jlong)delGen {
   self->delGen_ = delGen;
 }
@@ -127,7 +120,6 @@ __attribute__((unused)) static void OrgApacheLuceneIndexPrefixCodedTerms_TermIte
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneStoreRAMFile:withLong:", "PrefixCodedTerms", NULL, 0x2, NULL, NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
     { "setDelGenWithLong:", "setDelGen", "V", 0x1, NULL, NULL },
     { "iterator", NULL, "Lorg.apache.lucene.index.PrefixCodedTerms$TermIterator;", 0x1, NULL, NULL },
     { "size", NULL, "J", 0x1, NULL, NULL },
@@ -140,7 +132,7 @@ __attribute__((unused)) static void OrgApacheLuceneIndexPrefixCodedTerms_TermIte
     { "delGen_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.index.PrefixCodedTerms$Builder;", "Lorg.apache.lucene.index.PrefixCodedTerms$TermIterator;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexPrefixCodedTerms = { 2, "PrefixCodedTerms", "org.apache.lucene.index", NULL, 0x1, 8, methods, 3, fields, 0, NULL, 2, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexPrefixCodedTerms = { 2, "PrefixCodedTerms", "org.apache.lucene.index", NULL, 0x1, 7, methods, 3, fields, 0, NULL, 2, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneIndexPrefixCodedTerms;
 }
 

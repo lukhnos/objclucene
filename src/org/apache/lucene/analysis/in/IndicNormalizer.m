@@ -3,173 +3,42 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/in/IndicNormalizer.java
 //
 
-#include "IOSClass.h"
-#include "IOSObjectArray.h"
-#include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/lang/Character.h"
-#include "java/util/BitSet.h"
-#include "java/util/Collection.h"
-#include "java/util/IdentityHashMap.h"
 #include "org/apache/lucene/analysis/in/IndicNormalizer.h"
-#include "org/apache/lucene/analysis/util/StemmerUtil.h"
 
-@class OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData;
+#pragma clang diagnostic ignored "-Wprotocol"
 
-@interface OrgApacheLuceneAnalysisInIndicNormalizer ()
+@interface OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData : NSObject
 
-+ (jint)flagWithJavaLangCharacter_UnicodeBlock:(JavaLangCharacter_UnicodeBlock *)ub;
-
-- (jint)composeWithInt:(jint)ch0
-withJavaLangCharacter_UnicodeBlock:(JavaLangCharacter_UnicodeBlock *)block0
-withOrgApacheLuceneAnalysisInIndicNormalizer_ScriptData:(OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData *)sd
-         withCharArray:(IOSCharArray *)text
-               withInt:(jint)pos
-               withInt:(jint)len;
-
-@end
-
-static JavaUtilIdentityHashMap *OrgApacheLuceneAnalysisInIndicNormalizer_scripts_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisInIndicNormalizer, scripts_, JavaUtilIdentityHashMap *)
-
-static IOSObjectArray *OrgApacheLuceneAnalysisInIndicNormalizer_decompositions_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisInIndicNormalizer, decompositions_, IOSObjectArray *)
-
-__attribute__((unused)) static jint OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JavaLangCharacter_UnicodeBlock *ub);
-
-__attribute__((unused)) static jint OrgApacheLuceneAnalysisInIndicNormalizer_composeWithInt_withJavaLangCharacter_UnicodeBlock_withOrgApacheLuceneAnalysisInIndicNormalizer_ScriptData_withCharArray_withInt_withInt_(OrgApacheLuceneAnalysisInIndicNormalizer *self, jint ch0, JavaLangCharacter_UnicodeBlock *block0, OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData *sd, IOSCharArray *text, jint pos, jint len);
-
-@interface OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData : NSObject {
- @public
-  jint flag_;
-  jint base_;
-  JavaUtilBitSet *decompMask_;
-}
-
-- (instancetype)initWithInt:(jint)flag
-                    withInt:(jint)base;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData, decompMask_, JavaUtilBitSet *)
+__attribute__((unused)) static void OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData_init(OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData *self);
 
-__attribute__((unused)) static void OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData_initWithInt_withInt_(OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData *self, jint flag, jint base);
-
-__attribute__((unused)) static OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData *new_OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData_initWithInt_withInt_(jint flag, jint base) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData *new_OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData)
 
-J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisInIndicNormalizer)
-
 @implementation OrgApacheLuceneAnalysisInIndicNormalizer
-
-+ (jint)flagWithJavaLangCharacter_UnicodeBlock:(JavaLangCharacter_UnicodeBlock *)ub {
-  return OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(ub);
-}
-
-- (jint)normalizeWithCharArray:(IOSCharArray *)text
-                       withInt:(jint)len {
-  for (jint i = 0; i < len; i++) {
-    JavaLangCharacter_UnicodeBlock *block = JavaLangCharacter_UnicodeBlock_ofWithChar_(IOSCharArray_Get(nil_chk(text), i));
-    OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData *sd = [((JavaUtilIdentityHashMap *) nil_chk(OrgApacheLuceneAnalysisInIndicNormalizer_scripts_)) getWithId:block];
-    if (sd != nil) {
-      jint ch = IOSCharArray_Get(text, i) - sd->base_;
-      if ([((JavaUtilBitSet *) nil_chk(sd->decompMask_)) getWithInt:ch]) len = OrgApacheLuceneAnalysisInIndicNormalizer_composeWithInt_withJavaLangCharacter_UnicodeBlock_withOrgApacheLuceneAnalysisInIndicNormalizer_ScriptData_withCharArray_withInt_withInt_(self, ch, block, sd, text, i, len);
-    }
-  }
-  return len;
-}
-
-- (jint)composeWithInt:(jint)ch0
-withJavaLangCharacter_UnicodeBlock:(JavaLangCharacter_UnicodeBlock *)block0
-withOrgApacheLuceneAnalysisInIndicNormalizer_ScriptData:(OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData *)sd
-         withCharArray:(IOSCharArray *)text
-               withInt:(jint)pos
-               withInt:(jint)len {
-  return OrgApacheLuceneAnalysisInIndicNormalizer_composeWithInt_withJavaLangCharacter_UnicodeBlock_withOrgApacheLuceneAnalysisInIndicNormalizer_ScriptData_withCharArray_withInt_withInt_(self, ch0, block0, sd, text, pos, len);
-}
 
 - (instancetype)init {
   OrgApacheLuceneAnalysisInIndicNormalizer_init(self);
   return self;
 }
 
-+ (void)initialize {
-  if (self == [OrgApacheLuceneAnalysisInIndicNormalizer class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisInIndicNormalizer_scripts_, new_JavaUtilIdentityHashMap_initWithInt_(9));
-    {
-      [OrgApacheLuceneAnalysisInIndicNormalizer_scripts_ putWithId:JreLoadStatic(JavaLangCharacter_UnicodeBlock, DEVANAGARI_) withId:[new_OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData_initWithInt_withInt_(1, (jint) 0x0900) autorelease]];
-      [OrgApacheLuceneAnalysisInIndicNormalizer_scripts_ putWithId:JreLoadStatic(JavaLangCharacter_UnicodeBlock, BENGALI_) withId:[new_OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData_initWithInt_withInt_(2, (jint) 0x0980) autorelease]];
-      [OrgApacheLuceneAnalysisInIndicNormalizer_scripts_ putWithId:JreLoadStatic(JavaLangCharacter_UnicodeBlock, GURMUKHI_) withId:[new_OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData_initWithInt_withInt_(4, (jint) 0x0A00) autorelease]];
-      [OrgApacheLuceneAnalysisInIndicNormalizer_scripts_ putWithId:JreLoadStatic(JavaLangCharacter_UnicodeBlock, GUJARATI_) withId:[new_OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData_initWithInt_withInt_(8, (jint) 0x0A80) autorelease]];
-      [OrgApacheLuceneAnalysisInIndicNormalizer_scripts_ putWithId:JreLoadStatic(JavaLangCharacter_UnicodeBlock, ORIYA_) withId:[new_OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData_initWithInt_withInt_(16, (jint) 0x0B00) autorelease]];
-      [OrgApacheLuceneAnalysisInIndicNormalizer_scripts_ putWithId:JreLoadStatic(JavaLangCharacter_UnicodeBlock, TAMIL_) withId:[new_OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData_initWithInt_withInt_(32, (jint) 0x0B80) autorelease]];
-      [OrgApacheLuceneAnalysisInIndicNormalizer_scripts_ putWithId:JreLoadStatic(JavaLangCharacter_UnicodeBlock, TELUGU_) withId:[new_OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData_initWithInt_withInt_(64, (jint) 0x0C00) autorelease]];
-      [OrgApacheLuceneAnalysisInIndicNormalizer_scripts_ putWithId:JreLoadStatic(JavaLangCharacter_UnicodeBlock, KANNADA_) withId:[new_OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData_initWithInt_withInt_(128, (jint) 0x0C80) autorelease]];
-      [OrgApacheLuceneAnalysisInIndicNormalizer_scripts_ putWithId:JreLoadStatic(JavaLangCharacter_UnicodeBlock, MALAYALAM_) withId:[new_OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData_initWithInt_withInt_(256, (jint) 0x0D00) autorelease]];
-    }
-    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisInIndicNormalizer_decompositions_, [IOSObjectArray newArrayWithObjects:(id[]){ [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x05, (jint) 0x3E, (jint) 0x45, (jint) 0x11, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, DEVANAGARI_)) | OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, GUJARATI_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x05, (jint) 0x3E, (jint) 0x46, (jint) 0x12, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, DEVANAGARI_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x05, (jint) 0x3E, (jint) 0x47, (jint) 0x13, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, DEVANAGARI_)) | OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, GUJARATI_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x05, (jint) 0x3E, (jint) 0x48, (jint) 0x14, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, DEVANAGARI_)) | OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, GUJARATI_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x05, (jint) 0x3E, -1, (jint) 0x06, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, DEVANAGARI_)) | OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, BENGALI_)) | OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, GURMUKHI_)) | OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, GUJARATI_)) | OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, ORIYA_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x05, (jint) 0x45, -1, (jint) 0x72, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, DEVANAGARI_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x05, (jint) 0x45, -1, (jint) 0x0D, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, GUJARATI_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x05, (jint) 0x46, -1, (jint) 0x04, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, DEVANAGARI_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x05, (jint) 0x47, -1, (jint) 0x0F, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, GUJARATI_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x05, (jint) 0x48, -1, (jint) 0x10, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, GURMUKHI_)) | OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, GUJARATI_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x05, (jint) 0x49, -1, (jint) 0x11, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, DEVANAGARI_)) | OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, GUJARATI_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x05, (jint) 0x4A, -1, (jint) 0x12, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, DEVANAGARI_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x05, (jint) 0x4B, -1, (jint) 0x13, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, DEVANAGARI_)) | OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, GUJARATI_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x05, (jint) 0x4C, -1, (jint) 0x14, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, DEVANAGARI_)) | OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, GURMUKHI_)) | OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, GUJARATI_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x06, (jint) 0x45, -1, (jint) 0x11, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, DEVANAGARI_)) | OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, GUJARATI_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x06, (jint) 0x46, -1, (jint) 0x12, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, DEVANAGARI_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x06, (jint) 0x47, -1, (jint) 0x13, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, DEVANAGARI_)) | OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, GUJARATI_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x06, (jint) 0x48, -1, (jint) 0x14, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, DEVANAGARI_)) | OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, GUJARATI_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x07, (jint) 0x57, -1, (jint) 0x08, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, MALAYALAM_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x09, (jint) 0x41, -1, (jint) 0x0A, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, DEVANAGARI_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x09, (jint) 0x57, -1, (jint) 0x0A, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, TAMIL_)) | OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, MALAYALAM_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x0E, (jint) 0x46, -1, (jint) 0x10, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, MALAYALAM_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x0F, (jint) 0x45, -1, (jint) 0x0D, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, DEVANAGARI_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x0F, (jint) 0x46, -1, (jint) 0x0E, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, DEVANAGARI_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x0F, (jint) 0x47, -1, (jint) 0x10, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, DEVANAGARI_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x0F, (jint) 0x57, -1, (jint) 0x10, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, ORIYA_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x12, (jint) 0x3E, -1, (jint) 0x13, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, MALAYALAM_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x12, (jint) 0x4C, -1, (jint) 0x14, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, TELUGU_)) | OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, KANNADA_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x12, (jint) 0x55, -1, (jint) 0x13, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, TELUGU_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x12, (jint) 0x57, -1, (jint) 0x14, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, TAMIL_)) | OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, MALAYALAM_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x13, (jint) 0x57, -1, (jint) 0x14, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, ORIYA_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x15, (jint) 0x3C, -1, (jint) 0x58, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, DEVANAGARI_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x16, (jint) 0x3C, -1, (jint) 0x59, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, DEVANAGARI_)) | OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, GURMUKHI_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x17, (jint) 0x3C, -1, (jint) 0x5A, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, DEVANAGARI_)) | OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, GURMUKHI_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x1C, (jint) 0x3C, -1, (jint) 0x5B, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, DEVANAGARI_)) | OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, GURMUKHI_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x21, (jint) 0x3C, -1, (jint) 0x5C, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, DEVANAGARI_)) | OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, BENGALI_)) | OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, ORIYA_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x22, (jint) 0x3C, -1, (jint) 0x5D, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, DEVANAGARI_)) | OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, BENGALI_)) | OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, ORIYA_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x23, (jint) 0x4D, (jint) 0xFF, (jint) 0x7A, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, MALAYALAM_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x24, (jint) 0x4D, (jint) 0xFF, (jint) 0x4E, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, BENGALI_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x28, (jint) 0x3C, -1, (jint) 0x29, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, DEVANAGARI_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x28, (jint) 0x4D, (jint) 0xFF, (jint) 0x7B, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, MALAYALAM_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x2B, (jint) 0x3C, -1, (jint) 0x5E, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, DEVANAGARI_)) | OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, GURMUKHI_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x2F, (jint) 0x3C, -1, (jint) 0x5F, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, DEVANAGARI_)) | OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, BENGALI_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x2C, (jint) 0x41, (jint) 0x41, (jint) 0x0B, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, TELUGU_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x30, (jint) 0x3C, -1, (jint) 0x31, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, DEVANAGARI_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x30, (jint) 0x4D, (jint) 0xFF, (jint) 0x7C, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, MALAYALAM_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x32, (jint) 0x4D, (jint) 0xFF, (jint) 0x7D, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, MALAYALAM_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x33, (jint) 0x3C, -1, (jint) 0x34, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, DEVANAGARI_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x33, (jint) 0x4D, (jint) 0xFF, (jint) 0x7E, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, MALAYALAM_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x35, (jint) 0x41, -1, (jint) 0x2E, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, TELUGU_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x3E, (jint) 0x45, -1, (jint) 0x49, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, DEVANAGARI_)) | OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, GUJARATI_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x3E, (jint) 0x46, -1, (jint) 0x4A, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, DEVANAGARI_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x3E, (jint) 0x47, -1, (jint) 0x4B, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, DEVANAGARI_)) | OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, GUJARATI_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x3E, (jint) 0x48, -1, (jint) 0x4C, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, DEVANAGARI_)) | OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, GUJARATI_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x3F, (jint) 0x55, -1, (jint) 0x40, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, KANNADA_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x41, (jint) 0x41, -1, (jint) 0x42, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, GURMUKHI_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x46, (jint) 0x3E, -1, (jint) 0x4A, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, TAMIL_)) | OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, MALAYALAM_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x46, (jint) 0x42, (jint) 0x55, (jint) 0x4B, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, KANNADA_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x46, (jint) 0x42, -1, (jint) 0x4A, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, KANNADA_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x46, (jint) 0x46, -1, (jint) 0x48, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, MALAYALAM_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x46, (jint) 0x55, -1, (jint) 0x47, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, TELUGU_)) | OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, KANNADA_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x46, (jint) 0x56, -1, (jint) 0x48, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, TELUGU_)) | OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, KANNADA_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x46, (jint) 0x57, -1, (jint) 0x4C, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, TAMIL_)) | OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, MALAYALAM_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x47, (jint) 0x3E, -1, (jint) 0x4B, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, BENGALI_)) | OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, ORIYA_)) | OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, TAMIL_)) | OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, MALAYALAM_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x47, (jint) 0x57, -1, (jint) 0x4C, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, BENGALI_)) | OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, ORIYA_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x4A, (jint) 0x55, -1, (jint) 0x4B, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, KANNADA_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x72, (jint) 0x3F, -1, (jint) 0x07, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, GURMUKHI_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x72, (jint) 0x40, -1, (jint) 0x08, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, GURMUKHI_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x72, (jint) 0x47, -1, (jint) 0x0F, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, GURMUKHI_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x73, (jint) 0x41, -1, (jint) 0x09, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, GURMUKHI_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x73, (jint) 0x42, -1, (jint) 0x0A, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, GURMUKHI_)) } count:5], [IOSIntArray arrayWithInts:(jint[]){ (jint) 0x73, (jint) 0x4B, -1, (jint) 0x13, OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JreLoadStatic(JavaLangCharacter_UnicodeBlock, GURMUKHI_)) } count:5] } count:72 type:IOSClass_intArray(1)]);
-    {
-      for (OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData * __strong sd in nil_chk([OrgApacheLuceneAnalysisInIndicNormalizer_scripts_ values])) {
-        JreStrongAssignAndConsume(&((OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData *) nil_chk(sd))->decompMask_, new_JavaUtilBitSet_initWithInt_((jint) 0x7F));
-        for (jint i = 0; i < OrgApacheLuceneAnalysisInIndicNormalizer_decompositions_->size_; i++) {
-          jint ch = IOSIntArray_Get(nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisInIndicNormalizer_decompositions_, i)), 0);
-          jint flags = IOSIntArray_Get(nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisInIndicNormalizer_decompositions_, i)), 4);
-          if ((flags & sd->flag_) != 0) [sd->decompMask_ setWithInt:ch];
-        }
-      }
-    }
-    J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisInIndicNormalizer)
-  }
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "flagWithJavaLangCharacter_UnicodeBlock:", "flag", "I", 0xa, NULL, NULL },
-    { "normalizeWithCharArray:withInt:", "normalize", "I", 0x1, NULL, NULL },
-    { "composeWithInt:withJavaLangCharacter_UnicodeBlock:withOrgApacheLuceneAnalysisInIndicNormalizer_ScriptData:withCharArray:withInt:withInt:", "compose", "I", 0x2, NULL, NULL },
     { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "scripts_", NULL, 0x1a, "Ljava.util.IdentityHashMap;", &OrgApacheLuceneAnalysisInIndicNormalizer_scripts_, "Ljava/util/IdentityHashMap<Ljava/lang/Character$UnicodeBlock;Lorg/apache/lucene/analysis/in/IndicNormalizer$ScriptData;>;", .constantValue.asLong = 0 },
-    { "decompositions_", NULL, 0x1a, "[[I", &OrgApacheLuceneAnalysisInIndicNormalizer_decompositions_, NULL, .constantValue.asLong = 0 },
-  };
   static const char *inner_classes[] = {"Lorg.apache.lucene.analysis.in.IndicNormalizer$ScriptData;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisInIndicNormalizer = { 2, "IndicNormalizer", "org.apache.lucene.analysis.in", NULL, 0x1, 4, methods, 2, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisInIndicNormalizer = { 2, "IndicNormalizer", "org.apache.lucene.analysis.in", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 1, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneAnalysisInIndicNormalizer;
 }
 
 @end
-
-jint OrgApacheLuceneAnalysisInIndicNormalizer_flagWithJavaLangCharacter_UnicodeBlock_(JavaLangCharacter_UnicodeBlock *ub) {
-  OrgApacheLuceneAnalysisInIndicNormalizer_initialize();
-  return ((OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData *) nil_chk([((JavaUtilIdentityHashMap *) nil_chk(OrgApacheLuceneAnalysisInIndicNormalizer_scripts_)) getWithId:ub]))->flag_;
-}
-
-jint OrgApacheLuceneAnalysisInIndicNormalizer_composeWithInt_withJavaLangCharacter_UnicodeBlock_withOrgApacheLuceneAnalysisInIndicNormalizer_ScriptData_withCharArray_withInt_withInt_(OrgApacheLuceneAnalysisInIndicNormalizer *self, jint ch0, JavaLangCharacter_UnicodeBlock *block0, OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData *sd, IOSCharArray *text, jint pos, jint len) {
-  if (pos + 1 >= len) return len;
-  jint ch1 = IOSCharArray_Get(nil_chk(text), pos + 1) - ((OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData *) nil_chk(sd))->base_;
-  JavaLangCharacter_UnicodeBlock *block1 = JavaLangCharacter_UnicodeBlock_ofWithChar_(IOSCharArray_Get(text, pos + 1));
-  if (block1 != block0) return len;
-  jint ch2 = -1;
-  if (pos + 2 < len) {
-    ch2 = IOSCharArray_Get(text, pos + 2) - sd->base_;
-    JavaLangCharacter_UnicodeBlock *block2 = JavaLangCharacter_UnicodeBlock_ofWithChar_(IOSCharArray_Get(text, pos + 2));
-    if (IOSCharArray_Get(text, pos + 2) == 0x200d) ch2 = (jint) 0xFF;
-    else if (block2 != block1) ch2 = -1;
-  }
-  for (jint i = 0; i < ((IOSObjectArray *) nil_chk(OrgApacheLuceneAnalysisInIndicNormalizer_decompositions_))->size_; i++) if (IOSIntArray_Get(nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisInIndicNormalizer_decompositions_, i)), 0) == ch0 && (IOSIntArray_Get(nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisInIndicNormalizer_decompositions_, i)), 4) & sd->flag_) != 0) {
-    if (IOSIntArray_Get(nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisInIndicNormalizer_decompositions_, i)), 1) == ch1 && (IOSIntArray_Get(nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisInIndicNormalizer_decompositions_, i)), 2) < 0 || IOSIntArray_Get(nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisInIndicNormalizer_decompositions_, i)), 2) == ch2)) {
-      *IOSCharArray_GetRef(text, pos) = (jchar) (sd->base_ + IOSIntArray_Get(nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisInIndicNormalizer_decompositions_, i)), 3));
-      len = OrgApacheLuceneAnalysisUtilStemmerUtil_delete__WithCharArray_withInt_withInt_(text, pos + 1, len);
-      if (IOSIntArray_Get(nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisInIndicNormalizer_decompositions_, i)), 2) >= 0) len = OrgApacheLuceneAnalysisUtilStemmerUtil_delete__WithCharArray_withInt_withInt_(text, pos + 1, len);
-      return len;
-    }
-  }
-  return len;
-}
 
 void OrgApacheLuceneAnalysisInIndicNormalizer_init(OrgApacheLuceneAnalysisInIndicNormalizer *self) {
   NSObject_init(self);
@@ -185,41 +54,28 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisInIndicNormalizer)
 
 @implementation OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData
 
-- (instancetype)initWithInt:(jint)flag
-                    withInt:(jint)base {
-  OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData_initWithInt_withInt_(self, flag, base);
+- (instancetype)init {
+  OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData_init(self);
   return self;
-}
-
-- (void)dealloc {
-  RELEASE_(decompMask_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withInt:", "ScriptData", NULL, 0x0, NULL, NULL },
+    { "init", NULL, NULL, 0x2, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "flag_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "base_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "decompMask_", NULL, 0x0, "Ljava.util.BitSet;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData = { 2, "ScriptData", "org.apache.lucene.analysis.in", "IndicNormalizer", 0xa, 1, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData = { 2, "ScriptData", "org.apache.lucene.analysis.in", "IndicNormalizer", 0xa, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData;
 }
 
 @end
 
-void OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData_initWithInt_withInt_(OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData *self, jint flag, jint base) {
+void OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData_init(OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData *self) {
   NSObject_init(self);
-  self->flag_ = flag;
-  self->base_ = base;
 }
 
-OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData *new_OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData_initWithInt_withInt_(jint flag, jint base) {
+OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData *new_OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData_init() {
   OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData *self = [OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData alloc];
-  OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData_initWithInt_withInt_(self, flag, base);
+  OrgApacheLuceneAnalysisInIndicNormalizer_ScriptData_init(self);
   return self;
 }
 

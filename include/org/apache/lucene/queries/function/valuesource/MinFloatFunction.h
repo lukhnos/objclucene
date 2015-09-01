@@ -20,31 +20,19 @@
 #define OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_INCLUDE 1
 #include "org/apache/lucene/queries/function/valuesource/MultiFloatFunction.h"
 
-@class IOSObjectArray;
-
 @interface OrgApacheLuceneQueriesFunctionValuesourceMinFloatFunction : OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValueSourceArray:(IOSObjectArray *)sources;
-
-#pragma mark Protected
-
-- (jboolean)existsWithInt:(jint)doc
-withOrgApacheLuceneQueriesFunctionFunctionValuesArray:(IOSObjectArray *)valsArr;
-
-- (jfloat)funcWithInt:(jint)doc
-withOrgApacheLuceneQueriesFunctionFunctionValuesArray:(IOSObjectArray *)valsArr;
-
-- (NSString *)name;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceMinFloatFunction)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceMinFloatFunction_initWithOrgApacheLuceneQueriesFunctionValueSourceArray_(OrgApacheLuceneQueriesFunctionValuesourceMinFloatFunction *self, IOSObjectArray *sources);
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceMinFloatFunction_init(OrgApacheLuceneQueriesFunctionValuesourceMinFloatFunction *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceMinFloatFunction *new_OrgApacheLuceneQueriesFunctionValuesourceMinFloatFunction_initWithOrgApacheLuceneQueriesFunctionValueSourceArray_(IOSObjectArray *sources) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceMinFloatFunction *new_OrgApacheLuceneQueriesFunctionValuesourceMinFloatFunction_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceMinFloatFunction)
 

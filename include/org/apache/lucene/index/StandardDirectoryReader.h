@@ -34,24 +34,13 @@
 
 #pragma mark Public
 
-- (OrgApacheLuceneIndexIndexCommit *)getIndexCommit;
-
 - (jlong)getVersion;
-
-- (jboolean)isCurrent;
 
 - (NSString *)description;
 
 #pragma mark Protected
 
 - (void)doClose;
-
-- (OrgApacheLuceneIndexDirectoryReader *)doOpenIfChanged;
-
-- (OrgApacheLuceneIndexDirectoryReader *)doOpenIfChangedWithOrgApacheLuceneIndexIndexCommit:(OrgApacheLuceneIndexIndexCommit *)commit;
-
-- (OrgApacheLuceneIndexDirectoryReader *)doOpenIfChangedWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer
-                                                                                withBoolean:(jboolean)applyAllDeletes;
 
 #pragma mark Package-Private
 
@@ -60,8 +49,6 @@
                   withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer
                  withOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)sis
                                           withBoolean:(jboolean)applyAllDeletes;
-
-- (OrgApacheLuceneIndexDirectoryReader *)doOpenIfChangedWithOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)infos;
 
 + (OrgApacheLuceneIndexDirectoryReader *)openWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory
                                            withOrgApacheLuceneIndexIndexCommit:(OrgApacheLuceneIndexIndexCommit *)commit;
@@ -96,59 +83,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexStandardDirectoryReader)
 #define OrgApacheLuceneIndexIndexCommit_INCLUDE 1
 #include "org/apache/lucene/index/IndexCommit.h"
 
-@class OrgApacheLuceneIndexSegmentInfos;
-@class OrgApacheLuceneIndexStandardDirectoryReader;
-@class OrgApacheLuceneStoreDirectory;
-@protocol JavaUtilCollection;
-@protocol JavaUtilMap;
-
-@interface OrgApacheLuceneIndexStandardDirectoryReader_ReaderCommit : OrgApacheLuceneIndexIndexCommit {
- @public
-  id<JavaUtilCollection> files_;
-  OrgApacheLuceneStoreDirectory *dir_;
-  jlong generation_;
-  id<JavaUtilMap> userData_;
-}
-
-#pragma mark Public
-
-- (void)delete__;
-
-- (OrgApacheLuceneStoreDirectory *)getDirectory;
-
-- (id<JavaUtilCollection>)getFileNames;
-
-- (jlong)getGeneration;
-
-- (jint)getSegmentCount;
-
-- (NSString *)getSegmentsFileName;
-
-- (id<JavaUtilMap>)getUserData;
-
-- (jboolean)isDeleted;
-
-- (NSString *)description;
+@interface OrgApacheLuceneIndexStandardDirectoryReader_ReaderCommit : OrgApacheLuceneIndexIndexCommit
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneIndexStandardDirectoryReader:(OrgApacheLuceneIndexStandardDirectoryReader *)reader
-                               withOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)infos
-                                  withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir;
-
-- (OrgApacheLuceneIndexStandardDirectoryReader *)getReader;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexStandardDirectoryReader_ReaderCommit)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexStandardDirectoryReader_ReaderCommit, files_, id<JavaUtilCollection>)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexStandardDirectoryReader_ReaderCommit, dir_, OrgApacheLuceneStoreDirectory *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexStandardDirectoryReader_ReaderCommit, userData_, id<JavaUtilMap>)
+FOUNDATION_EXPORT void OrgApacheLuceneIndexStandardDirectoryReader_ReaderCommit_init(OrgApacheLuceneIndexStandardDirectoryReader_ReaderCommit *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexStandardDirectoryReader_ReaderCommit_initWithOrgApacheLuceneIndexStandardDirectoryReader_withOrgApacheLuceneIndexSegmentInfos_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexStandardDirectoryReader_ReaderCommit *self, OrgApacheLuceneIndexStandardDirectoryReader *reader, OrgApacheLuceneIndexSegmentInfos *infos, OrgApacheLuceneStoreDirectory *dir);
-
-FOUNDATION_EXPORT OrgApacheLuceneIndexStandardDirectoryReader_ReaderCommit *new_OrgApacheLuceneIndexStandardDirectoryReader_ReaderCommit_initWithOrgApacheLuceneIndexStandardDirectoryReader_withOrgApacheLuceneIndexSegmentInfos_withOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexStandardDirectoryReader *reader, OrgApacheLuceneIndexSegmentInfos *infos, OrgApacheLuceneStoreDirectory *dir) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexStandardDirectoryReader_ReaderCommit *new_OrgApacheLuceneIndexStandardDirectoryReader_ReaderCommit_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexStandardDirectoryReader_ReaderCommit)
 

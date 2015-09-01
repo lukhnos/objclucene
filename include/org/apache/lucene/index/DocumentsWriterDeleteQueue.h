@@ -20,13 +20,11 @@
 #define OrgApacheLuceneUtilAccountable_INCLUDE 1
 #include "org/apache/lucene/util/Accountable.h"
 
-@class IOSObjectArray;
 @class OrgApacheLuceneIndexBufferedUpdates;
 @class OrgApacheLuceneIndexDocumentsWriterDeleteQueue_DeleteSlice;
 @class OrgApacheLuceneIndexDocumentsWriterDeleteQueue_Node;
 @class OrgApacheLuceneIndexFrozenBufferedUpdates;
 @class OrgApacheLuceneIndexTerm;
-@protocol JavaUtilCollection;
 
 @interface OrgApacheLuceneIndexDocumentsWriterDeleteQueue : NSObject < OrgApacheLuceneUtilAccountable > {
  @public
@@ -34,10 +32,6 @@
 }
 
 #pragma mark Public
-
-- (jint)getBufferedUpdatesTermsSize;
-
-- (id<JavaUtilCollection>)getChildResources;
 
 - (jint)numGlobalTermDeletes;
 
@@ -58,12 +52,6 @@
 
 - (void)addWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
 withOrgApacheLuceneIndexDocumentsWriterDeleteQueue_DeleteSlice:(OrgApacheLuceneIndexDocumentsWriterDeleteQueue_DeleteSlice *)slice;
-
-- (void)addDeleteWithOrgApacheLuceneSearchQueryArray:(IOSObjectArray *)queries;
-
-- (void)addDeleteWithOrgApacheLuceneIndexTermArray:(IOSObjectArray *)terms;
-
-- (void)addDocValuesUpdatesWithOrgApacheLuceneIndexDocValuesUpdateArray:(IOSObjectArray *)updates;
 
 - (jboolean)anyChanges;
 

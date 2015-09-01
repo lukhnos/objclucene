@@ -20,25 +20,19 @@
 #define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
-@class OrgApacheLuceneAnalysisCkbSoraniStemFilter;
-@class OrgApacheLuceneAnalysisTokenStream;
-@protocol JavaUtilMap;
-
 @interface OrgApacheLuceneAnalysisCkbSoraniStemFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
-
-- (OrgApacheLuceneAnalysisCkbSoraniStemFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisCkbSoraniStemFilterFactory)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCkbSoraniStemFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisCkbSoraniStemFilterFactory *self, id<JavaUtilMap> args);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCkbSoraniStemFilterFactory_init(OrgApacheLuceneAnalysisCkbSoraniStemFilterFactory *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCkbSoraniStemFilterFactory *new_OrgApacheLuceneAnalysisCkbSoraniStemFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCkbSoraniStemFilterFactory *new_OrgApacheLuceneAnalysisCkbSoraniStemFilterFactory_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCkbSoraniStemFilterFactory)
 

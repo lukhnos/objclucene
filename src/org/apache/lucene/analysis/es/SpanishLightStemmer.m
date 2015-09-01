@@ -3,62 +3,12 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/es/SpanishLightStemmer.java
 //
 
-#include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/analysis/es/SpanishLightStemmer.h"
 
-@implementation OrgApacheLuceneAnalysisEsSpanishLightStemmer
+#pragma clang diagnostic ignored "-Wprotocol"
 
-- (jint)stemWithCharArray:(IOSCharArray *)s
-                  withInt:(jint)len {
-  if (len < 5) return len;
-  for (jint i = 0; i < len; i++) switch (IOSCharArray_Get(nil_chk(s), i)) {
-    case 0x00e0:
-    case 0x00e1:
-    case 0x00e2:
-    case 0x00e4:
-    *IOSCharArray_GetRef(s, i) = 'a';
-    break;
-    case 0x00f2:
-    case 0x00f3:
-    case 0x00f4:
-    case 0x00f6:
-    *IOSCharArray_GetRef(s, i) = 'o';
-    break;
-    case 0x00e8:
-    case 0x00e9:
-    case 0x00ea:
-    case 0x00eb:
-    *IOSCharArray_GetRef(s, i) = 'e';
-    break;
-    case 0x00f9:
-    case 0x00fa:
-    case 0x00fb:
-    case 0x00fc:
-    *IOSCharArray_GetRef(s, i) = 'u';
-    break;
-    case 0x00ec:
-    case 0x00ed:
-    case 0x00ee:
-    case 0x00ef:
-    *IOSCharArray_GetRef(s, i) = 'i';
-    break;
-  }
-  switch (IOSCharArray_Get(nil_chk(s), len - 1)) {
-    case 'o':
-    case 'a':
-    case 'e':
-    return len - 1;
-    case 's':
-    if (IOSCharArray_Get(s, len - 2) == 'e' && IOSCharArray_Get(s, len - 3) == 's' && IOSCharArray_Get(s, len - 4) == 'e') return len - 2;
-    if (IOSCharArray_Get(s, len - 2) == 'e' && IOSCharArray_Get(s, len - 3) == 'c') {
-      *IOSCharArray_GetRef(s, len - 3) = 'z';
-      return len - 2;
-    }
-    if (IOSCharArray_Get(s, len - 2) == 'o' || IOSCharArray_Get(s, len - 2) == 'a' || IOSCharArray_Get(s, len - 2) == 'e') return len - 2;
-  }
-  return len;
-}
+@implementation OrgApacheLuceneAnalysisEsSpanishLightStemmer
 
 - (instancetype)init {
   OrgApacheLuceneAnalysisEsSpanishLightStemmer_init(self);
@@ -67,10 +17,9 @@
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "stemWithCharArray:withInt:", "stem", "I", 0x1, NULL, NULL },
     { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisEsSpanishLightStemmer = { 2, "SpanishLightStemmer", "org.apache.lucene.analysis.es", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisEsSpanishLightStemmer = { 2, "SpanishLightStemmer", "org.apache.lucene.analysis.es", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisEsSpanishLightStemmer;
 }
 

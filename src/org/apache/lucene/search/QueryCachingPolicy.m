@@ -3,16 +3,8 @@
 //  source: ./core/src/java/org/apache/lucene/search/QueryCachingPolicy.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/IllegalArgumentException.h"
-#include "org/apache/lucene/index/IndexReader.h"
-#include "org/apache/lucene/index/IndexReaderContext.h"
-#include "org/apache/lucene/index/LeafReader.h"
-#include "org/apache/lucene/index/LeafReaderContext.h"
-#include "org/apache/lucene/index/ReaderUtil.h"
-#include "org/apache/lucene/search/Query.h"
 #include "org/apache/lucene/search/QueryCachingPolicy.h"
 
 @interface OrgApacheLuceneSearchQueryCachingPolicy_CacheOnLargeSegments () {
@@ -24,11 +16,6 @@
 @end
 
 @interface OrgApacheLuceneSearchQueryCachingPolicy_$1 : NSObject < OrgApacheLuceneSearchQueryCachingPolicy >
-
-- (void)onUseWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
-
-- (jboolean)shouldCacheWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-            withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
 
 - (instancetype)init;
 
@@ -56,15 +43,11 @@ id<OrgApacheLuceneSearchQueryCachingPolicy> OrgApacheLuceneSearchQueryCachingPol
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "onUseWithOrgApacheLuceneSearchQuery:", "onUse", "V", 0x401, NULL, NULL },
-    { "shouldCacheWithOrgApacheLuceneSearchQuery:withOrgApacheLuceneIndexLeafReaderContext:", "shouldCache", "Z", 0x401, "Ljava.io.IOException;", NULL },
-  };
   static const J2ObjcFieldInfo fields[] = {
     { "ALWAYS_CACHE_", NULL, 0x19, "Lorg.apache.lucene.search.QueryCachingPolicy;", &OrgApacheLuceneSearchQueryCachingPolicy_ALWAYS_CACHE_, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.search.QueryCachingPolicy$CacheOnLargeSegments;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchQueryCachingPolicy = { 2, "QueryCachingPolicy", "org.apache.lucene.search", NULL, 0x609, 2, methods, 1, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchQueryCachingPolicy = { 2, "QueryCachingPolicy", "org.apache.lucene.search", NULL, 0x609, 0, NULL, 1, fields, 0, NULL, 1, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneSearchQueryCachingPolicy;
 }
 
@@ -84,19 +67,6 @@ OrgApacheLuceneSearchQueryCachingPolicy_CacheOnLargeSegments *OrgApacheLuceneSea
   return self;
 }
 
-- (void)onUseWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query {
-}
-
-- (jboolean)shouldCacheWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-            withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
-  OrgApacheLuceneIndexIndexReaderContext *topLevelContext = OrgApacheLuceneIndexReaderUtil_getTopLevelContextWithOrgApacheLuceneIndexIndexReaderContext_(context);
-  if ([((OrgApacheLuceneIndexIndexReader *) nil_chk([((OrgApacheLuceneIndexIndexReaderContext *) nil_chk(topLevelContext)) reader])) maxDoc] < minIndexSize_) {
-    return NO;
-  }
-  jfloat sizeRatio = (jfloat) [((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader])) maxDoc] / [((OrgApacheLuceneIndexIndexReader *) nil_chk([topLevelContext reader])) maxDoc];
-  return sizeRatio >= minSizeRatio_;
-}
-
 + (void)initialize {
   if (self == [OrgApacheLuceneSearchQueryCachingPolicy_CacheOnLargeSegments class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneSearchQueryCachingPolicy_CacheOnLargeSegments_DEFAULT_, new_OrgApacheLuceneSearchQueryCachingPolicy_CacheOnLargeSegments_initWithInt_withFloat_(10000, 0.03f));
@@ -107,15 +77,13 @@ OrgApacheLuceneSearchQueryCachingPolicy_CacheOnLargeSegments *OrgApacheLuceneSea
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithInt:withFloat:", "CacheOnLargeSegments", NULL, 0x1, NULL, NULL },
-    { "onUseWithOrgApacheLuceneSearchQuery:", "onUse", "V", 0x1, NULL, NULL },
-    { "shouldCacheWithOrgApacheLuceneSearchQuery:withOrgApacheLuceneIndexLeafReaderContext:", "shouldCache", "Z", 0x1, "Ljava.io.IOException;", NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "DEFAULT_", NULL, 0x19, "Lorg.apache.lucene.search.QueryCachingPolicy$CacheOnLargeSegments;", &OrgApacheLuceneSearchQueryCachingPolicy_CacheOnLargeSegments_DEFAULT_, NULL, .constantValue.asLong = 0 },
     { "minIndexSize_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "minSizeRatio_", NULL, 0x12, "F", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchQueryCachingPolicy_CacheOnLargeSegments = { 2, "CacheOnLargeSegments", "org.apache.lucene.search", "QueryCachingPolicy", 0x9, 3, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchQueryCachingPolicy_CacheOnLargeSegments = { 2, "CacheOnLargeSegments", "org.apache.lucene.search", "QueryCachingPolicy", 0x9, 1, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchQueryCachingPolicy_CacheOnLargeSegments;
 }
 
@@ -140,14 +108,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchQueryCachingPolicy_CacheOn
 
 @implementation OrgApacheLuceneSearchQueryCachingPolicy_$1
 
-- (void)onUseWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query {
-}
-
-- (jboolean)shouldCacheWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-            withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
-  return YES;
-}
-
 - (instancetype)init {
   OrgApacheLuceneSearchQueryCachingPolicy_$1_init(self);
   return self;
@@ -155,11 +115,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchQueryCachingPolicy_CacheOn
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "onUseWithOrgApacheLuceneSearchQuery:", "onUse", "V", 0x1, NULL, NULL },
-    { "shouldCacheWithOrgApacheLuceneSearchQuery:withOrgApacheLuceneIndexLeafReaderContext:", "shouldCache", "Z", 0x1, "Ljava.io.IOException;", NULL },
     { "init", "", NULL, 0x0, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchQueryCachingPolicy_$1 = { 2, "", "org.apache.lucene.search", "QueryCachingPolicy", 0x8008, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchQueryCachingPolicy_$1 = { 2, "", "org.apache.lucene.search", "QueryCachingPolicy", 0x8008, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchQueryCachingPolicy_$1;
 }
 

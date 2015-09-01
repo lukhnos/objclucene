@@ -14,25 +14,11 @@
   return self;
 }
 
-- (jlong)ordAtWithInt:(jint)index {
-  // can't call an abstract method
-  [self doesNotRecognizeSelector:_cmd];
-  return 0;
-}
-
-- (jint)cardinality {
-  // can't call an abstract method
-  [self doesNotRecognizeSelector:_cmd];
-  return 0;
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "init", "RandomAccessOrds", NULL, 0x4, NULL, NULL },
-    { "ordAtWithInt:", "ordAt", "J", 0x401, NULL, NULL },
-    { "cardinality", NULL, "I", 0x401, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexRandomAccessOrds = { 2, "RandomAccessOrds", "org.apache.lucene.index", NULL, 0x401, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexRandomAccessOrds = { 2, "RandomAccessOrds", "org.apache.lucene.index", NULL, 0x401, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexRandomAccessOrds;
 }
 

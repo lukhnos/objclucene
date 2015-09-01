@@ -35,27 +35,17 @@
 - (void)documentWithInt:(jint)docID
 withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisitor *)visitor;
 
-- (jint)getDocCountWithNSString:(NSString *)field;
-
-- (jlong)getSumDocFreqWithNSString:(NSString *)field;
-
-- (jlong)getSumTotalTermFreqWithNSString:(NSString *)field;
-
 - (OrgApacheLuceneIndexFields *)getTermVectorsWithInt:(jint)docID;
 
 - (jint)maxDoc;
 
 - (jint)numDocs;
 
-- (jlong)totalTermFreqWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
-
 #pragma mark Protected
 
 - (instancetype)initWithOrgApacheLuceneIndexIndexReaderArray:(IOSObjectArray *)subReaders;
 
 - (id<JavaUtilList>)getSequentialSubReaders;
-
-- (jint)readerBaseWithInt:(jint)readerIndex;
 
 - (jint)readerIndexWithInt:(jint)docID;
 

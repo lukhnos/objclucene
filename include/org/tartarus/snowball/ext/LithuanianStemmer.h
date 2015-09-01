@@ -26,15 +26,9 @@
 
 - (instancetype)init;
 
-- (jboolean)isEqual:(id)o;
-
-- (NSUInteger)hash;
-
-- (jboolean)stem;
-
 @end
 
-J2OBJC_STATIC_INIT(OrgTartarusSnowballExtLithuanianStemmer)
+J2OBJC_EMPTY_STATIC_INIT(OrgTartarusSnowballExtLithuanianStemmer)
 
 FOUNDATION_EXPORT void OrgTartarusSnowballExtLithuanianStemmer_init(OrgTartarusSnowballExtLithuanianStemmer *self);
 

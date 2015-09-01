@@ -20,9 +20,6 @@
 #define OrgApacheLuceneSearchScorer_INCLUDE 1
 #include "org/apache/lucene/search/Scorer.h"
 
-@class OrgApacheLuceneSearchWeight;
-@protocol JavaUtilCollection;
-
 @interface OrgApacheLuceneSearchFakeScorer : OrgApacheLuceneSearchScorer {
  @public
   jfloat score_;
@@ -41,10 +38,6 @@
 - (jint)docID;
 
 - (jint)freq;
-
-- (id<JavaUtilCollection>)getChildren;
-
-- (OrgApacheLuceneSearchWeight *)getWeight;
 
 - (jint)nextDoc;
 

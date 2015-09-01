@@ -53,8 +53,6 @@ withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer:(OrgApacheLuceneSearch
 
 - (jfloat)score;
 
-- (jfloat)sloppyFreq;
-
 #pragma mark Protected
 
 - (void)doCurrentSpans;

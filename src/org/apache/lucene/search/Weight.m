@@ -11,7 +11,6 @@
 #include "org/apache/lucene/index/LeafReaderContext.h"
 #include "org/apache/lucene/search/BulkScorer.h"
 #include "org/apache/lucene/search/DocIdSetIterator.h"
-#include "org/apache/lucene/search/Explanation.h"
 #include "org/apache/lucene/search/LeafCollector.h"
 #include "org/apache/lucene/search/Query.h"
 #include "org/apache/lucene/search/Scorer.h"
@@ -38,13 +37,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchWeight_DefaultBulkScorer, scorer_, OrgA
 - (void)extractTermsWithJavaUtilSet:(id<JavaUtilSet>)terms {
   // can't call an abstract method
   [self doesNotRecognizeSelector:_cmd];
-}
-
-- (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-                                                                               withInt:(jint)doc {
-  // can't call an abstract method
-  [self doesNotRecognizeSelector:_cmd];
-  return 0;
 }
 
 - (OrgApacheLuceneSearchQuery *)getQuery {
@@ -86,7 +78,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchWeight_DefaultBulkScorer, scorer_, OrgA
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneSearchQuery:", "Weight", NULL, 0x4, NULL, NULL },
     { "extractTermsWithJavaUtilSet:", "extractTerms", "V", 0x401, NULL, NULL },
-    { "explainWithOrgApacheLuceneIndexLeafReaderContext:withInt:", "explain", "Lorg.apache.lucene.search.Explanation;", 0x401, "Ljava.io.IOException;", NULL },
     { "getQuery", NULL, "Lorg.apache.lucene.search.Query;", 0x11, NULL, NULL },
     { "getValueForNormalization", NULL, "F", 0x401, "Ljava.io.IOException;", NULL },
     { "normalizeWithFloat:withFloat:", "normalize", "V", 0x401, NULL, NULL },
@@ -97,7 +88,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchWeight_DefaultBulkScorer, scorer_, OrgA
     { "parentQuery_", NULL, 0x14, "Lorg.apache.lucene.search.Query;", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.search.Weight$DefaultBulkScorer;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchWeight = { 2, "Weight", "org.apache.lucene.search", NULL, 0x401, 8, methods, 1, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchWeight = { 2, "Weight", "org.apache.lucene.search", NULL, 0x401, 7, methods, 1, fields, 0, NULL, 1, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneSearchWeight;
 }
 

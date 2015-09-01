@@ -20,37 +20,19 @@
 #define OrgApacheLuceneAnalysisTokenStream_INCLUDE 1
 #include "org/apache/lucene/analysis/TokenStream.h"
 
-@class OrgApacheLuceneAnalysisToken;
-
 @interface OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter : OrgApacheLuceneAnalysisTokenStream
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)prefix
-                    withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-                    withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)suffix;
-
-- (void)close;
-
-- (void)end;
-
-- (jboolean)incrementToken;
-
-- (void)reset;
-
-- (OrgApacheLuceneAnalysisToken *)updateInputTokenWithOrgApacheLuceneAnalysisToken:(OrgApacheLuceneAnalysisToken *)inputToken
-                                                  withOrgApacheLuceneAnalysisToken:(OrgApacheLuceneAnalysisToken *)lastPrefixToken;
-
-- (OrgApacheLuceneAnalysisToken *)updateSuffixTokenWithOrgApacheLuceneAnalysisToken:(OrgApacheLuceneAnalysisToken *)suffixToken
-                                                   withOrgApacheLuceneAnalysisToken:(OrgApacheLuceneAnalysisToken *)lastInputToken;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter *self, OrgApacheLuceneAnalysisTokenStream *prefix, OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisTokenStream *suffix);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_init(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter *new_OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *prefix, OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisTokenStream *suffix) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter *new_OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousPrefixAndSuffixAwareTokenFilter)
 

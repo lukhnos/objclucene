@@ -18,7 +18,6 @@
  @public
   OrgApacheLuceneUtilBytesRef *current_;
   OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput *result_;
-  OrgApacheLuceneUtilBytesRef *target_;
 }
 
 - (OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput *)setResult;
@@ -27,7 +26,6 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstBytesRefFSTEnum, current_, OrgApacheLuceneUtilBytesRef *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstBytesRefFSTEnum, result_, OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstBytesRefFSTEnum, target_, OrgApacheLuceneUtilBytesRef *)
 
 __attribute__((unused)) static OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput *OrgApacheLuceneUtilFstBytesRefFSTEnum_setResult(OrgApacheLuceneUtilFstBytesRefFSTEnum *self);
 
@@ -38,52 +36,9 @@ __attribute__((unused)) static OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput
   return self;
 }
 
-- (OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput *)current {
-  return result_;
-}
-
 - (OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput *)next {
   [self doNext];
   return OrgApacheLuceneUtilFstBytesRefFSTEnum_setResult(self);
-}
-
-- (OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput *)seekCeilWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)target {
-  JreStrongAssign(&self->target_, target);
-  targetLength_ = ((OrgApacheLuceneUtilBytesRef *) nil_chk(target))->length_;
-  [super doSeekCeil];
-  return OrgApacheLuceneUtilFstBytesRefFSTEnum_setResult(self);
-}
-
-- (OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput *)seekFloorWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)target {
-  JreStrongAssign(&self->target_, target);
-  targetLength_ = ((OrgApacheLuceneUtilBytesRef *) nil_chk(target))->length_;
-  [super doSeekFloor];
-  return OrgApacheLuceneUtilFstBytesRefFSTEnum_setResult(self);
-}
-
-- (OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput *)seekExactWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)target {
-  JreStrongAssign(&self->target_, target);
-  targetLength_ = ((OrgApacheLuceneUtilBytesRef *) nil_chk(target))->length_;
-  if ([super doSeekExact]) {
-    JreAssert((upto_ == 1 + target->length_), (@"org/apache/lucene/util/fst/BytesRefFSTEnum.java:85 condition failed: assert upto == 1+target.length;"));
-    return OrgApacheLuceneUtilFstBytesRefFSTEnum_setResult(self);
-  }
-  else {
-    return nil;
-  }
-}
-
-- (jint)getTargetLabel {
-  if (upto_ - 1 == ((OrgApacheLuceneUtilBytesRef *) nil_chk(target_))->length_) {
-    return OrgApacheLuceneUtilFstFST_END_LABEL;
-  }
-  else {
-    return IOSByteArray_Get(nil_chk(target_->bytes_), target_->offset_ + upto_ - 1) & (jint) 0xFF;
-  }
-}
-
-- (jint)getCurrentLabel {
-  return IOSByteArray_Get(nil_chk(((OrgApacheLuceneUtilBytesRef *) nil_chk(current_))->bytes_), upto_) & (jint) 0xFF;
 }
 
 - (void)setCurrentLabelWithInt:(jint)label {
@@ -101,20 +56,13 @@ __attribute__((unused)) static OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput
 - (void)dealloc {
   RELEASE_(current_);
   RELEASE_(result_);
-  RELEASE_(target_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneUtilFstFST:", "BytesRefFSTEnum", NULL, 0x1, NULL, NULL },
-    { "current", NULL, "Lorg.apache.lucene.util.fst.BytesRefFSTEnum$InputOutput;", 0x1, NULL, NULL },
     { "next", NULL, "Lorg.apache.lucene.util.fst.BytesRefFSTEnum$InputOutput;", 0x1, "Ljava.io.IOException;", NULL },
-    { "seekCeilWithOrgApacheLuceneUtilBytesRef:", "seekCeil", "Lorg.apache.lucene.util.fst.BytesRefFSTEnum$InputOutput;", 0x1, "Ljava.io.IOException;", NULL },
-    { "seekFloorWithOrgApacheLuceneUtilBytesRef:", "seekFloor", "Lorg.apache.lucene.util.fst.BytesRefFSTEnum$InputOutput;", 0x1, "Ljava.io.IOException;", NULL },
-    { "seekExactWithOrgApacheLuceneUtilBytesRef:", "seekExact", "Lorg.apache.lucene.util.fst.BytesRefFSTEnum$InputOutput;", 0x1, "Ljava.io.IOException;", NULL },
-    { "getTargetLabel", NULL, "I", 0x4, NULL, NULL },
-    { "getCurrentLabel", NULL, "I", 0x4, NULL, NULL },
     { "setCurrentLabelWithInt:", "setCurrentLabel", "V", 0x4, NULL, NULL },
     { "grow", NULL, "V", 0x4, NULL, NULL },
     { "setResult", NULL, "Lorg.apache.lucene.util.fst.BytesRefFSTEnum$InputOutput;", 0x2, NULL, NULL },
@@ -122,11 +70,10 @@ __attribute__((unused)) static OrgApacheLuceneUtilFstBytesRefFSTEnum_InputOutput
   static const J2ObjcFieldInfo fields[] = {
     { "current_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
     { "result_", NULL, 0x12, "Lorg.apache.lucene.util.fst.BytesRefFSTEnum$InputOutput;", NULL, "Lorg/apache/lucene/util/fst/BytesRefFSTEnum$InputOutput<TT;>;", .constantValue.asLong = 0 },
-    { "target_", NULL, 0x2, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *superclass_type_args[] = {"TT;"};
   static const char *inner_classes[] = {"Lorg.apache.lucene.util.fst.BytesRefFSTEnum$InputOutput;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstBytesRefFSTEnum = { 2, "BytesRefFSTEnum", "org.apache.lucene.util.fst", NULL, 0x11, 11, methods, 3, fields, 1, superclass_type_args, 1, inner_classes, NULL, "<T:Ljava/lang/Object;>Lorg/apache/lucene/util/fst/FSTEnum<TT;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstBytesRefFSTEnum = { 2, "BytesRefFSTEnum", "org.apache.lucene.util.fst", NULL, 0x11, 5, methods, 2, fields, 1, superclass_type_args, 1, inner_classes, NULL, "<T:Ljava/lang/Object;>Lorg/apache/lucene/util/fst/FSTEnum<TT;>;" };
   return &_OrgApacheLuceneUtilFstBytesRefFSTEnum;
 }
 

@@ -77,85 +77,8 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
   return total;
 }
 
-- (jlong)totalTermFreqWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term {
-  [self ensureOpen];
-  jlong total = 0;
-  for (jint i = 0; i < ((IOSObjectArray *) nil_chk(subReaders_))->size_; i++) {
-    jlong sub = [((OrgApacheLuceneIndexIndexReader *) nil_chk(IOSObjectArray_Get(subReaders_, i))) totalTermFreqWithOrgApacheLuceneIndexTerm:term];
-    if (sub == -1) {
-      return -1;
-    }
-    total += sub;
-  }
-  return total;
-}
-
-- (jlong)getSumDocFreqWithNSString:(NSString *)field {
-  [self ensureOpen];
-  jlong total = 0;
-  {
-    IOSObjectArray *a__ = subReaders_;
-    OrgApacheLuceneIndexIndexReader * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
-    OrgApacheLuceneIndexIndexReader * const *e__ = b__ + a__->size_;
-    while (b__ < e__) {
-      OrgApacheLuceneIndexIndexReader *reader = *b__++;
-      jlong sub = [((OrgApacheLuceneIndexIndexReader *) nil_chk(reader)) getSumDocFreqWithNSString:field];
-      if (sub == -1) {
-        return -1;
-      }
-      total += sub;
-    }
-  }
-  return total;
-}
-
-- (jint)getDocCountWithNSString:(NSString *)field {
-  [self ensureOpen];
-  jint total = 0;
-  {
-    IOSObjectArray *a__ = subReaders_;
-    OrgApacheLuceneIndexIndexReader * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
-    OrgApacheLuceneIndexIndexReader * const *e__ = b__ + a__->size_;
-    while (b__ < e__) {
-      OrgApacheLuceneIndexIndexReader *reader = *b__++;
-      jint sub = [((OrgApacheLuceneIndexIndexReader *) nil_chk(reader)) getDocCountWithNSString:field];
-      if (sub == -1) {
-        return -1;
-      }
-      total += sub;
-    }
-  }
-  return total;
-}
-
-- (jlong)getSumTotalTermFreqWithNSString:(NSString *)field {
-  [self ensureOpen];
-  jlong total = 0;
-  {
-    IOSObjectArray *a__ = subReaders_;
-    OrgApacheLuceneIndexIndexReader * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
-    OrgApacheLuceneIndexIndexReader * const *e__ = b__ + a__->size_;
-    while (b__ < e__) {
-      OrgApacheLuceneIndexIndexReader *reader = *b__++;
-      jlong sub = [((OrgApacheLuceneIndexIndexReader *) nil_chk(reader)) getSumTotalTermFreqWithNSString:field];
-      if (sub == -1) {
-        return -1;
-      }
-      total += sub;
-    }
-  }
-  return total;
-}
-
 - (jint)readerIndexWithInt:(jint)docID {
   return OrgApacheLuceneIndexBaseCompositeReader_readerIndexWithInt_(self, docID);
-}
-
-- (jint)readerBaseWithInt:(jint)readerIndex {
-  if (readerIndex < 0 || readerIndex >= ((IOSObjectArray *) nil_chk(subReaders_))->size_) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"readerIndex must be >= 0 and < getSequentialSubReaders().size()") autorelease];
-  }
-  return IOSIntArray_Get(nil_chk(self->starts_), readerIndex);
 }
 
 - (id<JavaUtilList>)getSequentialSubReaders {
@@ -177,12 +100,7 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
     { "maxDoc", NULL, "I", 0x11, NULL, NULL },
     { "documentWithInt:withOrgApacheLuceneIndexStoredFieldVisitor:", "document", "V", 0x11, "Ljava.io.IOException;", NULL },
     { "docFreqWithOrgApacheLuceneIndexTerm:", "docFreq", "I", 0x11, "Ljava.io.IOException;", NULL },
-    { "totalTermFreqWithOrgApacheLuceneIndexTerm:", "totalTermFreq", "J", 0x11, "Ljava.io.IOException;", NULL },
-    { "getSumDocFreqWithNSString:", "getSumDocFreq", "J", 0x11, "Ljava.io.IOException;", NULL },
-    { "getDocCountWithNSString:", "getDocCount", "I", 0x11, "Ljava.io.IOException;", NULL },
-    { "getSumTotalTermFreqWithNSString:", "getSumTotalTermFreq", "J", 0x11, "Ljava.io.IOException;", NULL },
     { "readerIndexWithInt:", "readerIndex", "I", 0x14, NULL, NULL },
-    { "readerBaseWithInt:", "readerBase", "I", 0x14, NULL, NULL },
     { "getSequentialSubReaders", NULL, "Ljava.util.List;", 0x14, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -192,7 +110,7 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
     { "numDocs_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "subReadersList_", NULL, 0x12, "Ljava.util.List;", NULL, "Ljava/util/List<TR;>;", .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexBaseCompositeReader = { 2, "BaseCompositeReader", "org.apache.lucene.index", NULL, 0x401, 13, methods, 5, fields, 0, NULL, 0, NULL, NULL, "<R:Lorg/apache/lucene/index/IndexReader;>Lorg/apache/lucene/index/CompositeReader;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexBaseCompositeReader = { 2, "BaseCompositeReader", "org.apache.lucene.index", NULL, 0x401, 8, methods, 5, fields, 0, NULL, 0, NULL, NULL, "<R:Lorg/apache/lucene/index/IndexReader;>Lorg/apache/lucene/index/CompositeReader;" };
   return &_OrgApacheLuceneIndexBaseCompositeReader;
 }
 

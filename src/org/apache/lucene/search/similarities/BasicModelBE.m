@@ -4,20 +4,9 @@
 //
 
 #include "J2ObjC_source.h"
-#include "java/lang/Math.h"
-#include "org/apache/lucene/search/similarities/BasicModel.h"
 #include "org/apache/lucene/search/similarities/BasicModelBE.h"
-#include "org/apache/lucene/search/similarities/BasicStats.h"
-#include "org/apache/lucene/search/similarities/SimilarityBase.h"
 
-@interface OrgApacheLuceneSearchSimilaritiesBasicModelBE ()
-
-- (jdouble)fWithDouble:(jdouble)n
-            withDouble:(jdouble)m;
-
-@end
-
-__attribute__((unused)) static jdouble OrgApacheLuceneSearchSimilaritiesBasicModelBE_fWithDouble_withDouble_(OrgApacheLuceneSearchSimilaritiesBasicModelBE *self, jdouble n, jdouble m);
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneSearchSimilaritiesBasicModelBE
 
@@ -26,47 +15,24 @@ __attribute__((unused)) static jdouble OrgApacheLuceneSearchSimilaritiesBasicMod
   return self;
 }
 
-- (jfloat)scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
-                                                     withFloat:(jfloat)tfn {
-  jdouble F = [((OrgApacheLuceneSearchSimilaritiesBasicStats *) nil_chk(stats)) getTotalTermFreq] + 1 + tfn;
-  jdouble N = F + [stats getNumberOfDocuments];
-  return (jfloat) (-OrgApacheLuceneSearchSimilaritiesSimilarityBase_log2WithDouble_((N - 1) * JavaLangMath_E) + OrgApacheLuceneSearchSimilaritiesBasicModelBE_fWithDouble_withDouble_(self, N + F - 1, N + F - tfn - 2) - OrgApacheLuceneSearchSimilaritiesBasicModelBE_fWithDouble_withDouble_(self, F, F - tfn));
-}
-
-- (jdouble)fWithDouble:(jdouble)n
-            withDouble:(jdouble)m {
-  return OrgApacheLuceneSearchSimilaritiesBasicModelBE_fWithDouble_withDouble_(self, n, m);
-}
-
-- (NSString *)description {
-  return @"Be";
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", "BasicModelBE", NULL, 0x1, NULL, NULL },
-    { "scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:withFloat:", "score", "F", 0x11, NULL, NULL },
-    { "fWithDouble:withDouble:", "f", "D", 0x12, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesBasicModelBE = { 2, "BasicModelBE", "org.apache.lucene.search.similarities", NULL, 0x1, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesBasicModelBE = { 2, "BasicModelBE", "org.apache.lucene.search.similarities", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchSimilaritiesBasicModelBE;
 }
 
 @end
 
 void OrgApacheLuceneSearchSimilaritiesBasicModelBE_init(OrgApacheLuceneSearchSimilaritiesBasicModelBE *self) {
-  OrgApacheLuceneSearchSimilaritiesBasicModel_init(self);
+  NSObject_init(self);
 }
 
 OrgApacheLuceneSearchSimilaritiesBasicModelBE *new_OrgApacheLuceneSearchSimilaritiesBasicModelBE_init() {
   OrgApacheLuceneSearchSimilaritiesBasicModelBE *self = [OrgApacheLuceneSearchSimilaritiesBasicModelBE alloc];
   OrgApacheLuceneSearchSimilaritiesBasicModelBE_init(self);
   return self;
-}
-
-jdouble OrgApacheLuceneSearchSimilaritiesBasicModelBE_fWithDouble_withDouble_(OrgApacheLuceneSearchSimilaritiesBasicModelBE *self, jdouble n, jdouble m) {
-  return (m + 0.5) * OrgApacheLuceneSearchSimilaritiesSimilarityBase_log2WithDouble_(n / m) + (n - m) * OrgApacheLuceneSearchSimilaritiesSimilarityBase_log2WithDouble_(n);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSimilaritiesBasicModelBE)

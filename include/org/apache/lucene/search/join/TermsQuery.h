@@ -20,40 +20,19 @@
 #define OrgApacheLuceneSearchMultiTermQuery_INCLUDE 1
 #include "org/apache/lucene/search/MultiTermQuery.h"
 
-@class OrgApacheLuceneIndexTerms;
-@class OrgApacheLuceneIndexTermsEnum;
-@class OrgApacheLuceneSearchQuery;
-@class OrgApacheLuceneUtilAttributeSource;
-@class OrgApacheLuceneUtilBytesRefHash;
-
 @interface OrgApacheLuceneSearchJoinTermsQuery : OrgApacheLuceneSearchMultiTermQuery
-
-#pragma mark Public
-
-- (jboolean)isEqual:(id)obj;
-
-- (NSUInteger)hash;
-
-- (NSString *)toStringWithNSString:(NSString *)string;
-
-#pragma mark Protected
-
-- (OrgApacheLuceneIndexTermsEnum *)getTermsEnumWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms
-                                      withOrgApacheLuceneUtilAttributeSource:(OrgApacheLuceneUtilAttributeSource *)atts;
 
 #pragma mark Package-Private
 
-- (instancetype)initWithNSString:(NSString *)field
-  withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)fromQuery
-withOrgApacheLuceneUtilBytesRefHash:(OrgApacheLuceneUtilBytesRefHash *)terms;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinTermsQuery)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinTermsQuery_initWithNSString_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneUtilBytesRefHash_(OrgApacheLuceneSearchJoinTermsQuery *self, NSString *field, OrgApacheLuceneSearchQuery *fromQuery, OrgApacheLuceneUtilBytesRefHash *terms);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinTermsQuery_init(OrgApacheLuceneSearchJoinTermsQuery *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchJoinTermsQuery *new_OrgApacheLuceneSearchJoinTermsQuery_initWithNSString_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneUtilBytesRefHash_(NSString *field, OrgApacheLuceneSearchQuery *fromQuery, OrgApacheLuceneUtilBytesRefHash *terms) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchJoinTermsQuery *new_OrgApacheLuceneSearchJoinTermsQuery_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinTermsQuery)
 
@@ -66,33 +45,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinTermsQuery)
 #define OrgApacheLuceneIndexFilteredTermsEnum_INCLUDE 1
 #include "org/apache/lucene/index/FilteredTermsEnum.h"
 
-@class IOSIntArray;
-@class OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum;
-@class OrgApacheLuceneIndexTermsEnum;
-@class OrgApacheLuceneUtilBytesRef;
-@class OrgApacheLuceneUtilBytesRefHash;
-
 @interface OrgApacheLuceneSearchJoinTermsQuery_SeekingTermSetTermsEnum : OrgApacheLuceneIndexFilteredTermsEnum
-
-#pragma mark Protected
-
-- (OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum *)acceptWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term;
-
-- (OrgApacheLuceneUtilBytesRef *)nextSeekTermWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)currentTerm;
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)tenum
-                  withOrgApacheLuceneUtilBytesRefHash:(OrgApacheLuceneUtilBytesRefHash *)terms
-                                         withIntArray:(IOSIntArray *)ords;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinTermsQuery_SeekingTermSetTermsEnum)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinTermsQuery_SeekingTermSetTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilBytesRefHash_withIntArray_(OrgApacheLuceneSearchJoinTermsQuery_SeekingTermSetTermsEnum *self, OrgApacheLuceneIndexTermsEnum *tenum, OrgApacheLuceneUtilBytesRefHash *terms, IOSIntArray *ords);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinTermsQuery_SeekingTermSetTermsEnum_init(OrgApacheLuceneSearchJoinTermsQuery_SeekingTermSetTermsEnum *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchJoinTermsQuery_SeekingTermSetTermsEnum *new_OrgApacheLuceneSearchJoinTermsQuery_SeekingTermSetTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilBytesRefHash_withIntArray_(OrgApacheLuceneIndexTermsEnum *tenum, OrgApacheLuceneUtilBytesRefHash *terms, IOSIntArray *ords) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchJoinTermsQuery_SeekingTermSetTermsEnum *new_OrgApacheLuceneSearchJoinTermsQuery_SeekingTermSetTermsEnum_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinTermsQuery_SeekingTermSetTermsEnum)
 

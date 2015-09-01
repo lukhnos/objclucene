@@ -3,133 +3,35 @@
 //  source: ./core/src/java/org/apache/lucene/search/NGramPhraseQuery.java
 //
 
-#include "IOSClass.h"
-#include "IOSObjectArray.h"
-#include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
-#include "org/apache/lucene/index/IndexReader.h"
-#include "org/apache/lucene/index/Term.h"
 #include "org/apache/lucene/search/NGramPhraseQuery.h"
-#include "org/apache/lucene/search/PhraseQuery.h"
-#include "org/apache/lucene/search/Query.h"
-#include "org/lukhnos/portmobile/util/Objects.h"
 
-@interface OrgApacheLuceneSearchNGramPhraseQuery () {
- @public
-  jint n_;
-  OrgApacheLuceneSearchPhraseQuery *phraseQuery_;
-}
-
-@end
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchNGramPhraseQuery, phraseQuery_, OrgApacheLuceneSearchPhraseQuery *)
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneSearchNGramPhraseQuery
 
-- (instancetype)initWithInt:(jint)n
-withOrgApacheLuceneSearchPhraseQuery:(OrgApacheLuceneSearchPhraseQuery *)query {
-  OrgApacheLuceneSearchNGramPhraseQuery_initWithInt_withOrgApacheLuceneSearchPhraseQuery_(self, n, query);
+- (instancetype)init {
+  OrgApacheLuceneSearchNGramPhraseQuery_init(self);
   return self;
-}
-
-- (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader {
-  IOSObjectArray *terms = [((OrgApacheLuceneSearchPhraseQuery *) nil_chk(phraseQuery_)) getTerms];
-  IOSIntArray *positions = [phraseQuery_ getPositions];
-  jboolean isOptimizable = [phraseQuery_ getSlop] == 0 && n_ >= 2 && ((IOSObjectArray *) nil_chk(terms))->size_ >= 3;
-  if (isOptimizable) {
-    for (jint i = 1; i < ((IOSIntArray *) nil_chk(positions))->size_; ++i) {
-      if (IOSIntArray_Get(positions, i) != IOSIntArray_Get(positions, i - 1) + 1) {
-        isOptimizable = NO;
-        break;
-      }
-    }
-  }
-  if (isOptimizable == NO) {
-    return [phraseQuery_ rewriteWithOrgApacheLuceneIndexIndexReader:reader];
-  }
-  OrgApacheLuceneSearchPhraseQuery_Builder *builder = [new_OrgApacheLuceneSearchPhraseQuery_Builder_init() autorelease];
-  for (jint i = 0; i < ((IOSObjectArray *) nil_chk(terms))->size_; ++i) {
-    if (i % n_ == 0 || i == terms->size_ - 1) {
-      [builder addWithOrgApacheLuceneIndexTerm:IOSObjectArray_Get(terms, i) withInt:i];
-    }
-  }
-  OrgApacheLuceneSearchPhraseQuery *rewritten = [builder build];
-  [((OrgApacheLuceneSearchPhraseQuery *) nil_chk(rewritten)) setBoostWithFloat:[phraseQuery_ getBoost]];
-  return rewritten;
-}
-
-- (jboolean)isEqual:(id)o {
-  if ([super isEqual:o] == NO) {
-    return NO;
-  }
-  OrgApacheLuceneSearchNGramPhraseQuery *other = (OrgApacheLuceneSearchNGramPhraseQuery *) check_class_cast(o, [OrgApacheLuceneSearchNGramPhraseQuery class]);
-  return n_ == ((OrgApacheLuceneSearchNGramPhraseQuery *) nil_chk(other))->n_ && [((OrgApacheLuceneSearchPhraseQuery *) nil_chk(phraseQuery_)) isEqual:other->phraseQuery_];
-}
-
-- (NSUInteger)hash {
-  jint h = ((jint) [super hash]);
-  h = 31 * h + ((jint) [((OrgApacheLuceneSearchPhraseQuery *) nil_chk(phraseQuery_)) hash]);
-  h = 31 * h + n_;
-  return h;
-}
-
-- (IOSObjectArray *)getTerms {
-  return [((OrgApacheLuceneSearchPhraseQuery *) nil_chk(phraseQuery_)) getTerms];
-}
-
-- (IOSIntArray *)getPositions {
-  return [((OrgApacheLuceneSearchPhraseQuery *) nil_chk(phraseQuery_)) getPositions];
-}
-
-- (jfloat)getBoost {
-  return [((OrgApacheLuceneSearchPhraseQuery *) nil_chk(phraseQuery_)) getBoost];
-}
-
-- (void)setBoostWithFloat:(jfloat)b {
-  [((OrgApacheLuceneSearchPhraseQuery *) nil_chk(phraseQuery_)) setBoostWithFloat:b];
-}
-
-- (NSString *)toStringWithNSString:(NSString *)field {
-  return [((OrgApacheLuceneSearchPhraseQuery *) nil_chk(phraseQuery_)) toStringWithNSString:field];
-}
-
-- (void)dealloc {
-  RELEASE_(phraseQuery_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withOrgApacheLuceneSearchPhraseQuery:", "NGramPhraseQuery", NULL, 0x1, NULL, NULL },
-    { "rewriteWithOrgApacheLuceneIndexIndexReader:", "rewrite", "Lorg.apache.lucene.search.Query;", 0x1, "Ljava.io.IOException;", NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
-    { "getTerms", NULL, "[Lorg.apache.lucene.index.Term;", 0x1, NULL, NULL },
-    { "getPositions", NULL, "[I", 0x1, NULL, NULL },
-    { "getBoost", NULL, "F", 0x1, NULL, NULL },
-    { "setBoostWithFloat:", "setBoost", "V", 0x1, NULL, NULL },
-    { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "n_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "phraseQuery_", NULL, 0x12, "Lorg.apache.lucene.search.PhraseQuery;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchNGramPhraseQuery = { 2, "NGramPhraseQuery", "org.apache.lucene.search", NULL, 0x1, 9, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchNGramPhraseQuery = { 2, "NGramPhraseQuery", "org.apache.lucene.search", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchNGramPhraseQuery;
 }
 
 @end
 
-void OrgApacheLuceneSearchNGramPhraseQuery_initWithInt_withOrgApacheLuceneSearchPhraseQuery_(OrgApacheLuceneSearchNGramPhraseQuery *self, jint n, OrgApacheLuceneSearchPhraseQuery *query) {
-  OrgApacheLuceneSearchQuery_init(self);
-  self->n_ = n;
-  JreStrongAssign(&self->phraseQuery_, OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_(query));
+void OrgApacheLuceneSearchNGramPhraseQuery_init(OrgApacheLuceneSearchNGramPhraseQuery *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneSearchNGramPhraseQuery *new_OrgApacheLuceneSearchNGramPhraseQuery_initWithInt_withOrgApacheLuceneSearchPhraseQuery_(jint n, OrgApacheLuceneSearchPhraseQuery *query) {
+OrgApacheLuceneSearchNGramPhraseQuery *new_OrgApacheLuceneSearchNGramPhraseQuery_init() {
   OrgApacheLuceneSearchNGramPhraseQuery *self = [OrgApacheLuceneSearchNGramPhraseQuery alloc];
-  OrgApacheLuceneSearchNGramPhraseQuery_initWithInt_withOrgApacheLuceneSearchPhraseQuery_(self, n, query);
+  OrgApacheLuceneSearchNGramPhraseQuery_init(self);
   return self;
 }
 

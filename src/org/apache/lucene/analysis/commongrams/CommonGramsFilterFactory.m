@@ -3,109 +3,35 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/commongrams/CommonGramsFilterFactory.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
-#include "java/lang/IllegalArgumentException.h"
-#include "java/util/Map.h"
-#include "org/apache/lucene/analysis/TokenFilter.h"
-#include "org/apache/lucene/analysis/TokenStream.h"
-#include "org/apache/lucene/analysis/commongrams/CommonGramsFilter.h"
 #include "org/apache/lucene/analysis/commongrams/CommonGramsFilterFactory.h"
-#include "org/apache/lucene/analysis/core/StopAnalyzer.h"
-#include "org/apache/lucene/analysis/util/AbstractAnalysisFactory.h"
-#include "org/apache/lucene/analysis/util/CharArraySet.h"
-#include "org/apache/lucene/analysis/util/ResourceLoader.h"
-#include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
-@interface OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory () {
- @public
-  OrgApacheLuceneAnalysisUtilCharArraySet *commonWords_;
-  NSString *commonWordFiles_;
-  NSString *format_;
-  jboolean ignoreCase_;
-}
-
-@end
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory, commonWords_, OrgApacheLuceneAnalysisUtilCharArraySet *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory, commonWordFiles_, NSString *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory, format_, NSString *)
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args {
-  OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory_initWithJavaUtilMap_(self, args);
+- (instancetype)init {
+  OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory_init(self);
   return self;
-}
-
-- (void)informWithOrgApacheLuceneAnalysisUtilResourceLoader:(id<OrgApacheLuceneAnalysisUtilResourceLoader>)loader {
-  if (commonWordFiles_ != nil) {
-    if ([@"snowball" equalsIgnoreCase:format_]) {
-      JreStrongAssign(&commonWords_, [self getSnowballWordSetWithOrgApacheLuceneAnalysisUtilResourceLoader:loader withNSString:commonWordFiles_ withBoolean:ignoreCase_]);
-    }
-    else {
-      JreStrongAssign(&commonWords_, [self getWordSetWithOrgApacheLuceneAnalysisUtilResourceLoader:loader withNSString:commonWordFiles_ withBoolean:ignoreCase_]);
-    }
-  }
-  else {
-    JreStrongAssign(&commonWords_, JreLoadStatic(OrgApacheLuceneAnalysisCoreStopAnalyzer, ENGLISH_STOP_WORDS_SET_));
-  }
-}
-
-- (jboolean)isIgnoreCase {
-  return ignoreCase_;
-}
-
-- (OrgApacheLuceneAnalysisUtilCharArraySet *)getCommonWords {
-  return commonWords_;
-}
-
-- (OrgApacheLuceneAnalysisTokenFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  OrgApacheLuceneAnalysisCommongramsCommonGramsFilter *commonGrams = [new_OrgApacheLuceneAnalysisCommongramsCommonGramsFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(input, commonWords_) autorelease];
-  return commonGrams;
-}
-
-- (void)dealloc {
-  RELEASE_(commonWords_);
-  RELEASE_(commonWordFiles_);
-  RELEASE_(format_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "CommonGramsFilterFactory", NULL, 0x1, NULL, NULL },
-    { "informWithOrgApacheLuceneAnalysisUtilResourceLoader:", "inform", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "isIgnoreCase", NULL, "Z", 0x1, NULL, NULL },
-    { "getCommonWords", NULL, "Lorg.apache.lucene.analysis.util.CharArraySet;", 0x1, NULL, NULL },
-    { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.TokenFilter;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "commonWords_", NULL, 0x2, "Lorg.apache.lucene.analysis.util.CharArraySet;", NULL, NULL, .constantValue.asLong = 0 },
-    { "commonWordFiles_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "format_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "ignoreCase_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory = { 2, "CommonGramsFilterFactory", "org.apache.lucene.analysis.commongrams", NULL, 0x1, 5, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory = { 2, "CommonGramsFilterFactory", "org.apache.lucene.analysis.commongrams", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory;
 }
 
 @end
 
-void OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory *self, id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
-  JreStrongAssign(&self->commonWordFiles_, [self getWithJavaUtilMap:args withNSString:@"words"]);
-  JreStrongAssign(&self->format_, [self getWithJavaUtilMap:args withNSString:@"format"]);
-  self->ignoreCase_ = [self getBooleanWithJavaUtilMap:args withNSString:@"ignoreCase" withBoolean:NO];
-  if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
-  }
+void OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory_init(OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory *new_OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory *new_OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory_init() {
   OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory *self = [OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory alloc];
-  OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory_initWithJavaUtilMap_(self, args);
+  OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory_init(self);
   return self;
 }
 

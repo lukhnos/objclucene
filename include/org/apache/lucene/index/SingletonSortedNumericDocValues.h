@@ -32,10 +32,6 @@
 
 - (jint)count;
 
-- (id<OrgApacheLuceneUtilBits>)getDocsWithField;
-
-- (OrgApacheLuceneIndexNumericDocValues *)getNumericDocValues;
-
 - (void)setDocumentWithInt:(jint)doc;
 
 - (jlong)valueAtWithInt:(jint)index;

@@ -23,7 +23,6 @@
 @class IOSByteArray;
 @class JavaUtilArrayList;
 @class OrgApacheLuceneStoreRAMDirectory;
-@protocol JavaUtilCollection;
 
 @interface OrgApacheLuceneStoreRAMFile : NSObject < OrgApacheLuceneUtilAccountable > {
  @public
@@ -38,8 +37,6 @@
 - (instancetype)init;
 
 - (jboolean)isEqual:(id)obj;
-
-- (id<JavaUtilCollection>)getChildResources;
 
 - (jlong)getLength;
 

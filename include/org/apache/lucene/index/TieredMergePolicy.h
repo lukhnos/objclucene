@@ -36,9 +36,6 @@
 
 - (instancetype)init;
 
-- (OrgApacheLuceneIndexMergePolicy_MergeSpecification *)findForcedDeletesMergesWithOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)infos
-                                                                                withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer;
-
 - (OrgApacheLuceneIndexMergePolicy_MergeSpecification *)findForcedMergesWithOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)infos
                                                                                                      withInt:(jint)maxSegmentCount
                                                                                              withJavaUtilMap:(id<JavaUtilMap>)segmentsToMerge
@@ -47,34 +44,6 @@
 - (OrgApacheLuceneIndexMergePolicy_MergeSpecification *)findMergesWithOrgApacheLuceneIndexMergeTriggerEnum:(OrgApacheLuceneIndexMergeTriggerEnum *)mergeTrigger
                                                                       withOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)infos
                                                                        withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer;
-
-- (jdouble)getFloorSegmentMB;
-
-- (jdouble)getForceMergeDeletesPctAllowed;
-
-- (jint)getMaxMergeAtOnce;
-
-- (jint)getMaxMergeAtOnceExplicit;
-
-- (jdouble)getMaxMergedSegmentMB;
-
-- (jdouble)getReclaimDeletesWeight;
-
-- (jdouble)getSegmentsPerTier;
-
-- (OrgApacheLuceneIndexTieredMergePolicy *)setFloorSegmentMBWithDouble:(jdouble)v;
-
-- (OrgApacheLuceneIndexTieredMergePolicy *)setForceMergeDeletesPctAllowedWithDouble:(jdouble)v;
-
-- (OrgApacheLuceneIndexTieredMergePolicy *)setMaxMergeAtOnceWithInt:(jint)v;
-
-- (OrgApacheLuceneIndexTieredMergePolicy *)setMaxMergeAtOnceExplicitWithInt:(jint)v;
-
-- (OrgApacheLuceneIndexTieredMergePolicy *)setMaxMergedSegmentMBWithDouble:(jdouble)v;
-
-- (OrgApacheLuceneIndexTieredMergePolicy *)setReclaimDeletesWeightWithDouble:(jdouble)v;
-
-- (OrgApacheLuceneIndexTieredMergePolicy *)setSegmentsPerTierWithDouble:(jdouble)v;
 
 - (NSString *)description;
 

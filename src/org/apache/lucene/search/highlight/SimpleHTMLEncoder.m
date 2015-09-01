@@ -4,8 +4,9 @@
 //
 
 #include "J2ObjC_source.h"
-#include "java/lang/StringBuilder.h"
 #include "org/apache/lucene/search/highlight/SimpleHTMLEncoder.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneSearchHighlightSimpleHTMLEncoder
 
@@ -14,21 +15,11 @@
   return self;
 }
 
-- (NSString *)encodeTextWithNSString:(NSString *)originalText {
-  return OrgApacheLuceneSearchHighlightSimpleHTMLEncoder_htmlEncodeWithNSString_(originalText);
-}
-
-+ (NSString *)htmlEncodeWithNSString:(NSString *)plainText {
-  return OrgApacheLuceneSearchHighlightSimpleHTMLEncoder_htmlEncodeWithNSString_(plainText);
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", "SimpleHTMLEncoder", NULL, 0x1, NULL, NULL },
-    { "encodeTextWithNSString:", "encodeText", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "htmlEncodeWithNSString:", "htmlEncode", "Ljava.lang.String;", 0x19, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightSimpleHTMLEncoder = { 2, "SimpleHTMLEncoder", "org.apache.lucene.search.highlight", NULL, 0x1, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightSimpleHTMLEncoder = { 2, "SimpleHTMLEncoder", "org.apache.lucene.search.highlight", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchHighlightSimpleHTMLEncoder;
 }
 
@@ -42,40 +33,6 @@ OrgApacheLuceneSearchHighlightSimpleHTMLEncoder *new_OrgApacheLuceneSearchHighli
   OrgApacheLuceneSearchHighlightSimpleHTMLEncoder *self = [OrgApacheLuceneSearchHighlightSimpleHTMLEncoder alloc];
   OrgApacheLuceneSearchHighlightSimpleHTMLEncoder_init(self);
   return self;
-}
-
-NSString *OrgApacheLuceneSearchHighlightSimpleHTMLEncoder_htmlEncodeWithNSString_(NSString *plainText) {
-  OrgApacheLuceneSearchHighlightSimpleHTMLEncoder_initialize();
-  if (plainText == nil || ((jint) [plainText length]) == 0) {
-    return @"";
-  }
-  JavaLangStringBuilder *result = [new_JavaLangStringBuilder_initWithInt_(((jint) [((NSString *) nil_chk(plainText)) length])) autorelease];
-  for (jint index = 0; index < ((jint) [plainText length]); index++) {
-    jchar ch = [plainText charAtWithInt:index];
-    switch (ch) {
-      case '"':
-      [result appendWithNSString:@"&quot;"];
-      break;
-      case '&':
-      [result appendWithNSString:@"&amp;"];
-      break;
-      case '<':
-      [result appendWithNSString:@"&lt;"];
-      break;
-      case '>':
-      [result appendWithNSString:@"&gt;"];
-      break;
-      case '\'':
-      [result appendWithNSString:@"&#x27;"];
-      break;
-      case '/':
-      [result appendWithNSString:@"&#x2F;"];
-      break;
-      default:
-      [result appendWithChar:ch];
-    }
-  }
-  return [result description];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchHighlightSimpleHTMLEncoder)

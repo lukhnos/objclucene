@@ -7,12 +7,6 @@
 #include "J2ObjC_source.h"
 #include "java/lang/Deprecated.h"
 #include "java/lang/IllegalArgumentException.h"
-#include "java/lang/Integer.h"
-#include "java/lang/NumberFormatException.h"
-#include "java/lang/Throwable.h"
-#include "java/text/ParseException.h"
-#include "java/util/Locale.h"
-#include "org/apache/lucene/util/StrictStringTokenizer.h"
 #include "org/apache/lucene/util/Version.h"
 
 @interface OrgApacheLuceneUtilVersion () {
@@ -89,14 +83,6 @@ OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_8_;
 OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_9_;
 
 @implementation OrgApacheLuceneUtilVersion
-
-+ (OrgApacheLuceneUtilVersion *)parseWithNSString:(NSString *)version_ {
-  return OrgApacheLuceneUtilVersion_parseWithNSString_(version_);
-}
-
-+ (OrgApacheLuceneUtilVersion *)parseLenientlyWithNSString:(NSString *)version_ {
-  return OrgApacheLuceneUtilVersion_parseLenientlyWithNSString_(version_);
-}
 
 + (OrgApacheLuceneUtilVersion *)fromBitsWithInt:(jint)major
                                         withInt:(jint)minor
@@ -352,8 +338,6 @@ OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_9_;
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "parseWithNSString:", "parse", "Lorg.apache.lucene.util.Version;", 0x9, "Ljava.text.ParseException;", NULL },
-    { "parseLenientlyWithNSString:", "parseLeniently", "Lorg.apache.lucene.util.Version;", 0x9, "Ljava.text.ParseException;", NULL },
     { "fromBitsWithInt:withInt:withInt:", "fromBits", "Lorg.apache.lucene.util.Version;", 0x9, NULL, NULL },
     { "initWithInt:withInt:withInt:", "Version", NULL, 0x2, NULL, NULL },
     { "initWithInt:withInt:withInt:withInt:", "Version", NULL, 0x2, NULL, NULL },
@@ -412,111 +396,11 @@ OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_9_;
     { "prerelease_", NULL, 0x11, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "encodedValue_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilVersion = { 2, "Version", "org.apache.lucene.util", NULL, 0x11, 10, methods, 47, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilVersion = { 2, "Version", "org.apache.lucene.util", NULL, 0x11, 8, methods, 47, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilVersion;
 }
 
 @end
-
-OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_parseWithNSString_(NSString *version_) {
-  OrgApacheLuceneUtilVersion_initialize();
-  OrgApacheLuceneUtilStrictStringTokenizer *tokens = [new_OrgApacheLuceneUtilStrictStringTokenizer_initWithNSString_withChar_(version_, '.') autorelease];
-  if ([tokens hasMoreTokens] == NO) {
-    @throw [new_JavaTextParseException_initWithNSString_withInt_(JreStrcat("$$C", @"Version is not in form major.minor.bugfix(.prerelease) (got: ", version_, ')'), 0) autorelease];
-  }
-  jint major;
-  NSString *token = [tokens nextToken];
-  @try {
-    major = JavaLangInteger_parseIntWithNSString_(token);
-  }
-  @catch (JavaLangNumberFormatException *nfe) {
-    JavaTextParseException *p = [new_JavaTextParseException_initWithNSString_withInt_(JreStrcat("$$$$C", @"Failed to parse major version from \"", token, @"\" (got: ", version_, ')'), 0) autorelease];
-    [p initCauseWithJavaLangThrowable:nfe];
-    @throw p;
-  }
-  if ([tokens hasMoreTokens] == NO) {
-    @throw [new_JavaTextParseException_initWithNSString_withInt_(JreStrcat("$$C", @"Version is not in form major.minor.bugfix(.prerelease) (got: ", version_, ')'), 0) autorelease];
-  }
-  jint minor;
-  token = [tokens nextToken];
-  @try {
-    minor = JavaLangInteger_parseIntWithNSString_(token);
-  }
-  @catch (JavaLangNumberFormatException *nfe) {
-    JavaTextParseException *p = [new_JavaTextParseException_initWithNSString_withInt_(JreStrcat("$$$$C", @"Failed to parse minor version from \"", token, @"\" (got: ", version_, ')'), 0) autorelease];
-    [p initCauseWithJavaLangThrowable:nfe];
-    @throw p;
-  }
-  jint bugfix = 0;
-  jint prerelease = 0;
-  if ([tokens hasMoreTokens]) {
-    token = [tokens nextToken];
-    @try {
-      bugfix = JavaLangInteger_parseIntWithNSString_(token);
-    }
-    @catch (JavaLangNumberFormatException *nfe) {
-      JavaTextParseException *p = [new_JavaTextParseException_initWithNSString_withInt_(JreStrcat("$$$$C", @"Failed to parse bugfix version from \"", token, @"\" (got: ", version_, ')'), 0) autorelease];
-      [p initCauseWithJavaLangThrowable:nfe];
-      @throw p;
-    }
-    if ([tokens hasMoreTokens]) {
-      token = [tokens nextToken];
-      @try {
-        prerelease = JavaLangInteger_parseIntWithNSString_(token);
-      }
-      @catch (JavaLangNumberFormatException *nfe) {
-        JavaTextParseException *p = [new_JavaTextParseException_initWithNSString_withInt_(JreStrcat("$$$$C", @"Failed to parse prerelease version from \"", token, @"\" (got: ", version_, ')'), 0) autorelease];
-        [p initCauseWithJavaLangThrowable:nfe];
-        @throw p;
-      }
-      if (prerelease == 0) {
-        @throw [new_JavaTextParseException_initWithNSString_withInt_(JreStrcat("$I$$C", @"Invalid value ", prerelease, @" for prerelease; should be 1 or 2 (got: ", version_, ')'), 0) autorelease];
-      }
-      if ([tokens hasMoreTokens]) {
-        @throw [new_JavaTextParseException_initWithNSString_withInt_(JreStrcat("$$C", @"Version is not in form major.minor.bugfix(.prerelease) (got: ", version_, ')'), 0) autorelease];
-      }
-    }
-  }
-  @try {
-    return [new_OrgApacheLuceneUtilVersion_initWithInt_withInt_withInt_withInt_(major, minor, bugfix, prerelease) autorelease];
-  }
-  @catch (JavaLangIllegalArgumentException *iae) {
-    JavaTextParseException *pe = [new_JavaTextParseException_initWithNSString_withInt_(JreStrcat("$$$$", @"failed to parse version string \"", version_, @"\": ", [((JavaLangIllegalArgumentException *) nil_chk(iae)) getMessage]), 0) autorelease];
-    [pe initCauseWithJavaLangThrowable:iae];
-    @throw pe;
-  }
-}
-
-OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_parseLenientlyWithNSString_(NSString *version_) {
-  OrgApacheLuceneUtilVersion_initialize();
-  NSString *versionOrig = version_;
-  version_ = [((NSString *) nil_chk(version_)) uppercaseStringWithJRELocale:JreLoadStatic(JavaUtilLocale, ROOT_)];
-  {
-    NSArray *__caseValues = [NSArray arrayWithObjects:@"LATEST", @"LUCENE_CURRENT", @"LUCENE_4_0_0", @"LUCENE_4_0_0_ALPHA", @"LUCENE_4_0_0_BETA", nil];
-    NSUInteger __index = [__caseValues indexOfObject:version_];
-    switch (__index) {
-      case 0:
-      case 1:
-      return OrgApacheLuceneUtilVersion_LATEST_;
-      case 2:
-      return OrgApacheLuceneUtilVersion_LUCENE_4_0_0_;
-      case 3:
-      return OrgApacheLuceneUtilVersion_LUCENE_4_0_0_ALPHA_;
-      case 4:
-      return OrgApacheLuceneUtilVersion_LUCENE_4_0_0_BETA_;
-      default:
-      version_ = [((NSString *) nil_chk([((NSString *) nil_chk([((NSString *) nil_chk(version_)) replaceFirst:@"^LUCENE_(\\d+)_(\\d+)_(\\d+)$" withReplacement:@"$1.$2.$3"])) replaceFirst:@"^LUCENE_(\\d+)_(\\d+)$" withReplacement:@"$1.$2.0"])) replaceFirst:@"^LUCENE_(\\d)(\\d)$" withReplacement:@"$1.$2.0"];
-      @try {
-        return OrgApacheLuceneUtilVersion_parseWithNSString_(version_);
-      }
-      @catch (JavaTextParseException *pe) {
-        JavaTextParseException *pe2 = [new_JavaTextParseException_initWithNSString_withInt_(JreStrcat("$$$$", @"failed to parse lenient version string \"", versionOrig, @"\": ", [((JavaTextParseException *) nil_chk(pe)) getMessage]), 0) autorelease];
-        [pe2 initCauseWithJavaLangThrowable:pe];
-        @throw pe2;
-      }
-    }
-  }
-}
 
 OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_fromBitsWithInt_withInt_withInt_(jint major, jint minor, jint bugfix) {
   OrgApacheLuceneUtilVersion_initialize();

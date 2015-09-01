@@ -20,46 +20,19 @@
 #define OrgApacheLuceneSearchReferenceManager_INCLUDE 1
 #include "org/apache/lucene/search/ReferenceManager.h"
 
-@class OrgApacheLuceneIndexDirectoryReader;
-@class OrgApacheLuceneIndexIndexWriter;
-@class OrgApacheLuceneStoreDirectory;
-
 @interface OrgApacheLuceneIndexReaderManager : OrgApacheLuceneSearchReferenceManager
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir;
-
-- (instancetype)initWithOrgApacheLuceneIndexDirectoryReader:(OrgApacheLuceneIndexDirectoryReader *)reader;
-
-- (instancetype)initWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer
-                                            withBoolean:(jboolean)applyAllDeletes;
-
-#pragma mark Protected
-
-- (void)decRefWithId:(OrgApacheLuceneIndexDirectoryReader *)reference;
-
-- (jint)getRefCountWithId:(OrgApacheLuceneIndexDirectoryReader *)reference;
-
-- (OrgApacheLuceneIndexDirectoryReader *)refreshIfNeededWithId:(OrgApacheLuceneIndexDirectoryReader *)referenceToRefresh;
-
-- (jboolean)tryIncRefWithId:(OrgApacheLuceneIndexDirectoryReader *)reference;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexReaderManager)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexReaderManager_initWithOrgApacheLuceneIndexIndexWriter_withBoolean_(OrgApacheLuceneIndexReaderManager *self, OrgApacheLuceneIndexIndexWriter *writer, jboolean applyAllDeletes);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexReaderManager_init(OrgApacheLuceneIndexReaderManager *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexReaderManager *new_OrgApacheLuceneIndexReaderManager_initWithOrgApacheLuceneIndexIndexWriter_withBoolean_(OrgApacheLuceneIndexIndexWriter *writer, jboolean applyAllDeletes) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneIndexReaderManager_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexReaderManager *self, OrgApacheLuceneStoreDirectory *dir);
-
-FOUNDATION_EXPORT OrgApacheLuceneIndexReaderManager *new_OrgApacheLuceneIndexReaderManager_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *dir) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneIndexReaderManager_initWithOrgApacheLuceneIndexDirectoryReader_(OrgApacheLuceneIndexReaderManager *self, OrgApacheLuceneIndexDirectoryReader *reader);
-
-FOUNDATION_EXPORT OrgApacheLuceneIndexReaderManager *new_OrgApacheLuceneIndexReaderManager_initWithOrgApacheLuceneIndexDirectoryReader_(OrgApacheLuceneIndexDirectoryReader *reader) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexReaderManager *new_OrgApacheLuceneIndexReaderManager_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexReaderManager)
 

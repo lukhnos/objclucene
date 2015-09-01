@@ -83,10 +83,6 @@ __attribute__((unused)) static OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatu
   @throw [new_JavaLangUnsupportedOperationException_initWithNSString_(JreStrcat("$$", [[self getClass] getName], @" does not support seeking")) autorelease];
 }
 
-- (void)seekExactWithLong:(jlong)ord {
-  @throw [new_JavaLangUnsupportedOperationException_initWithNSString_(JreStrcat("$$", [[self getClass] getName], @" does not support seeking")) autorelease];
-}
-
 - (jlong)ord {
   return [((OrgApacheLuceneIndexTermsEnum *) nil_chk(tenum_)) ord];
 }
@@ -157,7 +153,6 @@ __attribute__((unused)) static OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatu
     { "totalTermFreq", NULL, "J", 0x1, "Ljava.io.IOException;", NULL },
     { "seekExactWithOrgApacheLuceneUtilBytesRef:", "seekExact", "Z", 0x1, "Ljava.io.IOException;", NULL },
     { "seekCeilWithOrgApacheLuceneUtilBytesRef:", "seekCeil", "Lorg.apache.lucene.index.TermsEnum$SeekStatus;", 0x1, "Ljava.io.IOException;", NULL },
-    { "seekExactWithLong:", "seekExact", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "ord", NULL, "J", 0x1, "Ljava.io.IOException;", NULL },
     { "postingsWithOrgApacheLuceneIndexPostingsEnum:withInt:", "postings", "Lorg.apache.lucene.index.PostingsEnum;", 0x1, "Ljava.io.IOException;", NULL },
     { "seekExactWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneIndexTermState:", "seekExact", "V", 0x1, "Ljava.io.IOException;", NULL },
@@ -171,7 +166,7 @@ __attribute__((unused)) static OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatu
     { "tenum_", NULL, 0x14, "Lorg.apache.lucene.index.TermsEnum;", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.index.FilteredTermsEnum$AcceptStatus;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexFilteredTermsEnum = { 2, "FilteredTermsEnum", "org.apache.lucene.index", NULL, 0x401, 17, methods, 4, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexFilteredTermsEnum = { 2, "FilteredTermsEnum", "org.apache.lucene.index", NULL, 0x401, 16, methods, 4, fields, 0, NULL, 1, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneIndexFilteredTermsEnum;
 }
 

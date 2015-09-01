@@ -22,13 +22,9 @@
 
 - (instancetype)init;
 
-#pragma mark Protected
-
-- (NSString *)stemWithNSString:(NSString *)term;
-
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisDeGermanStemmer)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisDeGermanStemmer)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisDeGermanStemmer_init(OrgApacheLuceneAnalysisDeGermanStemmer *self);
 

@@ -4,9 +4,9 @@
 //
 
 #include "J2ObjC_source.h"
-#include "org/apache/lucene/search/Explanation.h"
-#include "org/apache/lucene/search/similarities/BasicStats.h"
 #include "org/apache/lucene/search/similarities/Lambda.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneSearchSimilaritiesLambda
 
@@ -15,32 +15,11 @@
   return self;
 }
 
-- (jfloat)lambdaWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats {
-  // can't call an abstract method
-  [self doesNotRecognizeSelector:_cmd];
-  return 0;
-}
-
-- (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats {
-  // can't call an abstract method
-  [self doesNotRecognizeSelector:_cmd];
-  return 0;
-}
-
-- (NSString *)description {
-  // can't call an abstract method
-  [self doesNotRecognizeSelector:_cmd];
-  return 0;
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", "Lambda", NULL, 0x1, NULL, NULL },
-    { "lambdaWithOrgApacheLuceneSearchSimilaritiesBasicStats:", "lambda", "F", 0x401, NULL, NULL },
-    { "explainWithOrgApacheLuceneSearchSimilaritiesBasicStats:", "explain", "Lorg.apache.lucene.search.Explanation;", 0x401, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x401, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesLambda = { 2, "Lambda", "org.apache.lucene.search.similarities", NULL, 0x401, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesLambda = { 2, "Lambda", "org.apache.lucene.search.similarities", NULL, 0x401, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchSimilaritiesLambda;
 }
 

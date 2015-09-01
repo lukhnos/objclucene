@@ -20,75 +20,16 @@
 #define OrgApacheLuceneIndexMergePolicy_INCLUDE 1
 #include "org/apache/lucene/index/MergePolicy.h"
 
-@class OrgApacheLuceneIndexIndexWriter;
-@class OrgApacheLuceneIndexMergePolicy_MergeSpecification;
-@class OrgApacheLuceneIndexMergeTriggerEnum;
-@class OrgApacheLuceneIndexSegmentCommitInfo;
-@class OrgApacheLuceneIndexSegmentInfos;
-@protocol JavaUtilMap;
-
 #define OrgApacheLuceneIndexLogMergePolicy_LEVEL_LOG_SPAN 0.75
 #define OrgApacheLuceneIndexLogMergePolicy_DEFAULT_MERGE_FACTOR 10
 #define OrgApacheLuceneIndexLogMergePolicy_DEFAULT_MAX_MERGE_DOCS 2147483647
 #define OrgApacheLuceneIndexLogMergePolicy_DEFAULT_NO_CFS_RATIO 0.1
 
-@interface OrgApacheLuceneIndexLogMergePolicy : OrgApacheLuceneIndexMergePolicy {
- @public
-  jint mergeFactor_;
-  jlong minMergeSize_;
-  jlong maxMergeSize_;
-  jlong maxMergeSizeForForcedMerge_;
-  jint maxMergeDocs_;
-  jboolean calibrateSizeByDeletes_;
-}
+@interface OrgApacheLuceneIndexLogMergePolicy : OrgApacheLuceneIndexMergePolicy
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (OrgApacheLuceneIndexMergePolicy_MergeSpecification *)findForcedDeletesMergesWithOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)segmentInfos
-                                                                                withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer;
-
-- (OrgApacheLuceneIndexMergePolicy_MergeSpecification *)findForcedMergesWithOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)infos
-                                                                                                     withInt:(jint)maxNumSegments
-                                                                                             withJavaUtilMap:(id<JavaUtilMap>)segmentsToMerge
-                                                                         withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer;
-
-- (OrgApacheLuceneIndexMergePolicy_MergeSpecification *)findMergesWithOrgApacheLuceneIndexMergeTriggerEnum:(OrgApacheLuceneIndexMergeTriggerEnum *)mergeTrigger
-                                                                      withOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)infos
-                                                                       withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer;
-
-- (jboolean)getCalibrateSizeByDeletes;
-
-- (jint)getMaxMergeDocs;
-
-- (jint)getMergeFactor;
-
-- (void)setCalibrateSizeByDeletesWithBoolean:(jboolean)calibrateSizeByDeletes;
-
-- (void)setMaxMergeDocsWithInt:(jint)maxMergeDocs;
-
-- (void)setMergeFactorWithInt:(jint)mergeFactor;
-
-- (NSString *)description;
-
-#pragma mark Protected
-
-- (jboolean)isMergedWithOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)infos
-                                                 withInt:(jint)maxNumSegments
-                                         withJavaUtilMap:(id<JavaUtilMap>)segmentsToMerge
-                     withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer;
-
-- (void)messageWithNSString:(NSString *)message
-withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer;
-
-- (jlong)sizeBytesWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)info
-                        withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer;
-
-- (jlong)sizeDocsWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)info
-                       withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer;
-
-- (jboolean)verboseWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer;
 
 @end
 

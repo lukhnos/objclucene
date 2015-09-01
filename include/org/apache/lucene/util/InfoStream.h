@@ -33,8 +33,6 @@
 - (void)messageWithNSString:(NSString *)component
                withNSString:(NSString *)message;
 
-+ (void)setDefaultWithOrgApacheLuceneUtilInfoStream:(OrgApacheLuceneUtilInfoStream *)infoStream;
-
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneUtilInfoStream)
@@ -43,8 +41,6 @@ FOUNDATION_EXPORT OrgApacheLuceneUtilInfoStream *OrgApacheLuceneUtilInfoStream_N
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilInfoStream, NO_OUTPUT_, OrgApacheLuceneUtilInfoStream *)
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilInfoStream *OrgApacheLuceneUtilInfoStream_getDefault();
-
-FOUNDATION_EXPORT void OrgApacheLuceneUtilInfoStream_setDefaultWithOrgApacheLuceneUtilInfoStream_(OrgApacheLuceneUtilInfoStream *infoStream);
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilInfoStream_init(OrgApacheLuceneUtilInfoStream *self);
 

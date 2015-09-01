@@ -23,7 +23,6 @@
 @class OrgApacheLuceneSearchDisiWrapper;
 @class OrgApacheLuceneSearchTwoPhaseIterator;
 @class OrgApacheLuceneSearchWeight;
-@protocol JavaUtilCollection;
 @protocol JavaUtilList;
 
 @interface OrgApacheLuceneSearchDisjunctionScorer : OrgApacheLuceneSearchScorer
@@ -39,8 +38,6 @@
 - (jint)docID;
 
 - (jint)freq;
-
-- (id<JavaUtilCollection>)getChildren;
 
 - (jint)nextDoc;
 

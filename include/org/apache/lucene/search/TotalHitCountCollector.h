@@ -26,12 +26,6 @@
 
 - (instancetype)init;
 
-- (void)collectWithInt:(jint)doc;
-
-- (jint)getTotalHits;
-
-- (jboolean)needsScores;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchTotalHitCountCollector)

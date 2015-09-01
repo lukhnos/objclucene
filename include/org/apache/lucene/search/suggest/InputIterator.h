@@ -23,20 +23,7 @@
 #define OrgApacheLuceneUtilBytesRefIterator_INCLUDE 1
 #include "org/apache/lucene/util/BytesRefIterator.h"
 
-@class OrgApacheLuceneUtilBytesRef;
-@protocol JavaUtilSet;
-
 @protocol OrgApacheLuceneSearchSuggestInputIterator < OrgApacheLuceneUtilBytesRefIterator, NSObject, JavaObject >
-
-- (jlong)weight;
-
-- (OrgApacheLuceneUtilBytesRef *)payload;
-
-- (jboolean)hasPayloads;
-
-- (id<JavaUtilSet>)contexts;
-
-- (jboolean)hasContexts;
 
 @end
 
@@ -57,7 +44,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestInputIterator)
 #define _OrgApacheLuceneSearchSuggestInputIterator_InputIteratorWrapper_
 
 @class OrgApacheLuceneUtilBytesRef;
-@protocol JavaUtilSet;
 @protocol OrgApacheLuceneUtilBytesRefIterator;
 
 @interface OrgApacheLuceneSearchSuggestInputIterator_InputIteratorWrapper : NSObject < OrgApacheLuceneSearchSuggestInputIterator >
@@ -66,17 +52,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestInputIterator)
 
 - (instancetype)initWithOrgApacheLuceneUtilBytesRefIterator:(id<OrgApacheLuceneUtilBytesRefIterator>)wrapped;
 
-- (id<JavaUtilSet>)contexts;
-
-- (jboolean)hasContexts;
-
-- (jboolean)hasPayloads;
-
 - (OrgApacheLuceneUtilBytesRef *)next;
-
-- (OrgApacheLuceneUtilBytesRef *)payload;
-
-- (jlong)weight;
 
 @end
 

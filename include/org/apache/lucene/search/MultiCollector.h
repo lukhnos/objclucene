@@ -20,30 +20,19 @@
 #define OrgApacheLuceneSearchCollector_INCLUDE 1
 #include "org/apache/lucene/search/Collector.h"
 
-@class IOSObjectArray;
-@class OrgApacheLuceneIndexLeafReaderContext;
-@protocol JavaLangIterable;
-@protocol OrgApacheLuceneSearchLeafCollector;
-
 @interface OrgApacheLuceneSearchMultiCollector : NSObject < OrgApacheLuceneSearchCollector >
 
 #pragma mark Public
 
-- (id<OrgApacheLuceneSearchLeafCollector>)getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
-
-- (jboolean)needsScores;
-
-+ (id<OrgApacheLuceneSearchCollector>)wrapWithOrgApacheLuceneSearchCollectorArray:(IOSObjectArray *)collectors;
-
-+ (id<OrgApacheLuceneSearchCollector>)wrapWithJavaLangIterable:(id<JavaLangIterable>)collectors;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchMultiCollector)
 
-FOUNDATION_EXPORT id<OrgApacheLuceneSearchCollector> OrgApacheLuceneSearchMultiCollector_wrapWithOrgApacheLuceneSearchCollectorArray_(IOSObjectArray *collectors);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchMultiCollector_init(OrgApacheLuceneSearchMultiCollector *self);
 
-FOUNDATION_EXPORT id<OrgApacheLuceneSearchCollector> OrgApacheLuceneSearchMultiCollector_wrapWithJavaLangIterable_(id<JavaLangIterable> collectors);
+FOUNDATION_EXPORT OrgApacheLuceneSearchMultiCollector *new_OrgApacheLuceneSearchMultiCollector_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMultiCollector)
 

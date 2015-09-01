@@ -3,10 +3,10 @@
 //  source: ./sandbox/src/java/org/apache/lucene/rangetree/SliceReader.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/rangetree/SliceReader.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @interface OrgApacheLuceneRangetreeSliceReader : NSObject
 
@@ -15,13 +15,7 @@
 @implementation OrgApacheLuceneRangetreeSliceReader
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "next", NULL, "Z", 0x401, "Ljava.io.IOException;", NULL },
-    { "value", NULL, "J", 0x401, NULL, NULL },
-    { "ord", NULL, "J", 0x401, NULL, NULL },
-    { "docID", NULL, "I", 0x401, NULL, NULL },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneRangetreeSliceReader = { 2, "SliceReader", "org.apache.lucene.rangetree", NULL, 0x608, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneRangetreeSliceReader = { 2, "SliceReader", "org.apache.lucene.rangetree", NULL, 0x608, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneRangetreeSliceReader;
 }
 

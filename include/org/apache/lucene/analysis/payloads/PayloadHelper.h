@@ -16,51 +16,15 @@
 #if !defined (_OrgApacheLuceneAnalysisPayloadsPayloadHelper_) && (OrgApacheLuceneAnalysisPayloadsPayloadHelper_INCLUDE_ALL || OrgApacheLuceneAnalysisPayloadsPayloadHelper_INCLUDE)
 #define _OrgApacheLuceneAnalysisPayloadsPayloadHelper_
 
-@class IOSByteArray;
-
 @interface OrgApacheLuceneAnalysisPayloadsPayloadHelper : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
-+ (jfloat)decodeFloatWithByteArray:(IOSByteArray *)bytes;
-
-+ (jfloat)decodeFloatWithByteArray:(IOSByteArray *)bytes
-                           withInt:(jint)offset;
-
-+ (jint)decodeIntWithByteArray:(IOSByteArray *)bytes
-                       withInt:(jint)offset;
-
-+ (IOSByteArray *)encodeFloatWithFloat:(jfloat)payload;
-
-+ (IOSByteArray *)encodeFloatWithFloat:(jfloat)payload
-                         withByteArray:(IOSByteArray *)data
-                               withInt:(jint)offset;
-
-+ (IOSByteArray *)encodeIntWithInt:(jint)payload;
-
-+ (IOSByteArray *)encodeIntWithInt:(jint)payload
-                     withByteArray:(IOSByteArray *)data
-                           withInt:(jint)offset;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisPayloadsPayloadHelper)
-
-FOUNDATION_EXPORT IOSByteArray *OrgApacheLuceneAnalysisPayloadsPayloadHelper_encodeFloatWithFloat_(jfloat payload);
-
-FOUNDATION_EXPORT IOSByteArray *OrgApacheLuceneAnalysisPayloadsPayloadHelper_encodeFloatWithFloat_withByteArray_withInt_(jfloat payload, IOSByteArray *data, jint offset);
-
-FOUNDATION_EXPORT IOSByteArray *OrgApacheLuceneAnalysisPayloadsPayloadHelper_encodeIntWithInt_(jint payload);
-
-FOUNDATION_EXPORT IOSByteArray *OrgApacheLuceneAnalysisPayloadsPayloadHelper_encodeIntWithInt_withByteArray_withInt_(jint payload, IOSByteArray *data, jint offset);
-
-FOUNDATION_EXPORT jfloat OrgApacheLuceneAnalysisPayloadsPayloadHelper_decodeFloatWithByteArray_(IOSByteArray *bytes);
-
-FOUNDATION_EXPORT jfloat OrgApacheLuceneAnalysisPayloadsPayloadHelper_decodeFloatWithByteArray_withInt_(IOSByteArray *bytes, jint offset);
-
-FOUNDATION_EXPORT jint OrgApacheLuceneAnalysisPayloadsPayloadHelper_decodeIntWithByteArray_withInt_(IOSByteArray *bytes, jint offset);
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPayloadsPayloadHelper_init(OrgApacheLuceneAnalysisPayloadsPayloadHelper *self);
 

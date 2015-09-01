@@ -20,24 +20,19 @@
 #define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
-@class OrgApacheLuceneAnalysisTokenStream;
-@protocol JavaUtilMap;
-
 @interface OrgApacheLuceneAnalysisEsSpanishLightStemFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
-
-- (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisEsSpanishLightStemFilterFactory)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisEsSpanishLightStemFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisEsSpanishLightStemFilterFactory *self, id<JavaUtilMap> args);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisEsSpanishLightStemFilterFactory_init(OrgApacheLuceneAnalysisEsSpanishLightStemFilterFactory *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisEsSpanishLightStemFilterFactory *new_OrgApacheLuceneAnalysisEsSpanishLightStemFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisEsSpanishLightStemFilterFactory *new_OrgApacheLuceneAnalysisEsSpanishLightStemFilterFactory_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisEsSpanishLightStemFilterFactory)
 

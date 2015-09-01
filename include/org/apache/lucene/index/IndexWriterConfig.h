@@ -20,7 +20,6 @@
 #define OrgApacheLuceneIndexLiveIndexWriterConfig_INCLUDE 1
 #include "org/apache/lucene/index/LiveIndexWriterConfig.h"
 
-@class JavaIoPrintStream;
 @class OrgApacheLuceneAnalysisAnalyzer;
 @class OrgApacheLuceneCodecsCodec;
 @class OrgApacheLuceneIndexDocumentsWriterPerThreadPool;
@@ -84,41 +83,9 @@
 
 - (jlong)getWriteLockTimeout;
 
-- (OrgApacheLuceneIndexIndexWriterConfig *)setCodecWithOrgApacheLuceneCodecsCodec:(OrgApacheLuceneCodecsCodec *)codec;
-
-- (OrgApacheLuceneIndexIndexWriterConfig *)setCommitOnCloseWithBoolean:(jboolean)commitOnClose;
-
-- (OrgApacheLuceneIndexIndexWriterConfig *)setIndexCommitWithOrgApacheLuceneIndexIndexCommit:(OrgApacheLuceneIndexIndexCommit *)commit;
-
-- (OrgApacheLuceneIndexIndexWriterConfig *)setIndexDeletionPolicyWithOrgApacheLuceneIndexIndexDeletionPolicy:(OrgApacheLuceneIndexIndexDeletionPolicy *)delPolicy;
-
-- (OrgApacheLuceneIndexIndexWriterConfig *)setInfoStreamWithOrgApacheLuceneUtilInfoStream:(OrgApacheLuceneUtilInfoStream *)infoStream;
-
-- (OrgApacheLuceneIndexIndexWriterConfig *)setInfoStreamWithJavaIoPrintStream:(JavaIoPrintStream *)printStream;
-
-- (OrgApacheLuceneIndexIndexWriterConfig *)setMaxBufferedDeleteTermsWithInt:(jint)maxBufferedDeleteTerms;
-
-- (OrgApacheLuceneIndexIndexWriterConfig *)setMaxBufferedDocsWithInt:(jint)maxBufferedDocs;
-
-- (OrgApacheLuceneIndexIndexWriterConfig *)setMergedSegmentWarmerWithOrgApacheLuceneIndexIndexWriter_IndexReaderWarmer:(OrgApacheLuceneIndexIndexWriter_IndexReaderWarmer *)mergeSegmentWarmer;
-
 - (OrgApacheLuceneIndexIndexWriterConfig *)setMergePolicyWithOrgApacheLuceneIndexMergePolicy:(OrgApacheLuceneIndexMergePolicy *)mergePolicy;
 
-- (OrgApacheLuceneIndexIndexWriterConfig *)setMergeSchedulerWithOrgApacheLuceneIndexMergeScheduler:(OrgApacheLuceneIndexMergeScheduler *)mergeScheduler;
-
 - (OrgApacheLuceneIndexIndexWriterConfig *)setOpenModeWithOrgApacheLuceneIndexIndexWriterConfig_OpenModeEnum:(OrgApacheLuceneIndexIndexWriterConfig_OpenModeEnum *)openMode;
-
-- (OrgApacheLuceneIndexIndexWriterConfig *)setRAMBufferSizeMBWithDouble:(jdouble)ramBufferSizeMB;
-
-- (OrgApacheLuceneIndexIndexWriterConfig *)setRAMPerThreadHardLimitMBWithInt:(jint)perThreadHardLimitMB;
-
-- (OrgApacheLuceneIndexIndexWriterConfig *)setReaderPoolingWithBoolean:(jboolean)readerPooling;
-
-- (OrgApacheLuceneIndexIndexWriterConfig *)setSimilarityWithOrgApacheLuceneSearchSimilaritiesSimilarity:(OrgApacheLuceneSearchSimilaritiesSimilarity *)similarity;
-
-- (OrgApacheLuceneIndexIndexWriterConfig *)setUseCompoundFileWithBoolean:(jboolean)useCompoundFile;
-
-- (OrgApacheLuceneIndexIndexWriterConfig *)setWriteLockTimeoutWithLong:(jlong)writeLockTimeout;
 
 - (NSString *)description;
 
@@ -129,12 +96,6 @@
 - (OrgApacheLuceneIndexDocumentsWriterPerThreadPool *)getIndexerThreadPool;
 
 - (OrgApacheLuceneIndexDocumentsWriterPerThread_IndexingChain *)getIndexingChain;
-
-- (OrgApacheLuceneIndexIndexWriterConfig *)setFlushPolicyWithOrgApacheLuceneIndexFlushPolicy:(OrgApacheLuceneIndexFlushPolicy *)flushPolicy;
-
-- (OrgApacheLuceneIndexIndexWriterConfig *)setIndexerThreadPoolWithOrgApacheLuceneIndexDocumentsWriterPerThreadPool:(OrgApacheLuceneIndexDocumentsWriterPerThreadPool *)threadPool;
-
-- (OrgApacheLuceneIndexIndexWriterConfig *)setIndexingChainWithOrgApacheLuceneIndexDocumentsWriterPerThread_IndexingChain:(OrgApacheLuceneIndexDocumentsWriterPerThread_IndexingChain *)indexingChain;
 
 - (OrgApacheLuceneIndexIndexWriterConfig *)setIndexWriterWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer;
 

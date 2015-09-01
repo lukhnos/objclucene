@@ -20,43 +20,19 @@
 #define OrgApacheLuceneQueriesFunctionValueSource_INCLUDE 1
 #include "org/apache/lucene/queries/function/ValueSource.h"
 
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneQueriesFunctionFunctionValues;
-@class OrgApacheLuceneSearchIndexSearcher;
-@protocol JavaUtilMap;
-
-@interface OrgApacheLuceneQueriesFunctionValuesourceNormValueSource : OrgApacheLuceneQueriesFunctionValueSource {
- @public
-  NSString *field_;
-}
+@interface OrgApacheLuceneQueriesFunctionValuesourceNormValueSource : OrgApacheLuceneQueriesFunctionValueSource
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field;
-
-- (void)createWeightWithJavaUtilMap:(id<JavaUtilMap>)context
-withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher;
-
-- (NSString *)description__;
-
-- (jboolean)isEqual:(id)o;
-
-- (OrgApacheLuceneQueriesFunctionFunctionValues *)getValuesWithJavaUtilMap:(id<JavaUtilMap>)context
-                                 withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext;
-
-- (NSUInteger)hash;
-
-- (NSString *)name;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceNormValueSource)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceNormValueSource, field_, NSString *)
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_init(OrgApacheLuceneQueriesFunctionValuesourceNormValueSource *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_initWithNSString_(OrgApacheLuceneQueriesFunctionValuesourceNormValueSource *self, NSString *field);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceNormValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_initWithNSString_(NSString *field) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceNormValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceNormValueSource_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceNormValueSource)
 

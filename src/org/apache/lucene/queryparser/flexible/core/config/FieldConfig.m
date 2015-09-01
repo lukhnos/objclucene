@@ -4,65 +4,34 @@
 //
 
 #include "J2ObjC_source.h"
-#include "java/lang/IllegalArgumentException.h"
-#include "org/apache/lucene/queryparser/flexible/core/config/AbstractQueryConfig.h"
 #include "org/apache/lucene/queryparser/flexible/core/config/FieldConfig.h"
 
-@interface OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig () {
- @public
-  NSString *fieldName_;
-}
-
-@end
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig, fieldName_, NSString *)
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig
 
-- (instancetype)initWithNSString:(NSString *)fieldName {
-  OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig_initWithNSString_(self, fieldName);
+- (instancetype)init {
+  OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig_init(self);
   return self;
-}
-
-- (NSString *)getField {
-  return self->fieldName_;
-}
-
-- (NSString *)description {
-  return JreStrcat("$$$$$", @"<fieldconfig name=\"", self->fieldName_, @"\" configurations=\"", [super description], @"\"/>");
-}
-
-- (void)dealloc {
-  RELEASE_(fieldName_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:", "FieldConfig", NULL, 0x1, NULL, NULL },
-    { "getField", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "fieldName_", NULL, 0x2, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig = { 2, "FieldConfig", "org.apache.lucene.queryparser.flexible.core.config", NULL, 0x1, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig = { 2, "FieldConfig", "org.apache.lucene.queryparser.flexible.core.config", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig;
 }
 
 @end
 
-void OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig_initWithNSString_(OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig *self, NSString *fieldName) {
-  OrgApacheLuceneQueryparserFlexibleCoreConfigAbstractQueryConfig_init(self);
-  if (fieldName == nil) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"field name should not be null!") autorelease];
-  }
-  JreStrongAssign(&self->fieldName_, fieldName);
+void OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig_init(OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig *new_OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig_initWithNSString_(NSString *fieldName) {
+OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig *new_OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig_init() {
   OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig *self = [OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig alloc];
-  OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig_initWithNSString_(self, fieldName);
+  OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig_init(self);
   return self;
 }
 

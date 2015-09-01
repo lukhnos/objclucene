@@ -21,9 +21,7 @@
 #include "java/lang/Iterable.h"
 
 @class IOSObjectArray;
-@class OrgApacheLuceneUtilBytesRef;
 @protocol JavaUtilIterator;
-@protocol JavaUtilList;
 @protocol OrgApacheLuceneIndexIndexableField;
 
 @interface OrgApacheLuceneDocumentDocument : NSObject < JavaLangIterable >
@@ -36,23 +34,11 @@
 
 - (NSString *)getWithNSString:(NSString *)name;
 
-- (OrgApacheLuceneUtilBytesRef *)getBinaryValueWithNSString:(NSString *)name;
-
-- (IOSObjectArray *)getBinaryValuesWithNSString:(NSString *)name;
-
 - (id<OrgApacheLuceneIndexIndexableField>)getFieldWithNSString:(NSString *)name;
-
-- (id<JavaUtilList>)getFields;
 
 - (IOSObjectArray *)getFieldsWithNSString:(NSString *)name;
 
-- (IOSObjectArray *)getValuesWithNSString:(NSString *)name;
-
 - (id<JavaUtilIterator>)iterator;
-
-- (void)removeFieldWithNSString:(NSString *)name;
-
-- (void)removeFieldsWithNSString:(NSString *)name;
 
 - (NSString *)description;
 

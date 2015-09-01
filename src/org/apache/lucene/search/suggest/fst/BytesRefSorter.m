@@ -3,14 +3,10 @@
 //  source: ./suggest/src/java/org/apache/lucene/search/suggest/fst/BytesRefSorter.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
-#include "java/lang/IllegalStateException.h"
-#include "java/util/Comparator.h"
 #include "org/apache/lucene/search/suggest/fst/BytesRefSorter.h"
-#include "org/apache/lucene/util/BytesRef.h"
-#include "org/apache/lucene/util/BytesRefIterator.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @interface OrgApacheLuceneSearchSuggestFstBytesRefSorter : NSObject
 
@@ -19,12 +15,7 @@
 @implementation OrgApacheLuceneSearchSuggestFstBytesRefSorter
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "addWithOrgApacheLuceneUtilBytesRef:", "add", "V", 0x401, "Ljava.io.IOException;Ljava.lang.IllegalStateException;", NULL },
-    { "iterator", NULL, "Lorg.apache.lucene.util.BytesRefIterator;", 0x401, "Ljava.io.IOException;", NULL },
-    { "getComparator", NULL, "Ljava.util.Comparator;", 0x401, NULL, NULL },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestFstBytesRefSorter = { 2, "BytesRefSorter", "org.apache.lucene.search.suggest.fst", NULL, 0x609, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestFstBytesRefSorter = { 2, "BytesRefSorter", "org.apache.lucene.search.suggest.fst", NULL, 0x609, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchSuggestFstBytesRefSorter;
 }
 

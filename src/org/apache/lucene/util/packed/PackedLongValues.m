@@ -10,9 +10,6 @@
 #include "java/lang/IllegalStateException.h"
 #include "java/lang/Math.h"
 #include "java/util/Arrays.h"
-#include "java/util/Collection.h"
-#include "java/util/Collections.h"
-#include "java/util/List.h"
 #include "org/apache/lucene/util/ArrayUtil.h"
 #include "org/apache/lucene/util/LongValues.h"
 #include "org/apache/lucene/util/RamUsageEstimator.h"
@@ -136,10 +133,6 @@ withOrgApacheLuceneUtilPackedPackedInts_ReaderArray:(IOSObjectArray *)values
   return ramBytesUsed_;
 }
 
-- (id<JavaUtilCollection>)getChildResources {
-  return JavaUtilCollections_emptyList();
-}
-
 - (OrgApacheLuceneUtilPackedPackedLongValues_Iterator *)iterator {
   return [new_OrgApacheLuceneUtilPackedPackedLongValues_Iterator_initWithOrgApacheLuceneUtilPackedPackedLongValues_(self) autorelease];
 }
@@ -170,7 +163,6 @@ withOrgApacheLuceneUtilPackedPackedInts_ReaderArray:(IOSObjectArray *)values
     { "getWithInt:withInt:", "get", "J", 0x0, NULL, NULL },
     { "getWithLong:", "get", "J", 0x11, NULL, NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
     { "iterator", NULL, "Lorg.apache.lucene.util.packed.PackedLongValues$Iterator;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -185,7 +177,7 @@ withOrgApacheLuceneUtilPackedPackedInts_ReaderArray:(IOSObjectArray *)values
     { "ramBytesUsed_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.util.packed.PackedLongValues$Iterator;", "Lorg.apache.lucene.util.packed.PackedLongValues$Builder;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPackedLongValues = { 2, "PackedLongValues", "org.apache.lucene.util.packed", NULL, 0x1, 14, methods, 9, fields, 0, NULL, 2, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPackedLongValues = { 2, "PackedLongValues", "org.apache.lucene.util.packed", NULL, 0x1, 13, methods, 9, fields, 0, NULL, 2, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneUtilPackedPackedLongValues;
 }
 
@@ -350,10 +342,6 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPackedPackedLongValues_Builder)
   return ramBytesUsed_;
 }
 
-- (id<JavaUtilCollection>)getChildResources {
-  return JavaUtilCollections_emptyList();
-}
-
 - (jlong)size {
   return size_;
 }
@@ -431,7 +419,6 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPackedPackedLongValues_Builder)
     { "build", NULL, "Lorg.apache.lucene.util.packed.PackedLongValues;", 0x1, NULL, NULL },
     { "baseRamBytesUsed", NULL, "J", 0x0, NULL, NULL },
     { "ramBytesUsed", NULL, "J", 0x11, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
     { "size", NULL, "J", 0x11, NULL, NULL },
     { "addWithLong:", "add", "Lorg.apache.lucene.util.packed.PackedLongValues$Builder;", 0x1, NULL, NULL },
     { "finish", NULL, "V", 0x10, NULL, NULL },
@@ -452,7 +439,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPackedPackedLongValues_Builder)
     { "valuesOff_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "pendingOff_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPackedLongValues_Builder = { 2, "Builder", "org.apache.lucene.util.packed", "PackedLongValues", 0x9, 11, methods, 11, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPackedLongValues_Builder = { 2, "Builder", "org.apache.lucene.util.packed", "PackedLongValues", 0x9, 10, methods, 11, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilPackedPackedLongValues_Builder;
 }
 

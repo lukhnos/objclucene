@@ -20,45 +20,19 @@
 #define OrgApacheLuceneRangetreeSliceWriter_INCLUDE 1
 #include "org/apache/lucene/rangetree/SliceWriter.h"
 
-@class IOSIntArray;
-@class IOSLongArray;
-@protocol OrgApacheLuceneRangetreeSliceReader;
+@interface OrgApacheLuceneRangetreeGrowingHeapSliceWriter : NSObject < OrgApacheLuceneRangetreeSliceWriter >
 
-@interface OrgApacheLuceneRangetreeGrowingHeapSliceWriter : NSObject < OrgApacheLuceneRangetreeSliceWriter > {
- @public
-  IOSLongArray *values_;
-  IOSIntArray *docIDs_;
-  IOSLongArray *ords_;
-  jint maxSize_;
-}
+#pragma mark Package-Private
 
-#pragma mark Public
-
-- (instancetype)initWithInt:(jint)maxSize;
-
-- (void)appendWithLong:(jlong)value
-              withLong:(jlong)ord
-               withInt:(jint)docID;
-
-- (void)close;
-
-- (void)destroy;
-
-- (id<OrgApacheLuceneRangetreeSliceReader>)getReaderWithLong:(jlong)start;
-
-- (NSString *)description;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneRangetreeGrowingHeapSliceWriter)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeGrowingHeapSliceWriter, values_, IOSLongArray *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeGrowingHeapSliceWriter, docIDs_, IOSIntArray *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeGrowingHeapSliceWriter, ords_, IOSLongArray *)
+FOUNDATION_EXPORT void OrgApacheLuceneRangetreeGrowingHeapSliceWriter_init(OrgApacheLuceneRangetreeGrowingHeapSliceWriter *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneRangetreeGrowingHeapSliceWriter_initWithInt_(OrgApacheLuceneRangetreeGrowingHeapSliceWriter *self, jint maxSize);
-
-FOUNDATION_EXPORT OrgApacheLuceneRangetreeGrowingHeapSliceWriter *new_OrgApacheLuceneRangetreeGrowingHeapSliceWriter_initWithInt_(jint maxSize) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneRangetreeGrowingHeapSliceWriter *new_OrgApacheLuceneRangetreeGrowingHeapSliceWriter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeGrowingHeapSliceWriter)
 

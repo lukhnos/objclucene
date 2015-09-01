@@ -20,32 +20,19 @@
 #define OrgApacheLuceneSearchFilteredDocIdSet_INCLUDE 1
 #include "org/apache/lucene/search/FilteredDocIdSet.h"
 
-@class OrgApacheLuceneSearchDocIdSet;
-@protocol OrgApacheLuceneUtilBits;
-
 @interface OrgApacheLuceneSearchBitsFilteredDocIdSet : OrgApacheLuceneSearchFilteredDocIdSet
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchDocIdSet:(OrgApacheLuceneSearchDocIdSet *)innerSet
-                          withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)acceptDocs;
-
-+ (OrgApacheLuceneSearchDocIdSet *)wrapWithOrgApacheLuceneSearchDocIdSet:(OrgApacheLuceneSearchDocIdSet *)set
-                                             withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)acceptDocs;
-
-#pragma mark Protected
-
-- (jboolean)matchWithInt:(jint)docid;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchBitsFilteredDocIdSet)
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchDocIdSet *OrgApacheLuceneSearchBitsFilteredDocIdSet_wrapWithOrgApacheLuceneSearchDocIdSet_withOrgApacheLuceneUtilBits_(OrgApacheLuceneSearchDocIdSet *set, id<OrgApacheLuceneUtilBits> acceptDocs);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchBitsFilteredDocIdSet_init(OrgApacheLuceneSearchBitsFilteredDocIdSet *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchBitsFilteredDocIdSet_initWithOrgApacheLuceneSearchDocIdSet_withOrgApacheLuceneUtilBits_(OrgApacheLuceneSearchBitsFilteredDocIdSet *self, OrgApacheLuceneSearchDocIdSet *innerSet, id<OrgApacheLuceneUtilBits> acceptDocs);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchBitsFilteredDocIdSet *new_OrgApacheLuceneSearchBitsFilteredDocIdSet_initWithOrgApacheLuceneSearchDocIdSet_withOrgApacheLuceneUtilBits_(OrgApacheLuceneSearchDocIdSet *innerSet, id<OrgApacheLuceneUtilBits> acceptDocs) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchBitsFilteredDocIdSet *new_OrgApacheLuceneSearchBitsFilteredDocIdSet_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBitsFilteredDocIdSet)
 

@@ -20,28 +20,17 @@
 #define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
-@class OrgApacheLuceneAnalysisTokenStream;
-
 @interface OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
-- (instancetype)initWithBoolean:(jboolean)enablePositionIncrements
-withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
-
-- (jboolean)incrementToken;
-
-- (void)reset;
-
-#pragma mark Protected
-
-- (jboolean)accept;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter_initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter *self, jboolean enablePositionIncrements, OrgApacheLuceneAnalysisTokenStream *input);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter_init(OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter)
 

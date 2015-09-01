@@ -16,13 +16,12 @@ NSString *OrgApacheLuceneAnalysisTokenattributesTypeAttribute_DEFAULT_TYPE_ = @"
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "type", NULL, "Ljava.lang.String;", 0x401, NULL, NULL },
     { "setTypeWithNSString:", "setType", "V", 0x401, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "DEFAULT_TYPE_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisTokenattributesTypeAttribute_DEFAULT_TYPE_, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisTokenattributesTypeAttribute = { 2, "TypeAttribute", "org.apache.lucene.analysis.tokenattributes", NULL, 0x609, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisTokenattributesTypeAttribute = { 2, "TypeAttribute", "org.apache.lucene.analysis.tokenattributes", NULL, 0x609, 1, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisTokenattributesTypeAttribute;
 }
 

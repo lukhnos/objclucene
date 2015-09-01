@@ -18,8 +18,6 @@
 
 @protocol OrgApacheLuceneIndexQueryTimeout < NSObject, JavaObject >
 
-- (jboolean)shouldExit;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexQueryTimeout)

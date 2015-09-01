@@ -4,65 +4,41 @@
 //
 
 #include "J2ObjC_source.h"
-#include "java/lang/IllegalArgumentException.h"
-#include "java/util/Map.h"
-#include "org/apache/lucene/analysis/TokenStream.h"
-#include "org/apache/lucene/analysis/miscellaneous/LimitTokenOffsetFilter.h"
 #include "org/apache/lucene/analysis/miscellaneous/LimitTokenOffsetFilterFactory.h"
-#include "org/apache/lucene/analysis/util/AbstractAnalysisFactory.h"
-#include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
-@interface OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory () {
- @public
-  jint maxStartOffset_;
-  jboolean consumeAllTokens_;
-}
-
-@end
+#pragma clang diagnostic ignored "-Wprotocol"
 
 NSString *OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory_MAX_START_OFFSET_ = @"maxStartOffset";
 NSString *OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory_CONSUME_ALL_TOKENS_KEY_ = @"consumeAllTokens";
 
 @implementation OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args {
-  OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory_initWithJavaUtilMap_(self, args);
+- (instancetype)init {
+  OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory_init(self);
   return self;
-}
-
-- (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  return [new_OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withBoolean_(input, maxStartOffset_, consumeAllTokens_) autorelease];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "LimitTokenOffsetFilterFactory", NULL, 0x1, NULL, NULL },
-    { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.TokenStream;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "MAX_START_OFFSET_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory_MAX_START_OFFSET_, NULL, .constantValue.asLong = 0 },
     { "CONSUME_ALL_TOKENS_KEY_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory_CONSUME_ALL_TOKENS_KEY_, NULL, .constantValue.asLong = 0 },
-    { "maxStartOffset_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "consumeAllTokens_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory = { 2, "LimitTokenOffsetFilterFactory", "org.apache.lucene.analysis.miscellaneous", NULL, 0x1, 2, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory = { 2, "LimitTokenOffsetFilterFactory", "org.apache.lucene.analysis.miscellaneous", NULL, 0x1, 1, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory;
 }
 
 @end
 
-void OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory *self, id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
-  self->maxStartOffset_ = [self requireIntWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory_MAX_START_OFFSET_];
-  self->consumeAllTokens_ = [self getBooleanWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory_CONSUME_ALL_TOKENS_KEY_ withBoolean:NO];
-  if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
-  }
+void OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory_init(OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory *new_OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory *new_OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory_init() {
   OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory *self = [OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory alloc];
-  OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory_initWithJavaUtilMap_(self, args);
+  OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilterFactory_init(self);
   return self;
 }
 

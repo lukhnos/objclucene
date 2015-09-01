@@ -4,7 +4,6 @@
 //
 
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/lukhnos/portmobile/file/AccessDeniedException.h"
 
 @implementation OrgLukhnosPortmobileFileAccessDeniedException
@@ -25,7 +24,7 @@
 @end
 
 void OrgLukhnosPortmobileFileAccessDeniedException_init(OrgLukhnosPortmobileFileAccessDeniedException *self) {
-  JavaIoIOException_init(self);
+  NSObject_init(self);
 }
 
 OrgLukhnosPortmobileFileAccessDeniedException *new_OrgLukhnosPortmobileFileAccessDeniedException_init() {

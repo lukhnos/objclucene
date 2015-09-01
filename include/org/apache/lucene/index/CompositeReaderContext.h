@@ -27,8 +27,6 @@
 
 #pragma mark Public
 
-- (id<JavaUtilList>)children;
-
 - (id<JavaUtilList>)leaves;
 
 - (OrgApacheLuceneIndexCompositeReader *)reader;

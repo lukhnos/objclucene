@@ -9,7 +9,6 @@
 #include "java/io/IOException.h"
 #include "java/lang/Boolean.h"
 #include "java/lang/Double.h"
-#include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Integer.h"
 #include "java/lang/InterruptedException.h"
 #include "java/lang/Long.h"
@@ -103,35 +102,6 @@ NSString *OrgApacheLuceneIndexConcurrentMergeScheduler_DEFAULT_SPINS_PROPERTY_ =
   return self;
 }
 
-- (void)setMaxMergesAndThreadsWithInt:(jint)maxMergeCount
-                              withInt:(jint)maxThreadCount {
-  @synchronized(self) {
-    if (maxMergeCount == OrgApacheLuceneIndexConcurrentMergeScheduler_AUTO_DETECT_MERGES_AND_THREADS && maxThreadCount == OrgApacheLuceneIndexConcurrentMergeScheduler_AUTO_DETECT_MERGES_AND_THREADS) {
-      self->maxMergeCount_ = OrgApacheLuceneIndexConcurrentMergeScheduler_AUTO_DETECT_MERGES_AND_THREADS;
-      self->maxThreadCount_ = OrgApacheLuceneIndexConcurrentMergeScheduler_AUTO_DETECT_MERGES_AND_THREADS;
-    }
-    else if (maxMergeCount == OrgApacheLuceneIndexConcurrentMergeScheduler_AUTO_DETECT_MERGES_AND_THREADS) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"both maxMergeCount and maxThreadCount must be AUTO_DETECT_MERGES_AND_THREADS") autorelease];
-    }
-    else if (maxThreadCount == OrgApacheLuceneIndexConcurrentMergeScheduler_AUTO_DETECT_MERGES_AND_THREADS) {
-      @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"both maxMergeCount and maxThreadCount must be AUTO_DETECT_MERGES_AND_THREADS") autorelease];
-    }
-    else {
-      if (maxThreadCount < 1) {
-        @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"maxThreadCount should be at least 1") autorelease];
-      }
-      if (maxMergeCount < 1) {
-        @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"maxMergeCount should be at least 1") autorelease];
-      }
-      if (maxThreadCount > maxMergeCount) {
-        @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$IC", @"maxThreadCount should be <= maxMergeCount (= ", maxMergeCount, ')')) autorelease];
-      }
-      self->maxThreadCount_ = maxThreadCount;
-      self->maxMergeCount_ = maxMergeCount;
-    }
-  }
-}
-
 - (void)setDefaultMaxMergesAndThreadsWithBoolean:(jboolean)spins {
   @synchronized(self) {
     if (spins) {
@@ -151,63 +121,6 @@ NSString *OrgApacheLuceneIndexConcurrentMergeScheduler_DEFAULT_SPINS_PROPERTY_ =
       maxThreadCount_ = JavaLangMath_maxWithInt_withInt_(1, JavaLangMath_minWithInt_withInt_(4, coreCount / 2));
       maxMergeCount_ = maxThreadCount_ + 5;
     }
-  }
-}
-
-- (void)setForceMergeMBPerSecWithDouble:(jdouble)v {
-  @synchronized(self) {
-    forceMergeMBPerSec_ = v;
-    [self updateMergeThreads];
-  }
-}
-
-- (jdouble)getForceMergeMBPerSec {
-  @synchronized(self) {
-    return forceMergeMBPerSec_;
-  }
-}
-
-- (void)enableAutoIOThrottle {
-  @synchronized(self) {
-    doAutoIOThrottle_ = YES;
-    targetMBPerSec_ = OrgApacheLuceneIndexConcurrentMergeScheduler_START_MB_PER_SEC;
-    [self updateMergeThreads];
-  }
-}
-
-- (void)disableAutoIOThrottle {
-  @synchronized(self) {
-    doAutoIOThrottle_ = NO;
-    [self updateMergeThreads];
-  }
-}
-
-- (jboolean)getAutoIOThrottle {
-  @synchronized(self) {
-    return doAutoIOThrottle_;
-  }
-}
-
-- (jdouble)getIORateLimitMBPerSec {
-  @synchronized(self) {
-    if (doAutoIOThrottle_) {
-      return targetMBPerSec_;
-    }
-    else {
-      return JavaLangDouble_POSITIVE_INFINITY;
-    }
-  }
-}
-
-- (jint)getMaxThreadCount {
-  @synchronized(self) {
-    return maxThreadCount_;
-  }
-}
-
-- (jint)getMaxMergeCount {
-  @synchronized(self) {
-    return maxMergeCount_;
   }
 }
 
@@ -471,14 +384,6 @@ NSString *OrgApacheLuceneIndexConcurrentMergeScheduler_DEFAULT_SPINS_PROPERTY_ =
   @throw [new_OrgApacheLuceneIndexMergePolicy_MergeException_initWithJavaLangThrowable_withOrgApacheLuceneStoreDirectory_(exc, dir) autorelease];
 }
 
-- (void)setSuppressExceptions {
-  suppressExceptions_ = YES;
-}
-
-- (void)clearSuppressExceptions {
-  suppressExceptions_ = NO;
-}
-
 - (NSString *)description {
   JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_initWithNSString_(JreStrcat("$$", [[self getClass] getSimpleName], @": ")) autorelease];
   [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:@"maxThreadCount="])) appendWithInt:maxThreadCount_])) appendWithNSString:@", "];
@@ -515,16 +420,7 @@ withOrgApacheLuceneIndexMergePolicy_OneMerge:(OrgApacheLuceneIndexMergePolicy_On
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "init", "ConcurrentMergeScheduler", NULL, 0x1, NULL, NULL },
-    { "setMaxMergesAndThreadsWithInt:withInt:", "setMaxMergesAndThreads", "V", 0x21, NULL, NULL },
     { "setDefaultMaxMergesAndThreadsWithBoolean:", "setDefaultMaxMergesAndThreads", "V", 0x21, NULL, NULL },
-    { "setForceMergeMBPerSecWithDouble:", "setForceMergeMBPerSec", "V", 0x21, NULL, NULL },
-    { "getForceMergeMBPerSec", NULL, "D", 0x21, NULL, NULL },
-    { "enableAutoIOThrottle", NULL, "V", 0x21, NULL, NULL },
-    { "disableAutoIOThrottle", NULL, "V", 0x21, NULL, NULL },
-    { "getAutoIOThrottle", NULL, "Z", 0x21, NULL, NULL },
-    { "getIORateLimitMBPerSec", NULL, "D", 0x21, NULL, NULL },
-    { "getMaxThreadCount", NULL, "I", 0x21, NULL, NULL },
-    { "getMaxMergeCount", NULL, "I", 0x21, NULL, NULL },
     { "removeMergeThread", NULL, "V", 0x20, NULL, NULL },
     { "updateMergeThreads", NULL, "V", 0x24, NULL, NULL },
     { "initDynamicDefaultsWithOrgApacheLuceneIndexIndexWriter:", "initDynamicDefaults", "V", 0x22, "Ljava.io.IOException;", NULL },
@@ -538,8 +434,6 @@ withOrgApacheLuceneIndexMergePolicy_OneMerge:(OrgApacheLuceneIndexMergePolicy_On
     { "doMergeWithOrgApacheLuceneIndexIndexWriter:withOrgApacheLuceneIndexMergePolicy_OneMerge:", "doMerge", "V", 0x4, "Ljava.io.IOException;", NULL },
     { "getMergeThreadWithOrgApacheLuceneIndexIndexWriter:withOrgApacheLuceneIndexMergePolicy_OneMerge:", "getMergeThread", "Lorg.apache.lucene.index.ConcurrentMergeScheduler$MergeThread;", 0x24, "Ljava.io.IOException;", NULL },
     { "handleMergeExceptionWithOrgApacheLuceneStoreDirectory:withJavaLangThrowable:", "handleMergeException", "V", 0x4, NULL, NULL },
-    { "setSuppressExceptions", NULL, "V", 0x0, NULL, NULL },
-    { "clearSuppressExceptions", NULL, "V", 0x0, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "isBacklogWithLong:withOrgApacheLuceneIndexMergePolicy_OneMerge:", "isBacklog", "Z", 0x2, NULL, NULL },
     { "updateIOThrottleWithOrgApacheLuceneIndexMergePolicy_OneMerge:", "updateIOThrottle", "V", 0x22, "Ljava.io.IOException;", NULL },
@@ -565,7 +459,7 @@ withOrgApacheLuceneIndexMergePolicy_OneMerge:(OrgApacheLuceneIndexMergePolicy_On
     { "suppressExceptions_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.index.ConcurrentMergeScheduler$MergeThread;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexConcurrentMergeScheduler = { 2, "ConcurrentMergeScheduler", "org.apache.lucene.index", NULL, 0x1, 32, methods, 15, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexConcurrentMergeScheduler = { 2, "ConcurrentMergeScheduler", "org.apache.lucene.index", NULL, 0x1, 21, methods, 15, fields, 0, NULL, 1, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneIndexConcurrentMergeScheduler;
 }
 

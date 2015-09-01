@@ -4,10 +4,9 @@
 //
 
 #include "J2ObjC_source.h"
-#include "java/lang/Math.h"
-#include "org/apache/lucene/search/similarities/BasicStats.h"
-#include "org/apache/lucene/search/similarities/Distribution.h"
 #include "org/apache/lucene/search/similarities/DistributionSPL.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneSearchSimilaritiesDistributionSPL
 
@@ -16,33 +15,18 @@
   return self;
 }
 
-- (jfloat)scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
-                                                     withFloat:(jfloat)tfn
-                                                     withFloat:(jfloat)lambda {
-  if (lambda == 1.0f) {
-    lambda = 0.99f;
-  }
-  return (jfloat) -JavaLangMath_logWithDouble_((JavaLangMath_powWithDouble_withDouble_(lambda, (tfn / (tfn + 1))) - lambda) / (1 - lambda));
-}
-
-- (NSString *)description {
-  return @"SPL";
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", "DistributionSPL", NULL, 0x1, NULL, NULL },
-    { "scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:withFloat:withFloat:", "score", "F", 0x11, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesDistributionSPL = { 2, "DistributionSPL", "org.apache.lucene.search.similarities", NULL, 0x1, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesDistributionSPL = { 2, "DistributionSPL", "org.apache.lucene.search.similarities", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchSimilaritiesDistributionSPL;
 }
 
 @end
 
 void OrgApacheLuceneSearchSimilaritiesDistributionSPL_init(OrgApacheLuceneSearchSimilaritiesDistributionSPL *self) {
-  OrgApacheLuceneSearchSimilaritiesDistribution_init(self);
+  NSObject_init(self);
 }
 
 OrgApacheLuceneSearchSimilaritiesDistributionSPL *new_OrgApacheLuceneSearchSimilaritiesDistributionSPL_init() {

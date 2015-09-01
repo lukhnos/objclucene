@@ -28,20 +28,16 @@
 #define OrgApacheLuceneUtilAccountable_INCLUDE 1
 #include "org/apache/lucene/util/Accountable.h"
 
-@class IOSObjectArray;
 @class JavaLangThrowable;
 @class JavaUtilConcurrentAtomicAtomicInteger;
 @class JavaUtilConcurrentAtomicAtomicLong;
-@class OrgApacheLuceneAnalysisAnalyzer;
 @class OrgApacheLuceneCodecsCodec;
 @class OrgApacheLuceneIndexBufferedUpdatesStream;
 @class OrgApacheLuceneIndexDirectoryReader;
-@class OrgApacheLuceneIndexDocumentsWriter;
 @class OrgApacheLuceneIndexFieldInfos;
 @class OrgApacheLuceneIndexFieldInfos_FieldNumbers;
 @class OrgApacheLuceneIndexFrozenBufferedUpdates;
 @class OrgApacheLuceneIndexIndexFileDeleter;
-@class OrgApacheLuceneIndexIndexReader;
 @class OrgApacheLuceneIndexIndexWriterConfig;
 @class OrgApacheLuceneIndexIndexWriter_ReaderPool;
 @class OrgApacheLuceneIndexLiveIndexWriterConfig;
@@ -53,12 +49,10 @@
 @class OrgApacheLuceneStoreDirectory;
 @class OrgApacheLuceneStoreIOContext;
 @class OrgApacheLuceneStoreTrackingDirectoryWrapper;
-@class OrgApacheLuceneUtilBytesRef;
 @class OrgApacheLuceneUtilCloseableThreadLocal;
 @class OrgApacheLuceneUtilInfoStream;
 @protocol JavaLangIterable;
 @protocol JavaUtilCollection;
-@protocol JavaUtilMap;
 
 #define OrgApacheLuceneIndexIndexWriter_MAX_DOCS 2147483519
 #define OrgApacheLuceneIndexIndexWriter_MAX_POSITION 2147483519
@@ -90,38 +84,9 @@
 
 - (void)addDocumentWithJavaLangIterable:(id<JavaLangIterable>)doc;
 
-- (void)addDocumentsWithJavaLangIterable:(id<JavaLangIterable>)docs;
-
-- (void)addIndexesWithOrgApacheLuceneIndexCodecReaderArray:(IOSObjectArray *)readers;
-
-- (void)addIndexesWithOrgApacheLuceneStoreDirectoryArray:(IOSObjectArray *)dirs;
-
 - (void)close;
 
 - (void)commit;
-
-- (void)deleteAll;
-
-- (void)deleteDocumentsWithOrgApacheLuceneSearchQueryArray:(IOSObjectArray *)queries;
-
-- (void)deleteDocumentsWithOrgApacheLuceneIndexTermArray:(IOSObjectArray *)terms;
-
-- (void)deleteUnusedFiles;
-
-- (void)forceMergeWithInt:(jint)maxNumSegments;
-
-- (void)forceMergeWithInt:(jint)maxNumSegments
-              withBoolean:(jboolean)doWait;
-
-- (void)forceMergeDeletes;
-
-- (void)forceMergeDeletesWithBoolean:(jboolean)doWait;
-
-- (OrgApacheLuceneAnalysisAnalyzer *)getAnalyzer;
-
-- (id<JavaUtilCollection>)getChildResources;
-
-- (id<JavaUtilMap>)getCommitData;
 
 - (OrgApacheLuceneIndexLiveIndexWriterConfig *)getConfig;
 
@@ -131,57 +96,18 @@
 
 - (OrgApacheLuceneIndexMergePolicy_OneMerge *)getNextMerge;
 
-- (JavaLangThrowable *)getTragicException;
-
-- (jboolean)hasDeletions;
-
 - (jboolean)hasPendingMerges;
-
-- (jboolean)hasUncommittedChanges;
-
-+ (jboolean)isLockedWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory;
-
-- (jboolean)isOpen;
-
-- (jint)maxDoc;
-
-- (void)maybeMerge;
 
 - (void)mergeWithOrgApacheLuceneIndexMergePolicy_OneMerge:(OrgApacheLuceneIndexMergePolicy_OneMerge *)merge;
 
 - (jint)numDeletedDocsWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)info;
 
-- (jint)numDocs;
-
-- (jint)numRamDocs;
-
-- (void)prepareCommit;
-
 - (jlong)ramBytesUsed;
 
 - (void)rollback;
 
-- (void)setCommitDataWithJavaUtilMap:(id<JavaUtilMap>)commitUserData;
-
-- (jboolean)tryDeleteDocumentWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)readerIn
-                                                         withInt:(jint)docID;
-
-- (void)updateBinaryDocValueWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-                                            withNSString:(NSString *)field
-                         withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)value;
-
 - (void)updateDocumentWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
                               withJavaLangIterable:(id<JavaLangIterable>)doc;
-
-- (void)updateDocumentsWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)delTerm
-                               withJavaLangIterable:(id<JavaLangIterable>)docs;
-
-- (void)updateDocValuesWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-              withOrgApacheLuceneDocumentFieldArray:(IOSObjectArray *)updates;
-
-- (void)updateNumericDocValueWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-                                             withNSString:(NSString *)field
-                                                 withLong:(jlong)value;
 
 #pragma mark Protected
 
@@ -226,35 +152,13 @@
 
 + (jint)getActualMaxDocs;
 
-- (jint)getBufferedDeleteTermsSize;
-
-- (OrgApacheLuceneIndexDocumentsWriter *)getDocsWriter;
-
-- (jint)getFlushCount;
-
-- (jint)getFlushDeletesCount;
-
-- (id<JavaUtilCollection>)getIndexFileNames;
-
 - (jboolean)getKeepFullyDeletedSegments;
 
-- (jint)getNumBufferedDeleteTerms;
-
-- (jint)getNumBufferedDocuments;
-
-- (OrgApacheLuceneIndexDirectoryReader *)getReader;
-
 - (OrgApacheLuceneIndexDirectoryReader *)getReaderWithBoolean:(jboolean)applyAllDeletes;
-
-- (jint)getSegmentCount;
 
 - (jboolean)holdsFullFlushLock;
 
 - (void)incRefDeleterWithOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)segmentInfos;
-
-- (jboolean)isClosed;
-
-- (jint)maxDocWithInt:(jint)i;
 
 - (jboolean)maybeApplyDeletesWithBoolean:(jboolean)applyAllDeletes;
 
@@ -264,11 +168,7 @@
 
 - (void)mergeSuccessWithOrgApacheLuceneIndexMergePolicy_OneMerge:(OrgApacheLuceneIndexMergePolicy_OneMerge *)merge;
 
-- (OrgApacheLuceneIndexSegmentCommitInfo *)newestSegment OBJC_METHOD_FAMILY_NONE;
-
 - (NSString *)newSegmentName OBJC_METHOD_FAMILY_NONE;
-
-- (jboolean)nrtIsCurrentWithOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)infos;
 
 - (void)publishFlushedSegmentWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)newSegment
                          withOrgApacheLuceneIndexFrozenBufferedUpdates:(OrgApacheLuceneIndexFrozenBufferedUpdates *)packet
@@ -290,10 +190,6 @@
 
 + (void)setDiagnosticsWithOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)info
                                              withNSString:(NSString *)source;
-
-- (void)setKeepFullyDeletedSegmentsWithBoolean:(jboolean)v;
-
-+ (void)setMaxDocsWithInt:(jint)maxDocs;
 
 + (jboolean)slowFileExistsWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
                                                withNSString:(NSString *)fileName;
@@ -344,8 +240,6 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneIndexIndexWriter, SOURCE_ADDINDEXES_RE
 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneIndexIndexWriter, MAX_TERM_LENGTH, jint)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexIndexWriter_setMaxDocsWithInt_(jint maxDocs);
-
 FOUNDATION_EXPORT jint OrgApacheLuceneIndexIndexWriter_getActualMaxDocs();
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexIndexWriter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_(OrgApacheLuceneIndexIndexWriter *self, OrgApacheLuceneStoreDirectory *d, OrgApacheLuceneIndexIndexWriterConfig *conf);
@@ -355,8 +249,6 @@ FOUNDATION_EXPORT OrgApacheLuceneIndexIndexWriter *new_OrgApacheLuceneIndexIndex
 FOUNDATION_EXPORT OrgApacheLuceneIndexFieldInfos *OrgApacheLuceneIndexIndexWriter_readFieldInfosWithOrgApacheLuceneIndexSegmentCommitInfo_(OrgApacheLuceneIndexSegmentCommitInfo *si);
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexIndexWriter_setDiagnosticsWithOrgApacheLuceneIndexSegmentInfo_withNSString_(OrgApacheLuceneIndexSegmentInfo *info, NSString *source);
-
-FOUNDATION_EXPORT jboolean OrgApacheLuceneIndexIndexWriter_isLockedWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *directory);
 
 FOUNDATION_EXPORT jboolean OrgApacheLuceneIndexIndexWriter_slowFileExistsWithOrgApacheLuceneStoreDirectory_withNSString_(OrgApacheLuceneStoreDirectory *dir, NSString *fileName);
 
@@ -379,8 +271,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexIndexWriter)
 @interface OrgApacheLuceneIndexIndexWriter_ReaderPool : NSObject < JavaIoCloseable >
 
 #pragma mark Public
-
-- (jboolean)anyPendingDeletes;
 
 - (void)close;
 
@@ -425,11 +315,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexIndexWriter_ReaderPool)
 
 #pragma mark Public
 
-- (void)warmWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader;
-
-#pragma mark Protected
-
 - (instancetype)init;
+
+- (void)warmWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader;
 
 @end
 

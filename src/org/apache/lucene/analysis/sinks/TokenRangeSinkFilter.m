@@ -3,79 +3,35 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/sinks/TokenRangeSinkFilter.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
-#include "java/lang/IllegalArgumentException.h"
-#include "org/apache/lucene/analysis/sinks/TeeSinkTokenFilter.h"
 #include "org/apache/lucene/analysis/sinks/TokenRangeSinkFilter.h"
-#include "org/apache/lucene/util/AttributeSource.h"
 
-@interface OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter () {
- @public
-  jint lower_;
-  jint upper_;
-  jint count_;
-}
-
-@end
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter
 
-- (instancetype)initWithInt:(jint)lower
-                    withInt:(jint)upper {
-  OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter_initWithInt_withInt_(self, lower, upper);
+- (instancetype)init {
+  OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter_init(self);
   return self;
-}
-
-- (jboolean)acceptWithOrgApacheLuceneUtilAttributeSource:(OrgApacheLuceneUtilAttributeSource *)source {
-  @try {
-    if (count_ >= lower_ && count_ < upper_) {
-      return YES;
-    }
-    return NO;
-  }
-  @finally {
-    count_++;
-  }
-}
-
-- (void)reset {
-  count_ = 0;
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withInt:", "TokenRangeSinkFilter", NULL, 0x1, NULL, NULL },
-    { "acceptWithOrgApacheLuceneUtilAttributeSource:", "accept", "Z", 0x1, NULL, NULL },
-    { "reset", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "lower_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "upper_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "count_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter = { 2, "TokenRangeSinkFilter", "org.apache.lucene.analysis.sinks", NULL, 0x1, 3, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter = { 2, "TokenRangeSinkFilter", "org.apache.lucene.analysis.sinks", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter;
 }
 
 @end
 
-void OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter_initWithInt_withInt_(OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter *self, jint lower, jint upper) {
-  OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter_init(self);
-  if (lower < 1) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"lower must be greater than zero") autorelease];
-  }
-  if (lower > upper) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"lower must not be greater than upper") autorelease];
-  }
-  self->lower_ = lower;
-  self->upper_ = upper;
+void OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter_init(OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter *new_OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter_initWithInt_withInt_(jint lower, jint upper) {
+OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter *new_OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter_init() {
   OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter *self = [OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter alloc];
-  OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter_initWithInt_withInt_(self, lower, upper);
+  OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter_init(self);
   return self;
 }
 

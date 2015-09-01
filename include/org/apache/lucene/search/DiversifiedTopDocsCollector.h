@@ -20,46 +20,17 @@
 #define OrgApacheLuceneSearchTopDocsCollector_INCLUDE 1
 #include "org/apache/lucene/search/TopDocsCollector.h"
 
-@class IOSObjectArray;
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneIndexNumericDocValues;
-@class OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey;
-@class OrgApacheLuceneSearchTopDocs;
-@protocol OrgApacheLuceneSearchLeafCollector;
-
-@interface OrgApacheLuceneSearchDiversifiedTopDocsCollector : OrgApacheLuceneSearchTopDocsCollector {
- @public
-  OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *spare_;
-  jint maxNumPerKey_;
-}
+@interface OrgApacheLuceneSearchDiversifiedTopDocsCollector : OrgApacheLuceneSearchTopDocsCollector
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)numHits
-                    withInt:(jint)maxHitsPerKey;
-
-- (id<OrgApacheLuceneSearchLeafCollector>)getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
-
-- (jboolean)needsScores;
-
-#pragma mark Protected
-
-- (OrgApacheLuceneIndexNumericDocValues *)getKeysWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
-
-- (OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *)insertWithOrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey:(OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *)addition
-                                                                                                                                 withInt:(jint)docBase
-                                                                                                withOrgApacheLuceneIndexNumericDocValues:(OrgApacheLuceneIndexNumericDocValues *)keys;
-
-- (OrgApacheLuceneSearchTopDocs *)newTopDocsWithOrgApacheLuceneSearchScoreDocArray:(IOSObjectArray *)results
-                                                                           withInt:(jint)start OBJC_METHOD_FAMILY_NONE;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchDiversifiedTopDocsCollector)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchDiversifiedTopDocsCollector, spare_, OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *)
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchDiversifiedTopDocsCollector_initWithInt_withInt_(OrgApacheLuceneSearchDiversifiedTopDocsCollector *self, jint numHits, jint maxHitsPerKey);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchDiversifiedTopDocsCollector_init(OrgApacheLuceneSearchDiversifiedTopDocsCollector *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDiversifiedTopDocsCollector)
 
@@ -72,26 +43,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDiversifiedTopDocsCollector)
 #define OrgApacheLuceneUtilPriorityQueue_INCLUDE 1
 #include "org/apache/lucene/util/PriorityQueue.h"
 
-@class OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey;
-
 @interface OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue : OrgApacheLuceneUtilPriorityQueue
-
-#pragma mark Protected
-
-- (jboolean)lessThanWithId:(OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *)hitA
-                    withId:(OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *)hitB;
 
 #pragma mark Package-Private
 
-- (instancetype)initWithInt:(jint)size;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue_initWithInt_(OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue *self, jint size);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue_init(OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue *new_OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue_initWithInt_(jint size) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue *new_OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKeyQueue)
 
@@ -104,33 +68,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDiversifiedTopDocsCollector_Scor
 #define OrgApacheLuceneSearchScoreDoc_INCLUDE 1
 #include "org/apache/lucene/search/ScoreDoc.h"
 
-@class JavaLangLong;
-
-@interface OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey : OrgApacheLuceneSearchScoreDoc {
- @public
-  JavaLangLong *key_;
-}
+@interface OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey : OrgApacheLuceneSearchScoreDoc
 
 #pragma mark Public
 
-- (JavaLangLong *)getKey;
-
-- (NSString *)description;
-
-#pragma mark Protected
-
-- (instancetype)initWithInt:(jint)doc
-                  withFloat:(jfloat)score;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey, key_, JavaLangLong *)
+FOUNDATION_EXPORT void OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey_init(OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey_initWithInt_withFloat_(OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *self, jint doc, jfloat score);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *new_OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey_initWithInt_withFloat_(jint doc, jfloat score) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey *new_OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDiversifiedTopDocsCollector_ScoreDocKey)
 

@@ -24,60 +24,19 @@
 #define OrgApacheLuceneUtilAccountable_INCLUDE 1
 #include "org/apache/lucene/util/Accountable.h"
 
-@class OrgApacheLuceneIndexLeafReader;
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneSearchDocIdSet;
-@class OrgApacheLuceneSearchDocIdSetIterator;
-@protocol JavaUtilCollection;
-@protocol OrgApacheLuceneSearchFilterCachingPolicy;
-@protocol OrgApacheLuceneUtilBits;
-
-@interface OrgApacheLuceneSearchCachingWrapperFilter : OrgApacheLuceneSearchFilter < OrgApacheLuceneUtilAccountable > {
- @public
-  jint hitCount_, missCount_;
-}
+@interface OrgApacheLuceneSearchCachingWrapperFilter : OrgApacheLuceneSearchFilter < OrgApacheLuceneUtilAccountable >
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter;
-
-- (instancetype)initWithOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter
-       withOrgApacheLuceneSearchFilterCachingPolicy:(id<OrgApacheLuceneSearchFilterCachingPolicy>)policy;
-
-- (jboolean)isEqual:(id)o;
-
-- (id<JavaUtilCollection>)getChildResources;
-
-- (OrgApacheLuceneSearchDocIdSet *)getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-                                                            withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)acceptDocs;
-
-- (OrgApacheLuceneSearchFilter *)getFilter;
-
-- (NSUInteger)hash;
-
-- (jlong)ramBytesUsed;
-
-- (NSString *)toStringWithNSString:(NSString *)field;
-
-#pragma mark Protected
-
-- (OrgApacheLuceneSearchDocIdSet *)cacheImplWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)iterator
-                                                   withOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader;
-
-- (OrgApacheLuceneSearchDocIdSet *)docIdSetToCacheWithOrgApacheLuceneSearchDocIdSet:(OrgApacheLuceneSearchDocIdSet *)docIdSet
-                                                 withOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchCachingWrapperFilter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchCachingWrapperFilter_initWithOrgApacheLuceneSearchFilter_withOrgApacheLuceneSearchFilterCachingPolicy_(OrgApacheLuceneSearchCachingWrapperFilter *self, OrgApacheLuceneSearchFilter *filter, id<OrgApacheLuceneSearchFilterCachingPolicy> policy);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchCachingWrapperFilter_init(OrgApacheLuceneSearchCachingWrapperFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchCachingWrapperFilter *new_OrgApacheLuceneSearchCachingWrapperFilter_initWithOrgApacheLuceneSearchFilter_withOrgApacheLuceneSearchFilterCachingPolicy_(OrgApacheLuceneSearchFilter *filter, id<OrgApacheLuceneSearchFilterCachingPolicy> policy) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchCachingWrapperFilter_initWithOrgApacheLuceneSearchFilter_(OrgApacheLuceneSearchCachingWrapperFilter *self, OrgApacheLuceneSearchFilter *filter);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchCachingWrapperFilter *new_OrgApacheLuceneSearchCachingWrapperFilter_initWithOrgApacheLuceneSearchFilter_(OrgApacheLuceneSearchFilter *filter) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchCachingWrapperFilter *new_OrgApacheLuceneSearchCachingWrapperFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchCachingWrapperFilter)
 

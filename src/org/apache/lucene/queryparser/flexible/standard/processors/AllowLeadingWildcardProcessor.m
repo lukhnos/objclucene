@@ -3,23 +3,10 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/standard/processors/AllowLeadingWildcardProcessor.java
 //
 
-#include "IOSClass.h"
-#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/lang/Boolean.h"
-#include "java/lang/CharSequence.h"
-#include "java/util/List.h"
-#include "org/apache/lucene/queryparser/flexible/core/QueryNodeException.h"
-#include "org/apache/lucene/queryparser/flexible/core/config/QueryConfigHandler.h"
-#include "org/apache/lucene/queryparser/flexible/core/messages/QueryParserMessages.h"
-#include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNode.h"
-#include "org/apache/lucene/queryparser/flexible/core/processors/QueryNodeProcessorImpl.h"
-#include "org/apache/lucene/queryparser/flexible/core/util/UnescapedCharSequence.h"
-#include "org/apache/lucene/queryparser/flexible/messages/MessageImpl.h"
-#include "org/apache/lucene/queryparser/flexible/standard/config/StandardQueryConfigHandler.h"
-#include "org/apache/lucene/queryparser/flexible/standard/nodes/WildcardQueryNode.h"
-#include "org/apache/lucene/queryparser/flexible/standard/parser/EscapeQuerySyntaxImpl.h"
 #include "org/apache/lucene/queryparser/flexible/standard/processors/AllowLeadingWildcardProcessor.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneQueryparserFlexibleStandardProcessorsAllowLeadingWildcardProcessor
 
@@ -28,55 +15,18 @@
   return self;
 }
 
-- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)processWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryTree {
-  JavaLangBoolean *allowsLeadingWildcard = [((OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *) nil_chk([self getQueryConfigHandler])) getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, ALLOW_LEADING_WILDCARD_)];
-  if (allowsLeadingWildcard != nil) {
-    if (![allowsLeadingWildcard booleanValue]) {
-      return [super processWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:queryTree];
-    }
-  }
-  return queryTree;
-}
-
-- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)postProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)node {
-  if ([node isKindOfClass:[OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode class]]) {
-    OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode *wildcardNode = (OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode *) check_class_cast(node, [OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode class]);
-    if ([((id<JavaLangCharSequence>) nil_chk([((OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode *) nil_chk(wildcardNode)) getText])) length] > 0) {
-      if (OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_wasEscapedWithJavaLangCharSequence_withInt_([wildcardNode getText], 0)) return node;
-      switch ([((id<JavaLangCharSequence>) nil_chk([wildcardNode getText])) charAtWithInt:0]) {
-        case '*':
-        case '?':
-        @throw [new_OrgApacheLuceneQueryparserFlexibleCoreQueryNodeException_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_([new_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_withNSObjectArray_(JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, LEADING_WILDCARD_NOT_ALLOWED_), [IOSObjectArray arrayWithObjects:(id[]){ [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(node)) toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:[new_OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_init() autorelease]] } count:1 type:NSObject_class_()]) autorelease]) autorelease];
-      }
-    }
-  }
-  return node;
-}
-
-- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)preProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)node {
-  return node;
-}
-
-- (id<JavaUtilList>)setChildrenOrderWithJavaUtilList:(id<JavaUtilList>)children {
-  return children;
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", "AllowLeadingWildcardProcessor", NULL, 0x1, NULL, NULL },
-    { "processWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "process", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x1, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
-    { "postProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "postProcessNode", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
-    { "preProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "preProcessNode", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
-    { "setChildrenOrderWithJavaUtilList:", "setChildrenOrder", "Ljava.util.List;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardProcessorsAllowLeadingWildcardProcessor = { 2, "AllowLeadingWildcardProcessor", "org.apache.lucene.queryparser.flexible.standard.processors", NULL, 0x1, 5, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardProcessorsAllowLeadingWildcardProcessor = { 2, "AllowLeadingWildcardProcessor", "org.apache.lucene.queryparser.flexible.standard.processors", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserFlexibleStandardProcessorsAllowLeadingWildcardProcessor;
 }
 
 @end
 
 void OrgApacheLuceneQueryparserFlexibleStandardProcessorsAllowLeadingWildcardProcessor_init(OrgApacheLuceneQueryparserFlexibleStandardProcessorsAllowLeadingWildcardProcessor *self) {
-  OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_init(self);
+  NSObject_init(self);
 }
 
 OrgApacheLuceneQueryparserFlexibleStandardProcessorsAllowLeadingWildcardProcessor *new_OrgApacheLuceneQueryparserFlexibleStandardProcessorsAllowLeadingWildcardProcessor_init() {

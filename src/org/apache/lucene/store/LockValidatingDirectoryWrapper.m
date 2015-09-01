@@ -42,14 +42,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreLockValidatingDirectoryWrapper, writeLoc
   return [((OrgApacheLuceneStoreDirectory *) nil_chk(in_)) createOutputWithNSString:name withOrgApacheLuceneStoreIOContext:context];
 }
 
-- (void)copyFromWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)from
-                                     withNSString:(NSString *)src
-                                     withNSString:(NSString *)dest
-                withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
-  [((OrgApacheLuceneStoreLock *) nil_chk(writeLock_)) ensureValid];
-  [((OrgApacheLuceneStoreDirectory *) nil_chk(in_)) copyFromWithOrgApacheLuceneStoreDirectory:from withNSString:src withNSString:dest withOrgApacheLuceneStoreIOContext:context];
-}
-
 - (void)renameFileWithNSString:(NSString *)source
                   withNSString:(NSString *)dest {
   [((OrgApacheLuceneStoreLock *) nil_chk(writeLock_)) ensureValid];
@@ -71,14 +63,13 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreLockValidatingDirectoryWrapper, writeLoc
     { "initWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneStoreLock:", "LockValidatingDirectoryWrapper", NULL, 0x1, NULL, NULL },
     { "deleteFileWithNSString:", "deleteFile", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "createOutputWithNSString:withOrgApacheLuceneStoreIOContext:", "createOutput", "Lorg.apache.lucene.store.IndexOutput;", 0x1, "Ljava.io.IOException;", NULL },
-    { "copyFromWithOrgApacheLuceneStoreDirectory:withNSString:withNSString:withOrgApacheLuceneStoreIOContext:", "copyFrom", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "renameFileWithNSString:withNSString:", "renameFile", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "syncWithJavaUtilCollection:", "sync", "V", 0x1, "Ljava.io.IOException;", NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "writeLock_", NULL, 0x12, "Lorg.apache.lucene.store.Lock;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreLockValidatingDirectoryWrapper = { 2, "LockValidatingDirectoryWrapper", "org.apache.lucene.store", NULL, 0x11, 6, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreLockValidatingDirectoryWrapper = { 2, "LockValidatingDirectoryWrapper", "org.apache.lucene.store", NULL, 0x11, 5, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneStoreLockValidatingDirectoryWrapper;
 }
 

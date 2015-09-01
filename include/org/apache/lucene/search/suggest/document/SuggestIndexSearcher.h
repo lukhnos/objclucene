@@ -20,30 +20,19 @@
 #define OrgApacheLuceneSearchIndexSearcher_INCLUDE 1
 #include "org/apache/lucene/search/IndexSearcher.h"
 
-@class OrgApacheLuceneIndexIndexReader;
-@class OrgApacheLuceneSearchSuggestDocumentCompletionQuery;
-@class OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs;
-@class OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector;
-
 @interface OrgApacheLuceneSearchSuggestDocumentSuggestIndexSearcher : OrgApacheLuceneSearchIndexSearcher
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
-
-- (OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs *)suggestWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery:(OrgApacheLuceneSearchSuggestDocumentCompletionQuery *)query
-                                                                                                               withInt:(jint)n;
-
-- (void)suggestWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery:(OrgApacheLuceneSearchSuggestDocumentCompletionQuery *)query
-       withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector:(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector *)collector;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestDocumentSuggestIndexSearcher)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentSuggestIndexSearcher_initWithOrgApacheLuceneIndexIndexReader_(OrgApacheLuceneSearchSuggestDocumentSuggestIndexSearcher *self, OrgApacheLuceneIndexIndexReader *reader);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentSuggestIndexSearcher_init(OrgApacheLuceneSearchSuggestDocumentSuggestIndexSearcher *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentSuggestIndexSearcher *new_OrgApacheLuceneSearchSuggestDocumentSuggestIndexSearcher_initWithOrgApacheLuceneIndexIndexReader_(OrgApacheLuceneIndexIndexReader *reader) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentSuggestIndexSearcher *new_OrgApacheLuceneSearchSuggestDocumentSuggestIndexSearcher_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentSuggestIndexSearcher)
 

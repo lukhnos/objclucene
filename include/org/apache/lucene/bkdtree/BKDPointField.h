@@ -20,26 +20,19 @@
 #define OrgApacheLuceneDocumentField_INCLUDE 1
 #include "org/apache/lucene/document/Field.h"
 
-@class OrgApacheLuceneDocumentFieldType;
-
 @interface OrgApacheLuceneBkdtreeBKDPointField : OrgApacheLuceneDocumentField
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)name
-                      withDouble:(jdouble)lat
-                      withDouble:(jdouble)lon;
+- (instancetype)init;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneBkdtreeBKDPointField)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneBkdtreeBKDPointField)
 
-FOUNDATION_EXPORT OrgApacheLuceneDocumentFieldType *OrgApacheLuceneBkdtreeBKDPointField_TYPE_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneBkdtreeBKDPointField, TYPE_, OrgApacheLuceneDocumentFieldType *)
+FOUNDATION_EXPORT void OrgApacheLuceneBkdtreeBKDPointField_init(OrgApacheLuceneBkdtreeBKDPointField *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneBkdtreeBKDPointField_initWithNSString_withDouble_withDouble_(OrgApacheLuceneBkdtreeBKDPointField *self, NSString *name, jdouble lat, jdouble lon);
-
-FOUNDATION_EXPORT OrgApacheLuceneBkdtreeBKDPointField *new_OrgApacheLuceneBkdtreeBKDPointField_initWithNSString_withDouble_withDouble_(NSString *name, jdouble lat, jdouble lon) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneBkdtreeBKDPointField *new_OrgApacheLuceneBkdtreeBKDPointField_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeBKDPointField)
 

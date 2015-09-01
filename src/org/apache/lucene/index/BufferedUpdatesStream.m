@@ -16,7 +16,6 @@
 #include "java/lang/Throwable.h"
 #include "java/util/ArrayList.h"
 #include "java/util/Arrays.h"
-#include "java/util/Collection.h"
 #include "java/util/Collections.h"
 #include "java/util/Comparator.h"
 #include "java/util/List.h"
@@ -184,10 +183,6 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexBufferedUpdatesStream)
 
 - (jlong)ramBytesUsed {
   return [((JavaUtilConcurrentAtomicAtomicLong *) nil_chk(bytesUsed_)) get];
-}
-
-- (id<JavaUtilCollection>)getChildResources {
-  return JavaUtilCollections_emptyList();
 }
 
 - (OrgApacheLuceneIndexBufferedUpdatesStream_ApplyDeletesResult *)applyDeletesAndUpdatesWithOrgApacheLuceneIndexIndexWriter_ReaderPool:(OrgApacheLuceneIndexIndexWriter_ReaderPool *)pool
@@ -400,7 +395,6 @@ withOrgApacheLuceneIndexBufferedUpdatesStream_SegmentState:(OrgApacheLuceneIndex
     { "any", NULL, "Z", 0x1, NULL, NULL },
     { "numTerms", NULL, "I", 0x1, NULL, NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
     { "applyDeletesAndUpdatesWithOrgApacheLuceneIndexIndexWriter_ReaderPool:withJavaUtilList:", "applyDeletesAndUpdates", "Lorg.apache.lucene.index.BufferedUpdatesStream$ApplyDeletesResult;", 0x21, "Ljava.io.IOException;", NULL },
     { "sortByDelGenWithJavaUtilList:", "sortByDelGen", "Ljava.util.List;", 0x2, NULL, NULL },
     { "getNextGen", NULL, "J", 0x20, NULL, NULL },
@@ -424,7 +418,7 @@ withOrgApacheLuceneIndexBufferedUpdatesStream_SegmentState:(OrgApacheLuceneIndex
     { "sortSegInfoByDelGen_", NULL, 0x1a, "Ljava.util.Comparator;", &OrgApacheLuceneIndexBufferedUpdatesStream_sortSegInfoByDelGen_, "Ljava/util/Comparator<Lorg/apache/lucene/index/SegmentCommitInfo;>;", .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.index.BufferedUpdatesStream$ApplyDeletesResult;", "Lorg.apache.lucene.index.BufferedUpdatesStream$SegmentState;", "Lorg.apache.lucene.index.BufferedUpdatesStream$SegmentQueue;", "Lorg.apache.lucene.index.BufferedUpdatesStream$QueryAndLimit;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexBufferedUpdatesStream = { 2, "BufferedUpdatesStream", "org.apache.lucene.index", NULL, 0x0, 19, methods, 7, fields, 0, NULL, 4, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexBufferedUpdatesStream = { 2, "BufferedUpdatesStream", "org.apache.lucene.index", NULL, 0x0, 18, methods, 7, fields, 0, NULL, 4, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneIndexBufferedUpdatesStream;
 }
 

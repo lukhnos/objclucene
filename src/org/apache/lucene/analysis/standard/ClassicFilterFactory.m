@@ -4,46 +4,34 @@
 //
 
 #include "J2ObjC_source.h"
-#include "java/lang/IllegalArgumentException.h"
-#include "java/util/Map.h"
-#include "org/apache/lucene/analysis/TokenFilter.h"
-#include "org/apache/lucene/analysis/TokenStream.h"
-#include "org/apache/lucene/analysis/standard/ClassicFilter.h"
 #include "org/apache/lucene/analysis/standard/ClassicFilterFactory.h"
-#include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneAnalysisStandardClassicFilterFactory
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args {
-  OrgApacheLuceneAnalysisStandardClassicFilterFactory_initWithJavaUtilMap_(self, args);
+- (instancetype)init {
+  OrgApacheLuceneAnalysisStandardClassicFilterFactory_init(self);
   return self;
-}
-
-- (OrgApacheLuceneAnalysisTokenFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  return [new_OrgApacheLuceneAnalysisStandardClassicFilter_initWithOrgApacheLuceneAnalysisTokenStream_(input) autorelease];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "ClassicFilterFactory", NULL, 0x1, NULL, NULL },
-    { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.TokenFilter;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisStandardClassicFilterFactory = { 2, "ClassicFilterFactory", "org.apache.lucene.analysis.standard", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisStandardClassicFilterFactory = { 2, "ClassicFilterFactory", "org.apache.lucene.analysis.standard", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisStandardClassicFilterFactory;
 }
 
 @end
 
-void OrgApacheLuceneAnalysisStandardClassicFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisStandardClassicFilterFactory *self, id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
-  if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
-  }
+void OrgApacheLuceneAnalysisStandardClassicFilterFactory_init(OrgApacheLuceneAnalysisStandardClassicFilterFactory *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneAnalysisStandardClassicFilterFactory *new_OrgApacheLuceneAnalysisStandardClassicFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+OrgApacheLuceneAnalysisStandardClassicFilterFactory *new_OrgApacheLuceneAnalysisStandardClassicFilterFactory_init() {
   OrgApacheLuceneAnalysisStandardClassicFilterFactory *self = [OrgApacheLuceneAnalysisStandardClassicFilterFactory alloc];
-  OrgApacheLuceneAnalysisStandardClassicFilterFactory_initWithJavaUtilMap_(self, args);
+  OrgApacheLuceneAnalysisStandardClassicFilterFactory_init(self);
   return self;
 }
 

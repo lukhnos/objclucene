@@ -20,68 +20,19 @@
 #define OrgApacheLuceneAnalysisAnalyzer_INCLUDE 1
 #include "org/apache/lucene/analysis/Analyzer.h"
 
-@class IOSObjectArray;
-@class JavaIoReader;
-@class JavaLangInteger;
-@class OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;
-@class OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder;
-@class OrgApacheLuceneAnalysisUtilTokenizerFactory;
-@class OrgApacheLuceneUtilVersion;
-@class OrgLukhnosPortmobileFilePath;
-@protocol JavaUtilList;
-@protocol OrgApacheLuceneAnalysisUtilResourceLoader;
-
 @interface OrgApacheLuceneAnalysisCustomCustomAnalyzer : OrgApacheLuceneAnalysisAnalyzer
 
 #pragma mark Public
 
-+ (OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder *)builder;
-
-+ (OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder *)builderWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)configDir;
-
-+ (OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder *)builderWithOrgApacheLuceneAnalysisUtilResourceLoader:(id<OrgApacheLuceneAnalysisUtilResourceLoader>)loader;
-
-- (id<JavaUtilList>)getCharFilterFactories;
-
-- (jint)getOffsetGapWithNSString:(NSString *)fieldName;
-
-- (jint)getPositionIncrementGapWithNSString:(NSString *)fieldName;
-
-- (id<JavaUtilList>)getTokenFilterFactories;
-
-- (OrgApacheLuceneAnalysisUtilTokenizerFactory *)getTokenizerFactory;
-
-- (NSString *)description;
-
-#pragma mark Protected
-
-- (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)createComponentsWithNSString:(NSString *)fieldName;
-
-- (JavaIoReader *)initReaderWithNSString:(NSString *)fieldName
-                        withJavaIoReader:(JavaIoReader *)reader OBJC_METHOD_FAMILY_NONE;
-
-#pragma mark Package-Private
-
-- (instancetype)initWithOrgApacheLuceneUtilVersion:(OrgApacheLuceneUtilVersion *)defaultMatchVersion
-withOrgApacheLuceneAnalysisUtilCharFilterFactoryArray:(IOSObjectArray *)charFilters
-   withOrgApacheLuceneAnalysisUtilTokenizerFactory:(OrgApacheLuceneAnalysisUtilTokenizerFactory *)tokenizer
-withOrgApacheLuceneAnalysisUtilTokenFilterFactoryArray:(IOSObjectArray *)tokenFilters
-                               withJavaLangInteger:(JavaLangInteger *)posIncGap
-                               withJavaLangInteger:(JavaLangInteger *)offsetGap;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisCustomCustomAnalyzer)
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder *OrgApacheLuceneAnalysisCustomCustomAnalyzer_builder();
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCustomCustomAnalyzer_init(OrgApacheLuceneAnalysisCustomCustomAnalyzer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder *OrgApacheLuceneAnalysisCustomCustomAnalyzer_builderWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *configDir);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder *OrgApacheLuceneAnalysisCustomCustomAnalyzer_builderWithOrgApacheLuceneAnalysisUtilResourceLoader_(id<OrgApacheLuceneAnalysisUtilResourceLoader> loader);
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCustomCustomAnalyzer_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneAnalysisUtilCharFilterFactoryArray_withOrgApacheLuceneAnalysisUtilTokenizerFactory_withOrgApacheLuceneAnalysisUtilTokenFilterFactoryArray_withJavaLangInteger_withJavaLangInteger_(OrgApacheLuceneAnalysisCustomCustomAnalyzer *self, OrgApacheLuceneUtilVersion *defaultMatchVersion, IOSObjectArray *charFilters, OrgApacheLuceneAnalysisUtilTokenizerFactory *tokenizer, IOSObjectArray *tokenFilters, JavaLangInteger *posIncGap, JavaLangInteger *offsetGap);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCustomCustomAnalyzer *new_OrgApacheLuceneAnalysisCustomCustomAnalyzer_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneAnalysisUtilCharFilterFactoryArray_withOrgApacheLuceneAnalysisUtilTokenizerFactory_withOrgApacheLuceneAnalysisUtilTokenFilterFactoryArray_withJavaLangInteger_withJavaLangInteger_(OrgApacheLuceneUtilVersion *defaultMatchVersion, IOSObjectArray *charFilters, OrgApacheLuceneAnalysisUtilTokenizerFactory *tokenizer, IOSObjectArray *tokenFilters, JavaLangInteger *posIncGap, JavaLangInteger *offsetGap) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCustomCustomAnalyzer *new_OrgApacheLuceneAnalysisCustomCustomAnalyzer_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCustomCustomAnalyzer)
 
@@ -90,53 +41,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCustomCustomAnalyzer)
 #if !defined (_OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder_) && (OrgApacheLuceneAnalysisCustomCustomAnalyzer_INCLUDE_ALL || OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder_INCLUDE)
 #define _OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder_
 
-@class IOSObjectArray;
-@class OrgApacheLuceneAnalysisCustomCustomAnalyzer;
-@class OrgApacheLuceneUtilVersion;
-@protocol JavaUtilMap;
-@protocol OrgApacheLuceneAnalysisUtilResourceLoader;
-
 @interface OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder : NSObject
 
 #pragma mark Public
 
-- (OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder *)addCharFilterWithNSString:(NSString *)name
-                                                                   withJavaUtilMap:(id<JavaUtilMap>)params;
-
-- (OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder *)addCharFilterWithNSString:(NSString *)name
-                                                                 withNSStringArray:(IOSObjectArray *)params;
-
-- (OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder *)addTokenFilterWithNSString:(NSString *)name
-                                                                    withJavaUtilMap:(id<JavaUtilMap>)params;
-
-- (OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder *)addTokenFilterWithNSString:(NSString *)name
-                                                                  withNSStringArray:(IOSObjectArray *)params;
-
-- (OrgApacheLuceneAnalysisCustomCustomAnalyzer *)build;
-
-- (OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder *)withDefaultMatchVersionWithOrgApacheLuceneUtilVersion:(OrgApacheLuceneUtilVersion *)version_;
-
-- (OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder *)withOffsetGapWithInt:(jint)offsetGap;
-
-- (OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder *)withPositionIncrementGapWithInt:(jint)posIncGap;
-
-- (OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder *)withTokenizerWithNSString:(NSString *)name
-                                                                   withJavaUtilMap:(id<JavaUtilMap>)params;
-
-- (OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder *)withTokenizerWithNSString:(NSString *)name
-                                                                 withNSStringArray:(IOSObjectArray *)params;
-
-#pragma mark Package-Private
-
-- (instancetype)initWithOrgApacheLuceneAnalysisUtilResourceLoader:(id<OrgApacheLuceneAnalysisUtilResourceLoader>)loader;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder_initWithOrgApacheLuceneAnalysisUtilResourceLoader_(OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder *self, id<OrgApacheLuceneAnalysisUtilResourceLoader> loader);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder_init(OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder *new_OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder_initWithOrgApacheLuceneAnalysisUtilResourceLoader_(id<OrgApacheLuceneAnalysisUtilResourceLoader> loader) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder *new_OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder)
 

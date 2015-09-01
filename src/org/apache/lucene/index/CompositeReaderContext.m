@@ -111,10 +111,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCompositeReaderContext_Builder)
   return leaves_;
 }
 
-- (id<JavaUtilList>)children {
-  return children_;
-}
-
 - (OrgApacheLuceneIndexCompositeReader *)reader {
   return reader_;
 }
@@ -133,7 +129,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCompositeReaderContext_Builder)
     { "initWithOrgApacheLuceneIndexCompositeReader:withJavaUtilList:withJavaUtilList:", "CompositeReaderContext", NULL, 0x0, NULL, NULL },
     { "initWithOrgApacheLuceneIndexCompositeReaderContext:withOrgApacheLuceneIndexCompositeReader:withInt:withInt:withJavaUtilList:withJavaUtilList:", "CompositeReaderContext", NULL, 0x2, NULL, NULL },
     { "leaves", NULL, "Ljava.util.List;", 0x1, "Ljava.lang.UnsupportedOperationException;", NULL },
-    { "children", NULL, "Ljava.util.List;", 0x1, NULL, NULL },
     { "reader", NULL, "Lorg.apache.lucene.index.CompositeReader;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -142,7 +137,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCompositeReaderContext_Builder)
     { "reader_", NULL, 0x12, "Lorg.apache.lucene.index.CompositeReader;", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.index.CompositeReaderContext$Builder;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexCompositeReaderContext = { 2, "CompositeReaderContext", "org.apache.lucene.index", NULL, 0x11, 7, methods, 3, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexCompositeReaderContext = { 2, "CompositeReaderContext", "org.apache.lucene.index", NULL, 0x11, 6, methods, 3, fields, 0, NULL, 1, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneIndexCompositeReaderContext;
 }
 

@@ -55,10 +55,6 @@
 
 - (jint)docFreq;
 
-- (jfloat)getMinSimilarity;
-
-- (jfloat)getScaleFactor;
-
 - (OrgApacheLuceneUtilBytesRef *)next;
 
 - (jlong)ord;
@@ -72,8 +68,6 @@
 
 - (void)seekExactWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term
                withOrgApacheLuceneIndexTermState:(OrgApacheLuceneIndexTermState *)state;
-
-- (void)seekExactWithLong:(jlong)ord;
 
 - (OrgApacheLuceneUtilBytesRef *)term;
 

@@ -35,8 +35,6 @@
 
 - (jboolean)followsWithOrgApacheLuceneSearchHighlightTextFragment:(OrgApacheLuceneSearchHighlightTextFragment *)fragment;
 
-- (jint)getFragNum;
-
 - (jfloat)getScore;
 
 - (void)mergeWithOrgApacheLuceneSearchHighlightTextFragment:(OrgApacheLuceneSearchHighlightTextFragment *)frag2;

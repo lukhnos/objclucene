@@ -20,45 +20,19 @@
 #define OrgApacheLuceneQueriesFunctionValueSource_INCLUDE 1
 #include "org/apache/lucene/queries/function/ValueSource.h"
 
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneQueriesFunctionFunctionValues;
-@class OrgApacheLuceneSearchIndexSearcher;
-@protocol JavaUtilMap;
-
-@interface OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction : OrgApacheLuceneQueriesFunctionValueSource {
- @public
-  OrgApacheLuceneQueriesFunctionValueSource *source_;
-  jfloat slope_;
-  jfloat intercept_;
-}
+@interface OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction : OrgApacheLuceneQueriesFunctionValueSource
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)source
-                                                        withFloat:(jfloat)slope
-                                                        withFloat:(jfloat)intercept;
-
-- (void)createWeightWithJavaUtilMap:(id<JavaUtilMap>)context
-withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher;
-
-- (NSString *)description__;
-
-- (jboolean)isEqual:(id)o;
-
-- (OrgApacheLuceneQueriesFunctionFunctionValues *)getValuesWithJavaUtilMap:(id<JavaUtilMap>)context
-                                 withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext;
-
-- (NSUInteger)hash;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction, source_, OrgApacheLuceneQueriesFunctionValueSource *)
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction_init(OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction_initWithOrgApacheLuceneQueriesFunctionValueSource_withFloat_withFloat_(OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction *self, OrgApacheLuceneQueriesFunctionValueSource *source, jfloat slope, jfloat intercept);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction *new_OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction_initWithOrgApacheLuceneQueriesFunctionValueSource_withFloat_withFloat_(OrgApacheLuceneQueriesFunctionValueSource *source, jfloat slope, jfloat intercept) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction *new_OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction)
 

@@ -25,7 +25,6 @@
 #include "java/lang/CharSequence.h"
 
 @class IOSCharArray;
-@protocol JavaUtilComparator;
 
 @interface OrgApacheLuceneUtilCharsRef : NSObject < JavaLangComparable, JavaLangCharSequence, NSCopying > {
  @public
@@ -42,10 +41,6 @@
                           withInt:(jint)offset
                           withInt:(jint)length;
 
-- (instancetype)initWithInt:(jint)capacity;
-
-- (instancetype)initWithNSString:(NSString *)string;
-
 - (jchar)charAtWithInt:(jint)index;
 
 - (jboolean)charsEqualsWithOrgApacheLuceneUtilCharsRef:(OrgApacheLuceneUtilCharsRef *)other;
@@ -54,11 +49,7 @@
 
 - (jint)compareToWithId:(OrgApacheLuceneUtilCharsRef *)other;
 
-+ (OrgApacheLuceneUtilCharsRef *)deepCopyOfWithOrgApacheLuceneUtilCharsRef:(OrgApacheLuceneUtilCharsRef *)other;
-
 - (jboolean)isEqual:(id)other;
-
-+ (id<JavaUtilComparator>)getUTF16SortedAsUTF8Comparator;
 
 - (NSUInteger)hash;
 
@@ -84,21 +75,9 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilCharsRef_init(OrgApacheLuceneUtilChars
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilCharsRef *new_OrgApacheLuceneUtilCharsRef_init() NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilCharsRef_initWithInt_(OrgApacheLuceneUtilCharsRef *self, jint capacity);
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilCharsRef *new_OrgApacheLuceneUtilCharsRef_initWithInt_(jint capacity) NS_RETURNS_RETAINED;
-
 FOUNDATION_EXPORT void OrgApacheLuceneUtilCharsRef_initWithCharArray_withInt_withInt_(OrgApacheLuceneUtilCharsRef *self, IOSCharArray *chars, jint offset, jint length);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilCharsRef *new_OrgApacheLuceneUtilCharsRef_initWithCharArray_withInt_withInt_(IOSCharArray *chars, jint offset, jint length) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneUtilCharsRef_initWithNSString_(OrgApacheLuceneUtilCharsRef *self, NSString *string);
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilCharsRef *new_OrgApacheLuceneUtilCharsRef_initWithNSString_(NSString *string) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT id<JavaUtilComparator> OrgApacheLuceneUtilCharsRef_getUTF16SortedAsUTF8Comparator();
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilCharsRef *OrgApacheLuceneUtilCharsRef_deepCopyOfWithOrgApacheLuceneUtilCharsRef_(OrgApacheLuceneUtilCharsRef *other);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilCharsRef)
 

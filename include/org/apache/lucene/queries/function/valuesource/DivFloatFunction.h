@@ -20,31 +20,19 @@
 #define OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_INCLUDE 1
 #include "org/apache/lucene/queries/function/valuesource/DualFloatFunction.h"
 
-@class OrgApacheLuceneQueriesFunctionFunctionValues;
-@class OrgApacheLuceneQueriesFunctionValueSource;
-
 @interface OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction : OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)a
-                    withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)b;
-
-#pragma mark Protected
-
-- (jfloat)funcWithInt:(jint)doc
-withOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)aVals
-withOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)bVals;
-
-- (NSString *)name;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction_initWithOrgApacheLuceneQueriesFunctionValueSource_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction *self, OrgApacheLuceneQueriesFunctionValueSource *a, OrgApacheLuceneQueriesFunctionValueSource *b);
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction_init(OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction *new_OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction_initWithOrgApacheLuceneQueriesFunctionValueSource_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValueSource *a, OrgApacheLuceneQueriesFunctionValueSource *b) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction *new_OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceDivFloatFunction)
 

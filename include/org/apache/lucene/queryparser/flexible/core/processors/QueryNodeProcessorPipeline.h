@@ -24,76 +24,11 @@
 #define JavaUtilList_INCLUDE 1
 #include "java/util/List.h"
 
-@class IOSObjectArray;
-@class OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler;
-@protocol JavaUtilCollection;
-@protocol JavaUtilIterator;
-@protocol JavaUtilListIterator;
-@protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
-
 @interface OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline : NSObject < OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor, JavaUtilList >
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (instancetype)initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler:(OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *)queryConfigHandler;
-
-- (void)addWithInt:(jint)index
-            withId:(id<OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor>)processor;
-
-- (jboolean)addWithId:(id<OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor>)processor;
-
-- (jboolean)addAllWithJavaUtilCollection:(id<JavaUtilCollection>)c;
-
-- (jboolean)addAllWithInt:(jint)index
-   withJavaUtilCollection:(id<JavaUtilCollection>)c;
-
-- (void)clear;
-
-- (jboolean)containsWithId:(id)o;
-
-- (jboolean)containsAllWithJavaUtilCollection:(id<JavaUtilCollection>)c;
-
-- (id<OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor>)getWithInt:(jint)index;
-
-- (OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *)getQueryConfigHandler;
-
-- (jint)indexOfWithId:(id)o;
-
-- (jboolean)isEmpty;
-
-- (id<JavaUtilIterator>)iterator;
-
-- (jint)lastIndexOfWithId:(id)o;
-
-- (id<JavaUtilListIterator>)listIterator;
-
-- (id<JavaUtilListIterator>)listIteratorWithInt:(jint)index;
-
-- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)processWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryTree;
-
-- (id<OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor>)removeWithInt:(jint)index;
-
-- (jboolean)removeWithId:(id)o;
-
-- (jboolean)removeAllWithJavaUtilCollection:(id<JavaUtilCollection>)c;
-
-- (jboolean)retainAllWithJavaUtilCollection:(id<JavaUtilCollection>)c;
-
-- (id<OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor>)setWithInt:(jint)index
-                                                                              withId:(id<OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor>)processor;
-
-- (void)setQueryConfigHandlerWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler:(OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *)queryConfigHandler;
-
-- (jint)size;
-
-- (id<JavaUtilList>)subListWithInt:(jint)fromIndex
-                           withInt:(jint)toIndex;
-
-- (IOSObjectArray *)toArray;
-
-- (IOSObjectArray *)toArrayWithNSObjectArray:(IOSObjectArray *)array;
 
 #pragma mark Package-Private
 
@@ -105,10 +40,6 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNo
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline_init(OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline *new_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline_init() NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline_initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler_(OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline *self, OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *queryConfigHandler);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline *new_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline_initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler_(OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *queryConfigHandler) NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorPipeline)
 

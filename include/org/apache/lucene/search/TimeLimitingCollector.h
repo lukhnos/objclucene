@@ -20,48 +20,19 @@
 #define OrgApacheLuceneSearchCollector_INCLUDE 1
 #include "org/apache/lucene/search/Collector.h"
 
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneSearchTimeLimitingCollector_TimerThread;
-@class OrgApacheLuceneUtilCounter;
-@protocol OrgApacheLuceneSearchLeafCollector;
-
 @interface OrgApacheLuceneSearchTimeLimitingCollector : NSObject < OrgApacheLuceneSearchCollector >
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchCollector:(id<OrgApacheLuceneSearchCollector>)collector
-                        withOrgApacheLuceneUtilCounter:(OrgApacheLuceneUtilCounter *)clock
-                                              withLong:(jlong)ticksAllowed;
-
-+ (OrgApacheLuceneUtilCounter *)getGlobalCounter;
-
-+ (OrgApacheLuceneSearchTimeLimitingCollector_TimerThread *)getGlobalTimerThread;
-
-- (id<OrgApacheLuceneSearchLeafCollector>)getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
-
-- (jboolean)isGreedy;
-
-- (jboolean)needsScores;
-
-- (void)setBaseline;
-
-- (void)setBaselineWithLong:(jlong)clockTime;
-
-- (void)setCollectorWithOrgApacheLuceneSearchCollector:(id<OrgApacheLuceneSearchCollector>)collector;
-
-- (void)setGreedyWithBoolean:(jboolean)greedy;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchTimeLimitingCollector)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchTimeLimitingCollector_initWithOrgApacheLuceneSearchCollector_withOrgApacheLuceneUtilCounter_withLong_(OrgApacheLuceneSearchTimeLimitingCollector *self, id<OrgApacheLuceneSearchCollector> collector, OrgApacheLuceneUtilCounter *clock, jlong ticksAllowed);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchTimeLimitingCollector_init(OrgApacheLuceneSearchTimeLimitingCollector *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchTimeLimitingCollector *new_OrgApacheLuceneSearchTimeLimitingCollector_initWithOrgApacheLuceneSearchCollector_withOrgApacheLuceneUtilCounter_withLong_(id<OrgApacheLuceneSearchCollector> collector, OrgApacheLuceneUtilCounter *clock, jlong ticksAllowed) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilCounter *OrgApacheLuceneSearchTimeLimitingCollector_getGlobalCounter();
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchTimeLimitingCollector_TimerThread *OrgApacheLuceneSearchTimeLimitingCollector_getGlobalTimerThread();
+FOUNDATION_EXPORT OrgApacheLuceneSearchTimeLimitingCollector *new_OrgApacheLuceneSearchTimeLimitingCollector_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTimeLimitingCollector)
 
@@ -78,15 +49,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTimeLimitingCollector)
 
 #pragma mark Public
 
-- (jint)getLastDocCollected;
-
-- (jlong)getTimeAllowed;
-
-- (jlong)getTimeElapsed;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchTimeLimitingCollector_TimeExceededException)
+
+FOUNDATION_EXPORT void OrgApacheLuceneSearchTimeLimitingCollector_TimeExceededException_init(OrgApacheLuceneSearchTimeLimitingCollector_TimeExceededException *self);
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchTimeLimitingCollector_TimeExceededException *new_OrgApacheLuceneSearchTimeLimitingCollector_TimeExceededException_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTimeLimitingCollector_TimeExceededException)
 
@@ -99,50 +70,26 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTimeLimitingCollector_TimeExceed
 #define JavaLangThread_INCLUDE 1
 #include "java/lang/Thread.h"
 
-@class OrgApacheLuceneUtilCounter;
-
 #define OrgApacheLuceneSearchTimeLimitingCollector_TimerThread_DEFAULT_RESOLUTION 20
 
-@interface OrgApacheLuceneSearchTimeLimitingCollector_TimerThread : JavaLangThread {
- @public
-  OrgApacheLuceneUtilCounter *counter_;
-}
+@interface OrgApacheLuceneSearchTimeLimitingCollector_TimerThread : JavaLangThread
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneUtilCounter:(OrgApacheLuceneUtilCounter *)counter;
-
-- (instancetype)initWithLong:(jlong)resolution
-withOrgApacheLuceneUtilCounter:(OrgApacheLuceneUtilCounter *)counter;
-
-- (jlong)getMilliseconds;
-
-- (jlong)getResolution;
-
-- (void)run;
-
-- (void)setResolutionWithLong:(jlong)resolution;
-
-- (void)stopTimer;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchTimeLimitingCollector_TimerThread)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchTimeLimitingCollector_TimerThread, counter_, OrgApacheLuceneUtilCounter *)
 
 FOUNDATION_EXPORT NSString *OrgApacheLuceneSearchTimeLimitingCollector_TimerThread_THREAD_NAME_;
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchTimeLimitingCollector_TimerThread, THREAD_NAME_, NSString *)
 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchTimeLimitingCollector_TimerThread, DEFAULT_RESOLUTION, jint)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchTimeLimitingCollector_TimerThread_initWithLong_withOrgApacheLuceneUtilCounter_(OrgApacheLuceneSearchTimeLimitingCollector_TimerThread *self, jlong resolution, OrgApacheLuceneUtilCounter *counter);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchTimeLimitingCollector_TimerThread_init(OrgApacheLuceneSearchTimeLimitingCollector_TimerThread *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchTimeLimitingCollector_TimerThread *new_OrgApacheLuceneSearchTimeLimitingCollector_TimerThread_initWithLong_withOrgApacheLuceneUtilCounter_(jlong resolution, OrgApacheLuceneUtilCounter *counter) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchTimeLimitingCollector_TimerThread_initWithOrgApacheLuceneUtilCounter_(OrgApacheLuceneSearchTimeLimitingCollector_TimerThread *self, OrgApacheLuceneUtilCounter *counter);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchTimeLimitingCollector_TimerThread *new_OrgApacheLuceneSearchTimeLimitingCollector_TimerThread_initWithOrgApacheLuceneUtilCounter_(OrgApacheLuceneUtilCounter *counter) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchTimeLimitingCollector_TimerThread *new_OrgApacheLuceneSearchTimeLimitingCollector_TimerThread_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTimeLimitingCollector_TimerThread)
 

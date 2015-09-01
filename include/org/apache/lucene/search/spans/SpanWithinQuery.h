@@ -20,73 +20,21 @@
 #define OrgApacheLuceneSearchSpansSpanContainQuery_INCLUDE 1
 #include "org/apache/lucene/search/spans/SpanContainQuery.h"
 
-@class OrgApacheLuceneSearchIndexSearcher;
-@class OrgApacheLuceneSearchSpansSpanQuery;
-@class OrgApacheLuceneSearchSpansSpanWeight;
-
 @interface OrgApacheLuceneSearchSpansSpanWithinQuery : OrgApacheLuceneSearchSpansSpanContainQuery
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)big
-                    withOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)little;
-
-- (OrgApacheLuceneSearchSpansSpanWithinQuery *)clone;
-
-- (OrgApacheLuceneSearchSpansSpanWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
-                                                                                 withBoolean:(jboolean)needsScores;
-
-- (NSString *)toStringWithNSString:(NSString *)field;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSpansSpanWithinQuery)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansSpanWithinQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withOrgApacheLuceneSearchSpansSpanQuery_(OrgApacheLuceneSearchSpansSpanWithinQuery *self, OrgApacheLuceneSearchSpansSpanQuery *big, OrgApacheLuceneSearchSpansSpanQuery *little);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansSpanWithinQuery_init(OrgApacheLuceneSearchSpansSpanWithinQuery *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanWithinQuery *new_OrgApacheLuceneSearchSpansSpanWithinQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withOrgApacheLuceneSearchSpansSpanQuery_(OrgApacheLuceneSearchSpansSpanQuery *big, OrgApacheLuceneSearchSpansSpanQuery *little) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanWithinQuery *new_OrgApacheLuceneSearchSpansSpanWithinQuery_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanWithinQuery)
-
-#endif
-
-#if !defined (_OrgApacheLuceneSearchSpansSpanWithinQuery_SpanWithinWeight_) && (OrgApacheLuceneSearchSpansSpanWithinQuery_INCLUDE_ALL || OrgApacheLuceneSearchSpansSpanWithinQuery_SpanWithinWeight_INCLUDE)
-#define _OrgApacheLuceneSearchSpansSpanWithinQuery_SpanWithinWeight_
-
-#define OrgApacheLuceneSearchSpansSpanContainQuery_RESTRICT 1
-#define OrgApacheLuceneSearchSpansSpanContainQuery_SpanContainWeight_INCLUDE 1
-#include "org/apache/lucene/search/spans/SpanContainQuery.h"
-
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneSearchIndexSearcher;
-@class OrgApacheLuceneSearchSpansSpanWeight;
-@class OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum;
-@class OrgApacheLuceneSearchSpansSpanWithinQuery;
-@class OrgApacheLuceneSearchSpansSpans;
-@protocol JavaUtilMap;
-
-@interface OrgApacheLuceneSearchSpansSpanWithinQuery_SpanWithinWeight : OrgApacheLuceneSearchSpansSpanContainQuery_SpanContainWeight
-
-#pragma mark Public
-
-- (instancetype)initWithOrgApacheLuceneSearchSpansSpanWithinQuery:(OrgApacheLuceneSearchSpansSpanWithinQuery *)outer$
-                           withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
-                                                  withJavaUtilMap:(id<JavaUtilMap>)terms
-                         withOrgApacheLuceneSearchSpansSpanWeight:(OrgApacheLuceneSearchSpansSpanWeight *)bigWeight
-                         withOrgApacheLuceneSearchSpansSpanWeight:(OrgApacheLuceneSearchSpansSpanWeight *)littleWeight;
-
-- (OrgApacheLuceneSearchSpansSpans *)getSpansWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-                                 withOrgApacheLuceneSearchSpansSpanWeight_PostingsEnum:(OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum *)requiredPostings;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSpansSpanWithinQuery_SpanWithinWeight)
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansSpanWithinQuery_SpanWithinWeight_initWithOrgApacheLuceneSearchSpansSpanWithinQuery_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_withOrgApacheLuceneSearchSpansSpanWeight_withOrgApacheLuceneSearchSpansSpanWeight_(OrgApacheLuceneSearchSpansSpanWithinQuery_SpanWithinWeight *self, OrgApacheLuceneSearchSpansSpanWithinQuery *outer$, OrgApacheLuceneSearchIndexSearcher *searcher, id<JavaUtilMap> terms, OrgApacheLuceneSearchSpansSpanWeight *bigWeight, OrgApacheLuceneSearchSpansSpanWeight *littleWeight);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanWithinQuery_SpanWithinWeight *new_OrgApacheLuceneSearchSpansSpanWithinQuery_SpanWithinWeight_initWithOrgApacheLuceneSearchSpansSpanWithinQuery_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_withOrgApacheLuceneSearchSpansSpanWeight_withOrgApacheLuceneSearchSpansSpanWeight_(OrgApacheLuceneSearchSpansSpanWithinQuery *outer$, OrgApacheLuceneSearchIndexSearcher *searcher, id<JavaUtilMap> terms, OrgApacheLuceneSearchSpansSpanWeight *bigWeight, OrgApacheLuceneSearchSpansSpanWeight *littleWeight) NS_RETURNS_RETAINED;
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanWithinQuery_SpanWithinWeight)
 
 #endif
 

@@ -24,20 +24,16 @@
 @class OrgApacheLuceneIndexCompositeReader;
 @class OrgApacheLuceneIndexFieldInfos;
 @class OrgApacheLuceneIndexFields;
-@class OrgApacheLuceneIndexIndexReader;
 @class OrgApacheLuceneIndexNumericDocValues;
 @class OrgApacheLuceneIndexSortedDocValues;
 @class OrgApacheLuceneIndexSortedNumericDocValues;
 @class OrgApacheLuceneIndexSortedSetDocValues;
 @class OrgApacheLuceneIndexStoredFieldVisitor;
-@protocol OrgApacheLuceneIndexLeafReader_CoreClosedListener;
 @protocol OrgApacheLuceneUtilBits;
 
 @interface OrgApacheLuceneIndexSlowCompositeReaderWrapper : OrgApacheLuceneIndexLeafReader
 
 #pragma mark Public
-
-- (void)addCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:(id<OrgApacheLuceneIndexLeafReader_CoreClosedListener>)listener;
 
 - (void)checkIntegrity;
 
@@ -47,8 +43,6 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 - (OrgApacheLuceneIndexFields *)fields;
 
 - (OrgApacheLuceneIndexBinaryDocValues *)getBinaryDocValuesWithNSString:(NSString *)field;
-
-- (id)getCombinedCoreAndDeletesKey;
 
 - (id)getCoreCacheKey;
 
@@ -74,11 +68,7 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 
 - (jint)numDocs;
 
-- (void)removeCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:(id<OrgApacheLuceneIndexLeafReader_CoreClosedListener>)listener;
-
 - (NSString *)description;
-
-+ (OrgApacheLuceneIndexLeafReader *)wrapWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
 
 #pragma mark Protected
 
@@ -92,8 +82,6 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexSlowCompositeReaderWrapper)
-
-FOUNDATION_EXPORT OrgApacheLuceneIndexLeafReader *OrgApacheLuceneIndexSlowCompositeReaderWrapper_wrapWithOrgApacheLuceneIndexIndexReader_(OrgApacheLuceneIndexIndexReader *reader);
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexSlowCompositeReaderWrapper_initWithOrgApacheLuceneIndexCompositeReader_withBoolean_(OrgApacheLuceneIndexSlowCompositeReaderWrapper *self, OrgApacheLuceneIndexCompositeReader *reader, jboolean merging);
 

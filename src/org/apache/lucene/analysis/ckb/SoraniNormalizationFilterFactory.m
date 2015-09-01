@@ -4,51 +4,34 @@
 //
 
 #include "J2ObjC_source.h"
-#include "java/lang/IllegalArgumentException.h"
-#include "java/util/Map.h"
-#include "org/apache/lucene/analysis/TokenStream.h"
-#include "org/apache/lucene/analysis/ckb/SoraniNormalizationFilter.h"
 #include "org/apache/lucene/analysis/ckb/SoraniNormalizationFilterFactory.h"
-#include "org/apache/lucene/analysis/util/AbstractAnalysisFactory.h"
-#include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneAnalysisCkbSoraniNormalizationFilterFactory
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args {
-  OrgApacheLuceneAnalysisCkbSoraniNormalizationFilterFactory_initWithJavaUtilMap_(self, args);
-  return self;
-}
-
-- (OrgApacheLuceneAnalysisCkbSoraniNormalizationFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  return [new_OrgApacheLuceneAnalysisCkbSoraniNormalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_(input) autorelease];
-}
-
-- (OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory *)getMultiTermComponent {
+- (instancetype)init {
+  OrgApacheLuceneAnalysisCkbSoraniNormalizationFilterFactory_init(self);
   return self;
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "SoraniNormalizationFilterFactory", NULL, 0x1, NULL, NULL },
-    { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.ckb.SoraniNormalizationFilter;", 0x1, NULL, NULL },
-    { "getMultiTermComponent", NULL, "Lorg.apache.lucene.analysis.util.AbstractAnalysisFactory;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCkbSoraniNormalizationFilterFactory = { 2, "SoraniNormalizationFilterFactory", "org.apache.lucene.analysis.ckb", NULL, 0x1, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCkbSoraniNormalizationFilterFactory = { 2, "SoraniNormalizationFilterFactory", "org.apache.lucene.analysis.ckb", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisCkbSoraniNormalizationFilterFactory;
 }
 
 @end
 
-void OrgApacheLuceneAnalysisCkbSoraniNormalizationFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisCkbSoraniNormalizationFilterFactory *self, id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
-  if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
-  }
+void OrgApacheLuceneAnalysisCkbSoraniNormalizationFilterFactory_init(OrgApacheLuceneAnalysisCkbSoraniNormalizationFilterFactory *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneAnalysisCkbSoraniNormalizationFilterFactory *new_OrgApacheLuceneAnalysisCkbSoraniNormalizationFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+OrgApacheLuceneAnalysisCkbSoraniNormalizationFilterFactory *new_OrgApacheLuceneAnalysisCkbSoraniNormalizationFilterFactory_init() {
   OrgApacheLuceneAnalysisCkbSoraniNormalizationFilterFactory *self = [OrgApacheLuceneAnalysisCkbSoraniNormalizationFilterFactory alloc];
-  OrgApacheLuceneAnalysisCkbSoraniNormalizationFilterFactory_initWithJavaUtilMap_(self, args);
+  OrgApacheLuceneAnalysisCkbSoraniNormalizationFilterFactory_init(self);
   return self;
 }
 

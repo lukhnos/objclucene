@@ -14,7 +14,6 @@
 #include "org/apache/lucene/search/ReferenceManager.h"
 #include "org/apache/lucene/search/SearcherFactory.h"
 #include "org/apache/lucene/search/SearcherManager.h"
-#include "org/apache/lucene/store/Directory.h"
 
 @interface OrgApacheLuceneSearchSearcherManager () {
  @public
@@ -34,32 +33,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSearcherManager, searcherFactory_, OrgA
   return self;
 }
 
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
-             withOrgApacheLuceneSearchSearcherFactory:(OrgApacheLuceneSearchSearcherFactory *)searcherFactory {
-  OrgApacheLuceneSearchSearcherManager_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneSearchSearcherFactory_(self, dir, searcherFactory);
-  return self;
-}
-
-- (instancetype)initWithOrgApacheLuceneIndexDirectoryReader:(OrgApacheLuceneIndexDirectoryReader *)reader
-                   withOrgApacheLuceneSearchSearcherFactory:(OrgApacheLuceneSearchSearcherFactory *)searcherFactory {
-  OrgApacheLuceneSearchSearcherManager_initWithOrgApacheLuceneIndexDirectoryReader_withOrgApacheLuceneSearchSearcherFactory_(self, reader, searcherFactory);
-  return self;
-}
-
 - (void)decRefWithId:(OrgApacheLuceneSearchIndexSearcher *)reference {
   [((OrgApacheLuceneIndexIndexReader *) nil_chk([((OrgApacheLuceneSearchIndexSearcher *) nil_chk(reference)) getIndexReader])) decRef];
-}
-
-- (OrgApacheLuceneSearchIndexSearcher *)refreshIfNeededWithId:(OrgApacheLuceneSearchIndexSearcher *)referenceToRefresh {
-  OrgApacheLuceneIndexIndexReader *r = [((OrgApacheLuceneSearchIndexSearcher *) nil_chk(referenceToRefresh)) getIndexReader];
-  JreAssert(([r isKindOfClass:[OrgApacheLuceneIndexDirectoryReader class]]), (JreStrcat("$@", @"searcher's IndexReader should be a DirectoryReader, but got ", r)));
-  OrgApacheLuceneIndexIndexReader *newReader = OrgApacheLuceneIndexDirectoryReader_openIfChangedWithOrgApacheLuceneIndexDirectoryReader_((OrgApacheLuceneIndexDirectoryReader *) check_class_cast(r, [OrgApacheLuceneIndexDirectoryReader class]));
-  if (newReader == nil) {
-    return nil;
-  }
-  else {
-    return OrgApacheLuceneSearchSearcherManager_getSearcherWithOrgApacheLuceneSearchSearcherFactory_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneIndexIndexReader_(searcherFactory_, newReader, r);
-  }
 }
 
 - (jboolean)tryIncRefWithId:(OrgApacheLuceneSearchIndexSearcher *)reference {
@@ -68,18 +43,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSearcherManager, searcherFactory_, OrgA
 
 - (jint)getRefCountWithId:(OrgApacheLuceneSearchIndexSearcher *)reference {
   return [((OrgApacheLuceneIndexIndexReader *) nil_chk([((OrgApacheLuceneSearchIndexSearcher *) nil_chk(reference)) getIndexReader])) getRefCount];
-}
-
-- (jboolean)isSearcherCurrent {
-  OrgApacheLuceneSearchIndexSearcher *searcher = [self acquire];
-  @try {
-    OrgApacheLuceneIndexIndexReader *r = [((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) getIndexReader];
-    JreAssert(([r isKindOfClass:[OrgApacheLuceneIndexDirectoryReader class]]), (JreStrcat("$@", @"searcher's IndexReader should be a DirectoryReader, but got ", r)));
-    return [((OrgApacheLuceneIndexDirectoryReader *) nil_chk(((OrgApacheLuceneIndexDirectoryReader *) check_class_cast(r, [OrgApacheLuceneIndexDirectoryReader class])))) isCurrent];
-  }
-  @finally {
-    [self release__WithId:searcher];
-  }
 }
 
 + (OrgApacheLuceneSearchIndexSearcher *)getSearcherWithOrgApacheLuceneSearchSearcherFactory:(OrgApacheLuceneSearchSearcherFactory *)searcherFactory
@@ -96,20 +59,16 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSearcherManager, searcherFactory_, OrgA
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneIndexIndexWriter:withBoolean:withOrgApacheLuceneSearchSearcherFactory:", "SearcherManager", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneStoreDirectory:withOrgApacheLuceneSearchSearcherFactory:", "SearcherManager", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneIndexDirectoryReader:withOrgApacheLuceneSearchSearcherFactory:", "SearcherManager", NULL, 0x1, "Ljava.io.IOException;", NULL },
     { "decRefWithId:", "decRef", "V", 0x4, "Ljava.io.IOException;", NULL },
-    { "refreshIfNeededWithId:", "refreshIfNeeded", "Lorg.apache.lucene.search.IndexSearcher;", 0x4, "Ljava.io.IOException;", NULL },
     { "tryIncRefWithId:", "tryIncRef", "Z", 0x4, NULL, NULL },
     { "getRefCountWithId:", "getRefCount", "I", 0x4, NULL, NULL },
-    { "isSearcherCurrent", NULL, "Z", 0x1, "Ljava.io.IOException;", NULL },
     { "getSearcherWithOrgApacheLuceneSearchSearcherFactory:withOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneIndexIndexReader:", "getSearcher", "Lorg.apache.lucene.search.IndexSearcher;", 0x9, "Ljava.io.IOException;", NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "searcherFactory_", NULL, 0x12, "Lorg.apache.lucene.search.SearcherFactory;", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.IndexSearcher;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSearcherManager = { 2, "SearcherManager", "org.apache.lucene.search", NULL, 0x11, 9, methods, 1, fields, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/search/ReferenceManager<Lorg/apache/lucene/search/IndexSearcher;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSearcherManager = { 2, "SearcherManager", "org.apache.lucene.search", NULL, 0x11, 5, methods, 1, fields, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/search/ReferenceManager<Lorg/apache/lucene/search/IndexSearcher;>;" };
   return &_OrgApacheLuceneSearchSearcherManager;
 }
 
@@ -127,36 +86,6 @@ void OrgApacheLuceneSearchSearcherManager_initWithOrgApacheLuceneIndexIndexWrite
 OrgApacheLuceneSearchSearcherManager *new_OrgApacheLuceneSearchSearcherManager_initWithOrgApacheLuceneIndexIndexWriter_withBoolean_withOrgApacheLuceneSearchSearcherFactory_(OrgApacheLuceneIndexIndexWriter *writer, jboolean applyAllDeletes, OrgApacheLuceneSearchSearcherFactory *searcherFactory) {
   OrgApacheLuceneSearchSearcherManager *self = [OrgApacheLuceneSearchSearcherManager alloc];
   OrgApacheLuceneSearchSearcherManager_initWithOrgApacheLuceneIndexIndexWriter_withBoolean_withOrgApacheLuceneSearchSearcherFactory_(self, writer, applyAllDeletes, searcherFactory);
-  return self;
-}
-
-void OrgApacheLuceneSearchSearcherManager_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneSearchSearcherFactory_(OrgApacheLuceneSearchSearcherManager *self, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneSearchSearcherFactory *searcherFactory) {
-  OrgApacheLuceneSearchReferenceManager_init(self);
-  if (searcherFactory == nil) {
-    searcherFactory = [new_OrgApacheLuceneSearchSearcherFactory_init() autorelease];
-  }
-  JreStrongAssign(&self->searcherFactory_, searcherFactory);
-  JreVolatileStrongAssign(&self->current_, OrgApacheLuceneSearchSearcherManager_getSearcherWithOrgApacheLuceneSearchSearcherFactory_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneIndexIndexReader_(searcherFactory, OrgApacheLuceneIndexDirectoryReader_openWithOrgApacheLuceneStoreDirectory_(dir), nil));
-}
-
-OrgApacheLuceneSearchSearcherManager *new_OrgApacheLuceneSearchSearcherManager_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneSearchSearcherFactory_(OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneSearchSearcherFactory *searcherFactory) {
-  OrgApacheLuceneSearchSearcherManager *self = [OrgApacheLuceneSearchSearcherManager alloc];
-  OrgApacheLuceneSearchSearcherManager_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneSearchSearcherFactory_(self, dir, searcherFactory);
-  return self;
-}
-
-void OrgApacheLuceneSearchSearcherManager_initWithOrgApacheLuceneIndexDirectoryReader_withOrgApacheLuceneSearchSearcherFactory_(OrgApacheLuceneSearchSearcherManager *self, OrgApacheLuceneIndexDirectoryReader *reader, OrgApacheLuceneSearchSearcherFactory *searcherFactory) {
-  OrgApacheLuceneSearchReferenceManager_init(self);
-  if (searcherFactory == nil) {
-    searcherFactory = [new_OrgApacheLuceneSearchSearcherFactory_init() autorelease];
-  }
-  JreStrongAssign(&self->searcherFactory_, searcherFactory);
-  JreVolatileStrongAssign(&self->current_, OrgApacheLuceneSearchSearcherManager_getSearcherWithOrgApacheLuceneSearchSearcherFactory_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneIndexIndexReader_(searcherFactory, reader, nil));
-}
-
-OrgApacheLuceneSearchSearcherManager *new_OrgApacheLuceneSearchSearcherManager_initWithOrgApacheLuceneIndexDirectoryReader_withOrgApacheLuceneSearchSearcherFactory_(OrgApacheLuceneIndexDirectoryReader *reader, OrgApacheLuceneSearchSearcherFactory *searcherFactory) {
-  OrgApacheLuceneSearchSearcherManager *self = [OrgApacheLuceneSearchSearcherManager alloc];
-  OrgApacheLuceneSearchSearcherManager_initWithOrgApacheLuceneIndexDirectoryReader_withOrgApacheLuceneSearchSearcherFactory_(self, reader, searcherFactory);
   return self;
 }
 

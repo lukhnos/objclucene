@@ -105,23 +105,6 @@ __attribute__((unused)) static jint OrgApacheLuceneUtilDocIdSetBuilder_dedupWith
   }
 }
 
-- (void)addWithInt:(jint)doc {
-  if (bitSet_ != nil) {
-    [bitSet_ setWithInt:doc];
-  }
-  else {
-    if (bufferSize_ + 1 > ((IOSIntArray *) nil_chk(buffer_))->size_) {
-      if (bufferSize_ + 1 >= threshold_) {
-        OrgApacheLuceneUtilDocIdSetBuilder_upgradeToBitSet(self);
-        [((OrgApacheLuceneUtilBitSet *) nil_chk(bitSet_)) setWithInt:doc];
-        return;
-      }
-      OrgApacheLuceneUtilDocIdSetBuilder_growBufferWithInt_(self, bufferSize_ + 1);
-    }
-    *IOSIntArray_GetRef(buffer_, bufferSize_++) = doc;
-  }
-}
-
 + (jint)dedupWithIntArray:(IOSIntArray *)arr
                   withInt:(jint)length {
   return OrgApacheLuceneUtilDocIdSetBuilder_dedupWithIntArray_withInt_(arr, length);
@@ -171,7 +154,6 @@ __attribute__((unused)) static jint OrgApacheLuceneUtilDocIdSetBuilder_dedupWith
     { "growBufferWithInt:", "growBuffer", "V", 0x2, NULL, NULL },
     { "addWithOrgApacheLuceneSearchDocIdSetIterator:", "add", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "growWithInt:", "grow", "V", 0x1, NULL, NULL },
-    { "addWithInt:", "add", "V", 0x1, NULL, NULL },
     { "dedupWithIntArray:withInt:", "dedup", "I", 0xa, NULL, NULL },
     { "build", NULL, "Lorg.apache.lucene.search.DocIdSet;", 0x1, NULL, NULL },
     { "buildWithLong:", "build", "Lorg.apache.lucene.search.DocIdSet;", 0x1, NULL, NULL },
@@ -183,7 +165,7 @@ __attribute__((unused)) static jint OrgApacheLuceneUtilDocIdSetBuilder_dedupWith
     { "bufferSize_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "bitSet_", NULL, 0x2, "Lorg.apache.lucene.util.BitSet;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilDocIdSetBuilder = { 2, "DocIdSetBuilder", "org.apache.lucene.util", NULL, 0x11, 9, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilDocIdSetBuilder = { 2, "DocIdSetBuilder", "org.apache.lucene.util", NULL, 0x11, 8, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilDocIdSetBuilder;
 }
 

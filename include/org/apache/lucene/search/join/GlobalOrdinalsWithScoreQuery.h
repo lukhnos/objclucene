@@ -20,93 +20,21 @@
 #define OrgApacheLuceneSearchQuery_INCLUDE 1
 #include "org/apache/lucene/search/Query.h"
 
-@class OrgApacheLuceneIndexIndexReader;
-@class OrgApacheLuceneIndexMultiDocValues_OrdinalMap;
-@class OrgApacheLuceneSearchIndexSearcher;
-@class OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector;
-@class OrgApacheLuceneSearchWeight;
-
 @interface OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery : OrgApacheLuceneSearchQuery
-
-#pragma mark Public
-
-- (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
-                                                                        withBoolean:(jboolean)needsScores;
-
-- (jboolean)isEqual:(id)o;
-
-- (NSUInteger)hash;
-
-- (NSString *)toStringWithNSString:(NSString *)field;
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector:(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector *)collector
-                                                                     withNSString:(NSString *)joinField
-                                withOrgApacheLuceneIndexMultiDocValues_OrdinalMap:(OrgApacheLuceneIndexMultiDocValues_OrdinalMap *)globalOrds
-                                                   withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)toQuery
-                                                   withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)fromQuery
-                                                                          withInt:(jint)min
-                                                                          withInt:(jint)max
-                                              withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)indexReader;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_initWithOrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector_withNSString_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_withInt_withInt_withOrgApacheLuceneIndexIndexReader_(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery *self, OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector *collector, NSString *joinField, OrgApacheLuceneIndexMultiDocValues_OrdinalMap *globalOrds, OrgApacheLuceneSearchQuery *toQuery, OrgApacheLuceneSearchQuery *fromQuery, jint min, jint max, OrgApacheLuceneIndexIndexReader *indexReader);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_init(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery *new_OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_initWithOrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector_withNSString_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_withInt_withInt_withOrgApacheLuceneIndexIndexReader_(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector *collector, NSString *joinField, OrgApacheLuceneIndexMultiDocValues_OrdinalMap *globalOrds, OrgApacheLuceneSearchQuery *toQuery, OrgApacheLuceneSearchQuery *fromQuery, jint min, jint max, OrgApacheLuceneIndexIndexReader *indexReader) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery *new_OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery)
-
-#endif
-
-#if !defined (_OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_W_) && (OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_INCLUDE_ALL || OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_W_INCLUDE)
-#define _OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_W_
-
-#define OrgApacheLuceneSearchWeight_RESTRICT 1
-#define OrgApacheLuceneSearchWeight_INCLUDE 1
-#include "org/apache/lucene/search/Weight.h"
-
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneSearchExplanation;
-@class OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery;
-@class OrgApacheLuceneSearchQuery;
-@class OrgApacheLuceneSearchScorer;
-@protocol JavaUtilSet;
-
-@interface OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_W : OrgApacheLuceneSearchWeight
-
-#pragma mark Public
-
-- (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-                                                                               withInt:(jint)doc;
-
-- (void)extractTermsWithJavaUtilSet:(id<JavaUtilSet>)terms;
-
-- (jfloat)getValueForNormalization;
-
-- (void)normalizeWithFloat:(jfloat)norm
-                 withFloat:(jfloat)topLevelBoost;
-
-- (OrgApacheLuceneSearchScorer *)scorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
-
-#pragma mark Package-Private
-
-- (instancetype)initWithOrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery:(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery *)outer$
-                                               withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-                                              withOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)approximationWeight;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_W)
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_W_initWithOrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchWeight_(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_W *self, OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery *outer$, OrgApacheLuceneSearchQuery *query, OrgApacheLuceneSearchWeight *approximationWeight);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_W *new_OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_W_initWithOrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchWeight_(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery *outer$, OrgApacheLuceneSearchQuery *query, OrgApacheLuceneSearchWeight *approximationWeight) NS_RETURNS_RETAINED;
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_W)
 
 #endif
 
@@ -117,44 +45,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery
 #define OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer_INCLUDE 1
 #include "org/apache/lucene/search/join/BaseGlobalOrdinalScorer.h"
 
-@class OrgApacheLuceneIndexSortedDocValues;
-@class OrgApacheLuceneSearchDocIdSetIterator;
-@class OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector;
-@class OrgApacheLuceneSearchScorer;
-@class OrgApacheLuceneSearchTwoPhaseIterator;
-@class OrgApacheLuceneSearchWeight;
-@class OrgApacheLuceneUtilLongValues;
+@interface OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_OrdinalMapScorer : OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer
 
-@interface OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_OrdinalMapScorer : OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer {
- @public
-  OrgApacheLuceneUtilLongValues *segmentOrdToGlobalOrdLookup_;
-  OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector *collector_;
-}
+#pragma mark Package-Private
 
-#pragma mark Public
-
-- (instancetype)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
-withOrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector:(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector *)collector
-            withOrgApacheLuceneIndexSortedDocValues:(OrgApacheLuceneIndexSortedDocValues *)values
-                    withOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)approximationScorer
-                  withOrgApacheLuceneUtilLongValues:(OrgApacheLuceneUtilLongValues *)segmentOrdToGlobalOrdLookup;
-
-- (jint)advanceWithInt:(jint)target;
-
-#pragma mark Protected
-
-- (OrgApacheLuceneSearchTwoPhaseIterator *)createTwoPhaseIteratorWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)approximation;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_OrdinalMapScorer)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_OrdinalMapScorer, segmentOrdToGlobalOrdLookup_, OrgApacheLuceneUtilLongValues *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_OrdinalMapScorer, collector_, OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector *)
+FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_OrdinalMapScorer_init(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_OrdinalMapScorer *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_OrdinalMapScorer_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector_withOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneSearchScorer_withOrgApacheLuceneUtilLongValues_(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_OrdinalMapScorer *self, OrgApacheLuceneSearchWeight *weight, OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector *collector, OrgApacheLuceneIndexSortedDocValues *values, OrgApacheLuceneSearchScorer *approximationScorer, OrgApacheLuceneUtilLongValues *segmentOrdToGlobalOrdLookup);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_OrdinalMapScorer *new_OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_OrdinalMapScorer_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector_withOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneSearchScorer_withOrgApacheLuceneUtilLongValues_(OrgApacheLuceneSearchWeight *weight, OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector *collector, OrgApacheLuceneIndexSortedDocValues *values, OrgApacheLuceneSearchScorer *approximationScorer, OrgApacheLuceneUtilLongValues *segmentOrdToGlobalOrdLookup) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_OrdinalMapScorer *new_OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_OrdinalMapScorer_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_OrdinalMapScorer)
 
@@ -167,40 +70,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery
 #define OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer_INCLUDE 1
 #include "org/apache/lucene/search/join/BaseGlobalOrdinalScorer.h"
 
-@class OrgApacheLuceneIndexSortedDocValues;
-@class OrgApacheLuceneSearchDocIdSetIterator;
-@class OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector;
-@class OrgApacheLuceneSearchScorer;
-@class OrgApacheLuceneSearchTwoPhaseIterator;
-@class OrgApacheLuceneSearchWeight;
+@interface OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_SegmentOrdinalScorer : OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer
 
-@interface OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_SegmentOrdinalScorer : OrgApacheLuceneSearchJoinBaseGlobalOrdinalScorer {
- @public
-  OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector *collector_;
-}
+#pragma mark Package-Private
 
-#pragma mark Public
-
-- (instancetype)initWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
-withOrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector:(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector *)collector
-            withOrgApacheLuceneIndexSortedDocValues:(OrgApacheLuceneIndexSortedDocValues *)values
-                    withOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)approximationScorer;
-
-- (jint)advanceWithInt:(jint)target;
-
-#pragma mark Protected
-
-- (OrgApacheLuceneSearchTwoPhaseIterator *)createTwoPhaseIteratorWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)approximation;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_SegmentOrdinalScorer)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_SegmentOrdinalScorer, collector_, OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector *)
+FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_SegmentOrdinalScorer_init(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_SegmentOrdinalScorer *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_SegmentOrdinalScorer_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector_withOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_SegmentOrdinalScorer *self, OrgApacheLuceneSearchWeight *weight, OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector *collector, OrgApacheLuceneIndexSortedDocValues *values, OrgApacheLuceneSearchScorer *approximationScorer);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_SegmentOrdinalScorer *new_OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_SegmentOrdinalScorer_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector_withOrgApacheLuceneIndexSortedDocValues_withOrgApacheLuceneSearchScorer_(OrgApacheLuceneSearchWeight *weight, OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector *collector, OrgApacheLuceneIndexSortedDocValues *values, OrgApacheLuceneSearchScorer *approximationScorer) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_SegmentOrdinalScorer *new_OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_SegmentOrdinalScorer_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_SegmentOrdinalScorer)
 

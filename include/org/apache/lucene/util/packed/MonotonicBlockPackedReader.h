@@ -28,7 +28,6 @@
 @class IOSLongArray;
 @class IOSObjectArray;
 @class OrgApacheLuceneStoreIndexInput;
-@protocol JavaUtilCollection;
 
 @interface OrgApacheLuceneUtilPackedMonotonicBlockPackedReader : OrgApacheLuceneUtilLongValues < OrgApacheLuceneUtilAccountable > {
  @public
@@ -43,8 +42,6 @@
 #pragma mark Public
 
 - (jlong)getWithLong:(jlong)index;
-
-- (id<JavaUtilCollection>)getChildResources;
 
 + (OrgApacheLuceneUtilPackedMonotonicBlockPackedReader *)ofWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)inArg
                                                                                       withInt:(jint)packedIntsVersion

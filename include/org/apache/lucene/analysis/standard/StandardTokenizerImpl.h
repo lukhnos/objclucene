@@ -41,23 +41,11 @@
 
 - (void)setBufferSizeWithInt:(jint)numChars;
 
-- (void)yybeginWithInt:(jint)newState;
-
 - (jint)yychar;
-
-- (jchar)yycharatWithInt:(jint)pos;
-
-- (void)yyclose;
 
 - (jint)yylength;
 
-- (void)yypushbackWithInt:(jint)number;
-
 - (void)yyresetWithJavaIoReader:(JavaIoReader *)reader;
-
-- (jint)yystate;
-
-- (NSString *)yytext;
 
 @end
 

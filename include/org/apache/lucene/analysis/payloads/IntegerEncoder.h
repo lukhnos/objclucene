@@ -24,18 +24,11 @@
 #define OrgApacheLuceneAnalysisPayloadsPayloadEncoder_INCLUDE 1
 #include "org/apache/lucene/analysis/payloads/PayloadEncoder.h"
 
-@class IOSCharArray;
-@class OrgApacheLuceneUtilBytesRef;
-
 @interface OrgApacheLuceneAnalysisPayloadsIntegerEncoder : OrgApacheLuceneAnalysisPayloadsAbstractEncoder < OrgApacheLuceneAnalysisPayloadsPayloadEncoder >
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (OrgApacheLuceneUtilBytesRef *)encodeWithCharArray:(IOSCharArray *)buffer
-                                             withInt:(jint)offset
-                                             withInt:(jint)length;
 
 @end
 

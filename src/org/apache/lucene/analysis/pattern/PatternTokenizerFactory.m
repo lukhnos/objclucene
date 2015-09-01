@@ -4,63 +4,41 @@
 //
 
 #include "J2ObjC_source.h"
-#include "java/lang/IllegalArgumentException.h"
-#include "java/util/Map.h"
-#include "java/util/regex/Pattern.h"
-#include "org/apache/lucene/analysis/pattern/PatternTokenizer.h"
 #include "org/apache/lucene/analysis/pattern/PatternTokenizerFactory.h"
-#include "org/apache/lucene/analysis/util/AbstractAnalysisFactory.h"
-#include "org/apache/lucene/analysis/util/TokenizerFactory.h"
-#include "org/apache/lucene/util/AttributeFactory.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 NSString *OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_PATTERN_ = @"pattern";
 NSString *OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_GROUP_ = @"group";
 
 @implementation OrgApacheLuceneAnalysisPatternPatternTokenizerFactory
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args {
-  OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_initWithJavaUtilMap_(self, args);
+- (instancetype)init {
+  OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_init(self);
   return self;
-}
-
-- (OrgApacheLuceneAnalysisPatternPatternTokenizer *)createWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory {
-  return [new_OrgApacheLuceneAnalysisPatternPatternTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withJavaUtilRegexPattern_withInt_(factory, pattern_, group_) autorelease];
-}
-
-- (void)dealloc {
-  RELEASE_(pattern_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "PatternTokenizerFactory", NULL, 0x1, NULL, NULL },
-    { "createWithOrgApacheLuceneUtilAttributeFactory:", "create", "Lorg.apache.lucene.analysis.pattern.PatternTokenizer;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "PATTERN_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_PATTERN_, NULL, .constantValue.asLong = 0 },
     { "GROUP_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_GROUP_, NULL, .constantValue.asLong = 0 },
-    { "pattern_", NULL, 0x14, "Ljava.util.regex.Pattern;", NULL, NULL, .constantValue.asLong = 0 },
-    { "group_", NULL, 0x14, "I", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPatternPatternTokenizerFactory = { 2, "PatternTokenizerFactory", "org.apache.lucene.analysis.pattern", NULL, 0x1, 2, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPatternPatternTokenizerFactory = { 2, "PatternTokenizerFactory", "org.apache.lucene.analysis.pattern", NULL, 0x1, 1, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisPatternPatternTokenizerFactory;
 }
 
 @end
 
-void OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisPatternPatternTokenizerFactory *self, id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisUtilTokenizerFactory_initWithJavaUtilMap_(self, args);
-  JreStrongAssign(&self->pattern_, [self getPatternWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_PATTERN_]);
-  self->group_ = [self getIntWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_GROUP_ withInt:-1];
-  if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
-  }
+void OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_init(OrgApacheLuceneAnalysisPatternPatternTokenizerFactory *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneAnalysisPatternPatternTokenizerFactory *new_OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+OrgApacheLuceneAnalysisPatternPatternTokenizerFactory *new_OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_init() {
   OrgApacheLuceneAnalysisPatternPatternTokenizerFactory *self = [OrgApacheLuceneAnalysisPatternPatternTokenizerFactory alloc];
-  OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_initWithJavaUtilMap_(self, args);
+  OrgApacheLuceneAnalysisPatternPatternTokenizerFactory_init(self);
   return self;
 }
 

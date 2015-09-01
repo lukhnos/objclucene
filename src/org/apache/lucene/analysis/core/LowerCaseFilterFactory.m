@@ -4,51 +4,34 @@
 //
 
 #include "J2ObjC_source.h"
-#include "java/lang/IllegalArgumentException.h"
-#include "java/util/Map.h"
-#include "org/apache/lucene/analysis/TokenStream.h"
-#include "org/apache/lucene/analysis/core/LowerCaseFilter.h"
 #include "org/apache/lucene/analysis/core/LowerCaseFilterFactory.h"
-#include "org/apache/lucene/analysis/util/AbstractAnalysisFactory.h"
-#include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneAnalysisCoreLowerCaseFilterFactory
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args {
-  OrgApacheLuceneAnalysisCoreLowerCaseFilterFactory_initWithJavaUtilMap_(self, args);
-  return self;
-}
-
-- (OrgApacheLuceneAnalysisCoreLowerCaseFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  return [new_OrgApacheLuceneAnalysisCoreLowerCaseFilter_initWithOrgApacheLuceneAnalysisTokenStream_(input) autorelease];
-}
-
-- (OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory *)getMultiTermComponent {
+- (instancetype)init {
+  OrgApacheLuceneAnalysisCoreLowerCaseFilterFactory_init(self);
   return self;
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "LowerCaseFilterFactory", NULL, 0x1, NULL, NULL },
-    { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.core.LowerCaseFilter;", 0x1, NULL, NULL },
-    { "getMultiTermComponent", NULL, "Lorg.apache.lucene.analysis.util.AbstractAnalysisFactory;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCoreLowerCaseFilterFactory = { 2, "LowerCaseFilterFactory", "org.apache.lucene.analysis.core", NULL, 0x1, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCoreLowerCaseFilterFactory = { 2, "LowerCaseFilterFactory", "org.apache.lucene.analysis.core", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisCoreLowerCaseFilterFactory;
 }
 
 @end
 
-void OrgApacheLuceneAnalysisCoreLowerCaseFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisCoreLowerCaseFilterFactory *self, id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
-  if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
-  }
+void OrgApacheLuceneAnalysisCoreLowerCaseFilterFactory_init(OrgApacheLuceneAnalysisCoreLowerCaseFilterFactory *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneAnalysisCoreLowerCaseFilterFactory *new_OrgApacheLuceneAnalysisCoreLowerCaseFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+OrgApacheLuceneAnalysisCoreLowerCaseFilterFactory *new_OrgApacheLuceneAnalysisCoreLowerCaseFilterFactory_init() {
   OrgApacheLuceneAnalysisCoreLowerCaseFilterFactory *self = [OrgApacheLuceneAnalysisCoreLowerCaseFilterFactory alloc];
-  OrgApacheLuceneAnalysisCoreLowerCaseFilterFactory_initWithJavaUtilMap_(self, args);
+  OrgApacheLuceneAnalysisCoreLowerCaseFilterFactory_init(self);
   return self;
 }
 

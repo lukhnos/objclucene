@@ -3,12 +3,10 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/core/parser/SyntaxParser.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/lang/CharSequence.h"
-#include "org/apache/lucene/queryparser/flexible/core/QueryNodeParseException.h"
-#include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNode.h"
 #include "org/apache/lucene/queryparser/flexible/core/parser/SyntaxParser.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @interface OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser : NSObject
 
@@ -17,10 +15,7 @@
 @implementation OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "parseWithJavaLangCharSequence:withJavaLangCharSequence:", "parse", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x401, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeParseException;", NULL },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser = { 2, "SyntaxParser", "org.apache.lucene.queryparser.flexible.core.parser", NULL, 0x609, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser = { 2, "SyntaxParser", "org.apache.lucene.queryparser.flexible.core.parser", NULL, 0x609, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser;
 }
 

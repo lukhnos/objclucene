@@ -26,8 +26,6 @@
 
 - (instancetype)init;
 
-- (jint)dimension;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceMultiValueSource)

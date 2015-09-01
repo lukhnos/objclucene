@@ -20,45 +20,19 @@
 #define OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource_INCLUDE 1
 #include "org/apache/lucene/queries/function/valuesource/FieldCacheSource.h"
 
-@class JavaLangInteger;
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneQueriesFunctionFunctionValues;
-@protocol JavaUtilMap;
-
-@interface OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource : OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource {
- @public
-  id<JavaUtilMap> enumIntToStringMap_;
-  id<JavaUtilMap> enumStringToIntMap_;
-}
+@interface OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource : OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field
-                 withJavaUtilMap:(id<JavaUtilMap>)enumIntToStringMap
-                 withJavaUtilMap:(id<JavaUtilMap>)enumStringToIntMap;
-
-- (NSString *)description__;
-
-- (jboolean)isEqual:(id)o;
-
-- (OrgApacheLuceneQueriesFunctionFunctionValues *)getValuesWithJavaUtilMap:(id<JavaUtilMap>)context
-                                 withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext;
-
-- (NSUInteger)hash;
+- (instancetype)init;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource, enumIntToStringMap_, id<JavaUtilMap>)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource, enumStringToIntMap_, id<JavaUtilMap>)
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_init(OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource *self);
 
-FOUNDATION_EXPORT JavaLangInteger *OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_DEFAULT_VALUE_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource, DEFAULT_VALUE_, JavaLangInteger *)
-
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_initWithNSString_withJavaUtilMap_withJavaUtilMap_(OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource *self, NSString *field, id<JavaUtilMap> enumIntToStringMap, id<JavaUtilMap> enumStringToIntMap);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource *new_OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_initWithNSString_withJavaUtilMap_withJavaUtilMap_(NSString *field, id<JavaUtilMap> enumIntToStringMap, id<JavaUtilMap> enumStringToIntMap) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource *new_OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource)
 

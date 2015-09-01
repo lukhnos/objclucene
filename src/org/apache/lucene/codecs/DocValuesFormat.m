@@ -6,9 +6,7 @@
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
-#include "java/lang/ClassLoader.h"
 #include "java/lang/IllegalStateException.h"
-#include "java/util/Set.h"
 #include "org/apache/lucene/codecs/DocValuesConsumer.h"
 #include "org/apache/lucene/codecs/DocValuesFormat.h"
 #include "org/apache/lucene/codecs/DocValuesProducer.h"
@@ -77,14 +75,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsDocValuesFormat_Holder)
   return OrgApacheLuceneCodecsDocValuesFormat_forNameWithNSString_(name);
 }
 
-+ (id<JavaUtilSet>)availableDocValuesFormats {
-  return OrgApacheLuceneCodecsDocValuesFormat_availableDocValuesFormats();
-}
-
-+ (void)reloadDocValuesFormatsWithJavaLangClassLoader:(JavaLangClassLoader *)classloader {
-  OrgApacheLuceneCodecsDocValuesFormat_reloadDocValuesFormatsWithJavaLangClassLoader_(classloader);
-}
-
 - (void)dealloc {
   RELEASE_(name_);
   [super dealloc];
@@ -98,14 +88,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsDocValuesFormat_Holder)
     { "getName", NULL, "Ljava.lang.String;", 0x11, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "forNameWithNSString:", "forName", "Lorg.apache.lucene.codecs.DocValuesFormat;", 0x9, NULL, NULL },
-    { "availableDocValuesFormats", NULL, "Ljava.util.Set;", 0x9, NULL, NULL },
-    { "reloadDocValuesFormatsWithJavaLangClassLoader:", "reloadDocValuesFormats", "V", 0x9, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "name_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.codecs.DocValuesFormat$Holder;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsDocValuesFormat = { 2, "DocValuesFormat", "org.apache.lucene.codecs", NULL, 0x401, 8, methods, 1, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsDocValuesFormat = { 2, "DocValuesFormat", "org.apache.lucene.codecs", NULL, 0x401, 6, methods, 1, fields, 0, NULL, 1, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneCodecsDocValuesFormat;
 }
 
@@ -120,16 +108,6 @@ void OrgApacheLuceneCodecsDocValuesFormat_initWithNSString_(OrgApacheLuceneCodec
 OrgApacheLuceneCodecsDocValuesFormat *OrgApacheLuceneCodecsDocValuesFormat_forNameWithNSString_(NSString *name) {
   OrgApacheLuceneCodecsDocValuesFormat_initialize();
   return [((OrgApacheLuceneUtilNamedSPILoader *) nil_chk(OrgApacheLuceneCodecsDocValuesFormat_Holder_getLoader())) lookupWithNSString:name];
-}
-
-id<JavaUtilSet> OrgApacheLuceneCodecsDocValuesFormat_availableDocValuesFormats() {
-  OrgApacheLuceneCodecsDocValuesFormat_initialize();
-  return [((OrgApacheLuceneUtilNamedSPILoader *) nil_chk(OrgApacheLuceneCodecsDocValuesFormat_Holder_getLoader())) availableServices];
-}
-
-void OrgApacheLuceneCodecsDocValuesFormat_reloadDocValuesFormatsWithJavaLangClassLoader_(JavaLangClassLoader *classloader) {
-  OrgApacheLuceneCodecsDocValuesFormat_initialize();
-  [((OrgApacheLuceneUtilNamedSPILoader *) nil_chk(OrgApacheLuceneCodecsDocValuesFormat_Holder_getLoader())) reloadWithJavaLangClassLoader:classloader];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsDocValuesFormat)

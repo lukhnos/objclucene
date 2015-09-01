@@ -16,15 +16,6 @@
 #if !defined (_OrgApacheLuceneQueriesMltMoreLikeThis_) && (OrgApacheLuceneQueriesMltMoreLikeThis_INCLUDE_ALL || OrgApacheLuceneQueriesMltMoreLikeThis_INCLUDE)
 #define _OrgApacheLuceneQueriesMltMoreLikeThis_
 
-@class IOSObjectArray;
-@class JavaIoReader;
-@class OrgApacheLuceneAnalysisAnalyzer;
-@class OrgApacheLuceneIndexIndexReader;
-@class OrgApacheLuceneSearchQuery;
-@class OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity;
-@protocol JavaUtilMap;
-@protocol JavaUtilSet;
-
 #define OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_MAX_NUM_TOKENS_PARSED 5000
 #define OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_MIN_TERM_FREQ 2
 #define OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_MIN_DOC_FREQ 5
@@ -38,82 +29,11 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)ir;
-
-- (instancetype)initWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)ir
-   withOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity:(OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *)sim;
-
-- (NSString *)describeParams;
-
-- (OrgApacheLuceneAnalysisAnalyzer *)getAnalyzer;
-
-- (jfloat)getBoostFactor;
-
-- (IOSObjectArray *)getFieldNames;
-
-- (jint)getMaxDocFreq;
-
-- (jint)getMaxNumTokensParsed;
-
-- (jint)getMaxQueryTerms;
-
-- (jint)getMaxWordLen;
-
-- (jint)getMinDocFreq;
-
-- (jint)getMinTermFreq;
-
-- (jint)getMinWordLen;
-
-- (OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *)getSimilarity;
-
-- (id<JavaUtilSet>)getStopWords;
-
-- (jboolean)isBoost;
-
-- (OrgApacheLuceneSearchQuery *)likeWithInt:(jint)docNum;
-
-- (OrgApacheLuceneSearchQuery *)likeWithJavaUtilMap:(id<JavaUtilMap>)filteredDocument;
-
-- (OrgApacheLuceneSearchQuery *)likeWithNSString:(NSString *)fieldName
-                           withJavaIoReaderArray:(IOSObjectArray *)readers;
-
-- (IOSObjectArray *)retrieveInterestingTermsWithInt:(jint)docNum;
-
-- (IOSObjectArray *)retrieveInterestingTermsWithJavaIoReader:(JavaIoReader *)r
-                                                withNSString:(NSString *)fieldName;
-
-- (void)setAnalyzerWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
-
-- (void)setBoostWithBoolean:(jboolean)boost;
-
-- (void)setBoostFactorWithFloat:(jfloat)boostFactor;
-
-- (void)setFieldNamesWithNSStringArray:(IOSObjectArray *)fieldNames;
-
-- (void)setMaxDocFreqWithInt:(jint)maxFreq;
-
-- (void)setMaxDocFreqPctWithInt:(jint)maxPercentage;
-
-- (void)setMaxNumTokensParsedWithInt:(jint)i;
-
-- (void)setMaxQueryTermsWithInt:(jint)maxQueryTerms;
-
-- (void)setMaxWordLenWithInt:(jint)maxWordLen;
-
-- (void)setMinDocFreqWithInt:(jint)minDocFreq;
-
-- (void)setMinTermFreqWithInt:(jint)minTermFreq;
-
-- (void)setMinWordLenWithInt:(jint)minWordLen;
-
-- (void)setSimilarityWithOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity:(OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *)similarity;
-
-- (void)setStopWordsWithJavaUtilSet:(id<JavaUtilSet>)stopWords;
+- (instancetype)init;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneQueriesMltMoreLikeThis)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesMltMoreLikeThis)
 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueriesMltMoreLikeThis, DEFAULT_MAX_NUM_TOKENS_PARSED, jint)
 
@@ -125,25 +45,15 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueriesMltMoreLikeThis, DEFAULT_MAX_DO
 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueriesMltMoreLikeThis, DEFAULT_BOOST, jboolean)
 
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_FIELD_NAMES_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueriesMltMoreLikeThis, DEFAULT_FIELD_NAMES_, IOSObjectArray *)
-
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueriesMltMoreLikeThis, DEFAULT_MIN_WORD_LENGTH, jint)
 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueriesMltMoreLikeThis, DEFAULT_MAX_WORD_LENGTH, jint)
 
-FOUNDATION_EXPORT id<JavaUtilSet> OrgApacheLuceneQueriesMltMoreLikeThis_DEFAULT_STOP_WORDS_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueriesMltMoreLikeThis, DEFAULT_STOP_WORDS_, id<JavaUtilSet>)
-
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueriesMltMoreLikeThis, DEFAULT_MAX_QUERY_TERMS, jint)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesMltMoreLikeThis_initWithOrgApacheLuceneIndexIndexReader_(OrgApacheLuceneQueriesMltMoreLikeThis *self, OrgApacheLuceneIndexIndexReader *ir);
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesMltMoreLikeThis_init(OrgApacheLuceneQueriesMltMoreLikeThis *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueriesMltMoreLikeThis *new_OrgApacheLuceneQueriesMltMoreLikeThis_initWithOrgApacheLuceneIndexIndexReader_(OrgApacheLuceneIndexIndexReader *ir) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesMltMoreLikeThis_initWithOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_(OrgApacheLuceneQueriesMltMoreLikeThis *self, OrgApacheLuceneIndexIndexReader *ir, OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *sim);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueriesMltMoreLikeThis *new_OrgApacheLuceneQueriesMltMoreLikeThis_initWithOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_(OrgApacheLuceneIndexIndexReader *ir, OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *sim) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueriesMltMoreLikeThis *new_OrgApacheLuceneQueriesMltMoreLikeThis_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesMltMoreLikeThis)
 

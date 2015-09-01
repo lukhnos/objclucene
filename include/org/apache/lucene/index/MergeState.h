@@ -86,8 +86,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergeState)
 
 - (jint)getWithInt:(jint)docID;
 
-- (jboolean)hasDeletions;
-
 - (jint)maxDoc;
 
 - (jint)numDeletedDocs;

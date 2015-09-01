@@ -20,24 +20,19 @@
 #define OrgApacheLuceneQueryparserXmlQueryBuilder_INCLUDE 1
 #include "org/apache/lucene/queryparser/xml/QueryBuilder.h"
 
-@class OrgApacheLuceneSearchQuery;
-@protocol OrgW3cDomElement;
-
 @interface OrgApacheLuceneQueryparserXmlBuildersBoostingQueryBuilder : NSObject < OrgApacheLuceneQueryparserXmlQueryBuilder >
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneQueryparserXmlQueryBuilder:(id<OrgApacheLuceneQueryparserXmlQueryBuilder>)factory;
-
-- (OrgApacheLuceneSearchQuery *)getQueryWithOrgW3cDomElement:(id<OrgW3cDomElement>)e;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserXmlBuildersBoostingQueryBuilder)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlBuildersBoostingQueryBuilder_initWithOrgApacheLuceneQueryparserXmlQueryBuilder_(OrgApacheLuceneQueryparserXmlBuildersBoostingQueryBuilder *self, id<OrgApacheLuceneQueryparserXmlQueryBuilder> factory);
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlBuildersBoostingQueryBuilder_init(OrgApacheLuceneQueryparserXmlBuildersBoostingQueryBuilder *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersBoostingQueryBuilder *new_OrgApacheLuceneQueryparserXmlBuildersBoostingQueryBuilder_initWithOrgApacheLuceneQueryparserXmlQueryBuilder_(id<OrgApacheLuceneQueryparserXmlQueryBuilder> factory) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersBoostingQueryBuilder *new_OrgApacheLuceneQueryparserXmlBuildersBoostingQueryBuilder_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlBuildersBoostingQueryBuilder)
 

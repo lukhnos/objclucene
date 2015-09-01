@@ -14,7 +14,6 @@
 #include "org/apache/lucene/search/spans/SpanQuery.h"
 #include "org/apache/lucene/search/spans/SpanWeight.h"
 #include "org/apache/lucene/util/ToStringUtils.h"
-#include "org/lukhnos/portmobile/util/Objects.h"
 
 @interface OrgApacheLuceneSearchSpansFieldMaskingSpanQuery () {
  @public
@@ -28,12 +27,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpansFieldMaskingSpanQuery, maskedQuery
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpansFieldMaskingSpanQuery, field_, NSString *)
 
 @implementation OrgApacheLuceneSearchSpansFieldMaskingSpanQuery
-
-- (instancetype)initWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)maskedQuery
-                                               withNSString:(NSString *)maskedField {
-  OrgApacheLuceneSearchSpansFieldMaskingSpanQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withNSString_(self, maskedQuery, maskedField);
-  return self;
-}
 
 - (NSString *)getField {
   return field_;
@@ -86,6 +79,11 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpansFieldMaskingSpanQuery, field_, NSS
   return ((jint) [super hash]) ^ ((jint) [((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk([self getMaskedQuery])) hash]) ^ ((jint) [((NSString *) nil_chk([self getField])) hash]);
 }
 
+- (instancetype)init {
+  OrgApacheLuceneSearchSpansFieldMaskingSpanQuery_init(self);
+  return self;
+}
+
 - (void)dealloc {
   RELEASE_(maskedQuery_);
   RELEASE_(field_);
@@ -94,7 +92,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpansFieldMaskingSpanQuery, field_, NSS
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchSpansSpanQuery:withNSString:", "FieldMaskingSpanQuery", NULL, 0x1, NULL, NULL },
     { "getField", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
     { "getMaskedQuery", NULL, "Lorg.apache.lucene.search.spans.SpanQuery;", 0x1, NULL, NULL },
     { "createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:", "createWeight", "Lorg.apache.lucene.search.spans.SpanWeight;", 0x1, "Ljava.io.IOException;", NULL },
@@ -102,6 +99,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpansFieldMaskingSpanQuery, field_, NSS
     { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
     { "hash", "hashCode", "I", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "maskedQuery_", NULL, 0x2, "Lorg.apache.lucene.search.spans.SpanQuery;", NULL, NULL, .constantValue.asLong = 0 },
@@ -113,15 +111,13 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpansFieldMaskingSpanQuery, field_, NSS
 
 @end
 
-void OrgApacheLuceneSearchSpansFieldMaskingSpanQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withNSString_(OrgApacheLuceneSearchSpansFieldMaskingSpanQuery *self, OrgApacheLuceneSearchSpansSpanQuery *maskedQuery, NSString *maskedField) {
-  OrgApacheLuceneSearchSpansSpanQuery_init(self);
-  JreStrongAssign(&self->maskedQuery_, OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_(maskedQuery));
-  JreStrongAssign(&self->field_, OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_(maskedField));
+void OrgApacheLuceneSearchSpansFieldMaskingSpanQuery_init(OrgApacheLuceneSearchSpansFieldMaskingSpanQuery *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneSearchSpansFieldMaskingSpanQuery *new_OrgApacheLuceneSearchSpansFieldMaskingSpanQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withNSString_(OrgApacheLuceneSearchSpansSpanQuery *maskedQuery, NSString *maskedField) {
+OrgApacheLuceneSearchSpansFieldMaskingSpanQuery *new_OrgApacheLuceneSearchSpansFieldMaskingSpanQuery_init() {
   OrgApacheLuceneSearchSpansFieldMaskingSpanQuery *self = [OrgApacheLuceneSearchSpansFieldMaskingSpanQuery alloc];
-  OrgApacheLuceneSearchSpansFieldMaskingSpanQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withNSString_(self, maskedQuery, maskedField);
+  OrgApacheLuceneSearchSpansFieldMaskingSpanQuery_init(self);
   return self;
 }
 

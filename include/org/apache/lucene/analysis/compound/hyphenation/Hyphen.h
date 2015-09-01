@@ -16,40 +16,19 @@
 #if !defined (_OrgApacheLuceneAnalysisCompoundHyphenationHyphen_) && (OrgApacheLuceneAnalysisCompoundHyphenationHyphen_INCLUDE_ALL || OrgApacheLuceneAnalysisCompoundHyphenationHyphen_INCLUDE)
 #define _OrgApacheLuceneAnalysisCompoundHyphenationHyphen_
 
-@interface OrgApacheLuceneAnalysisCompoundHyphenationHyphen : NSObject {
- @public
-  NSString *preBreak_;
-  NSString *noBreak_;
-  NSString *postBreak_;
-}
+@interface OrgApacheLuceneAnalysisCompoundHyphenationHyphen : NSObject
 
 #pragma mark Public
 
-- (NSString *)description;
-
-#pragma mark Package-Private
-
-- (instancetype)initWithNSString:(NSString *)pre;
-
-- (instancetype)initWithNSString:(NSString *)pre
-                    withNSString:(NSString *)no
-                    withNSString:(NSString *)post;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisCompoundHyphenationHyphen)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundHyphenationHyphen, preBreak_, NSString *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundHyphenationHyphen, noBreak_, NSString *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundHyphenationHyphen, postBreak_, NSString *)
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCompoundHyphenationHyphen_init(OrgApacheLuceneAnalysisCompoundHyphenationHyphen *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCompoundHyphenationHyphen_initWithNSString_withNSString_withNSString_(OrgApacheLuceneAnalysisCompoundHyphenationHyphen *self, NSString *pre, NSString *no, NSString *post);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundHyphenationHyphen *new_OrgApacheLuceneAnalysisCompoundHyphenationHyphen_initWithNSString_withNSString_withNSString_(NSString *pre, NSString *no, NSString *post) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCompoundHyphenationHyphen_initWithNSString_(OrgApacheLuceneAnalysisCompoundHyphenationHyphen *self, NSString *pre);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundHyphenationHyphen *new_OrgApacheLuceneAnalysisCompoundHyphenationHyphen_initWithNSString_(NSString *pre) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundHyphenationHyphen *new_OrgApacheLuceneAnalysisCompoundHyphenationHyphen_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCompoundHyphenationHyphen)
 

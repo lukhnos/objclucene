@@ -30,14 +30,6 @@
   return res;
 }
 
-- (jint)getStart {
-  return start_;
-}
-
-- (jint)getEnd {
-  return end_;
-}
-
 - (NSString *)toStringWithNSString:(NSString *)field {
   JavaLangStringBuilder *buffer = [new_JavaLangStringBuilder_init() autorelease];
   [buffer appendWithNSString:@"spanPosRange("];
@@ -73,8 +65,6 @@
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneSearchSpansSpanQuery:withInt:withInt:", "SpanPositionRangeQuery", NULL, 0x1, NULL, NULL },
     { "acceptPositionWithOrgApacheLuceneSearchSpansSpans:", "acceptPosition", "Lorg.apache.lucene.search.spans.FilterSpans$AcceptStatus;", 0x4, "Ljava.io.IOException;", NULL },
-    { "getStart", NULL, "I", 0x1, NULL, NULL },
-    { "getEnd", NULL, "I", 0x1, NULL, NULL },
     { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "clone", NULL, "Lorg.apache.lucene.search.spans.SpanPositionRangeQuery;", 0x1, NULL, NULL },
     { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
@@ -84,7 +74,7 @@
     { "start_", NULL, 0x4, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "end_", NULL, 0x4, "I", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpanPositionRangeQuery = { 2, "SpanPositionRangeQuery", "org.apache.lucene.search.spans", NULL, 0x1, 8, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpanPositionRangeQuery = { 2, "SpanPositionRangeQuery", "org.apache.lucene.search.spans", NULL, 0x1, 6, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchSpansSpanPositionRangeQuery;
 }
 

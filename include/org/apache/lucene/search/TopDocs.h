@@ -50,8 +50,6 @@ withOrgApacheLuceneSearchScoreDocArray:(IOSObjectArray *)scoreDocs
                                                                   withInt:(jint)topN
                                withOrgApacheLuceneSearchTopFieldDocsArray:(IOSObjectArray *)shardHits;
 
-- (void)setMaxScoreWithFloat:(jfloat)maxScore;
-
 #pragma mark Package-Private
 
 - (instancetype)initWithInt:(jint)totalHits

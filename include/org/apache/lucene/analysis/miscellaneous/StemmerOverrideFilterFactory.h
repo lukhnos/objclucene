@@ -24,29 +24,19 @@
 #define OrgApacheLuceneAnalysisUtilResourceLoaderAware_INCLUDE 1
 #include "org/apache/lucene/analysis/util/ResourceLoaderAware.h"
 
-@class OrgApacheLuceneAnalysisTokenStream;
-@protocol JavaUtilMap;
-@protocol OrgApacheLuceneAnalysisUtilResourceLoader;
-
 @interface OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory < OrgApacheLuceneAnalysisUtilResourceLoaderAware >
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
-
-- (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
-
-- (void)informWithOrgApacheLuceneAnalysisUtilResourceLoader:(id<OrgApacheLuceneAnalysisUtilResourceLoader>)loader;
-
-- (jboolean)isIgnoreCase;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFactory)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFactory *self, id<JavaUtilMap> args);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFactory_init(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFactory *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFactory *new_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFactory *new_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFactory_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilterFactory)
 

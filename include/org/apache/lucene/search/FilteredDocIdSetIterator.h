@@ -20,36 +20,17 @@
 #define OrgApacheLuceneSearchDocIdSetIterator_INCLUDE 1
 #include "org/apache/lucene/search/DocIdSetIterator.h"
 
-@interface OrgApacheLuceneSearchFilteredDocIdSetIterator : OrgApacheLuceneSearchDocIdSetIterator {
- @public
-  OrgApacheLuceneSearchDocIdSetIterator *_innerIter_;
-}
+@interface OrgApacheLuceneSearchFilteredDocIdSetIterator : OrgApacheLuceneSearchDocIdSetIterator
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)innerIter;
-
-- (jint)advanceWithInt:(jint)target;
-
-- (jlong)cost;
-
-- (jint)docID;
-
-- (OrgApacheLuceneSearchDocIdSetIterator *)getDelegate;
-
-- (jint)nextDoc;
-
-#pragma mark Protected
-
-- (jboolean)matchWithInt:(jint)doc;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchFilteredDocIdSetIterator)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchFilteredDocIdSetIterator, _innerIter_, OrgApacheLuceneSearchDocIdSetIterator *)
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchFilteredDocIdSetIterator_initWithOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchFilteredDocIdSetIterator *self, OrgApacheLuceneSearchDocIdSetIterator *innerIter);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchFilteredDocIdSetIterator_init(OrgApacheLuceneSearchFilteredDocIdSetIterator *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFilteredDocIdSetIterator)
 

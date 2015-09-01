@@ -43,20 +43,6 @@
 
 - (void)close;
 
-- (void)disableAutoIOThrottle;
-
-- (void)enableAutoIOThrottle;
-
-- (jboolean)getAutoIOThrottle;
-
-- (jdouble)getForceMergeMBPerSec;
-
-- (jdouble)getIORateLimitMBPerSec;
-
-- (jint)getMaxMergeCount;
-
-- (jint)getMaxThreadCount;
-
 - (void)mergeWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer
         withOrgApacheLuceneIndexMergeTriggerEnum:(OrgApacheLuceneIndexMergeTriggerEnum *)trigger
                                      withBoolean:(jboolean)newMergesFound;
@@ -64,11 +50,6 @@
 - (jint)mergeThreadCount;
 
 - (void)setDefaultMaxMergesAndThreadsWithBoolean:(jboolean)spins;
-
-- (void)setForceMergeMBPerSecWithDouble:(jdouble)v;
-
-- (void)setMaxMergesAndThreadsWithInt:(jint)maxMergeCount
-                              withInt:(jint)maxThreadCount;
 
 - (void)sync;
 
@@ -95,11 +76,7 @@
 
 #pragma mark Package-Private
 
-- (void)clearSuppressExceptions;
-
 - (void)removeMergeThread;
-
-- (void)setSuppressExceptions;
 
 @end
 

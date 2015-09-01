@@ -19,22 +19,11 @@
 #if !defined (_OrgApacheLuceneSearchSimilaritiesAfterEffect_) && (OrgApacheLuceneSearchSimilaritiesAfterEffect_INCLUDE_ALL || OrgApacheLuceneSearchSimilaritiesAfterEffect_INCLUDE)
 #define _OrgApacheLuceneSearchSimilaritiesAfterEffect_
 
-@class OrgApacheLuceneSearchExplanation;
-@class OrgApacheLuceneSearchSimilaritiesBasicStats;
-
 @interface OrgApacheLuceneSearchSimilaritiesAfterEffect : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
-                                                                                   withFloat:(jfloat)tfn;
-
-- (jfloat)scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
-                                                     withFloat:(jfloat)tfn;
-
-- (NSString *)description;
 
 @end
 
@@ -49,22 +38,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesAfterEffect)
 #if !defined (_OrgApacheLuceneSearchSimilaritiesAfterEffect_NoAfterEffect_) && (OrgApacheLuceneSearchSimilaritiesAfterEffect_INCLUDE_ALL || OrgApacheLuceneSearchSimilaritiesAfterEffect_NoAfterEffect_INCLUDE)
 #define _OrgApacheLuceneSearchSimilaritiesAfterEffect_NoAfterEffect_
 
-@class OrgApacheLuceneSearchExplanation;
-@class OrgApacheLuceneSearchSimilaritiesBasicStats;
-
 @interface OrgApacheLuceneSearchSimilaritiesAfterEffect_NoAfterEffect : OrgApacheLuceneSearchSimilaritiesAfterEffect
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
-                                                                                   withFloat:(jfloat)tfn;
-
-- (jfloat)scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
-                                                     withFloat:(jfloat)tfn;
-
-- (NSString *)description;
 
 @end
 

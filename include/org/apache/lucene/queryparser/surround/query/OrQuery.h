@@ -24,33 +24,19 @@
 #define OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery_INCLUDE 1
 #include "org/apache/lucene/queryparser/surround/query/DistanceSubQuery.h"
 
-@class OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory;
-@class OrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory;
-@class OrgApacheLuceneSearchQuery;
-@protocol JavaUtilList;
-
 @interface OrgApacheLuceneQueryparserSurroundQueryOrQuery : OrgApacheLuceneQueryparserSurroundQueryComposedQuery < OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery >
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)queries
-                         withBoolean:(jboolean)infix
-                        withNSString:(NSString *)opName;
-
-- (void)addSpanQueriesWithOrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory:(OrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory *)sncf;
-
-- (NSString *)distanceSubQueryNotAllowed;
-
-- (OrgApacheLuceneSearchQuery *)makeLuceneQueryFieldNoBoostWithNSString:(NSString *)fieldName
-           withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *)qf;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserSurroundQueryOrQuery)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundQueryOrQuery_initWithJavaUtilList_withBoolean_withNSString_(OrgApacheLuceneQueryparserSurroundQueryOrQuery *self, id<JavaUtilList> queries, jboolean infix, NSString *opName);
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundQueryOrQuery_init(OrgApacheLuceneQueryparserSurroundQueryOrQuery *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQueryOrQuery *new_OrgApacheLuceneQueryparserSurroundQueryOrQuery_initWithJavaUtilList_withBoolean_withNSString_(id<JavaUtilList> queries, jboolean infix, NSString *opName) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQueryOrQuery *new_OrgApacheLuceneQueryparserSurroundQueryOrQuery_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundQueryOrQuery)
 

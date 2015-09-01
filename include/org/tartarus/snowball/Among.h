@@ -16,39 +16,19 @@
 #if !defined (_OrgTartarusSnowballAmong_) && (OrgTartarusSnowballAmong_INCLUDE_ALL || OrgTartarusSnowballAmong_INCLUDE)
 #define _OrgTartarusSnowballAmong_
 
-@class IOSCharArray;
-@class JavaLangReflectMethod;
-@class OrgTartarusSnowballSnowballProgram;
-
-@interface OrgTartarusSnowballAmong : NSObject {
- @public
-  jint s_size_;
-  IOSCharArray *s_;
-  jint substring_i_;
-  jint result_;
-  JavaLangReflectMethod *method_;
-  OrgTartarusSnowballSnowballProgram *methodobject_;
-}
+@interface OrgTartarusSnowballAmong : NSObject
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)s
-                         withInt:(jint)substring_i
-                         withInt:(jint)result
-                    withNSString:(NSString *)methodname
-withOrgTartarusSnowballSnowballProgram:(OrgTartarusSnowballSnowballProgram *)methodobject;
+- (instancetype)init;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgTartarusSnowballAmong)
+J2OBJC_EMPTY_STATIC_INIT(OrgTartarusSnowballAmong)
 
-J2OBJC_FIELD_SETTER(OrgTartarusSnowballAmong, s_, IOSCharArray *)
-J2OBJC_FIELD_SETTER(OrgTartarusSnowballAmong, method_, JavaLangReflectMethod *)
-J2OBJC_FIELD_SETTER(OrgTartarusSnowballAmong, methodobject_, OrgTartarusSnowballSnowballProgram *)
+FOUNDATION_EXPORT void OrgTartarusSnowballAmong_init(OrgTartarusSnowballAmong *self);
 
-FOUNDATION_EXPORT void OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(OrgTartarusSnowballAmong *self, NSString *s, jint substring_i, jint result, NSString *methodname, OrgTartarusSnowballSnowballProgram *methodobject);
-
-FOUNDATION_EXPORT OrgTartarusSnowballAmong *new_OrgTartarusSnowballAmong_initWithNSString_withInt_withInt_withNSString_withOrgTartarusSnowballSnowballProgram_(NSString *s, jint substring_i, jint result, NSString *methodname, OrgTartarusSnowballSnowballProgram *methodobject) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgTartarusSnowballAmong *new_OrgTartarusSnowballAmong_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgTartarusSnowballAmong)
 

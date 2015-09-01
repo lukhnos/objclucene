@@ -24,32 +24,19 @@
 #define OrgApacheLuceneAnalysisUtilResourceLoaderAware_INCLUDE 1
 #include "org/apache/lucene/analysis/util/ResourceLoaderAware.h"
 
-@class OrgApacheLuceneAnalysisTokenStream;
-@class OrgApacheLuceneAnalysisUtilCharArraySet;
-@protocol JavaUtilMap;
-@protocol OrgApacheLuceneAnalysisUtilResourceLoader;
-
 @interface OrgApacheLuceneAnalysisMiscellaneousKeepWordFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory < OrgApacheLuceneAnalysisUtilResourceLoaderAware >
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
-
-- (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
-
-- (OrgApacheLuceneAnalysisUtilCharArraySet *)getWords;
-
-- (void)informWithOrgApacheLuceneAnalysisUtilResourceLoader:(id<OrgApacheLuceneAnalysisUtilResourceLoader>)loader;
-
-- (jboolean)isIgnoreCase;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousKeepWordFilterFactory)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousKeepWordFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisMiscellaneousKeepWordFilterFactory *self, id<JavaUtilMap> args);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousKeepWordFilterFactory_init(OrgApacheLuceneAnalysisMiscellaneousKeepWordFilterFactory *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousKeepWordFilterFactory *new_OrgApacheLuceneAnalysisMiscellaneousKeepWordFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousKeepWordFilterFactory *new_OrgApacheLuceneAnalysisMiscellaneousKeepWordFilterFactory_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousKeepWordFilterFactory)
 

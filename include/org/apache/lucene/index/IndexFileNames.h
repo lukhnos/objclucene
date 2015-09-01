@@ -26,11 +26,6 @@
                                     withNSString:(NSString *)ext
                                         withLong:(jlong)gen;
 
-+ (NSString *)getExtensionWithNSString:(NSString *)filename;
-
-+ (jboolean)matchesExtensionWithNSString:(NSString *)filename
-                            withNSString:(NSString *)ext;
-
 + (jlong)parseGenerationWithNSString:(NSString *)filename;
 
 + (NSString *)parseSegmentNameWithNSString:(NSString *)filename;
@@ -63,8 +58,6 @@ FOUNDATION_EXPORT NSString *OrgApacheLuceneIndexIndexFileNames_fileNameFromGener
 
 FOUNDATION_EXPORT NSString *OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(NSString *segmentName, NSString *segmentSuffix, NSString *ext);
 
-FOUNDATION_EXPORT jboolean OrgApacheLuceneIndexIndexFileNames_matchesExtensionWithNSString_withNSString_(NSString *filename, NSString *ext);
-
 FOUNDATION_EXPORT NSString *OrgApacheLuceneIndexIndexFileNames_stripSegmentNameWithNSString_(NSString *filename);
 
 FOUNDATION_EXPORT jlong OrgApacheLuceneIndexIndexFileNames_parseGenerationWithNSString_(NSString *filename);
@@ -72,8 +65,6 @@ FOUNDATION_EXPORT jlong OrgApacheLuceneIndexIndexFileNames_parseGenerationWithNS
 FOUNDATION_EXPORT NSString *OrgApacheLuceneIndexIndexFileNames_parseSegmentNameWithNSString_(NSString *filename);
 
 FOUNDATION_EXPORT NSString *OrgApacheLuceneIndexIndexFileNames_stripExtensionWithNSString_(NSString *filename);
-
-FOUNDATION_EXPORT NSString *OrgApacheLuceneIndexIndexFileNames_getExtensionWithNSString_(NSString *filename);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexIndexFileNames)
 

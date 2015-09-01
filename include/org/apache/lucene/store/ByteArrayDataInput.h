@@ -28,17 +28,11 @@
 
 - (instancetype)init;
 
-- (instancetype)initWithByteArray:(IOSByteArray *)bytes;
-
 - (instancetype)initWithByteArray:(IOSByteArray *)bytes
                           withInt:(jint)offset
                           withInt:(jint)len;
 
-- (jboolean)eof;
-
 - (jint)getPosition;
-
-- (jint)length;
 
 - (jbyte)readByte;
 
@@ -71,10 +65,6 @@
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneStoreByteArrayDataInput)
-
-FOUNDATION_EXPORT void OrgApacheLuceneStoreByteArrayDataInput_initWithByteArray_(OrgApacheLuceneStoreByteArrayDataInput *self, IOSByteArray *bytes);
-
-FOUNDATION_EXPORT OrgApacheLuceneStoreByteArrayDataInput *new_OrgApacheLuceneStoreByteArrayDataInput_initWithByteArray_(IOSByteArray *bytes) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT void OrgApacheLuceneStoreByteArrayDataInput_initWithByteArray_withInt_withInt_(OrgApacheLuceneStoreByteArrayDataInput *self, IOSByteArray *bytes, jint offset, jint len);
 

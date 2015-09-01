@@ -20,25 +20,19 @@
 #define OrgApacheLuceneSearchMultiTermQueryWrapperFilter_INCLUDE 1
 #include "org/apache/lucene/search/MultiTermQueryWrapperFilter.h"
 
-@class OrgApacheLuceneIndexTerm;
-
 @interface OrgApacheLuceneSearchPrefixFilter : OrgApacheLuceneSearchMultiTermQueryWrapperFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)prefix;
-
-- (OrgApacheLuceneIndexTerm *)getPrefix;
-
-- (NSString *)toStringWithNSString:(NSString *)field;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchPrefixFilter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchPrefixFilter_initWithOrgApacheLuceneIndexTerm_(OrgApacheLuceneSearchPrefixFilter *self, OrgApacheLuceneIndexTerm *prefix);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchPrefixFilter_init(OrgApacheLuceneSearchPrefixFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchPrefixFilter *new_OrgApacheLuceneSearchPrefixFilter_initWithOrgApacheLuceneIndexTerm_(OrgApacheLuceneIndexTerm *prefix) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchPrefixFilter *new_OrgApacheLuceneSearchPrefixFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPrefixFilter)
 

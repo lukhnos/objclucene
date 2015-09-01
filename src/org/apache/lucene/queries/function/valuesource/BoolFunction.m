@@ -4,7 +4,6 @@
 //
 
 #include "J2ObjC_source.h"
-#include "org/apache/lucene/queries/function/ValueSource.h"
 #include "org/apache/lucene/queries/function/valuesource/BoolFunction.h"
 
 @implementation OrgApacheLuceneQueriesFunctionValuesourceBoolFunction
@@ -25,7 +24,7 @@
 @end
 
 void OrgApacheLuceneQueriesFunctionValuesourceBoolFunction_init(OrgApacheLuceneQueriesFunctionValuesourceBoolFunction *self) {
-  OrgApacheLuceneQueriesFunctionValueSource_init(self);
+  NSObject_init(self);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceBoolFunction)

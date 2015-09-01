@@ -20,62 +20,19 @@
 #define OrgApacheLuceneQueriesFunctionValueSource_INCLUDE 1
 #include "org/apache/lucene/queries/function/ValueSource.h"
 
-@class JavaLangFloat;
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneQueriesFunctionFunctionValues;
-@class OrgApacheLuceneSearchIndexSearcher;
-@protocol JavaUtilMap;
-
-@interface OrgApacheLuceneQueriesFunctionValuesourceRangeMapFloatFunction : OrgApacheLuceneQueriesFunctionValueSource {
- @public
-  OrgApacheLuceneQueriesFunctionValueSource *source_;
-  jfloat min_;
-  jfloat max_;
-  OrgApacheLuceneQueriesFunctionValueSource *target_;
-  OrgApacheLuceneQueriesFunctionValueSource *defaultVal_;
-}
+@interface OrgApacheLuceneQueriesFunctionValuesourceRangeMapFloatFunction : OrgApacheLuceneQueriesFunctionValueSource
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)source
-                                                        withFloat:(jfloat)min
-                                                        withFloat:(jfloat)max
-                                                        withFloat:(jfloat)target
-                                                withJavaLangFloat:(JavaLangFloat *)def;
-
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)source
-                                                        withFloat:(jfloat)min
-                                                        withFloat:(jfloat)max
-                    withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)target
-                    withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)def;
-
-- (void)createWeightWithJavaUtilMap:(id<JavaUtilMap>)context
-withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher;
-
-- (NSString *)description__;
-
-- (jboolean)isEqual:(id)o;
-
-- (OrgApacheLuceneQueriesFunctionFunctionValues *)getValuesWithJavaUtilMap:(id<JavaUtilMap>)context
-                                 withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext;
-
-- (NSUInteger)hash;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceRangeMapFloatFunction)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceRangeMapFloatFunction, source_, OrgApacheLuceneQueriesFunctionValueSource *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceRangeMapFloatFunction, target_, OrgApacheLuceneQueriesFunctionValueSource *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceRangeMapFloatFunction, defaultVal_, OrgApacheLuceneQueriesFunctionValueSource *)
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceRangeMapFloatFunction_init(OrgApacheLuceneQueriesFunctionValuesourceRangeMapFloatFunction *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceRangeMapFloatFunction_initWithOrgApacheLuceneQueriesFunctionValueSource_withFloat_withFloat_withFloat_withJavaLangFloat_(OrgApacheLuceneQueriesFunctionValuesourceRangeMapFloatFunction *self, OrgApacheLuceneQueriesFunctionValueSource *source, jfloat min, jfloat max, jfloat target, JavaLangFloat *def);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceRangeMapFloatFunction *new_OrgApacheLuceneQueriesFunctionValuesourceRangeMapFloatFunction_initWithOrgApacheLuceneQueriesFunctionValueSource_withFloat_withFloat_withFloat_withJavaLangFloat_(OrgApacheLuceneQueriesFunctionValueSource *source, jfloat min, jfloat max, jfloat target, JavaLangFloat *def) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceRangeMapFloatFunction_initWithOrgApacheLuceneQueriesFunctionValueSource_withFloat_withFloat_withOrgApacheLuceneQueriesFunctionValueSource_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceRangeMapFloatFunction *self, OrgApacheLuceneQueriesFunctionValueSource *source, jfloat min, jfloat max, OrgApacheLuceneQueriesFunctionValueSource *target, OrgApacheLuceneQueriesFunctionValueSource *def);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceRangeMapFloatFunction *new_OrgApacheLuceneQueriesFunctionValuesourceRangeMapFloatFunction_initWithOrgApacheLuceneQueriesFunctionValueSource_withFloat_withFloat_withOrgApacheLuceneQueriesFunctionValueSource_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValueSource *source, jfloat min, jfloat max, OrgApacheLuceneQueriesFunctionValueSource *target, OrgApacheLuceneQueriesFunctionValueSource *def) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceRangeMapFloatFunction *new_OrgApacheLuceneQueriesFunctionValuesourceRangeMapFloatFunction_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceRangeMapFloatFunction)
 

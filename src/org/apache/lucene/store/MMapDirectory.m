@@ -26,7 +26,6 @@
 #include "org/apache/lucene/store/BaseDirectory.h"
 #include "org/apache/lucene/store/ByteBufferIndexInput.h"
 #include "org/apache/lucene/store/FSDirectory.h"
-#include "org/apache/lucene/store/FSLockFactory.h"
 #include "org/apache/lucene/store/IOContext.h"
 #include "org/apache/lucene/store/IndexInput.h"
 #include "org/apache/lucene/store/LockFactory.h"
@@ -122,17 +121,6 @@ jboolean OrgApacheLuceneStoreMMapDirectory_UNMAP_SUPPORTED_;
   return self;
 }
 
-- (instancetype)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path {
-  OrgApacheLuceneStoreMMapDirectory_initWithOrgLukhnosPortmobileFilePath_(self, path);
-  return self;
-}
-
-- (instancetype)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path
-                                             withInt:(jint)maxChunkSize {
-  OrgApacheLuceneStoreMMapDirectory_initWithOrgLukhnosPortmobileFilePath_withInt_(self, path, maxChunkSize);
-  return self;
-}
-
 - (instancetype)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path
                  withOrgApacheLuceneStoreLockFactory:(OrgApacheLuceneStoreLockFactory *)lockFactory
                                              withInt:(jint)maxChunkSize {
@@ -140,25 +128,8 @@ jboolean OrgApacheLuceneStoreMMapDirectory_UNMAP_SUPPORTED_;
   return self;
 }
 
-- (void)setUseUnmapWithBoolean:(jboolean)useUnmapHack {
-  if (useUnmapHack && !OrgApacheLuceneStoreMMapDirectory_UNMAP_SUPPORTED_) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"Unmap hack not supported on this platform!") autorelease];
-  self->useUnmapHack_ = useUnmapHack;
-}
-
 - (jboolean)getUseUnmap {
   return useUnmapHack_;
-}
-
-- (void)setPreloadWithBoolean:(jboolean)preload {
-  self->preload_ = preload;
-}
-
-- (jboolean)getPreload {
-  return preload_;
-}
-
-- (jint)getMaxChunkSize {
-  return JreLShift32(1, chunkSizePower_);
 }
 
 - (OrgApacheLuceneStoreIndexInput *)openInputWithNSString:(NSString *)name
@@ -216,14 +187,8 @@ jboolean OrgApacheLuceneStoreMMapDirectory_UNMAP_SUPPORTED_;
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgLukhnosPortmobileFilePath:withOrgApacheLuceneStoreLockFactory:", "MMapDirectory", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgLukhnosPortmobileFilePath:", "MMapDirectory", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgLukhnosPortmobileFilePath:withInt:", "MMapDirectory", NULL, 0x1, "Ljava.io.IOException;", NULL },
     { "initWithOrgLukhnosPortmobileFilePath:withOrgApacheLuceneStoreLockFactory:withInt:", "MMapDirectory", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "setUseUnmapWithBoolean:", "setUseUnmap", "V", 0x1, NULL, NULL },
     { "getUseUnmap", NULL, "Z", 0x1, NULL, NULL },
-    { "setPreloadWithBoolean:", "setPreload", "V", 0x1, NULL, NULL },
-    { "getPreload", NULL, "Z", 0x1, NULL, NULL },
-    { "getMaxChunkSize", NULL, "I", 0x11, NULL, NULL },
     { "openInputWithNSString:withOrgApacheLuceneStoreIOContext:", "openInput", "Lorg.apache.lucene.store.IndexInput;", 0x1, "Ljava.io.IOException;", NULL },
     { "mapWithNSString:withJavaNioChannelsFileChannel:withLong:withLong:", "map", "[Ljava.nio.ByteBuffer;", 0x10, "Ljava.io.IOException;", NULL },
     { "convertMapFailedIOExceptionWithJavaIoIOException:withNSString:withInt:", "convertMapFailedIOException", "Ljava.io.IOException;", 0x2, NULL, NULL },
@@ -236,7 +201,7 @@ jboolean OrgApacheLuceneStoreMMapDirectory_UNMAP_SUPPORTED_;
     { "UNMAP_SUPPORTED_", NULL, 0x19, "Z", &OrgApacheLuceneStoreMMapDirectory_UNMAP_SUPPORTED_, NULL, .constantValue.asLong = 0 },
     { "CLEANER_", NULL, 0x1a, "Lorg.apache.lucene.store.ByteBufferIndexInput$BufferCleaner;", &OrgApacheLuceneStoreMMapDirectory_CLEANER_, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreMMapDirectory = { 2, "MMapDirectory", "org.apache.lucene.store", NULL, 0x1, 12, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreMMapDirectory = { 2, "MMapDirectory", "org.apache.lucene.store", NULL, 0x1, 6, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneStoreMMapDirectory;
 }
 
@@ -249,26 +214,6 @@ void OrgApacheLuceneStoreMMapDirectory_initWithOrgLukhnosPortmobileFilePath_with
 OrgApacheLuceneStoreMMapDirectory *new_OrgApacheLuceneStoreMMapDirectory_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneStoreLockFactory_(OrgLukhnosPortmobileFilePath *path, OrgApacheLuceneStoreLockFactory *lockFactory) {
   OrgApacheLuceneStoreMMapDirectory *self = [OrgApacheLuceneStoreMMapDirectory alloc];
   OrgApacheLuceneStoreMMapDirectory_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneStoreLockFactory_(self, path, lockFactory);
-  return self;
-}
-
-void OrgApacheLuceneStoreMMapDirectory_initWithOrgLukhnosPortmobileFilePath_(OrgApacheLuceneStoreMMapDirectory *self, OrgLukhnosPortmobileFilePath *path) {
-  OrgApacheLuceneStoreMMapDirectory_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneStoreLockFactory_(self, path, OrgApacheLuceneStoreFSLockFactory_getDefault());
-}
-
-OrgApacheLuceneStoreMMapDirectory *new_OrgApacheLuceneStoreMMapDirectory_initWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *path) {
-  OrgApacheLuceneStoreMMapDirectory *self = [OrgApacheLuceneStoreMMapDirectory alloc];
-  OrgApacheLuceneStoreMMapDirectory_initWithOrgLukhnosPortmobileFilePath_(self, path);
-  return self;
-}
-
-void OrgApacheLuceneStoreMMapDirectory_initWithOrgLukhnosPortmobileFilePath_withInt_(OrgApacheLuceneStoreMMapDirectory *self, OrgLukhnosPortmobileFilePath *path, jint maxChunkSize) {
-  OrgApacheLuceneStoreMMapDirectory_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneStoreLockFactory_withInt_(self, path, OrgApacheLuceneStoreFSLockFactory_getDefault(), maxChunkSize);
-}
-
-OrgApacheLuceneStoreMMapDirectory *new_OrgApacheLuceneStoreMMapDirectory_initWithOrgLukhnosPortmobileFilePath_withInt_(OrgLukhnosPortmobileFilePath *path, jint maxChunkSize) {
-  OrgApacheLuceneStoreMMapDirectory *self = [OrgApacheLuceneStoreMMapDirectory alloc];
-  OrgApacheLuceneStoreMMapDirectory_initWithOrgLukhnosPortmobileFilePath_withInt_(self, path, maxChunkSize);
   return self;
 }
 

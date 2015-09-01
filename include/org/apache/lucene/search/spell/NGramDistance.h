@@ -26,24 +26,9 @@
 
 - (instancetype)init;
 
-- (instancetype)initWithInt:(jint)size;
-
-- (jboolean)isEqual:(id)obj;
-
-- (jfloat)getDistanceWithNSString:(NSString *)source
-                     withNSString:(NSString *)target;
-
-- (NSUInteger)hash;
-
-- (NSString *)description;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSpellNGramDistance)
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSpellNGramDistance_initWithInt_(OrgApacheLuceneSearchSpellNGramDistance *self, jint size);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSpellNGramDistance *new_OrgApacheLuceneSearchSpellNGramDistance_initWithInt_(jint size) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSpellNGramDistance_init(OrgApacheLuceneSearchSpellNGramDistance *self);
 

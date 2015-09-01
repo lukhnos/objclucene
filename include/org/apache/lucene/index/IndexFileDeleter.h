@@ -54,8 +54,6 @@ withOrgApacheLuceneIndexIndexDeletionPolicy:(OrgApacheLuceneIndexIndexDeletionPo
 
 - (jboolean)existsWithNSString:(NSString *)fileName;
 
-- (OrgApacheLuceneIndexSegmentInfos *)getLastSegmentInfos;
-
 #pragma mark Package-Private
 
 - (void)decRefWithJavaUtilCollection:(id<JavaUtilCollection>)files;
@@ -79,13 +77,9 @@ withOrgApacheLuceneIndexIndexDeletionPolicy:(OrgApacheLuceneIndexIndexDeletionPo
                                  withJavaUtilCollection:(id<JavaUtilCollection>)files
                       withOrgApacheLuceneUtilInfoStream:(OrgApacheLuceneUtilInfoStream *)infoStream;
 
-- (jboolean)isClosed;
-
 - (void)refresh;
 
 - (void)refreshWithNSString:(NSString *)segmentName;
-
-- (void)revisitPolicy;
 
 @end
 

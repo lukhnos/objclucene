@@ -22,44 +22,11 @@
 
 #pragma mark Public
 
-+ (jint)bitCountWithByte:(jbyte)b;
-
-+ (jint)bitListWithByte:(jbyte)b;
-
-+ (jlong)deinterleaveWithLong:(jlong)b;
-
-+ (jlong)flipFlopWithLong:(jlong)b;
-
-+ (jlong)interleaveWithLong:(jlong)v1
-                   withLong:(jlong)v2;
-
-+ (jint)nextHighestPowerOfTwoWithInt:(jint)v;
-
-+ (jlong)nextHighestPowerOfTwoWithLong:(jlong)v;
-
-+ (jlong)pop_andnotWithLongArray:(IOSLongArray *)arr1
-                   withLongArray:(IOSLongArray *)arr2
-                         withInt:(jint)wordOffset
-                         withInt:(jint)numWords;
+- (instancetype)init;
 
 + (jlong)pop_arrayWithLongArray:(IOSLongArray *)arr
                         withInt:(jint)wordOffset
                         withInt:(jint)numWords;
-
-+ (jlong)pop_intersectWithLongArray:(IOSLongArray *)arr1
-                      withLongArray:(IOSLongArray *)arr2
-                            withInt:(jint)wordOffset
-                            withInt:(jint)numWords;
-
-+ (jlong)pop_unionWithLongArray:(IOSLongArray *)arr1
-                  withLongArray:(IOSLongArray *)arr2
-                        withInt:(jint)wordOffset
-                        withInt:(jint)numWords;
-
-+ (jlong)pop_xorWithLongArray:(IOSLongArray *)arr1
-                withLongArray:(IOSLongArray *)arr2
-                      withInt:(jint)wordOffset
-                      withInt:(jint)numWords;
 
 + (jint)zigZagDecodeWithInt:(jint)i;
 
@@ -73,29 +40,7 @@
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneUtilBitUtil)
 
-FOUNDATION_EXPORT jint OrgApacheLuceneUtilBitUtil_bitCountWithByte_(jbyte b);
-
-FOUNDATION_EXPORT jint OrgApacheLuceneUtilBitUtil_bitListWithByte_(jbyte b);
-
 FOUNDATION_EXPORT jlong OrgApacheLuceneUtilBitUtil_pop_arrayWithLongArray_withInt_withInt_(IOSLongArray *arr, jint wordOffset, jint numWords);
-
-FOUNDATION_EXPORT jlong OrgApacheLuceneUtilBitUtil_pop_intersectWithLongArray_withLongArray_withInt_withInt_(IOSLongArray *arr1, IOSLongArray *arr2, jint wordOffset, jint numWords);
-
-FOUNDATION_EXPORT jlong OrgApacheLuceneUtilBitUtil_pop_unionWithLongArray_withLongArray_withInt_withInt_(IOSLongArray *arr1, IOSLongArray *arr2, jint wordOffset, jint numWords);
-
-FOUNDATION_EXPORT jlong OrgApacheLuceneUtilBitUtil_pop_andnotWithLongArray_withLongArray_withInt_withInt_(IOSLongArray *arr1, IOSLongArray *arr2, jint wordOffset, jint numWords);
-
-FOUNDATION_EXPORT jlong OrgApacheLuceneUtilBitUtil_pop_xorWithLongArray_withLongArray_withInt_withInt_(IOSLongArray *arr1, IOSLongArray *arr2, jint wordOffset, jint numWords);
-
-FOUNDATION_EXPORT jint OrgApacheLuceneUtilBitUtil_nextHighestPowerOfTwoWithInt_(jint v);
-
-FOUNDATION_EXPORT jlong OrgApacheLuceneUtilBitUtil_nextHighestPowerOfTwoWithLong_(jlong v);
-
-FOUNDATION_EXPORT jlong OrgApacheLuceneUtilBitUtil_interleaveWithLong_withLong_(jlong v1, jlong v2);
-
-FOUNDATION_EXPORT jlong OrgApacheLuceneUtilBitUtil_deinterleaveWithLong_(jlong b);
-
-FOUNDATION_EXPORT jlong OrgApacheLuceneUtilBitUtil_flipFlopWithLong_(jlong b);
 
 FOUNDATION_EXPORT jint OrgApacheLuceneUtilBitUtil_zigZagEncodeWithInt_(jint i);
 
@@ -104,6 +49,10 @@ FOUNDATION_EXPORT jlong OrgApacheLuceneUtilBitUtil_zigZagEncodeWithLong_(jlong l
 FOUNDATION_EXPORT jint OrgApacheLuceneUtilBitUtil_zigZagDecodeWithInt_(jint i);
 
 FOUNDATION_EXPORT jlong OrgApacheLuceneUtilBitUtil_zigZagDecodeWithLong_(jlong l);
+
+FOUNDATION_EXPORT void OrgApacheLuceneUtilBitUtil_init(OrgApacheLuceneUtilBitUtil *self);
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilBitUtil *new_OrgApacheLuceneUtilBitUtil_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilBitUtil)
 

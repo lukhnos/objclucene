@@ -42,8 +42,6 @@
 
 - (OrgApacheLuceneIndexTermsEnum_SeekStatusEnum *)seekCeilWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)text;
 
-- (void)seekExactWithLong:(jlong)ord;
-
 - (OrgApacheLuceneUtilBytesRef *)term;
 
 - (jlong)totalTermFreq;

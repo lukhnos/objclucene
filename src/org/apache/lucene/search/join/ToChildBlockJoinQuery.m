@@ -4,20 +4,14 @@
 //
 
 #include "IOSClass.h"
-#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
 #include "java/lang/IllegalStateException.h"
-#include "java/lang/Integer.h"
 #include "java/lang/Math.h"
-#include "java/util/Collection.h"
-#include "java/util/Collections.h"
-#include "java/util/Locale.h"
 #include "java/util/Set.h"
 #include "org/apache/lucene/index/IndexReader.h"
 #include "org/apache/lucene/index/LeafReaderContext.h"
 #include "org/apache/lucene/search/DocIdSetIterator.h"
-#include "org/apache/lucene/search/Explanation.h"
 #include "org/apache/lucene/search/IndexSearcher.h"
 #include "org/apache/lucene/search/Query.h"
 #include "org/apache/lucene/search/Scorer.h"
@@ -68,9 +62,6 @@ __attribute__((unused)) static OrgApacheLuceneSearchJoinToChildBlockJoinQuery *n
                  withFloat:(jfloat)topLevelBoost;
 
 - (OrgApacheLuceneSearchScorer *)scorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext;
-
-- (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-                                                                               withInt:(jint)doc;
 
 @end
 
@@ -266,16 +257,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinToChildBlockJoinQuery)
   return [new_OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinScorer_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchScorer_withOrgApacheLuceneUtilBitSet_withBoolean_(self, parentScorer, parents, doScores_) autorelease];
 }
 
-- (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-                                                                               withInt:(jint)doc {
-  OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinScorer *scorer = (OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinScorer *) check_class_cast([self scorerWithOrgApacheLuceneIndexLeafReaderContext:context], [OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinScorer class]);
-  if (scorer != nil && [scorer advanceWithInt:doc] == doc) {
-    jint parentDoc = [scorer getParentDoc];
-    return OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_([scorer score], NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT_), @"Score based on parent document %d", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangInteger_valueOfWithInt_(parentDoc + ((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context))->docBase_) } count:1 type:NSObject_class_()]), [IOSObjectArray arrayWithObjects:(id[]){ [((OrgApacheLuceneSearchWeight *) nil_chk(parentWeight_)) explainWithOrgApacheLuceneIndexLeafReaderContext:context withInt:parentDoc] } count:1 type:OrgApacheLuceneSearchExplanation_class_()]);
-  }
-  return OrgApacheLuceneSearchExplanation_noMatchWithNSString_withOrgApacheLuceneSearchExplanationArray_(@"Not a match", [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchExplanation_class_()]);
-}
-
 - (void)dealloc {
   RELEASE_(joinQuery_);
   RELEASE_(parentWeight_);
@@ -290,7 +271,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinToChildBlockJoinQuery)
     { "getValueForNormalization", NULL, "F", 0x1, "Ljava.io.IOException;", NULL },
     { "normalizeWithFloat:withFloat:", "normalize", "V", 0x1, NULL, NULL },
     { "scorerWithOrgApacheLuceneIndexLeafReaderContext:", "scorer", "Lorg.apache.lucene.search.Scorer;", 0x1, "Ljava.io.IOException;", NULL },
-    { "explainWithOrgApacheLuceneIndexLeafReaderContext:withInt:", "explain", "Lorg.apache.lucene.search.Explanation;", 0x1, "Ljava.io.IOException;", NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "joinQuery_", NULL, 0x12, "Lorg.apache.lucene.search.Query;", NULL, NULL, .constantValue.asLong = 0 },
@@ -298,7 +278,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinToChildBlockJoinQuery)
     { "parentsFilter_", NULL, 0x12, "Lorg.apache.lucene.search.join.BitSetProducer;", NULL, NULL, .constantValue.asLong = 0 },
     { "doScores_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinWeight = { 2, "ToChildBlockJoinWeight", "org.apache.lucene.search.join", "ToChildBlockJoinQuery", 0xa, 6, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinWeight = { 2, "ToChildBlockJoinWeight", "org.apache.lucene.search.join", "ToChildBlockJoinQuery", 0xa, 5, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinWeight;
 }
 
@@ -328,10 +308,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinToChildBlockJoinQuery_
                                         withBoolean:(jboolean)doScores {
   OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinScorer_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchScorer_withOrgApacheLuceneUtilBitSet_withBoolean_(self, weight, parentScorer, parentBits, doScores);
   return self;
-}
-
-- (id<JavaUtilCollection>)getChildren {
-  return JavaUtilCollections_singletonWithId_([new_OrgApacheLuceneSearchScorer_ChildScorer_initWithOrgApacheLuceneSearchScorer_withNSString_(parentScorer_, @"BLOCK_JOIN") autorelease]);
 }
 
 - (jint)nextDoc {
@@ -424,10 +400,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinToChildBlockJoinQuery_
   return [((OrgApacheLuceneSearchScorer *) nil_chk(parentScorer_)) cost];
 }
 
-- (jint)getParentDoc {
-  return parentDoc_;
-}
-
 - (void)dealloc {
   RELEASE_(parentScorer_);
   RELEASE_(parentBits_);
@@ -437,7 +409,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinToChildBlockJoinQuery_
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneSearchWeight:withOrgApacheLuceneSearchScorer:withOrgApacheLuceneUtilBitSet:withBoolean:", "ToChildBlockJoinScorer", NULL, 0x1, NULL, NULL },
-    { "getChildren", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
     { "nextDoc", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
     { "validateParentDoc", NULL, "V", 0x2, NULL, NULL },
     { "docID", NULL, "I", 0x1, NULL, NULL },
@@ -445,7 +416,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinToChildBlockJoinQuery_
     { "freq", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
     { "advanceWithInt:", "advance", "I", 0x1, "Ljava.io.IOException;", NULL },
     { "cost", NULL, "J", 0x1, NULL, NULL },
-    { "getParentDoc", NULL, "I", 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "parentScorer_", NULL, 0x12, "Lorg.apache.lucene.search.Scorer;", NULL, NULL, .constantValue.asLong = 0 },
@@ -456,7 +426,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinToChildBlockJoinQuery_
     { "childDoc_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "parentDoc_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinScorer = { 2, "ToChildBlockJoinScorer", "org.apache.lucene.search.join", "ToChildBlockJoinQuery", 0x8, 10, methods, 7, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinScorer = { 2, "ToChildBlockJoinScorer", "org.apache.lucene.search.join", "ToChildBlockJoinQuery", 0x8, 8, methods, 7, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinScorer;
 }
 

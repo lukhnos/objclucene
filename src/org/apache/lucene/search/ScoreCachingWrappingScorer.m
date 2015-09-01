@@ -6,9 +6,6 @@
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
-#include "java/util/Collection.h"
-#include "java/util/Collections.h"
-#include "java/util/Set.h"
 #include "org/apache/lucene/search/FilterScorer.h"
 #include "org/apache/lucene/search/ScoreCachingWrappingScorer.h"
 #include "org/apache/lucene/search/Scorer.h"
@@ -37,21 +34,16 @@
   return curScore_;
 }
 
-- (id<JavaUtilCollection>)getChildren {
-  return JavaUtilCollections_singletonWithId_([new_OrgApacheLuceneSearchScorer_ChildScorer_initWithOrgApacheLuceneSearchScorer_withNSString_(in_, @"CACHED") autorelease]);
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneSearchScorer:", "ScoreCachingWrappingScorer", NULL, 0x1, NULL, NULL },
     { "score", NULL, "F", 0x1, "Ljava.io.IOException;", NULL },
-    { "getChildren", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "curDoc_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "curScore_", NULL, 0x2, "F", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchScoreCachingWrappingScorer = { 2, "ScoreCachingWrappingScorer", "org.apache.lucene.search", NULL, 0x1, 3, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchScoreCachingWrappingScorer = { 2, "ScoreCachingWrappingScorer", "org.apache.lucene.search", NULL, 0x1, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchScoreCachingWrappingScorer;
 }
 

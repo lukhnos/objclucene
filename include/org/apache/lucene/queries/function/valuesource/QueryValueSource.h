@@ -20,48 +20,19 @@
 #define OrgApacheLuceneQueriesFunctionValueSource_INCLUDE 1
 #include "org/apache/lucene/queries/function/ValueSource.h"
 
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneQueriesFunctionFunctionValues;
-@class OrgApacheLuceneSearchIndexSearcher;
-@class OrgApacheLuceneSearchQuery;
-@protocol JavaUtilMap;
-
-@interface OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource : OrgApacheLuceneQueriesFunctionValueSource {
- @public
-  OrgApacheLuceneSearchQuery *q_;
-  jfloat defVal_;
-}
+@interface OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource : OrgApacheLuceneQueriesFunctionValueSource
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)q
-                                         withFloat:(jfloat)defVal;
-
-- (void)createWeightWithJavaUtilMap:(id<JavaUtilMap>)context
-withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher;
-
-- (NSString *)description__;
-
-- (jboolean)isEqual:(id)o;
-
-- (jfloat)getDefaultValue;
-
-- (OrgApacheLuceneSearchQuery *)getQuery;
-
-- (OrgApacheLuceneQueriesFunctionFunctionValues *)getValuesWithJavaUtilMap:(id<JavaUtilMap>)fcontext
-                                 withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext;
-
-- (NSUInteger)hash;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource, q_, OrgApacheLuceneSearchQuery *)
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource_init(OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource_initWithOrgApacheLuceneSearchQuery_withFloat_(OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource *self, OrgApacheLuceneSearchQuery *q, jfloat defVal);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource_initWithOrgApacheLuceneSearchQuery_withFloat_(OrgApacheLuceneSearchQuery *q, jfloat defVal) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource)
 
@@ -74,56 +45,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceQueryValueSo
 #define OrgApacheLuceneQueriesFunctionDocvaluesFloatDocValues_INCLUDE 1
 #include "org/apache/lucene/queries/function/docvalues/FloatDocValues.h"
 
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller;
-@class OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource;
-@class OrgApacheLuceneSearchQuery;
-@class OrgApacheLuceneSearchScorer;
-@class OrgApacheLuceneSearchWeight;
-@protocol JavaUtilMap;
+@interface OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues : OrgApacheLuceneQueriesFunctionDocvaluesFloatDocValues
 
-@interface OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues : OrgApacheLuceneQueriesFunctionDocvaluesFloatDocValues {
- @public
-  OrgApacheLuceneIndexLeafReaderContext *readerContext_;
-  OrgApacheLuceneSearchWeight *weight_;
-  jfloat defVal_;
-  id<JavaUtilMap> fcontext_;
-  OrgApacheLuceneSearchQuery *q_;
-  OrgApacheLuceneSearchScorer *scorer_;
-  jint scorerDoc_;
-  jboolean noMatches_;
-  jint lastDocRequested_;
-}
+#pragma mark Package-Private
 
-#pragma mark Public
-
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValuesourceQueryValueSource:(OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource *)vs
-                                        withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext
-                                                                  withJavaUtilMap:(id<JavaUtilMap>)fcontext;
-
-- (jboolean)existsWithInt:(jint)doc;
-
-- (jfloat)floatValWithInt:(jint)doc;
-
-- (OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller *)getValueFiller;
-
-- (id)objectValWithInt:(jint)doc;
-
-- (NSString *)toStringWithInt:(jint)doc;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues, readerContext_, OrgApacheLuceneIndexLeafReaderContext *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues, weight_, OrgApacheLuceneSearchWeight *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues, fcontext_, id<JavaUtilMap>)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues, q_, OrgApacheLuceneSearchQuery *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues, scorer_, OrgApacheLuceneSearchScorer *)
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_init(OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_initWithOrgApacheLuceneQueriesFunctionValuesourceQueryValueSource_withOrgApacheLuceneIndexLeafReaderContext_withJavaUtilMap_(OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues *self, OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource *vs, OrgApacheLuceneIndexLeafReaderContext *readerContext, id<JavaUtilMap> fcontext);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues *new_OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_initWithOrgApacheLuceneQueriesFunctionValuesourceQueryValueSource_withOrgApacheLuceneIndexLeafReaderContext_withJavaUtilMap_(OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource *vs, OrgApacheLuceneIndexLeafReaderContext *readerContext, id<JavaUtilMap> fcontext) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues *new_OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues)
 

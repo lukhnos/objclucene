@@ -40,10 +40,6 @@
 
 - (jboolean)isScoring;
 
-- (void)setOccurWithOrgApacheLuceneSearchBooleanClause_OccurEnum:(OrgApacheLuceneSearchBooleanClause_OccurEnum *)occur;
-
-- (void)setQueryWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
-
 - (NSString *)description;
 
 @end

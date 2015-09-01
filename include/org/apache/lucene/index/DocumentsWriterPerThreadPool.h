@@ -27,26 +27,18 @@
 
 - (instancetype)init;
 
-- (void)clearAbort;
-
 - (jint)getActiveThreadStateCount;
 
 - (OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *)getAndLockWithJavaLangThread:(JavaLangThread *)requestingThread
                                                        withOrgApacheLuceneIndexDocumentsWriter:(OrgApacheLuceneIndexDocumentsWriter *)documentsWriter;
 
-- (jint)getMaxThreadStates;
-
 - (OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *)getThreadStateWithInt:(jint)ord;
-
-- (OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *)minContendedThreadState;
 
 - (void)recycleWithOrgApacheLuceneIndexDocumentsWriterPerThread:(OrgApacheLuceneIndexDocumentsWriterPerThread *)dwpt;
 
 - (void)release__WithOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState:(OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *)state;
 
 - (OrgApacheLuceneIndexDocumentsWriterPerThread *)resetWithOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState:(OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *)threadState;
-
-- (void)setAbort;
 
 @end
 
@@ -75,14 +67,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriterPerThreadPool)
   volatile_jboolean flushPending_;
   jlong bytesUsed_;
 }
-
-#pragma mark Public
-
-- (jlong)getBytesUsedPerThread;
-
-- (OrgApacheLuceneIndexDocumentsWriterPerThread *)getDocumentsWriterPerThread;
-
-- (jboolean)isFlushPending;
 
 #pragma mark Package-Private
 

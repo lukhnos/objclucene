@@ -16,18 +16,7 @@
 #if !defined (_OrgApacheLuceneAnalysisUtilResourceLoader_) && (OrgApacheLuceneAnalysisUtilResourceLoader_INCLUDE_ALL || OrgApacheLuceneAnalysisUtilResourceLoader_INCLUDE)
 #define _OrgApacheLuceneAnalysisUtilResourceLoader_
 
-@class IOSClass;
-@class JavaIoInputStream;
-
 @protocol OrgApacheLuceneAnalysisUtilResourceLoader < NSObject, JavaObject >
-
-- (JavaIoInputStream *)openResourceWithNSString:(NSString *)resource;
-
-- (IOSClass *)findClassWithNSString:(NSString *)cname
-                       withIOSClass:(IOSClass *)expectedType;
-
-- (id)newInstanceWithNSString:(NSString *)cname
-                 withIOSClass:(IOSClass *)expectedType OBJC_METHOD_FAMILY_NONE;
 
 @end
 

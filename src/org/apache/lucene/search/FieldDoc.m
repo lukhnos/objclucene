@@ -25,14 +25,6 @@
   return self;
 }
 
-- (instancetype)initWithInt:(jint)doc
-                  withFloat:(jfloat)score
-          withNSObjectArray:(IOSObjectArray *)fields
-                    withInt:(jint)shardIndex {
-  OrgApacheLuceneSearchFieldDoc_initWithInt_withFloat_withNSObjectArray_withInt_(self, doc, score, fields, shardIndex);
-  return self;
-}
-
 - (NSString *)description {
   JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_initWithNSString_([super description]) autorelease];
   [sb appendWithNSString:@" fields="];
@@ -49,13 +41,12 @@
   static const J2ObjcMethodInfo methods[] = {
     { "initWithInt:withFloat:", "FieldDoc", NULL, 0x1, NULL, NULL },
     { "initWithInt:withFloat:withNSObjectArray:", "FieldDoc", NULL, 0x1, NULL, NULL },
-    { "initWithInt:withFloat:withNSObjectArray:withInt:", "FieldDoc", NULL, 0x1, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "fields_", NULL, 0x1, "[Ljava.lang.Object;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchFieldDoc = { 2, "FieldDoc", "org.apache.lucene.search", NULL, 0x1, 4, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchFieldDoc = { 2, "FieldDoc", "org.apache.lucene.search", NULL, 0x1, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchFieldDoc;
 }
 
@@ -79,17 +70,6 @@ void OrgApacheLuceneSearchFieldDoc_initWithInt_withFloat_withNSObjectArray_(OrgA
 OrgApacheLuceneSearchFieldDoc *new_OrgApacheLuceneSearchFieldDoc_initWithInt_withFloat_withNSObjectArray_(jint doc, jfloat score, IOSObjectArray *fields) {
   OrgApacheLuceneSearchFieldDoc *self = [OrgApacheLuceneSearchFieldDoc alloc];
   OrgApacheLuceneSearchFieldDoc_initWithInt_withFloat_withNSObjectArray_(self, doc, score, fields);
-  return self;
-}
-
-void OrgApacheLuceneSearchFieldDoc_initWithInt_withFloat_withNSObjectArray_withInt_(OrgApacheLuceneSearchFieldDoc *self, jint doc, jfloat score, IOSObjectArray *fields, jint shardIndex) {
-  OrgApacheLuceneSearchScoreDoc_initWithInt_withFloat_withInt_(self, doc, score, shardIndex);
-  JreStrongAssign(&self->fields_, fields);
-}
-
-OrgApacheLuceneSearchFieldDoc *new_OrgApacheLuceneSearchFieldDoc_initWithInt_withFloat_withNSObjectArray_withInt_(jint doc, jfloat score, IOSObjectArray *fields, jint shardIndex) {
-  OrgApacheLuceneSearchFieldDoc *self = [OrgApacheLuceneSearchFieldDoc alloc];
-  OrgApacheLuceneSearchFieldDoc_initWithInt_withFloat_withNSObjectArray_withInt_(self, doc, score, fields, shardIndex);
   return self;
 }
 

@@ -20,51 +20,19 @@
 #define OrgApacheLuceneSearchMultiTermQueryWrapperFilter_INCLUDE 1
 #include "org/apache/lucene/search/MultiTermQueryWrapperFilter.h"
 
-@class OrgApacheLuceneUtilBytesRef;
-
 @interface OrgApacheLuceneSearchTermRangeFilter : OrgApacheLuceneSearchMultiTermQueryWrapperFilter
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)fieldName
- withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)lowerTerm
- withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)upperTerm
-                     withBoolean:(jboolean)includeLower
-                     withBoolean:(jboolean)includeUpper;
-
-- (OrgApacheLuceneUtilBytesRef *)getLowerTerm;
-
-- (OrgApacheLuceneUtilBytesRef *)getUpperTerm;
-
-- (jboolean)includesLower;
-
-- (jboolean)includesUpper;
-
-+ (OrgApacheLuceneSearchTermRangeFilter *)LessWithNSString:(NSString *)fieldName
-                           withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)upperTerm;
-
-+ (OrgApacheLuceneSearchTermRangeFilter *)MoreWithNSString:(NSString *)fieldName
-                           withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)lowerTerm;
-
-+ (OrgApacheLuceneSearchTermRangeFilter *)newStringRangeWithNSString:(NSString *)field
-                                                        withNSString:(NSString *)lowerTerm
-                                                        withNSString:(NSString *)upperTerm
-                                                         withBoolean:(jboolean)includeLower
-                                                         withBoolean:(jboolean)includeUpper OBJC_METHOD_FAMILY_NONE;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchTermRangeFilter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchTermRangeFilter_initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_(OrgApacheLuceneSearchTermRangeFilter *self, NSString *fieldName, OrgApacheLuceneUtilBytesRef *lowerTerm, OrgApacheLuceneUtilBytesRef *upperTerm, jboolean includeLower, jboolean includeUpper);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchTermRangeFilter_init(OrgApacheLuceneSearchTermRangeFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchTermRangeFilter *new_OrgApacheLuceneSearchTermRangeFilter_initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_(NSString *fieldName, OrgApacheLuceneUtilBytesRef *lowerTerm, OrgApacheLuceneUtilBytesRef *upperTerm, jboolean includeLower, jboolean includeUpper) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchTermRangeFilter *OrgApacheLuceneSearchTermRangeFilter_newStringRangeWithNSString_withNSString_withNSString_withBoolean_withBoolean_(NSString *field, NSString *lowerTerm, NSString *upperTerm, jboolean includeLower, jboolean includeUpper);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchTermRangeFilter *OrgApacheLuceneSearchTermRangeFilter_LessWithNSString_withOrgApacheLuceneUtilBytesRef_(NSString *fieldName, OrgApacheLuceneUtilBytesRef *upperTerm);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchTermRangeFilter *OrgApacheLuceneSearchTermRangeFilter_MoreWithNSString_withOrgApacheLuceneUtilBytesRef_(NSString *fieldName, OrgApacheLuceneUtilBytesRef *lowerTerm);
+FOUNDATION_EXPORT OrgApacheLuceneSearchTermRangeFilter *new_OrgApacheLuceneSearchTermRangeFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTermRangeFilter)
 

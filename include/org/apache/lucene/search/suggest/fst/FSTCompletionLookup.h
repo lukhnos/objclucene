@@ -24,45 +24,11 @@
 #define OrgApacheLuceneUtilAccountable_INCLUDE 1
 #include "org/apache/lucene/util/Accountable.h"
 
-@class OrgApacheLuceneSearchSuggestFstFSTCompletion;
-@class OrgApacheLuceneStoreDataInput;
-@class OrgApacheLuceneStoreDataOutput;
-@protocol JavaLangCharSequence;
-@protocol JavaUtilCollection;
-@protocol JavaUtilList;
-@protocol JavaUtilSet;
-@protocol OrgApacheLuceneSearchSuggestInputIterator;
-
 @interface OrgApacheLuceneSearchSuggestFstFSTCompletionLookup : OrgApacheLuceneSearchSuggestLookup < OrgApacheLuceneUtilAccountable >
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (instancetype)initWithOrgApacheLuceneSearchSuggestFstFSTCompletion:(OrgApacheLuceneSearchSuggestFstFSTCompletion *)completion
-                                                         withBoolean:(jboolean)exactMatchFirst;
-
-- (instancetype)initWithInt:(jint)buckets
-                withBoolean:(jboolean)exactMatchFirst;
-
-- (void)buildWithOrgApacheLuceneSearchSuggestInputIterator:(id<OrgApacheLuceneSearchSuggestInputIterator>)iterator;
-
-- (id)getWithJavaLangCharSequence:(id<JavaLangCharSequence>)key;
-
-- (id<JavaUtilCollection>)getChildResources;
-
-- (jlong)getCount;
-
-- (jboolean)load__WithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)input;
-
-- (id<JavaUtilList>)lookupWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
-                                   withJavaUtilSet:(id<JavaUtilSet>)contexts
-                                       withBoolean:(jboolean)higherWeightsFirst
-                                           withInt:(jint)num;
-
-- (jlong)ramBytesUsed;
-
-- (jboolean)storeWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)output;
 
 @end
 
@@ -71,14 +37,6 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestFstFSTCompletionLookup)
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestFstFSTCompletionLookup_init(OrgApacheLuceneSearchSuggestFstFSTCompletionLookup *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestFstFSTCompletionLookup *new_OrgApacheLuceneSearchSuggestFstFSTCompletionLookup_init() NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestFstFSTCompletionLookup_initWithInt_withBoolean_(OrgApacheLuceneSearchSuggestFstFSTCompletionLookup *self, jint buckets, jboolean exactMatchFirst);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestFstFSTCompletionLookup *new_OrgApacheLuceneSearchSuggestFstFSTCompletionLookup_initWithInt_withBoolean_(jint buckets, jboolean exactMatchFirst) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestFstFSTCompletionLookup_initWithOrgApacheLuceneSearchSuggestFstFSTCompletion_withBoolean_(OrgApacheLuceneSearchSuggestFstFSTCompletionLookup *self, OrgApacheLuceneSearchSuggestFstFSTCompletion *completion, jboolean exactMatchFirst);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestFstFSTCompletionLookup *new_OrgApacheLuceneSearchSuggestFstFSTCompletionLookup_initWithOrgApacheLuceneSearchSuggestFstFSTCompletion_withBoolean_(OrgApacheLuceneSearchSuggestFstFSTCompletion *completion, jboolean exactMatchFirst) NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestFstFSTCompletionLookup)
 

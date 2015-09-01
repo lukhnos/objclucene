@@ -16,26 +16,15 @@
 #if !defined (_OrgApacheLuceneIndexMultiPassIndexSplitter_) && (OrgApacheLuceneIndexMultiPassIndexSplitter_INCLUDE_ALL || OrgApacheLuceneIndexMultiPassIndexSplitter_INCLUDE)
 #define _OrgApacheLuceneIndexMultiPassIndexSplitter_
 
-@class IOSObjectArray;
-@class OrgApacheLuceneIndexIndexReader;
-
 @interface OrgApacheLuceneIndexMultiPassIndexSplitter : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
-+ (void)mainWithNSStringArray:(IOSObjectArray *)args;
-
-- (void)splitWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)inArg
-          withOrgApacheLuceneStoreDirectoryArray:(IOSObjectArray *)outputs
-                                     withBoolean:(jboolean)seq;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexMultiPassIndexSplitter)
-
-FOUNDATION_EXPORT void OrgApacheLuceneIndexMultiPassIndexSplitter_mainWithNSStringArray_(IOSObjectArray *args);
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexMultiPassIndexSplitter_init(OrgApacheLuceneIndexMultiPassIndexSplitter *self);
 

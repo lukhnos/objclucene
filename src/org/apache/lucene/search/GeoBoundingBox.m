@@ -4,59 +4,34 @@
 //
 
 #include "J2ObjC_source.h"
-#include "java/lang/IllegalArgumentException.h"
 #include "org/apache/lucene/search/GeoBoundingBox.h"
-#include "org/apache/lucene/util/GeoUtils.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneSearchGeoBoundingBox
 
-- (instancetype)initWithDouble:(jdouble)minLon
-                    withDouble:(jdouble)maxLon
-                    withDouble:(jdouble)minLat
-                    withDouble:(jdouble)maxLat {
-  OrgApacheLuceneSearchGeoBoundingBox_initWithDouble_withDouble_withDouble_withDouble_(self, minLon, maxLon, minLat, maxLat);
+- (instancetype)init {
+  OrgApacheLuceneSearchGeoBoundingBox_init(self);
   return self;
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithDouble:withDouble:withDouble:withDouble:", "GeoBoundingBox", NULL, 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x0, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "minLon_", NULL, 0x11, "D", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxLon_", NULL, 0x11, "D", NULL, NULL, .constantValue.asLong = 0 },
-    { "minLat_", NULL, 0x11, "D", NULL, NULL, .constantValue.asLong = 0 },
-    { "maxLat_", NULL, 0x11, "D", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchGeoBoundingBox = { 2, "GeoBoundingBox", "org.apache.lucene.search", NULL, 0x0, 1, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchGeoBoundingBox = { 2, "GeoBoundingBox", "org.apache.lucene.search", NULL, 0x0, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchGeoBoundingBox;
 }
 
 @end
 
-void OrgApacheLuceneSearchGeoBoundingBox_initWithDouble_withDouble_withDouble_withDouble_(OrgApacheLuceneSearchGeoBoundingBox *self, jdouble minLon, jdouble maxLon, jdouble minLat, jdouble maxLat) {
+void OrgApacheLuceneSearchGeoBoundingBox_init(OrgApacheLuceneSearchGeoBoundingBox *self) {
   NSObject_init(self);
-  if (OrgApacheLuceneUtilGeoUtils_isValidLonWithDouble_(minLon) == NO) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D", @"invalid minLon ", minLon)) autorelease];
-  }
-  if (OrgApacheLuceneUtilGeoUtils_isValidLonWithDouble_(maxLon) == NO) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D", @"invalid maxLon ", minLon)) autorelease];
-  }
-  if (OrgApacheLuceneUtilGeoUtils_isValidLatWithDouble_(minLat) == NO) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D", @"invalid minLat ", minLat)) autorelease];
-  }
-  if (OrgApacheLuceneUtilGeoUtils_isValidLatWithDouble_(maxLat) == NO) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D", @"invalid maxLat ", minLat)) autorelease];
-  }
-  self->minLon_ = minLon;
-  self->maxLon_ = maxLon;
-  self->minLat_ = minLat;
-  self->maxLat_ = maxLat;
 }
 
-OrgApacheLuceneSearchGeoBoundingBox *new_OrgApacheLuceneSearchGeoBoundingBox_initWithDouble_withDouble_withDouble_withDouble_(jdouble minLon, jdouble maxLon, jdouble minLat, jdouble maxLat) {
+OrgApacheLuceneSearchGeoBoundingBox *new_OrgApacheLuceneSearchGeoBoundingBox_init() {
   OrgApacheLuceneSearchGeoBoundingBox *self = [OrgApacheLuceneSearchGeoBoundingBox alloc];
-  OrgApacheLuceneSearchGeoBoundingBox_initWithDouble_withDouble_withDouble_withDouble_(self, minLon, maxLon, minLat, maxLat);
+  OrgApacheLuceneSearchGeoBoundingBox_init(self);
   return self;
 }
 

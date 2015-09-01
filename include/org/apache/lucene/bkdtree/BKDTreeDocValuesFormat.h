@@ -20,11 +20,6 @@
 #define OrgApacheLuceneCodecsDocValuesFormat_INCLUDE 1
 #include "org/apache/lucene/codecs/DocValuesFormat.h"
 
-@class OrgApacheLuceneCodecsDocValuesConsumer;
-@class OrgApacheLuceneCodecsDocValuesProducer;
-@class OrgApacheLuceneIndexSegmentReadState;
-@class OrgApacheLuceneIndexSegmentWriteState;
-
 #define OrgApacheLuceneBkdtreeBKDTreeDocValuesFormat_DATA_VERSION_START 0
 #define OrgApacheLuceneBkdtreeBKDTreeDocValuesFormat_DATA_VERSION_CURRENT 0
 #define OrgApacheLuceneBkdtreeBKDTreeDocValuesFormat_META_VERSION_START 0
@@ -35,13 +30,6 @@
 #pragma mark Public
 
 - (instancetype)init;
-
-- (instancetype)initWithInt:(jint)maxPointsInLeafNode
-                    withInt:(jint)maxPointsSortInHeap;
-
-- (OrgApacheLuceneCodecsDocValuesConsumer *)fieldsConsumerWithOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state;
-
-- (OrgApacheLuceneCodecsDocValuesProducer *)fieldsProducerWithOrgApacheLuceneIndexSegmentReadState:(OrgApacheLuceneIndexSegmentReadState *)state;
 
 @end
 
@@ -70,10 +58,6 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneBkdtreeBKDTreeDocValuesFormat, META_EX
 FOUNDATION_EXPORT void OrgApacheLuceneBkdtreeBKDTreeDocValuesFormat_init(OrgApacheLuceneBkdtreeBKDTreeDocValuesFormat *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneBkdtreeBKDTreeDocValuesFormat *new_OrgApacheLuceneBkdtreeBKDTreeDocValuesFormat_init() NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneBkdtreeBKDTreeDocValuesFormat_initWithInt_withInt_(OrgApacheLuceneBkdtreeBKDTreeDocValuesFormat *self, jint maxPointsInLeafNode, jint maxPointsSortInHeap);
-
-FOUNDATION_EXPORT OrgApacheLuceneBkdtreeBKDTreeDocValuesFormat *new_OrgApacheLuceneBkdtreeBKDTreeDocValuesFormat_initWithInt_withInt_(jint maxPointsInLeafNode, jint maxPointsSortInHeap) NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeBKDTreeDocValuesFormat)
 

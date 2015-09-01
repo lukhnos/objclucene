@@ -20,13 +20,15 @@
 
 #pragma mark Public
 
-+ (OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey *)newInstance OBJC_METHOD_FAMILY_NONE;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey)
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey *OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey_newInstance();
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey_init(OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey *self);
+
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey *new_OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey)
 

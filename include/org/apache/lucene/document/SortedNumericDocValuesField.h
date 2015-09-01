@@ -20,25 +20,19 @@
 #define OrgApacheLuceneDocumentField_INCLUDE 1
 #include "org/apache/lucene/document/Field.h"
 
-@class OrgApacheLuceneDocumentFieldType;
-
 @interface OrgApacheLuceneDocumentSortedNumericDocValuesField : OrgApacheLuceneDocumentField
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)name
-                        withLong:(jlong)value;
+- (instancetype)init;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneDocumentSortedNumericDocValuesField)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneDocumentSortedNumericDocValuesField)
 
-FOUNDATION_EXPORT OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentSortedNumericDocValuesField_TYPE_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneDocumentSortedNumericDocValuesField, TYPE_, OrgApacheLuceneDocumentFieldType *)
+FOUNDATION_EXPORT void OrgApacheLuceneDocumentSortedNumericDocValuesField_init(OrgApacheLuceneDocumentSortedNumericDocValuesField *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneDocumentSortedNumericDocValuesField_initWithNSString_withLong_(OrgApacheLuceneDocumentSortedNumericDocValuesField *self, NSString *name, jlong value);
-
-FOUNDATION_EXPORT OrgApacheLuceneDocumentSortedNumericDocValuesField *new_OrgApacheLuceneDocumentSortedNumericDocValuesField_initWithNSString_withLong_(NSString *name, jlong value) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneDocumentSortedNumericDocValuesField *new_OrgApacheLuceneDocumentSortedNumericDocValuesField_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentSortedNumericDocValuesField)
 

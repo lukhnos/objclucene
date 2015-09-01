@@ -25,7 +25,6 @@
 @class OrgApacheLuceneIndexIndexWriter_ReaderPool;
 @class OrgApacheLuceneIndexSegmentInfos;
 @class OrgApacheLuceneUtilInfoStream;
-@protocol JavaUtilCollection;
 @protocol JavaUtilList;
 
 @interface OrgApacheLuceneIndexBufferedUpdatesStream : NSObject < OrgApacheLuceneUtilAccountable >
@@ -40,8 +39,6 @@
                                                                                                                       withJavaUtilList:(id<JavaUtilList>)infos;
 
 - (void)clear;
-
-- (id<JavaUtilCollection>)getChildResources;
 
 - (jint)numTerms;
 

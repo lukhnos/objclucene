@@ -20,8 +20,6 @@
 #define OrgApacheLuceneAnalysisTokenizer_INCLUDE 1
 #include "org/apache/lucene/analysis/Tokenizer.h"
 
-@class OrgApacheLuceneUtilAttributeFactory;
-
 #define OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer_DEFAULT_MIN_NGRAM_SIZE 1
 #define OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer_DEFAULT_MAX_NGRAM_SIZE 2
 
@@ -31,19 +29,6 @@
 
 - (instancetype)init;
 
-- (instancetype)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory
-                                                    withInt:(jint)minGram
-                                                    withInt:(jint)maxGram;
-
-- (instancetype)initWithInt:(jint)minGram
-                    withInt:(jint)maxGram;
-
-- (void)end;
-
-- (jboolean)incrementToken;
-
-- (void)reset;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer)
@@ -51,14 +36,6 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer)
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer, DEFAULT_MIN_NGRAM_SIZE, jint)
 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer, DEFAULT_MAX_NGRAM_SIZE, jint)
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer_initWithInt_withInt_(OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer *self, jint minGram, jint maxGram);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer *new_OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer_initWithInt_withInt_(jint minGram, jint maxGram) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withInt_(OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer *self, OrgApacheLuceneUtilAttributeFactory *factory, jint minGram, jint maxGram);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer *new_OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withInt_(OrgApacheLuceneUtilAttributeFactory *factory, jint minGram, jint maxGram) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer_init(OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer *self);
 

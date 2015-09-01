@@ -22,31 +22,9 @@
 
 - (instancetype)init;
 
-+ (jdouble)asinWithDouble:(jdouble)a;
-
-+ (jdouble)cosWithDouble:(jdouble)a;
-
-+ (jdouble)earthDiameterWithDouble:(jdouble)latitude;
-
-+ (jdouble)haversinWithDouble:(jdouble)lat1
-                   withDouble:(jdouble)lon1
-                   withDouble:(jdouble)lat2
-                   withDouble:(jdouble)lon2;
-
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneUtilSloppyMath)
-
-FOUNDATION_EXPORT jdouble OrgApacheLuceneUtilSloppyMath_SIN_COS_MAX_VALUE_FOR_INT_MODULO_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilSloppyMath, SIN_COS_MAX_VALUE_FOR_INT_MODULO_, jdouble)
-
-FOUNDATION_EXPORT jdouble OrgApacheLuceneUtilSloppyMath_haversinWithDouble_withDouble_withDouble_withDouble_(jdouble lat1, jdouble lon1, jdouble lat2, jdouble lon2);
-
-FOUNDATION_EXPORT jdouble OrgApacheLuceneUtilSloppyMath_cosWithDouble_(jdouble a);
-
-FOUNDATION_EXPORT jdouble OrgApacheLuceneUtilSloppyMath_asinWithDouble_(jdouble a);
-
-FOUNDATION_EXPORT jdouble OrgApacheLuceneUtilSloppyMath_earthDiameterWithDouble_(jdouble latitude);
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilSloppyMath)
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilSloppyMath_init(OrgApacheLuceneUtilSloppyMath *self);
 

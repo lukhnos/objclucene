@@ -5,7 +5,6 @@
 
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/lang/Deprecated.h"
 #include "java/lang/Enum.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "org/apache/lucene/search/BooleanClause.h"
@@ -125,26 +124,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanClause_Occur_$4Enum)
   return JreStrcat("$$", [((OrgApacheLuceneSearchBooleanClause_OccurEnum *) nil_chk(occur_)) description], [((OrgApacheLuceneSearchQuery *) nil_chk(query_)) description]);
 }
 
-- (void)setOccurWithOrgApacheLuceneSearchBooleanClause_OccurEnum:(OrgApacheLuceneSearchBooleanClause_OccurEnum *)occur {
-  JreStrongAssign(&self->occur_, OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_withNSString_(occur, @"Occur must not be null"));
-}
-
-- (void)setQueryWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query {
-  JreStrongAssign(&self->query_, OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_withNSString_(query, @"Query must not be null"));
-}
-
 - (void)dealloc {
   RELEASE_(query_);
   RELEASE_(occur_);
   [super dealloc];
-}
-
-+ (IOSObjectArray *)__annotations_setOccurWithOrgApacheLuceneSearchBooleanClause_OccurEnum_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_setQueryWithOrgApacheLuceneSearchQuery_ {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -158,15 +141,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanClause_Occur_$4Enum)
     { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
     { "hash", "hashCode", "I", 0x1, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "setOccurWithOrgApacheLuceneSearchBooleanClause_OccurEnum:", "setOccur", "V", 0x1, NULL, NULL },
-    { "setQueryWithOrgApacheLuceneSearchQuery:", "setQuery", "V", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "query_", NULL, 0x2, "Lorg.apache.lucene.search.Query;", NULL, NULL, .constantValue.asLong = 0 },
     { "occur_", NULL, 0x2, "Lorg.apache.lucene.search.BooleanClause$Occur;", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.search.BooleanClause$Occur;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchBooleanClause = { 2, "BooleanClause", "org.apache.lucene.search", NULL, 0x11, 11, methods, 2, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchBooleanClause = { 2, "BooleanClause", "org.apache.lucene.search", NULL, 0x11, 9, methods, 2, fields, 0, NULL, 1, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneSearchBooleanClause;
 }
 

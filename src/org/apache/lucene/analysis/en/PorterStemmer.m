@@ -85,13 +85,6 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisEnPorterStemmer_step6
   dirty_ = NO;
 }
 
-- (void)addWithChar:(jchar)ch {
-  if (((IOSCharArray *) nil_chk(b_))->size_ <= i_) {
-    JreStrongAssign(&b_, OrgApacheLuceneUtilArrayUtil_growWithCharArray_withInt_(b_, i_ + 1));
-  }
-  *IOSCharArray_GetRef(nil_chk(b_), i_++) = ch;
-}
-
 - (NSString *)description {
   return [NSString stringWithCharacters:b_ offset:0 length:i_];
 }
@@ -164,15 +157,6 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisEnPorterStemmer_step6
   OrgApacheLuceneAnalysisEnPorterStemmer_step6(self);
 }
 
-- (NSString *)stemWithNSString:(NSString *)s {
-  if ([self stemWithCharArray:[((NSString *) nil_chk(s)) toCharArray] withInt:((jint) [s length])]) return [self description];
-  else return s;
-}
-
-- (jboolean)stemWithCharArray:(IOSCharArray *)word {
-  return [self stemWithCharArray:word withInt:((IOSCharArray *) nil_chk(word))->size_];
-}
-
 - (jboolean)stemWithCharArray:(IOSCharArray *)wordBuffer
                       withInt:(jint)offset
                       withInt:(jint)wordLen {
@@ -182,15 +166,6 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisEnPorterStemmer_step6
   }
   JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(wordBuffer, offset, b_, 0, wordLen);
   i_ = wordLen;
-  return [self stemWithInt:0];
-}
-
-- (jboolean)stemWithCharArray:(IOSCharArray *)word
-                      withInt:(jint)wordLen {
-  return [self stemWithCharArray:word withInt:0 withInt:wordLen];
-}
-
-- (jboolean)stem {
   return [self stemWithInt:0];
 }
 
@@ -219,7 +194,6 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisEnPorterStemmer_step6
   static const J2ObjcMethodInfo methods[] = {
     { "init", "PorterStemmer", NULL, 0x1, NULL, NULL },
     { "reset", NULL, "V", 0x1, NULL, NULL },
-    { "addWithChar:", "add", "V", 0x1, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "getResultLength", NULL, "I", 0x1, NULL, NULL },
     { "getResultBuffer", NULL, "[C", 0x1, NULL, NULL },
@@ -237,11 +211,7 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisEnPorterStemmer_step6
     { "step4", NULL, "V", 0x12, NULL, NULL },
     { "step5", NULL, "V", 0x12, NULL, NULL },
     { "step6", NULL, "V", 0x12, NULL, NULL },
-    { "stemWithNSString:", "stem", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "stemWithCharArray:", "stem", "Z", 0x1, NULL, NULL },
     { "stemWithCharArray:withInt:withInt:", "stem", "Z", 0x1, NULL, NULL },
-    { "stemWithCharArray:withInt:", "stem", "Z", 0x1, NULL, NULL },
-    { "stem", NULL, "Z", 0x1, NULL, NULL },
     { "stemWithInt:", "stem", "Z", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -253,7 +223,7 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisEnPorterStemmer_step6
     { "dirty_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
     { "INITIAL_SIZE", "INITIAL_SIZE", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisEnPorterStemmer_INITIAL_SIZE },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisEnPorterStemmer = { 2, "PorterStemmer", "org.apache.lucene.analysis.en", NULL, 0x0, 26, methods, 7, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisEnPorterStemmer = { 2, "PorterStemmer", "org.apache.lucene.analysis.en", NULL, 0x0, 21, methods, 7, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisEnPorterStemmer;
 }
 

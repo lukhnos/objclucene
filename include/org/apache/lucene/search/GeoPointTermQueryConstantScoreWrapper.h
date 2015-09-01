@@ -20,39 +20,19 @@
 #define OrgApacheLuceneSearchQuery_INCLUDE 1
 #include "org/apache/lucene/search/Query.h"
 
-@class OrgApacheLuceneSearchGeoPointTermQuery;
-@class OrgApacheLuceneSearchIndexSearcher;
-@class OrgApacheLuceneSearchWeight;
+@interface OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper : OrgApacheLuceneSearchQuery
 
-@interface OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper : OrgApacheLuceneSearchQuery {
- @public
-  OrgApacheLuceneSearchGeoPointTermQuery *query_;
-}
+#pragma mark Package-Private
 
-#pragma mark Public
-
-- (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
-                                                                        withBoolean:(jboolean)needsScores;
-
-- (jboolean)isEqual:(id)o;
-
-- (NSUInteger)hash;
-
-- (NSString *)toStringWithNSString:(NSString *)field;
-
-#pragma mark Protected
-
-- (instancetype)initWithOrgApacheLuceneSearchGeoPointTermQuery:(OrgApacheLuceneSearchGeoPointTermQuery *)query;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper, query_, id)
+FOUNDATION_EXPORT void OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_init(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_initWithOrgApacheLuceneSearchGeoPointTermQuery_(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper *self, OrgApacheLuceneSearchGeoPointTermQuery *query);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper *new_OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_initWithOrgApacheLuceneSearchGeoPointTermQuery_(OrgApacheLuceneSearchGeoPointTermQuery *query) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper *new_OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper)
 

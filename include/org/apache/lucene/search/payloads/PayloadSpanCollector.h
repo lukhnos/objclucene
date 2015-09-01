@@ -20,23 +20,11 @@
 #define OrgApacheLuceneSearchSpansSpanCollector_INCLUDE 1
 #include "org/apache/lucene/search/spans/SpanCollector.h"
 
-@class OrgApacheLuceneIndexPostingsEnum;
-@class OrgApacheLuceneIndexTerm;
-@protocol JavaUtilCollection;
-
 @interface OrgApacheLuceneSearchPayloadsPayloadSpanCollector : NSObject < OrgApacheLuceneSearchSpansSpanCollector >
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (void)collectLeafWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)postings
-                                                withInt:(jint)position
-                           withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
-
-- (id<JavaUtilCollection>)getPayloads;
-
-- (void)reset;
 
 @end
 

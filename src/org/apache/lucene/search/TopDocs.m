@@ -109,10 +109,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTopDocs_MergeSortQueue)
   return maxScore_;
 }
 
-- (void)setMaxScoreWithFloat:(jfloat)maxScore {
-  self->maxScore_ = maxScore;
-}
-
 - (instancetype)initWithInt:(jint)totalHits
 withOrgApacheLuceneSearchScoreDocArray:(IOSObjectArray *)scoreDocs {
   OrgApacheLuceneSearchTopDocs_initWithInt_withOrgApacheLuceneSearchScoreDocArray_(self, totalHits, scoreDocs);
@@ -165,7 +161,6 @@ withOrgApacheLuceneSearchScoreDocArray:(IOSObjectArray *)scoreDocs
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "getMaxScore", NULL, "F", 0x1, NULL, NULL },
-    { "setMaxScoreWithFloat:", "setMaxScore", "V", 0x1, NULL, NULL },
     { "initWithInt:withOrgApacheLuceneSearchScoreDocArray:", "TopDocs", NULL, 0x0, NULL, NULL },
     { "initWithInt:withOrgApacheLuceneSearchScoreDocArray:withFloat:", "TopDocs", NULL, 0x1, NULL, NULL },
     { "mergeWithInt:withOrgApacheLuceneSearchTopDocsArray:", "merge", "Lorg.apache.lucene.search.TopDocs;", 0x9, "Ljava.io.IOException;", NULL },
@@ -180,7 +175,7 @@ withOrgApacheLuceneSearchScoreDocArray:(IOSObjectArray *)scoreDocs
     { "maxScore_", NULL, 0x2, "F", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.search.TopDocs$ShardRef;", "Lorg.apache.lucene.search.TopDocs$ScoreMergeSortQueue;", "Lorg.apache.lucene.search.TopDocs$MergeSortQueue;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchTopDocs = { 2, "TopDocs", "org.apache.lucene.search", NULL, 0x1, 9, methods, 3, fields, 0, NULL, 3, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchTopDocs = { 2, "TopDocs", "org.apache.lucene.search", NULL, 0x1, 8, methods, 3, fields, 0, NULL, 3, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneSearchTopDocs;
 }
 

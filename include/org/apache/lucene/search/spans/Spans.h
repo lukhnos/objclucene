@@ -21,7 +21,6 @@
 #include "org/apache/lucene/search/DocIdSetIterator.h"
 
 @class OrgApacheLuceneSearchTwoPhaseIterator;
-@protocol OrgApacheLuceneSearchSpansSpanCollector;
 
 #define OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS 2147483647
 
@@ -32,8 +31,6 @@
 - (instancetype)init;
 
 - (OrgApacheLuceneSearchTwoPhaseIterator *)asTwoPhaseIterator;
-
-- (void)collectWithOrgApacheLuceneSearchSpansSpanCollector:(id<OrgApacheLuceneSearchSpansSpanCollector>)collector;
 
 - (jint)endPosition;
 

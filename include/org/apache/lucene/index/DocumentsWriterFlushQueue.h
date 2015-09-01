@@ -45,8 +45,6 @@
 - (void)addSegmentWithOrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket:(OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket *)ticket
                        withOrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment:(OrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment *)segment;
 
-- (void)clear;
-
 - (jint)forcePurgeWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer;
 
 - (jboolean)hasTickets;

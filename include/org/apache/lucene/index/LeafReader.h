@@ -21,26 +21,20 @@
 #include "org/apache/lucene/index/IndexReader.h"
 
 @class OrgApacheLuceneIndexBinaryDocValues;
-@class OrgApacheLuceneIndexDocsAndPositionsEnum;
-@class OrgApacheLuceneIndexDocsEnum;
 @class OrgApacheLuceneIndexFieldInfos;
 @class OrgApacheLuceneIndexFields;
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneIndexNumericDocValues;
-@class OrgApacheLuceneIndexPostingsEnum;
 @class OrgApacheLuceneIndexSortedDocValues;
 @class OrgApacheLuceneIndexSortedNumericDocValues;
 @class OrgApacheLuceneIndexSortedSetDocValues;
 @class OrgApacheLuceneIndexTerm;
 @class OrgApacheLuceneIndexTerms;
-@protocol OrgApacheLuceneIndexLeafReader_CoreClosedListener;
 @protocol OrgApacheLuceneUtilBits;
 
 @interface OrgApacheLuceneIndexLeafReader : OrgApacheLuceneIndexIndexReader
 
 #pragma mark Public
-
-- (void)addCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:(id<OrgApacheLuceneIndexLeafReader_CoreClosedListener>)listener;
 
 - (void)checkIntegrity;
 
@@ -51,8 +45,6 @@
 - (OrgApacheLuceneIndexBinaryDocValues *)getBinaryDocValuesWithNSString:(NSString *)field;
 
 - (OrgApacheLuceneIndexLeafReaderContext *)getContext;
-
-- (jint)getDocCountWithNSString:(NSString *)field;
 
 - (id<OrgApacheLuceneUtilBits>)getDocsWithFieldWithNSString:(NSString *)field;
 
@@ -70,44 +62,17 @@
 
 - (OrgApacheLuceneIndexSortedSetDocValues *)getSortedSetDocValuesWithNSString:(NSString *)field;
 
-- (jlong)getSumDocFreqWithNSString:(NSString *)field;
-
-- (jlong)getSumTotalTermFreqWithNSString:(NSString *)field;
-
-- (OrgApacheLuceneIndexPostingsEnum *)postingsWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
-
-- (OrgApacheLuceneIndexPostingsEnum *)postingsWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-                                                                   withInt:(jint)flags;
-
-- (void)removeCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:(id<OrgApacheLuceneIndexLeafReader_CoreClosedListener>)listener;
-
-- (OrgApacheLuceneIndexDocsEnum *)termDocsEnumWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
-
-- (OrgApacheLuceneIndexDocsAndPositionsEnum *)termPositionsEnumWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
-
 - (OrgApacheLuceneIndexTerms *)termsWithNSString:(NSString *)field;
-
-- (jlong)totalTermFreqWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
 
 #pragma mark Protected
 
 - (instancetype)init;
-
-+ (void)addCoreClosedListenerAsReaderClosedListenerWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
-                                 withOrgApacheLuceneIndexLeafReader_CoreClosedListener:(id<OrgApacheLuceneIndexLeafReader_CoreClosedListener>)listener;
-
-+ (void)removeCoreClosedListenerAsReaderClosedListenerWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
-                                    withOrgApacheLuceneIndexLeafReader_CoreClosedListener:(id<OrgApacheLuceneIndexLeafReader_CoreClosedListener>)listener;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexLeafReader)
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexLeafReader_init(OrgApacheLuceneIndexLeafReader *self);
-
-FOUNDATION_EXPORT void OrgApacheLuceneIndexLeafReader_addCoreClosedListenerAsReaderClosedListenerWithOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneIndexLeafReader_CoreClosedListener_(OrgApacheLuceneIndexIndexReader *reader, id<OrgApacheLuceneIndexLeafReader_CoreClosedListener> listener);
-
-FOUNDATION_EXPORT void OrgApacheLuceneIndexLeafReader_removeCoreClosedListenerAsReaderClosedListenerWithOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneIndexLeafReader_CoreClosedListener_(OrgApacheLuceneIndexIndexReader *reader, id<OrgApacheLuceneIndexLeafReader_CoreClosedListener> listener);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexLeafReader)
 

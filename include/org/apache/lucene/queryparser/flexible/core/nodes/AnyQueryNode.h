@@ -20,40 +20,19 @@
 #define OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNode_INCLUDE 1
 #include "org/apache/lucene/queryparser/flexible/core/nodes/AndQueryNode.h"
 
-@protocol JavaLangCharSequence;
-@protocol JavaUtilList;
-@protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
-@protocol OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax;
-
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNode
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)clauses
-            withJavaLangCharSequence:(id<JavaLangCharSequence>)field
-                             withInt:(jint)minimumMatchingElements;
-
-- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)cloneTree;
-
-- (id<JavaLangCharSequence>)getField;
-
-- (NSString *)getFieldAsString;
-
-- (jint)getMinimumMatchingElements;
-
-- (void)setFieldWithJavaLangCharSequence:(id<JavaLangCharSequence>)field;
-
-- (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escapeSyntaxParser;
-
-- (NSString *)description;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode_initWithJavaUtilList_withJavaLangCharSequence_withInt_(OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode *self, id<JavaUtilList> clauses, id<JavaLangCharSequence> field, jint minimumMatchingElements);
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode_init(OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode_initWithJavaUtilList_withJavaLangCharSequence_withInt_(id<JavaUtilList> clauses, id<JavaLangCharSequence> field, jint minimumMatchingElements) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode)
 

@@ -24,36 +24,9 @@
 #define OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode_INCLUDE 1
 #include "org/apache/lucene/queryparser/flexible/core/nodes/RangeQueryNode.h"
 
-@protocol JavaLangCharSequence;
-@protocol OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode;
-@protocol OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax;
-
 @interface OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl < OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode >
 
 #pragma mark Public
-
-- (id<JavaLangCharSequence>)getField;
-
-- (id)getLowerBound;
-
-- (id)getUpperBound;
-
-- (jboolean)isLowerInclusive;
-
-- (jboolean)isUpperInclusive;
-
-- (void)setBoundsWithOrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode>)lower
-                 withOrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode>)upper
-                                                                            withBoolean:(jboolean)lowerInclusive
-                                                                            withBoolean:(jboolean)upperInclusive;
-
-- (void)setFieldWithJavaLangCharSequence:(id<JavaLangCharSequence>)fieldName;
-
-- (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escapeSyntaxParser;
-
-- (NSString *)description;
-
-#pragma mark Protected
 
 - (instancetype)init;
 

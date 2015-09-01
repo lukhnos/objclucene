@@ -3,69 +3,35 @@
 //  source: ./queries/src/java/org/apache/lucene/queries/function/valuesource/MaxFloatFunction.java
 //
 
-#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/lang/Float.h"
-#include "java/lang/Math.h"
-#include "org/apache/lucene/queries/function/FunctionValues.h"
 #include "org/apache/lucene/queries/function/valuesource/MaxFloatFunction.h"
-#include "org/apache/lucene/queries/function/valuesource/MultiFloatFunction.h"
-#include "org/apache/lucene/queries/function/valuesource/MultiFunction.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction
 
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValueSourceArray:(IOSObjectArray *)sources {
-  OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction_initWithOrgApacheLuceneQueriesFunctionValueSourceArray_(self, sources);
+- (instancetype)init {
+  OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction_init(self);
   return self;
-}
-
-- (NSString *)name {
-  return @"max";
-}
-
-- (jfloat)funcWithInt:(jint)doc
-withOrgApacheLuceneQueriesFunctionFunctionValuesArray:(IOSObjectArray *)valsArr {
-  if (![self existsWithInt:doc withOrgApacheLuceneQueriesFunctionFunctionValuesArray:valsArr]) return 0.0f;
-  jfloat val = JavaLangFloat_NEGATIVE_INFINITY;
-  {
-    IOSObjectArray *a__ = valsArr;
-    OrgApacheLuceneQueriesFunctionFunctionValues * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
-    OrgApacheLuceneQueriesFunctionFunctionValues * const *e__ = b__ + a__->size_;
-    while (b__ < e__) {
-      OrgApacheLuceneQueriesFunctionFunctionValues *vals = *b__++;
-      if ([((OrgApacheLuceneQueriesFunctionFunctionValues *) nil_chk(vals)) existsWithInt:doc]) {
-        val = JavaLangMath_maxWithFloat_withFloat_([vals floatValWithInt:doc], val);
-      }
-    }
-  }
-  return val;
-}
-
-- (jboolean)existsWithInt:(jint)doc
-withOrgApacheLuceneQueriesFunctionFunctionValuesArray:(IOSObjectArray *)valsArr {
-  return OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_anyExistsWithInt_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_(doc, valsArr);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneQueriesFunctionValueSourceArray:", "MaxFloatFunction", NULL, 0x1, NULL, NULL },
-    { "name", NULL, "Ljava.lang.String;", 0x4, NULL, NULL },
-    { "funcWithInt:withOrgApacheLuceneQueriesFunctionFunctionValuesArray:", "func", "F", 0x4, NULL, NULL },
-    { "existsWithInt:withOrgApacheLuceneQueriesFunctionFunctionValuesArray:", "exists", "Z", 0x4, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction = { 2, "MaxFloatFunction", "org.apache.lucene.queries.function.valuesource", NULL, 0x1, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction = { 2, "MaxFloatFunction", "org.apache.lucene.queries.function.valuesource", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction;
 }
 
 @end
 
-void OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction_initWithOrgApacheLuceneQueriesFunctionValueSourceArray_(OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction *self, IOSObjectArray *sources) {
-  OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction_initWithOrgApacheLuceneQueriesFunctionValueSourceArray_(self, sources);
+void OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction_init(OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction *new_OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction_initWithOrgApacheLuceneQueriesFunctionValueSourceArray_(IOSObjectArray *sources) {
+OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction *new_OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction_init() {
   OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction *self = [OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction alloc];
-  OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction_initWithOrgApacheLuceneQueriesFunctionValueSourceArray_(self, sources);
+  OrgApacheLuceneQueriesFunctionValuesourceMaxFloatFunction_init(self);
   return self;
 }
 

@@ -16,9 +16,6 @@
 #if !defined (_OrgApacheLuceneAnalysisArArabicStemmer_) && (OrgApacheLuceneAnalysisArArabicStemmer_INCLUDE_ALL || OrgApacheLuceneAnalysisArArabicStemmer_INCLUDE)
 #define _OrgApacheLuceneAnalysisArArabicStemmer_
 
-@class IOSCharArray;
-@class IOSObjectArray;
-
 #define OrgApacheLuceneAnalysisArArabicStemmer_ALEF 0x0627
 #define OrgApacheLuceneAnalysisArArabicStemmer_BEH 0x0628
 #define OrgApacheLuceneAnalysisArArabicStemmer_TEH_MARBUTA 0x0629
@@ -37,28 +34,9 @@
 
 - (instancetype)init;
 
-- (jint)stemWithCharArray:(IOSCharArray *)s
-                  withInt:(jint)len;
-
-- (jint)stemPrefixWithCharArray:(IOSCharArray *)s
-                        withInt:(jint)len;
-
-- (jint)stemSuffixWithCharArray:(IOSCharArray *)s
-                        withInt:(jint)len;
-
-#pragma mark Package-Private
-
-- (jboolean)endsWithCheckLengthWithCharArray:(IOSCharArray *)s
-                                     withInt:(jint)len
-                               withCharArray:(IOSCharArray *)suffix;
-
-- (jboolean)startsWithCheckLengthWithCharArray:(IOSCharArray *)s
-                                       withInt:(jint)len
-                                 withCharArray:(IOSCharArray *)prefix;
-
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisArArabicStemmer)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisArArabicStemmer)
 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisArArabicStemmer, ALEF, jchar)
 
@@ -81,12 +59,6 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisArArabicStemmer, HEH, jchar)
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisArArabicStemmer, WAW, jchar)
 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisArArabicStemmer, YEH, jchar)
-
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneAnalysisArArabicStemmer_prefixes_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisArArabicStemmer, prefixes_, IOSObjectArray *)
-
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneAnalysisArArabicStemmer_suffixes_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisArArabicStemmer, suffixes_, IOSObjectArray *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisArArabicStemmer_init(OrgApacheLuceneAnalysisArArabicStemmer *self);
 

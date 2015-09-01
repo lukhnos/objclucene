@@ -20,26 +20,19 @@
 #define OrgApacheLuceneAnalysisAnalyzer_INCLUDE 1
 #include "org/apache/lucene/analysis/Analyzer.h"
 
-@class JavaTextCollator;
-@class OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;
-
 @interface OrgApacheLuceneCollationCollationKeyAnalyzer : OrgApacheLuceneAnalysisAnalyzer
 
 #pragma mark Public
 
-- (instancetype)initWithJavaTextCollator:(JavaTextCollator *)collator;
-
-#pragma mark Protected
-
-- (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)createComponentsWithNSString:(NSString *)fieldName;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCollationCollationKeyAnalyzer)
 
-FOUNDATION_EXPORT void OrgApacheLuceneCollationCollationKeyAnalyzer_initWithJavaTextCollator_(OrgApacheLuceneCollationCollationKeyAnalyzer *self, JavaTextCollator *collator);
+FOUNDATION_EXPORT void OrgApacheLuceneCollationCollationKeyAnalyzer_init(OrgApacheLuceneCollationCollationKeyAnalyzer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneCollationCollationKeyAnalyzer *new_OrgApacheLuceneCollationCollationKeyAnalyzer_initWithJavaTextCollator_(JavaTextCollator *collator) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneCollationCollationKeyAnalyzer *new_OrgApacheLuceneCollationCollationKeyAnalyzer_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCollationCollationKeyAnalyzer)
 

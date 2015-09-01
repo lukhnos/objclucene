@@ -27,11 +27,6 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
-
-- (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-                                         withInt:(jint)flags;
-
 - (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
                                          withInt:(jint)flags
 withOrgApacheLuceneUtilAutomatonAutomatonProvider:(id<OrgApacheLuceneUtilAutomatonAutomatonProvider>)provider
@@ -46,14 +41,6 @@ withOrgApacheLuceneUtilAutomatonAutomatonProvider:(id<OrgApacheLuceneUtilAutomat
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneSearchRegexpQuery)
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchRegexpQuery_initWithOrgApacheLuceneIndexTerm_(OrgApacheLuceneSearchRegexpQuery *self, OrgApacheLuceneIndexTerm *term);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchRegexpQuery *new_OrgApacheLuceneSearchRegexpQuery_initWithOrgApacheLuceneIndexTerm_(OrgApacheLuceneIndexTerm *term) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchRegexpQuery_initWithOrgApacheLuceneIndexTerm_withInt_(OrgApacheLuceneSearchRegexpQuery *self, OrgApacheLuceneIndexTerm *term, jint flags);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchRegexpQuery *new_OrgApacheLuceneSearchRegexpQuery_initWithOrgApacheLuceneIndexTerm_withInt_(OrgApacheLuceneIndexTerm *term, jint flags) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchRegexpQuery_initWithOrgApacheLuceneIndexTerm_withInt_withInt_(OrgApacheLuceneSearchRegexpQuery *self, OrgApacheLuceneIndexTerm *term, jint flags, jint maxDeterminizedStates);
 

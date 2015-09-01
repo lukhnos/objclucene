@@ -22,7 +22,6 @@
 
 @class OrgApacheLuceneCodecsBlocktreeFieldReader;
 @class OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame;
-@class OrgApacheLuceneCodecsBlocktreeStats;
 @class OrgApacheLuceneIndexPostingsEnum;
 @class OrgApacheLuceneIndexTermState;
 @class OrgApacheLuceneIndexTermsEnum_SeekStatusEnum;
@@ -44,8 +43,6 @@
 
 - (instancetype)initWithOrgApacheLuceneCodecsBlocktreeFieldReader:(OrgApacheLuceneCodecsBlocktreeFieldReader *)fr;
 
-- (OrgApacheLuceneCodecsBlocktreeStats *)computeBlockStats;
-
 - (jint)docFreq;
 
 - (OrgApacheLuceneUtilBytesRef *)next;
@@ -61,8 +58,6 @@
 
 - (void)seekExactWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)target
                withOrgApacheLuceneIndexTermState:(OrgApacheLuceneIndexTermState *)otherState;
-
-- (void)seekExactWithLong:(jlong)ord;
 
 - (OrgApacheLuceneUtilBytesRef *)term;
 

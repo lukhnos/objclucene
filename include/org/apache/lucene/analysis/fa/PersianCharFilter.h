@@ -20,32 +20,19 @@
 #define OrgApacheLuceneAnalysisCharFilter_INCLUDE 1
 #include "org/apache/lucene/analysis/CharFilter.h"
 
-@class IOSCharArray;
-@class JavaIoReader;
-
 @interface OrgApacheLuceneAnalysisFaPersianCharFilter : OrgApacheLuceneAnalysisCharFilter
 
 #pragma mark Public
 
-- (instancetype)initWithJavaIoReader:(JavaIoReader *)inArg;
-
-- (jint)read;
-
-- (jint)readWithCharArray:(IOSCharArray *)cbuf
-                  withInt:(jint)off
-                  withInt:(jint)len;
-
-#pragma mark Protected
-
-- (jint)correctWithInt:(jint)currentOff;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisFaPersianCharFilter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisFaPersianCharFilter_initWithJavaIoReader_(OrgApacheLuceneAnalysisFaPersianCharFilter *self, JavaIoReader *inArg);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisFaPersianCharFilter_init(OrgApacheLuceneAnalysisFaPersianCharFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisFaPersianCharFilter *new_OrgApacheLuceneAnalysisFaPersianCharFilter_initWithJavaIoReader_(JavaIoReader *inArg) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisFaPersianCharFilter *new_OrgApacheLuceneAnalysisFaPersianCharFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisFaPersianCharFilter)
 

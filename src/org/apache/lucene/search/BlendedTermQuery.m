@@ -310,15 +310,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchBlendedTermQuery)
   return self;
 }
 
-- (OrgApacheLuceneSearchBlendedTermQuery_Builder *)addWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term {
-  return [self addWithOrgApacheLuceneIndexTerm:term withFloat:1.0f];
-}
-
-- (OrgApacheLuceneSearchBlendedTermQuery_Builder *)addWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-                                                                         withFloat:(jfloat)boost {
-  return [self addWithOrgApacheLuceneIndexTerm:term withFloat:boost withOrgApacheLuceneIndexTermContext:nil];
-}
-
 - (OrgApacheLuceneSearchBlendedTermQuery_Builder *)addWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
                                                                          withFloat:(jfloat)boost
                                                withOrgApacheLuceneIndexTermContext:(OrgApacheLuceneIndexTermContext *)context {
@@ -351,8 +342,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchBlendedTermQuery)
   static const J2ObjcMethodInfo methods[] = {
     { "init", "Builder", NULL, 0x1, NULL, NULL },
     { "setRewriteMethodWithOrgApacheLuceneSearchBlendedTermQuery_RewriteMethod:", "setRewriteMethod", "Lorg.apache.lucene.search.BlendedTermQuery$Builder;", 0x1, NULL, NULL },
-    { "addWithOrgApacheLuceneIndexTerm:", "add", "Lorg.apache.lucene.search.BlendedTermQuery$Builder;", 0x1, NULL, NULL },
-    { "addWithOrgApacheLuceneIndexTerm:withFloat:", "add", "Lorg.apache.lucene.search.BlendedTermQuery$Builder;", 0x1, NULL, NULL },
     { "addWithOrgApacheLuceneIndexTerm:withFloat:withOrgApacheLuceneIndexTermContext:", "add", "Lorg.apache.lucene.search.BlendedTermQuery$Builder;", 0x1, NULL, NULL },
     { "build", NULL, "Lorg.apache.lucene.search.BlendedTermQuery;", 0x1, NULL, NULL },
   };
@@ -363,7 +352,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchBlendedTermQuery)
     { "contexts_", NULL, 0x2, "[Lorg.apache.lucene.index.TermContext;", NULL, NULL, .constantValue.asLong = 0 },
     { "rewriteMethod_", NULL, 0x2, "Lorg.apache.lucene.search.BlendedTermQuery$RewriteMethod;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchBlendedTermQuery_Builder = { 2, "Builder", "org.apache.lucene.search", "BlendedTermQuery", 0x9, 6, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchBlendedTermQuery_Builder = { 2, "Builder", "org.apache.lucene.search", "BlendedTermQuery", 0x9, 4, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchBlendedTermQuery_Builder;
 }
 

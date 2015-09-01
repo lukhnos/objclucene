@@ -16,20 +16,7 @@
 #if !defined (_OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_) && (OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_INCLUDE_ALL || OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_INCLUDE)
 #define _OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_
 
-@class OrgApacheLuceneUtilAutomatonAutomaton;
-@class OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State;
-@class OrgApacheLuceneUtilCharsRef;
-@protocol JavaUtilCollection;
-
 @interface OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder : NSObject
-
-#pragma mark Public
-
-- (void)addWithOrgApacheLuceneUtilCharsRef:(OrgApacheLuceneUtilCharsRef *)current;
-
-+ (OrgApacheLuceneUtilAutomatonAutomaton *)buildWithJavaUtilCollection:(id<JavaUtilCollection>)input;
-
-- (OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State *)complete;
 
 #pragma mark Package-Private
 
@@ -37,59 +24,13 @@
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder)
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_buildWithJavaUtilCollection_(id<JavaUtilCollection> input);
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder)
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_init(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder *new_OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder)
-
-#endif
-
-#if !defined (_OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State_) && (OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_INCLUDE_ALL || OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State_INCLUDE)
-#define _OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State_
-
-@class IOSIntArray;
-@class IOSObjectArray;
-
-@interface OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State : NSObject {
- @public
-  IOSIntArray *labels_;
-  IOSObjectArray *states_;
-  jboolean is_final_;
-}
-
-#pragma mark Public
-
-- (jboolean)isEqual:(id)obj;
-
-- (NSUInteger)hash;
-
-#pragma mark Package-Private
-
-- (OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State *)getStateWithInt:(jint)label;
-
-- (jboolean)hasChildren;
-
-- (OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State *)lastChild;
-
-- (OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State *)lastChildWithInt:(jint)label;
-
-- (OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State *)newStateWithInt:(jint)label OBJC_METHOD_FAMILY_NONE;
-
-- (void)replaceLastChildWithOrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State:(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State *)state;
-
-@end
-
-J2OBJC_STATIC_INIT(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State, labels_, IOSIntArray *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State, states_, IOSObjectArray *)
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State)
 
 #endif
 

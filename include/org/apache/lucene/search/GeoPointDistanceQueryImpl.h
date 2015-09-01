@@ -20,41 +20,19 @@
 #define OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_INCLUDE 1
 #include "org/apache/lucene/search/GeoPointInBBoxQueryImpl.h"
 
-@class OrgApacheLuceneIndexTerms;
-@class OrgApacheLuceneIndexTermsEnum;
-@class OrgApacheLuceneSearchGeoBoundingBox;
-@class OrgApacheLuceneSearchGeoPointDistanceQuery;
-@class OrgApacheLuceneSearchMultiTermQuery_RewriteMethod;
-@class OrgApacheLuceneUtilAttributeSource;
-
 @interface OrgApacheLuceneSearchGeoPointDistanceQueryImpl : OrgApacheLuceneSearchGeoPointInBBoxQueryImpl
-
-#pragma mark Public
-
-- (jboolean)isEqual:(id)o;
-
-- (NSUInteger)hash;
-
-- (void)setRewriteMethodWithOrgApacheLuceneSearchMultiTermQuery_RewriteMethod:(OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *)method;
-
-#pragma mark Protected
-
-- (OrgApacheLuceneIndexTermsEnum *)getTermsEnumWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms
-                                      withOrgApacheLuceneUtilAttributeSource:(OrgApacheLuceneUtilAttributeSource *)atts;
 
 #pragma mark Package-Private
 
-- (instancetype)initWithNSString:(NSString *)field
-withOrgApacheLuceneSearchGeoPointDistanceQuery:(OrgApacheLuceneSearchGeoPointDistanceQuery *)q
-withOrgApacheLuceneSearchGeoBoundingBox:(OrgApacheLuceneSearchGeoBoundingBox *)bbox;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchGeoPointDistanceQueryImpl)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchGeoPointDistanceQueryImpl_initWithNSString_withOrgApacheLuceneSearchGeoPointDistanceQuery_withOrgApacheLuceneSearchGeoBoundingBox_(OrgApacheLuceneSearchGeoPointDistanceQueryImpl *self, NSString *field, OrgApacheLuceneSearchGeoPointDistanceQuery *q, OrgApacheLuceneSearchGeoBoundingBox *bbox);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchGeoPointDistanceQueryImpl_init(OrgApacheLuceneSearchGeoPointDistanceQueryImpl *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchGeoPointDistanceQueryImpl *new_OrgApacheLuceneSearchGeoPointDistanceQueryImpl_initWithNSString_withOrgApacheLuceneSearchGeoPointDistanceQuery_withOrgApacheLuceneSearchGeoBoundingBox_(NSString *field, OrgApacheLuceneSearchGeoPointDistanceQuery *q, OrgApacheLuceneSearchGeoBoundingBox *bbox) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchGeoPointDistanceQueryImpl *new_OrgApacheLuceneSearchGeoPointDistanceQueryImpl_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchGeoPointDistanceQueryImpl)
 

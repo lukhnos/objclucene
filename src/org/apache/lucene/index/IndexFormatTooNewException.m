@@ -39,22 +39,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexIndexFormatTooNewException, resourceDesc
   return self;
 }
 
-- (NSString *)getResourceDescription {
-  return resourceDescription_;
-}
-
-- (jint)getVersion {
-  return version__;
-}
-
-- (jint)getMaxVersion {
-  return maxVersion_;
-}
-
-- (jint)getMinVersion {
-  return minVersion_;
-}
-
 - (void)dealloc {
   RELEASE_(resourceDescription_);
   [super dealloc];
@@ -64,10 +48,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexIndexFormatTooNewException, resourceDesc
   static const J2ObjcMethodInfo methods[] = {
     { "initWithNSString:withInt:withInt:withInt:", "IndexFormatTooNewException", NULL, 0x1, NULL, NULL },
     { "initWithOrgApacheLuceneStoreDataInput:withInt:withInt:withInt:", "IndexFormatTooNewException", NULL, 0x1, NULL, NULL },
-    { "getResourceDescription", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getVersion", NULL, "I", 0x1, NULL, NULL },
-    { "getMaxVersion", NULL, "I", 0x1, NULL, NULL },
-    { "getMinVersion", NULL, "I", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "resourceDescription_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
@@ -75,7 +55,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexIndexFormatTooNewException, resourceDesc
     { "minVersion_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "maxVersion_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexFormatTooNewException = { 2, "IndexFormatTooNewException", "org.apache.lucene.index", NULL, 0x1, 6, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexFormatTooNewException = { 2, "IndexFormatTooNewException", "org.apache.lucene.index", NULL, 0x1, 2, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexIndexFormatTooNewException;
 }
 

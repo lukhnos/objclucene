@@ -8,7 +8,6 @@
 #include "J2ObjC_source.h"
 #include "java/lang/StringBuilder.h"
 #include "org/apache/lucene/index/MultiBits.h"
-#include "org/apache/lucene/index/ReaderSlice.h"
 #include "org/apache/lucene/index/ReaderUtil.h"
 #include "org/apache/lucene/util/Bits.h"
 
@@ -74,21 +73,6 @@ __attribute__((unused)) static jboolean OrgApacheLuceneIndexMultiBits_checkLengt
   return [b description];
 }
 
-- (OrgApacheLuceneIndexMultiBits_SubResult *)getMatchingSubWithOrgApacheLuceneIndexReaderSlice:(OrgApacheLuceneIndexReaderSlice *)slice {
-  jint reader = OrgApacheLuceneIndexReaderUtil_subIndexWithInt_withIntArray_(((OrgApacheLuceneIndexReaderSlice *) nil_chk(slice))->start_, starts_);
-  JreAssert((reader != -1), (@"org/apache/lucene/index/MultiBits.java:101 condition failed: assert reader != -1;"));
-  JreAssert((reader < ((IOSObjectArray *) nil_chk(subs_))->size_), (JreStrcat("$@$I", @"slice=", slice, @" starts[-1]=", IOSIntArray_Get(starts_, ((IOSIntArray *) nil_chk(starts_))->size_ - 1))));
-  OrgApacheLuceneIndexMultiBits_SubResult *subResult = [new_OrgApacheLuceneIndexMultiBits_SubResult_init() autorelease];
-  if (IOSIntArray_Get(starts_, reader) == slice->start_ && IOSIntArray_Get(starts_, 1 + reader) == slice->start_ + slice->length_) {
-    subResult->matches_ = YES;
-    JreStrongAssign(&subResult->result_, IOSObjectArray_Get(subs_, reader));
-  }
-  else {
-    subResult->matches_ = NO;
-  }
-  return subResult;
-}
-
 - (jint)length {
   return IOSIntArray_Get(starts_, ((IOSIntArray *) nil_chk(starts_))->size_ - 1);
 }
@@ -105,7 +89,6 @@ __attribute__((unused)) static jboolean OrgApacheLuceneIndexMultiBits_checkLengt
     { "checkLengthWithInt:withInt:", "checkLength", "Z", 0x2, NULL, NULL },
     { "getWithInt:", "get", "Z", 0x1, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getMatchingSubWithOrgApacheLuceneIndexReaderSlice:", "getMatchingSub", "Lorg.apache.lucene.index.MultiBits$SubResult;", 0x1, NULL, NULL },
     { "length", NULL, "I", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -114,7 +97,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneIndexMultiBits_checkLengt
     { "defaultValue_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.index.MultiBits$SubResult;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiBits = { 2, "MultiBits", "org.apache.lucene.index", NULL, 0x10, 6, methods, 3, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiBits = { 2, "MultiBits", "org.apache.lucene.index", NULL, 0x10, 5, methods, 3, fields, 0, NULL, 1, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneIndexMultiBits;
 }
 
@@ -149,20 +132,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMultiBits)
   return self;
 }
 
-- (void)dealloc {
-  RELEASE_(result_);
-  [super dealloc];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "matches_", NULL, 0x1, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "result_", NULL, 0x1, "Lorg.apache.lucene.util.Bits;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiBits_SubResult = { 2, "SubResult", "org.apache.lucene.index", "MultiBits", 0x19, 1, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiBits_SubResult = { 2, "SubResult", "org.apache.lucene.index", "MultiBits", 0x19, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexMultiBits_SubResult;
 }
 

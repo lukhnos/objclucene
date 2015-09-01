@@ -20,40 +20,19 @@
 #define OrgApacheLuceneUtilAccountable_INCLUDE 1
 #include "org/apache/lucene/util/Accountable.h"
 
-@class OrgApacheLuceneSearchSuggestDocumentNRTSuggester;
-@class OrgApacheLuceneStoreIndexInput;
-@protocol JavaUtilCollection;
-
-@interface OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader : NSObject < OrgApacheLuceneUtilAccountable > {
- @public
-  jlong minWeight_;
-  jlong maxWeight_;
-  jbyte type_;
-}
+@interface OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader : NSObject < OrgApacheLuceneUtilAccountable >
 
 #pragma mark Public
 
-- (id<JavaUtilCollection>)getChildResources;
-
-- (jlong)ramBytesUsed;
-
-- (OrgApacheLuceneSearchSuggestDocumentNRTSuggester *)suggester;
-
-#pragma mark Package-Private
-
-- (instancetype)initWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)dictIn
-                                              withLong:(jlong)offset
-                                              withLong:(jlong)minWeight
-                                              withLong:(jlong)maxWeight
-                                              withByte:(jbyte)type;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader_initWithOrgApacheLuceneStoreIndexInput_withLong_withLong_withLong_withByte_(OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader *self, OrgApacheLuceneStoreIndexInput *dictIn, jlong offset, jlong minWeight, jlong maxWeight, jbyte type);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader_init(OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader *new_OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader_initWithOrgApacheLuceneStoreIndexInput_withLong_withLong_withLong_withByte_(OrgApacheLuceneStoreIndexInput *dictIn, jlong offset, jlong minWeight, jlong maxWeight, jbyte type) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader *new_OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader)
 

@@ -32,7 +32,6 @@
 @class OrgApacheLuceneStoreDirectory;
 @class OrgApacheLuceneStoreIOContext;
 @class OrgApacheLuceneStoreIndexInput;
-@protocol JavaUtilCollection;
 
 @interface OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader : OrgApacheLuceneCodecsTermVectorsReader < JavaIoCloseable > {
  @public
@@ -57,8 +56,6 @@
 - (void)close;
 
 - (OrgApacheLuceneIndexFields *)getWithInt:(jint)doc;
-
-- (id<JavaUtilCollection>)getChildResources;
 
 - (jlong)ramBytesUsed;
 

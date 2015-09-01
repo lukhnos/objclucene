@@ -7,9 +7,7 @@
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
-#include "java/lang/ClassLoader.h"
 #include "java/lang/IllegalStateException.h"
-#include "java/util/Set.h"
 #include "org/apache/lucene/codecs/FieldsConsumer.h"
 #include "org/apache/lucene/codecs/FieldsProducer.h"
 #include "org/apache/lucene/codecs/PostingsFormat.h"
@@ -82,14 +80,6 @@ IOSObjectArray *OrgApacheLuceneCodecsPostingsFormat_EMPTY_;
   return OrgApacheLuceneCodecsPostingsFormat_forNameWithNSString_(name);
 }
 
-+ (id<JavaUtilSet>)availablePostingsFormats {
-  return OrgApacheLuceneCodecsPostingsFormat_availablePostingsFormats();
-}
-
-+ (void)reloadPostingsFormatsWithJavaLangClassLoader:(JavaLangClassLoader *)classloader {
-  OrgApacheLuceneCodecsPostingsFormat_reloadPostingsFormatsWithJavaLangClassLoader_(classloader);
-}
-
 - (void)dealloc {
   RELEASE_(name_);
   [super dealloc];
@@ -110,15 +100,13 @@ IOSObjectArray *OrgApacheLuceneCodecsPostingsFormat_EMPTY_;
     { "fieldsProducerWithOrgApacheLuceneIndexSegmentReadState:", "fieldsProducer", "Lorg.apache.lucene.codecs.FieldsProducer;", 0x401, "Ljava.io.IOException;", NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "forNameWithNSString:", "forName", "Lorg.apache.lucene.codecs.PostingsFormat;", 0x9, NULL, NULL },
-    { "availablePostingsFormats", NULL, "Ljava.util.Set;", 0x9, NULL, NULL },
-    { "reloadPostingsFormatsWithJavaLangClassLoader:", "reloadPostingsFormats", "V", 0x9, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "EMPTY_", NULL, 0x19, "[Lorg.apache.lucene.codecs.PostingsFormat;", &OrgApacheLuceneCodecsPostingsFormat_EMPTY_, NULL, .constantValue.asLong = 0 },
     { "name_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.codecs.PostingsFormat$Holder;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsPostingsFormat = { 2, "PostingsFormat", "org.apache.lucene.codecs", NULL, 0x401, 8, methods, 2, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsPostingsFormat = { 2, "PostingsFormat", "org.apache.lucene.codecs", NULL, 0x401, 6, methods, 2, fields, 0, NULL, 1, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneCodecsPostingsFormat;
 }
 
@@ -133,16 +121,6 @@ void OrgApacheLuceneCodecsPostingsFormat_initWithNSString_(OrgApacheLuceneCodecs
 OrgApacheLuceneCodecsPostingsFormat *OrgApacheLuceneCodecsPostingsFormat_forNameWithNSString_(NSString *name) {
   OrgApacheLuceneCodecsPostingsFormat_initialize();
   return [((OrgApacheLuceneUtilNamedSPILoader *) nil_chk(OrgApacheLuceneCodecsPostingsFormat_Holder_getLoader())) lookupWithNSString:name];
-}
-
-id<JavaUtilSet> OrgApacheLuceneCodecsPostingsFormat_availablePostingsFormats() {
-  OrgApacheLuceneCodecsPostingsFormat_initialize();
-  return [((OrgApacheLuceneUtilNamedSPILoader *) nil_chk(OrgApacheLuceneCodecsPostingsFormat_Holder_getLoader())) availableServices];
-}
-
-void OrgApacheLuceneCodecsPostingsFormat_reloadPostingsFormatsWithJavaLangClassLoader_(JavaLangClassLoader *classloader) {
-  OrgApacheLuceneCodecsPostingsFormat_initialize();
-  [((OrgApacheLuceneUtilNamedSPILoader *) nil_chk(OrgApacheLuceneCodecsPostingsFormat_Holder_getLoader())) reloadWithJavaLangClassLoader:classloader];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsPostingsFormat)

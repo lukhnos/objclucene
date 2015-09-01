@@ -20,20 +20,11 @@
 #define OrgApacheLuceneSearchSimilaritiesLambda_INCLUDE 1
 #include "org/apache/lucene/search/similarities/Lambda.h"
 
-@class OrgApacheLuceneSearchExplanation;
-@class OrgApacheLuceneSearchSimilaritiesBasicStats;
-
 @interface OrgApacheLuceneSearchSimilaritiesLambdaDF : OrgApacheLuceneSearchSimilaritiesLambda
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats;
-
-- (jfloat)lambdaWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats;
-
-- (NSString *)description;
 
 @end
 

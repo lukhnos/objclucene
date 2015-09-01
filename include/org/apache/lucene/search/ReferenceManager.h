@@ -20,8 +20,6 @@
 #define JavaIoCloseable_INCLUDE 1
 #include "java/io/Closeable.h"
 
-@protocol OrgApacheLuceneSearchReferenceManager_RefreshListener;
-
 @interface OrgApacheLuceneSearchReferenceManager : NSObject < JavaIoCloseable > {
  @public
   volatile_id current_;
@@ -33,29 +31,17 @@
 
 - (id)acquire;
 
-- (void)addListenerWithOrgApacheLuceneSearchReferenceManager_RefreshListener:(id<OrgApacheLuceneSearchReferenceManager_RefreshListener>)listener;
-
 - (void)close;
 
-- (jboolean)maybeRefresh;
-
-- (void)maybeRefreshBlocking;
-
 - (void)release__WithId:(id)reference;
-
-- (void)removeListenerWithOrgApacheLuceneSearchReferenceManager_RefreshListener:(id<OrgApacheLuceneSearchReferenceManager_RefreshListener>)listener;
 
 #pragma mark Protected
 
 - (void)afterClose;
 
-- (void)afterMaybeRefresh;
-
 - (void)decRefWithId:(id)reference;
 
 - (jint)getRefCountWithId:(id)reference;
-
-- (id)refreshIfNeededWithId:(id)referenceToRefresh;
 
 - (jboolean)tryIncRefWithId:(id)reference;
 
@@ -75,10 +61,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchReferenceManager)
 #define _OrgApacheLuceneSearchReferenceManager_RefreshListener_
 
 @protocol OrgApacheLuceneSearchReferenceManager_RefreshListener < NSObject, JavaObject >
-
-- (void)beforeRefresh;
-
-- (void)afterRefreshWithBoolean:(jboolean)didRefresh;
 
 @end
 

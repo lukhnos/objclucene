@@ -3,205 +3,38 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/query/QueryAutoStopWordAnalyzer.java
 //
 
-#include "IOSClass.h"
-#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
-#include "java/util/ArrayList.h"
-#include "java/util/Collection.h"
-#include "java/util/HashMap.h"
-#include "java/util/HashSet.h"
-#include "java/util/List.h"
-#include "java/util/Map.h"
-#include "java/util/Set.h"
-#include "org/apache/lucene/analysis/Analyzer.h"
-#include "org/apache/lucene/analysis/AnalyzerWrapper.h"
-#include "org/apache/lucene/analysis/TokenStream.h"
-#include "org/apache/lucene/analysis/Tokenizer.h"
-#include "org/apache/lucene/analysis/core/StopFilter.h"
 #include "org/apache/lucene/analysis/query/QueryAutoStopWordAnalyzer.h"
-#include "org/apache/lucene/analysis/util/CharArraySet.h"
-#include "org/apache/lucene/index/IndexReader.h"
-#include "org/apache/lucene/index/MultiFields.h"
-#include "org/apache/lucene/index/Term.h"
-#include "org/apache/lucene/index/Terms.h"
-#include "org/apache/lucene/index/TermsEnum.h"
-#include "org/apache/lucene/util/BytesRef.h"
-#include "org/apache/lucene/util/CharsRefBuilder.h"
 
-@interface OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer () {
- @public
-  OrgApacheLuceneAnalysisAnalyzer *delegate_;
-  id<JavaUtilMap> stopWordsPerField_;
-}
-
-@end
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer, delegate_, OrgApacheLuceneAnalysisAnalyzer *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer, stopWordsPerField_, id<JavaUtilMap>)
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer
 
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)delegate
-                    withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)indexReader {
-  OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexIndexReader_(self, delegate, indexReader);
+- (instancetype)init {
+  OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer_init(self);
   return self;
-}
-
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)delegate
-                    withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)indexReader
-                                                withInt:(jint)maxDocFreq {
-  OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexIndexReader_withInt_(self, delegate, indexReader, maxDocFreq);
-  return self;
-}
-
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)delegate
-                    withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)indexReader
-                                              withFloat:(jfloat)maxPercentDocs {
-  OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexIndexReader_withFloat_(self, delegate, indexReader, maxPercentDocs);
-  return self;
-}
-
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)delegate
-                    withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)indexReader
-                                 withJavaUtilCollection:(id<JavaUtilCollection>)fields
-                                              withFloat:(jfloat)maxPercentDocs {
-  OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexIndexReader_withJavaUtilCollection_withFloat_(self, delegate, indexReader, fields, maxPercentDocs);
-  return self;
-}
-
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)delegate
-                    withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)indexReader
-                                 withJavaUtilCollection:(id<JavaUtilCollection>)fields
-                                                withInt:(jint)maxDocFreq {
-  OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexIndexReader_withJavaUtilCollection_withInt_(self, delegate, indexReader, fields, maxDocFreq);
-  return self;
-}
-
-- (OrgApacheLuceneAnalysisAnalyzer *)getWrappedAnalyzerWithNSString:(NSString *)fieldName {
-  return delegate_;
-}
-
-- (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)wrapComponentsWithNSString:(NSString *)fieldName
-                            withOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents:(OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)components {
-  id<JavaUtilSet> stopWords = [((id<JavaUtilMap>) nil_chk(stopWordsPerField_)) getWithId:fieldName];
-  if (stopWords == nil) {
-    return components;
-  }
-  OrgApacheLuceneAnalysisCoreStopFilter *stopFilter = [new_OrgApacheLuceneAnalysisCoreStopFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_([((OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *) nil_chk(components)) getTokenStream], [new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(stopWords, NO) autorelease]) autorelease];
-  return [new_OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_([components getTokenizer], stopFilter) autorelease];
-}
-
-- (IOSObjectArray *)getStopWordsWithNSString:(NSString *)fieldName {
-  id<JavaUtilSet> stopWords = [((id<JavaUtilMap>) nil_chk(stopWordsPerField_)) getWithId:fieldName];
-  return stopWords != nil ? [stopWords toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:[stopWords size] type:NSString_class_()]] : [IOSObjectArray arrayWithLength:0 type:NSString_class_()];
-}
-
-- (IOSObjectArray *)getStopWords {
-  id<JavaUtilList> allStopWords = [new_JavaUtilArrayList_init() autorelease];
-  for (NSString * __strong fieldName in nil_chk([((id<JavaUtilMap>) nil_chk(stopWordsPerField_)) keySet])) {
-    id<JavaUtilSet> stopWords = [stopWordsPerField_ getWithId:fieldName];
-    for (NSString * __strong text in nil_chk(stopWords)) {
-      [allStopWords addWithId:[new_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(fieldName, text) autorelease]];
-    }
-  }
-  return [allStopWords toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:[allStopWords size] type:OrgApacheLuceneIndexTerm_class_()]];
-}
-
-- (void)dealloc {
-  RELEASE_(delegate_);
-  RELEASE_(stopWordsPerField_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneIndexIndexReader:", "QueryAutoStopWordAnalyzer", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneIndexIndexReader:withInt:", "QueryAutoStopWordAnalyzer", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneIndexIndexReader:withFloat:", "QueryAutoStopWordAnalyzer", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneIndexIndexReader:withJavaUtilCollection:withFloat:", "QueryAutoStopWordAnalyzer", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneIndexIndexReader:withJavaUtilCollection:withInt:", "QueryAutoStopWordAnalyzer", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "getWrappedAnalyzerWithNSString:", "getWrappedAnalyzer", "Lorg.apache.lucene.analysis.Analyzer;", 0x4, NULL, NULL },
-    { "wrapComponentsWithNSString:withOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents:", "wrapComponents", "Lorg.apache.lucene.analysis.Analyzer$TokenStreamComponents;", 0x4, NULL, NULL },
-    { "getStopWordsWithNSString:", "getStopWords", "[Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getStopWords", NULL, "[Lorg.apache.lucene.index.Term;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "delegate_", NULL, 0x12, "Lorg.apache.lucene.analysis.Analyzer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "stopWordsPerField_", NULL, 0x12, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/String;Ljava/util/Set<Ljava/lang/String;>;>;", .constantValue.asLong = 0 },
     { "defaultMaxDocFreqPercent", "defaultMaxDocFreqPercent", 0x19, "F", NULL, NULL, .constantValue.asFloat = OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer_defaultMaxDocFreqPercent },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer = { 2, "QueryAutoStopWordAnalyzer", "org.apache.lucene.analysis.query", NULL, 0x11, 9, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer = { 2, "QueryAutoStopWordAnalyzer", "org.apache.lucene.analysis.query", NULL, 0x11, 1, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer;
 }
 
 @end
 
-void OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexIndexReader_(OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer *self, OrgApacheLuceneAnalysisAnalyzer *delegate, OrgApacheLuceneIndexIndexReader *indexReader) {
-  OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexIndexReader_withFloat_(self, delegate, indexReader, OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer_defaultMaxDocFreqPercent);
+void OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer_init(OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer *new_OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexIndexReader_(OrgApacheLuceneAnalysisAnalyzer *delegate, OrgApacheLuceneIndexIndexReader *indexReader) {
+OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer *new_OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer_init() {
   OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer *self = [OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer alloc];
-  OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexIndexReader_(self, delegate, indexReader);
-  return self;
-}
-
-void OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexIndexReader_withInt_(OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer *self, OrgApacheLuceneAnalysisAnalyzer *delegate, OrgApacheLuceneIndexIndexReader *indexReader, jint maxDocFreq) {
-  OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexIndexReader_withJavaUtilCollection_withInt_(self, delegate, indexReader, OrgApacheLuceneIndexMultiFields_getIndexedFieldsWithOrgApacheLuceneIndexIndexReader_(indexReader), maxDocFreq);
-}
-
-OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer *new_OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexIndexReader_withInt_(OrgApacheLuceneAnalysisAnalyzer *delegate, OrgApacheLuceneIndexIndexReader *indexReader, jint maxDocFreq) {
-  OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer *self = [OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer alloc];
-  OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexIndexReader_withInt_(self, delegate, indexReader, maxDocFreq);
-  return self;
-}
-
-void OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexIndexReader_withFloat_(OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer *self, OrgApacheLuceneAnalysisAnalyzer *delegate, OrgApacheLuceneIndexIndexReader *indexReader, jfloat maxPercentDocs) {
-  OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexIndexReader_withJavaUtilCollection_withFloat_(self, delegate, indexReader, OrgApacheLuceneIndexMultiFields_getIndexedFieldsWithOrgApacheLuceneIndexIndexReader_(indexReader), maxPercentDocs);
-}
-
-OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer *new_OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexIndexReader_withFloat_(OrgApacheLuceneAnalysisAnalyzer *delegate, OrgApacheLuceneIndexIndexReader *indexReader, jfloat maxPercentDocs) {
-  OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer *self = [OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer alloc];
-  OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexIndexReader_withFloat_(self, delegate, indexReader, maxPercentDocs);
-  return self;
-}
-
-void OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexIndexReader_withJavaUtilCollection_withFloat_(OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer *self, OrgApacheLuceneAnalysisAnalyzer *delegate, OrgApacheLuceneIndexIndexReader *indexReader, id<JavaUtilCollection> fields, jfloat maxPercentDocs) {
-  OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexIndexReader_withJavaUtilCollection_withInt_(self, delegate, indexReader, fields, JreFpToInt(([((OrgApacheLuceneIndexIndexReader *) nil_chk(indexReader)) numDocs] * maxPercentDocs)));
-}
-
-OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer *new_OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexIndexReader_withJavaUtilCollection_withFloat_(OrgApacheLuceneAnalysisAnalyzer *delegate, OrgApacheLuceneIndexIndexReader *indexReader, id<JavaUtilCollection> fields, jfloat maxPercentDocs) {
-  OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer *self = [OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer alloc];
-  OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexIndexReader_withJavaUtilCollection_withFloat_(self, delegate, indexReader, fields, maxPercentDocs);
-  return self;
-}
-
-void OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexIndexReader_withJavaUtilCollection_withInt_(OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer *self, OrgApacheLuceneAnalysisAnalyzer *delegate, OrgApacheLuceneIndexIndexReader *indexReader, id<JavaUtilCollection> fields, jint maxDocFreq) {
-  OrgApacheLuceneAnalysisAnalyzerWrapper_initWithOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_(self, [((OrgApacheLuceneAnalysisAnalyzer *) nil_chk(delegate)) getReuseStrategy]);
-  JreStrongAssignAndConsume(&self->stopWordsPerField_, new_JavaUtilHashMap_init());
-  JreStrongAssign(&self->delegate_, delegate);
-  for (NSString * __strong field in nil_chk(fields)) {
-    id<JavaUtilSet> stopWords = [new_JavaUtilHashSet_init() autorelease];
-    OrgApacheLuceneIndexTerms *terms = OrgApacheLuceneIndexMultiFields_getTermsWithOrgApacheLuceneIndexIndexReader_withNSString_(indexReader, field);
-    OrgApacheLuceneUtilCharsRefBuilder *spare = [new_OrgApacheLuceneUtilCharsRefBuilder_init() autorelease];
-    if (terms != nil) {
-      OrgApacheLuceneIndexTermsEnum *te = [terms iterator];
-      OrgApacheLuceneUtilBytesRef *text;
-      while ((text = [((OrgApacheLuceneIndexTermsEnum *) nil_chk(te)) next]) != nil) {
-        if ([te docFreq] > maxDocFreq) {
-          [spare copyUTF8BytesWithOrgApacheLuceneUtilBytesRef:text];
-          [stopWords addWithId:[spare description]];
-        }
-      }
-    }
-    [self->stopWordsPerField_ putWithId:field withId:stopWords];
-  }
-}
-
-OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer *new_OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexIndexReader_withJavaUtilCollection_withInt_(OrgApacheLuceneAnalysisAnalyzer *delegate, OrgApacheLuceneIndexIndexReader *indexReader, id<JavaUtilCollection> fields, jint maxDocFreq) {
-  OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer *self = [OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer alloc];
-  OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneIndexIndexReader_withJavaUtilCollection_withInt_(self, delegate, indexReader, fields, maxDocFreq);
+  OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer_init(self);
   return self;
 }
 

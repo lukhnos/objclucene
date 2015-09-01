@@ -30,7 +30,6 @@
 @class OrgApacheLuceneIndexIndexWriter;
 @class OrgApacheLuceneIndexLiveIndexWriterConfig;
 @class OrgApacheLuceneIndexSegmentInfo;
-@class OrgApacheLuceneIndexSegmentWriteState;
 @class OrgApacheLuceneIndexTerm;
 @class OrgApacheLuceneStoreDirectory;
 @class OrgApacheLuceneStoreTrackingDirectoryWrapper;
@@ -52,7 +51,6 @@
   OrgApacheLuceneIndexDocumentsWriterPerThread_DocState *docState_;
   OrgApacheLuceneIndexDocConsumer *consumer_;
   OrgApacheLuceneUtilCounter *bytesUsed_;
-  OrgApacheLuceneIndexSegmentWriteState *flushState_;
   OrgApacheLuceneIndexBufferedUpdates *pendingUpdates_;
   jboolean aborted_;
   OrgApacheLuceneIndexDocumentsWriterDeleteQueue *deleteQueue_;
@@ -77,8 +75,6 @@
 
 - (jint)getNumDocsInRAM;
 
-- (jint)numDeleteTerms;
-
 - (id<JavaUtilSet>)pendingFilesToDelete;
 
 - (NSString *)description;
@@ -86,10 +82,6 @@
 - (void)updateDocumentWithJavaLangIterable:(id<JavaLangIterable>)doc
        withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
               withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)delTerm;
-
-- (jint)updateDocumentsWithJavaLangIterable:(id<JavaLangIterable>)docs
-        withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
-               withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)delTerm;
 
 #pragma mark Package-Private
 
@@ -119,7 +111,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriterPerThread, directoryOrig_
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriterPerThread, docState_, OrgApacheLuceneIndexDocumentsWriterPerThread_DocState *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriterPerThread, consumer_, OrgApacheLuceneIndexDocConsumer *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriterPerThread, bytesUsed_, OrgApacheLuceneUtilCounter *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriterPerThread, flushState_, OrgApacheLuceneIndexSegmentWriteState *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriterPerThread, pendingUpdates_, OrgApacheLuceneIndexBufferedUpdates *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriterPerThread, deleteQueue_, OrgApacheLuceneIndexDocumentsWriterDeleteQueue *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriterPerThread, byteBlockAllocator_, OrgApacheLuceneUtilByteBlockPool_Allocator *)
@@ -186,8 +177,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriterPerThread_Indexing
 #pragma mark Public
 
 - (void)clear;
-
-- (void)testPointWithNSString:(NSString *)name;
 
 #pragma mark Package-Private
 

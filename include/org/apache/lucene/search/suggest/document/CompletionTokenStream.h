@@ -24,7 +24,6 @@
 #include "org/apache/lucene/analysis/TokenStream.h"
 
 @class OrgApacheLuceneUtilAutomatonAutomaton;
-@class OrgApacheLuceneUtilBytesRef;
 
 @interface OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream : OrgApacheLuceneAnalysisTokenStream {
  @public
@@ -35,6 +34,8 @@
 
 #pragma mark Public
 
+- (instancetype)init;
+
 - (void)close;
 
 - (void)end;
@@ -43,32 +44,17 @@
 
 - (void)reset;
 
-- (void)setPayloadWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload;
-
 - (OrgApacheLuceneUtilAutomatonAutomaton *)toAutomaton;
 
 - (OrgApacheLuceneUtilAutomatonAutomaton *)toAutomatonWithBoolean:(jboolean)unicodeAware;
-
-#pragma mark Package-Private
-
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
-
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-                                               withBoolean:(jboolean)preserveSep
-                                               withBoolean:(jboolean)preservePositionIncrements
-                                                   withInt:(jint)maxGraphExpansions;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *self, OrgApacheLuceneAnalysisTokenStream *input);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_init(OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *new_OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_withBoolean_withInt_(OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *self, OrgApacheLuceneAnalysisTokenStream *input, jboolean preserveSep, jboolean preservePositionIncrements, jint maxGraphExpansions);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *new_OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_withBoolean_withInt_(OrgApacheLuceneAnalysisTokenStream *input, jboolean preserveSep, jboolean preservePositionIncrements, jint maxGraphExpansions) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *new_OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream)
 

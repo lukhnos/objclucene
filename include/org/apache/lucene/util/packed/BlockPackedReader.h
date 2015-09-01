@@ -24,34 +24,19 @@
 #define OrgApacheLuceneUtilAccountable_INCLUDE 1
 #include "org/apache/lucene/util/Accountable.h"
 
-@class OrgApacheLuceneStoreIndexInput;
-@protocol JavaUtilCollection;
-
 @interface OrgApacheLuceneUtilPackedBlockPackedReader : OrgApacheLuceneUtilLongValues < OrgApacheLuceneUtilAccountable >
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)inArg
-                                               withInt:(jint)packedIntsVersion
-                                               withInt:(jint)blockSize
-                                              withLong:(jlong)valueCount
-                                           withBoolean:(jboolean)direct;
-
-- (jlong)getWithLong:(jlong)index;
-
-- (id<JavaUtilCollection>)getChildResources;
-
-- (jlong)ramBytesUsed;
-
-- (NSString *)description;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilPackedBlockPackedReader)
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedBlockPackedReader_initWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withLong_withBoolean_(OrgApacheLuceneUtilPackedBlockPackedReader *self, OrgApacheLuceneStoreIndexInput *inArg, jint packedIntsVersion, jint blockSize, jlong valueCount, jboolean direct);
+FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedBlockPackedReader_init(OrgApacheLuceneUtilPackedBlockPackedReader *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilPackedBlockPackedReader *new_OrgApacheLuceneUtilPackedBlockPackedReader_initWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withLong_withBoolean_(OrgApacheLuceneStoreIndexInput *inArg, jint packedIntsVersion, jint blockSize, jlong valueCount, jboolean direct) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedBlockPackedReader *new_OrgApacheLuceneUtilPackedBlockPackedReader_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedBlockPackedReader)
 

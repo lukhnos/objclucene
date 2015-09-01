@@ -29,25 +29,18 @@
 @class OrgApacheLuceneDocumentFieldType;
 @class OrgApacheLuceneIndexIndexWriterConfig;
 @class OrgApacheLuceneIndexIndexWriterConfig_OpenModeEnum;
-@class OrgApacheLuceneSearchBooleanClause_OccurEnum;
 @class OrgApacheLuceneSearchBooleanQuery;
 @class OrgApacheLuceneSearchBooleanQuery_Builder;
 @class OrgApacheLuceneSearchIndexSearcher;
 @class OrgApacheLuceneSearchQuery;
 @class OrgApacheLuceneSearchSearcherManager;
 @class OrgApacheLuceneSearchTopFieldDocs;
-@class OrgApacheLuceneStoreDataInput;
-@class OrgApacheLuceneStoreDataOutput;
 @class OrgApacheLuceneStoreDirectory;
 @class OrgApacheLuceneUtilBytesRef;
 @class OrgApacheLuceneUtilVersion;
-@class OrgLukhnosPortmobileFilePath;
 @protocol JavaLangCharSequence;
-@protocol JavaUtilCollection;
 @protocol JavaUtilList;
-@protocol JavaUtilMap;
 @protocol JavaUtilSet;
-@protocol OrgApacheLuceneSearchSuggestInputIterator;
 
 #define OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_DEFAULT_MIN_PREFIX_CHARS 4
 #define OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_DEFAULT_ALL_TERMS_REQUIRED YES
@@ -67,31 +60,6 @@
 - (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
                   withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
 
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
-                  withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)indexAnalyzer
-                  withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)queryAnalyzer
-                                              withInt:(jint)minPrefixChars
-                                          withBoolean:(jboolean)commitOnBuild;
-
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
-                  withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)indexAnalyzer
-                  withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)queryAnalyzer
-                                              withInt:(jint)minPrefixChars
-                                          withBoolean:(jboolean)commitOnBuild
-                                          withBoolean:(jboolean)allTermsRequired
-                                          withBoolean:(jboolean)highlight;
-
-- (instancetype)initWithOrgApacheLuceneUtilVersion:(OrgApacheLuceneUtilVersion *)matchVersion
-                 withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
-               withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
-
-- (instancetype)initWithOrgApacheLuceneUtilVersion:(OrgApacheLuceneUtilVersion *)matchVersion
-                 withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
-               withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)indexAnalyzer
-               withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)queryAnalyzer
-                                           withInt:(jint)minPrefixChars
-                                       withBoolean:(jboolean)commitOnBuild;
-
 - (instancetype)initWithOrgApacheLuceneUtilVersion:(OrgApacheLuceneUtilVersion *)matchVersion
                  withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
                withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)indexAnalyzer
@@ -106,21 +74,9 @@
                                   withLong:(jlong)weight
            withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload;
 
-- (void)addContextToQueryWithOrgApacheLuceneSearchBooleanQuery_Builder:(OrgApacheLuceneSearchBooleanQuery_Builder *)query
-                                       withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)context
-                      withOrgApacheLuceneSearchBooleanClause_OccurEnum:(OrgApacheLuceneSearchBooleanClause_OccurEnum *)clause;
-
-- (void)buildWithOrgApacheLuceneSearchSuggestInputIterator:(id<OrgApacheLuceneSearchSuggestInputIterator>)iter;
-
 - (void)close;
 
 - (void)commit;
-
-- (id<JavaUtilCollection>)getChildResources;
-
-- (jlong)getCount;
-
-- (jboolean)load__WithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)outArg;
 
 - (id<JavaUtilList>)lookupWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
              withOrgApacheLuceneSearchBooleanQuery:(OrgApacheLuceneSearchBooleanQuery *)contextQuery
@@ -133,33 +89,7 @@
                                        withBoolean:(jboolean)allTermsRequired
                                        withBoolean:(jboolean)doHighlight;
 
-- (id<JavaUtilList>)lookupWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
-                                   withJavaUtilMap:(id<JavaUtilMap>)contextInfo
-                                           withInt:(jint)num
-                                       withBoolean:(jboolean)allTermsRequired
-                                       withBoolean:(jboolean)doHighlight;
-
-- (id<JavaUtilList>)lookupWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
-                                   withJavaUtilSet:(id<JavaUtilSet>)contexts
-                                       withBoolean:(jboolean)onlyMorePopular
-                                           withInt:(jint)num;
-
-- (id<JavaUtilList>)lookupWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
-                                   withJavaUtilSet:(id<JavaUtilSet>)contexts
-                                           withInt:(jint)num
-                                       withBoolean:(jboolean)allTermsRequired
-                                       withBoolean:(jboolean)doHighlight;
-
 - (jlong)ramBytesUsed;
-
-- (void)refresh;
-
-- (jboolean)storeWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)inArg;
-
-- (void)updateWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)text
-                              withJavaUtilSet:(id<JavaUtilSet>)contexts
-                                     withLong:(jlong)weight
-              withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload;
 
 #pragma mark Protected
 
@@ -185,8 +115,6 @@
 
 - (OrgApacheLuceneSearchQuery *)finishQueryWithOrgApacheLuceneSearchBooleanQuery_Builder:(OrgApacheLuceneSearchBooleanQuery_Builder *)inArg
                                                                              withBoolean:(jboolean)allTermsRequired;
-
-- (OrgApacheLuceneStoreDirectory *)getDirectoryWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path;
 
 - (OrgApacheLuceneIndexIndexWriterConfig *)getIndexWriterConfigWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)indexAnalyzer
                                             withOrgApacheLuceneIndexIndexWriterConfig_OpenModeEnum:(OrgApacheLuceneIndexIndexWriterConfig_OpenModeEnum *)openMode;
@@ -226,22 +154,6 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSu
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester *self, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *analyzer);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester *new_OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *analyzer) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester *self, OrgApacheLuceneUtilVersion *matchVersion, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *analyzer);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester *new_OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneUtilVersion *matchVersion, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *analyzer) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withBoolean_(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester *self, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer, jint minPrefixChars, jboolean commitOnBuild);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester *new_OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withBoolean_(OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer, jint minPrefixChars, jboolean commitOnBuild) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withBoolean_withBoolean_withBoolean_(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester *self, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer, jint minPrefixChars, jboolean commitOnBuild, jboolean allTermsRequired, jboolean highlight);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester *new_OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withBoolean_withBoolean_withBoolean_(OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer, jint minPrefixChars, jboolean commitOnBuild, jboolean allTermsRequired, jboolean highlight) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withBoolean_(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester *self, OrgApacheLuceneUtilVersion *matchVersion, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer, jint minPrefixChars, jboolean commitOnBuild);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester *new_OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withBoolean_(OrgApacheLuceneUtilVersion *matchVersion, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer, jint minPrefixChars, jboolean commitOnBuild) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withBoolean_withBoolean_withBoolean_(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester *self, OrgApacheLuceneUtilVersion *matchVersion, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer, jint minPrefixChars, jboolean commitOnBuild, jboolean allTermsRequired, jboolean highlight);
 

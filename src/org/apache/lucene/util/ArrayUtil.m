@@ -7,14 +7,11 @@
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/lang/Character.h"
 #include "java/lang/Comparable.h"
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Integer.h"
-#include "java/lang/NumberFormatException.h"
 #include "java/lang/System.h"
 #include "java/util/Arrays.h"
-#include "java/util/Collection.h"
 #include "java/util/Comparator.h"
 #include "org/apache/lucene/util/ArrayIntroSorter.h"
 #include "org/apache/lucene/util/ArrayTimSorter.h"
@@ -26,12 +23,6 @@
 
 - (instancetype)init;
 
-+ (jint)parseWithCharArray:(IOSCharArray *)chars
-                   withInt:(jint)offset
-                   withInt:(jint)len
-                   withInt:(jint)radix
-               withBoolean:(jboolean)negative;
-
 @end
 
 static id<JavaUtilComparator> OrgApacheLuceneUtilArrayUtil_NATURAL_COMPARATOR_;
@@ -40,8 +31,6 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilArrayUtil, NATURAL_COMPARATOR_, id
 __attribute__((unused)) static void OrgApacheLuceneUtilArrayUtil_init(OrgApacheLuceneUtilArrayUtil *self);
 
 __attribute__((unused)) static OrgApacheLuceneUtilArrayUtil *new_OrgApacheLuceneUtilArrayUtil_init() NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static jint OrgApacheLuceneUtilArrayUtil_parseWithCharArray_withInt_withInt_withInt_withBoolean_(IOSCharArray *chars, jint offset, jint len, jint radix, jboolean negative);
 
 @interface OrgApacheLuceneUtilArrayUtil_NaturalComparator : NSObject < JavaUtilComparator >
 
@@ -71,54 +60,14 @@ jint OrgApacheLuceneUtilArrayUtil_MAX_ARRAY_LENGTH_;
   return self;
 }
 
-+ (jint)parseIntWithCharArray:(IOSCharArray *)chars {
-  return OrgApacheLuceneUtilArrayUtil_parseIntWithCharArray_(chars);
-}
-
-+ (jint)parseIntWithCharArray:(IOSCharArray *)chars
-                      withInt:(jint)offset
-                      withInt:(jint)len {
-  return OrgApacheLuceneUtilArrayUtil_parseIntWithCharArray_withInt_withInt_(chars, offset, len);
-}
-
-+ (jint)parseIntWithCharArray:(IOSCharArray *)chars
-                      withInt:(jint)offset
-                      withInt:(jint)len
-                      withInt:(jint)radix {
-  return OrgApacheLuceneUtilArrayUtil_parseIntWithCharArray_withInt_withInt_withInt_(chars, offset, len, radix);
-}
-
-+ (jint)parseWithCharArray:(IOSCharArray *)chars
-                   withInt:(jint)offset
-                   withInt:(jint)len
-                   withInt:(jint)radix
-               withBoolean:(jboolean)negative {
-  return OrgApacheLuceneUtilArrayUtil_parseWithCharArray_withInt_withInt_withInt_withBoolean_(chars, offset, len, radix, negative);
-}
-
 + (jint)oversizeWithInt:(jint)minTargetSize
                 withInt:(jint)bytesPerElement {
   return OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(minTargetSize, bytesPerElement);
 }
 
-+ (jint)getShrinkSizeWithInt:(jint)currentSize
-                     withInt:(jint)targetSize
-                     withInt:(jint)bytesPerElement {
-  return OrgApacheLuceneUtilArrayUtil_getShrinkSizeWithInt_withInt_withInt_(currentSize, targetSize, bytesPerElement);
-}
-
 + (IOSObjectArray *)growWithNSObjectArray:(IOSObjectArray *)array
                                   withInt:(jint)minSize {
   return OrgApacheLuceneUtilArrayUtil_growWithNSObjectArray_withInt_(array, minSize);
-}
-
-+ (IOSShortArray *)growWithShortArray:(IOSShortArray *)array
-                              withInt:(jint)minSize {
-  return OrgApacheLuceneUtilArrayUtil_growWithShortArray_withInt_(array, minSize);
-}
-
-+ (IOSShortArray *)growWithShortArray:(IOSShortArray *)array {
-  return OrgApacheLuceneUtilArrayUtil_growWithShortArray_(array);
 }
 
 + (IOSFloatArray *)growWithFloatArray:(IOSFloatArray *)array
@@ -130,20 +79,6 @@ jint OrgApacheLuceneUtilArrayUtil_MAX_ARRAY_LENGTH_;
   return OrgApacheLuceneUtilArrayUtil_growWithFloatArray_(array);
 }
 
-+ (IOSDoubleArray *)growWithDoubleArray:(IOSDoubleArray *)array
-                                withInt:(jint)minSize {
-  return OrgApacheLuceneUtilArrayUtil_growWithDoubleArray_withInt_(array, minSize);
-}
-
-+ (IOSDoubleArray *)growWithDoubleArray:(IOSDoubleArray *)array {
-  return OrgApacheLuceneUtilArrayUtil_growWithDoubleArray_(array);
-}
-
-+ (IOSShortArray *)shrinkWithShortArray:(IOSShortArray *)array
-                                withInt:(jint)targetSize {
-  return OrgApacheLuceneUtilArrayUtil_shrinkWithShortArray_withInt_(array, targetSize);
-}
-
 + (IOSIntArray *)growWithIntArray:(IOSIntArray *)array
                           withInt:(jint)minSize {
   return OrgApacheLuceneUtilArrayUtil_growWithIntArray_withInt_(array, minSize);
@@ -153,23 +88,9 @@ jint OrgApacheLuceneUtilArrayUtil_MAX_ARRAY_LENGTH_;
   return OrgApacheLuceneUtilArrayUtil_growWithIntArray_(array);
 }
 
-+ (IOSIntArray *)shrinkWithIntArray:(IOSIntArray *)array
-                            withInt:(jint)targetSize {
-  return OrgApacheLuceneUtilArrayUtil_shrinkWithIntArray_withInt_(array, targetSize);
-}
-
 + (IOSLongArray *)growWithLongArray:(IOSLongArray *)array
                             withInt:(jint)minSize {
   return OrgApacheLuceneUtilArrayUtil_growWithLongArray_withInt_(array, minSize);
-}
-
-+ (IOSLongArray *)growWithLongArray:(IOSLongArray *)array {
-  return OrgApacheLuceneUtilArrayUtil_growWithLongArray_(array);
-}
-
-+ (IOSLongArray *)shrinkWithLongArray:(IOSLongArray *)array
-                              withInt:(jint)targetSize {
-  return OrgApacheLuceneUtilArrayUtil_shrinkWithLongArray_withInt_(array, targetSize);
 }
 
 + (IOSByteArray *)growWithByteArray:(IOSByteArray *)array
@@ -181,105 +102,15 @@ jint OrgApacheLuceneUtilArrayUtil_MAX_ARRAY_LENGTH_;
   return OrgApacheLuceneUtilArrayUtil_growWithByteArray_(array);
 }
 
-+ (IOSByteArray *)shrinkWithByteArray:(IOSByteArray *)array
-                              withInt:(jint)targetSize {
-  return OrgApacheLuceneUtilArrayUtil_shrinkWithByteArray_withInt_(array, targetSize);
-}
-
-+ (IOSBooleanArray *)growWithBooleanArray:(IOSBooleanArray *)array
-                                  withInt:(jint)minSize {
-  return OrgApacheLuceneUtilArrayUtil_growWithBooleanArray_withInt_(array, minSize);
-}
-
-+ (IOSBooleanArray *)growWithBooleanArray:(IOSBooleanArray *)array {
-  return OrgApacheLuceneUtilArrayUtil_growWithBooleanArray_(array);
-}
-
-+ (IOSBooleanArray *)shrinkWithBooleanArray:(IOSBooleanArray *)array
-                                    withInt:(jint)targetSize {
-  return OrgApacheLuceneUtilArrayUtil_shrinkWithBooleanArray_withInt_(array, targetSize);
-}
-
 + (IOSCharArray *)growWithCharArray:(IOSCharArray *)array
                             withInt:(jint)minSize {
   return OrgApacheLuceneUtilArrayUtil_growWithCharArray_withInt_(array, minSize);
-}
-
-+ (IOSCharArray *)growWithCharArray:(IOSCharArray *)array {
-  return OrgApacheLuceneUtilArrayUtil_growWithCharArray_(array);
-}
-
-+ (IOSCharArray *)shrinkWithCharArray:(IOSCharArray *)array
-                              withInt:(jint)targetSize {
-  return OrgApacheLuceneUtilArrayUtil_shrinkWithCharArray_withInt_(array, targetSize);
-}
-
-+ (IOSObjectArray *)growWithIntArray2:(IOSObjectArray *)array
-                              withInt:(jint)minSize {
-  return OrgApacheLuceneUtilArrayUtil_growWithIntArray2_withInt_(array, minSize);
-}
-
-+ (IOSObjectArray *)growWithIntArray2:(IOSObjectArray *)array {
-  return OrgApacheLuceneUtilArrayUtil_growWithIntArray2_(array);
-}
-
-+ (IOSObjectArray *)shrinkWithIntArray2:(IOSObjectArray *)array
-                                withInt:(jint)targetSize {
-  return OrgApacheLuceneUtilArrayUtil_shrinkWithIntArray2_withInt_(array, targetSize);
-}
-
-+ (IOSObjectArray *)growWithFloatArray2:(IOSObjectArray *)array
-                                withInt:(jint)minSize {
-  return OrgApacheLuceneUtilArrayUtil_growWithFloatArray2_withInt_(array, minSize);
-}
-
-+ (IOSObjectArray *)growWithFloatArray2:(IOSObjectArray *)array {
-  return OrgApacheLuceneUtilArrayUtil_growWithFloatArray2_(array);
-}
-
-+ (IOSObjectArray *)shrinkWithFloatArray2:(IOSObjectArray *)array
-                                  withInt:(jint)targetSize {
-  return OrgApacheLuceneUtilArrayUtil_shrinkWithFloatArray2_withInt_(array, targetSize);
 }
 
 + (jint)hashCodeWithCharArray:(IOSCharArray *)array
                       withInt:(jint)start
                       withInt:(jint)end {
   return OrgApacheLuceneUtilArrayUtil_hashCodeWithCharArray_withInt_withInt_(array, start, end);
-}
-
-+ (jint)hashCodeWithByteArray:(IOSByteArray *)array
-                      withInt:(jint)start
-                      withInt:(jint)end {
-  return OrgApacheLuceneUtilArrayUtil_hashCodeWithByteArray_withInt_withInt_(array, start, end);
-}
-
-+ (jboolean)equalsWithCharArray:(IOSCharArray *)left
-                        withInt:(jint)offsetLeft
-                  withCharArray:(IOSCharArray *)right
-                        withInt:(jint)offsetRight
-                        withInt:(jint)length {
-  return OrgApacheLuceneUtilArrayUtil_equalsWithCharArray_withInt_withCharArray_withInt_withInt_(left, offsetLeft, right, offsetRight, length);
-}
-
-+ (jboolean)equalsWithByteArray:(IOSByteArray *)left
-                        withInt:(jint)offsetLeft
-                  withByteArray:(IOSByteArray *)right
-                        withInt:(jint)offsetRight
-                        withInt:(jint)length {
-  return OrgApacheLuceneUtilArrayUtil_equalsWithByteArray_withInt_withByteArray_withInt_withInt_(left, offsetLeft, right, offsetRight, length);
-}
-
-+ (jboolean)equalsWithIntArray:(IOSIntArray *)left
-                       withInt:(jint)offsetLeft
-                  withIntArray:(IOSIntArray *)right
-                       withInt:(jint)offsetRight
-                       withInt:(jint)length {
-  return OrgApacheLuceneUtilArrayUtil_equalsWithIntArray_withInt_withIntArray_withInt_withInt_(left, offsetLeft, right, offsetRight, length);
-}
-
-+ (IOSIntArray *)toIntArrayWithJavaUtilCollection:(id<JavaUtilCollection>)ints {
-  return OrgApacheLuceneUtilArrayUtil_toIntArrayWithJavaUtilCollection_(ints);
 }
 
 + (id<JavaUtilComparator>)naturalComparator {
@@ -299,19 +130,10 @@ jint OrgApacheLuceneUtilArrayUtil_MAX_ARRAY_LENGTH_;
   OrgApacheLuceneUtilArrayUtil_introSortWithNSObjectArray_withInt_withInt_withJavaUtilComparator_(a, fromIndex, toIndex, comp);
 }
 
-+ (void)introSortWithNSObjectArray:(IOSObjectArray *)a
-            withJavaUtilComparator:(id<JavaUtilComparator>)comp {
-  OrgApacheLuceneUtilArrayUtil_introSortWithNSObjectArray_withJavaUtilComparator_(a, comp);
-}
-
 + (void)introSortWithJavaLangComparableArray:(IOSObjectArray *)a
                                      withInt:(jint)fromIndex
                                      withInt:(jint)toIndex {
   OrgApacheLuceneUtilArrayUtil_introSortWithJavaLangComparableArray_withInt_withInt_(a, fromIndex, toIndex);
-}
-
-+ (void)introSortWithJavaLangComparableArray:(IOSObjectArray *)a {
-  OrgApacheLuceneUtilArrayUtil_introSortWithJavaLangComparableArray_(a);
 }
 
 + (void)timSortWithNSObjectArray:(IOSObjectArray *)a
@@ -347,53 +169,21 @@ jint OrgApacheLuceneUtilArrayUtil_MAX_ARRAY_LENGTH_;
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "init", "ArrayUtil", NULL, 0x2, NULL, NULL },
-    { "parseIntWithCharArray:", "parseInt", "I", 0x9, "Ljava.lang.NumberFormatException;", NULL },
-    { "parseIntWithCharArray:withInt:withInt:", "parseInt", "I", 0x9, "Ljava.lang.NumberFormatException;", NULL },
-    { "parseIntWithCharArray:withInt:withInt:withInt:", "parseInt", "I", 0x9, "Ljava.lang.NumberFormatException;", NULL },
-    { "parseWithCharArray:withInt:withInt:withInt:withBoolean:", "parse", "I", 0xa, "Ljava.lang.NumberFormatException;", NULL },
     { "oversizeWithInt:withInt:", "oversize", "I", 0x9, NULL, NULL },
-    { "getShrinkSizeWithInt:withInt:withInt:", "getShrinkSize", "I", 0x9, NULL, NULL },
     { "growWithNSObjectArray:withInt:", "grow", "[Ljava.lang.Object;", 0x9, NULL, "<T:Ljava/lang/Object;>([TT;I)[TT;" },
-    { "growWithShortArray:withInt:", "grow", "[S", 0x9, NULL, NULL },
-    { "growWithShortArray:", "grow", "[S", 0x9, NULL, NULL },
     { "growWithFloatArray:withInt:", "grow", "[F", 0x9, NULL, NULL },
     { "growWithFloatArray:", "grow", "[F", 0x9, NULL, NULL },
-    { "growWithDoubleArray:withInt:", "grow", "[D", 0x9, NULL, NULL },
-    { "growWithDoubleArray:", "grow", "[D", 0x9, NULL, NULL },
-    { "shrinkWithShortArray:withInt:", "shrink", "[S", 0x9, NULL, NULL },
     { "growWithIntArray:withInt:", "grow", "[I", 0x9, NULL, NULL },
     { "growWithIntArray:", "grow", "[I", 0x9, NULL, NULL },
-    { "shrinkWithIntArray:withInt:", "shrink", "[I", 0x9, NULL, NULL },
     { "growWithLongArray:withInt:", "grow", "[J", 0x9, NULL, NULL },
-    { "growWithLongArray:", "grow", "[J", 0x9, NULL, NULL },
-    { "shrinkWithLongArray:withInt:", "shrink", "[J", 0x9, NULL, NULL },
     { "growWithByteArray:withInt:", "grow", "[B", 0x9, NULL, NULL },
     { "growWithByteArray:", "grow", "[B", 0x9, NULL, NULL },
-    { "shrinkWithByteArray:withInt:", "shrink", "[B", 0x9, NULL, NULL },
-    { "growWithBooleanArray:withInt:", "grow", "[Z", 0x9, NULL, NULL },
-    { "growWithBooleanArray:", "grow", "[Z", 0x9, NULL, NULL },
-    { "shrinkWithBooleanArray:withInt:", "shrink", "[Z", 0x9, NULL, NULL },
     { "growWithCharArray:withInt:", "grow", "[C", 0x9, NULL, NULL },
-    { "growWithCharArray:", "grow", "[C", 0x9, NULL, NULL },
-    { "shrinkWithCharArray:withInt:", "shrink", "[C", 0x9, NULL, NULL },
-    { "growWithIntArray2:withInt:", "grow", "[[I", 0x9, NULL, NULL },
-    { "growWithIntArray2:", "grow", "[[I", 0x9, NULL, NULL },
-    { "shrinkWithIntArray2:withInt:", "shrink", "[[I", 0x9, NULL, NULL },
-    { "growWithFloatArray2:withInt:", "grow", "[[F", 0x9, NULL, NULL },
-    { "growWithFloatArray2:", "grow", "[[F", 0x9, NULL, NULL },
-    { "shrinkWithFloatArray2:withInt:", "shrink", "[[F", 0x9, NULL, NULL },
     { "hashCodeWithCharArray:withInt:withInt:", "hashCode", "I", 0x9, NULL, NULL },
-    { "hashCodeWithByteArray:withInt:withInt:", "hashCode", "I", 0x9, NULL, NULL },
-    { "equalsWithCharArray:withInt:withCharArray:withInt:withInt:", "equals", "Z", 0x9, NULL, NULL },
-    { "equalsWithByteArray:withInt:withByteArray:withInt:withInt:", "equals", "Z", 0x9, NULL, NULL },
-    { "equalsWithIntArray:withInt:withIntArray:withInt:withInt:", "equals", "Z", 0x9, NULL, NULL },
-    { "toIntArrayWithJavaUtilCollection:", "toIntArray", "[I", 0x9, NULL, NULL },
     { "naturalComparator", NULL, "Ljava.util.Comparator;", 0x9, NULL, "<T::Ljava/lang/Comparable<-TT;>;>()Ljava/util/Comparator<TT;>;" },
     { "swapWithNSObjectArray:withInt:withInt:", "swap", "V", 0x9, NULL, "<T:Ljava/lang/Object;>([TT;II)V" },
     { "introSortWithNSObjectArray:withInt:withInt:withJavaUtilComparator:", "introSort", "V", 0x9, NULL, "<T:Ljava/lang/Object;>([TT;IILjava/util/Comparator<-TT;>;)V" },
-    { "introSortWithNSObjectArray:withJavaUtilComparator:", "introSort", "V", 0x9, NULL, "<T:Ljava/lang/Object;>([TT;Ljava/util/Comparator<-TT;>;)V" },
     { "introSortWithJavaLangComparableArray:withInt:withInt:", "introSort", "V", 0x9, NULL, "<T::Ljava/lang/Comparable<-TT;>;>([TT;II)V" },
-    { "introSortWithJavaLangComparableArray:", "introSort", "V", 0x9, NULL, "<T::Ljava/lang/Comparable<-TT;>;>([TT;)V" },
     { "timSortWithNSObjectArray:withInt:withInt:withJavaUtilComparator:", "timSort", "V", 0x9, NULL, "<T:Ljava/lang/Object;>([TT;IILjava/util/Comparator<-TT;>;)V" },
     { "timSortWithNSObjectArray:withJavaUtilComparator:", "timSort", "V", 0x9, NULL, "<T:Ljava/lang/Object;>([TT;Ljava/util/Comparator<-TT;>;)V" },
     { "timSortWithJavaLangComparableArray:withInt:withInt:", "timSort", "V", 0x9, NULL, "<T::Ljava/lang/Comparable<-TT;>;>([TT;II)V" },
@@ -404,7 +194,7 @@ jint OrgApacheLuceneUtilArrayUtil_MAX_ARRAY_LENGTH_;
     { "NATURAL_COMPARATOR_", NULL, 0x1a, "Ljava.util.Comparator;", &OrgApacheLuceneUtilArrayUtil_NATURAL_COMPARATOR_, "Ljava/util/Comparator<*>;", .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.util.ArrayUtil$NaturalComparator;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilArrayUtil = { 2, "ArrayUtil", "org.apache.lucene.util", NULL, 0x11, 52, methods, 2, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilArrayUtil = { 2, "ArrayUtil", "org.apache.lucene.util", NULL, 0x11, 20, methods, 2, fields, 0, NULL, 1, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneUtilArrayUtil;
 }
 
@@ -418,63 +208,6 @@ OrgApacheLuceneUtilArrayUtil *new_OrgApacheLuceneUtilArrayUtil_init() {
   OrgApacheLuceneUtilArrayUtil *self = [OrgApacheLuceneUtilArrayUtil alloc];
   OrgApacheLuceneUtilArrayUtil_init(self);
   return self;
-}
-
-jint OrgApacheLuceneUtilArrayUtil_parseIntWithCharArray_(IOSCharArray *chars) {
-  OrgApacheLuceneUtilArrayUtil_initialize();
-  return OrgApacheLuceneUtilArrayUtil_parseIntWithCharArray_withInt_withInt_withInt_(chars, 0, ((IOSCharArray *) nil_chk(chars))->size_, 10);
-}
-
-jint OrgApacheLuceneUtilArrayUtil_parseIntWithCharArray_withInt_withInt_(IOSCharArray *chars, jint offset, jint len) {
-  OrgApacheLuceneUtilArrayUtil_initialize();
-  return OrgApacheLuceneUtilArrayUtil_parseIntWithCharArray_withInt_withInt_withInt_(chars, offset, len, 10);
-}
-
-jint OrgApacheLuceneUtilArrayUtil_parseIntWithCharArray_withInt_withInt_withInt_(IOSCharArray *chars, jint offset, jint len, jint radix) {
-  OrgApacheLuceneUtilArrayUtil_initialize();
-  if (chars == nil || radix < JavaLangCharacter_MIN_RADIX || radix > JavaLangCharacter_MAX_RADIX) {
-    @throw [new_JavaLangNumberFormatException_init() autorelease];
-  }
-  jint i = 0;
-  if (len == 0) {
-    @throw [new_JavaLangNumberFormatException_initWithNSString_(@"chars length is 0") autorelease];
-  }
-  jboolean negative = IOSCharArray_Get(nil_chk(chars), offset + i) == '-';
-  if (negative && ++i == len) {
-    @throw [new_JavaLangNumberFormatException_initWithNSString_(@"can't convert to an int") autorelease];
-  }
-  if (negative == YES) {
-    offset++;
-    len--;
-  }
-  return OrgApacheLuceneUtilArrayUtil_parseWithCharArray_withInt_withInt_withInt_withBoolean_(chars, offset, len, radix, negative);
-}
-
-jint OrgApacheLuceneUtilArrayUtil_parseWithCharArray_withInt_withInt_withInt_withBoolean_(IOSCharArray *chars, jint offset, jint len, jint radix, jboolean negative) {
-  OrgApacheLuceneUtilArrayUtil_initialize();
-  jint max = JavaLangInteger_MIN_VALUE / radix;
-  jint result = 0;
-  for (jint i = 0; i < len; i++) {
-    jint digit = JavaLangCharacter_digitWithChar_withInt_(IOSCharArray_Get(nil_chk(chars), i + offset), radix);
-    if (digit == -1) {
-      @throw [new_JavaLangNumberFormatException_initWithNSString_(@"Unable to parse") autorelease];
-    }
-    if (max > result) {
-      @throw [new_JavaLangNumberFormatException_initWithNSString_(@"Unable to parse") autorelease];
-    }
-    jint next = result * radix - digit;
-    if (next > result) {
-      @throw [new_JavaLangNumberFormatException_initWithNSString_(@"Unable to parse") autorelease];
-    }
-    result = next;
-  }
-  if (!negative) {
-    result = -result;
-    if (result < 0) {
-      @throw [new_JavaLangNumberFormatException_initWithNSString_(@"Unable to parse") autorelease];
-    }
-  }
-  return result;
 }
 
 jint OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(jint minTargetSize, jint bytesPerElement) {
@@ -523,13 +256,6 @@ jint OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(jint minTargetSize, j
   }
 }
 
-jint OrgApacheLuceneUtilArrayUtil_getShrinkSizeWithInt_withInt_withInt_(jint currentSize, jint targetSize, jint bytesPerElement) {
-  OrgApacheLuceneUtilArrayUtil_initialize();
-  jint newSize = OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(targetSize, bytesPerElement);
-  if (newSize < currentSize / 2) return newSize;
-  else return currentSize;
-}
-
 IOSObjectArray *OrgApacheLuceneUtilArrayUtil_growWithNSObjectArray_withInt_(IOSObjectArray *array, jint minSize) {
   OrgApacheLuceneUtilArrayUtil_initialize();
   JreAssert((minSize >= 0), (JreStrcat("$I$", @"size must be positive (got ", minSize, @"): likely integer overflow?")));
@@ -537,22 +263,6 @@ IOSObjectArray *OrgApacheLuceneUtilArrayUtil_growWithNSObjectArray_withInt_(IOSO
     return JavaUtilArrays_copyOfWithNSObjectArray_withInt_(array, OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(minSize, JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF_)));
   }
   else return array;
-}
-
-IOSShortArray *OrgApacheLuceneUtilArrayUtil_growWithShortArray_withInt_(IOSShortArray *array, jint minSize) {
-  OrgApacheLuceneUtilArrayUtil_initialize();
-  JreAssert((minSize >= 0), (JreStrcat("$I$", @"size must be positive (got ", minSize, @"): likely integer overflow?")));
-  if (((IOSShortArray *) nil_chk(array))->size_ < minSize) {
-    IOSShortArray *newArray = [IOSShortArray arrayWithLength:OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(minSize, OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_SHORT)];
-    JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(array, 0, newArray, 0, array->size_);
-    return newArray;
-  }
-  else return array;
-}
-
-IOSShortArray *OrgApacheLuceneUtilArrayUtil_growWithShortArray_(IOSShortArray *array) {
-  OrgApacheLuceneUtilArrayUtil_initialize();
-  return OrgApacheLuceneUtilArrayUtil_growWithShortArray_withInt_(array, 1 + ((IOSShortArray *) nil_chk(array))->size_);
 }
 
 IOSFloatArray *OrgApacheLuceneUtilArrayUtil_growWithFloatArray_withInt_(IOSFloatArray *array, jint minSize) {
@@ -571,34 +281,6 @@ IOSFloatArray *OrgApacheLuceneUtilArrayUtil_growWithFloatArray_(IOSFloatArray *a
   return OrgApacheLuceneUtilArrayUtil_growWithFloatArray_withInt_(array, 1 + ((IOSFloatArray *) nil_chk(array))->size_);
 }
 
-IOSDoubleArray *OrgApacheLuceneUtilArrayUtil_growWithDoubleArray_withInt_(IOSDoubleArray *array, jint minSize) {
-  OrgApacheLuceneUtilArrayUtil_initialize();
-  JreAssert((minSize >= 0), (JreStrcat("$I$", @"size must be positive (got ", minSize, @"): likely integer overflow?")));
-  if (((IOSDoubleArray *) nil_chk(array))->size_ < minSize) {
-    IOSDoubleArray *newArray = [IOSDoubleArray arrayWithLength:OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(minSize, OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_DOUBLE)];
-    JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(array, 0, newArray, 0, array->size_);
-    return newArray;
-  }
-  else return array;
-}
-
-IOSDoubleArray *OrgApacheLuceneUtilArrayUtil_growWithDoubleArray_(IOSDoubleArray *array) {
-  OrgApacheLuceneUtilArrayUtil_initialize();
-  return OrgApacheLuceneUtilArrayUtil_growWithDoubleArray_withInt_(array, 1 + ((IOSDoubleArray *) nil_chk(array))->size_);
-}
-
-IOSShortArray *OrgApacheLuceneUtilArrayUtil_shrinkWithShortArray_withInt_(IOSShortArray *array, jint targetSize) {
-  OrgApacheLuceneUtilArrayUtil_initialize();
-  JreAssert((targetSize >= 0), (JreStrcat("$I$", @"size must be positive (got ", targetSize, @"): likely integer overflow?")));
-  jint newSize = OrgApacheLuceneUtilArrayUtil_getShrinkSizeWithInt_withInt_withInt_(((IOSShortArray *) nil_chk(array))->size_, targetSize, OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_SHORT);
-  if (newSize != array->size_) {
-    IOSShortArray *newArray = [IOSShortArray arrayWithLength:newSize];
-    JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(array, 0, newArray, 0, newSize);
-    return newArray;
-  }
-  else return array;
-}
-
 IOSIntArray *OrgApacheLuceneUtilArrayUtil_growWithIntArray_withInt_(IOSIntArray *array, jint minSize) {
   OrgApacheLuceneUtilArrayUtil_initialize();
   JreAssert((minSize >= 0), (JreStrcat("$I$", @"size must be positive (got ", minSize, @"): likely integer overflow?")));
@@ -615,41 +297,12 @@ IOSIntArray *OrgApacheLuceneUtilArrayUtil_growWithIntArray_(IOSIntArray *array) 
   return OrgApacheLuceneUtilArrayUtil_growWithIntArray_withInt_(array, 1 + ((IOSIntArray *) nil_chk(array))->size_);
 }
 
-IOSIntArray *OrgApacheLuceneUtilArrayUtil_shrinkWithIntArray_withInt_(IOSIntArray *array, jint targetSize) {
-  OrgApacheLuceneUtilArrayUtil_initialize();
-  JreAssert((targetSize >= 0), (JreStrcat("$I$", @"size must be positive (got ", targetSize, @"): likely integer overflow?")));
-  jint newSize = OrgApacheLuceneUtilArrayUtil_getShrinkSizeWithInt_withInt_withInt_(((IOSIntArray *) nil_chk(array))->size_, targetSize, OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT);
-  if (newSize != array->size_) {
-    IOSIntArray *newArray = [IOSIntArray arrayWithLength:newSize];
-    JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(array, 0, newArray, 0, newSize);
-    return newArray;
-  }
-  else return array;
-}
-
 IOSLongArray *OrgApacheLuceneUtilArrayUtil_growWithLongArray_withInt_(IOSLongArray *array, jint minSize) {
   OrgApacheLuceneUtilArrayUtil_initialize();
   JreAssert((minSize >= 0), (JreStrcat("$I$", @"size must be positive (got ", minSize, @"): likely integer overflow?")));
   if (((IOSLongArray *) nil_chk(array))->size_ < minSize) {
     IOSLongArray *newArray = [IOSLongArray arrayWithLength:OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(minSize, OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_LONG)];
     JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(array, 0, newArray, 0, array->size_);
-    return newArray;
-  }
-  else return array;
-}
-
-IOSLongArray *OrgApacheLuceneUtilArrayUtil_growWithLongArray_(IOSLongArray *array) {
-  OrgApacheLuceneUtilArrayUtil_initialize();
-  return OrgApacheLuceneUtilArrayUtil_growWithLongArray_withInt_(array, 1 + ((IOSLongArray *) nil_chk(array))->size_);
-}
-
-IOSLongArray *OrgApacheLuceneUtilArrayUtil_shrinkWithLongArray_withInt_(IOSLongArray *array, jint targetSize) {
-  OrgApacheLuceneUtilArrayUtil_initialize();
-  JreAssert((targetSize >= 0), (JreStrcat("$I$", @"size must be positive (got ", targetSize, @"): likely integer overflow?")));
-  jint newSize = OrgApacheLuceneUtilArrayUtil_getShrinkSizeWithInt_withInt_withInt_(((IOSLongArray *) nil_chk(array))->size_, targetSize, OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_LONG);
-  if (newSize != array->size_) {
-    IOSLongArray *newArray = [IOSLongArray arrayWithLength:newSize];
-    JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(array, 0, newArray, 0, newSize);
     return newArray;
   }
   else return array;
@@ -671,46 +324,6 @@ IOSByteArray *OrgApacheLuceneUtilArrayUtil_growWithByteArray_(IOSByteArray *arra
   return OrgApacheLuceneUtilArrayUtil_growWithByteArray_withInt_(array, 1 + ((IOSByteArray *) nil_chk(array))->size_);
 }
 
-IOSByteArray *OrgApacheLuceneUtilArrayUtil_shrinkWithByteArray_withInt_(IOSByteArray *array, jint targetSize) {
-  OrgApacheLuceneUtilArrayUtil_initialize();
-  JreAssert((targetSize >= 0), (JreStrcat("$I$", @"size must be positive (got ", targetSize, @"): likely integer overflow?")));
-  jint newSize = OrgApacheLuceneUtilArrayUtil_getShrinkSizeWithInt_withInt_withInt_(((IOSByteArray *) nil_chk(array))->size_, targetSize, 1);
-  if (newSize != array->size_) {
-    IOSByteArray *newArray = [IOSByteArray arrayWithLength:newSize];
-    JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(array, 0, newArray, 0, newSize);
-    return newArray;
-  }
-  else return array;
-}
-
-IOSBooleanArray *OrgApacheLuceneUtilArrayUtil_growWithBooleanArray_withInt_(IOSBooleanArray *array, jint minSize) {
-  OrgApacheLuceneUtilArrayUtil_initialize();
-  JreAssert((minSize >= 0), (JreStrcat("$I$", @"size must be positive (got ", minSize, @"): likely integer overflow?")));
-  if (((IOSBooleanArray *) nil_chk(array))->size_ < minSize) {
-    IOSBooleanArray *newArray = [IOSBooleanArray arrayWithLength:OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(minSize, 1)];
-    JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(array, 0, newArray, 0, array->size_);
-    return newArray;
-  }
-  else return array;
-}
-
-IOSBooleanArray *OrgApacheLuceneUtilArrayUtil_growWithBooleanArray_(IOSBooleanArray *array) {
-  OrgApacheLuceneUtilArrayUtil_initialize();
-  return OrgApacheLuceneUtilArrayUtil_growWithBooleanArray_withInt_(array, 1 + ((IOSBooleanArray *) nil_chk(array))->size_);
-}
-
-IOSBooleanArray *OrgApacheLuceneUtilArrayUtil_shrinkWithBooleanArray_withInt_(IOSBooleanArray *array, jint targetSize) {
-  OrgApacheLuceneUtilArrayUtil_initialize();
-  JreAssert((targetSize >= 0), (JreStrcat("$I$", @"size must be positive (got ", targetSize, @"): likely integer overflow?")));
-  jint newSize = OrgApacheLuceneUtilArrayUtil_getShrinkSizeWithInt_withInt_withInt_(((IOSBooleanArray *) nil_chk(array))->size_, targetSize, 1);
-  if (newSize != array->size_) {
-    IOSBooleanArray *newArray = [IOSBooleanArray arrayWithLength:newSize];
-    JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(array, 0, newArray, 0, newSize);
-    return newArray;
-  }
-  else return array;
-}
-
 IOSCharArray *OrgApacheLuceneUtilArrayUtil_growWithCharArray_withInt_(IOSCharArray *array, jint minSize) {
   OrgApacheLuceneUtilArrayUtil_initialize();
   JreAssert((minSize >= 0), (JreStrcat("$I$", @"size must be positive (got ", minSize, @"): likely integer overflow?")));
@@ -722,150 +335,11 @@ IOSCharArray *OrgApacheLuceneUtilArrayUtil_growWithCharArray_withInt_(IOSCharArr
   else return array;
 }
 
-IOSCharArray *OrgApacheLuceneUtilArrayUtil_growWithCharArray_(IOSCharArray *array) {
-  OrgApacheLuceneUtilArrayUtil_initialize();
-  return OrgApacheLuceneUtilArrayUtil_growWithCharArray_withInt_(array, 1 + ((IOSCharArray *) nil_chk(array))->size_);
-}
-
-IOSCharArray *OrgApacheLuceneUtilArrayUtil_shrinkWithCharArray_withInt_(IOSCharArray *array, jint targetSize) {
-  OrgApacheLuceneUtilArrayUtil_initialize();
-  JreAssert((targetSize >= 0), (JreStrcat("$I$", @"size must be positive (got ", targetSize, @"): likely integer overflow?")));
-  jint newSize = OrgApacheLuceneUtilArrayUtil_getShrinkSizeWithInt_withInt_withInt_(((IOSCharArray *) nil_chk(array))->size_, targetSize, OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_CHAR);
-  if (newSize != array->size_) {
-    IOSCharArray *newArray = [IOSCharArray arrayWithLength:newSize];
-    JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(array, 0, newArray, 0, newSize);
-    return newArray;
-  }
-  else return array;
-}
-
-IOSObjectArray *OrgApacheLuceneUtilArrayUtil_growWithIntArray2_withInt_(IOSObjectArray *array, jint minSize) {
-  OrgApacheLuceneUtilArrayUtil_initialize();
-  JreAssert((minSize >= 0), (JreStrcat("$I$", @"size must be positive (got ", minSize, @"): likely integer overflow?")));
-  if (((IOSObjectArray *) nil_chk(array))->size_ < minSize) {
-    IOSObjectArray *newArray = [IOSObjectArray arrayWithLength:OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(minSize, JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF_)) type:IOSClass_intArray(1)];
-    JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(array, 0, newArray, 0, array->size_);
-    return newArray;
-  }
-  else {
-    return array;
-  }
-}
-
-IOSObjectArray *OrgApacheLuceneUtilArrayUtil_growWithIntArray2_(IOSObjectArray *array) {
-  OrgApacheLuceneUtilArrayUtil_initialize();
-  return OrgApacheLuceneUtilArrayUtil_growWithIntArray2_withInt_(array, 1 + ((IOSObjectArray *) nil_chk(array))->size_);
-}
-
-IOSObjectArray *OrgApacheLuceneUtilArrayUtil_shrinkWithIntArray2_withInt_(IOSObjectArray *array, jint targetSize) {
-  OrgApacheLuceneUtilArrayUtil_initialize();
-  JreAssert((targetSize >= 0), (JreStrcat("$I$", @"size must be positive (got ", targetSize, @"): likely integer overflow?")));
-  jint newSize = OrgApacheLuceneUtilArrayUtil_getShrinkSizeWithInt_withInt_withInt_(((IOSObjectArray *) nil_chk(array))->size_, targetSize, JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF_));
-  if (newSize != array->size_) {
-    IOSObjectArray *newArray = [IOSObjectArray arrayWithLength:newSize type:IOSClass_intArray(1)];
-    JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(array, 0, newArray, 0, newSize);
-    return newArray;
-  }
-  else {
-    return array;
-  }
-}
-
-IOSObjectArray *OrgApacheLuceneUtilArrayUtil_growWithFloatArray2_withInt_(IOSObjectArray *array, jint minSize) {
-  OrgApacheLuceneUtilArrayUtil_initialize();
-  JreAssert((minSize >= 0), (JreStrcat("$I$", @"size must be positive (got ", minSize, @"): likely integer overflow?")));
-  if (((IOSObjectArray *) nil_chk(array))->size_ < minSize) {
-    IOSObjectArray *newArray = [IOSObjectArray arrayWithLength:OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(minSize, JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF_)) type:IOSClass_floatArray(1)];
-    JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(array, 0, newArray, 0, array->size_);
-    return newArray;
-  }
-  else {
-    return array;
-  }
-}
-
-IOSObjectArray *OrgApacheLuceneUtilArrayUtil_growWithFloatArray2_(IOSObjectArray *array) {
-  OrgApacheLuceneUtilArrayUtil_initialize();
-  return OrgApacheLuceneUtilArrayUtil_growWithFloatArray2_withInt_(array, 1 + ((IOSObjectArray *) nil_chk(array))->size_);
-}
-
-IOSObjectArray *OrgApacheLuceneUtilArrayUtil_shrinkWithFloatArray2_withInt_(IOSObjectArray *array, jint targetSize) {
-  OrgApacheLuceneUtilArrayUtil_initialize();
-  JreAssert((targetSize >= 0), (JreStrcat("$I$", @"size must be positive (got ", targetSize, @"): likely integer overflow?")));
-  jint newSize = OrgApacheLuceneUtilArrayUtil_getShrinkSizeWithInt_withInt_withInt_(((IOSObjectArray *) nil_chk(array))->size_, targetSize, JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF_));
-  if (newSize != array->size_) {
-    IOSObjectArray *newArray = [IOSObjectArray arrayWithLength:newSize type:IOSClass_floatArray(1)];
-    JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(array, 0, newArray, 0, newSize);
-    return newArray;
-  }
-  else {
-    return array;
-  }
-}
-
 jint OrgApacheLuceneUtilArrayUtil_hashCodeWithCharArray_withInt_withInt_(IOSCharArray *array, jint start, jint end) {
   OrgApacheLuceneUtilArrayUtil_initialize();
   jint code = 0;
   for (jint i = end - 1; i >= start; i--) code = code * 31 + IOSCharArray_Get(nil_chk(array), i);
   return code;
-}
-
-jint OrgApacheLuceneUtilArrayUtil_hashCodeWithByteArray_withInt_withInt_(IOSByteArray *array, jint start, jint end) {
-  OrgApacheLuceneUtilArrayUtil_initialize();
-  jint code = 0;
-  for (jint i = end - 1; i >= start; i--) code = code * 31 + IOSByteArray_Get(nil_chk(array), i);
-  return code;
-}
-
-jboolean OrgApacheLuceneUtilArrayUtil_equalsWithCharArray_withInt_withCharArray_withInt_withInt_(IOSCharArray *left, jint offsetLeft, IOSCharArray *right, jint offsetRight, jint length) {
-  OrgApacheLuceneUtilArrayUtil_initialize();
-  if ((offsetLeft + length <= ((IOSCharArray *) nil_chk(left))->size_) && (offsetRight + length <= ((IOSCharArray *) nil_chk(right))->size_)) {
-    for (jint i = 0; i < length; i++) {
-      if (IOSCharArray_Get(left, offsetLeft + i) != IOSCharArray_Get(right, offsetRight + i)) {
-        return NO;
-      }
-    }
-    return YES;
-  }
-  return NO;
-}
-
-jboolean OrgApacheLuceneUtilArrayUtil_equalsWithByteArray_withInt_withByteArray_withInt_withInt_(IOSByteArray *left, jint offsetLeft, IOSByteArray *right, jint offsetRight, jint length) {
-  OrgApacheLuceneUtilArrayUtil_initialize();
-  if ((offsetLeft + length <= ((IOSByteArray *) nil_chk(left))->size_) && (offsetRight + length <= ((IOSByteArray *) nil_chk(right))->size_)) {
-    for (jint i = 0; i < length; i++) {
-      if (IOSByteArray_Get(left, offsetLeft + i) != IOSByteArray_Get(right, offsetRight + i)) {
-        return NO;
-      }
-    }
-    return YES;
-  }
-  return NO;
-}
-
-jboolean OrgApacheLuceneUtilArrayUtil_equalsWithIntArray_withInt_withIntArray_withInt_withInt_(IOSIntArray *left, jint offsetLeft, IOSIntArray *right, jint offsetRight, jint length) {
-  OrgApacheLuceneUtilArrayUtil_initialize();
-  if ((offsetLeft + length <= ((IOSIntArray *) nil_chk(left))->size_) && (offsetRight + length <= ((IOSIntArray *) nil_chk(right))->size_)) {
-    for (jint i = 0; i < length; i++) {
-      if (IOSIntArray_Get(left, offsetLeft + i) != IOSIntArray_Get(right, offsetRight + i)) {
-        return NO;
-      }
-    }
-    return YES;
-  }
-  return NO;
-}
-
-IOSIntArray *OrgApacheLuceneUtilArrayUtil_toIntArrayWithJavaUtilCollection_(id<JavaUtilCollection> ints) {
-  OrgApacheLuceneUtilArrayUtil_initialize();
-  IOSIntArray *result = [IOSIntArray arrayWithLength:[((id<JavaUtilCollection>) nil_chk(ints)) size]];
-  jint upto = 0;
-  for (JavaLangInteger *boxed__ in ints) {
-    jint v = [((JavaLangInteger *) nil_chk(boxed__)) intValue];
-    *IOSIntArray_GetRef(result, upto++) = v;
-  }
-  JreAssert((upto == result->size_), (@"org/apache/lucene/util/ArrayUtil.java:619 condition failed: assert upto == result.length;"));
-  return result;
 }
 
 id<JavaUtilComparator> OrgApacheLuceneUtilArrayUtil_naturalComparator() {
@@ -886,20 +360,10 @@ void OrgApacheLuceneUtilArrayUtil_introSortWithNSObjectArray_withInt_withInt_wit
   [((OrgApacheLuceneUtilArrayIntroSorter *) [new_OrgApacheLuceneUtilArrayIntroSorter_initWithNSObjectArray_withJavaUtilComparator_(a, comp) autorelease]) sortWithInt:fromIndex withInt:toIndex];
 }
 
-void OrgApacheLuceneUtilArrayUtil_introSortWithNSObjectArray_withJavaUtilComparator_(IOSObjectArray *a, id<JavaUtilComparator> comp) {
-  OrgApacheLuceneUtilArrayUtil_initialize();
-  OrgApacheLuceneUtilArrayUtil_introSortWithNSObjectArray_withInt_withInt_withJavaUtilComparator_(a, 0, ((IOSObjectArray *) nil_chk(a))->size_, comp);
-}
-
 void OrgApacheLuceneUtilArrayUtil_introSortWithJavaLangComparableArray_withInt_withInt_(IOSObjectArray *a, jint fromIndex, jint toIndex) {
   OrgApacheLuceneUtilArrayUtil_initialize();
   if (toIndex - fromIndex <= 1) return;
   OrgApacheLuceneUtilArrayUtil_introSortWithNSObjectArray_withInt_withInt_withJavaUtilComparator_(a, fromIndex, toIndex, OrgApacheLuceneUtilArrayUtil_naturalComparator());
-}
-
-void OrgApacheLuceneUtilArrayUtil_introSortWithJavaLangComparableArray_(IOSObjectArray *a) {
-  OrgApacheLuceneUtilArrayUtil_initialize();
-  OrgApacheLuceneUtilArrayUtil_introSortWithJavaLangComparableArray_withInt_withInt_(a, 0, ((IOSObjectArray *) nil_chk(a))->size_);
 }
 
 void OrgApacheLuceneUtilArrayUtil_timSortWithNSObjectArray_withInt_withInt_withJavaUtilComparator_(IOSObjectArray *a, jint fromIndex, jint toIndex, id<JavaUtilComparator> comp) {

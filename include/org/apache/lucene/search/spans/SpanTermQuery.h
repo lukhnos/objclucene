@@ -35,17 +35,12 @@
 
 - (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
 
-- (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-             withOrgApacheLuceneIndexTermContext:(OrgApacheLuceneIndexTermContext *)context;
-
 - (OrgApacheLuceneSearchSpansSpanWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                                  withBoolean:(jboolean)needsScores;
 
 - (jboolean)isEqual:(id)obj;
 
 - (NSString *)getField;
-
-- (OrgApacheLuceneIndexTerm *)getTerm;
 
 - (NSUInteger)hash;
 
@@ -61,10 +56,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpansSpanTermQuery, termContext_, OrgAp
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansSpanTermQuery_initWithOrgApacheLuceneIndexTerm_(OrgApacheLuceneSearchSpansSpanTermQuery *self, OrgApacheLuceneIndexTerm *term);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanTermQuery *new_OrgApacheLuceneSearchSpansSpanTermQuery_initWithOrgApacheLuceneIndexTerm_(OrgApacheLuceneIndexTerm *term) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansSpanTermQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneIndexTermContext_(OrgApacheLuceneSearchSpansSpanTermQuery *self, OrgApacheLuceneIndexTerm *term, OrgApacheLuceneIndexTermContext *context);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanTermQuery *new_OrgApacheLuceneSearchSpansSpanTermQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneIndexTermContext_(OrgApacheLuceneIndexTerm *term, OrgApacheLuceneIndexTermContext *context) NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanTermQuery)
 

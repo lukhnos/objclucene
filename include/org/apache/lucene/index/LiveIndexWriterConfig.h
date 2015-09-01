@@ -88,17 +88,7 @@
 
 - (jlong)getWriteLockTimeout;
 
-- (OrgApacheLuceneIndexLiveIndexWriterConfig *)setMaxBufferedDeleteTermsWithInt:(jint)maxBufferedDeleteTerms;
-
-- (OrgApacheLuceneIndexLiveIndexWriterConfig *)setMaxBufferedDocsWithInt:(jint)maxBufferedDocs;
-
-- (OrgApacheLuceneIndexLiveIndexWriterConfig *)setMergedSegmentWarmerWithOrgApacheLuceneIndexIndexWriter_IndexReaderWarmer:(OrgApacheLuceneIndexIndexWriter_IndexReaderWarmer *)mergeSegmentWarmer;
-
 - (OrgApacheLuceneIndexLiveIndexWriterConfig *)setMergePolicyWithOrgApacheLuceneIndexMergePolicy:(OrgApacheLuceneIndexMergePolicy *)mergePolicy;
-
-- (OrgApacheLuceneIndexLiveIndexWriterConfig *)setRAMBufferSizeMBWithDouble:(jdouble)ramBufferSizeMB;
-
-- (OrgApacheLuceneIndexLiveIndexWriterConfig *)setUseCompoundFileWithBoolean:(jboolean)useCompoundFile;
 
 - (NSString *)description;
 

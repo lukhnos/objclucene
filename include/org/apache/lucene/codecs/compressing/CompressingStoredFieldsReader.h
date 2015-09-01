@@ -30,7 +30,6 @@
 @class OrgApacheLuceneStoreDirectory;
 @class OrgApacheLuceneStoreIOContext;
 @class OrgApacheLuceneStoreIndexInput;
-@protocol JavaUtilCollection;
 
 @interface OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader : OrgApacheLuceneCodecsStoredFieldsReader
 
@@ -49,8 +48,6 @@
 - (OrgApacheLuceneCodecsStoredFieldsReader *)clone;
 
 - (void)close;
-
-- (id<JavaUtilCollection>)getChildResources;
 
 - (OrgApacheLuceneCodecsStoredFieldsReader *)getMergeInstance;
 

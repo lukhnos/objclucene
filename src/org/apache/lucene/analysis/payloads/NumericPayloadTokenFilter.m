@@ -3,93 +3,35 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/payloads/NumericPayloadTokenFilter.java
 //
 
-#include "IOSClass.h"
-#include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
-#include "java/lang/IllegalArgumentException.h"
-#include "org/apache/lucene/analysis/TokenFilter.h"
-#include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/payloads/NumericPayloadTokenFilter.h"
-#include "org/apache/lucene/analysis/payloads/PayloadHelper.h"
-#include "org/apache/lucene/analysis/tokenattributes/PayloadAttribute.h"
-#include "org/apache/lucene/analysis/tokenattributes/TypeAttribute.h"
-#include "org/apache/lucene/util/AttributeSource.h"
-#include "org/apache/lucene/util/BytesRef.h"
 
-@interface OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter () {
- @public
-  NSString *typeMatch_;
-  OrgApacheLuceneUtilBytesRef *thePayload_;
-  id<OrgApacheLuceneAnalysisTokenattributesPayloadAttribute> payloadAtt_;
-  id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute> typeAtt_;
-}
-
-@end
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter, typeMatch_, NSString *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter, thePayload_, OrgApacheLuceneUtilBytesRef *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter, payloadAtt_, id<OrgApacheLuceneAnalysisTokenattributesPayloadAttribute>)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter, typeAtt_, id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>)
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-                                                 withFloat:(jfloat)payload
-                                              withNSString:(NSString *)typeMatch {
-  OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withFloat_withNSString_(self, input, payload, typeMatch);
+- (instancetype)init {
+  OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter_init(self);
   return self;
-}
-
-- (jboolean)incrementToken {
-  if ([((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
-    if ([((NSString *) nil_chk([((id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>) nil_chk(typeAtt_)) type])) isEqual:typeMatch_]) [((id<OrgApacheLuceneAnalysisTokenattributesPayloadAttribute>) nil_chk(payloadAtt_)) setPayloadWithOrgApacheLuceneUtilBytesRef:thePayload_];
-    return YES;
-  }
-  else {
-    return NO;
-  }
-}
-
-- (void)dealloc {
-  RELEASE_(typeMatch_);
-  RELEASE_(thePayload_);
-  RELEASE_(payloadAtt_);
-  RELEASE_(typeAtt_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withFloat:withNSString:", "NumericPayloadTokenFilter", NULL, 0x1, NULL, NULL },
-    { "incrementToken", NULL, "Z", 0x11, "Ljava.io.IOException;", NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "typeMatch_", NULL, 0x2, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "thePayload_", NULL, 0x2, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "payloadAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.PayloadAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "typeAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.TypeAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter = { 2, "NumericPayloadTokenFilter", "org.apache.lucene.analysis.payloads", NULL, 0x1, 2, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter = { 2, "NumericPayloadTokenFilter", "org.apache.lucene.analysis.payloads", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter;
 }
 
 @end
 
-void OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withFloat_withNSString_(OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter *self, OrgApacheLuceneAnalysisTokenStream *input, jfloat payload, NSString *typeMatch) {
-  OrgApacheLuceneAnalysisTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, input);
-  JreStrongAssign(&self->payloadAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPayloadAttribute_class_()]);
-  JreStrongAssign(&self->typeAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesTypeAttribute_class_()]);
-  if (typeMatch == nil) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"typeMatch cannot be null") autorelease];
-  }
-  JreStrongAssignAndConsume(&self->thePayload_, new_OrgApacheLuceneUtilBytesRef_initWithByteArray_(OrgApacheLuceneAnalysisPayloadsPayloadHelper_encodeFloatWithFloat_(payload)));
-  JreStrongAssign(&self->typeMatch_, typeMatch);
+void OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter_init(OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter *new_OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withFloat_withNSString_(OrgApacheLuceneAnalysisTokenStream *input, jfloat payload, NSString *typeMatch) {
+OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter *new_OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter_init() {
   OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter *self = [OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter alloc];
-  OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withFloat_withNSString_(self, input, payload, typeMatch);
+  OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter_init(self);
   return self;
 }
 

@@ -19,10 +19,7 @@
 @class JavaLangInteger;
 @class JavaUtilConcurrentAtomicAtomicInteger;
 @class JavaUtilConcurrentAtomicAtomicLong;
-@class OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate;
-@class OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate;
 @class OrgApacheLuceneIndexTerm;
-@class OrgApacheLuceneSearchQuery;
 @protocol JavaUtilList;
 @protocol JavaUtilMap;
 
@@ -44,16 +41,7 @@
 
 - (instancetype)init;
 
-- (void)addBinaryUpdateWithOrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate:(OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate *)update
-                                                                             withInt:(jint)docIDUpto;
-
 - (void)addDocIDWithInt:(jint)docID;
-
-- (void)addNumericUpdateWithOrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate:(OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate *)update
-                                                                               withInt:(jint)docIDUpto;
-
-- (void)addQueryWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-                                       withInt:(jint)docIDUpto;
 
 - (void)addTermWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
                                     withInt:(jint)docIDUpto;

@@ -20,29 +20,19 @@
 #define OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter_INCLUDE 1
 #include "org/apache/lucene/analysis/util/Lucene43FilteringTokenFilter.h"
 
-@class OrgApacheLuceneAnalysisTokenStream;
-@protocol JavaUtilSet;
-
 @interface OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter : OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter
 
 #pragma mark Public
 
-- (instancetype)initWithBoolean:(jboolean)enablePositionIncrements
-withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-                withJavaUtilSet:(id<JavaUtilSet>)stopTypes
-                    withBoolean:(jboolean)useWhiteList;
-
-#pragma mark Protected
-
-- (jboolean)accept;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter_initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_withJavaUtilSet_withBoolean_(OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter *self, jboolean enablePositionIncrements, OrgApacheLuceneAnalysisTokenStream *input, id<JavaUtilSet> stopTypes, jboolean useWhiteList);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter_init(OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter *new_OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter_initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_withJavaUtilSet_withBoolean_(jboolean enablePositionIncrements, OrgApacheLuceneAnalysisTokenStream *input, id<JavaUtilSet> stopTypes, jboolean useWhiteList) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter *new_OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCoreLucene43TypeTokenFilter)
 

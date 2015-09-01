@@ -20,34 +20,19 @@
 #define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
-@class JavaUtilRegexPattern;
-@class OrgApacheLuceneAnalysisPatternPatternReplaceFilter;
-@class OrgApacheLuceneAnalysisTokenStream;
-@protocol JavaUtilMap;
-
-@interface OrgApacheLuceneAnalysisPatternPatternReplaceFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory {
- @public
-  JavaUtilRegexPattern *pattern_;
-  NSString *replacement_;
-  jboolean replaceAll_;
-}
+@interface OrgApacheLuceneAnalysisPatternPatternReplaceFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
-
-- (OrgApacheLuceneAnalysisPatternPatternReplaceFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisPatternPatternReplaceFilterFactory)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPatternPatternReplaceFilterFactory, pattern_, JavaUtilRegexPattern *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPatternPatternReplaceFilterFactory, replacement_, NSString *)
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPatternPatternReplaceFilterFactory_init(OrgApacheLuceneAnalysisPatternPatternReplaceFilterFactory *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPatternPatternReplaceFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisPatternPatternReplaceFilterFactory *self, id<JavaUtilMap> args);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisPatternPatternReplaceFilterFactory *new_OrgApacheLuceneAnalysisPatternPatternReplaceFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPatternPatternReplaceFilterFactory *new_OrgApacheLuceneAnalysisPatternPatternReplaceFilterFactory_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPatternPatternReplaceFilterFactory)
 

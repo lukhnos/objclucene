@@ -3,15 +3,10 @@
 //  source: ./core/src/java/org/apache/lucene/search/similarities/LambdaTTF.java
 //
 
-#include "IOSClass.h"
-#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "org/apache/lucene/search/Explanation.h"
-#include "org/apache/lucene/search/similarities/BasicStats.h"
-#include "org/apache/lucene/search/similarities/Lambda.h"
 #include "org/apache/lucene/search/similarities/LambdaTTF.h"
 
-__attribute__((unused)) static jfloat OrgApacheLuceneSearchSimilaritiesLambdaTTF_lambdaWithOrgApacheLuceneSearchSimilaritiesBasicStats_(OrgApacheLuceneSearchSimilaritiesLambdaTTF *self, OrgApacheLuceneSearchSimilaritiesBasicStats *stats);
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneSearchSimilaritiesLambdaTTF
 
@@ -20,43 +15,24 @@ __attribute__((unused)) static jfloat OrgApacheLuceneSearchSimilaritiesLambdaTTF
   return self;
 }
 
-- (jfloat)lambdaWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats {
-  return OrgApacheLuceneSearchSimilaritiesLambdaTTF_lambdaWithOrgApacheLuceneSearchSimilaritiesBasicStats_(self, stats);
-}
-
-- (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats {
-  return OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_(OrgApacheLuceneSearchSimilaritiesLambdaTTF_lambdaWithOrgApacheLuceneSearchSimilaritiesBasicStats_(self, stats), JreStrcat("$$", [[self getClass] getSimpleName], @", computed from: "), [IOSObjectArray arrayWithObjects:(id[]){ OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_([((OrgApacheLuceneSearchSimilaritiesBasicStats *) nil_chk(stats)) getTotalTermFreq], @"totalTermFreq", [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchExplanation_class_()]), OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_([stats getNumberOfDocuments], @"numberOfDocuments", [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchExplanation_class_()]) } count:2 type:OrgApacheLuceneSearchExplanation_class_()]);
-}
-
-- (NSString *)description {
-  return @"L";
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", "LambdaTTF", NULL, 0x1, NULL, NULL },
-    { "lambdaWithOrgApacheLuceneSearchSimilaritiesBasicStats:", "lambda", "F", 0x11, NULL, NULL },
-    { "explainWithOrgApacheLuceneSearchSimilaritiesBasicStats:", "explain", "Lorg.apache.lucene.search.Explanation;", 0x11, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesLambdaTTF = { 2, "LambdaTTF", "org.apache.lucene.search.similarities", NULL, 0x1, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesLambdaTTF = { 2, "LambdaTTF", "org.apache.lucene.search.similarities", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchSimilaritiesLambdaTTF;
 }
 
 @end
 
 void OrgApacheLuceneSearchSimilaritiesLambdaTTF_init(OrgApacheLuceneSearchSimilaritiesLambdaTTF *self) {
-  OrgApacheLuceneSearchSimilaritiesLambda_init(self);
+  NSObject_init(self);
 }
 
 OrgApacheLuceneSearchSimilaritiesLambdaTTF *new_OrgApacheLuceneSearchSimilaritiesLambdaTTF_init() {
   OrgApacheLuceneSearchSimilaritiesLambdaTTF *self = [OrgApacheLuceneSearchSimilaritiesLambdaTTF alloc];
   OrgApacheLuceneSearchSimilaritiesLambdaTTF_init(self);
   return self;
-}
-
-jfloat OrgApacheLuceneSearchSimilaritiesLambdaTTF_lambdaWithOrgApacheLuceneSearchSimilaritiesBasicStats_(OrgApacheLuceneSearchSimilaritiesLambdaTTF *self, OrgApacheLuceneSearchSimilaritiesBasicStats *stats) {
-  return ([((OrgApacheLuceneSearchSimilaritiesBasicStats *) nil_chk(stats)) getTotalTermFreq] + 1.0f) / ([stats getNumberOfDocuments] + 1.0f);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSimilaritiesLambdaTTF)

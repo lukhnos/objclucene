@@ -20,32 +20,19 @@
 #define OrgApacheLuceneSearchRescorer_INCLUDE 1
 #include "org/apache/lucene/search/Rescorer.h"
 
-@class OrgApacheLuceneSearchExplanation;
-@class OrgApacheLuceneSearchIndexSearcher;
-@class OrgApacheLuceneSearchSort;
-@class OrgApacheLuceneSearchTopDocs;
-
 @interface OrgApacheLuceneSearchSortRescorer : OrgApacheLuceneSearchRescorer
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)sort;
-
-- (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
-                                               withOrgApacheLuceneSearchExplanation:(OrgApacheLuceneSearchExplanation *)firstPassExplanation
-                                                                            withInt:(jint)docID;
-
-- (OrgApacheLuceneSearchTopDocs *)rescoreWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
-                                               withOrgApacheLuceneSearchTopDocs:(OrgApacheLuceneSearchTopDocs *)firstPassTopDocs
-                                                                        withInt:(jint)topN;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSortRescorer)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSortRescorer_initWithOrgApacheLuceneSearchSort_(OrgApacheLuceneSearchSortRescorer *self, OrgApacheLuceneSearchSort *sort);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSortRescorer_init(OrgApacheLuceneSearchSortRescorer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSortRescorer *new_OrgApacheLuceneSearchSortRescorer_initWithOrgApacheLuceneSearchSort_(OrgApacheLuceneSearchSort *sort) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSortRescorer *new_OrgApacheLuceneSearchSortRescorer_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortRescorer)
 

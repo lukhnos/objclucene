@@ -17,9 +17,7 @@
 #define _OrgApacheLuceneQueriesCustomScoreProvider_
 
 @class IOSFloatArray;
-@class IOSObjectArray;
 @class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneSearchExplanation;
 
 @interface OrgApacheLuceneQueriesCustomScoreProvider : NSObject {
  @public
@@ -29,14 +27,6 @@
 #pragma mark Public
 
 - (instancetype)initWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
-
-- (OrgApacheLuceneSearchExplanation *)customExplainWithInt:(jint)doc
-                      withOrgApacheLuceneSearchExplanation:(OrgApacheLuceneSearchExplanation *)subQueryExpl
-                      withOrgApacheLuceneSearchExplanation:(OrgApacheLuceneSearchExplanation *)valSrcExpl;
-
-- (OrgApacheLuceneSearchExplanation *)customExplainWithInt:(jint)doc
-                      withOrgApacheLuceneSearchExplanation:(OrgApacheLuceneSearchExplanation *)subQueryExpl
-                 withOrgApacheLuceneSearchExplanationArray:(IOSObjectArray *)valSrcExpls;
 
 - (jfloat)customScoreWithInt:(jint)doc
                    withFloat:(jfloat)subQueryScore

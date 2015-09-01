@@ -7,16 +7,6 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/analysis/en/KStemData8.h"
 
-@interface OrgApacheLuceneAnalysisEnKStemData8 ()
-
-- (instancetype)init;
-
-@end
-
-__attribute__((unused)) static void OrgApacheLuceneAnalysisEnKStemData8_init(OrgApacheLuceneAnalysisEnKStemData8 *self);
-
-__attribute__((unused)) static OrgApacheLuceneAnalysisEnKStemData8 *new_OrgApacheLuceneAnalysisEnKStemData8_init() NS_RETURNS_RETAINED;
-
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisEnKStemData8)
 
 IOSObjectArray *OrgApacheLuceneAnalysisEnKStemData8_data_;
@@ -37,7 +27,7 @@ IOSObjectArray *OrgApacheLuceneAnalysisEnKStemData8_data_;
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", "KStemData8", NULL, 0x2, NULL, NULL },
+    { "init", NULL, NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "data_", NULL, 0x8, "[Ljava.lang.String;", &OrgApacheLuceneAnalysisEnKStemData8_data_, NULL, .constantValue.asLong = 0 },

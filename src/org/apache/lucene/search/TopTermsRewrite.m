@@ -108,10 +108,6 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchTopTermsRewrite)
   return self;
 }
 
-- (jint)getSize {
-  return size_;
-}
-
 - (jint)getMaxSize {
   // can't call an abstract method
   [self doesNotRecognizeSelector:_cmd];
@@ -162,7 +158,6 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchTopTermsRewrite)
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithInt:", "TopTermsRewrite", NULL, 0x1, NULL, NULL },
-    { "getSize", NULL, "I", 0x1, NULL, NULL },
     { "getMaxSize", NULL, "I", 0x404, NULL, NULL },
     { "rewriteWithOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneSearchMultiTermQuery:", "rewrite", "Lorg.apache.lucene.search.Query;", 0x11, "Ljava.io.IOException;", NULL },
     { "hash", "hashCode", "I", 0x1, NULL, NULL },
@@ -174,7 +169,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchTopTermsRewrite)
   };
   static const char *superclass_type_args[] = {"TB;"};
   static const char *inner_classes[] = {"Lorg.apache.lucene.search.TopTermsRewrite$ScoreTerm;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchTopTermsRewrite = { 2, "TopTermsRewrite", "org.apache.lucene.search", NULL, 0x401, 6, methods, 2, fields, 1, superclass_type_args, 1, inner_classes, NULL, "<B:Ljava/lang/Object;>Lorg/apache/lucene/search/TermCollectingRewrite<TB;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchTopTermsRewrite = { 2, "TopTermsRewrite", "org.apache.lucene.search", NULL, 0x401, 5, methods, 2, fields, 1, superclass_type_args, 1, inner_classes, NULL, "<B:Ljava/lang/Object;>Lorg/apache/lucene/search/TermCollectingRewrite<TB;>;" };
   return &_OrgApacheLuceneSearchTopTermsRewrite;
 }
 

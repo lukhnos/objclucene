@@ -20,22 +20,11 @@
 #define OrgApacheLuceneSearchSimilaritiesAfterEffect_INCLUDE 1
 #include "org/apache/lucene/search/similarities/AfterEffect.h"
 
-@class OrgApacheLuceneSearchExplanation;
-@class OrgApacheLuceneSearchSimilaritiesBasicStats;
-
 @interface OrgApacheLuceneSearchSimilaritiesAfterEffectB : OrgApacheLuceneSearchSimilaritiesAfterEffect
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
-                                                                                   withFloat:(jfloat)tfn;
-
-- (jfloat)scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
-                                                     withFloat:(jfloat)tfn;
-
-- (NSString *)description;
 
 @end
 

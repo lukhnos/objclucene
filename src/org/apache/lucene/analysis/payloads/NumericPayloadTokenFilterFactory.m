@@ -4,67 +4,34 @@
 //
 
 #include "J2ObjC_source.h"
-#include "java/lang/IllegalArgumentException.h"
-#include "java/util/Map.h"
-#include "org/apache/lucene/analysis/TokenStream.h"
-#include "org/apache/lucene/analysis/payloads/NumericPayloadTokenFilter.h"
 #include "org/apache/lucene/analysis/payloads/NumericPayloadTokenFilterFactory.h"
-#include "org/apache/lucene/analysis/util/AbstractAnalysisFactory.h"
-#include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
-@interface OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilterFactory () {
- @public
-  jfloat payload_;
-  NSString *typeMatch_;
-}
-
-@end
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilterFactory, typeMatch_, NSString *)
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilterFactory
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args {
-  OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilterFactory_initWithJavaUtilMap_(self, args);
+- (instancetype)init {
+  OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilterFactory_init(self);
   return self;
-}
-
-- (OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  return [new_OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withFloat_withNSString_(input, payload_, typeMatch_) autorelease];
-}
-
-- (void)dealloc {
-  RELEASE_(typeMatch_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "NumericPayloadTokenFilterFactory", NULL, 0x1, NULL, NULL },
-    { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.payloads.NumericPayloadTokenFilter;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "payload_", NULL, 0x12, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "typeMatch_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilterFactory = { 2, "NumericPayloadTokenFilterFactory", "org.apache.lucene.analysis.payloads", NULL, 0x1, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilterFactory = { 2, "NumericPayloadTokenFilterFactory", "org.apache.lucene.analysis.payloads", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilterFactory;
 }
 
 @end
 
-void OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilterFactory *self, id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
-  self->payload_ = [self requireFloatWithJavaUtilMap:args withNSString:@"payload"];
-  JreStrongAssign(&self->typeMatch_, [self requireWithJavaUtilMap:args withNSString:@"typeMatch"]);
-  if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
-  }
+void OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilterFactory_init(OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilterFactory *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilterFactory *new_OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilterFactory *new_OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilterFactory_init() {
   OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilterFactory *self = [OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilterFactory alloc];
-  OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilterFactory_initWithJavaUtilMap_(self, args);
+  OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilterFactory_init(self);
   return self;
 }
 

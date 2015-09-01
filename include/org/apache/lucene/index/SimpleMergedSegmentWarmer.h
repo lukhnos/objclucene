@@ -20,24 +20,19 @@
 #define OrgApacheLuceneIndexIndexWriter_IndexReaderWarmer_INCLUDE 1
 #include "org/apache/lucene/index/IndexWriter.h"
 
-@class OrgApacheLuceneIndexLeafReader;
-@class OrgApacheLuceneUtilInfoStream;
-
 @interface OrgApacheLuceneIndexSimpleMergedSegmentWarmer : OrgApacheLuceneIndexIndexWriter_IndexReaderWarmer
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneUtilInfoStream:(OrgApacheLuceneUtilInfoStream *)infoStream;
-
-- (void)warmWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexSimpleMergedSegmentWarmer)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexSimpleMergedSegmentWarmer_initWithOrgApacheLuceneUtilInfoStream_(OrgApacheLuceneIndexSimpleMergedSegmentWarmer *self, OrgApacheLuceneUtilInfoStream *infoStream);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexSimpleMergedSegmentWarmer_init(OrgApacheLuceneIndexSimpleMergedSegmentWarmer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexSimpleMergedSegmentWarmer *new_OrgApacheLuceneIndexSimpleMergedSegmentWarmer_initWithOrgApacheLuceneUtilInfoStream_(OrgApacheLuceneUtilInfoStream *infoStream) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexSimpleMergedSegmentWarmer *new_OrgApacheLuceneIndexSimpleMergedSegmentWarmer_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSimpleMergedSegmentWarmer)
 

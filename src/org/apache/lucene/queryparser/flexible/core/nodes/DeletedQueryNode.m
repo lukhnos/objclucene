@@ -3,14 +3,10 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/core/nodes/DeletedQueryNode.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/lang/CharSequence.h"
-#include "java/lang/CloneNotSupportedException.h"
 #include "org/apache/lucene/queryparser/flexible/core/nodes/DeletedQueryNode.h"
-#include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNode.h"
-#include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNodeImpl.h"
-#include "org/apache/lucene/queryparser/flexible/core/parser/EscapeQuerySyntax.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode
 
@@ -19,34 +15,18 @@
   return self;
 }
 
-- (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escaper {
-  return @"[DELETEDCHILD]";
-}
-
-- (NSString *)description {
-  return @"<deleted/>";
-}
-
-- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)cloneTree {
-  OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode *clone = (OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode *) check_class_cast([super cloneTree], [OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode class]);
-  return clone;
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", "DeletedQueryNode", NULL, 0x1, NULL, NULL },
-    { "toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:", "toQueryString", "Ljava.lang.CharSequence;", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "cloneTree", NULL, "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x1, "Ljava.lang.CloneNotSupportedException;", NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode = { 2, "DeletedQueryNode", "org.apache.lucene.queryparser.flexible.core.nodes", NULL, 0x1, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode = { 2, "DeletedQueryNode", "org.apache.lucene.queryparser.flexible.core.nodes", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode;
 }
 
 @end
 
 void OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode_init(OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode *self) {
-  OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_init(self);
+  NSObject_init(self);
 }
 
 OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode_init() {

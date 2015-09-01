@@ -20,22 +20,11 @@
 #define OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder_INCLUDE 1
 #include "org/apache/lucene/queryparser/xml/builders/SpanQueryBuilder.h"
 
-@class OrgApacheLuceneSearchQuery;
-@class OrgApacheLuceneSearchSpansSpanQuery;
-@protocol OrgW3cDomElement;
-
 @interface OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilderFactory : NSObject < OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder >
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (void)addBuilderWithNSString:(NSString *)nodeName
-withOrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder:(id<OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder>)builder;
-
-- (OrgApacheLuceneSearchQuery *)getQueryWithOrgW3cDomElement:(id<OrgW3cDomElement>)e;
-
-- (OrgApacheLuceneSearchSpansSpanQuery *)getSpanQueryWithOrgW3cDomElement:(id<OrgW3cDomElement>)e;
 
 @end
 

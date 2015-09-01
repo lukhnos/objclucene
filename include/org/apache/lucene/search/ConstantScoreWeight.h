@@ -20,17 +20,12 @@
 #define OrgApacheLuceneSearchWeight_INCLUDE 1
 #include "org/apache/lucene/search/Weight.h"
 
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneSearchExplanation;
 @class OrgApacheLuceneSearchQuery;
 @protocol JavaUtilSet;
 
 @interface OrgApacheLuceneSearchConstantScoreWeight : OrgApacheLuceneSearchWeight
 
 #pragma mark Public
-
-- (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-                                                                               withInt:(jint)doc;
 
 - (void)extractTermsWithJavaUtilSet:(id<JavaUtilSet>)terms;
 

@@ -16,92 +16,15 @@
 #if !defined (_OrgApacheLuceneSearchSpellDirectSpellChecker_) && (OrgApacheLuceneSearchSpellDirectSpellChecker_INCLUDE_ALL || OrgApacheLuceneSearchSpellDirectSpellChecker_INCLUDE)
 #define _OrgApacheLuceneSearchSpellDirectSpellChecker_
 
-@class IOSObjectArray;
-@class OrgApacheLuceneIndexIndexReader;
-@class OrgApacheLuceneIndexTerm;
-@class OrgApacheLuceneSearchSpellSuggestModeEnum;
-@class OrgApacheLuceneUtilCharsRefBuilder;
-@protocol JavaUtilCollection;
-@protocol JavaUtilComparator;
-@protocol OrgApacheLuceneSearchSpellStringDistance;
-
 @interface OrgApacheLuceneSearchSpellDirectSpellChecker : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
-- (jfloat)getAccuracy;
-
-- (id<JavaUtilComparator>)getComparator;
-
-- (id<OrgApacheLuceneSearchSpellStringDistance>)getDistance;
-
-- (jboolean)getLowerCaseTerms;
-
-- (jint)getMaxEdits;
-
-- (jint)getMaxInspections;
-
-- (jfloat)getMaxQueryFrequency;
-
-- (jint)getMinPrefix;
-
-- (jint)getMinQueryLength;
-
-- (jfloat)getThresholdFrequency;
-
-- (void)setAccuracyWithFloat:(jfloat)accuracy;
-
-- (void)setComparatorWithJavaUtilComparator:(id<JavaUtilComparator>)comparator;
-
-- (void)setDistanceWithOrgApacheLuceneSearchSpellStringDistance:(id<OrgApacheLuceneSearchSpellStringDistance>)distance;
-
-- (void)setLowerCaseTermsWithBoolean:(jboolean)lowerCaseTerms;
-
-- (void)setMaxEditsWithInt:(jint)maxEdits;
-
-- (void)setMaxInspectionsWithInt:(jint)maxInspections;
-
-- (void)setMaxQueryFrequencyWithFloat:(jfloat)maxQueryFrequency;
-
-- (void)setMinPrefixWithInt:(jint)minPrefix;
-
-- (void)setMinQueryLengthWithInt:(jint)minQueryLength;
-
-- (void)setThresholdFrequencyWithFloat:(jfloat)thresholdFrequency;
-
-- (IOSObjectArray *)suggestSimilarWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-                                                       withInt:(jint)numSug
-                           withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)ir;
-
-- (IOSObjectArray *)suggestSimilarWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-                                                       withInt:(jint)numSug
-                           withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)ir
-                 withOrgApacheLuceneSearchSpellSuggestModeEnum:(OrgApacheLuceneSearchSpellSuggestModeEnum *)suggestMode;
-
-- (IOSObjectArray *)suggestSimilarWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-                                                       withInt:(jint)numSug
-                           withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)ir
-                 withOrgApacheLuceneSearchSpellSuggestModeEnum:(OrgApacheLuceneSearchSpellSuggestModeEnum *)suggestMode
-                                                     withFloat:(jfloat)accuracy;
-
-#pragma mark Protected
-
-- (id<JavaUtilCollection>)suggestSimilarWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-                                                             withInt:(jint)numSug
-                                 withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)ir
-                                                             withInt:(jint)docfreq
-                                                             withInt:(jint)editDistance
-                                                           withFloat:(jfloat)accuracy
-                              withOrgApacheLuceneUtilCharsRefBuilder:(OrgApacheLuceneUtilCharsRefBuilder *)spare;
-
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneSearchSpellDirectSpellChecker)
-
-FOUNDATION_EXPORT id<OrgApacheLuceneSearchSpellStringDistance> OrgApacheLuceneSearchSpellDirectSpellChecker_INTERNAL_LEVENSHTEIN_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchSpellDirectSpellChecker, INTERNAL_LEVENSHTEIN_, id<OrgApacheLuceneSearchSpellStringDistance>)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSpellDirectSpellChecker)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSpellDirectSpellChecker_init(OrgApacheLuceneSearchSpellDirectSpellChecker *self);
 
@@ -118,33 +41,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpellDirectSpellChecker)
 #define JavaLangComparable_INCLUDE 1
 #include "java/lang/Comparable.h"
 
-@class OrgApacheLuceneUtilBytesRef;
+@interface OrgApacheLuceneSearchSpellDirectSpellChecker_ScoreTerm : NSObject < JavaLangComparable >
 
-@interface OrgApacheLuceneSearchSpellDirectSpellChecker_ScoreTerm : NSObject < JavaLangComparable > {
- @public
-  OrgApacheLuceneUtilBytesRef *term_;
-  jfloat boost_;
-  jint docfreq_;
-  NSString *termAsString_;
-  jfloat score_;
-}
-
-#pragma mark Public
+#pragma mark Protected
 
 - (instancetype)init;
-
-- (jint)compareToWithId:(OrgApacheLuceneSearchSpellDirectSpellChecker_ScoreTerm *)other;
-
-- (jboolean)isEqual:(id)obj;
-
-- (NSUInteger)hash;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSpellDirectSpellChecker_ScoreTerm)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpellDirectSpellChecker_ScoreTerm, term_, OrgApacheLuceneUtilBytesRef *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpellDirectSpellChecker_ScoreTerm, termAsString_, NSString *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSpellDirectSpellChecker_ScoreTerm_init(OrgApacheLuceneSearchSpellDirectSpellChecker_ScoreTerm *self);
 

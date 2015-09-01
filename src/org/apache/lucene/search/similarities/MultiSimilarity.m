@@ -3,89 +3,36 @@
 //  source: ./core/src/java/org/apache/lucene/search/similarities/MultiSimilarity.java
 //
 
-#include "IOSClass.h"
-#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
-#include "java/util/ArrayList.h"
-#include "java/util/List.h"
-#include "org/apache/lucene/index/FieldInvertState.h"
-#include "org/apache/lucene/index/LeafReaderContext.h"
-#include "org/apache/lucene/search/CollectionStatistics.h"
-#include "org/apache/lucene/search/Explanation.h"
 #include "org/apache/lucene/search/similarities/MultiSimilarity.h"
-#include "org/apache/lucene/search/similarities/Similarity.h"
-#include "org/apache/lucene/util/BytesRef.h"
 
-@interface OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer () {
- @public
-  IOSObjectArray *subScorers_;
-}
-
-@end
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer, subScorers_, IOSObjectArray *)
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneSearchSimilaritiesMultiSimilarity
 
-- (instancetype)initWithOrgApacheLuceneSearchSimilaritiesSimilarityArray:(IOSObjectArray *)sims {
-  OrgApacheLuceneSearchSimilaritiesMultiSimilarity_initWithOrgApacheLuceneSearchSimilaritiesSimilarityArray_(self, sims);
+- (instancetype)init {
+  OrgApacheLuceneSearchSimilaritiesMultiSimilarity_init(self);
   return self;
-}
-
-- (jlong)computeNormWithOrgApacheLuceneIndexFieldInvertState:(OrgApacheLuceneIndexFieldInvertState *)state {
-  return [((OrgApacheLuceneSearchSimilaritiesSimilarity *) nil_chk(IOSObjectArray_Get(nil_chk(sims_), 0))) computeNormWithOrgApacheLuceneIndexFieldInvertState:state];
-}
-
-- (OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight *)computeWeightWithFloat:(jfloat)queryBoost
-                                    withOrgApacheLuceneSearchCollectionStatistics:(OrgApacheLuceneSearchCollectionStatistics *)collectionStats
-                                     withOrgApacheLuceneSearchTermStatisticsArray:(IOSObjectArray *)termStats {
-  IOSObjectArray *subStats = [IOSObjectArray arrayWithLength:((IOSObjectArray *) nil_chk(sims_))->size_ type:OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight_class_()];
-  for (jint i = 0; i < subStats->size_; i++) {
-    IOSObjectArray_Set(subStats, i, [((OrgApacheLuceneSearchSimilaritiesSimilarity *) nil_chk(IOSObjectArray_Get(sims_, i))) computeWeightWithFloat:queryBoost withOrgApacheLuceneSearchCollectionStatistics:collectionStats withOrgApacheLuceneSearchTermStatisticsArray:termStats]);
-  }
-  return [new_OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats_initWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeightArray_(subStats) autorelease];
-}
-
-- (OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *)simScorerWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight:(OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight *)stats
-                                                                                    withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
-  IOSObjectArray *subScorers = [IOSObjectArray arrayWithLength:((IOSObjectArray *) nil_chk(sims_))->size_ type:OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_class_()];
-  for (jint i = 0; i < subScorers->size_; i++) {
-    IOSObjectArray_Set(subScorers, i, [((OrgApacheLuceneSearchSimilaritiesSimilarity *) nil_chk(IOSObjectArray_Get(sims_, i))) simScorerWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight:IOSObjectArray_Get(nil_chk(((OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats *) nil_chk(((OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats *) check_class_cast(stats, [OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats class]))))->subStats_), i) withOrgApacheLuceneIndexLeafReaderContext:context]);
-  }
-  return [new_OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer_initWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorerArray_(subScorers) autorelease];
-}
-
-- (void)dealloc {
-  RELEASE_(sims_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchSimilaritiesSimilarityArray:", "MultiSimilarity", NULL, 0x1, NULL, NULL },
-    { "computeNormWithOrgApacheLuceneIndexFieldInvertState:", "computeNorm", "J", 0x1, NULL, NULL },
-    { "computeWeightWithFloat:withOrgApacheLuceneSearchCollectionStatistics:withOrgApacheLuceneSearchTermStatisticsArray:", "computeWeight", "Lorg.apache.lucene.search.similarities.Similarity$SimWeight;", 0x81, NULL, NULL },
-    { "simScorerWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight:withOrgApacheLuceneIndexLeafReaderContext:", "simScorer", "Lorg.apache.lucene.search.similarities.Similarity$SimScorer;", 0x1, "Ljava.io.IOException;", NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "sims_", NULL, 0x14, "[Lorg.apache.lucene.search.similarities.Similarity;", NULL, NULL, .constantValue.asLong = 0 },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.search.similarities.MultiSimilarity$MultiSimScorer;", "Lorg.apache.lucene.search.similarities.MultiSimilarity$MultiStats;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesMultiSimilarity = { 2, "MultiSimilarity", "org.apache.lucene.search.similarities", NULL, 0x1, 4, methods, 1, fields, 0, NULL, 2, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesMultiSimilarity = { 2, "MultiSimilarity", "org.apache.lucene.search.similarities", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 2, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneSearchSimilaritiesMultiSimilarity;
 }
 
 @end
 
-void OrgApacheLuceneSearchSimilaritiesMultiSimilarity_initWithOrgApacheLuceneSearchSimilaritiesSimilarityArray_(OrgApacheLuceneSearchSimilaritiesMultiSimilarity *self, IOSObjectArray *sims) {
-  OrgApacheLuceneSearchSimilaritiesSimilarity_init(self);
-  JreStrongAssign(&self->sims_, sims);
+void OrgApacheLuceneSearchSimilaritiesMultiSimilarity_init(OrgApacheLuceneSearchSimilaritiesMultiSimilarity *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneSearchSimilaritiesMultiSimilarity *new_OrgApacheLuceneSearchSimilaritiesMultiSimilarity_initWithOrgApacheLuceneSearchSimilaritiesSimilarityArray_(IOSObjectArray *sims) {
+OrgApacheLuceneSearchSimilaritiesMultiSimilarity *new_OrgApacheLuceneSearchSimilaritiesMultiSimilarity_init() {
   OrgApacheLuceneSearchSimilaritiesMultiSimilarity *self = [OrgApacheLuceneSearchSimilaritiesMultiSimilarity alloc];
-  OrgApacheLuceneSearchSimilaritiesMultiSimilarity_initWithOrgApacheLuceneSearchSimilaritiesSimilarityArray_(self, sims);
+  OrgApacheLuceneSearchSimilaritiesMultiSimilarity_init(self);
   return self;
 }
 
@@ -93,82 +40,28 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSimilaritiesMultiSimilarit
 
 @implementation OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer
 
-- (instancetype)initWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorerArray:(IOSObjectArray *)subScorers {
-  OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer_initWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorerArray_(self, subScorers);
+- (instancetype)init {
+  OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer_init(self);
   return self;
-}
-
-- (jfloat)scoreWithInt:(jint)doc
-             withFloat:(jfloat)freq {
-  jfloat sum = 0.0f;
-  {
-    IOSObjectArray *a__ = subScorers_;
-    OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
-    OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer * const *e__ = b__ + a__->size_;
-    while (b__ < e__) {
-      OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *subScorer = *b__++;
-      JrePlusAssignFloatF(&sum, [((OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *) nil_chk(subScorer)) scoreWithInt:doc withFloat:freq]);
-    }
-  }
-  return sum;
-}
-
-- (OrgApacheLuceneSearchExplanation *)explainWithInt:(jint)doc
-                withOrgApacheLuceneSearchExplanation:(OrgApacheLuceneSearchExplanation *)freq {
-  id<JavaUtilList> subs = [new_JavaUtilArrayList_init() autorelease];
-  {
-    IOSObjectArray *a__ = subScorers_;
-    OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
-    OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer * const *e__ = b__ + a__->size_;
-    while (b__ < e__) {
-      OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *subScorer = *b__++;
-      [subs addWithId:[((OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *) nil_chk(subScorer)) explainWithInt:doc withOrgApacheLuceneSearchExplanation:freq]];
-    }
-  }
-  return OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withJavaUtilCollection_([self scoreWithInt:doc withFloat:[((OrgApacheLuceneSearchExplanation *) nil_chk(freq)) getValue]], @"sum of:", subs);
-}
-
-- (jfloat)computeSlopFactorWithInt:(jint)distance {
-  return [((OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *) nil_chk(IOSObjectArray_Get(nil_chk(subScorers_), 0))) computeSlopFactorWithInt:distance];
-}
-
-- (jfloat)computePayloadFactorWithInt:(jint)doc
-                              withInt:(jint)start
-                              withInt:(jint)end
-      withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload {
-  return [((OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *) nil_chk(IOSObjectArray_Get(nil_chk(subScorers_), 0))) computePayloadFactorWithInt:doc withInt:start withInt:end withOrgApacheLuceneUtilBytesRef:payload];
-}
-
-- (void)dealloc {
-  RELEASE_(subScorers_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorerArray:", "MultiSimScorer", NULL, 0x0, NULL, NULL },
-    { "scoreWithInt:withFloat:", "score", "F", 0x1, NULL, NULL },
-    { "explainWithInt:withOrgApacheLuceneSearchExplanation:", "explain", "Lorg.apache.lucene.search.Explanation;", 0x1, NULL, NULL },
-    { "computeSlopFactorWithInt:", "computeSlopFactor", "F", 0x1, NULL, NULL },
-    { "computePayloadFactorWithInt:withInt:withInt:withOrgApacheLuceneUtilBytesRef:", "computePayloadFactor", "F", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x0, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "subScorers_", NULL, 0x12, "[Lorg.apache.lucene.search.similarities.Similarity$SimScorer;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer = { 2, "MultiSimScorer", "org.apache.lucene.search.similarities", "MultiSimilarity", 0x8, 5, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer = { 2, "MultiSimScorer", "org.apache.lucene.search.similarities", "MultiSimilarity", 0x8, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer;
 }
 
 @end
 
-void OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer_initWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorerArray_(OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer *self, IOSObjectArray *subScorers) {
-  OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_init(self);
-  JreStrongAssign(&self->subScorers_, subScorers);
+void OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer_init(OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer *new_OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer_initWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorerArray_(IOSObjectArray *subScorers) {
+OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer *new_OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer_init() {
   OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer *self = [OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer alloc];
-  OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer_initWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorerArray_(self, subScorers);
+  OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer_init(self);
   return self;
 }
 
@@ -176,66 +69,28 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSimilaritiesMultiSimilarit
 
 @implementation OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats
 
-- (instancetype)initWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeightArray:(IOSObjectArray *)subStats {
-  OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats_initWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeightArray_(self, subStats);
+- (instancetype)init {
+  OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats_init(self);
   return self;
-}
-
-- (jfloat)getValueForNormalization {
-  jfloat sum = 0.0f;
-  {
-    IOSObjectArray *a__ = subStats_;
-    OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
-    OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight * const *e__ = b__ + a__->size_;
-    while (b__ < e__) {
-      OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight *stat = *b__++;
-      JrePlusAssignFloatF(&sum, [((OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight *) nil_chk(stat)) getValueForNormalization]);
-    }
-  }
-  return sum / ((IOSObjectArray *) nil_chk(subStats_))->size_;
-}
-
-- (void)normalizeWithFloat:(jfloat)queryNorm
-                 withFloat:(jfloat)topLevelBoost {
-  {
-    IOSObjectArray *a__ = subStats_;
-    OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
-    OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight * const *e__ = b__ + a__->size_;
-    while (b__ < e__) {
-      OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight *stat = *b__++;
-      [((OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight *) nil_chk(stat)) normalizeWithFloat:queryNorm withFloat:topLevelBoost];
-    }
-  }
-}
-
-- (void)dealloc {
-  RELEASE_(subStats_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeightArray:", "MultiStats", NULL, 0x0, NULL, NULL },
-    { "getValueForNormalization", NULL, "F", 0x1, NULL, NULL },
-    { "normalizeWithFloat:withFloat:", "normalize", "V", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x0, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "subStats_", NULL, 0x10, "[Lorg.apache.lucene.search.similarities.Similarity$SimWeight;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats = { 2, "MultiStats", "org.apache.lucene.search.similarities", "MultiSimilarity", 0x8, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats = { 2, "MultiStats", "org.apache.lucene.search.similarities", "MultiSimilarity", 0x8, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats;
 }
 
 @end
 
-void OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats_initWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeightArray_(OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats *self, IOSObjectArray *subStats) {
-  OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight_init(self);
-  JreStrongAssign(&self->subStats_, subStats);
+void OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats_init(OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats *new_OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats_initWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeightArray_(IOSObjectArray *subStats) {
+OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats *new_OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats_init() {
   OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats *self = [OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats alloc];
-  OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats_initWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeightArray_(self, subStats);
+  OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats_init(self);
   return self;
 }
 

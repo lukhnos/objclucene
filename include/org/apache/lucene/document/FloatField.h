@@ -20,38 +20,19 @@
 #define OrgApacheLuceneDocumentField_INCLUDE 1
 #include "org/apache/lucene/document/Field.h"
 
-@class OrgApacheLuceneDocumentFieldType;
-@class OrgApacheLuceneDocumentField_StoreEnum;
-
 @interface OrgApacheLuceneDocumentFloatField : OrgApacheLuceneDocumentField
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)name
-                       withFloat:(jfloat)value
-withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type;
-
-- (instancetype)initWithNSString:(NSString *)name
-                       withFloat:(jfloat)value
-withOrgApacheLuceneDocumentField_StoreEnum:(OrgApacheLuceneDocumentField_StoreEnum *)stored;
+- (instancetype)init;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneDocumentFloatField)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneDocumentFloatField)
 
-FOUNDATION_EXPORT OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentFloatField_TYPE_NOT_STORED_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneDocumentFloatField, TYPE_NOT_STORED_, OrgApacheLuceneDocumentFieldType *)
+FOUNDATION_EXPORT void OrgApacheLuceneDocumentFloatField_init(OrgApacheLuceneDocumentFloatField *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentFloatField_TYPE_STORED_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneDocumentFloatField, TYPE_STORED_, OrgApacheLuceneDocumentFieldType *)
-
-FOUNDATION_EXPORT void OrgApacheLuceneDocumentFloatField_initWithNSString_withFloat_withOrgApacheLuceneDocumentField_StoreEnum_(OrgApacheLuceneDocumentFloatField *self, NSString *name, jfloat value, OrgApacheLuceneDocumentField_StoreEnum *stored);
-
-FOUNDATION_EXPORT OrgApacheLuceneDocumentFloatField *new_OrgApacheLuceneDocumentFloatField_initWithNSString_withFloat_withOrgApacheLuceneDocumentField_StoreEnum_(NSString *name, jfloat value, OrgApacheLuceneDocumentField_StoreEnum *stored) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneDocumentFloatField_initWithNSString_withFloat_withOrgApacheLuceneDocumentFieldType_(OrgApacheLuceneDocumentFloatField *self, NSString *name, jfloat value, OrgApacheLuceneDocumentFieldType *type);
-
-FOUNDATION_EXPORT OrgApacheLuceneDocumentFloatField *new_OrgApacheLuceneDocumentFloatField_initWithNSString_withFloat_withOrgApacheLuceneDocumentFieldType_(NSString *name, jfloat value, OrgApacheLuceneDocumentFieldType *type) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneDocumentFloatField *new_OrgApacheLuceneDocumentFloatField_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentFloatField)
 

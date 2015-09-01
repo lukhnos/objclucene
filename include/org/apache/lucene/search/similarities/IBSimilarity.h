@@ -20,56 +20,19 @@
 #define OrgApacheLuceneSearchSimilaritiesSimilarityBase_INCLUDE 1
 #include "org/apache/lucene/search/similarities/SimilarityBase.h"
 
-@class OrgApacheLuceneSearchSimilaritiesBasicStats;
-@class OrgApacheLuceneSearchSimilaritiesDistribution;
-@class OrgApacheLuceneSearchSimilaritiesLambda;
-@class OrgApacheLuceneSearchSimilaritiesNormalization;
-@protocol JavaUtilList;
-
-@interface OrgApacheLuceneSearchSimilaritiesIBSimilarity : OrgApacheLuceneSearchSimilaritiesSimilarityBase {
- @public
-  OrgApacheLuceneSearchSimilaritiesDistribution *distribution_;
-  OrgApacheLuceneSearchSimilaritiesLambda *lambda_;
-  OrgApacheLuceneSearchSimilaritiesNormalization *normalization_;
-}
+@interface OrgApacheLuceneSearchSimilaritiesIBSimilarity : OrgApacheLuceneSearchSimilaritiesSimilarityBase
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchSimilaritiesDistribution:(OrgApacheLuceneSearchSimilaritiesDistribution *)distribution
-                          withOrgApacheLuceneSearchSimilaritiesLambda:(OrgApacheLuceneSearchSimilaritiesLambda *)lambda
-                   withOrgApacheLuceneSearchSimilaritiesNormalization:(OrgApacheLuceneSearchSimilaritiesNormalization *)normalization;
-
-- (OrgApacheLuceneSearchSimilaritiesDistribution *)getDistribution;
-
-- (OrgApacheLuceneSearchSimilaritiesLambda *)getLambda;
-
-- (OrgApacheLuceneSearchSimilaritiesNormalization *)getNormalization;
-
-- (NSString *)description;
-
-#pragma mark Protected
-
-- (void)explainWithJavaUtilList:(id<JavaUtilList>)subs
-withOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
-                        withInt:(jint)doc
-                      withFloat:(jfloat)freq
-                      withFloat:(jfloat)docLen;
-
-- (jfloat)scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
-                                                     withFloat:(jfloat)freq
-                                                     withFloat:(jfloat)docLen;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSimilaritiesIBSimilarity)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSimilaritiesIBSimilarity, distribution_, OrgApacheLuceneSearchSimilaritiesDistribution *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSimilaritiesIBSimilarity, lambda_, OrgApacheLuceneSearchSimilaritiesLambda *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSimilaritiesIBSimilarity, normalization_, OrgApacheLuceneSearchSimilaritiesNormalization *)
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesIBSimilarity_init(OrgApacheLuceneSearchSimilaritiesIBSimilarity *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesIBSimilarity_initWithOrgApacheLuceneSearchSimilaritiesDistribution_withOrgApacheLuceneSearchSimilaritiesLambda_withOrgApacheLuceneSearchSimilaritiesNormalization_(OrgApacheLuceneSearchSimilaritiesIBSimilarity *self, OrgApacheLuceneSearchSimilaritiesDistribution *distribution, OrgApacheLuceneSearchSimilaritiesLambda *lambda, OrgApacheLuceneSearchSimilaritiesNormalization *normalization);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesIBSimilarity *new_OrgApacheLuceneSearchSimilaritiesIBSimilarity_initWithOrgApacheLuceneSearchSimilaritiesDistribution_withOrgApacheLuceneSearchSimilaritiesLambda_withOrgApacheLuceneSearchSimilaritiesNormalization_(OrgApacheLuceneSearchSimilaritiesDistribution *distribution, OrgApacheLuceneSearchSimilaritiesLambda *lambda, OrgApacheLuceneSearchSimilaritiesNormalization *normalization) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesIBSimilarity *new_OrgApacheLuceneSearchSimilaritiesIBSimilarity_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesIBSimilarity)
 

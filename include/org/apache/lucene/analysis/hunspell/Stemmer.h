@@ -16,54 +16,19 @@
 #if !defined (_OrgApacheLuceneAnalysisHunspellStemmer_) && (OrgApacheLuceneAnalysisHunspellStemmer_INCLUDE_ALL || OrgApacheLuceneAnalysisHunspellStemmer_INCLUDE)
 #define _OrgApacheLuceneAnalysisHunspellStemmer_
 
-@class IOSCharArray;
-@class IOSObjectArray;
-@class OrgApacheLuceneAnalysisHunspellDictionary;
-@protocol JavaUtilList;
-
-@interface OrgApacheLuceneAnalysisHunspellStemmer : NSObject {
- @public
-  IOSObjectArray *prefixReaders_;
-  IOSObjectArray *prefixArcs_;
-  IOSObjectArray *suffixReaders_;
-  IOSObjectArray *suffixArcs_;
-}
-
-#pragma mark Public
-
-- (instancetype)initWithOrgApacheLuceneAnalysisHunspellDictionary:(OrgApacheLuceneAnalysisHunspellDictionary *)dictionary;
-
-- (id<JavaUtilList>)stemWithCharArray:(IOSCharArray *)word
-                              withInt:(jint)length;
-
-- (id<JavaUtilList>)stemWithNSString:(NSString *)word;
-
-- (id<JavaUtilList>)uniqueStemsWithCharArray:(IOSCharArray *)word
-                                     withInt:(jint)length;
+@interface OrgApacheLuceneAnalysisHunspellStemmer : NSObject
 
 #pragma mark Package-Private
 
-- (id<JavaUtilList>)applyAffixWithCharArray:(IOSCharArray *)strippedWord
-                                    withInt:(jint)length
-                                    withInt:(jint)affix
-                                    withInt:(jint)prefixFlag
-                                    withInt:(jint)recursionDepth
-                                withBoolean:(jboolean)prefix
-                                withBoolean:(jboolean)circumfix
-                                withBoolean:(jboolean)caseVariant;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisHunspellStemmer)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisHunspellStemmer, prefixReaders_, IOSObjectArray *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisHunspellStemmer, prefixArcs_, IOSObjectArray *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisHunspellStemmer, suffixReaders_, IOSObjectArray *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisHunspellStemmer, suffixArcs_, IOSObjectArray *)
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisHunspellStemmer_init(OrgApacheLuceneAnalysisHunspellStemmer *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisHunspellStemmer_initWithOrgApacheLuceneAnalysisHunspellDictionary_(OrgApacheLuceneAnalysisHunspellStemmer *self, OrgApacheLuceneAnalysisHunspellDictionary *dictionary);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisHunspellStemmer *new_OrgApacheLuceneAnalysisHunspellStemmer_initWithOrgApacheLuceneAnalysisHunspellDictionary_(OrgApacheLuceneAnalysisHunspellDictionary *dictionary) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisHunspellStemmer *new_OrgApacheLuceneAnalysisHunspellStemmer_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisHunspellStemmer)
 

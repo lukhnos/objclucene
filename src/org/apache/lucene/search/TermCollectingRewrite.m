@@ -38,13 +38,6 @@
 - (void)addClauseWithId:(id)topLevel
 withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
                 withInt:(jint)docCount
-              withFloat:(jfloat)boost {
-  [self addClauseWithId:topLevel withOrgApacheLuceneIndexTerm:term withInt:docCount withFloat:boost withOrgApacheLuceneIndexTermContext:nil];
-}
-
-- (void)addClauseWithId:(id)topLevel
-withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-                withInt:(jint)docCount
               withFloat:(jfloat)boost
 withOrgApacheLuceneIndexTermContext:(OrgApacheLuceneIndexTermContext *)states {
   // can't call an abstract method
@@ -81,13 +74,12 @@ withOrgApacheLuceneSearchTermCollectingRewrite_TermCollector:(OrgApacheLuceneSea
   static const J2ObjcMethodInfo methods[] = {
     { "getTopLevelBuilder", NULL, "TB;", 0x404, "Ljava.io.IOException;", "()TB;" },
     { "buildWithId:", "build", "Lorg.apache.lucene.search.Query;", 0x404, NULL, "(TB;)Lorg/apache/lucene/search/Query;" },
-    { "addClauseWithId:withOrgApacheLuceneIndexTerm:withInt:withFloat:", "addClause", "V", 0x14, "Ljava.io.IOException;", "(TB;Lorg/apache/lucene/index/Term;IF)V" },
     { "addClauseWithId:withOrgApacheLuceneIndexTerm:withInt:withFloat:withOrgApacheLuceneIndexTermContext:", "addClause", "V", 0x404, "Ljava.io.IOException;", "(TB;Lorg/apache/lucene/index/Term;IFLorg/apache/lucene/index/TermContext;)V" },
     { "collectTermsWithOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneSearchMultiTermQuery:withOrgApacheLuceneSearchTermCollectingRewrite_TermCollector:", "collectTerms", "V", 0x10, "Ljava.io.IOException;", NULL },
     { "init", NULL, NULL, 0x0, NULL, NULL },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.search.TermCollectingRewrite$TermCollector;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchTermCollectingRewrite = { 2, "TermCollectingRewrite", "org.apache.lucene.search", NULL, 0x400, 6, methods, 0, NULL, 0, NULL, 1, inner_classes, NULL, "<B:Ljava/lang/Object;>Lorg/apache/lucene/search/MultiTermQuery$RewriteMethod;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchTermCollectingRewrite = { 2, "TermCollectingRewrite", "org.apache.lucene.search", NULL, 0x400, 5, methods, 0, NULL, 0, NULL, 1, inner_classes, NULL, "<B:Ljava/lang/Object;>Lorg/apache/lucene/search/MultiTermQuery$RewriteMethod;" };
   return &_OrgApacheLuceneSearchTermCollectingRewrite;
 }
 

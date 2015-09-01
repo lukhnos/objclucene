@@ -3,150 +3,35 @@
 //  source: ./core/src/java/org/apache/lucene/util/packed/BlockPackedReader.java
 //
 
-#include "IOSClass.h"
-#include "IOSObjectArray.h"
-#include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
-#include "java/lang/Math.h"
-#include "java/util/Collection.h"
-#include "java/util/Collections.h"
-#include "java/util/List.h"
-#include "org/apache/lucene/store/IndexInput.h"
-#include "org/apache/lucene/util/BitUtil.h"
-#include "org/apache/lucene/util/LongValues.h"
-#include "org/apache/lucene/util/packed/AbstractBlockPackedWriter.h"
 #include "org/apache/lucene/util/packed/BlockPackedReader.h"
-#include "org/apache/lucene/util/packed/BlockPackedReaderIterator.h"
-#include "org/apache/lucene/util/packed/PackedInts.h"
 
-@interface OrgApacheLuceneUtilPackedBlockPackedReader () {
- @public
-  jint blockShift_, blockMask_;
-  jlong valueCount_;
-  IOSLongArray *minValues_;
-  IOSObjectArray *subReaders_;
-  jlong sumBPV_;
-}
-
-@end
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPackedBlockPackedReader, minValues_, IOSLongArray *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPackedBlockPackedReader, subReaders_, IOSObjectArray *)
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneUtilPackedBlockPackedReader
 
-- (instancetype)initWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)inArg
-                                               withInt:(jint)packedIntsVersion
-                                               withInt:(jint)blockSize
-                                              withLong:(jlong)valueCount
-                                           withBoolean:(jboolean)direct {
-  OrgApacheLuceneUtilPackedBlockPackedReader_initWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withLong_withBoolean_(self, inArg, packedIntsVersion, blockSize, valueCount, direct);
+- (instancetype)init {
+  OrgApacheLuceneUtilPackedBlockPackedReader_init(self);
   return self;
-}
-
-- (jlong)getWithLong:(jlong)index {
-  JreAssert((index >= 0 && index < valueCount_), (@"org/apache/lucene/util/packed/BlockPackedReader.java:90 condition failed: assert index >= 0 && index < valueCount;"));
-  jint block = (jint) (JreURShift64(index, blockShift_));
-  jint idx = (jint) (index & blockMask_);
-  return (minValues_ == nil ? 0 : IOSLongArray_Get(minValues_, block)) + [((OrgApacheLuceneUtilPackedPackedInts_Reader *) nil_chk(IOSObjectArray_Get(nil_chk(subReaders_), block))) getWithInt:idx];
-}
-
-- (jlong)ramBytesUsed {
-  jlong size = 0;
-  {
-    IOSObjectArray *a__ = subReaders_;
-    OrgApacheLuceneUtilPackedPackedInts_Reader * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
-    OrgApacheLuceneUtilPackedPackedInts_Reader * const *e__ = b__ + a__->size_;
-    while (b__ < e__) {
-      OrgApacheLuceneUtilPackedPackedInts_Reader *reader = *b__++;
-      size += [((OrgApacheLuceneUtilPackedPackedInts_Reader *) nil_chk(reader)) ramBytesUsed];
-    }
-  }
-  return size;
-}
-
-- (id<JavaUtilCollection>)getChildResources {
-  return JavaUtilCollections_emptyList();
-}
-
-- (NSString *)description {
-  jlong avgBPV = ((IOSObjectArray *) nil_chk(subReaders_))->size_ == 0 ? 0 : sumBPV_ / subReaders_->size_;
-  return JreStrcat("$$I$J$JC", [[self getClass] getSimpleName], @"(blocksize=", (JreLShift32(1, blockShift_)), @",size=", valueCount_, @",avgBPV=", avgBPV, ')');
-}
-
-- (void)dealloc {
-  RELEASE_(minValues_);
-  RELEASE_(subReaders_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneStoreIndexInput:withInt:withInt:withLong:withBoolean:", "BlockPackedReader", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "getWithLong:", "get", "J", 0x1, NULL, NULL },
-    { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "blockShift_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "blockMask_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "valueCount_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "minValues_", NULL, 0x12, "[J", NULL, NULL, .constantValue.asLong = 0 },
-    { "subReaders_", NULL, 0x12, "[Lorg.apache.lucene.util.packed.PackedInts$Reader;", NULL, NULL, .constantValue.asLong = 0 },
-    { "sumBPV_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedBlockPackedReader = { 2, "BlockPackedReader", "org.apache.lucene.util.packed", NULL, 0x11, 5, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedBlockPackedReader = { 2, "BlockPackedReader", "org.apache.lucene.util.packed", NULL, 0x11, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilPackedBlockPackedReader;
 }
 
 @end
 
-void OrgApacheLuceneUtilPackedBlockPackedReader_initWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withLong_withBoolean_(OrgApacheLuceneUtilPackedBlockPackedReader *self, OrgApacheLuceneStoreIndexInput *inArg, jint packedIntsVersion, jint blockSize, jlong valueCount, jboolean direct) {
-  OrgApacheLuceneUtilLongValues_init(self);
-  self->valueCount_ = valueCount;
-  self->blockShift_ = OrgApacheLuceneUtilPackedPackedInts_checkBlockSizeWithInt_withInt_withInt_(blockSize, OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_MIN_BLOCK_SIZE, OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_MAX_BLOCK_SIZE);
-  self->blockMask_ = blockSize - 1;
-  jint numBlocks = OrgApacheLuceneUtilPackedPackedInts_numBlocksWithLong_withInt_(valueCount, blockSize);
-  IOSLongArray *minValues = nil;
-  JreStrongAssignAndConsume(&self->subReaders_, [IOSObjectArray newArrayWithLength:numBlocks type:OrgApacheLuceneUtilPackedPackedInts_Reader_class_()]);
-  jlong sumBPV = 0;
-  for (jint i = 0; i < numBlocks; ++i) {
-    jint token = [((OrgApacheLuceneStoreIndexInput *) nil_chk(inArg)) readByte] & (jint) 0xFF;
-    jint bitsPerValue = JreURShift32(token, OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_BPV_SHIFT);
-    sumBPV += bitsPerValue;
-    if (bitsPerValue > 64) {
-      @throw [new_JavaIoIOException_initWithNSString_(@"Corrupted") autorelease];
-    }
-    if ((token & OrgApacheLuceneUtilPackedAbstractBlockPackedWriter_MIN_VALUE_EQUALS_0) == 0) {
-      if (minValues == nil) {
-        minValues = [IOSLongArray arrayWithLength:numBlocks];
-      }
-      *IOSLongArray_GetRef(nil_chk(minValues), i) = OrgApacheLuceneUtilBitUtil_zigZagDecodeWithLong_(1LL + OrgApacheLuceneUtilPackedBlockPackedReaderIterator_readVLongWithOrgApacheLuceneStoreDataInput_(inArg));
-    }
-    if (bitsPerValue == 0) {
-      IOSObjectArray_SetAndConsume(self->subReaders_, i, new_OrgApacheLuceneUtilPackedPackedInts_NullReader_initWithInt_(blockSize));
-    }
-    else {
-      jint size = (jint) JavaLangMath_minWithLong_withLong_(blockSize, valueCount - (jlong) i * blockSize);
-      if (direct) {
-        jlong pointer = [inArg getFilePointer];
-        IOSObjectArray_Set(self->subReaders_, i, OrgApacheLuceneUtilPackedPackedInts_getDirectReaderNoHeaderWithOrgApacheLuceneStoreIndexInput_withOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withInt_withInt_withInt_(inArg, JreLoadStatic(OrgApacheLuceneUtilPackedPackedInts_FormatEnum, PACKED), packedIntsVersion, size, bitsPerValue));
-        [inArg seekWithLong:pointer + [((OrgApacheLuceneUtilPackedPackedInts_FormatEnum *) nil_chk(JreLoadStatic(OrgApacheLuceneUtilPackedPackedInts_FormatEnum, PACKED))) byteCountWithInt:packedIntsVersion withInt:size withInt:bitsPerValue]];
-      }
-      else {
-        IOSObjectArray_Set(self->subReaders_, i, OrgApacheLuceneUtilPackedPackedInts_getReaderNoHeaderWithOrgApacheLuceneStoreDataInput_withOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withInt_withInt_withInt_(inArg, JreLoadStatic(OrgApacheLuceneUtilPackedPackedInts_FormatEnum, PACKED), packedIntsVersion, size, bitsPerValue));
-      }
-    }
-  }
-  JreStrongAssign(&self->minValues_, minValues);
-  self->sumBPV_ = sumBPV;
+void OrgApacheLuceneUtilPackedBlockPackedReader_init(OrgApacheLuceneUtilPackedBlockPackedReader *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneUtilPackedBlockPackedReader *new_OrgApacheLuceneUtilPackedBlockPackedReader_initWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withLong_withBoolean_(OrgApacheLuceneStoreIndexInput *inArg, jint packedIntsVersion, jint blockSize, jlong valueCount, jboolean direct) {
+OrgApacheLuceneUtilPackedBlockPackedReader *new_OrgApacheLuceneUtilPackedBlockPackedReader_init() {
   OrgApacheLuceneUtilPackedBlockPackedReader *self = [OrgApacheLuceneUtilPackedBlockPackedReader alloc];
-  OrgApacheLuceneUtilPackedBlockPackedReader_initWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withLong_withBoolean_(self, inArg, packedIntsVersion, blockSize, valueCount, direct);
+  OrgApacheLuceneUtilPackedBlockPackedReader_init(self);
   return self;
 }
 

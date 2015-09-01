@@ -20,47 +20,19 @@
 #define OrgApacheLuceneBkdtreeLatLonWriter_INCLUDE 1
 #include "org/apache/lucene/bkdtree/LatLonWriter.h"
 
-@class IOSIntArray;
-@class IOSLongArray;
-@protocol OrgApacheLuceneBkdtreeLatLonReader;
+@interface OrgApacheLuceneBkdtreeHeapLatLonWriter : NSObject < OrgApacheLuceneBkdtreeLatLonWriter >
 
-@interface OrgApacheLuceneBkdtreeHeapLatLonWriter : NSObject < OrgApacheLuceneBkdtreeLatLonWriter > {
- @public
-  IOSIntArray *latEncs_;
-  IOSIntArray *lonEncs_;
-  IOSIntArray *docIDs_;
-  IOSLongArray *ords_;
-}
+#pragma mark Package-Private
 
-#pragma mark Public
-
-- (instancetype)initWithInt:(jint)count;
-
-- (void)appendWithInt:(jint)latEnc
-              withInt:(jint)lonEnc
-             withLong:(jlong)ord
-              withInt:(jint)docID;
-
-- (void)close;
-
-- (void)destroy;
-
-- (id<OrgApacheLuceneBkdtreeLatLonReader>)getReaderWithLong:(jlong)start;
-
-- (NSString *)description;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneBkdtreeHeapLatLonWriter)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneBkdtreeHeapLatLonWriter, latEncs_, IOSIntArray *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneBkdtreeHeapLatLonWriter, lonEncs_, IOSIntArray *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneBkdtreeHeapLatLonWriter, docIDs_, IOSIntArray *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneBkdtreeHeapLatLonWriter, ords_, IOSLongArray *)
+FOUNDATION_EXPORT void OrgApacheLuceneBkdtreeHeapLatLonWriter_init(OrgApacheLuceneBkdtreeHeapLatLonWriter *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneBkdtreeHeapLatLonWriter_initWithInt_(OrgApacheLuceneBkdtreeHeapLatLonWriter *self, jint count);
-
-FOUNDATION_EXPORT OrgApacheLuceneBkdtreeHeapLatLonWriter *new_OrgApacheLuceneBkdtreeHeapLatLonWriter_initWithInt_(jint count) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneBkdtreeHeapLatLonWriter *new_OrgApacheLuceneBkdtreeHeapLatLonWriter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeHeapLatLonWriter)
 

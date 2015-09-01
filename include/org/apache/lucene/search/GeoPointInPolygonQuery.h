@@ -20,44 +20,19 @@
 #define OrgApacheLuceneSearchGeoPointInBBoxQueryImpl_INCLUDE 1
 #include "org/apache/lucene/search/GeoPointInBBoxQueryImpl.h"
 
-@class IOSDoubleArray;
-@class OrgApacheLuceneIndexTerms;
-@class OrgApacheLuceneIndexTermsEnum;
-@class OrgApacheLuceneSearchMultiTermQuery_RewriteMethod;
-@class OrgApacheLuceneUtilAttributeSource;
-
 @interface OrgApacheLuceneSearchGeoPointInPolygonQuery : OrgApacheLuceneSearchGeoPointInBBoxQueryImpl
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field
-                 withDoubleArray:(IOSDoubleArray *)polyLons
-                 withDoubleArray:(IOSDoubleArray *)polyLats;
-
-- (jboolean)isEqual:(id)o;
-
-- (IOSDoubleArray *)getLats;
-
-- (IOSDoubleArray *)getLons;
-
-- (NSUInteger)hash;
-
-- (void)setRewriteMethodWithOrgApacheLuceneSearchMultiTermQuery_RewriteMethod:(OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *)method;
-
-- (NSString *)toStringWithNSString:(NSString *)field;
-
-#pragma mark Protected
-
-- (OrgApacheLuceneIndexTermsEnum *)getTermsEnumWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms
-                                      withOrgApacheLuceneUtilAttributeSource:(OrgApacheLuceneUtilAttributeSource *)atts;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchGeoPointInPolygonQuery)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchGeoPointInPolygonQuery_initWithNSString_withDoubleArray_withDoubleArray_(OrgApacheLuceneSearchGeoPointInPolygonQuery *self, NSString *field, IOSDoubleArray *polyLons, IOSDoubleArray *polyLats);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchGeoPointInPolygonQuery_init(OrgApacheLuceneSearchGeoPointInPolygonQuery *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchGeoPointInPolygonQuery *new_OrgApacheLuceneSearchGeoPointInPolygonQuery_initWithNSString_withDoubleArray_withDoubleArray_(NSString *field, IOSDoubleArray *polyLons, IOSDoubleArray *polyLats) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchGeoPointInPolygonQuery *new_OrgApacheLuceneSearchGeoPointInPolygonQuery_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchGeoPointInPolygonQuery)
 

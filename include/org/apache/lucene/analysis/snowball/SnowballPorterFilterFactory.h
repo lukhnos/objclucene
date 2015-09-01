@@ -24,20 +24,11 @@
 #define OrgApacheLuceneAnalysisUtilResourceLoaderAware_INCLUDE 1
 #include "org/apache/lucene/analysis/util/ResourceLoaderAware.h"
 
-@class OrgApacheLuceneAnalysisTokenFilter;
-@class OrgApacheLuceneAnalysisTokenStream;
-@protocol JavaUtilMap;
-@protocol OrgApacheLuceneAnalysisUtilResourceLoader;
-
 @interface OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory < OrgApacheLuceneAnalysisUtilResourceLoaderAware >
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
-
-- (OrgApacheLuceneAnalysisTokenFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
-
-- (void)informWithOrgApacheLuceneAnalysisUtilResourceLoader:(id<OrgApacheLuceneAnalysisUtilResourceLoader>)loader;
+- (instancetype)init;
 
 @end
 
@@ -46,9 +37,9 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFact
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory_PROTECTED_TOKENS_;
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory, PROTECTED_TOKENS_, NSString *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory *self, id<JavaUtilMap> args);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory_init(OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory *new_OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory *new_OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory)
 

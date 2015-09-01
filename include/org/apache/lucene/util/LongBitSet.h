@@ -27,65 +27,23 @@
 - (instancetype)initWithLongArray:(IOSLongArray *)storedBits
                          withLong:(jlong)numBits;
 
-- (void)and__WithOrgApacheLuceneUtilLongBitSet:(OrgApacheLuceneUtilLongBitSet *)other;
-
-- (void)andNotWithOrgApacheLuceneUtilLongBitSet:(OrgApacheLuceneUtilLongBitSet *)other;
-
 + (jint)bits2wordsWithLong:(jlong)numBits;
 
 - (jlong)cardinality;
 
-- (void)clearWithLong:(jlong)index;
-
-- (void)clearWithLong:(jlong)startIndex
-             withLong:(jlong)endIndex;
-
 - (OrgApacheLuceneUtilLongBitSet *)clone;
-
-+ (OrgApacheLuceneUtilLongBitSet *)ensureCapacityWithOrgApacheLuceneUtilLongBitSet:(OrgApacheLuceneUtilLongBitSet *)bits
-                                                                          withLong:(jlong)numBits;
 
 - (jboolean)isEqual:(id)o;
 
-- (void)flipWithLong:(jlong)index;
-
-- (void)flipWithLong:(jlong)startIndex
-            withLong:(jlong)endIndex;
-
 - (jboolean)getWithLong:(jlong)index;
-
-- (jboolean)getAndClearWithLong:(jlong)index;
-
-- (jboolean)getAndSetWithLong:(jlong)index;
-
-- (IOSLongArray *)getBits;
 
 - (NSUInteger)hash;
 
-- (jboolean)intersectsWithOrgApacheLuceneUtilLongBitSet:(OrgApacheLuceneUtilLongBitSet *)other;
-
-- (jlong)length;
-
-- (jlong)nextSetBitWithLong:(jlong)index;
-
-- (void)or__WithOrgApacheLuceneUtilLongBitSet:(OrgApacheLuceneUtilLongBitSet *)other;
-
-- (jlong)prevSetBitWithLong:(jlong)index;
-
-- (jboolean)scanIsEmpty;
-
 - (void)setWithLong:(jlong)index;
-
-- (void)setWithLong:(jlong)startIndex
-           withLong:(jlong)endIndex;
-
-- (void)xor__WithOrgApacheLuceneUtilLongBitSet:(OrgApacheLuceneUtilLongBitSet *)other;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilLongBitSet)
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilLongBitSet *OrgApacheLuceneUtilLongBitSet_ensureCapacityWithOrgApacheLuceneUtilLongBitSet_withLong_(OrgApacheLuceneUtilLongBitSet *bits, jlong numBits);
 
 FOUNDATION_EXPORT jint OrgApacheLuceneUtilLongBitSet_bits2wordsWithLong_(jlong numBits);
 

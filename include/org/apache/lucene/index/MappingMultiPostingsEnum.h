@@ -20,7 +20,6 @@
 #define OrgApacheLuceneIndexPostingsEnum_INCLUDE 1
 #include "org/apache/lucene/index/PostingsEnum.h"
 
-@class IOSObjectArray;
 @class OrgApacheLuceneIndexMergeState;
 @class OrgApacheLuceneIndexMergeState_DocMap;
 @class OrgApacheLuceneIndexMultiPostingsEnum;
@@ -53,11 +52,7 @@ withOrgApacheLuceneIndexMergeState:(OrgApacheLuceneIndexMergeState *)mergeState;
 
 - (jint)freq;
 
-- (jint)getNumSubs;
-
 - (OrgApacheLuceneUtilBytesRef *)getPayload;
-
-- (IOSObjectArray *)getSubs;
 
 - (jint)nextDoc;
 

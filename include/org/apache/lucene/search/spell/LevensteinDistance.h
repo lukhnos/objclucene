@@ -26,15 +26,6 @@
 
 - (instancetype)init;
 
-- (jboolean)isEqual:(id)obj;
-
-- (jfloat)getDistanceWithNSString:(NSString *)target
-                     withNSString:(NSString *)other;
-
-- (NSUInteger)hash;
-
-- (NSString *)description;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSpellLevensteinDistance)

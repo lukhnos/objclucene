@@ -19,28 +19,11 @@
 #if !defined (_OrgApacheLuceneSearchFilterCachingPolicy_) && (OrgApacheLuceneSearchFilterCachingPolicy_INCLUDE_ALL || OrgApacheLuceneSearchFilterCachingPolicy_INCLUDE)
 #define _OrgApacheLuceneSearchFilterCachingPolicy_
 
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneSearchDocIdSet;
-@class OrgApacheLuceneSearchFilter;
-
 @protocol OrgApacheLuceneSearchFilterCachingPolicy < NSObject, JavaObject >
 
-- (void)onUseWithOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter;
-
-- (jboolean)shouldCacheWithOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter
-             withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-                     withOrgApacheLuceneSearchDocIdSet:(OrgApacheLuceneSearchDocIdSet *)set;
-
 @end
 
-@interface OrgApacheLuceneSearchFilterCachingPolicy : NSObject
-
-@end
-
-J2OBJC_STATIC_INIT(OrgApacheLuceneSearchFilterCachingPolicy)
-
-FOUNDATION_EXPORT id<OrgApacheLuceneSearchFilterCachingPolicy> OrgApacheLuceneSearchFilterCachingPolicy_ALWAYS_CACHE_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchFilterCachingPolicy, ALWAYS_CACHE_, id<OrgApacheLuceneSearchFilterCachingPolicy>)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchFilterCachingPolicy)
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFilterCachingPolicy)
 
@@ -49,32 +32,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFilterCachingPolicy)
 #if !defined (_OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments_) && (OrgApacheLuceneSearchFilterCachingPolicy_INCLUDE_ALL || OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments_INCLUDE)
 #define _OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments_
 
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneSearchDocIdSet;
-@class OrgApacheLuceneSearchFilter;
-
 @interface OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments : NSObject < OrgApacheLuceneSearchFilterCachingPolicy >
 
 #pragma mark Public
 
-- (instancetype)initWithFloat:(jfloat)minSizeRatio;
-
-- (void)onUseWithOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter;
-
-- (jboolean)shouldCacheWithOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter
-             withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-                     withOrgApacheLuceneSearchDocIdSet:(OrgApacheLuceneSearchDocIdSet *)set;
+- (instancetype)init;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments)
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments *OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments_DEFAULT_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments, DEFAULT_, OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments *)
+FOUNDATION_EXPORT void OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments_init(OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments_initWithFloat_(OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments *self, jfloat minSizeRatio);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments *new_OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments_initWithFloat_(jfloat minSizeRatio) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments *new_OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments)
 

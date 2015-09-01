@@ -38,21 +38,16 @@
   return result;
 }
 
-- (jint)size {
-  return count_;
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneUtilAutomatonAutomaton:withInt:", "LimitedFiniteStringsIterator", NULL, 0x1, NULL, NULL },
     { "next", NULL, "Lorg.apache.lucene.util.IntsRef;", 0x1, NULL, NULL },
-    { "size", NULL, "I", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "limit_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "count_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator = { 2, "LimitedFiniteStringsIterator", "org.apache.lucene.util.automaton", NULL, 0x1, 3, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator = { 2, "LimitedFiniteStringsIterator", "org.apache.lucene.util.automaton", NULL, 0x1, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilAutomatonLimitedFiniteStringsIterator;
 }
 

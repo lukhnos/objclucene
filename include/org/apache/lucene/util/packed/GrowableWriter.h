@@ -46,8 +46,6 @@
 
 - (jint)getBitsPerValue;
 
-- (OrgApacheLuceneUtilPackedPackedInts_Mutable *)getMutable;
-
 - (jlong)ramBytesUsed;
 
 - (OrgApacheLuceneUtilPackedGrowableWriter *)resizeWithInt:(jint)newSize;

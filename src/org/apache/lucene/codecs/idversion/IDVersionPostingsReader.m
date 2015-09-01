@@ -7,9 +7,6 @@
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
-#include "java/util/Collection.h"
-#include "java/util/Collections.h"
-#include "java/util/List.h"
 #include "org/apache/lucene/codecs/BlockTermState.h"
 #include "org/apache/lucene/codecs/CodecUtil.h"
 #include "org/apache/lucene/codecs/PostingsReaderBase.h"
@@ -85,10 +82,6 @@ withOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)_
   return 0;
 }
 
-- (id<JavaUtilCollection>)getChildResources {
-  return JavaUtilCollections_emptyList();
-}
-
 - (void)checkIntegrity {
 }
 
@@ -109,12 +102,11 @@ withOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)_
     { "decodeTermWithLongArray:withOrgApacheLuceneStoreDataInput:withOrgApacheLuceneIndexFieldInfo:withOrgApacheLuceneCodecsBlockTermState:withBoolean:", "decodeTerm", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "postingsWithOrgApacheLuceneIndexFieldInfo:withOrgApacheLuceneCodecsBlockTermState:withOrgApacheLuceneIndexPostingsEnum:withInt:", "postings", "Lorg.apache.lucene.index.PostingsEnum;", 0x1, "Ljava.io.IOException;", NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
     { "checkIntegrity", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "init", NULL, NULL, 0x0, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsIdversionIDVersionPostingsReader = { 2, "IDVersionPostingsReader", "org.apache.lucene.codecs.idversion", NULL, 0x10, 10, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsIdversionIDVersionPostingsReader = { 2, "IDVersionPostingsReader", "org.apache.lucene.codecs.idversion", NULL, 0x10, 9, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneCodecsIdversionIDVersionPostingsReader;
 }
 

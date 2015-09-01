@@ -24,20 +24,11 @@
 #define OrgApacheLuceneAnalysisUtilResourceLoaderAware_INCLUDE 1
 #include "org/apache/lucene/analysis/util/ResourceLoaderAware.h"
 
-@class OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter;
-@class OrgApacheLuceneAnalysisTokenStream;
-@protocol JavaUtilMap;
-@protocol OrgApacheLuceneAnalysisUtilResourceLoader;
-
 @interface OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory < OrgApacheLuceneAnalysisUtilResourceLoaderAware >
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
-
-- (OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
-
-- (void)informWithOrgApacheLuceneAnalysisUtilResourceLoader:(id<OrgApacheLuceneAnalysisUtilResourceLoader>)loader;
+- (instancetype)init;
 
 @end
 
@@ -49,9 +40,9 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenF
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_DELIMITER_ATTR_;
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory, DELIMITER_ATTR_, NSString *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory *self, id<JavaUtilMap> args);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_init(OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory *new_OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory *new_OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilterFactory)
 

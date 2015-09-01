@@ -20,35 +20,19 @@
 #define OrgApacheLuceneAnalysisUtilFilteringTokenFilter_INCLUDE 1
 #include "org/apache/lucene/analysis/util/FilteringTokenFilter.h"
 
-@class OrgApacheLuceneAnalysisTokenStream;
-@protocol JavaUtilSet;
-
 @interface OrgApacheLuceneAnalysisCoreTypeTokenFilter : OrgApacheLuceneAnalysisUtilFilteringTokenFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-                                           withJavaUtilSet:(id<JavaUtilSet>)stopTypes;
-
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-                                           withJavaUtilSet:(id<JavaUtilSet>)stopTypes
-                                               withBoolean:(jboolean)useWhiteList;
-
-#pragma mark Protected
-
-- (jboolean)accept;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisCoreTypeTokenFilter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCoreTypeTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withJavaUtilSet_withBoolean_(OrgApacheLuceneAnalysisCoreTypeTokenFilter *self, OrgApacheLuceneAnalysisTokenStream *input, id<JavaUtilSet> stopTypes, jboolean useWhiteList);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCoreTypeTokenFilter_init(OrgApacheLuceneAnalysisCoreTypeTokenFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreTypeTokenFilter *new_OrgApacheLuceneAnalysisCoreTypeTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withJavaUtilSet_withBoolean_(OrgApacheLuceneAnalysisTokenStream *input, id<JavaUtilSet> stopTypes, jboolean useWhiteList) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCoreTypeTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withJavaUtilSet_(OrgApacheLuceneAnalysisCoreTypeTokenFilter *self, OrgApacheLuceneAnalysisTokenStream *input, id<JavaUtilSet> stopTypes);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreTypeTokenFilter *new_OrgApacheLuceneAnalysisCoreTypeTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withJavaUtilSet_(OrgApacheLuceneAnalysisTokenStream *input, id<JavaUtilSet> stopTypes) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreTypeTokenFilter *new_OrgApacheLuceneAnalysisCoreTypeTokenFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCoreTypeTokenFilter)
 

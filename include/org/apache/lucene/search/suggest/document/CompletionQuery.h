@@ -20,34 +20,17 @@
 #define OrgApacheLuceneSearchQuery_INCLUDE 1
 #include "org/apache/lucene/search/Query.h"
 
-@class OrgApacheLuceneIndexIndexReader;
-@class OrgApacheLuceneIndexTerm;
-@class OrgApacheLuceneSearchSuggestBitsProducer;
-
 @interface OrgApacheLuceneSearchSuggestDocumentCompletionQuery : OrgApacheLuceneSearchQuery
 
 #pragma mark Public
 
-- (NSString *)getField;
-
-- (OrgApacheLuceneSearchSuggestBitsProducer *)getFilter;
-
-- (OrgApacheLuceneIndexTerm *)getTerm;
-
-- (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
-
-- (NSString *)toStringWithNSString:(NSString *)field;
-
-#pragma mark Protected
-
-- (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-    withOrgApacheLuceneSearchSuggestBitsProducer:(OrgApacheLuceneSearchSuggestBitsProducer *)filter;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestDocumentCompletionQuery)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentCompletionQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneSearchSuggestBitsProducer_(OrgApacheLuceneSearchSuggestDocumentCompletionQuery *self, OrgApacheLuceneIndexTerm *term, OrgApacheLuceneSearchSuggestBitsProducer *filter);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentCompletionQuery_init(OrgApacheLuceneSearchSuggestDocumentCompletionQuery *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentCompletionQuery)
 

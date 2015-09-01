@@ -23,7 +23,6 @@
 #include "org/apache/lucene/search/IndexSearcher.h"
 #include "org/apache/lucene/search/Query.h"
 #include "org/apache/lucene/search/TwoPhaseIterator.h"
-#include "org/apache/lucene/search/spans/SpanCollector.h"
 #include "org/apache/lucene/search/spans/SpanOrQuery.h"
 #include "org/apache/lucene/search/spans/SpanPositionQueue.h"
 #include "org/apache/lucene/search/spans/SpanQuery.h"
@@ -83,8 +82,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpansSpanOrQuery_SpanOrWeight, this$0_,
 - (jint)endPosition;
 
 - (jint)width;
-
-- (void)collectWithOrgApacheLuceneSearchSpansSpanCollector:(id<OrgApacheLuceneSearchSpansSpanCollector>)collector;
 
 - (NSString *)description;
 
@@ -483,10 +480,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansSpanOrQuery_SpanOrWei
   return [((OrgApacheLuceneSearchSpansSpans *) nil_chk(topPositionSpans_)) width];
 }
 
-- (void)collectWithOrgApacheLuceneSearchSpansSpanCollector:(id<OrgApacheLuceneSearchSpansSpanCollector>)collector {
-  [((OrgApacheLuceneSearchSpansSpans *) nil_chk(topPositionSpans_)) collectWithOrgApacheLuceneSearchSpansSpanCollector:collector];
-}
-
 - (NSString *)description {
   return JreStrcat("$@$I$I$I", @"spanOr(", this$0_->this$0_, @")@", [self docID], @": ", [self startPosition], @" - ", [self endPosition]);
 }
@@ -530,7 +523,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansSpanOrQuery_SpanOrWei
     { "startPosition", NULL, "I", 0x1, NULL, NULL },
     { "endPosition", NULL, "I", 0x1, NULL, NULL },
     { "width", NULL, "I", 0x1, NULL, NULL },
-    { "collectWithOrgApacheLuceneSearchSpansSpanCollector:", "collect", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "cost", NULL, "J", 0x1, NULL, NULL },
     { "initWithOrgApacheLuceneSearchSpansSpanOrQuery_SpanOrWeight:withOrgApacheLuceneSearchDisiPriorityQueue:withOrgApacheLuceneSearchSpansSpanPositionQueue:withJavaUtilArrayList:", "", NULL, 0x0, NULL, NULL },
@@ -545,7 +537,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansSpanOrQuery_SpanOrWei
     { "val$subSpans_", NULL, 0x1012, "Ljava.util.ArrayList;", NULL, "Ljava/util/ArrayList<Lorg/apache/lucene/search/spans/Spans;>;", .constantValue.asLong = 0 },
   };
   static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneSearchSpansSpanOrQuery_SpanOrWeight", "getSpansWithOrgApacheLuceneIndexLeafReaderContext:withOrgApacheLuceneSearchSpansSpanWeight_PostingsEnum:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpanOrQuery_SpanOrWeight_$1 = { 2, "", "org.apache.lucene.search.spans", "SpanOrQuery$SpanOrWeight", 0x8008, 14, methods, 7, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpanOrQuery_SpanOrWeight_$1 = { 2, "", "org.apache.lucene.search.spans", "SpanOrQuery$SpanOrWeight", 0x8008, 13, methods, 7, fields, 0, NULL, 0, NULL, &enclosing_method, NULL };
   return &_OrgApacheLuceneSearchSpansSpanOrQuery_SpanOrWeight_$1;
 }
 

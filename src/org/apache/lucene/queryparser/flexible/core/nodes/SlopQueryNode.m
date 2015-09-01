@@ -3,126 +3,36 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/core/nodes/SlopQueryNode.java
 //
 
-#include "IOSClass.h"
-#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/lang/CharSequence.h"
-#include "java/lang/CloneNotSupportedException.h"
-#include "java/lang/Float.h"
-#include "java/util/List.h"
-#include "org/apache/lucene/queryparser/flexible/core/QueryNodeError.h"
-#include "org/apache/lucene/queryparser/flexible/core/messages/QueryParserMessages.h"
-#include "org/apache/lucene/queryparser/flexible/core/nodes/FieldableNode.h"
-#include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNode.h"
-#include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNodeImpl.h"
 #include "org/apache/lucene/queryparser/flexible/core/nodes/SlopQueryNode.h"
-#include "org/apache/lucene/queryparser/flexible/core/parser/EscapeQuerySyntax.h"
-#include "org/apache/lucene/queryparser/flexible/messages/MessageImpl.h"
 
-@interface OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode () {
- @public
-  jint value_;
-}
-
-- (id<JavaLangCharSequence>)getValueString;
-
-@end
-
-__attribute__((unused)) static id<JavaLangCharSequence> OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode_getValueString(OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode *self);
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode
 
-- (instancetype)initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)query
-                                                                     withInt:(jint)value {
-  OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_withInt_(self, query, value);
+- (instancetype)init {
+  OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode_init(self);
   return self;
-}
-
-- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)getChild {
-  return [((id<JavaUtilList>) nil_chk([self getChildren])) getWithInt:0];
-}
-
-- (jint)getValue {
-  return self->value_;
-}
-
-- (id<JavaLangCharSequence>)getValueString {
-  return OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode_getValueString(self);
-}
-
-- (NSString *)description {
-  return JreStrcat("$@$$$", @"<slop value='", OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode_getValueString(self), @"'>\n", [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk([self getChild])) description], @"\n</slop>");
-}
-
-- (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escapeSyntaxParser {
-  if ([self getChild] == nil) return @"";
-  return JreStrcat("@C@", [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk([self getChild])) toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:escapeSyntaxParser], '~', OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode_getValueString(self));
-}
-
-- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)cloneTree {
-  OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode *clone = (OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode *) check_class_cast([super cloneTree], [OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode class]);
-  ((OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode *) nil_chk(clone))->value_ = self->value_;
-  return clone;
-}
-
-- (id<JavaLangCharSequence>)getField {
-  id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> child = [self getChild];
-  if ([OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_class_() isInstance:child]) {
-    return [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) nil_chk(((id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) check_protocol_cast(child, OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_class_())))) getField];
-  }
-  return nil;
-}
-
-- (void)setFieldWithJavaLangCharSequence:(id<JavaLangCharSequence>)fieldName {
-  id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> child = [self getChild];
-  if ([OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_class_() isInstance:child]) {
-    [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) nil_chk(((id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) check_protocol_cast(child, OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_class_())))) setFieldWithJavaLangCharSequence:fieldName];
-  }
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:withInt:", "SlopQueryNode", NULL, 0x1, NULL, NULL },
-    { "getChild", NULL, "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x1, NULL, NULL },
-    { "getValue", NULL, "I", 0x1, NULL, NULL },
-    { "getValueString", NULL, "Ljava.lang.CharSequence;", 0x2, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:", "toQueryString", "Ljava.lang.CharSequence;", 0x1, NULL, NULL },
-    { "cloneTree", NULL, "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x1, "Ljava.lang.CloneNotSupportedException;", NULL },
-    { "getField", NULL, "Ljava.lang.CharSequence;", 0x1, NULL, NULL },
-    { "setFieldWithJavaLangCharSequence:", "setField", "V", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "value_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode = { 2, "SlopQueryNode", "org.apache.lucene.queryparser.flexible.core.nodes", NULL, 0x1, 9, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode = { 2, "SlopQueryNode", "org.apache.lucene.queryparser.flexible.core.nodes", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode;
 }
 
 @end
 
-void OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_withInt_(OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode *self, id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> query, jint value) {
-  OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_init(self);
-  self->value_ = 0;
-  if (query == nil) {
-    @throw [new_OrgApacheLuceneQueryparserFlexibleCoreQueryNodeError_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_([new_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_withNSObjectArray_(JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, NODE_ACTION_NOT_SUPPORTED_), [IOSObjectArray arrayWithObjects:(id[]){ @"query", @"null" } count:2 type:NSObject_class_()]) autorelease]) autorelease];
-  }
-  self->value_ = value;
-  [self setLeafWithBoolean:NO];
-  [self allocate];
-  [self addWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:query];
+void OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode_init(OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_withInt_(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> query, jint value) {
+OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode_init() {
   OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode *self = [OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode alloc];
-  OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_withInt_(self, query, value);
+  OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode_init(self);
   return self;
-}
-
-id<JavaLangCharSequence> OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode_getValueString(OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode *self) {
-  JavaLangFloat *f = JavaLangFloat_valueOfWithFloat_(self->value_);
-  if ([f floatValue] == [f longLongValue]) return JreStrcat("J", [f longLongValue]);
-  else return JreStrcat("@", f);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode)

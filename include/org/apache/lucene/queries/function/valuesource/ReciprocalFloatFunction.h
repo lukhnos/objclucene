@@ -20,47 +20,19 @@
 #define OrgApacheLuceneQueriesFunctionValueSource_INCLUDE 1
 #include "org/apache/lucene/queries/function/ValueSource.h"
 
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneQueriesFunctionFunctionValues;
-@class OrgApacheLuceneSearchIndexSearcher;
-@protocol JavaUtilMap;
-
-@interface OrgApacheLuceneQueriesFunctionValuesourceReciprocalFloatFunction : OrgApacheLuceneQueriesFunctionValueSource {
- @public
-  OrgApacheLuceneQueriesFunctionValueSource *source_;
-  jfloat m_;
-  jfloat a_;
-  jfloat b_;
-}
+@interface OrgApacheLuceneQueriesFunctionValuesourceReciprocalFloatFunction : OrgApacheLuceneQueriesFunctionValueSource
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)source
-                                                        withFloat:(jfloat)m
-                                                        withFloat:(jfloat)a
-                                                        withFloat:(jfloat)b;
-
-- (void)createWeightWithJavaUtilMap:(id<JavaUtilMap>)context
-withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher;
-
-- (NSString *)description__;
-
-- (jboolean)isEqual:(id)o;
-
-- (OrgApacheLuceneQueriesFunctionFunctionValues *)getValuesWithJavaUtilMap:(id<JavaUtilMap>)context
-                                 withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext;
-
-- (NSUInteger)hash;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceReciprocalFloatFunction)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceReciprocalFloatFunction, source_, OrgApacheLuceneQueriesFunctionValueSource *)
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceReciprocalFloatFunction_init(OrgApacheLuceneQueriesFunctionValuesourceReciprocalFloatFunction *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceReciprocalFloatFunction_initWithOrgApacheLuceneQueriesFunctionValueSource_withFloat_withFloat_withFloat_(OrgApacheLuceneQueriesFunctionValuesourceReciprocalFloatFunction *self, OrgApacheLuceneQueriesFunctionValueSource *source, jfloat m, jfloat a, jfloat b);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceReciprocalFloatFunction *new_OrgApacheLuceneQueriesFunctionValuesourceReciprocalFloatFunction_initWithOrgApacheLuceneQueriesFunctionValueSource_withFloat_withFloat_withFloat_(OrgApacheLuceneQueriesFunctionValueSource *source, jfloat m, jfloat a, jfloat b) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceReciprocalFloatFunction *new_OrgApacheLuceneQueriesFunctionValuesourceReciprocalFloatFunction_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceReciprocalFloatFunction)
 

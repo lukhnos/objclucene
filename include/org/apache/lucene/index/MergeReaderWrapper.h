@@ -34,7 +34,6 @@
 @class OrgApacheLuceneIndexSortedNumericDocValues;
 @class OrgApacheLuceneIndexSortedSetDocValues;
 @class OrgApacheLuceneIndexStoredFieldVisitor;
-@protocol OrgApacheLuceneIndexLeafReader_CoreClosedListener;
 @protocol OrgApacheLuceneUtilBits;
 
 @interface OrgApacheLuceneIndexMergeReaderWrapper : OrgApacheLuceneIndexLeafReader {
@@ -49,8 +48,6 @@
 
 #pragma mark Public
 
-- (void)addCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:(id<OrgApacheLuceneIndexLeafReader_CoreClosedListener>)listener;
-
 - (void)checkIntegrity;
 
 - (void)documentWithInt:(jint)docID
@@ -59,8 +56,6 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 - (OrgApacheLuceneIndexFields *)fields;
 
 - (OrgApacheLuceneIndexBinaryDocValues *)getBinaryDocValuesWithNSString:(NSString *)field;
-
-- (id)getCombinedCoreAndDeletesKey;
 
 - (id)getCoreCacheKey;
 
@@ -85,8 +80,6 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 - (jint)maxDoc;
 
 - (jint)numDocs;
-
-- (void)removeCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:(id<OrgApacheLuceneIndexLeafReader_CoreClosedListener>)listener;
 
 - (NSString *)description;
 

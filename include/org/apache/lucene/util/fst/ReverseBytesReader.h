@@ -36,8 +36,6 @@
                        withInt:(jint)offset
                        withInt:(jint)len;
 
-- (jboolean)reversed;
-
 - (void)setPositionWithLong:(jlong)pos;
 
 - (void)skipBytesWithLong:(jlong)count;

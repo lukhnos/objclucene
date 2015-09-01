@@ -33,11 +33,6 @@
 - (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)inArg
                          withOrgApacheLuceneStoreLock:(OrgApacheLuceneStoreLock *)writeLock;
 
-- (void)copyFromWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)from
-                                     withNSString:(NSString *)src
-                                     withNSString:(NSString *)dest
-                withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context OBJC_METHOD_FAMILY_NONE;
-
 - (OrgApacheLuceneStoreIndexOutput *)createOutputWithNSString:(NSString *)name
                             withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
 

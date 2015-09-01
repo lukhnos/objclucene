@@ -22,8 +22,6 @@
 
 @protocol OrgApacheLuceneAnalysisTokenattributesFlagsAttribute < OrgApacheLuceneUtilAttribute, NSObject, JavaObject >
 
-- (jint)getFlags;
-
 - (void)setFlagsWithInt:(jint)flags;
 
 @end

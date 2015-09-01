@@ -16,46 +16,19 @@
 #if !defined (_OrgApacheLuceneAnalysisUtilStemmerUtil_) && (OrgApacheLuceneAnalysisUtilStemmerUtil_INCLUDE_ALL || OrgApacheLuceneAnalysisUtilStemmerUtil_INCLUDE)
 #define _OrgApacheLuceneAnalysisUtilStemmerUtil_
 
-@class IOSCharArray;
-
 @interface OrgApacheLuceneAnalysisUtilStemmerUtil : NSObject
 
 #pragma mark Public
 
-+ (jint)delete__WithCharArray:(IOSCharArray *)s
-                      withInt:(jint)pos
-                      withInt:(jint)len;
-
-+ (jint)deleteNWithCharArray:(IOSCharArray *)s
-                     withInt:(jint)pos
-                     withInt:(jint)len
-                     withInt:(jint)nChars;
-
-+ (jboolean)endsWithWithCharArray:(IOSCharArray *)s
-                          withInt:(jint)len
-                    withCharArray:(IOSCharArray *)suffix;
-
-+ (jboolean)endsWithWithCharArray:(IOSCharArray *)s
-                          withInt:(jint)len
-                     withNSString:(NSString *)suffix;
-
-+ (jboolean)startsWithWithCharArray:(IOSCharArray *)s
-                            withInt:(jint)len
-                       withNSString:(NSString *)prefix;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisUtilStemmerUtil)
 
-FOUNDATION_EXPORT jboolean OrgApacheLuceneAnalysisUtilStemmerUtil_startsWithWithCharArray_withInt_withNSString_(IOSCharArray *s, jint len, NSString *prefix);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisUtilStemmerUtil_init(OrgApacheLuceneAnalysisUtilStemmerUtil *self);
 
-FOUNDATION_EXPORT jboolean OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(IOSCharArray *s, jint len, NSString *suffix);
-
-FOUNDATION_EXPORT jboolean OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withCharArray_(IOSCharArray *s, jint len, IOSCharArray *suffix);
-
-FOUNDATION_EXPORT jint OrgApacheLuceneAnalysisUtilStemmerUtil_delete__WithCharArray_withInt_withInt_(IOSCharArray *s, jint pos, jint len);
-
-FOUNDATION_EXPORT jint OrgApacheLuceneAnalysisUtilStemmerUtil_deleteNWithCharArray_withInt_withInt_withInt_(IOSCharArray *s, jint pos, jint len, jint nChars);
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilStemmerUtil *new_OrgApacheLuceneAnalysisUtilStemmerUtil_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilStemmerUtil)
 

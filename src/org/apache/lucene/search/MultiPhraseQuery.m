@@ -38,7 +38,6 @@
 #include "org/apache/lucene/search/BooleanQuery.h"
 #include "org/apache/lucene/search/CollectionStatistics.h"
 #include "org/apache/lucene/search/ExactPhraseScorer.h"
-#include "org/apache/lucene/search/Explanation.h"
 #include "org/apache/lucene/search/IndexSearcher.h"
 #include "org/apache/lucene/search/MatchNoDocsQuery.h"
 #include "org/apache/lucene/search/MultiPhraseQuery.h"
@@ -100,9 +99,6 @@ __attribute__((unused)) static jboolean OrgApacheLuceneSearchMultiPhraseQuery_te
 
 - (OrgApacheLuceneSearchScorer *)scorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
 
-- (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-                                                                               withInt:(jint)doc;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchMultiPhraseQuery_MultiPhraseWeight)
@@ -145,10 +141,6 @@ __attribute__((unused)) static void OrgApacheLuceneSearchMultiPhraseQuery_UnionP
 
 - (jint)getSlop {
   return slop_;
-}
-
-- (void)addWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term {
-  [self addWithOrgApacheLuceneIndexTermArray:[IOSObjectArray arrayWithObjects:(id[]){ term } count:1 type:OrgApacheLuceneIndexTerm_class_()]];
 }
 
 - (void)addWithOrgApacheLuceneIndexTermArray:(IOSObjectArray *)terms {
@@ -288,7 +280,6 @@ __attribute__((unused)) static void OrgApacheLuceneSearchMultiPhraseQuery_UnionP
   static const J2ObjcMethodInfo methods[] = {
     { "setSlopWithInt:", "setSlop", "V", 0x1, NULL, NULL },
     { "getSlop", NULL, "I", 0x1, NULL, NULL },
-    { "addWithOrgApacheLuceneIndexTerm:", "add", "V", 0x1, NULL, NULL },
     { "addWithOrgApacheLuceneIndexTermArray:", "add", "V", 0x1, NULL, NULL },
     { "addWithOrgApacheLuceneIndexTermArray:withInt:", "add", "V", 0x1, NULL, NULL },
     { "getTermArrays", NULL, "Ljava.util.List;", 0x1, NULL, NULL },
@@ -309,7 +300,7 @@ __attribute__((unused)) static void OrgApacheLuceneSearchMultiPhraseQuery_UnionP
     { "slop_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.search.MultiPhraseQuery$MultiPhraseWeight;", "Lorg.apache.lucene.search.MultiPhraseQuery$UnionPostingsEnum;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchMultiPhraseQuery = { 2, "MultiPhraseQuery", "org.apache.lucene.search", NULL, 0x1, 15, methods, 4, fields, 0, NULL, 2, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchMultiPhraseQuery = { 2, "MultiPhraseQuery", "org.apache.lucene.search", NULL, 0x1, 14, methods, 4, fields, 0, NULL, 2, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneSearchMultiPhraseQuery;
 }
 
@@ -437,22 +428,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchMultiPhraseQuery)
   }
 }
 
-- (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-                                                                               withInt:(jint)doc {
-  OrgApacheLuceneSearchScorer *scorer = [self scorerWithOrgApacheLuceneIndexLeafReaderContext:context];
-  if (scorer != nil) {
-    jint newDoc = [scorer advanceWithInt:doc];
-    if (newDoc == doc) {
-      jfloat freq = this$0_->slop_ == 0 ? [scorer freq] : [((OrgApacheLuceneSearchSloppyPhraseScorer *) check_class_cast(scorer, [OrgApacheLuceneSearchSloppyPhraseScorer class])) sloppyFreq];
-      OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *docScorer = [((OrgApacheLuceneSearchSimilaritiesSimilarity *) nil_chk(similarity_)) simScorerWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight:stats_ withOrgApacheLuceneIndexLeafReaderContext:context];
-      OrgApacheLuceneSearchExplanation *freqExplanation = OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_(freq, JreStrcat("$F", @"phraseFreq=", freq), [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchExplanation_class_()]);
-      OrgApacheLuceneSearchExplanation *scoreExplanation = [((OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *) nil_chk(docScorer)) explainWithInt:doc withOrgApacheLuceneSearchExplanation:freqExplanation];
-      return OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_([((OrgApacheLuceneSearchExplanation *) nil_chk(scoreExplanation)) getValue], JreStrcat("$@$I$$$", @"weight(", [self getQuery], @" in ", doc, @") [", [[similarity_ getClass] getSimpleName], @"], result of:"), [IOSObjectArray arrayWithObjects:(id[]){ scoreExplanation } count:1 type:OrgApacheLuceneSearchExplanation_class_()]);
-    }
-  }
-  return OrgApacheLuceneSearchExplanation_noMatchWithNSString_withOrgApacheLuceneSearchExplanationArray_(@"no matching term", [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchExplanation_class_()]);
-}
-
 - (void)dealloc {
   RELEASE_(this$0_);
   RELEASE_(similarity_);
@@ -468,7 +443,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchMultiPhraseQuery)
     { "getValueForNormalization", NULL, "F", 0x1, NULL, NULL },
     { "normalizeWithFloat:withFloat:", "normalize", "V", 0x1, NULL, NULL },
     { "scorerWithOrgApacheLuceneIndexLeafReaderContext:", "scorer", "Lorg.apache.lucene.search.Scorer;", 0x1, "Ljava.io.IOException;", NULL },
-    { "explainWithOrgApacheLuceneIndexLeafReaderContext:withInt:", "explain", "Lorg.apache.lucene.search.Explanation;", 0x1, "Ljava.io.IOException;", NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.MultiPhraseQuery;", NULL, NULL, .constantValue.asLong = 0 },
@@ -477,7 +451,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchMultiPhraseQuery)
     { "termContexts_", NULL, 0x12, "Ljava.util.Map;", NULL, "Ljava/util/Map<Lorg/apache/lucene/index/Term;Lorg/apache/lucene/index/TermContext;>;", .constantValue.asLong = 0 },
     { "needsScores_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchMultiPhraseQuery_MultiPhraseWeight = { 2, "MultiPhraseWeight", "org.apache.lucene.search", "MultiPhraseQuery", 0x2, 6, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchMultiPhraseQuery_MultiPhraseWeight = { 2, "MultiPhraseWeight", "org.apache.lucene.search", "MultiPhraseQuery", 0x2, 5, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchMultiPhraseQuery_MultiPhraseWeight;
 }
 

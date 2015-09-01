@@ -20,53 +20,19 @@
 #define OrgApacheLuceneQueriesFunctionValueSource_INCLUDE 1
 #include "org/apache/lucene/queries/function/ValueSource.h"
 
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneQueriesFunctionFunctionValues;
-@class OrgApacheLuceneSearchIndexSearcher;
-@class OrgApacheLuceneUtilBytesRef;
-@protocol JavaUtilMap;
-
-@interface OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource : OrgApacheLuceneQueriesFunctionValueSource {
- @public
-  NSString *field_;
-  NSString *indexedField_;
-  NSString *val_;
-  OrgApacheLuceneUtilBytesRef *indexedBytes_;
-}
+@interface OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource : OrgApacheLuceneQueriesFunctionValueSource
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field
-                    withNSString:(NSString *)val
-                    withNSString:(NSString *)indexedField
- withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)indexedBytes;
-
-- (void)createWeightWithJavaUtilMap:(id<JavaUtilMap>)context
-withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher;
-
-- (NSString *)description__;
-
-- (jboolean)isEqual:(id)o;
-
-- (OrgApacheLuceneQueriesFunctionFunctionValues *)getValuesWithJavaUtilMap:(id<JavaUtilMap>)context
-                                 withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext;
-
-- (NSUInteger)hash;
-
-- (NSString *)name;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource, field_, NSString *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource, indexedField_, NSString *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource, val_, NSString *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource, indexedBytes_, OrgApacheLuceneUtilBytesRef *)
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_init(OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_initWithNSString_withNSString_withNSString_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource *self, NSString *field, NSString *val, NSString *indexedField, OrgApacheLuceneUtilBytesRef *indexedBytes);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_initWithNSString_withNSString_withNSString_withOrgApacheLuceneUtilBytesRef_(NSString *field, NSString *val, NSString *indexedField, OrgApacheLuceneUtilBytesRef *indexedBytes) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource)
 

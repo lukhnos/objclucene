@@ -22,7 +22,6 @@
 
 @class OrgApacheLuceneSearchTwoPhaseIterator;
 @class OrgApacheLuceneSearchWeight;
-@protocol JavaUtilCollection;
 @protocol JavaUtilList;
 
 @interface OrgApacheLuceneSearchConjunctionScorer : OrgApacheLuceneSearchScorer
@@ -38,8 +37,6 @@
 - (jint)docID;
 
 - (jint)freq;
-
-- (id<JavaUtilCollection>)getChildren;
 
 - (jint)nextDoc;
 
@@ -75,28 +72,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchConjunctionScorer)
 #if !defined (_OrgApacheLuceneSearchConjunctionScorer_DocsAndFreqs_) && (OrgApacheLuceneSearchConjunctionScorer_INCLUDE_ALL || OrgApacheLuceneSearchConjunctionScorer_DocsAndFreqs_INCLUDE)
 #define _OrgApacheLuceneSearchConjunctionScorer_DocsAndFreqs_
 
-@class OrgApacheLuceneSearchDocIdSetIterator;
-
-@interface OrgApacheLuceneSearchConjunctionScorer_DocsAndFreqs : NSObject {
- @public
-  jlong cost_;
-  OrgApacheLuceneSearchDocIdSetIterator *iterator_;
-  jint doc_;
-}
+@interface OrgApacheLuceneSearchConjunctionScorer_DocsAndFreqs : NSObject
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)iterator;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchConjunctionScorer_DocsAndFreqs)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchConjunctionScorer_DocsAndFreqs, iterator_, OrgApacheLuceneSearchDocIdSetIterator *)
+FOUNDATION_EXPORT void OrgApacheLuceneSearchConjunctionScorer_DocsAndFreqs_init(OrgApacheLuceneSearchConjunctionScorer_DocsAndFreqs *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchConjunctionScorer_DocsAndFreqs_initWithOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchConjunctionScorer_DocsAndFreqs *self, OrgApacheLuceneSearchDocIdSetIterator *iterator);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchConjunctionScorer_DocsAndFreqs *new_OrgApacheLuceneSearchConjunctionScorer_DocsAndFreqs_initWithOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchDocIdSetIterator *iterator) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchConjunctionScorer_DocsAndFreqs *new_OrgApacheLuceneSearchConjunctionScorer_DocsAndFreqs_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchConjunctionScorer_DocsAndFreqs)
 

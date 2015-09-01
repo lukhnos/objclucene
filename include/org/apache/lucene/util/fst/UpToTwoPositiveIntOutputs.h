@@ -20,50 +20,19 @@
 #define OrgApacheLuceneUtilFstOutputs_INCLUDE 1
 #include "org/apache/lucene/util/fst/Outputs.h"
 
-@class JavaLangLong;
-@class OrgApacheLuceneStoreDataInput;
-@class OrgApacheLuceneStoreDataOutput;
-@class OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs;
-
 @interface OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs : OrgApacheLuceneUtilFstOutputs
 
 #pragma mark Public
 
-- (id)addWithId:(id)_prefix
-         withId:(id)_output;
-
-- (JavaLangLong *)commonWithId:(id)_output1
-                        withId:(id)_output2;
-
-- (JavaLangLong *)getWithLong:(jlong)v;
-
-- (OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs *)getWithLong:(jlong)first
-                                                                 withLong:(jlong)second;
-
-- (id)getNoOutput;
-
-+ (OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs *)getSingletonWithBoolean:(jboolean)doShare;
-
-- (id)mergeWithId:(id)first
-           withId:(id)second;
-
-- (NSString *)outputToStringWithId:(id)output;
-
-- (jlong)ramBytesUsedWithId:(id)o;
-
-- (id)readWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg;
-
-- (JavaLangLong *)subtractWithId:(id)_output
-                          withId:(id)_inc;
-
-- (void)writeWithId:(id)_output
-withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg;
+- (instancetype)init;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs)
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs *OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_getSingletonWithBoolean_(jboolean doShare);
+FOUNDATION_EXPORT void OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_init(OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs *self);
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs *new_OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs)
 
@@ -72,30 +41,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs)
 #if !defined (_OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs_) && (OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_INCLUDE_ALL || OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs_INCLUDE)
 #define _OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs_
 
-@interface OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs : NSObject {
- @public
-  jlong first_;
-  jlong second_;
-}
+@interface OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs : NSObject
 
 #pragma mark Public
 
-- (instancetype)initWithLong:(jlong)first
-                    withLong:(jlong)second;
-
-- (jboolean)isEqual:(id)_other;
-
-- (NSUInteger)hash;
-
-- (NSString *)description;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs)
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs_initWithLong_withLong_(OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs *self, jlong first, jlong second);
+FOUNDATION_EXPORT void OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs_init(OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs *new_OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs_initWithLong_withLong_(jlong first, jlong second) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs *new_OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs)
 

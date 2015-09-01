@@ -66,11 +66,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBlendedTermQuery)
 
 - (instancetype)init;
 
-- (OrgApacheLuceneSearchBlendedTermQuery_Builder *)addWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
-
-- (OrgApacheLuceneSearchBlendedTermQuery_Builder *)addWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-                                                                         withFloat:(jfloat)boost;
-
 - (OrgApacheLuceneSearchBlendedTermQuery_Builder *)addWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
                                                                          withFloat:(jfloat)boost
                                                withOrgApacheLuceneIndexTermContext:(OrgApacheLuceneIndexTermContext *)context;

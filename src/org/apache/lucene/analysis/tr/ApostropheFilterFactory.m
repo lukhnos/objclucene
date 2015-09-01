@@ -4,45 +4,34 @@
 //
 
 #include "J2ObjC_source.h"
-#include "java/lang/IllegalArgumentException.h"
-#include "java/util/Map.h"
-#include "org/apache/lucene/analysis/TokenStream.h"
-#include "org/apache/lucene/analysis/tr/ApostropheFilter.h"
 #include "org/apache/lucene/analysis/tr/ApostropheFilterFactory.h"
-#include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneAnalysisTrApostropheFilterFactory
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args {
-  OrgApacheLuceneAnalysisTrApostropheFilterFactory_initWithJavaUtilMap_(self, args);
+- (instancetype)init {
+  OrgApacheLuceneAnalysisTrApostropheFilterFactory_init(self);
   return self;
-}
-
-- (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  return [new_OrgApacheLuceneAnalysisTrApostropheFilter_initWithOrgApacheLuceneAnalysisTokenStream_(input) autorelease];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "ApostropheFilterFactory", NULL, 0x1, NULL, NULL },
-    { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.TokenStream;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisTrApostropheFilterFactory = { 2, "ApostropheFilterFactory", "org.apache.lucene.analysis.tr", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisTrApostropheFilterFactory = { 2, "ApostropheFilterFactory", "org.apache.lucene.analysis.tr", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisTrApostropheFilterFactory;
 }
 
 @end
 
-void OrgApacheLuceneAnalysisTrApostropheFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisTrApostropheFilterFactory *self, id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
-  if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameter(s): ", args)) autorelease];
-  }
+void OrgApacheLuceneAnalysisTrApostropheFilterFactory_init(OrgApacheLuceneAnalysisTrApostropheFilterFactory *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneAnalysisTrApostropheFilterFactory *new_OrgApacheLuceneAnalysisTrApostropheFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+OrgApacheLuceneAnalysisTrApostropheFilterFactory *new_OrgApacheLuceneAnalysisTrApostropheFilterFactory_init() {
   OrgApacheLuceneAnalysisTrApostropheFilterFactory *self = [OrgApacheLuceneAnalysisTrApostropheFilterFactory alloc];
-  OrgApacheLuceneAnalysisTrApostropheFilterFactory_initWithJavaUtilMap_(self, args);
+  OrgApacheLuceneAnalysisTrApostropheFilterFactory_init(self);
   return self;
 }
 

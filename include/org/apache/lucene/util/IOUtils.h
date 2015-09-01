@@ -16,16 +16,12 @@
 #if !defined (_OrgApacheLuceneUtilIOUtils_) && (OrgApacheLuceneUtilIOUtils_INCLUDE_ALL || OrgApacheLuceneUtilIOUtils_INCLUDE)
 #define _OrgApacheLuceneUtilIOUtils_
 
-@class IOSClass;
 @class IOSObjectArray;
-@class JavaIoInputStream;
-@class JavaIoReader;
 @class JavaLangThrowable;
 @class JavaNioCharsetCharset;
 @class OrgApacheLuceneStoreDirectory;
 @class OrgLukhnosPortmobileFilePath;
 @protocol JavaLangIterable;
-@protocol JavaUtilCollection;
 
 @interface OrgApacheLuceneUtilIOUtils : NSObject
 
@@ -39,32 +35,15 @@
 
 + (void)closeWhileHandlingExceptionWithJavaLangIterable:(id<JavaLangIterable>)objects;
 
-+ (void)deleteFilesIfExistWithJavaUtilCollection:(id<JavaUtilCollection>)files;
-
-+ (void)deleteFilesIfExistWithOrgLukhnosPortmobileFilePathArray:(IOSObjectArray *)files;
-
-+ (void)deleteFilesIgnoringExceptionsWithJavaUtilCollection:(id<JavaUtilCollection>)files;
-
 + (void)deleteFilesIgnoringExceptionsWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
                                                      withNSStringArray:(IOSObjectArray *)files;
-
-+ (void)deleteFilesIgnoringExceptionsWithOrgLukhnosPortmobileFilePathArray:(IOSObjectArray *)files;
 
 + (void)fsyncWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)fileToSync
                                   withBoolean:(jboolean)isDir;
 
-+ (JavaIoReader *)getDecodingReaderWithIOSClass:(IOSClass *)clazz
-                                   withNSString:(NSString *)resource
-                      withJavaNioCharsetCharset:(JavaNioCharsetCharset *)charSet;
-
-+ (JavaIoReader *)getDecodingReaderWithJavaIoInputStream:(JavaIoInputStream *)stream
-                               withJavaNioCharsetCharset:(JavaNioCharsetCharset *)charSet;
-
 + (void)reThrowWithJavaLangThrowable:(JavaLangThrowable *)th;
 
 + (void)reThrowUncheckedWithJavaLangThrowable:(JavaLangThrowable *)th;
-
-+ (void)rmWithOrgLukhnosPortmobileFilePathArray:(IOSObjectArray *)locations;
 
 + (jboolean)spinsWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir;
 
@@ -92,21 +71,7 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilIOUtils_closeWhileHandlingExceptionWit
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilIOUtils_closeWhileHandlingExceptionWithJavaLangIterable_(id<JavaLangIterable> objects);
 
-FOUNDATION_EXPORT JavaIoReader *OrgApacheLuceneUtilIOUtils_getDecodingReaderWithJavaIoInputStream_withJavaNioCharsetCharset_(JavaIoInputStream *stream, JavaNioCharsetCharset *charSet);
-
-FOUNDATION_EXPORT JavaIoReader *OrgApacheLuceneUtilIOUtils_getDecodingReaderWithIOSClass_withNSString_withJavaNioCharsetCharset_(IOSClass *clazz, NSString *resource, JavaNioCharsetCharset *charSet);
-
 FOUNDATION_EXPORT void OrgApacheLuceneUtilIOUtils_deleteFilesIgnoringExceptionsWithOrgApacheLuceneStoreDirectory_withNSStringArray_(OrgApacheLuceneStoreDirectory *dir, IOSObjectArray *files);
-
-FOUNDATION_EXPORT void OrgApacheLuceneUtilIOUtils_deleteFilesIgnoringExceptionsWithOrgLukhnosPortmobileFilePathArray_(IOSObjectArray *files);
-
-FOUNDATION_EXPORT void OrgApacheLuceneUtilIOUtils_deleteFilesIgnoringExceptionsWithJavaUtilCollection_(id<JavaUtilCollection> files);
-
-FOUNDATION_EXPORT void OrgApacheLuceneUtilIOUtils_deleteFilesIfExistWithOrgLukhnosPortmobileFilePathArray_(IOSObjectArray *files);
-
-FOUNDATION_EXPORT void OrgApacheLuceneUtilIOUtils_deleteFilesIfExistWithJavaUtilCollection_(id<JavaUtilCollection> files);
-
-FOUNDATION_EXPORT void OrgApacheLuceneUtilIOUtils_rmWithOrgLukhnosPortmobileFilePathArray_(IOSObjectArray *locations);
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilIOUtils_reThrowWithJavaLangThrowable_(JavaLangThrowable *th);
 

@@ -20,42 +20,19 @@
 #define OrgApacheLuceneRangetreeSliceReader_INCLUDE 1
 #include "org/apache/lucene/rangetree/SliceReader.h"
 
-@class OrgApacheLuceneStoreInputStreamDataInput;
-@class OrgLukhnosPortmobileFilePath;
-
-@interface OrgApacheLuceneRangetreeOfflineSliceReader : NSObject < OrgApacheLuceneRangetreeSliceReader > {
- @public
-  OrgApacheLuceneStoreInputStreamDataInput *in_;
-  jlong countLeft_;
-}
-
-#pragma mark Public
-
-- (void)close;
-
-- (jint)docID;
-
-- (jboolean)next;
-
-- (jlong)ord;
-
-- (jlong)value;
+@interface OrgApacheLuceneRangetreeOfflineSliceReader : NSObject < OrgApacheLuceneRangetreeSliceReader >
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)tempFile
-                                            withLong:(jlong)start
-                                            withLong:(jlong)count;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneRangetreeOfflineSliceReader)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeOfflineSliceReader, in_, OrgApacheLuceneStoreInputStreamDataInput *)
+FOUNDATION_EXPORT void OrgApacheLuceneRangetreeOfflineSliceReader_init(OrgApacheLuceneRangetreeOfflineSliceReader *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneRangetreeOfflineSliceReader_initWithOrgLukhnosPortmobileFilePath_withLong_withLong_(OrgApacheLuceneRangetreeOfflineSliceReader *self, OrgLukhnosPortmobileFilePath *tempFile, jlong start, jlong count);
-
-FOUNDATION_EXPORT OrgApacheLuceneRangetreeOfflineSliceReader *new_OrgApacheLuceneRangetreeOfflineSliceReader_initWithOrgLukhnosPortmobileFilePath_withLong_withLong_(OrgLukhnosPortmobileFilePath *tempFile, jlong start, jlong count) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneRangetreeOfflineSliceReader *new_OrgApacheLuceneRangetreeOfflineSliceReader_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeOfflineSliceReader)
 

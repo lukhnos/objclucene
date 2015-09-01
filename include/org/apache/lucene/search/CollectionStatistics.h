@@ -26,15 +26,9 @@
                         withLong:(jlong)sumTotalTermFreq
                         withLong:(jlong)sumDocFreq;
 
-- (jlong)docCount;
-
 - (NSString *)field;
 
 - (jlong)maxDoc;
-
-- (jlong)sumDocFreq;
-
-- (jlong)sumTotalTermFreq;
 
 @end
 

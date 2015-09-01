@@ -18,7 +18,6 @@
 
 @class OrgApacheLuceneIndexLeafReaderContext;
 @class OrgApacheLuceneSearchBulkScorer;
-@class OrgApacheLuceneSearchExplanation;
 @class OrgApacheLuceneSearchQuery;
 @class OrgApacheLuceneSearchScorer;
 @protocol JavaUtilSet;
@@ -31,9 +30,6 @@
 #pragma mark Public
 
 - (OrgApacheLuceneSearchBulkScorer *)bulkScorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
-
-- (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-                                                                               withInt:(jint)doc;
 
 - (void)extractTermsWithJavaUtilSet:(id<JavaUtilSet>)terms;
 

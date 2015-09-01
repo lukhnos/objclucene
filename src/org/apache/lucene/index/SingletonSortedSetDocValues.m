@@ -29,10 +29,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSingletonSortedSetDocValues, in_, OrgApa
   return self;
 }
 
-- (OrgApacheLuceneIndexSortedDocValues *)getSortedDocValues {
-  return in_;
-}
-
 - (jlong)nextOrd {
   jlong v = currentOrd_;
   currentOrd_ = OrgApacheLuceneIndexSortedSetDocValues_NO_MORE_ORDS;
@@ -55,14 +51,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSingletonSortedSetDocValues, in_, OrgApa
   return [((OrgApacheLuceneIndexSortedDocValues *) nil_chk(in_)) lookupTermWithOrgApacheLuceneUtilBytesRef:key];
 }
 
-- (jlong)ordAtWithInt:(jint)index {
-  return ord_;
-}
-
-- (jint)cardinality {
-  return (jint) (JreURShift64(ord_, 63)) ^ 1;
-}
-
 - (OrgApacheLuceneIndexTermsEnum *)termsEnum {
   return [((OrgApacheLuceneIndexSortedDocValues *) nil_chk(in_)) termsEnum];
 }
@@ -75,14 +63,11 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSingletonSortedSetDocValues, in_, OrgApa
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneIndexSortedDocValues:", "SingletonSortedSetDocValues", NULL, 0x1, NULL, NULL },
-    { "getSortedDocValues", NULL, "Lorg.apache.lucene.index.SortedDocValues;", 0x1, NULL, NULL },
     { "nextOrd", NULL, "J", 0x1, NULL, NULL },
     { "setDocumentWithInt:", "setDocument", "V", 0x1, NULL, NULL },
     { "lookupOrdWithLong:", "lookupOrd", "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
     { "getValueCount", NULL, "J", 0x1, NULL, NULL },
     { "lookupTermWithOrgApacheLuceneUtilBytesRef:", "lookupTerm", "J", 0x1, NULL, NULL },
-    { "ordAtWithInt:", "ordAt", "J", 0x1, NULL, NULL },
-    { "cardinality", NULL, "I", 0x1, NULL, NULL },
     { "termsEnum", NULL, "Lorg.apache.lucene.index.TermsEnum;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -90,7 +75,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSingletonSortedSetDocValues, in_, OrgApa
     { "currentOrd_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
     { "ord_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexSingletonSortedSetDocValues = { 2, "SingletonSortedSetDocValues", "org.apache.lucene.index", NULL, 0x10, 10, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexSingletonSortedSetDocValues = { 2, "SingletonSortedSetDocValues", "org.apache.lucene.index", NULL, 0x10, 7, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexSingletonSortedSetDocValues;
 }
 

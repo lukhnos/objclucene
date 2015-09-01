@@ -16,18 +16,7 @@
 #if !defined (_OrgApacheLuceneQueryparserFlexibleMessagesMessage_) && (OrgApacheLuceneQueryparserFlexibleMessagesMessage_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleMessagesMessage_INCLUDE)
 #define _OrgApacheLuceneQueryparserFlexibleMessagesMessage_
 
-@class IOSObjectArray;
-@class JavaUtilLocale;
-
 @protocol OrgApacheLuceneQueryparserFlexibleMessagesMessage < NSObject, JavaObject >
-
-- (NSString *)getKey;
-
-- (IOSObjectArray *)getArguments;
-
-- (NSString *)getLocalizedMessage;
-
-- (NSString *)getLocalizedMessageWithJavaUtilLocale:(JavaUtilLocale *)locale;
 
 @end
 

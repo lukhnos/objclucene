@@ -30,8 +30,6 @@
 
 - (id)getWithIOSClass:(IOSClass *)type;
 
-- (void)removeWithIOSClass:(IOSClass *)type;
-
 #pragma mark Protected
 
 - (instancetype)init;

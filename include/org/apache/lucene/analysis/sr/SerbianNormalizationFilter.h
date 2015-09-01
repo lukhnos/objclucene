@@ -20,23 +20,19 @@
 #define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
-@class OrgApacheLuceneAnalysisTokenStream;
-
 @interface OrgApacheLuceneAnalysisSrSerbianNormalizationFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
-
-- (jboolean)incrementToken;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisSrSerbianNormalizationFilter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisSrSerbianNormalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisSrSerbianNormalizationFilter *self, OrgApacheLuceneAnalysisTokenStream *input);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisSrSerbianNormalizationFilter_init(OrgApacheLuceneAnalysisSrSerbianNormalizationFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisSrSerbianNormalizationFilter *new_OrgApacheLuceneAnalysisSrSerbianNormalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisSrSerbianNormalizationFilter *new_OrgApacheLuceneAnalysisSrSerbianNormalizationFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSrSerbianNormalizationFilter)
 

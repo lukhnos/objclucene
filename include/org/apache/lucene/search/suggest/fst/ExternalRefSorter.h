@@ -24,66 +24,21 @@
 #define JavaIoCloseable_INCLUDE 1
 #include "java/io/Closeable.h"
 
-@class OrgApacheLuceneUtilBytesRef;
-@class OrgApacheLuceneUtilOfflineSorter;
-@protocol JavaUtilComparator;
-@protocol OrgApacheLuceneUtilBytesRefIterator;
-
 @interface OrgApacheLuceneSearchSuggestFstExternalRefSorter : NSObject < OrgApacheLuceneSearchSuggestFstBytesRefSorter, JavaIoCloseable >
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneUtilOfflineSorter:(OrgApacheLuceneUtilOfflineSorter *)sort;
-
-- (void)addWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)utf8;
-
-- (void)close;
-
-- (id<JavaUtilComparator>)getComparator;
-
-- (id<OrgApacheLuceneUtilBytesRefIterator>)iterator;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestFstExternalRefSorter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestFstExternalRefSorter_initWithOrgApacheLuceneUtilOfflineSorter_(OrgApacheLuceneSearchSuggestFstExternalRefSorter *self, OrgApacheLuceneUtilOfflineSorter *sort);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestFstExternalRefSorter_init(OrgApacheLuceneSearchSuggestFstExternalRefSorter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestFstExternalRefSorter *new_OrgApacheLuceneSearchSuggestFstExternalRefSorter_initWithOrgApacheLuceneUtilOfflineSorter_(OrgApacheLuceneUtilOfflineSorter *sort) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestFstExternalRefSorter *new_OrgApacheLuceneSearchSuggestFstExternalRefSorter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestFstExternalRefSorter)
-
-#endif
-
-#if !defined (_OrgApacheLuceneSearchSuggestFstExternalRefSorter_ByteSequenceIterator_) && (OrgApacheLuceneSearchSuggestFstExternalRefSorter_INCLUDE_ALL || OrgApacheLuceneSearchSuggestFstExternalRefSorter_ByteSequenceIterator_INCLUDE)
-#define _OrgApacheLuceneSearchSuggestFstExternalRefSorter_ByteSequenceIterator_
-
-#define OrgApacheLuceneUtilBytesRefIterator_RESTRICT 1
-#define OrgApacheLuceneUtilBytesRefIterator_INCLUDE 1
-#include "org/apache/lucene/util/BytesRefIterator.h"
-
-@class OrgApacheLuceneSearchSuggestFstExternalRefSorter;
-@class OrgApacheLuceneUtilBytesRef;
-@class OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader;
-
-@interface OrgApacheLuceneSearchSuggestFstExternalRefSorter_ByteSequenceIterator : NSObject < OrgApacheLuceneUtilBytesRefIterator >
-
-#pragma mark Public
-
-- (instancetype)initWithOrgApacheLuceneSearchSuggestFstExternalRefSorter:(OrgApacheLuceneSearchSuggestFstExternalRefSorter *)outer$
-                withOrgApacheLuceneUtilOfflineSorter_ByteSequencesReader:(OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader *)reader;
-
-- (OrgApacheLuceneUtilBytesRef *)next;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestFstExternalRefSorter_ByteSequenceIterator)
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestFstExternalRefSorter_ByteSequenceIterator_initWithOrgApacheLuceneSearchSuggestFstExternalRefSorter_withOrgApacheLuceneUtilOfflineSorter_ByteSequencesReader_(OrgApacheLuceneSearchSuggestFstExternalRefSorter_ByteSequenceIterator *self, OrgApacheLuceneSearchSuggestFstExternalRefSorter *outer$, OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader *reader);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestFstExternalRefSorter_ByteSequenceIterator *new_OrgApacheLuceneSearchSuggestFstExternalRefSorter_ByteSequenceIterator_initWithOrgApacheLuceneSearchSuggestFstExternalRefSorter_withOrgApacheLuceneUtilOfflineSorter_ByteSequencesReader_(OrgApacheLuceneSearchSuggestFstExternalRefSorter *outer$, OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader *reader) NS_RETURNS_RETAINED;
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestFstExternalRefSorter_ByteSequenceIterator)
 
 #endif
 

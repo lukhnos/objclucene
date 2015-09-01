@@ -7,17 +7,11 @@
 #include "java/lang/Character.h"
 #include "org/apache/lucene/analysis/core/LetterTokenizer.h"
 #include "org/apache/lucene/analysis/util/CharTokenizer.h"
-#include "org/apache/lucene/util/AttributeFactory.h"
 
 @implementation OrgApacheLuceneAnalysisCoreLetterTokenizer
 
 - (instancetype)init {
   OrgApacheLuceneAnalysisCoreLetterTokenizer_init(self);
-  return self;
-}
-
-- (instancetype)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory {
-  OrgApacheLuceneAnalysisCoreLetterTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(self, factory);
   return self;
 }
 
@@ -28,10 +22,9 @@
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "init", "LetterTokenizer", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilAttributeFactory:", "LetterTokenizer", NULL, 0x1, NULL, NULL },
     { "isTokenCharWithInt:", "isTokenChar", "Z", 0x4, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCoreLetterTokenizer = { 2, "LetterTokenizer", "org.apache.lucene.analysis.core", NULL, 0x1, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCoreLetterTokenizer = { 2, "LetterTokenizer", "org.apache.lucene.analysis.core", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisCoreLetterTokenizer;
 }
 
@@ -44,16 +37,6 @@ void OrgApacheLuceneAnalysisCoreLetterTokenizer_init(OrgApacheLuceneAnalysisCore
 OrgApacheLuceneAnalysisCoreLetterTokenizer *new_OrgApacheLuceneAnalysisCoreLetterTokenizer_init() {
   OrgApacheLuceneAnalysisCoreLetterTokenizer *self = [OrgApacheLuceneAnalysisCoreLetterTokenizer alloc];
   OrgApacheLuceneAnalysisCoreLetterTokenizer_init(self);
-  return self;
-}
-
-void OrgApacheLuceneAnalysisCoreLetterTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(OrgApacheLuceneAnalysisCoreLetterTokenizer *self, OrgApacheLuceneUtilAttributeFactory *factory) {
-  OrgApacheLuceneAnalysisUtilCharTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(self, factory);
-}
-
-OrgApacheLuceneAnalysisCoreLetterTokenizer *new_OrgApacheLuceneAnalysisCoreLetterTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(OrgApacheLuceneUtilAttributeFactory *factory) {
-  OrgApacheLuceneAnalysisCoreLetterTokenizer *self = [OrgApacheLuceneAnalysisCoreLetterTokenizer alloc];
-  OrgApacheLuceneAnalysisCoreLetterTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(self, factory);
   return self;
 }
 

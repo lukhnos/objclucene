@@ -20,122 +20,19 @@
 #define OrgApacheLuceneQueriesFunctionValueSource_INCLUDE 1
 #include "org/apache/lucene/queries/function/ValueSource.h"
 
-@class IOSObjectArray;
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneQueriesFunctionFunctionValues;
-@class OrgApacheLuceneSearchIndexSearcher;
-@protocol JavaUtilList;
-@protocol JavaUtilMap;
-
-@interface OrgApacheLuceneQueriesFunctionValuesourceMultiFunction : OrgApacheLuceneQueriesFunctionValueSource {
- @public
-  id<JavaUtilList> sources_;
-}
+@interface OrgApacheLuceneQueriesFunctionValuesourceMultiFunction : OrgApacheLuceneQueriesFunctionValueSource
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)sources;
-
-+ (jboolean)allExistsWithInt:(jint)doc
-withOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)values1
-withOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)values2;
-
-+ (jboolean)allExistsWithInt:(jint)doc
-withOrgApacheLuceneQueriesFunctionFunctionValuesArray:(IOSObjectArray *)values;
-
-+ (jboolean)anyExistsWithInt:(jint)doc
-withOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)values1
-withOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)values2;
-
-+ (jboolean)anyExistsWithInt:(jint)doc
-withOrgApacheLuceneQueriesFunctionFunctionValuesArray:(IOSObjectArray *)values;
-
-- (void)createWeightWithJavaUtilMap:(id<JavaUtilMap>)context
-withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher;
-
-- (NSString *)description__;
-
-+ (NSString *)description__WithNSString:(NSString *)name
-                       withJavaUtilList:(id<JavaUtilList>)sources;
-
-- (jboolean)isEqual:(id)o;
-
-- (NSUInteger)hash;
-
-+ (NSString *)toStringWithNSString:(NSString *)name
-withOrgApacheLuceneQueriesFunctionFunctionValuesArray:(IOSObjectArray *)valsArr
-                           withInt:(jint)doc;
-
-+ (IOSObjectArray *)valsArrWithJavaUtilList:(id<JavaUtilList>)sources
-                            withJavaUtilMap:(id<JavaUtilMap>)fcontext
-  withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext;
-
-#pragma mark Protected
-
-- (NSString *)name;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceMultiFunction)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceMultiFunction, sources_, id<JavaUtilList>)
-
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_initWithJavaUtilList_(OrgApacheLuceneQueriesFunctionValuesourceMultiFunction *self, id<JavaUtilList> sources);
-
-FOUNDATION_EXPORT jboolean OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_allExistsWithInt_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_(jint doc, IOSObjectArray *values);
-
-FOUNDATION_EXPORT jboolean OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_anyExistsWithInt_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_(jint doc, IOSObjectArray *values);
-
-FOUNDATION_EXPORT jboolean OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_allExistsWithInt_withOrgApacheLuceneQueriesFunctionFunctionValues_withOrgApacheLuceneQueriesFunctionFunctionValues_(jint doc, OrgApacheLuceneQueriesFunctionFunctionValues *values1, OrgApacheLuceneQueriesFunctionFunctionValues *values2);
-
-FOUNDATION_EXPORT jboolean OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_anyExistsWithInt_withOrgApacheLuceneQueriesFunctionFunctionValues_withOrgApacheLuceneQueriesFunctionFunctionValues_(jint doc, OrgApacheLuceneQueriesFunctionFunctionValues *values1, OrgApacheLuceneQueriesFunctionFunctionValues *values2);
-
-FOUNDATION_EXPORT NSString *OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_description__WithNSString_withJavaUtilList_(NSString *name, id<JavaUtilList> sources);
-
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_valsArrWithJavaUtilList_withJavaUtilMap_withOrgApacheLuceneIndexLeafReaderContext_(id<JavaUtilList> sources, id<JavaUtilMap> fcontext, OrgApacheLuceneIndexLeafReaderContext *readerContext);
-
-FOUNDATION_EXPORT NSString *OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_toStringWithNSString_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_withInt_(NSString *name, IOSObjectArray *valsArr, jint doc);
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_init(OrgApacheLuceneQueriesFunctionValuesourceMultiFunction *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceMultiFunction)
-
-#endif
-
-#if !defined (_OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_Values_) && (OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_INCLUDE_ALL || OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_Values_INCLUDE)
-#define _OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_Values_
-
-#define OrgApacheLuceneQueriesFunctionFunctionValues_RESTRICT 1
-#define OrgApacheLuceneQueriesFunctionFunctionValues_INCLUDE 1
-#include "org/apache/lucene/queries/function/FunctionValues.h"
-
-@class IOSObjectArray;
-@class OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller;
-@class OrgApacheLuceneQueriesFunctionValuesourceMultiFunction;
-
-@interface OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_Values : OrgApacheLuceneQueriesFunctionFunctionValues {
- @public
-  IOSObjectArray *valsArr_;
-}
-
-#pragma mark Public
-
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValuesourceMultiFunction:(OrgApacheLuceneQueriesFunctionValuesourceMultiFunction *)outer$
-                         withOrgApacheLuceneQueriesFunctionFunctionValuesArray:(IOSObjectArray *)valsArr;
-
-- (OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller *)getValueFiller;
-
-- (NSString *)toStringWithInt:(jint)doc;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_Values)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_Values, valsArr_, IOSObjectArray *)
-
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_Values_initWithOrgApacheLuceneQueriesFunctionValuesourceMultiFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_(OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_Values *self, OrgApacheLuceneQueriesFunctionValuesourceMultiFunction *outer$, IOSObjectArray *valsArr);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_Values *new_OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_Values_initWithOrgApacheLuceneQueriesFunctionValuesourceMultiFunction_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_(OrgApacheLuceneQueriesFunctionValuesourceMultiFunction *outer$, IOSObjectArray *valsArr) NS_RETURNS_RETAINED;
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_Values)
 
 #endif
 

@@ -20,41 +20,22 @@
 #define OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource_INCLUDE 1
 #include "org/apache/lucene/queries/function/valuesource/FieldCacheSource.h"
 
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneQueriesFunctionFunctionValues;
-@protocol JavaUtilMap;
-
-@interface OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource : OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource {
- @public
-  NSString *qfield_;
-}
+@interface OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource : OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field
-                    withNSString:(NSString *)qfield;
-
-- (NSString *)description__;
-
-- (jboolean)isEqual:(id)o;
-
-- (OrgApacheLuceneQueriesFunctionFunctionValues *)getValuesWithJavaUtilMap:(id<JavaUtilMap>)context
-                                 withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext;
-
-- (NSUInteger)hash;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource, qfield_, NSString *)
-
 FOUNDATION_EXPORT NSString *OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_NAME_;
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource, NAME_, NSString *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_initWithNSString_withNSString_(OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource *self, NSString *field, NSString *qfield);
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_init(OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_initWithNSString_withNSString_(NSString *field, NSString *qfield) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource)
 

@@ -20,24 +20,19 @@
 #define JavaUtilConcurrentThreadFactory_INCLUDE 1
 #include "java/util/concurrent/ThreadFactory.h"
 
-@class JavaLangThread;
-@protocol JavaLangRunnable;
-
 @interface OrgApacheLuceneUtilNamedThreadFactory : NSObject < JavaUtilConcurrentThreadFactory >
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)threadNamePrefix;
-
-- (JavaLangThread *)newThreadWithJavaLangRunnable:(id<JavaLangRunnable>)r OBJC_METHOD_FAMILY_NONE;
+- (instancetype)init;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneUtilNamedThreadFactory)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilNamedThreadFactory)
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilNamedThreadFactory_initWithNSString_(OrgApacheLuceneUtilNamedThreadFactory *self, NSString *threadNamePrefix);
+FOUNDATION_EXPORT void OrgApacheLuceneUtilNamedThreadFactory_init(OrgApacheLuceneUtilNamedThreadFactory *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilNamedThreadFactory *new_OrgApacheLuceneUtilNamedThreadFactory_initWithNSString_(NSString *threadNamePrefix) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilNamedThreadFactory *new_OrgApacheLuceneUtilNamedThreadFactory_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilNamedThreadFactory)
 

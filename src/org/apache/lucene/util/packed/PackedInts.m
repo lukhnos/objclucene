@@ -17,9 +17,6 @@
 #include "java/lang/Math.h"
 #include "java/lang/System.h"
 #include "java/util/Arrays.h"
-#include "java/util/Collection.h"
-#include "java/util/Collections.h"
-#include "java/util/List.h"
 #include "org/apache/lucene/codecs/CodecUtil.h"
 #include "org/apache/lucene/index/NumericDocValues.h"
 #include "org/apache/lucene/store/DataInput.h"
@@ -172,21 +169,12 @@ NSString *OrgApacheLuceneUtilPackedPackedInts_CODEC_NAME_ = @"PackedInts";
   return OrgApacheLuceneUtilPackedPackedInts_getReaderIteratorNoHeaderWithOrgApacheLuceneStoreDataInput_withOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withInt_withInt_withInt_withInt_(inArg, format, version_, valueCount, bitsPerValue, mem);
 }
 
-+ (id<OrgApacheLuceneUtilPackedPackedInts_ReaderIterator>)getReaderIteratorWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
-                                                                                                     withInt:(jint)mem {
-  return OrgApacheLuceneUtilPackedPackedInts_getReaderIteratorWithOrgApacheLuceneStoreDataInput_withInt_(inArg, mem);
-}
-
 + (OrgApacheLuceneUtilPackedPackedInts_Reader *)getDirectReaderNoHeaderWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)inArg
                                                        withOrgApacheLuceneUtilPackedPackedInts_FormatEnum:(OrgApacheLuceneUtilPackedPackedInts_FormatEnum *)format
                                                                                                   withInt:(jint)version_
                                                                                                   withInt:(jint)valueCount
                                                                                                   withInt:(jint)bitsPerValue {
   return OrgApacheLuceneUtilPackedPackedInts_getDirectReaderNoHeaderWithOrgApacheLuceneStoreIndexInput_withOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withInt_withInt_withInt_(inArg, format, version_, valueCount, bitsPerValue);
-}
-
-+ (OrgApacheLuceneUtilPackedPackedInts_Reader *)getDirectReaderWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)inArg {
-  return OrgApacheLuceneUtilPackedPackedInts_getDirectReaderWithOrgApacheLuceneStoreIndexInput_(inArg);
 }
 
 + (OrgApacheLuceneUtilPackedPackedInts_Mutable *)getMutableWithInt:(jint)valueCount
@@ -207,13 +195,6 @@ NSString *OrgApacheLuceneUtilPackedPackedInts_CODEC_NAME_ = @"PackedInts";
                                                                                             withInt:(jint)bitsPerValue
                                                                                             withInt:(jint)mem {
   return OrgApacheLuceneUtilPackedPackedInts_getWriterNoHeaderWithOrgApacheLuceneStoreDataOutput_withOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withInt_withInt_withInt_(outArg, format, valueCount, bitsPerValue, mem);
-}
-
-+ (OrgApacheLuceneUtilPackedPackedInts_Writer *)getWriterWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg
-                                                                                    withInt:(jint)valueCount
-                                                                                    withInt:(jint)bitsPerValue
-                                                                                  withFloat:(jfloat)acceptableOverheadRatio {
-  return OrgApacheLuceneUtilPackedPackedInts_getWriterWithOrgApacheLuceneStoreDataOutput_withInt_withInt_withFloat_(outArg, valueCount, bitsPerValue, acceptableOverheadRatio);
 }
 
 + (jint)bitsRequiredWithLong:(jlong)maxValue {
@@ -271,13 +252,10 @@ NSString *OrgApacheLuceneUtilPackedPackedInts_CODEC_NAME_ = @"PackedInts";
     { "getReaderNoHeaderWithOrgApacheLuceneStoreDataInput:withOrgApacheLuceneUtilPackedPackedInts_FormatEnum:withInt:withInt:withInt:", "getReaderNoHeader", "Lorg.apache.lucene.util.packed.PackedInts$Reader;", 0x9, "Ljava.io.IOException;", NULL },
     { "getReaderWithOrgApacheLuceneStoreDataInput:", "getReader", "Lorg.apache.lucene.util.packed.PackedInts$Reader;", 0x9, "Ljava.io.IOException;", NULL },
     { "getReaderIteratorNoHeaderWithOrgApacheLuceneStoreDataInput:withOrgApacheLuceneUtilPackedPackedInts_FormatEnum:withInt:withInt:withInt:withInt:", "getReaderIteratorNoHeader", "Lorg.apache.lucene.util.packed.PackedInts$ReaderIterator;", 0x9, NULL, NULL },
-    { "getReaderIteratorWithOrgApacheLuceneStoreDataInput:withInt:", "getReaderIterator", "Lorg.apache.lucene.util.packed.PackedInts$ReaderIterator;", 0x9, "Ljava.io.IOException;", NULL },
     { "getDirectReaderNoHeaderWithOrgApacheLuceneStoreIndexInput:withOrgApacheLuceneUtilPackedPackedInts_FormatEnum:withInt:withInt:withInt:", "getDirectReaderNoHeader", "Lorg.apache.lucene.util.packed.PackedInts$Reader;", 0x9, NULL, NULL },
-    { "getDirectReaderWithOrgApacheLuceneStoreIndexInput:", "getDirectReader", "Lorg.apache.lucene.util.packed.PackedInts$Reader;", 0x9, "Ljava.io.IOException;", NULL },
     { "getMutableWithInt:withInt:withFloat:", "getMutable", "Lorg.apache.lucene.util.packed.PackedInts$Mutable;", 0x9, NULL, NULL },
     { "getMutableWithInt:withInt:withOrgApacheLuceneUtilPackedPackedInts_FormatEnum:", "getMutable", "Lorg.apache.lucene.util.packed.PackedInts$Mutable;", 0x9, NULL, NULL },
     { "getWriterNoHeaderWithOrgApacheLuceneStoreDataOutput:withOrgApacheLuceneUtilPackedPackedInts_FormatEnum:withInt:withInt:withInt:", "getWriterNoHeader", "Lorg.apache.lucene.util.packed.PackedInts$Writer;", 0x9, NULL, NULL },
-    { "getWriterWithOrgApacheLuceneStoreDataOutput:withInt:withInt:withFloat:", "getWriter", "Lorg.apache.lucene.util.packed.PackedInts$Writer;", 0x9, "Ljava.io.IOException;", NULL },
     { "bitsRequiredWithLong:", "bitsRequired", "I", 0x9, NULL, NULL },
     { "unsignedBitsRequiredWithLong:", "unsignedBitsRequired", "I", 0x9, NULL, NULL },
     { "maxValueWithInt:", "maxValue", "J", 0x9, NULL, NULL },
@@ -300,7 +278,7 @@ NSString *OrgApacheLuceneUtilPackedPackedInts_CODEC_NAME_ = @"PackedInts";
     { "VERSION_CURRENT", "VERSION_CURRENT", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilPackedPackedInts_VERSION_CURRENT },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.util.packed.PackedInts$Format;", "Lorg.apache.lucene.util.packed.PackedInts$FormatAndBits;", "Lorg.apache.lucene.util.packed.PackedInts$Decoder;", "Lorg.apache.lucene.util.packed.PackedInts$Encoder;", "Lorg.apache.lucene.util.packed.PackedInts$Reader;", "Lorg.apache.lucene.util.packed.PackedInts$ReaderIterator;", "Lorg.apache.lucene.util.packed.PackedInts$ReaderIteratorImpl;", "Lorg.apache.lucene.util.packed.PackedInts$Mutable;", "Lorg.apache.lucene.util.packed.PackedInts$ReaderImpl;", "Lorg.apache.lucene.util.packed.PackedInts$MutableImpl;", "Lorg.apache.lucene.util.packed.PackedInts$NullReader;", "Lorg.apache.lucene.util.packed.PackedInts$Writer;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPackedInts = { 2, "PackedInts", "org.apache.lucene.util.packed", NULL, 0x1, 22, methods, 10, fields, 0, NULL, 12, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPackedInts = { 2, "PackedInts", "org.apache.lucene.util.packed", NULL, 0x1, 19, methods, 10, fields, 0, NULL, 12, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneUtilPackedPackedInts;
 }
 
@@ -425,16 +403,6 @@ id<OrgApacheLuceneUtilPackedPackedInts_ReaderIterator> OrgApacheLuceneUtilPacked
   return [new_OrgApacheLuceneUtilPackedPackedReaderIterator_initWithOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withInt_withInt_withInt_withOrgApacheLuceneStoreDataInput_withInt_(format, version_, valueCount, bitsPerValue, inArg, mem) autorelease];
 }
 
-id<OrgApacheLuceneUtilPackedPackedInts_ReaderIterator> OrgApacheLuceneUtilPackedPackedInts_getReaderIteratorWithOrgApacheLuceneStoreDataInput_withInt_(OrgApacheLuceneStoreDataInput *inArg, jint mem) {
-  OrgApacheLuceneUtilPackedPackedInts_initialize();
-  jint version_ = OrgApacheLuceneCodecsCodecUtil_checkHeaderWithOrgApacheLuceneStoreDataInput_withNSString_withInt_withInt_(inArg, OrgApacheLuceneUtilPackedPackedInts_CODEC_NAME_, OrgApacheLuceneUtilPackedPackedInts_VERSION_START, OrgApacheLuceneUtilPackedPackedInts_VERSION_CURRENT);
-  jint bitsPerValue = [((OrgApacheLuceneStoreDataInput *) nil_chk(inArg)) readVInt];
-  JreAssert((bitsPerValue > 0 && bitsPerValue <= 64), (JreStrcat("$I", @"bitsPerValue=", bitsPerValue)));
-  jint valueCount = [inArg readVInt];
-  OrgApacheLuceneUtilPackedPackedInts_FormatEnum *format = OrgApacheLuceneUtilPackedPackedInts_FormatEnum_byIdWithInt_([inArg readVInt]);
-  return OrgApacheLuceneUtilPackedPackedInts_getReaderIteratorNoHeaderWithOrgApacheLuceneStoreDataInput_withOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withInt_withInt_withInt_withInt_(inArg, format, version_, valueCount, bitsPerValue, mem);
-}
-
 OrgApacheLuceneUtilPackedPackedInts_Reader *OrgApacheLuceneUtilPackedPackedInts_getDirectReaderNoHeaderWithOrgApacheLuceneStoreIndexInput_withOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withInt_withInt_withInt_(OrgApacheLuceneStoreIndexInput *inArg, OrgApacheLuceneUtilPackedPackedInts_FormatEnum *format, jint version_, jint valueCount, jint bitsPerValue) {
   OrgApacheLuceneUtilPackedPackedInts_initialize();
   OrgApacheLuceneUtilPackedPackedInts_checkVersionWithInt_(version_);
@@ -457,16 +425,6 @@ OrgApacheLuceneUtilPackedPackedInts_Reader *OrgApacheLuceneUtilPackedPackedInts_
       @throw [new_JavaLangAssertionError_initWithId_(JreStrcat("$@", @"Unknwown format: ", format)) autorelease];
     }
   }
-}
-
-OrgApacheLuceneUtilPackedPackedInts_Reader *OrgApacheLuceneUtilPackedPackedInts_getDirectReaderWithOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneStoreIndexInput *inArg) {
-  OrgApacheLuceneUtilPackedPackedInts_initialize();
-  jint version_ = OrgApacheLuceneCodecsCodecUtil_checkHeaderWithOrgApacheLuceneStoreDataInput_withNSString_withInt_withInt_(inArg, OrgApacheLuceneUtilPackedPackedInts_CODEC_NAME_, OrgApacheLuceneUtilPackedPackedInts_VERSION_START, OrgApacheLuceneUtilPackedPackedInts_VERSION_CURRENT);
-  jint bitsPerValue = [((OrgApacheLuceneStoreIndexInput *) nil_chk(inArg)) readVInt];
-  JreAssert((bitsPerValue > 0 && bitsPerValue <= 64), (JreStrcat("$I", @"bitsPerValue=", bitsPerValue)));
-  jint valueCount = [inArg readVInt];
-  OrgApacheLuceneUtilPackedPackedInts_FormatEnum *format = OrgApacheLuceneUtilPackedPackedInts_FormatEnum_byIdWithInt_([inArg readVInt]);
-  return OrgApacheLuceneUtilPackedPackedInts_getDirectReaderNoHeaderWithOrgApacheLuceneStoreIndexInput_withOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withInt_withInt_withInt_(inArg, format, version_, valueCount, bitsPerValue);
 }
 
 OrgApacheLuceneUtilPackedPackedInts_Mutable *OrgApacheLuceneUtilPackedPackedInts_getMutableWithInt_withInt_withFloat_(jint valueCount, jint bitsPerValue, jfloat acceptableOverheadRatio) {
@@ -511,15 +469,6 @@ OrgApacheLuceneUtilPackedPackedInts_Mutable *OrgApacheLuceneUtilPackedPackedInts
 OrgApacheLuceneUtilPackedPackedInts_Writer *OrgApacheLuceneUtilPackedPackedInts_getWriterNoHeaderWithOrgApacheLuceneStoreDataOutput_withOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withInt_withInt_withInt_(OrgApacheLuceneStoreDataOutput *outArg, OrgApacheLuceneUtilPackedPackedInts_FormatEnum *format, jint valueCount, jint bitsPerValue, jint mem) {
   OrgApacheLuceneUtilPackedPackedInts_initialize();
   return [new_OrgApacheLuceneUtilPackedPackedWriter_initWithOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withOrgApacheLuceneStoreDataOutput_withInt_withInt_withInt_(format, outArg, valueCount, bitsPerValue, mem) autorelease];
-}
-
-OrgApacheLuceneUtilPackedPackedInts_Writer *OrgApacheLuceneUtilPackedPackedInts_getWriterWithOrgApacheLuceneStoreDataOutput_withInt_withInt_withFloat_(OrgApacheLuceneStoreDataOutput *outArg, jint valueCount, jint bitsPerValue, jfloat acceptableOverheadRatio) {
-  OrgApacheLuceneUtilPackedPackedInts_initialize();
-  JreAssert((valueCount >= 0), (@"org/apache/lucene/util/packed/PackedInts.java:1099 condition failed: assert valueCount >= 0;"));
-  OrgApacheLuceneUtilPackedPackedInts_FormatAndBits *formatAndBits = OrgApacheLuceneUtilPackedPackedInts_fastestFormatAndBitsWithInt_withInt_withFloat_(valueCount, bitsPerValue, acceptableOverheadRatio);
-  OrgApacheLuceneUtilPackedPackedInts_Writer *writer = OrgApacheLuceneUtilPackedPackedInts_getWriterNoHeaderWithOrgApacheLuceneStoreDataOutput_withOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withInt_withInt_withInt_(outArg, ((OrgApacheLuceneUtilPackedPackedInts_FormatAndBits *) nil_chk(formatAndBits))->format_, valueCount, formatAndBits->bitsPerValue_, OrgApacheLuceneUtilPackedPackedInts_DEFAULT_BUFFER_SIZE);
-  [((OrgApacheLuceneUtilPackedPackedInts_Writer *) nil_chk(writer)) writeHeader];
-  return writer;
 }
 
 jint OrgApacheLuceneUtilPackedPackedInts_bitsRequiredWithLong_(jlong maxValue) {
@@ -665,11 +614,6 @@ OrgApacheLuceneUtilPackedPackedInts_FormatEnum *OrgApacheLuceneUtilPackedPackedI
   return 0.0f;
 }
 
-- (jfloat)overheadRatioWithInt:(jint)bitsPerValue {
-  JreAssert(([self isSupportedWithInt:bitsPerValue]), (@"org/apache/lucene/util/packed/PackedInts.java:208 condition failed: assert isSupported(bitsPerValue);"));
-  return [self overheadPerValueWithInt:bitsPerValue] / bitsPerValue;
-}
-
 IOSObjectArray *OrgApacheLuceneUtilPackedPackedInts_FormatEnum_values() {
   OrgApacheLuceneUtilPackedPackedInts_FormatEnum_initialize();
   return [IOSObjectArray arrayWithObjects:OrgApacheLuceneUtilPackedPackedInts_FormatEnum_values_ count:2 type:OrgApacheLuceneUtilPackedPackedInts_FormatEnum_class_()];
@@ -715,7 +659,6 @@ OrgApacheLuceneUtilPackedPackedInts_FormatEnum *OrgApacheLuceneUtilPackedPackedI
     { "longCountWithInt:withInt:withInt:", "longCount", "I", 0x1, NULL, NULL },
     { "isSupportedWithInt:", "isSupported", "Z", 0x1, NULL, NULL },
     { "overheadPerValueWithInt:", "overheadPerValue", "F", 0x1, NULL, NULL },
-    { "overheadRatioWithInt:", "overheadRatio", "F", 0x11, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "PACKED", "PACKED", 0x4019, "Lorg.apache.lucene.util.packed.PackedInts$Format;", &OrgApacheLuceneUtilPackedPackedInts_FormatEnum_PACKED, NULL, .constantValue.asLong = 0 },
@@ -723,7 +666,7 @@ OrgApacheLuceneUtilPackedPackedInts_FormatEnum *OrgApacheLuceneUtilPackedPackedI
     { "id__", "id", 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *superclass_type_args[] = {"Lorg.apache.lucene.util.packed.PackedInts$Format;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPackedInts_FormatEnum = { 2, "Format", "org.apache.lucene.util.packed", "PackedInts", 0x4009, 7, methods, 3, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/util/packed/PackedInts$Format;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPackedInts_FormatEnum = { 2, "Format", "org.apache.lucene.util.packed", "PackedInts", 0x4009, 6, methods, 3, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/util/packed/PackedInts$Format;>;" };
   return &_OrgApacheLuceneUtilPackedPackedInts_FormatEnum;
 }
 
@@ -907,10 +850,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedPackedInts_FormatAndBi
     { "byteValueCount", NULL, "I", 0x401, NULL, NULL },
     { "decodeWithLongArray:withInt:withLongArray:withInt:withInt:", "decode", "V", 0x401, NULL, NULL },
     { "decodeWithByteArray:withInt:withLongArray:withInt:withInt:", "decode", "V", 0x401, NULL, NULL },
-    { "decodeWithLongArray:withInt:withIntArray:withInt:withInt:", "decode", "V", 0x401, NULL, NULL },
     { "decodeWithByteArray:withInt:withIntArray:withInt:withInt:", "decode", "V", 0x401, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPackedInts_Decoder = { 2, "Decoder", "org.apache.lucene.util.packed", "PackedInts", 0x609, 8, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPackedInts_Decoder = { 2, "Decoder", "org.apache.lucene.util.packed", "PackedInts", 0x609, 7, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilPackedPackedInts_Decoder;
 }
 
@@ -922,16 +864,14 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedPackedInts_Decoder
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "longBlockCount", NULL, "I", 0x401, NULL, NULL },
     { "longValueCount", NULL, "I", 0x401, NULL, NULL },
     { "byteBlockCount", NULL, "I", 0x401, NULL, NULL },
     { "byteValueCount", NULL, "I", 0x401, NULL, NULL },
     { "encodeWithLongArray:withInt:withLongArray:withInt:withInt:", "encode", "V", 0x401, NULL, NULL },
     { "encodeWithLongArray:withInt:withByteArray:withInt:withInt:", "encode", "V", 0x401, NULL, NULL },
-    { "encodeWithIntArray:withInt:withLongArray:withInt:withInt:", "encode", "V", 0x401, NULL, NULL },
     { "encodeWithIntArray:withInt:withByteArray:withInt:withInt:", "encode", "V", 0x401, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPackedInts_Encoder = { 2, "Encoder", "org.apache.lucene.util.packed", "PackedInts", 0x609, 8, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPackedInts_Encoder = { 2, "Encoder", "org.apache.lucene.util.packed", "PackedInts", 0x609, 6, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilPackedPackedInts_Encoder;
 }
 
@@ -961,10 +901,6 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedPackedInts_Encoder
   return 0;
 }
 
-- (id<JavaUtilCollection>)getChildResources {
-  return JavaUtilCollections_emptyList();
-}
-
 - (instancetype)init {
   OrgApacheLuceneUtilPackedPackedInts_Reader_init(self);
   return self;
@@ -974,10 +910,9 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedPackedInts_Encoder
   static const J2ObjcMethodInfo methods[] = {
     { "getWithInt:withLongArray:withInt:withInt:", "get", "I", 0x1, NULL, NULL },
     { "size", NULL, "I", 0x401, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
     { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPackedInts_Reader = { 2, "Reader", "org.apache.lucene.util.packed", "PackedInts", 0x409, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPackedInts_Reader = { 2, "Reader", "org.apache.lucene.util.packed", "PackedInts", 0x409, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilPackedPackedInts_Reader;
 }
 
@@ -995,11 +930,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedPackedInts_Reader)
   static const J2ObjcMethodInfo methods[] = {
     { "next", NULL, "J", 0x401, "Ljava.io.IOException;", NULL },
     { "nextWithInt:", "next", "Lorg.apache.lucene.util.LongsRef;", 0x401, "Ljava.io.IOException;", NULL },
-    { "getBitsPerValue", NULL, "I", 0x401, NULL, NULL },
-    { "size", NULL, "I", 0x401, NULL, NULL },
-    { "ord", NULL, "I", 0x401, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPackedInts_ReaderIterator = { 2, "ReaderIterator", "org.apache.lucene.util.packed", "PackedInts", 0x609, 5, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPackedInts_ReaderIterator = { 2, "ReaderIterator", "org.apache.lucene.util.packed", "PackedInts", 0x609, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilPackedPackedInts_ReaderIterator;
 }
 
@@ -1025,14 +957,6 @@ withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg {
   return result;
 }
 
-- (jint)getBitsPerValue {
-  return bitsPerValue_;
-}
-
-- (jint)size {
-  return valueCount_;
-}
-
 - (void)dealloc {
   RELEASE_(in_);
   [super dealloc];
@@ -1042,15 +966,13 @@ withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithInt:withInt:withOrgApacheLuceneStoreDataInput:", "ReaderIteratorImpl", NULL, 0x4, NULL, NULL },
     { "next", NULL, "J", 0x1, "Ljava.io.IOException;", NULL },
-    { "getBitsPerValue", NULL, "I", 0x1, NULL, NULL },
-    { "size", NULL, "I", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "in_", NULL, 0x14, "Lorg.apache.lucene.store.DataInput;", NULL, NULL, .constantValue.asLong = 0 },
     { "bitsPerValue_", NULL, 0x14, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "valueCount_", NULL, 0x14, "I", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPackedInts_ReaderIteratorImpl = { 2, "ReaderIteratorImpl", "org.apache.lucene.util.packed", "PackedInts", 0x408, 4, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPackedInts_ReaderIteratorImpl = { 2, "ReaderIteratorImpl", "org.apache.lucene.util.packed", "PackedInts", 0x408, 2, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilPackedPackedInts_ReaderIteratorImpl;
 }
 
@@ -1155,12 +1077,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedPackedInts_Mutable)
   return self;
 }
 
-- (jlong)getWithInt:(jint)index {
-  // can't call an abstract method
-  [self doesNotRecognizeSelector:_cmd];
-  return 0;
-}
-
 - (jint)size {
   return valueCount_;
 }
@@ -1168,13 +1084,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedPackedInts_Mutable)
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithInt:", "ReaderImpl", NULL, 0x4, NULL, NULL },
-    { "getWithInt:", "get", "J", 0x401, NULL, NULL },
     { "size", NULL, "I", 0x11, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "valueCount_", NULL, 0x14, "I", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPackedInts_ReaderImpl = { 2, "ReaderImpl", "org.apache.lucene.util.packed", "PackedInts", 0x408, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPackedInts_ReaderImpl = { 2, "ReaderImpl", "org.apache.lucene.util.packed", "PackedInts", 0x408, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilPackedPackedInts_ReaderImpl;
 }
 

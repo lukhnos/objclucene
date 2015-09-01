@@ -44,8 +44,6 @@
 
 - (void)finish;
 
-- (jlong)ord;
-
 - (void)resetWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg;
 
 #pragma mark Protected
@@ -55,8 +53,6 @@
 - (void)writeValuesWithInt:(jint)bitsRequired;
 
 #pragma mark Package-Private
-
-- (void)addBlockOfZeros;
 
 + (void)writeVLongWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg
                                             withLong:(jlong)i;

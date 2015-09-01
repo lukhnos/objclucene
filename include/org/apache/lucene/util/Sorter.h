@@ -38,9 +38,6 @@
 #pragma mark Package-Private
 
 - (void)binarySortWithInt:(jint)from
-                  withInt:(jint)to;
-
-- (void)binarySortWithInt:(jint)from
                   withInt:(jint)to
                   withInt:(jint)i;
 

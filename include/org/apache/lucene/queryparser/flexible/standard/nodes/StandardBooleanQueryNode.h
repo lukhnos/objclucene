@@ -20,24 +20,19 @@
 #define OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode_INCLUDE 1
 #include "org/apache/lucene/queryparser/flexible/core/nodes/BooleanQueryNode.h"
 
-@protocol JavaUtilList;
-
 @interface OrgApacheLuceneQueryparserFlexibleStandardNodesStandardBooleanQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)clauses
-                         withBoolean:(jboolean)disableCoord;
-
-- (jboolean)isDisableCoord;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleStandardNodesStandardBooleanQueryNode)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardNodesStandardBooleanQueryNode_initWithJavaUtilList_withBoolean_(OrgApacheLuceneQueryparserFlexibleStandardNodesStandardBooleanQueryNode *self, id<JavaUtilList> clauses, jboolean disableCoord);
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardNodesStandardBooleanQueryNode_init(OrgApacheLuceneQueryparserFlexibleStandardNodesStandardBooleanQueryNode *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardNodesStandardBooleanQueryNode *new_OrgApacheLuceneQueryparserFlexibleStandardNodesStandardBooleanQueryNode_initWithJavaUtilList_withBoolean_(id<JavaUtilList> clauses, jboolean disableCoord) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardNodesStandardBooleanQueryNode *new_OrgApacheLuceneQueryparserFlexibleStandardNodesStandardBooleanQueryNode_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardNodesStandardBooleanQueryNode)
 

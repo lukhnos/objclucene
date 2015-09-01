@@ -20,17 +20,11 @@
 #define OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat_INCLUDE 1
 #include "org/apache/lucene/search/suggest/document/CompletionPostingsFormat.h"
 
-@class OrgApacheLuceneCodecsPostingsFormat;
-
 @interface OrgApacheLuceneSearchSuggestDocumentCompletion50PostingsFormat : OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat
 
 #pragma mark Public
 
 - (instancetype)init;
-
-#pragma mark Protected
-
-- (OrgApacheLuceneCodecsPostingsFormat *)delegatePostingsFormat;
 
 @end
 

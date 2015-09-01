@@ -3,15 +3,12 @@
 //  source: ./core/src/java/org/apache/lucene/index/ByteSliceReader.java
 //
 
-#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/System.h"
 #include "org/apache/lucene/index/ByteSliceReader.h"
 #include "org/apache/lucene/store/DataInput.h"
-#include "org/apache/lucene/store/DataOutput.h"
 #include "org/apache/lucene/util/ByteBlockPool.h"
 
 @implementation OrgApacheLuceneIndexByteSliceReader
@@ -46,24 +43,6 @@
   JreAssert((upto_ <= limit_), (@"org/apache/lucene/index/ByteSliceReader.java:74 condition failed: assert upto <= limit;"));
   if (upto_ == limit_) [self nextSlice];
   return IOSByteArray_Get(nil_chk(buffer_), upto_++);
-}
-
-- (jlong)writeToWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg {
-  jlong size = 0;
-  while (YES) {
-    if (limit_ + bufferOffset_ == endIndex_) {
-      JreAssert((endIndex_ - bufferOffset_ >= upto_), (@"org/apache/lucene/index/ByteSliceReader.java:84 condition failed: assert endIndex - bufferOffset >= upto;"));
-      [((OrgApacheLuceneStoreDataOutput *) nil_chk(outArg)) writeBytesWithByteArray:buffer_ withInt:upto_ withInt:limit_ - upto_];
-      size += limit_ - upto_;
-      break;
-    }
-    else {
-      [((OrgApacheLuceneStoreDataOutput *) nil_chk(outArg)) writeBytesWithByteArray:buffer_ withInt:upto_ withInt:limit_ - upto_];
-      size += limit_ - upto_;
-      [self nextSlice];
-    }
-  }
-  return size;
 }
 
 - (void)nextSlice {
@@ -118,7 +97,6 @@
     { "init__WithOrgApacheLuceneUtilByteBlockPool:withInt:withInt:", "init", "V", 0x1, NULL, NULL },
     { "eof", NULL, "Z", 0x1, NULL, NULL },
     { "readByte", NULL, "B", 0x1, NULL, NULL },
-    { "writeToWithOrgApacheLuceneStoreDataOutput:", "writeTo", "J", 0x1, "Ljava.io.IOException;", NULL },
     { "nextSlice", NULL, "V", 0x1, NULL, NULL },
     { "readBytesWithByteArray:withInt:withInt:", "readBytes", "V", 0x1, NULL, NULL },
     { "init", NULL, NULL, 0x0, NULL, NULL },
@@ -133,7 +111,7 @@
     { "bufferOffset_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "endIndex_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexByteSliceReader = { 2, "ByteSliceReader", "org.apache.lucene.index", NULL, 0x10, 7, methods, 8, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexByteSliceReader = { 2, "ByteSliceReader", "org.apache.lucene.index", NULL, 0x10, 6, methods, 8, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexByteSliceReader;
 }
 

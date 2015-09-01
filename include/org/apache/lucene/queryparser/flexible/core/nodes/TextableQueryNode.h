@@ -16,13 +16,7 @@
 #if !defined (_OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode_) && (OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode_INCLUDE)
 #define _OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode_
 
-@protocol JavaLangCharSequence;
-
 @protocol OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode < NSObject, JavaObject >
-
-- (id<JavaLangCharSequence>)getText;
-
-- (void)setTextWithJavaLangCharSequence:(id<JavaLangCharSequence>)text;
 
 @end
 

@@ -20,39 +20,19 @@
 #define OrgApacheLuceneQueriesFunctionValuesourceBoolFunction_INCLUDE 1
 #include "org/apache/lucene/queries/function/valuesource/BoolFunction.h"
 
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneQueriesFunctionFunctionValues;
-@class OrgApacheLuceneQueriesFunctionValueSource;
-@class OrgApacheLuceneSearchIndexSearcher;
-@protocol JavaUtilMap;
-
 @interface OrgApacheLuceneQueriesFunctionValuesourceIfFunction : OrgApacheLuceneQueriesFunctionValuesourceBoolFunction
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)ifSource
-                    withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)trueSource
-                    withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)falseSource;
-
-- (void)createWeightWithJavaUtilMap:(id<JavaUtilMap>)context
-withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher;
-
-- (NSString *)description__;
-
-- (jboolean)isEqual:(id)o;
-
-- (OrgApacheLuceneQueriesFunctionFunctionValues *)getValuesWithJavaUtilMap:(id<JavaUtilMap>)context
-                                 withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext;
-
-- (NSUInteger)hash;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceIfFunction)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceIfFunction_initWithOrgApacheLuceneQueriesFunctionValueSource_withOrgApacheLuceneQueriesFunctionValueSource_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceIfFunction *self, OrgApacheLuceneQueriesFunctionValueSource *ifSource, OrgApacheLuceneQueriesFunctionValueSource *trueSource, OrgApacheLuceneQueriesFunctionValueSource *falseSource);
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceIfFunction_init(OrgApacheLuceneQueriesFunctionValuesourceIfFunction *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceIfFunction *new_OrgApacheLuceneQueriesFunctionValuesourceIfFunction_initWithOrgApacheLuceneQueriesFunctionValueSource_withOrgApacheLuceneQueriesFunctionValueSource_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValueSource *ifSource, OrgApacheLuceneQueriesFunctionValueSource *trueSource, OrgApacheLuceneQueriesFunctionValueSource *falseSource) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceIfFunction *new_OrgApacheLuceneQueriesFunctionValuesourceIfFunction_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceIfFunction)
 

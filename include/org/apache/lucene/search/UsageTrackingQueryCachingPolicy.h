@@ -20,47 +20,15 @@
 #define OrgApacheLuceneSearchQueryCachingPolicy_INCLUDE 1
 #include "org/apache/lucene/search/QueryCachingPolicy.h"
 
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneSearchQuery;
-
 @interface OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy : NSObject < OrgApacheLuceneSearchQueryCachingPolicy >
 
 #pragma mark Public
 
 - (instancetype)init;
 
-- (instancetype)initWithInt:(jint)minIndexSize
-                  withFloat:(jfloat)minSizeRatio
-                    withInt:(jint)historySize;
-
-- (void)onUseWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
-
-- (jboolean)shouldCacheWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-            withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
-
-#pragma mark Protected
-
-- (jint)minFrequencyToCacheWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
-
-#pragma mark Package-Private
-
-- (jint)frequencyWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
-
-+ (jboolean)isCheapWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
-
-+ (jboolean)isCostlyWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy)
-
-FOUNDATION_EXPORT jboolean OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy_isCostlyWithOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchQuery *query);
-
-FOUNDATION_EXPORT jboolean OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy_isCheapWithOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchQuery *query);
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy_initWithInt_withFloat_withInt_(OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy *self, jint minIndexSize, jfloat minSizeRatio, jint historySize);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy *new_OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy_initWithInt_withFloat_withInt_(jint minIndexSize, jfloat minSizeRatio, jint historySize) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy_init(OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy *self);
 

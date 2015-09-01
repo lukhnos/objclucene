@@ -19,36 +19,23 @@
 #if !defined (_OrgApacheLuceneAnalysisSynonymSynonymMap_) && (OrgApacheLuceneAnalysisSynonymSynonymMap_INCLUDE_ALL || OrgApacheLuceneAnalysisSynonymSynonymMap_INCLUDE)
 #define _OrgApacheLuceneAnalysisSynonymSynonymMap_
 
-@class OrgApacheLuceneUtilBytesRefHash;
-@class OrgApacheLuceneUtilFstFST;
-
 #define OrgApacheLuceneAnalysisSynonymSynonymMap_WORD_SEPARATOR 0x0000
 
-@interface OrgApacheLuceneAnalysisSynonymSynonymMap : NSObject {
- @public
-  OrgApacheLuceneUtilFstFST *fst_;
-  OrgApacheLuceneUtilBytesRefHash *words_;
-  jint maxHorizontalContext_;
-}
+@interface OrgApacheLuceneAnalysisSynonymSynonymMap : NSObject
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)fst
-              withOrgApacheLuceneUtilBytesRefHash:(OrgApacheLuceneUtilBytesRefHash *)words
-                                          withInt:(jint)maxHorizontalContext;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisSynonymSynonymMap)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisSynonymSynonymMap, fst_, OrgApacheLuceneUtilFstFST *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisSynonymSynonymMap, words_, OrgApacheLuceneUtilBytesRefHash *)
-
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisSynonymSynonymMap, WORD_SEPARATOR, jchar)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisSynonymSynonymMap_initWithOrgApacheLuceneUtilFstFST_withOrgApacheLuceneUtilBytesRefHash_withInt_(OrgApacheLuceneAnalysisSynonymSynonymMap *self, OrgApacheLuceneUtilFstFST *fst, OrgApacheLuceneUtilBytesRefHash *words, jint maxHorizontalContext);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisSynonymSynonymMap_init(OrgApacheLuceneAnalysisSynonymSynonymMap *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisSynonymSynonymMap *new_OrgApacheLuceneAnalysisSynonymSynonymMap_initWithOrgApacheLuceneUtilFstFST_withOrgApacheLuceneUtilBytesRefHash_withInt_(OrgApacheLuceneUtilFstFST *fst, OrgApacheLuceneUtilBytesRefHash *words, jint maxHorizontalContext) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisSynonymSynonymMap *new_OrgApacheLuceneAnalysisSynonymSynonymMap_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSynonymSynonymMap)
 
@@ -57,35 +44,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSynonymSynonymMap)
 #if !defined (_OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_) && (OrgApacheLuceneAnalysisSynonymSynonymMap_INCLUDE_ALL || OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_INCLUDE)
 #define _OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_
 
-@class IOSObjectArray;
-@class OrgApacheLuceneAnalysisSynonymSynonymMap;
-@class OrgApacheLuceneUtilCharsRef;
-@class OrgApacheLuceneUtilCharsRefBuilder;
-
 @interface OrgApacheLuceneAnalysisSynonymSynonymMap_Builder : NSObject
 
 #pragma mark Public
 
-- (instancetype)initWithBoolean:(jboolean)dedup;
-
-- (void)addWithOrgApacheLuceneUtilCharsRef:(OrgApacheLuceneUtilCharsRef *)input
-           withOrgApacheLuceneUtilCharsRef:(OrgApacheLuceneUtilCharsRef *)output
-                               withBoolean:(jboolean)includeOrig;
-
-- (OrgApacheLuceneAnalysisSynonymSynonymMap *)build;
-
-+ (OrgApacheLuceneUtilCharsRef *)joinWithNSStringArray:(IOSObjectArray *)words
-                withOrgApacheLuceneUtilCharsRefBuilder:(OrgApacheLuceneUtilCharsRefBuilder *)reuse;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisSynonymSynonymMap_Builder)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_initWithBoolean_(OrgApacheLuceneAnalysisSynonymSynonymMap_Builder *self, jboolean dedup);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_init(OrgApacheLuceneAnalysisSynonymSynonymMap_Builder *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisSynonymSynonymMap_Builder *new_OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_initWithBoolean_(jboolean dedup) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilCharsRef *OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_joinWithNSStringArray_withOrgApacheLuceneUtilCharsRefBuilder_(IOSObjectArray *words, OrgApacheLuceneUtilCharsRefBuilder *reuse);
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisSynonymSynonymMap_Builder *new_OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSynonymSynonymMap_Builder)
 
@@ -94,28 +65,17 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSynonymSynonymMap_Builder)
 #if !defined (_OrgApacheLuceneAnalysisSynonymSynonymMap_Parser_) && (OrgApacheLuceneAnalysisSynonymSynonymMap_INCLUDE_ALL || OrgApacheLuceneAnalysisSynonymSynonymMap_Parser_INCLUDE)
 #define _OrgApacheLuceneAnalysisSynonymSynonymMap_Parser_
 
-@class JavaIoReader;
-@class OrgApacheLuceneAnalysisAnalyzer;
-@class OrgApacheLuceneUtilCharsRef;
-@class OrgApacheLuceneUtilCharsRefBuilder;
-
 @interface OrgApacheLuceneAnalysisSynonymSynonymMap_Parser : OrgApacheLuceneAnalysisSynonymSynonymMap_Builder
 
 #pragma mark Public
 
-- (instancetype)initWithBoolean:(jboolean)dedup
-withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
-
-- (OrgApacheLuceneUtilCharsRef *)analyzeWithNSString:(NSString *)text
-              withOrgApacheLuceneUtilCharsRefBuilder:(OrgApacheLuceneUtilCharsRefBuilder *)reuse;
-
-- (void)parseWithJavaIoReader:(JavaIoReader *)inArg;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisSynonymSynonymMap_Parser)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisSynonymSynonymMap_Parser_initWithBoolean_withOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneAnalysisSynonymSynonymMap_Parser *self, jboolean dedup, OrgApacheLuceneAnalysisAnalyzer *analyzer);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisSynonymSynonymMap_Parser_init(OrgApacheLuceneAnalysisSynonymSynonymMap_Parser *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSynonymSynonymMap_Parser)
 

@@ -16,9 +16,6 @@
 #if !defined (_OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_) && (OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_INCLUDE_ALL || OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_INCLUDE)
 #define _OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_
 
-@class JavaIoReader;
-@protocol OrgApacheLuceneAnalysisTokenattributesCharTermAttribute;
-
 #define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_YYEOF -1
 #define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_YYINITIAL 0
 #define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_AVOID_BAD_URL 2
@@ -36,35 +33,11 @@
 
 #pragma mark Public
 
-- (instancetype)initWithJavaIoReader:(JavaIoReader *)inArg;
-
-- (jint)getNextToken;
-
-- (void)getTextWithOrgApacheLuceneAnalysisTokenattributesCharTermAttribute:(id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)t;
-
-- (void)setBufferSizeWithInt:(jint)numChars;
-
-- (void)yybeginWithInt:(jint)newState;
-
-- (jint)yychar;
-
-- (jchar)yycharatWithInt:(jint)pos;
-
-- (void)yyclose;
-
-- (jint)yylength;
-
-- (void)yypushbackWithInt:(jint)number;
-
-- (void)yyresetWithJavaIoReader:(JavaIoReader *)reader;
-
-- (jint)yystate;
-
-- (NSString *)yytext;
+- (instancetype)init;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl)
 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl, YYEOF, jint)
 
@@ -90,9 +63,9 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizer
 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl, URL_TYPE, jint)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_initWithJavaIoReader_(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl *self, JavaIoReader *inArg);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_init(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl *new_OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_initWithJavaIoReader_(JavaIoReader *inArg) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl *new_OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl)
 

@@ -20,14 +20,11 @@
 #define OrgApacheLuceneUtilBytesRefIterator_INCLUDE 1
 #include "org/apache/lucene/util/BytesRefIterator.h"
 
-@class OrgApacheLuceneIndexDocsAndPositionsEnum;
-@class OrgApacheLuceneIndexDocsEnum;
 @class OrgApacheLuceneIndexPostingsEnum;
 @class OrgApacheLuceneIndexTermState;
 @class OrgApacheLuceneIndexTermsEnum_SeekStatusEnum;
 @class OrgApacheLuceneUtilAttributeSource;
 @class OrgApacheLuceneUtilBytesRef;
-@protocol OrgApacheLuceneUtilBits;
 
 @interface OrgApacheLuceneIndexTermsEnum : NSObject < OrgApacheLuceneUtilBytesRefIterator >
 
@@ -37,23 +34,7 @@
 
 - (jint)docFreq;
 
-- (OrgApacheLuceneIndexDocsEnum *)docsWithOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)liveDocs
-                                 withOrgApacheLuceneIndexDocsEnum:(OrgApacheLuceneIndexDocsEnum *)reuse;
-
-- (OrgApacheLuceneIndexDocsEnum *)docsWithOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)liveDocs
-                                 withOrgApacheLuceneIndexDocsEnum:(OrgApacheLuceneIndexDocsEnum *)reuse
-                                                          withInt:(jint)flags;
-
-- (OrgApacheLuceneIndexDocsAndPositionsEnum *)docsAndPositionsWithOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)liveDocs
-                                             withOrgApacheLuceneIndexDocsAndPositionsEnum:(OrgApacheLuceneIndexDocsAndPositionsEnum *)reuse;
-
-- (OrgApacheLuceneIndexDocsAndPositionsEnum *)docsAndPositionsWithOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)liveDocs
-                                             withOrgApacheLuceneIndexDocsAndPositionsEnum:(OrgApacheLuceneIndexDocsAndPositionsEnum *)reuse
-                                                                                  withInt:(jint)flags;
-
 - (jlong)ord;
-
-- (OrgApacheLuceneIndexPostingsEnum *)postingsWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)reuse;
 
 - (OrgApacheLuceneIndexPostingsEnum *)postingsWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)reuse
                                                                            withInt:(jint)flags;
@@ -64,8 +45,6 @@
 
 - (void)seekExactWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term
                withOrgApacheLuceneIndexTermState:(OrgApacheLuceneIndexTermState *)state;
-
-- (void)seekExactWithLong:(jlong)ord;
 
 - (OrgApacheLuceneUtilBytesRef *)term;
 

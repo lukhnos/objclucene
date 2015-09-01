@@ -20,38 +20,19 @@
 #define OrgApacheLuceneSearchFilter_INCLUDE 1
 #include "org/apache/lucene/search/Filter.h"
 
-@class OrgApacheLuceneIndexIndexReader;
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneSearchDocIdSet;
-@class OrgApacheLuceneSearchQuery;
-@protocol OrgApacheLuceneUtilBits;
-
 @interface OrgApacheLuceneSearchQueryWrapperFilter : OrgApacheLuceneSearchFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
-
-- (jboolean)isEqual:(id)o;
-
-- (OrgApacheLuceneSearchDocIdSet *)getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-                                                            withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)acceptDocs;
-
-- (OrgApacheLuceneSearchQuery *)getQuery;
-
-- (NSUInteger)hash;
-
-- (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
-
-- (NSString *)toStringWithNSString:(NSString *)field;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchQueryWrapperFilter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchQueryWrapperFilter_initWithOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchQueryWrapperFilter *self, OrgApacheLuceneSearchQuery *query);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchQueryWrapperFilter_init(OrgApacheLuceneSearchQueryWrapperFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchQueryWrapperFilter *new_OrgApacheLuceneSearchQueryWrapperFilter_initWithOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchQuery *query) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchQueryWrapperFilter *new_OrgApacheLuceneSearchQueryWrapperFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchQueryWrapperFilter)
 

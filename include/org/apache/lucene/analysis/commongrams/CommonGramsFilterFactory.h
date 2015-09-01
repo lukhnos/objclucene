@@ -24,33 +24,19 @@
 #define OrgApacheLuceneAnalysisUtilResourceLoaderAware_INCLUDE 1
 #include "org/apache/lucene/analysis/util/ResourceLoaderAware.h"
 
-@class OrgApacheLuceneAnalysisTokenFilter;
-@class OrgApacheLuceneAnalysisTokenStream;
-@class OrgApacheLuceneAnalysisUtilCharArraySet;
-@protocol JavaUtilMap;
-@protocol OrgApacheLuceneAnalysisUtilResourceLoader;
-
 @interface OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory < OrgApacheLuceneAnalysisUtilResourceLoaderAware >
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
-
-- (OrgApacheLuceneAnalysisTokenFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
-
-- (OrgApacheLuceneAnalysisUtilCharArraySet *)getCommonWords;
-
-- (void)informWithOrgApacheLuceneAnalysisUtilResourceLoader:(id<OrgApacheLuceneAnalysisUtilResourceLoader>)loader;
-
-- (jboolean)isIgnoreCase;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory *self, id<JavaUtilMap> args);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory_init(OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory *new_OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory *new_OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory)
 

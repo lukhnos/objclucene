@@ -4,9 +4,9 @@
 //
 
 #include "J2ObjC_source.h"
-#include "java/lang/Exception.h"
-#include "java/lang/Throwable.h"
 #include "org/apache/lucene/queryparser/xml/ParserException.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneQueryparserXmlParserException
 
@@ -15,72 +15,23 @@
   return self;
 }
 
-- (instancetype)initWithNSString:(NSString *)message {
-  OrgApacheLuceneQueryparserXmlParserException_initWithNSString_(self, message);
-  return self;
-}
-
-- (instancetype)initWithNSString:(NSString *)message
-           withJavaLangThrowable:(JavaLangThrowable *)cause {
-  OrgApacheLuceneQueryparserXmlParserException_initWithNSString_withJavaLangThrowable_(self, message, cause);
-  return self;
-}
-
-- (instancetype)initWithJavaLangThrowable:(JavaLangThrowable *)cause {
-  OrgApacheLuceneQueryparserXmlParserException_initWithJavaLangThrowable_(self, cause);
-  return self;
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", "ParserException", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:", "ParserException", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withJavaLangThrowable:", "ParserException", NULL, 0x1, NULL, NULL },
-    { "initWithJavaLangThrowable:", "ParserException", NULL, 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlParserException = { 2, "ParserException", "org.apache.lucene.queryparser.xml", NULL, 0x1, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlParserException = { 2, "ParserException", "org.apache.lucene.queryparser.xml", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserXmlParserException;
 }
 
 @end
 
 void OrgApacheLuceneQueryparserXmlParserException_init(OrgApacheLuceneQueryparserXmlParserException *self) {
-  JavaLangException_init(self);
+  NSObject_init(self);
 }
 
 OrgApacheLuceneQueryparserXmlParserException *new_OrgApacheLuceneQueryparserXmlParserException_init() {
   OrgApacheLuceneQueryparserXmlParserException *self = [OrgApacheLuceneQueryparserXmlParserException alloc];
   OrgApacheLuceneQueryparserXmlParserException_init(self);
-  return self;
-}
-
-void OrgApacheLuceneQueryparserXmlParserException_initWithNSString_(OrgApacheLuceneQueryparserXmlParserException *self, NSString *message) {
-  JavaLangException_initWithNSString_(self, message);
-}
-
-OrgApacheLuceneQueryparserXmlParserException *new_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_(NSString *message) {
-  OrgApacheLuceneQueryparserXmlParserException *self = [OrgApacheLuceneQueryparserXmlParserException alloc];
-  OrgApacheLuceneQueryparserXmlParserException_initWithNSString_(self, message);
-  return self;
-}
-
-void OrgApacheLuceneQueryparserXmlParserException_initWithNSString_withJavaLangThrowable_(OrgApacheLuceneQueryparserXmlParserException *self, NSString *message, JavaLangThrowable *cause) {
-  JavaLangException_initWithNSString_withJavaLangThrowable_(self, message, cause);
-}
-
-OrgApacheLuceneQueryparserXmlParserException *new_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_withJavaLangThrowable_(NSString *message, JavaLangThrowable *cause) {
-  OrgApacheLuceneQueryparserXmlParserException *self = [OrgApacheLuceneQueryparserXmlParserException alloc];
-  OrgApacheLuceneQueryparserXmlParserException_initWithNSString_withJavaLangThrowable_(self, message, cause);
-  return self;
-}
-
-void OrgApacheLuceneQueryparserXmlParserException_initWithJavaLangThrowable_(OrgApacheLuceneQueryparserXmlParserException *self, JavaLangThrowable *cause) {
-  JavaLangException_initWithJavaLangThrowable_(self, cause);
-}
-
-OrgApacheLuceneQueryparserXmlParserException *new_OrgApacheLuceneQueryparserXmlParserException_initWithJavaLangThrowable_(JavaLangThrowable *cause) {
-  OrgApacheLuceneQueryparserXmlParserException *self = [OrgApacheLuceneQueryparserXmlParserException alloc];
-  OrgApacheLuceneQueryparserXmlParserException_initWithJavaLangThrowable_(self, cause);
   return self;
 }
 

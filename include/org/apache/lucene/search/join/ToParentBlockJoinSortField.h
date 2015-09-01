@@ -20,41 +20,19 @@
 #define OrgApacheLuceneSearchSortField_INCLUDE 1
 #include "org/apache/lucene/search/SortField.h"
 
-@class OrgApacheLuceneSearchFieldComparator;
-@class OrgApacheLuceneSearchSortField_TypeEnum;
-@protocol OrgApacheLuceneSearchJoinBitSetProducer;
-
 @interface OrgApacheLuceneSearchJoinToParentBlockJoinSortField : OrgApacheLuceneSearchSortField
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field
-withOrgApacheLuceneSearchSortField_TypeEnum:(OrgApacheLuceneSearchSortField_TypeEnum *)type
-                     withBoolean:(jboolean)reverse
-withOrgApacheLuceneSearchJoinBitSetProducer:(id<OrgApacheLuceneSearchJoinBitSetProducer>)parentFilter
-withOrgApacheLuceneSearchJoinBitSetProducer:(id<OrgApacheLuceneSearchJoinBitSetProducer>)childFilter;
-
-- (instancetype)initWithNSString:(NSString *)field
-withOrgApacheLuceneSearchSortField_TypeEnum:(OrgApacheLuceneSearchSortField_TypeEnum *)type
-                     withBoolean:(jboolean)reverse
-                     withBoolean:(jboolean)order
-withOrgApacheLuceneSearchJoinBitSetProducer:(id<OrgApacheLuceneSearchJoinBitSetProducer>)parentFilter
-withOrgApacheLuceneSearchJoinBitSetProducer:(id<OrgApacheLuceneSearchJoinBitSetProducer>)childFilter;
-
-- (OrgApacheLuceneSearchFieldComparator *)getComparatorWithInt:(jint)numHits
-                                                       withInt:(jint)sortPos;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinToParentBlockJoinSortField)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinToParentBlockJoinSortField_initWithNSString_withOrgApacheLuceneSearchSortField_TypeEnum_withBoolean_withOrgApacheLuceneSearchJoinBitSetProducer_withOrgApacheLuceneSearchJoinBitSetProducer_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *self, NSString *field, OrgApacheLuceneSearchSortField_TypeEnum *type, jboolean reverse, id<OrgApacheLuceneSearchJoinBitSetProducer> parentFilter, id<OrgApacheLuceneSearchJoinBitSetProducer> childFilter);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinToParentBlockJoinSortField_init(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchJoinToParentBlockJoinSortField *new_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_initWithNSString_withOrgApacheLuceneSearchSortField_TypeEnum_withBoolean_withOrgApacheLuceneSearchJoinBitSetProducer_withOrgApacheLuceneSearchJoinBitSetProducer_(NSString *field, OrgApacheLuceneSearchSortField_TypeEnum *type, jboolean reverse, id<OrgApacheLuceneSearchJoinBitSetProducer> parentFilter, id<OrgApacheLuceneSearchJoinBitSetProducer> childFilter) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinToParentBlockJoinSortField_initWithNSString_withOrgApacheLuceneSearchSortField_TypeEnum_withBoolean_withBoolean_withOrgApacheLuceneSearchJoinBitSetProducer_withOrgApacheLuceneSearchJoinBitSetProducer_(OrgApacheLuceneSearchJoinToParentBlockJoinSortField *self, NSString *field, OrgApacheLuceneSearchSortField_TypeEnum *type, jboolean reverse, jboolean order, id<OrgApacheLuceneSearchJoinBitSetProducer> parentFilter, id<OrgApacheLuceneSearchJoinBitSetProducer> childFilter);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchJoinToParentBlockJoinSortField *new_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_initWithNSString_withOrgApacheLuceneSearchSortField_TypeEnum_withBoolean_withBoolean_withOrgApacheLuceneSearchJoinBitSetProducer_withOrgApacheLuceneSearchJoinBitSetProducer_(NSString *field, OrgApacheLuceneSearchSortField_TypeEnum *type, jboolean reverse, jboolean order, id<OrgApacheLuceneSearchJoinBitSetProducer> parentFilter, id<OrgApacheLuceneSearchJoinBitSetProducer> childFilter) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchJoinToParentBlockJoinSortField *new_OrgApacheLuceneSearchJoinToParentBlockJoinSortField_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinToParentBlockJoinSortField)
 

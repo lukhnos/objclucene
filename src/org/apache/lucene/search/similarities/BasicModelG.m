@@ -4,10 +4,9 @@
 //
 
 #include "J2ObjC_source.h"
-#include "org/apache/lucene/search/similarities/BasicModel.h"
 #include "org/apache/lucene/search/similarities/BasicModelG.h"
-#include "org/apache/lucene/search/similarities/BasicStats.h"
-#include "org/apache/lucene/search/similarities/SimilarityBase.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneSearchSimilaritiesBasicModelG
 
@@ -16,32 +15,18 @@
   return self;
 }
 
-- (jfloat)scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
-                                                     withFloat:(jfloat)tfn {
-  jdouble F = [((OrgApacheLuceneSearchSimilaritiesBasicStats *) nil_chk(stats)) getTotalTermFreq] + 1;
-  jdouble N = [stats getNumberOfDocuments];
-  jdouble lambda = F / (N + F);
-  return (jfloat) (OrgApacheLuceneSearchSimilaritiesSimilarityBase_log2WithDouble_(lambda + 1) + tfn * OrgApacheLuceneSearchSimilaritiesSimilarityBase_log2WithDouble_((1 + lambda) / lambda));
-}
-
-- (NSString *)description {
-  return @"G";
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", "BasicModelG", NULL, 0x1, NULL, NULL },
-    { "scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:withFloat:", "score", "F", 0x11, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesBasicModelG = { 2, "BasicModelG", "org.apache.lucene.search.similarities", NULL, 0x1, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesBasicModelG = { 2, "BasicModelG", "org.apache.lucene.search.similarities", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchSimilaritiesBasicModelG;
 }
 
 @end
 
 void OrgApacheLuceneSearchSimilaritiesBasicModelG_init(OrgApacheLuceneSearchSimilaritiesBasicModelG *self) {
-  OrgApacheLuceneSearchSimilaritiesBasicModel_init(self);
+  NSObject_init(self);
 }
 
 OrgApacheLuceneSearchSimilaritiesBasicModelG *new_OrgApacheLuceneSearchSimilaritiesBasicModelG_init() {

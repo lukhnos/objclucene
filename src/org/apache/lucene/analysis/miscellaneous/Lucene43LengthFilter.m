@@ -5,43 +5,16 @@
 
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Deprecated.h"
-#include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/miscellaneous/Lucene43LengthFilter.h"
-#include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
-#include "org/apache/lucene/analysis/util/Lucene43FilteringTokenFilter.h"
-#include "org/apache/lucene/util/AttributeSource.h"
 
-@interface OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter () {
- @public
-  jint min_;
-  jint max_;
-  id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute> termAtt_;
-}
-
-@end
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter, termAtt_, id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter
 
-- (instancetype)initWithBoolean:(jboolean)enablePositionIncrements
-withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
-                        withInt:(jint)min
-                        withInt:(jint)max {
-  OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter_initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(self, enablePositionIncrements, inArg, min, max);
+- (instancetype)init {
+  OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter_init(self);
   return self;
-}
-
-- (jboolean)accept {
-  jint len = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) length];
-  return (len >= min_ && len <= max_);
-}
-
-- (void)dealloc {
-  RELEASE_(termAtt_);
-  [super dealloc];
 }
 
 + (IOSObjectArray *)__annotations {
@@ -50,30 +23,21 @@ withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inA
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithBoolean:withOrgApacheLuceneAnalysisTokenStream:withInt:withInt:", "Lucene43LengthFilter", NULL, 0x1, NULL, NULL },
-    { "accept", NULL, "Z", 0x1, "Ljava.io.IOException;", NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "min_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "max_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "termAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter = { 2, "Lucene43LengthFilter", "org.apache.lucene.analysis.miscellaneous", NULL, 0x11, 2, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter = { 2, "Lucene43LengthFilter", "org.apache.lucene.analysis.miscellaneous", NULL, 0x11, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter;
 }
 
 @end
 
-void OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter_initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter *self, jboolean enablePositionIncrements, OrgApacheLuceneAnalysisTokenStream *inArg, jint min, jint max) {
-  OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter_initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_(self, enablePositionIncrements, inArg);
-  JreStrongAssign(&self->termAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()]);
-  self->min_ = min;
-  self->max_ = max;
+void OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter_init(OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter *new_OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter_initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(jboolean enablePositionIncrements, OrgApacheLuceneAnalysisTokenStream *inArg, jint min, jint max) {
+OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter *new_OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter_init() {
   OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter *self = [OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter alloc];
-  OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter_initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(self, enablePositionIncrements, inArg, min, max);
+  OrgApacheLuceneAnalysisMiscellaneousLucene43LengthFilter_init(self);
   return self;
 }
 

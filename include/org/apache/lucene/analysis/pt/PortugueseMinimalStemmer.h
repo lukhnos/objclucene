@@ -20,20 +20,15 @@
 #define OrgApacheLuceneAnalysisPtRSLPStemmerBase_INCLUDE 1
 #include "org/apache/lucene/analysis/pt/RSLPStemmerBase.h"
 
-@class IOSCharArray;
-
 @interface OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer : OrgApacheLuceneAnalysisPtRSLPStemmerBase
 
 #pragma mark Public
 
 - (instancetype)init;
 
-- (jint)stemWithCharArray:(IOSCharArray *)s
-                  withInt:(jint)len;
-
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer_init(OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer *self);
 

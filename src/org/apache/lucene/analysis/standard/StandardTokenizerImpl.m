@@ -139,8 +139,6 @@ __attribute__((unused)) static IOSCharArray *OrgApacheLuceneAnalysisStandardStan
 
 __attribute__((unused)) static jboolean OrgApacheLuceneAnalysisStandardStandardTokenizerImpl_zzRefill(OrgApacheLuceneAnalysisStandardStandardTokenizerImpl *self);
 
-__attribute__((unused)) static jint OrgApacheLuceneAnalysisStandardStandardTokenizerImpl_yylength(OrgApacheLuceneAnalysisStandardStandardTokenizerImpl *self);
-
 __attribute__((unused)) static void OrgApacheLuceneAnalysisStandardStandardTokenizerImpl_zzScanErrorWithInt_(OrgApacheLuceneAnalysisStandardStandardTokenizerImpl *self, jint errorCode);
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisStandardStandardTokenizerImpl)
@@ -215,12 +213,6 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisStandardStandardTokenizerImpl)
   return OrgApacheLuceneAnalysisStandardStandardTokenizerImpl_zzRefill(self);
 }
 
-- (void)yyclose {
-  zzAtEOF_ = YES;
-  zzEndRead_ = zzStartRead_;
-  if (zzReader_ != nil) [zzReader_ close];
-}
-
 - (void)yyresetWithJavaIoReader:(JavaIoReader *)reader {
   JreStrongAssign(&zzReader_, reader);
   zzAtBOL_ = YES;
@@ -234,33 +226,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisStandardStandardTokenizerImpl)
   if (((IOSCharArray *) nil_chk(zzBuffer_))->size_ > ZZ_BUFFERSIZE_) JreStrongAssignAndConsume(&zzBuffer_, [IOSCharArray newArrayWithLength:ZZ_BUFFERSIZE_]);
 }
 
-- (jint)yystate {
-  return zzLexicalState_;
-}
-
-- (void)yybeginWithInt:(jint)newState {
-  zzLexicalState_ = newState;
-}
-
-- (NSString *)yytext {
-  return [NSString stringWithCharacters:zzBuffer_ offset:zzStartRead_ length:zzMarkedPos_ - zzStartRead_];
-}
-
-- (jchar)yycharatWithInt:(jint)pos {
-  return IOSCharArray_Get(nil_chk(zzBuffer_), zzStartRead_ + pos);
-}
-
 - (jint)yylength {
-  return OrgApacheLuceneAnalysisStandardStandardTokenizerImpl_yylength(self);
+  return zzMarkedPos_ - zzStartRead_;
 }
 
 - (void)zzScanErrorWithInt:(jint)errorCode {
   OrgApacheLuceneAnalysisStandardStandardTokenizerImpl_zzScanErrorWithInt_(self, errorCode);
-}
-
-- (void)yypushbackWithInt:(jint)number {
-  if (number > OrgApacheLuceneAnalysisStandardStandardTokenizerImpl_yylength(self)) OrgApacheLuceneAnalysisStandardStandardTokenizerImpl_zzScanErrorWithInt_(self, OrgApacheLuceneAnalysisStandardStandardTokenizerImpl_ZZ_PUSHBACK_2BIG);
-  zzMarkedPos_ -= number;
 }
 
 - (jint)getNextToken {
@@ -423,15 +394,9 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisStandardStandardTokenizerImpl)
     { "initWithJavaIoReader:", "StandardTokenizerImpl", NULL, 0x1, NULL, NULL },
     { "zzUnpackCMapWithNSString:", "zzUnpackCMap", "[C", 0xa, NULL, NULL },
     { "zzRefill", NULL, "Z", 0x2, "Ljava.io.IOException;", NULL },
-    { "yyclose", NULL, "V", 0x11, "Ljava.io.IOException;", NULL },
     { "yyresetWithJavaIoReader:", "yyreset", "V", 0x11, NULL, NULL },
-    { "yystate", NULL, "I", 0x11, NULL, NULL },
-    { "yybeginWithInt:", "yybegin", "V", 0x11, NULL, NULL },
-    { "yytext", NULL, "Ljava.lang.String;", 0x11, NULL, NULL },
-    { "yycharatWithInt:", "yycharat", "C", 0x11, NULL, NULL },
     { "yylength", NULL, "I", 0x11, NULL, NULL },
     { "zzScanErrorWithInt:", "zzScanError", "V", 0x2, NULL, NULL },
-    { "yypushbackWithInt:", "yypushback", "V", 0x1, NULL, NULL },
     { "getNextToken", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -476,7 +441,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisStandardStandardTokenizerImpl)
     { "KATAKANA_TYPE", "KATAKANA_TYPE", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisStandardStandardTokenizerImpl_KATAKANA_TYPE },
     { "HANGUL_TYPE", "HANGUL_TYPE", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisStandardStandardTokenizerImpl_HANGUL_TYPE },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisStandardStandardTokenizerImpl = { 2, "StandardTokenizerImpl", "org.apache.lucene.analysis.standard", NULL, 0x11, 24, methods, 40, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisStandardStandardTokenizerImpl = { 2, "StandardTokenizerImpl", "org.apache.lucene.analysis.standard", NULL, 0x11, 18, methods, 40, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisStandardStandardTokenizerImpl;
 }
 
@@ -632,10 +597,6 @@ jboolean OrgApacheLuceneAnalysisStandardStandardTokenizerImpl_zzRefill(OrgApache
     return NO;
   }
   return YES;
-}
-
-jint OrgApacheLuceneAnalysisStandardStandardTokenizerImpl_yylength(OrgApacheLuceneAnalysisStandardStandardTokenizerImpl *self) {
-  return self->zzMarkedPos_ - self->zzStartRead_;
 }
 
 void OrgApacheLuceneAnalysisStandardStandardTokenizerImpl_zzScanErrorWithInt_(OrgApacheLuceneAnalysisStandardStandardTokenizerImpl *self, jint errorCode) {

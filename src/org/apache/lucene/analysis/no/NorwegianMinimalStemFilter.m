@@ -3,102 +3,35 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/no/NorwegianMinimalStemFilter.java
 //
 
-#include "IOSClass.h"
-#include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
-#include "org/apache/lucene/analysis/TokenFilter.h"
-#include "org/apache/lucene/analysis/TokenStream.h"
-#include "org/apache/lucene/analysis/no/NorwegianLightStemmer.h"
 #include "org/apache/lucene/analysis/no/NorwegianMinimalStemFilter.h"
-#include "org/apache/lucene/analysis/no/NorwegianMinimalStemmer.h"
-#include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
-#include "org/apache/lucene/analysis/tokenattributes/KeywordAttribute.h"
-#include "org/apache/lucene/util/AttributeSource.h"
 
-@interface OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter () {
- @public
-  OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer *stemmer_;
-  id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute> termAtt_;
-  id<OrgApacheLuceneAnalysisTokenattributesKeywordAttribute> keywordAttr_;
-}
-
-@end
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter, stemmer_, OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter, termAtt_, id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter, keywordAttr_, id<OrgApacheLuceneAnalysisTokenattributesKeywordAttribute>)
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, input);
+- (instancetype)init {
+  OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter_init(self);
   return self;
-}
-
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-                                                   withInt:(jint)flags {
-  OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(self, input, flags);
-  return self;
-}
-
-- (jboolean)incrementToken {
-  if ([((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
-    if (![((id<OrgApacheLuceneAnalysisTokenattributesKeywordAttribute>) nil_chk(keywordAttr_)) isKeyword]) {
-      jint newlen = [((OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer *) nil_chk(stemmer_)) stemWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer] withInt:[termAtt_ length]];
-      [termAtt_ setLengthWithInt:newlen];
-    }
-    return YES;
-  }
-  else {
-    return NO;
-  }
-}
-
-- (void)dealloc {
-  RELEASE_(stemmer_);
-  RELEASE_(termAtt_);
-  RELEASE_(keywordAttr_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:", "NorwegianMinimalStemFilter", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withInt:", "NorwegianMinimalStemFilter", NULL, 0x1, NULL, NULL },
-    { "incrementToken", NULL, "Z", 0x1, "Ljava.io.IOException;", NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "stemmer_", NULL, 0x12, "Lorg.apache.lucene.analysis.no.NorwegianMinimalStemmer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "termAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "keywordAttr_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.KeywordAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter = { 2, "NorwegianMinimalStemFilter", "org.apache.lucene.analysis.no", NULL, 0x11, 3, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter = { 2, "NorwegianMinimalStemFilter", "org.apache.lucene.analysis.no", NULL, 0x11, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter;
 }
 
 @end
 
-void OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter *self, OrgApacheLuceneAnalysisTokenStream *input) {
-  OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(self, input, OrgApacheLuceneAnalysisNoNorwegianLightStemmer_BOKMAAL);
+void OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter_init(OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter *new_OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) {
+OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter *new_OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter_init() {
   OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter *self = [OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter alloc];
-  OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, input);
-  return self;
-}
-
-void OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter *self, OrgApacheLuceneAnalysisTokenStream *input, jint flags) {
-  OrgApacheLuceneAnalysisTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, input);
-  JreStrongAssign(&self->termAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()]);
-  JreStrongAssign(&self->keywordAttr_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesKeywordAttribute_class_()]);
-  JreStrongAssignAndConsume(&self->stemmer_, new_OrgApacheLuceneAnalysisNoNorwegianMinimalStemmer_initWithInt_(flags));
-}
-
-OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter *new_OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(OrgApacheLuceneAnalysisTokenStream *input, jint flags) {
-  OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter *self = [OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter alloc];
-  OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(self, input, flags);
+  OrgApacheLuceneAnalysisNoNorwegianMinimalStemFilter_init(self);
   return self;
 }
 

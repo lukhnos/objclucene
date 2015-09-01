@@ -3,111 +3,35 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/xml/builders/SpanOrTermsBuilder.java
 //
 
-#include "IOSClass.h"
-#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
-#include "java/lang/Throwable.h"
-#include "java/util/ArrayList.h"
-#include "java/util/List.h"
-#include "org/apache/lucene/analysis/Analyzer.h"
-#include "org/apache/lucene/analysis/TokenStream.h"
-#include "org/apache/lucene/analysis/tokenattributes/TermToBytesRefAttribute.h"
-#include "org/apache/lucene/index/Term.h"
-#include "org/apache/lucene/queryparser/xml/DOMUtils.h"
-#include "org/apache/lucene/queryparser/xml/ParserException.h"
-#include "org/apache/lucene/queryparser/xml/builders/SpanBuilderBase.h"
 #include "org/apache/lucene/queryparser/xml/builders/SpanOrTermsBuilder.h"
-#include "org/apache/lucene/search/spans/SpanOrQuery.h"
-#include "org/apache/lucene/search/spans/SpanQuery.h"
-#include "org/apache/lucene/search/spans/SpanTermQuery.h"
-#include "org/apache/lucene/util/BytesRef.h"
-#include "org/w3c/dom/Element.h"
 
-@interface OrgApacheLuceneQueryparserXmlBuildersSpanOrTermsBuilder () {
- @public
-  OrgApacheLuceneAnalysisAnalyzer *analyzer_;
-}
-
-@end
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserXmlBuildersSpanOrTermsBuilder, analyzer_, OrgApacheLuceneAnalysisAnalyzer *)
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneQueryparserXmlBuildersSpanOrTermsBuilder
 
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer {
-  OrgApacheLuceneQueryparserXmlBuildersSpanOrTermsBuilder_initWithOrgApacheLuceneAnalysisAnalyzer_(self, analyzer);
+- (instancetype)init {
+  OrgApacheLuceneQueryparserXmlBuildersSpanOrTermsBuilder_init(self);
   return self;
-}
-
-- (OrgApacheLuceneSearchSpansSpanQuery *)getSpanQueryWithOrgW3cDomElement:(id<OrgW3cDomElement>)e {
-  NSString *fieldName = OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithInheritanceOrFailWithOrgW3cDomElement_withNSString_(e, @"fieldName");
-  NSString *value = OrgApacheLuceneQueryparserXmlDOMUtils_getNonBlankTextOrFailWithOrgW3cDomElement_(e);
-  id<JavaUtilList> clausesList = [new_JavaUtilArrayList_init() autorelease];
-  {
-    JavaLangThrowable *__mainException = nil;
-    OrgApacheLuceneAnalysisTokenStream *ts = [((OrgApacheLuceneAnalysisAnalyzer *) nil_chk(analyzer_)) tokenStreamWithNSString:fieldName withNSString:value];
-    @try {
-      id<OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute> termAtt = [((OrgApacheLuceneAnalysisTokenStream *) nil_chk(ts)) addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute_class_()];
-      [ts reset];
-      while ([ts incrementToken]) {
-        OrgApacheLuceneSearchSpansSpanTermQuery *stq = [new_OrgApacheLuceneSearchSpansSpanTermQuery_initWithOrgApacheLuceneIndexTerm_([new_OrgApacheLuceneIndexTerm_initWithNSString_withOrgApacheLuceneUtilBytesRef_(fieldName, OrgApacheLuceneUtilBytesRef_deepCopyOfWithOrgApacheLuceneUtilBytesRef_([((id<OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute>) nil_chk(termAtt)) getBytesRef])) autorelease]) autorelease];
-        [clausesList addWithId:stq];
-      }
-      [ts end];
-      OrgApacheLuceneSearchSpansSpanOrQuery *soq = [new_OrgApacheLuceneSearchSpansSpanOrQuery_initWithOrgApacheLuceneSearchSpansSpanQueryArray_([clausesList toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:[clausesList size] type:OrgApacheLuceneSearchSpansSpanQuery_class_()]]) autorelease];
-      [soq setBoostWithFloat:OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withFloat_(e, @"boost", 1.0f)];
-      return soq;
-    }
-    @catch (JavaIoIOException *ioe) {
-      __mainException = ioe;
-      @throw [new_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_(JreStrcat("$$", @"IOException parsing value:", value)) autorelease];
-    }
-    @finally {
-      @try {
-        [ts close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
-        } else {
-          __mainException = e;
-        }
-      }
-      if (__mainException) {
-        @throw __mainException;
-      }
-    }
-  }
-}
-
-- (void)dealloc {
-  RELEASE_(analyzer_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisAnalyzer:", "SpanOrTermsBuilder", NULL, 0x1, NULL, NULL },
-    { "getSpanQueryWithOrgW3cDomElement:", "getSpanQuery", "Lorg.apache.lucene.search.spans.SpanQuery;", 0x1, "Lorg.apache.lucene.queryparser.xml.ParserException;", NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "analyzer_", NULL, 0x12, "Lorg.apache.lucene.analysis.Analyzer;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlBuildersSpanOrTermsBuilder = { 2, "SpanOrTermsBuilder", "org.apache.lucene.queryparser.xml.builders", NULL, 0x1, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlBuildersSpanOrTermsBuilder = { 2, "SpanOrTermsBuilder", "org.apache.lucene.queryparser.xml.builders", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserXmlBuildersSpanOrTermsBuilder;
 }
 
 @end
 
-void OrgApacheLuceneQueryparserXmlBuildersSpanOrTermsBuilder_initWithOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneQueryparserXmlBuildersSpanOrTermsBuilder *self, OrgApacheLuceneAnalysisAnalyzer *analyzer) {
-  OrgApacheLuceneQueryparserXmlBuildersSpanBuilderBase_init(self);
-  JreStrongAssign(&self->analyzer_, analyzer);
+void OrgApacheLuceneQueryparserXmlBuildersSpanOrTermsBuilder_init(OrgApacheLuceneQueryparserXmlBuildersSpanOrTermsBuilder *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneQueryparserXmlBuildersSpanOrTermsBuilder *new_OrgApacheLuceneQueryparserXmlBuildersSpanOrTermsBuilder_initWithOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneAnalysisAnalyzer *analyzer) {
+OrgApacheLuceneQueryparserXmlBuildersSpanOrTermsBuilder *new_OrgApacheLuceneQueryparserXmlBuildersSpanOrTermsBuilder_init() {
   OrgApacheLuceneQueryparserXmlBuildersSpanOrTermsBuilder *self = [OrgApacheLuceneQueryparserXmlBuildersSpanOrTermsBuilder alloc];
-  OrgApacheLuceneQueryparserXmlBuildersSpanOrTermsBuilder_initWithOrgApacheLuceneAnalysisAnalyzer_(self, analyzer);
+  OrgApacheLuceneQueryparserXmlBuildersSpanOrTermsBuilder_init(self);
   return self;
 }
 

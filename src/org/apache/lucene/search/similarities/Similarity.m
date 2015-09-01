@@ -7,14 +7,10 @@
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
-#include "java/util/Collections.h"
-#include "java/util/Set.h"
 #include "org/apache/lucene/index/FieldInvertState.h"
 #include "org/apache/lucene/index/LeafReaderContext.h"
 #include "org/apache/lucene/search/CollectionStatistics.h"
-#include "org/apache/lucene/search/Explanation.h"
 #include "org/apache/lucene/search/similarities/Similarity.h"
-#include "org/apache/lucene/util/BytesRef.h"
 
 @implementation OrgApacheLuceneSearchSimilaritiesSimilarity
 
@@ -95,29 +91,13 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSimilaritiesSimilarity)
   return 0;
 }
 
-- (jfloat)computePayloadFactorWithInt:(jint)doc
-                              withInt:(jint)start
-                              withInt:(jint)end
-      withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload {
-  // can't call an abstract method
-  [self doesNotRecognizeSelector:_cmd];
-  return 0;
-}
-
-- (OrgApacheLuceneSearchExplanation *)explainWithInt:(jint)doc
-                withOrgApacheLuceneSearchExplanation:(OrgApacheLuceneSearchExplanation *)freq {
-  return OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withJavaUtilCollection_([self scoreWithInt:doc withFloat:[((OrgApacheLuceneSearchExplanation *) nil_chk(freq)) getValue]], JreStrcat("$I$F$", @"score(doc=", doc, @",freq=", [freq getValue], @"), with freq of:"), JavaUtilCollections_singletonWithId_(freq));
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "init", "SimScorer", NULL, 0x1, NULL, NULL },
     { "scoreWithInt:withFloat:", "score", "F", 0x401, NULL, NULL },
     { "computeSlopFactorWithInt:", "computeSlopFactor", "F", 0x401, NULL, NULL },
-    { "computePayloadFactorWithInt:withInt:withInt:withOrgApacheLuceneUtilBytesRef:", "computePayloadFactor", "F", 0x401, NULL, NULL },
-    { "explainWithInt:withOrgApacheLuceneSearchExplanation:", "explain", "Lorg.apache.lucene.search.Explanation;", 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer = { 2, "SimScorer", "org.apache.lucene.search.similarities", "Similarity", 0x409, 5, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer = { 2, "SimScorer", "org.apache.lucene.search.similarities", "Similarity", 0x409, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer;
 }
 

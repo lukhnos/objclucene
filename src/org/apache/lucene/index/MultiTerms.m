@@ -39,14 +39,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiTerms, subSlices_, IOSObjectArray *
   return self;
 }
 
-- (IOSObjectArray *)getSubTerms {
-  return subs_;
-}
-
-- (IOSObjectArray *)getSubSlices {
-  return subSlices_;
-}
-
 - (OrgApacheLuceneIndexTermsEnum *)intersectWithOrgApacheLuceneUtilAutomatonCompiledAutomaton:(OrgApacheLuceneUtilAutomatonCompiledAutomaton *)compiled
                                                               withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)startTerm {
   id<JavaUtilList> termsEnums = [new_JavaUtilArrayList_init() autorelease];
@@ -62,40 +54,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiTerms, subSlices_, IOSObjectArray *
   else {
     return JreLoadStatic(OrgApacheLuceneIndexTermsEnum, EMPTY_);
   }
-}
-
-- (OrgApacheLuceneUtilBytesRef *)getMin {
-  OrgApacheLuceneUtilBytesRef *minTerm = nil;
-  {
-    IOSObjectArray *a__ = subs_;
-    OrgApacheLuceneIndexTerms * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
-    OrgApacheLuceneIndexTerms * const *e__ = b__ + a__->size_;
-    while (b__ < e__) {
-      OrgApacheLuceneIndexTerms *terms = *b__++;
-      OrgApacheLuceneUtilBytesRef *term = [((OrgApacheLuceneIndexTerms *) nil_chk(terms)) getMin];
-      if (minTerm == nil || [((OrgApacheLuceneUtilBytesRef *) nil_chk(term)) compareToWithId:minTerm] < 0) {
-        minTerm = term;
-      }
-    }
-  }
-  return minTerm;
-}
-
-- (OrgApacheLuceneUtilBytesRef *)getMax {
-  OrgApacheLuceneUtilBytesRef *maxTerm = nil;
-  {
-    IOSObjectArray *a__ = subs_;
-    OrgApacheLuceneIndexTerms * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
-    OrgApacheLuceneIndexTerms * const *e__ = b__ + a__->size_;
-    while (b__ < e__) {
-      OrgApacheLuceneIndexTerms *terms = *b__++;
-      OrgApacheLuceneUtilBytesRef *term = [((OrgApacheLuceneIndexTerms *) nil_chk(terms)) getMax];
-      if (maxTerm == nil || [((OrgApacheLuceneUtilBytesRef *) nil_chk(term)) compareToWithId:maxTerm] > 0) {
-        maxTerm = term;
-      }
-    }
-  }
-  return maxTerm;
 }
 
 - (OrgApacheLuceneIndexTermsEnum *)iterator {
@@ -197,11 +155,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiTerms, subSlices_, IOSObjectArray *
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneIndexTermsArray:withOrgApacheLuceneIndexReaderSliceArray:", "MultiTerms", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "getSubTerms", NULL, "[Lorg.apache.lucene.index.Terms;", 0x1, NULL, NULL },
-    { "getSubSlices", NULL, "[Lorg.apache.lucene.index.ReaderSlice;", 0x1, NULL, NULL },
     { "intersectWithOrgApacheLuceneUtilAutomatonCompiledAutomaton:withOrgApacheLuceneUtilBytesRef:", "intersect", "Lorg.apache.lucene.index.TermsEnum;", 0x1, "Ljava.io.IOException;", NULL },
-    { "getMin", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
-    { "getMax", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
     { "iterator", NULL, "Lorg.apache.lucene.index.TermsEnum;", 0x1, "Ljava.io.IOException;", NULL },
     { "size", NULL, "J", 0x1, NULL, NULL },
     { "getSumTotalTermFreq", NULL, "J", 0x1, "Ljava.io.IOException;", NULL },
@@ -220,7 +174,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiTerms, subSlices_, IOSObjectArray *
     { "hasPositions_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
     { "hasPayloads_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiTerms = { 2, "MultiTerms", "org.apache.lucene.index", NULL, 0x11, 15, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiTerms = { 2, "MultiTerms", "org.apache.lucene.index", NULL, 0x11, 11, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexMultiTerms;
 }
 

@@ -20,46 +20,19 @@
 #define OrgApacheLuceneSearchQuery_INCLUDE 1
 #include "org/apache/lucene/search/Query.h"
 
-@class JavaLangLong;
-@class OrgApacheLuceneIndexIndexReader;
-@class OrgApacheLuceneSearchIndexSearcher;
-@class OrgApacheLuceneSearchWeight;
-@class OrgApacheLuceneUtilBytesRef;
-
 @interface OrgApacheLuceneSearchDocValuesRangeQuery : OrgApacheLuceneSearchQuery
 
 #pragma mark Public
 
-- (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
-                                                                        withBoolean:(jboolean)needsScores;
-
-- (jboolean)isEqual:(id)obj;
-
-- (NSUInteger)hash;
-
-+ (OrgApacheLuceneSearchQuery *)newBytesRefRangeWithNSString:(NSString *)field
-                             withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)lowerVal
-                             withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)upperVal
-                                                 withBoolean:(jboolean)includeLower
-                                                 withBoolean:(jboolean)includeUpper OBJC_METHOD_FAMILY_NONE;
-
-+ (OrgApacheLuceneSearchQuery *)newLongRangeWithNSString:(NSString *)field
-                                        withJavaLangLong:(JavaLangLong *)lowerVal
-                                        withJavaLangLong:(JavaLangLong *)upperVal
-                                             withBoolean:(jboolean)includeLower
-                                             withBoolean:(jboolean)includeUpper OBJC_METHOD_FAMILY_NONE;
-
-- (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
-
-- (NSString *)toStringWithNSString:(NSString *)field;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchDocValuesRangeQuery)
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchQuery *OrgApacheLuceneSearchDocValuesRangeQuery_newLongRangeWithNSString_withJavaLangLong_withJavaLangLong_withBoolean_withBoolean_(NSString *field, JavaLangLong *lowerVal, JavaLangLong *upperVal, jboolean includeLower, jboolean includeUpper);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchDocValuesRangeQuery_init(OrgApacheLuceneSearchDocValuesRangeQuery *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchQuery *OrgApacheLuceneSearchDocValuesRangeQuery_newBytesRefRangeWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_(NSString *field, OrgApacheLuceneUtilBytesRef *lowerVal, OrgApacheLuceneUtilBytesRef *upperVal, jboolean includeLower, jboolean includeUpper);
+FOUNDATION_EXPORT OrgApacheLuceneSearchDocValuesRangeQuery *new_OrgApacheLuceneSearchDocValuesRangeQuery_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocValuesRangeQuery)
 

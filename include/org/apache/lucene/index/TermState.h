@@ -22,8 +22,6 @@
 
 - (OrgApacheLuceneIndexTermState *)clone;
 
-- (void)copyFromWithOrgApacheLuceneIndexTermState:(OrgApacheLuceneIndexTermState *)other OBJC_METHOD_FAMILY_NONE;
-
 - (jboolean)isRealTerm;
 
 - (NSString *)description;

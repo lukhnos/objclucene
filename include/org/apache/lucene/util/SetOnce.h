@@ -22,8 +22,6 @@
 
 - (instancetype)init;
 
-- (instancetype)initWithId:(id)obj;
-
 - (id)get;
 
 - (void)setWithId:(id)obj;
@@ -35,10 +33,6 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilSetOnce)
 FOUNDATION_EXPORT void OrgApacheLuceneUtilSetOnce_init(OrgApacheLuceneUtilSetOnce *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilSetOnce *new_OrgApacheLuceneUtilSetOnce_init() NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneUtilSetOnce_initWithId_(OrgApacheLuceneUtilSetOnce *self, id obj);
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilSetOnce *new_OrgApacheLuceneUtilSetOnce_initWithId_(id obj) NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilSetOnce)
 

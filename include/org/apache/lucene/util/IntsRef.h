@@ -33,8 +33,6 @@
 
 - (instancetype)init;
 
-- (instancetype)initWithInt:(jint)capacity;
-
 - (instancetype)initWithIntArray:(IOSIntArray *)ints
                          withInt:(jint)offset
                          withInt:(jint)length;
@@ -42,8 +40,6 @@
 - (OrgApacheLuceneUtilIntsRef *)clone;
 
 - (jint)compareToWithId:(OrgApacheLuceneUtilIntsRef *)other;
-
-+ (OrgApacheLuceneUtilIntsRef *)deepCopyOfWithOrgApacheLuceneUtilIntsRef:(OrgApacheLuceneUtilIntsRef *)other;
 
 - (jboolean)isEqual:(id)other;
 
@@ -68,15 +64,9 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilIntsRef_init(OrgApacheLuceneUtilIntsRe
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilIntsRef *new_OrgApacheLuceneUtilIntsRef_init() NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilIntsRef_initWithInt_(OrgApacheLuceneUtilIntsRef *self, jint capacity);
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilIntsRef *new_OrgApacheLuceneUtilIntsRef_initWithInt_(jint capacity) NS_RETURNS_RETAINED;
-
 FOUNDATION_EXPORT void OrgApacheLuceneUtilIntsRef_initWithIntArray_withInt_withInt_(OrgApacheLuceneUtilIntsRef *self, IOSIntArray *ints, jint offset, jint length);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilIntsRef *new_OrgApacheLuceneUtilIntsRef_initWithIntArray_withInt_withInt_(IOSIntArray *ints, jint offset, jint length) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilIntsRef *OrgApacheLuceneUtilIntsRef_deepCopyOfWithOrgApacheLuceneUtilIntsRef_(OrgApacheLuceneUtilIntsRef *other);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilIntsRef)
 

@@ -50,52 +50,16 @@
   }
 }
 
-- (jint)getPosition {
-  return position_;
-}
-
 - (jint)getLength {
   return length_;
-}
-
-- (void)setLengthWithInt:(jint)length {
-  self->length_ = length;
 }
 
 - (jint)getNumOverlap {
   return numOverlap_;
 }
 
-- (void)setNumOverlapWithInt:(jint)numOverlap {
-  self->numOverlap_ = numOverlap;
-}
-
-- (jint)getOffset {
-  return offset_;
-}
-
 - (jfloat)getBoost {
   return boost_;
-}
-
-- (void)setBoostWithFloat:(jfloat)boost {
-  self->boost_ = boost;
-}
-
-- (jint)getMaxTermFrequency {
-  return maxTermFrequency_;
-}
-
-- (jint)getUniqueTermCount {
-  return uniqueTermCount_;
-}
-
-- (OrgApacheLuceneUtilAttributeSource *)getAttributeSource {
-  return attributeSource_;
-}
-
-- (NSString *)getName {
-  return name_;
 }
 
 - (void)dealloc {
@@ -114,18 +78,9 @@
     { "initWithNSString:withInt:withInt:withInt:withInt:withFloat:", "FieldInvertState", NULL, 0x1, NULL, NULL },
     { "reset", NULL, "V", 0x0, NULL, NULL },
     { "setAttributeSourceWithOrgApacheLuceneUtilAttributeSource:", "setAttributeSource", "V", 0x0, NULL, NULL },
-    { "getPosition", NULL, "I", 0x1, NULL, NULL },
     { "getLength", NULL, "I", 0x1, NULL, NULL },
-    { "setLengthWithInt:", "setLength", "V", 0x1, NULL, NULL },
     { "getNumOverlap", NULL, "I", 0x1, NULL, NULL },
-    { "setNumOverlapWithInt:", "setNumOverlap", "V", 0x1, NULL, NULL },
-    { "getOffset", NULL, "I", 0x1, NULL, NULL },
     { "getBoost", NULL, "F", 0x1, NULL, NULL },
-    { "setBoostWithFloat:", "setBoost", "V", 0x1, NULL, NULL },
-    { "getMaxTermFrequency", NULL, "I", 0x1, NULL, NULL },
-    { "getUniqueTermCount", NULL, "I", 0x1, NULL, NULL },
-    { "getAttributeSource", NULL, "Lorg.apache.lucene.util.AttributeSource;", 0x1, NULL, NULL },
-    { "getName", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "name_", NULL, 0x0, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
@@ -144,7 +99,7 @@
     { "payloadAttribute_", NULL, 0x0, "Lorg.apache.lucene.analysis.tokenattributes.PayloadAttribute;", NULL, NULL, .constantValue.asLong = 0 },
     { "termAttribute_", NULL, 0x0, "Lorg.apache.lucene.analysis.tokenattributes.TermToBytesRefAttribute;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexFieldInvertState = { 2, "FieldInvertState", "org.apache.lucene.index", NULL, 0x11, 16, methods, 15, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexFieldInvertState = { 2, "FieldInvertState", "org.apache.lucene.index", NULL, 0x11, 7, methods, 15, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexFieldInvertState;
 }
 

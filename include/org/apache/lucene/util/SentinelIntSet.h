@@ -16,48 +16,19 @@
 #if !defined (_OrgApacheLuceneUtilSentinelIntSet_) && (OrgApacheLuceneUtilSentinelIntSet_INCLUDE_ALL || OrgApacheLuceneUtilSentinelIntSet_INCLUDE)
 #define _OrgApacheLuceneUtilSentinelIntSet_
 
-@class IOSIntArray;
-
-@interface OrgApacheLuceneUtilSentinelIntSet : NSObject {
- @public
-  IOSIntArray *keys_;
-  jint count_;
-  jint emptyVal_;
-  jint rehashCount_;
-}
+@interface OrgApacheLuceneUtilSentinelIntSet : NSObject
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)size
-                    withInt:(jint)emptyVal;
-
-- (void)clear;
-
-- (jboolean)existsWithInt:(jint)key;
-
-- (jint)findWithInt:(jint)key;
-
-- (jint)getSlotWithInt:(jint)key;
-
-- (jint)hash__WithInt:(jint)key;
-
-- (jint)putWithInt:(jint)key;
-
-- (jlong)ramBytesUsed;
-
-- (void)rehash;
-
-- (jint)size;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilSentinelIntSet)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilSentinelIntSet, keys_, IOSIntArray *)
+FOUNDATION_EXPORT void OrgApacheLuceneUtilSentinelIntSet_init(OrgApacheLuceneUtilSentinelIntSet *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilSentinelIntSet_initWithInt_withInt_(OrgApacheLuceneUtilSentinelIntSet *self, jint size, jint emptyVal);
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilSentinelIntSet *new_OrgApacheLuceneUtilSentinelIntSet_initWithInt_withInt_(jint size, jint emptyVal) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilSentinelIntSet *new_OrgApacheLuceneUtilSentinelIntSet_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilSentinelIntSet)
 

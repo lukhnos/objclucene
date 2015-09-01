@@ -20,12 +20,6 @@
 #define OrgApacheLuceneUtilQueryBuilder_INCLUDE 1
 #include "org/apache/lucene/util/QueryBuilder.h"
 
-@class OrgApacheLuceneAnalysisAnalyzer;
-@class OrgApacheLuceneSearchBooleanClause_OccurEnum;
-@class OrgApacheLuceneSearchBooleanQuery;
-@class OrgApacheLuceneSearchQuery;
-@protocol JavaUtilMap;
-
 #define OrgApacheLuceneQueryparserSimpleSimpleQueryParser_AND_OPERATOR 1
 #define OrgApacheLuceneQueryparserSimpleSimpleQueryParser_NOT_OPERATOR 2
 #define OrgApacheLuceneQueryparserSimpleSimpleQueryParser_OR_OPERATOR 4
@@ -37,49 +31,15 @@
 #define OrgApacheLuceneQueryparserSimpleSimpleQueryParser_FUZZY_OPERATOR 256
 #define OrgApacheLuceneQueryparserSimpleSimpleQueryParser_NEAR_OPERATOR 512
 
-@interface OrgApacheLuceneQueryparserSimpleSimpleQueryParser : OrgApacheLuceneUtilQueryBuilder {
- @public
-  id<JavaUtilMap> weights_;
-  jint flags_;
-}
+@interface OrgApacheLuceneQueryparserSimpleSimpleQueryParser : OrgApacheLuceneUtilQueryBuilder
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
-                                        withJavaUtilMap:(id<JavaUtilMap>)weights;
-
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
-                                        withJavaUtilMap:(id<JavaUtilMap>)weights
-                                                withInt:(jint)flags;
-
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
-                                           withNSString:(NSString *)field;
-
-- (OrgApacheLuceneSearchBooleanClause_OccurEnum *)getDefaultOperator;
-
-- (OrgApacheLuceneSearchQuery *)parseWithNSString:(NSString *)queryText;
-
-- (void)setDefaultOperatorWithOrgApacheLuceneSearchBooleanClause_OccurEnum:(OrgApacheLuceneSearchBooleanClause_OccurEnum *)operator_;
-
-#pragma mark Protected
-
-- (OrgApacheLuceneSearchQuery *)newDefaultQueryWithNSString:(NSString *)text OBJC_METHOD_FAMILY_NONE;
-
-- (OrgApacheLuceneSearchQuery *)newFuzzyQueryWithNSString:(NSString *)text
-                                                  withInt:(jint)fuzziness OBJC_METHOD_FAMILY_NONE;
-
-- (OrgApacheLuceneSearchQuery *)newPhraseQueryWithNSString:(NSString *)text
-                                                   withInt:(jint)slop OBJC_METHOD_FAMILY_NONE;
-
-- (OrgApacheLuceneSearchQuery *)newPrefixQueryWithNSString:(NSString *)text OBJC_METHOD_FAMILY_NONE;
-
-- (OrgApacheLuceneSearchQuery *)simplifyWithOrgApacheLuceneSearchBooleanQuery:(OrgApacheLuceneSearchBooleanQuery *)bq;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserSimpleSimpleQueryParser)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserSimpleSimpleQueryParser, weights_, id<JavaUtilMap>)
 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserSimpleSimpleQueryParser, AND_OPERATOR, jint)
 
@@ -101,17 +61,9 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserSimpleSimpleQueryParser, FU
 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserSimpleSimpleQueryParser, NEAR_OPERATOR, jint)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSimpleSimpleQueryParser_initWithOrgApacheLuceneAnalysisAnalyzer_withNSString_(OrgApacheLuceneQueryparserSimpleSimpleQueryParser *self, OrgApacheLuceneAnalysisAnalyzer *analyzer, NSString *field);
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSimpleSimpleQueryParser_init(OrgApacheLuceneQueryparserSimpleSimpleQueryParser *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserSimpleSimpleQueryParser *new_OrgApacheLuceneQueryparserSimpleSimpleQueryParser_initWithOrgApacheLuceneAnalysisAnalyzer_withNSString_(OrgApacheLuceneAnalysisAnalyzer *analyzer, NSString *field) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSimpleSimpleQueryParser_initWithOrgApacheLuceneAnalysisAnalyzer_withJavaUtilMap_(OrgApacheLuceneQueryparserSimpleSimpleQueryParser *self, OrgApacheLuceneAnalysisAnalyzer *analyzer, id<JavaUtilMap> weights);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserSimpleSimpleQueryParser *new_OrgApacheLuceneQueryparserSimpleSimpleQueryParser_initWithOrgApacheLuceneAnalysisAnalyzer_withJavaUtilMap_(OrgApacheLuceneAnalysisAnalyzer *analyzer, id<JavaUtilMap> weights) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSimpleSimpleQueryParser_initWithOrgApacheLuceneAnalysisAnalyzer_withJavaUtilMap_withInt_(OrgApacheLuceneQueryparserSimpleSimpleQueryParser *self, OrgApacheLuceneAnalysisAnalyzer *analyzer, id<JavaUtilMap> weights, jint flags);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserSimpleSimpleQueryParser *new_OrgApacheLuceneQueryparserSimpleSimpleQueryParser_initWithOrgApacheLuceneAnalysisAnalyzer_withJavaUtilMap_withInt_(OrgApacheLuceneAnalysisAnalyzer *analyzer, id<JavaUtilMap> weights, jint flags) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserSimpleSimpleQueryParser *new_OrgApacheLuceneQueryparserSimpleSimpleQueryParser_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSimpleSimpleQueryParser)
 
@@ -120,42 +72,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSimpleSimpleQueryParser)
 #if !defined (_OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State_) && (OrgApacheLuceneQueryparserSimpleSimpleQueryParser_INCLUDE_ALL || OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State_INCLUDE)
 #define _OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State_
 
-@class IOSCharArray;
-@class OrgApacheLuceneSearchBooleanClause_OccurEnum;
-@class OrgApacheLuceneSearchQuery;
-
-@interface OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State : NSObject {
- @public
-  IOSCharArray *data_;
-  IOSCharArray *buffer_;
-  jint index_;
-  jint length_;
-  OrgApacheLuceneSearchBooleanClause_OccurEnum *currentOperation_;
-  OrgApacheLuceneSearchBooleanClause_OccurEnum *previousOperation_;
-  jint not__;
-  OrgApacheLuceneSearchQuery *top_;
-}
+@interface OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State : NSObject
 
 #pragma mark Package-Private
 
-- (instancetype)initWithCharArray:(IOSCharArray *)data
-                    withCharArray:(IOSCharArray *)buffer
-                          withInt:(jint)index
-                          withInt:(jint)length;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State, data_, IOSCharArray *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State, buffer_, IOSCharArray *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State, currentOperation_, OrgApacheLuceneSearchBooleanClause_OccurEnum *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State, previousOperation_, OrgApacheLuceneSearchBooleanClause_OccurEnum *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State, top_, OrgApacheLuceneSearchQuery *)
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State_init(OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State_initWithCharArray_withCharArray_withInt_withInt_(OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State *self, IOSCharArray *data, IOSCharArray *buffer, jint index, jint length);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State *new_OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State_initWithCharArray_withCharArray_withInt_withInt_(IOSCharArray *data, IOSCharArray *buffer, jint index, jint length) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State *new_OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State)
 

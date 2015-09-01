@@ -3,53 +3,12 @@
 //  source: ./core/src/java/org/apache/lucene/search/payloads/PayloadFunction.java
 //
 
-#include "IOSClass.h"
-#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "org/apache/lucene/search/Explanation.h"
 #include "org/apache/lucene/search/payloads/PayloadFunction.h"
 
+#pragma clang diagnostic ignored "-Wprotocol"
+
 @implementation OrgApacheLuceneSearchPayloadsPayloadFunction
-
-- (jfloat)currentScoreWithInt:(jint)docId
-                 withNSString:(NSString *)field
-                      withInt:(jint)start
-                      withInt:(jint)end
-                      withInt:(jint)numPayloadsSeen
-                    withFloat:(jfloat)currentScore
-                    withFloat:(jfloat)currentPayloadScore {
-  // can't call an abstract method
-  [self doesNotRecognizeSelector:_cmd];
-  return 0;
-}
-
-- (jfloat)docScoreWithInt:(jint)docId
-             withNSString:(NSString *)field
-                  withInt:(jint)numPayloadsSeen
-                withFloat:(jfloat)payloadScore {
-  // can't call an abstract method
-  [self doesNotRecognizeSelector:_cmd];
-  return 0;
-}
-
-- (OrgApacheLuceneSearchExplanation *)explainWithInt:(jint)docId
-                                        withNSString:(NSString *)field
-                                             withInt:(jint)numPayloadsSeen
-                                           withFloat:(jfloat)payloadScore {
-  return OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_([self docScoreWithInt:docId withNSString:field withInt:numPayloadsSeen withFloat:payloadScore], JreStrcat("$$", [[self getClass] getSimpleName], @".docScore()"), [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchExplanation_class_()]);
-}
-
-- (NSUInteger)hash {
-  // can't call an abstract method
-  [self doesNotRecognizeSelector:_cmd];
-  return 0;
-}
-
-- (jboolean)isEqual:(id)o {
-  // can't call an abstract method
-  [self doesNotRecognizeSelector:_cmd];
-  return 0;
-}
 
 - (instancetype)init {
   OrgApacheLuceneSearchPayloadsPayloadFunction_init(self);
@@ -58,14 +17,9 @@
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "currentScoreWithInt:withNSString:withInt:withInt:withInt:withFloat:withFloat:", "currentScore", "F", 0x401, NULL, NULL },
-    { "docScoreWithInt:withNSString:withInt:withFloat:", "docScore", "F", 0x401, NULL, NULL },
-    { "explainWithInt:withNSString:withInt:withFloat:", "explain", "Lorg.apache.lucene.search.Explanation;", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x401, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x401, NULL, NULL },
     { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchPayloadsPayloadFunction = { 2, "PayloadFunction", "org.apache.lucene.search.payloads", NULL, 0x401, 6, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchPayloadsPayloadFunction = { 2, "PayloadFunction", "org.apache.lucene.search.payloads", NULL, 0x401, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchPayloadsPayloadFunction;
 }
 

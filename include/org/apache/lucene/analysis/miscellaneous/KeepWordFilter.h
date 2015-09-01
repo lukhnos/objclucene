@@ -20,25 +20,19 @@
 #define OrgApacheLuceneAnalysisUtilFilteringTokenFilter_INCLUDE 1
 #include "org/apache/lucene/analysis/util/FilteringTokenFilter.h"
 
-@class OrgApacheLuceneAnalysisTokenStream;
-@class OrgApacheLuceneAnalysisUtilCharArraySet;
-
 @interface OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter : OrgApacheLuceneAnalysisUtilFilteringTokenFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
-               withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)words;
-
-- (jboolean)accept;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter *self, OrgApacheLuceneAnalysisTokenStream *inArg, OrgApacheLuceneAnalysisUtilCharArraySet *words);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter_init(OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter *new_OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisTokenStream *inArg, OrgApacheLuceneAnalysisUtilCharArraySet *words) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter *new_OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousKeepWordFilter)
 

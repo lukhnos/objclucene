@@ -20,22 +20,14 @@
 #define OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_INCLUDE 1
 #include "org/apache/lucene/analysis/util/StopwordAnalyzerBase.h"
 
-@class JavaIoReader;
 @class OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;
 @class OrgApacheLuceneAnalysisUtilCharArraySet;
-@class OrgLukhnosPortmobileFilePath;
 
 @interface OrgApacheLuceneAnalysisCoreStopAnalyzer : OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopWords;
-
-- (instancetype)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)stopwordsFile;
-
-- (instancetype)initWithJavaIoReader:(JavaIoReader *)stopwords;
 
 #pragma mark Protected
 
@@ -51,18 +43,6 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisCoreStopAnalyzer, ENGLISH_STOP
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCoreStopAnalyzer_init(OrgApacheLuceneAnalysisCoreStopAnalyzer *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreStopAnalyzer *new_OrgApacheLuceneAnalysisCoreStopAnalyzer_init() NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCoreStopAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisCoreStopAnalyzer *self, OrgApacheLuceneAnalysisUtilCharArraySet *stopWords);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreStopAnalyzer *new_OrgApacheLuceneAnalysisCoreStopAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisUtilCharArraySet *stopWords) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCoreStopAnalyzer_initWithOrgLukhnosPortmobileFilePath_(OrgApacheLuceneAnalysisCoreStopAnalyzer *self, OrgLukhnosPortmobileFilePath *stopwordsFile);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreStopAnalyzer *new_OrgApacheLuceneAnalysisCoreStopAnalyzer_initWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *stopwordsFile) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCoreStopAnalyzer_initWithJavaIoReader_(OrgApacheLuceneAnalysisCoreStopAnalyzer *self, JavaIoReader *stopwords);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreStopAnalyzer *new_OrgApacheLuceneAnalysisCoreStopAnalyzer_initWithJavaIoReader_(JavaIoReader *stopwords) NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCoreStopAnalyzer)
 

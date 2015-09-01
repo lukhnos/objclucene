@@ -75,14 +75,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightTermVectorLeafReader_$1
   return self;
 }
 
-- (void)addCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:(id<OrgApacheLuceneIndexLeafReader_CoreClosedListener>)listener {
-  OrgApacheLuceneIndexLeafReader_addCoreClosedListenerAsReaderClosedListenerWithOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneIndexLeafReader_CoreClosedListener_(self, listener);
-}
-
-- (void)removeCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:(id<OrgApacheLuceneIndexLeafReader_CoreClosedListener>)listener {
-  OrgApacheLuceneIndexLeafReader_removeCoreClosedListenerAsReaderClosedListenerWithOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneIndexLeafReader_CoreClosedListener_(self, listener);
-}
-
 - (void)doClose {
 }
 
@@ -157,8 +149,6 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithNSString:withOrgApacheLuceneIndexTerms:", "TermVectorLeafReader", NULL, 0x1, NULL, NULL },
-    { "addCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:", "addCoreClosedListener", "V", 0x1, NULL, NULL },
-    { "removeCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:", "removeCoreClosedListener", "V", 0x1, NULL, NULL },
     { "doClose", NULL, "V", 0x4, "Ljava.io.IOException;", NULL },
     { "fields", NULL, "Lorg.apache.lucene.index.Fields;", 0x1, "Ljava.io.IOException;", NULL },
     { "getNumericDocValuesWithNSString:", "getNumericDocValues", "Lorg.apache.lucene.index.NumericDocValues;", 0x1, "Ljava.io.IOException;", NULL },
@@ -180,7 +170,7 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
     { "fields_", NULL, 0x12, "Lorg.apache.lucene.index.Fields;", NULL, NULL, .constantValue.asLong = 0 },
     { "fieldInfos_", NULL, 0x12, "Lorg.apache.lucene.index.FieldInfos;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightTermVectorLeafReader = { 2, "TermVectorLeafReader", "org.apache.lucene.search.highlight", NULL, 0x1, 19, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightTermVectorLeafReader = { 2, "TermVectorLeafReader", "org.apache.lucene.search.highlight", NULL, 0x1, 17, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchHighlightTermVectorLeafReader;
 }
 

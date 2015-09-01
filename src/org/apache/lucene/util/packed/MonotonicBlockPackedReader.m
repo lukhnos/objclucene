@@ -10,9 +10,6 @@
 #include "java/io/IOException.h"
 #include "java/lang/Float.h"
 #include "java/lang/Math.h"
-#include "java/util/Collection.h"
-#include "java/util/Collections.h"
-#include "java/util/List.h"
 #include "org/apache/lucene/store/IndexInput.h"
 #include "org/apache/lucene/util/BitUtil.h"
 #include "org/apache/lucene/util/LongValues.h"
@@ -111,10 +108,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_$
   return sizeInBytes;
 }
 
-- (id<JavaUtilCollection>)getChildResources {
-  return JavaUtilCollections_emptyList();
-}
-
 - (NSString *)description {
   jlong avgBPV = ((IOSObjectArray *) nil_chk(subReaders_))->size_ == 0 ? 0 : sumBPV_ / subReaders_->size_;
   return JreStrcat("$$I$J$JC", [[self getClass] getSimpleName], @"(blocksize=", (JreLShift32(1, blockShift_)), @",size=", valueCount_, @",avgBPV=", avgBPV, ')');
@@ -136,7 +129,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_$
     { "decodeDeltaWithLong:", "decodeDelta", "J", 0x4, NULL, NULL },
     { "size", NULL, "J", 0x1, NULL, NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -148,7 +140,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_$
     { "subReaders_", NULL, 0x10, "[Lorg.apache.lucene.util.packed.PackedInts$Reader;", NULL, NULL, .constantValue.asLong = 0 },
     { "sumBPV_", NULL, 0x10, "J", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedMonotonicBlockPackedReader = { 2, "MonotonicBlockPackedReader", "org.apache.lucene.util.packed", NULL, 0x1, 9, methods, 7, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedMonotonicBlockPackedReader = { 2, "MonotonicBlockPackedReader", "org.apache.lucene.util.packed", NULL, 0x1, 8, methods, 7, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilPackedMonotonicBlockPackedReader;
 }
 

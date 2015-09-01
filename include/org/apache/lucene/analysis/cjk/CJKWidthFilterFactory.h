@@ -24,27 +24,19 @@
 #define OrgApacheLuceneAnalysisUtilMultiTermAwareComponent_INCLUDE 1
 #include "org/apache/lucene/analysis/util/MultiTermAwareComponent.h"
 
-@class OrgApacheLuceneAnalysisTokenStream;
-@class OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory;
-@protocol JavaUtilMap;
-
 @interface OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory < OrgApacheLuceneAnalysisUtilMultiTermAwareComponent >
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
-
-- (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
-
-- (OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory *)getMultiTermComponent;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory *self, id<JavaUtilMap> args);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory_init(OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory *new_OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory *new_OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCjkCJKWidthFilterFactory)
 

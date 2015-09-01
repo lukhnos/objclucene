@@ -23,10 +23,6 @@
 #define OrgApacheLuceneIndexDocsEnum_INCLUDE 1
 #include "org/apache/lucene/index/DocsEnum.h"
 
-@class OrgApacheLuceneIndexPostingsEnum;
-@class OrgApacheLuceneUtilBytesRef;
-@protocol OrgApacheLuceneUtilBits;
-
 #define OrgApacheLuceneIndexDocsAndPositionsEnum_FLAG_OFFSETS 1
 #define OrgApacheLuceneIndexDocsAndPositionsEnum_FLAG_PAYLOADS 2
 #define OrgApacheLuceneIndexDocsAndPositionsEnum_OLD_NULL_SEMANTICS 16384
@@ -35,26 +31,7 @@
 
 #pragma mark Public
 
-- (jint)endOffset;
-
-- (OrgApacheLuceneUtilBytesRef *)getPayload;
-
-- (jint)nextPosition;
-
-- (jint)startOffset;
-
-#pragma mark Protected
-
 - (instancetype)init;
-
-#pragma mark Package-Private
-
-+ (OrgApacheLuceneIndexPostingsEnum *)unwrapWithOrgApacheLuceneIndexDocsEnum:(OrgApacheLuceneIndexDocsEnum *)docs;
-
-+ (id<OrgApacheLuceneUtilBits>)unwrapliveDocsWithOrgApacheLuceneIndexDocsEnum:(OrgApacheLuceneIndexDocsEnum *)docs;
-
-+ (OrgApacheLuceneIndexDocsAndPositionsEnum *)wrapWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)postings
-                                                           withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)liveDocs;
 
 @end
 
@@ -68,12 +45,6 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneIndexDocsAndPositionsEnum, OLD_NULL_SE
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexDocsAndPositionsEnum_init(OrgApacheLuceneIndexDocsAndPositionsEnum *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexDocsAndPositionsEnum *OrgApacheLuceneIndexDocsAndPositionsEnum_wrapWithOrgApacheLuceneIndexPostingsEnum_withOrgApacheLuceneUtilBits_(OrgApacheLuceneIndexPostingsEnum *postings, id<OrgApacheLuceneUtilBits> liveDocs);
-
-FOUNDATION_EXPORT OrgApacheLuceneIndexPostingsEnum *OrgApacheLuceneIndexDocsAndPositionsEnum_unwrapWithOrgApacheLuceneIndexDocsEnum_(OrgApacheLuceneIndexDocsEnum *docs);
-
-FOUNDATION_EXPORT id<OrgApacheLuceneUtilBits> OrgApacheLuceneIndexDocsAndPositionsEnum_unwrapliveDocsWithOrgApacheLuceneIndexDocsEnum_(OrgApacheLuceneIndexDocsEnum *docs);
-
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocsAndPositionsEnum)
 
 #endif
@@ -81,54 +52,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocsAndPositionsEnum)
 #if !defined (_OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper_) && (OrgApacheLuceneIndexDocsAndPositionsEnum_INCLUDE_ALL || OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper_INCLUDE)
 #define _OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper_
 
-@class OrgApacheLuceneIndexPostingsEnum;
-@class OrgApacheLuceneUtilAttributeSource;
-@class OrgApacheLuceneUtilBytesRef;
-@protocol OrgApacheLuceneUtilBits;
-
-@interface OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper : OrgApacheLuceneIndexDocsAndPositionsEnum {
- @public
-  OrgApacheLuceneIndexPostingsEnum *in_;
-  id<OrgApacheLuceneUtilBits> liveDocs_;
-}
-
-#pragma mark Public
-
-- (jint)advanceWithInt:(jint)target;
-
-- (OrgApacheLuceneUtilAttributeSource *)attributes;
-
-- (jlong)cost;
-
-- (jint)docID;
-
-- (jint)endOffset;
-
-- (jint)freq;
-
-- (OrgApacheLuceneUtilBytesRef *)getPayload;
-
-- (jint)nextDoc;
-
-- (jint)nextPosition;
-
-- (jint)startOffset;
+@interface OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper : OrgApacheLuceneIndexDocsAndPositionsEnum
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)inArg
-                             withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)liveDocs;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper, in_, OrgApacheLuceneIndexPostingsEnum *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper, liveDocs_, id<OrgApacheLuceneUtilBits>)
+FOUNDATION_EXPORT void OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper_init(OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper_initWithOrgApacheLuceneIndexPostingsEnum_withOrgApacheLuceneUtilBits_(OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper *self, OrgApacheLuceneIndexPostingsEnum *inArg, id<OrgApacheLuceneUtilBits> liveDocs);
-
-FOUNDATION_EXPORT OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper *new_OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper_initWithOrgApacheLuceneIndexPostingsEnum_withOrgApacheLuceneUtilBits_(OrgApacheLuceneIndexPostingsEnum *inArg, id<OrgApacheLuceneUtilBits> liveDocs) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper *new_OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper)
 

@@ -20,36 +20,17 @@
 #define OrgApacheLuceneSearchFilterCollector_INCLUDE 1
 #include "org/apache/lucene/search/FilterCollector.h"
 
-@protocol OrgApacheLuceneSearchCollector;
-
 @interface OrgApacheLuceneSearchCachingCollector : OrgApacheLuceneSearchFilterCollector
 
 #pragma mark Public
 
-+ (OrgApacheLuceneSearchCachingCollector *)createWithBoolean:(jboolean)cacheScores
-                                                  withDouble:(jdouble)maxRAMMB;
-
-+ (OrgApacheLuceneSearchCachingCollector *)createWithOrgApacheLuceneSearchCollector:(id<OrgApacheLuceneSearchCollector>)other
-                                                                        withBoolean:(jboolean)cacheScores
-                                                                         withDouble:(jdouble)maxRAMMB;
-
-+ (OrgApacheLuceneSearchCachingCollector *)createWithOrgApacheLuceneSearchCollector:(id<OrgApacheLuceneSearchCollector>)other
-                                                                        withBoolean:(jboolean)cacheScores
-                                                                            withInt:(jint)maxDocsToCache;
-
-- (jboolean)isCached;
-
-- (void)replayWithOrgApacheLuceneSearchCollector:(id<OrgApacheLuceneSearchCollector>)other;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchCachingCollector)
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchCachingCollector *OrgApacheLuceneSearchCachingCollector_createWithBoolean_withDouble_(jboolean cacheScores, jdouble maxRAMMB);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchCachingCollector *OrgApacheLuceneSearchCachingCollector_createWithOrgApacheLuceneSearchCollector_withBoolean_withDouble_(id<OrgApacheLuceneSearchCollector> other, jboolean cacheScores, jdouble maxRAMMB);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchCachingCollector *OrgApacheLuceneSearchCachingCollector_createWithOrgApacheLuceneSearchCollector_withBoolean_withInt_(id<OrgApacheLuceneSearchCollector> other, jboolean cacheScores, jint maxDocsToCache);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchCachingCollector_init(OrgApacheLuceneSearchCachingCollector *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchCachingCollector)
 

@@ -31,7 +31,6 @@
 @class OrgApacheLuceneIndexSegmentDocValues;
 @class OrgApacheLuceneStoreDirectory;
 @class OrgApacheLuceneStoreIOContext;
-@protocol OrgApacheLuceneIndexLeafReader_CoreClosedListener;
 @protocol OrgApacheLuceneUtilBits;
 
 @interface OrgApacheLuceneIndexSegmentReader : OrgApacheLuceneIndexCodecReader {
@@ -47,11 +46,7 @@
 - (instancetype)initWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)si
                             withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
 
-- (void)addCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:(id<OrgApacheLuceneIndexLeafReader_CoreClosedListener>)listener;
-
 - (OrgApacheLuceneStoreDirectory *)directory;
-
-- (id)getCombinedCoreAndDeletesKey;
 
 - (id)getCoreCacheKey;
 
@@ -69,15 +64,11 @@
 
 - (OrgApacheLuceneIndexSegmentCommitInfo *)getSegmentInfo;
 
-- (NSString *)getSegmentName;
-
 - (OrgApacheLuceneCodecsTermVectorsReader *)getTermVectorsReader;
 
 - (jint)maxDoc;
 
 - (jint)numDocs;
-
-- (void)removeCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:(id<OrgApacheLuceneIndexLeafReader_CoreClosedListener>)listener;
 
 - (NSString *)description;
 
@@ -86,9 +77,6 @@
 - (void)doClose;
 
 #pragma mark Package-Private
-
-- (instancetype)initWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)si
-                        withOrgApacheLuceneIndexSegmentReader:(OrgApacheLuceneIndexSegmentReader *)sr;
 
 - (instancetype)initWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)si
                         withOrgApacheLuceneIndexSegmentReader:(OrgApacheLuceneIndexSegmentReader *)sr
@@ -107,10 +95,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSegmentReader, fieldInfos_, OrgApacheLuc
 FOUNDATION_EXPORT void OrgApacheLuceneIndexSegmentReader_initWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneIndexSegmentReader *self, OrgApacheLuceneIndexSegmentCommitInfo *si, OrgApacheLuceneStoreIOContext *context);
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentReader *new_OrgApacheLuceneIndexSegmentReader_initWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneIndexSegmentCommitInfo *si, OrgApacheLuceneStoreIOContext *context) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneIndexSegmentReader_initWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneIndexSegmentReader_(OrgApacheLuceneIndexSegmentReader *self, OrgApacheLuceneIndexSegmentCommitInfo *si, OrgApacheLuceneIndexSegmentReader *sr);
-
-FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentReader *new_OrgApacheLuceneIndexSegmentReader_initWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneIndexSegmentReader_(OrgApacheLuceneIndexSegmentCommitInfo *si, OrgApacheLuceneIndexSegmentReader *sr) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT void OrgApacheLuceneIndexSegmentReader_initWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneIndexSegmentReader_withOrgApacheLuceneUtilBits_withInt_(OrgApacheLuceneIndexSegmentReader *self, OrgApacheLuceneIndexSegmentCommitInfo *si, OrgApacheLuceneIndexSegmentReader *sr, id<OrgApacheLuceneUtilBits> liveDocs, jint numDocs);
 

@@ -31,8 +31,6 @@
 
 #pragma mark Public
 
-+ (OrgApacheLuceneSearchTopScoreDocCollector *)createWithInt:(jint)numHits;
-
 + (OrgApacheLuceneSearchTopScoreDocCollector *)createWithInt:(jint)numHits
                            withOrgApacheLuceneSearchScoreDoc:(OrgApacheLuceneSearchScoreDoc *)after;
 
@@ -52,8 +50,6 @@
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchTopScoreDocCollector)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchTopScoreDocCollector, pqTop_, OrgApacheLuceneSearchScoreDoc *)
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchTopScoreDocCollector *OrgApacheLuceneSearchTopScoreDocCollector_createWithInt_(jint numHits);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchTopScoreDocCollector *OrgApacheLuceneSearchTopScoreDocCollector_createWithInt_withOrgApacheLuceneSearchScoreDoc_(jint numHits, OrgApacheLuceneSearchScoreDoc *after);
 

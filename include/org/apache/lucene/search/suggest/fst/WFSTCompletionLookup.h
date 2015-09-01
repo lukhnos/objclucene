@@ -20,56 +20,19 @@
 #define OrgApacheLuceneSearchSuggestLookup_INCLUDE 1
 #include "org/apache/lucene/search/suggest/Lookup.h"
 
-@class OrgApacheLuceneStoreDataInput;
-@class OrgApacheLuceneStoreDataOutput;
-@protocol JavaLangCharSequence;
-@protocol JavaUtilCollection;
-@protocol JavaUtilComparator;
-@protocol JavaUtilList;
-@protocol JavaUtilSet;
-@protocol OrgApacheLuceneSearchSuggestInputIterator;
-
 @interface OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup : OrgApacheLuceneSearchSuggestLookup
 
 #pragma mark Public
 
 - (instancetype)init;
 
-- (instancetype)initWithBoolean:(jboolean)exactFirst;
-
-- (void)buildWithOrgApacheLuceneSearchSuggestInputIterator:(id<OrgApacheLuceneSearchSuggestInputIterator>)iterator;
-
-- (id)getWithJavaLangCharSequence:(id<JavaLangCharSequence>)key;
-
-- (id<JavaUtilCollection>)getChildResources;
-
-- (jlong)getCount;
-
-- (jboolean)load__WithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)input;
-
-- (id<JavaUtilList>)lookupWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
-                                   withJavaUtilSet:(id<JavaUtilSet>)contexts
-                                       withBoolean:(jboolean)onlyMorePopular
-                                           withInt:(jint)num;
-
-- (jlong)ramBytesUsed;
-
-- (jboolean)storeWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)output;
-
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup)
-
-FOUNDATION_EXPORT id<JavaUtilComparator> OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_weightComparator_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup, weightComparator_, id<JavaUtilComparator>)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_init(OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup *new_OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_init() NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_initWithBoolean_(OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup *self, jboolean exactFirst);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup *new_OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_initWithBoolean_(jboolean exactFirst) NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup)
 

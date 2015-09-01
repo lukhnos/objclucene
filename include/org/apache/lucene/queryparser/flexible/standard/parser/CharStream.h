@@ -16,33 +16,7 @@
 #if !defined (_OrgApacheLuceneQueryparserFlexibleStandardParserCharStream_) && (OrgApacheLuceneQueryparserFlexibleStandardParserCharStream_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleStandardParserCharStream_INCLUDE)
 #define _OrgApacheLuceneQueryparserFlexibleStandardParserCharStream_
 
-@class IOSCharArray;
-
 @protocol OrgApacheLuceneQueryparserFlexibleStandardParserCharStream < NSObject, JavaObject >
-
-- (jchar)readChar;
-
-- (jint)getColumn;
-
-- (jint)getLine;
-
-- (jint)getEndColumn;
-
-- (jint)getEndLine;
-
-- (jint)getBeginColumn;
-
-- (jint)getBeginLine;
-
-- (void)backupWithInt:(jint)amount;
-
-- (jchar)BeginToken;
-
-- (NSString *)GetImage;
-
-- (IOSCharArray *)GetSuffixWithInt:(jint)len;
-
-- (void)Done;
 
 @end
 

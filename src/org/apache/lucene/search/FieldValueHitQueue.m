@@ -82,10 +82,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldValueHitQueue_MultiComparat
   return OrgApacheLuceneSearchFieldValueHitQueue_createWithOrgApacheLuceneSearchSortFieldArray_withInt_(fields, size);
 }
 
-- (IOSObjectArray *)getComparators {
-  return comparators_;
-}
-
 - (IOSIntArray *)getReverseMul {
   return reverseMul_;
 }
@@ -129,7 +125,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldValueHitQueue_MultiComparat
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneSearchSortFieldArray:withInt:", "FieldValueHitQueue", NULL, 0x2, "Ljava.io.IOException;", NULL },
     { "createWithOrgApacheLuceneSearchSortFieldArray:withInt:", "create", "Lorg.apache.lucene.search.FieldValueHitQueue;", 0x9, "Ljava.io.IOException;", "<T:Lorg/apache/lucene/search/FieldValueHitQueue$Entry;>([Lorg/apache/lucene/search/SortField;I)Lorg/apache/lucene/search/FieldValueHitQueue<TT;>;" },
-    { "getComparators", NULL, "[Lorg.apache.lucene.search.FieldComparator;", 0x1, NULL, NULL },
     { "getReverseMul", NULL, "[I", 0x1, NULL, NULL },
     { "getComparatorsWithOrgApacheLuceneIndexLeafReaderContext:", "getComparators", "[Lorg.apache.lucene.search.LeafFieldComparator;", 0x1, "Ljava.io.IOException;", NULL },
     { "lessThanWithId:withId:", "lessThan", "Z", 0x404, NULL, NULL },
@@ -143,7 +138,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldValueHitQueue_MultiComparat
   };
   static const char *superclass_type_args[] = {"TT;"};
   static const char *inner_classes[] = {"Lorg.apache.lucene.search.FieldValueHitQueue$Entry;", "Lorg.apache.lucene.search.FieldValueHitQueue$OneComparatorFieldValueHitQueue;", "Lorg.apache.lucene.search.FieldValueHitQueue$MultiComparatorsFieldValueHitQueue;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchFieldValueHitQueue = { 2, "FieldValueHitQueue", "org.apache.lucene.search", NULL, 0x401, 8, methods, 3, fields, 1, superclass_type_args, 3, inner_classes, NULL, "<T:Lorg/apache/lucene/search/FieldValueHitQueue$Entry;>Lorg/apache/lucene/util/PriorityQueue<TT;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchFieldValueHitQueue = { 2, "FieldValueHitQueue", "org.apache.lucene.search", NULL, 0x401, 7, methods, 3, fields, 1, superclass_type_args, 3, inner_classes, NULL, "<T:Lorg/apache/lucene/search/FieldValueHitQueue$Entry;>Lorg/apache/lucene/util/PriorityQueue<TT;>;" };
   return &_OrgApacheLuceneSearchFieldValueHitQueue;
 }
 

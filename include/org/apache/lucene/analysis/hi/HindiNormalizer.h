@@ -16,16 +16,11 @@
 #if !defined (_OrgApacheLuceneAnalysisHiHindiNormalizer_) && (OrgApacheLuceneAnalysisHiHindiNormalizer_INCLUDE_ALL || OrgApacheLuceneAnalysisHiHindiNormalizer_INCLUDE)
 #define _OrgApacheLuceneAnalysisHiHindiNormalizer_
 
-@class IOSCharArray;
-
 @interface OrgApacheLuceneAnalysisHiHindiNormalizer : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (jint)normalizeWithCharArray:(IOSCharArray *)s
-                       withInt:(jint)len;
 
 @end
 

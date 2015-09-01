@@ -4,51 +4,34 @@
 //
 
 #include "J2ObjC_source.h"
-#include "java/lang/IllegalArgumentException.h"
-#include "java/util/Map.h"
-#include "org/apache/lucene/analysis/TokenStream.h"
-#include "org/apache/lucene/analysis/fa/PersianNormalizationFilter.h"
 #include "org/apache/lucene/analysis/fa/PersianNormalizationFilterFactory.h"
-#include "org/apache/lucene/analysis/util/AbstractAnalysisFactory.h"
-#include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args {
-  OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory_initWithJavaUtilMap_(self, args);
-  return self;
-}
-
-- (OrgApacheLuceneAnalysisFaPersianNormalizationFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  return [new_OrgApacheLuceneAnalysisFaPersianNormalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_(input) autorelease];
-}
-
-- (OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory *)getMultiTermComponent {
+- (instancetype)init {
+  OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory_init(self);
   return self;
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "PersianNormalizationFilterFactory", NULL, 0x1, NULL, NULL },
-    { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.fa.PersianNormalizationFilter;", 0x1, NULL, NULL },
-    { "getMultiTermComponent", NULL, "Lorg.apache.lucene.analysis.util.AbstractAnalysisFactory;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory = { 2, "PersianNormalizationFilterFactory", "org.apache.lucene.analysis.fa", NULL, 0x1, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory = { 2, "PersianNormalizationFilterFactory", "org.apache.lucene.analysis.fa", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory;
 }
 
 @end
 
-void OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory *self, id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
-  if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
-  }
+void OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory_init(OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory *new_OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory *new_OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory_init() {
   OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory *self = [OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory alloc];
-  OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory_initWithJavaUtilMap_(self, args);
+  OrgApacheLuceneAnalysisFaPersianNormalizationFilterFactory_init(self);
   return self;
 }
 

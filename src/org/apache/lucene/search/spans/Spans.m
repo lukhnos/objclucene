@@ -10,7 +10,6 @@
 #include "java/lang/StringBuilder.h"
 #include "org/apache/lucene/search/DocIdSetIterator.h"
 #include "org/apache/lucene/search/TwoPhaseIterator.h"
-#include "org/apache/lucene/search/spans/SpanCollector.h"
 #include "org/apache/lucene/search/spans/Spans.h"
 
 @implementation OrgApacheLuceneSearchSpansSpans
@@ -39,11 +38,6 @@
   return 0;
 }
 
-- (void)collectWithOrgApacheLuceneSearchSpansSpanCollector:(id<OrgApacheLuceneSearchSpansSpanCollector>)collector {
-  // can't call an abstract method
-  [self doesNotRecognizeSelector:_cmd];
-}
-
 - (OrgApacheLuceneSearchTwoPhaseIterator *)asTwoPhaseIterator {
   return nil;
 }
@@ -70,7 +64,6 @@
     { "startPosition", NULL, "I", 0x401, NULL, NULL },
     { "endPosition", NULL, "I", 0x401, NULL, NULL },
     { "width", NULL, "I", 0x401, NULL, NULL },
-    { "collectWithOrgApacheLuceneSearchSpansSpanCollector:", "collect", "V", 0x401, "Ljava.io.IOException;", NULL },
     { "asTwoPhaseIterator", NULL, "Lorg.apache.lucene.search.TwoPhaseIterator;", 0x1, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "init", NULL, NULL, 0x1, NULL, NULL },
@@ -78,7 +71,7 @@
   static const J2ObjcFieldInfo fields[] = {
     { "NO_MORE_POSITIONS", "NO_MORE_POSITIONS", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpans = { 2, "Spans", "org.apache.lucene.search.spans", NULL, 0x401, 8, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpans = { 2, "Spans", "org.apache.lucene.search.spans", NULL, 0x401, 7, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchSpansSpans;
 }
 

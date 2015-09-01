@@ -20,34 +20,19 @@
 #define OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_INCLUDE 1
 #include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNodeImpl.h"
 
-@protocol JavaLangCharSequence;
-@protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
-@protocol OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax;
-
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)query
-                                                                   withFloat:(jfloat)value;
-
-- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)cloneTree;
-
-- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)getChild;
-
-- (jfloat)getValue;
-
-- (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escapeSyntaxParser;
-
-- (NSString *)description;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_withFloat_(OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode *self, id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> query, jfloat value);
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode_init(OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_withFloat_(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> query, jfloat value) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode)
 

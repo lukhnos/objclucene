@@ -13,7 +13,6 @@
 #include "org/apache/lucene/analysis/tokenattributes/OffsetAttribute.h"
 #include "org/apache/lucene/analysis/util/CharTokenizer.h"
 #include "org/apache/lucene/analysis/util/CharacterUtils.h"
-#include "org/apache/lucene/util/AttributeFactory.h"
 #include "org/apache/lucene/util/AttributeSource.h"
 
 #define OrgApacheLuceneAnalysisUtilCharTokenizer_MAX_WORD_LEN 255
@@ -43,11 +42,6 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisUtilCharTokenizer, IO_BUFFER_S
 
 - (instancetype)init {
   OrgApacheLuceneAnalysisUtilCharTokenizer_init(self);
-  return self;
-}
-
-- (instancetype)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory {
-  OrgApacheLuceneAnalysisUtilCharTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(self, factory);
   return self;
 }
 
@@ -133,7 +127,6 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisUtilCharTokenizer, IO_BUFFER_S
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "init", "CharTokenizer", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilAttributeFactory:", "CharTokenizer", NULL, 0x1, NULL, NULL },
     { "isTokenCharWithInt:", "isTokenChar", "Z", 0x404, NULL, NULL },
     { "normalizeWithInt:", "normalize", "I", 0x4, NULL, NULL },
     { "incrementToken", NULL, "Z", 0x11, "Ljava.io.IOException;", NULL },
@@ -152,7 +145,7 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisUtilCharTokenizer, IO_BUFFER_S
     { "charUtils_", NULL, 0x12, "Lorg.apache.lucene.analysis.util.CharacterUtils;", NULL, NULL, .constantValue.asLong = 0 },
     { "ioBuffer_", NULL, 0x12, "Lorg.apache.lucene.analysis.util.CharacterUtils$CharacterBuffer;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisUtilCharTokenizer = { 2, "CharTokenizer", "org.apache.lucene.analysis.util", NULL, 0x401, 7, methods, 10, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisUtilCharTokenizer = { 2, "CharTokenizer", "org.apache.lucene.analysis.util", NULL, 0x401, 6, methods, 10, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisUtilCharTokenizer;
 }
 
@@ -160,18 +153,6 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisUtilCharTokenizer, IO_BUFFER_S
 
 void OrgApacheLuceneAnalysisUtilCharTokenizer_init(OrgApacheLuceneAnalysisUtilCharTokenizer *self) {
   OrgApacheLuceneAnalysisTokenizer_init(self);
-  self->offset_ = 0;
-  self->bufferIndex_ = 0;
-  self->dataLen_ = 0;
-  self->finalOffset_ = 0;
-  JreStrongAssign(&self->termAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()]);
-  JreStrongAssign(&self->offsetAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_class_()]);
-  JreStrongAssign(&self->charUtils_, OrgApacheLuceneAnalysisUtilCharacterUtils_getInstance());
-  JreStrongAssign(&self->ioBuffer_, OrgApacheLuceneAnalysisUtilCharacterUtils_newCharacterBufferWithInt_(OrgApacheLuceneAnalysisUtilCharTokenizer_IO_BUFFER_SIZE));
-}
-
-void OrgApacheLuceneAnalysisUtilCharTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(OrgApacheLuceneAnalysisUtilCharTokenizer *self, OrgApacheLuceneUtilAttributeFactory *factory) {
-  OrgApacheLuceneAnalysisTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(self, factory);
   self->offset_ = 0;
   self->bufferIndex_ = 0;
   self->dataLen_ = 0;

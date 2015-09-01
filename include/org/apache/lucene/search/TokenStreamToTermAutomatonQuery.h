@@ -16,19 +16,11 @@
 #if !defined (_OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery_) && (OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery_INCLUDE_ALL || OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery_INCLUDE)
 #define _OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery_
 
-@class OrgApacheLuceneAnalysisTokenStream;
-@class OrgApacheLuceneSearchTermAutomatonQuery;
-
 @interface OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (void)setPreservePositionIncrementsWithBoolean:(jboolean)enablePositionIncrements;
-
-- (OrgApacheLuceneSearchTermAutomatonQuery *)toQueryWithNSString:(NSString *)field
-                          withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
 
 @end
 

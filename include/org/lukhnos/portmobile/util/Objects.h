@@ -24,12 +24,7 @@
 
 - (instancetype)init;
 
-+ (jboolean)equalsWithId:(id)a
-                  withId:(id)b;
-
 + (jint)hash__WithNSObjectArray:(IOSObjectArray *)values;
-
-+ (jint)hashCodeWithId:(id)o;
 
 + (id)requireNonNullWithId:(id)obj;
 
@@ -46,13 +41,9 @@ FOUNDATION_EXPORT id OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_(id ob
 
 FOUNDATION_EXPORT id OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_withNSString_(id obj, NSString *msg);
 
-FOUNDATION_EXPORT jint OrgLukhnosPortmobileUtilObjects_hashCodeWithId_(id o);
-
 FOUNDATION_EXPORT jint OrgLukhnosPortmobileUtilObjects_hash__WithNSObjectArray_(IOSObjectArray *values);
 
 FOUNDATION_EXPORT NSString *OrgLukhnosPortmobileUtilObjects_toStringWithId_(id o);
-
-FOUNDATION_EXPORT jboolean OrgLukhnosPortmobileUtilObjects_equalsWithId_withId_(id a, id b);
 
 FOUNDATION_EXPORT void OrgLukhnosPortmobileUtilObjects_init(OrgLukhnosPortmobileUtilObjects *self);
 

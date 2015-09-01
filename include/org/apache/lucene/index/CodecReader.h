@@ -37,7 +37,6 @@
 @class OrgApacheLuceneIndexSortedSetDocValues;
 @class OrgApacheLuceneIndexStoredFieldVisitor;
 @class OrgApacheLuceneUtilCloseableThreadLocal;
-@protocol JavaUtilCollection;
 @protocol OrgApacheLuceneUtilBits;
 
 @interface OrgApacheLuceneIndexCodecReader : OrgApacheLuceneIndexLeafReader < OrgApacheLuceneUtilAccountable > {
@@ -57,8 +56,6 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 - (OrgApacheLuceneIndexFields *)fields;
 
 - (OrgApacheLuceneIndexBinaryDocValues *)getBinaryDocValuesWithNSString:(NSString *)field;
-
-- (id<JavaUtilCollection>)getChildResources;
 
 - (id<OrgApacheLuceneUtilBits>)getDocsWithFieldWithNSString:(NSString *)field;
 

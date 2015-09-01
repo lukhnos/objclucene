@@ -3,22 +3,12 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/xml/builders/SpanBuilderBase.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "org/apache/lucene/queryparser/xml/ParserException.h"
 #include "org/apache/lucene/queryparser/xml/builders/SpanBuilderBase.h"
-#include "org/apache/lucene/queryparser/xml/builders/SpanQueryBuilder.h"
-#include "org/apache/lucene/search/Query.h"
-#include "org/apache/lucene/search/spans/SpanQuery.h"
-#include "org/w3c/dom/Element.h"
 
 #pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneQueryparserXmlBuildersSpanBuilderBase
-
-- (OrgApacheLuceneSearchQuery *)getQueryWithOrgW3cDomElement:(id<OrgW3cDomElement>)e {
-  return [self getSpanQueryWithOrgW3cDomElement:e];
-}
 
 - (instancetype)init {
   OrgApacheLuceneQueryparserXmlBuildersSpanBuilderBase_init(self);
@@ -27,10 +17,9 @@
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "getQueryWithOrgW3cDomElement:", "getQuery", "Lorg.apache.lucene.search.Query;", 0x1, "Lorg.apache.lucene.queryparser.xml.ParserException;", NULL },
     { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlBuildersSpanBuilderBase = { 2, "SpanBuilderBase", "org.apache.lucene.queryparser.xml.builders", NULL, 0x401, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlBuildersSpanBuilderBase = { 2, "SpanBuilderBase", "org.apache.lucene.queryparser.xml.builders", NULL, 0x401, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserXmlBuildersSpanBuilderBase;
 }
 

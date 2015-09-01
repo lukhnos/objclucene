@@ -16,12 +16,7 @@
 #if !defined (_OrgApacheLuceneSearchSpellSuggestWord_) && (OrgApacheLuceneSearchSpellSuggestWord_INCLUDE_ALL || OrgApacheLuceneSearchSpellSuggestWord_INCLUDE)
 #define _OrgApacheLuceneSearchSpellSuggestWord_
 
-@interface OrgApacheLuceneSearchSpellSuggestWord : NSObject {
- @public
-  jfloat score_;
-  jint freq_;
-  NSString *string_;
-}
+@interface OrgApacheLuceneSearchSpellSuggestWord : NSObject
 
 #pragma mark Public
 
@@ -30,8 +25,6 @@
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSpellSuggestWord)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpellSuggestWord, string_, NSString *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSpellSuggestWord_init(OrgApacheLuceneSearchSpellSuggestWord *self);
 

@@ -20,35 +20,15 @@
 #define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
-@class OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter;
-@class OrgApacheLuceneAnalysisTokenStream;
-@class OrgApacheLuceneAnalysisUtilCharArraySet;
-@protocol JavaUtilCollection;
-@protocol JavaUtilMap;
-
-@interface OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory {
- @public
-  OrgApacheLuceneAnalysisUtilCharArraySet *keep_;
-  id<JavaUtilCollection> okPrefix_;
-  jint minWordLength_;
-  jint maxWordCount_;
-  jint maxTokenLength_;
-  jboolean onlyFirstWord_;
-  jboolean forceFirstLetter_;
-}
+@interface OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
-
-- (OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory, keep_, OrgApacheLuceneAnalysisUtilCharArraySet *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory, okPrefix_, id<JavaUtilCollection>)
 
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_KEEP_;
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory, KEEP_, NSString *)
@@ -74,9 +54,9 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisMiscellaneousCapitalizationFil
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_FORCE_FIRST_LETTER_;
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory, FORCE_FIRST_LETTER_, NSString *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory *self, id<JavaUtilMap> args);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_init(OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory *new_OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory *new_OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory)
 

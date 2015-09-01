@@ -71,12 +71,6 @@ OrgApacheLuceneStoreIOContext *OrgApacheLuceneStoreIOContext_READ_;
   return self;
 }
 
-- (instancetype)initWithOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)ctxt
-                                          withBoolean:(jboolean)readOnce {
-  OrgApacheLuceneStoreIOContext_initWithOrgApacheLuceneStoreIOContext_withBoolean_(self, ctxt, readOnce);
-  return self;
-}
-
 - (NSUInteger)hash {
   jint prime = 31;
   jint result = 1;
@@ -133,7 +127,6 @@ OrgApacheLuceneStoreIOContext *OrgApacheLuceneStoreIOContext_READ_;
     { "initWithBoolean:", "IOContext", NULL, 0x2, NULL, NULL },
     { "initWithOrgApacheLuceneStoreMergeInfo:", "IOContext", NULL, 0x1, NULL, NULL },
     { "initWithOrgApacheLuceneStoreIOContext_ContextEnum:withOrgApacheLuceneStoreMergeInfo:", "IOContext", NULL, 0x2, NULL, NULL },
-    { "initWithOrgApacheLuceneStoreIOContext:withBoolean:", "IOContext", NULL, 0x1, NULL, NULL },
     { "hash", "hashCode", "I", 0x1, NULL, NULL },
     { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
@@ -148,7 +141,7 @@ OrgApacheLuceneStoreIOContext *OrgApacheLuceneStoreIOContext_READ_;
     { "READ_", NULL, 0x19, "Lorg.apache.lucene.store.IOContext;", &OrgApacheLuceneStoreIOContext_READ_, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.store.IOContext$Context;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreIOContext = { 2, "IOContext", "org.apache.lucene.store", NULL, 0x1, 10, methods, 7, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreIOContext = { 2, "IOContext", "org.apache.lucene.store", NULL, 0x1, 9, methods, 7, fields, 0, NULL, 1, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneStoreIOContext;
 }
 
@@ -226,20 +219,6 @@ void OrgApacheLuceneStoreIOContext_initWithOrgApacheLuceneStoreIOContext_Context
 OrgApacheLuceneStoreIOContext *new_OrgApacheLuceneStoreIOContext_initWithOrgApacheLuceneStoreIOContext_ContextEnum_withOrgApacheLuceneStoreMergeInfo_(OrgApacheLuceneStoreIOContext_ContextEnum *context, OrgApacheLuceneStoreMergeInfo *mergeInfo) {
   OrgApacheLuceneStoreIOContext *self = [OrgApacheLuceneStoreIOContext alloc];
   OrgApacheLuceneStoreIOContext_initWithOrgApacheLuceneStoreIOContext_ContextEnum_withOrgApacheLuceneStoreMergeInfo_(self, context, mergeInfo);
-  return self;
-}
-
-void OrgApacheLuceneStoreIOContext_initWithOrgApacheLuceneStoreIOContext_withBoolean_(OrgApacheLuceneStoreIOContext *self, OrgApacheLuceneStoreIOContext *ctxt, jboolean readOnce) {
-  NSObject_init(self);
-  JreStrongAssign(&self->context_, ((OrgApacheLuceneStoreIOContext *) nil_chk(ctxt))->context_);
-  JreStrongAssign(&self->mergeInfo_, ctxt->mergeInfo_);
-  JreStrongAssign(&self->flushInfo_, ctxt->flushInfo_);
-  self->readOnce_ = readOnce;
-}
-
-OrgApacheLuceneStoreIOContext *new_OrgApacheLuceneStoreIOContext_initWithOrgApacheLuceneStoreIOContext_withBoolean_(OrgApacheLuceneStoreIOContext *ctxt, jboolean readOnce) {
-  OrgApacheLuceneStoreIOContext *self = [OrgApacheLuceneStoreIOContext alloc];
-  OrgApacheLuceneStoreIOContext_initWithOrgApacheLuceneStoreIOContext_withBoolean_(self, ctxt, readOnce);
   return self;
 }
 

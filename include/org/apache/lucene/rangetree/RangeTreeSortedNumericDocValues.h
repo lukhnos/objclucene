@@ -20,37 +20,19 @@
 #define OrgApacheLuceneIndexSortedNumericDocValues_INCLUDE 1
 #include "org/apache/lucene/index/SortedNumericDocValues.h"
 
-@class OrgApacheLuceneRangetreeRangeTreeReader;
+@interface OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues : OrgApacheLuceneIndexSortedNumericDocValues
 
-@interface OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues : OrgApacheLuceneIndexSortedNumericDocValues {
- @public
-  OrgApacheLuceneRangetreeRangeTreeReader *rangeTreeReader_;
-  OrgApacheLuceneIndexSortedNumericDocValues *delegate_;
-}
+#pragma mark Package-Private
 
-#pragma mark Public
-
-- (instancetype)initWithOrgApacheLuceneRangetreeRangeTreeReader:(OrgApacheLuceneRangetreeRangeTreeReader *)rangeTreeReader
-                 withOrgApacheLuceneIndexSortedNumericDocValues:(OrgApacheLuceneIndexSortedNumericDocValues *)delegate;
-
-- (jint)count;
-
-- (OrgApacheLuceneRangetreeRangeTreeReader *)getRangeTreeReader;
-
-- (void)setDocumentWithInt:(jint)doc;
-
-- (jlong)valueAtWithInt:(jint)index;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues, rangeTreeReader_, OrgApacheLuceneRangetreeRangeTreeReader *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues, delegate_, OrgApacheLuceneIndexSortedNumericDocValues *)
+FOUNDATION_EXPORT void OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues_init(OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues_initWithOrgApacheLuceneRangetreeRangeTreeReader_withOrgApacheLuceneIndexSortedNumericDocValues_(OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues *self, OrgApacheLuceneRangetreeRangeTreeReader *rangeTreeReader, OrgApacheLuceneIndexSortedNumericDocValues *delegate);
-
-FOUNDATION_EXPORT OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues *new_OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues_initWithOrgApacheLuceneRangetreeRangeTreeReader_withOrgApacheLuceneIndexSortedNumericDocValues_(OrgApacheLuceneRangetreeRangeTreeReader *rangeTreeReader, OrgApacheLuceneIndexSortedNumericDocValues *delegate) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues *new_OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues)
 

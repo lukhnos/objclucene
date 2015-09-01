@@ -3,18 +3,10 @@
 //  source: ./join/src/java/org/apache/lucene/search/join/BitDocIdSetFilter.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
-#include "org/apache/lucene/index/LeafReaderContext.h"
-#include "org/apache/lucene/search/BitsFilteredDocIdSet.h"
-#include "org/apache/lucene/search/DocIdSet.h"
-#include "org/apache/lucene/search/Filter.h"
 #include "org/apache/lucene/search/join/BitDocIdSetFilter.h"
-#include "org/apache/lucene/util/BitDocIdSet.h"
-#include "org/apache/lucene/util/BitSet.h"
-#include "org/apache/lucene/util/Bits.h"
-#include "org/lukhnos/portmobile/util/Objects.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneSearchJoinBitDocIdSetFilter
 
@@ -23,43 +15,18 @@
   return self;
 }
 
-- (OrgApacheLuceneUtilBitDocIdSet *)getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
-  // can't call an abstract method
-  [self doesNotRecognizeSelector:_cmd];
-  return 0;
-}
-
-- (OrgApacheLuceneSearchDocIdSet *)getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-                                                            withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)acceptDocs {
-  return OrgApacheLuceneSearchBitsFilteredDocIdSet_wrapWithOrgApacheLuceneSearchDocIdSet_withOrgApacheLuceneUtilBits_([self getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:context], acceptDocs);
-}
-
-- (OrgApacheLuceneUtilBitSet *)getBitSetWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
-  OrgApacheLuceneUtilBitDocIdSet *set = [self getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:context];
-  if (set == nil) {
-    return nil;
-  }
-  else {
-    OrgApacheLuceneUtilBitSet *bits = [set bits];
-    return OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_(bits);
-  }
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", "BitDocIdSetFilter", NULL, 0x4, NULL, NULL },
-    { "getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:", "getDocIdSet", "Lorg.apache.lucene.util.BitDocIdSet;", 0x401, "Ljava.io.IOException;", NULL },
-    { "getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:withOrgApacheLuceneUtilBits:", "getDocIdSet", "Lorg.apache.lucene.search.DocIdSet;", 0x11, "Ljava.io.IOException;", NULL },
-    { "getBitSetWithOrgApacheLuceneIndexLeafReaderContext:", "getBitSet", "Lorg.apache.lucene.util.BitSet;", 0x11, "Ljava.io.IOException;", NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinBitDocIdSetFilter = { 2, "BitDocIdSetFilter", "org.apache.lucene.search.join", NULL, 0x401, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinBitDocIdSetFilter = { 2, "BitDocIdSetFilter", "org.apache.lucene.search.join", NULL, 0x401, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchJoinBitDocIdSetFilter;
 }
 
 @end
 
 void OrgApacheLuceneSearchJoinBitDocIdSetFilter_init(OrgApacheLuceneSearchJoinBitDocIdSetFilter *self) {
-  OrgApacheLuceneSearchFilter_init(self);
+  NSObject_init(self);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinBitDocIdSetFilter)

@@ -49,10 +49,6 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)output
                     withNSString:(NSString *)resourceDescription
            withJavaLangThrowable:(JavaLangThrowable *)cause;
 
-- (NSString *)getOriginalMessage;
-
-- (NSString *)getResourceDescription;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexCorruptIndexException)

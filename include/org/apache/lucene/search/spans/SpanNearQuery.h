@@ -24,7 +24,6 @@
 @class OrgApacheLuceneIndexIndexReader;
 @class OrgApacheLuceneSearchIndexSearcher;
 @class OrgApacheLuceneSearchQuery;
-@class OrgApacheLuceneSearchSpansSpanNearQuery_Builder;
 @class OrgApacheLuceneSearchSpansSpanWeight;
 @protocol JavaUtilList;
 
@@ -62,12 +61,6 @@
 
 - (NSUInteger)hash;
 
-- (jboolean)isInOrder;
-
-+ (OrgApacheLuceneSearchSpansSpanNearQuery_Builder *)newOrderedNearQueryWithNSString:(NSString *)field OBJC_METHOD_FAMILY_NONE;
-
-+ (OrgApacheLuceneSearchSpansSpanNearQuery_Builder *)newUnorderedNearQueryWithNSString:(NSString *)field OBJC_METHOD_FAMILY_NONE;
-
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
 
 - (NSString *)toStringWithNSString:(NSString *)field;
@@ -78,10 +71,6 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSpansSpanNearQuery)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpansSpanNearQuery, clauses_, id<JavaUtilList>)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpansSpanNearQuery, field_, NSString *)
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanNearQuery_Builder *OrgApacheLuceneSearchSpansSpanNearQuery_newOrderedNearQueryWithNSString_(NSString *field);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanNearQuery_Builder *OrgApacheLuceneSearchSpansSpanNearQuery_newUnorderedNearQueryWithNSString_(NSString *field);
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansSpanNearQuery_initWithOrgApacheLuceneSearchSpansSpanQueryArray_withInt_withBoolean_(OrgApacheLuceneSearchSpansSpanNearQuery *self, IOSObjectArray *clauses, jint slop, jboolean inOrder);
 
@@ -98,31 +87,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanNearQuery)
 #if !defined (_OrgApacheLuceneSearchSpansSpanNearQuery_Builder_) && (OrgApacheLuceneSearchSpansSpanNearQuery_INCLUDE_ALL || OrgApacheLuceneSearchSpansSpanNearQuery_Builder_INCLUDE)
 #define _OrgApacheLuceneSearchSpansSpanNearQuery_Builder_
 
-@class OrgApacheLuceneSearchSpansSpanNearQuery;
-@class OrgApacheLuceneSearchSpansSpanQuery;
-
 @interface OrgApacheLuceneSearchSpansSpanNearQuery_Builder : NSObject
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field
-                     withBoolean:(jboolean)ordered;
-
-- (OrgApacheLuceneSearchSpansSpanNearQuery_Builder *)addClauseWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)clause;
-
-- (OrgApacheLuceneSearchSpansSpanNearQuery_Builder *)addGapWithInt:(jint)width;
-
-- (OrgApacheLuceneSearchSpansSpanNearQuery *)build;
-
-- (OrgApacheLuceneSearchSpansSpanNearQuery_Builder *)setSlopWithInt:(jint)slop;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSpansSpanNearQuery_Builder)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansSpanNearQuery_Builder_initWithNSString_withBoolean_(OrgApacheLuceneSearchSpansSpanNearQuery_Builder *self, NSString *field, jboolean ordered);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansSpanNearQuery_Builder_init(OrgApacheLuceneSearchSpansSpanNearQuery_Builder *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanNearQuery_Builder *new_OrgApacheLuceneSearchSpansSpanNearQuery_Builder_initWithNSString_withBoolean_(NSString *field, jboolean ordered) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanNearQuery_Builder *new_OrgApacheLuceneSearchSpansSpanNearQuery_Builder_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanNearQuery_Builder)
 
@@ -184,8 +161,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanNearQuery_SpanNearWeigh
 #define OrgApacheLuceneSearchSpansSpans_INCLUDE 1
 #include "org/apache/lucene/search/spans/Spans.h"
 
-@protocol OrgApacheLuceneSearchSpansSpanCollector;
-
 @interface OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans : OrgApacheLuceneSearchSpansSpans {
  @public
   jint doc_;
@@ -196,8 +171,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanNearQuery_SpanNearWeigh
 #pragma mark Public
 
 - (jint)advanceWithInt:(jint)target;
-
-- (void)collectWithOrgApacheLuceneSearchSpansSpanCollector:(id<OrgApacheLuceneSearchSpansSpanCollector>)collector;
 
 - (jlong)cost;
 
@@ -217,15 +190,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanNearQuery_SpanNearWeigh
 
 #pragma mark Package-Private
 
-- (instancetype)initWithInt:(jint)width;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans_initWithInt_(OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans *self, jint width);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans_init(OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans *new_OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans_initWithInt_(jint width) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans *new_OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans)
 

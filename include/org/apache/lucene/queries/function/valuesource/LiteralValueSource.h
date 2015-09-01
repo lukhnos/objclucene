@@ -20,45 +20,19 @@
 #define OrgApacheLuceneQueriesFunctionValueSource_INCLUDE 1
 #include "org/apache/lucene/queries/function/ValueSource.h"
 
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneQueriesFunctionFunctionValues;
-@class OrgApacheLuceneUtilBytesRef;
-@protocol JavaUtilMap;
-
-@interface OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource : OrgApacheLuceneQueriesFunctionValueSource {
- @public
-  NSString *string_;
-  OrgApacheLuceneUtilBytesRef *bytesRef_;
-}
+@interface OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource : OrgApacheLuceneQueriesFunctionValueSource
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)string;
-
-- (NSString *)description__;
-
-- (jboolean)isEqual:(id)o;
-
-- (NSString *)getValue;
-
-- (OrgApacheLuceneQueriesFunctionFunctionValues *)getValuesWithJavaUtilMap:(id<JavaUtilMap>)context
-                                 withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext;
-
-- (NSUInteger)hash;
+- (instancetype)init;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource, string_, NSString *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource, bytesRef_, OrgApacheLuceneUtilBytesRef *)
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_init(OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource *self);
 
-FOUNDATION_EXPORT jint OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_hash__;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource, hash__, jint)
-
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_initWithNSString_(OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource *self, NSString *string);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_initWithNSString_(NSString *string) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource)
 

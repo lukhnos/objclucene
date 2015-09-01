@@ -26,23 +26,6 @@
 
 - (instancetype)init;
 
-- (jfloat)currentScoreWithInt:(jint)docId
-                 withNSString:(NSString *)field
-                      withInt:(jint)start
-                      withInt:(jint)end
-                      withInt:(jint)numPayloadsSeen
-                    withFloat:(jfloat)currentScore
-                    withFloat:(jfloat)currentPayloadScore;
-
-- (jfloat)docScoreWithInt:(jint)docId
-             withNSString:(NSString *)field
-                  withInt:(jint)numPayloadsSeen
-                withFloat:(jfloat)payloadScore;
-
-- (jboolean)isEqual:(id)obj;
-
-- (NSUInteger)hash;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchPayloadsMinPayloadFunction)

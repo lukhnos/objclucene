@@ -3,78 +3,35 @@
 //  source: ./core/src/java/org/apache/lucene/index/QueryTimeoutImpl.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/lang/Long.h"
-#include "java/lang/System.h"
-#include "java/util/concurrent/TimeUnit.h"
 #include "org/apache/lucene/index/QueryTimeoutImpl.h"
 
-@interface OrgApacheLuceneIndexQueryTimeoutImpl () {
- @public
-  JavaLangLong *timeoutAt_;
-}
-
-@end
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexQueryTimeoutImpl, timeoutAt_, JavaLangLong *)
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneIndexQueryTimeoutImpl
 
-- (instancetype)initWithLong:(jlong)timeAllowed {
-  OrgApacheLuceneIndexQueryTimeoutImpl_initWithLong_(self, timeAllowed);
+- (instancetype)init {
+  OrgApacheLuceneIndexQueryTimeoutImpl_init(self);
   return self;
-}
-
-- (JavaLangLong *)getTimeoutAt {
-  return timeoutAt_;
-}
-
-- (jboolean)shouldExit {
-  return timeoutAt_ != nil && JavaLangSystem_nanoTime() - [timeoutAt_ longLongValue] > 0;
-}
-
-- (void)reset {
-  JreStrongAssign(&timeoutAt_, nil);
-}
-
-- (NSString *)description {
-  return JreStrcat("$@$JC", @"timeoutAt: ", timeoutAt_, @" (System.nanoTime(): ", JavaLangSystem_nanoTime(), ')');
-}
-
-- (void)dealloc {
-  RELEASE_(timeoutAt_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithLong:", "QueryTimeoutImpl", NULL, 0x1, NULL, NULL },
-    { "getTimeoutAt", NULL, "Ljava.lang.Long;", 0x1, NULL, NULL },
-    { "shouldExit", NULL, "Z", 0x1, NULL, NULL },
-    { "reset", NULL, "V", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "timeoutAt_", NULL, 0x2, "Ljava.lang.Long;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexQueryTimeoutImpl = { 2, "QueryTimeoutImpl", "org.apache.lucene.index", NULL, 0x1, 5, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexQueryTimeoutImpl = { 2, "QueryTimeoutImpl", "org.apache.lucene.index", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexQueryTimeoutImpl;
 }
 
 @end
 
-void OrgApacheLuceneIndexQueryTimeoutImpl_initWithLong_(OrgApacheLuceneIndexQueryTimeoutImpl *self, jlong timeAllowed) {
+void OrgApacheLuceneIndexQueryTimeoutImpl_init(OrgApacheLuceneIndexQueryTimeoutImpl *self) {
   NSObject_init(self);
-  if (timeAllowed < 0LL) {
-    timeAllowed = JavaLangLong_MAX_VALUE;
-  }
-  JreStrongAssign(&self->timeoutAt_, JavaLangLong_valueOfWithLong_(JavaLangSystem_nanoTime() + [((JavaUtilConcurrentTimeUnitEnum *) nil_chk(JreLoadStatic(JavaUtilConcurrentTimeUnitEnum, NANOSECONDS))) convertWithLong:timeAllowed withJavaUtilConcurrentTimeUnitEnum:JreLoadStatic(JavaUtilConcurrentTimeUnitEnum, MILLISECONDS)]));
 }
 
-OrgApacheLuceneIndexQueryTimeoutImpl *new_OrgApacheLuceneIndexQueryTimeoutImpl_initWithLong_(jlong timeAllowed) {
+OrgApacheLuceneIndexQueryTimeoutImpl *new_OrgApacheLuceneIndexQueryTimeoutImpl_init() {
   OrgApacheLuceneIndexQueryTimeoutImpl *self = [OrgApacheLuceneIndexQueryTimeoutImpl alloc];
-  OrgApacheLuceneIndexQueryTimeoutImpl_initWithLong_(self, timeAllowed);
+  OrgApacheLuceneIndexQueryTimeoutImpl_init(self);
   return self;
 }
 

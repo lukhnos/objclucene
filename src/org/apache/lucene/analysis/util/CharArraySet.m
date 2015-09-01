@@ -5,7 +5,6 @@
 
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/lang/CharSequence.h"
 #include "java/lang/NullPointerException.h"
 #include "java/lang/StringBuilder.h"
 #include "java/util/AbstractCollection.h"
@@ -61,28 +60,12 @@ OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisUtilCharArraySet
   return [((OrgApacheLuceneAnalysisUtilCharArrayMap *) nil_chk(map_)) containsKeyWithCharArray:text withInt:off withInt:len];
 }
 
-- (jboolean)containsWithJavaLangCharSequence:(id<JavaLangCharSequence>)cs {
-  return [((OrgApacheLuceneAnalysisUtilCharArrayMap *) nil_chk(map_)) containsKeyWithJavaLangCharSequence:cs];
-}
-
 - (jboolean)containsWithId:(id)o {
   return [((OrgApacheLuceneAnalysisUtilCharArrayMap *) nil_chk(map_)) containsKeyWithId:o];
 }
 
 - (jboolean)addWithId:(id)o {
   return [((OrgApacheLuceneAnalysisUtilCharArrayMap *) nil_chk(map_)) putWithId:o withId:OrgApacheLuceneAnalysisUtilCharArraySet_PLACEHOLDER_] == nil;
-}
-
-- (jboolean)addWithJavaLangCharSequence:(id<JavaLangCharSequence>)text {
-  return [((OrgApacheLuceneAnalysisUtilCharArrayMap *) nil_chk(map_)) putWithJavaLangCharSequence:text withId:OrgApacheLuceneAnalysisUtilCharArraySet_PLACEHOLDER_] == nil;
-}
-
-- (jboolean)addWithNSString:(NSString *)text {
-  return [((OrgApacheLuceneAnalysisUtilCharArrayMap *) nil_chk(map_)) putWithNSString:text withId:OrgApacheLuceneAnalysisUtilCharArraySet_PLACEHOLDER_] == nil;
-}
-
-- (jboolean)addWithCharArray:(IOSCharArray *)text {
-  return [((OrgApacheLuceneAnalysisUtilCharArrayMap *) nil_chk(map_)) putWithCharArray:text withId:OrgApacheLuceneAnalysisUtilCharArraySet_PLACEHOLDER_] == nil;
 }
 
 - (jint)size {
@@ -139,12 +122,8 @@ OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisUtilCharArraySet
     { "initWithOrgApacheLuceneAnalysisUtilCharArrayMap:", "CharArraySet", NULL, 0x0, NULL, NULL },
     { "clear", NULL, "V", 0x1, NULL, NULL },
     { "containsWithCharArray:withInt:withInt:", "contains", "Z", 0x1, NULL, NULL },
-    { "containsWithJavaLangCharSequence:", "contains", "Z", 0x1, NULL, NULL },
     { "containsWithId:", "contains", "Z", 0x1, NULL, NULL },
     { "addWithId:", "add", "Z", 0x1, NULL, NULL },
-    { "addWithJavaLangCharSequence:", "add", "Z", 0x1, NULL, NULL },
-    { "addWithNSString:", "add", "Z", 0x1, NULL, NULL },
-    { "addWithCharArray:", "add", "Z", 0x1, NULL, NULL },
     { "size", NULL, "I", 0x1, NULL, NULL },
     { "unmodifiableSetWithOrgApacheLuceneAnalysisUtilCharArraySet:", "unmodifiableSet", "Lorg.apache.lucene.analysis.util.CharArraySet;", 0x9, NULL, NULL },
     { "copy__WithJavaUtilSet:", "copy", "Lorg.apache.lucene.analysis.util.CharArraySet;", 0x9, NULL, NULL },
@@ -157,7 +136,7 @@ OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisUtilCharArraySet
     { "map_", NULL, 0x12, "Lorg.apache.lucene.analysis.util.CharArrayMap;", NULL, "Lorg/apache/lucene/analysis/util/CharArrayMap<Ljava/lang/Object;>;", .constantValue.asLong = 0 },
   };
   static const char *superclass_type_args[] = {"Ljava.lang.Object;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisUtilCharArraySet = { 2, "CharArraySet", "org.apache.lucene.analysis.util", NULL, 0x1, 16, methods, 3, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/util/AbstractSet<Ljava/lang/Object;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisUtilCharArraySet = { 2, "CharArraySet", "org.apache.lucene.analysis.util", NULL, 0x1, 12, methods, 3, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/util/AbstractSet<Ljava/lang/Object;>;" };
   return &_OrgApacheLuceneAnalysisUtilCharArraySet;
 }
 

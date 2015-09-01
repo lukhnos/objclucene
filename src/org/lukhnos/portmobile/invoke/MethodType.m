@@ -18,10 +18,6 @@
   return OrgLukhnosPortmobileInvokeMethodType_methodTypeWithIOSClass_(clazz);
 }
 
-- (IOSClass *)getType {
-  return clazz_;
-}
-
 - (void)dealloc {
   RELEASE_(clazz_);
   [super dealloc];
@@ -31,12 +27,11 @@
   static const J2ObjcMethodInfo methods[] = {
     { "initWithIOSClass:", "MethodType", NULL, 0x0, NULL, NULL },
     { "methodTypeWithIOSClass:", "methodType", "Lorg.lukhnos.portmobile.invoke.MethodType;", 0x9, NULL, NULL },
-    { "getType", NULL, "Ljava.lang.Class;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "clazz_", NULL, 0x0, "Ljava.lang.Class;", NULL, "Ljava/lang/Class<*>;", .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgLukhnosPortmobileInvokeMethodType = { 2, "MethodType", "org.lukhnos.portmobile.invoke", NULL, 0x1, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgLukhnosPortmobileInvokeMethodType = { 2, "MethodType", "org.lukhnos.portmobile.invoke", NULL, 0x1, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgLukhnosPortmobileInvokeMethodType;
 }
 

@@ -20,42 +20,19 @@
 #define OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_INCLUDE 1
 #include "org/apache/lucene/queryparser/surround/query/SimpleTerm.h"
 
-@class JavaLangStringBuilder;
-@class OrgApacheLuceneIndexIndexReader;
-@protocol OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor;
-
 @interface OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery : OrgApacheLuceneQueryparserSurroundQuerySimpleTerm
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)truncated
-                        withChar:(jchar)unlimited
-                        withChar:(jchar)mask;
-
-- (NSString *)getTruncated;
-
-- (NSString *)toStringUnquoted;
-
-- (void)visitMatchingTermsWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
-                                                 withNSString:(NSString *)fieldName
-withOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor:(id<OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor>)mtv;
-
-#pragma mark Protected
-
-- (void)appendRegExpForCharWithChar:(jchar)c
-          withJavaLangStringBuilder:(JavaLangStringBuilder *)re;
-
-- (jboolean)matchingCharWithChar:(jchar)c;
-
-- (void)truncatedToPrefixAndPattern;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery_initWithNSString_withChar_withChar_(OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery *self, NSString *truncated, jchar unlimited, jchar mask);
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery_init(OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery *new_OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery_initWithNSString_withChar_withChar_(NSString *truncated, jchar unlimited, jchar mask) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery *new_OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery)
 

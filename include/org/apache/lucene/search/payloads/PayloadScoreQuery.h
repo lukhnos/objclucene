@@ -20,35 +20,19 @@
 #define OrgApacheLuceneSearchSpansSpanQuery_INCLUDE 1
 #include "org/apache/lucene/search/spans/SpanQuery.h"
 
-@class OrgApacheLuceneSearchIndexSearcher;
-@class OrgApacheLuceneSearchPayloadsPayloadFunction;
-@class OrgApacheLuceneSearchSpansSpanWeight;
-
 @interface OrgApacheLuceneSearchPayloadsPayloadScoreQuery : OrgApacheLuceneSearchSpansSpanQuery
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)wrappedQuery
-           withOrgApacheLuceneSearchPayloadsPayloadFunction:(OrgApacheLuceneSearchPayloadsPayloadFunction *)function;
-
-- (OrgApacheLuceneSearchSpansSpanWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
-                                                                                 withBoolean:(jboolean)needsScores;
-
-- (jboolean)isEqual:(id)o;
-
-- (NSString *)getField;
-
-- (NSUInteger)hash;
-
-- (NSString *)toStringWithNSString:(NSString *)field;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchPayloadsPayloadScoreQuery)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchPayloadsPayloadScoreQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withOrgApacheLuceneSearchPayloadsPayloadFunction_(OrgApacheLuceneSearchPayloadsPayloadScoreQuery *self, OrgApacheLuceneSearchSpansSpanQuery *wrappedQuery, OrgApacheLuceneSearchPayloadsPayloadFunction *function);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchPayloadsPayloadScoreQuery_init(OrgApacheLuceneSearchPayloadsPayloadScoreQuery *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsPayloadScoreQuery *new_OrgApacheLuceneSearchPayloadsPayloadScoreQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withOrgApacheLuceneSearchPayloadsPayloadFunction_(OrgApacheLuceneSearchSpansSpanQuery *wrappedQuery, OrgApacheLuceneSearchPayloadsPayloadFunction *function) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsPayloadScoreQuery *new_OrgApacheLuceneSearchPayloadsPayloadScoreQuery_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPayloadsPayloadScoreQuery)
 

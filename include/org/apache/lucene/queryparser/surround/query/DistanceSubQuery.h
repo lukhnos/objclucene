@@ -16,13 +16,7 @@
 #if !defined (_OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery_) && (OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery_INCLUDE_ALL || OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery_INCLUDE)
 #define _OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery_
 
-@class OrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory;
-
 @protocol OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery < NSObject, JavaObject >
-
-- (NSString *)distanceSubQueryNotAllowed;
-
-- (void)addSpanQueriesWithOrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory:(OrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory *)sncf;
 
 @end
 

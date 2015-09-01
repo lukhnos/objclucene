@@ -22,25 +22,15 @@
 #if !defined (_OrgApacheLuceneAnalysisPtRSLPStemmerBase_) && (OrgApacheLuceneAnalysisPtRSLPStemmerBase_INCLUDE_ALL || OrgApacheLuceneAnalysisPtRSLPStemmerBase_INCLUDE)
 #define _OrgApacheLuceneAnalysisPtRSLPStemmerBase_
 
-@class IOSClass;
-@protocol JavaUtilMap;
-
 @interface OrgApacheLuceneAnalysisPtRSLPStemmerBase : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
-#pragma mark Protected
-
-+ (id<JavaUtilMap>)parseWithIOSClass:(IOSClass *)clazz
-                        withNSString:(NSString *)resource;
-
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisPtRSLPStemmerBase)
-
-FOUNDATION_EXPORT id<JavaUtilMap> OrgApacheLuceneAnalysisPtRSLPStemmerBase_parseWithIOSClass_withNSString_(IOSClass *clazz, NSString *resource);
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisPtRSLPStemmerBase)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPtRSLPStemmerBase_init(OrgApacheLuceneAnalysisPtRSLPStemmerBase *self);
 
@@ -51,37 +41,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPtRSLPStemmerBase)
 #if !defined (_OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule_) && (OrgApacheLuceneAnalysisPtRSLPStemmerBase_INCLUDE_ALL || OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule_INCLUDE)
 #define _OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule_
 
-@class IOSCharArray;
+@interface OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule : NSObject
 
-@interface OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule : NSObject {
- @public
-  IOSCharArray *suffix_;
-  IOSCharArray *replacement_;
-  jint min_;
-}
+#pragma mark Protected
 
-#pragma mark Public
-
-- (instancetype)initWithNSString:(NSString *)suffix
-                         withInt:(jint)min
-                    withNSString:(NSString *)replacement;
-
-- (jboolean)matchesWithCharArray:(IOSCharArray *)s
-                         withInt:(jint)len;
-
-- (jint)replaceWithCharArray:(IOSCharArray *)s
-                     withInt:(jint)len;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule, suffix_, IOSCharArray *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule, replacement_, IOSCharArray *)
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule_init(OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule_initWithNSString_withInt_withNSString_(OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule *self, NSString *suffix, jint min, NSString *replacement);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule *new_OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule_initWithNSString_withInt_withNSString_(NSString *suffix, jint min, NSString *replacement) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule *new_OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule)
 
@@ -90,34 +62,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule)
 #if !defined (_OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetExceptions_) && (OrgApacheLuceneAnalysisPtRSLPStemmerBase_INCLUDE_ALL || OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetExceptions_INCLUDE)
 #define _OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetExceptions_
 
-@class IOSCharArray;
-@class IOSObjectArray;
-@class OrgApacheLuceneAnalysisUtilCharArraySet;
+@interface OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetExceptions : OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule
 
-@interface OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetExceptions : OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule {
- @public
-  OrgApacheLuceneAnalysisUtilCharArraySet *exceptions_;
-}
+#pragma mark Protected
 
-#pragma mark Public
-
-- (instancetype)initWithNSString:(NSString *)suffix
-                         withInt:(jint)min
-                    withNSString:(NSString *)replacement
-               withNSStringArray:(IOSObjectArray *)exceptions;
-
-- (jboolean)matchesWithCharArray:(IOSCharArray *)s
-                         withInt:(jint)len;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetExceptions)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetExceptions, exceptions_, OrgApacheLuceneAnalysisUtilCharArraySet *)
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetExceptions_init(OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetExceptions *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetExceptions_initWithNSString_withInt_withNSString_withNSStringArray_(OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetExceptions *self, NSString *suffix, jint min, NSString *replacement, IOSObjectArray *exceptions);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetExceptions *new_OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetExceptions_initWithNSString_withInt_withNSString_withNSStringArray_(NSString *suffix, jint min, NSString *replacement, IOSObjectArray *exceptions) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetExceptions *new_OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetExceptions_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetExceptions)
 
@@ -126,33 +83,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetE
 #if !defined (_OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSuffixExceptions_) && (OrgApacheLuceneAnalysisPtRSLPStemmerBase_INCLUDE_ALL || OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSuffixExceptions_INCLUDE)
 #define _OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSuffixExceptions_
 
-@class IOSCharArray;
-@class IOSObjectArray;
+@interface OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSuffixExceptions : OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule
 
-@interface OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSuffixExceptions : OrgApacheLuceneAnalysisPtRSLPStemmerBase_Rule {
- @public
-  IOSObjectArray *exceptions_;
-}
+#pragma mark Protected
 
-#pragma mark Public
-
-- (instancetype)initWithNSString:(NSString *)suffix
-                         withInt:(jint)min
-                    withNSString:(NSString *)replacement
-               withNSStringArray:(IOSObjectArray *)exceptions;
-
-- (jboolean)matchesWithCharArray:(IOSCharArray *)s
-                         withInt:(jint)len;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSuffixExceptions)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSuffixExceptions, exceptions_, IOSObjectArray *)
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSuffixExceptions_init(OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSuffixExceptions *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSuffixExceptions_initWithNSString_withInt_withNSString_withNSStringArray_(OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSuffixExceptions *self, NSString *suffix, jint min, NSString *replacement, IOSObjectArray *exceptions);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSuffixExceptions *new_OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSuffixExceptions_initWithNSString_withInt_withNSString_withNSStringArray_(NSString *suffix, jint min, NSString *replacement, IOSObjectArray *exceptions) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSuffixExceptions *new_OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSuffixExceptions_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSuffixExceptions)
 
@@ -161,38 +104,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSuff
 #if !defined (_OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step_) && (OrgApacheLuceneAnalysisPtRSLPStemmerBase_INCLUDE_ALL || OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step_INCLUDE)
 #define _OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step_
 
-@class IOSCharArray;
-@class IOSObjectArray;
+@interface OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step : NSObject
 
-@interface OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step : NSObject {
- @public
-  NSString *name_;
-  IOSObjectArray *rules_;
-  jint min_;
-  IOSObjectArray *suffixes_;
-}
+#pragma mark Protected
 
-#pragma mark Public
-
-- (instancetype)initWithNSString:(NSString *)name
-withOrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleArray:(IOSObjectArray *)rules
-                         withInt:(jint)min
-               withNSStringArray:(IOSObjectArray *)suffixes;
-
-- (jint)applyWithCharArray:(IOSCharArray *)s
-                   withInt:(jint)len;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step, name_, NSString *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step, rules_, IOSObjectArray *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step, suffixes_, IOSObjectArray *)
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step_init(OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step_initWithNSString_withOrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleArray_withInt_withNSStringArray_(OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *self, NSString *name, IOSObjectArray *rules, jint min, IOSObjectArray *suffixes);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *new_OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step_initWithNSString_withOrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleArray_withInt_withNSStringArray_(NSString *name, IOSObjectArray *rules, jint min, IOSObjectArray *suffixes) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *new_OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step)
 

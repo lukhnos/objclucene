@@ -27,8 +27,6 @@
 
 - (void)addWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)iter;
 
-- (void)addWithInt:(jint)doc;
-
 - (OrgApacheLuceneSearchDocIdSet *)build;
 
 - (OrgApacheLuceneSearchDocIdSet *)buildWithLong:(jlong)costHint;

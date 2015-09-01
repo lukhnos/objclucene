@@ -16,11 +16,7 @@
 #if !defined (_OrgApacheLuceneQueryparserFlexibleMessagesNLSException_) && (OrgApacheLuceneQueryparserFlexibleMessagesNLSException_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleMessagesNLSException_INCLUDE)
 #define _OrgApacheLuceneQueryparserFlexibleMessagesNLSException_
 
-@protocol OrgApacheLuceneQueryparserFlexibleMessagesMessage;
-
 @protocol OrgApacheLuceneQueryparserFlexibleMessagesNLSException < NSObject, JavaObject >
-
-- (id<OrgApacheLuceneQueryparserFlexibleMessagesMessage>)getMessageObject;
 
 @end
 

@@ -16,13 +16,7 @@
 #if !defined (_OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser_) && (OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser_INCLUDE)
 #define _OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser_
 
-@protocol JavaLangCharSequence;
-@protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
-
 @protocol OrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser < NSObject, JavaObject >
-
-- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)parseWithJavaLangCharSequence:(id<JavaLangCharSequence>)query
-                                                                 withJavaLangCharSequence:(id<JavaLangCharSequence>)field;
 
 @end
 

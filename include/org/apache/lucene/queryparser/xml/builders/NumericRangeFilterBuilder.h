@@ -20,22 +20,15 @@
 #define OrgApacheLuceneQueryparserXmlFilterBuilder_INCLUDE 1
 #include "org/apache/lucene/queryparser/xml/FilterBuilder.h"
 
-@class OrgApacheLuceneSearchFilter;
-@protocol OrgW3cDomElement;
-
 @interface OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder : NSObject < OrgApacheLuceneQueryparserXmlFilterBuilder >
 
 #pragma mark Public
 
 - (instancetype)init;
 
-- (OrgApacheLuceneSearchFilter *)getFilterWithOrgW3cDomElement:(id<OrgW3cDomElement>)e;
-
-- (void)setStrictModeWithBoolean:(jboolean)strictMode;
-
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder)
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_init(OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder *self);
 
@@ -52,18 +45,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilt
 #define OrgApacheLuceneSearchFilter_INCLUDE 1
 #include "org/apache/lucene/search/Filter.h"
 
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneSearchDocIdSet;
-@protocol OrgApacheLuceneUtilBits;
-
 @interface OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_NoMatchFilter : OrgApacheLuceneSearchFilter
-
-#pragma mark Public
-
-- (OrgApacheLuceneSearchDocIdSet *)getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-                                                            withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)acceptDocs;
-
-- (NSString *)toStringWithNSString:(NSString *)field;
 
 #pragma mark Package-Private
 

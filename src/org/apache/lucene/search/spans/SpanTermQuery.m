@@ -48,16 +48,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpansSpanTermQuery_SpanTermWeight, this
   return self;
 }
 
-- (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-             withOrgApacheLuceneIndexTermContext:(OrgApacheLuceneIndexTermContext *)context {
-  OrgApacheLuceneSearchSpansSpanTermQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneIndexTermContext_(self, term, context);
-  return self;
-}
-
-- (OrgApacheLuceneIndexTerm *)getTerm {
-  return term_;
-}
-
 - (NSString *)getField {
   return [((OrgApacheLuceneIndexTerm *) nil_chk(term_)) field];
 }
@@ -107,8 +97,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpansSpanTermQuery_SpanTermWeight, this
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneIndexTerm:", "SpanTermQuery", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexTerm:withOrgApacheLuceneIndexTermContext:", "SpanTermQuery", NULL, 0x1, NULL, NULL },
-    { "getTerm", NULL, "Lorg.apache.lucene.index.Term;", 0x1, NULL, NULL },
     { "getField", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
     { "createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:", "createWeight", "Lorg.apache.lucene.search.spans.SpanWeight;", 0x1, "Ljava.io.IOException;", NULL },
     { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
@@ -120,7 +108,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpansSpanTermQuery_SpanTermWeight, this
     { "termContext_", NULL, 0x14, "Lorg.apache.lucene.index.TermContext;", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.search.spans.SpanTermQuery$SpanTermWeight;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpanTermQuery = { 2, "SpanTermQuery", "org.apache.lucene.search.spans", NULL, 0x1, 8, methods, 2, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpanTermQuery = { 2, "SpanTermQuery", "org.apache.lucene.search.spans", NULL, 0x1, 6, methods, 2, fields, 0, NULL, 1, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneSearchSpansSpanTermQuery;
 }
 
@@ -135,18 +123,6 @@ void OrgApacheLuceneSearchSpansSpanTermQuery_initWithOrgApacheLuceneIndexTerm_(O
 OrgApacheLuceneSearchSpansSpanTermQuery *new_OrgApacheLuceneSearchSpansSpanTermQuery_initWithOrgApacheLuceneIndexTerm_(OrgApacheLuceneIndexTerm *term) {
   OrgApacheLuceneSearchSpansSpanTermQuery *self = [OrgApacheLuceneSearchSpansSpanTermQuery alloc];
   OrgApacheLuceneSearchSpansSpanTermQuery_initWithOrgApacheLuceneIndexTerm_(self, term);
-  return self;
-}
-
-void OrgApacheLuceneSearchSpansSpanTermQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneIndexTermContext_(OrgApacheLuceneSearchSpansSpanTermQuery *self, OrgApacheLuceneIndexTerm *term, OrgApacheLuceneIndexTermContext *context) {
-  OrgApacheLuceneSearchSpansSpanQuery_init(self);
-  JreStrongAssign(&self->term_, OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_(term));
-  JreStrongAssign(&self->termContext_, context);
-}
-
-OrgApacheLuceneSearchSpansSpanTermQuery *new_OrgApacheLuceneSearchSpansSpanTermQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneIndexTermContext_(OrgApacheLuceneIndexTerm *term, OrgApacheLuceneIndexTermContext *context) {
-  OrgApacheLuceneSearchSpansSpanTermQuery *self = [OrgApacheLuceneSearchSpansSpanTermQuery alloc];
-  OrgApacheLuceneSearchSpansSpanTermQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneIndexTermContext_(self, term, context);
   return self;
 }
 

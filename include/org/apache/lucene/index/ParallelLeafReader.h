@@ -20,89 +20,19 @@
 #define OrgApacheLuceneIndexLeafReader_INCLUDE 1
 #include "org/apache/lucene/index/LeafReader.h"
 
-@class IOSObjectArray;
-@class OrgApacheLuceneIndexBinaryDocValues;
-@class OrgApacheLuceneIndexFieldInfos;
-@class OrgApacheLuceneIndexFields;
-@class OrgApacheLuceneIndexNumericDocValues;
-@class OrgApacheLuceneIndexSortedDocValues;
-@class OrgApacheLuceneIndexSortedNumericDocValues;
-@class OrgApacheLuceneIndexSortedSetDocValues;
-@class OrgApacheLuceneIndexStoredFieldVisitor;
-@protocol OrgApacheLuceneIndexLeafReader_CoreClosedListener;
-@protocol OrgApacheLuceneUtilBits;
-
 @interface OrgApacheLuceneIndexParallelLeafReader : OrgApacheLuceneIndexLeafReader
 
 #pragma mark Public
 
-- (instancetype)initWithBoolean:(jboolean)closeSubReaders
-withOrgApacheLuceneIndexLeafReaderArray:(IOSObjectArray *)readers;
-
-- (instancetype)initWithBoolean:(jboolean)closeSubReaders
-withOrgApacheLuceneIndexLeafReaderArray:(IOSObjectArray *)readers
-withOrgApacheLuceneIndexLeafReaderArray:(IOSObjectArray *)storedFieldsReaders;
-
-- (instancetype)initWithOrgApacheLuceneIndexLeafReaderArray:(IOSObjectArray *)readers;
-
-- (void)addCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:(id<OrgApacheLuceneIndexLeafReader_CoreClosedListener>)listener;
-
-- (void)checkIntegrity;
-
-- (void)documentWithInt:(jint)docID
-withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisitor *)visitor;
-
-- (OrgApacheLuceneIndexFields *)fields;
-
-- (OrgApacheLuceneIndexBinaryDocValues *)getBinaryDocValuesWithNSString:(NSString *)field;
-
-- (id<OrgApacheLuceneUtilBits>)getDocsWithFieldWithNSString:(NSString *)field;
-
-- (OrgApacheLuceneIndexFieldInfos *)getFieldInfos;
-
-- (id<OrgApacheLuceneUtilBits>)getLiveDocs;
-
-- (OrgApacheLuceneIndexNumericDocValues *)getNormValuesWithNSString:(NSString *)field;
-
-- (OrgApacheLuceneIndexNumericDocValues *)getNumericDocValuesWithNSString:(NSString *)field;
-
-- (IOSObjectArray *)getParallelReaders;
-
-- (OrgApacheLuceneIndexSortedDocValues *)getSortedDocValuesWithNSString:(NSString *)field;
-
-- (OrgApacheLuceneIndexSortedNumericDocValues *)getSortedNumericDocValuesWithNSString:(NSString *)field;
-
-- (OrgApacheLuceneIndexSortedSetDocValues *)getSortedSetDocValuesWithNSString:(NSString *)field;
-
-- (OrgApacheLuceneIndexFields *)getTermVectorsWithInt:(jint)docID;
-
-- (jint)maxDoc;
-
-- (jint)numDocs;
-
-- (void)removeCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:(id<OrgApacheLuceneIndexLeafReader_CoreClosedListener>)listener;
-
-- (NSString *)description;
-
-#pragma mark Protected
-
-- (void)doClose;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexParallelLeafReader)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexParallelLeafReader_initWithOrgApacheLuceneIndexLeafReaderArray_(OrgApacheLuceneIndexParallelLeafReader *self, IOSObjectArray *readers);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexParallelLeafReader_init(OrgApacheLuceneIndexParallelLeafReader *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexParallelLeafReader *new_OrgApacheLuceneIndexParallelLeafReader_initWithOrgApacheLuceneIndexLeafReaderArray_(IOSObjectArray *readers) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneIndexParallelLeafReader_initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_(OrgApacheLuceneIndexParallelLeafReader *self, jboolean closeSubReaders, IOSObjectArray *readers);
-
-FOUNDATION_EXPORT OrgApacheLuceneIndexParallelLeafReader *new_OrgApacheLuceneIndexParallelLeafReader_initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_(jboolean closeSubReaders, IOSObjectArray *readers) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneIndexParallelLeafReader_initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexLeafReaderArray_(OrgApacheLuceneIndexParallelLeafReader *self, jboolean closeSubReaders, IOSObjectArray *readers, IOSObjectArray *storedFieldsReaders);
-
-FOUNDATION_EXPORT OrgApacheLuceneIndexParallelLeafReader *new_OrgApacheLuceneIndexParallelLeafReader_initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexLeafReaderArray_(jboolean closeSubReaders, IOSObjectArray *readers, IOSObjectArray *storedFieldsReaders) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexParallelLeafReader *new_OrgApacheLuceneIndexParallelLeafReader_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexParallelLeafReader)
 

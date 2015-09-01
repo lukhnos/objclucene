@@ -20,50 +20,19 @@
 #define OrgApacheLuceneRangetreeSliceWriter_INCLUDE 1
 #include "org/apache/lucene/rangetree/SliceWriter.h"
 
-@class IOSByteArray;
-@class OrgApacheLuceneStoreByteArrayDataOutput;
-@class OrgApacheLuceneStoreOutputStreamDataOutput;
-@class OrgLukhnosPortmobileFilePath;
-@protocol OrgApacheLuceneRangetreeSliceReader;
+@interface OrgApacheLuceneRangetreeOfflineSliceWriter : NSObject < OrgApacheLuceneRangetreeSliceWriter >
 
-@interface OrgApacheLuceneRangetreeOfflineSliceWriter : NSObject < OrgApacheLuceneRangetreeSliceWriter > {
- @public
-  OrgLukhnosPortmobileFilePath *tempFile_;
-  IOSByteArray *scratchBytes_;
-  OrgApacheLuceneStoreByteArrayDataOutput *scratchBytesOutput_;
-  OrgApacheLuceneStoreOutputStreamDataOutput *out_;
-  jlong count_;
-}
+#pragma mark Package-Private
 
-#pragma mark Public
-
-- (instancetype)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)tempDir
-                                            withLong:(jlong)count;
-
-- (void)appendWithLong:(jlong)value
-              withLong:(jlong)ord
-               withInt:(jint)docID;
-
-- (void)close;
-
-- (void)destroy;
-
-- (id<OrgApacheLuceneRangetreeSliceReader>)getReaderWithLong:(jlong)start;
-
-- (NSString *)description;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneRangetreeOfflineSliceWriter)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeOfflineSliceWriter, tempFile_, OrgLukhnosPortmobileFilePath *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeOfflineSliceWriter, scratchBytes_, IOSByteArray *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeOfflineSliceWriter, scratchBytesOutput_, OrgApacheLuceneStoreByteArrayDataOutput *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeOfflineSliceWriter, out_, OrgApacheLuceneStoreOutputStreamDataOutput *)
+FOUNDATION_EXPORT void OrgApacheLuceneRangetreeOfflineSliceWriter_init(OrgApacheLuceneRangetreeOfflineSliceWriter *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneRangetreeOfflineSliceWriter_initWithOrgLukhnosPortmobileFilePath_withLong_(OrgApacheLuceneRangetreeOfflineSliceWriter *self, OrgLukhnosPortmobileFilePath *tempDir, jlong count);
-
-FOUNDATION_EXPORT OrgApacheLuceneRangetreeOfflineSliceWriter *new_OrgApacheLuceneRangetreeOfflineSliceWriter_initWithOrgLukhnosPortmobileFilePath_withLong_(OrgLukhnosPortmobileFilePath *tempDir, jlong count) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneRangetreeOfflineSliceWriter *new_OrgApacheLuceneRangetreeOfflineSliceWriter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeOfflineSliceWriter)
 

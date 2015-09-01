@@ -26,8 +26,6 @@
 
 - (instancetype)init;
 
-- (jboolean)incrementToken;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousEmptyTokenStream)

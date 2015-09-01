@@ -8,35 +8,28 @@
 
 @implementation OrgApacheLuceneCodecsTermStats
 
-- (instancetype)initWithInt:(jint)docFreq
-                   withLong:(jlong)totalTermFreq {
-  OrgApacheLuceneCodecsTermStats_initWithInt_withLong_(self, docFreq, totalTermFreq);
+- (instancetype)init {
+  OrgApacheLuceneCodecsTermStats_init(self);
   return self;
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withLong:", "TermStats", NULL, 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "docFreq_", NULL, 0x11, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "totalTermFreq_", NULL, 0x11, "J", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsTermStats = { 2, "TermStats", "org.apache.lucene.codecs", NULL, 0x1, 1, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsTermStats = { 2, "TermStats", "org.apache.lucene.codecs", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneCodecsTermStats;
 }
 
 @end
 
-void OrgApacheLuceneCodecsTermStats_initWithInt_withLong_(OrgApacheLuceneCodecsTermStats *self, jint docFreq, jlong totalTermFreq) {
+void OrgApacheLuceneCodecsTermStats_init(OrgApacheLuceneCodecsTermStats *self) {
   NSObject_init(self);
-  self->docFreq_ = docFreq;
-  self->totalTermFreq_ = totalTermFreq;
 }
 
-OrgApacheLuceneCodecsTermStats *new_OrgApacheLuceneCodecsTermStats_initWithInt_withLong_(jint docFreq, jlong totalTermFreq) {
+OrgApacheLuceneCodecsTermStats *new_OrgApacheLuceneCodecsTermStats_init() {
   OrgApacheLuceneCodecsTermStats *self = [OrgApacheLuceneCodecsTermStats alloc];
-  OrgApacheLuceneCodecsTermStats_initWithInt_withLong_(self, docFreq, totalTermFreq);
+  OrgApacheLuceneCodecsTermStats_init(self);
   return self;
 }
 

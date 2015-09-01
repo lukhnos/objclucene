@@ -24,59 +24,19 @@
 #define OrgApacheLuceneUtilAccountable_INCLUDE 1
 #include "org/apache/lucene/util/Accountable.h"
 
-@class IOSObjectArray;
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneSearchDocIdSet;
-@protocol JavaUtilCollection;
-@protocol JavaUtilList;
-@protocol OrgApacheLuceneUtilBits;
-
 @interface OrgApacheLuceneQueriesTermsFilter : OrgApacheLuceneSearchFilter < OrgApacheLuceneUtilAccountable >
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)terms;
-
-- (instancetype)initWithNSString:(NSString *)field
-withOrgApacheLuceneUtilBytesRefArray:(IOSObjectArray *)terms;
-
-- (instancetype)initWithNSString:(NSString *)field
-                withJavaUtilList:(id<JavaUtilList>)terms;
-
-- (instancetype)initWithOrgApacheLuceneIndexTermArray:(IOSObjectArray *)terms;
-
-- (jboolean)isEqual:(id)obj;
-
-- (id<JavaUtilCollection>)getChildResources;
-
-- (OrgApacheLuceneSearchDocIdSet *)getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-                                                            withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)acceptDocs;
-
-- (NSUInteger)hash;
-
-- (jlong)ramBytesUsed;
-
-- (NSString *)toStringWithNSString:(NSString *)defaultField;
+- (instancetype)init;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneQueriesTermsFilter)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesTermsFilter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesTermsFilter_initWithJavaUtilList_(OrgApacheLuceneQueriesTermsFilter *self, id<JavaUtilList> terms);
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesTermsFilter_init(OrgApacheLuceneQueriesTermsFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueriesTermsFilter *new_OrgApacheLuceneQueriesTermsFilter_initWithJavaUtilList_(id<JavaUtilList> terms) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesTermsFilter_initWithNSString_withJavaUtilList_(OrgApacheLuceneQueriesTermsFilter *self, NSString *field, id<JavaUtilList> terms);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueriesTermsFilter *new_OrgApacheLuceneQueriesTermsFilter_initWithNSString_withJavaUtilList_(NSString *field, id<JavaUtilList> terms) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesTermsFilter_initWithNSString_withOrgApacheLuceneUtilBytesRefArray_(OrgApacheLuceneQueriesTermsFilter *self, NSString *field, IOSObjectArray *terms);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueriesTermsFilter *new_OrgApacheLuceneQueriesTermsFilter_initWithNSString_withOrgApacheLuceneUtilBytesRefArray_(NSString *field, IOSObjectArray *terms) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesTermsFilter_initWithOrgApacheLuceneIndexTermArray_(OrgApacheLuceneQueriesTermsFilter *self, IOSObjectArray *terms);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueriesTermsFilter *new_OrgApacheLuceneQueriesTermsFilter_initWithOrgApacheLuceneIndexTermArray_(IOSObjectArray *terms) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueriesTermsFilter *new_OrgApacheLuceneQueriesTermsFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesTermsFilter)
 

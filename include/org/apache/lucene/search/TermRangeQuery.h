@@ -35,21 +35,7 @@
 
 - (jboolean)isEqual:(id)obj;
 
-- (OrgApacheLuceneUtilBytesRef *)getLowerTerm;
-
-- (OrgApacheLuceneUtilBytesRef *)getUpperTerm;
-
 - (NSUInteger)hash;
-
-- (jboolean)includesLower;
-
-- (jboolean)includesUpper;
-
-+ (OrgApacheLuceneSearchTermRangeQuery *)newStringRangeWithNSString:(NSString *)field
-                                                       withNSString:(NSString *)lowerTerm
-                                                       withNSString:(NSString *)upperTerm
-                                                        withBoolean:(jboolean)includeLower
-                                                        withBoolean:(jboolean)includeUpper OBJC_METHOD_FAMILY_NONE;
 
 + (OrgApacheLuceneUtilAutomatonAutomaton *)toAutomatonWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)lowerTerm
                                                       withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)upperTerm
@@ -67,8 +53,6 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchTermRangeQuery_initWithNSString_with
 FOUNDATION_EXPORT OrgApacheLuceneSearchTermRangeQuery *new_OrgApacheLuceneSearchTermRangeQuery_initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_(NSString *field, OrgApacheLuceneUtilBytesRef *lowerTerm, OrgApacheLuceneUtilBytesRef *upperTerm, jboolean includeLower, jboolean includeUpper) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneSearchTermRangeQuery_toAutomatonWithOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_(OrgApacheLuceneUtilBytesRef *lowerTerm, OrgApacheLuceneUtilBytesRef *upperTerm, jboolean includeLower, jboolean includeUpper);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchTermRangeQuery *OrgApacheLuceneSearchTermRangeQuery_newStringRangeWithNSString_withNSString_withNSString_withBoolean_withBoolean_(NSString *field, NSString *lowerTerm, NSString *upperTerm, jboolean includeLower, jboolean includeUpper);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTermRangeQuery)
 

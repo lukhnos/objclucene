@@ -22,15 +22,9 @@
 
 - (instancetype)init;
 
-- (NSString *)log;
-
-#pragma mark Protected
-
-- (NSString *)stemWithNSString:(NSString *)term;
-
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisBrBrazilianStemmer)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisBrBrazilianStemmer)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisBrBrazilianStemmer_init(OrgApacheLuceneAnalysisBrBrazilianStemmer *self);
 

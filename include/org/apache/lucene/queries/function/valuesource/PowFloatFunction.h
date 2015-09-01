@@ -20,31 +20,19 @@
 #define OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction_INCLUDE 1
 #include "org/apache/lucene/queries/function/valuesource/DualFloatFunction.h"
 
-@class OrgApacheLuceneQueriesFunctionFunctionValues;
-@class OrgApacheLuceneQueriesFunctionValueSource;
-
 @interface OrgApacheLuceneQueriesFunctionValuesourcePowFloatFunction : OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)a
-                    withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)b;
-
-#pragma mark Protected
-
-- (jfloat)funcWithInt:(jint)doc
-withOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)aVals
-withOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)bVals;
-
-- (NSString *)name;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourcePowFloatFunction)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourcePowFloatFunction_initWithOrgApacheLuceneQueriesFunctionValueSource_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourcePowFloatFunction *self, OrgApacheLuceneQueriesFunctionValueSource *a, OrgApacheLuceneQueriesFunctionValueSource *b);
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourcePowFloatFunction_init(OrgApacheLuceneQueriesFunctionValuesourcePowFloatFunction *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourcePowFloatFunction *new_OrgApacheLuceneQueriesFunctionValuesourcePowFloatFunction_initWithOrgApacheLuceneQueriesFunctionValueSource_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValueSource *a, OrgApacheLuceneQueriesFunctionValueSource *b) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourcePowFloatFunction *new_OrgApacheLuceneQueriesFunctionValuesourcePowFloatFunction_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourcePowFloatFunction)
 

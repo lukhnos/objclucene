@@ -21,15 +21,12 @@
 #include "org/apache/lucene/search/FilterScorer.h"
 
 @class OrgApacheLuceneSearchScorer;
-@protocol JavaUtilCollection;
 
 @interface OrgApacheLuceneSearchScoreCachingWrappingScorer : OrgApacheLuceneSearchFilterScorer
 
 #pragma mark Public
 
 - (instancetype)initWithOrgApacheLuceneSearchScorer:(OrgApacheLuceneSearchScorer *)scorer;
-
-- (id<JavaUtilCollection>)getChildren;
 
 - (jfloat)score;
 

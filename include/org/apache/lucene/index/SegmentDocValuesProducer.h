@@ -30,7 +30,6 @@
 @class OrgApacheLuceneIndexSortedNumericDocValues;
 @class OrgApacheLuceneIndexSortedSetDocValues;
 @class OrgApacheLuceneStoreDirectory;
-@protocol JavaUtilCollection;
 @protocol JavaUtilList;
 @protocol JavaUtilMap;
 @protocol JavaUtilSet;
@@ -50,8 +49,6 @@
 - (void)close;
 
 - (OrgApacheLuceneIndexBinaryDocValues *)getBinaryWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)field;
-
-- (id<JavaUtilCollection>)getChildResources;
 
 - (id<OrgApacheLuceneUtilBits>)getDocsWithFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)field;
 

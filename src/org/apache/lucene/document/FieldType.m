@@ -94,27 +94,12 @@ __attribute__((unused)) static OrgApacheLuceneDocumentFieldType_NumericTypeEnum 
   return self->storeTermVectorOffsets_;
 }
 
-- (void)setStoreTermVectorOffsetsWithBoolean:(jboolean)value {
-  [self checkIfFrozen];
-  self->storeTermVectorOffsets_ = value;
-}
-
 - (jboolean)storeTermVectorPositions {
   return self->storeTermVectorPositions_;
 }
 
-- (void)setStoreTermVectorPositionsWithBoolean:(jboolean)value {
-  [self checkIfFrozen];
-  self->storeTermVectorPositions_ = value;
-}
-
 - (jboolean)storeTermVectorPayloads {
   return self->storeTermVectorPayloads_;
-}
-
-- (void)setStoreTermVectorPayloadsWithBoolean:(jboolean)value {
-  [self checkIfFrozen];
-  self->storeTermVectorPayloads_ = value;
 }
 
 - (jboolean)omitNorms {
@@ -274,11 +259,8 @@ __attribute__((unused)) static OrgApacheLuceneDocumentFieldType_NumericTypeEnum 
     { "storeTermVectors", NULL, "Z", 0x1, NULL, NULL },
     { "setStoreTermVectorsWithBoolean:", "setStoreTermVectors", "V", 0x1, NULL, NULL },
     { "storeTermVectorOffsets", NULL, "Z", 0x1, NULL, NULL },
-    { "setStoreTermVectorOffsetsWithBoolean:", "setStoreTermVectorOffsets", "V", 0x1, NULL, NULL },
     { "storeTermVectorPositions", NULL, "Z", 0x1, NULL, NULL },
-    { "setStoreTermVectorPositionsWithBoolean:", "setStoreTermVectorPositions", "V", 0x1, NULL, NULL },
     { "storeTermVectorPayloads", NULL, "Z", 0x1, NULL, NULL },
-    { "setStoreTermVectorPayloadsWithBoolean:", "setStoreTermVectorPayloads", "V", 0x1, NULL, NULL },
     { "omitNorms", NULL, "Z", 0x1, NULL, NULL },
     { "setOmitNormsWithBoolean:", "setOmitNorms", "V", 0x1, NULL, NULL },
     { "indexOptions", NULL, "Lorg.apache.lucene.index.IndexOptions;", 0x1, NULL, NULL },
@@ -308,7 +290,7 @@ __attribute__((unused)) static OrgApacheLuceneDocumentFieldType_NumericTypeEnum 
     { "docValuesType_", NULL, 0x2, "Lorg.apache.lucene.index.DocValuesType;", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.document.FieldType$NumericType;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneDocumentFieldType = { 2, "FieldType", "org.apache.lucene.document", NULL, 0x1, 29, methods, 12, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneDocumentFieldType = { 2, "FieldType", "org.apache.lucene.document", NULL, 0x1, 26, methods, 12, fields, 0, NULL, 1, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneDocumentFieldType;
 }
 

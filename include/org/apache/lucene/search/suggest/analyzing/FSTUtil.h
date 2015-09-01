@@ -16,22 +16,19 @@
 #if !defined (_OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_) && (OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_INCLUDE_ALL || OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_INCLUDE)
 #define _OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_
 
-@class OrgApacheLuceneUtilAutomatonAutomaton;
-@class OrgApacheLuceneUtilFstFST;
-@protocol JavaUtilList;
-
 @interface OrgApacheLuceneSearchSuggestAnalyzingFSTUtil : NSObject
 
 #pragma mark Public
 
-+ (id<JavaUtilList>)intersectPrefixPathsWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a
-                                                    withOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)fst;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestAnalyzingFSTUtil)
 
-FOUNDATION_EXPORT id<JavaUtilList> OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_intersectPrefixPathsWithOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneUtilFstFST_(OrgApacheLuceneUtilAutomatonAutomaton *a, OrgApacheLuceneUtilFstFST *fst);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_init(OrgApacheLuceneSearchSuggestAnalyzingFSTUtil *self);
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestAnalyzingFSTUtil *new_OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestAnalyzingFSTUtil)
 
@@ -40,35 +37,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestAnalyzingFSTUtil)
 #if !defined (_OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path_) && (OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_INCLUDE_ALL || OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path_INCLUDE)
 #define _OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path_
 
-@class OrgApacheLuceneUtilFstFST_Arc;
-@class OrgApacheLuceneUtilIntsRefBuilder;
-
-@interface OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path : NSObject {
- @public
-  jint state_;
-  OrgApacheLuceneUtilFstFST_Arc *fstNode_;
-  id output_;
-  OrgApacheLuceneUtilIntsRefBuilder *input_;
-}
+@interface OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path : NSObject
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)state
-withOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)fstNode
-                     withId:(id)output
-withOrgApacheLuceneUtilIntsRefBuilder:(OrgApacheLuceneUtilIntsRefBuilder *)input;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path, fstNode_, OrgApacheLuceneUtilFstFST_Arc *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path, output_, id)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path, input_, OrgApacheLuceneUtilIntsRefBuilder *)
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path_init(OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path_initWithInt_withOrgApacheLuceneUtilFstFST_Arc_withId_withOrgApacheLuceneUtilIntsRefBuilder_(OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path *self, jint state, OrgApacheLuceneUtilFstFST_Arc *fstNode, id output, OrgApacheLuceneUtilIntsRefBuilder *input);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path *new_OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path_initWithInt_withOrgApacheLuceneUtilFstFST_Arc_withId_withOrgApacheLuceneUtilIntsRefBuilder_(jint state, OrgApacheLuceneUtilFstFST_Arc *fstNode, id output, OrgApacheLuceneUtilIntsRefBuilder *input) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path *new_OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path)
 

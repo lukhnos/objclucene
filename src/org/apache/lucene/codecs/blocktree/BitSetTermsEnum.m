@@ -32,10 +32,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum, postingsEnum_
   @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
 }
 
-- (void)seekExactWithLong:(jlong)ord {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
-}
-
 - (OrgApacheLuceneUtilBytesRef *)term {
   @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
 }
@@ -74,7 +70,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum, postingsEnum_
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneUtilBitSet:", "BitSetTermsEnum", NULL, 0x1, NULL, NULL },
     { "seekCeilWithOrgApacheLuceneUtilBytesRef:", "seekCeil", "Lorg.apache.lucene.index.TermsEnum$SeekStatus;", 0x1, NULL, NULL },
-    { "seekExactWithLong:", "seekExact", "V", 0x1, NULL, NULL },
     { "term", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
     { "next", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
     { "ord", NULL, "J", 0x1, NULL, NULL },
@@ -85,7 +80,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum, postingsEnum_
   static const J2ObjcFieldInfo fields[] = {
     { "postingsEnum_", NULL, 0x12, "Lorg.apache.lucene.codecs.blocktree.BitSetPostingsEnum;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum = { 2, "BitSetTermsEnum", "org.apache.lucene.codecs.blocktree", NULL, 0x0, 9, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum = { 2, "BitSetTermsEnum", "org.apache.lucene.codecs.blocktree", NULL, 0x0, 8, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneCodecsBlocktreeBitSetTermsEnum;
 }
 

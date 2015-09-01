@@ -22,7 +22,6 @@
 
 @class OrgApacheLuceneUtilBitSet;
 @class OrgApacheLuceneUtilFixedBitSet;
-@class OrgApacheLuceneUtilSparseFixedBitSet;
 
 @interface OrgApacheLuceneUtilBitSetIterator : OrgApacheLuceneSearchDocIdSetIterator
 
@@ -39,8 +38,6 @@
 
 + (OrgApacheLuceneUtilFixedBitSet *)getFixedBitSetOrNullWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)iterator;
 
-+ (OrgApacheLuceneUtilSparseFixedBitSet *)getSparseFixedBitSetOrNullWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)iterator;
-
 - (jint)nextDoc;
 
 @end
@@ -48,8 +45,6 @@
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilBitSetIterator)
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilFixedBitSet *OrgApacheLuceneUtilBitSetIterator_getFixedBitSetOrNullWithOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchDocIdSetIterator *iterator);
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilSparseFixedBitSet *OrgApacheLuceneUtilBitSetIterator_getSparseFixedBitSetOrNullWithOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchDocIdSetIterator *iterator);
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilBitSetIterator_initWithOrgApacheLuceneUtilBitSet_withLong_(OrgApacheLuceneUtilBitSetIterator *self, OrgApacheLuceneUtilBitSet *bits, jlong cost);
 

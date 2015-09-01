@@ -41,23 +41,15 @@
 
 - (jchar)BeginToken;
 
-- (void)Done;
-
 - (jint)getBeginColumn;
 
 - (jint)getBeginLine;
-
-- (jint)getColumn;
 
 - (jint)getEndColumn;
 
 - (jint)getEndLine;
 
 - (NSString *)GetImage;
-
-- (jint)getLine;
-
-- (IOSCharArray *)GetSuffixWithInt:(jint)len;
 
 - (jchar)readChar;
 

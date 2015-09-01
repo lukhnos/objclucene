@@ -16,8 +16,6 @@
 #if !defined (_OrgApacheLuceneAnalysisArArabicNormalizer_) && (OrgApacheLuceneAnalysisArArabicNormalizer_INCLUDE_ALL || OrgApacheLuceneAnalysisArArabicNormalizer_INCLUDE)
 #define _OrgApacheLuceneAnalysisArArabicNormalizer_
 
-@class IOSCharArray;
-
 #define OrgApacheLuceneAnalysisArArabicNormalizer_ALEF 0x0627
 #define OrgApacheLuceneAnalysisArArabicNormalizer_ALEF_MADDA 0x0622
 #define OrgApacheLuceneAnalysisArArabicNormalizer_ALEF_HAMZA_ABOVE 0x0623
@@ -41,9 +39,6 @@
 #pragma mark Public
 
 - (instancetype)init;
-
-- (jint)normalizeWithCharArray:(IOSCharArray *)s
-                       withInt:(jint)len;
 
 @end
 

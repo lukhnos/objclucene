@@ -115,10 +115,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTopScoreDocCollector_PagingTopSc
 
 @implementation OrgApacheLuceneSearchTopScoreDocCollector
 
-+ (OrgApacheLuceneSearchTopScoreDocCollector *)createWithInt:(jint)numHits {
-  return OrgApacheLuceneSearchTopScoreDocCollector_createWithInt_(numHits);
-}
-
 + (OrgApacheLuceneSearchTopScoreDocCollector *)createWithInt:(jint)numHits
                            withOrgApacheLuceneSearchScoreDoc:(OrgApacheLuceneSearchScoreDoc *)after {
   return OrgApacheLuceneSearchTopScoreDocCollector_createWithInt_withOrgApacheLuceneSearchScoreDoc_(numHits, after);
@@ -158,7 +154,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTopScoreDocCollector_PagingTopSc
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "createWithInt:", "create", "Lorg.apache.lucene.search.TopScoreDocCollector;", 0x9, NULL, NULL },
     { "createWithInt:withOrgApacheLuceneSearchScoreDoc:", "create", "Lorg.apache.lucene.search.TopScoreDocCollector;", 0x9, NULL, NULL },
     { "initWithInt:", "TopScoreDocCollector", NULL, 0x0, NULL, NULL },
     { "newTopDocsWithOrgApacheLuceneSearchScoreDocArray:withInt:", "newTopDocs", "Lorg.apache.lucene.search.TopDocs;", 0x4, NULL, NULL },
@@ -169,16 +164,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTopScoreDocCollector_PagingTopSc
   };
   static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.ScoreDoc;"};
   static const char *inner_classes[] = {"Lorg.apache.lucene.search.TopScoreDocCollector$ScorerLeafCollector;", "Lorg.apache.lucene.search.TopScoreDocCollector$SimpleTopScoreDocCollector;", "Lorg.apache.lucene.search.TopScoreDocCollector$PagingTopScoreDocCollector;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchTopScoreDocCollector = { 2, "TopScoreDocCollector", "org.apache.lucene.search", NULL, 0x401, 5, methods, 1, fields, 1, superclass_type_args, 3, inner_classes, NULL, "Lorg/apache/lucene/search/TopDocsCollector<Lorg/apache/lucene/search/ScoreDoc;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchTopScoreDocCollector = { 2, "TopScoreDocCollector", "org.apache.lucene.search", NULL, 0x401, 4, methods, 1, fields, 1, superclass_type_args, 3, inner_classes, NULL, "Lorg/apache/lucene/search/TopDocsCollector<Lorg/apache/lucene/search/ScoreDoc;>;" };
   return &_OrgApacheLuceneSearchTopScoreDocCollector;
 }
 
 @end
-
-OrgApacheLuceneSearchTopScoreDocCollector *OrgApacheLuceneSearchTopScoreDocCollector_createWithInt_(jint numHits) {
-  OrgApacheLuceneSearchTopScoreDocCollector_initialize();
-  return OrgApacheLuceneSearchTopScoreDocCollector_createWithInt_withOrgApacheLuceneSearchScoreDoc_(numHits, nil);
-}
 
 OrgApacheLuceneSearchTopScoreDocCollector *OrgApacheLuceneSearchTopScoreDocCollector_createWithInt_withOrgApacheLuceneSearchScoreDoc_(jint numHits, OrgApacheLuceneSearchScoreDoc *after) {
   OrgApacheLuceneSearchTopScoreDocCollector_initialize();

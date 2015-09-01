@@ -32,13 +32,9 @@
 - (void)addWithInt:(jint)doc
             withId:(id)value;
 
-- (jboolean)any;
-
 - (OrgApacheLuceneIndexDocValuesFieldUpdates_Iterator *)iterator;
 
 - (void)mergeWithOrgApacheLuceneIndexDocValuesFieldUpdates:(OrgApacheLuceneIndexDocValuesFieldUpdates *)other;
-
-- (jlong)ramBytesPerDoc;
 
 #pragma mark Protected
 
@@ -120,8 +116,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocValuesFieldUpdates_Iterator)
 - (OrgApacheLuceneIndexDocValuesFieldUpdates *)newUpdatesWithNSString:(NSString *)field
                             withOrgApacheLuceneIndexDocValuesTypeEnum:(OrgApacheLuceneIndexDocValuesTypeEnum *)type
                                                               withInt:(jint)maxDoc OBJC_METHOD_FAMILY_NONE;
-
-- (jlong)ramBytesPerDoc;
 
 - (jint)size;
 

@@ -148,49 +148,6 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisUtilCharacterUtils)
   }
 }
 
-- (void)toUpperCaseWithCharArray:(IOSCharArray *)buffer
-                         withInt:(jint)offset
-                         withInt:(jint)limit {
-  JreAssert((((IOSCharArray *) nil_chk(buffer))->size_ >= limit), (@"org/apache/lucene/analysis/util/CharacterUtils.java:135 condition failed: assert buffer.length >= limit;"));
-  JreAssert((offset <= 0 && offset <= buffer->size_), (@"org/apache/lucene/analysis/util/CharacterUtils.java:136 condition failed: assert offset <=0 && offset <= buffer.length;"));
-  for (jint i = offset; i < limit; ) {
-    i += JavaLangCharacter_toCharsWithInt_withCharArray_withInt_(JavaLangCharacter_toUpperCaseWithInt_([self codePointAtWithCharArray:buffer withInt:i withInt:limit]), buffer, i);
-  }
-}
-
-- (jint)toCodePointsWithCharArray:(IOSCharArray *)src
-                          withInt:(jint)srcOff
-                          withInt:(jint)srcLen
-                     withIntArray:(IOSIntArray *)dest
-                          withInt:(jint)destOff {
-  if (srcLen < 0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"srcLen must be >= 0") autorelease];
-  }
-  jint codePointCount = 0;
-  for (jint i = 0; i < srcLen; ) {
-    jint cp = [self codePointAtWithCharArray:src withInt:srcOff + i withInt:srcOff + srcLen];
-    jint charCount = JavaLangCharacter_charCountWithInt_(cp);
-    *IOSIntArray_GetRef(nil_chk(dest), destOff + codePointCount++) = cp;
-    i += charCount;
-  }
-  return codePointCount;
-}
-
-- (jint)toCharsWithIntArray:(IOSIntArray *)src
-                    withInt:(jint)srcOff
-                    withInt:(jint)srcLen
-              withCharArray:(IOSCharArray *)dest
-                    withInt:(jint)destOff {
-  if (srcLen < 0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"srcLen must be >= 0") autorelease];
-  }
-  jint written = 0;
-  for (jint i = 0; i < srcLen; ++i) {
-    written += JavaLangCharacter_toCharsWithInt_withCharArray_withInt_(IOSIntArray_Get(nil_chk(src), srcOff + i), dest, destOff + written);
-  }
-  return written;
-}
-
 - (jboolean)fillWithOrgApacheLuceneAnalysisUtilCharacterUtils_CharacterBuffer:(OrgApacheLuceneAnalysisUtilCharacterUtils_CharacterBuffer *)buffer
                                                              withJavaIoReader:(JavaIoReader *)reader
                                                                       withInt:(jint)numChars {
@@ -247,9 +204,6 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisUtilCharacterUtils)
     { "codePointCountWithJavaLangCharSequence:", "codePointCount", "I", 0x401, NULL, NULL },
     { "newCharacterBufferWithInt:", "newCharacterBuffer", "Lorg.apache.lucene.analysis.util.CharacterUtils$CharacterBuffer;", 0x9, NULL, NULL },
     { "toLowerCaseWithCharArray:withInt:withInt:", "toLowerCase", "V", 0x11, NULL, NULL },
-    { "toUpperCaseWithCharArray:withInt:withInt:", "toUpperCase", "V", 0x11, NULL, NULL },
-    { "toCodePointsWithCharArray:withInt:withInt:withIntArray:withInt:", "toCodePoints", "I", 0x11, NULL, NULL },
-    { "toCharsWithIntArray:withInt:withInt:withCharArray:withInt:", "toChars", "I", 0x11, NULL, NULL },
     { "fillWithOrgApacheLuceneAnalysisUtilCharacterUtils_CharacterBuffer:withJavaIoReader:withInt:", "fill", "Z", 0x401, "Ljava.io.IOException;", NULL },
     { "fillWithOrgApacheLuceneAnalysisUtilCharacterUtils_CharacterBuffer:withJavaIoReader:", "fill", "Z", 0x11, "Ljava.io.IOException;", NULL },
     { "offsetByCodePointsWithCharArray:withInt:withInt:withInt:withInt:", "offsetByCodePoints", "I", 0x401, NULL, NULL },
@@ -261,7 +215,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisUtilCharacterUtils)
     { "JAVA_5_", NULL, 0x1a, "Lorg.apache.lucene.analysis.util.CharacterUtils$Java5CharacterUtils;", &OrgApacheLuceneAnalysisUtilCharacterUtils_JAVA_5_, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.analysis.util.CharacterUtils$Java5CharacterUtils;", "Lorg.apache.lucene.analysis.util.CharacterUtils$Java4CharacterUtils;", "Lorg.apache.lucene.analysis.util.CharacterUtils$CharacterBuffer;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisUtilCharacterUtils = { 2, "CharacterUtils", "org.apache.lucene.analysis.util", NULL, 0x401, 15, methods, 2, fields, 0, NULL, 3, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisUtilCharacterUtils = { 2, "CharacterUtils", "org.apache.lucene.analysis.util", NULL, 0x401, 12, methods, 2, fields, 0, NULL, 3, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneAnalysisUtilCharacterUtils;
 }
 
@@ -480,10 +434,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisUtilCharacterUtils_Java4
   return buffer_;
 }
 
-- (jint)getOffset {
-  return offset_;
-}
-
 - (jint)getLength {
   return length_;
 }
@@ -503,7 +453,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisUtilCharacterUtils_Java4
   static const J2ObjcMethodInfo methods[] = {
     { "initWithCharArray:withInt:withInt:", "CharacterBuffer", NULL, 0x0, NULL, NULL },
     { "getBuffer", NULL, "[C", 0x1, NULL, NULL },
-    { "getOffset", NULL, "I", 0x1, NULL, NULL },
     { "getLength", NULL, "I", 0x1, NULL, NULL },
     { "reset", NULL, "V", 0x1, NULL, NULL },
   };
@@ -513,7 +462,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisUtilCharacterUtils_Java4
     { "length_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "lastTrailingHighSurrogate_", NULL, 0x0, "C", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisUtilCharacterUtils_CharacterBuffer = { 2, "CharacterBuffer", "org.apache.lucene.analysis.util", "CharacterUtils", 0x19, 5, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisUtilCharacterUtils_CharacterBuffer = { 2, "CharacterBuffer", "org.apache.lucene.analysis.util", "CharacterUtils", 0x19, 4, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisUtilCharacterUtils_CharacterBuffer;
 }
 

@@ -6,6 +6,8 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/queryparser/flexible/core/nodes/ValueQueryNode.h"
 
+#pragma clang diagnostic ignored "-Wprotocol"
+
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesValueQueryNode : NSObject
 
 @end
@@ -13,11 +15,7 @@
 @implementation OrgApacheLuceneQueryparserFlexibleCoreNodesValueQueryNode
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "setValueWithId:", "setValue", "V", 0x401, NULL, "(TT;)V" },
-    { "getValue", NULL, "TT;", 0x401, NULL, "()TT;" },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesValueQueryNode = { 2, "ValueQueryNode", "org.apache.lucene.queryparser.flexible.core.nodes", NULL, 0x609, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, "<T:Ljava/lang/Object;>Ljava/lang/Object;Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesValueQueryNode = { 2, "ValueQueryNode", "org.apache.lucene.queryparser.flexible.core.nodes", NULL, 0x609, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, "<T:Ljava/lang/Object;>Ljava/lang/Object;Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;" };
   return &_OrgApacheLuceneQueryparserFlexibleCoreNodesValueQueryNode;
 }
 

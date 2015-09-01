@@ -30,7 +30,6 @@
   OrgApacheLuceneUtilFstFST_BytesReader *fstReader_;
   OrgApacheLuceneUtilFstFST_Arc *scratchArc_;
   jint upto_;
-  jint targetLength_;
 }
 
 #pragma mark Protected
@@ -39,19 +38,7 @@
 
 - (void)doNext;
 
-- (void)doSeekCeil;
-
-- (jboolean)doSeekExact;
-
-- (void)doSeekFloor;
-
-- (jint)getCurrentLabel;
-
-- (jint)getTargetLabel;
-
 - (void)grow;
-
-- (void)rewindPrefix;
 
 - (void)setCurrentLabelWithInt:(jint)label;
 

@@ -16,11 +16,7 @@
 #if !defined (_OrgApacheLuceneAnalysisUtilResourceLoaderAware_) && (OrgApacheLuceneAnalysisUtilResourceLoaderAware_INCLUDE_ALL || OrgApacheLuceneAnalysisUtilResourceLoaderAware_INCLUDE)
 #define _OrgApacheLuceneAnalysisUtilResourceLoaderAware_
 
-@protocol OrgApacheLuceneAnalysisUtilResourceLoader;
-
 @protocol OrgApacheLuceneAnalysisUtilResourceLoaderAware < NSObject, JavaObject >
-
-- (void)informWithOrgApacheLuceneAnalysisUtilResourceLoader:(id<OrgApacheLuceneAnalysisUtilResourceLoader>)loader;
 
 @end
 

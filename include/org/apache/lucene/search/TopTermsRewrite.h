@@ -32,8 +32,6 @@
 
 - (jboolean)isEqual:(id)obj;
 
-- (jint)getSize;
-
 - (NSUInteger)hash;
 
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader

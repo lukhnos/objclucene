@@ -23,6 +23,8 @@
 
 #pragma mark Public
 
+- (instancetype)init;
+
 + (OrgApacheLuceneIndexCodecReader *)wrapWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader;
 
 @end
@@ -30,6 +32,10 @@
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexSlowCodecReaderWrapper)
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexCodecReader *OrgApacheLuceneIndexSlowCodecReaderWrapper_wrapWithOrgApacheLuceneIndexLeafReader_(OrgApacheLuceneIndexLeafReader *reader);
+
+FOUNDATION_EXPORT void OrgApacheLuceneIndexSlowCodecReaderWrapper_init(OrgApacheLuceneIndexSlowCodecReaderWrapper *self);
+
+FOUNDATION_EXPORT OrgApacheLuceneIndexSlowCodecReaderWrapper *new_OrgApacheLuceneIndexSlowCodecReaderWrapper_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSlowCodecReaderWrapper)
 

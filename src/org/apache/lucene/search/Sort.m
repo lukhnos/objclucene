@@ -3,13 +3,10 @@
 //  source: ./core/src/java/org/apache/lucene/search/Sort.java
 //
 
-#include "IOSClass.h"
 #include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/StringBuilder.h"
 #include "java/util/Arrays.h"
-#include "org/apache/lucene/search/IndexSearcher.h"
 #include "org/apache/lucene/search/Sort.h"
 #include "org/apache/lucene/search/SortField.h"
 
@@ -30,33 +27,12 @@ OrgApacheLuceneSearchSort *OrgApacheLuceneSearchSort_INDEXORDER_;
   return self;
 }
 
-- (instancetype)initWithOrgApacheLuceneSearchSortFieldArray:(IOSObjectArray *)fields {
-  OrgApacheLuceneSearchSort_initWithOrgApacheLuceneSearchSortFieldArray_(self, fields);
-  return self;
-}
-
 - (void)setSortWithOrgApacheLuceneSearchSortField:(OrgApacheLuceneSearchSortField *)field {
   JreStrongAssignAndConsume(&self->fields_, [IOSObjectArray newArrayWithObjects:(id[]){ field } count:1 type:OrgApacheLuceneSearchSortField_class_()]);
 }
 
-- (void)setSortWithOrgApacheLuceneSearchSortFieldArray:(IOSObjectArray *)fields {
-  JreStrongAssign(&self->fields_, fields);
-}
-
 - (IOSObjectArray *)getSort {
   return fields_;
-}
-
-- (OrgApacheLuceneSearchSort *)rewriteWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher {
-  jboolean changed = NO;
-  IOSObjectArray *rewrittenSortFields = [IOSObjectArray arrayWithLength:((IOSObjectArray *) nil_chk(fields_))->size_ type:OrgApacheLuceneSearchSortField_class_()];
-  for (jint i = 0; i < fields_->size_; i++) {
-    IOSObjectArray_Set(rewrittenSortFields, i, [((OrgApacheLuceneSearchSortField *) nil_chk(IOSObjectArray_Get(fields_, i))) rewriteWithOrgApacheLuceneSearchIndexSearcher:searcher]);
-    if (IOSObjectArray_Get(fields_, i) != IOSObjectArray_Get(rewrittenSortFields, i)) {
-      changed = YES;
-    }
-  }
-  return (changed) ? [new_OrgApacheLuceneSearchSort_initWithOrgApacheLuceneSearchSortFieldArray_(rewrittenSortFields) autorelease] : self;
 }
 
 - (NSString *)description {
@@ -111,11 +87,8 @@ OrgApacheLuceneSearchSort *OrgApacheLuceneSearchSort_INDEXORDER_;
   static const J2ObjcMethodInfo methods[] = {
     { "init", "Sort", NULL, 0x1, NULL, NULL },
     { "initWithOrgApacheLuceneSearchSortField:", "Sort", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneSearchSortFieldArray:", "Sort", NULL, 0x81, NULL, NULL },
     { "setSortWithOrgApacheLuceneSearchSortField:", "setSort", "V", 0x1, NULL, NULL },
-    { "setSortWithOrgApacheLuceneSearchSortFieldArray:", "setSort", "V", 0x81, NULL, NULL },
     { "getSort", NULL, "[Lorg.apache.lucene.search.SortField;", 0x1, NULL, NULL },
-    { "rewriteWithOrgApacheLuceneSearchIndexSearcher:", "rewrite", "Lorg.apache.lucene.search.Sort;", 0x1, "Ljava.io.IOException;", NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
     { "hash", "hashCode", "I", 0x1, NULL, NULL },
@@ -126,7 +99,7 @@ OrgApacheLuceneSearchSort *OrgApacheLuceneSearchSort_INDEXORDER_;
     { "INDEXORDER_", NULL, 0x19, "Lorg.apache.lucene.search.Sort;", &OrgApacheLuceneSearchSort_INDEXORDER_, NULL, .constantValue.asLong = 0 },
     { "fields_", NULL, 0x0, "[Lorg.apache.lucene.search.SortField;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSort = { 2, "Sort", "org.apache.lucene.search", NULL, 0x1, 11, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSort = { 2, "Sort", "org.apache.lucene.search", NULL, 0x1, 8, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchSort;
 }
 
@@ -150,17 +123,6 @@ void OrgApacheLuceneSearchSort_initWithOrgApacheLuceneSearchSortField_(OrgApache
 OrgApacheLuceneSearchSort *new_OrgApacheLuceneSearchSort_initWithOrgApacheLuceneSearchSortField_(OrgApacheLuceneSearchSortField *field) {
   OrgApacheLuceneSearchSort *self = [OrgApacheLuceneSearchSort alloc];
   OrgApacheLuceneSearchSort_initWithOrgApacheLuceneSearchSortField_(self, field);
-  return self;
-}
-
-void OrgApacheLuceneSearchSort_initWithOrgApacheLuceneSearchSortFieldArray_(OrgApacheLuceneSearchSort *self, IOSObjectArray *fields) {
-  NSObject_init(self);
-  [self setSortWithOrgApacheLuceneSearchSortFieldArray:fields];
-}
-
-OrgApacheLuceneSearchSort *new_OrgApacheLuceneSearchSort_initWithOrgApacheLuceneSearchSortFieldArray_(IOSObjectArray *fields) {
-  OrgApacheLuceneSearchSort *self = [OrgApacheLuceneSearchSort alloc];
-  OrgApacheLuceneSearchSort_initWithOrgApacheLuceneSearchSortFieldArray_(self, fields);
   return self;
 }
 

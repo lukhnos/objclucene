@@ -16,42 +16,19 @@
 #if !defined (_OrgApacheLuceneUtilAccountables_) && (OrgApacheLuceneUtilAccountables_INCLUDE_ALL || OrgApacheLuceneUtilAccountables_INCLUDE)
 #define _OrgApacheLuceneUtilAccountables_
 
-@protocol JavaUtilCollection;
-@protocol JavaUtilMap;
-@protocol OrgApacheLuceneUtilAccountable;
-
 @interface OrgApacheLuceneUtilAccountables : NSObject
 
 #pragma mark Public
 
-+ (id<OrgApacheLuceneUtilAccountable>)namedAccountableWithNSString:(NSString *)description_
-                                withOrgApacheLuceneUtilAccountable:(id<OrgApacheLuceneUtilAccountable>)inArg;
-
-+ (id<OrgApacheLuceneUtilAccountable>)namedAccountableWithNSString:(NSString *)description_
-                                            withJavaUtilCollection:(id<JavaUtilCollection>)children
-                                                          withLong:(jlong)bytes;
-
-+ (id<OrgApacheLuceneUtilAccountable>)namedAccountableWithNSString:(NSString *)description_
-                                                          withLong:(jlong)bytes;
-
-+ (id<JavaUtilCollection>)namedAccountablesWithNSString:(NSString *)prefix
-                                        withJavaUtilMap:(id<JavaUtilMap>)inArg;
-
-+ (NSString *)toStringWithOrgApacheLuceneUtilAccountable:(id<OrgApacheLuceneUtilAccountable>)a;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilAccountables)
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneUtilAccountables_toStringWithOrgApacheLuceneUtilAccountable_(id<OrgApacheLuceneUtilAccountable> a);
+FOUNDATION_EXPORT void OrgApacheLuceneUtilAccountables_init(OrgApacheLuceneUtilAccountables *self);
 
-FOUNDATION_EXPORT id<OrgApacheLuceneUtilAccountable> OrgApacheLuceneUtilAccountables_namedAccountableWithNSString_withOrgApacheLuceneUtilAccountable_(NSString *description_, id<OrgApacheLuceneUtilAccountable> inArg);
-
-FOUNDATION_EXPORT id<OrgApacheLuceneUtilAccountable> OrgApacheLuceneUtilAccountables_namedAccountableWithNSString_withLong_(NSString *description_, jlong bytes);
-
-FOUNDATION_EXPORT id<JavaUtilCollection> OrgApacheLuceneUtilAccountables_namedAccountablesWithNSString_withJavaUtilMap_(NSString *prefix, id<JavaUtilMap> inArg);
-
-FOUNDATION_EXPORT id<OrgApacheLuceneUtilAccountable> OrgApacheLuceneUtilAccountables_namedAccountableWithNSString_withJavaUtilCollection_withLong_(NSString *description_, id<JavaUtilCollection> children, jlong bytes);
+FOUNDATION_EXPORT OrgApacheLuceneUtilAccountables *new_OrgApacheLuceneUtilAccountables_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAccountables)
 

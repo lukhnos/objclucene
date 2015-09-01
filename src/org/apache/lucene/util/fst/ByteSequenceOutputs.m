@@ -149,10 +149,6 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg {
   return OrgApacheLuceneUtilFstByteSequenceOutputs_NO_OUTPUT_;
 }
 
-- (NSString *)outputToStringWithId:(OrgApacheLuceneUtilBytesRef *)output {
-  return [((OrgApacheLuceneUtilBytesRef *) nil_chk(output)) description];
-}
-
 - (jlong)ramBytesUsedWithId:(OrgApacheLuceneUtilBytesRef *)output {
   return OrgApacheLuceneUtilFstByteSequenceOutputs_BASE_NUM_BYTES_ + OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithByteArray_(((OrgApacheLuceneUtilBytesRef *) nil_chk(output))->bytes_);
 }
@@ -181,7 +177,6 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg {
     { "readWithOrgApacheLuceneStoreDataInput:", "read", "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
     { "skipOutputWithOrgApacheLuceneStoreDataInput:", "skipOutput", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "getNoOutput", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "outputToStringWithId:", "outputToString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "ramBytesUsedWithId:", "ramBytesUsed", "J", 0x1, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
   };
@@ -191,7 +186,7 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg {
     { "BASE_NUM_BYTES_", NULL, 0x1a, "J", &OrgApacheLuceneUtilFstByteSequenceOutputs_BASE_NUM_BYTES_, NULL, .constantValue.asLong = 0 },
   };
   static const char *superclass_type_args[] = {"Lorg.apache.lucene.util.BytesRef;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstByteSequenceOutputs = { 2, "ByteSequenceOutputs", "org.apache.lucene.util.fst", NULL, 0x11, 12, methods, 3, fields, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/util/fst/Outputs<Lorg/apache/lucene/util/BytesRef;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstByteSequenceOutputs = { 2, "ByteSequenceOutputs", "org.apache.lucene.util.fst", NULL, 0x11, 11, methods, 3, fields, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/util/fst/Outputs<Lorg/apache/lucene/util/BytesRef;>;" };
   return &_OrgApacheLuceneUtilFstByteSequenceOutputs;
 }
 

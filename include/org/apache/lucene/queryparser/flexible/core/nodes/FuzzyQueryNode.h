@@ -20,40 +20,19 @@
 #define OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode_INCLUDE 1
 #include "org/apache/lucene/queryparser/flexible/core/nodes/FieldQueryNode.h"
 
-@protocol JavaLangCharSequence;
-@protocol OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax;
-
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode
 
 #pragma mark Public
 
-- (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)field
-                    withJavaLangCharSequence:(id<JavaLangCharSequence>)term
-                                   withFloat:(jfloat)minSimilarity
-                                     withInt:(jint)begin
-                                     withInt:(jint)end;
-
-- (OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode *)cloneTree;
-
-- (jint)getPrefixLength;
-
-- (jfloat)getSimilarity;
-
-- (void)setPrefixLengthWithInt:(jint)prefixLength;
-
-- (void)setSimilarityWithFloat:(jfloat)similarity;
-
-- (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escaper;
-
-- (NSString *)description;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_withFloat_withInt_withInt_(OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode *self, id<JavaLangCharSequence> field, id<JavaLangCharSequence> term, jfloat minSimilarity, jint begin, jint end);
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode_init(OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_withFloat_withInt_withInt_(id<JavaLangCharSequence> field, id<JavaLangCharSequence> term, jfloat minSimilarity, jint begin, jint end) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode)
 

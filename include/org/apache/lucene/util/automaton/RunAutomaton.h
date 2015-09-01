@@ -36,16 +36,10 @@
 
 - (instancetype)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a
                                                       withInt:(jint)maxInterval
-                                                  withBoolean:(jboolean)tableize;
-
-- (instancetype)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a
-                                                      withInt:(jint)maxInterval
                                                   withBoolean:(jboolean)tableize
                                                       withInt:(jint)maxDeterminizedStates;
 
 - (jboolean)isEqual:(id)obj;
-
-- (IOSIntArray *)getCharIntervals;
 
 - (jint)getInitialState;
 
@@ -73,8 +67,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilAutomatonRunAutomaton, accept_, IOSBoolea
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilAutomatonRunAutomaton, transitions_, IOSIntArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilAutomatonRunAutomaton, points_, IOSIntArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilAutomatonRunAutomaton, classmap_, IOSIntArray *)
-
-FOUNDATION_EXPORT void OrgApacheLuceneUtilAutomatonRunAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_withBoolean_(OrgApacheLuceneUtilAutomatonRunAutomaton *self, OrgApacheLuceneUtilAutomatonAutomaton *a, jint maxInterval, jboolean tableize);
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilAutomatonRunAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_withBoolean_withInt_(OrgApacheLuceneUtilAutomatonRunAutomaton *self, OrgApacheLuceneUtilAutomatonAutomaton *a, jint maxInterval, jboolean tableize, jint maxDeterminizedStates);
 

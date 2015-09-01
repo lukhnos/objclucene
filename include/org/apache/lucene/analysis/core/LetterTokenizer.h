@@ -20,15 +20,11 @@
 #define OrgApacheLuceneAnalysisUtilCharTokenizer_INCLUDE 1
 #include "org/apache/lucene/analysis/util/CharTokenizer.h"
 
-@class OrgApacheLuceneUtilAttributeFactory;
-
 @interface OrgApacheLuceneAnalysisCoreLetterTokenizer : OrgApacheLuceneAnalysisUtilCharTokenizer
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (instancetype)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory;
 
 #pragma mark Protected
 
@@ -41,10 +37,6 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisCoreLetterTokenizer)
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCoreLetterTokenizer_init(OrgApacheLuceneAnalysisCoreLetterTokenizer *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreLetterTokenizer *new_OrgApacheLuceneAnalysisCoreLetterTokenizer_init() NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCoreLetterTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(OrgApacheLuceneAnalysisCoreLetterTokenizer *self, OrgApacheLuceneUtilAttributeFactory *factory);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreLetterTokenizer *new_OrgApacheLuceneAnalysisCoreLetterTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(OrgApacheLuceneUtilAttributeFactory *factory) NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCoreLetterTokenizer)
 

@@ -24,34 +24,19 @@
 #define JavaIoCloseable_INCLUDE 1
 #include "java/io/Closeable.h"
 
-@class OrgApacheLuceneIndexTrackingIndexWriter;
-@class OrgApacheLuceneSearchReferenceManager;
-
 @interface OrgApacheLuceneSearchControlledRealTimeReopenThread : JavaLangThread < JavaIoCloseable >
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneIndexTrackingIndexWriter:(OrgApacheLuceneIndexTrackingIndexWriter *)writer
-                      withOrgApacheLuceneSearchReferenceManager:(OrgApacheLuceneSearchReferenceManager *)manager
-                                                     withDouble:(jdouble)targetMaxStaleSec
-                                                     withDouble:(jdouble)targetMinStaleSec;
-
-- (void)close;
-
-- (void)run;
-
-- (void)waitForGenerationWithLong:(jlong)targetGen;
-
-- (jboolean)waitForGenerationWithLong:(jlong)targetGen
-                              withInt:(jint)maxMS;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchControlledRealTimeReopenThread)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchControlledRealTimeReopenThread_initWithOrgApacheLuceneIndexTrackingIndexWriter_withOrgApacheLuceneSearchReferenceManager_withDouble_withDouble_(OrgApacheLuceneSearchControlledRealTimeReopenThread *self, OrgApacheLuceneIndexTrackingIndexWriter *writer, OrgApacheLuceneSearchReferenceManager *manager, jdouble targetMaxStaleSec, jdouble targetMinStaleSec);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchControlledRealTimeReopenThread_init(OrgApacheLuceneSearchControlledRealTimeReopenThread *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchControlledRealTimeReopenThread *new_OrgApacheLuceneSearchControlledRealTimeReopenThread_initWithOrgApacheLuceneIndexTrackingIndexWriter_withOrgApacheLuceneSearchReferenceManager_withDouble_withDouble_(OrgApacheLuceneIndexTrackingIndexWriter *writer, OrgApacheLuceneSearchReferenceManager *manager, jdouble targetMaxStaleSec, jdouble targetMinStaleSec) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchControlledRealTimeReopenThread *new_OrgApacheLuceneSearchControlledRealTimeReopenThread_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchControlledRealTimeReopenThread)
 

@@ -105,10 +105,6 @@ jint OrgApacheLuceneIndexFrozenBufferedUpdates_BYTES_PER_DEL_QUERY_;
   return gen_;
 }
 
-- (OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *)termIterator {
-  return [((OrgApacheLuceneIndexPrefixCodedTerms *) nil_chk(terms_)) iterator];
-}
-
 - (id<JavaLangIterable>)queriesIterable {
   return [new_OrgApacheLuceneIndexFrozenBufferedUpdates_$1_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_(self) autorelease];
 }
@@ -152,7 +148,6 @@ jint OrgApacheLuceneIndexFrozenBufferedUpdates_BYTES_PER_DEL_QUERY_;
     { "initWithOrgApacheLuceneIndexBufferedUpdates:withBoolean:", "FrozenBufferedUpdates", NULL, 0x1, NULL, NULL },
     { "setDelGenWithLong:", "setDelGen", "V", 0x1, NULL, NULL },
     { "delGen", NULL, "J", 0x1, NULL, NULL },
-    { "termIterator", NULL, "Lorg.apache.lucene.index.PrefixCodedTerms$TermIterator;", 0x1, NULL, NULL },
     { "queriesIterable", NULL, "Ljava.lang.Iterable;", 0x1, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "any", NULL, "Z", 0x0, NULL, NULL },
@@ -169,7 +164,7 @@ jint OrgApacheLuceneIndexFrozenBufferedUpdates_BYTES_PER_DEL_QUERY_;
     { "gen_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
     { "isSegmentPrivate_", NULL, 0x10, "Z", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexFrozenBufferedUpdates = { 2, "FrozenBufferedUpdates", "org.apache.lucene.index", NULL, 0x0, 7, methods, 10, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexFrozenBufferedUpdates = { 2, "FrozenBufferedUpdates", "org.apache.lucene.index", NULL, 0x0, 6, methods, 10, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexFrozenBufferedUpdates;
 }
 

@@ -6,9 +6,6 @@
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
-#include "java/util/Collection.h"
-#include "java/util/Collections.h"
-#include "java/util/List.h"
 #include "org/apache/lucene/search/DocIdSet.h"
 #include "org/apache/lucene/search/DocIdSetIterator.h"
 #include "org/apache/lucene/util/Bits.h"
@@ -18,8 +15,6 @@
 @interface OrgApacheLuceneSearchDocIdSet_$1 : OrgApacheLuceneSearchDocIdSet
 
 - (OrgApacheLuceneSearchDocIdSetIterator *)iterator;
-
-- (jboolean)isCacheable;
 
 - (id<OrgApacheLuceneUtilBits>)bits;
 
@@ -53,14 +48,6 @@ OrgApacheLuceneSearchDocIdSet *OrgApacheLuceneSearchDocIdSet_EMPTY_;
   return nil;
 }
 
-- (jboolean)isCacheable {
-  return NO;
-}
-
-- (id<JavaUtilCollection>)getChildResources {
-  return JavaUtilCollections_emptyList();
-}
-
 - (instancetype)init {
   OrgApacheLuceneSearchDocIdSet_init(self);
   return self;
@@ -77,14 +64,12 @@ OrgApacheLuceneSearchDocIdSet *OrgApacheLuceneSearchDocIdSet_EMPTY_;
   static const J2ObjcMethodInfo methods[] = {
     { "iterator", NULL, "Lorg.apache.lucene.search.DocIdSetIterator;", 0x401, "Ljava.io.IOException;", NULL },
     { "bits", NULL, "Lorg.apache.lucene.util.Bits;", 0x1, "Ljava.io.IOException;", NULL },
-    { "isCacheable", NULL, "Z", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
     { "init", NULL, NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "EMPTY_", NULL, 0x19, "Lorg.apache.lucene.search.DocIdSet;", &OrgApacheLuceneSearchDocIdSet_EMPTY_, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchDocIdSet = { 2, "DocIdSet", "org.apache.lucene.search", NULL, 0x401, 5, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchDocIdSet = { 2, "DocIdSet", "org.apache.lucene.search", NULL, 0x401, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchDocIdSet;
 }
 
@@ -100,10 +85,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocIdSet)
 
 - (OrgApacheLuceneSearchDocIdSetIterator *)iterator {
   return OrgApacheLuceneSearchDocIdSetIterator_empty();
-}
-
-- (jboolean)isCacheable {
-  return YES;
 }
 
 - (id<OrgApacheLuceneUtilBits>)bits {
@@ -122,12 +103,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocIdSet)
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "iterator", NULL, "Lorg.apache.lucene.search.DocIdSetIterator;", 0x1, NULL, NULL },
-    { "isCacheable", NULL, "Z", 0x1, NULL, NULL },
     { "bits", NULL, "Lorg.apache.lucene.util.Bits;", 0x1, NULL, NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
     { "init", "", NULL, 0x0, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchDocIdSet_$1 = { 2, "", "org.apache.lucene.search", "DocIdSet", 0x8008, 5, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchDocIdSet_$1 = { 2, "", "org.apache.lucene.search", "DocIdSet", 0x8008, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchDocIdSet_$1;
 }
 

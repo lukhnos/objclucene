@@ -9,7 +9,6 @@
 #include "java/io/IOException.h"
 #include "java/lang/Boolean.h"
 #include "java/lang/Double.h"
-#include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Long.h"
 #include "java/lang/Math.h"
 #include "java/lang/RuntimeException.h"
@@ -112,92 +111,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexTieredMergePolicy_$1)
 - (instancetype)init {
   OrgApacheLuceneIndexTieredMergePolicy_init(self);
   return self;
-}
-
-- (OrgApacheLuceneIndexTieredMergePolicy *)setMaxMergeAtOnceWithInt:(jint)v {
-  if (v < 2) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$IC", @"maxMergeAtOnce must be > 1 (got ", v, ')')) autorelease];
-  }
-  maxMergeAtOnce_ = v;
-  return self;
-}
-
-- (jint)getMaxMergeAtOnce {
-  return maxMergeAtOnce_;
-}
-
-- (OrgApacheLuceneIndexTieredMergePolicy *)setMaxMergeAtOnceExplicitWithInt:(jint)v {
-  if (v < 2) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$IC", @"maxMergeAtOnceExplicit must be > 1 (got ", v, ')')) autorelease];
-  }
-  maxMergeAtOnceExplicit_ = v;
-  return self;
-}
-
-- (jint)getMaxMergeAtOnceExplicit {
-  return maxMergeAtOnceExplicit_;
-}
-
-- (OrgApacheLuceneIndexTieredMergePolicy *)setMaxMergedSegmentMBWithDouble:(jdouble)v {
-  if (v < 0.0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$DC", @"maxMergedSegmentMB must be >=0 (got ", v, ')')) autorelease];
-  }
-  JreTimesAssignDoubleD(&v, 1024 * 1024);
-  maxMergedSegmentBytes_ = v > JavaLangLong_MAX_VALUE ? JavaLangLong_MAX_VALUE : JreFpToLong(v);
-  return self;
-}
-
-- (jdouble)getMaxMergedSegmentMB {
-  return maxMergedSegmentBytes_ / 1024 / 1024.;
-}
-
-- (OrgApacheLuceneIndexTieredMergePolicy *)setReclaimDeletesWeightWithDouble:(jdouble)v {
-  if (v < 0.0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$DC", @"reclaimDeletesWeight must be >= 0.0 (got ", v, ')')) autorelease];
-  }
-  reclaimDeletesWeight_ = v;
-  return self;
-}
-
-- (jdouble)getReclaimDeletesWeight {
-  return reclaimDeletesWeight_;
-}
-
-- (OrgApacheLuceneIndexTieredMergePolicy *)setFloorSegmentMBWithDouble:(jdouble)v {
-  if (v <= 0.0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$DC", @"floorSegmentMB must be >= 0.0 (got ", v, ')')) autorelease];
-  }
-  JreTimesAssignDoubleD(&v, 1024 * 1024);
-  floorSegmentBytes_ = v > JavaLangLong_MAX_VALUE ? JavaLangLong_MAX_VALUE : JreFpToLong(v);
-  return self;
-}
-
-- (jdouble)getFloorSegmentMB {
-  return floorSegmentBytes_ / (1024 * 1024.);
-}
-
-- (OrgApacheLuceneIndexTieredMergePolicy *)setForceMergeDeletesPctAllowedWithDouble:(jdouble)v {
-  if (v < 0.0 || v > 100.0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$DC", @"forceMergeDeletesPctAllowed must be between 0.0 and 100.0 inclusive (got ", v, ')')) autorelease];
-  }
-  forceMergeDeletesPctAllowed_ = v;
-  return self;
-}
-
-- (jdouble)getForceMergeDeletesPctAllowed {
-  return forceMergeDeletesPctAllowed_;
-}
-
-- (OrgApacheLuceneIndexTieredMergePolicy *)setSegmentsPerTierWithDouble:(jdouble)v {
-  if (v < 2.0) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$DC", @"segmentsPerTier must be >= 2.0 (got ", v, ')')) autorelease];
-  }
-  segsPerTier_ = v;
-  return self;
-}
-
-- (jdouble)getSegmentsPerTier {
-  return segsPerTier_;
 }
 
 - (OrgApacheLuceneIndexMergePolicy_MergeSpecification *)findMergesWithOrgApacheLuceneIndexMergeTriggerEnum:(OrgApacheLuceneIndexMergeTriggerEnum *)mergeTrigger
@@ -418,43 +331,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexTieredMergePolicy_$1)
   return spec;
 }
 
-- (OrgApacheLuceneIndexMergePolicy_MergeSpecification *)findForcedDeletesMergesWithOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)infos
-                                                                                withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer {
-  if (OrgApacheLuceneIndexTieredMergePolicy_verboseWithOrgApacheLuceneIndexIndexWriter_(self, writer)) {
-    OrgApacheLuceneIndexTieredMergePolicy_messageWithNSString_withOrgApacheLuceneIndexIndexWriter_(self, JreStrcat("$$$D", @"findForcedDeletesMerges infos=", [((OrgApacheLuceneIndexIndexWriter *) nil_chk(writer)) segStringWithJavaLangIterable:infos], @" forceMergeDeletesPctAllowed=", forceMergeDeletesPctAllowed_), writer);
-  }
-  id<JavaUtilList> eligible = [new_JavaUtilArrayList_init() autorelease];
-  id<JavaUtilCollection> merging = [((OrgApacheLuceneIndexIndexWriter *) nil_chk(writer)) getMergingSegments];
-  for (OrgApacheLuceneIndexSegmentCommitInfo * __strong info in nil_chk(infos)) {
-    jdouble pctDeletes = 100. * ((jdouble) [writer numDeletedDocsWithOrgApacheLuceneIndexSegmentCommitInfo:info]) / [((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(info))->info_)) maxDoc];
-    if (pctDeletes > forceMergeDeletesPctAllowed_ && ![((id<JavaUtilCollection>) nil_chk(merging)) containsWithId:info]) {
-      [eligible addWithId:info];
-    }
-  }
-  if ([eligible size] == 0) {
-    return nil;
-  }
-  JavaUtilCollections_sortWithJavaUtilList_withJavaUtilComparator_(eligible, [new_OrgApacheLuceneIndexTieredMergePolicy_SegmentByteSizeDescending_initWithOrgApacheLuceneIndexTieredMergePolicy_withOrgApacheLuceneIndexIndexWriter_(self, writer) autorelease]);
-  if (OrgApacheLuceneIndexTieredMergePolicy_verboseWithOrgApacheLuceneIndexIndexWriter_(self, writer)) {
-    OrgApacheLuceneIndexTieredMergePolicy_messageWithNSString_withOrgApacheLuceneIndexIndexWriter_(self, JreStrcat("$@", @"eligible=", eligible), writer);
-  }
-  jint start = 0;
-  OrgApacheLuceneIndexMergePolicy_MergeSpecification *spec = nil;
-  while (start < [eligible size]) {
-    jint end = JavaLangMath_minWithInt_withInt_(start + maxMergeAtOnceExplicit_, [eligible size]);
-    if (spec == nil) {
-      spec = [new_OrgApacheLuceneIndexMergePolicy_MergeSpecification_init() autorelease];
-    }
-    OrgApacheLuceneIndexMergePolicy_OneMerge *merge = [new_OrgApacheLuceneIndexMergePolicy_OneMerge_initWithJavaUtilList_([eligible subListWithInt:start withInt:end]) autorelease];
-    if (OrgApacheLuceneIndexTieredMergePolicy_verboseWithOrgApacheLuceneIndexIndexWriter_(self, writer)) {
-      OrgApacheLuceneIndexTieredMergePolicy_messageWithNSString_withOrgApacheLuceneIndexIndexWriter_(self, JreStrcat("$$", @"add merge=", [writer segStringWithJavaLangIterable:merge->segments_]), writer);
-    }
-    [((OrgApacheLuceneIndexMergePolicy_MergeSpecification *) nil_chk(spec)) addWithOrgApacheLuceneIndexMergePolicy_OneMerge:merge];
-    start = end;
-  }
-  return spec;
-}
-
 - (jlong)floorSizeWithLong:(jlong)bytes {
   return OrgApacheLuceneIndexTieredMergePolicy_floorSizeWithLong_(self, bytes);
 }
@@ -484,24 +360,9 @@ withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer {
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "init", "TieredMergePolicy", NULL, 0x1, NULL, NULL },
-    { "setMaxMergeAtOnceWithInt:", "setMaxMergeAtOnce", "Lorg.apache.lucene.index.TieredMergePolicy;", 0x1, NULL, NULL },
-    { "getMaxMergeAtOnce", NULL, "I", 0x1, NULL, NULL },
-    { "setMaxMergeAtOnceExplicitWithInt:", "setMaxMergeAtOnceExplicit", "Lorg.apache.lucene.index.TieredMergePolicy;", 0x1, NULL, NULL },
-    { "getMaxMergeAtOnceExplicit", NULL, "I", 0x1, NULL, NULL },
-    { "setMaxMergedSegmentMBWithDouble:", "setMaxMergedSegmentMB", "Lorg.apache.lucene.index.TieredMergePolicy;", 0x1, NULL, NULL },
-    { "getMaxMergedSegmentMB", NULL, "D", 0x1, NULL, NULL },
-    { "setReclaimDeletesWeightWithDouble:", "setReclaimDeletesWeight", "Lorg.apache.lucene.index.TieredMergePolicy;", 0x1, NULL, NULL },
-    { "getReclaimDeletesWeight", NULL, "D", 0x1, NULL, NULL },
-    { "setFloorSegmentMBWithDouble:", "setFloorSegmentMB", "Lorg.apache.lucene.index.TieredMergePolicy;", 0x1, NULL, NULL },
-    { "getFloorSegmentMB", NULL, "D", 0x1, NULL, NULL },
-    { "setForceMergeDeletesPctAllowedWithDouble:", "setForceMergeDeletesPctAllowed", "Lorg.apache.lucene.index.TieredMergePolicy;", 0x1, NULL, NULL },
-    { "getForceMergeDeletesPctAllowed", NULL, "D", 0x1, NULL, NULL },
-    { "setSegmentsPerTierWithDouble:", "setSegmentsPerTier", "Lorg.apache.lucene.index.TieredMergePolicy;", 0x1, NULL, NULL },
-    { "getSegmentsPerTier", NULL, "D", 0x1, NULL, NULL },
     { "findMergesWithOrgApacheLuceneIndexMergeTriggerEnum:withOrgApacheLuceneIndexSegmentInfos:withOrgApacheLuceneIndexIndexWriter:", "findMerges", "Lorg.apache.lucene.index.MergePolicy$MergeSpecification;", 0x1, "Ljava.io.IOException;", NULL },
     { "scoreWithJavaUtilList:withBoolean:withLong:withOrgApacheLuceneIndexIndexWriter:", "score", "Lorg.apache.lucene.index.TieredMergePolicy$MergeScore;", 0x4, "Ljava.io.IOException;", NULL },
     { "findForcedMergesWithOrgApacheLuceneIndexSegmentInfos:withInt:withJavaUtilMap:withOrgApacheLuceneIndexIndexWriter:", "findForcedMerges", "Lorg.apache.lucene.index.MergePolicy$MergeSpecification;", 0x1, "Ljava.io.IOException;", NULL },
-    { "findForcedDeletesMergesWithOrgApacheLuceneIndexSegmentInfos:withOrgApacheLuceneIndexIndexWriter:", "findForcedDeletesMerges", "Lorg.apache.lucene.index.MergePolicy$MergeSpecification;", 0x1, "Ljava.io.IOException;", NULL },
     { "floorSizeWithLong:", "floorSize", "J", 0x2, NULL, NULL },
     { "verboseWithOrgApacheLuceneIndexIndexWriter:", "verbose", "Z", 0x2, NULL, NULL },
     { "messageWithNSString:withOrgApacheLuceneIndexIndexWriter:", "message", "V", 0x2, NULL, NULL },
@@ -518,7 +379,7 @@ withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer {
     { "reclaimDeletesWeight_", NULL, 0x2, "D", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.index.TieredMergePolicy$SegmentByteSizeDescending;", "Lorg.apache.lucene.index.TieredMergePolicy$MergeScore;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexTieredMergePolicy = { 2, "TieredMergePolicy", "org.apache.lucene.index", NULL, 0x1, 23, methods, 8, fields, 0, NULL, 2, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexTieredMergePolicy = { 2, "TieredMergePolicy", "org.apache.lucene.index", NULL, 0x1, 8, methods, 8, fields, 0, NULL, 2, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneIndexTieredMergePolicy;
 }
 

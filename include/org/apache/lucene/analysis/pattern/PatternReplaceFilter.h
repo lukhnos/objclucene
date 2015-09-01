@@ -20,27 +20,19 @@
 #define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
-@class JavaUtilRegexPattern;
-@class OrgApacheLuceneAnalysisTokenStream;
-
 @interface OrgApacheLuceneAnalysisPatternPatternReplaceFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
-                                  withJavaUtilRegexPattern:(JavaUtilRegexPattern *)p
-                                              withNSString:(NSString *)replacement
-                                               withBoolean:(jboolean)all;
-
-- (jboolean)incrementToken;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisPatternPatternReplaceFilter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPatternPatternReplaceFilter_initWithOrgApacheLuceneAnalysisTokenStream_withJavaUtilRegexPattern_withNSString_withBoolean_(OrgApacheLuceneAnalysisPatternPatternReplaceFilter *self, OrgApacheLuceneAnalysisTokenStream *inArg, JavaUtilRegexPattern *p, NSString *replacement, jboolean all);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPatternPatternReplaceFilter_init(OrgApacheLuceneAnalysisPatternPatternReplaceFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisPatternPatternReplaceFilter *new_OrgApacheLuceneAnalysisPatternPatternReplaceFilter_initWithOrgApacheLuceneAnalysisTokenStream_withJavaUtilRegexPattern_withNSString_withBoolean_(OrgApacheLuceneAnalysisTokenStream *inArg, JavaUtilRegexPattern *p, NSString *replacement, jboolean all) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPatternPatternReplaceFilter *new_OrgApacheLuceneAnalysisPatternPatternReplaceFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPatternPatternReplaceFilter)
 

@@ -9,12 +9,9 @@
 #include "J2ObjC_source.h"
 #include "java/io/Closeable.h"
 #include "java/io/IOException.h"
-#include "java/lang/Throwable.h"
-#include "java/util/ArrayList.h"
 #include "java/util/Collection.h"
 #include "java/util/Collections.h"
 #include "java/util/Iterator.h"
-#include "java/util/List.h"
 #include "java/util/Set.h"
 #include "java/util/TreeMap.h"
 #include "org/apache/lucene/codecs/CodecUtil.h"
@@ -33,8 +30,6 @@
 #include "org/apache/lucene/store/Directory.h"
 #include "org/apache/lucene/store/IOContext.h"
 #include "org/apache/lucene/store/IndexInput.h"
-#include "org/apache/lucene/util/Accountable.h"
-#include "org/apache/lucene/util/Accountables.h"
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/IOUtils.h"
 #include "org/apache/lucene/util/fst/ByteSequenceOutputs.h"
@@ -108,33 +103,12 @@ NSString *OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_TERMS_INDEX_CODEC_N
   return [((JavaUtilTreeMap *) nil_chk(fields_)) size];
 }
 
-- (NSString *)brToStringWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)b {
-  if (b == nil) {
-    return @"null";
-  }
-  else {
-    @try {
-      return JreStrcat("$C@", [b utf8ToString], ' ', b);
-    }
-    @catch (JavaLangThrowable *t) {
-      return [b description];
-    }
-  }
-}
-
 - (jlong)ramBytesUsed {
   jlong sizeInBytes = [((OrgApacheLuceneCodecsPostingsReaderBase *) nil_chk(postingsReader_)) ramBytesUsed];
   for (OrgApacheLuceneCodecsBlocktreeFieldReader * __strong reader in nil_chk([((JavaUtilTreeMap *) nil_chk(fields_)) values])) {
     sizeInBytes += [((OrgApacheLuceneCodecsBlocktreeFieldReader *) nil_chk(reader)) ramBytesUsed];
   }
   return sizeInBytes;
-}
-
-- (id<JavaUtilCollection>)getChildResources {
-  id<JavaUtilList> resources = [new_JavaUtilArrayList_init() autorelease];
-  [resources addAllWithJavaUtilCollection:OrgApacheLuceneUtilAccountables_namedAccountablesWithNSString_withJavaUtilMap_(@"field", fields_)];
-  [resources addWithId:OrgApacheLuceneUtilAccountables_namedAccountableWithNSString_withOrgApacheLuceneUtilAccountable_(@"delegate", postingsReader_)];
-  return JavaUtilCollections_unmodifiableListWithJavaUtilList_(resources);
 }
 
 - (void)checkIntegrity {
@@ -175,9 +149,7 @@ NSString *OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_TERMS_INDEX_CODEC_N
     { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, NULL },
     { "termsWithNSString:", "terms", "Lorg.apache.lucene.index.Terms;", 0x1, "Ljava.io.IOException;", NULL },
     { "size", NULL, "I", 0x1, NULL, NULL },
-    { "brToStringWithOrgApacheLuceneUtilBytesRef:", "brToString", "Ljava.lang.String;", 0x0, NULL, NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
     { "checkIntegrity", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
   };
@@ -205,7 +177,7 @@ NSString *OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_TERMS_INDEX_CODEC_N
     { "version__", "version", 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "anyAutoPrefixTerms_", NULL, 0x10, "Z", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader = { 2, "BlockTreeTermsReader", "org.apache.lucene.codecs.blocktree", NULL, 0x11, 12, methods, 22, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader = { 2, "BlockTreeTermsReader", "org.apache.lucene.codecs.blocktree", NULL, 0x11, 10, methods, 22, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader;
 }
 

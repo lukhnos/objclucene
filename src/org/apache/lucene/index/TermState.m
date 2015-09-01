@@ -15,11 +15,6 @@
   return self;
 }
 
-- (void)copyFromWithOrgApacheLuceneIndexTermState:(OrgApacheLuceneIndexTermState *)other {
-  // can't call an abstract method
-  [self doesNotRecognizeSelector:_cmd];
-}
-
 - (OrgApacheLuceneIndexTermState *)clone {
   @try {
     return (OrgApacheLuceneIndexTermState *) check_class_cast([super clone], [OrgApacheLuceneIndexTermState class]);
@@ -44,12 +39,11 @@
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "init", "TermState", NULL, 0x4, NULL, NULL },
-    { "copyFromWithOrgApacheLuceneIndexTermState:", "copyFrom", "V", 0x401, NULL, NULL },
     { "clone", NULL, "Lorg.apache.lucene.index.TermState;", 0x1, NULL, NULL },
     { "isRealTerm", NULL, "Z", 0x1, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexTermState = { 2, "TermState", "org.apache.lucene.index", NULL, 0x401, 5, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexTermState = { 2, "TermState", "org.apache.lucene.index", NULL, 0x401, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexTermState;
 }
 

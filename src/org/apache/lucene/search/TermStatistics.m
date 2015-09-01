@@ -27,16 +27,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchTermStatistics, term_, OrgApacheLuceneU
   return self;
 }
 
-- (OrgApacheLuceneUtilBytesRef *)term {
-  return term_;
-}
-
 - (jlong)docFreq {
   return docFreq_;
-}
-
-- (jlong)totalTermFreq {
-  return totalTermFreq_;
 }
 
 - (void)dealloc {
@@ -47,16 +39,14 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchTermStatistics, term_, OrgApacheLuceneU
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneUtilBytesRef:withLong:withLong:", "TermStatistics", NULL, 0x1, NULL, NULL },
-    { "term", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x11, NULL, NULL },
     { "docFreq", NULL, "J", 0x11, NULL, NULL },
-    { "totalTermFreq", NULL, "J", 0x11, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "term_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
     { "docFreq_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
     { "totalTermFreq_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchTermStatistics = { 2, "TermStatistics", "org.apache.lucene.search", NULL, 0x1, 4, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchTermStatistics = { 2, "TermStatistics", "org.apache.lucene.search", NULL, 0x1, 2, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchTermStatistics;
 }
 

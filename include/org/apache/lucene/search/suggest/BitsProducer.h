@@ -16,16 +16,9 @@
 #if !defined (_OrgApacheLuceneSearchSuggestBitsProducer_) && (OrgApacheLuceneSearchSuggestBitsProducer_INCLUDE_ALL || OrgApacheLuceneSearchSuggestBitsProducer_INCLUDE)
 #define _OrgApacheLuceneSearchSuggestBitsProducer_
 
-@class OrgApacheLuceneIndexLeafReaderContext;
-@protocol OrgApacheLuceneUtilBits;
-
 @interface OrgApacheLuceneSearchSuggestBitsProducer : NSObject
 
 #pragma mark Public
-
-- (id<OrgApacheLuceneUtilBits>)getBitsWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
-
-#pragma mark Protected
 
 - (instancetype)init;
 

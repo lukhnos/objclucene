@@ -20,41 +20,19 @@
 #define OrgApacheLuceneSearchQuery_INCLUDE 1
 #include "org/apache/lucene/search/Query.h"
 
-@class IOSObjectArray;
-@class OrgApacheLuceneSearchIndexSearcher;
-@class OrgApacheLuceneSearchWeight;
-@protocol JavaUtilSet;
-
 @interface OrgApacheLuceneSearchDocValuesNumbersQuery : OrgApacheLuceneSearchQuery
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field
-           withJavaLangLongArray:(IOSObjectArray *)numbers;
-
-- (instancetype)initWithNSString:(NSString *)field
-                 withJavaUtilSet:(id<JavaUtilSet>)numbers;
-
-- (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
-                                                                        withBoolean:(jboolean)needsScores;
-
-- (jboolean)isEqual:(id)obj;
-
-- (NSUInteger)hash;
-
-- (NSString *)toStringWithNSString:(NSString *)defaultField;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchDocValuesNumbersQuery)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchDocValuesNumbersQuery_initWithNSString_withJavaUtilSet_(OrgApacheLuceneSearchDocValuesNumbersQuery *self, NSString *field, id<JavaUtilSet> numbers);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchDocValuesNumbersQuery_init(OrgApacheLuceneSearchDocValuesNumbersQuery *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchDocValuesNumbersQuery *new_OrgApacheLuceneSearchDocValuesNumbersQuery_initWithNSString_withJavaUtilSet_(NSString *field, id<JavaUtilSet> numbers) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchDocValuesNumbersQuery_initWithNSString_withJavaLangLongArray_(OrgApacheLuceneSearchDocValuesNumbersQuery *self, NSString *field, IOSObjectArray *numbers);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchDocValuesNumbersQuery *new_OrgApacheLuceneSearchDocValuesNumbersQuery_initWithNSString_withJavaLangLongArray_(NSString *field, IOSObjectArray *numbers) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchDocValuesNumbersQuery *new_OrgApacheLuceneSearchDocValuesNumbersQuery_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocValuesNumbersQuery)
 

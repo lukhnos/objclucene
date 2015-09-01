@@ -8,7 +8,6 @@
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
 #include "java/lang/Integer.h"
-#include "java/lang/Throwable.h"
 #include "java/util/Collection.h"
 #include "org/apache/lucene/store/AlreadyClosedException.h"
 #include "org/apache/lucene/store/BufferedChecksumIndexInput.h"
@@ -18,7 +17,6 @@
 #include "org/apache/lucene/store/IndexInput.h"
 #include "org/apache/lucene/store/IndexOutput.h"
 #include "org/apache/lucene/store/Lock.h"
-#include "org/apache/lucene/util/IOUtils.h"
 
 @implementation OrgApacheLuceneStoreDirectory
 
@@ -84,50 +82,6 @@
   return JreStrcat("$C$", [[self getClass] getSimpleName], '@', JavaLangInteger_toHexStringWithInt_(((jint) [self hash])));
 }
 
-- (void)copyFromWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)from
-                                     withNSString:(NSString *)src
-                                     withNSString:(NSString *)dest
-                withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
-  jboolean success = NO;
-  {
-    JavaLangThrowable *__mainException = nil;
-    OrgApacheLuceneStoreIndexInput *is = [((OrgApacheLuceneStoreDirectory *) nil_chk(from)) openInputWithNSString:src withOrgApacheLuceneStoreIOContext:context];
-    OrgApacheLuceneStoreIndexOutput *os = [self createOutputWithNSString:dest withOrgApacheLuceneStoreIOContext:context];
-    @try {
-      [((OrgApacheLuceneStoreIndexOutput *) nil_chk(os)) copyBytesWithOrgApacheLuceneStoreDataInput:is withLong:[((OrgApacheLuceneStoreIndexInput *) nil_chk(is)) length]];
-      success = YES;
-    }
-    @finally {
-      @try {
-        [os close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
-        } else {
-          __mainException = e;
-        }
-      }
-      @try {
-        [is close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
-        } else {
-          __mainException = e;
-        }
-      }
-      if (!success) {
-        OrgApacheLuceneUtilIOUtils_deleteFilesIgnoringExceptionsWithOrgApacheLuceneStoreDirectory_withNSStringArray_(self, [IOSObjectArray arrayWithObjects:(id[]){ dest } count:1 type:NSString_class_()]);
-      }
-      if (__mainException) {
-        @throw __mainException;
-      }
-    }
-  }
-}
-
 - (void)ensureOpen {
 }
 
@@ -149,11 +103,10 @@
     { "obtainLockWithNSString:", "obtainLock", "Lorg.apache.lucene.store.Lock;", 0x401, "Ljava.io.IOException;", NULL },
     { "close", NULL, "V", 0x401, "Ljava.io.IOException;", NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "copyFromWithOrgApacheLuceneStoreDirectory:withNSString:withNSString:withOrgApacheLuceneStoreIOContext:", "copyFrom", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "ensureOpen", NULL, "V", 0x4, "Lorg.apache.lucene.store.AlreadyClosedException;", NULL },
     { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreDirectory = { 2, "Directory", "org.apache.lucene.store", NULL, 0x401, 14, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreDirectory = { 2, "Directory", "org.apache.lucene.store", NULL, 0x401, 13, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneStoreDirectory;
 }
 

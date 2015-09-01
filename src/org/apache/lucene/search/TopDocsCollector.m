@@ -38,20 +38,12 @@ OrgApacheLuceneSearchTopDocs *OrgApacheLuceneSearchTopDocsCollector_EMPTY_TOPDOC
   return results == nil ? OrgApacheLuceneSearchTopDocsCollector_EMPTY_TOPDOCS_ : [new_OrgApacheLuceneSearchTopDocs_initWithInt_withOrgApacheLuceneSearchScoreDocArray_(totalHits_, results) autorelease];
 }
 
-- (jint)getTotalHits {
-  return totalHits_;
-}
-
 - (jint)topDocsSize {
   return totalHits_ < [((OrgApacheLuceneUtilPriorityQueue *) nil_chk(pq_)) size] ? totalHits_ : [pq_ size];
 }
 
 - (OrgApacheLuceneSearchTopDocs *)topDocs {
   return [self topDocsWithInt:0 withInt:[self topDocsSize]];
-}
-
-- (OrgApacheLuceneSearchTopDocs *)topDocsWithInt:(jint)start {
-  return [self topDocsWithInt:start withInt:[self topDocsSize]];
 }
 
 - (OrgApacheLuceneSearchTopDocs *)topDocsWithInt:(jint)start
@@ -86,10 +78,8 @@ OrgApacheLuceneSearchTopDocs *OrgApacheLuceneSearchTopDocsCollector_EMPTY_TOPDOC
     { "initWithOrgApacheLuceneUtilPriorityQueue:", "TopDocsCollector", NULL, 0x4, NULL, NULL },
     { "populateResultsWithOrgApacheLuceneSearchScoreDocArray:withInt:", "populateResults", "V", 0x4, NULL, NULL },
     { "newTopDocsWithOrgApacheLuceneSearchScoreDocArray:withInt:", "newTopDocs", "Lorg.apache.lucene.search.TopDocs;", 0x4, NULL, NULL },
-    { "getTotalHits", NULL, "I", 0x1, NULL, NULL },
     { "topDocsSize", NULL, "I", 0x4, NULL, NULL },
     { "topDocs", NULL, "Lorg.apache.lucene.search.TopDocs;", 0x1, NULL, NULL },
-    { "topDocsWithInt:", "topDocs", "Lorg.apache.lucene.search.TopDocs;", 0x1, NULL, NULL },
     { "topDocsWithInt:withInt:", "topDocs", "Lorg.apache.lucene.search.TopDocs;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -97,7 +87,7 @@ OrgApacheLuceneSearchTopDocs *OrgApacheLuceneSearchTopDocsCollector_EMPTY_TOPDOC
     { "pq_", NULL, 0x4, "Lorg.apache.lucene.util.PriorityQueue;", NULL, "Lorg/apache/lucene/util/PriorityQueue<TT;>;", .constantValue.asLong = 0 },
     { "totalHits_", NULL, 0x4, "I", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchTopDocsCollector = { 2, "TopDocsCollector", "org.apache.lucene.search", NULL, 0x401, 8, methods, 3, fields, 0, NULL, 0, NULL, NULL, "<T:Lorg/apache/lucene/search/ScoreDoc;>Ljava/lang/Object;Lorg/apache/lucene/search/Collector;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchTopDocsCollector = { 2, "TopDocsCollector", "org.apache.lucene.search", NULL, 0x401, 6, methods, 3, fields, 0, NULL, 0, NULL, NULL, "<T:Lorg/apache/lucene/search/ScoreDoc;>Ljava/lang/Object;Lorg/apache/lucene/search/Collector;" };
   return &_OrgApacheLuceneSearchTopDocsCollector;
 }
 

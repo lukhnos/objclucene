@@ -30,8 +30,6 @@
 @class OrgApacheLuceneUtilFstFST_BytesReader;
 @class OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum;
 @class OrgApacheLuceneUtilFstOutputs;
-@class OrgLukhnosPortmobileFilePath;
-@protocol JavaUtilCollection;
 
 #define OrgApacheLuceneUtilFstFST_BIT_FINAL_ARC 1
 #define OrgApacheLuceneUtilFstFST_BIT_LAST_ARC 2
@@ -69,18 +67,11 @@
 
 - (OrgApacheLuceneUtilFstFST_BytesReader *)getBytesReader;
 
-- (id<JavaUtilCollection>)getChildResources;
-
 - (id)getEmptyOutput;
 
 - (OrgApacheLuceneUtilFstFST_Arc *)getFirstArcWithOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)arc;
 
-- (OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum *)getInputType;
-
 - (jlong)ramBytesUsed;
-
-+ (OrgApacheLuceneUtilFstFST *)readWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path
-                                  withOrgApacheLuceneUtilFstOutputs:(OrgApacheLuceneUtilFstOutputs *)outputs;
 
 - (OrgApacheLuceneUtilFstFST_Arc *)readFirstRealTargetArcWithLong:(jlong)node
                                 withOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)arc
@@ -92,22 +83,13 @@
 
 - (jint)readLabelWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg;
 
-- (OrgApacheLuceneUtilFstFST_Arc *)readLastTargetArcWithOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)follow
-                                                    withOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)arc
-                                            withOrgApacheLuceneUtilFstFST_BytesReader:(OrgApacheLuceneUtilFstFST_BytesReader *)inArg;
-
 - (OrgApacheLuceneUtilFstFST_Arc *)readNextArcWithOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)arc
                                       withOrgApacheLuceneUtilFstFST_BytesReader:(OrgApacheLuceneUtilFstFST_BytesReader *)inArg;
-
-- (jint)readNextArcLabelWithOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)arc
-                withOrgApacheLuceneUtilFstFST_BytesReader:(OrgApacheLuceneUtilFstFST_BytesReader *)inArg;
 
 - (OrgApacheLuceneUtilFstFST_Arc *)readNextRealArcWithOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)arc
                                           withOrgApacheLuceneUtilFstFST_BytesReader:(OrgApacheLuceneUtilFstFST_BytesReader *)inArg;
 
 - (void)saveWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg;
-
-- (void)saveWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path;
 
 + (jboolean)targetHasArcsWithOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)arc;
 
@@ -125,9 +107,6 @@
  withOrgApacheLuceneUtilFstBuilder_UnCompiledNode:(OrgApacheLuceneUtilFstBuilder_UnCompiledNode *)nodeIn;
 
 - (void)finishWithLong:(jlong)newStartNode;
-
-- (jboolean)isExpandedTargetWithOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)follow
-                    withOrgApacheLuceneUtilFstFST_BytesReader:(OrgApacheLuceneUtilFstFST_BytesReader *)inArg;
 
 - (OrgApacheLuceneUtilFstFST *)packWithOrgApacheLuceneUtilFstBuilder:(OrgApacheLuceneUtilFstBuilder *)builder
                                                              withInt:(jint)minInCountDeref
@@ -180,8 +159,6 @@ FOUNDATION_EXPORT OrgApacheLuceneUtilFstFST *new_OrgApacheLuceneUtilFstFST_initW
 FOUNDATION_EXPORT void OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneStoreDataInput_withOrgApacheLuceneUtilFstOutputs_withInt_(OrgApacheLuceneUtilFstFST *self, OrgApacheLuceneStoreDataInput *inArg, OrgApacheLuceneUtilFstOutputs *outputs, jint maxBlockBits);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilFstFST *new_OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneStoreDataInput_withOrgApacheLuceneUtilFstOutputs_withInt_(OrgApacheLuceneStoreDataInput *inArg, OrgApacheLuceneUtilFstOutputs *outputs, jint maxBlockBits) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilFstFST *OrgApacheLuceneUtilFstFST_readWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneUtilFstOutputs_(OrgLukhnosPortmobileFilePath *path, OrgApacheLuceneUtilFstOutputs *outputs);
 
 FOUNDATION_EXPORT jboolean OrgApacheLuceneUtilFstFST_targetHasArcsWithOrgApacheLuceneUtilFstFST_Arc_(OrgApacheLuceneUtilFstFST_Arc *arc);
 
@@ -296,8 +273,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstFST_Arc)
 - (instancetype)init;
 
 - (jlong)getPosition;
-
-- (jboolean)reversed;
 
 - (void)setPositionWithLong:(jlong)pos;
 

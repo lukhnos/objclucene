@@ -160,10 +160,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapp
   return 31 * ((jint) [super hash]) + ((jint) [((OrgApacheLuceneSearchMultiTermQuery *) nil_chk(query_)) hash]);
 }
 
-- (NSString *)getField {
-  return [((OrgApacheLuceneSearchMultiTermQuery *) nil_chk(query_)) getField];
-}
-
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores {
   return [new_OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_$1_initWithOrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_withOrgApacheLuceneSearchIndexSearcher_withBoolean_withOrgApacheLuceneSearchQuery_(self, searcher, needsScores, self) autorelease];
@@ -180,7 +176,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapp
     { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "isEqual:", "equals", "Z", 0x11, NULL, NULL },
     { "hash", "hashCode", "I", 0x11, NULL, NULL },
-    { "getField", NULL, "Ljava.lang.String;", 0x11, NULL, NULL },
     { "createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:", "createWeight", "Lorg.apache.lucene.search.Weight;", 0x1, "Ljava.io.IOException;", NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -188,7 +183,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapp
     { "query_", NULL, 0x14, "TQ;", NULL, "TQ;", .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.search.MultiTermQueryConstantScoreWrapper$TermAndState;", "Lorg.apache.lucene.search.MultiTermQueryConstantScoreWrapper$WeightOrDocIdSet;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper = { 2, "MultiTermQueryConstantScoreWrapper", "org.apache.lucene.search", NULL, 0x10, 6, methods, 2, fields, 0, NULL, 2, inner_classes, NULL, "<Q:Lorg/apache/lucene/search/MultiTermQuery;>Lorg/apache/lucene/search/Query;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper = { 2, "MultiTermQueryConstantScoreWrapper", "org.apache.lucene.search", NULL, 0x10, 5, methods, 2, fields, 0, NULL, 2, inner_classes, NULL, "<Q:Lorg/apache/lucene/search/MultiTermQuery;>Lorg/apache/lucene/search/Query;" };
   return &_OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper;
 }
 

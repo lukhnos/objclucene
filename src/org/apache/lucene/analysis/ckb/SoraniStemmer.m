@@ -3,80 +3,12 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/ckb/SoraniStemmer.java
 //
 
-#include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/analysis/ckb/SoraniStemmer.h"
-#include "org/apache/lucene/analysis/util/StemmerUtil.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneAnalysisCkbSoraniStemmer
-
-- (jint)stemWithCharArray:(IOSCharArray *)s
-                  withInt:(jint)len {
-  if (len > 5 && OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(s, len, @"\u062f\u0627")) {
-    len -= 2;
-  }
-  else if (len > 4 && OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(s, len, @"\u0646\u0627")) {
-    len--;
-  }
-  else if (len > 6 && OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(s, len, @"\u06d5\u0648\u06d5")) {
-    len -= 3;
-  }
-  if (len > 6 && (OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(s, len, @"\u0645\u0627\u0646") || OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(s, len, @"\u06cc\u0627\u0646") || OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(s, len, @"\u062a\u0627\u0646"))) {
-    len -= 3;
-  }
-  if (len > 6 && OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(s, len, @"\u06ce\u06a9\u06cc")) {
-    return len - 3;
-  }
-  else if (len > 7 && OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(s, len, @"\u06cc\u06d5\u06a9\u06cc")) {
-    return len - 4;
-  }
-  if (len > 5 && OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(s, len, @"\u06ce\u06a9")) {
-    return len - 2;
-  }
-  else if (len > 6 && OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(s, len, @"\u06cc\u06d5\u06a9")) {
-    return len - 3;
-  }
-  else if (len > 6 && OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(s, len, @"\u06d5\u06a9\u06d5")) {
-    return len - 3;
-  }
-  else if (len > 5 && OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(s, len, @"\u06a9\u06d5")) {
-    return len - 2;
-  }
-  else if (len > 7 && OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(s, len, @"\u06d5\u06a9\u0627\u0646")) {
-    return len - 4;
-  }
-  else if (len > 6 && OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(s, len, @"\u06a9\u0627\u0646")) {
-    return len - 3;
-  }
-  else if (len > 7 && OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(s, len, @"\u06cc\u0627\u0646\u06cc")) {
-    return len - 4;
-  }
-  else if (len > 6 && OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(s, len, @"\u0627\u0646\u06cc")) {
-    return len - 3;
-  }
-  else if (len > 6 && OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(s, len, @"\u06cc\u0627\u0646")) {
-    return len - 3;
-  }
-  else if (len > 5 && OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(s, len, @"\u0627\u0646")) {
-    return len - 2;
-  }
-  else if (len > 7 && OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(s, len, @"\u06cc\u0627\u0646\u06d5")) {
-    return len - 4;
-  }
-  else if (len > 6 && OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(s, len, @"\u0627\u0646\u06d5")) {
-    return len - 3;
-  }
-  else if (len > 5 && (OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(s, len, @"\u0627\u06cc\u06d5") || OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(s, len, @"\u06d5\u06cc\u06d5"))) {
-    return len - 2;
-  }
-  else if (len > 4 && OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(s, len, @"\u06d5")) {
-    return len - 1;
-  }
-  else if (len > 4 && OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(s, len, @"\u06cc")) {
-    return len - 1;
-  }
-  return len;
-}
 
 - (instancetype)init {
   OrgApacheLuceneAnalysisCkbSoraniStemmer_init(self);
@@ -85,10 +17,9 @@
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "stemWithCharArray:withInt:", "stem", "I", 0x1, NULL, NULL },
     { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCkbSoraniStemmer = { 2, "SoraniStemmer", "org.apache.lucene.analysis.ckb", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCkbSoraniStemmer = { 2, "SoraniStemmer", "org.apache.lucene.analysis.ckb", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisCkbSoraniStemmer;
 }
 

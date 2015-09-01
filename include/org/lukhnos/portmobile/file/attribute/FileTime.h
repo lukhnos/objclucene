@@ -31,8 +31,6 @@
 
 - (jboolean)isEqual:(id)obj;
 
-+ (OrgLukhnosPortmobileFileAttributeFileTime *)fromMillisWithLong:(jlong)value;
-
 - (NSString *)description;
 
 #pragma mark Package-Private
@@ -46,8 +44,6 @@ J2OBJC_EMPTY_STATIC_INIT(OrgLukhnosPortmobileFileAttributeFileTime)
 FOUNDATION_EXPORT void OrgLukhnosPortmobileFileAttributeFileTime_initWithLong_(OrgLukhnosPortmobileFileAttributeFileTime *self, jlong time);
 
 FOUNDATION_EXPORT OrgLukhnosPortmobileFileAttributeFileTime *new_OrgLukhnosPortmobileFileAttributeFileTime_initWithLong_(jlong time) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT OrgLukhnosPortmobileFileAttributeFileTime *OrgLukhnosPortmobileFileAttributeFileTime_fromMillisWithLong_(jlong value);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileFileAttributeFileTime)
 

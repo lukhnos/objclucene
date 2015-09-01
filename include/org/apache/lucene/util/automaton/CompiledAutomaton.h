@@ -38,8 +38,6 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)automaton;
-
 - (instancetype)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)automaton
                                           withJavaLangBoolean:(JavaLangBoolean *)finite
                                                   withBoolean:(jboolean)simplify;
@@ -69,10 +67,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilAutomatonCompiledAutomaton, runAutomaton_
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilAutomatonCompiledAutomaton, automaton_, OrgApacheLuceneUtilAutomatonAutomaton *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilAutomatonCompiledAutomaton, commonSuffixRef_, OrgApacheLuceneUtilBytesRef *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilAutomatonCompiledAutomaton, finite_, JavaLangBoolean *)
-
-FOUNDATION_EXPORT void OrgApacheLuceneUtilAutomatonCompiledAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneUtilAutomatonCompiledAutomaton *self, OrgApacheLuceneUtilAutomatonAutomaton *automaton);
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonCompiledAutomaton *new_OrgApacheLuceneUtilAutomatonCompiledAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneUtilAutomatonAutomaton *automaton) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilAutomatonCompiledAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withJavaLangBoolean_withBoolean_(OrgApacheLuceneUtilAutomatonCompiledAutomaton *self, OrgApacheLuceneUtilAutomatonAutomaton *automaton, JavaLangBoolean *finite, jboolean simplify);
 

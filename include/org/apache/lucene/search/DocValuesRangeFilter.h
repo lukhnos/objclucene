@@ -20,100 +20,17 @@
 #define OrgApacheLuceneSearchFilter_INCLUDE 1
 #include "org/apache/lucene/search/Filter.h"
 
-@class JavaLangDouble;
-@class JavaLangFloat;
-@class JavaLangInteger;
-@class JavaLangLong;
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneSearchDocIdSet;
-@class OrgApacheLuceneUtilBytesRef;
-@protocol OrgApacheLuceneUtilBits;
-
-@interface OrgApacheLuceneSearchDocValuesRangeFilter : OrgApacheLuceneSearchFilter {
- @public
-  NSString *field_;
-  id lowerVal_;
-  id upperVal_;
-  jboolean includeLower_;
-  jboolean includeUpper_;
-}
+@interface OrgApacheLuceneSearchDocValuesRangeFilter : OrgApacheLuceneSearchFilter
 
 #pragma mark Public
 
-- (jboolean)isEqual:(id)o;
-
-- (OrgApacheLuceneSearchDocIdSet *)getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-                                                            withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)acceptDocs;
-
-- (NSString *)getField;
-
-- (id)getLowerVal;
-
-- (id)getUpperVal;
-
-- (NSUInteger)hash;
-
-- (jboolean)includesLower;
-
-- (jboolean)includesUpper;
-
-+ (OrgApacheLuceneSearchDocValuesRangeFilter *)newBytesRefRangeWithNSString:(NSString *)field
-                                            withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)lowerVal
-                                            withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)upperVal
-                                                                withBoolean:(jboolean)includeLower
-                                                                withBoolean:(jboolean)includeUpper OBJC_METHOD_FAMILY_NONE;
-
-+ (OrgApacheLuceneSearchDocValuesRangeFilter *)newDoubleRangeWithNSString:(NSString *)field
-                                                       withJavaLangDouble:(JavaLangDouble *)lowerVal
-                                                       withJavaLangDouble:(JavaLangDouble *)upperVal
-                                                              withBoolean:(jboolean)includeLower
-                                                              withBoolean:(jboolean)includeUpper OBJC_METHOD_FAMILY_NONE;
-
-+ (OrgApacheLuceneSearchDocValuesRangeFilter *)newFloatRangeWithNSString:(NSString *)field
-                                                       withJavaLangFloat:(JavaLangFloat *)lowerVal
-                                                       withJavaLangFloat:(JavaLangFloat *)upperVal
-                                                             withBoolean:(jboolean)includeLower
-                                                             withBoolean:(jboolean)includeUpper OBJC_METHOD_FAMILY_NONE;
-
-+ (OrgApacheLuceneSearchDocValuesRangeFilter *)newIntRangeWithNSString:(NSString *)field
-                                                   withJavaLangInteger:(JavaLangInteger *)lowerVal
-                                                   withJavaLangInteger:(JavaLangInteger *)upperVal
-                                                           withBoolean:(jboolean)includeLower
-                                                           withBoolean:(jboolean)includeUpper OBJC_METHOD_FAMILY_NONE;
-
-+ (OrgApacheLuceneSearchDocValuesRangeFilter *)newLongRangeWithNSString:(NSString *)field
-                                                       withJavaLangLong:(JavaLangLong *)lowerVal
-                                                       withJavaLangLong:(JavaLangLong *)upperVal
-                                                            withBoolean:(jboolean)includeLower
-                                                            withBoolean:(jboolean)includeUpper OBJC_METHOD_FAMILY_NONE;
-
-+ (OrgApacheLuceneSearchDocValuesRangeFilter *)newStringRangeWithNSString:(NSString *)field
-                                                             withNSString:(NSString *)lowerVal
-                                                             withNSString:(NSString *)upperVal
-                                                              withBoolean:(jboolean)includeLower
-                                                              withBoolean:(jboolean)includeUpper OBJC_METHOD_FAMILY_NONE;
-
-- (NSString *)toStringWithNSString:(NSString *)defaultField;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchDocValuesRangeFilter)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchDocValuesRangeFilter, field_, NSString *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchDocValuesRangeFilter, lowerVal_, id)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchDocValuesRangeFilter, upperVal_, id)
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchDocValuesRangeFilter *OrgApacheLuceneSearchDocValuesRangeFilter_newStringRangeWithNSString_withNSString_withNSString_withBoolean_withBoolean_(NSString *field, NSString *lowerVal, NSString *upperVal, jboolean includeLower, jboolean includeUpper);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchDocValuesRangeFilter *OrgApacheLuceneSearchDocValuesRangeFilter_newBytesRefRangeWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_(NSString *field, OrgApacheLuceneUtilBytesRef *lowerVal, OrgApacheLuceneUtilBytesRef *upperVal, jboolean includeLower, jboolean includeUpper);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchDocValuesRangeFilter *OrgApacheLuceneSearchDocValuesRangeFilter_newIntRangeWithNSString_withJavaLangInteger_withJavaLangInteger_withBoolean_withBoolean_(NSString *field, JavaLangInteger *lowerVal, JavaLangInteger *upperVal, jboolean includeLower, jboolean includeUpper);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchDocValuesRangeFilter *OrgApacheLuceneSearchDocValuesRangeFilter_newLongRangeWithNSString_withJavaLangLong_withJavaLangLong_withBoolean_withBoolean_(NSString *field, JavaLangLong *lowerVal, JavaLangLong *upperVal, jboolean includeLower, jboolean includeUpper);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchDocValuesRangeFilter *OrgApacheLuceneSearchDocValuesRangeFilter_newFloatRangeWithNSString_withJavaLangFloat_withJavaLangFloat_withBoolean_withBoolean_(NSString *field, JavaLangFloat *lowerVal, JavaLangFloat *upperVal, jboolean includeLower, jboolean includeUpper);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchDocValuesRangeFilter *OrgApacheLuceneSearchDocValuesRangeFilter_newDoubleRangeWithNSString_withJavaLangDouble_withJavaLangDouble_withBoolean_withBoolean_(NSString *field, JavaLangDouble *lowerVal, JavaLangDouble *upperVal, jboolean includeLower, jboolean includeUpper);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchDocValuesRangeFilter_init(OrgApacheLuceneSearchDocValuesRangeFilter *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocValuesRangeFilter)
 

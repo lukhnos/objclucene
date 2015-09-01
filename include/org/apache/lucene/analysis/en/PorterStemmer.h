@@ -24,28 +24,17 @@
 
 - (instancetype)init;
 
-- (void)addWithChar:(jchar)ch;
-
 - (IOSCharArray *)getResultBuffer;
 
 - (jint)getResultLength;
 
 - (void)reset;
 
-- (jboolean)stem;
-
-- (jboolean)stemWithCharArray:(IOSCharArray *)word;
-
-- (jboolean)stemWithCharArray:(IOSCharArray *)word
-                      withInt:(jint)wordLen;
-
 - (jboolean)stemWithCharArray:(IOSCharArray *)wordBuffer
                       withInt:(jint)offset
                       withInt:(jint)wordLen;
 
 - (jboolean)stemWithInt:(jint)i0;
-
-- (NSString *)stemWithNSString:(NSString *)s;
 
 - (NSString *)description;
 

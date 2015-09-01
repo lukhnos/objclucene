@@ -6,10 +6,8 @@
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/lang/UnsupportedOperationException.h"
-#include "java/util/Collection.h"
 #include "org/apache/lucene/search/FakeScorer.h"
 #include "org/apache/lucene/search/Scorer.h"
-#include "org/apache/lucene/search/Weight.h"
 
 @implementation OrgApacheLuceneSearchFakeScorer
 
@@ -42,14 +40,6 @@
   return 1;
 }
 
-- (OrgApacheLuceneSearchWeight *)getWeight {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
-}
-
-- (id<JavaUtilCollection>)getChildren {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "init", "FakeScorer", NULL, 0x1, NULL, NULL },
@@ -59,15 +49,13 @@
     { "nextDoc", NULL, "I", 0x1, NULL, NULL },
     { "score", NULL, "F", 0x1, NULL, NULL },
     { "cost", NULL, "J", 0x1, NULL, NULL },
-    { "getWeight", NULL, "Lorg.apache.lucene.search.Weight;", 0x1, NULL, NULL },
-    { "getChildren", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "score_", NULL, 0x0, "F", NULL, NULL, .constantValue.asLong = 0 },
     { "doc_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "freq_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchFakeScorer = { 2, "FakeScorer", "org.apache.lucene.search", NULL, 0x10, 9, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchFakeScorer = { 2, "FakeScorer", "org.apache.lucene.search", NULL, 0x10, 7, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchFakeScorer;
 }
 

@@ -20,48 +20,19 @@
 #define OrgApacheLuceneQueriesFunctionValuesourceMultiValueSource_INCLUDE 1
 #include "org/apache/lucene/queries/function/valuesource/MultiValueSource.h"
 
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneQueriesFunctionFunctionValues;
-@class OrgApacheLuceneSearchIndexSearcher;
-@protocol JavaUtilList;
-@protocol JavaUtilMap;
-
-@interface OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource : OrgApacheLuceneQueriesFunctionValuesourceMultiValueSource {
- @public
-  id<JavaUtilList> sources_;
-}
+@interface OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource : OrgApacheLuceneQueriesFunctionValuesourceMultiValueSource
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)sources;
-
-- (void)createWeightWithJavaUtilMap:(id<JavaUtilMap>)context
-withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher;
-
-- (NSString *)description__;
-
-- (jint)dimension;
-
-- (jboolean)isEqual:(id)o;
-
-- (id<JavaUtilList>)getSources;
-
-- (OrgApacheLuceneQueriesFunctionFunctionValues *)getValuesWithJavaUtilMap:(id<JavaUtilMap>)context
-                                 withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext;
-
-- (NSUInteger)hash;
-
-- (NSString *)name;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource, sources_, id<JavaUtilList>)
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_init(OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_initWithJavaUtilList_(OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource *self, id<JavaUtilList> sources);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_initWithJavaUtilList_(id<JavaUtilList> sources) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource)
 

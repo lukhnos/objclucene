@@ -24,37 +24,19 @@
 #define OrgApacheLuceneQueryparserFlexibleMessagesNLSException_INCLUDE 1
 #include "org/apache/lucene/queryparser/flexible/messages/NLSException.h"
 
-@class JavaLangThrowable;
-@protocol OrgApacheLuceneQueryparserFlexibleMessagesMessage;
-
 @interface OrgApacheLuceneQueryparserFlexibleCoreQueryNodeError : JavaLangError < OrgApacheLuceneQueryparserFlexibleMessagesNLSException >
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage:(id<OrgApacheLuceneQueryparserFlexibleMessagesMessage>)message;
-
-- (instancetype)initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage:(id<OrgApacheLuceneQueryparserFlexibleMessagesMessage>)message
-                                                    withJavaLangThrowable:(JavaLangThrowable *)throwable;
-
-- (instancetype)initWithJavaLangThrowable:(JavaLangThrowable *)throwable;
-
-- (id<OrgApacheLuceneQueryparserFlexibleMessagesMessage>)getMessageObject;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreQueryNodeError)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreQueryNodeError_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_(OrgApacheLuceneQueryparserFlexibleCoreQueryNodeError *self, id<OrgApacheLuceneQueryparserFlexibleMessagesMessage> message);
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreQueryNodeError_init(OrgApacheLuceneQueryparserFlexibleCoreQueryNodeError *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreQueryNodeError *new_OrgApacheLuceneQueryparserFlexibleCoreQueryNodeError_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_(id<OrgApacheLuceneQueryparserFlexibleMessagesMessage> message) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreQueryNodeError_initWithJavaLangThrowable_(OrgApacheLuceneQueryparserFlexibleCoreQueryNodeError *self, JavaLangThrowable *throwable);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreQueryNodeError *new_OrgApacheLuceneQueryparserFlexibleCoreQueryNodeError_initWithJavaLangThrowable_(JavaLangThrowable *throwable) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreQueryNodeError_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_withJavaLangThrowable_(OrgApacheLuceneQueryparserFlexibleCoreQueryNodeError *self, id<OrgApacheLuceneQueryparserFlexibleMessagesMessage> message, JavaLangThrowable *throwable);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreQueryNodeError *new_OrgApacheLuceneQueryparserFlexibleCoreQueryNodeError_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_withJavaLangThrowable_(id<OrgApacheLuceneQueryparserFlexibleMessagesMessage> message, JavaLangThrowable *throwable) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreQueryNodeError *new_OrgApacheLuceneQueryparserFlexibleCoreQueryNodeError_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreQueryNodeError)
 

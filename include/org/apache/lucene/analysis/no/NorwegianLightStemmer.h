@@ -16,23 +16,14 @@
 #if !defined (_OrgApacheLuceneAnalysisNoNorwegianLightStemmer_) && (OrgApacheLuceneAnalysisNoNorwegianLightStemmer_INCLUDE_ALL || OrgApacheLuceneAnalysisNoNorwegianLightStemmer_INCLUDE)
 #define _OrgApacheLuceneAnalysisNoNorwegianLightStemmer_
 
-@class IOSCharArray;
-
 #define OrgApacheLuceneAnalysisNoNorwegianLightStemmer_BOKMAAL 1
 #define OrgApacheLuceneAnalysisNoNorwegianLightStemmer_NYNORSK 2
 
-@interface OrgApacheLuceneAnalysisNoNorwegianLightStemmer : NSObject {
- @public
-  jboolean useBokmaal_;
-  jboolean useNynorsk_;
-}
+@interface OrgApacheLuceneAnalysisNoNorwegianLightStemmer : NSObject
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)flags;
-
-- (jint)stemWithCharArray:(IOSCharArray *)s
-                  withInt:(jint)len;
+- (instancetype)init;
 
 @end
 
@@ -42,9 +33,9 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisNoNorwegianLightStemmer, BOKMA
 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisNoNorwegianLightStemmer, NYNORSK, jint)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisNoNorwegianLightStemmer_initWithInt_(OrgApacheLuceneAnalysisNoNorwegianLightStemmer *self, jint flags);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisNoNorwegianLightStemmer_init(OrgApacheLuceneAnalysisNoNorwegianLightStemmer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisNoNorwegianLightStemmer *new_OrgApacheLuceneAnalysisNoNorwegianLightStemmer_initWithInt_(jint flags) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisNoNorwegianLightStemmer *new_OrgApacheLuceneAnalysisNoNorwegianLightStemmer_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisNoNorwegianLightStemmer)
 

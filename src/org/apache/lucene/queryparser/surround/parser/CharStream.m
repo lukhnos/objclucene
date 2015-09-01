@@ -3,12 +3,10 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/surround/parser/CharStream.java
 //
 
-#include "IOSClass.h"
-#include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
-#include "java/lang/Deprecated.h"
 #include "org/apache/lucene/queryparser/surround/parser/CharStream.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @interface OrgApacheLuceneQueryparserSurroundParserCharStream : NSObject
 
@@ -16,30 +14,8 @@
 
 @implementation OrgApacheLuceneQueryparserSurroundParserCharStream
 
-+ (IOSObjectArray *)__annotations_getColumn {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
-+ (IOSObjectArray *)__annotations_getLine {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "readChar", NULL, "C", 0x401, "Ljava.io.IOException;", NULL },
-    { "getColumn", NULL, "I", 0x401, NULL, NULL },
-    { "getLine", NULL, "I", 0x401, NULL, NULL },
-    { "getEndColumn", NULL, "I", 0x401, NULL, NULL },
-    { "getEndLine", NULL, "I", 0x401, NULL, NULL },
-    { "getBeginColumn", NULL, "I", 0x401, NULL, NULL },
-    { "getBeginLine", NULL, "I", 0x401, NULL, NULL },
-    { "backupWithInt:", "backup", "V", 0x401, NULL, NULL },
-    { "BeginToken", NULL, "C", 0x401, "Ljava.io.IOException;", NULL },
-    { "GetImage", NULL, "Ljava.lang.String;", 0x401, NULL, NULL },
-    { "GetSuffixWithInt:", "GetSuffix", "[C", 0x401, NULL, NULL },
-    { "Done", NULL, "V", 0x401, NULL, NULL },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserSurroundParserCharStream = { 2, "CharStream", "org.apache.lucene.queryparser.surround.parser", NULL, 0x609, 12, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserSurroundParserCharStream = { 2, "CharStream", "org.apache.lucene.queryparser.surround.parser", NULL, 0x609, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserSurroundParserCharStream;
 }
 

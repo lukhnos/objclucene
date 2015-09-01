@@ -20,37 +20,19 @@
 #define OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode_INCLUDE 1
 #include "org/apache/lucene/queryparser/flexible/core/nodes/FieldQueryNode.h"
 
-@protocol JavaLangCharSequence;
-@protocol OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax;
-
 @interface OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode
 
 #pragma mark Public
 
-- (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)field
-                    withJavaLangCharSequence:(id<JavaLangCharSequence>)text
-                                     withInt:(jint)begin
-                                     withInt:(jint)end;
-
-- (instancetype)initWithOrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode:(OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *)fqn;
-
-- (OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode *)cloneTree;
-
-- (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escaper;
-
-- (NSString *)description;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_withInt_withInt_(OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode *self, id<JavaLangCharSequence> field, id<JavaLangCharSequence> text, jint begin, jint end);
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode_init(OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode *new_OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_withInt_withInt_(id<JavaLangCharSequence> field, id<JavaLangCharSequence> text, jint begin, jint end) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode_(OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode *self, OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *fqn);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode *new_OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode_(OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *fqn) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode *new_OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode)
 

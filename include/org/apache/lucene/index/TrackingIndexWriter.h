@@ -16,59 +16,19 @@
 #if !defined (_OrgApacheLuceneIndexTrackingIndexWriter_) && (OrgApacheLuceneIndexTrackingIndexWriter_INCLUDE_ALL || OrgApacheLuceneIndexTrackingIndexWriter_INCLUDE)
 #define _OrgApacheLuceneIndexTrackingIndexWriter_
 
-@class IOSObjectArray;
-@class OrgApacheLuceneIndexIndexReader;
-@class OrgApacheLuceneIndexIndexWriter;
-@class OrgApacheLuceneIndexTerm;
-@class OrgApacheLuceneSearchQuery;
-@protocol JavaLangIterable;
-
 @interface OrgApacheLuceneIndexTrackingIndexWriter : NSObject
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer;
-
-- (jlong)addDocumentWithJavaLangIterable:(id<JavaLangIterable>)d;
-
-- (jlong)addDocumentsWithJavaLangIterable:(id<JavaLangIterable>)docs;
-
-- (jlong)addIndexesWithOrgApacheLuceneIndexCodecReaderArray:(IOSObjectArray *)readers;
-
-- (jlong)addIndexesWithOrgApacheLuceneStoreDirectoryArray:(IOSObjectArray *)dirs;
-
-- (jlong)deleteAll;
-
-- (jlong)deleteDocumentsWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)q;
-
-- (jlong)deleteDocumentsWithOrgApacheLuceneSearchQueryArray:(IOSObjectArray *)queries;
-
-- (jlong)deleteDocumentsWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)t;
-
-- (jlong)deleteDocumentsWithOrgApacheLuceneIndexTermArray:(IOSObjectArray *)terms;
-
-- (jlong)getAndIncrementGeneration;
-
-- (jlong)getGeneration;
-
-- (OrgApacheLuceneIndexIndexWriter *)getIndexWriter;
-
-- (jlong)tryDeleteDocumentWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
-                                                      withInt:(jint)docID;
-
-- (jlong)updateDocumentWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)t
-                               withJavaLangIterable:(id<JavaLangIterable>)d;
-
-- (jlong)updateDocumentsWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)t
-                                withJavaLangIterable:(id<JavaLangIterable>)docs;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexTrackingIndexWriter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexTrackingIndexWriter_initWithOrgApacheLuceneIndexIndexWriter_(OrgApacheLuceneIndexTrackingIndexWriter *self, OrgApacheLuceneIndexIndexWriter *writer);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexTrackingIndexWriter_init(OrgApacheLuceneIndexTrackingIndexWriter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexTrackingIndexWriter *new_OrgApacheLuceneIndexTrackingIndexWriter_initWithOrgApacheLuceneIndexIndexWriter_(OrgApacheLuceneIndexIndexWriter *writer) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexTrackingIndexWriter *new_OrgApacheLuceneIndexTrackingIndexWriter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexTrackingIndexWriter)
 

@@ -17,15 +17,8 @@
 #include "org/apache/lucene/util/ToStringUtils.h"
 #include "org/apache/lucene/util/automaton/Automaton.h"
 #include "org/apache/lucene/util/automaton/CompiledAutomaton.h"
-#include "org/apache/lucene/util/automaton/Operations.h"
 
 @implementation OrgApacheLuceneSearchAutomatonQuery
-
-- (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-       withOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)automaton {
-  OrgApacheLuceneSearchAutomatonQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneUtilAutomatonAutomaton_(self, term, automaton);
-  return self;
-}
 
 - (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
        withOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)automaton
@@ -83,10 +76,6 @@
   return [buffer description];
 }
 
-- (OrgApacheLuceneUtilAutomatonAutomaton *)getAutomaton {
-  return automaton_;
-}
-
 - (void)dealloc {
   RELEASE_(automaton_);
   RELEASE_(compiled_);
@@ -96,35 +85,23 @@
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexTerm:withOrgApacheLuceneUtilAutomatonAutomaton:", "AutomatonQuery", NULL, 0x1, NULL, NULL },
     { "initWithOrgApacheLuceneIndexTerm:withOrgApacheLuceneUtilAutomatonAutomaton:withInt:", "AutomatonQuery", NULL, 0x1, NULL, NULL },
     { "initWithOrgApacheLuceneIndexTerm:withOrgApacheLuceneUtilAutomatonAutomaton:withInt:withBoolean:", "AutomatonQuery", NULL, 0x1, NULL, NULL },
     { "getTermsEnumWithOrgApacheLuceneIndexTerms:withOrgApacheLuceneUtilAttributeSource:", "getTermsEnum", "Lorg.apache.lucene.index.TermsEnum;", 0x4, "Ljava.io.IOException;", NULL },
     { "hash", "hashCode", "I", 0x1, NULL, NULL },
     { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
     { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getAutomaton", NULL, "Lorg.apache.lucene.util.automaton.Automaton;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "automaton_", NULL, 0x14, "Lorg.apache.lucene.util.automaton.Automaton;", NULL, NULL, .constantValue.asLong = 0 },
     { "compiled_", NULL, 0x14, "Lorg.apache.lucene.util.automaton.CompiledAutomaton;", NULL, NULL, .constantValue.asLong = 0 },
     { "term_", NULL, 0x14, "Lorg.apache.lucene.index.Term;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchAutomatonQuery = { 2, "AutomatonQuery", "org.apache.lucene.search", NULL, 0x1, 8, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchAutomatonQuery = { 2, "AutomatonQuery", "org.apache.lucene.search", NULL, 0x1, 6, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchAutomatonQuery;
 }
 
 @end
-
-void OrgApacheLuceneSearchAutomatonQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneSearchAutomatonQuery *self, OrgApacheLuceneIndexTerm *term, OrgApacheLuceneUtilAutomatonAutomaton *automaton) {
-  OrgApacheLuceneSearchAutomatonQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneUtilAutomatonAutomaton_withInt_(self, term, automaton, OrgApacheLuceneUtilAutomatonOperations_DEFAULT_MAX_DETERMINIZED_STATES);
-}
-
-OrgApacheLuceneSearchAutomatonQuery *new_OrgApacheLuceneSearchAutomatonQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneIndexTerm *term, OrgApacheLuceneUtilAutomatonAutomaton *automaton) {
-  OrgApacheLuceneSearchAutomatonQuery *self = [OrgApacheLuceneSearchAutomatonQuery alloc];
-  OrgApacheLuceneSearchAutomatonQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneUtilAutomatonAutomaton_(self, term, automaton);
-  return self;
-}
 
 void OrgApacheLuceneSearchAutomatonQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneUtilAutomatonAutomaton_withInt_(OrgApacheLuceneSearchAutomatonQuery *self, OrgApacheLuceneIndexTerm *term, OrgApacheLuceneUtilAutomatonAutomaton *automaton, jint maxDeterminizedStates) {
   OrgApacheLuceneSearchAutomatonQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneUtilAutomatonAutomaton_withInt_withBoolean_(self, term, automaton, maxDeterminizedStates, NO);

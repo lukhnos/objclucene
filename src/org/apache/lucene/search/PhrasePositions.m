@@ -41,7 +41,6 @@ __attribute__((unused)) static jboolean OrgApacheLuceneSearchPhrasePositions_nex
 
 - (void)dealloc {
   RELEASE_(postings_);
-  RELEASE_(next_);
   RELEASE_(terms_);
   [super dealloc];
 }
@@ -59,12 +58,11 @@ __attribute__((unused)) static jboolean OrgApacheLuceneSearchPhrasePositions_nex
     { "offset_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "ord_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "postings_", NULL, 0x10, "Lorg.apache.lucene.index.PostingsEnum;", NULL, NULL, .constantValue.asLong = 0 },
-    { "next_", NULL, 0x0, "Lorg.apache.lucene.search.PhrasePositions;", NULL, NULL, .constantValue.asLong = 0 },
     { "rptGroup_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "rptInd_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "terms_", NULL, 0x10, "[Lorg.apache.lucene.index.Term;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchPhrasePositions = { 2, "PhrasePositions", "org.apache.lucene.search", NULL, 0x10, 4, methods, 9, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchPhrasePositions = { 2, "PhrasePositions", "org.apache.lucene.search", NULL, 0x10, 4, methods, 8, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchPhrasePositions;
 }
 

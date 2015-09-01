@@ -16,10 +16,7 @@
 #include "java/lang/reflect/Field.h"
 #include "java/lang/reflect/Method.h"
 #include "java/lang/reflect/Modifier.h"
-#include "java/text/DecimalFormat.h"
-#include "java/text/DecimalFormatSymbols.h"
 #include "java/util/IdentityHashMap.h"
-#include "java/util/Locale.h"
 #include "java/util/Map.h"
 #include "org/apache/lucene/util/Accountable.h"
 #include "org/apache/lucene/util/Constants.h"
@@ -27,18 +24,12 @@
 
 @interface OrgApacheLuceneUtilRamUsageEstimator ()
 
-- (instancetype)init;
-
 + (jlong)shallowSizeOfArrayWithId:(id)array;
 
 @end
 
 static id<JavaUtilMap> OrgApacheLuceneUtilRamUsageEstimator_primitiveSizes_;
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilRamUsageEstimator, primitiveSizes_, id<JavaUtilMap>)
-
-__attribute__((unused)) static void OrgApacheLuceneUtilRamUsageEstimator_init(OrgApacheLuceneUtilRamUsageEstimator *self);
-
-__attribute__((unused)) static OrgApacheLuceneUtilRamUsageEstimator *new_OrgApacheLuceneUtilRamUsageEstimator_init() NS_RETURNS_RETAINED;
 
 __attribute__((unused)) static jlong OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfArrayWithId_(id array);
 
@@ -58,11 +49,6 @@ NSString *OrgApacheLuceneUtilRamUsageEstimator_HOTSPOT_BEAN_CLASS_ = @"com.sun.m
 
 @implementation OrgApacheLuceneUtilRamUsageEstimator
 
-- (instancetype)init {
-  OrgApacheLuceneUtilRamUsageEstimator_init(self);
-  return self;
-}
-
 + (jlong)alignObjectSizeWithLong:(jlong)size {
   return OrgApacheLuceneUtilRamUsageEstimator_alignObjectSizeWithLong_(size);
 }
@@ -73,14 +59,6 @@ NSString *OrgApacheLuceneUtilRamUsageEstimator_HOTSPOT_BEAN_CLASS_ = @"com.sun.m
 
 + (jlong)sizeOfWithByteArray:(IOSByteArray *)arr {
   return OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithByteArray_(arr);
-}
-
-+ (jlong)sizeOfWithBooleanArray:(IOSBooleanArray *)arr {
-  return OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithBooleanArray_(arr);
-}
-
-+ (jlong)sizeOfWithCharArray:(IOSCharArray *)arr {
-  return OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithCharArray_(arr);
 }
 
 + (jlong)sizeOfWithShortArray:(IOSShortArray *)arr {
@@ -97,10 +75,6 @@ NSString *OrgApacheLuceneUtilRamUsageEstimator_HOTSPOT_BEAN_CLASS_ = @"com.sun.m
 
 + (jlong)sizeOfWithLongArray:(IOSLongArray *)arr {
   return OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithLongArray_(arr);
-}
-
-+ (jlong)sizeOfWithDoubleArray:(IOSDoubleArray *)arr {
-  return OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithDoubleArray_(arr);
 }
 
 + (jlong)shallowSizeOfWithNSObjectArray:(IOSObjectArray *)arr {
@@ -124,17 +98,13 @@ NSString *OrgApacheLuceneUtilRamUsageEstimator_HOTSPOT_BEAN_CLASS_ = @"com.sun.m
   return OrgApacheLuceneUtilRamUsageEstimator_adjustForFieldWithLong_withJavaLangReflectField_(sizeSoFar, f);
 }
 
-+ (NSString *)humanReadableUnitsWithLong:(jlong)bytes {
-  return OrgApacheLuceneUtilRamUsageEstimator_humanReadableUnitsWithLong_(bytes);
-}
-
-+ (NSString *)humanReadableUnitsWithLong:(jlong)bytes
-               withJavaTextDecimalFormat:(JavaTextDecimalFormat *)df {
-  return OrgApacheLuceneUtilRamUsageEstimator_humanReadableUnitsWithLong_withJavaTextDecimalFormat_(bytes, df);
-}
-
 + (jlong)sizeOfWithOrgApacheLuceneUtilAccountableArray:(IOSObjectArray *)accountables {
   return OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithOrgApacheLuceneUtilAccountableArray_(accountables);
+}
+
+- (instancetype)init {
+  OrgApacheLuceneUtilRamUsageEstimator_init(self);
+  return self;
 }
 
 + (void)initialize {
@@ -213,25 +183,20 @@ NSString *OrgApacheLuceneUtilRamUsageEstimator_HOTSPOT_BEAN_CLASS_ = @"com.sun.m
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", "RamUsageEstimator", NULL, 0x2, NULL, NULL },
     { "alignObjectSizeWithLong:", "alignObjectSize", "J", 0x9, NULL, NULL },
     { "sizeOfWithJavaLangLong:", "sizeOf", "J", 0x9, NULL, NULL },
     { "sizeOfWithByteArray:", "sizeOf", "J", 0x9, NULL, NULL },
-    { "sizeOfWithBooleanArray:", "sizeOf", "J", 0x9, NULL, NULL },
-    { "sizeOfWithCharArray:", "sizeOf", "J", 0x9, NULL, NULL },
     { "sizeOfWithShortArray:", "sizeOf", "J", 0x9, NULL, NULL },
     { "sizeOfWithIntArray:", "sizeOf", "J", 0x9, NULL, NULL },
     { "sizeOfWithFloatArray:", "sizeOf", "J", 0x9, NULL, NULL },
     { "sizeOfWithLongArray:", "sizeOf", "J", 0x9, NULL, NULL },
-    { "sizeOfWithDoubleArray:", "sizeOf", "J", 0x9, NULL, NULL },
     { "shallowSizeOfWithNSObjectArray:", "shallowSizeOf", "J", 0x9, NULL, NULL },
     { "shallowSizeOfWithId:", "shallowSizeOf", "J", 0x9, NULL, NULL },
     { "shallowSizeOfInstanceWithIOSClass:", "shallowSizeOfInstance", "J", 0x9, NULL, NULL },
     { "shallowSizeOfArrayWithId:", "shallowSizeOfArray", "J", 0xa, NULL, NULL },
     { "adjustForFieldWithLong:withJavaLangReflectField:", "adjustForField", "J", 0x8, NULL, NULL },
-    { "humanReadableUnitsWithLong:", "humanReadableUnits", "Ljava.lang.String;", 0x9, NULL, NULL },
-    { "humanReadableUnitsWithLong:withJavaTextDecimalFormat:", "humanReadableUnits", "Ljava.lang.String;", 0x9, NULL, NULL },
     { "sizeOfWithOrgApacheLuceneUtilAccountableArray:", "sizeOf", "J", 0x9, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "ONE_KB", "ONE_KB", 0x19, "J", NULL, NULL, .constantValue.asLong = OrgApacheLuceneUtilRamUsageEstimator_ONE_KB },
@@ -258,21 +223,11 @@ NSString *OrgApacheLuceneUtilRamUsageEstimator_HOTSPOT_BEAN_CLASS_ = @"com.sun.m
     { "MANAGEMENT_FACTORY_CLASS_", NULL, 0x18, "Ljava.lang.String;", &OrgApacheLuceneUtilRamUsageEstimator_MANAGEMENT_FACTORY_CLASS_, NULL, .constantValue.asLong = 0 },
     { "HOTSPOT_BEAN_CLASS_", NULL, 0x18, "Ljava.lang.String;", &OrgApacheLuceneUtilRamUsageEstimator_HOTSPOT_BEAN_CLASS_, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilRamUsageEstimator = { 2, "RamUsageEstimator", "org.apache.lucene.util", NULL, 0x11, 19, methods, 23, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilRamUsageEstimator = { 2, "RamUsageEstimator", "org.apache.lucene.util", NULL, 0x11, 14, methods, 23, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilRamUsageEstimator;
 }
 
 @end
-
-void OrgApacheLuceneUtilRamUsageEstimator_init(OrgApacheLuceneUtilRamUsageEstimator *self) {
-  NSObject_init(self);
-}
-
-OrgApacheLuceneUtilRamUsageEstimator *new_OrgApacheLuceneUtilRamUsageEstimator_init() {
-  OrgApacheLuceneUtilRamUsageEstimator *self = [OrgApacheLuceneUtilRamUsageEstimator alloc];
-  OrgApacheLuceneUtilRamUsageEstimator_init(self);
-  return self;
-}
 
 jlong OrgApacheLuceneUtilRamUsageEstimator_alignObjectSizeWithLong_(jlong size) {
   OrgApacheLuceneUtilRamUsageEstimator_initialize();
@@ -293,16 +248,6 @@ jlong OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithByteArray_(IOSByteArray *ar
   return OrgApacheLuceneUtilRamUsageEstimator_alignObjectSizeWithLong_((jlong) OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_ARRAY_HEADER_ + ((IOSByteArray *) nil_chk(arr))->size_);
 }
 
-jlong OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithBooleanArray_(IOSBooleanArray *arr) {
-  OrgApacheLuceneUtilRamUsageEstimator_initialize();
-  return OrgApacheLuceneUtilRamUsageEstimator_alignObjectSizeWithLong_((jlong) OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_ARRAY_HEADER_ + ((IOSBooleanArray *) nil_chk(arr))->size_);
-}
-
-jlong OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithCharArray_(IOSCharArray *arr) {
-  OrgApacheLuceneUtilRamUsageEstimator_initialize();
-  return OrgApacheLuceneUtilRamUsageEstimator_alignObjectSizeWithLong_((jlong) OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_ARRAY_HEADER_ + (jlong) OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_CHAR * ((IOSCharArray *) nil_chk(arr))->size_);
-}
-
 jlong OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithShortArray_(IOSShortArray *arr) {
   OrgApacheLuceneUtilRamUsageEstimator_initialize();
   return OrgApacheLuceneUtilRamUsageEstimator_alignObjectSizeWithLong_((jlong) OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_ARRAY_HEADER_ + (jlong) OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_SHORT * ((IOSShortArray *) nil_chk(arr))->size_);
@@ -321,11 +266,6 @@ jlong OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithFloatArray_(IOSFloatArray *
 jlong OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithLongArray_(IOSLongArray *arr) {
   OrgApacheLuceneUtilRamUsageEstimator_initialize();
   return OrgApacheLuceneUtilRamUsageEstimator_alignObjectSizeWithLong_((jlong) OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_ARRAY_HEADER_ + (jlong) OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_LONG * ((IOSLongArray *) nil_chk(arr))->size_);
-}
-
-jlong OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithDoubleArray_(IOSDoubleArray *arr) {
-  OrgApacheLuceneUtilRamUsageEstimator_initialize();
-  return OrgApacheLuceneUtilRamUsageEstimator_alignObjectSizeWithLong_((jlong) OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_ARRAY_HEADER_ + (jlong) OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_DOUBLE * ((IOSDoubleArray *) nil_chk(arr))->size_);
 }
 
 jlong OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfWithNSObjectArray_(IOSObjectArray *arr) {
@@ -390,27 +330,6 @@ jlong OrgApacheLuceneUtilRamUsageEstimator_adjustForFieldWithLong_withJavaLangRe
   return sizeSoFar + fsize;
 }
 
-NSString *OrgApacheLuceneUtilRamUsageEstimator_humanReadableUnitsWithLong_(jlong bytes) {
-  OrgApacheLuceneUtilRamUsageEstimator_initialize();
-  return OrgApacheLuceneUtilRamUsageEstimator_humanReadableUnitsWithLong_withJavaTextDecimalFormat_(bytes, [new_JavaTextDecimalFormat_initWithNSString_withJavaTextDecimalFormatSymbols_(@"0.#", JavaTextDecimalFormatSymbols_getInstanceWithJavaUtilLocale_(JreLoadStatic(JavaUtilLocale, ROOT_))) autorelease]);
-}
-
-NSString *OrgApacheLuceneUtilRamUsageEstimator_humanReadableUnitsWithLong_withJavaTextDecimalFormat_(jlong bytes, JavaTextDecimalFormat *df) {
-  OrgApacheLuceneUtilRamUsageEstimator_initialize();
-  if (bytes / OrgApacheLuceneUtilRamUsageEstimator_ONE_GB > 0) {
-    return JreStrcat("$$", [((JavaTextDecimalFormat *) nil_chk(df)) formatWithDouble:(jfloat) bytes / OrgApacheLuceneUtilRamUsageEstimator_ONE_GB], @" GB");
-  }
-  else if (bytes / OrgApacheLuceneUtilRamUsageEstimator_ONE_MB > 0) {
-    return JreStrcat("$$", [((JavaTextDecimalFormat *) nil_chk(df)) formatWithDouble:(jfloat) bytes / OrgApacheLuceneUtilRamUsageEstimator_ONE_MB], @" MB");
-  }
-  else if (bytes / OrgApacheLuceneUtilRamUsageEstimator_ONE_KB > 0) {
-    return JreStrcat("$$", [((JavaTextDecimalFormat *) nil_chk(df)) formatWithDouble:(jfloat) bytes / OrgApacheLuceneUtilRamUsageEstimator_ONE_KB], @" KB");
-  }
-  else {
-    return JreStrcat("J$", bytes, @" bytes");
-  }
-}
-
 jlong OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithOrgApacheLuceneUtilAccountableArray_(IOSObjectArray *accountables) {
   OrgApacheLuceneUtilRamUsageEstimator_initialize();
   jlong size = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfWithNSObjectArray_(accountables);
@@ -426,6 +345,16 @@ jlong OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithOrgApacheLuceneUtilAccounta
     }
   }
   return size;
+}
+
+void OrgApacheLuceneUtilRamUsageEstimator_init(OrgApacheLuceneUtilRamUsageEstimator *self) {
+  NSObject_init(self);
+}
+
+OrgApacheLuceneUtilRamUsageEstimator *new_OrgApacheLuceneUtilRamUsageEstimator_init() {
+  OrgApacheLuceneUtilRamUsageEstimator *self = [OrgApacheLuceneUtilRamUsageEstimator alloc];
+  OrgApacheLuceneUtilRamUsageEstimator_init(self);
+  return self;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilRamUsageEstimator)

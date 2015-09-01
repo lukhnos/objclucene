@@ -4,8 +4,9 @@
 //
 
 #include "J2ObjC_source.h"
-#include "java/util/ArrayList.h"
 #include "org/apache/lucene/analysis/compound/hyphenation/PatternConsumer.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @interface OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer : NSObject
 
@@ -14,12 +15,7 @@
 @implementation OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "addClassWithNSString:", "addClass", "V", 0x401, NULL, NULL },
-    { "addExceptionWithNSString:withJavaUtilArrayList:", "addException", "V", 0x401, NULL, NULL },
-    { "addPatternWithNSString:withNSString:", "addPattern", "V", 0x401, NULL, NULL },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer = { 2, "PatternConsumer", "org.apache.lucene.analysis.compound.hyphenation", NULL, 0x609, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer = { 2, "PatternConsumer", "org.apache.lucene.analysis.compound.hyphenation", NULL, 0x609, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer;
 }
 

@@ -20,62 +20,17 @@
 #define OrgApacheLuceneQueryparserSurroundQuerySrndQuery_INCLUDE 1
 #include "org/apache/lucene/queryparser/surround/query/SrndQuery.h"
 
-@class JavaLangStringBuilder;
-@class OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory;
-@protocol JavaUtilIterator;
-@protocol JavaUtilList;
-
-@interface OrgApacheLuceneQueryparserSurroundQueryComposedQuery : OrgApacheLuceneQueryparserSurroundQuerySrndQuery {
- @public
-  NSString *opName_;
-  id<JavaUtilList> queries_;
-}
+@interface OrgApacheLuceneQueryparserSurroundQueryComposedQuery : OrgApacheLuceneQueryparserSurroundQuerySrndQuery
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)qs
-                         withBoolean:(jboolean)operatorInfix
-                        withNSString:(NSString *)opName;
-
-- (jint)getNrSubQueries;
-
-- (NSString *)getOperatorName;
-
-- (id<JavaUtilIterator>)getSubQueriesIterator;
-
-- (OrgApacheLuceneQueryparserSurroundQuerySrndQuery *)getSubQueryWithInt:(jint)qn;
-
-- (jboolean)isFieldsSubQueryAcceptable;
-
-- (jboolean)isOperatorInfix;
-
-- (id<JavaUtilList>)makeLuceneSubQueriesFieldWithNSString:(NSString *)fn
-withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *)qf;
-
-- (NSString *)description;
-
-#pragma mark Protected
-
-- (NSString *)getBracketClose;
-
-- (NSString *)getBracketOpen;
-
-- (NSString *)getPrefixSeparator;
-
-- (void)infixToStringWithJavaLangStringBuilder:(JavaLangStringBuilder *)r;
-
-- (void)prefixToStringWithJavaLangStringBuilder:(JavaLangStringBuilder *)r;
-
-- (void)recomposeWithJavaUtilList:(id<JavaUtilList>)queries;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserSurroundQueryComposedQuery)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserSurroundQueryComposedQuery, opName_, NSString *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserSurroundQueryComposedQuery, queries_, id<JavaUtilList>)
-
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundQueryComposedQuery_initWithJavaUtilList_withBoolean_withNSString_(OrgApacheLuceneQueryparserSurroundQueryComposedQuery *self, id<JavaUtilList> qs, jboolean operatorInfix, NSString *opName);
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundQueryComposedQuery_init(OrgApacheLuceneQueryparserSurroundQueryComposedQuery *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundQueryComposedQuery)
 

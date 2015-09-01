@@ -22,14 +22,6 @@
 
 @protocol OrgApacheLuceneRangetreeSliceReader < JavaIoCloseable, NSObject, JavaObject >
 
-- (jboolean)next;
-
-- (jlong)value;
-
-- (jlong)ord;
-
-- (jint)docID;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneRangetreeSliceReader)

@@ -29,10 +29,6 @@
 
 - (instancetype)initWithNSString:(NSString *)name
                          withInt:(jint)value
-withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type;
-
-- (instancetype)initWithNSString:(NSString *)name
-                         withInt:(jint)value
 withOrgApacheLuceneDocumentField_StoreEnum:(OrgApacheLuceneDocumentField_StoreEnum *)stored;
 
 @end
@@ -48,10 +44,6 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneDocumentIntField, TYPE_STORED_, OrgApa
 FOUNDATION_EXPORT void OrgApacheLuceneDocumentIntField_initWithNSString_withInt_withOrgApacheLuceneDocumentField_StoreEnum_(OrgApacheLuceneDocumentIntField *self, NSString *name, jint value, OrgApacheLuceneDocumentField_StoreEnum *stored);
 
 FOUNDATION_EXPORT OrgApacheLuceneDocumentIntField *new_OrgApacheLuceneDocumentIntField_initWithNSString_withInt_withOrgApacheLuceneDocumentField_StoreEnum_(NSString *name, jint value, OrgApacheLuceneDocumentField_StoreEnum *stored) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneDocumentIntField_initWithNSString_withInt_withOrgApacheLuceneDocumentFieldType_(OrgApacheLuceneDocumentIntField *self, NSString *name, jint value, OrgApacheLuceneDocumentFieldType *type);
-
-FOUNDATION_EXPORT OrgApacheLuceneDocumentIntField *new_OrgApacheLuceneDocumentIntField_initWithNSString_withInt_withOrgApacheLuceneDocumentFieldType_(NSString *name, jint value, OrgApacheLuceneDocumentFieldType *type) NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentIntField)
 

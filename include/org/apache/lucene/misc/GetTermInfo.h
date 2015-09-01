@@ -16,28 +16,15 @@
 #if !defined (_OrgApacheLuceneMiscGetTermInfo_) && (OrgApacheLuceneMiscGetTermInfo_INCLUDE_ALL || OrgApacheLuceneMiscGetTermInfo_INCLUDE)
 #define _OrgApacheLuceneMiscGetTermInfo_
 
-@class IOSObjectArray;
-@class OrgApacheLuceneIndexTerm;
-@class OrgApacheLuceneStoreDirectory;
-
 @interface OrgApacheLuceneMiscGetTermInfo : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
-+ (void)getTermInfoWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
-                        withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
-
-+ (void)mainWithNSStringArray:(IOSObjectArray *)args;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneMiscGetTermInfo)
-
-FOUNDATION_EXPORT void OrgApacheLuceneMiscGetTermInfo_mainWithNSStringArray_(IOSObjectArray *args);
-
-FOUNDATION_EXPORT void OrgApacheLuceneMiscGetTermInfo_getTermInfoWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexTerm_(OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexTerm *term);
 
 FOUNDATION_EXPORT void OrgApacheLuceneMiscGetTermInfo_init(OrgApacheLuceneMiscGetTermInfo *self);
 

@@ -36,11 +36,6 @@
                   withFloat:(jfloat)score
           withNSObjectArray:(IOSObjectArray *)fields;
 
-- (instancetype)initWithInt:(jint)doc
-                  withFloat:(jfloat)score
-          withNSObjectArray:(IOSObjectArray *)fields
-                    withInt:(jint)shardIndex;
-
 - (NSString *)description;
 
 @end
@@ -56,10 +51,6 @@ FOUNDATION_EXPORT OrgApacheLuceneSearchFieldDoc *new_OrgApacheLuceneSearchFieldD
 FOUNDATION_EXPORT void OrgApacheLuceneSearchFieldDoc_initWithInt_withFloat_withNSObjectArray_(OrgApacheLuceneSearchFieldDoc *self, jint doc, jfloat score, IOSObjectArray *fields);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchFieldDoc *new_OrgApacheLuceneSearchFieldDoc_initWithInt_withFloat_withNSObjectArray_(jint doc, jfloat score, IOSObjectArray *fields) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchFieldDoc_initWithInt_withFloat_withNSObjectArray_withInt_(OrgApacheLuceneSearchFieldDoc *self, jint doc, jfloat score, IOSObjectArray *fields, jint shardIndex);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchFieldDoc *new_OrgApacheLuceneSearchFieldDoc_initWithInt_withFloat_withNSObjectArray_withInt_(jint doc, jfloat score, IOSObjectArray *fields, jint shardIndex) NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldDoc)
 

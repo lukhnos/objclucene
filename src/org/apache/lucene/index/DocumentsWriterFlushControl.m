@@ -3,7 +3,6 @@
 //  source: ./core/src/java/org/apache/lucene/index/DocumentsWriterFlushControl.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/lang/InterruptedException.h"
 #include "java/lang/Long.h"
@@ -12,8 +11,6 @@
 #include "java/lang/Throwable.h"
 #include "java/lang/UnsupportedOperationException.h"
 #include "java/util/ArrayList.h"
-#include "java/util/Collection.h"
-#include "java/util/Collections.h"
 #include "java/util/IdentityHashMap.h"
 #include "java/util/Iterator.h"
 #include "java/util/LinkedList.h"
@@ -373,12 +370,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriterFlushControl_$1)
   return OrgApacheLuceneIndexDocumentsWriterFlushControl_getPerThreadsIteratorWithInt_(self, upto);
 }
 
-- (void)doOnDelete {
-  @synchronized(self) {
-    [((OrgApacheLuceneIndexFlushPolicy *) nil_chk(flushPolicy_)) onDeleteWithOrgApacheLuceneIndexDocumentsWriterFlushControl:self withOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState:nil];
-  }
-}
-
 - (jint)getNumGlobalTermDeletes {
   return [((OrgApacheLuceneIndexDocumentsWriterDeleteQueue *) nil_chk(JreLoadVolatileId(&((OrgApacheLuceneIndexDocumentsWriter *) nil_chk(documentsWriter_))->deleteQueue_))) numGlobalTermDeletes] + [((OrgApacheLuceneIndexBufferedUpdatesStream *) nil_chk(bufferedUpdatesStream_)) numTerms];
 }
@@ -389,10 +380,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriterFlushControl_$1)
 
 - (jlong)ramBytesUsed {
   return [self getDeleteBytesUsed] + [self netBytes];
-}
-
-- (id<JavaUtilCollection>)getChildResources {
-  return JavaUtilCollections_emptyList();
 }
 
 - (jint)numFlushingDWPT {
@@ -407,10 +394,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriterFlushControl_$1)
 
 - (void)setApplyAllDeletes {
   [((JavaUtilConcurrentAtomicAtomicBoolean *) nil_chk(flushDeletes_)) setWithBoolean:YES];
-}
-
-- (jint)numActiveDWPT {
-  return [((OrgApacheLuceneIndexDocumentsWriterPerThreadPool *) nil_chk(self->perThreadPool_)) getActiveThreadStateCount];
 }
 
 - (OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *)obtainAndLock {
@@ -602,10 +585,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriterFlushControl_$1)
   return [((OrgApacheLuceneIndexDocumentsWriterStallControl *) nil_chk(stallControl_)) anyStalledThreads];
 }
 
-- (OrgApacheLuceneUtilInfoStream *)getInfoStream {
-  return infoStream_;
-}
-
 - (void)dealloc {
   RELEASE_(flushDeletes_);
   RELEASE_(flushQueue_);
@@ -647,15 +626,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriterFlushControl_$1)
     { "setClosed", NULL, "V", 0x20, NULL, NULL },
     { "allActiveThreadStates", NULL, "Ljava.util.Iterator;", 0x1, NULL, NULL },
     { "getPerThreadsIteratorWithInt:", "getPerThreadsIterator", "Ljava.util.Iterator;", 0x2, NULL, NULL },
-    { "doOnDelete", NULL, "V", 0x20, NULL, NULL },
     { "getNumGlobalTermDeletes", NULL, "I", 0x1, NULL, NULL },
     { "getDeleteBytesUsed", NULL, "J", 0x1, NULL, NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
     { "numFlushingDWPT", NULL, "I", 0x20, NULL, NULL },
     { "getAndResetApplyAllDeletes", NULL, "Z", 0x1, NULL, NULL },
     { "setApplyAllDeletes", NULL, "V", 0x1, NULL, NULL },
-    { "numActiveDWPT", NULL, "I", 0x0, NULL, NULL },
     { "obtainAndLock", NULL, "Lorg.apache.lucene.index.DocumentsWriterPerThreadPool$ThreadState;", 0x0, NULL, NULL },
     { "markForFullFlush", NULL, "V", 0x0, NULL, NULL },
     { "assertActiveDeleteQueueWithOrgApacheLuceneIndexDocumentsWriterDeleteQueue:", "assertActiveDeleteQueue", "Z", 0x2, NULL, NULL },
@@ -670,7 +646,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriterFlushControl_$1)
     { "numBlockedFlushes", NULL, "I", 0x20, NULL, NULL },
     { "waitIfStalled", NULL, "V", 0x0, NULL, NULL },
     { "anyStalledThreads", NULL, "Z", 0x0, NULL, NULL },
-    { "getInfoStream", NULL, "Lorg.apache.lucene.util.InfoStream;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "hardMaxBytesPerDWPT_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
@@ -700,7 +675,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriterFlushControl_$1)
     { "fullFlushBuffer_", NULL, 0x12, "Ljava.util.List;", NULL, "Ljava/util/List<Lorg/apache/lucene/index/DocumentsWriterPerThread;>;", .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.index.DocumentsWriterFlushControl$BlockedFlush;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocumentsWriterFlushControl = { 2, "DocumentsWriterFlushControl", "org.apache.lucene.index", NULL, 0x10, 47, methods, 25, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocumentsWriterFlushControl = { 2, "DocumentsWriterFlushControl", "org.apache.lucene.index", NULL, 0x10, 43, methods, 25, fields, 0, NULL, 1, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneIndexDocumentsWriterFlushControl;
 }
 

@@ -20,24 +20,19 @@
 #define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
-@class OrgApacheLuceneAnalysisTokenStream;
-@protocol JavaUtilMap;
-
 @interface OrgApacheLuceneAnalysisFrFrenchMinimalStemFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
-
-- (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisFrFrenchMinimalStemFilterFactory)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisFrFrenchMinimalStemFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisFrFrenchMinimalStemFilterFactory *self, id<JavaUtilMap> args);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisFrFrenchMinimalStemFilterFactory_init(OrgApacheLuceneAnalysisFrFrenchMinimalStemFilterFactory *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisFrFrenchMinimalStemFilterFactory *new_OrgApacheLuceneAnalysisFrFrenchMinimalStemFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisFrFrenchMinimalStemFilterFactory *new_OrgApacheLuceneAnalysisFrFrenchMinimalStemFilterFactory_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisFrFrenchMinimalStemFilterFactory)
 

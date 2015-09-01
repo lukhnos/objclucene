@@ -24,37 +24,11 @@
 #define JavaLangIterable_INCLUDE 1
 #include "java/lang/Iterable.h"
 
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneQueriesFilterClause;
-@class OrgApacheLuceneSearchBooleanClause_OccurEnum;
-@class OrgApacheLuceneSearchDocIdSet;
-@protocol JavaUtilIterator;
-@protocol JavaUtilList;
-@protocol OrgApacheLuceneUtilBits;
-
 @interface OrgApacheLuceneQueriesBooleanFilter : OrgApacheLuceneSearchFilter < JavaLangIterable >
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (void)addWithOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter
-withOrgApacheLuceneSearchBooleanClause_OccurEnum:(OrgApacheLuceneSearchBooleanClause_OccurEnum *)occur;
-
-- (void)addWithOrgApacheLuceneQueriesFilterClause:(OrgApacheLuceneQueriesFilterClause *)filterClause;
-
-- (id<JavaUtilList>)clauses;
-
-- (jboolean)isEqual:(id)obj;
-
-- (OrgApacheLuceneSearchDocIdSet *)getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-                                                            withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)acceptDocs;
-
-- (NSUInteger)hash;
-
-- (id<JavaUtilIterator>)iterator;
-
-- (NSString *)toStringWithNSString:(NSString *)field;
 
 #pragma mark Package-Private
 

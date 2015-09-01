@@ -30,8 +30,6 @@
 
 #pragma mark Public
 
-- (id<JavaUtilList>)children;
-
 - (id<JavaUtilList>)leaves;
 
 - (OrgApacheLuceneIndexIndexReader *)reader;

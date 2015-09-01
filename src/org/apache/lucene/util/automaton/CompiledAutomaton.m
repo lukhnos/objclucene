@@ -55,11 +55,6 @@ __attribute__((unused)) static OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUT
 
 @implementation OrgApacheLuceneUtilAutomatonCompiledAutomaton
 
-- (instancetype)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)automaton {
-  OrgApacheLuceneUtilAutomatonCompiledAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_(self, automaton);
-  return self;
-}
-
 + (jint)findSinkStateWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)automaton {
   return OrgApacheLuceneUtilAutomatonCompiledAutomaton_findSinkStateWithOrgApacheLuceneUtilAutomatonAutomaton_(automaton);
 }
@@ -208,7 +203,6 @@ __attribute__((unused)) static OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUT
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneUtilAutomatonAutomaton:", "CompiledAutomaton", NULL, 0x1, NULL, NULL },
     { "findSinkStateWithOrgApacheLuceneUtilAutomatonAutomaton:", "findSinkState", "I", 0xa, NULL, NULL },
     { "initWithOrgApacheLuceneUtilAutomatonAutomaton:withJavaLangBoolean:withBoolean:", "CompiledAutomaton", NULL, 0x1, NULL, NULL },
     { "initWithOrgApacheLuceneUtilAutomatonAutomaton:withJavaLangBoolean:withBoolean:withInt:withBoolean:", "CompiledAutomaton", NULL, 0x1, NULL, NULL },
@@ -229,21 +223,11 @@ __attribute__((unused)) static OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUT
     { "transition_", NULL, 0x2, "Lorg.apache.lucene.util.automaton.Transition;", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.util.automaton.CompiledAutomaton$AUTOMATON_TYPE;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonCompiledAutomaton = { 2, "CompiledAutomaton", "org.apache.lucene.util.automaton", NULL, 0x1, 9, methods, 8, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonCompiledAutomaton = { 2, "CompiledAutomaton", "org.apache.lucene.util.automaton", NULL, 0x1, 8, methods, 8, fields, 0, NULL, 1, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneUtilAutomatonCompiledAutomaton;
 }
 
 @end
-
-void OrgApacheLuceneUtilAutomatonCompiledAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneUtilAutomatonCompiledAutomaton *self, OrgApacheLuceneUtilAutomatonAutomaton *automaton) {
-  OrgApacheLuceneUtilAutomatonCompiledAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withJavaLangBoolean_withBoolean_(self, automaton, nil, YES);
-}
-
-OrgApacheLuceneUtilAutomatonCompiledAutomaton *new_OrgApacheLuceneUtilAutomatonCompiledAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneUtilAutomatonAutomaton *automaton) {
-  OrgApacheLuceneUtilAutomatonCompiledAutomaton *self = [OrgApacheLuceneUtilAutomatonCompiledAutomaton alloc];
-  OrgApacheLuceneUtilAutomatonCompiledAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_(self, automaton);
-  return self;
-}
 
 jint OrgApacheLuceneUtilAutomatonCompiledAutomaton_findSinkStateWithOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneUtilAutomatonAutomaton *automaton) {
   OrgApacheLuceneUtilAutomatonCompiledAutomaton_initialize();

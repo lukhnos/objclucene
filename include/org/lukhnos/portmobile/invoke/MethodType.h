@@ -25,8 +25,6 @@
 
 #pragma mark Public
 
-- (IOSClass *)getType;
-
 + (OrgLukhnosPortmobileInvokeMethodType *)methodTypeWithIOSClass:(IOSClass *)clazz;
 
 #pragma mark Package-Private

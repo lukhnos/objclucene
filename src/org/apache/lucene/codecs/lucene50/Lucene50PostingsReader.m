@@ -11,9 +11,6 @@
 #include "java/io/IOException.h"
 #include "java/lang/IllegalStateException.h"
 #include "java/util/Arrays.h"
-#include "java/util/Collection.h"
-#include "java/util/Collections.h"
-#include "java/util/List.h"
 #include "org/apache/lucene/codecs/BlockTermState.h"
 #include "org/apache/lucene/codecs/CodecUtil.h"
 #include "org/apache/lucene/codecs/PostingsReaderBase.h"
@@ -340,10 +337,6 @@ withOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)_
   return OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BASE_RAM_BYTES_USED_;
 }
 
-- (id<JavaUtilCollection>)getChildResources {
-  return JavaUtilCollections_emptyList();
-}
-
 - (void)checkIntegrity {
   if (docIn_ != nil) {
     OrgApacheLuceneCodecsCodecUtil_checksumEntireFileWithOrgApacheLuceneStoreIndexInput_(docIn_);
@@ -385,7 +378,6 @@ withOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)_
     { "decodeTermWithLongArray:withOrgApacheLuceneStoreDataInput:withOrgApacheLuceneIndexFieldInfo:withOrgApacheLuceneCodecsBlockTermState:withBoolean:", "decodeTerm", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "postingsWithOrgApacheLuceneIndexFieldInfo:withOrgApacheLuceneCodecsBlockTermState:withOrgApacheLuceneIndexPostingsEnum:withInt:", "postings", "Lorg.apache.lucene.index.PostingsEnum;", 0x1, "Ljava.io.IOException;", NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
     { "checkIntegrity", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
   };
@@ -398,7 +390,7 @@ withOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)_
     { "version__", "version", 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.codecs.lucene50.Lucene50PostingsReader$BlockDocsEnum;", "Lorg.apache.lucene.codecs.lucene50.Lucene50PostingsReader$BlockPostingsEnum;", "Lorg.apache.lucene.codecs.lucene50.Lucene50PostingsReader$EverythingEnum;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene50Lucene50PostingsReader = { 2, "Lucene50PostingsReader", "org.apache.lucene.codecs.lucene50", NULL, 0x11, 11, methods, 6, fields, 0, NULL, 3, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene50Lucene50PostingsReader = { 2, "Lucene50PostingsReader", "org.apache.lucene.codecs.lucene50", NULL, 0x11, 10, methods, 6, fields, 0, NULL, 3, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneCodecsLucene50Lucene50PostingsReader;
 }
 

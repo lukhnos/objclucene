@@ -20,25 +20,19 @@
 #define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
-@class OrgApacheLuceneAnalysisTokenFilter;
-@class OrgApacheLuceneAnalysisTokenStream;
-@protocol JavaUtilMap;
-
 @interface OrgApacheLuceneAnalysisNgramEdgeNGramFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
-
-- (OrgApacheLuceneAnalysisTokenFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisNgramEdgeNGramFilterFactory)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisNgramEdgeNGramFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisNgramEdgeNGramFilterFactory *self, id<JavaUtilMap> args);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisNgramEdgeNGramFilterFactory_init(OrgApacheLuceneAnalysisNgramEdgeNGramFilterFactory *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisNgramEdgeNGramFilterFactory *new_OrgApacheLuceneAnalysisNgramEdgeNGramFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisNgramEdgeNGramFilterFactory *new_OrgApacheLuceneAnalysisNgramEdgeNGramFilterFactory_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisNgramEdgeNGramFilterFactory)
 

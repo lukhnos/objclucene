@@ -20,45 +20,19 @@
 #define OrgApacheLuceneUtilFstOutputs_INCLUDE 1
 #include "org/apache/lucene/util/fst/Outputs.h"
 
-@class OrgApacheLuceneStoreDataInput;
-@class OrgApacheLuceneStoreDataOutput;
-@class OrgApacheLuceneUtilIntsRef;
-
 @interface OrgApacheLuceneUtilFstIntSequenceOutputs : OrgApacheLuceneUtilFstOutputs
 
 #pragma mark Public
 
-- (OrgApacheLuceneUtilIntsRef *)addWithId:(OrgApacheLuceneUtilIntsRef *)prefix
-                                   withId:(OrgApacheLuceneUtilIntsRef *)output;
-
-- (OrgApacheLuceneUtilIntsRef *)commonWithId:(OrgApacheLuceneUtilIntsRef *)output1
-                                      withId:(OrgApacheLuceneUtilIntsRef *)output2;
-
-- (OrgApacheLuceneUtilIntsRef *)getNoOutput;
-
-+ (OrgApacheLuceneUtilFstIntSequenceOutputs *)getSingleton;
-
-- (NSString *)outputToStringWithId:(OrgApacheLuceneUtilIntsRef *)output;
-
-- (jlong)ramBytesUsedWithId:(OrgApacheLuceneUtilIntsRef *)output;
-
-- (OrgApacheLuceneUtilIntsRef *)readWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg;
-
-- (void)skipOutputWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg;
-
-- (OrgApacheLuceneUtilIntsRef *)subtractWithId:(OrgApacheLuceneUtilIntsRef *)output
-                                        withId:(OrgApacheLuceneUtilIntsRef *)inc;
-
-- (NSString *)description;
-
-- (void)writeWithId:(OrgApacheLuceneUtilIntsRef *)prefix
-withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg;
+- (instancetype)init;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneUtilFstIntSequenceOutputs)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilFstIntSequenceOutputs)
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilFstIntSequenceOutputs *OrgApacheLuceneUtilFstIntSequenceOutputs_getSingleton();
+FOUNDATION_EXPORT void OrgApacheLuceneUtilFstIntSequenceOutputs_init(OrgApacheLuceneUtilFstIntSequenceOutputs *self);
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstIntSequenceOutputs *new_OrgApacheLuceneUtilFstIntSequenceOutputs_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstIntSequenceOutputs)
 

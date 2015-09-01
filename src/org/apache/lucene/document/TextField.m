@@ -4,8 +4,6 @@
 //
 
 #include "J2ObjC_source.h"
-#include "java/io/Reader.h"
-#include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/document/Field.h"
 #include "org/apache/lucene/document/FieldType.h"
 #include "org/apache/lucene/document/TextField.h"
@@ -19,21 +17,9 @@ OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentTextField_TYPE_STORED_;
 @implementation OrgApacheLuceneDocumentTextField
 
 - (instancetype)initWithNSString:(NSString *)name
-                withJavaIoReader:(JavaIoReader *)reader {
-  OrgApacheLuceneDocumentTextField_initWithNSString_withJavaIoReader_(self, name, reader);
-  return self;
-}
-
-- (instancetype)initWithNSString:(NSString *)name
                     withNSString:(NSString *)value
 withOrgApacheLuceneDocumentField_StoreEnum:(OrgApacheLuceneDocumentField_StoreEnum *)store {
   OrgApacheLuceneDocumentTextField_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_StoreEnum_(self, name, value, store);
-  return self;
-}
-
-- (instancetype)initWithNSString:(NSString *)name
-withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)stream {
-  OrgApacheLuceneDocumentTextField_initWithNSString_withOrgApacheLuceneAnalysisTokenStream_(self, name, stream);
   return self;
 }
 
@@ -56,29 +42,17 @@ withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)str
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withJavaIoReader:", "TextField", NULL, 0x1, NULL, NULL },
     { "initWithNSString:withNSString:withOrgApacheLuceneDocumentField_StoreEnum:", "TextField", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withOrgApacheLuceneAnalysisTokenStream:", "TextField", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "TYPE_NOT_STORED_", NULL, 0x19, "Lorg.apache.lucene.document.FieldType;", &OrgApacheLuceneDocumentTextField_TYPE_NOT_STORED_, NULL, .constantValue.asLong = 0 },
     { "TYPE_STORED_", NULL, 0x19, "Lorg.apache.lucene.document.FieldType;", &OrgApacheLuceneDocumentTextField_TYPE_STORED_, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneDocumentTextField = { 2, "TextField", "org.apache.lucene.document", NULL, 0x11, 3, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneDocumentTextField = { 2, "TextField", "org.apache.lucene.document", NULL, 0x11, 1, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneDocumentTextField;
 }
 
 @end
-
-void OrgApacheLuceneDocumentTextField_initWithNSString_withJavaIoReader_(OrgApacheLuceneDocumentTextField *self, NSString *name, JavaIoReader *reader) {
-  OrgApacheLuceneDocumentField_initWithNSString_withJavaIoReader_withOrgApacheLuceneDocumentFieldType_(self, name, reader, OrgApacheLuceneDocumentTextField_TYPE_NOT_STORED_);
-}
-
-OrgApacheLuceneDocumentTextField *new_OrgApacheLuceneDocumentTextField_initWithNSString_withJavaIoReader_(NSString *name, JavaIoReader *reader) {
-  OrgApacheLuceneDocumentTextField *self = [OrgApacheLuceneDocumentTextField alloc];
-  OrgApacheLuceneDocumentTextField_initWithNSString_withJavaIoReader_(self, name, reader);
-  return self;
-}
 
 void OrgApacheLuceneDocumentTextField_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_StoreEnum_(OrgApacheLuceneDocumentTextField *self, NSString *name, NSString *value, OrgApacheLuceneDocumentField_StoreEnum *store) {
   OrgApacheLuceneDocumentField_initWithNSString_withNSString_withOrgApacheLuceneDocumentFieldType_(self, name, value, store == JreLoadStatic(OrgApacheLuceneDocumentField_StoreEnum, YES) ? OrgApacheLuceneDocumentTextField_TYPE_STORED_ : OrgApacheLuceneDocumentTextField_TYPE_NOT_STORED_);
@@ -87,16 +61,6 @@ void OrgApacheLuceneDocumentTextField_initWithNSString_withNSString_withOrgApach
 OrgApacheLuceneDocumentTextField *new_OrgApacheLuceneDocumentTextField_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_StoreEnum_(NSString *name, NSString *value, OrgApacheLuceneDocumentField_StoreEnum *store) {
   OrgApacheLuceneDocumentTextField *self = [OrgApacheLuceneDocumentTextField alloc];
   OrgApacheLuceneDocumentTextField_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_StoreEnum_(self, name, value, store);
-  return self;
-}
-
-void OrgApacheLuceneDocumentTextField_initWithNSString_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneDocumentTextField *self, NSString *name, OrgApacheLuceneAnalysisTokenStream *stream) {
-  OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneDocumentFieldType_(self, name, stream, OrgApacheLuceneDocumentTextField_TYPE_NOT_STORED_);
-}
-
-OrgApacheLuceneDocumentTextField *new_OrgApacheLuceneDocumentTextField_initWithNSString_withOrgApacheLuceneAnalysisTokenStream_(NSString *name, OrgApacheLuceneAnalysisTokenStream *stream) {
-  OrgApacheLuceneDocumentTextField *self = [OrgApacheLuceneDocumentTextField alloc];
-  OrgApacheLuceneDocumentTextField_initWithNSString_withOrgApacheLuceneAnalysisTokenStream_(self, name, stream);
   return self;
 }
 

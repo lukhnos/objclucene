@@ -20,25 +20,19 @@
 #define OrgApacheLuceneSearchFilterCollector_INCLUDE 1
 #include "org/apache/lucene/search/FilterCollector.h"
 
-@class OrgApacheLuceneIndexLeafReaderContext;
-@protocol OrgApacheLuceneSearchCollector;
-@protocol OrgApacheLuceneSearchLeafCollector;
-
 @interface OrgApacheLuceneSearchPositiveScoresOnlyCollector : OrgApacheLuceneSearchFilterCollector
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchCollector:(id<OrgApacheLuceneSearchCollector>)inArg;
-
-- (id<OrgApacheLuceneSearchLeafCollector>)getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchPositiveScoresOnlyCollector)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchPositiveScoresOnlyCollector_initWithOrgApacheLuceneSearchCollector_(OrgApacheLuceneSearchPositiveScoresOnlyCollector *self, id<OrgApacheLuceneSearchCollector> inArg);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchPositiveScoresOnlyCollector_init(OrgApacheLuceneSearchPositiveScoresOnlyCollector *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchPositiveScoresOnlyCollector *new_OrgApacheLuceneSearchPositiveScoresOnlyCollector_initWithOrgApacheLuceneSearchCollector_(id<OrgApacheLuceneSearchCollector> inArg) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchPositiveScoresOnlyCollector *new_OrgApacheLuceneSearchPositiveScoresOnlyCollector_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPositiveScoresOnlyCollector)
 

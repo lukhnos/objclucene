@@ -20,9 +20,6 @@
 #define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
-@class IOSCharArray;
-@class OrgApacheLuceneAnalysisTokenStream;
-
 #define OrgApacheLuceneAnalysisReverseReverseStringFilter_START_OF_HEADING_MARKER 0x0001
 #define OrgApacheLuceneAnalysisReverseReverseStringFilter_INFORMATION_SEPARATOR_MARKER 0x001f
 #define OrgApacheLuceneAnalysisReverseReverseStringFilter_PUA_EC00_MARKER 0xec00
@@ -32,23 +29,7 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
-
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
-                                                  withChar:(jchar)marker;
-
-- (jboolean)incrementToken;
-
-+ (void)reverseWithCharArray:(IOSCharArray *)buffer;
-
-+ (void)reverseWithCharArray:(IOSCharArray *)buffer
-                     withInt:(jint)len;
-
-+ (void)reverseWithCharArray:(IOSCharArray *)buffer
-                     withInt:(jint)start
-                     withInt:(jint)len;
-
-+ (NSString *)reverseWithNSString:(NSString *)input;
+- (instancetype)init;
 
 @end
 
@@ -62,21 +43,9 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisReverseReverseStringFilter, PU
 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisReverseReverseStringFilter, RTL_DIRECTION_MARKER, jchar)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisReverseReverseStringFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisReverseReverseStringFilter *self, OrgApacheLuceneAnalysisTokenStream *inArg);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisReverseReverseStringFilter_init(OrgApacheLuceneAnalysisReverseReverseStringFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisReverseReverseStringFilter *new_OrgApacheLuceneAnalysisReverseReverseStringFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisReverseReverseStringFilter_initWithOrgApacheLuceneAnalysisTokenStream_withChar_(OrgApacheLuceneAnalysisReverseReverseStringFilter *self, OrgApacheLuceneAnalysisTokenStream *inArg, jchar marker);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisReverseReverseStringFilter *new_OrgApacheLuceneAnalysisReverseReverseStringFilter_initWithOrgApacheLuceneAnalysisTokenStream_withChar_(OrgApacheLuceneAnalysisTokenStream *inArg, jchar marker) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisReverseReverseStringFilter_reverseWithNSString_(NSString *input);
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisReverseReverseStringFilter_reverseWithCharArray_(IOSCharArray *buffer);
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisReverseReverseStringFilter_reverseWithCharArray_withInt_(IOSCharArray *buffer, jint len);
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisReverseReverseStringFilter_reverseWithCharArray_withInt_withInt_(IOSCharArray *buffer, jint start, jint len);
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisReverseReverseStringFilter *new_OrgApacheLuceneAnalysisReverseReverseStringFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisReverseReverseStringFilter)
 

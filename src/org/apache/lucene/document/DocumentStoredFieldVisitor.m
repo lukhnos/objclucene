@@ -4,11 +4,9 @@
 //
 
 #include "IOSClass.h"
-#include "IOSObjectArray.h"
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
-#include "java/util/HashSet.h"
 #include "java/util/Set.h"
 #include "org/apache/lucene/document/Document.h"
 #include "org/apache/lucene/document/DocumentStoredFieldVisitor.h"
@@ -36,11 +34,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneDocumentDocumentStoredFieldVisitor, fieldsToA
 
 - (instancetype)initWithJavaUtilSet:(id<JavaUtilSet>)fieldsToAdd {
   OrgApacheLuceneDocumentDocumentStoredFieldVisitor_initWithJavaUtilSet_(self, fieldsToAdd);
-  return self;
-}
-
-- (instancetype)initWithNSStringArray:(IOSObjectArray *)fields {
-  OrgApacheLuceneDocumentDocumentStoredFieldVisitor_initWithNSStringArray_(self, fields);
   return self;
 }
 
@@ -100,7 +93,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneDocumentDocumentStoredFieldVisitor, fieldsToA
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithJavaUtilSet:", "DocumentStoredFieldVisitor", NULL, 0x1, NULL, NULL },
-    { "initWithNSStringArray:", "DocumentStoredFieldVisitor", NULL, 0x81, NULL, NULL },
     { "init", "DocumentStoredFieldVisitor", NULL, 0x1, NULL, NULL },
     { "binaryFieldWithOrgApacheLuceneIndexFieldInfo:withByteArray:", "binaryField", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "stringFieldWithOrgApacheLuceneIndexFieldInfo:withByteArray:", "stringField", "V", 0x1, "Ljava.io.IOException;", NULL },
@@ -115,7 +107,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneDocumentDocumentStoredFieldVisitor, fieldsToA
     { "doc_", NULL, 0x12, "Lorg.apache.lucene.document.Document;", NULL, NULL, .constantValue.asLong = 0 },
     { "fieldsToAdd_", NULL, 0x12, "Ljava.util.Set;", NULL, "Ljava/util/Set<Ljava/lang/String;>;", .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneDocumentDocumentStoredFieldVisitor = { 2, "DocumentStoredFieldVisitor", "org.apache.lucene.document", NULL, 0x1, 11, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneDocumentDocumentStoredFieldVisitor = { 2, "DocumentStoredFieldVisitor", "org.apache.lucene.document", NULL, 0x1, 10, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneDocumentDocumentStoredFieldVisitor;
 }
 
@@ -130,27 +122,6 @@ void OrgApacheLuceneDocumentDocumentStoredFieldVisitor_initWithJavaUtilSet_(OrgA
 OrgApacheLuceneDocumentDocumentStoredFieldVisitor *new_OrgApacheLuceneDocumentDocumentStoredFieldVisitor_initWithJavaUtilSet_(id<JavaUtilSet> fieldsToAdd) {
   OrgApacheLuceneDocumentDocumentStoredFieldVisitor *self = [OrgApacheLuceneDocumentDocumentStoredFieldVisitor alloc];
   OrgApacheLuceneDocumentDocumentStoredFieldVisitor_initWithJavaUtilSet_(self, fieldsToAdd);
-  return self;
-}
-
-void OrgApacheLuceneDocumentDocumentStoredFieldVisitor_initWithNSStringArray_(OrgApacheLuceneDocumentDocumentStoredFieldVisitor *self, IOSObjectArray *fields) {
-  OrgApacheLuceneIndexStoredFieldVisitor_init(self);
-  JreStrongAssignAndConsume(&self->doc_, new_OrgApacheLuceneDocumentDocument_init());
-  JreStrongAssignAndConsume(&self->fieldsToAdd_, new_JavaUtilHashSet_initWithInt_(((IOSObjectArray *) nil_chk(fields))->size_));
-  {
-    IOSObjectArray *a__ = fields;
-    NSString * const *b__ = a__->buffer_;
-    NSString * const *e__ = b__ + a__->size_;
-    while (b__ < e__) {
-      NSString *field = *b__++;
-      [self->fieldsToAdd_ addWithId:field];
-    }
-  }
-}
-
-OrgApacheLuceneDocumentDocumentStoredFieldVisitor *new_OrgApacheLuceneDocumentDocumentStoredFieldVisitor_initWithNSStringArray_(IOSObjectArray *fields) {
-  OrgApacheLuceneDocumentDocumentStoredFieldVisitor *self = [OrgApacheLuceneDocumentDocumentStoredFieldVisitor alloc];
-  OrgApacheLuceneDocumentDocumentStoredFieldVisitor_initWithNSStringArray_(self, fields);
   return self;
 }
 

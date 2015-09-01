@@ -21,7 +21,6 @@
 #include "org/apache/lucene/store/DataInput.h"
 
 @class IOSByteArray;
-@class OrgApacheLuceneStoreDataOutput;
 @class OrgApacheLuceneUtilByteBlockPool;
 
 @interface OrgApacheLuceneIndexByteSliceReader : OrgApacheLuceneStoreDataInput {
@@ -51,8 +50,6 @@
 - (void)readBytesWithByteArray:(IOSByteArray *)b
                        withInt:(jint)offset
                        withInt:(jint)len;
-
-- (jlong)writeToWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg;
 
 #pragma mark Package-Private
 

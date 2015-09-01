@@ -20,25 +20,19 @@
 #define OrgApacheLuceneAnalysisUtilTokenizerFactory_INCLUDE 1
 #include "org/apache/lucene/analysis/util/TokenizerFactory.h"
 
-@class OrgApacheLuceneAnalysisTokenizer;
-@class OrgApacheLuceneUtilAttributeFactory;
-@protocol JavaUtilMap;
-
 @interface OrgApacheLuceneAnalysisNgramNGramTokenizerFactory : OrgApacheLuceneAnalysisUtilTokenizerFactory
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
-
-- (OrgApacheLuceneAnalysisTokenizer *)createWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisNgramNGramTokenizerFactory)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisNgramNGramTokenizerFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisNgramNGramTokenizerFactory *self, id<JavaUtilMap> args);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisNgramNGramTokenizerFactory_init(OrgApacheLuceneAnalysisNgramNGramTokenizerFactory *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisNgramNGramTokenizerFactory *new_OrgApacheLuceneAnalysisNgramNGramTokenizerFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisNgramNGramTokenizerFactory *new_OrgApacheLuceneAnalysisNgramNGramTokenizerFactory_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisNgramNGramTokenizerFactory)
 

@@ -16,13 +16,7 @@
 #if !defined (_OrgApacheLuceneSearchFilterCache_) && (OrgApacheLuceneSearchFilterCache_INCLUDE_ALL || OrgApacheLuceneSearchFilterCache_INCLUDE)
 #define _OrgApacheLuceneSearchFilterCache_
 
-@class OrgApacheLuceneSearchFilter;
-@protocol OrgApacheLuceneSearchFilterCachingPolicy;
-
 @protocol OrgApacheLuceneSearchFilterCache < NSObject, JavaObject >
-
-- (OrgApacheLuceneSearchFilter *)doCacheWithOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter
-                           withOrgApacheLuceneSearchFilterCachingPolicy:(id<OrgApacheLuceneSearchFilterCachingPolicy>)policy;
 
 @end
 

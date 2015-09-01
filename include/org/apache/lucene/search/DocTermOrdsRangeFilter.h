@@ -20,56 +20,17 @@
 #define OrgApacheLuceneSearchFilter_INCLUDE 1
 #include "org/apache/lucene/search/Filter.h"
 
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneSearchDocIdSet;
-@class OrgApacheLuceneUtilBytesRef;
-@protocol OrgApacheLuceneUtilBits;
-
-@interface OrgApacheLuceneSearchDocTermOrdsRangeFilter : OrgApacheLuceneSearchFilter {
- @public
-  NSString *field_;
-  OrgApacheLuceneUtilBytesRef *lowerVal_;
-  OrgApacheLuceneUtilBytesRef *upperVal_;
-  jboolean includeLower_;
-  jboolean includeUpper_;
-}
+@interface OrgApacheLuceneSearchDocTermOrdsRangeFilter : OrgApacheLuceneSearchFilter
 
 #pragma mark Public
 
-- (jboolean)isEqual:(id)o;
-
-- (OrgApacheLuceneSearchDocIdSet *)getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-                                                            withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)acceptDocs;
-
-- (NSString *)getField;
-
-- (OrgApacheLuceneUtilBytesRef *)getLowerVal;
-
-- (OrgApacheLuceneUtilBytesRef *)getUpperVal;
-
-- (NSUInteger)hash;
-
-- (jboolean)includesLower;
-
-- (jboolean)includesUpper;
-
-+ (OrgApacheLuceneSearchDocTermOrdsRangeFilter *)newBytesRefRangeWithNSString:(NSString *)field
-                                              withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)lowerVal
-                                              withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)upperVal
-                                                                  withBoolean:(jboolean)includeLower
-                                                                  withBoolean:(jboolean)includeUpper OBJC_METHOD_FAMILY_NONE;
-
-- (NSString *)toStringWithNSString:(NSString *)defaultField;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchDocTermOrdsRangeFilter)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchDocTermOrdsRangeFilter, field_, NSString *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchDocTermOrdsRangeFilter, lowerVal_, OrgApacheLuceneUtilBytesRef *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchDocTermOrdsRangeFilter, upperVal_, OrgApacheLuceneUtilBytesRef *)
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchDocTermOrdsRangeFilter *OrgApacheLuceneSearchDocTermOrdsRangeFilter_newBytesRefRangeWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_(NSString *field, OrgApacheLuceneUtilBytesRef *lowerVal, OrgApacheLuceneUtilBytesRef *upperVal, jboolean includeLower, jboolean includeUpper);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchDocTermOrdsRangeFilter_init(OrgApacheLuceneSearchDocTermOrdsRangeFilter *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocTermOrdsRangeFilter)
 

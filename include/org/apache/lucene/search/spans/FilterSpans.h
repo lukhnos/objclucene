@@ -22,7 +22,6 @@
 
 @class OrgApacheLuceneSearchSpansFilterSpans_AcceptStatusEnum;
 @class OrgApacheLuceneSearchTwoPhaseIterator;
-@protocol OrgApacheLuceneSearchSpansSpanCollector;
 
 @interface OrgApacheLuceneSearchSpansFilterSpans : OrgApacheLuceneSearchSpansSpans {
  @public
@@ -34,8 +33,6 @@
 - (jint)advanceWithInt:(jint)target;
 
 - (OrgApacheLuceneSearchTwoPhaseIterator *)asTwoPhaseIterator;
-
-- (void)collectWithOrgApacheLuceneSearchSpansSpanCollector:(id<OrgApacheLuceneSearchSpansSpanCollector>)collector;
 
 - (jlong)cost;
 

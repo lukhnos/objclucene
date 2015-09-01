@@ -20,25 +20,19 @@
 #define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
-@class OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap;
-@class OrgApacheLuceneAnalysisTokenStream;
-
 @interface OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-withOrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap:(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap *)stemmerOverrideMap;
-
-- (jboolean)incrementToken;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap_(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter *self, OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap *stemmerOverrideMap);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_init(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter *new_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap_(OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap *stemmerOverrideMap) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter *new_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter)
 
@@ -47,33 +41,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFi
 #if !defined (_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap_) && (OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap_INCLUDE)
 #define _OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap_
 
-@class IOSCharArray;
-@class OrgApacheLuceneUtilBytesRef;
-@class OrgApacheLuceneUtilFstFST;
-@class OrgApacheLuceneUtilFstFST_Arc;
-@class OrgApacheLuceneUtilFstFST_BytesReader;
-
 @interface OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap : NSObject
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)fst
-                                      withBoolean:(jboolean)ignoreCase;
-
-- (OrgApacheLuceneUtilBytesRef *)getWithCharArray:(IOSCharArray *)buffer
-                                          withInt:(jint)bufferLen
-                withOrgApacheLuceneUtilFstFST_Arc:(OrgApacheLuceneUtilFstFST_Arc *)scratchArc
-        withOrgApacheLuceneUtilFstFST_BytesReader:(OrgApacheLuceneUtilFstFST_BytesReader *)fstReader;
-
-- (OrgApacheLuceneUtilFstFST_BytesReader *)getBytesReader;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap_initWithOrgApacheLuceneUtilFstFST_withBoolean_(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap *self, OrgApacheLuceneUtilFstFST *fst, jboolean ignoreCase);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap_init(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap *new_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap_initWithOrgApacheLuceneUtilFstFST_withBoolean_(OrgApacheLuceneUtilFstFST *fst, jboolean ignoreCase) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap *new_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap)
 
@@ -82,21 +62,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFi
 #if !defined (_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder_) && (OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder_INCLUDE)
 #define _OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder_
 
-@class OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap;
-@protocol JavaLangCharSequence;
-
 @interface OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (instancetype)initWithBoolean:(jboolean)ignoreCase;
-
-- (jboolean)addWithJavaLangCharSequence:(id<JavaLangCharSequence>)input
-               withJavaLangCharSequence:(id<JavaLangCharSequence>)output;
-
-- (OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap *)build;
 
 @end
 
@@ -105,10 +75,6 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilt
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder_init(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder *new_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder_init() NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder_initWithBoolean_(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder *self, jboolean ignoreCase);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder *new_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder_initWithBoolean_(jboolean ignoreCase) NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder)
 

@@ -24,30 +24,19 @@
 #define JavaIoCloseable_INCLUDE 1
 #include "java/io/Closeable.h"
 
-@class IOSByteArray;
-@class JavaIoInputStream;
-
 @interface OrgApacheLuceneStoreInputStreamDataInput : OrgApacheLuceneStoreDataInput < JavaIoCloseable >
 
 #pragma mark Public
 
-- (instancetype)initWithJavaIoInputStream:(JavaIoInputStream *)is;
-
-- (void)close;
-
-- (jbyte)readByte;
-
-- (void)readBytesWithByteArray:(IOSByteArray *)b
-                       withInt:(jint)offset
-                       withInt:(jint)len;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneStoreInputStreamDataInput)
 
-FOUNDATION_EXPORT void OrgApacheLuceneStoreInputStreamDataInput_initWithJavaIoInputStream_(OrgApacheLuceneStoreInputStreamDataInput *self, JavaIoInputStream *is);
+FOUNDATION_EXPORT void OrgApacheLuceneStoreInputStreamDataInput_init(OrgApacheLuceneStoreInputStreamDataInput *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneStoreInputStreamDataInput *new_OrgApacheLuceneStoreInputStreamDataInput_initWithJavaIoInputStream_(JavaIoInputStream *is) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneStoreInputStreamDataInput *new_OrgApacheLuceneStoreInputStreamDataInput_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreInputStreamDataInput)
 

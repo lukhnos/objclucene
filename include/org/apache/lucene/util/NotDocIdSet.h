@@ -20,31 +20,19 @@
 #define OrgApacheLuceneSearchDocIdSet_INCLUDE 1
 #include "org/apache/lucene/search/DocIdSet.h"
 
-@class OrgApacheLuceneSearchDocIdSetIterator;
-@protocol OrgApacheLuceneUtilBits;
-
 @interface OrgApacheLuceneUtilNotDocIdSet : OrgApacheLuceneSearchDocIdSet
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)maxDoc
-withOrgApacheLuceneSearchDocIdSet:(OrgApacheLuceneSearchDocIdSet *)inArg;
-
-- (id<OrgApacheLuceneUtilBits>)bits;
-
-- (jboolean)isCacheable;
-
-- (OrgApacheLuceneSearchDocIdSetIterator *)iterator;
-
-- (jlong)ramBytesUsed;
+- (instancetype)init;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneUtilNotDocIdSet)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilNotDocIdSet)
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilNotDocIdSet_initWithInt_withOrgApacheLuceneSearchDocIdSet_(OrgApacheLuceneUtilNotDocIdSet *self, jint maxDoc, OrgApacheLuceneSearchDocIdSet *inArg);
+FOUNDATION_EXPORT void OrgApacheLuceneUtilNotDocIdSet_init(OrgApacheLuceneUtilNotDocIdSet *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilNotDocIdSet *new_OrgApacheLuceneUtilNotDocIdSet_initWithInt_withOrgApacheLuceneSearchDocIdSet_(jint maxDoc, OrgApacheLuceneSearchDocIdSet *inArg) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilNotDocIdSet *new_OrgApacheLuceneUtilNotDocIdSet_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilNotDocIdSet)
 

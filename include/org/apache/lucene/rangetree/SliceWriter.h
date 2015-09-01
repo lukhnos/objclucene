@@ -20,17 +20,7 @@
 #define JavaIoCloseable_INCLUDE 1
 #include "java/io/Closeable.h"
 
-@protocol OrgApacheLuceneRangetreeSliceReader;
-
 @protocol OrgApacheLuceneRangetreeSliceWriter < JavaIoCloseable, NSObject, JavaObject >
-
-- (void)appendWithLong:(jlong)value
-              withLong:(jlong)ord
-               withInt:(jint)docID;
-
-- (id<OrgApacheLuceneRangetreeSliceReader>)getReaderWithLong:(jlong)start;
-
-- (void)destroy;
 
 @end
 

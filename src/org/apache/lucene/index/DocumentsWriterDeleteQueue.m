@@ -4,30 +4,19 @@
 //
 
 #include "IOSClass.h"
-#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/lang/IllegalArgumentException.h"
 #include "java/lang/IllegalStateException.h"
 #include "java/lang/Integer.h"
-#include "java/lang/Long.h"
-#include "java/lang/StringBuilder.h"
-#include "java/util/Arrays.h"
-#include "java/util/Collection.h"
-#include "java/util/Collections.h"
-#include "java/util/List.h"
-#include "java/util/Map.h"
 #include "java/util/concurrent/atomic/AtomicInteger.h"
 #include "java/util/concurrent/atomic/AtomicLong.h"
 #include "java/util/concurrent/atomic/AtomicReferenceFieldUpdater.h"
 #include "java/util/concurrent/locks/ReentrantLock.h"
 #include "org/apache/lucene/index/BufferedUpdates.h"
-#include "org/apache/lucene/index/DocValuesType.h"
-#include "org/apache/lucene/index/DocValuesUpdate.h"
 #include "org/apache/lucene/index/DocumentsWriterDeleteQueue.h"
 #include "org/apache/lucene/index/FrozenBufferedUpdates.h"
 #include "org/apache/lucene/index/Term.h"
-#include "org/apache/lucene/search/Query.h"
-#include "org/apache/lucene/util/BytesRef.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @interface OrgApacheLuceneIndexDocumentsWriterDeleteQueue () {
  @public
@@ -36,8 +25,6 @@
   OrgApacheLuceneIndexBufferedUpdates *globalBufferedUpdates_;
   JavaUtilConcurrentLocksReentrantLock *globalBufferLock_;
 }
-
-- (jboolean)forceApplyGlobalSlice;
 
 @end
 
@@ -48,8 +35,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriterDeleteQueue, globalBuffer
 
 static JavaUtilConcurrentAtomicAtomicReferenceFieldUpdater *OrgApacheLuceneIndexDocumentsWriterDeleteQueue_tailUpdater_;
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneIndexDocumentsWriterDeleteQueue, tailUpdater_, JavaUtilConcurrentAtomicAtomicReferenceFieldUpdater *)
-
-__attribute__((unused)) static jboolean OrgApacheLuceneIndexDocumentsWriterDeleteQueue_forceApplyGlobalSlice(OrgApacheLuceneIndexDocumentsWriterDeleteQueue *self);
 
 @interface OrgApacheLuceneIndexDocumentsWriterDeleteQueue_TermNode : OrgApacheLuceneIndexDocumentsWriterDeleteQueue_Node
 
@@ -72,56 +57,43 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriterDeleteQueue_TermNo
 
 @interface OrgApacheLuceneIndexDocumentsWriterDeleteQueue_QueryArrayNode : OrgApacheLuceneIndexDocumentsWriterDeleteQueue_Node
 
-- (instancetype)initWithOrgApacheLuceneSearchQueryArray:(IOSObjectArray *)query;
-
-- (void)applyWithOrgApacheLuceneIndexBufferedUpdates:(OrgApacheLuceneIndexBufferedUpdates *)bufferedUpdates
-                                             withInt:(jint)docIDUpto;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexDocumentsWriterDeleteQueue_QueryArrayNode)
 
-__attribute__((unused)) static void OrgApacheLuceneIndexDocumentsWriterDeleteQueue_QueryArrayNode_initWithOrgApacheLuceneSearchQueryArray_(OrgApacheLuceneIndexDocumentsWriterDeleteQueue_QueryArrayNode *self, IOSObjectArray *query);
+__attribute__((unused)) static void OrgApacheLuceneIndexDocumentsWriterDeleteQueue_QueryArrayNode_init(OrgApacheLuceneIndexDocumentsWriterDeleteQueue_QueryArrayNode *self);
 
-__attribute__((unused)) static OrgApacheLuceneIndexDocumentsWriterDeleteQueue_QueryArrayNode *new_OrgApacheLuceneIndexDocumentsWriterDeleteQueue_QueryArrayNode_initWithOrgApacheLuceneSearchQueryArray_(IOSObjectArray *query) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneIndexDocumentsWriterDeleteQueue_QueryArrayNode *new_OrgApacheLuceneIndexDocumentsWriterDeleteQueue_QueryArrayNode_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriterDeleteQueue_QueryArrayNode)
 
 @interface OrgApacheLuceneIndexDocumentsWriterDeleteQueue_TermArrayNode : OrgApacheLuceneIndexDocumentsWriterDeleteQueue_Node
 
-- (instancetype)initWithOrgApacheLuceneIndexTermArray:(IOSObjectArray *)term;
-
-- (void)applyWithOrgApacheLuceneIndexBufferedUpdates:(OrgApacheLuceneIndexBufferedUpdates *)bufferedUpdates
-                                             withInt:(jint)docIDUpto;
-
-- (NSString *)description;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexDocumentsWriterDeleteQueue_TermArrayNode)
 
-__attribute__((unused)) static void OrgApacheLuceneIndexDocumentsWriterDeleteQueue_TermArrayNode_initWithOrgApacheLuceneIndexTermArray_(OrgApacheLuceneIndexDocumentsWriterDeleteQueue_TermArrayNode *self, IOSObjectArray *term);
+__attribute__((unused)) static void OrgApacheLuceneIndexDocumentsWriterDeleteQueue_TermArrayNode_init(OrgApacheLuceneIndexDocumentsWriterDeleteQueue_TermArrayNode *self);
 
-__attribute__((unused)) static OrgApacheLuceneIndexDocumentsWriterDeleteQueue_TermArrayNode *new_OrgApacheLuceneIndexDocumentsWriterDeleteQueue_TermArrayNode_initWithOrgApacheLuceneIndexTermArray_(IOSObjectArray *term) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneIndexDocumentsWriterDeleteQueue_TermArrayNode *new_OrgApacheLuceneIndexDocumentsWriterDeleteQueue_TermArrayNode_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriterDeleteQueue_TermArrayNode)
 
 @interface OrgApacheLuceneIndexDocumentsWriterDeleteQueue_DocValuesUpdatesNode : OrgApacheLuceneIndexDocumentsWriterDeleteQueue_Node
 
-- (instancetype)initWithOrgApacheLuceneIndexDocValuesUpdateArray:(IOSObjectArray *)updates;
-
-- (void)applyWithOrgApacheLuceneIndexBufferedUpdates:(OrgApacheLuceneIndexBufferedUpdates *)bufferedUpdates
-                                             withInt:(jint)docIDUpto;
-
-- (NSString *)description;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexDocumentsWriterDeleteQueue_DocValuesUpdatesNode)
 
-__attribute__((unused)) static void OrgApacheLuceneIndexDocumentsWriterDeleteQueue_DocValuesUpdatesNode_initWithOrgApacheLuceneIndexDocValuesUpdateArray_(OrgApacheLuceneIndexDocumentsWriterDeleteQueue_DocValuesUpdatesNode *self, IOSObjectArray *updates);
+__attribute__((unused)) static void OrgApacheLuceneIndexDocumentsWriterDeleteQueue_DocValuesUpdatesNode_init(OrgApacheLuceneIndexDocumentsWriterDeleteQueue_DocValuesUpdatesNode *self);
 
-__attribute__((unused)) static OrgApacheLuceneIndexDocumentsWriterDeleteQueue_DocValuesUpdatesNode *new_OrgApacheLuceneIndexDocumentsWriterDeleteQueue_DocValuesUpdatesNode_initWithOrgApacheLuceneIndexDocValuesUpdateArray_(IOSObjectArray *updates) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneIndexDocumentsWriterDeleteQueue_DocValuesUpdatesNode *new_OrgApacheLuceneIndexDocumentsWriterDeleteQueue_DocValuesUpdatesNode_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocumentsWriterDeleteQueue_DocValuesUpdatesNode)
 
@@ -143,21 +115,6 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexDocumentsWriterDeleteQueue)
                                                    withLong:(jlong)generation {
   OrgApacheLuceneIndexDocumentsWriterDeleteQueue_initWithOrgApacheLuceneIndexBufferedUpdates_withLong_(self, globalBufferedUpdates, generation);
   return self;
-}
-
-- (void)addDeleteWithOrgApacheLuceneSearchQueryArray:(IOSObjectArray *)queries {
-  [self addWithOrgApacheLuceneIndexDocumentsWriterDeleteQueue_Node:[new_OrgApacheLuceneIndexDocumentsWriterDeleteQueue_QueryArrayNode_initWithOrgApacheLuceneSearchQueryArray_(queries) autorelease]];
-  [self tryApplyGlobalSlice];
-}
-
-- (void)addDeleteWithOrgApacheLuceneIndexTermArray:(IOSObjectArray *)terms {
-  [self addWithOrgApacheLuceneIndexDocumentsWriterDeleteQueue_Node:[new_OrgApacheLuceneIndexDocumentsWriterDeleteQueue_TermArrayNode_initWithOrgApacheLuceneIndexTermArray_(terms) autorelease]];
-  [self tryApplyGlobalSlice];
-}
-
-- (void)addDocValuesUpdatesWithOrgApacheLuceneIndexDocValuesUpdateArray:(IOSObjectArray *)updates {
-  [self addWithOrgApacheLuceneIndexDocumentsWriterDeleteQueue_Node:[new_OrgApacheLuceneIndexDocumentsWriterDeleteQueue_DocValuesUpdatesNode_initWithOrgApacheLuceneIndexDocValuesUpdateArray_(updates) autorelease]];
-  [self tryApplyGlobalSlice];
 }
 
 - (void)addWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
@@ -258,27 +215,8 @@ withOrgApacheLuceneIndexDocumentsWriterDeleteQueue_DeleteSlice:(OrgApacheLuceneI
   }
 }
 
-- (jboolean)forceApplyGlobalSlice {
-  return OrgApacheLuceneIndexDocumentsWriterDeleteQueue_forceApplyGlobalSlice(self);
-}
-
-- (jint)getBufferedUpdatesTermsSize {
-  [((JavaUtilConcurrentLocksReentrantLock *) nil_chk(globalBufferLock_)) lock];
-  @try {
-    OrgApacheLuceneIndexDocumentsWriterDeleteQueue_forceApplyGlobalSlice(self);
-    return [((id<JavaUtilMap>) nil_chk(((OrgApacheLuceneIndexBufferedUpdates *) nil_chk(globalBufferedUpdates_))->terms_)) size];
-  }
-  @finally {
-    [globalBufferLock_ unlock];
-  }
-}
-
 - (jlong)ramBytesUsed {
   return [((JavaUtilConcurrentAtomicAtomicLong *) nil_chk(((OrgApacheLuceneIndexBufferedUpdates *) nil_chk(globalBufferedUpdates_))->bytesUsed_)) get];
-}
-
-- (id<JavaUtilCollection>)getChildResources {
-  return JavaUtilCollections_emptyList();
 }
 
 - (NSString *)description {
@@ -310,9 +248,6 @@ withOrgApacheLuceneIndexDocumentsWriterDeleteQueue_DeleteSlice:(OrgApacheLuceneI
     { "init", "DocumentsWriterDeleteQueue", NULL, 0x0, NULL, NULL },
     { "initWithLong:", "DocumentsWriterDeleteQueue", NULL, 0x0, NULL, NULL },
     { "initWithOrgApacheLuceneIndexBufferedUpdates:withLong:", "DocumentsWriterDeleteQueue", NULL, 0x0, NULL, NULL },
-    { "addDeleteWithOrgApacheLuceneSearchQueryArray:", "addDelete", "V", 0x80, NULL, NULL },
-    { "addDeleteWithOrgApacheLuceneIndexTermArray:", "addDelete", "V", 0x80, NULL, NULL },
-    { "addDocValuesUpdatesWithOrgApacheLuceneIndexDocValuesUpdateArray:", "addDocValuesUpdates", "V", 0x80, NULL, NULL },
     { "addWithOrgApacheLuceneIndexTerm:withOrgApacheLuceneIndexDocumentsWriterDeleteQueue_DeleteSlice:", "add", "V", 0x0, NULL, NULL },
     { "addWithOrgApacheLuceneIndexDocumentsWriterDeleteQueue_Node:", "add", "V", 0x0, NULL, NULL },
     { "anyChanges", NULL, "Z", 0x0, NULL, NULL },
@@ -322,10 +257,7 @@ withOrgApacheLuceneIndexDocumentsWriterDeleteQueue_DeleteSlice:(OrgApacheLuceneI
     { "updateSliceWithOrgApacheLuceneIndexDocumentsWriterDeleteQueue_DeleteSlice:", "updateSlice", "Z", 0x0, NULL, NULL },
     { "numGlobalTermDeletes", NULL, "I", 0x1, NULL, NULL },
     { "clear", NULL, "V", 0x0, NULL, NULL },
-    { "forceApplyGlobalSlice", NULL, "Z", 0x2, NULL, NULL },
-    { "getBufferedUpdatesTermsSize", NULL, "I", 0x1, NULL, NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -337,7 +269,7 @@ withOrgApacheLuceneIndexDocumentsWriterDeleteQueue_DeleteSlice:(OrgApacheLuceneI
     { "generation_", NULL, 0x10, "J", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.index.DocumentsWriterDeleteQueue$DeleteSlice;", "Lorg.apache.lucene.index.DocumentsWriterDeleteQueue$Node;", "Lorg.apache.lucene.index.DocumentsWriterDeleteQueue$TermNode;", "Lorg.apache.lucene.index.DocumentsWriterDeleteQueue$QueryArrayNode;", "Lorg.apache.lucene.index.DocumentsWriterDeleteQueue$TermArrayNode;", "Lorg.apache.lucene.index.DocumentsWriterDeleteQueue$DocValuesUpdatesNode;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocumentsWriterDeleteQueue = { 2, "DocumentsWriterDeleteQueue", "org.apache.lucene.index", NULL, 0x10, 20, methods, 6, fields, 0, NULL, 6, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocumentsWriterDeleteQueue = { 2, "DocumentsWriterDeleteQueue", "org.apache.lucene.index", NULL, 0x10, 14, methods, 6, fields, 0, NULL, 6, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneIndexDocumentsWriterDeleteQueue;
 }
 
@@ -376,21 +308,6 @@ OrgApacheLuceneIndexDocumentsWriterDeleteQueue *new_OrgApacheLuceneIndexDocument
   OrgApacheLuceneIndexDocumentsWriterDeleteQueue *self = [OrgApacheLuceneIndexDocumentsWriterDeleteQueue alloc];
   OrgApacheLuceneIndexDocumentsWriterDeleteQueue_initWithOrgApacheLuceneIndexBufferedUpdates_withLong_(self, globalBufferedUpdates, generation);
   return self;
-}
-
-jboolean OrgApacheLuceneIndexDocumentsWriterDeleteQueue_forceApplyGlobalSlice(OrgApacheLuceneIndexDocumentsWriterDeleteQueue *self) {
-  [((JavaUtilConcurrentLocksReentrantLock *) nil_chk(self->globalBufferLock_)) lock];
-  OrgApacheLuceneIndexDocumentsWriterDeleteQueue_Node *currentTail = JreLoadVolatileId(&self->tail_);
-  @try {
-    if (((OrgApacheLuceneIndexDocumentsWriterDeleteQueue_DeleteSlice *) nil_chk(self->globalSlice_))->sliceTail_ != currentTail) {
-      JreStrongAssign(&self->globalSlice_->sliceTail_, currentTail);
-      [self->globalSlice_ applyWithOrgApacheLuceneIndexBufferedUpdates:self->globalBufferedUpdates_ withInt:[((JavaLangInteger *) nil_chk(JreLoadStatic(OrgApacheLuceneIndexBufferedUpdates, MAX_INT_))) intValue]];
-    }
-    return [((OrgApacheLuceneIndexBufferedUpdates *) nil_chk(self->globalBufferedUpdates_)) any];
-  }
-  @finally {
-    [self->globalBufferLock_ unlock];
-  }
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocumentsWriterDeleteQueue)
@@ -579,43 +496,29 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocumentsWriterDeleteQueue_
 
 @implementation OrgApacheLuceneIndexDocumentsWriterDeleteQueue_QueryArrayNode
 
-- (instancetype)initWithOrgApacheLuceneSearchQueryArray:(IOSObjectArray *)query {
-  OrgApacheLuceneIndexDocumentsWriterDeleteQueue_QueryArrayNode_initWithOrgApacheLuceneSearchQueryArray_(self, query);
+- (instancetype)init {
+  OrgApacheLuceneIndexDocumentsWriterDeleteQueue_QueryArrayNode_init(self);
   return self;
-}
-
-- (void)applyWithOrgApacheLuceneIndexBufferedUpdates:(OrgApacheLuceneIndexBufferedUpdates *)bufferedUpdates
-                                             withInt:(jint)docIDUpto {
-  {
-    IOSObjectArray *a__ = ((IOSObjectArray *) item_);
-    OrgApacheLuceneSearchQuery * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
-    OrgApacheLuceneSearchQuery * const *e__ = b__ + a__->size_;
-    while (b__ < e__) {
-      OrgApacheLuceneSearchQuery *query = *b__++;
-      [((OrgApacheLuceneIndexBufferedUpdates *) nil_chk(bufferedUpdates)) addQueryWithOrgApacheLuceneSearchQuery:query withInt:docIDUpto];
-    }
-  }
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchQueryArray:", "QueryArrayNode", NULL, 0x0, NULL, NULL },
-    { "applyWithOrgApacheLuceneIndexBufferedUpdates:withInt:", "apply", "V", 0x0, NULL, NULL },
+    { "init", NULL, NULL, 0x2, NULL, NULL },
   };
   static const char *superclass_type_args[] = {"[Lorg.apache.lucene.search.Query;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocumentsWriterDeleteQueue_QueryArrayNode = { 2, "QueryArrayNode", "org.apache.lucene.index", "DocumentsWriterDeleteQueue", 0x1a, 2, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/index/DocumentsWriterDeleteQueue$Node<L[Lorg/apache/lucene/search/Query;;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocumentsWriterDeleteQueue_QueryArrayNode = { 2, "QueryArrayNode", "org.apache.lucene.index", "DocumentsWriterDeleteQueue", 0x1a, 1, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/index/DocumentsWriterDeleteQueue$Node<L[Lorg/apache/lucene/search/Query;;>;" };
   return &_OrgApacheLuceneIndexDocumentsWriterDeleteQueue_QueryArrayNode;
 }
 
 @end
 
-void OrgApacheLuceneIndexDocumentsWriterDeleteQueue_QueryArrayNode_initWithOrgApacheLuceneSearchQueryArray_(OrgApacheLuceneIndexDocumentsWriterDeleteQueue_QueryArrayNode *self, IOSObjectArray *query) {
-  OrgApacheLuceneIndexDocumentsWriterDeleteQueue_Node_initWithId_(self, query);
+void OrgApacheLuceneIndexDocumentsWriterDeleteQueue_QueryArrayNode_init(OrgApacheLuceneIndexDocumentsWriterDeleteQueue_QueryArrayNode *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneIndexDocumentsWriterDeleteQueue_QueryArrayNode *new_OrgApacheLuceneIndexDocumentsWriterDeleteQueue_QueryArrayNode_initWithOrgApacheLuceneSearchQueryArray_(IOSObjectArray *query) {
+OrgApacheLuceneIndexDocumentsWriterDeleteQueue_QueryArrayNode *new_OrgApacheLuceneIndexDocumentsWriterDeleteQueue_QueryArrayNode_init() {
   OrgApacheLuceneIndexDocumentsWriterDeleteQueue_QueryArrayNode *self = [OrgApacheLuceneIndexDocumentsWriterDeleteQueue_QueryArrayNode alloc];
-  OrgApacheLuceneIndexDocumentsWriterDeleteQueue_QueryArrayNode_initWithOrgApacheLuceneSearchQueryArray_(self, query);
+  OrgApacheLuceneIndexDocumentsWriterDeleteQueue_QueryArrayNode_init(self);
   return self;
 }
 
@@ -623,48 +526,29 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocumentsWriterDeleteQueue_
 
 @implementation OrgApacheLuceneIndexDocumentsWriterDeleteQueue_TermArrayNode
 
-- (instancetype)initWithOrgApacheLuceneIndexTermArray:(IOSObjectArray *)term {
-  OrgApacheLuceneIndexDocumentsWriterDeleteQueue_TermArrayNode_initWithOrgApacheLuceneIndexTermArray_(self, term);
+- (instancetype)init {
+  OrgApacheLuceneIndexDocumentsWriterDeleteQueue_TermArrayNode_init(self);
   return self;
-}
-
-- (void)applyWithOrgApacheLuceneIndexBufferedUpdates:(OrgApacheLuceneIndexBufferedUpdates *)bufferedUpdates
-                                             withInt:(jint)docIDUpto {
-  {
-    IOSObjectArray *a__ = ((IOSObjectArray *) item_);
-    OrgApacheLuceneIndexTerm * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
-    OrgApacheLuceneIndexTerm * const *e__ = b__ + a__->size_;
-    while (b__ < e__) {
-      OrgApacheLuceneIndexTerm *term = *b__++;
-      [((OrgApacheLuceneIndexBufferedUpdates *) nil_chk(bufferedUpdates)) addTermWithOrgApacheLuceneIndexTerm:term withInt:docIDUpto];
-    }
-  }
-}
-
-- (NSString *)description {
-  return JreStrcat("$$", @"dels=", JavaUtilArrays_toStringWithNSObjectArray_(item_));
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexTermArray:", "TermArrayNode", NULL, 0x0, NULL, NULL },
-    { "applyWithOrgApacheLuceneIndexBufferedUpdates:withInt:", "apply", "V", 0x0, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x2, NULL, NULL },
   };
   static const char *superclass_type_args[] = {"[Lorg.apache.lucene.index.Term;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocumentsWriterDeleteQueue_TermArrayNode = { 2, "TermArrayNode", "org.apache.lucene.index", "DocumentsWriterDeleteQueue", 0x1a, 3, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/index/DocumentsWriterDeleteQueue$Node<L[Lorg/apache/lucene/index/Term;;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocumentsWriterDeleteQueue_TermArrayNode = { 2, "TermArrayNode", "org.apache.lucene.index", "DocumentsWriterDeleteQueue", 0x1a, 1, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/index/DocumentsWriterDeleteQueue$Node<L[Lorg/apache/lucene/index/Term;;>;" };
   return &_OrgApacheLuceneIndexDocumentsWriterDeleteQueue_TermArrayNode;
 }
 
 @end
 
-void OrgApacheLuceneIndexDocumentsWriterDeleteQueue_TermArrayNode_initWithOrgApacheLuceneIndexTermArray_(OrgApacheLuceneIndexDocumentsWriterDeleteQueue_TermArrayNode *self, IOSObjectArray *term) {
-  OrgApacheLuceneIndexDocumentsWriterDeleteQueue_Node_initWithId_(self, term);
+void OrgApacheLuceneIndexDocumentsWriterDeleteQueue_TermArrayNode_init(OrgApacheLuceneIndexDocumentsWriterDeleteQueue_TermArrayNode *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneIndexDocumentsWriterDeleteQueue_TermArrayNode *new_OrgApacheLuceneIndexDocumentsWriterDeleteQueue_TermArrayNode_initWithOrgApacheLuceneIndexTermArray_(IOSObjectArray *term) {
+OrgApacheLuceneIndexDocumentsWriterDeleteQueue_TermArrayNode *new_OrgApacheLuceneIndexDocumentsWriterDeleteQueue_TermArrayNode_init() {
   OrgApacheLuceneIndexDocumentsWriterDeleteQueue_TermArrayNode *self = [OrgApacheLuceneIndexDocumentsWriterDeleteQueue_TermArrayNode alloc];
-  OrgApacheLuceneIndexDocumentsWriterDeleteQueue_TermArrayNode_initWithOrgApacheLuceneIndexTermArray_(self, term);
+  OrgApacheLuceneIndexDocumentsWriterDeleteQueue_TermArrayNode_init(self);
   return self;
 }
 
@@ -672,72 +556,29 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocumentsWriterDeleteQueue_
 
 @implementation OrgApacheLuceneIndexDocumentsWriterDeleteQueue_DocValuesUpdatesNode
 
-- (instancetype)initWithOrgApacheLuceneIndexDocValuesUpdateArray:(IOSObjectArray *)updates {
-  OrgApacheLuceneIndexDocumentsWriterDeleteQueue_DocValuesUpdatesNode_initWithOrgApacheLuceneIndexDocValuesUpdateArray_(self, updates);
+- (instancetype)init {
+  OrgApacheLuceneIndexDocumentsWriterDeleteQueue_DocValuesUpdatesNode_init(self);
   return self;
-}
-
-- (void)applyWithOrgApacheLuceneIndexBufferedUpdates:(OrgApacheLuceneIndexBufferedUpdates *)bufferedUpdates
-                                             withInt:(jint)docIDUpto {
-  {
-    IOSObjectArray *a__ = ((IOSObjectArray *) item_);
-    OrgApacheLuceneIndexDocValuesUpdate * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
-    OrgApacheLuceneIndexDocValuesUpdate * const *e__ = b__ + a__->size_;
-    while (b__ < e__) {
-      OrgApacheLuceneIndexDocValuesUpdate *update = *b__++;
-      switch ([((OrgApacheLuceneIndexDocValuesUpdate *) nil_chk(update))->type_ ordinal]) {
-        case OrgApacheLuceneIndexDocValuesType_NUMERIC:
-        [((OrgApacheLuceneIndexBufferedUpdates *) nil_chk(bufferedUpdates)) addNumericUpdateWithOrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate:[new_OrgApacheLuceneIndexDocValuesUpdate_NumericDocValuesUpdate_initWithOrgApacheLuceneIndexTerm_withNSString_withJavaLangLong_(update->term_, update->field_, (JavaLangLong *) check_class_cast(update->value_, [JavaLangLong class])) autorelease] withInt:docIDUpto];
-        break;
-        case OrgApacheLuceneIndexDocValuesType_BINARY:
-        [((OrgApacheLuceneIndexBufferedUpdates *) nil_chk(bufferedUpdates)) addBinaryUpdateWithOrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate:[new_OrgApacheLuceneIndexDocValuesUpdate_BinaryDocValuesUpdate_initWithOrgApacheLuceneIndexTerm_withNSString_withOrgApacheLuceneUtilBytesRef_(update->term_, update->field_, (OrgApacheLuceneUtilBytesRef *) check_class_cast(update->value_, [OrgApacheLuceneUtilBytesRef class])) autorelease] withInt:docIDUpto];
-        break;
-        default:
-        @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("@$", update->type_, @" DocValues updates not supported yet!")) autorelease];
-      }
-    }
-  }
-}
-
-- (NSString *)description {
-  JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
-  [sb appendWithNSString:@"docValuesUpdates: "];
-  if (((IOSObjectArray *) nil_chk(item_))->size_ > 0) {
-    [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:@"term="])) appendWithId:((OrgApacheLuceneIndexDocValuesUpdate *) nil_chk(IOSObjectArray_Get(item_, 0)))->term_])) appendWithNSString:@"; updates: ["];
-    {
-      IOSObjectArray *a__ = ((IOSObjectArray *) item_);
-      OrgApacheLuceneIndexDocValuesUpdate * const *b__ = a__->buffer_;
-      OrgApacheLuceneIndexDocValuesUpdate * const *e__ = b__ + a__->size_;
-      while (b__ < e__) {
-        OrgApacheLuceneIndexDocValuesUpdate *update = *b__++;
-        [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:((OrgApacheLuceneIndexDocValuesUpdate *) nil_chk(update))->field_])) appendWithChar:':'])) appendWithId:update->value_])) appendWithChar:','];
-      }
-    }
-    [sb setCharAtWithInt:[sb length] - 1 withChar:']'];
-  }
-  return [sb description];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexDocValuesUpdateArray:", "DocValuesUpdatesNode", NULL, 0x80, NULL, NULL },
-    { "applyWithOrgApacheLuceneIndexBufferedUpdates:withInt:", "apply", "V", 0x0, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x2, NULL, NULL },
   };
   static const char *superclass_type_args[] = {"[Lorg.apache.lucene.index.DocValuesUpdate;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocumentsWriterDeleteQueue_DocValuesUpdatesNode = { 2, "DocValuesUpdatesNode", "org.apache.lucene.index", "DocumentsWriterDeleteQueue", 0x1a, 3, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/index/DocumentsWriterDeleteQueue$Node<L[Lorg/apache/lucene/index/DocValuesUpdate;;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocumentsWriterDeleteQueue_DocValuesUpdatesNode = { 2, "DocValuesUpdatesNode", "org.apache.lucene.index", "DocumentsWriterDeleteQueue", 0x1a, 1, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/index/DocumentsWriterDeleteQueue$Node<L[Lorg/apache/lucene/index/DocValuesUpdate;;>;" };
   return &_OrgApacheLuceneIndexDocumentsWriterDeleteQueue_DocValuesUpdatesNode;
 }
 
 @end
 
-void OrgApacheLuceneIndexDocumentsWriterDeleteQueue_DocValuesUpdatesNode_initWithOrgApacheLuceneIndexDocValuesUpdateArray_(OrgApacheLuceneIndexDocumentsWriterDeleteQueue_DocValuesUpdatesNode *self, IOSObjectArray *updates) {
-  OrgApacheLuceneIndexDocumentsWriterDeleteQueue_Node_initWithId_(self, updates);
+void OrgApacheLuceneIndexDocumentsWriterDeleteQueue_DocValuesUpdatesNode_init(OrgApacheLuceneIndexDocumentsWriterDeleteQueue_DocValuesUpdatesNode *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneIndexDocumentsWriterDeleteQueue_DocValuesUpdatesNode *new_OrgApacheLuceneIndexDocumentsWriterDeleteQueue_DocValuesUpdatesNode_initWithOrgApacheLuceneIndexDocValuesUpdateArray_(IOSObjectArray *updates) {
+OrgApacheLuceneIndexDocumentsWriterDeleteQueue_DocValuesUpdatesNode *new_OrgApacheLuceneIndexDocumentsWriterDeleteQueue_DocValuesUpdatesNode_init() {
   OrgApacheLuceneIndexDocumentsWriterDeleteQueue_DocValuesUpdatesNode *self = [OrgApacheLuceneIndexDocumentsWriterDeleteQueue_DocValuesUpdatesNode alloc];
-  OrgApacheLuceneIndexDocumentsWriterDeleteQueue_DocValuesUpdatesNode_initWithOrgApacheLuceneIndexDocValuesUpdateArray_(self, updates);
+  OrgApacheLuceneIndexDocumentsWriterDeleteQueue_DocValuesUpdatesNode_init(self);
   return self;
 }
 

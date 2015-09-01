@@ -22,7 +22,6 @@
 
 @class OrgApacheLuceneIndexPrefixCodedTerms_TermIterator;
 @class OrgApacheLuceneStoreRAMFile;
-@protocol JavaUtilCollection;
 
 @interface OrgApacheLuceneIndexPrefixCodedTerms : NSObject < OrgApacheLuceneUtilAccountable > {
  @public
@@ -32,8 +31,6 @@
 #pragma mark Public
 
 - (jboolean)isEqual:(id)obj;
-
-- (id<JavaUtilCollection>)getChildResources;
 
 - (NSUInteger)hash;
 

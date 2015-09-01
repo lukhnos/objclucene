@@ -20,10 +20,6 @@
 #define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
-@class IOSByteArray;
-@class OrgApacheLuceneAnalysisTokenStream;
-@class OrgApacheLuceneAnalysisUtilCharArraySet;
-
 #define OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_LOWER 1
 #define OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_UPPER 2
 #define OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_DIGIT 4
@@ -40,41 +36,15 @@
 #define OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_SPLIT_ON_NUMERICS 128
 #define OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_STEM_ENGLISH_POSSESSIVE 256
 
-@interface OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter : OrgApacheLuceneAnalysisTokenFilter {
- @public
-  OrgApacheLuceneAnalysisUtilCharArraySet *protWords_;
-}
+@interface OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
-                                             withByteArray:(IOSByteArray *)charTypeTable
-                                                   withInt:(jint)configurationFlags
-               withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)protWords;
-
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
-                                                   withInt:(jint)configurationFlags
-               withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)protWords;
-
-- (jboolean)incrementToken;
-
-- (void)reset;
-
-#pragma mark Package-Private
-
-+ (jboolean)isAlphaWithInt:(jint)type;
-
-+ (jboolean)isDigitWithInt:(jint)type;
-
-+ (jboolean)isSubwordDelimWithInt:(jint)type;
-
-+ (jboolean)isUpperWithInt:(jint)type;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter, protWords_, OrgApacheLuceneAnalysisUtilCharArraySet *)
 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter, LOWER, jint)
 
@@ -106,69 +76,11 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelim
 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter, STEM_ENGLISH_POSSESSIVE, jint)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_initWithOrgApacheLuceneAnalysisTokenStream_withByteArray_withInt_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter *self, OrgApacheLuceneAnalysisTokenStream *inArg, IOSByteArray *charTypeTable, jint configurationFlags, OrgApacheLuceneAnalysisUtilCharArraySet *protWords);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_init(OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter *new_OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_initWithOrgApacheLuceneAnalysisTokenStream_withByteArray_withInt_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisTokenStream *inArg, IOSByteArray *charTypeTable, jint configurationFlags, OrgApacheLuceneAnalysisUtilCharArraySet *protWords) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter *self, OrgApacheLuceneAnalysisTokenStream *inArg, jint configurationFlags, OrgApacheLuceneAnalysisUtilCharArraySet *protWords);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter *new_OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisTokenStream *inArg, jint configurationFlags, OrgApacheLuceneAnalysisUtilCharArraySet *protWords) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT jboolean OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_isAlphaWithInt_(jint type);
-
-FOUNDATION_EXPORT jboolean OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_isDigitWithInt_(jint type);
-
-FOUNDATION_EXPORT jboolean OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_isSubwordDelimWithInt_(jint type);
-
-FOUNDATION_EXPORT jboolean OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_isUpperWithInt_(jint type);
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter *new_OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter)
-
-#endif
-
-#if !defined (_OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_WordDelimiterConcatenation_) && (OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_WordDelimiterConcatenation_INCLUDE)
-#define _OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_WordDelimiterConcatenation_
-
-@class IOSCharArray;
-@class JavaLangStringBuilder;
-@class OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter;
-
-@interface OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_WordDelimiterConcatenation : NSObject {
- @public
-  JavaLangStringBuilder *buffer_;
-  jint startOffset_;
-  jint endOffset_;
-  jint type_;
-  jint subwordCount_;
-}
-
-#pragma mark Package-Private
-
-- (instancetype)initWithOrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter:(OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter *)outer$;
-
-- (void)appendWithCharArray:(IOSCharArray *)text
-                    withInt:(jint)offset
-                    withInt:(jint)length;
-
-- (void)clear;
-
-- (jboolean)isEmpty;
-
-- (void)write;
-
-- (void)writeAndClear;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_WordDelimiterConcatenation)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_WordDelimiterConcatenation, buffer_, JavaLangStringBuilder *)
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_WordDelimiterConcatenation_initWithOrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_(OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_WordDelimiterConcatenation *self, OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter *outer$);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_WordDelimiterConcatenation *new_OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_WordDelimiterConcatenation_initWithOrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_(OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter *outer$) NS_RETURNS_RETAINED;
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_WordDelimiterConcatenation)
 
 #endif
 

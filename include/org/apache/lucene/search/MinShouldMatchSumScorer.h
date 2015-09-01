@@ -51,8 +51,6 @@
 
 - (jint)freq;
 
-- (id<JavaUtilCollection>)getChildren;
-
 - (jint)nextDoc;
 
 - (jfloat)score;

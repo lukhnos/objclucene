@@ -3,11 +3,10 @@
 //  source: ./sandbox/src/java/org/apache/lucene/rangetree/SliceWriter.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
-#include "org/apache/lucene/rangetree/SliceReader.h"
 #include "org/apache/lucene/rangetree/SliceWriter.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @interface OrgApacheLuceneRangetreeSliceWriter : NSObject
 
@@ -16,12 +15,7 @@
 @implementation OrgApacheLuceneRangetreeSliceWriter
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "appendWithLong:withLong:withInt:", "append", "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "getReaderWithLong:", "getReader", "Lorg.apache.lucene.rangetree.SliceReader;", 0x401, "Ljava.io.IOException;", NULL },
-    { "destroy", NULL, "V", 0x401, "Ljava.io.IOException;", NULL },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneRangetreeSliceWriter = { 2, "SliceWriter", "org.apache.lucene.rangetree", NULL, 0x608, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneRangetreeSliceWriter = { 2, "SliceWriter", "org.apache.lucene.rangetree", NULL, 0x608, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneRangetreeSliceWriter;
 }
 

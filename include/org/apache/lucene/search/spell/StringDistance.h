@@ -18,9 +18,6 @@
 
 @protocol OrgApacheLuceneSearchSpellStringDistance < NSObject, JavaObject >
 
-- (jfloat)getDistanceWithNSString:(NSString *)s1
-                     withNSString:(NSString *)s2;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSpellStringDistance)

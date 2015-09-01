@@ -20,48 +20,17 @@
 #define OrgApacheLuceneQueriesFunctionValuesourceBoolFunction_INCLUDE 1
 #include "org/apache/lucene/queries/function/valuesource/BoolFunction.h"
 
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneQueriesFunctionDocvaluesBoolDocValues;
-@class OrgApacheLuceneQueriesFunctionFunctionValues;
-@class OrgApacheLuceneQueriesFunctionValueSource;
-@class OrgApacheLuceneSearchIndexSearcher;
-@protocol JavaUtilMap;
-
-@interface OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction : OrgApacheLuceneQueriesFunctionValuesourceBoolFunction {
- @public
-  OrgApacheLuceneQueriesFunctionValueSource *source_;
-}
+@interface OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction : OrgApacheLuceneQueriesFunctionValuesourceBoolFunction
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)source;
-
-- (void)createWeightWithJavaUtilMap:(id<JavaUtilMap>)context
-withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher;
-
-- (NSString *)description__;
-
-- (jboolean)isEqual:(id)o;
-
-- (OrgApacheLuceneQueriesFunctionDocvaluesBoolDocValues *)getValuesWithJavaUtilMap:(id<JavaUtilMap>)context
-                                         withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext;
-
-- (NSUInteger)hash;
-
-#pragma mark Protected
-
-- (jboolean)funcWithInt:(jint)doc
-withOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)vals;
-
-- (NSString *)name;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction, source_, OrgApacheLuceneQueriesFunctionValueSource *)
-
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction_initWithOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction *self, OrgApacheLuceneQueriesFunctionValueSource *source);
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction_init(OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction)
 

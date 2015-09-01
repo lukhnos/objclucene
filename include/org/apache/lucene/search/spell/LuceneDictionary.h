@@ -20,25 +20,19 @@
 #define OrgApacheLuceneSearchSpellDictionary_INCLUDE 1
 #include "org/apache/lucene/search/spell/Dictionary.h"
 
-@class OrgApacheLuceneIndexIndexReader;
-@protocol OrgApacheLuceneSearchSuggestInputIterator;
-
 @interface OrgApacheLuceneSearchSpellLuceneDictionary : NSObject < OrgApacheLuceneSearchSpellDictionary >
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
-                                           withNSString:(NSString *)field;
-
-- (id<OrgApacheLuceneSearchSuggestInputIterator>)getEntryIterator;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSpellLuceneDictionary)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSpellLuceneDictionary_initWithOrgApacheLuceneIndexIndexReader_withNSString_(OrgApacheLuceneSearchSpellLuceneDictionary *self, OrgApacheLuceneIndexIndexReader *reader, NSString *field);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSpellLuceneDictionary_init(OrgApacheLuceneSearchSpellLuceneDictionary *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSpellLuceneDictionary *new_OrgApacheLuceneSearchSpellLuceneDictionary_initWithOrgApacheLuceneIndexIndexReader_withNSString_(OrgApacheLuceneIndexIndexReader *reader, NSString *field) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpellLuceneDictionary *new_OrgApacheLuceneSearchSpellLuceneDictionary_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpellLuceneDictionary)
 

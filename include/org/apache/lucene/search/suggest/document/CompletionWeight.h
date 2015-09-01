@@ -20,54 +20,19 @@
 #define OrgApacheLuceneSearchWeight_INCLUDE 1
 #include "org/apache/lucene/search/Weight.h"
 
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneSearchBulkScorer;
-@class OrgApacheLuceneSearchExplanation;
-@class OrgApacheLuceneSearchScorer;
-@class OrgApacheLuceneSearchSuggestDocumentCompletionQuery;
-@class OrgApacheLuceneUtilAutomatonAutomaton;
-@class OrgApacheLuceneUtilIntsRef;
-@protocol JavaLangCharSequence;
-@protocol JavaUtilSet;
-
 @interface OrgApacheLuceneSearchSuggestDocumentCompletionWeight : OrgApacheLuceneSearchWeight
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery:(OrgApacheLuceneSearchSuggestDocumentCompletionQuery *)query
-                                  withOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)automaton;
-
-- (OrgApacheLuceneSearchBulkScorer *)bulkScorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
-
-- (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-                                                                               withInt:(jint)doc;
-
-- (void)extractTermsWithJavaUtilSet:(id<JavaUtilSet>)terms;
-
-- (OrgApacheLuceneUtilAutomatonAutomaton *)getAutomaton;
-
-- (jfloat)getValueForNormalization;
-
-- (void)normalizeWithFloat:(jfloat)norm
-                 withFloat:(jfloat)topLevelBoost;
-
-- (OrgApacheLuceneSearchScorer *)scorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
-
-#pragma mark Protected
-
-- (jfloat)boost;
-
-- (id<JavaLangCharSequence>)context;
-
-- (void)setNextMatchWithOrgApacheLuceneUtilIntsRef:(OrgApacheLuceneUtilIntsRef *)pathPrefix;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestDocumentCompletionWeight)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentCompletionWeight_initWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery_withOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneSearchSuggestDocumentCompletionWeight *self, OrgApacheLuceneSearchSuggestDocumentCompletionQuery *query, OrgApacheLuceneUtilAutomatonAutomaton *automaton);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentCompletionWeight_init(OrgApacheLuceneSearchSuggestDocumentCompletionWeight *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentCompletionWeight *new_OrgApacheLuceneSearchSuggestDocumentCompletionWeight_initWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery_withOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneSearchSuggestDocumentCompletionQuery *query, OrgApacheLuceneUtilAutomatonAutomaton *automaton) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentCompletionWeight *new_OrgApacheLuceneSearchSuggestDocumentCompletionWeight_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentCompletionWeight)
 

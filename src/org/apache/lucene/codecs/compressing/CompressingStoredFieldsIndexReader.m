@@ -9,17 +9,11 @@
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
 #include "java/lang/IllegalArgumentException.h"
-#include "java/util/ArrayList.h"
 #include "java/util/Arrays.h"
-#include "java/util/Collection.h"
-#include "java/util/Collections.h"
-#include "java/util/List.h"
 #include "org/apache/lucene/codecs/compressing/CompressingStoredFieldsIndexReader.h"
 #include "org/apache/lucene/index/CorruptIndexException.h"
 #include "org/apache/lucene/index/SegmentInfo.h"
 #include "org/apache/lucene/store/IndexInput.h"
-#include "org/apache/lucene/util/Accountable.h"
-#include "org/apache/lucene/util/Accountables.h"
 #include "org/apache/lucene/util/ArrayUtil.h"
 #include "org/apache/lucene/util/BitUtil.h"
 #include "org/apache/lucene/util/RamUsageEstimator.h"
@@ -122,33 +116,6 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsI
   return res;
 }
 
-- (id<JavaUtilCollection>)getChildResources {
-  id<JavaUtilList> resources = [new_JavaUtilArrayList_init() autorelease];
-  jlong docBaseDeltaBytes = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfWithNSObjectArray_(docBasesDeltas_);
-  {
-    IOSObjectArray *a__ = docBasesDeltas_;
-    OrgApacheLuceneUtilPackedPackedInts_Reader * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
-    OrgApacheLuceneUtilPackedPackedInts_Reader * const *e__ = b__ + a__->size_;
-    while (b__ < e__) {
-      OrgApacheLuceneUtilPackedPackedInts_Reader *r = *b__++;
-      docBaseDeltaBytes += [((OrgApacheLuceneUtilPackedPackedInts_Reader *) nil_chk(r)) ramBytesUsed];
-    }
-  }
-  [resources addWithId:OrgApacheLuceneUtilAccountables_namedAccountableWithNSString_withLong_(@"doc base deltas", docBaseDeltaBytes)];
-  jlong startPointerDeltaBytes = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfWithNSObjectArray_(startPointersDeltas_);
-  {
-    IOSObjectArray *a__ = startPointersDeltas_;
-    OrgApacheLuceneUtilPackedPackedInts_Reader * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
-    OrgApacheLuceneUtilPackedPackedInts_Reader * const *e__ = b__ + a__->size_;
-    while (b__ < e__) {
-      OrgApacheLuceneUtilPackedPackedInts_Reader *r = *b__++;
-      startPointerDeltaBytes += [((OrgApacheLuceneUtilPackedPackedInts_Reader *) nil_chk(r)) ramBytesUsed];
-    }
-  }
-  [resources addWithId:OrgApacheLuceneUtilAccountables_namedAccountableWithNSString_withLong_(@"start pointer deltas", startPointerDeltaBytes)];
-  return JavaUtilCollections_unmodifiableListWithJavaUtilList_(resources);
-}
-
 - (NSString *)description {
   return JreStrcat("$$IC", [[self getClass] getSimpleName], @"(blocks=", ((IOSIntArray *) nil_chk(docBases_))->size_, ')');
 }
@@ -184,7 +151,6 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsI
     { "getStartPointerWithInt:", "getStartPointer", "J", 0x0, NULL, NULL },
     { "clone", NULL, "Lorg.apache.lucene.codecs.compressing.CompressingStoredFieldsIndexReader;", 0x1, NULL, NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -197,7 +163,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsI
     { "docBasesDeltas_", NULL, 0x10, "[Lorg.apache.lucene.util.packed.PackedInts$Reader;", NULL, NULL, .constantValue.asLong = 0 },
     { "startPointersDeltas_", NULL, 0x10, "[Lorg.apache.lucene.util.packed.PackedInts$Reader;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader = { 2, "CompressingStoredFieldsIndexReader", "org.apache.lucene.codecs.compressing", NULL, 0x11, 10, methods, 8, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader = { 2, "CompressingStoredFieldsIndexReader", "org.apache.lucene.codecs.compressing", NULL, 0x11, 9, methods, 8, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader;
 }
 

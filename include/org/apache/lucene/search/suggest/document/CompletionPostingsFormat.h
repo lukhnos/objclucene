@@ -20,11 +20,6 @@
 #define OrgApacheLuceneCodecsPostingsFormat_INCLUDE 1
 #include "org/apache/lucene/codecs/PostingsFormat.h"
 
-@class OrgApacheLuceneCodecsFieldsConsumer;
-@class OrgApacheLuceneCodecsFieldsProducer;
-@class OrgApacheLuceneIndexSegmentReadState;
-@class OrgApacheLuceneIndexSegmentWriteState;
-
 #define OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat_COMPLETION_CODEC_VERSION 1
 #define OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat_COMPLETION_VERSION_CURRENT 1
 
@@ -33,14 +28,6 @@
 #pragma mark Public
 
 - (instancetype)init;
-
-- (OrgApacheLuceneCodecsFieldsConsumer *)fieldsConsumerWithOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state;
-
-- (OrgApacheLuceneCodecsFieldsProducer *)fieldsProducerWithOrgApacheLuceneIndexSegmentReadState:(OrgApacheLuceneIndexSegmentReadState *)state;
-
-#pragma mark Protected
-
-- (OrgApacheLuceneCodecsPostingsFormat *)delegatePostingsFormat;
 
 @end
 

@@ -20,8 +20,6 @@
 #define OrgApacheLuceneAnalysisTokenizer_INCLUDE 1
 #include "org/apache/lucene/analysis/Tokenizer.h"
 
-@class OrgApacheLuceneUtilAttributeFactory;
-
 #define OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_DEFAULT_DELIMITER '/'
 #define OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_DEFAULT_SKIP 0
 
@@ -30,47 +28,6 @@
 #pragma mark Public
 
 - (instancetype)init;
-
-- (instancetype)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory
-                                                   withChar:(jchar)delimiter
-                                                   withChar:(jchar)replacement
-                                                    withInt:(jint)skip;
-
-- (instancetype)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory
-                                                    withInt:(jint)bufferSize
-                                                   withChar:(jchar)delimiter
-                                                   withChar:(jchar)replacement
-                                                    withInt:(jint)skip;
-
-- (instancetype)initWithChar:(jchar)delimiter
-                    withChar:(jchar)replacement;
-
-- (instancetype)initWithChar:(jchar)delimiter
-                    withChar:(jchar)replacement
-                     withInt:(jint)skip;
-
-- (instancetype)initWithChar:(jchar)delimiter
-                     withInt:(jint)skip;
-
-- (instancetype)initWithInt:(jint)skip;
-
-- (instancetype)initWithInt:(jint)bufferSize
-                   withChar:(jchar)delimiter;
-
-- (instancetype)initWithInt:(jint)bufferSize
-                   withChar:(jchar)delimiter
-                   withChar:(jchar)replacement;
-
-- (instancetype)initWithInt:(jint)bufferSize
-                   withChar:(jchar)delimiter
-                   withChar:(jchar)replacement
-                    withInt:(jint)skip;
-
-- (void)end;
-
-- (jboolean)incrementToken;
-
-- (void)reset;
 
 @end
 
@@ -83,42 +40,6 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisPathReversePathHierarchyTokeni
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_init(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *new_OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_init() NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithInt_(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *self, jint skip);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *new_OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithInt_(jint skip) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithInt_withChar_(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *self, jint bufferSize, jchar delimiter);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *new_OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithInt_withChar_(jint bufferSize, jchar delimiter) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithChar_withChar_(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *self, jchar delimiter, jchar replacement);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *new_OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithChar_withChar_(jchar delimiter, jchar replacement) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithInt_withChar_withChar_(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *self, jint bufferSize, jchar delimiter, jchar replacement);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *new_OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithInt_withChar_withChar_(jint bufferSize, jchar delimiter, jchar replacement) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithChar_withInt_(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *self, jchar delimiter, jint skip);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *new_OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithChar_withInt_(jchar delimiter, jint skip) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithChar_withChar_withInt_(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *self, jchar delimiter, jchar replacement, jint skip);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *new_OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithChar_withChar_withInt_(jchar delimiter, jchar replacement, jint skip) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withChar_withChar_withInt_(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *self, OrgApacheLuceneUtilAttributeFactory *factory, jchar delimiter, jchar replacement, jint skip);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *new_OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withChar_withChar_withInt_(OrgApacheLuceneUtilAttributeFactory *factory, jchar delimiter, jchar replacement, jint skip) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithInt_withChar_withChar_withInt_(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *self, jint bufferSize, jchar delimiter, jchar replacement, jint skip);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *new_OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithInt_withChar_withChar_withInt_(jint bufferSize, jchar delimiter, jchar replacement, jint skip) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withChar_withChar_withInt_(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *self, OrgApacheLuceneUtilAttributeFactory *factory, jint bufferSize, jchar delimiter, jchar replacement, jint skip);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer *new_OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withChar_withChar_withInt_(OrgApacheLuceneUtilAttributeFactory *factory, jint bufferSize, jchar delimiter, jchar replacement, jint skip) NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer)
 

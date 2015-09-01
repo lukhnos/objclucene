@@ -42,8 +42,6 @@
 - (instancetype)initWithNSString:(NSString *)input
                      withBoolean:(jboolean)withTranspositions;
 
-- (OrgApacheLuceneUtilAutomatonAutomaton *)toAutomatonWithInt:(jint)n;
-
 - (OrgApacheLuceneUtilAutomatonAutomaton *)toAutomatonWithInt:(jint)n
                                                  withNSString:(NSString *)prefix;
 

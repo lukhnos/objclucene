@@ -83,10 +83,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansConjunctionSpans_$1)
   return res;
 }
 
-- (IOSObjectArray *)getSubSpans {
-  return subSpans_;
-}
-
 - (void)dealloc {
   RELEASE_(subSpans_);
   RELEASE_(conjunction_);
@@ -103,7 +99,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansConjunctionSpans_$1)
     { "toMatchDoc", NULL, "I", 0x0, "Ljava.io.IOException;", NULL },
     { "twoPhaseCurrentDocMatches", NULL, "Z", 0x400, "Ljava.io.IOException;", NULL },
     { "asTwoPhaseIterator", NULL, "Lorg.apache.lucene.search.TwoPhaseIterator;", 0x1, NULL, NULL },
-    { "getSubSpans", NULL, "[Lorg.apache.lucene.search.spans.Spans;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "subSpans_", NULL, 0x10, "[Lorg.apache.lucene.search.spans.Spans;", NULL, NULL, .constantValue.asLong = 0 },
@@ -111,7 +106,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansConjunctionSpans_$1)
     { "atFirstInCurrentDoc_", NULL, 0x0, "Z", NULL, NULL, .constantValue.asLong = 0 },
     { "oneExhaustedInCurrentDoc_", NULL, 0x0, "Z", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansConjunctionSpans = { 2, "ConjunctionSpans", "org.apache.lucene.search.spans", NULL, 0x400, 9, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansConjunctionSpans = { 2, "ConjunctionSpans", "org.apache.lucene.search.spans", NULL, 0x400, 8, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchSpansConjunctionSpans;
 }
 

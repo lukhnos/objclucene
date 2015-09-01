@@ -16,35 +16,11 @@
 #if !defined (_OrgApacheLuceneAnalysisCompoundHyphenationByteVector_) && (OrgApacheLuceneAnalysisCompoundHyphenationByteVector_INCLUDE_ALL || OrgApacheLuceneAnalysisCompoundHyphenationByteVector_INCLUDE)
 #define _OrgApacheLuceneAnalysisCompoundHyphenationByteVector_
 
-@class IOSByteArray;
-
 @interface OrgApacheLuceneAnalysisCompoundHyphenationByteVector : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (instancetype)initWithByteArray:(IOSByteArray *)a;
-
-- (instancetype)initWithByteArray:(IOSByteArray *)a
-                          withInt:(jint)capacity;
-
-- (instancetype)initWithInt:(jint)capacity;
-
-- (jint)alloc__WithInt:(jint)size OBJC_METHOD_FAMILY_NONE;
-
-- (jint)capacity;
-
-- (jbyte)getWithInt:(jint)index;
-
-- (IOSByteArray *)getArray;
-
-- (jint)length;
-
-- (void)putWithInt:(jint)index
-          withByte:(jbyte)val;
-
-- (void)trimToSize;
 
 @end
 
@@ -53,18 +29,6 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisCompoundHyphenationByteVector)
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCompoundHyphenationByteVector_init(OrgApacheLuceneAnalysisCompoundHyphenationByteVector *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundHyphenationByteVector *new_OrgApacheLuceneAnalysisCompoundHyphenationByteVector_init() NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCompoundHyphenationByteVector_initWithInt_(OrgApacheLuceneAnalysisCompoundHyphenationByteVector *self, jint capacity);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundHyphenationByteVector *new_OrgApacheLuceneAnalysisCompoundHyphenationByteVector_initWithInt_(jint capacity) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCompoundHyphenationByteVector_initWithByteArray_(OrgApacheLuceneAnalysisCompoundHyphenationByteVector *self, IOSByteArray *a);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundHyphenationByteVector *new_OrgApacheLuceneAnalysisCompoundHyphenationByteVector_initWithByteArray_(IOSByteArray *a) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCompoundHyphenationByteVector_initWithByteArray_withInt_(OrgApacheLuceneAnalysisCompoundHyphenationByteVector *self, IOSByteArray *a, jint capacity);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundHyphenationByteVector *new_OrgApacheLuceneAnalysisCompoundHyphenationByteVector_initWithByteArray_withInt_(IOSByteArray *a, jint capacity) NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCompoundHyphenationByteVector)
 

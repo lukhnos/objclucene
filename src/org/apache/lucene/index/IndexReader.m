@@ -25,7 +25,6 @@
 #include "org/apache/lucene/index/LeafReader.h"
 #include "org/apache/lucene/index/StoredFieldVisitor.h"
 #include "org/apache/lucene/index/Term.h"
-#include "org/apache/lucene/index/Terms.h"
 #include "org/apache/lucene/store/AlreadyClosedException.h"
 #include "org/apache/lucene/util/IOUtils.h"
 
@@ -69,16 +68,6 @@ __attribute__((unused)) static jint OrgApacheLuceneIndexIndexReader_numDeletedDo
 - (instancetype)init {
   OrgApacheLuceneIndexIndexReader_init(self);
   return self;
-}
-
-- (void)addReaderClosedListenerWithOrgApacheLuceneIndexIndexReader_ReaderClosedListener:(id<OrgApacheLuceneIndexIndexReader_ReaderClosedListener>)listener {
-  OrgApacheLuceneIndexIndexReader_ensureOpen(self);
-  [((id<JavaUtilSet>) nil_chk(readerClosedListeners_)) addWithId:listener];
-}
-
-- (void)removeReaderClosedListenerWithOrgApacheLuceneIndexIndexReader_ReaderClosedListener:(id<OrgApacheLuceneIndexIndexReader_ReaderClosedListener>)listener {
-  OrgApacheLuceneIndexIndexReader_ensureOpen(self);
-  [((id<JavaUtilSet>) nil_chk(readerClosedListeners_)) removeWithId:listener];
 }
 
 - (void)registerParentReaderWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader {
@@ -128,15 +117,6 @@ __attribute__((unused)) static jint OrgApacheLuceneIndexIndexReader_numDeletedDo
   // can't call an abstract method
   [self doesNotRecognizeSelector:_cmd];
   return 0;
-}
-
-- (OrgApacheLuceneIndexTerms *)getTermVectorWithInt:(jint)docID
-                                       withNSString:(NSString *)field {
-  OrgApacheLuceneIndexFields *vectors = [self getTermVectorsWithInt:docID];
-  if (vectors == nil) {
-    return nil;
-  }
-  return [((OrgApacheLuceneIndexFields *) nil_chk(vectors)) termsWithNSString:field];
 }
 
 - (jint)numDocs {
@@ -206,35 +186,7 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
   return self;
 }
 
-- (id)getCombinedCoreAndDeletesKey {
-  return self;
-}
-
 - (jint)docFreqWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term {
-  // can't call an abstract method
-  [self doesNotRecognizeSelector:_cmd];
-  return 0;
-}
-
-- (jlong)totalTermFreqWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term {
-  // can't call an abstract method
-  [self doesNotRecognizeSelector:_cmd];
-  return 0;
-}
-
-- (jlong)getSumDocFreqWithNSString:(NSString *)field {
-  // can't call an abstract method
-  [self doesNotRecognizeSelector:_cmd];
-  return 0;
-}
-
-- (jint)getDocCountWithNSString:(NSString *)field {
-  // can't call an abstract method
-  [self doesNotRecognizeSelector:_cmd];
-  return 0;
-}
-
-- (jlong)getSumTotalTermFreqWithNSString:(NSString *)field {
   // can't call an abstract method
   [self doesNotRecognizeSelector:_cmd];
   return 0;
@@ -250,8 +202,6 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "init", "IndexReader", NULL, 0x0, NULL, NULL },
-    { "addReaderClosedListenerWithOrgApacheLuceneIndexIndexReader_ReaderClosedListener:", "addReaderClosedListener", "V", 0x11, NULL, NULL },
-    { "removeReaderClosedListenerWithOrgApacheLuceneIndexIndexReader_ReaderClosedListener:", "removeReaderClosedListener", "V", 0x11, NULL, NULL },
     { "registerParentReaderWithOrgApacheLuceneIndexIndexReader:", "registerParentReader", "V", 0x11, NULL, NULL },
     { "notifyReaderClosedListenersWithJavaLangThrowable:", "notifyReaderClosedListeners", "V", 0x2, NULL, NULL },
     { "reportCloseToParentReaders", NULL, "V", 0x2, NULL, NULL },
@@ -263,7 +213,6 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
     { "isEqual:", "equals", "Z", 0x11, NULL, NULL },
     { "hash", "hashCode", "I", 0x11, NULL, NULL },
     { "getTermVectorsWithInt:", "getTermVectors", "Lorg.apache.lucene.index.Fields;", 0x401, "Ljava.io.IOException;", NULL },
-    { "getTermVectorWithInt:withNSString:", "getTermVector", "Lorg.apache.lucene.index.Terms;", 0x11, "Ljava.io.IOException;", NULL },
     { "numDocs", NULL, "I", 0x401, NULL, NULL },
     { "maxDoc", NULL, "I", 0x401, NULL, NULL },
     { "numDeletedDocs", NULL, "I", 0x11, NULL, NULL },
@@ -276,12 +225,7 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
     { "getContext", NULL, "Lorg.apache.lucene.index.IndexReaderContext;", 0x401, NULL, NULL },
     { "leaves", NULL, "Ljava.util.List;", 0x11, NULL, NULL },
     { "getCoreCacheKey", NULL, "Ljava.lang.Object;", 0x1, NULL, NULL },
-    { "getCombinedCoreAndDeletesKey", NULL, "Ljava.lang.Object;", 0x1, NULL, NULL },
     { "docFreqWithOrgApacheLuceneIndexTerm:", "docFreq", "I", 0x401, "Ljava.io.IOException;", NULL },
-    { "totalTermFreqWithOrgApacheLuceneIndexTerm:", "totalTermFreq", "J", 0x401, "Ljava.io.IOException;", NULL },
-    { "getSumDocFreqWithNSString:", "getSumDocFreq", "J", 0x401, "Ljava.io.IOException;", NULL },
-    { "getDocCountWithNSString:", "getDocCount", "I", 0x401, "Ljava.io.IOException;", NULL },
-    { "getSumTotalTermFreqWithNSString:", "getSumTotalTermFreq", "J", 0x401, "Ljava.io.IOException;", NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "closed_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
@@ -291,7 +235,7 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
     { "parentReaders_", NULL, 0x12, "Ljava.util.Set;", NULL, "Ljava/util/Set<Lorg/apache/lucene/index/IndexReader;>;", .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.index.IndexReader$ReaderClosedListener;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexReader = { 2, "IndexReader", "org.apache.lucene.index", NULL, 0x401, 33, methods, 5, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexReader = { 2, "IndexReader", "org.apache.lucene.index", NULL, 0x401, 25, methods, 5, fields, 0, NULL, 1, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneIndexIndexReader;
 }
 

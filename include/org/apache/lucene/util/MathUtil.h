@@ -20,17 +20,10 @@
 
 #pragma mark Public
 
-+ (jdouble)acoshWithDouble:(jdouble)a;
-
-+ (jdouble)asinhWithDouble:(jdouble)a;
-
-+ (jdouble)atanhWithDouble:(jdouble)a;
+- (instancetype)init;
 
 + (jlong)gcdWithLong:(jlong)a
             withLong:(jlong)b;
-
-+ (jdouble)logWithDouble:(jdouble)base
-              withDouble:(jdouble)x;
 
 + (jint)logWithLong:(jlong)x
             withInt:(jint)base;
@@ -41,15 +34,11 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilMathUtil)
 
 FOUNDATION_EXPORT jint OrgApacheLuceneUtilMathUtil_logWithLong_withInt_(jlong x, jint base);
 
-FOUNDATION_EXPORT jdouble OrgApacheLuceneUtilMathUtil_logWithDouble_withDouble_(jdouble base, jdouble x);
-
 FOUNDATION_EXPORT jlong OrgApacheLuceneUtilMathUtil_gcdWithLong_withLong_(jlong a, jlong b);
 
-FOUNDATION_EXPORT jdouble OrgApacheLuceneUtilMathUtil_asinhWithDouble_(jdouble a);
+FOUNDATION_EXPORT void OrgApacheLuceneUtilMathUtil_init(OrgApacheLuceneUtilMathUtil *self);
 
-FOUNDATION_EXPORT jdouble OrgApacheLuceneUtilMathUtil_acoshWithDouble_(jdouble a);
-
-FOUNDATION_EXPORT jdouble OrgApacheLuceneUtilMathUtil_atanhWithDouble_(jdouble a);
+FOUNDATION_EXPORT OrgApacheLuceneUtilMathUtil *new_OrgApacheLuceneUtilMathUtil_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilMathUtil)
 

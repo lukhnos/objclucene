@@ -16,35 +16,11 @@
 #if !defined (_OrgApacheLuceneSearchPayloadsPayloadFunction_) && (OrgApacheLuceneSearchPayloadsPayloadFunction_INCLUDE_ALL || OrgApacheLuceneSearchPayloadsPayloadFunction_INCLUDE)
 #define _OrgApacheLuceneSearchPayloadsPayloadFunction_
 
-@class OrgApacheLuceneSearchExplanation;
-
 @interface OrgApacheLuceneSearchPayloadsPayloadFunction : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (jfloat)currentScoreWithInt:(jint)docId
-                 withNSString:(NSString *)field
-                      withInt:(jint)start
-                      withInt:(jint)end
-                      withInt:(jint)numPayloadsSeen
-                    withFloat:(jfloat)currentScore
-                    withFloat:(jfloat)currentPayloadScore;
-
-- (jfloat)docScoreWithInt:(jint)docId
-             withNSString:(NSString *)field
-                  withInt:(jint)numPayloadsSeen
-                withFloat:(jfloat)payloadScore;
-
-- (jboolean)isEqual:(id)o;
-
-- (OrgApacheLuceneSearchExplanation *)explainWithInt:(jint)docId
-                                        withNSString:(NSString *)field
-                                             withInt:(jint)numPayloadsSeen
-                                           withFloat:(jfloat)payloadScore;
-
-- (NSUInteger)hash;
 
 @end
 

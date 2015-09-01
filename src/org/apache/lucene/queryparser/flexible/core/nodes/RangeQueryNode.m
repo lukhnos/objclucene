@@ -4,8 +4,9 @@
 //
 
 #include "J2ObjC_source.h"
-#include "org/apache/lucene/queryparser/flexible/core/nodes/FieldValuePairQueryNode.h"
 #include "org/apache/lucene/queryparser/flexible/core/nodes/RangeQueryNode.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode : NSObject
 
@@ -14,13 +15,7 @@
 @implementation OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getLowerBound", NULL, "TT;", 0x401, NULL, "()TT;" },
-    { "getUpperBound", NULL, "TT;", 0x401, NULL, "()TT;" },
-    { "isLowerInclusive", NULL, "Z", 0x401, NULL, NULL },
-    { "isUpperInclusive", NULL, "Z", 0x401, NULL, NULL },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode = { 2, "RangeQueryNode", "org.apache.lucene.queryparser.flexible.core.nodes", NULL, 0x609, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, "<T::Lorg/apache/lucene/queryparser/flexible/core/nodes/FieldValuePairQueryNode<*>;>Ljava/lang/Object;Lorg/apache/lucene/queryparser/flexible/core/nodes/FieldableNode;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode = { 2, "RangeQueryNode", "org.apache.lucene.queryparser.flexible.core.nodes", NULL, 0x609, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, "<T::Lorg/apache/lucene/queryparser/flexible/core/nodes/FieldValuePairQueryNode<*>;>Ljava/lang/Object;Lorg/apache/lucene/queryparser/flexible/core/nodes/FieldableNode;" };
   return &_OrgApacheLuceneQueryparserFlexibleCoreNodesRangeQueryNode;
 }
 

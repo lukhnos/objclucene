@@ -3,25 +3,12 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/xml/builders/RangeFilterBuilder.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "org/apache/lucene/queryparser/xml/DOMUtils.h"
-#include "org/apache/lucene/queryparser/xml/ParserException.h"
 #include "org/apache/lucene/queryparser/xml/builders/RangeFilterBuilder.h"
-#include "org/apache/lucene/search/Filter.h"
-#include "org/apache/lucene/search/TermRangeFilter.h"
-#include "org/w3c/dom/Element.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder
-
-- (OrgApacheLuceneSearchFilter *)getFilterWithOrgW3cDomElement:(id<OrgW3cDomElement>)e {
-  NSString *fieldName = OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithInheritanceWithOrgW3cDomElement_withNSString_(e, @"fieldName");
-  NSString *lowerTerm = [((id<OrgW3cDomElement>) nil_chk(e)) getAttributeWithNSString:@"lowerTerm"];
-  NSString *upperTerm = [e getAttributeWithNSString:@"upperTerm"];
-  jboolean includeLower = OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withBoolean_(e, @"includeLower", YES);
-  jboolean includeUpper = OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withBoolean_(e, @"includeUpper", YES);
-  return OrgApacheLuceneSearchTermRangeFilter_newStringRangeWithNSString_withNSString_withNSString_withBoolean_withBoolean_(fieldName, lowerTerm, upperTerm, includeLower, includeUpper);
-}
 
 - (instancetype)init {
   OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder_init(self);
@@ -30,10 +17,9 @@
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "getFilterWithOrgW3cDomElement:", "getFilter", "Lorg.apache.lucene.search.Filter;", 0x1, "Lorg.apache.lucene.queryparser.xml.ParserException;", NULL },
     { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder = { 2, "RangeFilterBuilder", "org.apache.lucene.queryparser.xml.builders", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder = { 2, "RangeFilterBuilder", "org.apache.lucene.queryparser.xml.builders", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserXmlBuildersRangeFilterBuilder;
 }
 

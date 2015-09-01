@@ -20,38 +20,17 @@
 #define OrgApacheLuceneQueriesFunctionValueSource_INCLUDE 1
 #include "org/apache/lucene/queries/function/ValueSource.h"
 
-@class OrgApacheLuceneSearchIndexSearcher;
-@protocol JavaUtilMap;
-
-@interface OrgApacheLuceneQueriesFunctionValuesourceSingleFunction : OrgApacheLuceneQueriesFunctionValueSource {
- @public
-  OrgApacheLuceneQueriesFunctionValueSource *source_;
-}
+@interface OrgApacheLuceneQueriesFunctionValuesourceSingleFunction : OrgApacheLuceneQueriesFunctionValueSource
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)source;
-
-- (void)createWeightWithJavaUtilMap:(id<JavaUtilMap>)context
-withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher;
-
-- (NSString *)description__;
-
-- (jboolean)isEqual:(id)o;
-
-- (NSUInteger)hash;
-
-#pragma mark Protected
-
-- (NSString *)name;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceSingleFunction)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceSingleFunction, source_, OrgApacheLuceneQueriesFunctionValueSource *)
-
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceSingleFunction_initWithOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceSingleFunction *self, OrgApacheLuceneQueriesFunctionValueSource *source);
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceSingleFunction_init(OrgApacheLuceneQueriesFunctionValuesourceSingleFunction *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceSingleFunction)
 

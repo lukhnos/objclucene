@@ -20,47 +20,19 @@
 #define OrgApacheLuceneUtilInfoStream_INCLUDE 1
 #include "org/apache/lucene/util/InfoStream.h"
 
-@class JavaIoPrintStream;
-
-@interface OrgApacheLuceneUtilPrintStreamInfoStream : OrgApacheLuceneUtilInfoStream {
- @public
-  jint messageID_;
-  JavaIoPrintStream *stream_;
-}
+@interface OrgApacheLuceneUtilPrintStreamInfoStream : OrgApacheLuceneUtilInfoStream
 
 #pragma mark Public
 
-- (instancetype)initWithJavaIoPrintStream:(JavaIoPrintStream *)stream;
-
-- (instancetype)initWithJavaIoPrintStream:(JavaIoPrintStream *)stream
-                                  withInt:(jint)messageID;
-
-- (void)close;
-
-- (jboolean)isEnabledWithNSString:(NSString *)component;
-
-- (jboolean)isSystemStream;
-
-- (void)messageWithNSString:(NSString *)component
-               withNSString:(NSString *)message;
-
-#pragma mark Protected
-
-- (NSString *)getTimestamp;
+- (instancetype)init;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneUtilPrintStreamInfoStream)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilPrintStreamInfoStream)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPrintStreamInfoStream, stream_, JavaIoPrintStream *)
+FOUNDATION_EXPORT void OrgApacheLuceneUtilPrintStreamInfoStream_init(OrgApacheLuceneUtilPrintStreamInfoStream *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilPrintStreamInfoStream_initWithJavaIoPrintStream_(OrgApacheLuceneUtilPrintStreamInfoStream *self, JavaIoPrintStream *stream);
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilPrintStreamInfoStream *new_OrgApacheLuceneUtilPrintStreamInfoStream_initWithJavaIoPrintStream_(JavaIoPrintStream *stream) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneUtilPrintStreamInfoStream_initWithJavaIoPrintStream_withInt_(OrgApacheLuceneUtilPrintStreamInfoStream *self, JavaIoPrintStream *stream, jint messageID);
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilPrintStreamInfoStream *new_OrgApacheLuceneUtilPrintStreamInfoStream_initWithJavaIoPrintStream_withInt_(JavaIoPrintStream *stream, jint messageID) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilPrintStreamInfoStream *new_OrgApacheLuceneUtilPrintStreamInfoStream_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPrintStreamInfoStream)
 

@@ -20,6 +20,10 @@
 
 @interface OrgApacheLuceneAnalysisEnKStemData6 : NSObject
 
+#pragma mark Package-Private
+
+- (instancetype)init;
+
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisEnKStemData6)
@@ -27,6 +31,10 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisEnKStemData6)
 FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneAnalysisEnKStemData6_data_;
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisEnKStemData6, data_, IOSObjectArray *)
 J2OBJC_STATIC_FIELD_SETTER(OrgApacheLuceneAnalysisEnKStemData6, data_, IOSObjectArray *)
+
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisEnKStemData6_init(OrgApacheLuceneAnalysisEnKStemData6 *self);
+
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisEnKStemData6 *new_OrgApacheLuceneAnalysisEnKStemData6_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisEnKStemData6)
 

@@ -22,7 +22,6 @@
 
 @class IOSCharArray;
 @class OrgApacheLuceneAnalysisUtilCharArrayMap;
-@protocol JavaLangCharSequence;
 @protocol JavaUtilCollection;
 @protocol JavaUtilIterator;
 @protocol JavaUtilSet;
@@ -37,21 +36,13 @@
 - (instancetype)initWithInt:(jint)startSize
                 withBoolean:(jboolean)ignoreCase;
 
-- (jboolean)addWithCharArray:(IOSCharArray *)text;
-
-- (jboolean)addWithJavaLangCharSequence:(id<JavaLangCharSequence>)text;
-
 - (jboolean)addWithId:(id)o;
-
-- (jboolean)addWithNSString:(NSString *)text;
 
 - (void)clear;
 
 - (jboolean)containsWithCharArray:(IOSCharArray *)text
                           withInt:(jint)off
                           withInt:(jint)len;
-
-- (jboolean)containsWithJavaLangCharSequence:(id<JavaLangCharSequence>)cs;
 
 - (jboolean)containsWithId:(id)o;
 

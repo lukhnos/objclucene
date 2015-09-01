@@ -20,26 +20,7 @@
 #define OrgApacheLuceneSearchScorer_INCLUDE 1
 #include "org/apache/lucene/search/Scorer.h"
 
-@interface OrgApacheLuceneSearchJoinFakeScorer : OrgApacheLuceneSearchScorer {
- @public
-  jfloat score_;
-  jint doc_;
-  jint freq_;
-}
-
-#pragma mark Public
-
-- (jint)advanceWithInt:(jint)target;
-
-- (jlong)cost;
-
-- (jint)docID;
-
-- (jint)freq;
-
-- (jint)nextDoc;
-
-- (jfloat)score;
+@interface OrgApacheLuceneSearchJoinFakeScorer : OrgApacheLuceneSearchScorer
 
 #pragma mark Package-Private
 

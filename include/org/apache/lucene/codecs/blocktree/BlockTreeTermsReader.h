@@ -26,7 +26,6 @@
 @class OrgApacheLuceneStoreIndexInput;
 @class OrgApacheLuceneUtilBytesRef;
 @class OrgApacheLuceneUtilFstOutputs;
-@protocol JavaUtilCollection;
 @protocol JavaUtilIterator;
 
 #define OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_OUTPUT_FLAGS_NUM_BITS 2
@@ -56,8 +55,6 @@
 
 - (void)close;
 
-- (id<JavaUtilCollection>)getChildResources;
-
 - (id<JavaUtilIterator>)iterator;
 
 - (jlong)ramBytesUsed;
@@ -69,8 +66,6 @@
 - (NSString *)description;
 
 #pragma mark Package-Private
-
-- (NSString *)brToStringWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)b;
 
 
 @end

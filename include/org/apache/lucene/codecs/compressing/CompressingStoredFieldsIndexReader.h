@@ -25,7 +25,6 @@
 @class IOSObjectArray;
 @class OrgApacheLuceneIndexSegmentInfo;
 @class OrgApacheLuceneStoreIndexInput;
-@protocol JavaUtilCollection;
 
 @interface OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader : NSObject < NSCopying, OrgApacheLuceneUtilAccountable > {
  @public
@@ -41,8 +40,6 @@
 #pragma mark Public
 
 - (OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader *)clone;
-
-- (id<JavaUtilCollection>)getChildResources;
 
 - (jlong)ramBytesUsed;
 

@@ -158,7 +158,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter_Pe
   IOSByteArray *termBytes_;
   OrgApacheLuceneCodecsBlockTermState *state_;
   OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm *prefixTerm_;
-  OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter_PendingTerm *other_;
 }
 
 - (instancetype)initWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term
@@ -174,7 +173,6 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter_Pend
 J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter_PendingTerm, termBytes_, IOSByteArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter_PendingTerm, state_, OrgApacheLuceneCodecsBlockTermState *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter_PendingTerm, prefixTerm_, OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter_PendingTerm, other_, OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter_PendingTerm *)
 
 __attribute__((unused)) static void OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter_PendingTerm_initWithOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneCodecsBlockTermState_withOrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm_(OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter_PendingTerm *self, OrgApacheLuceneUtilBytesRef *term, OrgApacheLuceneCodecsBlockTermState *state, OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm *prefixTerm);
 
@@ -764,7 +762,6 @@ withOrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm:(OrgApacheLuc
   RELEASE_(termBytes_);
   RELEASE_(state_);
   RELEASE_(prefixTerm_);
-  RELEASE_(other_);
   [super dealloc];
 }
 
@@ -777,9 +774,8 @@ withOrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm:(OrgApacheLuc
     { "termBytes_", NULL, 0x11, "[B", NULL, NULL, .constantValue.asLong = 0 },
     { "state_", NULL, 0x11, "Lorg.apache.lucene.codecs.BlockTermState;", NULL, NULL, .constantValue.asLong = 0 },
     { "prefixTerm_", NULL, 0x11, "Lorg.apache.lucene.codecs.blocktree.AutoPrefixTermsWriter$PrefixTerm;", NULL, NULL, .constantValue.asLong = 0 },
-    { "other_", NULL, 0x1, "Lorg.apache.lucene.codecs.blocktree.BlockTreeTermsWriter$PendingTerm;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter_PendingTerm = { 2, "PendingTerm", "org.apache.lucene.codecs.blocktree", "BlockTreeTermsWriter", 0x1a, 2, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter_PendingTerm = { 2, "PendingTerm", "org.apache.lucene.codecs.blocktree", "BlockTreeTermsWriter", 0x1a, 2, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter_PendingTerm;
 }
 

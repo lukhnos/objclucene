@@ -20,60 +20,19 @@
 #define OrgApacheLuceneSearchQuery_INCLUDE 1
 #include "org/apache/lucene/search/Query.h"
 
-@class OrgApacheLuceneSearchIndexSearcher;
-@class OrgApacheLuceneSearchWeight;
-@class OrgApacheLuceneUtilAutomatonAutomaton;
-@class OrgApacheLuceneUtilBytesRef;
-
-@interface OrgApacheLuceneSearchTermAutomatonQuery : OrgApacheLuceneSearchQuery {
- @public
-  OrgApacheLuceneUtilAutomatonAutomaton *det_;
-}
+@interface OrgApacheLuceneSearchTermAutomatonQuery : OrgApacheLuceneSearchQuery
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field;
-
-- (void)addAnyTransitionWithInt:(jint)source
-                        withInt:(jint)dest;
-
-- (void)addTransitionWithInt:(jint)source
-                     withInt:(jint)dest
-withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term;
-
-- (void)addTransitionWithInt:(jint)source
-                     withInt:(jint)dest
-                withNSString:(NSString *)term;
-
-- (jint)createState;
-
-- (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
-                                                                        withBoolean:(jboolean)needsScores;
-
-- (jboolean)isEqual:(id)o;
-
-- (void)finish;
-
-- (void)finishWithInt:(jint)maxDeterminizedStates;
-
-- (NSUInteger)hash;
-
-- (void)setAcceptWithInt:(jint)state
-             withBoolean:(jboolean)accept;
-
-- (NSString *)toDot;
-
-- (NSString *)toStringWithNSString:(NSString *)field;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchTermAutomatonQuery)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchTermAutomatonQuery, det_, OrgApacheLuceneUtilAutomatonAutomaton *)
+FOUNDATION_EXPORT void OrgApacheLuceneSearchTermAutomatonQuery_init(OrgApacheLuceneSearchTermAutomatonQuery *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchTermAutomatonQuery_initWithNSString_(OrgApacheLuceneSearchTermAutomatonQuery *self, NSString *field);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchTermAutomatonQuery *new_OrgApacheLuceneSearchTermAutomatonQuery_initWithNSString_(NSString *field) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchTermAutomatonQuery *new_OrgApacheLuceneSearchTermAutomatonQuery_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTermAutomatonQuery)
 
@@ -82,88 +41,21 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTermAutomatonQuery)
 #if !defined (_OrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorer_) && (OrgApacheLuceneSearchTermAutomatonQuery_INCLUDE_ALL || OrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorer_INCLUDE)
 #define _OrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorer_
 
-@class OrgApacheLuceneIndexPostingsEnum;
+@interface OrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorer : NSObject
 
-@interface OrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorer : NSObject {
- @public
-  jint termID_;
-  OrgApacheLuceneIndexPostingsEnum *posEnum_;
-  jint posLeft_;
-  jint pos_;
-}
+#pragma mark Package-Private
 
-#pragma mark Public
-
-- (instancetype)initWithInt:(jint)termID
-withOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)posEnum;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorer)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorer, posEnum_, OrgApacheLuceneIndexPostingsEnum *)
+FOUNDATION_EXPORT void OrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorer_init(OrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorer *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorer_initWithInt_withOrgApacheLuceneIndexPostingsEnum_(OrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorer *self, jint termID, OrgApacheLuceneIndexPostingsEnum *posEnum);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorer *new_OrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorer_initWithInt_withOrgApacheLuceneIndexPostingsEnum_(jint termID, OrgApacheLuceneIndexPostingsEnum *posEnum) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorer *new_OrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorer_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorer)
-
-#endif
-
-#if !defined (_OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight_) && (OrgApacheLuceneSearchTermAutomatonQuery_INCLUDE_ALL || OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight_INCLUDE)
-#define _OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight_
-
-#define OrgApacheLuceneSearchWeight_RESTRICT 1
-#define OrgApacheLuceneSearchWeight_INCLUDE 1
-#include "org/apache/lucene/search/Weight.h"
-
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneSearchExplanation;
-@class OrgApacheLuceneSearchIndexSearcher;
-@class OrgApacheLuceneSearchScorer;
-@class OrgApacheLuceneSearchTermAutomatonQuery;
-@class OrgApacheLuceneUtilAutomatonAutomaton;
-@protocol JavaUtilMap;
-@protocol JavaUtilSet;
-
-@interface OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight : OrgApacheLuceneSearchWeight {
- @public
-  OrgApacheLuceneUtilAutomatonAutomaton *automaton_;
-}
-
-#pragma mark Public
-
-- (instancetype)initWithOrgApacheLuceneSearchTermAutomatonQuery:(OrgApacheLuceneSearchTermAutomatonQuery *)outer$
-                      withOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)automaton
-                         withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
-                                                withJavaUtilMap:(id<JavaUtilMap>)termStates;
-
-- (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-                                                                               withInt:(jint)doc;
-
-- (void)extractTermsWithJavaUtilSet:(id<JavaUtilSet>)terms;
-
-- (jfloat)getValueForNormalization;
-
-- (void)normalizeWithFloat:(jfloat)queryNorm
-                 withFloat:(jfloat)topLevelBoost;
-
-- (OrgApacheLuceneSearchScorer *)scorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
-
-- (NSString *)description;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight, automaton_, OrgApacheLuceneUtilAutomatonAutomaton *)
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight_initWithOrgApacheLuceneSearchTermAutomatonQuery_withOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_(OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight *self, OrgApacheLuceneSearchTermAutomatonQuery *outer$, OrgApacheLuceneUtilAutomatonAutomaton *automaton, OrgApacheLuceneSearchIndexSearcher *searcher, id<JavaUtilMap> termStates);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight *new_OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight_initWithOrgApacheLuceneSearchTermAutomatonQuery_withOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_(OrgApacheLuceneSearchTermAutomatonQuery *outer$, OrgApacheLuceneUtilAutomatonAutomaton *automaton, OrgApacheLuceneSearchIndexSearcher *searcher, id<JavaUtilMap> termStates) NS_RETURNS_RETAINED;
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight)
 
 #endif
 

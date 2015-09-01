@@ -20,34 +20,19 @@
 #define OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_INCLUDE 1
 #include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNodeImpl.h"
 
-@protocol JavaLangCharSequence;
-@protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
-@protocol OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax;
-
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl
 
 #pragma mark Public
 
-- (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)schema
-                    withJavaLangCharSequence:(id<JavaLangCharSequence>)value;
-
-- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)cloneTree;
-
-- (id<JavaLangCharSequence>)getSchema;
-
-- (id<JavaLangCharSequence>)getValue;
-
-- (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escapeSyntaxParser;
-
-- (NSString *)description;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_(OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode *self, id<JavaLangCharSequence> schema, id<JavaLangCharSequence> value);
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode_init(OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_(id<JavaLangCharSequence> schema, id<JavaLangCharSequence> value) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode)
 

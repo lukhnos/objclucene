@@ -38,18 +38,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchCollectionStatistics, field_, NSString 
   return maxDoc_;
 }
 
-- (jlong)docCount {
-  return docCount_;
-}
-
-- (jlong)sumTotalTermFreq {
-  return sumTotalTermFreq_;
-}
-
-- (jlong)sumDocFreq {
-  return sumDocFreq_;
-}
-
 - (void)dealloc {
   RELEASE_(field_);
   [super dealloc];
@@ -60,9 +48,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchCollectionStatistics, field_, NSString 
     { "initWithNSString:withLong:withLong:withLong:withLong:", "CollectionStatistics", NULL, 0x1, NULL, NULL },
     { "field", NULL, "Ljava.lang.String;", 0x11, NULL, NULL },
     { "maxDoc", NULL, "J", 0x11, NULL, NULL },
-    { "docCount", NULL, "J", 0x11, NULL, NULL },
-    { "sumTotalTermFreq", NULL, "J", 0x11, NULL, NULL },
-    { "sumDocFreq", NULL, "J", 0x11, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "field_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
@@ -71,7 +56,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchCollectionStatistics, field_, NSString 
     { "sumTotalTermFreq_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
     { "sumDocFreq_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchCollectionStatistics = { 2, "CollectionStatistics", "org.apache.lucene.search", NULL, 0x1, 6, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchCollectionStatistics = { 2, "CollectionStatistics", "org.apache.lucene.search", NULL, 0x1, 3, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchCollectionStatistics;
 }
 

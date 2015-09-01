@@ -16,27 +16,14 @@
 #if !defined (_OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder_) && (OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder_INCLUDE_ALL || OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder_INCLUDE)
 #define _OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder_
 
-@class OrgApacheLuceneStoreDataOutput;
-@class OrgApacheLuceneUtilBytesRef;
-
 #define OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder_PAYLOAD_SEP 31
 #define OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder_END_BYTE 0
 
 @interface OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder : NSObject
 
-#pragma mark Public
+#pragma mark Package-Private
 
 - (instancetype)init;
-
-- (void)addEntryWithInt:(jint)docID
-withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)surfaceForm
-               withLong:(jlong)weight;
-
-- (void)finishTerm;
-
-- (void)startTermWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)analyzed;
-
-- (jboolean)storeWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)output;
 
 @end
 

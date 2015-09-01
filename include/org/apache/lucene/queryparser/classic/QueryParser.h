@@ -47,23 +47,13 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)a;
 
 - (jint)Conjunction;
 
-- (void)disable_tracing;
-
-- (void)enable_tracing;
-
 - (OrgApacheLuceneQueryparserClassicParseException *)generateParseException;
-
-- (OrgApacheLuceneQueryparserClassicToken *)getNextToken;
-
-- (OrgApacheLuceneQueryparserClassicToken *)getTokenWithInt:(jint)index;
 
 - (jint)Modifiers;
 
 - (OrgApacheLuceneSearchQuery *)QueryWithNSString:(NSString *)field;
 
 - (void)ReInitWithOrgApacheLuceneQueryparserClassicCharStream:(id<OrgApacheLuceneQueryparserClassicCharStream>)stream;
-
-- (void)ReInitWithOrgApacheLuceneQueryparserClassicQueryParserTokenManager:(OrgApacheLuceneQueryparserClassicQueryParserTokenManager *)tm;
 
 - (OrgApacheLuceneSearchQuery *)TermWithNSString:(NSString *)field;
 
@@ -72,8 +62,6 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)a;
 #pragma mark Protected
 
 - (instancetype)initWithOrgApacheLuceneQueryparserClassicCharStream:(id<OrgApacheLuceneQueryparserClassicCharStream>)stream;
-
-- (instancetype)initWithOrgApacheLuceneQueryparserClassicQueryParserTokenManager:(OrgApacheLuceneQueryparserClassicQueryParserTokenManager *)tm;
 
 @end
 
@@ -90,10 +78,6 @@ FOUNDATION_EXPORT OrgApacheLuceneQueryparserClassicQueryParser *new_OrgApacheLuc
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserClassicQueryParser_initWithOrgApacheLuceneQueryparserClassicCharStream_(OrgApacheLuceneQueryparserClassicQueryParser *self, id<OrgApacheLuceneQueryparserClassicCharStream> stream);
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserClassicQueryParser *new_OrgApacheLuceneQueryparserClassicQueryParser_initWithOrgApacheLuceneQueryparserClassicCharStream_(id<OrgApacheLuceneQueryparserClassicCharStream> stream) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserClassicQueryParser_initWithOrgApacheLuceneQueryparserClassicQueryParserTokenManager_(OrgApacheLuceneQueryparserClassicQueryParser *self, OrgApacheLuceneQueryparserClassicQueryParserTokenManager *tm);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserClassicQueryParser *new_OrgApacheLuceneQueryparserClassicQueryParser_initWithOrgApacheLuceneQueryparserClassicQueryParserTokenManager_(OrgApacheLuceneQueryparserClassicQueryParserTokenManager *tm) NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserClassicQueryParser)
 

@@ -36,18 +36,6 @@ withOrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException:(OrgApacheLucen
   return self;
 }
 
-- (OrgApacheLuceneUtilAutomatonAutomaton *)getAutomaton {
-  return automaton_;
-}
-
-- (OrgApacheLuceneUtilAutomatonRegExp *)getRegExp {
-  return regExp_;
-}
-
-- (jint)getMaxDeterminizedStates {
-  return maxDeterminizedStates_;
-}
-
 - (void)dealloc {
   RELEASE_(automaton_);
   RELEASE_(regExp_);
@@ -58,16 +46,13 @@ withOrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException:(OrgApacheLucen
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneUtilAutomatonRegExp:withOrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException:", "TooComplexToDeterminizeException", NULL, 0x1, NULL, NULL },
     { "initWithOrgApacheLuceneUtilAutomatonAutomaton:withInt:", "TooComplexToDeterminizeException", NULL, 0x1, NULL, NULL },
-    { "getAutomaton", NULL, "Lorg.apache.lucene.util.automaton.Automaton;", 0x1, NULL, NULL },
-    { "getRegExp", NULL, "Lorg.apache.lucene.util.automaton.RegExp;", 0x1, NULL, NULL },
-    { "getMaxDeterminizedStates", NULL, "I", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "automaton_", NULL, 0x92, "Lorg.apache.lucene.util.automaton.Automaton;", NULL, NULL, .constantValue.asLong = 0 },
     { "regExp_", NULL, 0x92, "Lorg.apache.lucene.util.automaton.RegExp;", NULL, NULL, .constantValue.asLong = 0 },
     { "maxDeterminizedStates_", NULL, 0x92, "I", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException = { 2, "TooComplexToDeterminizeException", "org.apache.lucene.util.automaton", NULL, 0x1, 5, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException = { 2, "TooComplexToDeterminizeException", "org.apache.lucene.util.automaton", NULL, 0x1, 2, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilAutomatonTooComplexToDeterminizeException;
 }
 

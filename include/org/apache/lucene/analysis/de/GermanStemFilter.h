@@ -20,26 +20,19 @@
 #define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
-@class OrgApacheLuceneAnalysisDeGermanStemmer;
-@class OrgApacheLuceneAnalysisTokenStream;
-
 @interface OrgApacheLuceneAnalysisDeGermanStemFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg;
-
-- (jboolean)incrementToken;
-
-- (void)setStemmerWithOrgApacheLuceneAnalysisDeGermanStemmer:(OrgApacheLuceneAnalysisDeGermanStemmer *)stemmer;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisDeGermanStemFilter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisDeGermanStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisDeGermanStemFilter *self, OrgApacheLuceneAnalysisTokenStream *inArg);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisDeGermanStemFilter_init(OrgApacheLuceneAnalysisDeGermanStemFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisDeGermanStemFilter *new_OrgApacheLuceneAnalysisDeGermanStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisDeGermanStemFilter *new_OrgApacheLuceneAnalysisDeGermanStemFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisDeGermanStemFilter)
 

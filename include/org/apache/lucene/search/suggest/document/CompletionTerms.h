@@ -20,34 +20,19 @@
 #define OrgApacheLuceneIndexFilterLeafReader_FilterTerms_INCLUDE 1
 #include "org/apache/lucene/index/FilterLeafReader.h"
 
-@class OrgApacheLuceneIndexTerms;
-@class OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader;
-@class OrgApacheLuceneSearchSuggestDocumentNRTSuggester;
-
 @interface OrgApacheLuceneSearchSuggestDocumentCompletionTerms : OrgApacheLuceneIndexFilterLeafReader_FilterTerms
 
 #pragma mark Public
 
-- (jlong)getMaxWeight;
-
-- (jlong)getMinWeight;
-
-- (jbyte)getType;
-
-- (OrgApacheLuceneSearchSuggestDocumentNRTSuggester *)suggester;
-
-#pragma mark Package-Private
-
-- (instancetype)initWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)inArg
-withOrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader:(OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader *)reader;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestDocumentCompletionTerms)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentCompletionTerms_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader_(OrgApacheLuceneSearchSuggestDocumentCompletionTerms *self, OrgApacheLuceneIndexTerms *inArg, OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader *reader);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentCompletionTerms_init(OrgApacheLuceneSearchSuggestDocumentCompletionTerms *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentCompletionTerms *new_OrgApacheLuceneSearchSuggestDocumentCompletionTerms_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader_(OrgApacheLuceneIndexTerms *inArg, OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader *reader) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentCompletionTerms *new_OrgApacheLuceneSearchSuggestDocumentCompletionTerms_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentCompletionTerms)
 

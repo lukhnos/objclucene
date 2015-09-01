@@ -20,134 +20,21 @@
 #define OrgApacheLuceneSearchQuery_INCLUDE 1
 #include "org/apache/lucene/search/Query.h"
 
-@class JavaUtilArrayList;
-@class OrgApacheLuceneAnalysisAnalyzer;
-@class OrgApacheLuceneIndexIndexReader;
-@class OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTermQueue;
-@class OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity;
-
-@interface OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery : OrgApacheLuceneSearchQuery {
- @public
-  OrgApacheLuceneSearchQuery *rewrittenQuery_;
-  JavaUtilArrayList *fieldVals_;
-  OrgApacheLuceneAnalysisAnalyzer *analyzer_;
-  OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTermQueue *q_;
-  jint MAX_VARIANTS_PER_TERM_;
-  jboolean ignoreTF_;
-}
+@interface OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery : OrgApacheLuceneSearchQuery
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)maxNumTerms
-withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
-
-- (void)addTermsWithNSString:(NSString *)queryString
-                withNSString:(NSString *)fieldName
-                   withFloat:(jfloat)minSimilarity
-                     withInt:(jint)prefixLength;
-
-- (jboolean)isEqual:(id)obj;
-
-- (NSUInteger)hash;
-
-- (jboolean)isIgnoreTF;
-
-- (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
-
-- (void)setIgnoreTFWithBoolean:(jboolean)ignoreTF;
-
-- (NSString *)toStringWithNSString:(NSString *)field;
+- (instancetype)init;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery, rewrittenQuery_, OrgApacheLuceneSearchQuery *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery, fieldVals_, JavaUtilArrayList *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery, analyzer_, OrgApacheLuceneAnalysisAnalyzer *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery, q_, OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTermQueue *)
+FOUNDATION_EXPORT void OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_init(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_sim_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery, sim_, OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *)
-J2OBJC_STATIC_FIELD_SETTER(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery, sim_, OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *)
-
-FOUNDATION_EXPORT void OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_initWithInt_withOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery *self, jint maxNumTerms, OrgApacheLuceneAnalysisAnalyzer *analyzer);
-
-FOUNDATION_EXPORT OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery *new_OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_initWithInt_withOrgApacheLuceneAnalysisAnalyzer_(jint maxNumTerms, OrgApacheLuceneAnalysisAnalyzer *analyzer) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery *new_OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery)
-
-#endif
-
-#if !defined (_OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_FieldVals_) && (OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_INCLUDE_ALL || OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_FieldVals_INCLUDE)
-#define _OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_FieldVals_
-
-@class OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery;
-
-@interface OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_FieldVals : NSObject {
- @public
-  NSString *queryString_;
-  NSString *fieldName_;
-  jfloat minSimilarity_;
-  jint prefixLength_;
-}
-
-#pragma mark Public
-
-- (instancetype)initWithOrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery:(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery *)outer$
-                                                           withNSString:(NSString *)name
-                                                              withFloat:(jfloat)similarity
-                                                                withInt:(jint)length
-                                                           withNSString:(NSString *)queryString;
-
-- (jboolean)isEqual:(id)obj;
-
-- (NSUInteger)hash;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_FieldVals)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_FieldVals, queryString_, NSString *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_FieldVals, fieldName_, NSString *)
-
-FOUNDATION_EXPORT void OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_FieldVals_initWithOrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_withNSString_withFloat_withInt_withNSString_(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_FieldVals *self, OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery *outer$, NSString *name, jfloat similarity, jint length, NSString *queryString);
-
-FOUNDATION_EXPORT OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_FieldVals *new_OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_FieldVals_initWithOrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_withNSString_withFloat_withInt_withNSString_(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery *outer$, NSString *name, jfloat similarity, jint length, NSString *queryString) NS_RETURNS_RETAINED;
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_FieldVals)
-
-#endif
-
-#if !defined (_OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTermQueue_) && (OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_INCLUDE_ALL || OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTermQueue_INCLUDE)
-#define _OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTermQueue_
-
-#define OrgApacheLuceneUtilPriorityQueue_RESTRICT 1
-#define OrgApacheLuceneUtilPriorityQueue_INCLUDE 1
-#include "org/apache/lucene/util/PriorityQueue.h"
-
-@class OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm;
-
-@interface OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTermQueue : OrgApacheLuceneUtilPriorityQueue
-
-#pragma mark Public
-
-- (instancetype)initWithInt:(jint)size;
-
-#pragma mark Protected
-
-- (jboolean)lessThanWithId:(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm *)termA
-                    withId:(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm *)termB;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTermQueue)
-
-FOUNDATION_EXPORT void OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTermQueue_initWithInt_(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTermQueue *self, jint size);
-
-FOUNDATION_EXPORT OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTermQueue *new_OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTermQueue_initWithInt_(jint size) NS_RETURNS_RETAINED;
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTermQueue)
 
 #endif
 

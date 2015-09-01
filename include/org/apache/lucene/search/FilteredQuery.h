@@ -40,10 +40,6 @@ withOrgApacheLuceneSearchFilteredQuery_FilterStrategy:(OrgApacheLuceneSearchFilt
 
 - (jboolean)isEqual:(id)o;
 
-- (OrgApacheLuceneSearchFilter *)getFilter;
-
-- (OrgApacheLuceneSearchFilteredQuery_FilterStrategy *)getFilterStrategy;
-
 - (OrgApacheLuceneSearchQuery *)getQuery;
 
 - (NSUInteger)hash;

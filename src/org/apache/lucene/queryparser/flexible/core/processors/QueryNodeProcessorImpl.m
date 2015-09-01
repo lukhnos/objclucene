@@ -3,41 +3,13 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/core/processors/QueryNodeProcessorImpl.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/lang/NullPointerException.h"
 #include "java/util/ArrayList.h"
-#include "java/util/List.h"
-#include "org/apache/lucene/queryparser/flexible/core/QueryNodeException.h"
-#include "org/apache/lucene/queryparser/flexible/core/config/QueryConfigHandler.h"
-#include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNode.h"
 #include "org/apache/lucene/queryparser/flexible/core/processors/QueryNodeProcessorImpl.h"
 
-@class OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList;
+#pragma clang diagnostic ignored "-Wprotocol"
 
-@interface OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl () {
- @public
-  JavaUtilArrayList *childrenListPool_;
-  OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *queryConfig_;
-}
-
-- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)processIterationWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryTree;
-
-- (OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList *)allocateChildrenList OBJC_METHOD_FAMILY_NONE;
-
-@end
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl, childrenListPool_, JavaUtilArrayList *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl, queryConfig_, OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *)
-
-__attribute__((unused)) static id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_processIterationWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_(OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl *self, id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> queryTree);
-
-__attribute__((unused)) static OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList *OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_allocateChildrenList(OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl *self);
-
-@interface OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList : JavaUtilArrayList {
- @public
-  jboolean beingUsed_;
-}
+@interface OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList : JavaUtilArrayList
 
 - (instancetype)init;
 
@@ -59,97 +31,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreProcessorsQuery
   return self;
 }
 
-- (instancetype)initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler:(OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *)queryConfigHandler {
-  OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler_(self, queryConfigHandler);
-  return self;
-}
-
-- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)processWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryTree {
-  return OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_processIterationWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_(self, queryTree);
-}
-
-- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)processIterationWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryTree {
-  return OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_processIterationWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_(self, queryTree);
-}
-
-- (void)processChildrenWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryTree {
-  id<JavaUtilList> children = [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(queryTree)) getChildren];
-  OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList *newChildren;
-  if (children != nil && [children size] > 0) {
-    newChildren = OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_allocateChildrenList(self);
-    @try {
-      for (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> __strong child in children) {
-        child = OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_processIterationWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_(self, child);
-        if (child == nil) {
-          @throw [new_JavaLangNullPointerException_init() autorelease];
-        }
-        [((OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList *) nil_chk(newChildren)) addWithId:child];
-      }
-      id<JavaUtilList> orderedChildrenList = [self setChildrenOrderWithJavaUtilList:newChildren];
-      [queryTree setWithJavaUtilList:orderedChildrenList];
-    }
-    @finally {
-      ((OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList *) nil_chk(newChildren))->beingUsed_ = NO;
-    }
-  }
-}
-
-- (OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList *)allocateChildrenList {
-  return OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_allocateChildrenList(self);
-}
-
-- (void)setQueryConfigHandlerWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler:(OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *)queryConfigHandler {
-  JreStrongAssign(&self->queryConfig_, queryConfigHandler);
-}
-
-- (OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *)getQueryConfigHandler {
-  return self->queryConfig_;
-}
-
-- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)preProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)node {
-  // can't call an abstract method
-  [self doesNotRecognizeSelector:_cmd];
-  return 0;
-}
-
-- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)postProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)node {
-  // can't call an abstract method
-  [self doesNotRecognizeSelector:_cmd];
-  return 0;
-}
-
-- (id<JavaUtilList>)setChildrenOrderWithJavaUtilList:(id<JavaUtilList>)children {
-  // can't call an abstract method
-  [self doesNotRecognizeSelector:_cmd];
-  return 0;
-}
-
-- (void)dealloc {
-  RELEASE_(childrenListPool_);
-  RELEASE_(queryConfig_);
-  [super dealloc];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", "QueryNodeProcessorImpl", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler:", "QueryNodeProcessorImpl", NULL, 0x1, NULL, NULL },
-    { "processWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "process", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x1, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
-    { "processIterationWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "processIteration", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x2, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
-    { "processChildrenWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "processChildren", "V", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
-    { "allocateChildrenList", NULL, "Lorg.apache.lucene.queryparser.flexible.core.processors.QueryNodeProcessorImpl$ChildrenList;", 0x2, NULL, NULL },
-    { "setQueryConfigHandlerWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler:", "setQueryConfigHandler", "V", 0x1, NULL, NULL },
-    { "getQueryConfigHandler", NULL, "Lorg.apache.lucene.queryparser.flexible.core.config.QueryConfigHandler;", 0x1, NULL, NULL },
-    { "preProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "preProcessNode", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x404, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
-    { "postProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "postProcessNode", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x404, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
-    { "setChildrenOrderWithJavaUtilList:", "setChildrenOrder", "Ljava.util.List;", 0x404, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "childrenListPool_", NULL, 0x2, "Ljava.util.ArrayList;", NULL, "Ljava/util/ArrayList<Lorg/apache/lucene/queryparser/flexible/core/processors/QueryNodeProcessorImpl$ChildrenList;>;", .constantValue.asLong = 0 },
-    { "queryConfig_", NULL, 0x2, "Lorg.apache.lucene.queryparser.flexible.core.config.QueryConfigHandler;", NULL, NULL, .constantValue.asLong = 0 },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.queryparser.flexible.core.processors.QueryNodeProcessorImpl$ChildrenList;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl = { 2, "QueryNodeProcessorImpl", "org.apache.lucene.queryparser.flexible.core.processors", NULL, 0x401, 11, methods, 2, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl = { 2, "QueryNodeProcessorImpl", "org.apache.lucene.queryparser.flexible.core.processors", NULL, 0x401, 1, methods, 0, NULL, 0, NULL, 1, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl;
 }
 
@@ -157,37 +44,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreProcessorsQuery
 
 void OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_init(OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl *self) {
   NSObject_init(self);
-  JreStrongAssignAndConsume(&self->childrenListPool_, new_JavaUtilArrayList_init());
-}
-
-void OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler_(OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl *self, OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *queryConfigHandler) {
-  NSObject_init(self);
-  JreStrongAssignAndConsume(&self->childrenListPool_, new_JavaUtilArrayList_init());
-  JreStrongAssign(&self->queryConfig_, queryConfigHandler);
-}
-
-id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_processIterationWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_(OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl *self, id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> queryTree) {
-  queryTree = [self preProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:queryTree];
-  [self processChildrenWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:queryTree];
-  queryTree = [self postProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:queryTree];
-  return queryTree;
-}
-
-OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList *OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_allocateChildrenList(OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl *self) {
-  OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList *list = nil;
-  for (OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList * __strong auxList in nil_chk(self->childrenListPool_)) {
-    if (!((OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList *) nil_chk(auxList))->beingUsed_) {
-      list = auxList;
-      [list clear];
-      break;
-    }
-  }
-  if (list == nil) {
-    list = [new_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList_init() autorelease];
-    [self->childrenListPool_ addWithId:list];
-  }
-  ((OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList *) nil_chk(list))->beingUsed_ = YES;
-  return list;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl)
@@ -207,18 +63,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleCoreProcessor
   static const J2ObjcMethodInfo methods[] = {
     { "init", NULL, NULL, 0x2, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "beingUsed_", NULL, 0x0, "Z", NULL, NULL, .constantValue.asLong = 0 },
-  };
   static const char *superclass_type_args[] = {"Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList = { 2, "ChildrenList", "org.apache.lucene.queryparser.flexible.core.processors", "QueryNodeProcessorImpl", 0xa, 1, methods, 1, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/util/ArrayList<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList = { 2, "ChildrenList", "org.apache.lucene.queryparser.flexible.core.processors", "QueryNodeProcessorImpl", 0xa, 1, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Ljava/util/ArrayList<Lorg/apache/lucene/queryparser/flexible/core/nodes/QueryNode;>;" };
   return &_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList;
 }
 
 @end
 
 void OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList_init(OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList *self) {
-  JavaUtilArrayList_init(self);
+  NSObject_init(self);
 }
 
 OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList *new_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList_init() {

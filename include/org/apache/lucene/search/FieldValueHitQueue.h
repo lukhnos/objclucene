@@ -38,8 +38,6 @@
 + (OrgApacheLuceneSearchFieldValueHitQueue *)createWithOrgApacheLuceneSearchSortFieldArray:(IOSObjectArray *)fields
                                                                                    withInt:(jint)size;
 
-- (IOSObjectArray *)getComparators;
-
 - (IOSObjectArray *)getComparatorsWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
 
 - (IOSIntArray *)getReverseMul;

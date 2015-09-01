@@ -18,11 +18,6 @@
   return self;
 }
 
-- (void)close {
-  // can't call an abstract method
-  [self doesNotRecognizeSelector:_cmd];
-}
-
 - (void)checkIntegrity {
   // can't call an abstract method
   [self doesNotRecognizeSelector:_cmd];
@@ -39,11 +34,10 @@
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "init", "FieldsProducer", NULL, 0x4, NULL, NULL },
-    { "close", NULL, "V", 0x401, "Ljava.io.IOException;", NULL },
     { "checkIntegrity", NULL, "V", 0x401, "Ljava.io.IOException;", NULL },
     { "getMergeInstance", NULL, "Lorg.apache.lucene.codecs.FieldsProducer;", 0x1, "Ljava.io.IOException;", NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsFieldsProducer = { 2, "FieldsProducer", "org.apache.lucene.codecs", NULL, 0x401, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsFieldsProducer = { 2, "FieldsProducer", "org.apache.lucene.codecs", NULL, 0x401, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneCodecsFieldsProducer;
 }
 

@@ -4,57 +4,34 @@
 //
 
 #include "J2ObjC_source.h"
-#include "java/lang/IllegalArgumentException.h"
-#include "java/util/Map.h"
-#include "org/apache/lucene/analysis/TokenStream.h"
-#include "org/apache/lucene/analysis/id/IndonesianStemFilter.h"
 #include "org/apache/lucene/analysis/id/IndonesianStemFilterFactory.h"
-#include "org/apache/lucene/analysis/util/AbstractAnalysisFactory.h"
-#include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
-@interface OrgApacheLuceneAnalysisIdIndonesianStemFilterFactory () {
- @public
-  jboolean stemDerivational_;
-}
-
-@end
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneAnalysisIdIndonesianStemFilterFactory
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args {
-  OrgApacheLuceneAnalysisIdIndonesianStemFilterFactory_initWithJavaUtilMap_(self, args);
+- (instancetype)init {
+  OrgApacheLuceneAnalysisIdIndonesianStemFilterFactory_init(self);
   return self;
-}
-
-- (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  return [new_OrgApacheLuceneAnalysisIdIndonesianStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_(input, stemDerivational_) autorelease];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "IndonesianStemFilterFactory", NULL, 0x1, NULL, NULL },
-    { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.TokenStream;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "stemDerivational_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisIdIndonesianStemFilterFactory = { 2, "IndonesianStemFilterFactory", "org.apache.lucene.analysis.id", NULL, 0x1, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisIdIndonesianStemFilterFactory = { 2, "IndonesianStemFilterFactory", "org.apache.lucene.analysis.id", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisIdIndonesianStemFilterFactory;
 }
 
 @end
 
-void OrgApacheLuceneAnalysisIdIndonesianStemFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisIdIndonesianStemFilterFactory *self, id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
-  self->stemDerivational_ = [self getBooleanWithJavaUtilMap:args withNSString:@"stemDerivational" withBoolean:YES];
-  if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
-  }
+void OrgApacheLuceneAnalysisIdIndonesianStemFilterFactory_init(OrgApacheLuceneAnalysisIdIndonesianStemFilterFactory *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneAnalysisIdIndonesianStemFilterFactory *new_OrgApacheLuceneAnalysisIdIndonesianStemFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+OrgApacheLuceneAnalysisIdIndonesianStemFilterFactory *new_OrgApacheLuceneAnalysisIdIndonesianStemFilterFactory_init() {
   OrgApacheLuceneAnalysisIdIndonesianStemFilterFactory *self = [OrgApacheLuceneAnalysisIdIndonesianStemFilterFactory alloc];
-  OrgApacheLuceneAnalysisIdIndonesianStemFilterFactory_initWithJavaUtilMap_(self, args);
+  OrgApacheLuceneAnalysisIdIndonesianStemFilterFactory_init(self);
   return self;
 }
 

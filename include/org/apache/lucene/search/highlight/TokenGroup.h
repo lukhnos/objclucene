@@ -16,7 +16,6 @@
 #if !defined (_OrgApacheLuceneSearchHighlightTokenGroup_) && (OrgApacheLuceneSearchHighlightTokenGroup_INCLUDE_ALL || OrgApacheLuceneSearchHighlightTokenGroup_INCLUDE)
 #define _OrgApacheLuceneSearchHighlightTokenGroup_
 
-@class OrgApacheLuceneAnalysisToken;
 @class OrgApacheLuceneAnalysisTokenStream;
 
 @interface OrgApacheLuceneSearchHighlightTokenGroup : NSObject
@@ -29,11 +28,7 @@
 
 - (jint)getNumTokens;
 
-- (jfloat)getScoreWithInt:(jint)index;
-
 - (jint)getStartOffset;
-
-- (OrgApacheLuceneAnalysisToken *)getTokenWithInt:(jint)index;
 
 - (jfloat)getTotalScore;
 

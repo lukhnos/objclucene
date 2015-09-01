@@ -23,10 +23,7 @@
 @class IOSObjectArray;
 @class OrgApacheLuceneIndexFieldInfos;
 @class OrgApacheLuceneIndexIndexReader;
-@class OrgApacheLuceneIndexPostingsEnum;
 @class OrgApacheLuceneIndexTerms;
-@class OrgApacheLuceneUtilBytesRef;
-@protocol JavaUtilCollection;
 @protocol JavaUtilIterator;
 @protocol OrgApacheLuceneUtilBits;
 
@@ -39,29 +36,9 @@
 
 + (OrgApacheLuceneIndexFields *)getFieldsWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
 
-+ (id<JavaUtilCollection>)getIndexedFieldsWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
-
 + (id<OrgApacheLuceneUtilBits>)getLiveDocsWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
 
 + (OrgApacheLuceneIndexFieldInfos *)getMergedFieldInfosWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
-
-+ (OrgApacheLuceneIndexPostingsEnum *)getTermDocsEnumWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)r
-                                                                            withNSString:(NSString *)field
-                                                         withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term;
-
-+ (OrgApacheLuceneIndexPostingsEnum *)getTermDocsEnumWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)r
-                                                                            withNSString:(NSString *)field
-                                                         withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term
-                                                                                 withInt:(jint)flags;
-
-+ (OrgApacheLuceneIndexPostingsEnum *)getTermPositionsEnumWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)r
-                                                                                 withNSString:(NSString *)field
-                                                              withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term;
-
-+ (OrgApacheLuceneIndexPostingsEnum *)getTermPositionsEnumWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)r
-                                                                                 withNSString:(NSString *)field
-                                                              withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term
-                                                                                      withInt:(jint)flags;
 
 + (OrgApacheLuceneIndexTerms *)getTermsWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)r
                                                               withNSString:(NSString *)field;
@@ -85,21 +62,11 @@ FOUNDATION_EXPORT id<OrgApacheLuceneUtilBits> OrgApacheLuceneIndexMultiFields_ge
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexTerms *OrgApacheLuceneIndexMultiFields_getTermsWithOrgApacheLuceneIndexIndexReader_withNSString_(OrgApacheLuceneIndexIndexReader *r, NSString *field);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexPostingsEnum *OrgApacheLuceneIndexMultiFields_getTermDocsEnumWithOrgApacheLuceneIndexIndexReader_withNSString_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneIndexIndexReader *r, NSString *field, OrgApacheLuceneUtilBytesRef *term);
-
-FOUNDATION_EXPORT OrgApacheLuceneIndexPostingsEnum *OrgApacheLuceneIndexMultiFields_getTermDocsEnumWithOrgApacheLuceneIndexIndexReader_withNSString_withOrgApacheLuceneUtilBytesRef_withInt_(OrgApacheLuceneIndexIndexReader *r, NSString *field, OrgApacheLuceneUtilBytesRef *term, jint flags);
-
-FOUNDATION_EXPORT OrgApacheLuceneIndexPostingsEnum *OrgApacheLuceneIndexMultiFields_getTermPositionsEnumWithOrgApacheLuceneIndexIndexReader_withNSString_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneIndexIndexReader *r, NSString *field, OrgApacheLuceneUtilBytesRef *term);
-
-FOUNDATION_EXPORT OrgApacheLuceneIndexPostingsEnum *OrgApacheLuceneIndexMultiFields_getTermPositionsEnumWithOrgApacheLuceneIndexIndexReader_withNSString_withOrgApacheLuceneUtilBytesRef_withInt_(OrgApacheLuceneIndexIndexReader *r, NSString *field, OrgApacheLuceneUtilBytesRef *term, jint flags);
-
 FOUNDATION_EXPORT void OrgApacheLuceneIndexMultiFields_initWithOrgApacheLuceneIndexFieldsArray_withOrgApacheLuceneIndexReaderSliceArray_(OrgApacheLuceneIndexMultiFields *self, IOSObjectArray *subs, IOSObjectArray *subSlices);
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexMultiFields *new_OrgApacheLuceneIndexMultiFields_initWithOrgApacheLuceneIndexFieldsArray_withOrgApacheLuceneIndexReaderSliceArray_(IOSObjectArray *subs, IOSObjectArray *subSlices) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexFieldInfos *OrgApacheLuceneIndexMultiFields_getMergedFieldInfosWithOrgApacheLuceneIndexIndexReader_(OrgApacheLuceneIndexIndexReader *reader);
-
-FOUNDATION_EXPORT id<JavaUtilCollection> OrgApacheLuceneIndexMultiFields_getIndexedFieldsWithOrgApacheLuceneIndexIndexReader_(OrgApacheLuceneIndexIndexReader *reader);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiFields)
 

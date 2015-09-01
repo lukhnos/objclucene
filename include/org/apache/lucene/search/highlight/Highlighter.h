@@ -34,11 +34,6 @@
                       withOrgApacheLuceneSearchHighlightEncoder:(id<OrgApacheLuceneSearchHighlightEncoder>)encoder
                        withOrgApacheLuceneSearchHighlightScorer:(id<OrgApacheLuceneSearchHighlightScorer>)fragmentScorer;
 
-- (instancetype)initWithOrgApacheLuceneSearchHighlightFormatter:(id<OrgApacheLuceneSearchHighlightFormatter>)formatter
-                       withOrgApacheLuceneSearchHighlightScorer:(id<OrgApacheLuceneSearchHighlightScorer>)fragmentScorer;
-
-- (instancetype)initWithOrgApacheLuceneSearchHighlightScorer:(id<OrgApacheLuceneSearchHighlightScorer>)fragmentScorer;
-
 - (NSString *)getBestFragmentWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
                                                     withNSString:(NSString *)fieldName
                                                     withNSString:(NSString *)text;
@@ -46,38 +41,14 @@
 - (NSString *)getBestFragmentWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tokenStream
                                                        withNSString:(NSString *)text;
 
-- (IOSObjectArray *)getBestFragmentsWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
-                                                           withNSString:(NSString *)fieldName
-                                                           withNSString:(NSString *)text
-                                                                withInt:(jint)maxNumFragments;
-
 - (IOSObjectArray *)getBestFragmentsWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tokenStream
                                                               withNSString:(NSString *)text
                                                                    withInt:(jint)maxNumFragments;
-
-- (NSString *)getBestFragmentsWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tokenStream
-                                                        withNSString:(NSString *)text
-                                                             withInt:(jint)maxNumFragments
-                                                        withNSString:(NSString *)separator;
 
 - (IOSObjectArray *)getBestTextFragmentsWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tokenStream
                                                                   withNSString:(NSString *)text
                                                                    withBoolean:(jboolean)mergeContiguousFragments
                                                                        withInt:(jint)maxNumFragments;
-
-- (id<OrgApacheLuceneSearchHighlightEncoder>)getEncoder;
-
-- (id<OrgApacheLuceneSearchHighlightScorer>)getFragmentScorer;
-
-- (jint)getMaxDocCharsToAnalyze;
-
-- (id<OrgApacheLuceneSearchHighlightFragmenter>)getTextFragmenter;
-
-- (void)setEncoderWithOrgApacheLuceneSearchHighlightEncoder:(id<OrgApacheLuceneSearchHighlightEncoder>)encoder;
-
-- (void)setFragmentScorerWithOrgApacheLuceneSearchHighlightScorer:(id<OrgApacheLuceneSearchHighlightScorer>)scorer;
-
-- (void)setMaxDocCharsToAnalyzeWithInt:(jint)maxDocCharsToAnalyze;
 
 - (void)setTextFragmenterWithOrgApacheLuceneSearchHighlightFragmenter:(id<OrgApacheLuceneSearchHighlightFragmenter>)fragmenter;
 
@@ -86,14 +57,6 @@
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchHighlightHighlighter)
 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchHighlightHighlighter, DEFAULT_MAX_CHARS_TO_ANALYZE, jint)
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightHighlighter_initWithOrgApacheLuceneSearchHighlightScorer_(OrgApacheLuceneSearchHighlightHighlighter *self, id<OrgApacheLuceneSearchHighlightScorer> fragmentScorer);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightHighlighter *new_OrgApacheLuceneSearchHighlightHighlighter_initWithOrgApacheLuceneSearchHighlightScorer_(id<OrgApacheLuceneSearchHighlightScorer> fragmentScorer) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightHighlighter_initWithOrgApacheLuceneSearchHighlightFormatter_withOrgApacheLuceneSearchHighlightScorer_(OrgApacheLuceneSearchHighlightHighlighter *self, id<OrgApacheLuceneSearchHighlightFormatter> formatter, id<OrgApacheLuceneSearchHighlightScorer> fragmentScorer);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightHighlighter *new_OrgApacheLuceneSearchHighlightHighlighter_initWithOrgApacheLuceneSearchHighlightFormatter_withOrgApacheLuceneSearchHighlightScorer_(id<OrgApacheLuceneSearchHighlightFormatter> formatter, id<OrgApacheLuceneSearchHighlightScorer> fragmentScorer) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightHighlighter_initWithOrgApacheLuceneSearchHighlightFormatter_withOrgApacheLuceneSearchHighlightEncoder_withOrgApacheLuceneSearchHighlightScorer_(OrgApacheLuceneSearchHighlightHighlighter *self, id<OrgApacheLuceneSearchHighlightFormatter> formatter, id<OrgApacheLuceneSearchHighlightEncoder> encoder, id<OrgApacheLuceneSearchHighlightScorer> fragmentScorer);
 

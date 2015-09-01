@@ -20,8 +20,6 @@
 #define OrgApacheLuceneAnalysisTokenizer_INCLUDE 1
 #include "org/apache/lucene/analysis/Tokenizer.h"
 
-@class OrgApacheLuceneUtilAttributeFactory;
-
 #define OrgApacheLuceneAnalysisNgramNGramTokenizer_DEFAULT_MIN_NGRAM_SIZE 1
 #define OrgApacheLuceneAnalysisNgramNGramTokenizer_DEFAULT_MAX_NGRAM_SIZE 2
 
@@ -31,34 +29,6 @@
 
 - (instancetype)init;
 
-- (instancetype)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory
-                                                    withInt:(jint)minGram
-                                                    withInt:(jint)maxGram;
-
-- (instancetype)initWithInt:(jint)minGram
-                    withInt:(jint)maxGram;
-
-- (void)end;
-
-- (jboolean)incrementToken;
-
-- (void)reset;
-
-#pragma mark Protected
-
-- (jboolean)isTokenCharWithInt:(jint)chr;
-
-#pragma mark Package-Private
-
-- (instancetype)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory
-                                                    withInt:(jint)minGram
-                                                    withInt:(jint)maxGram
-                                                withBoolean:(jboolean)edgesOnly;
-
-- (instancetype)initWithInt:(jint)minGram
-                    withInt:(jint)maxGram
-                withBoolean:(jboolean)edgesOnly;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisNgramNGramTokenizer)
@@ -66,22 +36,6 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisNgramNGramTokenizer)
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisNgramNGramTokenizer, DEFAULT_MIN_NGRAM_SIZE, jint)
 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisNgramNGramTokenizer, DEFAULT_MAX_NGRAM_SIZE, jint)
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisNgramNGramTokenizer_initWithInt_withInt_withBoolean_(OrgApacheLuceneAnalysisNgramNGramTokenizer *self, jint minGram, jint maxGram, jboolean edgesOnly);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisNgramNGramTokenizer *new_OrgApacheLuceneAnalysisNgramNGramTokenizer_initWithInt_withInt_withBoolean_(jint minGram, jint maxGram, jboolean edgesOnly) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisNgramNGramTokenizer_initWithInt_withInt_(OrgApacheLuceneAnalysisNgramNGramTokenizer *self, jint minGram, jint maxGram);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisNgramNGramTokenizer *new_OrgApacheLuceneAnalysisNgramNGramTokenizer_initWithInt_withInt_(jint minGram, jint maxGram) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisNgramNGramTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withInt_withBoolean_(OrgApacheLuceneAnalysisNgramNGramTokenizer *self, OrgApacheLuceneUtilAttributeFactory *factory, jint minGram, jint maxGram, jboolean edgesOnly);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisNgramNGramTokenizer *new_OrgApacheLuceneAnalysisNgramNGramTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withInt_withBoolean_(OrgApacheLuceneUtilAttributeFactory *factory, jint minGram, jint maxGram, jboolean edgesOnly) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisNgramNGramTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withInt_(OrgApacheLuceneAnalysisNgramNGramTokenizer *self, OrgApacheLuceneUtilAttributeFactory *factory, jint minGram, jint maxGram);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisNgramNGramTokenizer *new_OrgApacheLuceneAnalysisNgramNGramTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withInt_(OrgApacheLuceneUtilAttributeFactory *factory, jint minGram, jint maxGram) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisNgramNGramTokenizer_init(OrgApacheLuceneAnalysisNgramNGramTokenizer *self);
 

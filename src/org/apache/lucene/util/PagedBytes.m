@@ -13,9 +13,6 @@
 #include "java/lang/Integer.h"
 #include "java/lang/System.h"
 #include "java/util/Arrays.h"
-#include "java/util/Collection.h"
-#include "java/util/Collections.h"
-#include "java/util/List.h"
 #include "org/apache/lucene/store/DataInput.h"
 #include "org/apache/lucene/store/DataOutput.h"
 #include "org/apache/lucene/store/IndexInput.h"
@@ -139,26 +136,6 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPagedBytes)
   }
 }
 
-- (void)copy__WithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)bytes
-              withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)outArg {
-  jint left = blockSize_ - upto_;
-  if (((OrgApacheLuceneUtilBytesRef *) nil_chk(bytes))->length_ > left || currentBlock_ == nil) {
-    if (currentBlock_ != nil) {
-      OrgApacheLuceneUtilPagedBytes_addBlockWithByteArray_(self, currentBlock_);
-      didSkipBytes_ = YES;
-    }
-    JreStrongAssignAndConsume(&currentBlock_, [IOSByteArray newArrayWithLength:blockSize_]);
-    upto_ = 0;
-    left = blockSize_;
-    JreAssert((bytes->length_ <= blockSize_), (@"org/apache/lucene/util/PagedBytes.java:207 condition failed: assert bytes.length <= blockSize;"));
-  }
-  JreStrongAssign(&((OrgApacheLuceneUtilBytesRef *) nil_chk(outArg))->bytes_, currentBlock_);
-  outArg->offset_ = upto_;
-  outArg->length_ = bytes->length_;
-  JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(bytes->bytes_, bytes->offset_, currentBlock_, upto_, bytes->length_);
-  upto_ += bytes->length_;
-}
-
 - (OrgApacheLuceneUtilPagedBytes_Reader *)freezeWithBoolean:(jboolean)trim {
   if (frozen_) {
     @throw [new_JavaLangIllegalStateException_initWithNSString_(@"already frozen") autorelease];
@@ -200,10 +177,6 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPagedBytes)
     size += OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithByteArray_(currentBlock_);
   }
   return size;
-}
-
-- (id<JavaUtilCollection>)getChildResources {
-  return JavaUtilCollections_emptyList();
 }
 
 - (jlong)copyUsingLengthPrefixWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)bytes {
@@ -266,11 +239,9 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPagedBytes)
     { "initWithInt:", "PagedBytes", NULL, 0x1, NULL, NULL },
     { "addBlockWithByteArray:", "addBlock", "V", 0x2, NULL, NULL },
     { "copy__WithOrgApacheLuceneStoreIndexInput:withLong:", "copy", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "copy__WithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:", "copy", "V", 0x1, NULL, NULL },
     { "freezeWithBoolean:", "freeze", "Lorg.apache.lucene.util.PagedBytes$Reader;", 0x1, NULL, NULL },
     { "getPointer", NULL, "J", 0x1, NULL, NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
     { "copyUsingLengthPrefixWithOrgApacheLuceneUtilBytesRef:", "copyUsingLengthPrefix", "J", 0x1, NULL, NULL },
     { "getDataInput", NULL, "Lorg.apache.lucene.util.PagedBytes$PagedBytesDataInput;", 0x1, NULL, NULL },
     { "getDataOutput", NULL, "Lorg.apache.lucene.util.PagedBytes$PagedBytesDataOutput;", 0x1, NULL, NULL },
@@ -290,7 +261,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPagedBytes)
     { "EMPTY_BYTES_", NULL, 0x1a, "[B", &OrgApacheLuceneUtilPagedBytes_EMPTY_BYTES_, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.util.PagedBytes$Reader;", "Lorg.apache.lucene.util.PagedBytes$PagedBytesDataInput;", "Lorg.apache.lucene.util.PagedBytes$PagedBytesDataOutput;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPagedBytes = { 2, "PagedBytes", "org.apache.lucene.util", NULL, 0x11, 11, methods, 12, fields, 0, NULL, 3, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPagedBytes = { 2, "PagedBytes", "org.apache.lucene.util", NULL, 0x11, 9, methods, 12, fields, 0, NULL, 3, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneUtilPagedBytes;
 }
 
@@ -332,29 +303,6 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPagedBytes_Reader)
   return self;
 }
 
-- (void)fillSliceWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)b
-                                        withLong:(jlong)start
-                                         withInt:(jint)length {
-  JreAssert((length >= 0), (JreStrcat("$I", @"length=", length)));
-  JreAssert((length <= blockSize_ + 1), (JreStrcat("$I", @"length=", length)));
-  ((OrgApacheLuceneUtilBytesRef *) nil_chk(b))->length_ = length;
-  if (length == 0) {
-    return;
-  }
-  jint index = (jint) (JreRShift64(start, blockBits_));
-  jint offset = (jint) (start & blockMask_);
-  if (blockSize_ - offset >= length) {
-    JreStrongAssign(&b->bytes_, IOSObjectArray_Get(nil_chk(blocks_), index));
-    b->offset_ = offset;
-  }
-  else {
-    JreStrongAssignAndConsume(&b->bytes_, [IOSByteArray newArrayWithLength:length]);
-    b->offset_ = 0;
-    JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(IOSObjectArray_Get(nil_chk(blocks_), index), offset, b->bytes_, 0, blockSize_ - offset);
-    JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(IOSObjectArray_Get(blocks_, 1 + index), 0, b->bytes_, blockSize_ - offset, length - (blockSize_ - offset));
-  }
-}
-
 - (void)fillWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)b
                                    withLong:(jlong)start {
   jint index = (jint) (JreRShift64(start, blockBits_));
@@ -380,10 +328,6 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPagedBytes_Reader)
   return size;
 }
 
-- (id<JavaUtilCollection>)getChildResources {
-  return JavaUtilCollections_emptyList();
-}
-
 - (NSString *)description {
   return JreStrcat("$IC", @"PagedBytes(blocksize=", blockSize_, ')');
 }
@@ -403,10 +347,8 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPagedBytes_Reader)
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneUtilPagedBytes:", "Reader", NULL, 0x2, NULL, NULL },
-    { "fillSliceWithOrgApacheLuceneUtilBytesRef:withLong:withInt:", "fillSlice", "V", 0x1, NULL, NULL },
     { "fillWithOrgApacheLuceneUtilBytesRef:withLong:", "fill", "V", 0x1, NULL, NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -417,7 +359,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPagedBytes_Reader)
     { "blockSize_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "bytesUsedPerBlock_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPagedBytes_Reader = { 2, "Reader", "org.apache.lucene.util", "PagedBytes", 0x19, 6, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPagedBytes_Reader = { 2, "Reader", "org.apache.lucene.util", "PagedBytes", 0x19, 4, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilPagedBytes_Reader;
 }
 
@@ -589,10 +531,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPagedBytes_PagedBytesDataInp
   }
 }
 
-- (jlong)getPosition {
-  return [this$0_ getPointer];
-}
-
 - (instancetype)initWithOrgApacheLuceneUtilPagedBytes:(OrgApacheLuceneUtilPagedBytes *)outer$ {
   OrgApacheLuceneUtilPagedBytes_PagedBytesDataOutput_initWithOrgApacheLuceneUtilPagedBytes_(self, outer$);
   return self;
@@ -607,13 +545,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPagedBytes_PagedBytesDataInp
   static const J2ObjcMethodInfo methods[] = {
     { "writeByteWithByte:", "writeByte", "V", 0x1, NULL, NULL },
     { "writeBytesWithByteArray:withInt:withInt:", "writeBytes", "V", 0x1, NULL, NULL },
-    { "getPosition", NULL, "J", 0x1, NULL, NULL },
     { "initWithOrgApacheLuceneUtilPagedBytes:", "init", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.util.PagedBytes;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPagedBytes_PagedBytesDataOutput = { 2, "PagedBytesDataOutput", "org.apache.lucene.util", "PagedBytes", 0x11, 4, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPagedBytes_PagedBytesDataOutput = { 2, "PagedBytesDataOutput", "org.apache.lucene.util", "PagedBytes", 0x11, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilPagedBytes_PagedBytesDataOutput;
 }
 

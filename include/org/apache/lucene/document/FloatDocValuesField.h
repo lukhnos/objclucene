@@ -24,20 +24,15 @@
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)name
-                       withFloat:(jfloat)value;
-
-- (void)setFloatValueWithFloat:(jfloat)value;
-
-- (void)setLongValueWithLong:(jlong)value;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneDocumentFloatDocValuesField)
 
-FOUNDATION_EXPORT void OrgApacheLuceneDocumentFloatDocValuesField_initWithNSString_withFloat_(OrgApacheLuceneDocumentFloatDocValuesField *self, NSString *name, jfloat value);
+FOUNDATION_EXPORT void OrgApacheLuceneDocumentFloatDocValuesField_init(OrgApacheLuceneDocumentFloatDocValuesField *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneDocumentFloatDocValuesField *new_OrgApacheLuceneDocumentFloatDocValuesField_initWithNSString_withFloat_(NSString *name, jfloat value) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneDocumentFloatDocValuesField *new_OrgApacheLuceneDocumentFloatDocValuesField_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentFloatDocValuesField)
 

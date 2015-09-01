@@ -20,16 +20,6 @@
 #define OrgApacheLuceneSearchSuggestLookup_INCLUDE 1
 #include "org/apache/lucene/search/suggest/Lookup.h"
 
-@class OrgApacheLuceneAnalysisAnalyzer;
-@class OrgApacheLuceneStoreDataInput;
-@class OrgApacheLuceneStoreDataOutput;
-@protocol JavaLangCharSequence;
-@protocol JavaUtilCollection;
-@protocol JavaUtilComparator;
-@protocol JavaUtilList;
-@protocol JavaUtilSet;
-@protocol OrgApacheLuceneSearchSuggestInputIterator;
-
 #define OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_VERSION_START 0
 #define OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_VERSION_CURRENT 0
 #define OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_DEFAULT_GRAMS 2
@@ -40,56 +30,11 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
-
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)indexAnalyzer
-                    withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)queryAnalyzer;
-
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)indexAnalyzer
-                    withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)queryAnalyzer
-                                                withInt:(jint)grams;
-
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)indexAnalyzer
-                    withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)queryAnalyzer
-                                                withInt:(jint)grams
-                                               withByte:(jbyte)separator;
-
-- (void)buildWithOrgApacheLuceneSearchSuggestInputIterator:(id<OrgApacheLuceneSearchSuggestInputIterator>)iterator;
-
-- (void)buildWithOrgApacheLuceneSearchSuggestInputIterator:(id<OrgApacheLuceneSearchSuggestInputIterator>)iterator
-                                                withDouble:(jdouble)ramBufferSizeMB;
-
-- (id)getWithJavaLangCharSequence:(id<JavaLangCharSequence>)key;
-
-- (id<JavaUtilCollection>)getChildResources;
-
-- (jlong)getCount;
-
-- (jboolean)load__WithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)input;
-
-- (id<JavaUtilList>)lookupWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
-                                       withBoolean:(jboolean)onlyMorePopular
-                                           withInt:(jint)num;
-
-- (id<JavaUtilList>)lookupWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
-                                           withInt:(jint)num;
-
-- (id<JavaUtilList>)lookupWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
-                                   withJavaUtilSet:(id<JavaUtilSet>)contexts
-                                       withBoolean:(jboolean)onlyMorePopular
-                                           withInt:(jint)num;
-
-- (id<JavaUtilList>)lookupWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
-                                   withJavaUtilSet:(id<JavaUtilSet>)contexts
-                                           withInt:(jint)num;
-
-- (jlong)ramBytesUsed;
-
-- (jboolean)storeWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)output;
+- (instancetype)init;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester)
 
 FOUNDATION_EXPORT NSString *OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_CODEC_NAME_;
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester, CODEC_NAME_, NSString *)
@@ -104,24 +49,9 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggeste
 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester, DEFAULT_SEPARATOR, jbyte)
 
-FOUNDATION_EXPORT id<JavaUtilComparator> OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_weightComparator_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester, weightComparator_, id<JavaUtilComparator>)
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_init(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_initWithOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *self, OrgApacheLuceneAnalysisAnalyzer *analyzer);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *new_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_initWithOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneAnalysisAnalyzer *analyzer) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *self, OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *new_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *self, OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer, jint grams);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *new_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_(OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer, jint grams) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withByte_(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *self, OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer, jint grams, jbyte separator);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *new_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withByte_(OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer, jint grams, jbyte separator) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester *new_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester)
 

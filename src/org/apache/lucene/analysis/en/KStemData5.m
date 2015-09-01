@@ -7,16 +7,6 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/analysis/en/KStemData5.h"
 
-@interface OrgApacheLuceneAnalysisEnKStemData5 ()
-
-- (instancetype)init;
-
-@end
-
-__attribute__((unused)) static void OrgApacheLuceneAnalysisEnKStemData5_init(OrgApacheLuceneAnalysisEnKStemData5 *self);
-
-__attribute__((unused)) static OrgApacheLuceneAnalysisEnKStemData5 *new_OrgApacheLuceneAnalysisEnKStemData5_init() NS_RETURNS_RETAINED;
-
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisEnKStemData5)
 
 IOSObjectArray *OrgApacheLuceneAnalysisEnKStemData5_data_;
@@ -37,7 +27,7 @@ IOSObjectArray *OrgApacheLuceneAnalysisEnKStemData5_data_;
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", "KStemData5", NULL, 0x2, NULL, NULL },
+    { "init", NULL, NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "data_", NULL, 0x8, "[Ljava.lang.String;", &OrgApacheLuceneAnalysisEnKStemData5_data_, NULL, .constantValue.asLong = 0 },

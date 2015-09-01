@@ -20,25 +20,19 @@
 #define OrgApacheLuceneAnalysisUtilTokenizerFactory_INCLUDE 1
 #include "org/apache/lucene/analysis/util/TokenizerFactory.h"
 
-@class OrgApacheLuceneAnalysisCoreKeywordTokenizer;
-@class OrgApacheLuceneUtilAttributeFactory;
-@protocol JavaUtilMap;
-
 @interface OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory : OrgApacheLuceneAnalysisUtilTokenizerFactory
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
-
-- (OrgApacheLuceneAnalysisCoreKeywordTokenizer *)createWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory *self, id<JavaUtilMap> args);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory_init(OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory *new_OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory *new_OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCoreKeywordTokenizerFactory)
 

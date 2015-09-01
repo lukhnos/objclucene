@@ -36,9 +36,6 @@
 
 - (instancetype)initWithOrgApacheLuceneStoreFlushInfo:(OrgApacheLuceneStoreFlushInfo *)flushInfo;
 
-- (instancetype)initWithOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)ctxt
-                                          withBoolean:(jboolean)readOnce;
-
 - (instancetype)initWithOrgApacheLuceneStoreMergeInfo:(OrgApacheLuceneStoreMergeInfo *)mergeInfo;
 
 - (jboolean)isEqual:(id)obj;
@@ -79,10 +76,6 @@ FOUNDATION_EXPORT OrgApacheLuceneStoreIOContext *new_OrgApacheLuceneStoreIOConte
 FOUNDATION_EXPORT void OrgApacheLuceneStoreIOContext_initWithOrgApacheLuceneStoreMergeInfo_(OrgApacheLuceneStoreIOContext *self, OrgApacheLuceneStoreMergeInfo *mergeInfo);
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreIOContext *new_OrgApacheLuceneStoreIOContext_initWithOrgApacheLuceneStoreMergeInfo_(OrgApacheLuceneStoreMergeInfo *mergeInfo) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneStoreIOContext_initWithOrgApacheLuceneStoreIOContext_withBoolean_(OrgApacheLuceneStoreIOContext *self, OrgApacheLuceneStoreIOContext *ctxt, jboolean readOnce);
-
-FOUNDATION_EXPORT OrgApacheLuceneStoreIOContext *new_OrgApacheLuceneStoreIOContext_initWithOrgApacheLuceneStoreIOContext_withBoolean_(OrgApacheLuceneStoreIOContext *ctxt, jboolean readOnce) NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreIOContext)
 

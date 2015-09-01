@@ -20,35 +20,19 @@
 #define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
-@class OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter;
-@class OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream;
-@class OrgApacheLuceneAnalysisTokenStream;
-
 @interface OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
-
-- (void)addSinkTokenStreamWithOrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream:(OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream *)sink;
-
-- (void)consumeAllTokens;
-
-- (void)end;
-
-- (jboolean)incrementToken;
-
-- (OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream *)newSinkTokenStream OBJC_METHOD_FAMILY_NONE;
-
-- (OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream *)newSinkTokenStreamWithOrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter:(OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter *)filter OBJC_METHOD_FAMILY_NONE;
+- (instancetype)init;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter *self, OrgApacheLuceneAnalysisTokenStream *input);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_init(OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter *new_OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter *new_OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter)
 
@@ -57,17 +41,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter)
 #if !defined (_OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter_) && (OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_INCLUDE_ALL || OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter_INCLUDE)
 #define _OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter_
 
-@class OrgApacheLuceneUtilAttributeSource;
-
 @interface OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (jboolean)acceptWithOrgApacheLuceneUtilAttributeSource:(OrgApacheLuceneUtilAttributeSource *)source;
-
-- (void)reset;
 
 @end
 
@@ -90,15 +68,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFi
 
 #pragma mark Public
 
-- (void)end;
-
-- (jboolean)incrementToken;
-
-- (void)reset;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream)
+
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream_init(OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream *self);
+
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream *new_OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkTokenStream)
 

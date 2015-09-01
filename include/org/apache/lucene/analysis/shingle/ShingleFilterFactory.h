@@ -20,25 +20,19 @@
 #define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
-@class OrgApacheLuceneAnalysisShingleShingleFilter;
-@class OrgApacheLuceneAnalysisTokenStream;
-@protocol JavaUtilMap;
-
 @interface OrgApacheLuceneAnalysisShingleShingleFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
-
-- (OrgApacheLuceneAnalysisShingleShingleFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisShingleShingleFilterFactory)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisShingleShingleFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisShingleShingleFilterFactory *self, id<JavaUtilMap> args);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisShingleShingleFilterFactory_init(OrgApacheLuceneAnalysisShingleShingleFilterFactory *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisShingleShingleFilterFactory *new_OrgApacheLuceneAnalysisShingleShingleFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisShingleShingleFilterFactory *new_OrgApacheLuceneAnalysisShingleShingleFilterFactory_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisShingleShingleFilterFactory)
 

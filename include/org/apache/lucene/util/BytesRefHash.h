@@ -49,13 +49,7 @@
 
 - (jint)byteStartWithInt:(jint)bytesID;
 
-- (void)clear;
-
 - (void)clearWithBoolean:(jboolean)resetPool;
-
-- (void)close;
-
-- (jint)findWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)bytes;
 
 - (OrgApacheLuceneUtilBytesRef *)getWithInt:(jint)bytesID
             withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)ref;

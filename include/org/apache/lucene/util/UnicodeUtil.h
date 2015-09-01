@@ -39,8 +39,6 @@
                             withInt:(jint)offset
                             withInt:(jint)count OBJC_METHOD_FAMILY_NONE;
 
-+ (NSString *)toHexStringWithNSString:(NSString *)s;
-
 + (jint)UTF16toUTF8WithCharArray:(IOSCharArray *)source
                          withInt:(jint)offset
                          withInt:(jint)length
@@ -58,14 +56,6 @@
 
 + (jint)UTF8toUTF16WithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)bytesRef
                                      withCharArray:(IOSCharArray *)chars;
-
-+ (jint)UTF8toUTF32WithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)utf8
-                                      withIntArray:(IOSIntArray *)ints;
-
-+ (jboolean)validUTF16StringWithCharArray:(IOSCharArray *)s
-                                  withInt:(jint)size;
-
-+ (jboolean)validUTF16StringWithJavaLangCharSequence:(id<JavaLangCharSequence>)s;
 
 @end
 
@@ -93,17 +83,9 @@ FOUNDATION_EXPORT jint OrgApacheLuceneUtilUnicodeUtil_UTF16toUTF8WithCharArray_w
 
 FOUNDATION_EXPORT jint OrgApacheLuceneUtilUnicodeUtil_UTF16toUTF8WithJavaLangCharSequence_withInt_withInt_withByteArray_(id<JavaLangCharSequence> s, jint offset, jint length, IOSByteArray *outArg);
 
-FOUNDATION_EXPORT jboolean OrgApacheLuceneUtilUnicodeUtil_validUTF16StringWithJavaLangCharSequence_(id<JavaLangCharSequence> s);
-
-FOUNDATION_EXPORT jboolean OrgApacheLuceneUtilUnicodeUtil_validUTF16StringWithCharArray_withInt_(IOSCharArray *s, jint size);
-
 FOUNDATION_EXPORT jint OrgApacheLuceneUtilUnicodeUtil_codePointCountWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilBytesRef *utf8);
 
-FOUNDATION_EXPORT jint OrgApacheLuceneUtilUnicodeUtil_UTF8toUTF32WithOrgApacheLuceneUtilBytesRef_withIntArray_(OrgApacheLuceneUtilBytesRef *utf8, IOSIntArray *ints);
-
 FOUNDATION_EXPORT NSString *OrgApacheLuceneUtilUnicodeUtil_newStringWithIntArray_withInt_withInt_(IOSIntArray *codePoints, jint offset, jint count);
-
-FOUNDATION_EXPORT NSString *OrgApacheLuceneUtilUnicodeUtil_toHexStringWithNSString_(NSString *s);
 
 FOUNDATION_EXPORT jint OrgApacheLuceneUtilUnicodeUtil_UTF8toUTF16WithByteArray_withInt_withInt_withCharArray_(IOSByteArray *utf8, jint offset, jint length, IOSCharArray *outArg);
 

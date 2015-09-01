@@ -3,13 +3,9 @@
 //  source: ./core/src/java/org/apache/lucene/index/IndexCommit.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Long.h"
 #include "java/lang/UnsupportedOperationException.h"
-#include "java/util/Collection.h"
-#include "java/util/Map.h"
 #include "org/apache/lucene/index/IndexCommit.h"
 #include "org/apache/lucene/index/StandardDirectoryReader.h"
 #include "org/apache/lucene/store/Directory.h"
@@ -17,12 +13,6 @@
 @implementation OrgApacheLuceneIndexIndexCommit
 
 - (NSString *)getSegmentsFileName {
-  // can't call an abstract method
-  [self doesNotRecognizeSelector:_cmd];
-  return 0;
-}
-
-- (id<JavaUtilCollection>)getFileNames {
   // can't call an abstract method
   [self doesNotRecognizeSelector:_cmd];
   return 0;
@@ -37,18 +27,6 @@
 - (void)delete__ {
   // can't call an abstract method
   [self doesNotRecognizeSelector:_cmd];
-}
-
-- (jboolean)isDeleted {
-  // can't call an abstract method
-  [self doesNotRecognizeSelector:_cmd];
-  return 0;
-}
-
-- (jint)getSegmentCount {
-  // can't call an abstract method
-  [self doesNotRecognizeSelector:_cmd];
-  return 0;
 }
 
 - (instancetype)init {
@@ -76,12 +54,6 @@
   return 0;
 }
 
-- (id<JavaUtilMap>)getUserData {
-  // can't call an abstract method
-  [self doesNotRecognizeSelector:_cmd];
-  return 0;
-}
-
 - (jint)compareToWithId:(OrgApacheLuceneIndexIndexCommit *)commit {
   check_class_cast(commit, [OrgApacheLuceneIndexIndexCommit class]);
   if ([self getDirectory] != [((OrgApacheLuceneIndexIndexCommit *) nil_chk(commit)) getDirectory]) {
@@ -99,20 +71,16 @@
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "getSegmentsFileName", NULL, "Ljava.lang.String;", 0x401, NULL, NULL },
-    { "getFileNames", NULL, "Ljava.util.Collection;", 0x401, "Ljava.io.IOException;", NULL },
     { "getDirectory", NULL, "Lorg.apache.lucene.store.Directory;", 0x401, NULL, NULL },
     { "delete__", "delete", "V", 0x401, NULL, NULL },
-    { "isDeleted", NULL, "Z", 0x401, NULL, NULL },
-    { "getSegmentCount", NULL, "I", 0x401, NULL, NULL },
     { "init", "IndexCommit", NULL, 0x4, NULL, NULL },
     { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
     { "hash", "hashCode", "I", 0x1, NULL, NULL },
     { "getGeneration", NULL, "J", 0x401, NULL, NULL },
-    { "getUserData", NULL, "Ljava.util.Map;", 0x401, "Ljava.io.IOException;", NULL },
     { "compareToWithId:", "compareTo", "I", 0x1, NULL, NULL },
     { "getReader", NULL, "Lorg.apache.lucene.index.StandardDirectoryReader;", 0x0, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexCommit = { 2, "IndexCommit", "org.apache.lucene.index", NULL, 0x401, 13, methods, 0, NULL, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/lang/Comparable<Lorg/apache/lucene/index/IndexCommit;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexCommit = { 2, "IndexCommit", "org.apache.lucene.index", NULL, 0x401, 9, methods, 0, NULL, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/lang/Comparable<Lorg/apache/lucene/index/IndexCommit;>;" };
   return &_OrgApacheLuceneIndexIndexCommit;
 }
 

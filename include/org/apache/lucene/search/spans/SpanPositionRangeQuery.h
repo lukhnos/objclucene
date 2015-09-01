@@ -40,10 +40,6 @@
 
 - (jboolean)isEqual:(id)o;
 
-- (jint)getEnd;
-
-- (jint)getStart;
-
 - (NSUInteger)hash;
 
 - (NSString *)toStringWithNSString:(NSString *)field;

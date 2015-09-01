@@ -4,23 +4,11 @@
 //
 
 #include "J2ObjC_source.h"
-#include "java/util/Date.h"
-#include "org/apache/lucene/util/mutable/MutableValue.h"
 #include "org/apache/lucene/util/mutable/MutableValueDate.h"
-#include "org/apache/lucene/util/mutable/MutableValueLong.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneUtilMutableMutableValueDate
-
-- (id)toObject {
-  return exists_ ? [new_JavaUtilDate_initWithLong_(value_) autorelease] : nil;
-}
-
-- (OrgApacheLuceneUtilMutableMutableValue *)duplicate {
-  OrgApacheLuceneUtilMutableMutableValueDate *v = [new_OrgApacheLuceneUtilMutableMutableValueDate_init() autorelease];
-  v->value_ = self->value_;
-  v->exists_ = self->exists_;
-  return v;
-}
 
 - (instancetype)init {
   OrgApacheLuceneUtilMutableMutableValueDate_init(self);
@@ -29,18 +17,16 @@
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "toObject", NULL, "Ljava.lang.Object;", 0x1, NULL, NULL },
-    { "duplicate", NULL, "Lorg.apache.lucene.util.mutable.MutableValue;", 0x1, NULL, NULL },
     { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilMutableMutableValueDate = { 2, "MutableValueDate", "org.apache.lucene.util.mutable", NULL, 0x1, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilMutableMutableValueDate = { 2, "MutableValueDate", "org.apache.lucene.util.mutable", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilMutableMutableValueDate;
 }
 
 @end
 
 void OrgApacheLuceneUtilMutableMutableValueDate_init(OrgApacheLuceneUtilMutableMutableValueDate *self) {
-  OrgApacheLuceneUtilMutableMutableValueLong_init(self);
+  NSObject_init(self);
 }
 
 OrgApacheLuceneUtilMutableMutableValueDate *new_OrgApacheLuceneUtilMutableMutableValueDate_init() {

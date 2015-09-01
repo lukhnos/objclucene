@@ -20,26 +20,19 @@
 #define OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter_INCLUDE 1
 #include "org/apache/lucene/analysis/sinks/TeeSinkTokenFilter.h"
 
-@class OrgApacheLuceneUtilAttributeSource;
-
 @interface OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter : OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)lower
-                    withInt:(jint)upper;
-
-- (jboolean)acceptWithOrgApacheLuceneUtilAttributeSource:(OrgApacheLuceneUtilAttributeSource *)source;
-
-- (void)reset;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter_initWithInt_withInt_(OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter *self, jint lower, jint upper);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter_init(OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter *new_OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter_initWithInt_withInt_(jint lower, jint upper) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter *new_OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSinksTokenRangeSinkFilter)
 

@@ -3,10 +3,10 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/messages/Message.java
 //
 
-#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/util/Locale.h"
 #include "org/apache/lucene/queryparser/flexible/messages/Message.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @interface OrgApacheLuceneQueryparserFlexibleMessagesMessage : NSObject
 
@@ -15,13 +15,7 @@
 @implementation OrgApacheLuceneQueryparserFlexibleMessagesMessage
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getKey", NULL, "Ljava.lang.String;", 0x401, NULL, NULL },
-    { "getArguments", NULL, "[Ljava.lang.Object;", 0x401, NULL, NULL },
-    { "getLocalizedMessage", NULL, "Ljava.lang.String;", 0x401, NULL, NULL },
-    { "getLocalizedMessageWithJavaUtilLocale:", "getLocalizedMessage", "Ljava.lang.String;", 0x401, NULL, NULL },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleMessagesMessage = { 2, "Message", "org.apache.lucene.queryparser.flexible.messages", NULL, 0x609, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleMessagesMessage = { 2, "Message", "org.apache.lucene.queryparser.flexible.messages", NULL, 0x609, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserFlexibleMessagesMessage;
 }
 

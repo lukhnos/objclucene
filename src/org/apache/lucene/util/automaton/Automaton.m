@@ -15,10 +15,7 @@
 #include "java/lang/System.h"
 #include "java/util/Arrays.h"
 #include "java/util/BitSet.h"
-#include "java/util/Collection.h"
-#include "java/util/Collections.h"
 #include "java/util/HashSet.h"
-#include "java/util/List.h"
 #include "java/util/Set.h"
 #include "org/apache/lucene/util/ArrayUtil.h"
 #include "org/apache/lucene/util/InPlaceMergeSorter.h"
@@ -466,10 +463,6 @@ withOrgApacheLuceneUtilAutomatonTransition:(OrgApacheLuceneUtilAutomatonTransiti
   return JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_HEADER_) + OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithIntArray_(states_) + OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithIntArray_(transitions_) + JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_HEADER_) + ([((JavaUtilBitSet *) nil_chk(isAccept_)) size] / 8) + JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF_) + 2 * JreLoadStatic(OrgApacheLuceneUtilRamUsageEstimator, NUM_BYTES_OBJECT_REF_) + 3 * OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT + OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_BOOLEAN;
 }
 
-- (id<JavaUtilCollection>)getChildResources {
-  return JavaUtilCollections_emptyList();
-}
-
 - (void)dealloc {
   RELEASE_(states_);
   RELEASE_(isAccept_);
@@ -509,7 +502,6 @@ withOrgApacheLuceneUtilAutomatonTransition:(OrgApacheLuceneUtilAutomatonTransiti
     { "getStartPoints", NULL, "[I", 0x0, NULL, NULL },
     { "stepWithInt:withInt:", "step", "I", 0x1, NULL, NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "nextState_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
@@ -523,7 +515,7 @@ withOrgApacheLuceneUtilAutomatonTransition:(OrgApacheLuceneUtilAutomatonTransiti
     { "minMaxDestSorter_", NULL, 0x12, "Lorg.apache.lucene.util.Sorter;", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.util.automaton.Automaton$Builder;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonAutomaton = { 2, "Automaton", "org.apache.lucene.util.automaton", NULL, 0x1, 29, methods, 9, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonAutomaton = { 2, "Automaton", "org.apache.lucene.util.automaton", NULL, 0x1, 28, methods, 9, fields, 0, NULL, 1, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneUtilAutomatonAutomaton;
 }
 

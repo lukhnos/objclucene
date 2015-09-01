@@ -20,46 +20,19 @@
 #define OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource_INCLUDE 1
 #include "org/apache/lucene/queries/function/valuesource/FieldCacheSource.h"
 
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneQueriesFunctionFunctionValues;
-@class OrgApacheLuceneSearchSortField;
-@class OrgApacheLuceneUtilMutableMutableValueLong;
-@protocol JavaUtilMap;
-
 @interface OrgApacheLuceneQueriesFunctionValuesourceLongFieldSource : OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field;
-
-- (NSString *)description__;
-
-- (jboolean)isEqual:(id)o;
-
-- (jlong)externalToLongWithNSString:(NSString *)extVal;
-
-- (OrgApacheLuceneSearchSortField *)getSortFieldWithBoolean:(jboolean)reverse;
-
-- (OrgApacheLuceneQueriesFunctionFunctionValues *)getValuesWithJavaUtilMap:(id<JavaUtilMap>)context
-                                 withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext;
-
-- (NSUInteger)hash;
-
-- (id)longToObjectWithLong:(jlong)val;
-
-- (NSString *)longToStringWithLong:(jlong)val;
-
-#pragma mark Protected
-
-- (OrgApacheLuceneUtilMutableMutableValueLong *)newMutableValueLong OBJC_METHOD_FAMILY_NONE;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceLongFieldSource)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceLongFieldSource_initWithNSString_(OrgApacheLuceneQueriesFunctionValuesourceLongFieldSource *self, NSString *field);
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceLongFieldSource_init(OrgApacheLuceneQueriesFunctionValuesourceLongFieldSource *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceLongFieldSource *new_OrgApacheLuceneQueriesFunctionValuesourceLongFieldSource_initWithNSString_(NSString *field) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceLongFieldSource *new_OrgApacheLuceneQueriesFunctionValuesourceLongFieldSource_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceLongFieldSource)
 

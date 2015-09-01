@@ -17,32 +17,22 @@
 #include "org/apache/lucene/util/automaton/Operations.h"
 #include "org/apache/lucene/util/automaton/Transition.h"
 
-@interface OrgApacheLuceneUtilAutomatonMinimizationOperations ()
-
-- (instancetype)init;
-
-@end
-
-__attribute__((unused)) static void OrgApacheLuceneUtilAutomatonMinimizationOperations_init(OrgApacheLuceneUtilAutomatonMinimizationOperations *self);
-
-__attribute__((unused)) static OrgApacheLuceneUtilAutomatonMinimizationOperations *new_OrgApacheLuceneUtilAutomatonMinimizationOperations_init() NS_RETURNS_RETAINED;
-
 @implementation OrgApacheLuceneUtilAutomatonMinimizationOperations
-
-- (instancetype)init {
-  OrgApacheLuceneUtilAutomatonMinimizationOperations_init(self);
-  return self;
-}
 
 + (OrgApacheLuceneUtilAutomatonAutomaton *)minimizeWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a
                                                                                      withInt:(jint)maxDeterminizedStates {
   return OrgApacheLuceneUtilAutomatonMinimizationOperations_minimizeWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(a, maxDeterminizedStates);
 }
 
+- (instancetype)init {
+  OrgApacheLuceneUtilAutomatonMinimizationOperations_init(self);
+  return self;
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", "MinimizationOperations", NULL, 0x2, NULL, NULL },
     { "minimizeWithOrgApacheLuceneUtilAutomatonAutomaton:withInt:", "minimize", "Lorg.apache.lucene.util.automaton.Automaton;", 0x9, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.util.automaton.MinimizationOperations$IntPair;", "Lorg.apache.lucene.util.automaton.MinimizationOperations$StateList;", "Lorg.apache.lucene.util.automaton.MinimizationOperations$StateListNode;"};
   static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonMinimizationOperations = { 2, "MinimizationOperations", "org.apache.lucene.util.automaton", NULL, 0x11, 2, methods, 0, NULL, 0, NULL, 3, inner_classes, NULL, NULL };
@@ -50,16 +40,6 @@ __attribute__((unused)) static OrgApacheLuceneUtilAutomatonMinimizationOperation
 }
 
 @end
-
-void OrgApacheLuceneUtilAutomatonMinimizationOperations_init(OrgApacheLuceneUtilAutomatonMinimizationOperations *self) {
-  NSObject_init(self);
-}
-
-OrgApacheLuceneUtilAutomatonMinimizationOperations *new_OrgApacheLuceneUtilAutomatonMinimizationOperations_init() {
-  OrgApacheLuceneUtilAutomatonMinimizationOperations *self = [OrgApacheLuceneUtilAutomatonMinimizationOperations alloc];
-  OrgApacheLuceneUtilAutomatonMinimizationOperations_init(self);
-  return self;
-}
 
 OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonMinimizationOperations_minimizeWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(OrgApacheLuceneUtilAutomatonAutomaton *a, jint maxDeterminizedStates) {
   OrgApacheLuceneUtilAutomatonMinimizationOperations_initialize();
@@ -220,6 +200,16 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonMinimizationO
   }
   [result finishState];
   return OrgApacheLuceneUtilAutomatonOperations_removeDeadStatesWithOrgApacheLuceneUtilAutomatonAutomaton_(result);
+}
+
+void OrgApacheLuceneUtilAutomatonMinimizationOperations_init(OrgApacheLuceneUtilAutomatonMinimizationOperations *self) {
+  NSObject_init(self);
+}
+
+OrgApacheLuceneUtilAutomatonMinimizationOperations *new_OrgApacheLuceneUtilAutomatonMinimizationOperations_init() {
+  OrgApacheLuceneUtilAutomatonMinimizationOperations *self = [OrgApacheLuceneUtilAutomatonMinimizationOperations alloc];
+  OrgApacheLuceneUtilAutomatonMinimizationOperations_init(self);
+  return self;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonMinimizationOperations)

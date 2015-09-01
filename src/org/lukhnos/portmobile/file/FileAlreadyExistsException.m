@@ -4,7 +4,6 @@
 //
 
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/lukhnos/portmobile/file/FileAlreadyExistsException.h"
 
 @implementation OrgLukhnosPortmobileFileFileAlreadyExistsException
@@ -25,7 +24,7 @@
 @end
 
 void OrgLukhnosPortmobileFileFileAlreadyExistsException_init(OrgLukhnosPortmobileFileFileAlreadyExistsException *self) {
-  JavaIoIOException_init(self);
+  NSObject_init(self);
 }
 
 OrgLukhnosPortmobileFileFileAlreadyExistsException *new_OrgLukhnosPortmobileFileFileAlreadyExistsException_init() {

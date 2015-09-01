@@ -20,29 +20,19 @@
 #define OrgApacheLuceneIndexQueryTimeout_INCLUDE 1
 #include "org/apache/lucene/index/QueryTimeout.h"
 
-@class JavaLangLong;
-
 @interface OrgApacheLuceneIndexQueryTimeoutImpl : NSObject < OrgApacheLuceneIndexQueryTimeout >
 
 #pragma mark Public
 
-- (instancetype)initWithLong:(jlong)timeAllowed;
-
-- (JavaLangLong *)getTimeoutAt;
-
-- (void)reset;
-
-- (jboolean)shouldExit;
-
-- (NSString *)description;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexQueryTimeoutImpl)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexQueryTimeoutImpl_initWithLong_(OrgApacheLuceneIndexQueryTimeoutImpl *self, jlong timeAllowed);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexQueryTimeoutImpl_init(OrgApacheLuceneIndexQueryTimeoutImpl *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexQueryTimeoutImpl *new_OrgApacheLuceneIndexQueryTimeoutImpl_initWithLong_(jlong timeAllowed) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexQueryTimeoutImpl *new_OrgApacheLuceneIndexQueryTimeoutImpl_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexQueryTimeoutImpl)
 

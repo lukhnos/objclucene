@@ -20,54 +20,19 @@
 #define OrgApacheLuceneSearchScorer_INCLUDE 1
 #include "org/apache/lucene/search/Scorer.h"
 
-@class OrgApacheLuceneIndexIndexReader;
-@class OrgApacheLuceneQueriesFunctionFunctionValues;
-
-@interface OrgApacheLuceneQueriesFunctionValueSourceScorer : OrgApacheLuceneSearchScorer {
- @public
-  OrgApacheLuceneIndexIndexReader *reader_;
-  jint maxDoc_;
-  OrgApacheLuceneQueriesFunctionFunctionValues *values_;
-  jboolean checkDeletes_;
-}
+@interface OrgApacheLuceneQueriesFunctionValueSourceScorer : OrgApacheLuceneSearchScorer
 
 #pragma mark Public
 
-- (jint)advanceWithInt:(jint)target;
-
-- (jlong)cost;
-
-- (jint)docID;
-
-- (jint)freq;
-
-- (OrgApacheLuceneIndexIndexReader *)getReader;
-
-- (jboolean)matchesWithInt:(jint)doc;
-
-- (jboolean)matchesValueWithInt:(jint)doc;
-
-- (jint)nextDoc;
-
-- (jfloat)score;
-
-- (void)setCheckDeletesWithBoolean:(jboolean)checkDeletes;
-
-#pragma mark Protected
-
-- (instancetype)initWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
-       withOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunctionFunctionValues *)values;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValueSourceScorer)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValueSourceScorer, reader_, OrgApacheLuceneIndexIndexReader *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValueSourceScorer, values_, OrgApacheLuceneQueriesFunctionFunctionValues *)
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValueSourceScorer_init(OrgApacheLuceneQueriesFunctionValueSourceScorer *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValueSourceScorer_initWithOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneQueriesFunctionValueSourceScorer *self, OrgApacheLuceneIndexIndexReader *reader, OrgApacheLuceneQueriesFunctionFunctionValues *values);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValueSourceScorer *new_OrgApacheLuceneQueriesFunctionValueSourceScorer_initWithOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneQueriesFunctionFunctionValues_(OrgApacheLuceneIndexIndexReader *reader, OrgApacheLuceneQueriesFunctionFunctionValues *values) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValueSourceScorer *new_OrgApacheLuceneQueriesFunctionValueSourceScorer_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValueSourceScorer)
 

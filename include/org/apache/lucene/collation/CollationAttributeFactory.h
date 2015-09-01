@@ -20,32 +20,19 @@
 #define OrgApacheLuceneUtilAttributeFactory_StaticImplementationAttributeFactory_INCLUDE 1
 #include "org/apache/lucene/util/AttributeFactory.h"
 
-@class JavaTextCollator;
-@class OrgApacheLuceneCollationTokenattributesCollatedTermAttributeImpl;
-@class OrgApacheLuceneUtilAttributeFactory;
-
 @interface OrgApacheLuceneCollationCollationAttributeFactory : OrgApacheLuceneUtilAttributeFactory_StaticImplementationAttributeFactory
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)delegate
-                                       withJavaTextCollator:(JavaTextCollator *)collator;
-
-- (instancetype)initWithJavaTextCollator:(JavaTextCollator *)collator;
-
-- (OrgApacheLuceneCollationTokenattributesCollatedTermAttributeImpl *)createInstance;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCollationCollationAttributeFactory)
 
-FOUNDATION_EXPORT void OrgApacheLuceneCollationCollationAttributeFactory_initWithJavaTextCollator_(OrgApacheLuceneCollationCollationAttributeFactory *self, JavaTextCollator *collator);
+FOUNDATION_EXPORT void OrgApacheLuceneCollationCollationAttributeFactory_init(OrgApacheLuceneCollationCollationAttributeFactory *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneCollationCollationAttributeFactory *new_OrgApacheLuceneCollationCollationAttributeFactory_initWithJavaTextCollator_(JavaTextCollator *collator) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneCollationCollationAttributeFactory_initWithOrgApacheLuceneUtilAttributeFactory_withJavaTextCollator_(OrgApacheLuceneCollationCollationAttributeFactory *self, OrgApacheLuceneUtilAttributeFactory *delegate, JavaTextCollator *collator);
-
-FOUNDATION_EXPORT OrgApacheLuceneCollationCollationAttributeFactory *new_OrgApacheLuceneCollationCollationAttributeFactory_initWithOrgApacheLuceneUtilAttributeFactory_withJavaTextCollator_(OrgApacheLuceneUtilAttributeFactory *delegate, JavaTextCollator *collator) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneCollationCollationAttributeFactory *new_OrgApacheLuceneCollationCollationAttributeFactory_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCollationCollationAttributeFactory)
 

@@ -20,19 +20,11 @@
 #define OrgApacheLuceneSearchSimilaritiesDistribution_INCLUDE 1
 #include "org/apache/lucene/search/similarities/Distribution.h"
 
-@class OrgApacheLuceneSearchSimilaritiesBasicStats;
-
 @interface OrgApacheLuceneSearchSimilaritiesDistributionSPL : OrgApacheLuceneSearchSimilaritiesDistribution
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (jfloat)scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
-                                                     withFloat:(jfloat)tfn
-                                                     withFloat:(jfloat)lambda;
-
-- (NSString *)description;
 
 @end
 

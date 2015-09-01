@@ -29,8 +29,7 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)maskedQuery
-                                               withNSString:(NSString *)maskedField;
+- (instancetype)init;
 
 - (OrgApacheLuceneSearchSpansSpanWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                                  withBoolean:(jboolean)needsScores;
@@ -51,9 +50,9 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSpansFieldMaskingSpanQuery)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansFieldMaskingSpanQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withNSString_(OrgApacheLuceneSearchSpansFieldMaskingSpanQuery *self, OrgApacheLuceneSearchSpansSpanQuery *maskedQuery, NSString *maskedField);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSpansFieldMaskingSpanQuery_init(OrgApacheLuceneSearchSpansFieldMaskingSpanQuery *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSpansFieldMaskingSpanQuery *new_OrgApacheLuceneSearchSpansFieldMaskingSpanQuery_initWithOrgApacheLuceneSearchSpansSpanQuery_withNSString_(OrgApacheLuceneSearchSpansSpanQuery *maskedQuery, NSString *maskedField) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpansFieldMaskingSpanQuery *new_OrgApacheLuceneSearchSpansFieldMaskingSpanQuery_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansFieldMaskingSpanQuery)
 

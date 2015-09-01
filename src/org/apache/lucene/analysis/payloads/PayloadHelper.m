@@ -3,46 +3,12 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/payloads/PayloadHelper.java
 //
 
-#include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/lang/Float.h"
 #include "org/apache/lucene/analysis/payloads/PayloadHelper.h"
 
+#pragma clang diagnostic ignored "-Wprotocol"
+
 @implementation OrgApacheLuceneAnalysisPayloadsPayloadHelper
-
-+ (IOSByteArray *)encodeFloatWithFloat:(jfloat)payload {
-  return OrgApacheLuceneAnalysisPayloadsPayloadHelper_encodeFloatWithFloat_(payload);
-}
-
-+ (IOSByteArray *)encodeFloatWithFloat:(jfloat)payload
-                         withByteArray:(IOSByteArray *)data
-                               withInt:(jint)offset {
-  return OrgApacheLuceneAnalysisPayloadsPayloadHelper_encodeFloatWithFloat_withByteArray_withInt_(payload, data, offset);
-}
-
-+ (IOSByteArray *)encodeIntWithInt:(jint)payload {
-  return OrgApacheLuceneAnalysisPayloadsPayloadHelper_encodeIntWithInt_(payload);
-}
-
-+ (IOSByteArray *)encodeIntWithInt:(jint)payload
-                     withByteArray:(IOSByteArray *)data
-                           withInt:(jint)offset {
-  return OrgApacheLuceneAnalysisPayloadsPayloadHelper_encodeIntWithInt_withByteArray_withInt_(payload, data, offset);
-}
-
-+ (jfloat)decodeFloatWithByteArray:(IOSByteArray *)bytes {
-  return OrgApacheLuceneAnalysisPayloadsPayloadHelper_decodeFloatWithByteArray_(bytes);
-}
-
-+ (jfloat)decodeFloatWithByteArray:(IOSByteArray *)bytes
-                           withInt:(jint)offset {
-  return OrgApacheLuceneAnalysisPayloadsPayloadHelper_decodeFloatWithByteArray_withInt_(bytes, offset);
-}
-
-+ (jint)decodeIntWithByteArray:(IOSByteArray *)bytes
-                       withInt:(jint)offset {
-  return OrgApacheLuceneAnalysisPayloadsPayloadHelper_decodeIntWithByteArray_withInt_(bytes, offset);
-}
 
 - (instancetype)init {
   OrgApacheLuceneAnalysisPayloadsPayloadHelper_init(self);
@@ -51,59 +17,13 @@
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "encodeFloatWithFloat:", "encodeFloat", "[B", 0x9, NULL, NULL },
-    { "encodeFloatWithFloat:withByteArray:withInt:", "encodeFloat", "[B", 0x9, NULL, NULL },
-    { "encodeIntWithInt:", "encodeInt", "[B", 0x9, NULL, NULL },
-    { "encodeIntWithInt:withByteArray:withInt:", "encodeInt", "[B", 0x9, NULL, NULL },
-    { "decodeFloatWithByteArray:", "decodeFloat", "F", 0x9, NULL, NULL },
-    { "decodeFloatWithByteArray:withInt:", "decodeFloat", "F", 0x19, NULL, NULL },
-    { "decodeIntWithByteArray:withInt:", "decodeInt", "I", 0x19, NULL, NULL },
     { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPayloadsPayloadHelper = { 2, "PayloadHelper", "org.apache.lucene.analysis.payloads", NULL, 0x1, 8, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPayloadsPayloadHelper = { 2, "PayloadHelper", "org.apache.lucene.analysis.payloads", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisPayloadsPayloadHelper;
 }
 
 @end
-
-IOSByteArray *OrgApacheLuceneAnalysisPayloadsPayloadHelper_encodeFloatWithFloat_(jfloat payload) {
-  OrgApacheLuceneAnalysisPayloadsPayloadHelper_initialize();
-  return OrgApacheLuceneAnalysisPayloadsPayloadHelper_encodeFloatWithFloat_withByteArray_withInt_(payload, [IOSByteArray arrayWithLength:4], 0);
-}
-
-IOSByteArray *OrgApacheLuceneAnalysisPayloadsPayloadHelper_encodeFloatWithFloat_withByteArray_withInt_(jfloat payload, IOSByteArray *data, jint offset) {
-  OrgApacheLuceneAnalysisPayloadsPayloadHelper_initialize();
-  return OrgApacheLuceneAnalysisPayloadsPayloadHelper_encodeIntWithInt_withByteArray_withInt_(JavaLangFloat_floatToIntBitsWithFloat_(payload), data, offset);
-}
-
-IOSByteArray *OrgApacheLuceneAnalysisPayloadsPayloadHelper_encodeIntWithInt_(jint payload) {
-  OrgApacheLuceneAnalysisPayloadsPayloadHelper_initialize();
-  return OrgApacheLuceneAnalysisPayloadsPayloadHelper_encodeIntWithInt_withByteArray_withInt_(payload, [IOSByteArray arrayWithLength:4], 0);
-}
-
-IOSByteArray *OrgApacheLuceneAnalysisPayloadsPayloadHelper_encodeIntWithInt_withByteArray_withInt_(jint payload, IOSByteArray *data, jint offset) {
-  OrgApacheLuceneAnalysisPayloadsPayloadHelper_initialize();
-  *IOSByteArray_GetRef(nil_chk(data), offset) = (jbyte) (JreRShift32(payload, 24));
-  *IOSByteArray_GetRef(data, offset + 1) = (jbyte) (JreRShift32(payload, 16));
-  *IOSByteArray_GetRef(data, offset + 2) = (jbyte) (JreRShift32(payload, 8));
-  *IOSByteArray_GetRef(data, offset + 3) = (jbyte) payload;
-  return data;
-}
-
-jfloat OrgApacheLuceneAnalysisPayloadsPayloadHelper_decodeFloatWithByteArray_(IOSByteArray *bytes) {
-  OrgApacheLuceneAnalysisPayloadsPayloadHelper_initialize();
-  return OrgApacheLuceneAnalysisPayloadsPayloadHelper_decodeFloatWithByteArray_withInt_(bytes, 0);
-}
-
-jfloat OrgApacheLuceneAnalysisPayloadsPayloadHelper_decodeFloatWithByteArray_withInt_(IOSByteArray *bytes, jint offset) {
-  OrgApacheLuceneAnalysisPayloadsPayloadHelper_initialize();
-  return JavaLangFloat_intBitsToFloatWithInt_(OrgApacheLuceneAnalysisPayloadsPayloadHelper_decodeIntWithByteArray_withInt_(bytes, offset));
-}
-
-jint OrgApacheLuceneAnalysisPayloadsPayloadHelper_decodeIntWithByteArray_withInt_(IOSByteArray *bytes, jint offset) {
-  OrgApacheLuceneAnalysisPayloadsPayloadHelper_initialize();
-  return (JreLShift32((IOSByteArray_Get(nil_chk(bytes), offset) & (jint) 0xFF), 24)) | (JreLShift32((IOSByteArray_Get(bytes, offset + 1) & (jint) 0xFF), 16)) | (JreLShift32((IOSByteArray_Get(bytes, offset + 2) & (jint) 0xFF), 8)) | (IOSByteArray_Get(bytes, offset + 3) & (jint) 0xFF);
-}
 
 void OrgApacheLuceneAnalysisPayloadsPayloadHelper_init(OrgApacheLuceneAnalysisPayloadsPayloadHelper *self) {
   NSObject_init(self);

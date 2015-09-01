@@ -11,7 +11,6 @@
 #include "org/apache/lucene/search/DocIdSetIterator.h"
 #include "org/apache/lucene/search/TwoPhaseIterator.h"
 #include "org/apache/lucene/search/spans/FilterSpans.h"
-#include "org/apache/lucene/search/spans/SpanCollector.h"
 #include "org/apache/lucene/search/spans/Spans.h"
 #include "org/lukhnos/portmobile/util/Objects.h"
 
@@ -151,10 +150,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansFilterSpans_$2)
   return [((OrgApacheLuceneSearchSpansSpans *) nil_chk(in_)) width];
 }
 
-- (void)collectWithOrgApacheLuceneSearchSpansSpanCollector:(id<OrgApacheLuceneSearchSpansSpanCollector>)collector {
-  [((OrgApacheLuceneSearchSpansSpans *) nil_chk(in_)) collectWithOrgApacheLuceneSearchSpansSpanCollector:collector];
-}
-
 - (jlong)cost {
   return [((OrgApacheLuceneSearchSpansSpans *) nil_chk(in_)) cost];
 }
@@ -193,7 +188,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansFilterSpans_$2)
     { "startPosition", NULL, "I", 0x11, NULL, NULL },
     { "endPosition", NULL, "I", 0x11, NULL, NULL },
     { "width", NULL, "I", 0x1, NULL, NULL },
-    { "collectWithOrgApacheLuceneSearchSpansSpanCollector:", "collect", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "cost", NULL, "J", 0x11, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "asTwoPhaseIterator", NULL, "Lorg.apache.lucene.search.TwoPhaseIterator;", 0x11, NULL, NULL },
@@ -205,7 +199,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansFilterSpans_$2)
     { "startPos_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.search.spans.FilterSpans$AcceptStatus;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansFilterSpans = { 2, "FilterSpans", "org.apache.lucene.search.spans", NULL, 0x401, 14, methods, 3, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansFilterSpans = { 2, "FilterSpans", "org.apache.lucene.search.spans", NULL, 0x401, 13, methods, 3, fields, 0, NULL, 1, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneSearchSpansFilterSpans;
 }
 

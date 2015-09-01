@@ -16,48 +16,19 @@
 #if !defined (_OrgApacheLuceneUtilCommandLineUtil_) && (OrgApacheLuceneUtilCommandLineUtil_INCLUDE_ALL || OrgApacheLuceneUtilCommandLineUtil_INCLUDE)
 #define _OrgApacheLuceneUtilCommandLineUtil_
 
-@class IOSClass;
-@class OrgApacheLuceneStoreFSDirectory;
-@class OrgApacheLuceneStoreLockFactory;
-@class OrgLukhnosPortmobileFilePath;
-
 @interface OrgApacheLuceneUtilCommandLineUtil : NSObject
 
 #pragma mark Public
 
-+ (IOSClass *)loadDirectoryClassWithNSString:(NSString *)clazzName;
-
-+ (IOSClass *)loadFSDirectoryClassWithNSString:(NSString *)clazzName;
-
-+ (OrgApacheLuceneStoreFSDirectory *)newFSDirectoryWithIOSClass:(IOSClass *)clazz
-                               withOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path OBJC_METHOD_FAMILY_NONE;
-
-+ (OrgApacheLuceneStoreFSDirectory *)newFSDirectoryWithIOSClass:(IOSClass *)clazz
-                               withOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path
-                            withOrgApacheLuceneStoreLockFactory:(OrgApacheLuceneStoreLockFactory *)lf OBJC_METHOD_FAMILY_NONE;
-
-+ (OrgApacheLuceneStoreFSDirectory *)newFSDirectoryWithNSString:(NSString *)clazzName
-                               withOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path OBJC_METHOD_FAMILY_NONE;
-
-+ (OrgApacheLuceneStoreFSDirectory *)newFSDirectoryWithNSString:(NSString *)clazzName
-                               withOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path
-                            withOrgApacheLuceneStoreLockFactory:(OrgApacheLuceneStoreLockFactory *)lf OBJC_METHOD_FAMILY_NONE;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilCommandLineUtil)
 
-FOUNDATION_EXPORT OrgApacheLuceneStoreFSDirectory *OrgApacheLuceneUtilCommandLineUtil_newFSDirectoryWithNSString_withOrgLukhnosPortmobileFilePath_(NSString *clazzName, OrgLukhnosPortmobileFilePath *path);
+FOUNDATION_EXPORT void OrgApacheLuceneUtilCommandLineUtil_init(OrgApacheLuceneUtilCommandLineUtil *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneStoreFSDirectory *OrgApacheLuceneUtilCommandLineUtil_newFSDirectoryWithNSString_withOrgLukhnosPortmobileFilePath_withOrgApacheLuceneStoreLockFactory_(NSString *clazzName, OrgLukhnosPortmobileFilePath *path, OrgApacheLuceneStoreLockFactory *lf);
-
-FOUNDATION_EXPORT IOSClass *OrgApacheLuceneUtilCommandLineUtil_loadDirectoryClassWithNSString_(NSString *clazzName);
-
-FOUNDATION_EXPORT IOSClass *OrgApacheLuceneUtilCommandLineUtil_loadFSDirectoryClassWithNSString_(NSString *clazzName);
-
-FOUNDATION_EXPORT OrgApacheLuceneStoreFSDirectory *OrgApacheLuceneUtilCommandLineUtil_newFSDirectoryWithIOSClass_withOrgLukhnosPortmobileFilePath_(IOSClass *clazz, OrgLukhnosPortmobileFilePath *path);
-
-FOUNDATION_EXPORT OrgApacheLuceneStoreFSDirectory *OrgApacheLuceneUtilCommandLineUtil_newFSDirectoryWithIOSClass_withOrgLukhnosPortmobileFilePath_withOrgApacheLuceneStoreLockFactory_(IOSClass *clazz, OrgLukhnosPortmobileFilePath *path, OrgApacheLuceneStoreLockFactory *lf);
+FOUNDATION_EXPORT OrgApacheLuceneUtilCommandLineUtil *new_OrgApacheLuceneUtilCommandLineUtil_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilCommandLineUtil)
 

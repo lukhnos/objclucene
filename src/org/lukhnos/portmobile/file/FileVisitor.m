@@ -20,10 +20,9 @@
   static const J2ObjcMethodInfo methods[] = {
     { "preVisitDirectoryWithId:withOrgLukhnosPortmobileFileAttributeBasicFileAttributes:", "preVisitDirectory", "Lorg.lukhnos.portmobile.file.FileVisitResult;", 0x401, "Ljava.io.IOException;", "(TT;Lorg/lukhnos/portmobile/file/attribute/BasicFileAttributes;)Lorg/lukhnos/portmobile/file/FileVisitResult;" },
     { "visitFileWithId:withOrgLukhnosPortmobileFileAttributeBasicFileAttributes:", "visitFile", "Lorg.lukhnos.portmobile.file.FileVisitResult;", 0x401, "Ljava.io.IOException;", "(TT;Lorg/lukhnos/portmobile/file/attribute/BasicFileAttributes;)Lorg/lukhnos/portmobile/file/FileVisitResult;" },
-    { "visitFileFailedWithId:withJavaIoIOException:", "visitFileFailed", "Lorg.lukhnos.portmobile.file.FileVisitResult;", 0x401, "Ljava.io.IOException;", "(TT;Ljava/io/IOException;)Lorg/lukhnos/portmobile/file/FileVisitResult;" },
     { "postVisitDirectoryWithId:withJavaIoIOException:", "postVisitDirectory", "Lorg.lukhnos.portmobile.file.FileVisitResult;", 0x401, "Ljava.io.IOException;", "(TT;Ljava/io/IOException;)Lorg/lukhnos/portmobile/file/FileVisitResult;" },
   };
-  static const J2ObjcClassInfo _OrgLukhnosPortmobileFileFileVisitor = { 2, "FileVisitor", "org.lukhnos.portmobile.file", NULL, 0x609, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, "<T:Ljava/lang/Object;>Ljava/lang/Object;" };
+  static const J2ObjcClassInfo _OrgLukhnosPortmobileFileFileVisitor = { 2, "FileVisitor", "org.lukhnos.portmobile.file", NULL, 0x609, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, "<T:Ljava/lang/Object;>Ljava/lang/Object;" };
   return &_OrgLukhnosPortmobileFileFileVisitor;
 }
 

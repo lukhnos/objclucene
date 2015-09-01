@@ -16,31 +16,9 @@
 #if !defined (_OrgApacheLuceneSearchSuggestTstTSTAutocomplete_) && (OrgApacheLuceneSearchSuggestTstTSTAutocomplete_INCLUDE_ALL || OrgApacheLuceneSearchSuggestTstTSTAutocomplete_INCLUDE)
 #define _OrgApacheLuceneSearchSuggestTstTSTAutocomplete_
 
-@class IOSObjectArray;
-@class JavaUtilArrayList;
-@class OrgApacheLuceneSearchSuggestTstTernaryTreeNode;
-@protocol JavaLangCharSequence;
-
 @interface OrgApacheLuceneSearchSuggestTstTSTAutocomplete : NSObject
 
 #pragma mark Public
-
-- (void)balancedTreeWithNSObjectArray:(IOSObjectArray *)tokens
-                    withNSObjectArray:(IOSObjectArray *)vals
-                              withInt:(jint)lo
-                              withInt:(jint)hi
-withOrgApacheLuceneSearchSuggestTstTernaryTreeNode:(OrgApacheLuceneSearchSuggestTstTernaryTreeNode *)root;
-
-- (OrgApacheLuceneSearchSuggestTstTernaryTreeNode *)insertWithOrgApacheLuceneSearchSuggestTstTernaryTreeNode:(OrgApacheLuceneSearchSuggestTstTernaryTreeNode *)currentNode
-                                                                                    withJavaLangCharSequence:(id<JavaLangCharSequence>)s
-                                                                                                      withId:(id)val
-                                                                                                     withInt:(jint)x;
-
-- (JavaUtilArrayList *)prefixCompletionWithOrgApacheLuceneSearchSuggestTstTernaryTreeNode:(OrgApacheLuceneSearchSuggestTstTernaryTreeNode *)root
-                                                                 withJavaLangCharSequence:(id<JavaLangCharSequence>)s
-                                                                                  withInt:(jint)x;
-
-#pragma mark Package-Private
 
 - (instancetype)init;
 

@@ -18,7 +18,6 @@
 #include "org/apache/lucene/analysis/standard/StandardTokenizer.h"
 #include "org/apache/lucene/analysis/standard/std40/StandardTokenizer40.h"
 #include "org/apache/lucene/analysis/util/CharArraySet.h"
-#include "org/apache/lucene/analysis/util/StopwordAnalyzerBase.h"
 #include "org/apache/lucene/util/Version.h"
 
 @interface OrgApacheLuceneAnalysisStandardStandardAnalyzer () {
@@ -60,29 +59,6 @@ OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisStandardStandard
 
 @implementation OrgApacheLuceneAnalysisStandardStandardAnalyzer
 
-- (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopWords {
-  OrgApacheLuceneAnalysisStandardStandardAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(self, stopWords);
-  return self;
-}
-
-- (instancetype)init {
-  OrgApacheLuceneAnalysisStandardStandardAnalyzer_init(self);
-  return self;
-}
-
-- (instancetype)initWithJavaIoReader:(JavaIoReader *)stopwords {
-  OrgApacheLuceneAnalysisStandardStandardAnalyzer_initWithJavaIoReader_(self, stopwords);
-  return self;
-}
-
-- (void)setMaxTokenLengthWithInt:(jint)length {
-  maxTokenLength_ = length;
-}
-
-- (jint)getMaxTokenLength {
-  return maxTokenLength_;
-}
-
 - (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)createComponentsWithNSString:(NSString *)fieldName {
   OrgApacheLuceneAnalysisTokenizer *src;
   if ([((OrgApacheLuceneUtilVersion *) nil_chk([self getVersion])) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_7_0_)]) {
@@ -101,6 +77,11 @@ OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisStandardStandard
   return [new_OrgApacheLuceneAnalysisStandardStandardAnalyzer_$1_initWithOrgApacheLuceneAnalysisStandardStandardAnalyzer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(self, src, src, tok) autorelease];
 }
 
+- (instancetype)init {
+  OrgApacheLuceneAnalysisStandardStandardAnalyzer_init(self);
+  return self;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisStandardStandardAnalyzer class]) {
     JreStrongAssign(&OrgApacheLuceneAnalysisStandardStandardAnalyzer_STOP_WORDS_SET_, JreLoadStatic(OrgApacheLuceneAnalysisCoreStopAnalyzer, ENGLISH_STOP_WORDS_SET_));
@@ -110,52 +91,28 @@ OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisStandardStandard
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisUtilCharArraySet:", "StandardAnalyzer", NULL, 0x1, NULL, NULL },
-    { "init", "StandardAnalyzer", NULL, 0x1, NULL, NULL },
-    { "initWithJavaIoReader:", "StandardAnalyzer", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "setMaxTokenLengthWithInt:", "setMaxTokenLength", "V", 0x1, NULL, NULL },
-    { "getMaxTokenLength", NULL, "I", 0x1, NULL, NULL },
     { "createComponentsWithNSString:", "createComponents", "Lorg.apache.lucene.analysis.Analyzer$TokenStreamComponents;", 0x4, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "DEFAULT_MAX_TOKEN_LENGTH", "DEFAULT_MAX_TOKEN_LENGTH", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisStandardStandardAnalyzer_DEFAULT_MAX_TOKEN_LENGTH },
     { "maxTokenLength_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "STOP_WORDS_SET_", NULL, 0x19, "Lorg.apache.lucene.analysis.util.CharArraySet;", &OrgApacheLuceneAnalysisStandardStandardAnalyzer_STOP_WORDS_SET_, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisStandardStandardAnalyzer = { 2, "StandardAnalyzer", "org.apache.lucene.analysis.standard", NULL, 0x11, 6, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisStandardStandardAnalyzer = { 2, "StandardAnalyzer", "org.apache.lucene.analysis.standard", NULL, 0x11, 2, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisStandardStandardAnalyzer;
 }
 
 @end
 
-void OrgApacheLuceneAnalysisStandardStandardAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisStandardStandardAnalyzer *self, OrgApacheLuceneAnalysisUtilCharArraySet *stopWords) {
-  OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(self, stopWords);
-  self->maxTokenLength_ = OrgApacheLuceneAnalysisStandardStandardAnalyzer_DEFAULT_MAX_TOKEN_LENGTH;
-}
-
-OrgApacheLuceneAnalysisStandardStandardAnalyzer *new_OrgApacheLuceneAnalysisStandardStandardAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisUtilCharArraySet *stopWords) {
-  OrgApacheLuceneAnalysisStandardStandardAnalyzer *self = [OrgApacheLuceneAnalysisStandardStandardAnalyzer alloc];
-  OrgApacheLuceneAnalysisStandardStandardAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(self, stopWords);
-  return self;
-}
-
 void OrgApacheLuceneAnalysisStandardStandardAnalyzer_init(OrgApacheLuceneAnalysisStandardStandardAnalyzer *self) {
-  OrgApacheLuceneAnalysisStandardStandardAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(self, OrgApacheLuceneAnalysisStandardStandardAnalyzer_STOP_WORDS_SET_);
+  NSObject_init(self);
+  self->maxTokenLength_ = OrgApacheLuceneAnalysisStandardStandardAnalyzer_DEFAULT_MAX_TOKEN_LENGTH;
 }
 
 OrgApacheLuceneAnalysisStandardStandardAnalyzer *new_OrgApacheLuceneAnalysisStandardStandardAnalyzer_init() {
   OrgApacheLuceneAnalysisStandardStandardAnalyzer *self = [OrgApacheLuceneAnalysisStandardStandardAnalyzer alloc];
   OrgApacheLuceneAnalysisStandardStandardAnalyzer_init(self);
-  return self;
-}
-
-void OrgApacheLuceneAnalysisStandardStandardAnalyzer_initWithJavaIoReader_(OrgApacheLuceneAnalysisStandardStandardAnalyzer *self, JavaIoReader *stopwords) {
-  OrgApacheLuceneAnalysisStandardStandardAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(self, OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_loadStopwordSetWithJavaIoReader_(stopwords));
-}
-
-OrgApacheLuceneAnalysisStandardStandardAnalyzer *new_OrgApacheLuceneAnalysisStandardStandardAnalyzer_initWithJavaIoReader_(JavaIoReader *stopwords) {
-  OrgApacheLuceneAnalysisStandardStandardAnalyzer *self = [OrgApacheLuceneAnalysisStandardStandardAnalyzer alloc];
-  OrgApacheLuceneAnalysisStandardStandardAnalyzer_initWithJavaIoReader_(self, stopwords);
   return self;
 }
 

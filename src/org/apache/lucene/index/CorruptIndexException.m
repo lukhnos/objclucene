@@ -64,14 +64,6 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)output
   return self;
 }
 
-- (NSString *)getResourceDescription {
-  return resourceDescription_;
-}
-
-- (NSString *)getOriginalMessage {
-  return message_;
-}
-
 - (void)dealloc {
   RELEASE_(message_);
   RELEASE_(resourceDescription_);
@@ -86,14 +78,12 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)output
     { "initWithNSString:withOrgApacheLuceneStoreDataOutput:withJavaLangThrowable:", "CorruptIndexException", NULL, 0x1, NULL, NULL },
     { "initWithNSString:withNSString:", "CorruptIndexException", NULL, 0x1, NULL, NULL },
     { "initWithNSString:withNSString:withJavaLangThrowable:", "CorruptIndexException", NULL, 0x1, NULL, NULL },
-    { "getResourceDescription", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getOriginalMessage", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "message_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
     { "resourceDescription_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexCorruptIndexException = { 2, "CorruptIndexException", "org.apache.lucene.index", NULL, 0x1, 8, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexCorruptIndexException = { 2, "CorruptIndexException", "org.apache.lucene.index", NULL, 0x1, 6, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexCorruptIndexException;
 }
 

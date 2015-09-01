@@ -24,8 +24,6 @@
 @class OrgApacheLuceneIndexSegmentReadState;
 @class OrgApacheLuceneIndexTerms;
 @class OrgApacheLuceneStoreIndexInput;
-@class OrgApacheLuceneUtilBytesRef;
-@protocol JavaUtilCollection;
 @protocol JavaUtilIterator;
 
 @interface OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader : OrgApacheLuceneCodecsFieldsProducer {
@@ -43,8 +41,6 @@
 
 - (void)close;
 
-- (id<JavaUtilCollection>)getChildResources;
-
 - (id<JavaUtilIterator>)iterator;
 
 - (jlong)ramBytesUsed;
@@ -56,8 +52,6 @@
 - (NSString *)description;
 
 #pragma mark Package-Private
-
-- (NSString *)brToStringWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)b;
 
 
 @end

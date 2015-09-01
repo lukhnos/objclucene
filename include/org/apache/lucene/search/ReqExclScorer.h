@@ -21,7 +21,6 @@
 #include "org/apache/lucene/search/Scorer.h"
 
 @class OrgApacheLuceneSearchTwoPhaseIterator;
-@protocol JavaUtilCollection;
 
 @interface OrgApacheLuceneSearchReqExclScorer : OrgApacheLuceneSearchScorer
 
@@ -39,8 +38,6 @@
 - (jint)docID;
 
 - (jint)freq;
-
-- (id<JavaUtilCollection>)getChildren;
 
 - (jint)nextDoc;
 

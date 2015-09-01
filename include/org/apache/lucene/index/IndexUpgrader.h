@@ -16,52 +16,19 @@
 #if !defined (_OrgApacheLuceneIndexIndexUpgrader_) && (OrgApacheLuceneIndexIndexUpgrader_INCLUDE_ALL || OrgApacheLuceneIndexIndexUpgrader_INCLUDE)
 #define _OrgApacheLuceneIndexIndexUpgrader_
 
-@class IOSObjectArray;
-@class OrgApacheLuceneIndexIndexWriterConfig;
-@class OrgApacheLuceneStoreDirectory;
-@class OrgApacheLuceneUtilInfoStream;
-
 @interface OrgApacheLuceneIndexIndexUpgrader : NSObject
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir;
-
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
-            withOrgApacheLuceneIndexIndexWriterConfig:(OrgApacheLuceneIndexIndexWriterConfig *)iwc
-                                          withBoolean:(jboolean)deletePriorCommits;
-
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
-                    withOrgApacheLuceneUtilInfoStream:(OrgApacheLuceneUtilInfoStream *)infoStream
-                                          withBoolean:(jboolean)deletePriorCommits;
-
-+ (void)mainWithNSStringArray:(IOSObjectArray *)args;
-
-- (void)upgrade;
-
-#pragma mark Package-Private
-
-+ (OrgApacheLuceneIndexIndexUpgrader *)parseArgsWithNSStringArray:(IOSObjectArray *)args;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexIndexUpgrader)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexIndexUpgrader_mainWithNSStringArray_(IOSObjectArray *args);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexIndexUpgrader_init(OrgApacheLuceneIndexIndexUpgrader *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexIndexUpgrader *OrgApacheLuceneIndexIndexUpgrader_parseArgsWithNSStringArray_(IOSObjectArray *args);
-
-FOUNDATION_EXPORT void OrgApacheLuceneIndexIndexUpgrader_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexIndexUpgrader *self, OrgApacheLuceneStoreDirectory *dir);
-
-FOUNDATION_EXPORT OrgApacheLuceneIndexIndexUpgrader *new_OrgApacheLuceneIndexIndexUpgrader_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *dir) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneIndexIndexUpgrader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneUtilInfoStream_withBoolean_(OrgApacheLuceneIndexIndexUpgrader *self, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneUtilInfoStream *infoStream, jboolean deletePriorCommits);
-
-FOUNDATION_EXPORT OrgApacheLuceneIndexIndexUpgrader *new_OrgApacheLuceneIndexIndexUpgrader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneUtilInfoStream_withBoolean_(OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneUtilInfoStream *infoStream, jboolean deletePriorCommits) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneIndexIndexUpgrader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_withBoolean_(OrgApacheLuceneIndexIndexUpgrader *self, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexIndexWriterConfig *iwc, jboolean deletePriorCommits);
-
-FOUNDATION_EXPORT OrgApacheLuceneIndexIndexUpgrader *new_OrgApacheLuceneIndexIndexUpgrader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_withBoolean_(OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneIndexIndexWriterConfig *iwc, jboolean deletePriorCommits) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexIndexUpgrader *new_OrgApacheLuceneIndexIndexUpgrader_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexIndexUpgrader)
 

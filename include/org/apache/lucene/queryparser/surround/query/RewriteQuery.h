@@ -20,42 +20,17 @@
 #define OrgApacheLuceneSearchQuery_INCLUDE 1
 #include "org/apache/lucene/search/Query.h"
 
-@class OrgApacheLuceneIndexIndexReader;
-@class OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory;
-@class OrgApacheLuceneQueryparserSurroundQuerySrndQuery;
-
-@interface OrgApacheLuceneQueryparserSurroundQueryRewriteQuery : OrgApacheLuceneSearchQuery {
- @public
-  OrgApacheLuceneQueryparserSurroundQuerySrndQuery *srndQuery_;
-  NSString *fieldName_;
-  OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *qf_;
-}
-
-#pragma mark Public
-
-- (jboolean)isEqual:(id)obj;
-
-- (NSUInteger)hash;
-
-- (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
-
-- (NSString *)toStringWithNSString:(NSString *)field;
+@interface OrgApacheLuceneQueryparserSurroundQueryRewriteQuery : OrgApacheLuceneSearchQuery
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery:(OrgApacheLuceneQueryparserSurroundQuerySrndQuery *)srndQuery
-                                                            withNSString:(NSString *)fieldName
-            withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *)qf;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserSurroundQueryRewriteQuery)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserSurroundQueryRewriteQuery, srndQuery_, id)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserSurroundQueryRewriteQuery, fieldName_, NSString *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserSurroundQueryRewriteQuery, qf_, OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *)
-
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundQueryRewriteQuery_initWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery_withNSString_withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_(OrgApacheLuceneQueryparserSurroundQueryRewriteQuery *self, OrgApacheLuceneQueryparserSurroundQuerySrndQuery *srndQuery, NSString *fieldName, OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *qf);
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundQueryRewriteQuery_init(OrgApacheLuceneQueryparserSurroundQueryRewriteQuery *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundQueryRewriteQuery)
 

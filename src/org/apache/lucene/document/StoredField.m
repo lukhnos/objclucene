@@ -12,7 +12,6 @@
 #include "org/apache/lucene/document/Field.h"
 #include "org/apache/lucene/document/FieldType.h"
 #include "org/apache/lucene/document/StoredField.h"
-#include "org/apache/lucene/util/BytesRef.h"
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneDocumentStoredField)
 
@@ -23,26 +22,6 @@ OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentStoredField_TYPE_;
 - (instancetype)initWithNSString:(NSString *)name
                    withByteArray:(IOSByteArray *)value {
   OrgApacheLuceneDocumentStoredField_initWithNSString_withByteArray_(self, name, value);
-  return self;
-}
-
-- (instancetype)initWithNSString:(NSString *)name
-                   withByteArray:(IOSByteArray *)value
-                         withInt:(jint)offset
-                         withInt:(jint)length {
-  OrgApacheLuceneDocumentStoredField_initWithNSString_withByteArray_withInt_withInt_(self, name, value, offset, length);
-  return self;
-}
-
-- (instancetype)initWithNSString:(NSString *)name
- withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)value {
-  OrgApacheLuceneDocumentStoredField_initWithNSString_withOrgApacheLuceneUtilBytesRef_(self, name, value);
-  return self;
-}
-
-- (instancetype)initWithNSString:(NSString *)name
-                    withNSString:(NSString *)value {
-  OrgApacheLuceneDocumentStoredField_initWithNSString_withNSString_(self, name, value);
   return self;
 }
 
@@ -84,9 +63,6 @@ OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentStoredField_TYPE_;
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithNSString:withByteArray:", "StoredField", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withByteArray:withInt:withInt:", "StoredField", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withOrgApacheLuceneUtilBytesRef:", "StoredField", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withNSString:", "StoredField", NULL, 0x1, NULL, NULL },
     { "initWithNSString:withInt:", "StoredField", NULL, 0x1, NULL, NULL },
     { "initWithNSString:withFloat:", "StoredField", NULL, 0x1, NULL, NULL },
     { "initWithNSString:withLong:", "StoredField", NULL, 0x1, NULL, NULL },
@@ -95,7 +71,7 @@ OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentStoredField_TYPE_;
   static const J2ObjcFieldInfo fields[] = {
     { "TYPE_", NULL, 0x19, "Lorg.apache.lucene.document.FieldType;", &OrgApacheLuceneDocumentStoredField_TYPE_, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneDocumentStoredField = { 2, "StoredField", "org.apache.lucene.document", NULL, 0x11, 8, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneDocumentStoredField = { 2, "StoredField", "org.apache.lucene.document", NULL, 0x11, 5, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneDocumentStoredField;
 }
 
@@ -108,36 +84,6 @@ void OrgApacheLuceneDocumentStoredField_initWithNSString_withByteArray_(OrgApach
 OrgApacheLuceneDocumentStoredField *new_OrgApacheLuceneDocumentStoredField_initWithNSString_withByteArray_(NSString *name, IOSByteArray *value) {
   OrgApacheLuceneDocumentStoredField *self = [OrgApacheLuceneDocumentStoredField alloc];
   OrgApacheLuceneDocumentStoredField_initWithNSString_withByteArray_(self, name, value);
-  return self;
-}
-
-void OrgApacheLuceneDocumentStoredField_initWithNSString_withByteArray_withInt_withInt_(OrgApacheLuceneDocumentStoredField *self, NSString *name, IOSByteArray *value, jint offset, jint length) {
-  OrgApacheLuceneDocumentField_initWithNSString_withByteArray_withInt_withInt_withOrgApacheLuceneDocumentFieldType_(self, name, value, offset, length, OrgApacheLuceneDocumentStoredField_TYPE_);
-}
-
-OrgApacheLuceneDocumentStoredField *new_OrgApacheLuceneDocumentStoredField_initWithNSString_withByteArray_withInt_withInt_(NSString *name, IOSByteArray *value, jint offset, jint length) {
-  OrgApacheLuceneDocumentStoredField *self = [OrgApacheLuceneDocumentStoredField alloc];
-  OrgApacheLuceneDocumentStoredField_initWithNSString_withByteArray_withInt_withInt_(self, name, value, offset, length);
-  return self;
-}
-
-void OrgApacheLuceneDocumentStoredField_initWithNSString_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneDocumentStoredField *self, NSString *name, OrgApacheLuceneUtilBytesRef *value) {
-  OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneDocumentFieldType_(self, name, value, OrgApacheLuceneDocumentStoredField_TYPE_);
-}
-
-OrgApacheLuceneDocumentStoredField *new_OrgApacheLuceneDocumentStoredField_initWithNSString_withOrgApacheLuceneUtilBytesRef_(NSString *name, OrgApacheLuceneUtilBytesRef *value) {
-  OrgApacheLuceneDocumentStoredField *self = [OrgApacheLuceneDocumentStoredField alloc];
-  OrgApacheLuceneDocumentStoredField_initWithNSString_withOrgApacheLuceneUtilBytesRef_(self, name, value);
-  return self;
-}
-
-void OrgApacheLuceneDocumentStoredField_initWithNSString_withNSString_(OrgApacheLuceneDocumentStoredField *self, NSString *name, NSString *value) {
-  OrgApacheLuceneDocumentField_initWithNSString_withNSString_withOrgApacheLuceneDocumentFieldType_(self, name, value, OrgApacheLuceneDocumentStoredField_TYPE_);
-}
-
-OrgApacheLuceneDocumentStoredField *new_OrgApacheLuceneDocumentStoredField_initWithNSString_withNSString_(NSString *name, NSString *value) {
-  OrgApacheLuceneDocumentStoredField *self = [OrgApacheLuceneDocumentStoredField alloc];
-  OrgApacheLuceneDocumentStoredField_initWithNSString_withNSString_(self, name, value);
   return self;
 }
 

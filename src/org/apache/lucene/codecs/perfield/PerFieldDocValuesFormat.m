@@ -29,7 +29,6 @@
 #include "org/apache/lucene/index/SortedDocValues.h"
 #include "org/apache/lucene/index/SortedNumericDocValues.h"
 #include "org/apache/lucene/index/SortedSetDocValues.h"
-#include "org/apache/lucene/util/Accountables.h"
 #include "org/apache/lucene/util/Bits.h"
 #include "org/apache/lucene/util/IOUtils.h"
 #include "org/apache/lucene/util/RamUsageEstimator.h"
@@ -113,8 +112,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_
 - (void)close;
 
 - (jlong)ramBytesUsed;
-
-- (id<JavaUtilCollection>)getChildResources;
 
 - (void)checkIntegrity;
 
@@ -473,10 +470,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsPerfieldPerFieldDocValuesF
   return size;
 }
 
-- (id<JavaUtilCollection>)getChildResources {
-  return OrgApacheLuceneUtilAccountables_namedAccountablesWithNSString_withJavaUtilMap_(@"format", formats_);
-}
-
 - (void)checkIntegrity {
   for (OrgApacheLuceneCodecsDocValuesProducer * __strong format in nil_chk([((id<JavaUtilMap>) nil_chk(formats_)) values])) {
     [((OrgApacheLuceneCodecsDocValuesProducer *) nil_chk(format)) checkIntegrity];
@@ -510,7 +503,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsPerfieldPerFieldDocValuesF
     { "getDocsWithFieldWithOrgApacheLuceneIndexFieldInfo:", "getDocsWithField", "Lorg.apache.lucene.util.Bits;", 0x1, "Ljava.io.IOException;", NULL },
     { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
     { "checkIntegrity", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
     { "getMergeInstance", NULL, "Lorg.apache.lucene.codecs.DocValuesProducer;", 0x1, "Ljava.io.IOException;", NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
@@ -520,7 +512,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsPerfieldPerFieldDocValuesF
     { "fields_", NULL, 0x12, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/codecs/DocValuesProducer;>;", .constantValue.asLong = 0 },
     { "formats_", NULL, 0x12, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/codecs/DocValuesProducer;>;", .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_FieldsReader = { 2, "FieldsReader", "org.apache.lucene.codecs.perfield", "PerFieldDocValuesFormat", 0x2, 14, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_FieldsReader = { 2, "FieldsReader", "org.apache.lucene.codecs.perfield", "PerFieldDocValuesFormat", 0x2, 13, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_FieldsReader;
 }
 

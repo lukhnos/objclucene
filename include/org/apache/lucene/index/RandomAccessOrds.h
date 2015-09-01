@@ -22,12 +22,6 @@
 
 @interface OrgApacheLuceneIndexRandomAccessOrds : OrgApacheLuceneIndexSortedSetDocValues
 
-#pragma mark Public
-
-- (jint)cardinality;
-
-- (jlong)ordAtWithInt:(jint)index;
-
 #pragma mark Protected
 
 - (instancetype)init;

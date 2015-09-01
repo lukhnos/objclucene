@@ -16,19 +16,13 @@
 #if !defined (_OrgApacheLuceneUtilToStringUtils_) && (OrgApacheLuceneUtilToStringUtils_INCLUDE_ALL || OrgApacheLuceneUtilToStringUtils_INCLUDE)
 #define _OrgApacheLuceneUtilToStringUtils_
 
-@class IOSByteArray;
-@class JavaLangStringBuilder;
-
 @interface OrgApacheLuceneUtilToStringUtils : NSObject
 
 #pragma mark Public
 
+- (instancetype)init;
+
 + (NSString *)boostWithFloat:(jfloat)boost;
-
-+ (void)byteArrayWithJavaLangStringBuilder:(JavaLangStringBuilder *)buffer
-                             withByteArray:(IOSByteArray *)bytes;
-
-+ (NSString *)longHexWithLong:(jlong)x;
 
 @end
 
@@ -36,9 +30,9 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneUtilToStringUtils)
 
 FOUNDATION_EXPORT NSString *OrgApacheLuceneUtilToStringUtils_boostWithFloat_(jfloat boost);
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilToStringUtils_byteArrayWithJavaLangStringBuilder_withByteArray_(JavaLangStringBuilder *buffer, IOSByteArray *bytes);
+FOUNDATION_EXPORT void OrgApacheLuceneUtilToStringUtils_init(OrgApacheLuceneUtilToStringUtils *self);
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneUtilToStringUtils_longHexWithLong_(jlong x);
+FOUNDATION_EXPORT OrgApacheLuceneUtilToStringUtils *new_OrgApacheLuceneUtilToStringUtils_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilToStringUtils)
 

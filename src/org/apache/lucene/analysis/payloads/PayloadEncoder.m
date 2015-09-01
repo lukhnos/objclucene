@@ -3,10 +3,10 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/payloads/PayloadEncoder.java
 //
 
-#include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/analysis/payloads/PayloadEncoder.h"
-#include "org/apache/lucene/util/BytesRef.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @interface OrgApacheLuceneAnalysisPayloadsPayloadEncoder : NSObject
 
@@ -15,11 +15,7 @@
 @implementation OrgApacheLuceneAnalysisPayloadsPayloadEncoder
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "encodeWithCharArray:", "encode", "Lorg.apache.lucene.util.BytesRef;", 0x401, NULL, NULL },
-    { "encodeWithCharArray:withInt:withInt:", "encode", "Lorg.apache.lucene.util.BytesRef;", 0x401, NULL, NULL },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPayloadsPayloadEncoder = { 2, "PayloadEncoder", "org.apache.lucene.analysis.payloads", NULL, 0x609, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPayloadsPayloadEncoder = { 2, "PayloadEncoder", "org.apache.lucene.analysis.payloads", NULL, 0x609, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisPayloadsPayloadEncoder;
 }
 

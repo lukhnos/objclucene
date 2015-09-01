@@ -20,7 +20,6 @@
 @class IOSObjectArray;
 @class OrgApacheLuceneIndexBufferedUpdates;
 @class OrgApacheLuceneIndexPrefixCodedTerms;
-@class OrgApacheLuceneIndexPrefixCodedTerms_TermIterator;
 @protocol JavaLangIterable;
 
 @interface OrgApacheLuceneIndexFrozenBufferedUpdates : NSObject {
@@ -45,8 +44,6 @@
 - (id<JavaLangIterable>)queriesIterable;
 
 - (void)setDelGenWithLong:(jlong)gen;
-
-- (OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *)termIterator;
 
 - (NSString *)description;
 

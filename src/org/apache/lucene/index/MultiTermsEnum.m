@@ -265,10 +265,6 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexMultiTermsEnum)
   }
 }
 
-- (void)seekExactWithLong:(jlong)ord {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
-}
-
 - (jlong)ord {
   @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
 }
@@ -377,7 +373,6 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexMultiTermsEnum)
     { "resetWithOrgApacheLuceneIndexMultiTermsEnum_TermsEnumIndexArray:", "reset", "Lorg.apache.lucene.index.TermsEnum;", 0x1, "Ljava.io.IOException;", NULL },
     { "seekExactWithOrgApacheLuceneUtilBytesRef:", "seekExact", "Z", 0x1, "Ljava.io.IOException;", NULL },
     { "seekCeilWithOrgApacheLuceneUtilBytesRef:", "seekCeil", "Lorg.apache.lucene.index.TermsEnum$SeekStatus;", 0x1, "Ljava.io.IOException;", NULL },
-    { "seekExactWithLong:", "seekExact", "V", 0x1, NULL, NULL },
     { "ord", NULL, "J", 0x1, NULL, NULL },
     { "pullTop", NULL, "V", 0x2, NULL, NULL },
     { "pushTop", NULL, "V", 0x2, "Ljava.io.IOException;", NULL },
@@ -402,7 +397,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexMultiTermsEnum)
     { "current_", NULL, 0x2, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.index.MultiTermsEnum$TermsEnumIndex;", "Lorg.apache.lucene.index.MultiTermsEnum$TermsEnumWithSlice;", "Lorg.apache.lucene.index.MultiTermsEnum$TermMergeQueue;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiTermsEnum = { 2, "MultiTermsEnum", "org.apache.lucene.index", NULL, 0x11, 16, methods, 12, fields, 0, NULL, 3, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiTermsEnum = { 2, "MultiTermsEnum", "org.apache.lucene.index", NULL, 0x11, 15, methods, 12, fields, 0, NULL, 3, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneIndexMultiTermsEnum;
 }
 

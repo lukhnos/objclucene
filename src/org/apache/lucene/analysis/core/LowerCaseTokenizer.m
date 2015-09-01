@@ -7,17 +7,11 @@
 #include "java/lang/Character.h"
 #include "org/apache/lucene/analysis/core/LetterTokenizer.h"
 #include "org/apache/lucene/analysis/core/LowerCaseTokenizer.h"
-#include "org/apache/lucene/util/AttributeFactory.h"
 
 @implementation OrgApacheLuceneAnalysisCoreLowerCaseTokenizer
 
 - (instancetype)init {
   OrgApacheLuceneAnalysisCoreLowerCaseTokenizer_init(self);
-  return self;
-}
-
-- (instancetype)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory {
-  OrgApacheLuceneAnalysisCoreLowerCaseTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(self, factory);
   return self;
 }
 
@@ -28,10 +22,9 @@
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "init", "LowerCaseTokenizer", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilAttributeFactory:", "LowerCaseTokenizer", NULL, 0x1, NULL, NULL },
     { "normalizeWithInt:", "normalize", "I", 0x4, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCoreLowerCaseTokenizer = { 2, "LowerCaseTokenizer", "org.apache.lucene.analysis.core", NULL, 0x11, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCoreLowerCaseTokenizer = { 2, "LowerCaseTokenizer", "org.apache.lucene.analysis.core", NULL, 0x11, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisCoreLowerCaseTokenizer;
 }
 
@@ -44,16 +37,6 @@ void OrgApacheLuceneAnalysisCoreLowerCaseTokenizer_init(OrgApacheLuceneAnalysisC
 OrgApacheLuceneAnalysisCoreLowerCaseTokenizer *new_OrgApacheLuceneAnalysisCoreLowerCaseTokenizer_init() {
   OrgApacheLuceneAnalysisCoreLowerCaseTokenizer *self = [OrgApacheLuceneAnalysisCoreLowerCaseTokenizer alloc];
   OrgApacheLuceneAnalysisCoreLowerCaseTokenizer_init(self);
-  return self;
-}
-
-void OrgApacheLuceneAnalysisCoreLowerCaseTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(OrgApacheLuceneAnalysisCoreLowerCaseTokenizer *self, OrgApacheLuceneUtilAttributeFactory *factory) {
-  OrgApacheLuceneAnalysisCoreLetterTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(self, factory);
-}
-
-OrgApacheLuceneAnalysisCoreLowerCaseTokenizer *new_OrgApacheLuceneAnalysisCoreLowerCaseTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(OrgApacheLuceneUtilAttributeFactory *factory) {
-  OrgApacheLuceneAnalysisCoreLowerCaseTokenizer *self = [OrgApacheLuceneAnalysisCoreLowerCaseTokenizer alloc];
-  OrgApacheLuceneAnalysisCoreLowerCaseTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(self, factory);
   return self;
 }
 

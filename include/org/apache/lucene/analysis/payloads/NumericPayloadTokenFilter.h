@@ -20,25 +20,19 @@
 #define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
-@class OrgApacheLuceneAnalysisTokenStream;
-
 @interface OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-                                                 withFloat:(jfloat)payload
-                                              withNSString:(NSString *)typeMatch;
-
-- (jboolean)incrementToken;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withFloat_withNSString_(OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter *self, OrgApacheLuceneAnalysisTokenStream *input, jfloat payload, NSString *typeMatch);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter_init(OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter *new_OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withFloat_withNSString_(OrgApacheLuceneAnalysisTokenStream *input, jfloat payload, NSString *typeMatch) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter *new_OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPayloadsNumericPayloadTokenFilter)
 

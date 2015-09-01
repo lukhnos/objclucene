@@ -22,6 +22,8 @@
 
 #pragma mark Public
 
+- (instancetype)init;
+
 + (OrgApacheLuceneUtilAutomatonAutomaton *)minimizeWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a
                                                                                      withInt:(jint)maxDeterminizedStates;
 
@@ -30,6 +32,10 @@
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilAutomatonMinimizationOperations)
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonMinimizationOperations_minimizeWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(OrgApacheLuceneUtilAutomatonAutomaton *a, jint maxDeterminizedStates);
+
+FOUNDATION_EXPORT void OrgApacheLuceneUtilAutomatonMinimizationOperations_init(OrgApacheLuceneUtilAutomatonMinimizationOperations *self);
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonMinimizationOperations *new_OrgApacheLuceneUtilAutomatonMinimizationOperations_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonMinimizationOperations)
 

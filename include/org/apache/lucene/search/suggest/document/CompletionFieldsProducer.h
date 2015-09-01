@@ -20,43 +20,20 @@
 #define OrgApacheLuceneCodecsFieldsProducer_INCLUDE 1
 #include "org/apache/lucene/codecs/FieldsProducer.h"
 
-@class OrgApacheLuceneIndexSegmentReadState;
-@class OrgApacheLuceneIndexTerms;
-@protocol JavaUtilCollection;
-@protocol JavaUtilIterator;
-
 @interface OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer : OrgApacheLuceneCodecsFieldsProducer
-
-#pragma mark Public
-
-- (void)checkIntegrity;
-
-- (void)close;
-
-- (id<JavaUtilCollection>)getChildResources;
-
-- (OrgApacheLuceneCodecsFieldsProducer *)getMergeInstance;
-
-- (id<JavaUtilIterator>)iterator;
-
-- (jlong)ramBytesUsed;
-
-- (jint)size;
-
-- (OrgApacheLuceneIndexTerms *)termsWithNSString:(NSString *)field;
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneIndexSegmentReadState:(OrgApacheLuceneIndexSegmentReadState *)state;
+- (instancetype)init;
 
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_initWithOrgApacheLuceneIndexSegmentReadState_(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer *self, OrgApacheLuceneIndexSegmentReadState *state);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_init(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer *new_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_initWithOrgApacheLuceneIndexSegmentReadState_(OrgApacheLuceneIndexSegmentReadState *state) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer *new_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer)
 

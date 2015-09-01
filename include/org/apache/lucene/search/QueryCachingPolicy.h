@@ -19,15 +19,7 @@
 #if !defined (_OrgApacheLuceneSearchQueryCachingPolicy_) && (OrgApacheLuceneSearchQueryCachingPolicy_INCLUDE_ALL || OrgApacheLuceneSearchQueryCachingPolicy_INCLUDE)
 #define _OrgApacheLuceneSearchQueryCachingPolicy_
 
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneSearchQuery;
-
 @protocol OrgApacheLuceneSearchQueryCachingPolicy < NSObject, JavaObject >
-
-- (void)onUseWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
-
-- (jboolean)shouldCacheWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-            withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
 
 @end
 
@@ -47,20 +39,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchQueryCachingPolicy)
 #if !defined (_OrgApacheLuceneSearchQueryCachingPolicy_CacheOnLargeSegments_) && (OrgApacheLuceneSearchQueryCachingPolicy_INCLUDE_ALL || OrgApacheLuceneSearchQueryCachingPolicy_CacheOnLargeSegments_INCLUDE)
 #define _OrgApacheLuceneSearchQueryCachingPolicy_CacheOnLargeSegments_
 
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneSearchQuery;
-
 @interface OrgApacheLuceneSearchQueryCachingPolicy_CacheOnLargeSegments : NSObject < OrgApacheLuceneSearchQueryCachingPolicy >
 
 #pragma mark Public
 
 - (instancetype)initWithInt:(jint)minIndexSize
                   withFloat:(jfloat)minSizeRatio;
-
-- (void)onUseWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
-
-- (jboolean)shouldCacheWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-            withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
 
 @end
 

@@ -11,10 +11,7 @@
 #include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Integer.h"
 #include "java/lang/Long.h"
-#include "java/util/ArrayList.h"
 #include "java/util/Arrays.h"
-#include "java/util/Collection.h"
-#include "java/util/Collections.h"
 #include "java/util/List.h"
 #include "org/apache/lucene/index/BinaryDocValues.h"
 #include "org/apache/lucene/index/DocValues.h"
@@ -35,8 +32,6 @@
 #include "org/apache/lucene/index/SortedNumericDocValues.h"
 #include "org/apache/lucene/index/SortedSetDocValues.h"
 #include "org/apache/lucene/index/TermsEnum.h"
-#include "org/apache/lucene/util/Accountable.h"
-#include "org/apache/lucene/util/Accountables.h"
 #include "org/apache/lucene/util/Bits.h"
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/InPlaceMergeSorter.h"
@@ -622,14 +617,6 @@ withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap:(OrgApacheLuceneInd
   return ramBytesUsed_;
 }
 
-- (id<JavaUtilCollection>)getChildResources {
-  id<JavaUtilList> resources = [new_JavaUtilArrayList_init() autorelease];
-  [resources addWithId:OrgApacheLuceneUtilAccountables_namedAccountableWithNSString_withOrgApacheLuceneUtilAccountable_(@"global ord deltas", globalOrdDeltas_)];
-  [resources addWithId:OrgApacheLuceneUtilAccountables_namedAccountableWithNSString_withOrgApacheLuceneUtilAccountable_(@"first segments", firstSegments_)];
-  [resources addWithId:OrgApacheLuceneUtilAccountables_namedAccountableWithNSString_withOrgApacheLuceneUtilAccountable_(@"segment map", segmentMap_)];
-  return resources;
-}
-
 - (void)dealloc {
   RELEASE_(owner_);
   RELEASE_(globalOrdDeltas_);
@@ -657,7 +644,6 @@ withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap:(OrgApacheLuceneInd
     { "getFirstSegmentNumberWithLong:", "getFirstSegmentNumber", "I", 0x1, NULL, NULL },
     { "getValueCount", NULL, "J", 0x1, NULL, NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "BASE_RAM_BYTES_USED_", NULL, 0x1a, "J", &OrgApacheLuceneIndexMultiDocValues_OrdinalMap_BASE_RAM_BYTES_USED_, NULL, .constantValue.asLong = 0 },
@@ -669,7 +655,7 @@ withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap:(OrgApacheLuceneInd
     { "ramBytesUsed_", NULL, 0x10, "J", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.index.MultiDocValues$OrdinalMap$SegmentMap;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiDocValues_OrdinalMap = { 2, "OrdinalMap", "org.apache.lucene.index", "MultiDocValues", 0x9, 10, methods, 7, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiDocValues_OrdinalMap = { 2, "OrdinalMap", "org.apache.lucene.index", "MultiDocValues", 0x9, 9, methods, 7, fields, 0, NULL, 1, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneIndexMultiDocValues_OrdinalMap;
 }
 
@@ -821,10 +807,6 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap
   return OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_BASE_RAM_BYTES_USED_ + OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithIntArray_(newToOld_) + OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithIntArray_(oldToNew_);
 }
 
-- (id<JavaUtilCollection>)getChildResources {
-  return JavaUtilCollections_emptyList();
-}
-
 - (void)dealloc {
   RELEASE_(newToOld_);
   RELEASE_(oldToNew_);
@@ -846,14 +828,13 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap
     { "newToOldWithInt:", "newToOld", "I", 0x0, NULL, NULL },
     { "oldToNewWithInt:", "oldToNew", "I", 0x0, NULL, NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "BASE_RAM_BYTES_USED_", NULL, 0x1a, "J", &OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap_BASE_RAM_BYTES_USED_, NULL, .constantValue.asLong = 0 },
     { "newToOld_", NULL, 0x12, "[I", NULL, NULL, .constantValue.asLong = 0 },
     { "oldToNew_", NULL, 0x12, "[I", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap = { 2, "SegmentMap", "org.apache.lucene.index", "MultiDocValues$OrdinalMap", 0xa, 7, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap = { 2, "SegmentMap", "org.apache.lucene.index", "MultiDocValues$OrdinalMap", 0xa, 6, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap;
 }
 

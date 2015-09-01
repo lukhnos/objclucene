@@ -23,7 +23,6 @@
 @class OrgApacheLuceneSearchSpansSpanNearQuery;
 @class OrgApacheLuceneSearchSpansSpans;
 @protocol JavaUtilList;
-@protocol OrgApacheLuceneSearchSpansSpanCollector;
 
 @interface OrgApacheLuceneSearchSpansNearSpansUnordered : OrgApacheLuceneSearchSpansNearSpans
 
@@ -31,8 +30,6 @@
 
 - (instancetype)initWithOrgApacheLuceneSearchSpansSpanNearQuery:(OrgApacheLuceneSearchSpansSpanNearQuery *)query
                                                withJavaUtilList:(id<JavaUtilList>)subSpans;
-
-- (void)collectWithOrgApacheLuceneSearchSpansSpanCollector:(id<OrgApacheLuceneSearchSpansSpanCollector>)collector;
 
 - (jint)endPosition;
 

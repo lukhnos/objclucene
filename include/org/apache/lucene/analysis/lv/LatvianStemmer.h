@@ -16,24 +16,15 @@
 #if !defined (_OrgApacheLuceneAnalysisLvLatvianStemmer_) && (OrgApacheLuceneAnalysisLvLatvianStemmer_INCLUDE_ALL || OrgApacheLuceneAnalysisLvLatvianStemmer_INCLUDE)
 #define _OrgApacheLuceneAnalysisLvLatvianStemmer_
 
-@class IOSCharArray;
-@class IOSObjectArray;
-
 @interface OrgApacheLuceneAnalysisLvLatvianStemmer : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
-- (jint)stemWithCharArray:(IOSCharArray *)s
-                  withInt:(jint)len;
-
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisLvLatvianStemmer)
-
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneAnalysisLvLatvianStemmer_affixes_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisLvLatvianStemmer, affixes_, IOSObjectArray *)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisLvLatvianStemmer)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisLvLatvianStemmer_init(OrgApacheLuceneAnalysisLvLatvianStemmer *self);
 
@@ -46,30 +37,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisLvLatvianStemmer)
 #if !defined (_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_) && (OrgApacheLuceneAnalysisLvLatvianStemmer_INCLUDE_ALL || OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_INCLUDE)
 #define _OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_
 
-@class IOSCharArray;
-
-@interface OrgApacheLuceneAnalysisLvLatvianStemmer_Affix : NSObject {
- @public
-  IOSCharArray *affix_;
-  jint vc_;
-  jboolean palatalizes_;
-}
+@interface OrgApacheLuceneAnalysisLvLatvianStemmer_Affix : NSObject
 
 #pragma mark Package-Private
 
-- (instancetype)initWithNSString:(NSString *)affix
-                         withInt:(jint)vc
-                     withBoolean:(jboolean)palatalizes;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisLvLatvianStemmer_Affix)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisLvLatvianStemmer_Affix, affix_, IOSCharArray *)
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_init(OrgApacheLuceneAnalysisLvLatvianStemmer_Affix *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(OrgApacheLuceneAnalysisLvLatvianStemmer_Affix *self, NSString *affix, jint vc, jboolean palatalizes);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisLvLatvianStemmer_Affix *new_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_initWithNSString_withInt_withBoolean_(NSString *affix, jint vc, jboolean palatalizes) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisLvLatvianStemmer_Affix *new_OrgApacheLuceneAnalysisLvLatvianStemmer_Affix_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisLvLatvianStemmer_Affix)
 

@@ -4,45 +4,34 @@
 //
 
 #include "J2ObjC_source.h"
-#include "java/lang/IllegalArgumentException.h"
-#include "java/util/Map.h"
-#include "org/apache/lucene/analysis/TokenStream.h"
-#include "org/apache/lucene/analysis/reverse/ReverseStringFilter.h"
 #include "org/apache/lucene/analysis/reverse/ReverseStringFilterFactory.h"
-#include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneAnalysisReverseReverseStringFilterFactory
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args {
-  OrgApacheLuceneAnalysisReverseReverseStringFilterFactory_initWithJavaUtilMap_(self, args);
+- (instancetype)init {
+  OrgApacheLuceneAnalysisReverseReverseStringFilterFactory_init(self);
   return self;
-}
-
-- (OrgApacheLuceneAnalysisReverseReverseStringFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg {
-  return [new_OrgApacheLuceneAnalysisReverseReverseStringFilter_initWithOrgApacheLuceneAnalysisTokenStream_(inArg) autorelease];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "ReverseStringFilterFactory", NULL, 0x1, NULL, NULL },
-    { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.reverse.ReverseStringFilter;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisReverseReverseStringFilterFactory = { 2, "ReverseStringFilterFactory", "org.apache.lucene.analysis.reverse", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisReverseReverseStringFilterFactory = { 2, "ReverseStringFilterFactory", "org.apache.lucene.analysis.reverse", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisReverseReverseStringFilterFactory;
 }
 
 @end
 
-void OrgApacheLuceneAnalysisReverseReverseStringFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisReverseReverseStringFilterFactory *self, id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
-  if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
-  }
+void OrgApacheLuceneAnalysisReverseReverseStringFilterFactory_init(OrgApacheLuceneAnalysisReverseReverseStringFilterFactory *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneAnalysisReverseReverseStringFilterFactory *new_OrgApacheLuceneAnalysisReverseReverseStringFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+OrgApacheLuceneAnalysisReverseReverseStringFilterFactory *new_OrgApacheLuceneAnalysisReverseReverseStringFilterFactory_init() {
   OrgApacheLuceneAnalysisReverseReverseStringFilterFactory *self = [OrgApacheLuceneAnalysisReverseReverseStringFilterFactory alloc];
-  OrgApacheLuceneAnalysisReverseReverseStringFilterFactory_initWithJavaUtilMap_(self, args);
+  OrgApacheLuceneAnalysisReverseReverseStringFilterFactory_init(self);
   return self;
 }
 

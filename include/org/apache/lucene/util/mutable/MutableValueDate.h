@@ -20,17 +20,11 @@
 #define OrgApacheLuceneUtilMutableMutableValueLong_INCLUDE 1
 #include "org/apache/lucene/util/mutable/MutableValueLong.h"
 
-@class OrgApacheLuceneUtilMutableMutableValue;
-
 @interface OrgApacheLuceneUtilMutableMutableValueDate : OrgApacheLuceneUtilMutableMutableValueLong
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (OrgApacheLuceneUtilMutableMutableValue *)duplicate;
-
-- (id)toObject;
 
 @end
 

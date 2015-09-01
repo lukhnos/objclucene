@@ -76,10 +76,6 @@ __attribute__((unused)) static void OrgApacheLuceneIndexSegmentCoreReaders_notif
   return self;
 }
 
-- (jint)getRefCount {
-  return [((JavaUtilConcurrentAtomicAtomicInteger *) nil_chk(ref_)) get];
-}
-
 - (void)incRef {
   jint count;
   while ((count = [((JavaUtilConcurrentAtomicAtomicInteger *) nil_chk(ref_)) get]) > 0) {
@@ -109,14 +105,6 @@ __attribute__((unused)) static void OrgApacheLuceneIndexSegmentCoreReaders_notif
   OrgApacheLuceneIndexSegmentCoreReaders_notifyCoreClosedListenersWithJavaLangThrowable_(self, th);
 }
 
-- (void)addCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:(id<OrgApacheLuceneIndexLeafReader_CoreClosedListener>)listener {
-  [((id<JavaUtilSet>) nil_chk(coreClosedListeners_)) addWithId:listener];
-}
-
-- (void)removeCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:(id<OrgApacheLuceneIndexLeafReader_CoreClosedListener>)listener {
-  [((id<JavaUtilSet>) nil_chk(coreClosedListeners_)) removeWithId:listener];
-}
-
 - (void)dealloc {
   RELEASE_(ref_);
   RELEASE_(fields_);
@@ -134,12 +122,9 @@ __attribute__((unused)) static void OrgApacheLuceneIndexSegmentCoreReaders_notif
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneIndexSegmentReader:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneIndexSegmentCommitInfo:withOrgApacheLuceneStoreIOContext:", "SegmentCoreReaders", NULL, 0x0, "Ljava.io.IOException;", NULL },
-    { "getRefCount", NULL, "I", 0x0, NULL, NULL },
     { "incRef", NULL, "V", 0x0, NULL, NULL },
     { "decRef", NULL, "V", 0x0, "Ljava.io.IOException;", NULL },
     { "notifyCoreClosedListenersWithJavaLangThrowable:", "notifyCoreClosedListeners", "V", 0x2, NULL, NULL },
-    { "addCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:", "addCoreClosedListener", "V", 0x0, NULL, NULL },
-    { "removeCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:", "removeCoreClosedListener", "V", 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "ref_", NULL, 0x12, "Ljava.util.concurrent.atomic.AtomicInteger;", NULL, NULL, .constantValue.asLong = 0 },
@@ -154,7 +139,7 @@ __attribute__((unused)) static void OrgApacheLuceneIndexSegmentCoreReaders_notif
     { "coreClosedListeners_", NULL, 0x12, "Ljava.util.Set;", NULL, "Ljava/util/Set<Lorg/apache/lucene/index/LeafReader$CoreClosedListener;>;", .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.index.SegmentCoreReaders$FieldsReaderLocal;", "Lorg.apache.lucene.index.SegmentCoreReaders$TermVectorsLocal;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexSegmentCoreReaders = { 2, "SegmentCoreReaders", "org.apache.lucene.index", NULL, 0x10, 7, methods, 10, fields, 0, NULL, 2, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexSegmentCoreReaders = { 2, "SegmentCoreReaders", "org.apache.lucene.index", NULL, 0x10, 4, methods, 10, fields, 0, NULL, 2, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneIndexSegmentCoreReaders;
 }
 

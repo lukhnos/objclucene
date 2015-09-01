@@ -23,7 +23,6 @@
 @class IOSIntArray;
 @class IOSObjectArray;
 @class OrgApacheLuceneIndexIndexReader;
-@class OrgApacheLuceneIndexTerm;
 @class OrgApacheLuceneSearchIndexSearcher;
 @class OrgApacheLuceneSearchWeight;
 
@@ -32,25 +31,6 @@
 #pragma mark Public
 
 - (instancetype)init;
-
-- (instancetype)initWithInt:(jint)slop
-               withNSString:(NSString *)field
-withOrgApacheLuceneUtilBytesRefArray:(IOSObjectArray *)terms;
-
-- (instancetype)initWithInt:(jint)slop
-               withNSString:(NSString *)field
-          withNSStringArray:(IOSObjectArray *)terms;
-
-- (instancetype)initWithNSString:(NSString *)field
-withOrgApacheLuceneUtilBytesRefArray:(IOSObjectArray *)terms;
-
-- (instancetype)initWithNSString:(NSString *)field
-               withNSStringArray:(IOSObjectArray *)terms;
-
-- (void)addWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
-
-- (void)addWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-                                withInt:(jint)position;
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores;
@@ -67,29 +47,11 @@ withOrgApacheLuceneUtilBytesRefArray:(IOSObjectArray *)terms;
 
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
 
-- (void)setSlopWithInt:(jint)s;
-
 - (NSString *)toStringWithNSString:(NSString *)f;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchPhraseQuery)
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchPhraseQuery_initWithInt_withNSString_withNSStringArray_(OrgApacheLuceneSearchPhraseQuery *self, jint slop, NSString *field, IOSObjectArray *terms);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchPhraseQuery *new_OrgApacheLuceneSearchPhraseQuery_initWithInt_withNSString_withNSStringArray_(jint slop, NSString *field, IOSObjectArray *terms) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchPhraseQuery_initWithNSString_withNSStringArray_(OrgApacheLuceneSearchPhraseQuery *self, NSString *field, IOSObjectArray *terms);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchPhraseQuery *new_OrgApacheLuceneSearchPhraseQuery_initWithNSString_withNSStringArray_(NSString *field, IOSObjectArray *terms) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchPhraseQuery_initWithInt_withNSString_withOrgApacheLuceneUtilBytesRefArray_(OrgApacheLuceneSearchPhraseQuery *self, jint slop, NSString *field, IOSObjectArray *terms);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchPhraseQuery *new_OrgApacheLuceneSearchPhraseQuery_initWithInt_withNSString_withOrgApacheLuceneUtilBytesRefArray_(jint slop, NSString *field, IOSObjectArray *terms) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchPhraseQuery_initWithNSString_withOrgApacheLuceneUtilBytesRefArray_(OrgApacheLuceneSearchPhraseQuery *self, NSString *field, IOSObjectArray *terms);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchPhraseQuery *new_OrgApacheLuceneSearchPhraseQuery_initWithNSString_withOrgApacheLuceneUtilBytesRefArray_(NSString *field, IOSObjectArray *terms) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchPhraseQuery_init(OrgApacheLuceneSearchPhraseQuery *self);
 
@@ -110,8 +72,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPhraseQuery)
 #pragma mark Public
 
 - (instancetype)init;
-
-- (OrgApacheLuceneSearchPhraseQuery_Builder *)addWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
 
 - (OrgApacheLuceneSearchPhraseQuery_Builder *)addWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
                                                                       withInt:(jint)position;

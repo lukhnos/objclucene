@@ -34,11 +34,6 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path;
-
-- (instancetype)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path
-                                             withInt:(jint)maxChunkSize;
-
 - (instancetype)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path
                  withOrgApacheLuceneStoreLockFactory:(OrgApacheLuceneStoreLockFactory *)lockFactory;
 
@@ -46,18 +41,10 @@
                  withOrgApacheLuceneStoreLockFactory:(OrgApacheLuceneStoreLockFactory *)lockFactory
                                              withInt:(jint)maxChunkSize;
 
-- (jint)getMaxChunkSize;
-
-- (jboolean)getPreload;
-
 - (jboolean)getUseUnmap;
 
 - (OrgApacheLuceneStoreIndexInput *)openInputWithNSString:(NSString *)name
                         withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
-
-- (void)setPreloadWithBoolean:(jboolean)preload;
-
-- (void)setUseUnmapWithBoolean:(jboolean)useUnmapHack;
 
 #pragma mark Package-Private
 
@@ -79,14 +66,6 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneStoreMMapDirectory, UNMAP_SUPPORTED_, 
 FOUNDATION_EXPORT void OrgApacheLuceneStoreMMapDirectory_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneStoreLockFactory_(OrgApacheLuceneStoreMMapDirectory *self, OrgLukhnosPortmobileFilePath *path, OrgApacheLuceneStoreLockFactory *lockFactory);
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreMMapDirectory *new_OrgApacheLuceneStoreMMapDirectory_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneStoreLockFactory_(OrgLukhnosPortmobileFilePath *path, OrgApacheLuceneStoreLockFactory *lockFactory) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneStoreMMapDirectory_initWithOrgLukhnosPortmobileFilePath_(OrgApacheLuceneStoreMMapDirectory *self, OrgLukhnosPortmobileFilePath *path);
-
-FOUNDATION_EXPORT OrgApacheLuceneStoreMMapDirectory *new_OrgApacheLuceneStoreMMapDirectory_initWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *path) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneStoreMMapDirectory_initWithOrgLukhnosPortmobileFilePath_withInt_(OrgApacheLuceneStoreMMapDirectory *self, OrgLukhnosPortmobileFilePath *path, jint maxChunkSize);
-
-FOUNDATION_EXPORT OrgApacheLuceneStoreMMapDirectory *new_OrgApacheLuceneStoreMMapDirectory_initWithOrgLukhnosPortmobileFilePath_withInt_(OrgLukhnosPortmobileFilePath *path, jint maxChunkSize) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT void OrgApacheLuceneStoreMMapDirectory_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneStoreLockFactory_withInt_(OrgApacheLuceneStoreMMapDirectory *self, OrgLukhnosPortmobileFilePath *path, OrgApacheLuceneStoreLockFactory *lockFactory, jint maxChunkSize);
 

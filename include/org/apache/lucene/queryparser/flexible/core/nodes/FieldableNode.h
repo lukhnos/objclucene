@@ -20,13 +20,7 @@
 #define OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_INCLUDE 1
 #include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNode.h"
 
-@protocol JavaLangCharSequence;
-
 @protocol OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode < OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode, NSObject, JavaObject >
-
-- (id<JavaLangCharSequence>)getField;
-
-- (void)setFieldWithJavaLangCharSequence:(id<JavaLangCharSequence>)fieldName;
 
 @end
 

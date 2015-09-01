@@ -24,60 +24,19 @@
 #define OrgApacheLuceneUtilAccountable_INCLUDE 1
 #include "org/apache/lucene/util/Accountable.h"
 
-@class IOSObjectArray;
-@class OrgApacheLuceneStoreDirectory;
-@class OrgApacheLuceneStoreIOContext;
-@class OrgApacheLuceneStoreIndexInput;
-@class OrgApacheLuceneStoreIndexOutput;
-@protocol JavaUtilCollection;
-
 @interface OrgApacheLuceneStoreNRTCachingDirectory : OrgApacheLuceneStoreFilterDirectory < OrgApacheLuceneUtilAccountable >
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)delegate
-                                           withDouble:(jdouble)maxMergeSizeMB
-                                           withDouble:(jdouble)maxCachedMB;
-
-- (void)close;
-
-- (OrgApacheLuceneStoreIndexOutput *)createOutputWithNSString:(NSString *)name
-                            withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
-
-- (void)deleteFileWithNSString:(NSString *)name;
-
-- (jlong)fileLengthWithNSString:(NSString *)name;
-
-- (id<JavaUtilCollection>)getChildResources;
-
-- (IOSObjectArray *)listAll;
-
-- (IOSObjectArray *)listCachedFiles;
-
-- (OrgApacheLuceneStoreIndexInput *)openInputWithNSString:(NSString *)name
-                        withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
-
-- (jlong)ramBytesUsed;
-
-- (void)renameFileWithNSString:(NSString *)source
-                  withNSString:(NSString *)dest;
-
-- (void)syncWithJavaUtilCollection:(id<JavaUtilCollection>)fileNames;
-
-- (NSString *)description;
-
-#pragma mark Protected
-
-- (jboolean)doCacheWriteWithNSString:(NSString *)name
-   withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneStoreNRTCachingDirectory)
 
-FOUNDATION_EXPORT void OrgApacheLuceneStoreNRTCachingDirectory_initWithOrgApacheLuceneStoreDirectory_withDouble_withDouble_(OrgApacheLuceneStoreNRTCachingDirectory *self, OrgApacheLuceneStoreDirectory *delegate, jdouble maxMergeSizeMB, jdouble maxCachedMB);
+FOUNDATION_EXPORT void OrgApacheLuceneStoreNRTCachingDirectory_init(OrgApacheLuceneStoreNRTCachingDirectory *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneStoreNRTCachingDirectory *new_OrgApacheLuceneStoreNRTCachingDirectory_initWithOrgApacheLuceneStoreDirectory_withDouble_withDouble_(OrgApacheLuceneStoreDirectory *delegate, jdouble maxMergeSizeMB, jdouble maxCachedMB) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneStoreNRTCachingDirectory *new_OrgApacheLuceneStoreNRTCachingDirectory_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreNRTCachingDirectory)
 

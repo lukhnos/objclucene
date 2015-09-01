@@ -26,8 +26,6 @@
 
 - (instancetype)init;
 
-- (NSString *)encodeTextWithNSString:(NSString *)originalText;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchHighlightDefaultEncoder)

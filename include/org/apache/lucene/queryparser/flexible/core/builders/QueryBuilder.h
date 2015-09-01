@@ -16,11 +16,7 @@
 #if !defined (_OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder_) && (OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder_INCLUDE)
 #define _OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder_
 
-@protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
-
 @protocol OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder < NSObject, JavaObject >
-
-- (id)buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryNode;
 
 @end
 

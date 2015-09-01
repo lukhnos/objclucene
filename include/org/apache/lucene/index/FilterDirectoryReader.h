@@ -20,52 +20,17 @@
 #define OrgApacheLuceneIndexDirectoryReader_INCLUDE 1
 #include "org/apache/lucene/index/DirectoryReader.h"
 
-@class OrgApacheLuceneIndexFilterDirectoryReader_SubReaderWrapper;
-@class OrgApacheLuceneIndexIndexCommit;
-@class OrgApacheLuceneIndexIndexWriter;
-
-@interface OrgApacheLuceneIndexFilterDirectoryReader : OrgApacheLuceneIndexDirectoryReader {
- @public
-  OrgApacheLuceneIndexDirectoryReader *in_;
-}
+@interface OrgApacheLuceneIndexFilterDirectoryReader : OrgApacheLuceneIndexDirectoryReader
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneIndexDirectoryReader:(OrgApacheLuceneIndexDirectoryReader *)inArg
-withOrgApacheLuceneIndexFilterDirectoryReader_SubReaderWrapper:(OrgApacheLuceneIndexFilterDirectoryReader_SubReaderWrapper *)wrapper;
-
-- (OrgApacheLuceneIndexDirectoryReader *)getDelegate;
-
-- (OrgApacheLuceneIndexIndexCommit *)getIndexCommit;
-
-- (jlong)getVersion;
-
-- (jboolean)isCurrent;
-
-+ (OrgApacheLuceneIndexDirectoryReader *)unwrapWithOrgApacheLuceneIndexDirectoryReader:(OrgApacheLuceneIndexDirectoryReader *)reader;
-
-#pragma mark Protected
-
-- (void)doClose;
-
-- (OrgApacheLuceneIndexDirectoryReader *)doOpenIfChanged;
-
-- (OrgApacheLuceneIndexDirectoryReader *)doOpenIfChangedWithOrgApacheLuceneIndexIndexCommit:(OrgApacheLuceneIndexIndexCommit *)commit;
-
-- (OrgApacheLuceneIndexDirectoryReader *)doOpenIfChangedWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer
-                                                                                withBoolean:(jboolean)applyAllDeletes;
-
-- (OrgApacheLuceneIndexDirectoryReader *)doWrapDirectoryReaderWithOrgApacheLuceneIndexDirectoryReader:(OrgApacheLuceneIndexDirectoryReader *)inArg;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexFilterDirectoryReader)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexFilterDirectoryReader, in_, OrgApacheLuceneIndexDirectoryReader *)
-
-FOUNDATION_EXPORT OrgApacheLuceneIndexDirectoryReader *OrgApacheLuceneIndexFilterDirectoryReader_unwrapWithOrgApacheLuceneIndexDirectoryReader_(OrgApacheLuceneIndexDirectoryReader *reader);
-
-FOUNDATION_EXPORT void OrgApacheLuceneIndexFilterDirectoryReader_initWithOrgApacheLuceneIndexDirectoryReader_withOrgApacheLuceneIndexFilterDirectoryReader_SubReaderWrapper_(OrgApacheLuceneIndexFilterDirectoryReader *self, OrgApacheLuceneIndexDirectoryReader *inArg, OrgApacheLuceneIndexFilterDirectoryReader_SubReaderWrapper *wrapper);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexFilterDirectoryReader_init(OrgApacheLuceneIndexFilterDirectoryReader *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFilterDirectoryReader)
 
@@ -74,15 +39,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFilterDirectoryReader)
 #if !defined (_OrgApacheLuceneIndexFilterDirectoryReader_SubReaderWrapper_) && (OrgApacheLuceneIndexFilterDirectoryReader_INCLUDE_ALL || OrgApacheLuceneIndexFilterDirectoryReader_SubReaderWrapper_INCLUDE)
 #define _OrgApacheLuceneIndexFilterDirectoryReader_SubReaderWrapper_
 
-@class OrgApacheLuceneIndexLeafReader;
-
 @interface OrgApacheLuceneIndexFilterDirectoryReader_SubReaderWrapper : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (OrgApacheLuceneIndexLeafReader *)wrapWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader;
 
 @end
 

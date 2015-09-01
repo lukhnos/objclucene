@@ -58,8 +58,6 @@
 - (void)seekExactWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term
                withOrgApacheLuceneIndexTermState:(OrgApacheLuceneIndexTermState *)state;
 
-- (void)seekExactWithLong:(jlong)ord;
-
 - (OrgApacheLuceneUtilBytesRef *)term;
 
 - (OrgApacheLuceneIndexTermState *)termState;

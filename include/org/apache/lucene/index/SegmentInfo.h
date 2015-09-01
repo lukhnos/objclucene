@@ -80,9 +80,6 @@
 
 - (NSString *)description;
 
-- (NSString *)toStringWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
-                                                withInt:(jint)delCount;
-
 - (NSString *)toStringWithInt:(jint)delCount;
 
 #pragma mark Package-Private

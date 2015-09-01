@@ -16,17 +16,7 @@
 #if !defined (_OrgApacheLuceneSearchSuggestFstBytesRefSorter_) && (OrgApacheLuceneSearchSuggestFstBytesRefSorter_INCLUDE_ALL || OrgApacheLuceneSearchSuggestFstBytesRefSorter_INCLUDE)
 #define _OrgApacheLuceneSearchSuggestFstBytesRefSorter_
 
-@class OrgApacheLuceneUtilBytesRef;
-@protocol JavaUtilComparator;
-@protocol OrgApacheLuceneUtilBytesRefIterator;
-
 @protocol OrgApacheLuceneSearchSuggestFstBytesRefSorter < NSObject, JavaObject >
-
-- (void)addWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)utf8;
-
-- (id<OrgApacheLuceneUtilBytesRefIterator>)iterator;
-
-- (id<JavaUtilComparator>)getComparator;
 
 @end
 

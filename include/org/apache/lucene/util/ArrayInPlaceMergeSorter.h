@@ -20,31 +20,19 @@
 #define OrgApacheLuceneUtilInPlaceMergeSorter_INCLUDE 1
 #include "org/apache/lucene/util/InPlaceMergeSorter.h"
 
-@class IOSObjectArray;
-@protocol JavaUtilComparator;
-
 @interface OrgApacheLuceneUtilArrayInPlaceMergeSorter : OrgApacheLuceneUtilInPlaceMergeSorter
 
-#pragma mark Public
+#pragma mark Package-Private
 
-- (instancetype)initWithNSObjectArray:(IOSObjectArray *)arr
-               withJavaUtilComparator:(id<JavaUtilComparator>)comparator;
-
-#pragma mark Protected
-
-- (jint)compareWithInt:(jint)i
-               withInt:(jint)j;
-
-- (void)swapWithInt:(jint)i
-            withInt:(jint)j;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilArrayInPlaceMergeSorter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilArrayInPlaceMergeSorter_initWithNSObjectArray_withJavaUtilComparator_(OrgApacheLuceneUtilArrayInPlaceMergeSorter *self, IOSObjectArray *arr, id<JavaUtilComparator> comparator);
+FOUNDATION_EXPORT void OrgApacheLuceneUtilArrayInPlaceMergeSorter_init(OrgApacheLuceneUtilArrayInPlaceMergeSorter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilArrayInPlaceMergeSorter *new_OrgApacheLuceneUtilArrayInPlaceMergeSorter_initWithNSObjectArray_withJavaUtilComparator_(IOSObjectArray *arr, id<JavaUtilComparator> comparator) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilArrayInPlaceMergeSorter *new_OrgApacheLuceneUtilArrayInPlaceMergeSorter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilArrayInPlaceMergeSorter)
 

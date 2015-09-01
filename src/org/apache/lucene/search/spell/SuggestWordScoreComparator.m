@@ -4,8 +4,9 @@
 //
 
 #include "J2ObjC_source.h"
-#include "org/apache/lucene/search/spell/SuggestWord.h"
 #include "org/apache/lucene/search/spell/SuggestWordScoreComparator.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneSearchSpellSuggestWordScoreComparator
 
@@ -14,29 +15,11 @@
   return self;
 }
 
-- (jint)compareWithId:(OrgApacheLuceneSearchSpellSuggestWord *)first
-               withId:(OrgApacheLuceneSearchSpellSuggestWord *)second {
-  if (((OrgApacheLuceneSearchSpellSuggestWord *) nil_chk(first))->score_ > ((OrgApacheLuceneSearchSpellSuggestWord *) nil_chk(second))->score_) {
-    return 1;
-  }
-  if (first->score_ < second->score_) {
-    return -1;
-  }
-  if (first->freq_ > second->freq_) {
-    return 1;
-  }
-  if (first->freq_ < second->freq_) {
-    return -1;
-  }
-  return [((NSString *) nil_chk(second->string_)) compareToWithId:first->string_];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", "SuggestWordScoreComparator", NULL, 0x1, NULL, NULL },
-    { "compareWithId:withId:", "compare", "I", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpellSuggestWordScoreComparator = { 2, "SuggestWordScoreComparator", "org.apache.lucene.search.spell", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/util/Comparator<Lorg/apache/lucene/search/spell/SuggestWord;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpellSuggestWordScoreComparator = { 2, "SuggestWordScoreComparator", "org.apache.lucene.search.spell", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/util/Comparator<Lorg/apache/lucene/search/spell/SuggestWord;>;" };
   return &_OrgApacheLuceneSearchSpellSuggestWordScoreComparator;
 }
 

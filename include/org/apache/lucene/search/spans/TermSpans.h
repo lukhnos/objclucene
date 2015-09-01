@@ -22,7 +22,6 @@
 
 @class OrgApacheLuceneIndexPostingsEnum;
 @class OrgApacheLuceneIndexTerm;
-@protocol OrgApacheLuceneSearchSpansSpanCollector;
 
 @interface OrgApacheLuceneSearchSpansTermSpans : OrgApacheLuceneSearchSpansSpans {
  @public
@@ -42,15 +41,11 @@
 
 - (jint)advanceWithInt:(jint)target;
 
-- (void)collectWithOrgApacheLuceneSearchSpansSpanCollector:(id<OrgApacheLuceneSearchSpansSpanCollector>)collector;
-
 - (jlong)cost;
 
 - (jint)docID;
 
 - (jint)endPosition;
-
-- (OrgApacheLuceneIndexPostingsEnum *)getPostings;
 
 - (jint)nextDoc;
 

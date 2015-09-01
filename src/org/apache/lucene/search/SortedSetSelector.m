@@ -3,30 +3,12 @@
 //  source: ./core/src/java/org/apache/lucene/search/SortedSetSelector.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/lang/AssertionError.h"
-#include "java/lang/Enum.h"
-#include "java/lang/IllegalArgumentException.h"
-#include "java/lang/Integer.h"
-#include "java/lang/UnsupportedOperationException.h"
-#include "org/apache/lucene/index/DocValues.h"
-#include "org/apache/lucene/index/RandomAccessOrds.h"
-#include "org/apache/lucene/index/SortedDocValues.h"
-#include "org/apache/lucene/index/SortedSetDocValues.h"
 #include "org/apache/lucene/search/SortedSetSelector.h"
-#include "org/apache/lucene/util/BytesRef.h"
 
-__attribute__((unused)) static void OrgApacheLuceneSearchSortedSetSelector_TypeEnum_initWithNSString_withInt_(OrgApacheLuceneSearchSortedSetSelector_TypeEnum *self, NSString *__name, jint __ordinal);
-
-__attribute__((unused)) static OrgApacheLuceneSearchSortedSetSelector_TypeEnum *new_OrgApacheLuceneSearchSortedSetSelector_TypeEnum_initWithNSString_withInt_(NSString *__name, jint __ordinal) NS_RETURNS_RETAINED;
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneSearchSortedSetSelector
-
-+ (OrgApacheLuceneIndexSortedDocValues *)wrapWithOrgApacheLuceneIndexSortedSetDocValues:(OrgApacheLuceneIndexSortedSetDocValues *)sortedSet
-                                    withOrgApacheLuceneSearchSortedSetSelector_TypeEnum:(OrgApacheLuceneSearchSortedSetSelector_TypeEnum *)selector {
-  return OrgApacheLuceneSearchSortedSetSelector_wrapWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneSearchSortedSetSelector_TypeEnum_(sortedSet, selector);
-}
 
 - (instancetype)init {
   OrgApacheLuceneSearchSortedSetSelector_init(self);
@@ -35,46 +17,14 @@ __attribute__((unused)) static OrgApacheLuceneSearchSortedSetSelector_TypeEnum *
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "wrapWithOrgApacheLuceneIndexSortedSetDocValues:withOrgApacheLuceneSearchSortedSetSelector_TypeEnum:", "wrap", "Lorg.apache.lucene.index.SortedDocValues;", 0x9, NULL, NULL },
     { "init", NULL, NULL, 0x1, NULL, NULL },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.search.SortedSetSelector$Type;", "Lorg.apache.lucene.search.SortedSetSelector$MinValue;", "Lorg.apache.lucene.search.SortedSetSelector$MaxValue;", "Lorg.apache.lucene.search.SortedSetSelector$MiddleMinValue;", "Lorg.apache.lucene.search.SortedSetSelector$MiddleMaxValue;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSortedSetSelector = { 2, "SortedSetSelector", "org.apache.lucene.search", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 5, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSortedSetSelector = { 2, "SortedSetSelector", "org.apache.lucene.search", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 5, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneSearchSortedSetSelector;
 }
 
 @end
-
-OrgApacheLuceneIndexSortedDocValues *OrgApacheLuceneSearchSortedSetSelector_wrapWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneSearchSortedSetSelector_TypeEnum_(OrgApacheLuceneIndexSortedSetDocValues *sortedSet, OrgApacheLuceneSearchSortedSetSelector_TypeEnum *selector) {
-  OrgApacheLuceneSearchSortedSetSelector_initialize();
-  if ([((OrgApacheLuceneIndexSortedSetDocValues *) nil_chk(sortedSet)) getValueCount] >= JavaLangInteger_MAX_VALUE) {
-    @throw [new_JavaLangUnsupportedOperationException_initWithNSString_(JreStrcat("$I$", @"fields containing more than ", (JavaLangInteger_MAX_VALUE - 1), @" unique terms are unsupported")) autorelease];
-  }
-  OrgApacheLuceneIndexSortedDocValues *singleton = OrgApacheLuceneIndexDocValues_unwrapSingletonWithOrgApacheLuceneIndexSortedSetDocValues_(sortedSet);
-  if (singleton != nil) {
-    return singleton;
-  }
-  else if (selector == JreLoadStatic(OrgApacheLuceneSearchSortedSetSelector_TypeEnum, MIN)) {
-    return [new_OrgApacheLuceneSearchSortedSetSelector_MinValue_initWithOrgApacheLuceneIndexSortedSetDocValues_(sortedSet) autorelease];
-  }
-  else {
-    if ([sortedSet isKindOfClass:[OrgApacheLuceneIndexRandomAccessOrds class]] == NO) {
-      @throw [new_JavaLangUnsupportedOperationException_initWithNSString_(JreStrcat("$@$$", @"codec does not support random access ordinals, cannot use selector: ", selector, @" docValsImpl: ", [sortedSet description])) autorelease];
-    }
-    OrgApacheLuceneIndexRandomAccessOrds *randomOrds = (OrgApacheLuceneIndexRandomAccessOrds *) check_class_cast(sortedSet, [OrgApacheLuceneIndexRandomAccessOrds class]);
-    switch ([selector ordinal]) {
-      case OrgApacheLuceneSearchSortedSetSelector_Type_MAX:
-      return [new_OrgApacheLuceneSearchSortedSetSelector_MaxValue_initWithOrgApacheLuceneIndexRandomAccessOrds_(randomOrds) autorelease];
-      case OrgApacheLuceneSearchSortedSetSelector_Type_MIDDLE_MIN:
-      return [new_OrgApacheLuceneSearchSortedSetSelector_MiddleMinValue_initWithOrgApacheLuceneIndexRandomAccessOrds_(randomOrds) autorelease];
-      case OrgApacheLuceneSearchSortedSetSelector_Type_MIDDLE_MAX:
-      return [new_OrgApacheLuceneSearchSortedSetSelector_MiddleMaxValue_initWithOrgApacheLuceneIndexRandomAccessOrds_(randomOrds) autorelease];
-      case OrgApacheLuceneSearchSortedSetSelector_Type_MIN:
-      default:
-      @throw [new_JavaLangAssertionError_init() autorelease];
-    }
-  }
-}
 
 void OrgApacheLuceneSearchSortedSetSelector_init(OrgApacheLuceneSearchSortedSetSelector *self) {
   NSObject_init(self);
@@ -88,137 +38,30 @@ OrgApacheLuceneSearchSortedSetSelector *new_OrgApacheLuceneSearchSortedSetSelect
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSortedSetSelector)
 
-J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchSortedSetSelector_TypeEnum)
-
-OrgApacheLuceneSearchSortedSetSelector_TypeEnum *OrgApacheLuceneSearchSortedSetSelector_TypeEnum_values_[4];
-
-@implementation OrgApacheLuceneSearchSortedSetSelector_TypeEnum
-
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal {
-  OrgApacheLuceneSearchSortedSetSelector_TypeEnum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
-}
-
-IOSObjectArray *OrgApacheLuceneSearchSortedSetSelector_TypeEnum_values() {
-  OrgApacheLuceneSearchSortedSetSelector_TypeEnum_initialize();
-  return [IOSObjectArray arrayWithObjects:OrgApacheLuceneSearchSortedSetSelector_TypeEnum_values_ count:4 type:OrgApacheLuceneSearchSortedSetSelector_TypeEnum_class_()];
-}
-
-+ (IOSObjectArray *)values {
-  return OrgApacheLuceneSearchSortedSetSelector_TypeEnum_values();
-}
-
-+ (OrgApacheLuceneSearchSortedSetSelector_TypeEnum *)valueOfWithNSString:(NSString *)name {
-  return OrgApacheLuceneSearchSortedSetSelector_TypeEnum_valueOfWithNSString_(name);
-}
-
-OrgApacheLuceneSearchSortedSetSelector_TypeEnum *OrgApacheLuceneSearchSortedSetSelector_TypeEnum_valueOfWithNSString_(NSString *name) {
-  OrgApacheLuceneSearchSortedSetSelector_TypeEnum_initialize();
-  for (int i = 0; i < 4; i++) {
-    OrgApacheLuceneSearchSortedSetSelector_TypeEnum *e = OrgApacheLuceneSearchSortedSetSelector_TypeEnum_values_[i];
-    if ([name isEqual:[e name]]) {
-      return e;
-    }
-  }
-  @throw [[[JavaLangIllegalArgumentException alloc] initWithNSString:name] autorelease];
-  return nil;
-}
-
-- (id)copyWithZone:(NSZone *)zone {
-  return [self retain];
-}
-
-+ (void)initialize {
-  if (self == [OrgApacheLuceneSearchSortedSetSelector_TypeEnum class]) {
-    OrgApacheLuceneSearchSortedSetSelector_TypeEnum_MIN = new_OrgApacheLuceneSearchSortedSetSelector_TypeEnum_initWithNSString_withInt_(@"MIN", 0);
-    OrgApacheLuceneSearchSortedSetSelector_TypeEnum_MAX = new_OrgApacheLuceneSearchSortedSetSelector_TypeEnum_initWithNSString_withInt_(@"MAX", 1);
-    OrgApacheLuceneSearchSortedSetSelector_TypeEnum_MIDDLE_MIN = new_OrgApacheLuceneSearchSortedSetSelector_TypeEnum_initWithNSString_withInt_(@"MIDDLE_MIN", 2);
-    OrgApacheLuceneSearchSortedSetSelector_TypeEnum_MIDDLE_MAX = new_OrgApacheLuceneSearchSortedSetSelector_TypeEnum_initWithNSString_withInt_(@"MIDDLE_MAX", 3);
-    J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchSortedSetSelector_TypeEnum)
-  }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcFieldInfo fields[] = {
-    { "MIN", "MIN", 0x4019, "Lorg.apache.lucene.search.SortedSetSelector$Type;", &OrgApacheLuceneSearchSortedSetSelector_TypeEnum_MIN, NULL, .constantValue.asLong = 0 },
-    { "MAX", "MAX", 0x4019, "Lorg.apache.lucene.search.SortedSetSelector$Type;", &OrgApacheLuceneSearchSortedSetSelector_TypeEnum_MAX, NULL, .constantValue.asLong = 0 },
-    { "MIDDLE_MIN", "MIDDLE_MIN", 0x4019, "Lorg.apache.lucene.search.SortedSetSelector$Type;", &OrgApacheLuceneSearchSortedSetSelector_TypeEnum_MIDDLE_MIN, NULL, .constantValue.asLong = 0 },
-    { "MIDDLE_MAX", "MIDDLE_MAX", 0x4019, "Lorg.apache.lucene.search.SortedSetSelector$Type;", &OrgApacheLuceneSearchSortedSetSelector_TypeEnum_MIDDLE_MAX, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.SortedSetSelector$Type;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSortedSetSelector_TypeEnum = { 2, "Type", "org.apache.lucene.search", "SortedSetSelector", 0x4019, 0, NULL, 4, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/search/SortedSetSelector$Type;>;" };
-  return &_OrgApacheLuceneSearchSortedSetSelector_TypeEnum;
-}
-
-@end
-
-void OrgApacheLuceneSearchSortedSetSelector_TypeEnum_initWithNSString_withInt_(OrgApacheLuceneSearchSortedSetSelector_TypeEnum *self, NSString *__name, jint __ordinal) {
-  JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
-}
-
-OrgApacheLuceneSearchSortedSetSelector_TypeEnum *new_OrgApacheLuceneSearchSortedSetSelector_TypeEnum_initWithNSString_withInt_(NSString *__name, jint __ordinal) {
-  OrgApacheLuceneSearchSortedSetSelector_TypeEnum *self = [OrgApacheLuceneSearchSortedSetSelector_TypeEnum alloc];
-  OrgApacheLuceneSearchSortedSetSelector_TypeEnum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSortedSetSelector_TypeEnum)
-
 @implementation OrgApacheLuceneSearchSortedSetSelector_MinValue
 
-- (instancetype)initWithOrgApacheLuceneIndexSortedSetDocValues:(OrgApacheLuceneIndexSortedSetDocValues *)inArg {
-  OrgApacheLuceneSearchSortedSetSelector_MinValue_initWithOrgApacheLuceneIndexSortedSetDocValues_(self, inArg);
+- (instancetype)init {
+  OrgApacheLuceneSearchSortedSetSelector_MinValue_init(self);
   return self;
-}
-
-- (jint)getOrdWithInt:(jint)docID {
-  [((OrgApacheLuceneIndexSortedSetDocValues *) nil_chk(in_)) setDocumentWithInt:docID];
-  return (jint) [in_ nextOrd];
-}
-
-- (OrgApacheLuceneUtilBytesRef *)lookupOrdWithInt:(jint)ord {
-  return [((OrgApacheLuceneIndexSortedSetDocValues *) nil_chk(in_)) lookupOrdWithLong:ord];
-}
-
-- (jint)getValueCount {
-  return (jint) [((OrgApacheLuceneIndexSortedSetDocValues *) nil_chk(in_)) getValueCount];
-}
-
-- (jint)lookupTermWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)key {
-  return (jint) [((OrgApacheLuceneIndexSortedSetDocValues *) nil_chk(in_)) lookupTermWithOrgApacheLuceneUtilBytesRef:key];
-}
-
-- (void)dealloc {
-  RELEASE_(in_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexSortedSetDocValues:", "MinValue", NULL, 0x0, NULL, NULL },
-    { "getOrdWithInt:", "getOrd", "I", 0x1, NULL, NULL },
-    { "lookupOrdWithInt:", "lookupOrd", "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "getValueCount", NULL, "I", 0x1, NULL, NULL },
-    { "lookupTermWithOrgApacheLuceneUtilBytesRef:", "lookupTerm", "I", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x0, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "in_", NULL, 0x10, "Lorg.apache.lucene.index.SortedSetDocValues;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSortedSetSelector_MinValue = { 2, "MinValue", "org.apache.lucene.search", "SortedSetSelector", 0x8, 5, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSortedSetSelector_MinValue = { 2, "MinValue", "org.apache.lucene.search", "SortedSetSelector", 0x8, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchSortedSetSelector_MinValue;
 }
 
 @end
 
-void OrgApacheLuceneSearchSortedSetSelector_MinValue_initWithOrgApacheLuceneIndexSortedSetDocValues_(OrgApacheLuceneSearchSortedSetSelector_MinValue *self, OrgApacheLuceneIndexSortedSetDocValues *inArg) {
-  OrgApacheLuceneIndexSortedDocValues_init(self);
-  JreStrongAssign(&self->in_, inArg);
+void OrgApacheLuceneSearchSortedSetSelector_MinValue_init(OrgApacheLuceneSearchSortedSetSelector_MinValue *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneSearchSortedSetSelector_MinValue *new_OrgApacheLuceneSearchSortedSetSelector_MinValue_initWithOrgApacheLuceneIndexSortedSetDocValues_(OrgApacheLuceneIndexSortedSetDocValues *inArg) {
+OrgApacheLuceneSearchSortedSetSelector_MinValue *new_OrgApacheLuceneSearchSortedSetSelector_MinValue_init() {
   OrgApacheLuceneSearchSortedSetSelector_MinValue *self = [OrgApacheLuceneSearchSortedSetSelector_MinValue alloc];
-  OrgApacheLuceneSearchSortedSetSelector_MinValue_initWithOrgApacheLuceneIndexSortedSetDocValues_(self, inArg);
+  OrgApacheLuceneSearchSortedSetSelector_MinValue_init(self);
   return self;
 }
 
@@ -226,64 +69,28 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSortedSetSelector_MinValue
 
 @implementation OrgApacheLuceneSearchSortedSetSelector_MaxValue
 
-- (instancetype)initWithOrgApacheLuceneIndexRandomAccessOrds:(OrgApacheLuceneIndexRandomAccessOrds *)inArg {
-  OrgApacheLuceneSearchSortedSetSelector_MaxValue_initWithOrgApacheLuceneIndexRandomAccessOrds_(self, inArg);
+- (instancetype)init {
+  OrgApacheLuceneSearchSortedSetSelector_MaxValue_init(self);
   return self;
-}
-
-- (jint)getOrdWithInt:(jint)docID {
-  [((OrgApacheLuceneIndexRandomAccessOrds *) nil_chk(in_)) setDocumentWithInt:docID];
-  jint count = [in_ cardinality];
-  if (count == 0) {
-    return -1;
-  }
-  else {
-    return (jint) [in_ ordAtWithInt:count - 1];
-  }
-}
-
-- (OrgApacheLuceneUtilBytesRef *)lookupOrdWithInt:(jint)ord {
-  return [((OrgApacheLuceneIndexRandomAccessOrds *) nil_chk(in_)) lookupOrdWithLong:ord];
-}
-
-- (jint)getValueCount {
-  return (jint) [((OrgApacheLuceneIndexRandomAccessOrds *) nil_chk(in_)) getValueCount];
-}
-
-- (jint)lookupTermWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)key {
-  return (jint) [((OrgApacheLuceneIndexRandomAccessOrds *) nil_chk(in_)) lookupTermWithOrgApacheLuceneUtilBytesRef:key];
-}
-
-- (void)dealloc {
-  RELEASE_(in_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexRandomAccessOrds:", "MaxValue", NULL, 0x0, NULL, NULL },
-    { "getOrdWithInt:", "getOrd", "I", 0x1, NULL, NULL },
-    { "lookupOrdWithInt:", "lookupOrd", "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "getValueCount", NULL, "I", 0x1, NULL, NULL },
-    { "lookupTermWithOrgApacheLuceneUtilBytesRef:", "lookupTerm", "I", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x0, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "in_", NULL, 0x10, "Lorg.apache.lucene.index.RandomAccessOrds;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSortedSetSelector_MaxValue = { 2, "MaxValue", "org.apache.lucene.search", "SortedSetSelector", 0x8, 5, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSortedSetSelector_MaxValue = { 2, "MaxValue", "org.apache.lucene.search", "SortedSetSelector", 0x8, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchSortedSetSelector_MaxValue;
 }
 
 @end
 
-void OrgApacheLuceneSearchSortedSetSelector_MaxValue_initWithOrgApacheLuceneIndexRandomAccessOrds_(OrgApacheLuceneSearchSortedSetSelector_MaxValue *self, OrgApacheLuceneIndexRandomAccessOrds *inArg) {
-  OrgApacheLuceneIndexSortedDocValues_init(self);
-  JreStrongAssign(&self->in_, inArg);
+void OrgApacheLuceneSearchSortedSetSelector_MaxValue_init(OrgApacheLuceneSearchSortedSetSelector_MaxValue *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneSearchSortedSetSelector_MaxValue *new_OrgApacheLuceneSearchSortedSetSelector_MaxValue_initWithOrgApacheLuceneIndexRandomAccessOrds_(OrgApacheLuceneIndexRandomAccessOrds *inArg) {
+OrgApacheLuceneSearchSortedSetSelector_MaxValue *new_OrgApacheLuceneSearchSortedSetSelector_MaxValue_init() {
   OrgApacheLuceneSearchSortedSetSelector_MaxValue *self = [OrgApacheLuceneSearchSortedSetSelector_MaxValue alloc];
-  OrgApacheLuceneSearchSortedSetSelector_MaxValue_initWithOrgApacheLuceneIndexRandomAccessOrds_(self, inArg);
+  OrgApacheLuceneSearchSortedSetSelector_MaxValue_init(self);
   return self;
 }
 
@@ -291,64 +98,28 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSortedSetSelector_MaxValue
 
 @implementation OrgApacheLuceneSearchSortedSetSelector_MiddleMinValue
 
-- (instancetype)initWithOrgApacheLuceneIndexRandomAccessOrds:(OrgApacheLuceneIndexRandomAccessOrds *)inArg {
-  OrgApacheLuceneSearchSortedSetSelector_MiddleMinValue_initWithOrgApacheLuceneIndexRandomAccessOrds_(self, inArg);
+- (instancetype)init {
+  OrgApacheLuceneSearchSortedSetSelector_MiddleMinValue_init(self);
   return self;
-}
-
-- (jint)getOrdWithInt:(jint)docID {
-  [((OrgApacheLuceneIndexRandomAccessOrds *) nil_chk(in_)) setDocumentWithInt:docID];
-  jint count = [in_ cardinality];
-  if (count == 0) {
-    return -1;
-  }
-  else {
-    return (jint) [in_ ordAtWithInt:JreURShift32((count - 1), 1)];
-  }
-}
-
-- (OrgApacheLuceneUtilBytesRef *)lookupOrdWithInt:(jint)ord {
-  return [((OrgApacheLuceneIndexRandomAccessOrds *) nil_chk(in_)) lookupOrdWithLong:ord];
-}
-
-- (jint)getValueCount {
-  return (jint) [((OrgApacheLuceneIndexRandomAccessOrds *) nil_chk(in_)) getValueCount];
-}
-
-- (jint)lookupTermWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)key {
-  return (jint) [((OrgApacheLuceneIndexRandomAccessOrds *) nil_chk(in_)) lookupTermWithOrgApacheLuceneUtilBytesRef:key];
-}
-
-- (void)dealloc {
-  RELEASE_(in_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexRandomAccessOrds:", "MiddleMinValue", NULL, 0x0, NULL, NULL },
-    { "getOrdWithInt:", "getOrd", "I", 0x1, NULL, NULL },
-    { "lookupOrdWithInt:", "lookupOrd", "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "getValueCount", NULL, "I", 0x1, NULL, NULL },
-    { "lookupTermWithOrgApacheLuceneUtilBytesRef:", "lookupTerm", "I", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x0, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "in_", NULL, 0x10, "Lorg.apache.lucene.index.RandomAccessOrds;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSortedSetSelector_MiddleMinValue = { 2, "MiddleMinValue", "org.apache.lucene.search", "SortedSetSelector", 0x8, 5, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSortedSetSelector_MiddleMinValue = { 2, "MiddleMinValue", "org.apache.lucene.search", "SortedSetSelector", 0x8, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchSortedSetSelector_MiddleMinValue;
 }
 
 @end
 
-void OrgApacheLuceneSearchSortedSetSelector_MiddleMinValue_initWithOrgApacheLuceneIndexRandomAccessOrds_(OrgApacheLuceneSearchSortedSetSelector_MiddleMinValue *self, OrgApacheLuceneIndexRandomAccessOrds *inArg) {
-  OrgApacheLuceneIndexSortedDocValues_init(self);
-  JreStrongAssign(&self->in_, inArg);
+void OrgApacheLuceneSearchSortedSetSelector_MiddleMinValue_init(OrgApacheLuceneSearchSortedSetSelector_MiddleMinValue *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneSearchSortedSetSelector_MiddleMinValue *new_OrgApacheLuceneSearchSortedSetSelector_MiddleMinValue_initWithOrgApacheLuceneIndexRandomAccessOrds_(OrgApacheLuceneIndexRandomAccessOrds *inArg) {
+OrgApacheLuceneSearchSortedSetSelector_MiddleMinValue *new_OrgApacheLuceneSearchSortedSetSelector_MiddleMinValue_init() {
   OrgApacheLuceneSearchSortedSetSelector_MiddleMinValue *self = [OrgApacheLuceneSearchSortedSetSelector_MiddleMinValue alloc];
-  OrgApacheLuceneSearchSortedSetSelector_MiddleMinValue_initWithOrgApacheLuceneIndexRandomAccessOrds_(self, inArg);
+  OrgApacheLuceneSearchSortedSetSelector_MiddleMinValue_init(self);
   return self;
 }
 
@@ -356,64 +127,28 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSortedSetSelector_MiddleMi
 
 @implementation OrgApacheLuceneSearchSortedSetSelector_MiddleMaxValue
 
-- (instancetype)initWithOrgApacheLuceneIndexRandomAccessOrds:(OrgApacheLuceneIndexRandomAccessOrds *)inArg {
-  OrgApacheLuceneSearchSortedSetSelector_MiddleMaxValue_initWithOrgApacheLuceneIndexRandomAccessOrds_(self, inArg);
+- (instancetype)init {
+  OrgApacheLuceneSearchSortedSetSelector_MiddleMaxValue_init(self);
   return self;
-}
-
-- (jint)getOrdWithInt:(jint)docID {
-  [((OrgApacheLuceneIndexRandomAccessOrds *) nil_chk(in_)) setDocumentWithInt:docID];
-  jint count = [in_ cardinality];
-  if (count == 0) {
-    return -1;
-  }
-  else {
-    return (jint) [in_ ordAtWithInt:JreURShift32(count, 1)];
-  }
-}
-
-- (OrgApacheLuceneUtilBytesRef *)lookupOrdWithInt:(jint)ord {
-  return [((OrgApacheLuceneIndexRandomAccessOrds *) nil_chk(in_)) lookupOrdWithLong:ord];
-}
-
-- (jint)getValueCount {
-  return (jint) [((OrgApacheLuceneIndexRandomAccessOrds *) nil_chk(in_)) getValueCount];
-}
-
-- (jint)lookupTermWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)key {
-  return (jint) [((OrgApacheLuceneIndexRandomAccessOrds *) nil_chk(in_)) lookupTermWithOrgApacheLuceneUtilBytesRef:key];
-}
-
-- (void)dealloc {
-  RELEASE_(in_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexRandomAccessOrds:", "MiddleMaxValue", NULL, 0x0, NULL, NULL },
-    { "getOrdWithInt:", "getOrd", "I", 0x1, NULL, NULL },
-    { "lookupOrdWithInt:", "lookupOrd", "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "getValueCount", NULL, "I", 0x1, NULL, NULL },
-    { "lookupTermWithOrgApacheLuceneUtilBytesRef:", "lookupTerm", "I", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x0, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "in_", NULL, 0x10, "Lorg.apache.lucene.index.RandomAccessOrds;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSortedSetSelector_MiddleMaxValue = { 2, "MiddleMaxValue", "org.apache.lucene.search", "SortedSetSelector", 0x8, 5, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSortedSetSelector_MiddleMaxValue = { 2, "MiddleMaxValue", "org.apache.lucene.search", "SortedSetSelector", 0x8, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchSortedSetSelector_MiddleMaxValue;
 }
 
 @end
 
-void OrgApacheLuceneSearchSortedSetSelector_MiddleMaxValue_initWithOrgApacheLuceneIndexRandomAccessOrds_(OrgApacheLuceneSearchSortedSetSelector_MiddleMaxValue *self, OrgApacheLuceneIndexRandomAccessOrds *inArg) {
-  OrgApacheLuceneIndexSortedDocValues_init(self);
-  JreStrongAssign(&self->in_, inArg);
+void OrgApacheLuceneSearchSortedSetSelector_MiddleMaxValue_init(OrgApacheLuceneSearchSortedSetSelector_MiddleMaxValue *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneSearchSortedSetSelector_MiddleMaxValue *new_OrgApacheLuceneSearchSortedSetSelector_MiddleMaxValue_initWithOrgApacheLuceneIndexRandomAccessOrds_(OrgApacheLuceneIndexRandomAccessOrds *inArg) {
+OrgApacheLuceneSearchSortedSetSelector_MiddleMaxValue *new_OrgApacheLuceneSearchSortedSetSelector_MiddleMaxValue_init() {
   OrgApacheLuceneSearchSortedSetSelector_MiddleMaxValue *self = [OrgApacheLuceneSearchSortedSetSelector_MiddleMaxValue alloc];
-  OrgApacheLuceneSearchSortedSetSelector_MiddleMaxValue_initWithOrgApacheLuceneIndexRandomAccessOrds_(self, inArg);
+  OrgApacheLuceneSearchSortedSetSelector_MiddleMaxValue_init(self);
   return self;
 }
 

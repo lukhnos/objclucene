@@ -20,34 +20,15 @@
 #define OrgApacheLuceneUtilMutableMutableValue_INCLUDE 1
 #include "org/apache/lucene/util/mutable/MutableValue.h"
 
-@class OrgApacheLuceneUtilBytesRefBuilder;
-
-@interface OrgApacheLuceneUtilMutableMutableValueStr : OrgApacheLuceneUtilMutableMutableValue {
- @public
-  OrgApacheLuceneUtilBytesRefBuilder *value_;
-}
+@interface OrgApacheLuceneUtilMutableMutableValueStr : OrgApacheLuceneUtilMutableMutableValue
 
 #pragma mark Public
 
 - (instancetype)init;
 
-- (jint)compareSameTypeWithId:(id)other;
-
-- (void)copy__WithOrgApacheLuceneUtilMutableMutableValue:(OrgApacheLuceneUtilMutableMutableValue *)source OBJC_METHOD_FAMILY_NONE;
-
-- (OrgApacheLuceneUtilMutableMutableValue *)duplicate;
-
-- (jboolean)equalsSameTypeWithId:(id)other;
-
-- (NSUInteger)hash;
-
-- (id)toObject;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilMutableMutableValueStr)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilMutableMutableValueStr, value_, OrgApacheLuceneUtilBytesRefBuilder *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilMutableMutableValueStr_init(OrgApacheLuceneUtilMutableMutableValueStr *self);
 

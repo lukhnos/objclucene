@@ -4,8 +4,9 @@
 //
 
 #include "J2ObjC_source.h"
-#include "org/apache/lucene/analysis/util/AbstractAnalysisFactory.h"
 #include "org/apache/lucene/analysis/util/MultiTermAwareComponent.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @interface OrgApacheLuceneAnalysisUtilMultiTermAwareComponent : NSObject
 
@@ -14,10 +15,7 @@
 @implementation OrgApacheLuceneAnalysisUtilMultiTermAwareComponent
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getMultiTermComponent", NULL, "Lorg.apache.lucene.analysis.util.AbstractAnalysisFactory;", 0x401, NULL, NULL },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisUtilMultiTermAwareComponent = { 2, "MultiTermAwareComponent", "org.apache.lucene.analysis.util", NULL, 0x609, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisUtilMultiTermAwareComponent = { 2, "MultiTermAwareComponent", "org.apache.lucene.analysis.util", NULL, 0x609, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisUtilMultiTermAwareComponent;
 }
 

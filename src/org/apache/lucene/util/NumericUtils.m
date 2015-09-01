@@ -3,143 +3,29 @@
 //  source: ./core/src/java/org/apache/lucene/util/NumericUtils.java
 //
 
-#include "IOSClass.h"
-#include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "java/lang/Double.h"
 #include "java/lang/Float.h"
 #include "java/lang/IllegalArgumentException.h"
-#include "java/lang/Integer.h"
-#include "java/lang/Long.h"
-#include "java/lang/NumberFormatException.h"
-#include "java/lang/UnsupportedOperationException.h"
-#include "org/apache/lucene/index/FilterLeafReader.h"
 #include "org/apache/lucene/index/FilteredTermsEnum.h"
-#include "org/apache/lucene/index/Terms.h"
-#include "org/apache/lucene/index/TermsEnum.h"
-#include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/BytesRefBuilder.h"
 #include "org/apache/lucene/util/NumericUtils.h"
 
-@interface OrgApacheLuceneUtilNumericUtils ()
-
-- (instancetype)init;
-
-+ (void)splitRangeWithId:(id)builder
-                 withInt:(jint)valSize
-                 withInt:(jint)precisionStep
-                withLong:(jlong)minBound
-                withLong:(jlong)maxBound;
-
-+ (void)addRangeWithId:(id)builder
-               withInt:(jint)valSize
-              withLong:(jlong)minBound
-              withLong:(jlong)maxBound
-               withInt:(jint)shift;
-
-+ (OrgApacheLuceneIndexTerms *)intTermsWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms;
-
-+ (OrgApacheLuceneIndexTerms *)longTermsWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms;
-
-@end
-
-__attribute__((unused)) static void OrgApacheLuceneUtilNumericUtils_init(OrgApacheLuceneUtilNumericUtils *self);
-
-__attribute__((unused)) static OrgApacheLuceneUtilNumericUtils *new_OrgApacheLuceneUtilNumericUtils_init() NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static void OrgApacheLuceneUtilNumericUtils_splitRangeWithId_withInt_withInt_withLong_withLong_(id builder, jint valSize, jint precisionStep, jlong minBound, jlong maxBound);
-
-__attribute__((unused)) static void OrgApacheLuceneUtilNumericUtils_addRangeWithId_withInt_withLong_withLong_withInt_(id builder, jint valSize, jlong minBound, jlong maxBound, jint shift);
-
-__attribute__((unused)) static OrgApacheLuceneIndexTerms *OrgApacheLuceneUtilNumericUtils_intTermsWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneIndexTerms *terms);
-
-__attribute__((unused)) static OrgApacheLuceneIndexTerms *OrgApacheLuceneUtilNumericUtils_longTermsWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneIndexTerms *terms);
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @interface OrgApacheLuceneUtilNumericUtils_SeekingNumericFilteredTermsEnum : OrgApacheLuceneIndexFilteredTermsEnum
 
-- (instancetype)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)tenum;
-
-- (OrgApacheLuceneIndexTermsEnum_SeekStatusEnum *)seekCeilWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilNumericUtils_SeekingNumericFilteredTermsEnum)
 
-__attribute__((unused)) static void OrgApacheLuceneUtilNumericUtils_SeekingNumericFilteredTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneUtilNumericUtils_SeekingNumericFilteredTermsEnum *self, OrgApacheLuceneIndexTermsEnum *tenum);
+__attribute__((unused)) static void OrgApacheLuceneUtilNumericUtils_SeekingNumericFilteredTermsEnum_init(OrgApacheLuceneUtilNumericUtils_SeekingNumericFilteredTermsEnum *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilNumericUtils_SeekingNumericFilteredTermsEnum)
 
-@interface OrgApacheLuceneUtilNumericUtils_$1 : OrgApacheLuceneUtilNumericUtils_SeekingNumericFilteredTermsEnum
-
-- (OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum *)acceptWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term;
-
-- (instancetype)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)arg$0;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilNumericUtils_$1)
-
-__attribute__((unused)) static void OrgApacheLuceneUtilNumericUtils_$1_initWithOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneUtilNumericUtils_$1 *self, OrgApacheLuceneIndexTermsEnum *arg$0);
-
-__attribute__((unused)) static OrgApacheLuceneUtilNumericUtils_$1 *new_OrgApacheLuceneUtilNumericUtils_$1_initWithOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneIndexTermsEnum *arg$0) NS_RETURNS_RETAINED;
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilNumericUtils_$1)
-
-@interface OrgApacheLuceneUtilNumericUtils_$2 : OrgApacheLuceneUtilNumericUtils_SeekingNumericFilteredTermsEnum
-
-- (OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum *)acceptWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term;
-
-- (instancetype)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)arg$0;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilNumericUtils_$2)
-
-__attribute__((unused)) static void OrgApacheLuceneUtilNumericUtils_$2_initWithOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneUtilNumericUtils_$2 *self, OrgApacheLuceneIndexTermsEnum *arg$0);
-
-__attribute__((unused)) static OrgApacheLuceneUtilNumericUtils_$2 *new_OrgApacheLuceneUtilNumericUtils_$2_initWithOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneIndexTermsEnum *arg$0) NS_RETURNS_RETAINED;
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilNumericUtils_$2)
-
-@interface OrgApacheLuceneUtilNumericUtils_$3 : OrgApacheLuceneIndexFilterLeafReader_FilterTerms
-
-- (OrgApacheLuceneIndexTermsEnum *)iterator;
-
-- (instancetype)initWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)arg$0;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilNumericUtils_$3)
-
-__attribute__((unused)) static void OrgApacheLuceneUtilNumericUtils_$3_initWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneUtilNumericUtils_$3 *self, OrgApacheLuceneIndexTerms *arg$0);
-
-__attribute__((unused)) static OrgApacheLuceneUtilNumericUtils_$3 *new_OrgApacheLuceneUtilNumericUtils_$3_initWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneIndexTerms *arg$0) NS_RETURNS_RETAINED;
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilNumericUtils_$3)
-
-@interface OrgApacheLuceneUtilNumericUtils_$4 : OrgApacheLuceneIndexFilterLeafReader_FilterTerms
-
-- (OrgApacheLuceneIndexTermsEnum *)iterator;
-
-- (instancetype)initWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)arg$0;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilNumericUtils_$4)
-
-__attribute__((unused)) static void OrgApacheLuceneUtilNumericUtils_$4_initWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneUtilNumericUtils_$4 *self, OrgApacheLuceneIndexTerms *arg$0);
-
-__attribute__((unused)) static OrgApacheLuceneUtilNumericUtils_$4 *new_OrgApacheLuceneUtilNumericUtils_$4_initWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneIndexTerms *arg$0) NS_RETURNS_RETAINED;
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilNumericUtils_$4)
-
 @implementation OrgApacheLuceneUtilNumericUtils
-
-- (instancetype)init {
-  OrgApacheLuceneUtilNumericUtils_init(self);
-  return self;
-}
 
 + (void)longToPrefixCodedWithLong:(jlong)val
                           withInt:(jint)shift
@@ -165,36 +51,12 @@ withOrgApacheLuceneUtilBytesRefBuilder:(OrgApacheLuceneUtilBytesRefBuilder *)byt
   OrgApacheLuceneUtilNumericUtils_intToPrefixCodedBytesWithInt_withInt_withOrgApacheLuceneUtilBytesRefBuilder_(val, shift, bytes);
 }
 
-+ (jint)getPrefixCodedLongShiftWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)val {
-  return OrgApacheLuceneUtilNumericUtils_getPrefixCodedLongShiftWithOrgApacheLuceneUtilBytesRef_(val);
-}
-
-+ (jint)getPrefixCodedIntShiftWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)val {
-  return OrgApacheLuceneUtilNumericUtils_getPrefixCodedIntShiftWithOrgApacheLuceneUtilBytesRef_(val);
-}
-
-+ (jlong)prefixCodedToLongWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)val {
-  return OrgApacheLuceneUtilNumericUtils_prefixCodedToLongWithOrgApacheLuceneUtilBytesRef_(val);
-}
-
-+ (jint)prefixCodedToIntWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)val {
-  return OrgApacheLuceneUtilNumericUtils_prefixCodedToIntWithOrgApacheLuceneUtilBytesRef_(val);
-}
-
 + (jlong)doubleToSortableLongWithDouble:(jdouble)val {
   return OrgApacheLuceneUtilNumericUtils_doubleToSortableLongWithDouble_(val);
 }
 
-+ (jdouble)sortableLongToDoubleWithLong:(jlong)val {
-  return OrgApacheLuceneUtilNumericUtils_sortableLongToDoubleWithLong_(val);
-}
-
 + (jint)floatToSortableIntWithFloat:(jfloat)val {
   return OrgApacheLuceneUtilNumericUtils_floatToSortableIntWithFloat_(val);
-}
-
-+ (jfloat)sortableIntToFloatWithInt:(jint)val {
-  return OrgApacheLuceneUtilNumericUtils_sortableIntToFloatWithInt_(val);
 }
 
 + (jlong)sortableDoubleBitsWithLong:(jlong)bits {
@@ -205,97 +67,22 @@ withOrgApacheLuceneUtilBytesRefBuilder:(OrgApacheLuceneUtilBytesRefBuilder *)byt
   return OrgApacheLuceneUtilNumericUtils_sortableFloatBitsWithInt_(bits);
 }
 
-+ (void)splitLongRangeWithOrgApacheLuceneUtilNumericUtils_LongRangeBuilder:(OrgApacheLuceneUtilNumericUtils_LongRangeBuilder *)builder
-                                                                   withInt:(jint)precisionStep
-                                                                  withLong:(jlong)minBound
-                                                                  withLong:(jlong)maxBound {
-  OrgApacheLuceneUtilNumericUtils_splitLongRangeWithOrgApacheLuceneUtilNumericUtils_LongRangeBuilder_withInt_withLong_withLong_(builder, precisionStep, minBound, maxBound);
-}
-
-+ (void)splitIntRangeWithOrgApacheLuceneUtilNumericUtils_IntRangeBuilder:(OrgApacheLuceneUtilNumericUtils_IntRangeBuilder *)builder
-                                                                 withInt:(jint)precisionStep
-                                                                 withInt:(jint)minBound
-                                                                 withInt:(jint)maxBound {
-  OrgApacheLuceneUtilNumericUtils_splitIntRangeWithOrgApacheLuceneUtilNumericUtils_IntRangeBuilder_withInt_withInt_withInt_(builder, precisionStep, minBound, maxBound);
-}
-
-+ (void)splitRangeWithId:(id)builder
-                 withInt:(jint)valSize
-                 withInt:(jint)precisionStep
-                withLong:(jlong)minBound
-                withLong:(jlong)maxBound {
-  OrgApacheLuceneUtilNumericUtils_splitRangeWithId_withInt_withInt_withLong_withLong_(builder, valSize, precisionStep, minBound, maxBound);
-}
-
-+ (void)addRangeWithId:(id)builder
-               withInt:(jint)valSize
-              withLong:(jlong)minBound
-              withLong:(jlong)maxBound
-               withInt:(jint)shift {
-  OrgApacheLuceneUtilNumericUtils_addRangeWithId_withInt_withLong_withLong_withInt_(builder, valSize, minBound, maxBound, shift);
-}
-
-+ (OrgApacheLuceneIndexTermsEnum *)filterPrefixCodedLongsWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)termsEnum {
-  return OrgApacheLuceneUtilNumericUtils_filterPrefixCodedLongsWithOrgApacheLuceneIndexTermsEnum_(termsEnum);
-}
-
-+ (OrgApacheLuceneIndexTermsEnum *)filterPrefixCodedIntsWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)termsEnum {
-  return OrgApacheLuceneUtilNumericUtils_filterPrefixCodedIntsWithOrgApacheLuceneIndexTermsEnum_(termsEnum);
-}
-
-+ (OrgApacheLuceneIndexTerms *)intTermsWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms {
-  return OrgApacheLuceneUtilNumericUtils_intTermsWithOrgApacheLuceneIndexTerms_(terms);
-}
-
-+ (OrgApacheLuceneIndexTerms *)longTermsWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms {
-  return OrgApacheLuceneUtilNumericUtils_longTermsWithOrgApacheLuceneIndexTerms_(terms);
-}
-
-+ (JavaLangInteger *)getMinIntWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms {
-  return OrgApacheLuceneUtilNumericUtils_getMinIntWithOrgApacheLuceneIndexTerms_(terms);
-}
-
-+ (JavaLangInteger *)getMaxIntWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms {
-  return OrgApacheLuceneUtilNumericUtils_getMaxIntWithOrgApacheLuceneIndexTerms_(terms);
-}
-
-+ (JavaLangLong *)getMinLongWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms {
-  return OrgApacheLuceneUtilNumericUtils_getMinLongWithOrgApacheLuceneIndexTerms_(terms);
-}
-
-+ (JavaLangLong *)getMaxLongWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)terms {
-  return OrgApacheLuceneUtilNumericUtils_getMaxLongWithOrgApacheLuceneIndexTerms_(terms);
+- (instancetype)init {
+  OrgApacheLuceneUtilNumericUtils_init(self);
+  return self;
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", "NumericUtils", NULL, 0x2, NULL, NULL },
     { "longToPrefixCodedWithLong:withInt:withOrgApacheLuceneUtilBytesRefBuilder:", "longToPrefixCoded", "V", 0x9, NULL, NULL },
     { "intToPrefixCodedWithInt:withInt:withOrgApacheLuceneUtilBytesRefBuilder:", "intToPrefixCoded", "V", 0x9, NULL, NULL },
     { "longToPrefixCodedBytesWithLong:withInt:withOrgApacheLuceneUtilBytesRefBuilder:", "longToPrefixCodedBytes", "V", 0x9, NULL, NULL },
     { "intToPrefixCodedBytesWithInt:withInt:withOrgApacheLuceneUtilBytesRefBuilder:", "intToPrefixCodedBytes", "V", 0x9, NULL, NULL },
-    { "getPrefixCodedLongShiftWithOrgApacheLuceneUtilBytesRef:", "getPrefixCodedLongShift", "I", 0x9, NULL, NULL },
-    { "getPrefixCodedIntShiftWithOrgApacheLuceneUtilBytesRef:", "getPrefixCodedIntShift", "I", 0x9, NULL, NULL },
-    { "prefixCodedToLongWithOrgApacheLuceneUtilBytesRef:", "prefixCodedToLong", "J", 0x9, NULL, NULL },
-    { "prefixCodedToIntWithOrgApacheLuceneUtilBytesRef:", "prefixCodedToInt", "I", 0x9, NULL, NULL },
     { "doubleToSortableLongWithDouble:", "doubleToSortableLong", "J", 0x9, NULL, NULL },
-    { "sortableLongToDoubleWithLong:", "sortableLongToDouble", "D", 0x9, NULL, NULL },
     { "floatToSortableIntWithFloat:", "floatToSortableInt", "I", 0x9, NULL, NULL },
-    { "sortableIntToFloatWithInt:", "sortableIntToFloat", "F", 0x9, NULL, NULL },
     { "sortableDoubleBitsWithLong:", "sortableDoubleBits", "J", 0x9, NULL, NULL },
     { "sortableFloatBitsWithInt:", "sortableFloatBits", "I", 0x9, NULL, NULL },
-    { "splitLongRangeWithOrgApacheLuceneUtilNumericUtils_LongRangeBuilder:withInt:withLong:withLong:", "splitLongRange", "V", 0x9, NULL, NULL },
-    { "splitIntRangeWithOrgApacheLuceneUtilNumericUtils_IntRangeBuilder:withInt:withInt:withInt:", "splitIntRange", "V", 0x9, NULL, NULL },
-    { "splitRangeWithId:withInt:withInt:withLong:withLong:", "splitRange", "V", 0xa, NULL, NULL },
-    { "addRangeWithId:withInt:withLong:withLong:withInt:", "addRange", "V", 0xa, NULL, NULL },
-    { "filterPrefixCodedLongsWithOrgApacheLuceneIndexTermsEnum:", "filterPrefixCodedLongs", "Lorg.apache.lucene.index.TermsEnum;", 0x9, NULL, NULL },
-    { "filterPrefixCodedIntsWithOrgApacheLuceneIndexTermsEnum:", "filterPrefixCodedInts", "Lorg.apache.lucene.index.TermsEnum;", 0x9, NULL, NULL },
-    { "intTermsWithOrgApacheLuceneIndexTerms:", "intTerms", "Lorg.apache.lucene.index.Terms;", 0xa, NULL, NULL },
-    { "longTermsWithOrgApacheLuceneIndexTerms:", "longTerms", "Lorg.apache.lucene.index.Terms;", 0xa, NULL, NULL },
-    { "getMinIntWithOrgApacheLuceneIndexTerms:", "getMinInt", "Ljava.lang.Integer;", 0x9, "Ljava.io.IOException;", NULL },
-    { "getMaxIntWithOrgApacheLuceneIndexTerms:", "getMaxInt", "Ljava.lang.Integer;", 0x9, "Ljava.io.IOException;", NULL },
-    { "getMinLongWithOrgApacheLuceneIndexTerms:", "getMinLong", "Ljava.lang.Long;", 0x9, "Ljava.io.IOException;", NULL },
-    { "getMaxLongWithOrgApacheLuceneIndexTerms:", "getMaxLong", "Ljava.lang.Long;", 0x9, "Ljava.io.IOException;", NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "PRECISION_STEP_DEFAULT", "PRECISION_STEP_DEFAULT", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilNumericUtils_PRECISION_STEP_DEFAULT },
@@ -306,21 +93,11 @@ withOrgApacheLuceneUtilBytesRefBuilder:(OrgApacheLuceneUtilBytesRefBuilder *)byt
     { "BUF_SIZE_INT", "BUF_SIZE_INT", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilNumericUtils_BUF_SIZE_INT },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.util.NumericUtils$LongRangeBuilder;", "Lorg.apache.lucene.util.NumericUtils$IntRangeBuilder;", "Lorg.apache.lucene.util.NumericUtils$SeekingNumericFilteredTermsEnum;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilNumericUtils = { 2, "NumericUtils", "org.apache.lucene.util", NULL, 0x11, 27, methods, 6, fields, 0, NULL, 3, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilNumericUtils = { 2, "NumericUtils", "org.apache.lucene.util", NULL, 0x11, 9, methods, 6, fields, 0, NULL, 3, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneUtilNumericUtils;
 }
 
 @end
-
-void OrgApacheLuceneUtilNumericUtils_init(OrgApacheLuceneUtilNumericUtils *self) {
-  NSObject_init(self);
-}
-
-OrgApacheLuceneUtilNumericUtils *new_OrgApacheLuceneUtilNumericUtils_init() {
-  OrgApacheLuceneUtilNumericUtils *self = [OrgApacheLuceneUtilNumericUtils alloc];
-  OrgApacheLuceneUtilNumericUtils_init(self);
-  return self;
-}
 
 void OrgApacheLuceneUtilNumericUtils_longToPrefixCodedWithLong_withInt_withOrgApacheLuceneUtilBytesRefBuilder_(jlong val, jint shift, OrgApacheLuceneUtilBytesRefBuilder *bytes) {
   OrgApacheLuceneUtilNumericUtils_initialize();
@@ -366,66 +143,14 @@ void OrgApacheLuceneUtilNumericUtils_intToPrefixCodedBytesWithInt_withInt_withOr
   }
 }
 
-jint OrgApacheLuceneUtilNumericUtils_getPrefixCodedLongShiftWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilBytesRef *val) {
-  OrgApacheLuceneUtilNumericUtils_initialize();
-  jint shift = IOSByteArray_Get(nil_chk(((OrgApacheLuceneUtilBytesRef *) nil_chk(val))->bytes_), val->offset_) - OrgApacheLuceneUtilNumericUtils_SHIFT_START_LONG;
-  if (shift > 63 || shift < 0) @throw [new_JavaLangNumberFormatException_initWithNSString_(JreStrcat("$I$", @"Invalid shift value (", shift, @") in prefixCoded bytes (is encoded value really an INT?)")) autorelease];
-  return shift;
-}
-
-jint OrgApacheLuceneUtilNumericUtils_getPrefixCodedIntShiftWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilBytesRef *val) {
-  OrgApacheLuceneUtilNumericUtils_initialize();
-  jint shift = IOSByteArray_Get(nil_chk(((OrgApacheLuceneUtilBytesRef *) nil_chk(val))->bytes_), val->offset_) - OrgApacheLuceneUtilNumericUtils_SHIFT_START_INT;
-  if (shift > 31 || shift < 0) @throw [new_JavaLangNumberFormatException_initWithNSString_(@"Invalid shift value in prefixCoded bytes (is encoded value really an INT?)") autorelease];
-  return shift;
-}
-
-jlong OrgApacheLuceneUtilNumericUtils_prefixCodedToLongWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilBytesRef *val) {
-  OrgApacheLuceneUtilNumericUtils_initialize();
-  jlong sortableBits = 0LL;
-  for (jint i = ((OrgApacheLuceneUtilBytesRef *) nil_chk(val))->offset_ + 1, limit = val->offset_ + val->length_; i < limit; i++) {
-    JreLShiftAssignLong(&sortableBits, 7);
-    jbyte b = IOSByteArray_Get(nil_chk(val->bytes_), i);
-    if (b < 0) {
-      @throw [new_JavaLangNumberFormatException_initWithNSString_(JreStrcat("$$$I$", @"Invalid prefixCoded numerical value representation (byte ", JavaLangInteger_toHexStringWithInt_(b & (jint) 0xff), @" at position ", (i - val->offset_), @" is invalid)")) autorelease];
-    }
-    sortableBits |= b;
-  }
-  return (JreLShift64(sortableBits, OrgApacheLuceneUtilNumericUtils_getPrefixCodedLongShiftWithOrgApacheLuceneUtilBytesRef_(val))) ^ -0x7fffffffffffffffLL - 1;
-}
-
-jint OrgApacheLuceneUtilNumericUtils_prefixCodedToIntWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilBytesRef *val) {
-  OrgApacheLuceneUtilNumericUtils_initialize();
-  jint sortableBits = 0;
-  for (jint i = ((OrgApacheLuceneUtilBytesRef *) nil_chk(val))->offset_ + 1, limit = val->offset_ + val->length_; i < limit; i++) {
-    JreLShiftAssignInt(&sortableBits, 7);
-    jbyte b = IOSByteArray_Get(nil_chk(val->bytes_), i);
-    if (b < 0) {
-      @throw [new_JavaLangNumberFormatException_initWithNSString_(JreStrcat("$$$I$", @"Invalid prefixCoded numerical value representation (byte ", JavaLangInteger_toHexStringWithInt_(b & (jint) 0xff), @" at position ", (i - val->offset_), @" is invalid)")) autorelease];
-    }
-    sortableBits |= b;
-  }
-  return (JreLShift32(sortableBits, OrgApacheLuceneUtilNumericUtils_getPrefixCodedIntShiftWithOrgApacheLuceneUtilBytesRef_(val))) ^ -0x7fffffff - 1;
-}
-
 jlong OrgApacheLuceneUtilNumericUtils_doubleToSortableLongWithDouble_(jdouble val) {
   OrgApacheLuceneUtilNumericUtils_initialize();
   return OrgApacheLuceneUtilNumericUtils_sortableDoubleBitsWithLong_(JavaLangDouble_doubleToLongBitsWithDouble_(val));
 }
 
-jdouble OrgApacheLuceneUtilNumericUtils_sortableLongToDoubleWithLong_(jlong val) {
-  OrgApacheLuceneUtilNumericUtils_initialize();
-  return JavaLangDouble_longBitsToDoubleWithLong_(OrgApacheLuceneUtilNumericUtils_sortableDoubleBitsWithLong_(val));
-}
-
 jint OrgApacheLuceneUtilNumericUtils_floatToSortableIntWithFloat_(jfloat val) {
   OrgApacheLuceneUtilNumericUtils_initialize();
   return OrgApacheLuceneUtilNumericUtils_sortableFloatBitsWithInt_(JavaLangFloat_floatToIntBitsWithFloat_(val));
-}
-
-jfloat OrgApacheLuceneUtilNumericUtils_sortableIntToFloatWithInt_(jint val) {
-  OrgApacheLuceneUtilNumericUtils_initialize();
-  return JavaLangFloat_intBitsToFloatWithInt_(OrgApacheLuceneUtilNumericUtils_sortableFloatBitsWithInt_(val));
 }
 
 jlong OrgApacheLuceneUtilNumericUtils_sortableDoubleBitsWithLong_(jlong bits) {
@@ -438,112 +163,19 @@ jint OrgApacheLuceneUtilNumericUtils_sortableFloatBitsWithInt_(jint bits) {
   return bits ^ (JreRShift32(bits, 31)) & (jint) 0x7fffffff;
 }
 
-void OrgApacheLuceneUtilNumericUtils_splitLongRangeWithOrgApacheLuceneUtilNumericUtils_LongRangeBuilder_withInt_withLong_withLong_(OrgApacheLuceneUtilNumericUtils_LongRangeBuilder *builder, jint precisionStep, jlong minBound, jlong maxBound) {
-  OrgApacheLuceneUtilNumericUtils_initialize();
-  OrgApacheLuceneUtilNumericUtils_splitRangeWithId_withInt_withInt_withLong_withLong_(builder, 64, precisionStep, minBound, maxBound);
+void OrgApacheLuceneUtilNumericUtils_init(OrgApacheLuceneUtilNumericUtils *self) {
+  NSObject_init(self);
 }
 
-void OrgApacheLuceneUtilNumericUtils_splitIntRangeWithOrgApacheLuceneUtilNumericUtils_IntRangeBuilder_withInt_withInt_withInt_(OrgApacheLuceneUtilNumericUtils_IntRangeBuilder *builder, jint precisionStep, jint minBound, jint maxBound) {
-  OrgApacheLuceneUtilNumericUtils_initialize();
-  OrgApacheLuceneUtilNumericUtils_splitRangeWithId_withInt_withInt_withLong_withLong_(builder, 32, precisionStep, minBound, maxBound);
-}
-
-void OrgApacheLuceneUtilNumericUtils_splitRangeWithId_withInt_withInt_withLong_withLong_(id builder, jint valSize, jint precisionStep, jlong minBound, jlong maxBound) {
-  OrgApacheLuceneUtilNumericUtils_initialize();
-  if (precisionStep < 1) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"precisionStep must be >=1") autorelease];
-  if (minBound > maxBound) return;
-  for (jint shift = 0; ; shift += precisionStep) {
-    jlong diff = JreLShift64(1LL, (shift + precisionStep)), mask = JreLShift64(((JreLShift64(1LL, precisionStep)) - 1LL), shift);
-    jboolean hasLower = (minBound & mask) != 0LL, hasUpper = (maxBound & mask) != mask;
-    jlong nextMinBound = (hasLower ? (minBound + diff) : minBound) & ~mask, nextMaxBound = (hasUpper ? (maxBound - diff) : maxBound) & ~mask;
-    jboolean lowerWrapped = nextMinBound < minBound, upperWrapped = nextMaxBound > maxBound;
-    if (shift + precisionStep >= valSize || nextMinBound > nextMaxBound || lowerWrapped || upperWrapped) {
-      OrgApacheLuceneUtilNumericUtils_addRangeWithId_withInt_withLong_withLong_withInt_(builder, valSize, minBound, maxBound, shift);
-      break;
-    }
-    if (hasLower) OrgApacheLuceneUtilNumericUtils_addRangeWithId_withInt_withLong_withLong_withInt_(builder, valSize, minBound, minBound | mask, shift);
-    if (hasUpper) OrgApacheLuceneUtilNumericUtils_addRangeWithId_withInt_withLong_withLong_withInt_(builder, valSize, maxBound & ~mask, maxBound, shift);
-    minBound = nextMinBound;
-    maxBound = nextMaxBound;
-  }
-}
-
-void OrgApacheLuceneUtilNumericUtils_addRangeWithId_withInt_withLong_withLong_withInt_(id builder, jint valSize, jlong minBound, jlong maxBound, jint shift) {
-  OrgApacheLuceneUtilNumericUtils_initialize();
-  maxBound |= (JreLShift64(1LL, shift)) - 1LL;
-  switch (valSize) {
-    case 64:
-    [((OrgApacheLuceneUtilNumericUtils_LongRangeBuilder *) nil_chk(((OrgApacheLuceneUtilNumericUtils_LongRangeBuilder *) check_class_cast(builder, [OrgApacheLuceneUtilNumericUtils_LongRangeBuilder class])))) addRangeWithLong:minBound withLong:maxBound withInt:shift];
-    break;
-    case 32:
-    [((OrgApacheLuceneUtilNumericUtils_IntRangeBuilder *) nil_chk(((OrgApacheLuceneUtilNumericUtils_IntRangeBuilder *) check_class_cast(builder, [OrgApacheLuceneUtilNumericUtils_IntRangeBuilder class])))) addRangeWithInt:(jint) minBound withInt:(jint) maxBound withInt:shift];
-    break;
-    default:
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"valSize must be 32 or 64.") autorelease];
-  }
-}
-
-OrgApacheLuceneIndexTermsEnum *OrgApacheLuceneUtilNumericUtils_filterPrefixCodedLongsWithOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneIndexTermsEnum *termsEnum) {
-  OrgApacheLuceneUtilNumericUtils_initialize();
-  return [new_OrgApacheLuceneUtilNumericUtils_$1_initWithOrgApacheLuceneIndexTermsEnum_(termsEnum) autorelease];
-}
-
-OrgApacheLuceneIndexTermsEnum *OrgApacheLuceneUtilNumericUtils_filterPrefixCodedIntsWithOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneIndexTermsEnum *termsEnum) {
-  OrgApacheLuceneUtilNumericUtils_initialize();
-  return [new_OrgApacheLuceneUtilNumericUtils_$2_initWithOrgApacheLuceneIndexTermsEnum_(termsEnum) autorelease];
-}
-
-OrgApacheLuceneIndexTerms *OrgApacheLuceneUtilNumericUtils_intTermsWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneIndexTerms *terms) {
-  OrgApacheLuceneUtilNumericUtils_initialize();
-  return [new_OrgApacheLuceneUtilNumericUtils_$3_initWithOrgApacheLuceneIndexTerms_(terms) autorelease];
-}
-
-OrgApacheLuceneIndexTerms *OrgApacheLuceneUtilNumericUtils_longTermsWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneIndexTerms *terms) {
-  OrgApacheLuceneUtilNumericUtils_initialize();
-  return [new_OrgApacheLuceneUtilNumericUtils_$4_initWithOrgApacheLuceneIndexTerms_(terms) autorelease];
-}
-
-JavaLangInteger *OrgApacheLuceneUtilNumericUtils_getMinIntWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneIndexTerms *terms) {
-  OrgApacheLuceneUtilNumericUtils_initialize();
-  OrgApacheLuceneUtilBytesRef *min = [((OrgApacheLuceneIndexTerms *) nil_chk(terms)) getMin];
-  return (min != nil) ? JavaLangInteger_valueOfWithInt_(OrgApacheLuceneUtilNumericUtils_prefixCodedToIntWithOrgApacheLuceneUtilBytesRef_(min)) : nil;
-}
-
-JavaLangInteger *OrgApacheLuceneUtilNumericUtils_getMaxIntWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneIndexTerms *terms) {
-  OrgApacheLuceneUtilNumericUtils_initialize();
-  OrgApacheLuceneUtilBytesRef *max = [((OrgApacheLuceneIndexTerms *) nil_chk(OrgApacheLuceneUtilNumericUtils_intTermsWithOrgApacheLuceneIndexTerms_(terms))) getMax];
-  return (max != nil) ? JavaLangInteger_valueOfWithInt_(OrgApacheLuceneUtilNumericUtils_prefixCodedToIntWithOrgApacheLuceneUtilBytesRef_(max)) : nil;
-}
-
-JavaLangLong *OrgApacheLuceneUtilNumericUtils_getMinLongWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneIndexTerms *terms) {
-  OrgApacheLuceneUtilNumericUtils_initialize();
-  OrgApacheLuceneUtilBytesRef *min = [((OrgApacheLuceneIndexTerms *) nil_chk(terms)) getMin];
-  return (min != nil) ? JavaLangLong_valueOfWithLong_(OrgApacheLuceneUtilNumericUtils_prefixCodedToLongWithOrgApacheLuceneUtilBytesRef_(min)) : nil;
-}
-
-JavaLangLong *OrgApacheLuceneUtilNumericUtils_getMaxLongWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneIndexTerms *terms) {
-  OrgApacheLuceneUtilNumericUtils_initialize();
-  OrgApacheLuceneUtilBytesRef *max = [((OrgApacheLuceneIndexTerms *) nil_chk(OrgApacheLuceneUtilNumericUtils_longTermsWithOrgApacheLuceneIndexTerms_(terms))) getMax];
-  return (max != nil) ? JavaLangLong_valueOfWithLong_(OrgApacheLuceneUtilNumericUtils_prefixCodedToLongWithOrgApacheLuceneUtilBytesRef_(max)) : nil;
+OrgApacheLuceneUtilNumericUtils *new_OrgApacheLuceneUtilNumericUtils_init() {
+  OrgApacheLuceneUtilNumericUtils *self = [OrgApacheLuceneUtilNumericUtils alloc];
+  OrgApacheLuceneUtilNumericUtils_init(self);
+  return self;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilNumericUtils)
 
 @implementation OrgApacheLuceneUtilNumericUtils_LongRangeBuilder
-
-- (void)addRangeWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)minPrefixCoded
-                withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)maxPrefixCoded {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
-}
-
-- (void)addRangeWithLong:(jlong)min
-                withLong:(jlong)max
-                 withInt:(jint)shift {
-  OrgApacheLuceneUtilBytesRefBuilder *minBytes = [new_OrgApacheLuceneUtilBytesRefBuilder_init() autorelease], *maxBytes = [new_OrgApacheLuceneUtilBytesRefBuilder_init() autorelease];
-  OrgApacheLuceneUtilNumericUtils_longToPrefixCodedBytesWithLong_withInt_withOrgApacheLuceneUtilBytesRefBuilder_(min, shift, minBytes);
-  OrgApacheLuceneUtilNumericUtils_longToPrefixCodedBytesWithLong_withInt_withOrgApacheLuceneUtilBytesRefBuilder_(max, shift, maxBytes);
-  [self addRangeWithOrgApacheLuceneUtilBytesRef:[minBytes get] withOrgApacheLuceneUtilBytesRef:[maxBytes get]];
-}
 
 - (instancetype)init {
   OrgApacheLuceneUtilNumericUtils_LongRangeBuilder_init(self);
@@ -552,11 +184,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilNumericUtils)
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "addRangeWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:", "addRange", "V", 0x1, NULL, NULL },
-    { "addRangeWithLong:withLong:withInt:", "addRange", "V", 0x1, NULL, NULL },
     { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilNumericUtils_LongRangeBuilder = { 2, "LongRangeBuilder", "org.apache.lucene.util", "NumericUtils", 0x409, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilNumericUtils_LongRangeBuilder = { 2, "LongRangeBuilder", "org.apache.lucene.util", "NumericUtils", 0x409, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilNumericUtils_LongRangeBuilder;
 }
 
@@ -570,20 +200,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilNumericUtils_LongRangeBuilde
 
 @implementation OrgApacheLuceneUtilNumericUtils_IntRangeBuilder
 
-- (void)addRangeWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)minPrefixCoded
-                withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)maxPrefixCoded {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
-}
-
-- (void)addRangeWithInt:(jint)min
-                withInt:(jint)max
-                withInt:(jint)shift {
-  OrgApacheLuceneUtilBytesRefBuilder *minBytes = [new_OrgApacheLuceneUtilBytesRefBuilder_init() autorelease], *maxBytes = [new_OrgApacheLuceneUtilBytesRefBuilder_init() autorelease];
-  OrgApacheLuceneUtilNumericUtils_intToPrefixCodedBytesWithInt_withInt_withOrgApacheLuceneUtilBytesRefBuilder_(min, shift, minBytes);
-  OrgApacheLuceneUtilNumericUtils_intToPrefixCodedBytesWithInt_withInt_withOrgApacheLuceneUtilBytesRefBuilder_(max, shift, maxBytes);
-  [self addRangeWithOrgApacheLuceneUtilBytesRef:[minBytes get] withOrgApacheLuceneUtilBytesRef:[maxBytes get]];
-}
-
 - (instancetype)init {
   OrgApacheLuceneUtilNumericUtils_IntRangeBuilder_init(self);
   return self;
@@ -591,11 +207,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilNumericUtils_LongRangeBuilde
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "addRangeWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:", "addRange", "V", 0x1, NULL, NULL },
-    { "addRangeWithInt:withInt:withInt:", "addRange", "V", 0x1, NULL, NULL },
     { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilNumericUtils_IntRangeBuilder = { 2, "IntRangeBuilder", "org.apache.lucene.util", "NumericUtils", 0x409, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilNumericUtils_IntRangeBuilder = { 2, "IntRangeBuilder", "org.apache.lucene.util", "NumericUtils", 0x409, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilNumericUtils_IntRangeBuilder;
 }
 
@@ -609,178 +223,23 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilNumericUtils_IntRangeBuilder
 
 @implementation OrgApacheLuceneUtilNumericUtils_SeekingNumericFilteredTermsEnum
 
-- (instancetype)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)tenum {
-  OrgApacheLuceneUtilNumericUtils_SeekingNumericFilteredTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_(self, tenum);
+- (instancetype)init {
+  OrgApacheLuceneUtilNumericUtils_SeekingNumericFilteredTermsEnum_init(self);
   return self;
-}
-
-- (OrgApacheLuceneIndexTermsEnum_SeekStatusEnum *)seekCeilWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term {
-  OrgApacheLuceneIndexTermsEnum_SeekStatusEnum *status = [((OrgApacheLuceneIndexTermsEnum *) nil_chk(tenum_)) seekCeilWithOrgApacheLuceneUtilBytesRef:term];
-  if (status == JreLoadStatic(OrgApacheLuceneIndexTermsEnum_SeekStatusEnum, END)) {
-    return JreLoadStatic(OrgApacheLuceneIndexTermsEnum_SeekStatusEnum, END);
-  }
-  JreStrongAssign(&actualTerm_, [tenum_ term]);
-  if ([self acceptWithOrgApacheLuceneUtilBytesRef:actualTerm_] == JreLoadStatic(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum, YES)) {
-    return status;
-  }
-  else {
-    return JreLoadStatic(OrgApacheLuceneIndexTermsEnum_SeekStatusEnum, END);
-  }
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexTermsEnum:", "SeekingNumericFilteredTermsEnum", NULL, 0x1, NULL, NULL },
-    { "seekCeilWithOrgApacheLuceneUtilBytesRef:", "seekCeil", "Lorg.apache.lucene.index.TermsEnum$SeekStatus;", 0x1, "Ljava.io.IOException;", NULL },
+    { "init", NULL, NULL, 0x2, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilNumericUtils_SeekingNumericFilteredTermsEnum = { 2, "SeekingNumericFilteredTermsEnum", "org.apache.lucene.util", "NumericUtils", 0x40a, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilNumericUtils_SeekingNumericFilteredTermsEnum = { 2, "SeekingNumericFilteredTermsEnum", "org.apache.lucene.util", "NumericUtils", 0x40a, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilNumericUtils_SeekingNumericFilteredTermsEnum;
 }
 
 @end
 
-void OrgApacheLuceneUtilNumericUtils_SeekingNumericFilteredTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneUtilNumericUtils_SeekingNumericFilteredTermsEnum *self, OrgApacheLuceneIndexTermsEnum *tenum) {
-  OrgApacheLuceneIndexFilteredTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withBoolean_(self, tenum, NO);
+void OrgApacheLuceneUtilNumericUtils_SeekingNumericFilteredTermsEnum_init(OrgApacheLuceneUtilNumericUtils_SeekingNumericFilteredTermsEnum *self) {
+  NSObject_init(self);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilNumericUtils_SeekingNumericFilteredTermsEnum)
-
-@implementation OrgApacheLuceneUtilNumericUtils_$1
-
-- (OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum *)acceptWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term {
-  return OrgApacheLuceneUtilNumericUtils_getPrefixCodedLongShiftWithOrgApacheLuceneUtilBytesRef_(term) == 0 ? JreLoadStatic(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum, YES) : JreLoadStatic(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum, END);
-}
-
-- (instancetype)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)arg$0 {
-  OrgApacheLuceneUtilNumericUtils_$1_initWithOrgApacheLuceneIndexTermsEnum_(self, arg$0);
-  return self;
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "acceptWithOrgApacheLuceneUtilBytesRef:", "accept", "Lorg.apache.lucene.index.FilteredTermsEnum$AcceptStatus;", 0x4, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexTermsEnum:", "", NULL, 0x0, NULL, NULL },
-  };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneUtilNumericUtils", "filterPrefixCodedLongsWithOrgApacheLuceneIndexTermsEnum:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilNumericUtils_$1 = { 2, "", "org.apache.lucene.util", "NumericUtils", 0x8008, 2, methods, 0, NULL, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneUtilNumericUtils_$1;
-}
-
-@end
-
-void OrgApacheLuceneUtilNumericUtils_$1_initWithOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneUtilNumericUtils_$1 *self, OrgApacheLuceneIndexTermsEnum *arg$0) {
-  OrgApacheLuceneUtilNumericUtils_SeekingNumericFilteredTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_(self, arg$0);
-}
-
-OrgApacheLuceneUtilNumericUtils_$1 *new_OrgApacheLuceneUtilNumericUtils_$1_initWithOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneIndexTermsEnum *arg$0) {
-  OrgApacheLuceneUtilNumericUtils_$1 *self = [OrgApacheLuceneUtilNumericUtils_$1 alloc];
-  OrgApacheLuceneUtilNumericUtils_$1_initWithOrgApacheLuceneIndexTermsEnum_(self, arg$0);
-  return self;
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilNumericUtils_$1)
-
-@implementation OrgApacheLuceneUtilNumericUtils_$2
-
-- (OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum *)acceptWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term {
-  return OrgApacheLuceneUtilNumericUtils_getPrefixCodedIntShiftWithOrgApacheLuceneUtilBytesRef_(term) == 0 ? JreLoadStatic(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum, YES) : JreLoadStatic(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum, END);
-}
-
-- (instancetype)initWithOrgApacheLuceneIndexTermsEnum:(OrgApacheLuceneIndexTermsEnum *)arg$0 {
-  OrgApacheLuceneUtilNumericUtils_$2_initWithOrgApacheLuceneIndexTermsEnum_(self, arg$0);
-  return self;
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "acceptWithOrgApacheLuceneUtilBytesRef:", "accept", "Lorg.apache.lucene.index.FilteredTermsEnum$AcceptStatus;", 0x4, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexTermsEnum:", "", NULL, 0x0, NULL, NULL },
-  };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneUtilNumericUtils", "filterPrefixCodedIntsWithOrgApacheLuceneIndexTermsEnum:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilNumericUtils_$2 = { 2, "", "org.apache.lucene.util", "NumericUtils", 0x8008, 2, methods, 0, NULL, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneUtilNumericUtils_$2;
-}
-
-@end
-
-void OrgApacheLuceneUtilNumericUtils_$2_initWithOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneUtilNumericUtils_$2 *self, OrgApacheLuceneIndexTermsEnum *arg$0) {
-  OrgApacheLuceneUtilNumericUtils_SeekingNumericFilteredTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_(self, arg$0);
-}
-
-OrgApacheLuceneUtilNumericUtils_$2 *new_OrgApacheLuceneUtilNumericUtils_$2_initWithOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneIndexTermsEnum *arg$0) {
-  OrgApacheLuceneUtilNumericUtils_$2 *self = [OrgApacheLuceneUtilNumericUtils_$2 alloc];
-  OrgApacheLuceneUtilNumericUtils_$2_initWithOrgApacheLuceneIndexTermsEnum_(self, arg$0);
-  return self;
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilNumericUtils_$2)
-
-@implementation OrgApacheLuceneUtilNumericUtils_$3
-
-- (OrgApacheLuceneIndexTermsEnum *)iterator {
-  return OrgApacheLuceneUtilNumericUtils_filterPrefixCodedIntsWithOrgApacheLuceneIndexTermsEnum_([((OrgApacheLuceneIndexTerms *) nil_chk(in_)) iterator]);
-}
-
-- (instancetype)initWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)arg$0 {
-  OrgApacheLuceneUtilNumericUtils_$3_initWithOrgApacheLuceneIndexTerms_(self, arg$0);
-  return self;
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "iterator", NULL, "Lorg.apache.lucene.index.TermsEnum;", 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneIndexTerms:", "", NULL, 0x0, NULL, NULL },
-  };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneUtilNumericUtils", "intTermsWithOrgApacheLuceneIndexTerms:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilNumericUtils_$3 = { 2, "", "org.apache.lucene.util", "NumericUtils", 0x8008, 2, methods, 0, NULL, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneUtilNumericUtils_$3;
-}
-
-@end
-
-void OrgApacheLuceneUtilNumericUtils_$3_initWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneUtilNumericUtils_$3 *self, OrgApacheLuceneIndexTerms *arg$0) {
-  OrgApacheLuceneIndexFilterLeafReader_FilterTerms_initWithOrgApacheLuceneIndexTerms_(self, arg$0);
-}
-
-OrgApacheLuceneUtilNumericUtils_$3 *new_OrgApacheLuceneUtilNumericUtils_$3_initWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneIndexTerms *arg$0) {
-  OrgApacheLuceneUtilNumericUtils_$3 *self = [OrgApacheLuceneUtilNumericUtils_$3 alloc];
-  OrgApacheLuceneUtilNumericUtils_$3_initWithOrgApacheLuceneIndexTerms_(self, arg$0);
-  return self;
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilNumericUtils_$3)
-
-@implementation OrgApacheLuceneUtilNumericUtils_$4
-
-- (OrgApacheLuceneIndexTermsEnum *)iterator {
-  return OrgApacheLuceneUtilNumericUtils_filterPrefixCodedLongsWithOrgApacheLuceneIndexTermsEnum_([((OrgApacheLuceneIndexTerms *) nil_chk(in_)) iterator]);
-}
-
-- (instancetype)initWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)arg$0 {
-  OrgApacheLuceneUtilNumericUtils_$4_initWithOrgApacheLuceneIndexTerms_(self, arg$0);
-  return self;
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "iterator", NULL, "Lorg.apache.lucene.index.TermsEnum;", 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneIndexTerms:", "", NULL, 0x0, NULL, NULL },
-  };
-  static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneUtilNumericUtils", "longTermsWithOrgApacheLuceneIndexTerms:" };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilNumericUtils_$4 = { 2, "", "org.apache.lucene.util", "NumericUtils", 0x8008, 2, methods, 0, NULL, 0, NULL, 0, NULL, &enclosing_method, NULL };
-  return &_OrgApacheLuceneUtilNumericUtils_$4;
-}
-
-@end
-
-void OrgApacheLuceneUtilNumericUtils_$4_initWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneUtilNumericUtils_$4 *self, OrgApacheLuceneIndexTerms *arg$0) {
-  OrgApacheLuceneIndexFilterLeafReader_FilterTerms_initWithOrgApacheLuceneIndexTerms_(self, arg$0);
-}
-
-OrgApacheLuceneUtilNumericUtils_$4 *new_OrgApacheLuceneUtilNumericUtils_$4_initWithOrgApacheLuceneIndexTerms_(OrgApacheLuceneIndexTerms *arg$0) {
-  OrgApacheLuceneUtilNumericUtils_$4 *self = [OrgApacheLuceneUtilNumericUtils_$4 alloc];
-  OrgApacheLuceneUtilNumericUtils_$4_initWithOrgApacheLuceneIndexTerms_(self, arg$0);
-  return self;
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilNumericUtils_$4)

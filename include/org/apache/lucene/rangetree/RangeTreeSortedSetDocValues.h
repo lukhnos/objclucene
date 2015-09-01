@@ -20,45 +20,19 @@
 #define OrgApacheLuceneIndexSortedSetDocValues_INCLUDE 1
 #include "org/apache/lucene/index/SortedSetDocValues.h"
 
-@class OrgApacheLuceneIndexTermsEnum;
-@class OrgApacheLuceneRangetreeRangeTreeReader;
-@class OrgApacheLuceneUtilBytesRef;
+@interface OrgApacheLuceneRangetreeRangeTreeSortedSetDocValues : OrgApacheLuceneIndexSortedSetDocValues
 
-@interface OrgApacheLuceneRangetreeRangeTreeSortedSetDocValues : OrgApacheLuceneIndexSortedSetDocValues {
- @public
-  OrgApacheLuceneRangetreeRangeTreeReader *rangeTreeReader_;
-  OrgApacheLuceneIndexSortedSetDocValues *delegate_;
-}
+#pragma mark Package-Private
 
-#pragma mark Public
-
-- (instancetype)initWithOrgApacheLuceneRangetreeRangeTreeReader:(OrgApacheLuceneRangetreeRangeTreeReader *)rangeTreeReader
-                     withOrgApacheLuceneIndexSortedSetDocValues:(OrgApacheLuceneIndexSortedSetDocValues *)delegate;
-
-- (OrgApacheLuceneRangetreeRangeTreeReader *)getRangeTreeReader;
-
-- (jlong)getValueCount;
-
-- (OrgApacheLuceneUtilBytesRef *)lookupOrdWithLong:(jlong)ord;
-
-- (jlong)lookupTermWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)key;
-
-- (jlong)nextOrd;
-
-- (void)setDocumentWithInt:(jint)doc;
-
-- (OrgApacheLuceneIndexTermsEnum *)termsEnum;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneRangetreeRangeTreeSortedSetDocValues)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeRangeTreeSortedSetDocValues, rangeTreeReader_, OrgApacheLuceneRangetreeRangeTreeReader *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeRangeTreeSortedSetDocValues, delegate_, OrgApacheLuceneIndexSortedSetDocValues *)
+FOUNDATION_EXPORT void OrgApacheLuceneRangetreeRangeTreeSortedSetDocValues_init(OrgApacheLuceneRangetreeRangeTreeSortedSetDocValues *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneRangetreeRangeTreeSortedSetDocValues_initWithOrgApacheLuceneRangetreeRangeTreeReader_withOrgApacheLuceneIndexSortedSetDocValues_(OrgApacheLuceneRangetreeRangeTreeSortedSetDocValues *self, OrgApacheLuceneRangetreeRangeTreeReader *rangeTreeReader, OrgApacheLuceneIndexSortedSetDocValues *delegate);
-
-FOUNDATION_EXPORT OrgApacheLuceneRangetreeRangeTreeSortedSetDocValues *new_OrgApacheLuceneRangetreeRangeTreeSortedSetDocValues_initWithOrgApacheLuceneRangetreeRangeTreeReader_withOrgApacheLuceneIndexSortedSetDocValues_(OrgApacheLuceneRangetreeRangeTreeReader *rangeTreeReader, OrgApacheLuceneIndexSortedSetDocValues *delegate) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneRangetreeRangeTreeSortedSetDocValues *new_OrgApacheLuceneRangetreeRangeTreeSortedSetDocValues_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeRangeTreeSortedSetDocValues)
 

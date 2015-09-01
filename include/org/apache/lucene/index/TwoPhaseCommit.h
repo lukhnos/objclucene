@@ -18,12 +18,6 @@
 
 @protocol OrgApacheLuceneIndexTwoPhaseCommit < NSObject, JavaObject >
 
-- (void)prepareCommit;
-
-- (void)commit;
-
-- (void)rollback;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexTwoPhaseCommit)

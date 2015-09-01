@@ -6,9 +6,6 @@
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
-#include "java/util/Collection.h"
-#include "java/util/Collections.h"
-#include "java/util/List.h"
 #include "org/apache/lucene/search/DocIdSetIterator.h"
 #include "org/apache/lucene/search/Scorer.h"
 #include "org/apache/lucene/search/TwoPhaseIterator.h"
@@ -33,14 +30,6 @@
   return 0;
 }
 
-- (OrgApacheLuceneSearchWeight *)getWeight {
-  return weight_;
-}
-
-- (id<JavaUtilCollection>)getChildren {
-  return JavaUtilCollections_emptyList();
-}
-
 - (OrgApacheLuceneSearchTwoPhaseIterator *)asTwoPhaseIterator {
   return nil;
 }
@@ -55,15 +44,13 @@
     { "initWithOrgApacheLuceneSearchWeight:", "Scorer", NULL, 0x4, NULL, NULL },
     { "score", NULL, "F", 0x401, "Ljava.io.IOException;", NULL },
     { "freq", NULL, "I", 0x401, "Ljava.io.IOException;", NULL },
-    { "getWeight", NULL, "Lorg.apache.lucene.search.Weight;", 0x1, NULL, NULL },
-    { "getChildren", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
     { "asTwoPhaseIterator", NULL, "Lorg.apache.lucene.search.TwoPhaseIterator;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "weight_", NULL, 0x14, "Lorg.apache.lucene.search.Weight;", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.search.Scorer$ChildScorer;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchScorer = { 2, "Scorer", "org.apache.lucene.search", NULL, 0x401, 6, methods, 1, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchScorer = { 2, "Scorer", "org.apache.lucene.search", NULL, 0x401, 4, methods, 1, fields, 0, NULL, 1, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneSearchScorer;
 }
 

@@ -56,19 +56,8 @@ __attribute__((unused)) static jint OrgApacheLuceneUtilAutomatonRunAutomaton_get
   return initial_;
 }
 
-- (IOSIntArray *)getCharIntervals {
-  return [((IOSIntArray *) nil_chk(points_)) clone];
-}
-
 - (jint)getCharClassWithInt:(jint)c {
   return OrgApacheLuceneUtilAutomatonRunAutomaton_getCharClassWithInt_(self, c);
-}
-
-- (instancetype)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a
-                                                      withInt:(jint)maxInterval
-                                                  withBoolean:(jboolean)tableize {
-  OrgApacheLuceneUtilAutomatonRunAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_withBoolean_(self, a, maxInterval, tableize);
-  return self;
 }
 
 - (instancetype)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a
@@ -128,9 +117,7 @@ __attribute__((unused)) static jint OrgApacheLuceneUtilAutomatonRunAutomaton_get
     { "getSize", NULL, "I", 0x11, NULL, NULL },
     { "isAcceptWithInt:", "isAccept", "Z", 0x11, NULL, NULL },
     { "getInitialState", NULL, "I", 0x11, NULL, NULL },
-    { "getCharIntervals", NULL, "[I", 0x11, NULL, NULL },
     { "getCharClassWithInt:", "getCharClass", "I", 0x10, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilAutomatonAutomaton:withInt:withBoolean:", "RunAutomaton", NULL, 0x1, NULL, NULL },
     { "initWithOrgApacheLuceneUtilAutomatonAutomaton:withInt:withBoolean:withInt:", "RunAutomaton", NULL, 0x1, NULL, NULL },
     { "stepWithInt:withInt:", "step", "I", 0x11, NULL, NULL },
     { "hash", "hashCode", "I", 0x1, NULL, NULL },
@@ -146,7 +133,7 @@ __attribute__((unused)) static jint OrgApacheLuceneUtilAutomatonRunAutomaton_get
     { "points_", NULL, 0x10, "[I", NULL, NULL, .constantValue.asLong = 0 },
     { "classmap_", NULL, 0x10, "[I", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonRunAutomaton = { 2, "RunAutomaton", "org.apache.lucene.util.automaton", NULL, 0x401, 11, methods, 8, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonRunAutomaton = { 2, "RunAutomaton", "org.apache.lucene.util.automaton", NULL, 0x401, 9, methods, 8, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilAutomatonRunAutomaton;
 }
 
@@ -154,10 +141,6 @@ __attribute__((unused)) static jint OrgApacheLuceneUtilAutomatonRunAutomaton_get
 
 jint OrgApacheLuceneUtilAutomatonRunAutomaton_getCharClassWithInt_(OrgApacheLuceneUtilAutomatonRunAutomaton *self, jint c) {
   return OrgApacheLuceneUtilAutomatonOperations_findIndexWithInt_withIntArray_(c, self->points_);
-}
-
-void OrgApacheLuceneUtilAutomatonRunAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_withBoolean_(OrgApacheLuceneUtilAutomatonRunAutomaton *self, OrgApacheLuceneUtilAutomatonAutomaton *a, jint maxInterval, jboolean tableize) {
-  OrgApacheLuceneUtilAutomatonRunAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_withBoolean_withInt_(self, a, maxInterval, tableize, OrgApacheLuceneUtilAutomatonOperations_DEFAULT_MAX_DETERMINIZED_STATES);
 }
 
 void OrgApacheLuceneUtilAutomatonRunAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_withBoolean_withInt_(OrgApacheLuceneUtilAutomatonRunAutomaton *self, OrgApacheLuceneUtilAutomatonAutomaton *a, jint maxInterval, jboolean tableize, jint maxDeterminizedStates) {

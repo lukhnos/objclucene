@@ -20,9 +20,6 @@
 #define OrgApacheLuceneIndexLogMergePolicy_INCLUDE 1
 #include "org/apache/lucene/index/LogMergePolicy.h"
 
-@class OrgApacheLuceneIndexIndexWriter;
-@class OrgApacheLuceneIndexSegmentCommitInfo;
-
 #define OrgApacheLuceneIndexLogDocMergePolicy_DEFAULT_MIN_MERGE_DOCS 1000
 
 @interface OrgApacheLuceneIndexLogDocMergePolicy : OrgApacheLuceneIndexLogMergePolicy
@@ -30,15 +27,6 @@
 #pragma mark Public
 
 - (instancetype)init;
-
-- (jint)getMinMergeDocs;
-
-- (void)setMinMergeDocsWithInt:(jint)minMergeDocs;
-
-#pragma mark Protected
-
-- (jlong)sizeWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)info
-                   withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer;
 
 @end
 

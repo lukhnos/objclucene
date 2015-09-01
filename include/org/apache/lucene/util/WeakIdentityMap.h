@@ -24,21 +24,11 @@
 
 - (void)clear;
 
-- (jboolean)containsKeyWithId:(id)key;
-
-- (id)getWithId:(id)key;
-
-- (jboolean)isEmpty;
-
 - (id<JavaUtilIterator>)keyIterator;
 
 + (OrgApacheLuceneUtilWeakIdentityMap *)newConcurrentHashMap OBJC_METHOD_FAMILY_NONE;
 
 + (OrgApacheLuceneUtilWeakIdentityMap *)newConcurrentHashMapWithBoolean:(jboolean)reapOnRead OBJC_METHOD_FAMILY_NONE;
-
-+ (OrgApacheLuceneUtilWeakIdentityMap *)newHashMap OBJC_METHOD_FAMILY_NONE;
-
-+ (OrgApacheLuceneUtilWeakIdentityMap *)newHashMapWithBoolean:(jboolean)reapOnRead OBJC_METHOD_FAMILY_NONE;
 
 - (id)putWithId:(id)key
          withId:(id)value;
@@ -47,20 +37,12 @@
 
 - (id)removeWithId:(id)key;
 
-- (jint)size;
-
-- (id<JavaUtilIterator>)valueIterator;
-
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneUtilWeakIdentityMap)
 
 FOUNDATION_EXPORT id OrgApacheLuceneUtilWeakIdentityMap_NULL__;
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilWeakIdentityMap, NULL__, id)
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilWeakIdentityMap *OrgApacheLuceneUtilWeakIdentityMap_newHashMap();
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilWeakIdentityMap *OrgApacheLuceneUtilWeakIdentityMap_newHashMapWithBoolean_(jboolean reapOnRead);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilWeakIdentityMap *OrgApacheLuceneUtilWeakIdentityMap_newConcurrentHashMap();
 

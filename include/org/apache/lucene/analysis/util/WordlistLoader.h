@@ -16,59 +16,19 @@
 #if !defined (_OrgApacheLuceneAnalysisUtilWordlistLoader_) && (OrgApacheLuceneAnalysisUtilWordlistLoader_INCLUDE_ALL || OrgApacheLuceneAnalysisUtilWordlistLoader_INCLUDE)
 #define _OrgApacheLuceneAnalysisUtilWordlistLoader_
 
-@class JavaIoInputStream;
-@class JavaIoReader;
-@class JavaNioCharsetCharset;
-@class OrgApacheLuceneAnalysisUtilCharArrayMap;
-@class OrgApacheLuceneAnalysisUtilCharArraySet;
-@protocol JavaUtilList;
-
 @interface OrgApacheLuceneAnalysisUtilWordlistLoader : NSObject
 
 #pragma mark Public
 
-+ (id<JavaUtilList>)getLinesWithJavaIoInputStream:(JavaIoInputStream *)stream
-                        withJavaNioCharsetCharset:(JavaNioCharsetCharset *)charset;
-
-+ (OrgApacheLuceneAnalysisUtilCharArraySet *)getSnowballWordSetWithJavaIoReader:(JavaIoReader *)reader;
-
-+ (OrgApacheLuceneAnalysisUtilCharArraySet *)getSnowballWordSetWithJavaIoReader:(JavaIoReader *)reader
-                                    withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)result;
-
-+ (OrgApacheLuceneAnalysisUtilCharArrayMap *)getStemDictWithJavaIoReader:(JavaIoReader *)reader
-                             withOrgApacheLuceneAnalysisUtilCharArrayMap:(OrgApacheLuceneAnalysisUtilCharArrayMap *)result;
-
-+ (OrgApacheLuceneAnalysisUtilCharArraySet *)getWordSetWithJavaIoReader:(JavaIoReader *)reader;
-
-+ (OrgApacheLuceneAnalysisUtilCharArraySet *)getWordSetWithJavaIoReader:(JavaIoReader *)reader
-                            withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)result;
-
-+ (OrgApacheLuceneAnalysisUtilCharArraySet *)getWordSetWithJavaIoReader:(JavaIoReader *)reader
-                                                           withNSString:(NSString *)comment;
-
-+ (OrgApacheLuceneAnalysisUtilCharArraySet *)getWordSetWithJavaIoReader:(JavaIoReader *)reader
-                                                           withNSString:(NSString *)comment
-                            withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)result;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisUtilWordlistLoader)
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisUtilWordlistLoader_getWordSetWithJavaIoReader_withOrgApacheLuceneAnalysisUtilCharArraySet_(JavaIoReader *reader, OrgApacheLuceneAnalysisUtilCharArraySet *result);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisUtilWordlistLoader_init(OrgApacheLuceneAnalysisUtilWordlistLoader *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisUtilWordlistLoader_getWordSetWithJavaIoReader_(JavaIoReader *reader);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisUtilWordlistLoader_getWordSetWithJavaIoReader_withNSString_(JavaIoReader *reader, NSString *comment);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisUtilWordlistLoader_getWordSetWithJavaIoReader_withNSString_withOrgApacheLuceneAnalysisUtilCharArraySet_(JavaIoReader *reader, NSString *comment, OrgApacheLuceneAnalysisUtilCharArraySet *result);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisUtilWordlistLoader_getSnowballWordSetWithJavaIoReader_withOrgApacheLuceneAnalysisUtilCharArraySet_(JavaIoReader *reader, OrgApacheLuceneAnalysisUtilCharArraySet *result);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisUtilWordlistLoader_getSnowballWordSetWithJavaIoReader_(JavaIoReader *reader);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArrayMap *OrgApacheLuceneAnalysisUtilWordlistLoader_getStemDictWithJavaIoReader_withOrgApacheLuceneAnalysisUtilCharArrayMap_(JavaIoReader *reader, OrgApacheLuceneAnalysisUtilCharArrayMap *result);
-
-FOUNDATION_EXPORT id<JavaUtilList> OrgApacheLuceneAnalysisUtilWordlistLoader_getLinesWithJavaIoInputStream_withJavaNioCharsetCharset_(JavaIoInputStream *stream, JavaNioCharsetCharset *charset);
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilWordlistLoader *new_OrgApacheLuceneAnalysisUtilWordlistLoader_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilWordlistLoader)
 

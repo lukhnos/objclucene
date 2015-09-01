@@ -20,53 +20,19 @@
 #define OrgApacheLuceneIndexMergePolicy_INCLUDE 1
 #include "org/apache/lucene/index/MergePolicy.h"
 
-@class OrgApacheLuceneIndexIndexWriter;
-@class OrgApacheLuceneIndexMergePolicy_MergeSpecification;
-@class OrgApacheLuceneIndexMergeTriggerEnum;
-@class OrgApacheLuceneIndexSegmentCommitInfo;
-@class OrgApacheLuceneIndexSegmentInfos;
-@protocol JavaUtilMap;
-
-@interface OrgApacheLuceneIndexUpgradeIndexMergePolicy : OrgApacheLuceneIndexMergePolicy {
- @public
-  OrgApacheLuceneIndexMergePolicy *base_;
-}
+@interface OrgApacheLuceneIndexUpgradeIndexMergePolicy : OrgApacheLuceneIndexMergePolicy
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneIndexMergePolicy:(OrgApacheLuceneIndexMergePolicy *)base;
-
-- (OrgApacheLuceneIndexMergePolicy_MergeSpecification *)findForcedDeletesMergesWithOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)segmentInfos
-                                                                                withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer;
-
-- (OrgApacheLuceneIndexMergePolicy_MergeSpecification *)findForcedMergesWithOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)segmentInfos
-                                                                                                     withInt:(jint)maxSegmentCount
-                                                                                             withJavaUtilMap:(id<JavaUtilMap>)segmentsToMerge
-                                                                         withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer;
-
-- (OrgApacheLuceneIndexMergePolicy_MergeSpecification *)findMergesWithOrgApacheLuceneIndexMergeTriggerEnum:(OrgApacheLuceneIndexMergeTriggerEnum *)mergeTrigger
-                                                                      withOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)segmentInfos
-                                                                       withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer;
-
-- (NSString *)description;
-
-- (jboolean)useCompoundFileWithOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)segments
-                      withOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)newSegment
-                            withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer;
-
-#pragma mark Protected
-
-- (jboolean)shouldUpgradeSegmentWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)si;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexUpgradeIndexMergePolicy)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexUpgradeIndexMergePolicy, base_, OrgApacheLuceneIndexMergePolicy *)
+FOUNDATION_EXPORT void OrgApacheLuceneIndexUpgradeIndexMergePolicy_init(OrgApacheLuceneIndexUpgradeIndexMergePolicy *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexUpgradeIndexMergePolicy_initWithOrgApacheLuceneIndexMergePolicy_(OrgApacheLuceneIndexUpgradeIndexMergePolicy *self, OrgApacheLuceneIndexMergePolicy *base);
-
-FOUNDATION_EXPORT OrgApacheLuceneIndexUpgradeIndexMergePolicy *new_OrgApacheLuceneIndexUpgradeIndexMergePolicy_initWithOrgApacheLuceneIndexMergePolicy_(OrgApacheLuceneIndexMergePolicy *base) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexUpgradeIndexMergePolicy *new_OrgApacheLuceneIndexUpgradeIndexMergePolicy_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexUpgradeIndexMergePolicy)
 

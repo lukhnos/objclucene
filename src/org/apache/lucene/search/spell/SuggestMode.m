@@ -13,9 +13,7 @@ __attribute__((unused)) static void OrgApacheLuceneSearchSpellSuggestModeEnum_in
 
 __attribute__((unused)) static OrgApacheLuceneSearchSpellSuggestModeEnum *new_OrgApacheLuceneSearchSpellSuggestModeEnum_initWithNSString_withInt_(NSString *__name, jint __ordinal) NS_RETURNS_RETAINED;
 
-J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchSpellSuggestModeEnum)
-
-OrgApacheLuceneSearchSpellSuggestModeEnum *OrgApacheLuceneSearchSpellSuggestModeEnum_values_[3];
+OrgApacheLuceneSearchSpellSuggestModeEnum *OrgApacheLuceneSearchSpellSuggestModeEnum_values_[0];
 
 @implementation OrgApacheLuceneSearchSpellSuggestModeEnum
 
@@ -27,7 +25,7 @@ OrgApacheLuceneSearchSpellSuggestModeEnum *OrgApacheLuceneSearchSpellSuggestMode
 
 IOSObjectArray *OrgApacheLuceneSearchSpellSuggestModeEnum_values() {
   OrgApacheLuceneSearchSpellSuggestModeEnum_initialize();
-  return [IOSObjectArray arrayWithObjects:OrgApacheLuceneSearchSpellSuggestModeEnum_values_ count:3 type:OrgApacheLuceneSearchSpellSuggestModeEnum_class_()];
+  return [IOSObjectArray arrayWithObjects:OrgApacheLuceneSearchSpellSuggestModeEnum_values_ count:0 type:OrgApacheLuceneSearchSpellSuggestModeEnum_class_()];
 }
 
 + (IOSObjectArray *)values {
@@ -40,7 +38,7 @@ IOSObjectArray *OrgApacheLuceneSearchSpellSuggestModeEnum_values() {
 
 OrgApacheLuceneSearchSpellSuggestModeEnum *OrgApacheLuceneSearchSpellSuggestModeEnum_valueOfWithNSString_(NSString *name) {
   OrgApacheLuceneSearchSpellSuggestModeEnum_initialize();
-  for (int i = 0; i < 3; i++) {
+  for (int i = 0; i < 0; i++) {
     OrgApacheLuceneSearchSpellSuggestModeEnum *e = OrgApacheLuceneSearchSpellSuggestModeEnum_values_[i];
     if ([name isEqual:[e name]]) {
       return e;
@@ -54,23 +52,9 @@ OrgApacheLuceneSearchSpellSuggestModeEnum *OrgApacheLuceneSearchSpellSuggestMode
   return [self retain];
 }
 
-+ (void)initialize {
-  if (self == [OrgApacheLuceneSearchSpellSuggestModeEnum class]) {
-    OrgApacheLuceneSearchSpellSuggestModeEnum_SUGGEST_WHEN_NOT_IN_INDEX = new_OrgApacheLuceneSearchSpellSuggestModeEnum_initWithNSString_withInt_(@"SUGGEST_WHEN_NOT_IN_INDEX", 0);
-    OrgApacheLuceneSearchSpellSuggestModeEnum_SUGGEST_MORE_POPULAR = new_OrgApacheLuceneSearchSpellSuggestModeEnum_initWithNSString_withInt_(@"SUGGEST_MORE_POPULAR", 1);
-    OrgApacheLuceneSearchSpellSuggestModeEnum_SUGGEST_ALWAYS = new_OrgApacheLuceneSearchSpellSuggestModeEnum_initWithNSString_withInt_(@"SUGGEST_ALWAYS", 2);
-    J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchSpellSuggestModeEnum)
-  }
-}
-
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcFieldInfo fields[] = {
-    { "SUGGEST_WHEN_NOT_IN_INDEX", "SUGGEST_WHEN_NOT_IN_INDEX", 0x4019, "Lorg.apache.lucene.search.spell.SuggestMode;", &OrgApacheLuceneSearchSpellSuggestModeEnum_SUGGEST_WHEN_NOT_IN_INDEX, NULL, .constantValue.asLong = 0 },
-    { "SUGGEST_MORE_POPULAR", "SUGGEST_MORE_POPULAR", 0x4019, "Lorg.apache.lucene.search.spell.SuggestMode;", &OrgApacheLuceneSearchSpellSuggestModeEnum_SUGGEST_MORE_POPULAR, NULL, .constantValue.asLong = 0 },
-    { "SUGGEST_ALWAYS", "SUGGEST_ALWAYS", 0x4019, "Lorg.apache.lucene.search.spell.SuggestMode;", &OrgApacheLuceneSearchSpellSuggestModeEnum_SUGGEST_ALWAYS, NULL, .constantValue.asLong = 0 },
-  };
   static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.spell.SuggestMode;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpellSuggestModeEnum = { 2, "SuggestMode", "org.apache.lucene.search.spell", NULL, 0x4011, 0, NULL, 3, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/search/spell/SuggestMode;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpellSuggestModeEnum = { 2, "SuggestMode", "org.apache.lucene.search.spell", NULL, 0x4011, 0, NULL, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/search/spell/SuggestMode;>;" };
   return &_OrgApacheLuceneSearchSpellSuggestModeEnum;
 }
 

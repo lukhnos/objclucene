@@ -98,10 +98,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum)
   }
 }
 
-- (jlong)getTotalBytesWritten {
-  return JreLoadVolatileLong(&totalBytesWritten_);
-}
-
 - (jlong)pauseWithLong:(jlong)bytes {
   JrePlusAssignVolatileLongJ(&totalBytesWritten_, bytes);
   jlong startNS = JavaLangSystem_nanoTime();
@@ -180,7 +176,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum)
     { "initWithOrgApacheLuceneIndexMergePolicy_OneMerge:", "MergeRateLimiter", NULL, 0x1, NULL, NULL },
     { "setMBPerSecWithDouble:", "setMBPerSec", "V", 0x21, NULL, NULL },
     { "getMBPerSec", NULL, "D", 0x21, NULL, NULL },
-    { "getTotalBytesWritten", NULL, "J", 0x1, NULL, NULL },
     { "pauseWithLong:", "pause", "J", 0x1, "Lorg.apache.lucene.index.MergePolicy$MergeAbortedException;", NULL },
     { "getTotalStoppedNS", NULL, "J", 0x21, NULL, NULL },
     { "getTotalPausedNS", NULL, "J", 0x21, NULL, NULL },
@@ -202,7 +197,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum)
     { "merge_", NULL, 0x10, "Lorg.apache.lucene.index.MergePolicy$OneMerge;", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.index.MergeRateLimiter$PauseResult;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMergeRateLimiter = { 2, "MergeRateLimiter", "org.apache.lucene.index", NULL, 0x1, 12, methods, 9, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMergeRateLimiter = { 2, "MergeRateLimiter", "org.apache.lucene.index", NULL, 0x1, 11, methods, 9, fields, 0, NULL, 1, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneIndexMergeRateLimiter;
 }
 

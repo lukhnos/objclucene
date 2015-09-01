@@ -16,11 +16,7 @@
 #if !defined (_OrgApacheLuceneSearchSpellDictionary_) && (OrgApacheLuceneSearchSpellDictionary_INCLUDE_ALL || OrgApacheLuceneSearchSpellDictionary_INCLUDE)
 #define _OrgApacheLuceneSearchSpellDictionary_
 
-@protocol OrgApacheLuceneSearchSuggestInputIterator;
-
 @protocol OrgApacheLuceneSearchSpellDictionary < NSObject, JavaObject >
-
-- (id<OrgApacheLuceneSearchSuggestInputIterator>)getEntryIterator;
 
 @end
 

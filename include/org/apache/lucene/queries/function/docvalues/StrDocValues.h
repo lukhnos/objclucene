@@ -20,35 +20,17 @@
 #define OrgApacheLuceneQueriesFunctionFunctionValues_INCLUDE 1
 #include "org/apache/lucene/queries/function/FunctionValues.h"
 
-@class OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller;
-@class OrgApacheLuceneQueriesFunctionValueSource;
-
-@interface OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues : OrgApacheLuceneQueriesFunctionFunctionValues {
- @public
-  OrgApacheLuceneQueriesFunctionValueSource *vs_;
-}
+@interface OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues : OrgApacheLuceneQueriesFunctionFunctionValues
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)vs;
-
-- (jboolean)boolValWithInt:(jint)doc;
-
-- (OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller *)getValueFiller;
-
-- (id)objectValWithInt:(jint)doc;
-
-- (NSString *)strValWithInt:(jint)doc;
-
-- (NSString *)toStringWithInt:(jint)doc;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues, vs_, OrgApacheLuceneQueriesFunctionValueSource *)
-
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_initWithOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues *self, OrgApacheLuceneQueriesFunctionValueSource *vs);
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues_init(OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionDocvaluesStrDocValues)
 

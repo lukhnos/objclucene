@@ -22,8 +22,6 @@
 
 @class OrgApacheLuceneIndexStandardDirectoryReader;
 @class OrgApacheLuceneStoreDirectory;
-@protocol JavaUtilCollection;
-@protocol JavaUtilMap;
 
 @interface OrgApacheLuceneIndexIndexCommit : NSObject < JavaLangComparable >
 
@@ -37,19 +35,11 @@
 
 - (OrgApacheLuceneStoreDirectory *)getDirectory;
 
-- (id<JavaUtilCollection>)getFileNames;
-
 - (jlong)getGeneration;
-
-- (jint)getSegmentCount;
 
 - (NSString *)getSegmentsFileName;
 
-- (id<JavaUtilMap>)getUserData;
-
 - (NSUInteger)hash;
-
-- (jboolean)isDeleted;
 
 #pragma mark Protected
 

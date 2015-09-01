@@ -20,27 +20,19 @@
 #define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
-@class OrgApacheLuceneAnalysisCommongramsCommonGramsFilter;
-
 @interface OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisCommongramsCommonGramsFilter:(OrgApacheLuceneAnalysisCommongramsCommonGramsFilter *)input;
-
-- (jboolean)incrementToken;
-
-- (jboolean)isGramType;
-
-- (void)reset;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter_initWithOrgApacheLuceneAnalysisCommongramsCommonGramsFilter_(OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter *self, OrgApacheLuceneAnalysisCommongramsCommonGramsFilter *input);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter_init(OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter *new_OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter_initWithOrgApacheLuceneAnalysisCommongramsCommonGramsFilter_(OrgApacheLuceneAnalysisCommongramsCommonGramsFilter *input) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter *new_OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter)
 

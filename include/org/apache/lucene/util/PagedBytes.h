@@ -25,7 +25,6 @@
 @class OrgApacheLuceneUtilPagedBytes_PagedBytesDataInput;
 @class OrgApacheLuceneUtilPagedBytes_PagedBytesDataOutput;
 @class OrgApacheLuceneUtilPagedBytes_Reader;
-@protocol JavaUtilCollection;
 
 @interface OrgApacheLuceneUtilPagedBytes : NSObject < OrgApacheLuceneUtilAccountable >
 
@@ -33,17 +32,12 @@
 
 - (instancetype)initWithInt:(jint)blockBits;
 
-- (void)copy__WithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)bytes
-              withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)outArg OBJC_METHOD_FAMILY_NONE;
-
 - (void)copy__WithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)inArg
                                         withLong:(jlong)byteCount OBJC_METHOD_FAMILY_NONE;
 
 - (jlong)copyUsingLengthPrefixWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)bytes OBJC_METHOD_FAMILY_NONE;
 
 - (OrgApacheLuceneUtilPagedBytes_Reader *)freezeWithBoolean:(jboolean)trim;
-
-- (id<JavaUtilCollection>)getChildResources;
 
 - (OrgApacheLuceneUtilPagedBytes_PagedBytesDataInput *)getDataInput;
 
@@ -73,7 +67,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPagedBytes)
 #include "org/apache/lucene/util/Accountable.h"
 
 @class OrgApacheLuceneUtilBytesRef;
-@protocol JavaUtilCollection;
 
 @interface OrgApacheLuceneUtilPagedBytes_Reader : NSObject < OrgApacheLuceneUtilAccountable >
 
@@ -81,12 +74,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPagedBytes)
 
 - (void)fillWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)b
                                    withLong:(jlong)start;
-
-- (void)fillSliceWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)b
-                                        withLong:(jlong)start
-                                         withInt:(jint)length;
-
-- (id<JavaUtilCollection>)getChildResources;
 
 - (jlong)ramBytesUsed;
 
@@ -155,8 +142,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPagedBytes_PagedBytesDataInput)
 @interface OrgApacheLuceneUtilPagedBytes_PagedBytesDataOutput : OrgApacheLuceneStoreDataOutput
 
 #pragma mark Public
-
-- (jlong)getPosition;
 
 - (void)writeByteWithByte:(jbyte)b;
 

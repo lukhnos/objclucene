@@ -34,10 +34,6 @@
   return textStartPos_ == ((OrgApacheLuceneSearchHighlightTextFragment *) nil_chk(fragment))->textEndPos_;
 }
 
-- (jint)getFragNum {
-  return fragNum_;
-}
-
 - (NSString *)description {
   return [((id<JavaLangCharSequence>) nil_chk([((id<JavaLangCharSequence>) nil_chk(markedUpText_)) subSequenceFrom:textStartPos_ to:textEndPos_])) description];
 }
@@ -54,7 +50,6 @@
     { "getScore", NULL, "F", 0x1, NULL, NULL },
     { "mergeWithOrgApacheLuceneSearchHighlightTextFragment:", "merge", "V", 0x1, NULL, NULL },
     { "followsWithOrgApacheLuceneSearchHighlightTextFragment:", "follows", "Z", 0x1, NULL, NULL },
-    { "getFragNum", NULL, "I", 0x1, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -64,7 +59,7 @@
     { "textEndPos_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "score_", NULL, 0x0, "F", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightTextFragment = { 2, "TextFragment", "org.apache.lucene.search.highlight", NULL, 0x1, 7, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightTextFragment = { 2, "TextFragment", "org.apache.lucene.search.highlight", NULL, 0x1, 6, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchHighlightTextFragment;
 }
 

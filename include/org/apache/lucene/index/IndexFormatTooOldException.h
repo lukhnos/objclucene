@@ -20,7 +20,6 @@
 #define JavaIoIOException_INCLUDE 1
 #include "java/io/IOException.h"
 
-@class JavaLangInteger;
 @class OrgApacheLuceneStoreDataInput;
 
 @interface OrgApacheLuceneIndexIndexFormatTooOldException : JavaIoIOException
@@ -42,16 +41,6 @@
 
 - (instancetype)initWithNSString:(NSString *)resourceDescription
                     withNSString:(NSString *)reason;
-
-- (JavaLangInteger *)getMaxVersion;
-
-- (JavaLangInteger *)getMinVersion;
-
-- (NSString *)getReason;
-
-- (NSString *)getResourceDescription;
-
-- (JavaLangInteger *)getVersion;
 
 @end
 

@@ -3,84 +3,35 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/fr/FrenchMinimalStemFilter.java
 //
 
-#include "IOSClass.h"
-#include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
-#include "org/apache/lucene/analysis/TokenFilter.h"
-#include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/fr/FrenchMinimalStemFilter.h"
-#include "org/apache/lucene/analysis/fr/FrenchMinimalStemmer.h"
-#include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
-#include "org/apache/lucene/analysis/tokenattributes/KeywordAttribute.h"
-#include "org/apache/lucene/util/AttributeSource.h"
 
-@interface OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter () {
- @public
-  OrgApacheLuceneAnalysisFrFrenchMinimalStemmer *stemmer_;
-  id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute> termAtt_;
-  id<OrgApacheLuceneAnalysisTokenattributesKeywordAttribute> keywordAttr_;
-}
-
-@end
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter, stemmer_, OrgApacheLuceneAnalysisFrFrenchMinimalStemmer *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter, termAtt_, id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter, keywordAttr_, id<OrgApacheLuceneAnalysisTokenattributesKeywordAttribute>)
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, input);
+- (instancetype)init {
+  OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter_init(self);
   return self;
-}
-
-- (jboolean)incrementToken {
-  if ([((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
-    if (![((id<OrgApacheLuceneAnalysisTokenattributesKeywordAttribute>) nil_chk(keywordAttr_)) isKeyword]) {
-      jint newlen = [((OrgApacheLuceneAnalysisFrFrenchMinimalStemmer *) nil_chk(stemmer_)) stemWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer] withInt:[termAtt_ length]];
-      [termAtt_ setLengthWithInt:newlen];
-    }
-    return YES;
-  }
-  else {
-    return NO;
-  }
-}
-
-- (void)dealloc {
-  RELEASE_(stemmer_);
-  RELEASE_(termAtt_);
-  RELEASE_(keywordAttr_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:", "FrenchMinimalStemFilter", NULL, 0x1, NULL, NULL },
-    { "incrementToken", NULL, "Z", 0x1, "Ljava.io.IOException;", NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "stemmer_", NULL, 0x12, "Lorg.apache.lucene.analysis.fr.FrenchMinimalStemmer;", NULL, NULL, .constantValue.asLong = 0 },
-    { "termAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "keywordAttr_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.KeywordAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter = { 2, "FrenchMinimalStemFilter", "org.apache.lucene.analysis.fr", NULL, 0x11, 2, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter = { 2, "FrenchMinimalStemFilter", "org.apache.lucene.analysis.fr", NULL, 0x11, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter;
 }
 
 @end
 
-void OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter *self, OrgApacheLuceneAnalysisTokenStream *input) {
-  OrgApacheLuceneAnalysisTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, input);
-  JreStrongAssignAndConsume(&self->stemmer_, new_OrgApacheLuceneAnalysisFrFrenchMinimalStemmer_init());
-  JreStrongAssign(&self->termAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()]);
-  JreStrongAssign(&self->keywordAttr_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesKeywordAttribute_class_()]);
+void OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter_init(OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter *new_OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) {
+OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter *new_OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter_init() {
   OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter *self = [OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter alloc];
-  OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, input);
+  OrgApacheLuceneAnalysisFrFrenchMinimalStemFilter_init(self);
   return self;
 }
 

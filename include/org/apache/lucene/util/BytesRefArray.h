@@ -19,8 +19,6 @@
 @class OrgApacheLuceneUtilBytesRef;
 @class OrgApacheLuceneUtilBytesRefBuilder;
 @class OrgApacheLuceneUtilCounter;
-@protocol JavaUtilComparator;
-@protocol OrgApacheLuceneUtilBytesRefIterator;
 
 @interface OrgApacheLuceneUtilBytesRefArray : NSObject
 
@@ -30,16 +28,8 @@
 
 - (jint)appendWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)bytes;
 
-- (void)clear;
-
 - (OrgApacheLuceneUtilBytesRef *)getWithOrgApacheLuceneUtilBytesRefBuilder:(OrgApacheLuceneUtilBytesRefBuilder *)spare
                                                                    withInt:(jint)index;
-
-- (id<OrgApacheLuceneUtilBytesRefIterator>)iterator;
-
-- (id<OrgApacheLuceneUtilBytesRefIterator>)iteratorWithJavaUtilComparator:(id<JavaUtilComparator>)comp;
-
-- (jint)size;
 
 @end
 

@@ -20,43 +20,19 @@
 #define OrgApacheLuceneUtilFstOutputs_INCLUDE 1
 #include "org/apache/lucene/util/fst/Outputs.h"
 
-@class OrgApacheLuceneStoreDataInput;
-@class OrgApacheLuceneStoreDataOutput;
-@class OrgApacheLuceneUtilCharsRef;
-
 @interface OrgApacheLuceneUtilFstCharSequenceOutputs : OrgApacheLuceneUtilFstOutputs
 
 #pragma mark Public
 
-- (OrgApacheLuceneUtilCharsRef *)addWithId:(OrgApacheLuceneUtilCharsRef *)prefix
-                                    withId:(OrgApacheLuceneUtilCharsRef *)output;
-
-- (OrgApacheLuceneUtilCharsRef *)commonWithId:(OrgApacheLuceneUtilCharsRef *)output1
-                                       withId:(OrgApacheLuceneUtilCharsRef *)output2;
-
-- (OrgApacheLuceneUtilCharsRef *)getNoOutput;
-
-+ (OrgApacheLuceneUtilFstCharSequenceOutputs *)getSingleton;
-
-- (NSString *)outputToStringWithId:(OrgApacheLuceneUtilCharsRef *)output;
-
-- (jlong)ramBytesUsedWithId:(OrgApacheLuceneUtilCharsRef *)output;
-
-- (OrgApacheLuceneUtilCharsRef *)readWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg;
-
-- (void)skipOutputWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg;
-
-- (OrgApacheLuceneUtilCharsRef *)subtractWithId:(OrgApacheLuceneUtilCharsRef *)output
-                                         withId:(OrgApacheLuceneUtilCharsRef *)inc;
-
-- (void)writeWithId:(OrgApacheLuceneUtilCharsRef *)prefix
-withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg;
+- (instancetype)init;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneUtilFstCharSequenceOutputs)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilFstCharSequenceOutputs)
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilFstCharSequenceOutputs *OrgApacheLuceneUtilFstCharSequenceOutputs_getSingleton();
+FOUNDATION_EXPORT void OrgApacheLuceneUtilFstCharSequenceOutputs_init(OrgApacheLuceneUtilFstCharSequenceOutputs *self);
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstCharSequenceOutputs *new_OrgApacheLuceneUtilFstCharSequenceOutputs_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstCharSequenceOutputs)
 

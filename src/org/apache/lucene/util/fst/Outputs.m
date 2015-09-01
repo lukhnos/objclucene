@@ -69,12 +69,6 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg {
   return 0;
 }
 
-- (NSString *)outputToStringWithId:(id)output {
-  // can't call an abstract method
-  [self doesNotRecognizeSelector:_cmd];
-  return 0;
-}
-
 - (id)mergeWithId:(id)first
            withId:(id)second {
   @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
@@ -103,12 +97,11 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg {
     { "readFinalOutputWithOrgApacheLuceneStoreDataInput:", "readFinalOutput", "TT;", 0x1, "Ljava.io.IOException;", "(Lorg/apache/lucene/store/DataInput;)TT;" },
     { "skipFinalOutputWithOrgApacheLuceneStoreDataInput:", "skipFinalOutput", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "getNoOutput", NULL, "TT;", 0x401, NULL, "()TT;" },
-    { "outputToStringWithId:", "outputToString", "Ljava.lang.String;", 0x401, NULL, "(TT;)Ljava/lang/String;" },
     { "mergeWithId:withId:", "merge", "TT;", 0x1, NULL, "(TT;TT;)TT;" },
     { "ramBytesUsedWithId:", "ramBytesUsed", "J", 0x401, NULL, "(TT;)J" },
     { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstOutputs = { 2, "Outputs", "org.apache.lucene.util.fst", NULL, 0x401, 14, methods, 0, NULL, 0, NULL, 0, NULL, NULL, "<T:Ljava/lang/Object;>Ljava/lang/Object;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstOutputs = { 2, "Outputs", "org.apache.lucene.util.fst", NULL, 0x401, 13, methods, 0, NULL, 0, NULL, 0, NULL, NULL, "<T:Ljava/lang/Object;>Ljava/lang/Object;" };
   return &_OrgApacheLuceneUtilFstOutputs;
 }
 

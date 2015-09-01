@@ -16,33 +16,7 @@
 #if !defined (_OrgApacheLuceneQueryparserSurroundParserCharStream_) && (OrgApacheLuceneQueryparserSurroundParserCharStream_INCLUDE_ALL || OrgApacheLuceneQueryparserSurroundParserCharStream_INCLUDE)
 #define _OrgApacheLuceneQueryparserSurroundParserCharStream_
 
-@class IOSCharArray;
-
 @protocol OrgApacheLuceneQueryparserSurroundParserCharStream < NSObject, JavaObject >
-
-- (jchar)readChar;
-
-- (jint)getColumn;
-
-- (jint)getLine;
-
-- (jint)getEndColumn;
-
-- (jint)getEndLine;
-
-- (jint)getBeginColumn;
-
-- (jint)getBeginLine;
-
-- (void)backupWithInt:(jint)amount;
-
-- (jchar)BeginToken;
-
-- (NSString *)GetImage;
-
-- (IOSCharArray *)GetSuffixWithInt:(jint)len;
-
-- (void)Done;
 
 @end
 

@@ -20,47 +20,19 @@
 #define OrgApacheLuceneQueriesFunctionValuesourceConstNumberSource_INCLUDE 1
 #include "org/apache/lucene/queries/function/valuesource/ConstNumberSource.h"
 
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneQueriesFunctionFunctionValues;
-@protocol JavaUtilMap;
-
-@interface OrgApacheLuceneQueriesFunctionValuesourceConstValueSource : OrgApacheLuceneQueriesFunctionValuesourceConstNumberSource {
- @public
-  jfloat constant_;
-}
+@interface OrgApacheLuceneQueriesFunctionValuesourceConstValueSource : OrgApacheLuceneQueriesFunctionValuesourceConstNumberSource
 
 #pragma mark Public
 
-- (instancetype)initWithFloat:(jfloat)constant;
-
-- (NSString *)description__;
-
-- (jboolean)isEqual:(id)o;
-
-- (jboolean)getBool;
-
-- (jdouble)getDouble;
-
-- (jfloat)getFloat;
-
-- (jint)getInt;
-
-- (jlong)getLong;
-
-- (NSNumber *)getNumber;
-
-- (OrgApacheLuceneQueriesFunctionFunctionValues *)getValuesWithJavaUtilMap:(id<JavaUtilMap>)context
-                                 withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext;
-
-- (NSUInteger)hash;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceConstValueSource)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceConstValueSource_initWithFloat_(OrgApacheLuceneQueriesFunctionValuesourceConstValueSource *self, jfloat constant);
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceConstValueSource_init(OrgApacheLuceneQueriesFunctionValuesourceConstValueSource *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceConstValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceConstValueSource_initWithFloat_(jfloat constant) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceConstValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceConstValueSource_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceConstValueSource)
 

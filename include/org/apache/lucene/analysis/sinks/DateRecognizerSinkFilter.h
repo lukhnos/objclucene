@@ -20,30 +20,15 @@
 #define OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter_INCLUDE 1
 #include "org/apache/lucene/analysis/sinks/TeeSinkTokenFilter.h"
 
-@class JavaTextDateFormat;
-@class OrgApacheLuceneUtilAttributeSource;
-@protocol OrgApacheLuceneAnalysisTokenattributesCharTermAttribute;
-
-@interface OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter : OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter {
- @public
-  JavaTextDateFormat *dateFormat_;
-  id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute> termAtt_;
-}
+@interface OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter : OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter
 
 #pragma mark Public
 
 - (instancetype)init;
 
-- (instancetype)initWithJavaTextDateFormat:(JavaTextDateFormat *)dateFormat;
-
-- (jboolean)acceptWithOrgApacheLuceneUtilAttributeSource:(OrgApacheLuceneUtilAttributeSource *)source;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter, dateFormat_, JavaTextDateFormat *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter, termAtt_, id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)
 
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter_DATE_TYPE_;
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter, DATE_TYPE_, NSString *)
@@ -51,10 +36,6 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter,
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter_init(OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter *new_OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter_init() NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter_initWithJavaTextDateFormat_(OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter *self, JavaTextDateFormat *dateFormat);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter *new_OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter_initWithJavaTextDateFormat_(JavaTextDateFormat *dateFormat) NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter)
 

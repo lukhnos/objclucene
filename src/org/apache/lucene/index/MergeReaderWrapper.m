@@ -43,14 +43,6 @@ __attribute__((unused)) static void OrgApacheLuceneIndexMergeReaderWrapper_check
   return self;
 }
 
-- (void)addCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:(id<OrgApacheLuceneIndexLeafReader_CoreClosedListener>)listener {
-  [((OrgApacheLuceneIndexSegmentReader *) nil_chk(in_)) addCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:listener];
-}
-
-- (void)removeCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:(id<OrgApacheLuceneIndexLeafReader_CoreClosedListener>)listener {
-  [((OrgApacheLuceneIndexSegmentReader *) nil_chk(in_)) removeCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:listener];
-}
-
 - (OrgApacheLuceneIndexFields *)fields {
   return fields_;
 }
@@ -180,10 +172,6 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
   return [((OrgApacheLuceneIndexSegmentReader *) nil_chk(in_)) getCoreCacheKey];
 }
 
-- (id)getCombinedCoreAndDeletesKey {
-  return [((OrgApacheLuceneIndexSegmentReader *) nil_chk(in_)) getCombinedCoreAndDeletesKey];
-}
-
 - (void)checkBoundsWithInt:(jint)docID {
   OrgApacheLuceneIndexMergeReaderWrapper_checkBoundsWithInt_(self, docID);
 }
@@ -205,8 +193,6 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneIndexSegmentReader:", "MergeReaderWrapper", NULL, 0x0, "Ljava.io.IOException;", NULL },
-    { "addCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:", "addCoreClosedListener", "V", 0x1, NULL, NULL },
-    { "removeCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:", "removeCoreClosedListener", "V", 0x1, NULL, NULL },
     { "fields", NULL, "Lorg.apache.lucene.index.Fields;", 0x1, "Ljava.io.IOException;", NULL },
     { "getNumericDocValuesWithNSString:", "getNumericDocValues", "Lorg.apache.lucene.index.NumericDocValues;", 0x1, "Ljava.io.IOException;", NULL },
     { "getBinaryDocValuesWithNSString:", "getBinaryDocValues", "Lorg.apache.lucene.index.BinaryDocValues;", 0x1, "Ljava.io.IOException;", NULL },
@@ -224,7 +210,6 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
     { "documentWithInt:withOrgApacheLuceneIndexStoredFieldVisitor:", "document", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "doClose", NULL, "V", 0x4, "Ljava.io.IOException;", NULL },
     { "getCoreCacheKey", NULL, "Ljava.lang.Object;", 0x1, NULL, NULL },
-    { "getCombinedCoreAndDeletesKey", NULL, "Ljava.lang.Object;", 0x1, NULL, NULL },
     { "checkBoundsWithInt:", "checkBounds", "V", 0x2, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
   };
@@ -236,7 +221,7 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
     { "store_", NULL, 0x10, "Lorg.apache.lucene.codecs.StoredFieldsReader;", NULL, NULL, .constantValue.asLong = 0 },
     { "vectors_", NULL, 0x10, "Lorg.apache.lucene.codecs.TermVectorsReader;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMergeReaderWrapper = { 2, "MergeReaderWrapper", "org.apache.lucene.index", NULL, 0x0, 23, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMergeReaderWrapper = { 2, "MergeReaderWrapper", "org.apache.lucene.index", NULL, 0x0, 20, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexMergeReaderWrapper;
 }
 

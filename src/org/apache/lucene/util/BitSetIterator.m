@@ -9,7 +9,6 @@
 #include "org/apache/lucene/util/BitSet.h"
 #include "org/apache/lucene/util/BitSetIterator.h"
 #include "org/apache/lucene/util/FixedBitSet.h"
-#include "org/apache/lucene/util/SparseFixedBitSet.h"
 
 @interface OrgApacheLuceneUtilBitSetIterator () {
  @public
@@ -37,10 +36,6 @@ __attribute__((unused)) static id OrgApacheLuceneUtilBitSetIterator_getBitSetWit
 
 + (OrgApacheLuceneUtilFixedBitSet *)getFixedBitSetOrNullWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)iterator {
   return OrgApacheLuceneUtilBitSetIterator_getFixedBitSetOrNullWithOrgApacheLuceneSearchDocIdSetIterator_(iterator);
-}
-
-+ (OrgApacheLuceneUtilSparseFixedBitSet *)getSparseFixedBitSetOrNullWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)iterator {
-  return OrgApacheLuceneUtilBitSetIterator_getSparseFixedBitSetOrNullWithOrgApacheLuceneSearchDocIdSetIterator_(iterator);
 }
 
 - (instancetype)initWithOrgApacheLuceneUtilBitSet:(OrgApacheLuceneUtilBitSet *)bits
@@ -77,7 +72,6 @@ __attribute__((unused)) static id OrgApacheLuceneUtilBitSetIterator_getBitSetWit
   static const J2ObjcMethodInfo methods[] = {
     { "getBitSetWithOrgApacheLuceneSearchDocIdSetIterator:withIOSClass:", "getBitSet", "TT;", 0xa, NULL, "<T:Lorg/apache/lucene/util/BitSet;>(Lorg/apache/lucene/search/DocIdSetIterator;Ljava/lang/Class<+TT;>;)TT;" },
     { "getFixedBitSetOrNullWithOrgApacheLuceneSearchDocIdSetIterator:", "getFixedBitSetOrNull", "Lorg.apache.lucene.util.FixedBitSet;", 0x9, NULL, NULL },
-    { "getSparseFixedBitSetOrNullWithOrgApacheLuceneSearchDocIdSetIterator:", "getSparseFixedBitSetOrNull", "Lorg.apache.lucene.util.SparseFixedBitSet;", 0x9, NULL, NULL },
     { "initWithOrgApacheLuceneUtilBitSet:withLong:", "BitSetIterator", NULL, 0x1, NULL, NULL },
     { "docID", NULL, "I", 0x1, NULL, NULL },
     { "nextDoc", NULL, "I", 0x1, NULL, NULL },
@@ -90,7 +84,7 @@ __attribute__((unused)) static id OrgApacheLuceneUtilBitSetIterator_getBitSetWit
     { "cost_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
     { "doc_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilBitSetIterator = { 2, "BitSetIterator", "org.apache.lucene.util", NULL, 0x1, 8, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilBitSetIterator = { 2, "BitSetIterator", "org.apache.lucene.util", NULL, 0x1, 7, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilBitSetIterator;
 }
 
@@ -111,11 +105,6 @@ id OrgApacheLuceneUtilBitSetIterator_getBitSetWithOrgApacheLuceneSearchDocIdSetI
 OrgApacheLuceneUtilFixedBitSet *OrgApacheLuceneUtilBitSetIterator_getFixedBitSetOrNullWithOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchDocIdSetIterator *iterator) {
   OrgApacheLuceneUtilBitSetIterator_initialize();
   return OrgApacheLuceneUtilBitSetIterator_getBitSetWithOrgApacheLuceneSearchDocIdSetIterator_withIOSClass_(iterator, OrgApacheLuceneUtilFixedBitSet_class_());
-}
-
-OrgApacheLuceneUtilSparseFixedBitSet *OrgApacheLuceneUtilBitSetIterator_getSparseFixedBitSetOrNullWithOrgApacheLuceneSearchDocIdSetIterator_(OrgApacheLuceneSearchDocIdSetIterator *iterator) {
-  OrgApacheLuceneUtilBitSetIterator_initialize();
-  return OrgApacheLuceneUtilBitSetIterator_getBitSetWithOrgApacheLuceneSearchDocIdSetIterator_withIOSClass_(iterator, OrgApacheLuceneUtilSparseFixedBitSet_class_());
 }
 
 void OrgApacheLuceneUtilBitSetIterator_initWithOrgApacheLuceneUtilBitSet_withLong_(OrgApacheLuceneUtilBitSetIterator *self, OrgApacheLuceneUtilBitSet *bits, jlong cost) {

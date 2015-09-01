@@ -17,7 +17,6 @@
 #define _OrgApacheLuceneIndexSegmentCommitInfo_
 
 @class OrgApacheLuceneIndexSegmentInfo;
-@class OrgApacheLuceneStoreDirectory;
 @protocol JavaUtilCollection;
 @protocol JavaUtilMap;
 @protocol JavaUtilSet;
@@ -70,9 +69,6 @@
 - (jlong)sizeInBytes;
 
 - (NSString *)description;
-
-- (NSString *)toStringWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
-                                                withInt:(jint)pendingDelCount;
 
 - (NSString *)toStringWithInt:(jint)pendingDelCount;
 

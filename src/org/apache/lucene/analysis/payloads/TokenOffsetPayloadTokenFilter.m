@@ -3,81 +3,35 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/payloads/TokenOffsetPayloadTokenFilter.java
 //
 
-#include "IOSClass.h"
-#include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
-#include "org/apache/lucene/analysis/TokenFilter.h"
-#include "org/apache/lucene/analysis/TokenStream.h"
-#include "org/apache/lucene/analysis/payloads/PayloadHelper.h"
 #include "org/apache/lucene/analysis/payloads/TokenOffsetPayloadTokenFilter.h"
-#include "org/apache/lucene/analysis/tokenattributes/OffsetAttribute.h"
-#include "org/apache/lucene/analysis/tokenattributes/PayloadAttribute.h"
-#include "org/apache/lucene/util/AttributeSource.h"
-#include "org/apache/lucene/util/BytesRef.h"
 
-@interface OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilter () {
- @public
-  id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute> offsetAtt_;
-  id<OrgApacheLuceneAnalysisTokenattributesPayloadAttribute> payAtt_;
-}
-
-@end
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilter, offsetAtt_, id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilter, payAtt_, id<OrgApacheLuceneAnalysisTokenattributesPayloadAttribute>)
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilter
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, input);
+- (instancetype)init {
+  OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilter_init(self);
   return self;
-}
-
-- (jboolean)incrementToken {
-  if ([((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
-    IOSByteArray *data = [IOSByteArray arrayWithLength:8];
-    OrgApacheLuceneAnalysisPayloadsPayloadHelper_encodeIntWithInt_withByteArray_withInt_([((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAtt_)) startOffset], data, 0);
-    OrgApacheLuceneAnalysisPayloadsPayloadHelper_encodeIntWithInt_withByteArray_withInt_([offsetAtt_ endOffset], data, 4);
-    OrgApacheLuceneUtilBytesRef *payload = [new_OrgApacheLuceneUtilBytesRef_initWithByteArray_(data) autorelease];
-    [((id<OrgApacheLuceneAnalysisTokenattributesPayloadAttribute>) nil_chk(payAtt_)) setPayloadWithOrgApacheLuceneUtilBytesRef:payload];
-    return YES;
-  }
-  else {
-    return NO;
-  }
-}
-
-- (void)dealloc {
-  RELEASE_(offsetAtt_);
-  RELEASE_(payAtt_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:", "TokenOffsetPayloadTokenFilter", NULL, 0x1, NULL, NULL },
-    { "incrementToken", NULL, "Z", 0x11, "Ljava.io.IOException;", NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "offsetAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.OffsetAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "payAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.PayloadAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilter = { 2, "TokenOffsetPayloadTokenFilter", "org.apache.lucene.analysis.payloads", NULL, 0x1, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilter = { 2, "TokenOffsetPayloadTokenFilter", "org.apache.lucene.analysis.payloads", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilter;
 }
 
 @end
 
-void OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilter *self, OrgApacheLuceneAnalysisTokenStream *input) {
-  OrgApacheLuceneAnalysisTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, input);
-  JreStrongAssign(&self->offsetAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_class_()]);
-  JreStrongAssign(&self->payAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPayloadAttribute_class_()]);
+void OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilter_init(OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilter *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilter *new_OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) {
+OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilter *new_OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilter_init() {
   OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilter *self = [OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilter alloc];
-  OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, input);
+  OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilter_init(self);
   return self;
 }
 

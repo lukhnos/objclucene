@@ -26,8 +26,6 @@
 
 - (instancetype)init;
 
-- (NSString *)description;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreNodesMatchNoDocsQueryNode)

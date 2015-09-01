@@ -30,10 +30,6 @@
 
 - (instancetype)initWithOrgApacheLuceneIndexSortedDocValues:(OrgApacheLuceneIndexSortedDocValues *)inArg;
 
-- (jint)cardinality;
-
-- (OrgApacheLuceneIndexSortedDocValues *)getSortedDocValues;
-
 - (jlong)getValueCount;
 
 - (OrgApacheLuceneUtilBytesRef *)lookupOrdWithLong:(jlong)ord;
@@ -41,8 +37,6 @@
 - (jlong)lookupTermWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)key;
 
 - (jlong)nextOrd;
-
-- (jlong)ordAtWithInt:(jint)index;
 
 - (void)setDocumentWithInt:(jint)docID;
 

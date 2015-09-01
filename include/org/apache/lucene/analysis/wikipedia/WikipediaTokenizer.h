@@ -20,10 +20,6 @@
 #define OrgApacheLuceneAnalysisTokenizer_INCLUDE 1
 #include "org/apache/lucene/analysis/Tokenizer.h"
 
-@class IOSObjectArray;
-@class OrgApacheLuceneUtilAttributeFactory;
-@protocol JavaUtilSet;
-
 #define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_ALPHANUM_ID 0
 #define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_APOSTROPHE_ID 1
 #define OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_ACRONYM_ID 2
@@ -53,24 +49,9 @@
 
 - (instancetype)init;
 
-- (instancetype)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory
-                                                    withInt:(jint)tokenOutput
-                                            withJavaUtilSet:(id<JavaUtilSet>)untokenizedTypes;
-
-- (instancetype)initWithInt:(jint)tokenOutput
-            withJavaUtilSet:(id<JavaUtilSet>)untokenizedTypes;
-
-- (void)close;
-
-- (void)end;
-
-- (jboolean)incrementToken;
-
-- (void)reset;
-
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer)
 
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_INTERNAL_LINK_;
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, INTERNAL_LINK_, NSString *)
@@ -138,9 +119,6 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, S
 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, EXTERNAL_LINK_URL_ID, jint)
 
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_TOKEN_TYPES_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, TOKEN_TYPES_, IOSObjectArray *)
-
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, TOKENS_ONLY, jint)
 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, UNTOKENIZED_ONLY, jint)
@@ -152,14 +130,6 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, U
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_init(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer *new_OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_init() NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_initWithInt_withJavaUtilSet_(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer *self, jint tokenOutput, id<JavaUtilSet> untokenizedTypes);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer *new_OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_initWithInt_withJavaUtilSet_(jint tokenOutput, id<JavaUtilSet> untokenizedTypes) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withJavaUtilSet_(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer *self, OrgApacheLuceneUtilAttributeFactory *factory, jint tokenOutput, id<JavaUtilSet> untokenizedTypes);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer *new_OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withJavaUtilSet_(OrgApacheLuceneUtilAttributeFactory *factory, jint tokenOutput, id<JavaUtilSet> untokenizedTypes) NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer)
 

@@ -28,8 +28,6 @@
 @class OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState;
 @class OrgApacheLuceneIndexDocumentsWriterStallControl;
 @class OrgApacheLuceneIndexLiveIndexWriterConfig;
-@class OrgApacheLuceneUtilInfoStream;
-@protocol JavaUtilCollection;
 @protocol JavaUtilIterator;
 
 @interface OrgApacheLuceneIndexDocumentsWriterFlushControl : NSObject < OrgApacheLuceneUtilAccountable > {
@@ -54,11 +52,7 @@
 
 - (jboolean)getAndResetApplyAllDeletes;
 
-- (id<JavaUtilCollection>)getChildResources;
-
 - (jlong)getDeleteBytesUsed;
-
-- (OrgApacheLuceneUtilInfoStream *)getInfoStream;
 
 - (jint)getNumGlobalTermDeletes;
 
@@ -97,8 +91,6 @@
 
 - (void)doOnAbortWithOrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState:(OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *)state;
 
-- (void)doOnDelete;
-
 - (void)finishFullFlush;
 
 - (jboolean)isFullFlush;
@@ -106,8 +98,6 @@
 - (void)markForFullFlush;
 
 - (OrgApacheLuceneIndexDocumentsWriterPerThread *)nextPendingFlush;
-
-- (jint)numActiveDWPT;
 
 - (jint)numBlockedFlushes;
 

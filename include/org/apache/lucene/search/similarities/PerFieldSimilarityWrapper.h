@@ -20,29 +20,11 @@
 #define OrgApacheLuceneSearchSimilaritiesSimilarity_INCLUDE 1
 #include "org/apache/lucene/search/similarities/Similarity.h"
 
-@class IOSObjectArray;
-@class OrgApacheLuceneIndexFieldInvertState;
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneSearchCollectionStatistics;
-@class OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer;
-@class OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight;
-
 @interface OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper : OrgApacheLuceneSearchSimilaritiesSimilarity
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (jlong)computeNormWithOrgApacheLuceneIndexFieldInvertState:(OrgApacheLuceneIndexFieldInvertState *)state;
-
-- (OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight *)computeWeightWithFloat:(jfloat)queryBoost
-                                    withOrgApacheLuceneSearchCollectionStatistics:(OrgApacheLuceneSearchCollectionStatistics *)collectionStats
-                                     withOrgApacheLuceneSearchTermStatisticsArray:(IOSObjectArray *)termStats;
-
-- (OrgApacheLuceneSearchSimilaritiesSimilarity *)getWithNSString:(NSString *)name;
-
-- (OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *)simScorerWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight:(OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight *)weight
-                                                                                    withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
 
 @end
 
@@ -61,20 +43,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWr
 #define OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight_INCLUDE 1
 #include "org/apache/lucene/search/similarities/Similarity.h"
 
-@class OrgApacheLuceneSearchSimilaritiesSimilarity;
-
-@interface OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight : OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight {
- @public
-  OrgApacheLuceneSearchSimilaritiesSimilarity *delegate_;
-  OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight *delegateWeight_;
-}
-
-#pragma mark Public
-
-- (jfloat)getValueForNormalization;
-
-- (void)normalizeWithFloat:(jfloat)queryNorm
-                 withFloat:(jfloat)topLevelBoost;
+@interface OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight : OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight
 
 #pragma mark Package-Private
 
@@ -83,9 +52,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWr
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight, delegate_, OrgApacheLuceneSearchSimilaritiesSimilarity *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight, delegateWeight_, OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight_init(OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight *self);
 

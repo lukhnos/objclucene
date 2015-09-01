@@ -13,10 +13,7 @@
 #include "java/lang/Integer.h"
 #include "java/lang/RuntimeException.h"
 #include "java/lang/Throwable.h"
-#include "java/util/Collection.h"
-#include "java/util/Collections.h"
 #include "java/util/HashMap.h"
-#include "java/util/List.h"
 #include "java/util/Map.h"
 #include "org/apache/lucene/codecs/CodecUtil.h"
 #include "org/apache/lucene/codecs/NormsProducer.h"
@@ -207,10 +204,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$5
   return 64LL * [((id<JavaUtilMap>) nil_chk(norms_)) size];
 }
 
-- (id<JavaUtilCollection>)getChildResources {
-  return JavaUtilCollections_emptyList();
-}
-
 - (void)checkIntegrity {
   OrgApacheLuceneCodecsCodecUtil_checksumEntireFileWithOrgApacheLuceneStoreIndexInput_(data_);
 }
@@ -232,7 +225,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$5
     { "getNormsWithOrgApacheLuceneIndexFieldInfo:", "getNorms", "Lorg.apache.lucene.index.NumericDocValues;", 0x1, "Ljava.io.IOException;", NULL },
     { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
     { "checkIntegrity", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
   };
@@ -242,7 +234,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_$5
     { "maxDoc_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.codecs.lucene53.Lucene53NormsProducer$NormsEntry;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene53Lucene53NormsProducer = { 2, "Lucene53NormsProducer", "org.apache.lucene.codecs.lucene53", NULL, 0x0, 8, methods, 3, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsLucene53Lucene53NormsProducer = { 2, "Lucene53NormsProducer", "org.apache.lucene.codecs.lucene53", NULL, 0x0, 7, methods, 3, fields, 0, NULL, 1, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneCodecsLucene53Lucene53NormsProducer;
 }
 

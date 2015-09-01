@@ -24,24 +24,11 @@
 #define OrgApacheLuceneAnalysisUtilResourceLoaderAware_INCLUDE 1
 #include "org/apache/lucene/analysis/util/ResourceLoaderAware.h"
 
-@class OrgApacheLuceneAnalysisTokenStream;
-@class OrgApacheLuceneAnalysisUtilCharArraySet;
-@protocol JavaUtilMap;
-@protocol OrgApacheLuceneAnalysisUtilResourceLoader;
-
 @interface OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory < OrgApacheLuceneAnalysisUtilResourceLoaderAware >
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
-
-- (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
-
-- (OrgApacheLuceneAnalysisUtilCharArraySet *)getStopWords;
-
-- (void)informWithOrgApacheLuceneAnalysisUtilResourceLoader:(id<OrgApacheLuceneAnalysisUtilResourceLoader>)loader;
-
-- (jboolean)isIgnoreCase;
+- (instancetype)init;
 
 @end
 
@@ -53,9 +40,9 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilte
 FOUNDATION_EXPORT NSString *OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilterFactory_FORMAT_SNOWBALL_;
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilterFactory, FORMAT_SNOWBALL_, NSString *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilterFactory *self, id<JavaUtilMap> args);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilterFactory_init(OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilterFactory *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilterFactory *new_OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilterFactory *new_OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilterFactory_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilterFactory)
 

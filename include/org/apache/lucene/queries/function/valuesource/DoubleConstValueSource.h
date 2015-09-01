@@ -20,47 +20,19 @@
 #define OrgApacheLuceneQueriesFunctionValuesourceConstNumberSource_INCLUDE 1
 #include "org/apache/lucene/queries/function/valuesource/ConstNumberSource.h"
 
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneQueriesFunctionFunctionValues;
-@protocol JavaUtilMap;
-
-@interface OrgApacheLuceneQueriesFunctionValuesourceDoubleConstValueSource : OrgApacheLuceneQueriesFunctionValuesourceConstNumberSource {
- @public
-  jdouble constant_;
-}
+@interface OrgApacheLuceneQueriesFunctionValuesourceDoubleConstValueSource : OrgApacheLuceneQueriesFunctionValuesourceConstNumberSource
 
 #pragma mark Public
 
-- (instancetype)initWithDouble:(jdouble)constant;
-
-- (NSString *)description__;
-
-- (jboolean)isEqual:(id)o;
-
-- (jboolean)getBool;
-
-- (jdouble)getDouble;
-
-- (jfloat)getFloat;
-
-- (jint)getInt;
-
-- (jlong)getLong;
-
-- (NSNumber *)getNumber;
-
-- (OrgApacheLuceneQueriesFunctionFunctionValues *)getValuesWithJavaUtilMap:(id<JavaUtilMap>)context
-                                 withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext;
-
-- (NSUInteger)hash;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceDoubleConstValueSource)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceDoubleConstValueSource_initWithDouble_(OrgApacheLuceneQueriesFunctionValuesourceDoubleConstValueSource *self, jdouble constant);
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceDoubleConstValueSource_init(OrgApacheLuceneQueriesFunctionValuesourceDoubleConstValueSource *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceDoubleConstValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceDoubleConstValueSource_initWithDouble_(jdouble constant) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceDoubleConstValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceDoubleConstValueSource_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceDoubleConstValueSource)
 

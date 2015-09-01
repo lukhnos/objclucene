@@ -20,25 +20,19 @@
 #define OrgApacheLuceneQueryparserXmlBuildersSpanBuilderBase_INCLUDE 1
 #include "org/apache/lucene/queryparser/xml/builders/SpanBuilderBase.h"
 
-@class OrgApacheLuceneAnalysisAnalyzer;
-@class OrgApacheLuceneSearchSpansSpanQuery;
-@protocol OrgW3cDomElement;
-
 @interface OrgApacheLuceneQueryparserXmlBuildersSpanOrTermsBuilder : OrgApacheLuceneQueryparserXmlBuildersSpanBuilderBase
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
-
-- (OrgApacheLuceneSearchSpansSpanQuery *)getSpanQueryWithOrgW3cDomElement:(id<OrgW3cDomElement>)e;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserXmlBuildersSpanOrTermsBuilder)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlBuildersSpanOrTermsBuilder_initWithOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneQueryparserXmlBuildersSpanOrTermsBuilder *self, OrgApacheLuceneAnalysisAnalyzer *analyzer);
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlBuildersSpanOrTermsBuilder_init(OrgApacheLuceneQueryparserXmlBuildersSpanOrTermsBuilder *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersSpanOrTermsBuilder *new_OrgApacheLuceneQueryparserXmlBuildersSpanOrTermsBuilder_initWithOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneAnalysisAnalyzer *analyzer) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersSpanOrTermsBuilder *new_OrgApacheLuceneQueryparserXmlBuildersSpanOrTermsBuilder_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlBuildersSpanOrTermsBuilder)
 

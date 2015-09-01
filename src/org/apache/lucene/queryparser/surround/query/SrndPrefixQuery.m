@@ -3,134 +3,35 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/surround/query/SrndPrefixQuery.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
-#include "java/lang/StringBuilder.h"
-#include "org/apache/lucene/index/IndexReader.h"
-#include "org/apache/lucene/index/MultiFields.h"
-#include "org/apache/lucene/index/Term.h"
-#include "org/apache/lucene/index/Terms.h"
-#include "org/apache/lucene/index/TermsEnum.h"
-#include "org/apache/lucene/queryparser/surround/query/SimpleTerm.h"
 #include "org/apache/lucene/queryparser/surround/query/SrndPrefixQuery.h"
-#include "org/apache/lucene/util/BytesRef.h"
-#include "org/apache/lucene/util/StringHelper.h"
 
-@interface OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery () {
- @public
-  OrgApacheLuceneUtilBytesRef *prefixRef_;
-  NSString *prefix_;
-  jchar truncator_;
-}
-
-@end
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery, prefixRef_, OrgApacheLuceneUtilBytesRef *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery, prefix_, NSString *)
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery
 
-- (instancetype)initWithNSString:(NSString *)prefix
-                     withBoolean:(jboolean)quoted
-                        withChar:(jchar)truncator {
-  OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery_initWithNSString_withBoolean_withChar_(self, prefix, quoted, truncator);
+- (instancetype)init {
+  OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery_init(self);
   return self;
-}
-
-- (NSString *)getPrefix {
-  return prefix_;
-}
-
-- (jchar)getSuffixOperator {
-  return truncator_;
-}
-
-- (OrgApacheLuceneIndexTerm *)getLucenePrefixTermWithNSString:(NSString *)fieldName {
-  return [new_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(fieldName, [self getPrefix]) autorelease];
-}
-
-- (NSString *)toStringUnquoted {
-  return [self getPrefix];
-}
-
-- (void)suffixToStringWithJavaLangStringBuilder:(JavaLangStringBuilder *)r {
-  [((JavaLangStringBuilder *) nil_chk(r)) appendWithChar:[self getSuffixOperator]];
-}
-
-- (void)visitMatchingTermsWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
-                                                 withNSString:(NSString *)fieldName
-withOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor:(id<OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor>)mtv {
-  OrgApacheLuceneIndexTerms *terms = OrgApacheLuceneIndexMultiFields_getTermsWithOrgApacheLuceneIndexIndexReader_withNSString_(reader, fieldName);
-  if (terms != nil) {
-    OrgApacheLuceneIndexTermsEnum *termsEnum = [terms iterator];
-    jboolean skip = NO;
-    OrgApacheLuceneIndexTermsEnum_SeekStatusEnum *status = [((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum)) seekCeilWithOrgApacheLuceneUtilBytesRef:[new_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_([self getPrefix]) autorelease]];
-    if (status == JreLoadStatic(OrgApacheLuceneIndexTermsEnum_SeekStatusEnum, FOUND)) {
-      [((id<OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor>) nil_chk(mtv)) visitMatchingTermWithOrgApacheLuceneIndexTerm:[self getLucenePrefixTermWithNSString:fieldName]];
-    }
-    else if (status == JreLoadStatic(OrgApacheLuceneIndexTermsEnum_SeekStatusEnum, NOT_FOUND)) {
-      if (OrgApacheLuceneUtilStringHelper_startsWithWithOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_([termsEnum term], prefixRef_)) {
-        [((id<OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor>) nil_chk(mtv)) visitMatchingTermWithOrgApacheLuceneIndexTerm:[new_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(fieldName, [((OrgApacheLuceneUtilBytesRef *) nil_chk([termsEnum term])) utf8ToString]) autorelease]];
-      }
-      else {
-        skip = YES;
-      }
-    }
-    else {
-      skip = YES;
-    }
-    if (!skip) {
-      while (YES) {
-        OrgApacheLuceneUtilBytesRef *text = [termsEnum next];
-        if (text != nil && OrgApacheLuceneUtilStringHelper_startsWithWithOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_(text, prefixRef_)) {
-          [((id<OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor>) nil_chk(mtv)) visitMatchingTermWithOrgApacheLuceneIndexTerm:[new_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_(fieldName, [text utf8ToString]) autorelease]];
-        }
-        else {
-          break;
-        }
-      }
-    }
-  }
-}
-
-- (void)dealloc {
-  RELEASE_(prefixRef_);
-  RELEASE_(prefix_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withBoolean:withChar:", "SrndPrefixQuery", NULL, 0x1, NULL, NULL },
-    { "getPrefix", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getSuffixOperator", NULL, "C", 0x1, NULL, NULL },
-    { "getLucenePrefixTermWithNSString:", "getLucenePrefixTerm", "Lorg.apache.lucene.index.Term;", 0x1, NULL, NULL },
-    { "toStringUnquoted", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "suffixToStringWithJavaLangStringBuilder:", "suffixToString", "V", 0x4, NULL, NULL },
-    { "visitMatchingTermsWithOrgApacheLuceneIndexIndexReader:withNSString:withOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor:", "visitMatchingTerms", "V", 0x1, "Ljava.io.IOException;", NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "prefixRef_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
-    { "prefix_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "truncator_", NULL, 0x12, "C", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery = { 2, "SrndPrefixQuery", "org.apache.lucene.queryparser.surround.query", NULL, 0x1, 7, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery = { 2, "SrndPrefixQuery", "org.apache.lucene.queryparser.surround.query", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery;
 }
 
 @end
 
-void OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery_initWithNSString_withBoolean_withChar_(OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery *self, NSString *prefix, jboolean quoted, jchar truncator) {
-  OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_initWithBoolean_(self, quoted);
-  JreStrongAssign(&self->prefix_, prefix);
-  JreStrongAssignAndConsume(&self->prefixRef_, new_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_(prefix));
-  self->truncator_ = truncator;
+void OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery_init(OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery *new_OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery_initWithNSString_withBoolean_withChar_(NSString *prefix, jboolean quoted, jchar truncator) {
+OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery *new_OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery_init() {
   OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery *self = [OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery alloc];
-  OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery_initWithNSString_withBoolean_withChar_(self, prefix, quoted, truncator);
+  OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery_init(self);
   return self;
 }
 

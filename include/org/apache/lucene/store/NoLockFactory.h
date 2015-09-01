@@ -20,53 +20,21 @@
 #define OrgApacheLuceneStoreLockFactory_INCLUDE 1
 #include "org/apache/lucene/store/LockFactory.h"
 
-@class OrgApacheLuceneStoreDirectory;
-@class OrgApacheLuceneStoreLock;
-@class OrgApacheLuceneStoreNoLockFactory_NoLock;
-
 @interface OrgApacheLuceneStoreNoLockFactory : OrgApacheLuceneStoreLockFactory
 
 #pragma mark Public
 
-- (OrgApacheLuceneStoreLock *)obtainLockWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
-                                                             withNSString:(NSString *)lockName;
+- (instancetype)init;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneStoreNoLockFactory)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneStoreNoLockFactory)
 
-FOUNDATION_EXPORT OrgApacheLuceneStoreNoLockFactory *OrgApacheLuceneStoreNoLockFactory_INSTANCE_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneStoreNoLockFactory, INSTANCE_, OrgApacheLuceneStoreNoLockFactory *)
+FOUNDATION_EXPORT void OrgApacheLuceneStoreNoLockFactory_init(OrgApacheLuceneStoreNoLockFactory *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneStoreNoLockFactory_NoLock *OrgApacheLuceneStoreNoLockFactory_SINGLETON_LOCK_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneStoreNoLockFactory, SINGLETON_LOCK_, OrgApacheLuceneStoreNoLockFactory_NoLock *)
+FOUNDATION_EXPORT OrgApacheLuceneStoreNoLockFactory *new_OrgApacheLuceneStoreNoLockFactory_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreNoLockFactory)
-
-#endif
-
-#if !defined (_OrgApacheLuceneStoreNoLockFactory_NoLock_) && (OrgApacheLuceneStoreNoLockFactory_INCLUDE_ALL || OrgApacheLuceneStoreNoLockFactory_NoLock_INCLUDE)
-#define _OrgApacheLuceneStoreNoLockFactory_NoLock_
-
-#define OrgApacheLuceneStoreLock_RESTRICT 1
-#define OrgApacheLuceneStoreLock_INCLUDE 1
-#include "org/apache/lucene/store/Lock.h"
-
-@interface OrgApacheLuceneStoreNoLockFactory_NoLock : OrgApacheLuceneStoreLock
-
-#pragma mark Public
-
-- (void)close;
-
-- (void)ensureValid;
-
-- (NSString *)description;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneStoreNoLockFactory_NoLock)
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreNoLockFactory_NoLock)
 
 #endif
 

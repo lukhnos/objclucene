@@ -42,9 +42,6 @@
 - (instancetype)initWithOrgApacheLuceneIndexMergePolicy:(OrgApacheLuceneIndexMergePolicy *)inArg
                           withOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)sort;
 
-- (OrgApacheLuceneIndexMergePolicy_MergeSpecification *)findForcedDeletesMergesWithOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)segmentInfos
-                                                                                withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer;
-
 - (OrgApacheLuceneIndexMergePolicy_MergeSpecification *)findForcedMergesWithOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)segmentInfos
                                                                                                      withInt:(jint)maxSegmentCount
                                                                                              withJavaUtilMap:(id<JavaUtilMap>)segmentsToMerge
@@ -155,7 +152,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerg
 
 @class OrgApacheLuceneIndexMergePolicy_OneMerge;
 @class OrgApacheLuceneIndexSortingMergePolicy;
-@class OrgApacheLuceneStoreDirectory;
 @class OrgApacheLuceneUtilInfoStream;
 
 @interface OrgApacheLuceneIndexSortingMergePolicy_SortingMergeSpecification : OrgApacheLuceneIndexMergePolicy_MergeSpecification {
@@ -166,8 +162,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSortingMergePolicy_SortingOneMerg
 #pragma mark Public
 
 - (void)addWithOrgApacheLuceneIndexMergePolicy_OneMerge:(OrgApacheLuceneIndexMergePolicy_OneMerge *)merge;
-
-- (NSString *)segStringWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir;
 
 #pragma mark Package-Private
 

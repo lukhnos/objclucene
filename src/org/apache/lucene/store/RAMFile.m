@@ -8,9 +8,6 @@
 #include "J2ObjC_source.h"
 #include "java/util/ArrayList.h"
 #include "java/util/Arrays.h"
-#include "java/util/Collection.h"
-#include "java/util/Collections.h"
-#include "java/util/List.h"
 #include "java/util/concurrent/atomic/AtomicLong.h"
 #include "org/apache/lucene/store/RAMDirectory.h"
 #include "org/apache/lucene/store/RAMFile.h"
@@ -73,10 +70,6 @@
   }
 }
 
-- (id<JavaUtilCollection>)getChildResources {
-  return JavaUtilCollections_emptyList();
-}
-
 - (NSString *)description {
   return JreStrcat("$$JC", [[self getClass] getSimpleName], @"(length=", length_, ')');
 }
@@ -123,7 +116,6 @@
     { "numBuffers", NULL, "I", 0x34, NULL, NULL },
     { "newBufferWithInt:", "newBuffer", "[B", 0x4, NULL, NULL },
     { "ramBytesUsed", NULL, "J", 0x21, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "hash", "hashCode", "I", 0x1, NULL, NULL },
     { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
@@ -134,7 +126,7 @@
     { "directory_", NULL, 0x0, "Lorg.apache.lucene.store.RAMDirectory;", NULL, NULL, .constantValue.asLong = 0 },
     { "sizeInBytes_", NULL, 0x4, "J", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreRAMFile = { 2, "RAMFile", "org.apache.lucene.store", NULL, 0x1, 13, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreRAMFile = { 2, "RAMFile", "org.apache.lucene.store", NULL, 0x1, 12, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneStoreRAMFile;
 }
 

@@ -28,53 +28,17 @@
 #define JavaLangComparable_INCLUDE 1
 #include "java/lang/Comparable.h"
 
-@class JavaLangStringBuilder;
-@class OrgApacheLuceneIndexIndexReader;
-@class OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory;
-@class OrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory;
-@class OrgApacheLuceneSearchQuery;
-@protocol OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor;
-
 @interface OrgApacheLuceneQueryparserSurroundQuerySimpleTerm : OrgApacheLuceneQueryparserSurroundQuerySrndQuery < OrgApacheLuceneQueryparserSurroundQueryDistanceSubQuery, JavaLangComparable >
 
 #pragma mark Public
 
-- (instancetype)initWithBoolean:(jboolean)q;
-
-- (void)addSpanQueriesWithOrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory:(OrgApacheLuceneQueryparserSurroundQuerySpanNearClauseFactory *)sncf;
-
-- (jint)compareToWithId:(OrgApacheLuceneQueryparserSurroundQuerySimpleTerm *)ost;
-
-- (NSString *)distanceSubQueryNotAllowed;
-
-- (NSString *)getFieldOperator;
-
-- (NSString *)getQuote;
-
-- (OrgApacheLuceneSearchQuery *)makeLuceneQueryFieldNoBoostWithNSString:(NSString *)fieldName
-           withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *)qf;
-
-- (NSString *)description;
-
-- (NSString *)toStringUnquoted;
-
-- (void)visitMatchingTermsWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
-                                                 withNSString:(NSString *)fieldName
-withOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor:(id<OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor>)mtv;
-
-#pragma mark Protected
-
-- (void)suffixToStringWithJavaLangStringBuilder:(JavaLangStringBuilder *)r;
-
-#pragma mark Package-Private
-
-- (jboolean)isQuoted;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserSurroundQuerySimpleTerm)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_initWithBoolean_(OrgApacheLuceneQueryparserSurroundQuerySimpleTerm *self, jboolean q);
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_init(OrgApacheLuceneQueryparserSurroundQuerySimpleTerm *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundQuerySimpleTerm)
 
@@ -83,11 +47,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundQuerySimpleTerm)
 #if !defined (_OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor_) && (OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_INCLUDE_ALL || OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor_INCLUDE)
 #define _OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor_
 
-@class OrgApacheLuceneIndexTerm;
-
 @protocol OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor < NSObject, JavaObject >
-
-- (void)visitMatchingTermWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)t;
 
 @end
 

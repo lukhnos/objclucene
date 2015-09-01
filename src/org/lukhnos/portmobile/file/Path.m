@@ -48,14 +48,6 @@
   return [new_OrgLukhnosPortmobileFilePath_initWithJavaIoFile_([new_JavaIoFile_initWithJavaIoFile_withNSString_(self->file_, other) autorelease]) autorelease];
 }
 
-- (jboolean)isAbsolute {
-  return [((JavaIoFile *) nil_chk(file_)) isAbsolute];
-}
-
-- (OrgLukhnosPortmobileFilePath *)toAbsolutePath {
-  return [new_OrgLukhnosPortmobileFilePath_initWithJavaIoFile_([((JavaIoFile *) nil_chk(file_)) getAbsoluteFile]) autorelease];
-}
-
 - (OrgLukhnosPortmobileFilePath *)getParent {
   return [new_OrgLukhnosPortmobileFilePath_initWithNSString_([((JavaIoFile *) nil_chk(file_)) getParent]) autorelease];
 }
@@ -74,14 +66,12 @@
     { "getFileName", NULL, "Lorg.lukhnos.portmobile.file.Path;", 0x1, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "resolveWithNSString:", "resolve", "Lorg.lukhnos.portmobile.file.Path;", 0x1, NULL, NULL },
-    { "isAbsolute", NULL, "Z", 0x1, NULL, NULL },
-    { "toAbsolutePath", NULL, "Lorg.lukhnos.portmobile.file.Path;", 0x1, NULL, NULL },
     { "getParent", NULL, "Lorg.lukhnos.portmobile.file.Path;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "file_", NULL, 0x0, "Ljava.io.File;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgLukhnosPortmobileFilePath = { 2, "Path", "org.lukhnos.portmobile.file", NULL, 0x1, 10, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgLukhnosPortmobileFilePath = { 2, "Path", "org.lukhnos.portmobile.file", NULL, 0x1, 8, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgLukhnosPortmobileFilePath;
 }
 

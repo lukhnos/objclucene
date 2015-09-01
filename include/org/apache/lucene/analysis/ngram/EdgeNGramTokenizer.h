@@ -20,8 +20,6 @@
 #define OrgApacheLuceneAnalysisNgramNGramTokenizer_INCLUDE 1
 #include "org/apache/lucene/analysis/ngram/NGramTokenizer.h"
 
-@class OrgApacheLuceneUtilAttributeFactory;
-
 #define OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer_DEFAULT_MAX_GRAM_SIZE 1
 #define OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer_DEFAULT_MIN_GRAM_SIZE 1
 
@@ -29,12 +27,7 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory
-                                                    withInt:(jint)minGram
-                                                    withInt:(jint)maxGram;
-
-- (instancetype)initWithInt:(jint)minGram
-                    withInt:(jint)maxGram;
+- (instancetype)init;
 
 @end
 
@@ -44,13 +37,9 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer, DEFAU
 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer, DEFAULT_MIN_GRAM_SIZE, jint)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer_initWithInt_withInt_(OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer *self, jint minGram, jint maxGram);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer_init(OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer *new_OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer_initWithInt_withInt_(jint minGram, jint maxGram) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withInt_(OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer *self, OrgApacheLuceneUtilAttributeFactory *factory, jint minGram, jint maxGram);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer *new_OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withInt_(OrgApacheLuceneUtilAttributeFactory *factory, jint minGram, jint maxGram) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer *new_OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer)
 

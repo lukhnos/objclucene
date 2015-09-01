@@ -20,57 +20,19 @@
 #define OrgApacheLuceneQueryparserFlexibleStandardParserCharStream_INCLUDE 1
 #include "org/apache/lucene/queryparser/flexible/standard/parser/CharStream.h"
 
-@class IOSCharArray;
-@class JavaIoReader;
-
-@interface OrgApacheLuceneQueryparserFlexibleStandardParserFastCharStream : NSObject < OrgApacheLuceneQueryparserFlexibleStandardParserCharStream > {
- @public
-  IOSCharArray *buffer_;
-  jint bufferLength_;
-  jint bufferPosition_;
-  jint tokenStart_;
-  jint bufferStart_;
-  JavaIoReader *input_;
-}
+@interface OrgApacheLuceneQueryparserFlexibleStandardParserFastCharStream : NSObject < OrgApacheLuceneQueryparserFlexibleStandardParserCharStream >
 
 #pragma mark Public
 
-- (instancetype)initWithJavaIoReader:(JavaIoReader *)r;
-
-- (void)backupWithInt:(jint)amount;
-
-- (jchar)BeginToken;
-
-- (void)Done;
-
-- (jint)getBeginColumn;
-
-- (jint)getBeginLine;
-
-- (jint)getColumn;
-
-- (jint)getEndColumn;
-
-- (jint)getEndLine;
-
-- (NSString *)GetImage;
-
-- (jint)getLine;
-
-- (IOSCharArray *)GetSuffixWithInt:(jint)len;
-
-- (jchar)readChar;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleStandardParserFastCharStream)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleStandardParserFastCharStream, buffer_, IOSCharArray *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleStandardParserFastCharStream, input_, JavaIoReader *)
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardParserFastCharStream_init(OrgApacheLuceneQueryparserFlexibleStandardParserFastCharStream *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardParserFastCharStream_initWithJavaIoReader_(OrgApacheLuceneQueryparserFlexibleStandardParserFastCharStream *self, JavaIoReader *r);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardParserFastCharStream *new_OrgApacheLuceneQueryparserFlexibleStandardParserFastCharStream_initWithJavaIoReader_(JavaIoReader *r) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardParserFastCharStream *new_OrgApacheLuceneQueryparserFlexibleStandardParserFastCharStream_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardParserFastCharStream)
 

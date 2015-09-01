@@ -12,7 +12,6 @@
 #include "org/apache/lucene/util/ToStringUtils.h"
 #include "org/apache/lucene/util/automaton/Automaton.h"
 #include "org/apache/lucene/util/automaton/AutomatonProvider.h"
-#include "org/apache/lucene/util/automaton/Operations.h"
 #include "org/apache/lucene/util/automaton/RegExp.h"
 
 static id<OrgApacheLuceneUtilAutomatonAutomatonProvider> OrgApacheLuceneSearchRegexpQuery_defaultProvider_;
@@ -38,17 +37,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchRegexpQuery_$1)
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchRegexpQuery)
 
 @implementation OrgApacheLuceneSearchRegexpQuery
-
-- (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term {
-  OrgApacheLuceneSearchRegexpQuery_initWithOrgApacheLuceneIndexTerm_(self, term);
-  return self;
-}
-
-- (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-                                         withInt:(jint)flags {
-  OrgApacheLuceneSearchRegexpQuery_initWithOrgApacheLuceneIndexTerm_withInt_(self, term, flags);
-  return self;
-}
 
 - (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
                                          withInt:(jint)flags
@@ -87,8 +75,6 @@ withOrgApacheLuceneUtilAutomatonAutomatonProvider:(id<OrgApacheLuceneUtilAutomat
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexTerm:", "RegexpQuery", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneIndexTerm:withInt:", "RegexpQuery", NULL, 0x1, NULL, NULL },
     { "initWithOrgApacheLuceneIndexTerm:withInt:withInt:", "RegexpQuery", NULL, 0x1, NULL, NULL },
     { "initWithOrgApacheLuceneIndexTerm:withInt:withOrgApacheLuceneUtilAutomatonAutomatonProvider:withInt:", "RegexpQuery", NULL, 0x1, NULL, NULL },
     { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
@@ -96,31 +82,11 @@ withOrgApacheLuceneUtilAutomatonAutomatonProvider:(id<OrgApacheLuceneUtilAutomat
   static const J2ObjcFieldInfo fields[] = {
     { "defaultProvider_", NULL, 0xa, "Lorg.apache.lucene.util.automaton.AutomatonProvider;", &OrgApacheLuceneSearchRegexpQuery_defaultProvider_, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchRegexpQuery = { 2, "RegexpQuery", "org.apache.lucene.search", NULL, 0x1, 5, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchRegexpQuery = { 2, "RegexpQuery", "org.apache.lucene.search", NULL, 0x1, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchRegexpQuery;
 }
 
 @end
-
-void OrgApacheLuceneSearchRegexpQuery_initWithOrgApacheLuceneIndexTerm_(OrgApacheLuceneSearchRegexpQuery *self, OrgApacheLuceneIndexTerm *term) {
-  OrgApacheLuceneSearchRegexpQuery_initWithOrgApacheLuceneIndexTerm_withInt_(self, term, OrgApacheLuceneUtilAutomatonRegExp_ALL);
-}
-
-OrgApacheLuceneSearchRegexpQuery *new_OrgApacheLuceneSearchRegexpQuery_initWithOrgApacheLuceneIndexTerm_(OrgApacheLuceneIndexTerm *term) {
-  OrgApacheLuceneSearchRegexpQuery *self = [OrgApacheLuceneSearchRegexpQuery alloc];
-  OrgApacheLuceneSearchRegexpQuery_initWithOrgApacheLuceneIndexTerm_(self, term);
-  return self;
-}
-
-void OrgApacheLuceneSearchRegexpQuery_initWithOrgApacheLuceneIndexTerm_withInt_(OrgApacheLuceneSearchRegexpQuery *self, OrgApacheLuceneIndexTerm *term, jint flags) {
-  OrgApacheLuceneSearchRegexpQuery_initWithOrgApacheLuceneIndexTerm_withInt_withOrgApacheLuceneUtilAutomatonAutomatonProvider_withInt_(self, term, flags, OrgApacheLuceneSearchRegexpQuery_defaultProvider_, OrgApacheLuceneUtilAutomatonOperations_DEFAULT_MAX_DETERMINIZED_STATES);
-}
-
-OrgApacheLuceneSearchRegexpQuery *new_OrgApacheLuceneSearchRegexpQuery_initWithOrgApacheLuceneIndexTerm_withInt_(OrgApacheLuceneIndexTerm *term, jint flags) {
-  OrgApacheLuceneSearchRegexpQuery *self = [OrgApacheLuceneSearchRegexpQuery alloc];
-  OrgApacheLuceneSearchRegexpQuery_initWithOrgApacheLuceneIndexTerm_withInt_(self, term, flags);
-  return self;
-}
 
 void OrgApacheLuceneSearchRegexpQuery_initWithOrgApacheLuceneIndexTerm_withInt_withInt_(OrgApacheLuceneSearchRegexpQuery *self, OrgApacheLuceneIndexTerm *term, jint flags, jint maxDeterminizedStates) {
   OrgApacheLuceneSearchRegexpQuery_initWithOrgApacheLuceneIndexTerm_withInt_withOrgApacheLuceneUtilAutomatonAutomatonProvider_withInt_(self, term, flags, OrgApacheLuceneSearchRegexpQuery_defaultProvider_, maxDeterminizedStates);

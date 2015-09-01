@@ -49,10 +49,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisEnEnglishAnalyzer_DefaultSetHo
 
 @implementation OrgApacheLuceneAnalysisEnEnglishAnalyzer
 
-+ (OrgApacheLuceneAnalysisUtilCharArraySet *)getDefaultStopSet {
-  return OrgApacheLuceneAnalysisEnEnglishAnalyzer_getDefaultStopSet();
-}
-
 - (instancetype)init {
   OrgApacheLuceneAnalysisEnEnglishAnalyzer_init(self);
   return self;
@@ -93,7 +89,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisEnEnglishAnalyzer_DefaultSetHo
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "getDefaultStopSet", NULL, "Lorg.apache.lucene.analysis.util.CharArraySet;", 0x9, NULL, NULL },
     { "init", "EnglishAnalyzer", NULL, 0x1, NULL, NULL },
     { "initWithOrgApacheLuceneAnalysisUtilCharArraySet:", "EnglishAnalyzer", NULL, 0x1, NULL, NULL },
     { "initWithOrgApacheLuceneAnalysisUtilCharArraySet:withOrgApacheLuceneAnalysisUtilCharArraySet:", "EnglishAnalyzer", NULL, 0x1, NULL, NULL },
@@ -103,16 +98,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisEnEnglishAnalyzer_DefaultSetHo
     { "stemExclusionSet_", NULL, 0x12, "Lorg.apache.lucene.analysis.util.CharArraySet;", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.analysis.en.EnglishAnalyzer$DefaultSetHolder;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisEnEnglishAnalyzer = { 2, "EnglishAnalyzer", "org.apache.lucene.analysis.en", NULL, 0x11, 5, methods, 1, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisEnEnglishAnalyzer = { 2, "EnglishAnalyzer", "org.apache.lucene.analysis.en", NULL, 0x11, 4, methods, 1, fields, 0, NULL, 1, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneAnalysisEnEnglishAnalyzer;
 }
 
 @end
-
-OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisEnEnglishAnalyzer_getDefaultStopSet() {
-  OrgApacheLuceneAnalysisEnEnglishAnalyzer_initialize();
-  return JreLoadStatic(OrgApacheLuceneAnalysisEnEnglishAnalyzer_DefaultSetHolder, DEFAULT_STOP_SET_);
-}
 
 void OrgApacheLuceneAnalysisEnEnglishAnalyzer_init(OrgApacheLuceneAnalysisEnEnglishAnalyzer *self) {
   OrgApacheLuceneAnalysisEnEnglishAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(self, JreLoadStatic(OrgApacheLuceneAnalysisEnEnglishAnalyzer_DefaultSetHolder, DEFAULT_STOP_SET_));

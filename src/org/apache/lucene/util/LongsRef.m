@@ -9,7 +9,6 @@
 #include "java/lang/Long.h"
 #include "java/lang/Math.h"
 #include "java/lang/StringBuilder.h"
-#include "java/util/Arrays.h"
 #include "org/apache/lucene/util/LongsRef.h"
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilLongsRef)
@@ -111,10 +110,6 @@ IOSLongArray *OrgApacheLuceneUtilLongsRef_EMPTY_LONGS_;
   return [sb description];
 }
 
-+ (OrgApacheLuceneUtilLongsRef *)deepCopyOfWithOrgApacheLuceneUtilLongsRef:(OrgApacheLuceneUtilLongsRef *)other {
-  return OrgApacheLuceneUtilLongsRef_deepCopyOfWithOrgApacheLuceneUtilLongsRef_(other);
-}
-
 - (jboolean)isValid {
   if (longs_ == nil) {
     @throw [new_JavaLangIllegalStateException_initWithNSString_(@"longs is null") autorelease];
@@ -167,7 +162,6 @@ IOSLongArray *OrgApacheLuceneUtilLongsRef_EMPTY_LONGS_;
     { "longsEqualsWithOrgApacheLuceneUtilLongsRef:", "longsEquals", "Z", 0x1, NULL, NULL },
     { "compareToWithId:", "compareTo", "I", 0x1, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "deepCopyOfWithOrgApacheLuceneUtilLongsRef:", "deepCopyOf", "Lorg.apache.lucene.util.LongsRef;", 0x9, NULL, NULL },
     { "isValid", NULL, "Z", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -176,7 +170,7 @@ IOSLongArray *OrgApacheLuceneUtilLongsRef_EMPTY_LONGS_;
     { "offset_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "length_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilLongsRef = { 2, "LongsRef", "org.apache.lucene.util", NULL, 0x11, 11, methods, 4, fields, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/lang/Comparable<Lorg/apache/lucene/util/LongsRef;>;Ljava/lang/Cloneable;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilLongsRef = { 2, "LongsRef", "org.apache.lucene.util", NULL, 0x11, 10, methods, 4, fields, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/lang/Comparable<Lorg/apache/lucene/util/LongsRef;>;Ljava/lang/Cloneable;" };
   return &_OrgApacheLuceneUtilLongsRef;
 }
 
@@ -216,11 +210,6 @@ OrgApacheLuceneUtilLongsRef *new_OrgApacheLuceneUtilLongsRef_initWithLongArray_w
   OrgApacheLuceneUtilLongsRef *self = [OrgApacheLuceneUtilLongsRef alloc];
   OrgApacheLuceneUtilLongsRef_initWithLongArray_withInt_withInt_(self, longs, offset, length);
   return self;
-}
-
-OrgApacheLuceneUtilLongsRef *OrgApacheLuceneUtilLongsRef_deepCopyOfWithOrgApacheLuceneUtilLongsRef_(OrgApacheLuceneUtilLongsRef *other) {
-  OrgApacheLuceneUtilLongsRef_initialize();
-  return [new_OrgApacheLuceneUtilLongsRef_initWithLongArray_withInt_withInt_(JavaUtilArrays_copyOfRangeWithLongArray_withInt_withInt_(((OrgApacheLuceneUtilLongsRef *) nil_chk(other))->longs_, other->offset_, other->offset_ + other->length_), 0, other->length_) autorelease];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilLongsRef)

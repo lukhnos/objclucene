@@ -20,9 +20,6 @@
 #define OrgApacheLuceneAnalysisTokenizer_INCLUDE 1
 #include "org/apache/lucene/analysis/Tokenizer.h"
 
-@class IOSObjectArray;
-@class OrgApacheLuceneUtilAttributeFactory;
-
 #define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizer_ALPHANUM 0
 #define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizer_NUM 1
 #define OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizer_SOUTHEAST_ASIAN 2
@@ -39,23 +36,9 @@
 
 - (instancetype)init;
 
-- (instancetype)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory;
-
-- (void)close;
-
-- (void)end;
-
-- (jint)getMaxTokenLength;
-
-- (jboolean)incrementToken;
-
-- (void)reset;
-
-- (void)setMaxTokenLengthWithInt:(jint)length;
-
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizer)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizer)
 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizer, ALPHANUM, jint)
 
@@ -75,16 +58,9 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizer
 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizer, EMAIL, jint)
 
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizer_TOKEN_TYPES_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizer, TOKEN_TYPES_, IOSObjectArray *)
-
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizer_init(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizer *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizer *new_OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizer_init() NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizer *self, OrgApacheLuceneUtilAttributeFactory *factory);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizer *new_OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(OrgApacheLuceneUtilAttributeFactory *factory) NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizer)
 

@@ -20,15 +20,11 @@
 #define OrgApacheLuceneAnalysisCoreLetterTokenizer_INCLUDE 1
 #include "org/apache/lucene/analysis/core/LetterTokenizer.h"
 
-@class OrgApacheLuceneUtilAttributeFactory;
-
 @interface OrgApacheLuceneAnalysisCoreLowerCaseTokenizer : OrgApacheLuceneAnalysisCoreLetterTokenizer
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (instancetype)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory;
 
 #pragma mark Protected
 
@@ -41,10 +37,6 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisCoreLowerCaseTokenizer)
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCoreLowerCaseTokenizer_init(OrgApacheLuceneAnalysisCoreLowerCaseTokenizer *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreLowerCaseTokenizer *new_OrgApacheLuceneAnalysisCoreLowerCaseTokenizer_init() NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCoreLowerCaseTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(OrgApacheLuceneAnalysisCoreLowerCaseTokenizer *self, OrgApacheLuceneUtilAttributeFactory *factory);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreLowerCaseTokenizer *new_OrgApacheLuceneAnalysisCoreLowerCaseTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(OrgApacheLuceneUtilAttributeFactory *factory) NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCoreLowerCaseTokenizer)
 

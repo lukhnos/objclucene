@@ -24,20 +24,15 @@
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)name
-                      withDouble:(jdouble)value;
-
-- (void)setDoubleValueWithDouble:(jdouble)value;
-
-- (void)setLongValueWithLong:(jlong)value;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneDocumentDoubleDocValuesField)
 
-FOUNDATION_EXPORT void OrgApacheLuceneDocumentDoubleDocValuesField_initWithNSString_withDouble_(OrgApacheLuceneDocumentDoubleDocValuesField *self, NSString *name, jdouble value);
+FOUNDATION_EXPORT void OrgApacheLuceneDocumentDoubleDocValuesField_init(OrgApacheLuceneDocumentDoubleDocValuesField *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneDocumentDoubleDocValuesField *new_OrgApacheLuceneDocumentDoubleDocValuesField_initWithNSString_withDouble_(NSString *name, jdouble value) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneDocumentDoubleDocValuesField *new_OrgApacheLuceneDocumentDoubleDocValuesField_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentDoubleDocValuesField)
 

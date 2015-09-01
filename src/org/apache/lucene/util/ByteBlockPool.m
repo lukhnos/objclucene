@@ -9,7 +9,6 @@
 #include "J2ObjC_source.h"
 #include "java/lang/System.h"
 #include "java/util/Arrays.h"
-#include "java/util/List.h"
 #include "org/apache/lucene/util/ArrayUtil.h"
 #include "org/apache/lucene/util/ByteBlockPool.h"
 #include "org/apache/lucene/util/BytesRef.h"
@@ -46,10 +45,6 @@ jint OrgApacheLuceneUtilByteBlockPool_FIRST_LEVEL_SIZE_;
 - (instancetype)initWithOrgApacheLuceneUtilByteBlockPool_Allocator:(OrgApacheLuceneUtilByteBlockPool_Allocator *)allocator {
   OrgApacheLuceneUtilByteBlockPool_initWithOrgApacheLuceneUtilByteBlockPool_Allocator_(self, allocator);
   return self;
-}
-
-- (void)reset {
-  [self resetWithBoolean:YES withBoolean:YES];
 }
 
 - (void)resetWithBoolean:(jboolean)zeroFillBuffers
@@ -215,7 +210,6 @@ jint OrgApacheLuceneUtilByteBlockPool_FIRST_LEVEL_SIZE_;
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneUtilByteBlockPool_Allocator:", "ByteBlockPool", NULL, 0x1, NULL, NULL },
-    { "reset", NULL, "V", 0x1, NULL, NULL },
     { "resetWithBoolean:withBoolean:", "reset", "V", 0x1, NULL, NULL },
     { "nextBuffer", NULL, "V", 0x1, NULL, NULL },
     { "newSliceWithInt:", "newSlice", "I", 0x1, NULL, NULL },
@@ -239,7 +233,7 @@ jint OrgApacheLuceneUtilByteBlockPool_FIRST_LEVEL_SIZE_;
     { "FIRST_LEVEL_SIZE_", NULL, 0x19, "I", &OrgApacheLuceneUtilByteBlockPool_FIRST_LEVEL_SIZE_, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.util.ByteBlockPool$Allocator;", "Lorg.apache.lucene.util.ByteBlockPool$DirectAllocator;", "Lorg.apache.lucene.util.ByteBlockPool$DirectTrackingAllocator;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilByteBlockPool = { 2, "ByteBlockPool", "org.apache.lucene.util", NULL, 0x11, 9, methods, 12, fields, 0, NULL, 3, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilByteBlockPool = { 2, "ByteBlockPool", "org.apache.lucene.util", NULL, 0x11, 8, methods, 12, fields, 0, NULL, 3, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneUtilByteBlockPool;
 }
 
@@ -276,11 +270,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilByteBlockPool)
   [self doesNotRecognizeSelector:_cmd];
 }
 
-- (void)recycleByteBlocksWithJavaUtilList:(id<JavaUtilList>)blocks {
-  IOSObjectArray *b = [blocks toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:[((id<JavaUtilList>) nil_chk(blocks)) size] type:IOSClass_byteArray(1)]];
-  [self recycleByteBlocksWithByteArray2:b withInt:0 withInt:((IOSObjectArray *) nil_chk(b))->size_];
-}
-
 - (IOSByteArray *)getByteBlock {
   return [IOSByteArray arrayWithLength:blockSize_];
 }
@@ -289,13 +278,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilByteBlockPool)
   static const J2ObjcMethodInfo methods[] = {
     { "initWithInt:", "Allocator", NULL, 0x1, NULL, NULL },
     { "recycleByteBlocksWithByteArray2:withInt:withInt:", "recycleByteBlocks", "V", 0x401, NULL, NULL },
-    { "recycleByteBlocksWithJavaUtilList:", "recycleByteBlocks", "V", 0x1, NULL, NULL },
     { "getByteBlock", NULL, "[B", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "blockSize_", NULL, 0x14, "I", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilByteBlockPool_Allocator = { 2, "Allocator", "org.apache.lucene.util", "ByteBlockPool", 0x409, 4, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilByteBlockPool_Allocator = { 2, "Allocator", "org.apache.lucene.util", "ByteBlockPool", 0x409, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilByteBlockPool_Allocator;
 }
 

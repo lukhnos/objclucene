@@ -21,7 +21,6 @@
 #include "org/apache/lucene/util/Accountable.h"
 
 @class OrgApacheLuceneSearchDocIdSetIterator;
-@protocol JavaUtilCollection;
 @protocol OrgApacheLuceneUtilBits;
 
 @interface OrgApacheLuceneSearchDocIdSet : NSObject < OrgApacheLuceneUtilAccountable >
@@ -31,10 +30,6 @@
 - (instancetype)init;
 
 - (id<OrgApacheLuceneUtilBits>)bits;
-
-- (id<JavaUtilCollection>)getChildResources;
-
-- (jboolean)isCacheable;
 
 - (OrgApacheLuceneSearchDocIdSetIterator *)iterator;
 

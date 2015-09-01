@@ -20,25 +20,19 @@
 #define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
-@class OrgApacheLuceneAnalysisPatternPatternCaptureGroupTokenFilter;
-@class OrgApacheLuceneAnalysisTokenStream;
-@protocol JavaUtilMap;
-
 @interface OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
-
-- (OrgApacheLuceneAnalysisPatternPatternCaptureGroupTokenFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory *self, id<JavaUtilMap> args);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory_init(OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory *new_OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory *new_OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory)
 

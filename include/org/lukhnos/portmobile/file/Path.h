@@ -29,11 +29,7 @@
 
 - (OrgLukhnosPortmobileFilePath *)getParent;
 
-- (jboolean)isAbsolute;
-
 - (OrgLukhnosPortmobileFilePath *)resolveWithNSString:(NSString *)other;
-
-- (OrgLukhnosPortmobileFilePath *)toAbsolutePath;
 
 - (JavaIoFile *)toFile;
 

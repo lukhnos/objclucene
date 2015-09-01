@@ -154,13 +154,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTi
   return [((JavaUtilConcurrentAtomicAtomicInteger *) nil_chk(ticketCount_)) get];
 }
 
-- (void)clear {
-  @synchronized(self) {
-    [((id<JavaUtilQueue>) nil_chk(queue_)) clear];
-    [((JavaUtilConcurrentAtomicAtomicInteger *) nil_chk(ticketCount_)) setWithInt:0];
-  }
-}
-
 - (instancetype)init {
   OrgApacheLuceneIndexDocumentsWriterFlushQueue_init(self);
   return self;
@@ -186,7 +179,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTi
     { "forcePurgeWithOrgApacheLuceneIndexIndexWriter:", "forcePurge", "I", 0x0, "Ljava.io.IOException;", NULL },
     { "tryPurgeWithOrgApacheLuceneIndexIndexWriter:", "tryPurge", "I", 0x0, "Ljava.io.IOException;", NULL },
     { "getTicketCount", NULL, "I", 0x1, NULL, NULL },
-    { "clear", NULL, "V", 0x20, NULL, NULL },
     { "init", NULL, NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -195,7 +187,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTi
     { "purgeLock_", NULL, 0x12, "Ljava.util.concurrent.locks.ReentrantLock;", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.index.DocumentsWriterFlushQueue$FlushTicket;", "Lorg.apache.lucene.index.DocumentsWriterFlushQueue$GlobalDeletesTicket;", "Lorg.apache.lucene.index.DocumentsWriterFlushQueue$SegmentFlushTicket;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocumentsWriterFlushQueue = { 2, "DocumentsWriterFlushQueue", "org.apache.lucene.index", NULL, 0x0, 13, methods, 3, fields, 0, NULL, 3, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocumentsWriterFlushQueue = { 2, "DocumentsWriterFlushQueue", "org.apache.lucene.index", NULL, 0x0, 12, methods, 3, fields, 0, NULL, 3, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneIndexDocumentsWriterFlushQueue;
 }
 

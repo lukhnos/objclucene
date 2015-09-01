@@ -20,35 +20,19 @@
 #define OrgApacheLuceneStoreDataOutput_INCLUDE 1
 #include "org/apache/lucene/store/DataOutput.h"
 
-@class IOSByteArray;
-@class OrgApacheLuceneUtilByteBlockPool;
+@interface OrgApacheLuceneIndexByteSliceWriter : OrgApacheLuceneStoreDataOutput
 
-@interface OrgApacheLuceneIndexByteSliceWriter : OrgApacheLuceneStoreDataOutput {
- @public
-  jint offset0_;
-}
+#pragma mark Package-Private
 
-#pragma mark Public
-
-- (instancetype)initWithOrgApacheLuceneUtilByteBlockPool:(OrgApacheLuceneUtilByteBlockPool *)pool;
-
-- (jint)getAddress;
-
-- (void)init__WithInt:(jint)address OBJC_METHOD_FAMILY_NONE;
-
-- (void)writeByteWithByte:(jbyte)b;
-
-- (void)writeBytesWithByteArray:(IOSByteArray *)b
-                        withInt:(jint)offset
-                        withInt:(jint)len;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexByteSliceWriter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexByteSliceWriter_initWithOrgApacheLuceneUtilByteBlockPool_(OrgApacheLuceneIndexByteSliceWriter *self, OrgApacheLuceneUtilByteBlockPool *pool);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexByteSliceWriter_init(OrgApacheLuceneIndexByteSliceWriter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexByteSliceWriter *new_OrgApacheLuceneIndexByteSliceWriter_initWithOrgApacheLuceneUtilByteBlockPool_(OrgApacheLuceneUtilByteBlockPool *pool) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexByteSliceWriter *new_OrgApacheLuceneIndexByteSliceWriter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexByteSliceWriter)
 

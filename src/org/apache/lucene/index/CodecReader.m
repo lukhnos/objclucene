@@ -9,11 +9,7 @@
 #include "java/io/Closeable.h"
 #include "java/io/IOException.h"
 #include "java/lang/IndexOutOfBoundsException.h"
-#include "java/util/ArrayList.h"
-#include "java/util/Collection.h"
-#include "java/util/Collections.h"
 #include "java/util/HashMap.h"
-#include "java/util/List.h"
 #include "java/util/Map.h"
 #include "org/apache/lucene/codecs/DocValuesProducer.h"
 #include "org/apache/lucene/codecs/FieldsProducer.h"
@@ -33,8 +29,6 @@
 #include "org/apache/lucene/index/SortedNumericDocValues.h"
 #include "org/apache/lucene/index/SortedSetDocValues.h"
 #include "org/apache/lucene/index/StoredFieldVisitor.h"
-#include "org/apache/lucene/util/Accountable.h"
-#include "org/apache/lucene/util/Accountables.h"
 #include "org/apache/lucene/util/Bits.h"
 #include "org/apache/lucene/util/CloseableThreadLocal.h"
 #include "org/apache/lucene/util/IOUtils.h"
@@ -313,25 +307,6 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
   return ramBytesUsed;
 }
 
-- (id<JavaUtilCollection>)getChildResources {
-  [self ensureOpen];
-  id<JavaUtilList> resources = [new_JavaUtilArrayList_init() autorelease];
-  [resources addWithId:OrgApacheLuceneUtilAccountables_namedAccountableWithNSString_withOrgApacheLuceneUtilAccountable_(@"postings", [self getPostingsReader])];
-  if ([self getNormsReader] != nil) {
-    [resources addWithId:OrgApacheLuceneUtilAccountables_namedAccountableWithNSString_withOrgApacheLuceneUtilAccountable_(@"norms", [self getNormsReader])];
-  }
-  if ([self getDocValuesReader] != nil) {
-    [resources addWithId:OrgApacheLuceneUtilAccountables_namedAccountableWithNSString_withOrgApacheLuceneUtilAccountable_(@"docvalues", [self getDocValuesReader])];
-  }
-  if ([self getFieldsReader] != nil) {
-    [resources addWithId:OrgApacheLuceneUtilAccountables_namedAccountableWithNSString_withOrgApacheLuceneUtilAccountable_(@"stored fields", [self getFieldsReader])];
-  }
-  if ([self getTermVectorsReader] != nil) {
-    [resources addWithId:OrgApacheLuceneUtilAccountables_namedAccountableWithNSString_withOrgApacheLuceneUtilAccountable_(@"term vectors", [self getTermVectorsReader])];
-  }
-  return JavaUtilCollections_unmodifiableListWithJavaUtilList_(resources);
-}
-
 - (void)checkIntegrity {
   [self ensureOpen];
   [((OrgApacheLuceneCodecsFieldsProducer *) nil_chk([self getPostingsReader])) checkIntegrity];
@@ -378,7 +353,6 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
     { "getNormValuesWithNSString:", "getNormValues", "Lorg.apache.lucene.index.NumericDocValues;", 0x11, "Ljava.io.IOException;", NULL },
     { "doClose", NULL, "V", 0x4, "Ljava.io.IOException;", NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
     { "checkIntegrity", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -386,7 +360,7 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
     { "docsWithFieldLocal_", NULL, 0x10, "Lorg.apache.lucene.util.CloseableThreadLocal;", NULL, "Lorg/apache/lucene/util/CloseableThreadLocal<Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/util/Bits;>;>;", .constantValue.asLong = 0 },
     { "normsLocal_", NULL, 0x10, "Lorg.apache.lucene.util.CloseableThreadLocal;", NULL, "Lorg/apache/lucene/util/CloseableThreadLocal<Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/index/NumericDocValues;>;>;", .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexCodecReader = { 2, "CodecReader", "org.apache.lucene.index", NULL, 0x401, 22, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexCodecReader = { 2, "CodecReader", "org.apache.lucene.index", NULL, 0x401, 21, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexCodecReader;
 }
 

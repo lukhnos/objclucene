@@ -16,25 +16,19 @@
 #if !defined (_OrgApacheLuceneSearchPayloadsPayloadSpanUtil_) && (OrgApacheLuceneSearchPayloadsPayloadSpanUtil_INCLUDE_ALL || OrgApacheLuceneSearchPayloadsPayloadSpanUtil_INCLUDE)
 #define _OrgApacheLuceneSearchPayloadsPayloadSpanUtil_
 
-@class OrgApacheLuceneIndexIndexReaderContext;
-@class OrgApacheLuceneSearchQuery;
-@protocol JavaUtilCollection;
-
 @interface OrgApacheLuceneSearchPayloadsPayloadSpanUtil : NSObject
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneIndexIndexReaderContext:(OrgApacheLuceneIndexIndexReaderContext *)context;
-
-- (id<JavaUtilCollection>)getPayloadsForQueryWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchPayloadsPayloadSpanUtil)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchPayloadsPayloadSpanUtil_initWithOrgApacheLuceneIndexIndexReaderContext_(OrgApacheLuceneSearchPayloadsPayloadSpanUtil *self, OrgApacheLuceneIndexIndexReaderContext *context);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchPayloadsPayloadSpanUtil_init(OrgApacheLuceneSearchPayloadsPayloadSpanUtil *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsPayloadSpanUtil *new_OrgApacheLuceneSearchPayloadsPayloadSpanUtil_initWithOrgApacheLuceneIndexIndexReaderContext_(OrgApacheLuceneIndexIndexReaderContext *context) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsPayloadSpanUtil *new_OrgApacheLuceneSearchPayloadsPayloadSpanUtil_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPayloadsPayloadSpanUtil)
 

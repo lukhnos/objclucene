@@ -24,66 +24,19 @@
 #define OrgApacheLuceneUtilAccountable_INCLUDE 1
 #include "org/apache/lucene/util/Accountable.h"
 
-@class OrgApacheLuceneIndexIndexReader;
-@class OrgApacheLuceneIndexLeafReader;
-@class OrgApacheLuceneSearchDocIdSet;
-@class OrgApacheLuceneSearchDocIdSetIterator;
-@class OrgApacheLuceneSearchIndexSearcher;
-@class OrgApacheLuceneSearchWeight;
-@protocol JavaUtilCollection;
-@protocol OrgApacheLuceneSearchQueryCachingPolicy;
-
-@interface OrgApacheLuceneSearchCachingWrapperQuery : OrgApacheLuceneSearchQuery < OrgApacheLuceneUtilAccountable > {
- @public
-  jint hitCount_, missCount_;
-}
+@interface OrgApacheLuceneSearchCachingWrapperQuery : OrgApacheLuceneSearchQuery < OrgApacheLuceneUtilAccountable >
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
-
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-       withOrgApacheLuceneSearchQueryCachingPolicy:(id<OrgApacheLuceneSearchQueryCachingPolicy>)policy;
-
-- (OrgApacheLuceneSearchCachingWrapperQuery *)clone;
-
-- (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
-                                                                        withBoolean:(jboolean)needsScores;
-
-- (jboolean)isEqual:(id)o;
-
-- (jfloat)getBoost;
-
-- (id<JavaUtilCollection>)getChildResources;
-
-- (OrgApacheLuceneSearchQuery *)getQuery;
-
-- (NSUInteger)hash;
-
-- (jlong)ramBytesUsed;
-
-- (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
-
-- (void)setBoostWithFloat:(jfloat)b;
-
-- (NSString *)toStringWithNSString:(NSString *)field;
-
-#pragma mark Protected
-
-- (OrgApacheLuceneSearchDocIdSet *)cacheImplWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)iterator
-                                                   withOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchCachingWrapperQuery)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchCachingWrapperQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQueryCachingPolicy_(OrgApacheLuceneSearchCachingWrapperQuery *self, OrgApacheLuceneSearchQuery *query, id<OrgApacheLuceneSearchQueryCachingPolicy> policy);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchCachingWrapperQuery_init(OrgApacheLuceneSearchCachingWrapperQuery *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchCachingWrapperQuery *new_OrgApacheLuceneSearchCachingWrapperQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQueryCachingPolicy_(OrgApacheLuceneSearchQuery *query, id<OrgApacheLuceneSearchQueryCachingPolicy> policy) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchCachingWrapperQuery_initWithOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchCachingWrapperQuery *self, OrgApacheLuceneSearchQuery *query);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchCachingWrapperQuery *new_OrgApacheLuceneSearchCachingWrapperQuery_initWithOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchQuery *query) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchCachingWrapperQuery *new_OrgApacheLuceneSearchCachingWrapperQuery_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchCachingWrapperQuery)
 

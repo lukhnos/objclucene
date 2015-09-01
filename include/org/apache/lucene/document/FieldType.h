@@ -60,12 +60,6 @@
 
 - (void)setStoredWithBoolean:(jboolean)value;
 
-- (void)setStoreTermVectorOffsetsWithBoolean:(jboolean)value;
-
-- (void)setStoreTermVectorPayloadsWithBoolean:(jboolean)value;
-
-- (void)setStoreTermVectorPositionsWithBoolean:(jboolean)value;
-
 - (void)setStoreTermVectorsWithBoolean:(jboolean)value;
 
 - (void)setTokenizedWithBoolean:(jboolean)value;

@@ -61,10 +61,6 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilAutomatonLevenshteinAutomata_Param
   return OrgApacheLuceneUtilAutomatonLevenshteinAutomata_codePointsWithNSString_(input);
 }
 
-- (OrgApacheLuceneUtilAutomatonAutomaton *)toAutomatonWithInt:(jint)n {
-  return [self toAutomatonWithInt:n withNSString:@""];
-}
-
 - (OrgApacheLuceneUtilAutomatonAutomaton *)toAutomatonWithInt:(jint)n
                                                  withNSString:(NSString *)prefix {
   JreAssert((prefix != nil), (@"org/apache/lucene/util/automaton/LevenshteinAutomata.java:144 condition failed: assert prefix != null;"));
@@ -144,7 +140,6 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilAutomatonLevenshteinAutomata_Param
     { "initWithNSString:withBoolean:", "LevenshteinAutomata", NULL, 0x1, NULL, NULL },
     { "initWithIntArray:withInt:withBoolean:", "LevenshteinAutomata", NULL, 0x1, NULL, NULL },
     { "codePointsWithNSString:", "codePoints", "[I", 0xa, NULL, NULL },
-    { "toAutomatonWithInt:", "toAutomaton", "Lorg.apache.lucene.util.automaton.Automaton;", 0x1, NULL, NULL },
     { "toAutomatonWithInt:withNSString:", "toAutomaton", "Lorg.apache.lucene.util.automaton.Automaton;", 0x1, NULL, NULL },
     { "getVectorWithInt:withInt:withInt:", "getVector", "I", 0x0, NULL, NULL },
   };
@@ -159,7 +154,7 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilAutomatonLevenshteinAutomata_Param
     { "descriptions_", NULL, 0x0, "[Lorg.apache.lucene.util.automaton.LevenshteinAutomata$ParametricDescription;", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.util.automaton.LevenshteinAutomata$ParametricDescription;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonLevenshteinAutomata = { 2, "LevenshteinAutomata", "org.apache.lucene.util.automaton", NULL, 0x1, 6, methods, 8, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonLevenshteinAutomata = { 2, "LevenshteinAutomata", "org.apache.lucene.util.automaton", NULL, 0x1, 5, methods, 8, fields, 0, NULL, 1, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneUtilAutomatonLevenshteinAutomata;
 }
 

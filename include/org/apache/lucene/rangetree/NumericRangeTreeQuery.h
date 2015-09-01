@@ -20,47 +20,19 @@
 #define OrgApacheLuceneSearchQuery_INCLUDE 1
 #include "org/apache/lucene/search/Query.h"
 
-@class JavaLangLong;
-@class OrgApacheLuceneSearchIndexSearcher;
-@class OrgApacheLuceneSearchWeight;
-
-@interface OrgApacheLuceneRangetreeNumericRangeTreeQuery : OrgApacheLuceneSearchQuery {
- @public
-  NSString *field_;
-  JavaLangLong *minValue_;
-  JavaLangLong *maxValue_;
-  jboolean minInclusive_;
-  jboolean maxInclusive_;
-}
+@interface OrgApacheLuceneRangetreeNumericRangeTreeQuery : OrgApacheLuceneSearchQuery
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field
-                withJavaLangLong:(JavaLangLong *)minValue
-                     withBoolean:(jboolean)minInclusive
-                withJavaLangLong:(JavaLangLong *)maxValue
-                     withBoolean:(jboolean)maxInclusive;
-
-- (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
-                                                                        withBoolean:(jboolean)needsScores;
-
-- (jboolean)isEqual:(id)other;
-
-- (NSUInteger)hash;
-
-- (NSString *)toStringWithNSString:(NSString *)field;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneRangetreeNumericRangeTreeQuery)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeNumericRangeTreeQuery, field_, NSString *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeNumericRangeTreeQuery, minValue_, JavaLangLong *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeNumericRangeTreeQuery, maxValue_, JavaLangLong *)
+FOUNDATION_EXPORT void OrgApacheLuceneRangetreeNumericRangeTreeQuery_init(OrgApacheLuceneRangetreeNumericRangeTreeQuery *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneRangetreeNumericRangeTreeQuery_initWithNSString_withJavaLangLong_withBoolean_withJavaLangLong_withBoolean_(OrgApacheLuceneRangetreeNumericRangeTreeQuery *self, NSString *field, JavaLangLong *minValue, jboolean minInclusive, JavaLangLong *maxValue, jboolean maxInclusive);
-
-FOUNDATION_EXPORT OrgApacheLuceneRangetreeNumericRangeTreeQuery *new_OrgApacheLuceneRangetreeNumericRangeTreeQuery_initWithNSString_withJavaLangLong_withBoolean_withJavaLangLong_withBoolean_(NSString *field, JavaLangLong *minValue, jboolean minInclusive, JavaLangLong *maxValue, jboolean maxInclusive) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneRangetreeNumericRangeTreeQuery *new_OrgApacheLuceneRangetreeNumericRangeTreeQuery_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeNumericRangeTreeQuery)
 

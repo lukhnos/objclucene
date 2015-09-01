@@ -20,42 +20,19 @@
 #define OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_INCLUDE 1
 #include "org/apache/lucene/queryparser/surround/query/SimpleTerm.h"
 
-@class JavaLangStringBuilder;
-@class OrgApacheLuceneIndexIndexReader;
-@class OrgApacheLuceneIndexTerm;
-@protocol OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor;
-
 @interface OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery : OrgApacheLuceneQueryparserSurroundQuerySimpleTerm
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)prefix
-                     withBoolean:(jboolean)quoted
-                        withChar:(jchar)truncator;
-
-- (OrgApacheLuceneIndexTerm *)getLucenePrefixTermWithNSString:(NSString *)fieldName;
-
-- (NSString *)getPrefix;
-
-- (jchar)getSuffixOperator;
-
-- (NSString *)toStringUnquoted;
-
-- (void)visitMatchingTermsWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
-                                                 withNSString:(NSString *)fieldName
-withOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor:(id<OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor>)mtv;
-
-#pragma mark Protected
-
-- (void)suffixToStringWithJavaLangStringBuilder:(JavaLangStringBuilder *)r;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery_initWithNSString_withBoolean_withChar_(OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery *self, NSString *prefix, jboolean quoted, jchar truncator);
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery_init(OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery *new_OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery_initWithNSString_withBoolean_withChar_(NSString *prefix, jboolean quoted, jchar truncator) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery *new_OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundQuerySrndPrefixQuery)
 

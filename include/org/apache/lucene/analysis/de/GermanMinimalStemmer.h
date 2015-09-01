@@ -16,16 +16,11 @@
 #if !defined (_OrgApacheLuceneAnalysisDeGermanMinimalStemmer_) && (OrgApacheLuceneAnalysisDeGermanMinimalStemmer_INCLUDE_ALL || OrgApacheLuceneAnalysisDeGermanMinimalStemmer_INCLUDE)
 #define _OrgApacheLuceneAnalysisDeGermanMinimalStemmer_
 
-@class IOSCharArray;
-
 @interface OrgApacheLuceneAnalysisDeGermanMinimalStemmer : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (jint)stemWithCharArray:(IOSCharArray *)s
-                  withInt:(jint)len;
 
 @end
 

@@ -37,9 +37,6 @@
 #pragma mark Public
 
 - (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-       withOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)automaton;
-
-- (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
        withOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)automaton
                                          withInt:(jint)maxDeterminizedStates;
 
@@ -49,8 +46,6 @@
                                      withBoolean:(jboolean)isBinary;
 
 - (jboolean)isEqual:(id)obj;
-
-- (OrgApacheLuceneUtilAutomatonAutomaton *)getAutomaton;
 
 - (NSUInteger)hash;
 
@@ -68,10 +63,6 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchAutomatonQuery)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchAutomatonQuery, automaton_, OrgApacheLuceneUtilAutomatonAutomaton *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchAutomatonQuery, compiled_, OrgApacheLuceneUtilAutomatonCompiledAutomaton *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchAutomatonQuery, term_, OrgApacheLuceneIndexTerm *)
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchAutomatonQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneSearchAutomatonQuery *self, OrgApacheLuceneIndexTerm *term, OrgApacheLuceneUtilAutomatonAutomaton *automaton);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchAutomatonQuery *new_OrgApacheLuceneSearchAutomatonQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneIndexTerm *term, OrgApacheLuceneUtilAutomatonAutomaton *automaton) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchAutomatonQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneUtilAutomatonAutomaton_withInt_(OrgApacheLuceneSearchAutomatonQuery *self, OrgApacheLuceneIndexTerm *term, OrgApacheLuceneUtilAutomatonAutomaton *automaton, jint maxDeterminizedStates);
 

@@ -8,7 +8,6 @@
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
 #include "java/lang/CharSequence.h"
-#include "org/apache/lucene/analysis/TokenFilter.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/en/KStemFilter.h"
 #include "org/apache/lucene/analysis/en/KStemmer.h"
@@ -31,11 +30,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisEnKStemFilter, keywordAtt_, id<OrgApa
 
 @implementation OrgApacheLuceneAnalysisEnKStemFilter
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg {
-  OrgApacheLuceneAnalysisEnKStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, inArg);
-  return self;
-}
-
 - (jboolean)incrementToken {
   if (![((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) return NO;
   IOSCharArray *term = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAttribute_)) buffer];
@@ -44,6 +38,11 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisEnKStemFilter, keywordAtt_, id<OrgApa
     [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk([termAttribute_ setEmpty])) appendWithJavaLangCharSequence:[stemmer_ asCharSequence]];
   }
   return YES;
+}
+
+- (instancetype)init {
+  OrgApacheLuceneAnalysisEnKStemFilter_init(self);
+  return self;
 }
 
 - (void)dealloc {
@@ -55,8 +54,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisEnKStemFilter, keywordAtt_, id<OrgApa
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:", "KStemFilter", NULL, 0x1, NULL, NULL },
     { "incrementToken", NULL, "Z", 0x1, "Ljava.io.IOException;", NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "stemmer_", NULL, 0x12, "Lorg.apache.lucene.analysis.en.KStemmer;", NULL, NULL, .constantValue.asLong = 0 },
@@ -69,16 +68,16 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisEnKStemFilter, keywordAtt_, id<OrgApa
 
 @end
 
-void OrgApacheLuceneAnalysisEnKStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisEnKStemFilter *self, OrgApacheLuceneAnalysisTokenStream *inArg) {
-  OrgApacheLuceneAnalysisTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, inArg);
+void OrgApacheLuceneAnalysisEnKStemFilter_init(OrgApacheLuceneAnalysisEnKStemFilter *self) {
+  NSObject_init(self);
   JreStrongAssignAndConsume(&self->stemmer_, new_OrgApacheLuceneAnalysisEnKStemmer_init());
   JreStrongAssign(&self->termAttribute_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()]);
   JreStrongAssign(&self->keywordAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesKeywordAttribute_class_()]);
 }
 
-OrgApacheLuceneAnalysisEnKStemFilter *new_OrgApacheLuceneAnalysisEnKStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg) {
+OrgApacheLuceneAnalysisEnKStemFilter *new_OrgApacheLuceneAnalysisEnKStemFilter_init() {
   OrgApacheLuceneAnalysisEnKStemFilter *self = [OrgApacheLuceneAnalysisEnKStemFilter alloc];
-  OrgApacheLuceneAnalysisEnKStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, inArg);
+  OrgApacheLuceneAnalysisEnKStemFilter_init(self);
   return self;
 }
 

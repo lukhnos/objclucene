@@ -20,67 +20,19 @@
 #define OrgApacheLuceneSearchQuery_INCLUDE 1
 #include "org/apache/lucene/search/Query.h"
 
-@class IOSObjectArray;
-@class OrgApacheLuceneAnalysisAnalyzer;
-@class OrgApacheLuceneIndexIndexReader;
-@protocol JavaUtilSet;
-
 @interface OrgApacheLuceneQueriesMltMoreLikeThisQuery : OrgApacheLuceneSearchQuery
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)likeText
-               withNSStringArray:(IOSObjectArray *)moreLikeFields
-withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
-                    withNSString:(NSString *)fieldName;
-
-- (jboolean)isEqual:(id)obj;
-
-- (OrgApacheLuceneAnalysisAnalyzer *)getAnalyzer;
-
-- (NSString *)getLikeText;
-
-- (jint)getMaxQueryTerms;
-
-- (jint)getMinDocFreq;
-
-- (jint)getMinTermFrequency;
-
-- (IOSObjectArray *)getMoreLikeFields;
-
-- (jfloat)getPercentTermsToMatch;
-
-- (id<JavaUtilSet>)getStopWords;
-
-- (NSUInteger)hash;
-
-- (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
-
-- (void)setAnalyzerWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
-
-- (void)setLikeTextWithNSString:(NSString *)likeText;
-
-- (void)setMaxQueryTermsWithInt:(jint)maxQueryTerms;
-
-- (void)setMinDocFreqWithInt:(jint)minDocFreq;
-
-- (void)setMinTermFrequencyWithInt:(jint)minTermFrequency;
-
-- (void)setMoreLikeFieldsWithNSStringArray:(IOSObjectArray *)moreLikeFields;
-
-- (void)setPercentTermsToMatchWithFloat:(jfloat)percentTermsToMatch;
-
-- (void)setStopWordsWithJavaUtilSet:(id<JavaUtilSet>)stopWords;
-
-- (NSString *)toStringWithNSString:(NSString *)field;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesMltMoreLikeThisQuery)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesMltMoreLikeThisQuery_initWithNSString_withNSStringArray_withOrgApacheLuceneAnalysisAnalyzer_withNSString_(OrgApacheLuceneQueriesMltMoreLikeThisQuery *self, NSString *likeText, IOSObjectArray *moreLikeFields, OrgApacheLuceneAnalysisAnalyzer *analyzer, NSString *fieldName);
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesMltMoreLikeThisQuery_init(OrgApacheLuceneQueriesMltMoreLikeThisQuery *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueriesMltMoreLikeThisQuery *new_OrgApacheLuceneQueriesMltMoreLikeThisQuery_initWithNSString_withNSStringArray_withOrgApacheLuceneAnalysisAnalyzer_withNSString_(NSString *likeText, IOSObjectArray *moreLikeFields, OrgApacheLuceneAnalysisAnalyzer *analyzer, NSString *fieldName) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueriesMltMoreLikeThisQuery *new_OrgApacheLuceneQueriesMltMoreLikeThisQuery_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesMltMoreLikeThisQuery)
 

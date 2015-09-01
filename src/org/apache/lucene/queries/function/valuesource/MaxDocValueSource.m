@@ -3,46 +3,12 @@
 //  source: ./queries/src/java/org/apache/lucene/queries/function/valuesource/MaxDocValueSource.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
-#include "java/util/Map.h"
-#include "org/apache/lucene/index/IndexReader.h"
-#include "org/apache/lucene/index/LeafReaderContext.h"
-#include "org/apache/lucene/queries/function/FunctionValues.h"
-#include "org/apache/lucene/queries/function/ValueSource.h"
-#include "org/apache/lucene/queries/function/valuesource/DocFreqValueSource.h"  // fixed by translate.py
 #include "org/apache/lucene/queries/function/valuesource/MaxDocValueSource.h"
-#include "org/apache/lucene/search/IndexSearcher.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource
-
-- (NSString *)name {
-  return @"maxdoc";
-}
-
-- (NSString *)description__ {
-  return JreStrcat("$$", [self name], @"()");
-}
-
-- (void)createWeightWithJavaUtilMap:(id<JavaUtilMap>)context
-withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher {
-  [((id<JavaUtilMap>) nil_chk(context)) putWithId:@"searcher" withId:searcher];
-}
-
-- (OrgApacheLuceneQueriesFunctionFunctionValues *)getValuesWithJavaUtilMap:(id<JavaUtilMap>)context
-                                 withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext {
-  OrgApacheLuceneSearchIndexSearcher *searcher = (OrgApacheLuceneSearchIndexSearcher *) check_class_cast([((id<JavaUtilMap>) nil_chk(context)) getWithId:@"searcher"], [OrgApacheLuceneSearchIndexSearcher class]);
-  return [new_OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues_initWithInt_withOrgApacheLuceneQueriesFunctionValueSource_([((OrgApacheLuceneIndexIndexReader *) nil_chk([((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) getIndexReader])) maxDoc], self) autorelease];
-}
-
-- (jboolean)isEqual:(id)o {
-  return [self getClass] == [nil_chk(o) getClass];
-}
-
-- (NSUInteger)hash {
-  return ((jint) [[self getClass] hash]);
-}
 
 - (instancetype)init {
   OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource_init(self);
@@ -51,22 +17,16 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "name", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "description__", "description", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "createWeightWithJavaUtilMap:withOrgApacheLuceneSearchIndexSearcher:", "createWeight", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "getValuesWithJavaUtilMap:withOrgApacheLuceneIndexLeafReaderContext:", "getValues", "Lorg.apache.lucene.queries.function.FunctionValues;", 0x1, "Ljava.io.IOException;", NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
     { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource = { 2, "MaxDocValueSource", "org.apache.lucene.queries.function.valuesource", NULL, 0x1, 7, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource = { 2, "MaxDocValueSource", "org.apache.lucene.queries.function.valuesource", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource;
 }
 
 @end
 
 void OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource_init(OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource *self) {
-  OrgApacheLuceneQueriesFunctionValueSource_init(self);
+  NSObject_init(self);
 }
 
 OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceMaxDocValueSource_init() {

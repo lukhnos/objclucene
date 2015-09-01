@@ -20,45 +20,17 @@
 #define OrgApacheLuceneQueriesFunctionFunctionValues_INCLUDE 1
 #include "org/apache/lucene/queries/function/FunctionValues.h"
 
-@class OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller;
-@class OrgApacheLuceneQueriesFunctionValueSource;
-
-@interface OrgApacheLuceneQueriesFunctionDocvaluesFloatDocValues : OrgApacheLuceneQueriesFunctionFunctionValues {
- @public
-  OrgApacheLuceneQueriesFunctionValueSource *vs_;
-}
+@interface OrgApacheLuceneQueriesFunctionDocvaluesFloatDocValues : OrgApacheLuceneQueriesFunctionFunctionValues
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)vs;
-
-- (jbyte)byteValWithInt:(jint)doc;
-
-- (jdouble)doubleValWithInt:(jint)doc;
-
-- (jfloat)floatValWithInt:(jint)doc;
-
-- (OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller *)getValueFiller;
-
-- (jint)intValWithInt:(jint)doc;
-
-- (jlong)longValWithInt:(jint)doc;
-
-- (id)objectValWithInt:(jint)doc;
-
-- (jshort)shortValWithInt:(jint)doc;
-
-- (NSString *)strValWithInt:(jint)doc;
-
-- (NSString *)toStringWithInt:(jint)doc;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionDocvaluesFloatDocValues)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionDocvaluesFloatDocValues, vs_, OrgApacheLuceneQueriesFunctionValueSource *)
-
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionDocvaluesFloatDocValues_initWithOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionDocvaluesFloatDocValues *self, OrgApacheLuceneQueriesFunctionValueSource *vs);
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionDocvaluesFloatDocValues_init(OrgApacheLuceneQueriesFunctionDocvaluesFloatDocValues *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionDocvaluesFloatDocValues)
 

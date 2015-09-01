@@ -18,22 +18,17 @@
 
 @interface OrgApacheLuceneUtilStrictStringTokenizer : NSObject
 
-#pragma mark Public
+#pragma mark Package-Private
 
-- (instancetype)initWithNSString:(NSString *)s
-                        withChar:(jchar)delimiter;
-
-- (jboolean)hasMoreTokens;
-
-- (NSString *)nextToken;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilStrictStringTokenizer)
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilStrictStringTokenizer_initWithNSString_withChar_(OrgApacheLuceneUtilStrictStringTokenizer *self, NSString *s, jchar delimiter);
+FOUNDATION_EXPORT void OrgApacheLuceneUtilStrictStringTokenizer_init(OrgApacheLuceneUtilStrictStringTokenizer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilStrictStringTokenizer *new_OrgApacheLuceneUtilStrictStringTokenizer_initWithNSString_withChar_(NSString *s, jchar delimiter) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilStrictStringTokenizer *new_OrgApacheLuceneUtilStrictStringTokenizer_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilStrictStringTokenizer)
 

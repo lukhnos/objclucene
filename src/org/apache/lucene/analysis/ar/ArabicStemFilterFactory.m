@@ -4,45 +4,34 @@
 //
 
 #include "J2ObjC_source.h"
-#include "java/lang/IllegalArgumentException.h"
-#include "java/util/Map.h"
-#include "org/apache/lucene/analysis/TokenStream.h"
-#include "org/apache/lucene/analysis/ar/ArabicStemFilter.h"
 #include "org/apache/lucene/analysis/ar/ArabicStemFilterFactory.h"
-#include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneAnalysisArArabicStemFilterFactory
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args {
-  OrgApacheLuceneAnalysisArArabicStemFilterFactory_initWithJavaUtilMap_(self, args);
+- (instancetype)init {
+  OrgApacheLuceneAnalysisArArabicStemFilterFactory_init(self);
   return self;
-}
-
-- (OrgApacheLuceneAnalysisArArabicStemFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  return [new_OrgApacheLuceneAnalysisArArabicStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(input) autorelease];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "ArabicStemFilterFactory", NULL, 0x1, NULL, NULL },
-    { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.ar.ArabicStemFilter;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisArArabicStemFilterFactory = { 2, "ArabicStemFilterFactory", "org.apache.lucene.analysis.ar", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisArArabicStemFilterFactory = { 2, "ArabicStemFilterFactory", "org.apache.lucene.analysis.ar", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisArArabicStemFilterFactory;
 }
 
 @end
 
-void OrgApacheLuceneAnalysisArArabicStemFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisArArabicStemFilterFactory *self, id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
-  if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
-  }
+void OrgApacheLuceneAnalysisArArabicStemFilterFactory_init(OrgApacheLuceneAnalysisArArabicStemFilterFactory *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneAnalysisArArabicStemFilterFactory *new_OrgApacheLuceneAnalysisArArabicStemFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+OrgApacheLuceneAnalysisArArabicStemFilterFactory *new_OrgApacheLuceneAnalysisArArabicStemFilterFactory_init() {
   OrgApacheLuceneAnalysisArArabicStemFilterFactory *self = [OrgApacheLuceneAnalysisArArabicStemFilterFactory alloc];
-  OrgApacheLuceneAnalysisArArabicStemFilterFactory_initWithJavaUtilMap_(self, args);
+  OrgApacheLuceneAnalysisArArabicStemFilterFactory_init(self);
   return self;
 }
 

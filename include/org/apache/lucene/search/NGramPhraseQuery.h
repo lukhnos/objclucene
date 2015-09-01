@@ -20,41 +20,19 @@
 #define OrgApacheLuceneSearchQuery_INCLUDE 1
 #include "org/apache/lucene/search/Query.h"
 
-@class IOSIntArray;
-@class IOSObjectArray;
-@class OrgApacheLuceneIndexIndexReader;
-@class OrgApacheLuceneSearchPhraseQuery;
-
 @interface OrgApacheLuceneSearchNGramPhraseQuery : OrgApacheLuceneSearchQuery
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)n
-withOrgApacheLuceneSearchPhraseQuery:(OrgApacheLuceneSearchPhraseQuery *)query;
-
-- (jboolean)isEqual:(id)o;
-
-- (jfloat)getBoost;
-
-- (IOSIntArray *)getPositions;
-
-- (IOSObjectArray *)getTerms;
-
-- (NSUInteger)hash;
-
-- (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
-
-- (void)setBoostWithFloat:(jfloat)b;
-
-- (NSString *)toStringWithNSString:(NSString *)field;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchNGramPhraseQuery)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchNGramPhraseQuery_initWithInt_withOrgApacheLuceneSearchPhraseQuery_(OrgApacheLuceneSearchNGramPhraseQuery *self, jint n, OrgApacheLuceneSearchPhraseQuery *query);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchNGramPhraseQuery_init(OrgApacheLuceneSearchNGramPhraseQuery *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchNGramPhraseQuery *new_OrgApacheLuceneSearchNGramPhraseQuery_initWithInt_withOrgApacheLuceneSearchPhraseQuery_(jint n, OrgApacheLuceneSearchPhraseQuery *query) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchNGramPhraseQuery *new_OrgApacheLuceneSearchNGramPhraseQuery_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchNGramPhraseQuery)
 

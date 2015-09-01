@@ -4,46 +4,34 @@
 //
 
 #include "J2ObjC_source.h"
-#include "java/lang/Float.h"
-#include "java/lang/IllegalArgumentException.h"
 #include "org/apache/lucene/document/FloatDocValuesField.h"
-#include "org/apache/lucene/document/NumericDocValuesField.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneDocumentFloatDocValuesField
 
-- (instancetype)initWithNSString:(NSString *)name
-                       withFloat:(jfloat)value {
-  OrgApacheLuceneDocumentFloatDocValuesField_initWithNSString_withFloat_(self, name, value);
+- (instancetype)init {
+  OrgApacheLuceneDocumentFloatDocValuesField_init(self);
   return self;
-}
-
-- (void)setFloatValueWithFloat:(jfloat)value {
-  [super setLongValueWithLong:JavaLangFloat_floatToRawIntBitsWithFloat_(value)];
-}
-
-- (void)setLongValueWithLong:(jlong)value {
-  @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"cannot change value type from Float to Long") autorelease];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withFloat:", "FloatDocValuesField", NULL, 0x1, NULL, NULL },
-    { "setFloatValueWithFloat:", "setFloatValue", "V", 0x1, NULL, NULL },
-    { "setLongValueWithLong:", "setLongValue", "V", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneDocumentFloatDocValuesField = { 2, "FloatDocValuesField", "org.apache.lucene.document", NULL, 0x1, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneDocumentFloatDocValuesField = { 2, "FloatDocValuesField", "org.apache.lucene.document", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneDocumentFloatDocValuesField;
 }
 
 @end
 
-void OrgApacheLuceneDocumentFloatDocValuesField_initWithNSString_withFloat_(OrgApacheLuceneDocumentFloatDocValuesField *self, NSString *name, jfloat value) {
-  OrgApacheLuceneDocumentNumericDocValuesField_initWithNSString_withLong_(self, name, JavaLangFloat_floatToRawIntBitsWithFloat_(value));
+void OrgApacheLuceneDocumentFloatDocValuesField_init(OrgApacheLuceneDocumentFloatDocValuesField *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneDocumentFloatDocValuesField *new_OrgApacheLuceneDocumentFloatDocValuesField_initWithNSString_withFloat_(NSString *name, jfloat value) {
+OrgApacheLuceneDocumentFloatDocValuesField *new_OrgApacheLuceneDocumentFloatDocValuesField_init() {
   OrgApacheLuceneDocumentFloatDocValuesField *self = [OrgApacheLuceneDocumentFloatDocValuesField alloc];
-  OrgApacheLuceneDocumentFloatDocValuesField_initWithNSString_withFloat_(self, name, value);
+  OrgApacheLuceneDocumentFloatDocValuesField_init(self);
   return self;
 }
 

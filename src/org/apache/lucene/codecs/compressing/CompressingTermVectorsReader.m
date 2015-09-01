@@ -14,11 +14,8 @@
 #include "java/lang/IllegalStateException.h"
 #include "java/lang/Throwable.h"
 #include "java/lang/UnsupportedOperationException.h"
-#include "java/util/Collection.h"
-#include "java/util/Collections.h"
 #include "java/util/Iterator.h"
 #include "java/util/NoSuchElementException.h"
-#include "java/util/Set.h"
 #include "org/apache/lucene/codecs/CodecUtil.h"
 #include "org/apache/lucene/codecs/TermVectorsReader.h"
 #include "org/apache/lucene/codecs/compressing/CompressingStoredFieldsIndexReader.h"
@@ -43,8 +40,6 @@
 #include "org/apache/lucene/store/Directory.h"
 #include "org/apache/lucene/store/IOContext.h"
 #include "org/apache/lucene/store/IndexInput.h"
-#include "org/apache/lucene/util/Accountable.h"
-#include "org/apache/lucene/util/Accountables.h"
 #include "org/apache/lucene/util/ArrayUtil.h"
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/IOUtils.h"
@@ -281,8 +276,6 @@ withOrgApacheLuceneStoreByteArrayDataInput:(OrgApacheLuceneStoreByteArrayDataInp
 - (OrgApacheLuceneUtilBytesRef *)next;
 
 - (OrgApacheLuceneIndexTermsEnum_SeekStatusEnum *)seekCeilWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)text;
-
-- (void)seekExactWithLong:(jlong)ord;
 
 - (OrgApacheLuceneUtilBytesRef *)term;
 
@@ -793,10 +786,6 @@ withOrgApacheLuceneUtilPackedPackedInts_Reader:(OrgApacheLuceneUtilPackedPackedI
   return [((OrgApacheLuceneCodecsCompressingCompressingStoredFieldsIndexReader *) nil_chk(indexReader_)) ramBytesUsed];
 }
 
-- (id<JavaUtilCollection>)getChildResources {
-  return JavaUtilCollections_singletonWithId_(OrgApacheLuceneUtilAccountables_namedAccountableWithNSString_withOrgApacheLuceneUtilAccountable_(@"term vector index", indexReader_));
-}
-
 - (void)checkIntegrity {
   OrgApacheLuceneCodecsCodecUtil_checksumEntireFileWithOrgApacheLuceneStoreIndexInput_(vectorsStream_);
 }
@@ -836,7 +825,6 @@ withOrgApacheLuceneUtilPackedPackedInts_Reader:(OrgApacheLuceneUtilPackedPackedI
     { "readPositionsWithInt:withInt:withOrgApacheLuceneUtilPackedPackedInts_Reader:withOrgApacheLuceneUtilPackedPackedInts_Reader:withIntArray:withInt:withInt:withIntArray2:", "readPositions", "[[I", 0x2, "Ljava.io.IOException;", NULL },
     { "sumWithIntArray:", "sum", "I", 0xa, NULL, NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
     { "checkIntegrity", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
   };
@@ -857,7 +845,7 @@ withOrgApacheLuceneUtilPackedPackedInts_Reader:(OrgApacheLuceneUtilPackedPackedI
     { "maxPointer_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.codecs.compressing.CompressingTermVectorsReader$TVFields;", "Lorg.apache.lucene.codecs.compressing.CompressingTermVectorsReader$TVTerms;", "Lorg.apache.lucene.codecs.compressing.CompressingTermVectorsReader$TVTermsEnum;", "Lorg.apache.lucene.codecs.compressing.CompressingTermVectorsReader$TVPostingsEnum;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader = { 2, "CompressingTermVectorsReader", "org.apache.lucene.codecs.compressing", NULL, 0x11, 22, methods, 14, fields, 0, NULL, 4, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader = { 2, "CompressingTermVectorsReader", "org.apache.lucene.codecs.compressing", NULL, 0x11, 21, methods, 14, fields, 0, NULL, 4, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader;
 }
 
@@ -1469,10 +1457,6 @@ withOrgApacheLuceneStoreByteArrayDataInput:(OrgApacheLuceneStoreByteArrayDataInp
   }
 }
 
-- (void)seekExactWithLong:(jlong)ord {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
-}
-
 - (OrgApacheLuceneUtilBytesRef *)term {
   return term_;
 }
@@ -1529,7 +1513,6 @@ withOrgApacheLuceneStoreByteArrayDataInput:(OrgApacheLuceneStoreByteArrayDataInp
     { "reset", NULL, "V", 0x0, NULL, NULL },
     { "next", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
     { "seekCeilWithOrgApacheLuceneUtilBytesRef:", "seekCeil", "Lorg.apache.lucene.index.TermsEnum$SeekStatus;", 0x1, "Ljava.io.IOException;", NULL },
-    { "seekExactWithLong:", "seekExact", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "term", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
     { "ord", NULL, "J", 0x1, "Ljava.io.IOException;", NULL },
     { "docFreq", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
@@ -1552,7 +1535,7 @@ withOrgApacheLuceneStoreByteArrayDataInput:(OrgApacheLuceneStoreByteArrayDataInp
     { "payloads_", NULL, 0x2, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
     { "term_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRef;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVTermsEnum = { 2, "TVTermsEnum", "org.apache.lucene.codecs.compressing", "CompressingTermVectorsReader", 0xa, 11, methods, 14, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVTermsEnum = { 2, "TVTermsEnum", "org.apache.lucene.codecs.compressing", "CompressingTermVectorsReader", 0xa, 10, methods, 14, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVTermsEnum;
 }
 

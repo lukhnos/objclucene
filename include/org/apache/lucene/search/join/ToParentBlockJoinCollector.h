@@ -20,47 +20,19 @@
 #define OrgApacheLuceneSearchCollector_INCLUDE 1
 #include "org/apache/lucene/search/Collector.h"
 
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneSearchGroupingTopGroups;
-@class OrgApacheLuceneSearchJoinToParentBlockJoinQuery;
-@class OrgApacheLuceneSearchSort;
-@protocol OrgApacheLuceneSearchLeafCollector;
-
 @interface OrgApacheLuceneSearchJoinToParentBlockJoinCollector : NSObject < OrgApacheLuceneSearchCollector >
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)sort
-                                          withInt:(jint)numParentHits
-                                      withBoolean:(jboolean)trackScores
-                                      withBoolean:(jboolean)trackMaxScore;
-
-- (id<OrgApacheLuceneSearchLeafCollector>)getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
-
-- (jfloat)getMaxScore;
-
-- (OrgApacheLuceneSearchGroupingTopGroups *)getTopGroupsWithOrgApacheLuceneSearchJoinToParentBlockJoinQuery:(OrgApacheLuceneSearchJoinToParentBlockJoinQuery *)query
-                                                                              withOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)withinGroupSort
-                                                                                                    withInt:(jint)offset
-                                                                                                    withInt:(jint)maxDocsPerGroup
-                                                                                                    withInt:(jint)withinGroupOffset
-                                                                                                withBoolean:(jboolean)fillSortFields;
-
-- (OrgApacheLuceneSearchGroupingTopGroups *)getTopGroupsWithAllChildDocsWithOrgApacheLuceneSearchJoinToParentBlockJoinQuery:(OrgApacheLuceneSearchJoinToParentBlockJoinQuery *)query
-                                                                                              withOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)withinGroupSort
-                                                                                                                    withInt:(jint)offset
-                                                                                                                    withInt:(jint)withinGroupOffset
-                                                                                                                withBoolean:(jboolean)fillSortFields;
-
-- (jboolean)needsScores;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinToParentBlockJoinCollector)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinToParentBlockJoinCollector_initWithOrgApacheLuceneSearchSort_withInt_withBoolean_withBoolean_(OrgApacheLuceneSearchJoinToParentBlockJoinCollector *self, OrgApacheLuceneSearchSort *sort, jint numParentHits, jboolean trackScores, jboolean trackMaxScore);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinToParentBlockJoinCollector_init(OrgApacheLuceneSearchJoinToParentBlockJoinCollector *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchJoinToParentBlockJoinCollector *new_OrgApacheLuceneSearchJoinToParentBlockJoinCollector_initWithOrgApacheLuceneSearchSort_withInt_withBoolean_withBoolean_(OrgApacheLuceneSearchSort *sort, jint numParentHits, jboolean trackScores, jboolean trackMaxScore) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchJoinToParentBlockJoinCollector *new_OrgApacheLuceneSearchJoinToParentBlockJoinCollector_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinToParentBlockJoinCollector)
 

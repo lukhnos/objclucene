@@ -8,7 +8,6 @@
 #include "J2ObjC_source.h"
 #include "java/lang/ClassLoader.h"
 #include "java/lang/ClassNotFoundException.h"
-#include "java/lang/Thread.h"
 #include "java/lang/UnsupportedOperationException.h"
 #include "java/util/ArrayList.h"
 #include "java/util/Collections.h"
@@ -53,10 +52,6 @@ __attribute__((unused)) static jboolean OrgApacheLuceneUtilSPIClassIterator_load
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilSPIClassIterator)
 
 @implementation OrgApacheLuceneUtilSPIClassIterator
-
-+ (OrgApacheLuceneUtilSPIClassIterator *)getWithIOSClass:(IOSClass *)clazz {
-  return OrgApacheLuceneUtilSPIClassIterator_getWithIOSClass_(clazz);
-}
 
 + (OrgApacheLuceneUtilSPIClassIterator *)getWithIOSClass:(IOSClass *)clazz
                                  withJavaLangClassLoader:(JavaLangClassLoader *)loader {
@@ -128,7 +123,6 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilSPIClassIterator)
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "getWithIOSClass:", "get", "Lorg.apache.lucene.util.SPIClassIterator;", 0x9, NULL, "<S:Ljava/lang/Object;>(Ljava/lang/Class<TS;>;)Lorg/apache/lucene/util/SPIClassIterator<TS;>;" },
     { "getWithIOSClass:withJavaLangClassLoader:", "get", "Lorg.apache.lucene.util.SPIClassIterator;", 0x9, NULL, "<S:Ljava/lang/Object;>(Ljava/lang/Class<TS;>;Ljava/lang/ClassLoader;)Lorg/apache/lucene/util/SPIClassIterator<TS;>;" },
     { "isParentClassLoaderWithJavaLangClassLoader:withJavaLangClassLoader:", "isParentClassLoader", "Z", 0x9, NULL, NULL },
     { "initWithIOSClass:withJavaLangClassLoader:", "SPIClassIterator", NULL, 0x2, NULL, NULL },
@@ -144,16 +138,11 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilSPIClassIterator)
     { "loaded_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
     { "linesIterator_", NULL, 0x2, "Ljava.util.Iterator;", NULL, "Ljava/util/Iterator<Ljava/lang/String;>;", .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilSPIClassIterator = { 2, "SPIClassIterator", "org.apache.lucene.util", NULL, 0x11, 8, methods, 5, fields, 0, NULL, 0, NULL, NULL, "<S:Ljava/lang/Object;>Ljava/lang/Object;Ljava/util/Iterator<Ljava/lang/Class<+TS;>;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilSPIClassIterator = { 2, "SPIClassIterator", "org.apache.lucene.util", NULL, 0x11, 7, methods, 5, fields, 0, NULL, 0, NULL, NULL, "<S:Ljava/lang/Object;>Ljava/lang/Object;Ljava/util/Iterator<Ljava/lang/Class<+TS;>;>;" };
   return &_OrgApacheLuceneUtilSPIClassIterator;
 }
 
 @end
-
-OrgApacheLuceneUtilSPIClassIterator *OrgApacheLuceneUtilSPIClassIterator_getWithIOSClass_(IOSClass *clazz) {
-  OrgApacheLuceneUtilSPIClassIterator_initialize();
-  return [new_OrgApacheLuceneUtilSPIClassIterator_initWithIOSClass_withJavaLangClassLoader_(clazz, [((JavaLangThread *) nil_chk(JavaLangThread_currentThread())) getContextClassLoader]) autorelease];
-}
 
 OrgApacheLuceneUtilSPIClassIterator *OrgApacheLuceneUtilSPIClassIterator_getWithIOSClass_withJavaLangClassLoader_(IOSClass *clazz, JavaLangClassLoader *loader) {
   OrgApacheLuceneUtilSPIClassIterator_initialize();

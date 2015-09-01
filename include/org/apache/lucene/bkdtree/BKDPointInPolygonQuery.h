@@ -20,47 +20,19 @@
 #define OrgApacheLuceneSearchQuery_INCLUDE 1
 #include "org/apache/lucene/search/Query.h"
 
-@class IOSDoubleArray;
-@class OrgApacheLuceneSearchIndexSearcher;
-@class OrgApacheLuceneSearchWeight;
-
-@interface OrgApacheLuceneBkdtreeBKDPointInPolygonQuery : OrgApacheLuceneSearchQuery {
- @public
-  NSString *field_;
-  jdouble minLat_;
-  jdouble maxLat_;
-  jdouble minLon_;
-  jdouble maxLon_;
-  IOSDoubleArray *polyLats_;
-  IOSDoubleArray *polyLons_;
-}
+@interface OrgApacheLuceneBkdtreeBKDPointInPolygonQuery : OrgApacheLuceneSearchQuery
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field
-                 withDoubleArray:(IOSDoubleArray *)polyLats
-                 withDoubleArray:(IOSDoubleArray *)polyLons;
-
-- (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
-                                                                        withBoolean:(jboolean)needsScores;
-
-- (jboolean)isEqual:(id)o;
-
-- (NSUInteger)hash;
-
-- (NSString *)toStringWithNSString:(NSString *)field;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery, field_, NSString *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery, polyLats_, IOSDoubleArray *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery, polyLons_, IOSDoubleArray *)
+FOUNDATION_EXPORT void OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_init(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_initWithNSString_withDoubleArray_withDoubleArray_(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery *self, NSString *field, IOSDoubleArray *polyLats, IOSDoubleArray *polyLons);
-
-FOUNDATION_EXPORT OrgApacheLuceneBkdtreeBKDPointInPolygonQuery *new_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_initWithNSString_withDoubleArray_withDoubleArray_(NSString *field, IOSDoubleArray *polyLats, IOSDoubleArray *polyLons) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneBkdtreeBKDPointInPolygonQuery *new_OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery)
 

@@ -3,79 +3,35 @@
 //  source: ./suggest/src/java/org/apache/lucene/search/suggest/document/CompletionTerms.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
-#include "org/apache/lucene/index/FilterLeafReader.h"
-#include "org/apache/lucene/index/Terms.h"
 #include "org/apache/lucene/search/suggest/document/CompletionTerms.h"
-#include "org/apache/lucene/search/suggest/document/CompletionsTermsReader.h"
-#include "org/apache/lucene/search/suggest/document/NRTSuggester.h"
-#include "org/apache/lucene/search/suggest/document/SuggestField.h"
 
-@interface OrgApacheLuceneSearchSuggestDocumentCompletionTerms () {
- @public
-  OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader *reader_;
-}
-
-@end
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentCompletionTerms, reader_, OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader *)
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneSearchSuggestDocumentCompletionTerms
 
-- (instancetype)initWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)inArg
-withOrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader:(OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader *)reader {
-  OrgApacheLuceneSearchSuggestDocumentCompletionTerms_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader_(self, inArg, reader);
+- (instancetype)init {
+  OrgApacheLuceneSearchSuggestDocumentCompletionTerms_init(self);
   return self;
-}
-
-- (jbyte)getType {
-  return (reader_ != nil) ? reader_->type_ : OrgApacheLuceneSearchSuggestDocumentSuggestField_TYPE;
-}
-
-- (jlong)getMinWeight {
-  return (reader_ != nil) ? reader_->minWeight_ : 0;
-}
-
-- (jlong)getMaxWeight {
-  return (reader_ != nil) ? reader_->maxWeight_ : 0;
-}
-
-- (OrgApacheLuceneSearchSuggestDocumentNRTSuggester *)suggester {
-  return (reader_ != nil) ? [reader_ suggester] : nil;
-}
-
-- (void)dealloc {
-  RELEASE_(reader_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexTerms:withOrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader:", "CompletionTerms", NULL, 0x0, NULL, NULL },
-    { "getType", NULL, "B", 0x1, NULL, NULL },
-    { "getMinWeight", NULL, "J", 0x1, NULL, NULL },
-    { "getMaxWeight", NULL, "J", 0x1, NULL, NULL },
-    { "suggester", NULL, "Lorg.apache.lucene.search.suggest.document.NRTSuggester;", 0x1, "Ljava.io.IOException;", NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "reader_", NULL, 0x12, "Lorg.apache.lucene.search.suggest.document.CompletionsTermsReader;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentCompletionTerms = { 2, "CompletionTerms", "org.apache.lucene.search.suggest.document", NULL, 0x11, 5, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentCompletionTerms = { 2, "CompletionTerms", "org.apache.lucene.search.suggest.document", NULL, 0x11, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchSuggestDocumentCompletionTerms;
 }
 
 @end
 
-void OrgApacheLuceneSearchSuggestDocumentCompletionTerms_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader_(OrgApacheLuceneSearchSuggestDocumentCompletionTerms *self, OrgApacheLuceneIndexTerms *inArg, OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader *reader) {
-  OrgApacheLuceneIndexFilterLeafReader_FilterTerms_initWithOrgApacheLuceneIndexTerms_(self, inArg);
-  JreStrongAssign(&self->reader_, reader);
+void OrgApacheLuceneSearchSuggestDocumentCompletionTerms_init(OrgApacheLuceneSearchSuggestDocumentCompletionTerms *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneSearchSuggestDocumentCompletionTerms *new_OrgApacheLuceneSearchSuggestDocumentCompletionTerms_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader_(OrgApacheLuceneIndexTerms *inArg, OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader *reader) {
+OrgApacheLuceneSearchSuggestDocumentCompletionTerms *new_OrgApacheLuceneSearchSuggestDocumentCompletionTerms_init() {
   OrgApacheLuceneSearchSuggestDocumentCompletionTerms *self = [OrgApacheLuceneSearchSuggestDocumentCompletionTerms alloc];
-  OrgApacheLuceneSearchSuggestDocumentCompletionTerms_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader_(self, inArg, reader);
+  OrgApacheLuceneSearchSuggestDocumentCompletionTerms_init(self);
   return self;
 }
 

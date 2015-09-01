@@ -43,8 +43,6 @@
 
 - (jlong)getMinPauseCheckBytes;
 
-- (jlong)getTotalBytesWritten;
-
 - (jlong)getTotalPausedNS;
 
 - (jlong)getTotalStoppedNS;

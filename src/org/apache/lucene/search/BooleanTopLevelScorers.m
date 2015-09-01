@@ -9,10 +9,7 @@
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
 #include "java/util/Arrays.h"
-#include "java/util/Collection.h"
-#include "java/util/Collections.h"
 #include "java/util/List.h"
-#include "java/util/Set.h"
 #include "org/apache/lucene/search/BooleanTopLevelScorers.h"
 #include "org/apache/lucene/search/ConjunctionScorer.h"
 #include "org/apache/lucene/search/DocIdSetIterator.h"
@@ -95,20 +92,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchBooleanTopLevelScorers)
   return [((OrgApacheLuceneSearchScorer *) nil_chk(in_)) score] * boost_;
 }
 
-- (id<JavaUtilCollection>)getChildren {
-  return JavaUtilCollections_singletonWithId_([new_OrgApacheLuceneSearchScorer_ChildScorer_initWithOrgApacheLuceneSearchScorer_withNSString_(in_, @"BOOSTED") autorelease]);
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneSearchScorer:withFloat:", "BoostedScorer", NULL, 0x0, NULL, NULL },
     { "score", NULL, "F", 0x1, "Ljava.io.IOException;", NULL },
-    { "getChildren", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "boost_", NULL, 0x10, "F", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchBooleanTopLevelScorers_BoostedScorer = { 2, "BoostedScorer", "org.apache.lucene.search", "BooleanTopLevelScorers", 0x8, 3, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchBooleanTopLevelScorers_BoostedScorer = { 2, "BoostedScorer", "org.apache.lucene.search", "BooleanTopLevelScorers", 0x8, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchBooleanTopLevelScorers_BoostedScorer;
 }
 

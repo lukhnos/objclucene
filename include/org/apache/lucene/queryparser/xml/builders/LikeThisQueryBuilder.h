@@ -20,27 +20,19 @@
 #define OrgApacheLuceneQueryparserXmlQueryBuilder_INCLUDE 1
 #include "org/apache/lucene/queryparser/xml/QueryBuilder.h"
 
-@class IOSObjectArray;
-@class OrgApacheLuceneAnalysisAnalyzer;
-@class OrgApacheLuceneSearchQuery;
-@protocol OrgW3cDomElement;
-
 @interface OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder : NSObject < OrgApacheLuceneQueryparserXmlQueryBuilder >
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
-                                      withNSStringArray:(IOSObjectArray *)defaultFieldNames;
-
-- (OrgApacheLuceneSearchQuery *)getQueryWithOrgW3cDomElement:(id<OrgW3cDomElement>)e;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder_initWithOrgApacheLuceneAnalysisAnalyzer_withNSStringArray_(OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder *self, OrgApacheLuceneAnalysisAnalyzer *analyzer, IOSObjectArray *defaultFieldNames);
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder_init(OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder *new_OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder_initWithOrgApacheLuceneAnalysisAnalyzer_withNSStringArray_(OrgApacheLuceneAnalysisAnalyzer *analyzer, IOSObjectArray *defaultFieldNames) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder *new_OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBuilder)
 

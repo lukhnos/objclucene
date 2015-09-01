@@ -20,37 +20,19 @@
 #define OrgApacheLuceneIndexSortedNumericDocValues_INCLUDE 1
 #include "org/apache/lucene/index/SortedNumericDocValues.h"
 
-@class OrgApacheLuceneBkdtreeBKDTreeReader;
+@interface OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues : OrgApacheLuceneIndexSortedNumericDocValues
 
-@interface OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues : OrgApacheLuceneIndexSortedNumericDocValues {
- @public
-  OrgApacheLuceneBkdtreeBKDTreeReader *bkdTreeReader_;
-  OrgApacheLuceneIndexSortedNumericDocValues *delegate_;
-}
+#pragma mark Package-Private
 
-#pragma mark Public
-
-- (instancetype)initWithOrgApacheLuceneBkdtreeBKDTreeReader:(OrgApacheLuceneBkdtreeBKDTreeReader *)bkdTreeReader
-             withOrgApacheLuceneIndexSortedNumericDocValues:(OrgApacheLuceneIndexSortedNumericDocValues *)delegate;
-
-- (jint)count;
-
-- (OrgApacheLuceneBkdtreeBKDTreeReader *)getBKDTreeReader;
-
-- (void)setDocumentWithInt:(jint)doc;
-
-- (jlong)valueAtWithInt:(jint)index;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues, bkdTreeReader_, OrgApacheLuceneBkdtreeBKDTreeReader *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues, delegate_, OrgApacheLuceneIndexSortedNumericDocValues *)
+FOUNDATION_EXPORT void OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues_init(OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues_initWithOrgApacheLuceneBkdtreeBKDTreeReader_withOrgApacheLuceneIndexSortedNumericDocValues_(OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues *self, OrgApacheLuceneBkdtreeBKDTreeReader *bkdTreeReader, OrgApacheLuceneIndexSortedNumericDocValues *delegate);
-
-FOUNDATION_EXPORT OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues *new_OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues_initWithOrgApacheLuceneBkdtreeBKDTreeReader_withOrgApacheLuceneIndexSortedNumericDocValues_(OrgApacheLuceneBkdtreeBKDTreeReader *bkdTreeReader, OrgApacheLuceneIndexSortedNumericDocValues *delegate) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues *new_OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues)
 

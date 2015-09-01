@@ -17,14 +17,11 @@
 #define _OrgApacheLuceneSearchIndexSearcher_
 
 @class IOSObjectArray;
-@class OrgApacheLuceneDocumentDocument;
 @class OrgApacheLuceneIndexIndexReader;
 @class OrgApacheLuceneIndexIndexReaderContext;
-@class OrgApacheLuceneIndexStoredFieldVisitor;
 @class OrgApacheLuceneIndexTerm;
 @class OrgApacheLuceneIndexTermContext;
 @class OrgApacheLuceneSearchCollectionStatistics;
-@class OrgApacheLuceneSearchExplanation;
 @class OrgApacheLuceneSearchFilter;
 @class OrgApacheLuceneSearchQuery;
 @class OrgApacheLuceneSearchScoreDoc;
@@ -36,11 +33,9 @@
 @class OrgApacheLuceneSearchWeight;
 @protocol JavaUtilConcurrentExecutorService;
 @protocol JavaUtilList;
-@protocol JavaUtilSet;
 @protocol OrgApacheLuceneSearchCollector;
 @protocol OrgApacheLuceneSearchCollectorManager;
 @protocol OrgApacheLuceneSearchQueryCache;
-@protocol OrgApacheLuceneSearchQueryCachingPolicy;
 
 @interface OrgApacheLuceneSearchIndexSearcher : NSObject {
  @public
@@ -64,28 +59,11 @@
 
 - (OrgApacheLuceneSearchCollectionStatistics *)collectionStatisticsWithNSString:(NSString *)field;
 
-- (jint)countWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
-
 - (OrgApacheLuceneSearchWeight *)createNormalizedWeightWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
                                                                           withBoolean:(jboolean)needsScores;
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
                                                                 withBoolean:(jboolean)needsScores;
-
-- (OrgApacheLuceneDocumentDocument *)docWithInt:(jint)docID;
-
-- (OrgApacheLuceneDocumentDocument *)docWithInt:(jint)docID
-                                withJavaUtilSet:(id<JavaUtilSet>)fieldsToLoad;
-
-- (void)docWithInt:(jint)docID
-withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisitor *)fieldVisitor;
-
-- (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-                                                                    withInt:(jint)doc;
-
-+ (id<OrgApacheLuceneSearchQueryCache>)getDefaultQueryCache;
-
-+ (id<OrgApacheLuceneSearchQueryCachingPolicy>)getDefaultQueryCachingPolicy;
 
 + (OrgApacheLuceneSearchSimilaritiesSimilarity *)getDefaultSimilarity;
 
@@ -103,19 +81,6 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 - (id)searchWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
  withOrgApacheLuceneSearchCollectorManager:(id<OrgApacheLuceneSearchCollectorManager>)collectorManager;
 
-- (void)searchWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-             withOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter
-          withOrgApacheLuceneSearchCollector:(id<OrgApacheLuceneSearchCollector>)results;
-
-- (OrgApacheLuceneSearchTopDocs *)searchWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-                                       withOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter
-                                                               withInt:(jint)n;
-
-- (OrgApacheLuceneSearchTopFieldDocs *)searchWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-                                            withOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter
-                                                                    withInt:(jint)n
-                                              withOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)sort;
-
 - (OrgApacheLuceneSearchTopFieldDocs *)searchWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
                                             withOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter
                                                                     withInt:(jint)n
@@ -129,23 +94,6 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 - (OrgApacheLuceneSearchTopFieldDocs *)searchWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
                                                                     withInt:(jint)n
                                               withOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)sort;
-
-- (OrgApacheLuceneSearchTopFieldDocs *)searchWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-                                                                    withInt:(jint)n
-                                              withOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)sort
-                                                                withBoolean:(jboolean)doDocScores
-                                                                withBoolean:(jboolean)doMaxScore;
-
-- (OrgApacheLuceneSearchTopDocs *)searchAfterWithOrgApacheLuceneSearchScoreDoc:(OrgApacheLuceneSearchScoreDoc *)after
-                                                withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-                                               withOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter
-                                                                       withInt:(jint)n;
-
-- (OrgApacheLuceneSearchTopFieldDocs *)searchAfterWithOrgApacheLuceneSearchScoreDoc:(OrgApacheLuceneSearchScoreDoc *)after
-                                                     withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-                                                    withOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter
-                                                                            withInt:(jint)n
-                                                      withOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)sort;
 
 - (OrgApacheLuceneSearchTopFieldDocs *)searchAfterWithOrgApacheLuceneSearchScoreDoc:(OrgApacheLuceneSearchScoreDoc *)after
                                                      withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
@@ -164,20 +112,7 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
                                                                        withInt:(jint)n
                                                  withOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)sort;
 
-- (OrgApacheLuceneSearchTopFieldDocs *)searchAfterWithOrgApacheLuceneSearchScoreDoc:(OrgApacheLuceneSearchScoreDoc *)after
-                                                     withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-                                                                            withInt:(jint)numHits
-                                                      withOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)sort
-                                                                        withBoolean:(jboolean)doDocScores
-                                                                        withBoolean:(jboolean)doMaxScore;
-
-+ (void)setDefaultQueryCacheWithOrgApacheLuceneSearchQueryCache:(id<OrgApacheLuceneSearchQueryCache>)defaultQueryCache;
-
-+ (void)setDefaultQueryCachingPolicyWithOrgApacheLuceneSearchQueryCachingPolicy:(id<OrgApacheLuceneSearchQueryCachingPolicy>)defaultQueryCachingPolicy;
-
 - (void)setQueryCacheWithOrgApacheLuceneSearchQueryCache:(id<OrgApacheLuceneSearchQueryCache>)queryCache;
-
-- (void)setQueryCachingPolicyWithOrgApacheLuceneSearchQueryCachingPolicy:(id<OrgApacheLuceneSearchQueryCachingPolicy>)queryCachingPolicy;
 
 - (void)setSimilarityWithOrgApacheLuceneSearchSimilaritiesSimilarity:(OrgApacheLuceneSearchSimilaritiesSimilarity *)similarity;
 
@@ -187,9 +122,6 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 - (NSString *)description;
 
 #pragma mark Protected
-
-- (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
-                                                                     withInt:(jint)doc;
 
 - (void)searchWithJavaUtilList:(id<JavaUtilList>)leaves
 withOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
@@ -210,14 +142,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchIndexSearcher, leafContexts_, id<JavaUt
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchIndexSearcher, leafSlices_, IOSObjectArray *)
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesSimilarity *OrgApacheLuceneSearchIndexSearcher_getDefaultSimilarity();
-
-FOUNDATION_EXPORT id<OrgApacheLuceneSearchQueryCache> OrgApacheLuceneSearchIndexSearcher_getDefaultQueryCache();
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchIndexSearcher_setDefaultQueryCacheWithOrgApacheLuceneSearchQueryCache_(id<OrgApacheLuceneSearchQueryCache> defaultQueryCache);
-
-FOUNDATION_EXPORT id<OrgApacheLuceneSearchQueryCachingPolicy> OrgApacheLuceneSearchIndexSearcher_getDefaultQueryCachingPolicy();
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchIndexSearcher_setDefaultQueryCachingPolicyWithOrgApacheLuceneSearchQueryCachingPolicy_(id<OrgApacheLuceneSearchQueryCachingPolicy> defaultQueryCachingPolicy);
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchIndexSearcher_initWithOrgApacheLuceneIndexIndexReader_(OrgApacheLuceneSearchIndexSearcher *self, OrgApacheLuceneIndexIndexReader *r);
 

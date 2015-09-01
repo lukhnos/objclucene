@@ -27,8 +27,6 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchHighlightQueryScorer:(OrgApacheLuceneSearchHighlightQueryScorer *)queryScorer;
-
 - (instancetype)initWithOrgApacheLuceneSearchHighlightQueryScorer:(OrgApacheLuceneSearchHighlightQueryScorer *)queryScorer
                                                           withInt:(jint)fragmentSize;
 
@@ -40,10 +38,6 @@ withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tok
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchHighlightSimpleSpanFragmenter)
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightSimpleSpanFragmenter_initWithOrgApacheLuceneSearchHighlightQueryScorer_(OrgApacheLuceneSearchHighlightSimpleSpanFragmenter *self, OrgApacheLuceneSearchHighlightQueryScorer *queryScorer);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightSimpleSpanFragmenter *new_OrgApacheLuceneSearchHighlightSimpleSpanFragmenter_initWithOrgApacheLuceneSearchHighlightQueryScorer_(OrgApacheLuceneSearchHighlightQueryScorer *queryScorer) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightSimpleSpanFragmenter_initWithOrgApacheLuceneSearchHighlightQueryScorer_withInt_(OrgApacheLuceneSearchHighlightSimpleSpanFragmenter *self, OrgApacheLuceneSearchHighlightQueryScorer *queryScorer, jint fragmentSize);
 

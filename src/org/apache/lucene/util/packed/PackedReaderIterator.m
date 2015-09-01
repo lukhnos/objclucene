@@ -65,10 +65,6 @@ __attribute__((unused)) static jint OrgApacheLuceneUtilPackedPackedReaderIterato
   return nextValues_;
 }
 
-- (jint)ord {
-  return position_;
-}
-
 - (void)dealloc {
   RELEASE_(format_);
   RELEASE_(bulkOperation_);
@@ -82,7 +78,6 @@ __attribute__((unused)) static jint OrgApacheLuceneUtilPackedPackedReaderIterato
     { "initWithOrgApacheLuceneUtilPackedPackedInts_FormatEnum:withInt:withInt:withInt:withOrgApacheLuceneStoreDataInput:withInt:", "PackedReaderIterator", NULL, 0x0, NULL, NULL },
     { "iterationsWithInt:", "iterations", "I", 0x2, NULL, NULL },
     { "nextWithInt:", "next", "Lorg.apache.lucene.util.LongsRef;", 0x1, "Ljava.io.IOException;", NULL },
-    { "ord", NULL, "I", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "packedIntsVersion_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
@@ -93,7 +88,7 @@ __attribute__((unused)) static jint OrgApacheLuceneUtilPackedPackedReaderIterato
     { "iterations_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "position_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPackedReaderIterator = { 2, "PackedReaderIterator", "org.apache.lucene.util.packed", NULL, 0x10, 4, methods, 7, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPackedReaderIterator = { 2, "PackedReaderIterator", "org.apache.lucene.util.packed", NULL, 0x10, 3, methods, 7, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilPackedPackedReaderIterator;
 }
 

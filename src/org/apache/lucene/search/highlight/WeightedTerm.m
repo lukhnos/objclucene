@@ -14,20 +14,8 @@
   return self;
 }
 
-- (NSString *)getTerm {
-  return term_;
-}
-
 - (jfloat)getWeight {
   return weight_;
-}
-
-- (void)setTermWithNSString:(NSString *)term {
-  JreStrongAssign(&self->term_, term);
-}
-
-- (void)setWeightWithFloat:(jfloat)weight {
-  self->weight_ = weight;
 }
 
 - (void)dealloc {
@@ -38,16 +26,13 @@
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithFloat:withNSString:", "WeightedTerm", NULL, 0x1, NULL, NULL },
-    { "getTerm", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
     { "getWeight", NULL, "F", 0x1, NULL, NULL },
-    { "setTermWithNSString:", "setTerm", "V", 0x1, NULL, NULL },
-    { "setWeightWithFloat:", "setWeight", "V", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "weight_", NULL, 0x0, "F", NULL, NULL, .constantValue.asLong = 0 },
     { "term_", NULL, 0x0, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightWeightedTerm = { 2, "WeightedTerm", "org.apache.lucene.search.highlight", NULL, 0x1, 5, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightWeightedTerm = { 2, "WeightedTerm", "org.apache.lucene.search.highlight", NULL, 0x1, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchHighlightWeightedTerm;
 }
 

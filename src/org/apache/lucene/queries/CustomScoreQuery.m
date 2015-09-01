@@ -9,18 +9,13 @@
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
 #include "java/lang/Float.h"
-#include "java/lang/IllegalArgumentException.h"
 #include "java/lang/StringBuilder.h"
 #include "java/util/Arrays.h"
-#include "java/util/Collection.h"
-#include "java/util/Collections.h"
 #include "java/util/Set.h"
 #include "org/apache/lucene/index/IndexReader.h"
 #include "org/apache/lucene/index/LeafReaderContext.h"
 #include "org/apache/lucene/queries/CustomScoreProvider.h"
 #include "org/apache/lucene/queries/CustomScoreQuery.h"
-#include "org/apache/lucene/queries/function/FunctionQuery.h"
-#include "org/apache/lucene/search/Explanation.h"
 #include "org/apache/lucene/search/FilterScorer.h"
 #include "org/apache/lucene/search/IndexSearcher.h"
 #include "org/apache/lucene/search/Query.h"
@@ -62,12 +57,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesCustomScoreQuery, scoringQueries_, IOS
 
 - (OrgApacheLuceneSearchScorer *)scorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
 
-- (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-                                                                               withInt:(jint)doc;
-
-- (OrgApacheLuceneSearchExplanation *)doExplainWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)info
-                                                                                 withInt:(jint)doc;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesCustomScoreQuery_CustomWeight)
@@ -79,8 +68,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesCustomScoreQuery_CustomWeight, valSrcW
 __attribute__((unused)) static void OrgApacheLuceneQueriesCustomScoreQuery_CustomWeight_initWithOrgApacheLuceneQueriesCustomScoreQuery_withOrgApacheLuceneSearchIndexSearcher_withBoolean_(OrgApacheLuceneQueriesCustomScoreQuery_CustomWeight *self, OrgApacheLuceneQueriesCustomScoreQuery *outer$, OrgApacheLuceneSearchIndexSearcher *searcher, jboolean needsScores);
 
 __attribute__((unused)) static OrgApacheLuceneQueriesCustomScoreQuery_CustomWeight *new_OrgApacheLuceneQueriesCustomScoreQuery_CustomWeight_initWithOrgApacheLuceneQueriesCustomScoreQuery_withOrgApacheLuceneSearchIndexSearcher_withBoolean_(OrgApacheLuceneQueriesCustomScoreQuery *outer$, OrgApacheLuceneSearchIndexSearcher *searcher, jboolean needsScores) NS_RETURNS_RETAINED;
-
-__attribute__((unused)) static OrgApacheLuceneSearchExplanation *OrgApacheLuceneQueriesCustomScoreQuery_CustomWeight_doExplainWithOrgApacheLuceneIndexLeafReaderContext_withInt_(OrgApacheLuceneQueriesCustomScoreQuery_CustomWeight *self, OrgApacheLuceneIndexLeafReaderContext *info, jint doc);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesCustomScoreQuery_CustomWeight)
 
@@ -103,8 +90,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesCustomScoreQuery_CustomWeight)
 
 - (jfloat)score;
 
-- (id<JavaUtilCollection>)getChildren;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesCustomScoreQuery_CustomScorer)
@@ -121,23 +106,6 @@ __attribute__((unused)) static OrgApacheLuceneQueriesCustomScoreQuery_CustomScor
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesCustomScoreQuery_CustomScorer)
 
 @implementation OrgApacheLuceneQueriesCustomScoreQuery
-
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)subQuery {
-  OrgApacheLuceneQueriesCustomScoreQuery_initWithOrgApacheLuceneSearchQuery_(self, subQuery);
-  return self;
-}
-
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)subQuery
-   withOrgApacheLuceneQueriesFunctionFunctionQuery:(OrgApacheLuceneQueriesFunctionFunctionQuery *)scoringQuery {
-  OrgApacheLuceneQueriesCustomScoreQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneQueriesFunctionFunctionQuery_(self, subQuery, scoringQuery);
-  return self;
-}
-
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)subQuery
-withOrgApacheLuceneQueriesFunctionFunctionQueryArray:(IOSObjectArray *)scoringQueries {
-  OrgApacheLuceneQueriesCustomScoreQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneQueriesFunctionFunctionQueryArray_(self, subQuery, scoringQueries);
-  return self;
-}
 
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader {
   OrgApacheLuceneQueriesCustomScoreQuery *clone = nil;
@@ -209,24 +177,17 @@ withOrgApacheLuceneQueriesFunctionFunctionQueryArray:(IOSObjectArray *)scoringQu
   return [new_OrgApacheLuceneQueriesCustomScoreQuery_CustomWeight_initWithOrgApacheLuceneQueriesCustomScoreQuery_withOrgApacheLuceneSearchIndexSearcher_withBoolean_(self, searcher, needsScores) autorelease];
 }
 
-- (jboolean)isStrict {
-  return strict_;
-}
-
-- (void)setStrictWithBoolean:(jboolean)strict {
-  self->strict_ = strict;
-}
-
 - (OrgApacheLuceneSearchQuery *)getSubQuery {
   return subQuery_;
 }
 
-- (IOSObjectArray *)getScoringQueries {
-  return scoringQueries_;
-}
-
 - (NSString *)name {
   return @"custom";
+}
+
+- (instancetype)init {
+  OrgApacheLuceneQueriesCustomScoreQuery_init(self);
+  return self;
 }
 
 - (void)dealloc {
@@ -237,9 +198,6 @@ withOrgApacheLuceneQueriesFunctionFunctionQueryArray:(IOSObjectArray *)scoringQu
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchQuery:", "CustomScoreQuery", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneSearchQuery:withOrgApacheLuceneQueriesFunctionFunctionQuery:", "CustomScoreQuery", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneSearchQuery:withOrgApacheLuceneQueriesFunctionFunctionQueryArray:", "CustomScoreQuery", NULL, 0x81, NULL, NULL },
     { "rewriteWithOrgApacheLuceneIndexIndexReader:", "rewrite", "Lorg.apache.lucene.search.Query;", 0x1, "Ljava.io.IOException;", NULL },
     { "clone", NULL, "Lorg.apache.lucene.queries.CustomScoreQuery;", 0x1, NULL, NULL },
     { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
@@ -247,11 +205,9 @@ withOrgApacheLuceneQueriesFunctionFunctionQueryArray:(IOSObjectArray *)scoringQu
     { "hash", "hashCode", "I", 0x1, NULL, NULL },
     { "getCustomScoreProviderWithOrgApacheLuceneIndexLeafReaderContext:", "getCustomScoreProvider", "Lorg.apache.lucene.queries.CustomScoreProvider;", 0x4, "Ljava.io.IOException;", NULL },
     { "createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:", "createWeight", "Lorg.apache.lucene.search.Weight;", 0x1, "Ljava.io.IOException;", NULL },
-    { "isStrict", NULL, "Z", 0x1, NULL, NULL },
-    { "setStrictWithBoolean:", "setStrict", "V", 0x1, NULL, NULL },
     { "getSubQuery", NULL, "Lorg.apache.lucene.search.Query;", 0x1, NULL, NULL },
-    { "getScoringQueries", NULL, "[Lorg.apache.lucene.search.Query;", 0x1, NULL, NULL },
     { "name", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "subQuery_", NULL, 0x2, "Lorg.apache.lucene.search.Query;", NULL, NULL, .constantValue.asLong = 0 },
@@ -259,43 +215,20 @@ withOrgApacheLuceneQueriesFunctionFunctionQueryArray:(IOSObjectArray *)scoringQu
     { "strict_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.queries.CustomScoreQuery$CustomWeight;", "Lorg.apache.lucene.queries.CustomScoreQuery$CustomScorer;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesCustomScoreQuery = { 2, "CustomScoreQuery", "org.apache.lucene.queries", NULL, 0x1, 15, methods, 3, fields, 0, NULL, 2, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesCustomScoreQuery = { 2, "CustomScoreQuery", "org.apache.lucene.queries", NULL, 0x1, 10, methods, 3, fields, 0, NULL, 2, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneQueriesCustomScoreQuery;
 }
 
 @end
 
-void OrgApacheLuceneQueriesCustomScoreQuery_initWithOrgApacheLuceneSearchQuery_(OrgApacheLuceneQueriesCustomScoreQuery *self, OrgApacheLuceneSearchQuery *subQuery) {
-  OrgApacheLuceneQueriesCustomScoreQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneQueriesFunctionFunctionQueryArray_(self, subQuery, [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneQueriesFunctionFunctionQuery_class_()]);
-}
-
-OrgApacheLuceneQueriesCustomScoreQuery *new_OrgApacheLuceneQueriesCustomScoreQuery_initWithOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchQuery *subQuery) {
-  OrgApacheLuceneQueriesCustomScoreQuery *self = [OrgApacheLuceneQueriesCustomScoreQuery alloc];
-  OrgApacheLuceneQueriesCustomScoreQuery_initWithOrgApacheLuceneSearchQuery_(self, subQuery);
-  return self;
-}
-
-void OrgApacheLuceneQueriesCustomScoreQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneQueriesFunctionFunctionQuery_(OrgApacheLuceneQueriesCustomScoreQuery *self, OrgApacheLuceneSearchQuery *subQuery, OrgApacheLuceneQueriesFunctionFunctionQuery *scoringQuery) {
-  OrgApacheLuceneQueriesCustomScoreQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneQueriesFunctionFunctionQueryArray_(self, subQuery, scoringQuery != nil ? [IOSObjectArray arrayWithObjects:(id[]){ scoringQuery } count:1 type:OrgApacheLuceneQueriesFunctionFunctionQuery_class_()] : [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneQueriesFunctionFunctionQuery_class_()]);
-}
-
-OrgApacheLuceneQueriesCustomScoreQuery *new_OrgApacheLuceneQueriesCustomScoreQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneQueriesFunctionFunctionQuery_(OrgApacheLuceneSearchQuery *subQuery, OrgApacheLuceneQueriesFunctionFunctionQuery *scoringQuery) {
-  OrgApacheLuceneQueriesCustomScoreQuery *self = [OrgApacheLuceneQueriesCustomScoreQuery alloc];
-  OrgApacheLuceneQueriesCustomScoreQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneQueriesFunctionFunctionQuery_(self, subQuery, scoringQuery);
-  return self;
-}
-
-void OrgApacheLuceneQueriesCustomScoreQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneQueriesFunctionFunctionQueryArray_(OrgApacheLuceneQueriesCustomScoreQuery *self, OrgApacheLuceneSearchQuery *subQuery, IOSObjectArray *scoringQueries) {
-  OrgApacheLuceneSearchQuery_init(self);
+void OrgApacheLuceneQueriesCustomScoreQuery_init(OrgApacheLuceneQueriesCustomScoreQuery *self) {
+  NSObject_init(self);
   self->strict_ = NO;
-  JreStrongAssign(&self->subQuery_, subQuery);
-  JreStrongAssign(&self->scoringQueries_, scoringQueries != nil ? scoringQueries : [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchQuery_class_()]);
-  if (subQuery == nil) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"<subquery> must not be null!") autorelease];
 }
 
-OrgApacheLuceneQueriesCustomScoreQuery *new_OrgApacheLuceneQueriesCustomScoreQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneQueriesFunctionFunctionQueryArray_(OrgApacheLuceneSearchQuery *subQuery, IOSObjectArray *scoringQueries) {
+OrgApacheLuceneQueriesCustomScoreQuery *new_OrgApacheLuceneQueriesCustomScoreQuery_init() {
   OrgApacheLuceneQueriesCustomScoreQuery *self = [OrgApacheLuceneQueriesCustomScoreQuery alloc];
-  OrgApacheLuceneQueriesCustomScoreQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneQueriesFunctionFunctionQueryArray_(self, subQuery, scoringQueries);
+  OrgApacheLuceneQueriesCustomScoreQuery_init(self);
   return self;
 }
 
@@ -374,17 +307,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesCustomScoreQuery)
   return [new_OrgApacheLuceneQueriesCustomScoreQuery_CustomScorer_initWithOrgApacheLuceneQueriesCustomScoreQuery_withOrgApacheLuceneQueriesCustomScoreProvider_withOrgApacheLuceneQueriesCustomScoreQuery_CustomWeight_withFloat_withOrgApacheLuceneSearchScorer_withOrgApacheLuceneSearchScorerArray_(this$0_, [this$0_ getCustomScoreProviderWithOrgApacheLuceneIndexLeafReaderContext:context], self, queryWeight_, subQueryScorer, valSrcScorers) autorelease];
 }
 
-- (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-                                                                               withInt:(jint)doc {
-  OrgApacheLuceneSearchExplanation *explain = OrgApacheLuceneQueriesCustomScoreQuery_CustomWeight_doExplainWithOrgApacheLuceneIndexLeafReaderContext_withInt_(self, context, doc);
-  return explain == nil ? OrgApacheLuceneSearchExplanation_noMatchWithNSString_withOrgApacheLuceneSearchExplanationArray_(@"no matching docs", [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchExplanation_class_()]) : explain;
-}
-
-- (OrgApacheLuceneSearchExplanation *)doExplainWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)info
-                                                                                 withInt:(jint)doc {
-  return OrgApacheLuceneQueriesCustomScoreQuery_CustomWeight_doExplainWithOrgApacheLuceneIndexLeafReaderContext_withInt_(self, info, doc);
-}
-
 - (void)dealloc {
   RELEASE_(this$0_);
   RELEASE_(subQueryWeight_);
@@ -399,8 +321,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesCustomScoreQuery)
     { "getValueForNormalization", NULL, "F", 0x1, "Ljava.io.IOException;", NULL },
     { "normalizeWithFloat:withFloat:", "normalize", "V", 0x1, NULL, NULL },
     { "scorerWithOrgApacheLuceneIndexLeafReaderContext:", "scorer", "Lorg.apache.lucene.search.Scorer;", 0x1, "Ljava.io.IOException;", NULL },
-    { "explainWithOrgApacheLuceneIndexLeafReaderContext:withInt:", "explain", "Lorg.apache.lucene.search.Explanation;", 0x1, "Ljava.io.IOException;", NULL },
-    { "doExplainWithOrgApacheLuceneIndexLeafReaderContext:withInt:", "doExplain", "Lorg.apache.lucene.search.Explanation;", 0x2, "Ljava.io.IOException;", NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.queries.CustomScoreQuery;", NULL, NULL, .constantValue.asLong = 0 },
@@ -409,7 +329,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesCustomScoreQuery)
     { "qStrict_", NULL, 0x0, "Z", NULL, NULL, .constantValue.asLong = 0 },
     { "queryWeight_", NULL, 0x0, "F", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesCustomScoreQuery_CustomWeight = { 2, "CustomWeight", "org.apache.lucene.queries", "CustomScoreQuery", 0x2, 7, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesCustomScoreQuery_CustomWeight = { 2, "CustomWeight", "org.apache.lucene.queries", "CustomScoreQuery", 0x2, 5, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueriesCustomScoreQuery_CustomWeight;
 }
 
@@ -430,20 +350,6 @@ OrgApacheLuceneQueriesCustomScoreQuery_CustomWeight *new_OrgApacheLuceneQueriesC
   OrgApacheLuceneQueriesCustomScoreQuery_CustomWeight *self = [OrgApacheLuceneQueriesCustomScoreQuery_CustomWeight alloc];
   OrgApacheLuceneQueriesCustomScoreQuery_CustomWeight_initWithOrgApacheLuceneQueriesCustomScoreQuery_withOrgApacheLuceneSearchIndexSearcher_withBoolean_(self, outer$, searcher, needsScores);
   return self;
-}
-
-OrgApacheLuceneSearchExplanation *OrgApacheLuceneQueriesCustomScoreQuery_CustomWeight_doExplainWithOrgApacheLuceneIndexLeafReaderContext_withInt_(OrgApacheLuceneQueriesCustomScoreQuery_CustomWeight *self, OrgApacheLuceneIndexLeafReaderContext *info, jint doc) {
-  OrgApacheLuceneSearchExplanation *subQueryExpl = [((OrgApacheLuceneSearchWeight *) nil_chk(self->subQueryWeight_)) explainWithOrgApacheLuceneIndexLeafReaderContext:info withInt:doc];
-  if (![((OrgApacheLuceneSearchExplanation *) nil_chk(subQueryExpl)) isMatch]) {
-    return subQueryExpl;
-  }
-  IOSObjectArray *valSrcExpls = [IOSObjectArray arrayWithLength:((IOSObjectArray *) nil_chk(self->valSrcWeights_))->size_ type:OrgApacheLuceneSearchExplanation_class_()];
-  for (jint i = 0; i < self->valSrcWeights_->size_; i++) {
-    IOSObjectArray_Set(valSrcExpls, i, [((OrgApacheLuceneSearchWeight *) nil_chk(IOSObjectArray_Get(self->valSrcWeights_, i))) explainWithOrgApacheLuceneIndexLeafReaderContext:info withInt:doc]);
-  }
-  OrgApacheLuceneSearchExplanation *customExp = [((OrgApacheLuceneQueriesCustomScoreProvider *) nil_chk([self->this$0_ getCustomScoreProviderWithOrgApacheLuceneIndexLeafReaderContext:info])) customExplainWithInt:doc withOrgApacheLuceneSearchExplanation:subQueryExpl withOrgApacheLuceneSearchExplanationArray:valSrcExpls];
-  jfloat sc = self->queryWeight_ * [((OrgApacheLuceneSearchExplanation *) nil_chk(customExp)) getValue];
-  return OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_(sc, JreStrcat("$$", [self->this$0_ description], @", product of:"), [IOSObjectArray arrayWithObjects:(id[]){ customExp, OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_(self->queryWeight_, @"queryWeight", [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchExplanation_class_()]) } count:2 type:OrgApacheLuceneSearchExplanation_class_()]);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesCustomScoreQuery_CustomWeight)
@@ -480,10 +386,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesCustomScoreQuery_CustomWe
   return qWeight_ * [((OrgApacheLuceneQueriesCustomScoreProvider *) nil_chk(provider_)) customScoreWithInt:[((OrgApacheLuceneSearchScorer *) nil_chk(subQueryScorer_)) docID] withFloat:[subQueryScorer_ score] withFloatArray:vScores_];
 }
 
-- (id<JavaUtilCollection>)getChildren {
-  return JavaUtilCollections_singletonWithId_([new_OrgApacheLuceneSearchScorer_ChildScorer_initWithOrgApacheLuceneSearchScorer_withNSString_(subQueryScorer_, @"CUSTOM") autorelease]);
-}
-
 - (void)dealloc {
   RELEASE_(subQueryScorer_);
   RELEASE_(valSrcScorers_);
@@ -496,7 +398,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesCustomScoreQuery_CustomWe
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneQueriesCustomScoreQuery:withOrgApacheLuceneQueriesCustomScoreProvider:withOrgApacheLuceneQueriesCustomScoreQuery_CustomWeight:withFloat:withOrgApacheLuceneSearchScorer:withOrgApacheLuceneSearchScorerArray:", "CustomScorer", NULL, 0x2, NULL, NULL },
     { "score", NULL, "F", 0x1, "Ljava.io.IOException;", NULL },
-    { "getChildren", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "qWeight_", NULL, 0x12, "F", NULL, NULL, .constantValue.asLong = 0 },
@@ -506,7 +407,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesCustomScoreQuery_CustomWe
     { "vScores_", NULL, 0x12, "[F", NULL, NULL, .constantValue.asLong = 0 },
     { "valSrcDocID_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesCustomScoreQuery_CustomScorer = { 2, "CustomScorer", "org.apache.lucene.queries", "CustomScoreQuery", 0x2, 3, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesCustomScoreQuery_CustomScorer = { 2, "CustomScorer", "org.apache.lucene.queries", "CustomScoreQuery", 0x2, 2, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueriesCustomScoreQuery_CustomScorer;
 }
 

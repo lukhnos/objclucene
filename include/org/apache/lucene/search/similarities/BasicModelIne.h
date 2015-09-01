@@ -20,18 +20,11 @@
 #define OrgApacheLuceneSearchSimilaritiesBasicModel_INCLUDE 1
 #include "org/apache/lucene/search/similarities/BasicModel.h"
 
-@class OrgApacheLuceneSearchSimilaritiesBasicStats;
-
 @interface OrgApacheLuceneSearchSimilaritiesBasicModelIne : OrgApacheLuceneSearchSimilaritiesBasicModel
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (jfloat)scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
-                                                     withFloat:(jfloat)tfn;
-
-- (NSString *)description;
 
 @end
 

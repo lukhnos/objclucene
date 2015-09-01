@@ -3,16 +3,10 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/standard/processors/PhraseSlopQueryNodeProcessor.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/util/List.h"
-#include "org/apache/lucene/queryparser/flexible/core/QueryNodeException.h"
-#include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNode.h"
-#include "org/apache/lucene/queryparser/flexible/core/nodes/SlopQueryNode.h"
-#include "org/apache/lucene/queryparser/flexible/core/nodes/TokenizedPhraseQueryNode.h"
-#include "org/apache/lucene/queryparser/flexible/core/processors/QueryNodeProcessorImpl.h"
-#include "org/apache/lucene/queryparser/flexible/standard/nodes/MultiPhraseQueryNode.h"
 #include "org/apache/lucene/queryparser/flexible/standard/processors/PhraseSlopQueryNodeProcessor.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneQueryparserFlexibleStandardProcessorsPhraseSlopQueryNodeProcessor
 
@@ -21,39 +15,18 @@
   return self;
 }
 
-- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)postProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)node {
-  if ([node isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode class]]) {
-    OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode *phraseSlopNode = (OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode *) check_class_cast(node, [OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode class]);
-    if (!([[((OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode *) nil_chk(phraseSlopNode)) getChild] isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode class]]) && !([[phraseSlopNode getChild] isKindOfClass:[OrgApacheLuceneQueryparserFlexibleStandardNodesMultiPhraseQueryNode class]])) {
-      return [phraseSlopNode getChild];
-    }
-  }
-  return node;
-}
-
-- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)preProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)node {
-  return node;
-}
-
-- (id<JavaUtilList>)setChildrenOrderWithJavaUtilList:(id<JavaUtilList>)children {
-  return children;
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", "PhraseSlopQueryNodeProcessor", NULL, 0x1, NULL, NULL },
-    { "postProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "postProcessNode", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
-    { "preProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "preProcessNode", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
-    { "setChildrenOrderWithJavaUtilList:", "setChildrenOrder", "Ljava.util.List;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardProcessorsPhraseSlopQueryNodeProcessor = { 2, "PhraseSlopQueryNodeProcessor", "org.apache.lucene.queryparser.flexible.standard.processors", NULL, 0x1, 4, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardProcessorsPhraseSlopQueryNodeProcessor = { 2, "PhraseSlopQueryNodeProcessor", "org.apache.lucene.queryparser.flexible.standard.processors", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserFlexibleStandardProcessorsPhraseSlopQueryNodeProcessor;
 }
 
 @end
 
 void OrgApacheLuceneQueryparserFlexibleStandardProcessorsPhraseSlopQueryNodeProcessor_init(OrgApacheLuceneQueryparserFlexibleStandardProcessorsPhraseSlopQueryNodeProcessor *self) {
-  OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_init(self);
+  NSObject_init(self);
 }
 
 OrgApacheLuceneQueryparserFlexibleStandardProcessorsPhraseSlopQueryNodeProcessor *new_OrgApacheLuceneQueryparserFlexibleStandardProcessorsPhraseSlopQueryNodeProcessor_init() {

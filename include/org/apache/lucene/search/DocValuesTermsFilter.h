@@ -20,41 +20,19 @@
 #define OrgApacheLuceneSearchFilter_INCLUDE 1
 #include "org/apache/lucene/search/Filter.h"
 
-@class IOSObjectArray;
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneSearchDocIdSet;
-@protocol OrgApacheLuceneUtilBits;
-
 @interface OrgApacheLuceneSearchDocValuesTermsFilter : OrgApacheLuceneSearchFilter
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field
-withOrgApacheLuceneUtilBytesRefArray:(IOSObjectArray *)terms;
-
-- (instancetype)initWithNSString:(NSString *)field
-               withNSStringArray:(IOSObjectArray *)terms;
-
-- (jboolean)isEqual:(id)obj;
-
-- (OrgApacheLuceneSearchDocIdSet *)getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-                                                            withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)acceptDocs;
-
-- (NSUInteger)hash;
-
-- (NSString *)toStringWithNSString:(NSString *)defaultField;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchDocValuesTermsFilter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchDocValuesTermsFilter_initWithNSString_withOrgApacheLuceneUtilBytesRefArray_(OrgApacheLuceneSearchDocValuesTermsFilter *self, NSString *field, IOSObjectArray *terms);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchDocValuesTermsFilter_init(OrgApacheLuceneSearchDocValuesTermsFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchDocValuesTermsFilter *new_OrgApacheLuceneSearchDocValuesTermsFilter_initWithNSString_withOrgApacheLuceneUtilBytesRefArray_(NSString *field, IOSObjectArray *terms) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchDocValuesTermsFilter_initWithNSString_withNSStringArray_(OrgApacheLuceneSearchDocValuesTermsFilter *self, NSString *field, IOSObjectArray *terms);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchDocValuesTermsFilter *new_OrgApacheLuceneSearchDocValuesTermsFilter_initWithNSString_withNSStringArray_(NSString *field, IOSObjectArray *terms) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchDocValuesTermsFilter *new_OrgApacheLuceneSearchDocValuesTermsFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocValuesTermsFilter)
 

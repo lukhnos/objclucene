@@ -26,7 +26,6 @@
 @class OrgApacheLuceneSearchBooleanQuery;
 @class OrgApacheLuceneSearchBooleanScorer;
 @class OrgApacheLuceneSearchBulkScorer;
-@class OrgApacheLuceneSearchExplanation;
 @class OrgApacheLuceneSearchIndexSearcher;
 @class OrgApacheLuceneSearchScorer;
 @class OrgApacheLuceneSearchSimilaritiesSimilarity;
@@ -49,9 +48,6 @@
 
 - (jfloat)coordWithInt:(jint)overlap
                withInt:(jint)maxOverlap;
-
-- (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-                                                                               withInt:(jint)doc;
 
 - (void)extractTermsWithJavaUtilSet:(id<JavaUtilSet>)terms;
 

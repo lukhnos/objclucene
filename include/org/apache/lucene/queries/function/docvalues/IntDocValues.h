@@ -20,53 +20,17 @@
 #define OrgApacheLuceneQueriesFunctionFunctionValues_INCLUDE 1
 #include "org/apache/lucene/queries/function/FunctionValues.h"
 
-@class OrgApacheLuceneIndexIndexReader;
-@class OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller;
-@class OrgApacheLuceneQueriesFunctionValueSource;
-@class OrgApacheLuceneQueriesFunctionValueSourceScorer;
-
-@interface OrgApacheLuceneQueriesFunctionDocvaluesIntDocValues : OrgApacheLuceneQueriesFunctionFunctionValues {
- @public
-  OrgApacheLuceneQueriesFunctionValueSource *vs_;
-}
+@interface OrgApacheLuceneQueriesFunctionDocvaluesIntDocValues : OrgApacheLuceneQueriesFunctionFunctionValues
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)vs;
-
-- (jbyte)byteValWithInt:(jint)doc;
-
-- (jdouble)doubleValWithInt:(jint)doc;
-
-- (jfloat)floatValWithInt:(jint)doc;
-
-- (OrgApacheLuceneQueriesFunctionValueSourceScorer *)getRangeScorerWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
-                                                                                          withNSString:(NSString *)lowerVal
-                                                                                          withNSString:(NSString *)upperVal
-                                                                                           withBoolean:(jboolean)includeLower
-                                                                                           withBoolean:(jboolean)includeUpper;
-
-- (OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller *)getValueFiller;
-
-- (jint)intValWithInt:(jint)doc;
-
-- (jlong)longValWithInt:(jint)doc;
-
-- (id)objectValWithInt:(jint)doc;
-
-- (jshort)shortValWithInt:(jint)doc;
-
-- (NSString *)strValWithInt:(jint)doc;
-
-- (NSString *)toStringWithInt:(jint)doc;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionDocvaluesIntDocValues)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionDocvaluesIntDocValues, vs_, OrgApacheLuceneQueriesFunctionValueSource *)
-
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionDocvaluesIntDocValues_initWithOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionDocvaluesIntDocValues *self, OrgApacheLuceneQueriesFunctionValueSource *vs);
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionDocvaluesIntDocValues_init(OrgApacheLuceneQueriesFunctionDocvaluesIntDocValues *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionDocvaluesIntDocValues)
 

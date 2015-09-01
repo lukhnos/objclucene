@@ -48,30 +48,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchTermRangeQuery, upperTerm_, OrgApacheLu
   return OrgApacheLuceneSearchTermRangeQuery_toAutomatonWithOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_(lowerTerm, upperTerm, includeLower, includeUpper);
 }
 
-+ (OrgApacheLuceneSearchTermRangeQuery *)newStringRangeWithNSString:(NSString *)field
-                                                       withNSString:(NSString *)lowerTerm
-                                                       withNSString:(NSString *)upperTerm
-                                                        withBoolean:(jboolean)includeLower
-                                                        withBoolean:(jboolean)includeUpper {
-  return OrgApacheLuceneSearchTermRangeQuery_newStringRangeWithNSString_withNSString_withNSString_withBoolean_withBoolean_(field, lowerTerm, upperTerm, includeLower, includeUpper);
-}
-
-- (OrgApacheLuceneUtilBytesRef *)getLowerTerm {
-  return lowerTerm_;
-}
-
-- (OrgApacheLuceneUtilBytesRef *)getUpperTerm {
-  return upperTerm_;
-}
-
-- (jboolean)includesLower {
-  return includeLower_;
-}
-
-- (jboolean)includesUpper {
-  return includeUpper_;
-}
-
 - (NSString *)toStringWithNSString:(NSString *)field {
   JavaLangStringBuilder *buffer = [new_JavaLangStringBuilder_init() autorelease];
   if (![((NSString *) nil_chk([self getField])) isEqual:field]) {
@@ -125,11 +101,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchTermRangeQuery, upperTerm_, OrgApacheLu
   static const J2ObjcMethodInfo methods[] = {
     { "initWithNSString:withOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:withBoolean:withBoolean:", "TermRangeQuery", NULL, 0x1, NULL, NULL },
     { "toAutomatonWithOrgApacheLuceneUtilBytesRef:withOrgApacheLuceneUtilBytesRef:withBoolean:withBoolean:", "toAutomaton", "Lorg.apache.lucene.util.automaton.Automaton;", 0x9, NULL, NULL },
-    { "newStringRangeWithNSString:withNSString:withNSString:withBoolean:withBoolean:", "newStringRange", "Lorg.apache.lucene.search.TermRangeQuery;", 0x9, NULL, NULL },
-    { "getLowerTerm", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "getUpperTerm", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
-    { "includesLower", NULL, "Z", 0x1, NULL, NULL },
-    { "includesUpper", NULL, "Z", 0x1, NULL, NULL },
     { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "hash", "hashCode", "I", 0x1, NULL, NULL },
     { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
@@ -140,7 +111,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchTermRangeQuery, upperTerm_, OrgApacheLu
     { "includeLower_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
     { "includeUpper_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchTermRangeQuery = { 2, "TermRangeQuery", "org.apache.lucene.search", NULL, 0x1, 10, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchTermRangeQuery = { 2, "TermRangeQuery", "org.apache.lucene.search", NULL, 0x1, 5, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchTermRangeQuery;
 }
 
@@ -169,13 +140,6 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneSearchTermRangeQuery_toAut
     includeUpper = YES;
   }
   return OrgApacheLuceneUtilAutomatonAutomata_makeBinaryIntervalWithOrgApacheLuceneUtilBytesRef_withBoolean_withOrgApacheLuceneUtilBytesRef_withBoolean_(lowerTerm, includeLower, upperTerm, includeUpper);
-}
-
-OrgApacheLuceneSearchTermRangeQuery *OrgApacheLuceneSearchTermRangeQuery_newStringRangeWithNSString_withNSString_withNSString_withBoolean_withBoolean_(NSString *field, NSString *lowerTerm, NSString *upperTerm, jboolean includeLower, jboolean includeUpper) {
-  OrgApacheLuceneSearchTermRangeQuery_initialize();
-  OrgApacheLuceneUtilBytesRef *lower = lowerTerm == nil ? nil : [new_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_(lowerTerm) autorelease];
-  OrgApacheLuceneUtilBytesRef *upper = upperTerm == nil ? nil : [new_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_(upperTerm) autorelease];
-  return [new_OrgApacheLuceneSearchTermRangeQuery_initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_(field, lower, upper, includeLower, includeUpper) autorelease];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTermRangeQuery)

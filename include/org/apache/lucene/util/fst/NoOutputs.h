@@ -20,48 +20,19 @@
 #define OrgApacheLuceneUtilFstOutputs_INCLUDE 1
 #include "org/apache/lucene/util/fst/Outputs.h"
 
-@class OrgApacheLuceneStoreDataInput;
-@class OrgApacheLuceneStoreDataOutput;
-
 @interface OrgApacheLuceneUtilFstNoOutputs : OrgApacheLuceneUtilFstOutputs
 
 #pragma mark Public
 
-- (id)addWithId:(id)prefix
-         withId:(id)output;
-
-- (id)commonWithId:(id)output1
-            withId:(id)output2;
-
-- (id)getNoOutput;
-
-+ (OrgApacheLuceneUtilFstNoOutputs *)getSingleton;
-
-- (id)mergeWithId:(id)first
-           withId:(id)second;
-
-- (NSString *)outputToStringWithId:(id)output;
-
-- (jlong)ramBytesUsedWithId:(id)output;
-
-- (id)readWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg;
-
-- (id)subtractWithId:(id)output
-              withId:(id)inc;
-
-- (NSString *)description;
-
-- (void)writeWithId:(id)prefix
-withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg;
+- (instancetype)init;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneUtilFstNoOutputs)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilFstNoOutputs)
 
-FOUNDATION_EXPORT id OrgApacheLuceneUtilFstNoOutputs_NO_OUTPUT_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilFstNoOutputs, NO_OUTPUT_, id)
+FOUNDATION_EXPORT void OrgApacheLuceneUtilFstNoOutputs_init(OrgApacheLuceneUtilFstNoOutputs *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilFstNoOutputs *OrgApacheLuceneUtilFstNoOutputs_getSingleton();
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstNoOutputs *new_OrgApacheLuceneUtilFstNoOutputs_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstNoOutputs)
 

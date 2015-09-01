@@ -20,28 +20,19 @@
 #define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
-@class IOSObjectArray;
-@class OrgApacheLuceneAnalysisTokenStream;
-
 @interface OrgApacheLuceneAnalysisPatternPatternCaptureGroupTokenFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-                                               withBoolean:(jboolean)preserveOriginal
-                             withJavaUtilRegexPatternArray:(IOSObjectArray *)patterns;
-
-- (jboolean)incrementToken;
-
-- (void)reset;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisPatternPatternCaptureGroupTokenFilter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPatternPatternCaptureGroupTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_withJavaUtilRegexPatternArray_(OrgApacheLuceneAnalysisPatternPatternCaptureGroupTokenFilter *self, OrgApacheLuceneAnalysisTokenStream *input, jboolean preserveOriginal, IOSObjectArray *patterns);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPatternPatternCaptureGroupTokenFilter_init(OrgApacheLuceneAnalysisPatternPatternCaptureGroupTokenFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisPatternPatternCaptureGroupTokenFilter *new_OrgApacheLuceneAnalysisPatternPatternCaptureGroupTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_withJavaUtilRegexPatternArray_(OrgApacheLuceneAnalysisTokenStream *input, jboolean preserveOriginal, IOSObjectArray *patterns) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisPatternPatternCaptureGroupTokenFilter *new_OrgApacheLuceneAnalysisPatternPatternCaptureGroupTokenFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPatternPatternCaptureGroupTokenFilter)
 

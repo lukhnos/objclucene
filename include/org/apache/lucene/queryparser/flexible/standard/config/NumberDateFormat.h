@@ -20,39 +20,19 @@
 #define JavaTextNumberFormat_INCLUDE 1
 #include "java/text/NumberFormat.h"
 
-@class JavaLangStringBuffer;
-@class JavaTextDateFormat;
-@class JavaTextFieldPosition;
-@class JavaTextParsePosition;
-
 @interface OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat : JavaTextNumberFormat
 
 #pragma mark Public
 
-- (instancetype)initWithJavaTextDateFormat:(JavaTextDateFormat *)dateFormat;
-
-- (JavaLangStringBuffer *)formatWithDouble:(jdouble)number
-                  withJavaLangStringBuffer:(JavaLangStringBuffer *)toAppendTo
-                 withJavaTextFieldPosition:(JavaTextFieldPosition *)pos;
-
-- (JavaLangStringBuffer *)formatWithLong:(jlong)number
-                withJavaLangStringBuffer:(JavaLangStringBuffer *)toAppendTo
-               withJavaTextFieldPosition:(JavaTextFieldPosition *)pos;
-
-- (JavaLangStringBuffer *)formatWithId:(id)number
-              withJavaLangStringBuffer:(JavaLangStringBuffer *)toAppendTo
-             withJavaTextFieldPosition:(JavaTextFieldPosition *)pos;
-
-- (NSNumber *)parseWithNSString:(NSString *)source
-      withJavaTextParsePosition:(JavaTextParsePosition *)parsePosition;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat_initWithJavaTextDateFormat_(OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat *self, JavaTextDateFormat *dateFormat);
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat_init(OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat *new_OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat_initWithJavaTextDateFormat_(JavaTextDateFormat *dateFormat) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat *new_OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat)
 

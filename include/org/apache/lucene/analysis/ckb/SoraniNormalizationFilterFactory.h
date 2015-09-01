@@ -24,28 +24,19 @@
 #define OrgApacheLuceneAnalysisUtilMultiTermAwareComponent_INCLUDE 1
 #include "org/apache/lucene/analysis/util/MultiTermAwareComponent.h"
 
-@class OrgApacheLuceneAnalysisCkbSoraniNormalizationFilter;
-@class OrgApacheLuceneAnalysisTokenStream;
-@class OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory;
-@protocol JavaUtilMap;
-
 @interface OrgApacheLuceneAnalysisCkbSoraniNormalizationFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory < OrgApacheLuceneAnalysisUtilMultiTermAwareComponent >
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
-
-- (OrgApacheLuceneAnalysisCkbSoraniNormalizationFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
-
-- (OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory *)getMultiTermComponent;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisCkbSoraniNormalizationFilterFactory)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCkbSoraniNormalizationFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisCkbSoraniNormalizationFilterFactory *self, id<JavaUtilMap> args);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCkbSoraniNormalizationFilterFactory_init(OrgApacheLuceneAnalysisCkbSoraniNormalizationFilterFactory *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCkbSoraniNormalizationFilterFactory *new_OrgApacheLuceneAnalysisCkbSoraniNormalizationFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCkbSoraniNormalizationFilterFactory *new_OrgApacheLuceneAnalysisCkbSoraniNormalizationFilterFactory_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCkbSoraniNormalizationFilterFactory)
 

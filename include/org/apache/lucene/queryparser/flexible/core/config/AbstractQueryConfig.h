@@ -16,22 +16,9 @@
 #if !defined (_OrgApacheLuceneQueryparserFlexibleCoreConfigAbstractQueryConfig_) && (OrgApacheLuceneQueryparserFlexibleCoreConfigAbstractQueryConfig_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleCoreConfigAbstractQueryConfig_INCLUDE)
 #define _OrgApacheLuceneQueryparserFlexibleCoreConfigAbstractQueryConfig_
 
-@class OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey;
-
 @interface OrgApacheLuceneQueryparserFlexibleCoreConfigAbstractQueryConfig : NSObject
 
 #pragma mark Public
-
-- (id)getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:(OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey *)key;
-
-- (jboolean)hasWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:(OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey *)key;
-
-- (void)setWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:(OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey *)key
-                                                                     withId:(id)value;
-
-- (jboolean)unsetWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:(OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey *)key;
-
-#pragma mark Package-Private
 
 - (instancetype)init;
 

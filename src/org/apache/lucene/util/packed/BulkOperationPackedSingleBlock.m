@@ -122,20 +122,6 @@ __attribute__((unused)) static jlong OrgApacheLuceneUtilPackedBulkOperationPacke
   }
 }
 
-- (void)decodeWithLongArray:(IOSLongArray *)blocks
-                    withInt:(jint)blocksOffset
-               withIntArray:(IOSIntArray *)values
-                    withInt:(jint)valuesOffset
-                    withInt:(jint)iterations {
-  if (bitsPerValue_ > 32) {
-    @throw [new_JavaLangUnsupportedOperationException_initWithNSString_(JreStrcat("$I$", @"Cannot decode ", bitsPerValue_, @"-bits values into an int[]")) autorelease];
-  }
-  for (jint i = 0; i < iterations; ++i) {
-    jlong block = IOSLongArray_Get(nil_chk(blocks), blocksOffset++);
-    valuesOffset = OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_decodeWithLong_withIntArray_withInt_(self, block, values, valuesOffset);
-  }
-}
-
 - (void)decodeWithByteArray:(IOSByteArray *)blocks
                     withInt:(jint)blocksOffset
                withIntArray:(IOSIntArray *)values
@@ -158,17 +144,6 @@ __attribute__((unused)) static jlong OrgApacheLuceneUtilPackedBulkOperationPacke
                     withInt:(jint)iterations {
   for (jint i = 0; i < iterations; ++i) {
     *IOSLongArray_GetRef(nil_chk(blocks), blocksOffset++) = OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_encodeWithLongArray_withInt_(self, values, valuesOffset);
-    valuesOffset += valueCount_;
-  }
-}
-
-- (void)encodeWithIntArray:(IOSIntArray *)values
-                   withInt:(jint)valuesOffset
-             withLongArray:(IOSLongArray *)blocks
-                   withInt:(jint)blocksOffset
-                   withInt:(jint)iterations {
-  for (jint i = 0; i < iterations; ++i) {
-    *IOSLongArray_GetRef(nil_chk(blocks), blocksOffset++) = OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock_encodeWithIntArray_withInt_(self, values, valuesOffset);
     valuesOffset += valueCount_;
   }
 }
@@ -211,10 +186,8 @@ __attribute__((unused)) static jlong OrgApacheLuceneUtilPackedBulkOperationPacke
     { "encodeWithIntArray:withInt:", "encode", "J", 0x2, NULL, NULL },
     { "decodeWithLongArray:withInt:withLongArray:withInt:withInt:", "decode", "V", 0x1, NULL, NULL },
     { "decodeWithByteArray:withInt:withLongArray:withInt:withInt:", "decode", "V", 0x1, NULL, NULL },
-    { "decodeWithLongArray:withInt:withIntArray:withInt:withInt:", "decode", "V", 0x1, NULL, NULL },
     { "decodeWithByteArray:withInt:withIntArray:withInt:withInt:", "decode", "V", 0x1, NULL, NULL },
     { "encodeWithLongArray:withInt:withLongArray:withInt:withInt:", "encode", "V", 0x1, NULL, NULL },
-    { "encodeWithIntArray:withInt:withLongArray:withInt:withInt:", "encode", "V", 0x1, NULL, NULL },
     { "encodeWithLongArray:withInt:withByteArray:withInt:withInt:", "encode", "V", 0x1, NULL, NULL },
     { "encodeWithIntArray:withInt:withByteArray:withInt:withInt:", "encode", "V", 0x1, NULL, NULL },
   };
@@ -224,7 +197,7 @@ __attribute__((unused)) static jlong OrgApacheLuceneUtilPackedBulkOperationPacke
     { "valueCount_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "mask_", NULL, 0x12, "J", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock = { 2, "BulkOperationPackedSingleBlock", "org.apache.lucene.util.packed", NULL, 0x10, 18, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock = { 2, "BulkOperationPackedSingleBlock", "org.apache.lucene.util.packed", NULL, 0x10, 16, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilPackedBulkOperationPackedSingleBlock;
 }
 

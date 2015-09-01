@@ -36,11 +36,6 @@
 
 - (instancetype)init;
 
-- (instancetype)initWithCharArray:(IOSCharArray *)arr
-                          withInt:(jint)len;
-
-- (instancetype)initWithInt:(jint)size;
-
 - (id<JavaLangAppendable>)appendWithChar:(jchar)c;
 
 - (id<JavaLangAppendable>)appendWithJavaLangCharSequence:(id<JavaLangCharSequence>)csq;
@@ -49,11 +44,7 @@
                                                  withInt:(jint)start
                                                  withInt:(jint)end;
 
-- (jint)capacity;
-
 - (jchar)charAtWithInt:(jint)index;
-
-- (void)flush;
 
 - (IOSCharArray *)getArray;
 
@@ -62,9 +53,6 @@
 - (void)reserveWithInt:(jint)num;
 
 - (void)reset;
-
-- (void)setWithCharArray:(IOSCharArray *)arr
-                 withInt:(jint)end;
 
 - (void)setCharAtWithInt:(jint)index
                 withChar:(jchar)ch;
@@ -76,31 +64,11 @@
 - (id<JavaLangCharSequence>)subSequenceFrom:(jint)start
                                          to:(jint)end;
 
-- (IOSCharArray *)toCharArray;
-
 - (NSString *)description;
 
 - (void)unsafeWriteWithChar:(jchar)b;
 
-- (void)unsafeWriteWithCharArray:(IOSCharArray *)b
-                         withInt:(jint)off
-                         withInt:(jint)len;
-
-- (void)unsafeWriteWithInt:(jint)b;
-
 - (void)writeWithChar:(jchar)b;
-
-- (void)writeWithCharArray:(IOSCharArray *)b;
-
-- (void)writeWithCharArray:(IOSCharArray *)b
-                   withInt:(jint)off
-                   withInt:(jint)len;
-
-- (void)writeWithInt:(jint)b;
-
-- (void)writeWithOrgApacheLuceneAnalysisUtilOpenStringBuilder:(OrgApacheLuceneAnalysisUtilOpenStringBuilder *)arr;
-
-- (void)writeWithNSString:(NSString *)s;
 
 #pragma mark Protected
 
@@ -115,14 +83,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisUtilOpenStringBuilder, buf_, IOSCharA
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisUtilOpenStringBuilder_init(OrgApacheLuceneAnalysisUtilOpenStringBuilder *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilOpenStringBuilder *new_OrgApacheLuceneAnalysisUtilOpenStringBuilder_init() NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisUtilOpenStringBuilder_initWithInt_(OrgApacheLuceneAnalysisUtilOpenStringBuilder *self, jint size);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilOpenStringBuilder *new_OrgApacheLuceneAnalysisUtilOpenStringBuilder_initWithInt_(jint size) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisUtilOpenStringBuilder_initWithCharArray_withInt_(OrgApacheLuceneAnalysisUtilOpenStringBuilder *self, IOSCharArray *arr, jint len);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilOpenStringBuilder *new_OrgApacheLuceneAnalysisUtilOpenStringBuilder_initWithCharArray_withInt_(IOSCharArray *arr, jint len) NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilOpenStringBuilder)
 

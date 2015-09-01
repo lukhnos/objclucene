@@ -20,44 +20,19 @@
 #define OrgApacheLuceneSearchSuggestDocumentCompletionQuery_INCLUDE 1
 #include "org/apache/lucene/search/suggest/document/CompletionQuery.h"
 
-@class OrgApacheLuceneSearchIndexSearcher;
-@class OrgApacheLuceneSearchWeight;
-@protocol JavaLangCharSequence;
-
-@interface OrgApacheLuceneSearchSuggestDocumentContextQuery : OrgApacheLuceneSearchSuggestDocumentCompletionQuery {
- @public
-  OrgApacheLuceneSearchSuggestDocumentCompletionQuery *innerQuery_;
-}
+@interface OrgApacheLuceneSearchSuggestDocumentContextQuery : OrgApacheLuceneSearchSuggestDocumentCompletionQuery
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery:(OrgApacheLuceneSearchSuggestDocumentCompletionQuery *)query;
-
-- (void)addAllContexts;
-
-- (void)addContextWithJavaLangCharSequence:(id<JavaLangCharSequence>)context;
-
-- (void)addContextWithJavaLangCharSequence:(id<JavaLangCharSequence>)context
-                                 withFloat:(jfloat)boost;
-
-- (void)addContextWithJavaLangCharSequence:(id<JavaLangCharSequence>)context
-                                 withFloat:(jfloat)boost
-                               withBoolean:(jboolean)exact;
-
-- (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
-                                                                        withBoolean:(jboolean)needsScores;
-
-- (NSString *)toStringWithNSString:(NSString *)field;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestDocumentContextQuery)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentContextQuery, innerQuery_, OrgApacheLuceneSearchSuggestDocumentCompletionQuery *)
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentContextQuery_init(OrgApacheLuceneSearchSuggestDocumentContextQuery *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestDocumentContextQuery_initWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery_(OrgApacheLuceneSearchSuggestDocumentContextQuery *self, OrgApacheLuceneSearchSuggestDocumentCompletionQuery *query);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentContextQuery *new_OrgApacheLuceneSearchSuggestDocumentContextQuery_initWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery_(OrgApacheLuceneSearchSuggestDocumentCompletionQuery *query) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestDocumentContextQuery *new_OrgApacheLuceneSearchSuggestDocumentContextQuery_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentContextQuery)
 

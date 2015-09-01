@@ -6,9 +6,9 @@
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/lang/Deprecated.h"
-#include "org/apache/lucene/search/Filter.h"
 #include "org/apache/lucene/search/FilterCache.h"
-#include "org/apache/lucene/search/FilterCachingPolicy.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @interface OrgApacheLuceneSearchFilterCache : NSObject
 
@@ -21,10 +21,7 @@
 }
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "doCacheWithOrgApacheLuceneSearchFilter:withOrgApacheLuceneSearchFilterCachingPolicy:", "doCache", "Lorg.apache.lucene.search.Filter;", 0x401, NULL, NULL },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchFilterCache = { 2, "FilterCache", "org.apache.lucene.search", NULL, 0x609, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchFilterCache = { 2, "FilterCache", "org.apache.lucene.search", NULL, 0x609, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchFilterCache;
 }
 

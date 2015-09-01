@@ -100,13 +100,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsMultiLevelSkipListReader_SkipBuf
   return self;
 }
 
-- (instancetype)initWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)skipStream
-                                               withInt:(jint)maxSkipLevels
-                                               withInt:(jint)skipInterval {
-  OrgApacheLuceneCodecsMultiLevelSkipListReader_initWithOrgApacheLuceneStoreIndexInput_withInt_withInt_(self, skipStream, maxSkipLevels, skipInterval);
-  return self;
-}
-
 - (jint)getDoc {
   return lastDoc_;
 }
@@ -196,7 +189,6 @@ withOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)skipStream 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneStoreIndexInput:withInt:withInt:withInt:", "MultiLevelSkipListReader", NULL, 0x4, NULL, NULL },
-    { "initWithOrgApacheLuceneStoreIndexInput:withInt:withInt:", "MultiLevelSkipListReader", NULL, 0x4, NULL, NULL },
     { "getDoc", NULL, "I", 0x1, NULL, NULL },
     { "skipToWithInt:", "skipTo", "I", 0x1, "Ljava.io.IOException;", NULL },
     { "loadNextSkipWithInt:", "loadNextSkip", "Z", 0x2, "Ljava.io.IOException;", NULL },
@@ -224,7 +216,7 @@ withOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)skipStream 
     { "skipMultiplier_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.codecs.MultiLevelSkipListReader$SkipBuffer;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsMultiLevelSkipListReader = { 2, "MultiLevelSkipListReader", "org.apache.lucene.codecs", NULL, 0x401, 11, methods, 14, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsMultiLevelSkipListReader = { 2, "MultiLevelSkipListReader", "org.apache.lucene.codecs", NULL, 0x401, 10, methods, 14, fields, 0, NULL, 1, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneCodecsMultiLevelSkipListReader;
 }
 
@@ -247,10 +239,6 @@ void OrgApacheLuceneCodecsMultiLevelSkipListReader_initWithOrgApacheLuceneStoreI
     *IOSIntArray_GetRef(self->skipInterval_, i) = IOSIntArray_Get(self->skipInterval_, i - 1) * skipMultiplier;
   }
   JreStrongAssignAndConsume(&self->skipDoc_, [IOSIntArray newArrayWithLength:maxSkipLevels]);
-}
-
-void OrgApacheLuceneCodecsMultiLevelSkipListReader_initWithOrgApacheLuceneStoreIndexInput_withInt_withInt_(OrgApacheLuceneCodecsMultiLevelSkipListReader *self, OrgApacheLuceneStoreIndexInput *skipStream, jint maxSkipLevels, jint skipInterval) {
-  OrgApacheLuceneCodecsMultiLevelSkipListReader_initWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withInt_(self, skipStream, maxSkipLevels, skipInterval, skipInterval);
 }
 
 jboolean OrgApacheLuceneCodecsMultiLevelSkipListReader_loadNextSkipWithInt_(OrgApacheLuceneCodecsMultiLevelSkipListReader *self, jint level) {

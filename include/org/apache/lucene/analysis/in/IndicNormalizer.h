@@ -16,20 +16,15 @@
 #if !defined (_OrgApacheLuceneAnalysisInIndicNormalizer_) && (OrgApacheLuceneAnalysisInIndicNormalizer_INCLUDE_ALL || OrgApacheLuceneAnalysisInIndicNormalizer_INCLUDE)
 #define _OrgApacheLuceneAnalysisInIndicNormalizer_
 
-@class IOSCharArray;
-
 @interface OrgApacheLuceneAnalysisInIndicNormalizer : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
-- (jint)normalizeWithCharArray:(IOSCharArray *)text
-                       withInt:(jint)len;
-
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisInIndicNormalizer)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisInIndicNormalizer)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisInIndicNormalizer_init(OrgApacheLuceneAnalysisInIndicNormalizer *self);
 

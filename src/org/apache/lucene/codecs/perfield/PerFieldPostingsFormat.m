@@ -32,7 +32,6 @@
 #include "org/apache/lucene/index/SegmentReadState.h"
 #include "org/apache/lucene/index/SegmentWriteState.h"
 #include "org/apache/lucene/index/Terms.h"
-#include "org/apache/lucene/util/Accountables.h"
 #include "org/apache/lucene/util/IOUtils.h"
 #include "org/apache/lucene/util/RamUsageEstimator.h"
 
@@ -107,8 +106,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_F
 - (void)close;
 
 - (jlong)ramBytesUsed;
-
-- (id<JavaUtilCollection>)getChildResources;
 
 - (void)checkIntegrity;
 
@@ -468,10 +465,6 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_Fiel
   return ramBytesUsed;
 }
 
-- (id<JavaUtilCollection>)getChildResources {
-  return OrgApacheLuceneUtilAccountables_namedAccountablesWithNSString_withJavaUtilMap_(@"format", formats_);
-}
-
 - (void)checkIntegrity {
   for (OrgApacheLuceneCodecsFieldsProducer * __strong producer in nil_chk([((id<JavaUtilMap>) nil_chk(formats_)) values])) {
     [((OrgApacheLuceneCodecsFieldsProducer *) nil_chk(producer)) checkIntegrity];
@@ -513,7 +506,6 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_Fiel
     { "size", NULL, "I", 0x1, NULL, NULL },
     { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
     { "checkIntegrity", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
     { "getMergeInstance", NULL, "Lorg.apache.lucene.codecs.FieldsProducer;", 0x1, "Ljava.io.IOException;", NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
@@ -524,7 +516,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_Fiel
     { "formats_", NULL, 0x12, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/codecs/FieldsProducer;>;", .constantValue.asLong = 0 },
     { "segment_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader = { 2, "FieldsReader", "org.apache.lucene.codecs.perfield", "PerFieldPostingsFormat", 0xa, 11, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader = { 2, "FieldsReader", "org.apache.lucene.codecs.perfield", "PerFieldPostingsFormat", 0xa, 10, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader;
 }
 

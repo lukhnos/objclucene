@@ -24,45 +24,19 @@
 #define OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode_INCLUDE 1
 #include "org/apache/lucene/queryparser/flexible/core/nodes/FieldValuePairQueryNode.h"
 
-@class JavaTextNumberFormat;
-@protocol JavaLangCharSequence;
-@protocol OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax;
-
 @interface OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl < OrgApacheLuceneQueryparserFlexibleCoreNodesFieldValuePairQueryNode >
 
 #pragma mark Public
 
-- (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)field
-                                withNSNumber:(NSNumber *)value
-                    withJavaTextNumberFormat:(JavaTextNumberFormat *)numberFormat;
-
-- (id<JavaLangCharSequence>)getField;
-
-- (JavaTextNumberFormat *)getNumberFormat;
-
-- (NSNumber *)getValue;
-
-- (void)setFieldWithJavaLangCharSequence:(id<JavaLangCharSequence>)fieldName;
-
-- (void)setNumberFormatWithJavaTextNumberFormat:(JavaTextNumberFormat *)format;
-
-- (void)setValueWithId:(NSNumber *)value;
-
-- (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escapeSyntaxParser;
-
-- (NSString *)description;
-
-#pragma mark Protected
-
-- (id<JavaLangCharSequence>)getTermEscapedWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escaper;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode_initWithJavaLangCharSequence_withNSNumber_withJavaTextNumberFormat_(OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode *self, id<JavaLangCharSequence> field, NSNumber *value, JavaTextNumberFormat *numberFormat);
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode_init(OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode *new_OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode_initWithJavaLangCharSequence_withNSNumber_withJavaTextNumberFormat_(id<JavaLangCharSequence> field, NSNumber *value, JavaTextNumberFormat *numberFormat) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode *new_OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardNodesNumericQueryNode)
 

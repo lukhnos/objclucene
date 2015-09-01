@@ -21,7 +21,6 @@
 #include "org/apache/lucene/search/Weight.h"
 
 @class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneSearchExplanation;
 @class OrgApacheLuceneSearchIndexSearcher;
 @class OrgApacheLuceneSearchScorer;
 @class OrgApacheLuceneSearchSimilaritiesSimilarity;
@@ -44,9 +43,6 @@
 - (instancetype)initWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)query
                      withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                             withJavaUtilMap:(id<JavaUtilMap>)termContexts;
-
-- (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-                                                                               withInt:(jint)doc;
 
 - (void)extractTermContextsWithJavaUtilMap:(id<JavaUtilMap>)contexts;
 
@@ -92,8 +88,6 @@ typedef NS_ENUM(NSUInteger, OrgApacheLuceneSearchSpansSpanWeight_Postings) {
 @interface OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum : JavaLangEnum < NSCopying >
 
 #pragma mark Public
-
-- (OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum *)atLeastWithOrgApacheLuceneSearchSpansSpanWeight_PostingsEnum:(OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum *)postings;
 
 - (jint)getRequiredPostings;
 

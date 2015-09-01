@@ -16,21 +16,12 @@
 #if !defined (_OrgApacheLuceneUtilAutomatonAutomata_) && (OrgApacheLuceneUtilAutomatonAutomata_INCLUDE_ALL || OrgApacheLuceneUtilAutomatonAutomata_INCLUDE)
 #define _OrgApacheLuceneUtilAutomatonAutomata_
 
-@class IOSIntArray;
 @class OrgApacheLuceneUtilAutomatonAutomaton;
 @class OrgApacheLuceneUtilBytesRef;
-@protocol JavaUtilCollection;
 
 @interface OrgApacheLuceneUtilAutomatonAutomata : NSObject
 
 #pragma mark Public
-
-+ (jint)appendAnyCharWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a
-                                                       withInt:(jint)state;
-
-+ (jint)appendCharWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a
-                                                    withInt:(jint)state
-                                                    withInt:(jint)c;
 
 + (OrgApacheLuceneUtilAutomatonAutomaton *)makeAnyBinary;
 
@@ -58,13 +49,7 @@
 
 + (OrgApacheLuceneUtilAutomatonAutomaton *)makeEmptyString;
 
-+ (OrgApacheLuceneUtilAutomatonAutomaton *)makeStringWithIntArray:(IOSIntArray *)word
-                                                          withInt:(jint)offset
-                                                          withInt:(jint)length;
-
 + (OrgApacheLuceneUtilAutomatonAutomaton *)makeStringWithNSString:(NSString *)s;
-
-+ (OrgApacheLuceneUtilAutomatonAutomaton *)makeStringUnionWithJavaUtilCollection:(id<JavaUtilCollection>)utf8Strings;
 
 @end
 
@@ -80,11 +65,7 @@ FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAuto
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonAutomata_makeAnyChar();
 
-FOUNDATION_EXPORT jint OrgApacheLuceneUtilAutomatonAutomata_appendAnyCharWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(OrgApacheLuceneUtilAutomatonAutomaton *a, jint state);
-
 FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonAutomata_makeCharWithInt_(jint c);
-
-FOUNDATION_EXPORT jint OrgApacheLuceneUtilAutomatonAutomata_appendCharWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_withInt_(OrgApacheLuceneUtilAutomatonAutomaton *a, jint state, jint c);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonAutomata_makeCharRangeWithInt_withInt_(jint min, jint max);
 
@@ -95,10 +76,6 @@ FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAuto
 FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonAutomata_makeStringWithNSString_(NSString *s);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonAutomata_makeBinaryWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilBytesRef *term);
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonAutomata_makeStringWithIntArray_withInt_withInt_(IOSIntArray *word, jint offset, jint length);
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonAutomata_makeStringUnionWithJavaUtilCollection_(id<JavaUtilCollection> utf8Strings);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonAutomata)
 

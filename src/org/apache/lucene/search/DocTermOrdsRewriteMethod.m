@@ -6,47 +6,15 @@
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/lang/Deprecated.h"
-#include "org/apache/lucene/index/IndexReader.h"
 #include "org/apache/lucene/search/DocTermOrdsRewriteMethod.h"
-#include "org/apache/lucene/search/DocValuesRewriteMethod.h"
-#include "org/apache/lucene/search/MultiTermQuery.h"
-#include "org/apache/lucene/search/Query.h"
 
-@interface OrgApacheLuceneSearchDocTermOrdsRewriteMethod () {
- @public
-  OrgApacheLuceneSearchDocValuesRewriteMethod *rewriteMethod_;
-}
-
-@end
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchDocTermOrdsRewriteMethod, rewriteMethod_, OrgApacheLuceneSearchDocValuesRewriteMethod *)
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneSearchDocTermOrdsRewriteMethod
-
-- (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
-                                   withOrgApacheLuceneSearchMultiTermQuery:(OrgApacheLuceneSearchMultiTermQuery *)query {
-  return [((OrgApacheLuceneSearchDocValuesRewriteMethod *) nil_chk(rewriteMethod_)) rewriteWithOrgApacheLuceneIndexIndexReader:reader withOrgApacheLuceneSearchMultiTermQuery:query];
-}
-
-- (jboolean)isEqual:(id)obj {
-  if (self == obj) return YES;
-  if (obj == nil) return NO;
-  if ([self getClass] != [nil_chk(obj) getClass]) return NO;
-  return YES;
-}
-
-- (NSUInteger)hash {
-  return 877;
-}
 
 - (instancetype)init {
   OrgApacheLuceneSearchDocTermOrdsRewriteMethod_init(self);
   return self;
-}
-
-- (void)dealloc {
-  RELEASE_(rewriteMethod_);
-  [super dealloc];
 }
 
 + (IOSObjectArray *)__annotations {
@@ -55,23 +23,16 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchDocTermOrdsRewriteMethod, rewriteMethod
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "rewriteWithOrgApacheLuceneIndexIndexReader:withOrgApacheLuceneSearchMultiTermQuery:", "rewrite", "Lorg.apache.lucene.search.Query;", 0x1, NULL, NULL },
-    { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
-    { "hash", "hashCode", "I", 0x1, NULL, NULL },
     { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "rewriteMethod_", NULL, 0x12, "Lorg.apache.lucene.search.DocValuesRewriteMethod;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchDocTermOrdsRewriteMethod = { 2, "DocTermOrdsRewriteMethod", "org.apache.lucene.search", NULL, 0x11, 4, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchDocTermOrdsRewriteMethod = { 2, "DocTermOrdsRewriteMethod", "org.apache.lucene.search", NULL, 0x11, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchDocTermOrdsRewriteMethod;
 }
 
 @end
 
 void OrgApacheLuceneSearchDocTermOrdsRewriteMethod_init(OrgApacheLuceneSearchDocTermOrdsRewriteMethod *self) {
-  OrgApacheLuceneSearchMultiTermQuery_RewriteMethod_init(self);
-  JreStrongAssignAndConsume(&self->rewriteMethod_, new_OrgApacheLuceneSearchDocValuesRewriteMethod_init());
+  NSObject_init(self);
 }
 
 OrgApacheLuceneSearchDocTermOrdsRewriteMethod *new_OrgApacheLuceneSearchDocTermOrdsRewriteMethod_init() {

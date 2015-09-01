@@ -20,40 +20,19 @@
 #define OrgApacheLuceneQueryparserClassicQueryParser_INCLUDE 1
 #include "org/apache/lucene/queryparser/classic/QueryParser.h"
 
-@class OrgApacheLuceneAnalysisAnalyzer;
-@class OrgApacheLuceneQueryparserExtExtensions;
-@class OrgApacheLuceneSearchQuery;
-
 @interface OrgApacheLuceneQueryparserExtExtendableQueryParser : OrgApacheLuceneQueryparserClassicQueryParser
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)f
-withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)a;
-
-- (instancetype)initWithNSString:(NSString *)f
-withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)a
-withOrgApacheLuceneQueryparserExtExtensions:(OrgApacheLuceneQueryparserExtExtensions *)ext;
-
-- (jchar)getExtensionFieldDelimiter;
-
-#pragma mark Protected
-
-- (OrgApacheLuceneSearchQuery *)getFieldQueryWithNSString:(NSString *)field
-                                             withNSString:(NSString *)queryText
-                                              withBoolean:(jboolean)quoted;
+- (instancetype)init;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneQueryparserExtExtendableQueryParser)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserExtExtendableQueryParser)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserExtExtendableQueryParser_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneQueryparserExtExtendableQueryParser *self, NSString *f, OrgApacheLuceneAnalysisAnalyzer *a);
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserExtExtendableQueryParser_init(OrgApacheLuceneQueryparserExtExtendableQueryParser *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserExtExtendableQueryParser *new_OrgApacheLuceneQueryparserExtExtendableQueryParser_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_(NSString *f, OrgApacheLuceneAnalysisAnalyzer *a) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserExtExtendableQueryParser_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneQueryparserExtExtensions_(OrgApacheLuceneQueryparserExtExtendableQueryParser *self, NSString *f, OrgApacheLuceneAnalysisAnalyzer *a, OrgApacheLuceneQueryparserExtExtensions *ext);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserExtExtendableQueryParser *new_OrgApacheLuceneQueryparserExtExtendableQueryParser_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneQueryparserExtExtensions_(NSString *f, OrgApacheLuceneAnalysisAnalyzer *a, OrgApacheLuceneQueryparserExtExtensions *ext) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserExtExtendableQueryParser *new_OrgApacheLuceneQueryparserExtExtendableQueryParser_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserExtExtendableQueryParser)
 

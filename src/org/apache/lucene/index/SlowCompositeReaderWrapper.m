@@ -48,10 +48,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSlowCompositeReaderWrapper, cachedOrdMap
 
 @implementation OrgApacheLuceneIndexSlowCompositeReaderWrapper
 
-+ (OrgApacheLuceneIndexLeafReader *)wrapWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader {
-  return OrgApacheLuceneIndexSlowCompositeReaderWrapper_wrapWithOrgApacheLuceneIndexIndexReader_(reader);
-}
-
 - (instancetype)initWithOrgApacheLuceneIndexCompositeReader:(OrgApacheLuceneIndexCompositeReader *)reader
                                                 withBoolean:(jboolean)merging {
   OrgApacheLuceneIndexSlowCompositeReaderWrapper_initWithOrgApacheLuceneIndexCompositeReader_withBoolean_(self, reader, merging);
@@ -60,14 +56,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSlowCompositeReaderWrapper, cachedOrdMap
 
 - (NSString *)description {
   return JreStrcat("$@C", @"SlowCompositeReaderWrapper(", in_, ')');
-}
-
-- (void)addCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:(id<OrgApacheLuceneIndexLeafReader_CoreClosedListener>)listener {
-  OrgApacheLuceneIndexLeafReader_addCoreClosedListenerAsReaderClosedListenerWithOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneIndexLeafReader_CoreClosedListener_(in_, listener);
-}
-
-- (void)removeCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:(id<OrgApacheLuceneIndexLeafReader_CoreClosedListener>)listener {
-  OrgApacheLuceneIndexLeafReader_removeCoreClosedListenerAsReaderClosedListenerWithOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneIndexLeafReader_CoreClosedListener_(in_, listener);
 }
 
 - (OrgApacheLuceneIndexFields *)fields {
@@ -204,10 +192,6 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
   return [((OrgApacheLuceneIndexCompositeReader *) nil_chk(in_)) getCoreCacheKey];
 }
 
-- (id)getCombinedCoreAndDeletesKey {
-  return [((OrgApacheLuceneIndexCompositeReader *) nil_chk(in_)) getCombinedCoreAndDeletesKey];
-}
-
 - (void)doClose {
   [((OrgApacheLuceneIndexCompositeReader *) nil_chk(in_)) close];
 }
@@ -228,11 +212,8 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "wrapWithOrgApacheLuceneIndexIndexReader:", "wrap", "Lorg.apache.lucene.index.LeafReader;", 0x9, "Ljava.io.IOException;", NULL },
     { "initWithOrgApacheLuceneIndexCompositeReader:withBoolean:", "SlowCompositeReaderWrapper", NULL, 0x0, "Ljava.io.IOException;", NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "addCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:", "addCoreClosedListener", "V", 0x1, NULL, NULL },
-    { "removeCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:", "removeCoreClosedListener", "V", 0x1, NULL, NULL },
     { "fields", NULL, "Lorg.apache.lucene.index.Fields;", 0x1, NULL, NULL },
     { "getNumericDocValuesWithNSString:", "getNumericDocValues", "Lorg.apache.lucene.index.NumericDocValues;", 0x1, "Ljava.io.IOException;", NULL },
     { "getDocsWithFieldWithNSString:", "getDocsWithField", "Lorg.apache.lucene.util.Bits;", 0x1, "Ljava.io.IOException;", NULL },
@@ -248,7 +229,6 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
     { "getLiveDocs", NULL, "Lorg.apache.lucene.util.Bits;", 0x1, NULL, NULL },
     { "getFieldInfos", NULL, "Lorg.apache.lucene.index.FieldInfos;", 0x1, NULL, NULL },
     { "getCoreCacheKey", NULL, "Ljava.lang.Object;", 0x1, NULL, NULL },
-    { "getCombinedCoreAndDeletesKey", NULL, "Ljava.lang.Object;", 0x1, NULL, NULL },
     { "doClose", NULL, "V", 0x4, "Ljava.io.IOException;", NULL },
     { "checkIntegrity", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
   };
@@ -258,22 +238,11 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
     { "merging_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
     { "cachedOrdMaps_", NULL, 0x12, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/index/MultiDocValues$OrdinalMap;>;", .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexSlowCompositeReaderWrapper = { 2, "SlowCompositeReaderWrapper", "org.apache.lucene.index", NULL, 0x11, 23, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexSlowCompositeReaderWrapper = { 2, "SlowCompositeReaderWrapper", "org.apache.lucene.index", NULL, 0x11, 19, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexSlowCompositeReaderWrapper;
 }
 
 @end
-
-OrgApacheLuceneIndexLeafReader *OrgApacheLuceneIndexSlowCompositeReaderWrapper_wrapWithOrgApacheLuceneIndexIndexReader_(OrgApacheLuceneIndexIndexReader *reader) {
-  OrgApacheLuceneIndexSlowCompositeReaderWrapper_initialize();
-  if ([reader isKindOfClass:[OrgApacheLuceneIndexCompositeReader class]]) {
-    return [new_OrgApacheLuceneIndexSlowCompositeReaderWrapper_initWithOrgApacheLuceneIndexCompositeReader_withBoolean_((OrgApacheLuceneIndexCompositeReader *) check_class_cast(reader, [OrgApacheLuceneIndexCompositeReader class]), NO) autorelease];
-  }
-  else {
-    JreAssert(([reader isKindOfClass:[OrgApacheLuceneIndexLeafReader class]]), (@"org/apache/lucene/index/SlowCompositeReaderWrapper.java:59 condition failed: assert reader instanceof LeafReader;"));
-    return (OrgApacheLuceneIndexLeafReader *) check_class_cast(reader, [OrgApacheLuceneIndexLeafReader class]);
-  }
-}
 
 void OrgApacheLuceneIndexSlowCompositeReaderWrapper_initWithOrgApacheLuceneIndexCompositeReader_withBoolean_(OrgApacheLuceneIndexSlowCompositeReaderWrapper *self, OrgApacheLuceneIndexCompositeReader *reader, jboolean merging) {
   OrgApacheLuceneIndexLeafReader_init(self);

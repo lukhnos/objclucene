@@ -16,16 +16,7 @@
 #if !defined (_OrgApacheLuceneSearchSpansSpanCollector_) && (OrgApacheLuceneSearchSpansSpanCollector_INCLUDE_ALL || OrgApacheLuceneSearchSpansSpanCollector_INCLUDE)
 #define _OrgApacheLuceneSearchSpansSpanCollector_
 
-@class OrgApacheLuceneIndexPostingsEnum;
-@class OrgApacheLuceneIndexTerm;
-
 @protocol OrgApacheLuceneSearchSpansSpanCollector < NSObject, JavaObject >
-
-- (void)collectLeafWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)postings
-                                                withInt:(jint)position
-                           withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
-
-- (void)reset;
 
 @end
 

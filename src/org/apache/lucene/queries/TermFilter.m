@@ -6,21 +6,15 @@
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/lang/Deprecated.h"
-#include "org/apache/lucene/index/Term.h"
 #include "org/apache/lucene/queries/TermFilter.h"
-#include "org/apache/lucene/search/Query.h"
-#include "org/apache/lucene/search/QueryWrapperFilter.h"
-#include "org/apache/lucene/search/TermQuery.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneQueriesTermFilter
 
-- (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term {
-  OrgApacheLuceneQueriesTermFilter_initWithOrgApacheLuceneIndexTerm_(self, term);
+- (instancetype)init {
+  OrgApacheLuceneQueriesTermFilter_init(self);
   return self;
-}
-
-- (NSString *)toStringWithNSString:(NSString *)field {
-  return [((OrgApacheLuceneSearchQuery *) nil_chk([self getQuery])) description];
 }
 
 + (IOSObjectArray *)__annotations {
@@ -29,22 +23,21 @@
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexTerm:", "TermFilter", NULL, 0x1, NULL, NULL },
-    { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueriesTermFilter = { 2, "TermFilter", "org.apache.lucene.queries", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueriesTermFilter = { 2, "TermFilter", "org.apache.lucene.queries", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueriesTermFilter;
 }
 
 @end
 
-void OrgApacheLuceneQueriesTermFilter_initWithOrgApacheLuceneIndexTerm_(OrgApacheLuceneQueriesTermFilter *self, OrgApacheLuceneIndexTerm *term) {
-  OrgApacheLuceneSearchQueryWrapperFilter_initWithOrgApacheLuceneSearchQuery_(self, [new_OrgApacheLuceneSearchTermQuery_initWithOrgApacheLuceneIndexTerm_(term) autorelease]);
+void OrgApacheLuceneQueriesTermFilter_init(OrgApacheLuceneQueriesTermFilter *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneQueriesTermFilter *new_OrgApacheLuceneQueriesTermFilter_initWithOrgApacheLuceneIndexTerm_(OrgApacheLuceneIndexTerm *term) {
+OrgApacheLuceneQueriesTermFilter *new_OrgApacheLuceneQueriesTermFilter_init() {
   OrgApacheLuceneQueriesTermFilter *self = [OrgApacheLuceneQueriesTermFilter alloc];
-  OrgApacheLuceneQueriesTermFilter_initWithOrgApacheLuceneIndexTerm_(self, term);
+  OrgApacheLuceneQueriesTermFilter_init(self);
   return self;
 }
 

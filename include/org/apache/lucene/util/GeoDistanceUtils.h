@@ -22,26 +22,9 @@
 
 - (instancetype)init;
 
-+ (jdouble)distanceToDegreesLatWithDouble:(jdouble)lat
-                               withDouble:(jdouble)distance;
-
-+ (jdouble)distanceToDegreesLonWithDouble:(jdouble)lat
-                               withDouble:(jdouble)distance;
-
-+ (jdouble)vincentyDistanceWithDouble:(jdouble)lonA
-                           withDouble:(jdouble)latA
-                           withDouble:(jdouble)lonB
-                           withDouble:(jdouble)latB;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilGeoDistanceUtils)
-
-FOUNDATION_EXPORT jdouble OrgApacheLuceneUtilGeoDistanceUtils_vincentyDistanceWithDouble_withDouble_withDouble_withDouble_(jdouble lonA, jdouble latA, jdouble lonB, jdouble latB);
-
-FOUNDATION_EXPORT jdouble OrgApacheLuceneUtilGeoDistanceUtils_distanceToDegreesLonWithDouble_withDouble_(jdouble lat, jdouble distance);
-
-FOUNDATION_EXPORT jdouble OrgApacheLuceneUtilGeoDistanceUtils_distanceToDegreesLatWithDouble_withDouble_(jdouble lat, jdouble distance);
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilGeoDistanceUtils_init(OrgApacheLuceneUtilGeoDistanceUtils *self);
 

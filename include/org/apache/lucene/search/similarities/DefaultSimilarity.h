@@ -21,7 +21,6 @@
 #include "org/apache/lucene/search/similarities/TFIDFSimilarity.h"
 
 @class OrgApacheLuceneIndexFieldInvertState;
-@class OrgApacheLuceneUtilBytesRef;
 
 @interface OrgApacheLuceneSearchSimilaritiesDefaultSimilarity : OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity {
  @public
@@ -39,21 +38,12 @@
 
 - (jlong)encodeNormValueWithFloat:(jfloat)f;
 
-- (jboolean)getDiscountOverlaps;
-
 - (jfloat)idfWithLong:(jlong)docFreq
              withLong:(jlong)numDocs;
 
 - (jfloat)lengthNormWithOrgApacheLuceneIndexFieldInvertState:(OrgApacheLuceneIndexFieldInvertState *)state;
 
 - (jfloat)queryNormWithFloat:(jfloat)sumOfSquaredWeights;
-
-- (jfloat)scorePayloadWithInt:(jint)doc
-                      withInt:(jint)start
-                      withInt:(jint)end
-withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload;
-
-- (void)setDiscountOverlapsWithBoolean:(jboolean)v;
 
 - (jfloat)sloppyFreqWithInt:(jint)distance;
 

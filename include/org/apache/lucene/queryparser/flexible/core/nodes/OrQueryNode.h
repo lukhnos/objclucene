@@ -20,27 +20,19 @@
 #define OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode_INCLUDE 1
 #include "org/apache/lucene/queryparser/flexible/core/nodes/BooleanQueryNode.h"
 
-@protocol JavaLangCharSequence;
-@protocol JavaUtilList;
-@protocol OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax;
-
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)clauses;
-
-- (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escapeSyntaxParser;
-
-- (NSString *)description;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode_initWithJavaUtilList_(OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode *self, id<JavaUtilList> clauses);
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode_init(OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode_initWithJavaUtilList_(id<JavaUtilList> clauses) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode)
 

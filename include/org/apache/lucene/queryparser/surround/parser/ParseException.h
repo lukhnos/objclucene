@@ -20,53 +20,19 @@
 #define JavaLangException_INCLUDE 1
 #include "java/lang/Exception.h"
 
-@class IOSObjectArray;
-@class OrgApacheLuceneQueryparserSurroundParserToken;
-
-@interface OrgApacheLuceneQueryparserSurroundParserParseException : JavaLangException {
- @public
-  OrgApacheLuceneQueryparserSurroundParserToken *currentToken_;
-  IOSObjectArray *expectedTokenSequences_;
-  IOSObjectArray *tokenImage_;
-  NSString *eol_;
-}
+@interface OrgApacheLuceneQueryparserSurroundParserParseException : JavaLangException
 
 #pragma mark Public
 
 - (instancetype)init;
 
-- (instancetype)initWithNSString:(NSString *)message;
-
-- (instancetype)initWithOrgApacheLuceneQueryparserSurroundParserToken:(OrgApacheLuceneQueryparserSurroundParserToken *)currentTokenVal
-                                                        withIntArray2:(IOSObjectArray *)expectedTokenSequencesVal
-                                                    withNSStringArray:(IOSObjectArray *)tokenImageVal;
-
-#pragma mark Package-Private
-
-+ (NSString *)add_escapesWithNSString:(NSString *)str;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserSurroundParserParseException)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserSurroundParserParseException, currentToken_, OrgApacheLuceneQueryparserSurroundParserToken *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserSurroundParserParseException, expectedTokenSequences_, IOSObjectArray *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserSurroundParserParseException, tokenImage_, IOSObjectArray *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserSurroundParserParseException, eol_, NSString *)
-
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundParserParseException_initWithOrgApacheLuceneQueryparserSurroundParserToken_withIntArray2_withNSStringArray_(OrgApacheLuceneQueryparserSurroundParserParseException *self, OrgApacheLuceneQueryparserSurroundParserToken *currentTokenVal, IOSObjectArray *expectedTokenSequencesVal, IOSObjectArray *tokenImageVal);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundParserParseException *new_OrgApacheLuceneQueryparserSurroundParserParseException_initWithOrgApacheLuceneQueryparserSurroundParserToken_withIntArray2_withNSStringArray_(OrgApacheLuceneQueryparserSurroundParserToken *currentTokenVal, IOSObjectArray *expectedTokenSequencesVal, IOSObjectArray *tokenImageVal) NS_RETURNS_RETAINED;
-
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundParserParseException_init(OrgApacheLuceneQueryparserSurroundParserParseException *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundParserParseException *new_OrgApacheLuceneQueryparserSurroundParserParseException_init() NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundParserParseException_initWithNSString_(OrgApacheLuceneQueryparserSurroundParserParseException *self, NSString *message);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundParserParseException *new_OrgApacheLuceneQueryparserSurroundParserParseException_initWithNSString_(NSString *message) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT NSString *OrgApacheLuceneQueryparserSurroundParserParseException_add_escapesWithNSString_(NSString *str);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundParserParseException)
 

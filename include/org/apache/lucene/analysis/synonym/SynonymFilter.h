@@ -20,24 +20,11 @@
 #define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
-@class OrgApacheLuceneAnalysisSynonymSynonymMap;
-@class OrgApacheLuceneAnalysisTokenStream;
-
 @interface OrgApacheLuceneAnalysisSynonymSynonymFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-              withOrgApacheLuceneAnalysisSynonymSynonymMap:(OrgApacheLuceneAnalysisSynonymSynonymMap *)synonyms
-                                               withBoolean:(jboolean)ignoreCase;
-
-- (jboolean)incrementToken;
-
-- (void)reset;
-
-#pragma mark Package-Private
-
-- (jint)getCaptureCount;
+- (instancetype)init;
 
 @end
 
@@ -46,9 +33,9 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisSynonymSynonymFilter)
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisSynonymSynonymFilter_TYPE_SYNONYM_;
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisSynonymSynonymFilter, TYPE_SYNONYM_, NSString *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisSynonymSynonymFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisSynonymSynonymMap_withBoolean_(OrgApacheLuceneAnalysisSynonymSynonymFilter *self, OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisSynonymSynonymMap *synonyms, jboolean ignoreCase);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisSynonymSynonymFilter_init(OrgApacheLuceneAnalysisSynonymSynonymFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisSynonymSynonymFilter *new_OrgApacheLuceneAnalysisSynonymSynonymFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisSynonymSynonymMap_withBoolean_(OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisSynonymSynonymMap *synonyms, jboolean ignoreCase) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisSynonymSynonymFilter *new_OrgApacheLuceneAnalysisSynonymSynonymFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSynonymSynonymFilter)
 

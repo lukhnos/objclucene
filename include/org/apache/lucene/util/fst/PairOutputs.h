@@ -42,8 +42,6 @@
 - (OrgApacheLuceneUtilFstPairOutputs_Pair *)newPairWithId:(id)a
                                                    withId:(id)b OBJC_METHOD_FAMILY_NONE;
 
-- (NSString *)outputToStringWithId:(OrgApacheLuceneUtilFstPairOutputs_Pair *)output;
-
 - (jlong)ramBytesUsedWithId:(OrgApacheLuceneUtilFstPairOutputs_Pair *)output;
 
 - (OrgApacheLuceneUtilFstPairOutputs_Pair *)readWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg;

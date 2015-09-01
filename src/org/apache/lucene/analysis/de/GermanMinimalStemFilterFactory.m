@@ -4,45 +4,34 @@
 //
 
 #include "J2ObjC_source.h"
-#include "java/lang/IllegalArgumentException.h"
-#include "java/util/Map.h"
-#include "org/apache/lucene/analysis/TokenStream.h"
-#include "org/apache/lucene/analysis/de/GermanMinimalStemFilter.h"
 #include "org/apache/lucene/analysis/de/GermanMinimalStemFilterFactory.h"
-#include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneAnalysisDeGermanMinimalStemFilterFactory
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args {
-  OrgApacheLuceneAnalysisDeGermanMinimalStemFilterFactory_initWithJavaUtilMap_(self, args);
+- (instancetype)init {
+  OrgApacheLuceneAnalysisDeGermanMinimalStemFilterFactory_init(self);
   return self;
-}
-
-- (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  return [new_OrgApacheLuceneAnalysisDeGermanMinimalStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(input) autorelease];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "GermanMinimalStemFilterFactory", NULL, 0x1, NULL, NULL },
-    { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.TokenStream;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisDeGermanMinimalStemFilterFactory = { 2, "GermanMinimalStemFilterFactory", "org.apache.lucene.analysis.de", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisDeGermanMinimalStemFilterFactory = { 2, "GermanMinimalStemFilterFactory", "org.apache.lucene.analysis.de", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisDeGermanMinimalStemFilterFactory;
 }
 
 @end
 
-void OrgApacheLuceneAnalysisDeGermanMinimalStemFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisDeGermanMinimalStemFilterFactory *self, id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
-  if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
-  }
+void OrgApacheLuceneAnalysisDeGermanMinimalStemFilterFactory_init(OrgApacheLuceneAnalysisDeGermanMinimalStemFilterFactory *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneAnalysisDeGermanMinimalStemFilterFactory *new_OrgApacheLuceneAnalysisDeGermanMinimalStemFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+OrgApacheLuceneAnalysisDeGermanMinimalStemFilterFactory *new_OrgApacheLuceneAnalysisDeGermanMinimalStemFilterFactory_init() {
   OrgApacheLuceneAnalysisDeGermanMinimalStemFilterFactory *self = [OrgApacheLuceneAnalysisDeGermanMinimalStemFilterFactory alloc];
-  OrgApacheLuceneAnalysisDeGermanMinimalStemFilterFactory_initWithJavaUtilMap_(self, args);
+  OrgApacheLuceneAnalysisDeGermanMinimalStemFilterFactory_init(self);
   return self;
 }
 

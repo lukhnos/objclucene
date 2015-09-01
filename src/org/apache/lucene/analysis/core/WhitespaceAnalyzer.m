@@ -4,9 +4,9 @@
 //
 
 #include "J2ObjC_source.h"
-#include "org/apache/lucene/analysis/Analyzer.h"
 #include "org/apache/lucene/analysis/core/WhitespaceAnalyzer.h"
-#include "org/apache/lucene/analysis/core/WhitespaceTokenizer.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneAnalysisCoreWhitespaceAnalyzer
 
@@ -15,23 +15,18 @@
   return self;
 }
 
-- (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)createComponentsWithNSString:(NSString *)fieldName {
-  return [new_OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuceneAnalysisTokenizer_([new_OrgApacheLuceneAnalysisCoreWhitespaceTokenizer_init() autorelease]) autorelease];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", "WhitespaceAnalyzer", NULL, 0x1, NULL, NULL },
-    { "createComponentsWithNSString:", "createComponents", "Lorg.apache.lucene.analysis.Analyzer$TokenStreamComponents;", 0x4, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCoreWhitespaceAnalyzer = { 2, "WhitespaceAnalyzer", "org.apache.lucene.analysis.core", NULL, 0x11, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCoreWhitespaceAnalyzer = { 2, "WhitespaceAnalyzer", "org.apache.lucene.analysis.core", NULL, 0x11, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisCoreWhitespaceAnalyzer;
 }
 
 @end
 
 void OrgApacheLuceneAnalysisCoreWhitespaceAnalyzer_init(OrgApacheLuceneAnalysisCoreWhitespaceAnalyzer *self) {
-  OrgApacheLuceneAnalysisAnalyzer_init(self);
+  NSObject_init(self);
 }
 
 OrgApacheLuceneAnalysisCoreWhitespaceAnalyzer *new_OrgApacheLuceneAnalysisCoreWhitespaceAnalyzer_init() {

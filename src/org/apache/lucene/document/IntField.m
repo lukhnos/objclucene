@@ -4,7 +4,6 @@
 //
 
 #include "J2ObjC_source.h"
-#include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Integer.h"
 #include "org/apache/lucene/document/Field.h"
 #include "org/apache/lucene/document/FieldType.h"
@@ -23,13 +22,6 @@ OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentIntField_TYPE_STORED_;
                          withInt:(jint)value
 withOrgApacheLuceneDocumentField_StoreEnum:(OrgApacheLuceneDocumentField_StoreEnum *)stored {
   OrgApacheLuceneDocumentIntField_initWithNSString_withInt_withOrgApacheLuceneDocumentField_StoreEnum_(self, name, value, stored);
-  return self;
-}
-
-- (instancetype)initWithNSString:(NSString *)name
-                         withInt:(jint)value
-withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type {
-  OrgApacheLuceneDocumentIntField_initWithNSString_withInt_withOrgApacheLuceneDocumentFieldType_(self, name, value, type);
   return self;
 }
 
@@ -61,13 +53,12 @@ withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type {
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithNSString:withInt:withOrgApacheLuceneDocumentField_StoreEnum:", "IntField", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withInt:withOrgApacheLuceneDocumentFieldType:", "IntField", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "TYPE_NOT_STORED_", NULL, 0x19, "Lorg.apache.lucene.document.FieldType;", &OrgApacheLuceneDocumentIntField_TYPE_NOT_STORED_, NULL, .constantValue.asLong = 0 },
     { "TYPE_STORED_", NULL, 0x19, "Lorg.apache.lucene.document.FieldType;", &OrgApacheLuceneDocumentIntField_TYPE_STORED_, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneDocumentIntField = { 2, "IntField", "org.apache.lucene.document", NULL, 0x11, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneDocumentIntField = { 2, "IntField", "org.apache.lucene.document", NULL, 0x11, 1, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneDocumentIntField;
 }
 
@@ -81,20 +72,6 @@ void OrgApacheLuceneDocumentIntField_initWithNSString_withInt_withOrgApacheLucen
 OrgApacheLuceneDocumentIntField *new_OrgApacheLuceneDocumentIntField_initWithNSString_withInt_withOrgApacheLuceneDocumentField_StoreEnum_(NSString *name, jint value, OrgApacheLuceneDocumentField_StoreEnum *stored) {
   OrgApacheLuceneDocumentIntField *self = [OrgApacheLuceneDocumentIntField alloc];
   OrgApacheLuceneDocumentIntField_initWithNSString_withInt_withOrgApacheLuceneDocumentField_StoreEnum_(self, name, value, stored);
-  return self;
-}
-
-void OrgApacheLuceneDocumentIntField_initWithNSString_withInt_withOrgApacheLuceneDocumentFieldType_(OrgApacheLuceneDocumentIntField *self, NSString *name, jint value, OrgApacheLuceneDocumentFieldType *type) {
-  OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneDocumentFieldType_(self, name, type);
-  if ([((OrgApacheLuceneDocumentFieldType *) nil_chk(type)) numericType] != JreLoadStatic(OrgApacheLuceneDocumentFieldType_NumericTypeEnum, INT)) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"type.numericType() must be INT but got ", [type numericType])) autorelease];
-  }
-  JreStrongAssign(&self->fieldsData_, JavaLangInteger_valueOfWithInt_(value));
-}
-
-OrgApacheLuceneDocumentIntField *new_OrgApacheLuceneDocumentIntField_initWithNSString_withInt_withOrgApacheLuceneDocumentFieldType_(NSString *name, jint value, OrgApacheLuceneDocumentFieldType *type) {
-  OrgApacheLuceneDocumentIntField *self = [OrgApacheLuceneDocumentIntField alloc];
-  OrgApacheLuceneDocumentIntField_initWithNSString_withInt_withOrgApacheLuceneDocumentFieldType_(self, name, value, type);
   return self;
 }
 

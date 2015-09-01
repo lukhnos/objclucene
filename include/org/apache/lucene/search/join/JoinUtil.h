@@ -16,47 +16,19 @@
 #if !defined (_OrgApacheLuceneSearchJoinJoinUtil_) && (OrgApacheLuceneSearchJoinJoinUtil_INCLUDE_ALL || OrgApacheLuceneSearchJoinJoinUtil_INCLUDE)
 #define _OrgApacheLuceneSearchJoinJoinUtil_
 
-@class OrgApacheLuceneIndexMultiDocValues_OrdinalMap;
-@class OrgApacheLuceneSearchIndexSearcher;
-@class OrgApacheLuceneSearchJoinScoreModeEnum;
-@class OrgApacheLuceneSearchQuery;
-
 @interface OrgApacheLuceneSearchJoinJoinUtil : NSObject
 
 #pragma mark Public
 
-+ (OrgApacheLuceneSearchQuery *)createJoinQueryWithNSString:(NSString *)fromField
-                                                withBoolean:(jboolean)multipleValuesPerDocument
-                                               withNSString:(NSString *)toField
-                             withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)fromQuery
-                     withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)fromSearcher
-                 withOrgApacheLuceneSearchJoinScoreModeEnum:(OrgApacheLuceneSearchJoinScoreModeEnum *)scoreMode;
-
-+ (OrgApacheLuceneSearchQuery *)createJoinQueryWithNSString:(NSString *)joinField
-                             withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)fromQuery
-                             withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)toQuery
-                     withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
-                 withOrgApacheLuceneSearchJoinScoreModeEnum:(OrgApacheLuceneSearchJoinScoreModeEnum *)scoreMode
-          withOrgApacheLuceneIndexMultiDocValues_OrdinalMap:(OrgApacheLuceneIndexMultiDocValues_OrdinalMap *)ordinalMap;
-
-+ (OrgApacheLuceneSearchQuery *)createJoinQueryWithNSString:(NSString *)joinField
-                             withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)fromQuery
-                             withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)toQuery
-                     withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
-                 withOrgApacheLuceneSearchJoinScoreModeEnum:(OrgApacheLuceneSearchJoinScoreModeEnum *)scoreMode
-          withOrgApacheLuceneIndexMultiDocValues_OrdinalMap:(OrgApacheLuceneIndexMultiDocValues_OrdinalMap *)ordinalMap
-                                                    withInt:(jint)min
-                                                    withInt:(jint)max;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinJoinUtil)
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchQuery *OrgApacheLuceneSearchJoinJoinUtil_createJoinQueryWithNSString_withBoolean_withNSString_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchIndexSearcher_withOrgApacheLuceneSearchJoinScoreModeEnum_(NSString *fromField, jboolean multipleValuesPerDocument, NSString *toField, OrgApacheLuceneSearchQuery *fromQuery, OrgApacheLuceneSearchIndexSearcher *fromSearcher, OrgApacheLuceneSearchJoinScoreModeEnum *scoreMode);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinJoinUtil_init(OrgApacheLuceneSearchJoinJoinUtil *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchQuery *OrgApacheLuceneSearchJoinJoinUtil_createJoinQueryWithNSString_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchIndexSearcher_withOrgApacheLuceneSearchJoinScoreModeEnum_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_(NSString *joinField, OrgApacheLuceneSearchQuery *fromQuery, OrgApacheLuceneSearchQuery *toQuery, OrgApacheLuceneSearchIndexSearcher *searcher, OrgApacheLuceneSearchJoinScoreModeEnum *scoreMode, OrgApacheLuceneIndexMultiDocValues_OrdinalMap *ordinalMap);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchQuery *OrgApacheLuceneSearchJoinJoinUtil_createJoinQueryWithNSString_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchIndexSearcher_withOrgApacheLuceneSearchJoinScoreModeEnum_withOrgApacheLuceneIndexMultiDocValues_OrdinalMap_withInt_withInt_(NSString *joinField, OrgApacheLuceneSearchQuery *fromQuery, OrgApacheLuceneSearchQuery *toQuery, OrgApacheLuceneSearchIndexSearcher *searcher, OrgApacheLuceneSearchJoinScoreModeEnum *scoreMode, OrgApacheLuceneIndexMultiDocValues_OrdinalMap *ordinalMap, jint min, jint max);
+FOUNDATION_EXPORT OrgApacheLuceneSearchJoinJoinUtil *new_OrgApacheLuceneSearchJoinJoinUtil_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinJoinUtil)
 

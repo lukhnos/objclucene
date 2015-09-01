@@ -20,49 +20,14 @@
 #define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
-@class OrgApacheLuceneAnalysisTokenStream;
-
 #define OrgApacheLuceneAnalysisShingleShingleFilter_DEFAULT_MAX_SHINGLE_SIZE 2
 #define OrgApacheLuceneAnalysisShingleShingleFilter_DEFAULT_MIN_SHINGLE_SIZE 2
 
-@interface OrgApacheLuceneAnalysisShingleShingleFilter : OrgApacheLuceneAnalysisTokenFilter {
- @public
-  jboolean noShingleOutput_;
-}
+@interface OrgApacheLuceneAnalysisShingleShingleFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
-
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-                                                   withInt:(jint)maxShingleSize;
-
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-                                                   withInt:(jint)minShingleSize
-                                                   withInt:(jint)maxShingleSize;
-
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-                                              withNSString:(NSString *)tokenType;
-
-- (void)end;
-
-- (jboolean)incrementToken;
-
-- (void)reset;
-
-- (void)setFillerTokenWithNSString:(NSString *)fillerToken;
-
-- (void)setMaxShingleSizeWithInt:(jint)maxShingleSize;
-
-- (void)setMinShingleSizeWithInt:(jint)minShingleSize;
-
-- (void)setOutputUnigramsWithBoolean:(jboolean)outputUnigrams;
-
-- (void)setOutputUnigramsIfNoShinglesWithBoolean:(jboolean)outputUnigramsIfNoShingles;
-
-- (void)setTokenSeparatorWithNSString:(NSString *)tokenSeparator;
-
-- (void)setTokenTypeWithNSString:(NSString *)tokenType;
+- (instancetype)init;
 
 @end
 
@@ -81,21 +46,9 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisShingleShingleFilter, DEFAULT_
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisShingleShingleFilter_DEFAULT_TOKEN_SEPARATOR_;
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisShingleShingleFilter, DEFAULT_TOKEN_SEPARATOR_, NSString *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisShingleShingleFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(OrgApacheLuceneAnalysisShingleShingleFilter *self, OrgApacheLuceneAnalysisTokenStream *input, jint minShingleSize, jint maxShingleSize);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisShingleShingleFilter_init(OrgApacheLuceneAnalysisShingleShingleFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisShingleShingleFilter *new_OrgApacheLuceneAnalysisShingleShingleFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withInt_(OrgApacheLuceneAnalysisTokenStream *input, jint minShingleSize, jint maxShingleSize) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisShingleShingleFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(OrgApacheLuceneAnalysisShingleShingleFilter *self, OrgApacheLuceneAnalysisTokenStream *input, jint maxShingleSize);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisShingleShingleFilter *new_OrgApacheLuceneAnalysisShingleShingleFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(OrgApacheLuceneAnalysisTokenStream *input, jint maxShingleSize) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisShingleShingleFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisShingleShingleFilter *self, OrgApacheLuceneAnalysisTokenStream *input);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisShingleShingleFilter *new_OrgApacheLuceneAnalysisShingleShingleFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisShingleShingleFilter_initWithOrgApacheLuceneAnalysisTokenStream_withNSString_(OrgApacheLuceneAnalysisShingleShingleFilter *self, OrgApacheLuceneAnalysisTokenStream *input, NSString *tokenType);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisShingleShingleFilter *new_OrgApacheLuceneAnalysisShingleShingleFilter_initWithOrgApacheLuceneAnalysisTokenStream_withNSString_(OrgApacheLuceneAnalysisTokenStream *input, NSString *tokenType) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisShingleShingleFilter *new_OrgApacheLuceneAnalysisShingleShingleFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisShingleShingleFilter)
 

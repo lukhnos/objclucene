@@ -42,7 +42,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanTopLevelScorers)
 #include "org/apache/lucene/search/FilterScorer.h"
 
 @class OrgApacheLuceneSearchScorer;
-@protocol JavaUtilCollection;
 
 @interface OrgApacheLuceneSearchBooleanTopLevelScorers_BoostedScorer : OrgApacheLuceneSearchFilterScorer {
  @public
@@ -50,8 +49,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanTopLevelScorers)
 }
 
 #pragma mark Public
-
-- (id<JavaUtilCollection>)getChildren;
 
 - (jfloat)score;
 

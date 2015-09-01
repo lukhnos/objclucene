@@ -20,31 +20,15 @@
 #define OrgApacheLuceneQueryparserXmlQueryBuilder_INCLUDE 1
 #include "org/apache/lucene/queryparser/xml/QueryBuilder.h"
 
-@class JavaUtilHashMap;
-@class OrgApacheLuceneSearchQuery;
-@protocol OrgW3cDomElement;
-
-@interface OrgApacheLuceneQueryparserXmlQueryBuilderFactory : NSObject < OrgApacheLuceneQueryparserXmlQueryBuilder > {
- @public
-  JavaUtilHashMap *builders_;
-}
+@interface OrgApacheLuceneQueryparserXmlQueryBuilderFactory : NSObject < OrgApacheLuceneQueryparserXmlQueryBuilder >
 
 #pragma mark Public
 
 - (instancetype)init;
 
-- (void)addBuilderWithNSString:(NSString *)nodeName
-withOrgApacheLuceneQueryparserXmlQueryBuilder:(id<OrgApacheLuceneQueryparserXmlQueryBuilder>)builder;
-
-- (OrgApacheLuceneSearchQuery *)getQueryWithOrgW3cDomElement:(id<OrgW3cDomElement>)n;
-
-- (id<OrgApacheLuceneQueryparserXmlQueryBuilder>)getQueryBuilderWithNSString:(NSString *)nodeName;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserXmlQueryBuilderFactory)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserXmlQueryBuilderFactory, builders_, JavaUtilHashMap *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlQueryBuilderFactory_init(OrgApacheLuceneQueryparserXmlQueryBuilderFactory *self);
 

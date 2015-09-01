@@ -63,17 +63,11 @@
 
 - (jboolean)seekExactWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)text;
 
-- (void)seekExactWithLong:(jlong)ord;
-
 - (OrgApacheLuceneUtilBytesRef *)term;
 
 - (OrgApacheLuceneIndexTermState *)termState;
 
 - (jlong)totalTermFreq;
-
-#pragma mark Package-Private
-
-+ (NSString *)brToStringWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)b;
 
 @end
 
@@ -92,8 +86,6 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum, fst
 FOUNDATION_EXPORT void OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum_initWithOrgApacheLuceneCodecsBlocktreeFieldReader_withOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneUtilAutomatonRunAutomaton_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withInt_(OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum *self, OrgApacheLuceneCodecsBlocktreeFieldReader *fr, OrgApacheLuceneUtilAutomatonAutomaton *automaton, OrgApacheLuceneUtilAutomatonRunAutomaton *runAutomaton, OrgApacheLuceneUtilBytesRef *commonSuffix, OrgApacheLuceneUtilBytesRef *startTerm, jint sinkState);
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum *new_OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum_initWithOrgApacheLuceneCodecsBlocktreeFieldReader_withOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneUtilAutomatonRunAutomaton_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withInt_(OrgApacheLuceneCodecsBlocktreeFieldReader *fr, OrgApacheLuceneUtilAutomatonAutomaton *automaton, OrgApacheLuceneUtilAutomatonRunAutomaton *runAutomaton, OrgApacheLuceneUtilBytesRef *commonSuffix, OrgApacheLuceneUtilBytesRef *startTerm, jint sinkState) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT NSString *OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum_brToStringWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilBytesRef *b);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum)
 

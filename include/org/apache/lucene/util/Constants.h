@@ -18,6 +18,10 @@
 
 @interface OrgApacheLuceneUtilConstants : NSObject
 
+#pragma mark Public
+
+- (instancetype)init;
+
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneUtilConstants)
@@ -78,6 +82,10 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilConstants, LUCENE_MAIN_VERSION_, N
 
 FOUNDATION_EXPORT NSString *OrgApacheLuceneUtilConstants_LUCENE_VERSION_;
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilConstants, LUCENE_VERSION_, NSString *)
+
+FOUNDATION_EXPORT void OrgApacheLuceneUtilConstants_init(OrgApacheLuceneUtilConstants *self);
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilConstants *new_OrgApacheLuceneUtilConstants_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilConstants)
 

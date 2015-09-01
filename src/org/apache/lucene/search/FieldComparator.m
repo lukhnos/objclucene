@@ -840,12 +840,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFieldComparator_DocCompara
 @implementation OrgApacheLuceneSearchFieldComparator_TermOrdValComparator
 
 - (instancetype)initWithInt:(jint)numHits
-               withNSString:(NSString *)field {
-  OrgApacheLuceneSearchFieldComparator_TermOrdValComparator_initWithInt_withNSString_(self, numHits, field);
-  return self;
-}
-
-- (instancetype)initWithInt:(jint)numHits
                withNSString:(NSString *)field
                 withBoolean:(jboolean)sortMissingLast {
   OrgApacheLuceneSearchFieldComparator_TermOrdValComparator_initWithInt_withNSString_withBoolean_(self, numHits, field, sortMissingLast);
@@ -1021,7 +1015,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFieldComparator_DocCompara
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withNSString:", "TermOrdValComparator", NULL, 0x1, NULL, NULL },
     { "initWithInt:withNSString:withBoolean:", "TermOrdValComparator", NULL, 0x1, NULL, NULL },
     { "compareWithInt:withInt:", "compare", "I", 0x1, NULL, NULL },
     { "compareBottomWithInt:", "compareBottom", "I", 0x1, NULL, NULL },
@@ -1054,21 +1047,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFieldComparator_DocCompara
     { "missingOrd_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *superclass_type_args[] = {"Lorg.apache.lucene.util.BytesRef;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchFieldComparator_TermOrdValComparator = { 2, "TermOrdValComparator", "org.apache.lucene.search", "FieldComparator", 0x9, 13, methods, 16, fields, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/search/FieldComparator<Lorg/apache/lucene/util/BytesRef;>;Lorg/apache/lucene/search/LeafFieldComparator;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchFieldComparator_TermOrdValComparator = { 2, "TermOrdValComparator", "org.apache.lucene.search", "FieldComparator", 0x9, 12, methods, 16, fields, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/search/FieldComparator<Lorg/apache/lucene/util/BytesRef;>;Lorg/apache/lucene/search/LeafFieldComparator;" };
   return &_OrgApacheLuceneSearchFieldComparator_TermOrdValComparator;
 }
 
 @end
-
-void OrgApacheLuceneSearchFieldComparator_TermOrdValComparator_initWithInt_withNSString_(OrgApacheLuceneSearchFieldComparator_TermOrdValComparator *self, jint numHits, NSString *field) {
-  OrgApacheLuceneSearchFieldComparator_TermOrdValComparator_initWithInt_withNSString_withBoolean_(self, numHits, field, NO);
-}
-
-OrgApacheLuceneSearchFieldComparator_TermOrdValComparator *new_OrgApacheLuceneSearchFieldComparator_TermOrdValComparator_initWithInt_withNSString_(jint numHits, NSString *field) {
-  OrgApacheLuceneSearchFieldComparator_TermOrdValComparator *self = [OrgApacheLuceneSearchFieldComparator_TermOrdValComparator alloc];
-  OrgApacheLuceneSearchFieldComparator_TermOrdValComparator_initWithInt_withNSString_(self, numHits, field);
-  return self;
-}
 
 void OrgApacheLuceneSearchFieldComparator_TermOrdValComparator_initWithInt_withNSString_withBoolean_(OrgApacheLuceneSearchFieldComparator_TermOrdValComparator *self, jint numHits, NSString *field, jboolean sortMissingLast) {
   OrgApacheLuceneSearchFieldComparator_init(self);

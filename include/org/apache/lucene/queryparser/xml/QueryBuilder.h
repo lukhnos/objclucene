@@ -16,12 +16,7 @@
 #if !defined (_OrgApacheLuceneQueryparserXmlQueryBuilder_) && (OrgApacheLuceneQueryparserXmlQueryBuilder_INCLUDE_ALL || OrgApacheLuceneQueryparserXmlQueryBuilder_INCLUDE)
 #define _OrgApacheLuceneQueryparserXmlQueryBuilder_
 
-@class OrgApacheLuceneSearchQuery;
-@protocol OrgW3cDomElement;
-
 @protocol OrgApacheLuceneQueryparserXmlQueryBuilder < NSObject, JavaObject >
-
-- (OrgApacheLuceneSearchQuery *)getQueryWithOrgW3cDomElement:(id<OrgW3cDomElement>)e;
 
 @end
 

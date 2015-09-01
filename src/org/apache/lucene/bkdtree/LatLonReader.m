@@ -3,10 +3,10 @@
 //  source: ./sandbox/src/java/org/apache/lucene/bkdtree/LatLonReader.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/bkdtree/LatLonReader.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @interface OrgApacheLuceneBkdtreeLatLonReader : NSObject
 
@@ -15,14 +15,7 @@
 @implementation OrgApacheLuceneBkdtreeLatLonReader
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "next", NULL, "Z", 0x401, "Ljava.io.IOException;", NULL },
-    { "latEnc", NULL, "I", 0x401, NULL, NULL },
-    { "lonEnc", NULL, "I", 0x401, NULL, NULL },
-    { "ord", NULL, "J", 0x401, NULL, NULL },
-    { "docID", NULL, "I", 0x401, NULL, NULL },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneBkdtreeLatLonReader = { 2, "LatLonReader", "org.apache.lucene.bkdtree", NULL, 0x608, 5, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneBkdtreeLatLonReader = { 2, "LatLonReader", "org.apache.lucene.bkdtree", NULL, 0x608, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneBkdtreeLatLonReader;
 }
 

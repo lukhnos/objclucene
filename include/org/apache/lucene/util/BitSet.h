@@ -25,7 +25,6 @@
 #include "org/apache/lucene/util/Accountable.h"
 
 @class OrgApacheLuceneSearchDocIdSetIterator;
-@protocol JavaUtilCollection;
 
 @interface OrgApacheLuceneUtilBitSet : NSObject < OrgApacheLuceneUtilMutableBits, OrgApacheLuceneUtilAccountable >
 
@@ -33,23 +32,11 @@
 
 - (instancetype)init;
 
-- (void)and__WithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)iter;
-
-- (void)andNotWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)iter;
-
 - (jint)approximateCardinality;
 
 - (jint)cardinality;
 
-- (void)clearWithInt:(jint)startIndex
-             withInt:(jint)endIndex;
-
-- (id<JavaUtilCollection>)getChildResources;
-
 - (jint)nextSetBitWithInt:(jint)index;
-
-+ (OrgApacheLuceneUtilBitSet *)ofWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)it
-                                                                   withInt:(jint)maxDoc;
 
 - (void)or__WithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)iter;
 
@@ -64,8 +51,6 @@
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilBitSet)
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilBitSet *OrgApacheLuceneUtilBitSet_ofWithOrgApacheLuceneSearchDocIdSetIterator_withInt_(OrgApacheLuceneSearchDocIdSetIterator *it, jint maxDoc);
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilBitSet_init(OrgApacheLuceneUtilBitSet *self);
 

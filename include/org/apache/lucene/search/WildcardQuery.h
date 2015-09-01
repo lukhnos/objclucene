@@ -31,12 +31,8 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
-
 - (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
                                          withInt:(jint)maxDeterminizedStates;
-
-- (OrgApacheLuceneIndexTerm *)getTerm;
 
 + (OrgApacheLuceneUtilAutomatonAutomaton *)toAutomatonWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)wildcardquery;
 
@@ -51,10 +47,6 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchWildcardQuery, WILDCARD_STRING, 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchWildcardQuery, WILDCARD_CHAR, jchar)
 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchWildcardQuery, WILDCARD_ESCAPE, jchar)
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchWildcardQuery_initWithOrgApacheLuceneIndexTerm_(OrgApacheLuceneSearchWildcardQuery *self, OrgApacheLuceneIndexTerm *term);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchWildcardQuery *new_OrgApacheLuceneSearchWildcardQuery_initWithOrgApacheLuceneIndexTerm_(OrgApacheLuceneIndexTerm *term) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchWildcardQuery_initWithOrgApacheLuceneIndexTerm_withInt_(OrgApacheLuceneSearchWildcardQuery *self, OrgApacheLuceneIndexTerm *term, jint maxDeterminizedStates);
 

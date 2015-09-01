@@ -20,32 +20,19 @@
 #define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
-@class OrgApacheLuceneAnalysisTokenStream;
-@class OrgTartarusSnowballSnowballProgram;
-
 @interface OrgApacheLuceneAnalysisSnowballSnowballFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-                    withOrgTartarusSnowballSnowballProgram:(OrgTartarusSnowballSnowballProgram *)stemmer;
-
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
-                                              withNSString:(NSString *)name;
-
-- (jboolean)incrementToken;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisSnowballSnowballFilter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisSnowballSnowballFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgTartarusSnowballSnowballProgram_(OrgApacheLuceneAnalysisSnowballSnowballFilter *self, OrgApacheLuceneAnalysisTokenStream *input, OrgTartarusSnowballSnowballProgram *stemmer);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisSnowballSnowballFilter_init(OrgApacheLuceneAnalysisSnowballSnowballFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisSnowballSnowballFilter *new_OrgApacheLuceneAnalysisSnowballSnowballFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgTartarusSnowballSnowballProgram_(OrgApacheLuceneAnalysisTokenStream *input, OrgTartarusSnowballSnowballProgram *stemmer) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisSnowballSnowballFilter_initWithOrgApacheLuceneAnalysisTokenStream_withNSString_(OrgApacheLuceneAnalysisSnowballSnowballFilter *self, OrgApacheLuceneAnalysisTokenStream *inArg, NSString *name);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisSnowballSnowballFilter *new_OrgApacheLuceneAnalysisSnowballSnowballFilter_initWithOrgApacheLuceneAnalysisTokenStream_withNSString_(OrgApacheLuceneAnalysisTokenStream *inArg, NSString *name) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisSnowballSnowballFilter *new_OrgApacheLuceneAnalysisSnowballSnowballFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSnowballSnowballFilter)
 

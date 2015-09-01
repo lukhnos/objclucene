@@ -24,74 +24,15 @@
 #define OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer_INCLUDE 1
 #include "org/apache/lucene/analysis/compound/hyphenation/PatternConsumer.h"
 
-@class IOSByteArray;
-@class IOSCharArray;
-@class JavaIoPrintStream;
-@class JavaUtilArrayList;
-@class JavaUtilHashMap;
-@class OrgApacheLuceneAnalysisCompoundHyphenationByteVector;
-@class OrgApacheLuceneAnalysisCompoundHyphenationHyphenation;
-@class OrgXmlSaxInputSource;
-
-@interface OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree : OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree < OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer > {
- @public
-  OrgApacheLuceneAnalysisCompoundHyphenationByteVector *vspace_;
-  JavaUtilHashMap *stoplist_;
-  OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree *classmap_;
-}
+@interface OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree : OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree < OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer >
 
 #pragma mark Public
 
 - (instancetype)init;
 
-- (void)addClassWithNSString:(NSString *)chargroup;
-
-- (void)addExceptionWithNSString:(NSString *)word
-           withJavaUtilArrayList:(JavaUtilArrayList *)hyphenatedword;
-
-- (void)addPatternWithNSString:(NSString *)pattern
-                  withNSString:(NSString *)ivalue;
-
-- (NSString *)findPatternWithNSString:(NSString *)pat;
-
-- (OrgApacheLuceneAnalysisCompoundHyphenationHyphenation *)hyphenateWithCharArray:(IOSCharArray *)w
-                                                                          withInt:(jint)offset
-                                                                          withInt:(jint)len
-                                                                          withInt:(jint)remainCharCount
-                                                                          withInt:(jint)pushCharCount;
-
-- (OrgApacheLuceneAnalysisCompoundHyphenationHyphenation *)hyphenateWithNSString:(NSString *)word
-                                                                         withInt:(jint)remainCharCount
-                                                                         withInt:(jint)pushCharCount;
-
-- (void)loadPatternsWithOrgXmlSaxInputSource:(OrgXmlSaxInputSource *)source;
-
-- (void)printStatsWithJavaIoPrintStream:(JavaIoPrintStream *)outArg;
-
-#pragma mark Protected
-
-- (IOSByteArray *)getValuesWithInt:(jint)k;
-
-- (jint)hstrcmpWithCharArray:(IOSCharArray *)s
-                     withInt:(jint)si
-               withCharArray:(IOSCharArray *)t
-                     withInt:(jint)ti;
-
-- (jint)packValuesWithNSString:(NSString *)values;
-
-- (void)searchPatternsWithCharArray:(IOSCharArray *)word
-                            withInt:(jint)index
-                      withByteArray:(IOSByteArray *)il;
-
-- (NSString *)unpackValuesWithInt:(jint)k;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree, vspace_, OrgApacheLuceneAnalysisCompoundHyphenationByteVector *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree, stoplist_, JavaUtilHashMap *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree, classmap_, OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree_init(OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree *self);
 

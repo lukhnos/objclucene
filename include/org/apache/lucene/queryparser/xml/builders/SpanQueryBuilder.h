@@ -20,12 +20,7 @@
 #define OrgApacheLuceneQueryparserXmlQueryBuilder_INCLUDE 1
 #include "org/apache/lucene/queryparser/xml/QueryBuilder.h"
 
-@class OrgApacheLuceneSearchSpansSpanQuery;
-@protocol OrgW3cDomElement;
-
 @protocol OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder < OrgApacheLuceneQueryparserXmlQueryBuilder, NSObject, JavaObject >
-
-- (OrgApacheLuceneSearchSpansSpanQuery *)getSpanQueryWithOrgW3cDomElement:(id<OrgW3cDomElement>)e;
 
 @end
 

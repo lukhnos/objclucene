@@ -20,29 +20,19 @@
 #define OrgApacheLuceneAnalysisTokenStream_INCLUDE 1
 #include "org/apache/lucene/analysis/TokenStream.h"
 
-@class OrgApacheLuceneAnalysisToken;
-
 @interface OrgApacheLuceneAnalysisMiscellaneousSingleTokenTokenStream : OrgApacheLuceneAnalysisTokenStream
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisToken:(OrgApacheLuceneAnalysisToken *)token;
-
-- (OrgApacheLuceneAnalysisToken *)getToken;
-
-- (jboolean)incrementToken;
-
-- (void)reset;
-
-- (void)setTokenWithOrgApacheLuceneAnalysisToken:(OrgApacheLuceneAnalysisToken *)token;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousSingleTokenTokenStream)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousSingleTokenTokenStream_initWithOrgApacheLuceneAnalysisToken_(OrgApacheLuceneAnalysisMiscellaneousSingleTokenTokenStream *self, OrgApacheLuceneAnalysisToken *token);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousSingleTokenTokenStream_init(OrgApacheLuceneAnalysisMiscellaneousSingleTokenTokenStream *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousSingleTokenTokenStream *new_OrgApacheLuceneAnalysisMiscellaneousSingleTokenTokenStream_initWithOrgApacheLuceneAnalysisToken_(OrgApacheLuceneAnalysisToken *token) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousSingleTokenTokenStream *new_OrgApacheLuceneAnalysisMiscellaneousSingleTokenTokenStream_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousSingleTokenTokenStream)
 

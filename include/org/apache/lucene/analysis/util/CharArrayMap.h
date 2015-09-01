@@ -74,9 +74,6 @@
 - (id)putWithCharArray:(IOSCharArray *)text
                 withId:(id)value;
 
-- (id)putWithJavaLangCharSequence:(id<JavaLangCharSequence>)text
-                           withId:(id)value;
-
 - (id)putWithId:(id)o
          withId:(id)value;
 
@@ -129,26 +126,17 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilCharArrayMap)
 #define JavaUtilIterator_INCLUDE 1
 #include "java/util/Iterator.h"
 
-@class IOSCharArray;
 @protocol JavaUtilMap_Entry;
 
 @interface OrgApacheLuceneAnalysisUtilCharArrayMap_EntryIterator : NSObject < JavaUtilIterator >
 
 #pragma mark Public
 
-- (id)currentValue;
-
 - (jboolean)hasNext;
 
 - (id<JavaUtilMap_Entry>)next;
 
-- (IOSCharArray *)nextKey;
-
-- (NSString *)nextKeyString;
-
 - (void)remove;
-
-- (id)setValueWithId:(id)value;
 
 @end
 
@@ -198,7 +186,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilCharArrayMap_EntrySet)
 @class IOSCharArray;
 @class OrgApacheLuceneAnalysisUtilCharArrayMap;
 @class OrgApacheLuceneAnalysisUtilCharArrayMap_EntrySet;
-@protocol JavaLangCharSequence;
 
 @interface OrgApacheLuceneAnalysisUtilCharArrayMap_UnmodifiableCharArrayMap : OrgApacheLuceneAnalysisUtilCharArrayMap
 
@@ -208,9 +195,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilCharArrayMap_EntrySet)
 
 - (id)putWithCharArray:(IOSCharArray *)text
                 withId:(id)val;
-
-- (id)putWithJavaLangCharSequence:(id<JavaLangCharSequence>)text
-                           withId:(id)val;
 
 - (id)putWithId:(id)o
          withId:(id)val;

@@ -34,11 +34,6 @@
 - (void)addClauseWithId:(id)topLevel
 withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
                 withInt:(jint)docCount
-              withFloat:(jfloat)boost;
-
-- (void)addClauseWithId:(id)topLevel
-withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-                withInt:(jint)docCount
               withFloat:(jfloat)boost
 withOrgApacheLuceneIndexTermContext:(OrgApacheLuceneIndexTermContext *)states;
 

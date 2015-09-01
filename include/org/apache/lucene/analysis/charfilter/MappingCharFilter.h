@@ -20,32 +20,19 @@
 #define OrgApacheLuceneAnalysisCharfilterBaseCharFilter_INCLUDE 1
 #include "org/apache/lucene/analysis/charfilter/BaseCharFilter.h"
 
-@class IOSCharArray;
-@class JavaIoReader;
-@class OrgApacheLuceneAnalysisCharfilterNormalizeCharMap;
-
 @interface OrgApacheLuceneAnalysisCharfilterMappingCharFilter : OrgApacheLuceneAnalysisCharfilterBaseCharFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisCharfilterNormalizeCharMap:(OrgApacheLuceneAnalysisCharfilterNormalizeCharMap *)normMap
-                                                         withJavaIoReader:(JavaIoReader *)inArg;
-
-- (jint)read;
-
-- (jint)readWithCharArray:(IOSCharArray *)cbuf
-                  withInt:(jint)off
-                  withInt:(jint)len;
-
-- (void)reset;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisCharfilterMappingCharFilter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCharfilterMappingCharFilter_initWithOrgApacheLuceneAnalysisCharfilterNormalizeCharMap_withJavaIoReader_(OrgApacheLuceneAnalysisCharfilterMappingCharFilter *self, OrgApacheLuceneAnalysisCharfilterNormalizeCharMap *normMap, JavaIoReader *inArg);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCharfilterMappingCharFilter_init(OrgApacheLuceneAnalysisCharfilterMappingCharFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCharfilterMappingCharFilter *new_OrgApacheLuceneAnalysisCharfilterMappingCharFilter_initWithOrgApacheLuceneAnalysisCharfilterNormalizeCharMap_withJavaIoReader_(OrgApacheLuceneAnalysisCharfilterNormalizeCharMap *normMap, JavaIoReader *inArg) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCharfilterMappingCharFilter *new_OrgApacheLuceneAnalysisCharfilterMappingCharFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCharfilterMappingCharFilter)
 

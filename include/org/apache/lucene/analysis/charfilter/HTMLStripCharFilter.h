@@ -20,44 +20,19 @@
 #define OrgApacheLuceneAnalysisCharfilterBaseCharFilter_INCLUDE 1
 #include "org/apache/lucene/analysis/charfilter/BaseCharFilter.h"
 
-@class IOSCharArray;
-@class JavaIoReader;
-@protocol JavaUtilSet;
-
 @interface OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter : OrgApacheLuceneAnalysisCharfilterBaseCharFilter
 
 #pragma mark Public
 
-- (instancetype)initWithJavaIoReader:(JavaIoReader *)source;
-
-- (instancetype)initWithJavaIoReader:(JavaIoReader *)source
-                     withJavaUtilSet:(id<JavaUtilSet>)escapedTags;
-
-- (void)close;
-
-- (jint)read;
-
-- (jint)readWithCharArray:(IOSCharArray *)cbuf
-                  withInt:(jint)off
-                  withInt:(jint)len;
-
-#pragma mark Package-Private
-
-+ (jint)getInitialBufferSize;
+- (instancetype)init;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter_initWithJavaIoReader_(OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter *self, JavaIoReader *source);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter_init(OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter *new_OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter_initWithJavaIoReader_(JavaIoReader *source) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter_initWithJavaIoReader_withJavaUtilSet_(OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter *self, JavaIoReader *source, id<JavaUtilSet> escapedTags);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter *new_OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter_initWithJavaIoReader_withJavaUtilSet_(JavaIoReader *source, id<JavaUtilSet> escapedTags) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT jint OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter_getInitialBufferSize();
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter *new_OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCharfilterHTMLStripCharFilter)
 

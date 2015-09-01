@@ -20,7 +20,6 @@
 #define OrgApacheLuceneSearchDocIdSetIterator_INCLUDE 1
 #include "org/apache/lucene/search/DocIdSetIterator.h"
 
-@class OrgApacheLuceneUtilAttributeSource;
 @class OrgApacheLuceneUtilBytesRef;
 
 #define OrgApacheLuceneIndexPostingsEnum_NONE 0
@@ -33,8 +32,6 @@
 @interface OrgApacheLuceneIndexPostingsEnum : OrgApacheLuceneSearchDocIdSetIterator
 
 #pragma mark Public
-
-- (OrgApacheLuceneUtilAttributeSource *)attributes;
 
 - (jint)endOffset;
 

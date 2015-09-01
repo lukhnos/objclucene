@@ -4,18 +4,11 @@
 //
 
 #include "J2ObjC_source.h"
-#include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/search/highlight/NullFragmenter.h"
 
+#pragma clang diagnostic ignored "-Wprotocol"
+
 @implementation OrgApacheLuceneSearchHighlightNullFragmenter
-
-- (void)startWithNSString:(NSString *)s
-withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tokenStream {
-}
-
-- (jboolean)isNewFragment {
-  return NO;
-}
 
 - (instancetype)init {
   OrgApacheLuceneSearchHighlightNullFragmenter_init(self);
@@ -24,11 +17,9 @@ withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tok
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "startWithNSString:withOrgApacheLuceneAnalysisTokenStream:", "start", "V", 0x1, NULL, NULL },
-    { "isNewFragment", NULL, "Z", 0x1, NULL, NULL },
     { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightNullFragmenter = { 2, "NullFragmenter", "org.apache.lucene.search.highlight", NULL, 0x1, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightNullFragmenter = { 2, "NullFragmenter", "org.apache.lucene.search.highlight", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchHighlightNullFragmenter;
 }
 

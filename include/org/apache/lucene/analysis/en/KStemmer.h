@@ -26,24 +26,16 @@
   NSString *result_;
 }
 
-#pragma mark Package-Private
+#pragma mark Public
 
 - (instancetype)init;
 
+#pragma mark Package-Private
+
 - (id<JavaLangCharSequence>)asCharSequence;
-
-- (NSString *)asString;
-
-- (IOSCharArray *)getChars;
-
-- (jint)getLength;
-
-- (NSString *)getString;
 
 - (jboolean)stemWithCharArray:(IOSCharArray *)term
                       withInt:(jint)len;
-
-- (NSString *)stemWithNSString:(NSString *)term;
 
 @end
 

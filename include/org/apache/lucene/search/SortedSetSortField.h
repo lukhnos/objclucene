@@ -20,44 +20,19 @@
 #define OrgApacheLuceneSearchSortField_INCLUDE 1
 #include "org/apache/lucene/search/SortField.h"
 
-@class OrgApacheLuceneSearchFieldComparator;
-@class OrgApacheLuceneSearchSortedSetSelector_TypeEnum;
-
 @interface OrgApacheLuceneSearchSortedSetSortField : OrgApacheLuceneSearchSortField
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field
-                     withBoolean:(jboolean)reverse;
-
-- (instancetype)initWithNSString:(NSString *)field
-                     withBoolean:(jboolean)reverse
-withOrgApacheLuceneSearchSortedSetSelector_TypeEnum:(OrgApacheLuceneSearchSortedSetSelector_TypeEnum *)selector;
-
-- (jboolean)isEqual:(id)obj;
-
-- (OrgApacheLuceneSearchFieldComparator *)getComparatorWithInt:(jint)numHits
-                                                       withInt:(jint)sortPos;
-
-- (OrgApacheLuceneSearchSortedSetSelector_TypeEnum *)getSelector;
-
-- (NSUInteger)hash;
-
-- (void)setMissingValueWithId:(id)missingValue;
-
-- (NSString *)description;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSortedSetSortField)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSortedSetSortField_initWithNSString_withBoolean_(OrgApacheLuceneSearchSortedSetSortField *self, NSString *field, jboolean reverse);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSortedSetSortField_init(OrgApacheLuceneSearchSortedSetSortField *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSortedSetSortField *new_OrgApacheLuceneSearchSortedSetSortField_initWithNSString_withBoolean_(NSString *field, jboolean reverse) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSortedSetSortField_initWithNSString_withBoolean_withOrgApacheLuceneSearchSortedSetSelector_TypeEnum_(OrgApacheLuceneSearchSortedSetSortField *self, NSString *field, jboolean reverse, OrgApacheLuceneSearchSortedSetSelector_TypeEnum *selector);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSortedSetSortField *new_OrgApacheLuceneSearchSortedSetSortField_initWithNSString_withBoolean_withOrgApacheLuceneSearchSortedSetSelector_TypeEnum_(NSString *field, jboolean reverse, OrgApacheLuceneSearchSortedSetSelector_TypeEnum *selector) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSortedSetSortField *new_OrgApacheLuceneSearchSortedSetSortField_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortedSetSortField)
 

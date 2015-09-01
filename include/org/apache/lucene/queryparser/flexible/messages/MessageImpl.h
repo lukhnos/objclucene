@@ -20,39 +20,19 @@
 #define OrgApacheLuceneQueryparserFlexibleMessagesMessage_INCLUDE 1
 #include "org/apache/lucene/queryparser/flexible/messages/Message.h"
 
-@class IOSObjectArray;
-@class JavaUtilLocale;
-
 @interface OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl : NSObject < OrgApacheLuceneQueryparserFlexibleMessagesMessage >
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)key;
-
-- (instancetype)initWithNSString:(NSString *)key
-               withNSObjectArray:(IOSObjectArray *)args;
-
-- (IOSObjectArray *)getArguments;
-
-- (NSString *)getKey;
-
-- (NSString *)getLocalizedMessage;
-
-- (NSString *)getLocalizedMessageWithJavaUtilLocale:(JavaUtilLocale *)locale;
-
-- (NSString *)description;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_(OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl *self, NSString *key);
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_init(OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl *new_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_(NSString *key) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_withNSObjectArray_(OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl *self, NSString *key, IOSObjectArray *args);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl *new_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_withNSObjectArray_(NSString *key, IOSObjectArray *args) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl *new_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl)
 

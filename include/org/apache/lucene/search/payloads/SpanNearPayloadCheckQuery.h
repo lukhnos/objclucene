@@ -20,31 +20,19 @@
 #define OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery_INCLUDE 1
 #include "org/apache/lucene/search/payloads/SpanPayloadCheckQuery.h"
 
-@class OrgApacheLuceneSearchSpansSpanNearQuery;
-@protocol JavaUtilCollection;
-
 @interface OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery : OrgApacheLuceneSearchPayloadsSpanPayloadCheckQuery
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchSpansSpanNearQuery:(OrgApacheLuceneSearchSpansSpanNearQuery *)match
-                                         withJavaUtilCollection:(id<JavaUtilCollection>)payloadToMatch;
-
-- (OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery *)clone;
-
-- (jboolean)isEqual:(id)o;
-
-- (NSUInteger)hash;
-
-- (NSString *)toStringWithNSString:(NSString *)field;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery_initWithOrgApacheLuceneSearchSpansSpanNearQuery_withJavaUtilCollection_(OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery *self, OrgApacheLuceneSearchSpansSpanNearQuery *match, id<JavaUtilCollection> payloadToMatch);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery_init(OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery *new_OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery_initWithOrgApacheLuceneSearchSpansSpanNearQuery_withJavaUtilCollection_(OrgApacheLuceneSearchSpansSpanNearQuery *match, id<JavaUtilCollection> payloadToMatch) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery *new_OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery)
 

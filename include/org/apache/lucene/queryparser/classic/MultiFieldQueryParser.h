@@ -36,24 +36,6 @@
 - (instancetype)initWithNSStringArray:(IOSObjectArray *)fields
   withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
 
-- (instancetype)initWithNSStringArray:(IOSObjectArray *)fields
-  withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
-                      withJavaUtilMap:(id<JavaUtilMap>)boosts;
-
-+ (OrgApacheLuceneSearchQuery *)parseWithNSString:(NSString *)query
-                                withNSStringArray:(IOSObjectArray *)fields
-withOrgApacheLuceneSearchBooleanClause_OccurEnumArray:(IOSObjectArray *)flags
-              withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
-
-+ (OrgApacheLuceneSearchQuery *)parseWithNSStringArray:(IOSObjectArray *)queries
-                                     withNSStringArray:(IOSObjectArray *)fields
-                   withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
-
-+ (OrgApacheLuceneSearchQuery *)parseWithNSStringArray:(IOSObjectArray *)queries
-                                     withNSStringArray:(IOSObjectArray *)fields
- withOrgApacheLuceneSearchBooleanClause_OccurEnumArray:(IOSObjectArray *)flags
-                   withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer;
-
 #pragma mark Protected
 
 - (OrgApacheLuceneSearchQuery *)getFieldQueryWithNSString:(NSString *)field
@@ -90,19 +72,9 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserClassicMultiFieldQueryParser)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserClassicMultiFieldQueryParser, fields_, IOSObjectArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserClassicMultiFieldQueryParser, boosts_, id<JavaUtilMap>)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserClassicMultiFieldQueryParser_initWithNSStringArray_withOrgApacheLuceneAnalysisAnalyzer_withJavaUtilMap_(OrgApacheLuceneQueryparserClassicMultiFieldQueryParser *self, IOSObjectArray *fields, OrgApacheLuceneAnalysisAnalyzer *analyzer, id<JavaUtilMap> boosts);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserClassicMultiFieldQueryParser *new_OrgApacheLuceneQueryparserClassicMultiFieldQueryParser_initWithNSStringArray_withOrgApacheLuceneAnalysisAnalyzer_withJavaUtilMap_(IOSObjectArray *fields, OrgApacheLuceneAnalysisAnalyzer *analyzer, id<JavaUtilMap> boosts) NS_RETURNS_RETAINED;
-
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserClassicMultiFieldQueryParser_initWithNSStringArray_withOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneQueryparserClassicMultiFieldQueryParser *self, IOSObjectArray *fields, OrgApacheLuceneAnalysisAnalyzer *analyzer);
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserClassicMultiFieldQueryParser *new_OrgApacheLuceneQueryparserClassicMultiFieldQueryParser_initWithNSStringArray_withOrgApacheLuceneAnalysisAnalyzer_(IOSObjectArray *fields, OrgApacheLuceneAnalysisAnalyzer *analyzer) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchQuery *OrgApacheLuceneQueryparserClassicMultiFieldQueryParser_parseWithNSStringArray_withNSStringArray_withOrgApacheLuceneAnalysisAnalyzer_(IOSObjectArray *queries, IOSObjectArray *fields, OrgApacheLuceneAnalysisAnalyzer *analyzer);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchQuery *OrgApacheLuceneQueryparserClassicMultiFieldQueryParser_parseWithNSString_withNSStringArray_withOrgApacheLuceneSearchBooleanClause_OccurEnumArray_withOrgApacheLuceneAnalysisAnalyzer_(NSString *query, IOSObjectArray *fields, IOSObjectArray *flags, OrgApacheLuceneAnalysisAnalyzer *analyzer);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchQuery *OrgApacheLuceneQueryparserClassicMultiFieldQueryParser_parseWithNSStringArray_withNSStringArray_withOrgApacheLuceneSearchBooleanClause_OccurEnumArray_withOrgApacheLuceneAnalysisAnalyzer_(IOSObjectArray *queries, IOSObjectArray *fields, IOSObjectArray *flags, OrgApacheLuceneAnalysisAnalyzer *analyzer);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserClassicMultiFieldQueryParser)
 

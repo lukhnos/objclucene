@@ -3,11 +3,10 @@
 //  source: ./sandbox/src/java/org/apache/lucene/bkdtree/LatLonWriter.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
-#include "org/apache/lucene/bkdtree/LatLonReader.h"
 #include "org/apache/lucene/bkdtree/LatLonWriter.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @interface OrgApacheLuceneBkdtreeLatLonWriter : NSObject
 
@@ -16,12 +15,7 @@
 @implementation OrgApacheLuceneBkdtreeLatLonWriter
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "appendWithInt:withInt:withLong:withInt:", "append", "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "getReaderWithLong:", "getReader", "Lorg.apache.lucene.bkdtree.LatLonReader;", 0x401, "Ljava.io.IOException;", NULL },
-    { "destroy", NULL, "V", 0x401, "Ljava.io.IOException;", NULL },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneBkdtreeLatLonWriter = { 2, "LatLonWriter", "org.apache.lucene.bkdtree", NULL, 0x608, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneBkdtreeLatLonWriter = { 2, "LatLonWriter", "org.apache.lucene.bkdtree", NULL, 0x608, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneBkdtreeLatLonWriter;
 }
 

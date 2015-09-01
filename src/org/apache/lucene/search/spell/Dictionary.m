@@ -3,11 +3,10 @@
 //  source: ./suggest/src/java/org/apache/lucene/search/spell/Dictionary.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/search/spell/Dictionary.h"
-#include "org/apache/lucene/search/suggest/InputIterator.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @interface OrgApacheLuceneSearchSpellDictionary : NSObject
 
@@ -16,10 +15,7 @@
 @implementation OrgApacheLuceneSearchSpellDictionary
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getEntryIterator", NULL, "Lorg.apache.lucene.search.suggest.InputIterator;", 0x401, "Ljava.io.IOException;", NULL },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpellDictionary = { 2, "Dictionary", "org.apache.lucene.search.spell", NULL, 0x609, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpellDictionary = { 2, "Dictionary", "org.apache.lucene.search.spell", NULL, 0x609, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchSpellDictionary;
 }
 

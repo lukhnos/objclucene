@@ -20,9 +20,7 @@
 #define OrgApacheLuceneSearchHighlightScorer_INCLUDE 1
 #include "org/apache/lucene/search/highlight/Scorer.h"
 
-@class IOSObjectArray;
 @class OrgApacheLuceneAnalysisTokenStream;
-@class OrgApacheLuceneIndexIndexReader;
 @class OrgApacheLuceneSearchHighlightTextFragment;
 @class OrgApacheLuceneSearchHighlightWeightedSpanTerm;
 @class OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor;
@@ -34,27 +32,7 @@
 
 - (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
 
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-               withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
-                                      withNSString:(NSString *)field;
-
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-               withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
-                                      withNSString:(NSString *)field
-                                      withNSString:(NSString *)defaultField;
-
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-                                      withNSString:(NSString *)field;
-
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-                                      withNSString:(NSString *)field
-                                      withNSString:(NSString *)defaultField;
-
-- (instancetype)initWithOrgApacheLuceneSearchHighlightWeightedSpanTermArray:(IOSObjectArray *)weightedTerms;
-
 - (jfloat)getFragmentScore;
-
-- (jfloat)getMaxTermWeight;
 
 - (jfloat)getTokenScore;
 
@@ -62,17 +40,7 @@
 
 - (OrgApacheLuceneAnalysisTokenStream *)init__WithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tokenStream OBJC_METHOD_FAMILY_NONE;
 
-- (jboolean)isExpandMultiTermQuery;
-
-- (jboolean)isUsePayloads;
-
-- (void)setExpandMultiTermQueryWithBoolean:(jboolean)expandMultiTermQuery;
-
 - (void)setMaxDocCharsToAnalyzeWithInt:(jint)maxDocCharsToAnalyze;
-
-- (void)setUsePayloadsWithBoolean:(jboolean)usePayloads;
-
-- (void)setWrapIfNotCachingTokenFilterWithBoolean:(jboolean)wrap;
 
 - (void)startFragmentWithOrgApacheLuceneSearchHighlightTextFragment:(OrgApacheLuceneSearchHighlightTextFragment *)newFragment;
 
@@ -87,26 +55,6 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchHighlightQueryScorer)
 FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightQueryScorer_initWithOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchHighlightQueryScorer *self, OrgApacheLuceneSearchQuery *query);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightQueryScorer *new_OrgApacheLuceneSearchHighlightQueryScorer_initWithOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchQuery *query) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightQueryScorer_initWithOrgApacheLuceneSearchQuery_withNSString_(OrgApacheLuceneSearchHighlightQueryScorer *self, OrgApacheLuceneSearchQuery *query, NSString *field);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightQueryScorer *new_OrgApacheLuceneSearchHighlightQueryScorer_initWithOrgApacheLuceneSearchQuery_withNSString_(OrgApacheLuceneSearchQuery *query, NSString *field) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightQueryScorer_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexReader_withNSString_(OrgApacheLuceneSearchHighlightQueryScorer *self, OrgApacheLuceneSearchQuery *query, OrgApacheLuceneIndexIndexReader *reader, NSString *field);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightQueryScorer *new_OrgApacheLuceneSearchHighlightQueryScorer_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexReader_withNSString_(OrgApacheLuceneSearchQuery *query, OrgApacheLuceneIndexIndexReader *reader, NSString *field) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightQueryScorer_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexReader_withNSString_withNSString_(OrgApacheLuceneSearchHighlightQueryScorer *self, OrgApacheLuceneSearchQuery *query, OrgApacheLuceneIndexIndexReader *reader, NSString *field, NSString *defaultField);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightQueryScorer *new_OrgApacheLuceneSearchHighlightQueryScorer_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexReader_withNSString_withNSString_(OrgApacheLuceneSearchQuery *query, OrgApacheLuceneIndexIndexReader *reader, NSString *field, NSString *defaultField) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightQueryScorer_initWithOrgApacheLuceneSearchQuery_withNSString_withNSString_(OrgApacheLuceneSearchHighlightQueryScorer *self, OrgApacheLuceneSearchQuery *query, NSString *field, NSString *defaultField);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightQueryScorer *new_OrgApacheLuceneSearchHighlightQueryScorer_initWithOrgApacheLuceneSearchQuery_withNSString_withNSString_(OrgApacheLuceneSearchQuery *query, NSString *field, NSString *defaultField) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightQueryScorer_initWithOrgApacheLuceneSearchHighlightWeightedSpanTermArray_(OrgApacheLuceneSearchHighlightQueryScorer *self, IOSObjectArray *weightedTerms);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightQueryScorer *new_OrgApacheLuceneSearchHighlightQueryScorer_initWithOrgApacheLuceneSearchHighlightWeightedSpanTermArray_(IOSObjectArray *weightedTerms) NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightQueryScorer)
 

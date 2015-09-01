@@ -8,7 +8,6 @@
 #include "java/lang/CharSequence.h"
 #include "java/lang/System.h"
 #include "java/lang/UnsupportedOperationException.h"
-#include "java/util/Arrays.h"
 #include "org/apache/lucene/util/ArrayUtil.h"
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/CharsRef.h"
@@ -42,21 +41,9 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilCharsRefBuilder, NULL_STRING_, NSS
   return ((OrgApacheLuceneUtilCharsRef *) nil_chk(ref_))->length_;
 }
 
-- (void)setLengthWithInt:(jint)length {
-  ((OrgApacheLuceneUtilCharsRef *) nil_chk(self->ref_))->length_ = length;
-}
-
-- (jchar)charAtWithInt:(jint)offset {
-  return IOSCharArray_Get(nil_chk(((OrgApacheLuceneUtilCharsRef *) nil_chk(ref_))->chars_), offset);
-}
-
 - (void)setCharAtWithInt:(jint)offset
                 withChar:(jchar)b {
   *IOSCharArray_GetRef(nil_chk(((OrgApacheLuceneUtilCharsRef *) nil_chk(ref_))->chars_), offset) = b;
-}
-
-- (void)clear {
-  ((OrgApacheLuceneUtilCharsRef *) nil_chk(ref_))->length_ = 0;
 }
 
 - (OrgApacheLuceneUtilCharsRefBuilder *)appendWithJavaLangCharSequence:(id<JavaLangCharSequence>)csq {
@@ -85,10 +72,6 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilCharsRefBuilder, NULL_STRING_, NSS
   return self;
 }
 
-- (void)copyCharsWithOrgApacheLuceneUtilCharsRef:(OrgApacheLuceneUtilCharsRef *)other {
-  [self copyCharsWithCharArray:((OrgApacheLuceneUtilCharsRef *) nil_chk(other))->chars_ withInt:other->offset_ withInt:other->length_];
-}
-
 - (void)growWithInt:(jint)newLength {
   JreStrongAssign(&((OrgApacheLuceneUtilCharsRef *) nil_chk(ref_))->chars_, OrgApacheLuceneUtilArrayUtil_growWithCharArray_withInt_(ref_->chars_, newLength));
 }
@@ -104,14 +87,6 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilCharsRefBuilder, NULL_STRING_, NSS
   [self copyUTF8BytesWithByteArray:((OrgApacheLuceneUtilBytesRef *) nil_chk(bytes))->bytes_ withInt:bytes->offset_ withInt:bytes->length_];
 }
 
-- (void)copyCharsWithCharArray:(IOSCharArray *)otherChars
-                       withInt:(jint)otherOffset
-                       withInt:(jint)otherLength {
-  [self growWithInt:otherLength];
-  JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(otherChars, otherOffset, ((OrgApacheLuceneUtilCharsRef *) nil_chk(ref_))->chars_, 0, otherLength);
-  ref_->length_ = otherLength;
-}
-
 - (void)appendWithCharArray:(IOSCharArray *)otherChars
                     withInt:(jint)otherOffset
                     withInt:(jint)otherLength {
@@ -124,10 +99,6 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilCharsRefBuilder, NULL_STRING_, NSS
 - (OrgApacheLuceneUtilCharsRef *)get {
   JreAssert((((OrgApacheLuceneUtilCharsRef *) nil_chk(ref_))->offset_ == 0), (@"Modifying the offset of the returned ref is illegal"));
   return ref_;
-}
-
-- (OrgApacheLuceneUtilCharsRef *)toCharsRef {
-  return [new_OrgApacheLuceneUtilCharsRef_initWithCharArray_withInt_withInt_(JavaUtilArrays_copyOfWithCharArray_withInt_(((OrgApacheLuceneUtilCharsRef *) nil_chk(ref_))->chars_, ref_->length_), 0, ref_->length_) autorelease];
 }
 
 - (NSString *)description {
@@ -152,21 +123,15 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilCharsRefBuilder, NULL_STRING_, NSS
     { "init", "CharsRefBuilder", NULL, 0x1, NULL, NULL },
     { "chars", NULL, "[C", 0x1, NULL, NULL },
     { "length", NULL, "I", 0x1, NULL, NULL },
-    { "setLengthWithInt:", "setLength", "V", 0x1, NULL, NULL },
-    { "charAtWithInt:", "charAt", "C", 0x1, NULL, NULL },
     { "setCharAtWithInt:withChar:", "setCharAt", "V", 0x1, NULL, NULL },
-    { "clear", NULL, "V", 0x1, NULL, NULL },
     { "appendWithJavaLangCharSequence:", "append", "Lorg.apache.lucene.util.CharsRefBuilder;", 0x1, NULL, NULL },
     { "appendWithJavaLangCharSequence:withInt:withInt:", "append", "Lorg.apache.lucene.util.CharsRefBuilder;", 0x1, NULL, NULL },
     { "appendWithChar:", "append", "Lorg.apache.lucene.util.CharsRefBuilder;", 0x1, NULL, NULL },
-    { "copyCharsWithOrgApacheLuceneUtilCharsRef:", "copyChars", "V", 0x1, NULL, NULL },
     { "growWithInt:", "grow", "V", 0x1, NULL, NULL },
     { "copyUTF8BytesWithByteArray:withInt:withInt:", "copyUTF8Bytes", "V", 0x1, NULL, NULL },
     { "copyUTF8BytesWithOrgApacheLuceneUtilBytesRef:", "copyUTF8Bytes", "V", 0x1, NULL, NULL },
-    { "copyCharsWithCharArray:withInt:withInt:", "copyChars", "V", 0x1, NULL, NULL },
     { "appendWithCharArray:withInt:withInt:", "append", "V", 0x1, NULL, NULL },
     { "get", NULL, "Lorg.apache.lucene.util.CharsRef;", 0x1, NULL, NULL },
-    { "toCharsRef", NULL, "Lorg.apache.lucene.util.CharsRef;", 0x1, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
     { "hash", "hashCode", "I", 0x1, NULL, NULL },
@@ -175,7 +140,7 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilCharsRefBuilder, NULL_STRING_, NSS
     { "NULL_STRING_", NULL, 0x1a, "Ljava.lang.String;", &OrgApacheLuceneUtilCharsRefBuilder_NULL_STRING_, NULL, .constantValue.asLong = 0 },
     { "ref_", NULL, 0x12, "Lorg.apache.lucene.util.CharsRef;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilCharsRefBuilder = { 2, "CharsRefBuilder", "org.apache.lucene.util", NULL, 0x1, 21, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilCharsRefBuilder = { 2, "CharsRefBuilder", "org.apache.lucene.util", NULL, 0x1, 15, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilCharsRefBuilder;
 }
 

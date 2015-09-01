@@ -20,16 +20,11 @@
 #define JavaUtilComparator_INCLUDE 1
 #include "java/util/Comparator.h"
 
-@class OrgApacheLuceneSearchSpellSuggestWord;
-
 @interface OrgApacheLuceneSearchSpellSuggestWordFrequencyComparator : NSObject < JavaUtilComparator >
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (jint)compareWithId:(OrgApacheLuceneSearchSpellSuggestWord *)first
-               withId:(OrgApacheLuceneSearchSpellSuggestWord *)second;
 
 @end
 

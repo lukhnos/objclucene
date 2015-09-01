@@ -3,91 +3,35 @@
 //  source: ./sandbox/src/java/org/apache/lucene/rangetree/HeapSliceWriter.java
 //
 
-#include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/lang/IllegalStateException.h"
-#include "org/apache/lucene/rangetree/HeapSliceReader.h"
 #include "org/apache/lucene/rangetree/HeapSliceWriter.h"
-#include "org/apache/lucene/rangetree/SliceReader.h"
 
-@interface OrgApacheLuceneRangetreeHeapSliceWriter () {
- @public
-  jint nextWrite_;
-}
-
-@end
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneRangetreeHeapSliceWriter
 
-- (instancetype)initWithInt:(jint)count {
-  OrgApacheLuceneRangetreeHeapSliceWriter_initWithInt_(self, count);
+- (instancetype)init {
+  OrgApacheLuceneRangetreeHeapSliceWriter_init(self);
   return self;
-}
-
-- (void)appendWithLong:(jlong)value
-              withLong:(jlong)ord
-               withInt:(jint)docID {
-  *IOSLongArray_GetRef(nil_chk(values_), nextWrite_) = value;
-  *IOSLongArray_GetRef(nil_chk(ords_), nextWrite_) = ord;
-  *IOSIntArray_GetRef(nil_chk(docIDs_), nextWrite_) = docID;
-  nextWrite_++;
-}
-
-- (id<OrgApacheLuceneRangetreeSliceReader>)getReaderWithLong:(jlong)start {
-  return [new_OrgApacheLuceneRangetreeHeapSliceReader_initWithLongArray_withLongArray_withIntArray_withInt_withInt_(values_, ords_, docIDs_, (jint) start, ((IOSLongArray *) nil_chk(values_))->size_) autorelease];
-}
-
-- (void)close {
-  if (nextWrite_ != ((IOSLongArray *) nil_chk(values_))->size_) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$I", @"only wrote ", nextWrite_, @" values, but expected ", values_->size_)) autorelease];
-  }
-}
-
-- (void)destroy {
-}
-
-- (NSString *)description {
-  return JreStrcat("$IC", @"HeapSliceWriter(count=", ((IOSLongArray *) nil_chk(values_))->size_, ')');
-}
-
-- (void)dealloc {
-  RELEASE_(values_);
-  RELEASE_(docIDs_);
-  RELEASE_(ords_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "HeapSliceWriter", NULL, 0x1, NULL, NULL },
-    { "appendWithLong:withLong:withInt:", "append", "V", 0x1, NULL, NULL },
-    { "getReaderWithLong:", "getReader", "Lorg.apache.lucene.rangetree.SliceReader;", 0x1, NULL, NULL },
-    { "close", NULL, "V", 0x1, NULL, NULL },
-    { "destroy", NULL, "V", 0x1, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x0, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "values_", NULL, 0x10, "[J", NULL, NULL, .constantValue.asLong = 0 },
-    { "docIDs_", NULL, 0x10, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "ords_", NULL, 0x10, "[J", NULL, NULL, .constantValue.asLong = 0 },
-    { "nextWrite_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneRangetreeHeapSliceWriter = { 2, "HeapSliceWriter", "org.apache.lucene.rangetree", NULL, 0x10, 6, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneRangetreeHeapSliceWriter = { 2, "HeapSliceWriter", "org.apache.lucene.rangetree", NULL, 0x10, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneRangetreeHeapSliceWriter;
 }
 
 @end
 
-void OrgApacheLuceneRangetreeHeapSliceWriter_initWithInt_(OrgApacheLuceneRangetreeHeapSliceWriter *self, jint count) {
+void OrgApacheLuceneRangetreeHeapSliceWriter_init(OrgApacheLuceneRangetreeHeapSliceWriter *self) {
   NSObject_init(self);
-  JreStrongAssignAndConsume(&self->values_, [IOSLongArray newArrayWithLength:count]);
-  JreStrongAssignAndConsume(&self->docIDs_, [IOSIntArray newArrayWithLength:count]);
-  JreStrongAssignAndConsume(&self->ords_, [IOSLongArray newArrayWithLength:count]);
 }
 
-OrgApacheLuceneRangetreeHeapSliceWriter *new_OrgApacheLuceneRangetreeHeapSliceWriter_initWithInt_(jint count) {
+OrgApacheLuceneRangetreeHeapSliceWriter *new_OrgApacheLuceneRangetreeHeapSliceWriter_init() {
   OrgApacheLuceneRangetreeHeapSliceWriter *self = [OrgApacheLuceneRangetreeHeapSliceWriter alloc];
-  OrgApacheLuceneRangetreeHeapSliceWriter_initWithInt_(self, count);
+  OrgApacheLuceneRangetreeHeapSliceWriter_init(self);
   return self;
 }
 

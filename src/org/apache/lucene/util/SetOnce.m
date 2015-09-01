@@ -27,11 +27,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilSetOnce, set_, JavaUtilConcurrentAtomicAt
   return self;
 }
 
-- (instancetype)initWithId:(id)obj {
-  OrgApacheLuceneUtilSetOnce_initWithId_(self, obj);
-  return self;
-}
-
 - (void)setWithId:(id)obj {
   if ([((JavaUtilConcurrentAtomicAtomicBoolean *) nil_chk(set_)) compareAndSetWithBoolean:NO withBoolean:YES]) {
     JreVolatileStrongAssign(&self->obj_, obj);
@@ -63,7 +58,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilSetOnce, set_, JavaUtilConcurrentAtomicAt
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "init", "SetOnce", NULL, 0x1, NULL, NULL },
-    { "initWithId:", "SetOnce", NULL, 0x1, NULL, "(TT;)V" },
     { "setWithId:", "set", "V", 0x11, NULL, "(TT;)V" },
     { "get", NULL, "TT;", 0x11, NULL, "()TT;" },
   };
@@ -72,7 +66,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilSetOnce, set_, JavaUtilConcurrentAtomicAt
     { "set_", NULL, 0x12, "Ljava.util.concurrent.atomic.AtomicBoolean;", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.util.SetOnce$AlreadySetException;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilSetOnce = { 2, "SetOnce", "org.apache.lucene.util", NULL, 0x11, 4, methods, 2, fields, 0, NULL, 1, inner_classes, NULL, "<T:Ljava/lang/Object;>Ljava/lang/Object;Ljava/lang/Cloneable;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilSetOnce = { 2, "SetOnce", "org.apache.lucene.util", NULL, 0x11, 3, methods, 2, fields, 0, NULL, 1, inner_classes, NULL, "<T:Ljava/lang/Object;>Ljava/lang/Object;Ljava/lang/Cloneable;" };
   return &_OrgApacheLuceneUtilSetOnce;
 }
 
@@ -87,19 +81,6 @@ void OrgApacheLuceneUtilSetOnce_init(OrgApacheLuceneUtilSetOnce *self) {
 OrgApacheLuceneUtilSetOnce *new_OrgApacheLuceneUtilSetOnce_init() {
   OrgApacheLuceneUtilSetOnce *self = [OrgApacheLuceneUtilSetOnce alloc];
   OrgApacheLuceneUtilSetOnce_init(self);
-  return self;
-}
-
-void OrgApacheLuceneUtilSetOnce_initWithId_(OrgApacheLuceneUtilSetOnce *self, id obj) {
-  NSObject_init(self);
-  JreVolatileStrongAssign(&self->obj_, nil);
-  JreVolatileStrongAssign(&self->obj_, obj);
-  JreStrongAssignAndConsume(&self->set_, new_JavaUtilConcurrentAtomicAtomicBoolean_initWithBoolean_(YES));
-}
-
-OrgApacheLuceneUtilSetOnce *new_OrgApacheLuceneUtilSetOnce_initWithId_(id obj) {
-  OrgApacheLuceneUtilSetOnce *self = [OrgApacheLuceneUtilSetOnce alloc];
-  OrgApacheLuceneUtilSetOnce_initWithId_(self, obj);
   return self;
 }
 

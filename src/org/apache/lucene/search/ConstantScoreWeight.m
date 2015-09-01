@@ -4,17 +4,11 @@
 //
 
 #include "IOSClass.h"
-#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
 #include "java/util/Set.h"
-#include "org/apache/lucene/index/LeafReaderContext.h"
 #include "org/apache/lucene/search/ConstantScoreWeight.h"
-#include "org/apache/lucene/search/DocIdSetIterator.h"
-#include "org/apache/lucene/search/Explanation.h"
 #include "org/apache/lucene/search/Query.h"
-#include "org/apache/lucene/search/Scorer.h"
-#include "org/apache/lucene/search/TwoPhaseIterator.h"
 #include "org/apache/lucene/search/Weight.h"
 
 @interface OrgApacheLuceneSearchConstantScoreWeight () {
@@ -49,30 +43,6 @@
   return queryWeight_;
 }
 
-- (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-                                                                               withInt:(jint)doc {
-  OrgApacheLuceneSearchScorer *s = [self scorerWithOrgApacheLuceneIndexLeafReaderContext:context];
-  jboolean exists;
-  if (s == nil) {
-    exists = NO;
-  }
-  else {
-    OrgApacheLuceneSearchTwoPhaseIterator *twoPhase = [s asTwoPhaseIterator];
-    if (twoPhase == nil) {
-      exists = ([s advanceWithInt:doc] == doc);
-    }
-    else {
-      exists = ([((OrgApacheLuceneSearchDocIdSetIterator *) nil_chk([twoPhase approximation])) advanceWithInt:doc] == doc && [twoPhase matches]);
-    }
-  }
-  if (exists) {
-    return OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_(queryWeight_, JreStrcat("$$", [((OrgApacheLuceneSearchQuery *) nil_chk([self getQuery])) description], @", product of:"), [IOSObjectArray arrayWithObjects:(id[]){ OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_([((OrgApacheLuceneSearchQuery *) nil_chk([self getQuery])) getBoost], @"boost", [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchExplanation_class_()]), OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_(queryNorm_, @"queryNorm", [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchExplanation_class_()]) } count:2 type:OrgApacheLuceneSearchExplanation_class_()]);
-  }
-  else {
-    return OrgApacheLuceneSearchExplanation_noMatchWithNSString_withOrgApacheLuceneSearchExplanationArray_(JreStrcat("$$I", [((OrgApacheLuceneSearchQuery *) nil_chk([self getQuery])) description], @" doesn't match id ", doc), [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchExplanation_class_()]);
-  }
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneSearchQuery:", "ConstantScoreWeight", NULL, 0x4, NULL, NULL },
@@ -80,13 +50,12 @@
     { "getValueForNormalization", NULL, "F", 0x11, "Ljava.io.IOException;", NULL },
     { "normalizeWithFloat:withFloat:", "normalize", "V", 0x11, NULL, NULL },
     { "score", NULL, "F", 0x14, NULL, NULL },
-    { "explainWithOrgApacheLuceneIndexLeafReaderContext:withInt:", "explain", "Lorg.apache.lucene.search.Explanation;", 0x11, "Ljava.io.IOException;", NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "queryNorm_", NULL, 0x2, "F", NULL, NULL, .constantValue.asLong = 0 },
     { "queryWeight_", NULL, 0x2, "F", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchConstantScoreWeight = { 2, "ConstantScoreWeight", "org.apache.lucene.search", NULL, 0x401, 6, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchConstantScoreWeight = { 2, "ConstantScoreWeight", "org.apache.lucene.search", NULL, 0x401, 5, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchConstantScoreWeight;
 }
 

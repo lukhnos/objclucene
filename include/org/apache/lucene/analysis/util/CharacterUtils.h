@@ -17,7 +17,6 @@
 #define _OrgApacheLuceneAnalysisUtilCharacterUtils_
 
 @class IOSCharArray;
-@class IOSIntArray;
 @class JavaIoReader;
 @class OrgApacheLuceneAnalysisUtilCharacterUtils_CharacterBuffer;
 @protocol JavaLangCharSequence;
@@ -56,23 +55,7 @@
                                 withInt:(jint)index
                                 withInt:(jint)offset;
 
-- (jint)toCharsWithIntArray:(IOSIntArray *)src
-                    withInt:(jint)srcOff
-                    withInt:(jint)srcLen
-              withCharArray:(IOSCharArray *)dest
-                    withInt:(jint)destOff;
-
-- (jint)toCodePointsWithCharArray:(IOSCharArray *)src
-                          withInt:(jint)srcOff
-                          withInt:(jint)srcLen
-                     withIntArray:(IOSIntArray *)dest
-                          withInt:(jint)destOff;
-
 - (void)toLowerCaseWithCharArray:(IOSCharArray *)buffer
-                         withInt:(jint)offset
-                         withInt:(jint)limit;
-
-- (void)toUpperCaseWithCharArray:(IOSCharArray *)buffer
                          withInt:(jint)offset
                          withInt:(jint)limit;
 
@@ -116,8 +99,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilCharacterUtils)
 - (IOSCharArray *)getBuffer;
 
 - (jint)getLength;
-
-- (jint)getOffset;
 
 - (void)reset;
 

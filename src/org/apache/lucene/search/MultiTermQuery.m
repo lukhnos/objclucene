@@ -14,17 +14,16 @@
 #include "org/apache/lucene/index/Terms.h"
 #include "org/apache/lucene/index/TermsEnum.h"
 #include "org/apache/lucene/search/BlendedTermQuery.h"
-#include "org/apache/lucene/search/BooleanClause.h"
 #include "org/apache/lucene/search/BooleanQuery.h"
-#include "org/apache/lucene/search/ConstantScoreQuery.h"
 #include "org/apache/lucene/search/MultiTermQuery.h"
 #include "org/apache/lucene/search/MultiTermQueryConstantScoreWrapper.h"
 #include "org/apache/lucene/search/Query.h"
 #include "org/apache/lucene/search/ScoringRewrite.h"
-#include "org/apache/lucene/search/TermQuery.h"
 #include "org/apache/lucene/search/TopTermsRewrite.h"
 #include "org/apache/lucene/util/AttributeSource.h"
 #include "org/lukhnos/portmobile/util/Objects.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @interface OrgApacheLuceneSearchMultiTermQuery_$1 : OrgApacheLuceneSearchMultiTermQuery_RewriteMethod
 
@@ -76,10 +75,6 @@ OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *OrgApacheLuceneSearchMultiTer
 
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader {
   return [((OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *) nil_chk(rewriteMethod_)) rewriteWithOrgApacheLuceneIndexIndexReader:reader withOrgApacheLuceneSearchMultiTermQuery:self];
-}
-
-- (OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *)getRewriteMethod {
-  return rewriteMethod_;
 }
 
 - (void)setRewriteMethodWithOrgApacheLuceneSearchMultiTermQuery_RewriteMethod:(OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *)method {
@@ -144,7 +139,6 @@ OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *OrgApacheLuceneSearchMultiTer
     { "getTermsEnumWithOrgApacheLuceneIndexTerms:withOrgApacheLuceneUtilAttributeSource:", "getTermsEnum", "Lorg.apache.lucene.index.TermsEnum;", 0x404, "Ljava.io.IOException;", NULL },
     { "getTermsEnumWithOrgApacheLuceneIndexTerms:", "getTermsEnum", "Lorg.apache.lucene.index.TermsEnum;", 0x14, "Ljava.io.IOException;", NULL },
     { "rewriteWithOrgApacheLuceneIndexIndexReader:", "rewrite", "Lorg.apache.lucene.search.Query;", 0x11, "Ljava.io.IOException;", NULL },
-    { "getRewriteMethod", NULL, "Lorg.apache.lucene.search.MultiTermQuery$RewriteMethod;", 0x1, NULL, NULL },
     { "setRewriteMethodWithOrgApacheLuceneSearchMultiTermQuery_RewriteMethod:", "setRewriteMethod", "V", 0x1, NULL, NULL },
     { "hash", "hashCode", "I", 0x1, NULL, NULL },
     { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
@@ -160,7 +154,7 @@ OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *OrgApacheLuceneSearchMultiTer
     { "CONSTANT_SCORE_BOOLEAN_QUERY_REWRITE_", NULL, 0x19, "Lorg.apache.lucene.search.MultiTermQuery$RewriteMethod;", &OrgApacheLuceneSearchMultiTermQuery_CONSTANT_SCORE_BOOLEAN_QUERY_REWRITE_, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.search.MultiTermQuery$RewriteMethod;", "Lorg.apache.lucene.search.MultiTermQuery$TopTermsScoringBooleanQueryRewrite;", "Lorg.apache.lucene.search.MultiTermQuery$TopTermsBlendedFreqScoringRewrite;", "Lorg.apache.lucene.search.MultiTermQuery$TopTermsBoostOnlyBooleanQueryRewrite;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchMultiTermQuery = { 2, "MultiTermQuery", "org.apache.lucene.search", NULL, 0x401, 9, methods, 8, fields, 0, NULL, 4, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchMultiTermQuery = { 2, "MultiTermQuery", "org.apache.lucene.search", NULL, 0x401, 8, methods, 8, fields, 0, NULL, 4, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneSearchMultiTermQuery;
 }
 
@@ -214,57 +208,29 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchMultiTermQuery_RewriteMeth
 
 @implementation OrgApacheLuceneSearchMultiTermQuery_TopTermsScoringBooleanQueryRewrite
 
-- (instancetype)initWithInt:(jint)size {
-  OrgApacheLuceneSearchMultiTermQuery_TopTermsScoringBooleanQueryRewrite_initWithInt_(self, size);
+- (instancetype)init {
+  OrgApacheLuceneSearchMultiTermQuery_TopTermsScoringBooleanQueryRewrite_init(self);
   return self;
-}
-
-- (jint)getMaxSize {
-  return OrgApacheLuceneSearchBooleanQuery_getMaxClauseCount();
-}
-
-- (OrgApacheLuceneSearchBooleanQuery_Builder *)getTopLevelBuilder {
-  OrgApacheLuceneSearchBooleanQuery_Builder *builder = [new_OrgApacheLuceneSearchBooleanQuery_Builder_init() autorelease];
-  [builder setDisableCoordWithBoolean:YES];
-  return builder;
-}
-
-- (OrgApacheLuceneSearchQuery *)buildWithId:(OrgApacheLuceneSearchBooleanQuery_Builder *)builder {
-  return [((OrgApacheLuceneSearchBooleanQuery_Builder *) nil_chk(builder)) build];
-}
-
-- (void)addClauseWithId:(OrgApacheLuceneSearchBooleanQuery_Builder *)topLevel
-withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-                withInt:(jint)docCount
-              withFloat:(jfloat)boost
-withOrgApacheLuceneIndexTermContext:(OrgApacheLuceneIndexTermContext *)states {
-  OrgApacheLuceneSearchTermQuery *tq = [new_OrgApacheLuceneSearchTermQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneIndexTermContext_(term, states) autorelease];
-  [tq setBoostWithFloat:boost];
-  [((OrgApacheLuceneSearchBooleanQuery_Builder *) nil_chk(topLevel)) addWithOrgApacheLuceneSearchQuery:tq withOrgApacheLuceneSearchBooleanClause_OccurEnum:JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, SHOULD)];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "TopTermsScoringBooleanQueryRewrite", NULL, 0x1, NULL, NULL },
-    { "getMaxSize", NULL, "I", 0x4, NULL, NULL },
-    { "getTopLevelBuilder", NULL, "Lorg.apache.lucene.search.BooleanQuery$Builder;", 0x4, NULL, NULL },
-    { "buildWithId:", "build", "Lorg.apache.lucene.search.Query;", 0x4, NULL, NULL },
-    { "addClauseWithId:withOrgApacheLuceneIndexTerm:withInt:withFloat:withOrgApacheLuceneIndexTermContext:", "addClause", "V", 0x4, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
   static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.BooleanQuery$Builder;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchMultiTermQuery_TopTermsScoringBooleanQueryRewrite = { 2, "TopTermsScoringBooleanQueryRewrite", "org.apache.lucene.search", "MultiTermQuery", 0x19, 5, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/search/TopTermsRewrite<Lorg/apache/lucene/search/BooleanQuery$Builder;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchMultiTermQuery_TopTermsScoringBooleanQueryRewrite = { 2, "TopTermsScoringBooleanQueryRewrite", "org.apache.lucene.search", "MultiTermQuery", 0x19, 1, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/search/TopTermsRewrite<Lorg/apache/lucene/search/BooleanQuery$Builder;>;" };
   return &_OrgApacheLuceneSearchMultiTermQuery_TopTermsScoringBooleanQueryRewrite;
 }
 
 @end
 
-void OrgApacheLuceneSearchMultiTermQuery_TopTermsScoringBooleanQueryRewrite_initWithInt_(OrgApacheLuceneSearchMultiTermQuery_TopTermsScoringBooleanQueryRewrite *self, jint size) {
-  OrgApacheLuceneSearchTopTermsRewrite_initWithInt_(self, size);
+void OrgApacheLuceneSearchMultiTermQuery_TopTermsScoringBooleanQueryRewrite_init(OrgApacheLuceneSearchMultiTermQuery_TopTermsScoringBooleanQueryRewrite *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneSearchMultiTermQuery_TopTermsScoringBooleanQueryRewrite *new_OrgApacheLuceneSearchMultiTermQuery_TopTermsScoringBooleanQueryRewrite_initWithInt_(jint size) {
+OrgApacheLuceneSearchMultiTermQuery_TopTermsScoringBooleanQueryRewrite *new_OrgApacheLuceneSearchMultiTermQuery_TopTermsScoringBooleanQueryRewrite_init() {
   OrgApacheLuceneSearchMultiTermQuery_TopTermsScoringBooleanQueryRewrite *self = [OrgApacheLuceneSearchMultiTermQuery_TopTermsScoringBooleanQueryRewrite alloc];
-  OrgApacheLuceneSearchMultiTermQuery_TopTermsScoringBooleanQueryRewrite_initWithInt_(self, size);
+  OrgApacheLuceneSearchMultiTermQuery_TopTermsScoringBooleanQueryRewrite_init(self);
   return self;
 }
 
@@ -328,57 +294,29 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchMultiTermQuery_TopTermsBle
 
 @implementation OrgApacheLuceneSearchMultiTermQuery_TopTermsBoostOnlyBooleanQueryRewrite
 
-- (instancetype)initWithInt:(jint)size {
-  OrgApacheLuceneSearchMultiTermQuery_TopTermsBoostOnlyBooleanQueryRewrite_initWithInt_(self, size);
+- (instancetype)init {
+  OrgApacheLuceneSearchMultiTermQuery_TopTermsBoostOnlyBooleanQueryRewrite_init(self);
   return self;
-}
-
-- (jint)getMaxSize {
-  return OrgApacheLuceneSearchBooleanQuery_getMaxClauseCount();
-}
-
-- (OrgApacheLuceneSearchBooleanQuery_Builder *)getTopLevelBuilder {
-  OrgApacheLuceneSearchBooleanQuery_Builder *builder = [new_OrgApacheLuceneSearchBooleanQuery_Builder_init() autorelease];
-  [builder setDisableCoordWithBoolean:YES];
-  return builder;
-}
-
-- (OrgApacheLuceneSearchQuery *)buildWithId:(OrgApacheLuceneSearchBooleanQuery_Builder *)builder {
-  return [((OrgApacheLuceneSearchBooleanQuery_Builder *) nil_chk(builder)) build];
-}
-
-- (void)addClauseWithId:(OrgApacheLuceneSearchBooleanQuery_Builder *)topLevel
-withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-                withInt:(jint)docFreq
-              withFloat:(jfloat)boost
-withOrgApacheLuceneIndexTermContext:(OrgApacheLuceneIndexTermContext *)states {
-  OrgApacheLuceneSearchQuery *q = [new_OrgApacheLuceneSearchConstantScoreQuery_initWithOrgApacheLuceneSearchQuery_([new_OrgApacheLuceneSearchTermQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneIndexTermContext_(term, states) autorelease]) autorelease];
-  [q setBoostWithFloat:boost];
-  [((OrgApacheLuceneSearchBooleanQuery_Builder *) nil_chk(topLevel)) addWithOrgApacheLuceneSearchQuery:q withOrgApacheLuceneSearchBooleanClause_OccurEnum:JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, SHOULD)];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "TopTermsBoostOnlyBooleanQueryRewrite", NULL, 0x1, NULL, NULL },
-    { "getMaxSize", NULL, "I", 0x4, NULL, NULL },
-    { "getTopLevelBuilder", NULL, "Lorg.apache.lucene.search.BooleanQuery$Builder;", 0x4, NULL, NULL },
-    { "buildWithId:", "build", "Lorg.apache.lucene.search.Query;", 0x4, NULL, NULL },
-    { "addClauseWithId:withOrgApacheLuceneIndexTerm:withInt:withFloat:withOrgApacheLuceneIndexTermContext:", "addClause", "V", 0x4, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
   static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.BooleanQuery$Builder;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchMultiTermQuery_TopTermsBoostOnlyBooleanQueryRewrite = { 2, "TopTermsBoostOnlyBooleanQueryRewrite", "org.apache.lucene.search", "MultiTermQuery", 0x19, 5, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/search/TopTermsRewrite<Lorg/apache/lucene/search/BooleanQuery$Builder;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchMultiTermQuery_TopTermsBoostOnlyBooleanQueryRewrite = { 2, "TopTermsBoostOnlyBooleanQueryRewrite", "org.apache.lucene.search", "MultiTermQuery", 0x19, 1, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/search/TopTermsRewrite<Lorg/apache/lucene/search/BooleanQuery$Builder;>;" };
   return &_OrgApacheLuceneSearchMultiTermQuery_TopTermsBoostOnlyBooleanQueryRewrite;
 }
 
 @end
 
-void OrgApacheLuceneSearchMultiTermQuery_TopTermsBoostOnlyBooleanQueryRewrite_initWithInt_(OrgApacheLuceneSearchMultiTermQuery_TopTermsBoostOnlyBooleanQueryRewrite *self, jint size) {
-  OrgApacheLuceneSearchTopTermsRewrite_initWithInt_(self, size);
+void OrgApacheLuceneSearchMultiTermQuery_TopTermsBoostOnlyBooleanQueryRewrite_init(OrgApacheLuceneSearchMultiTermQuery_TopTermsBoostOnlyBooleanQueryRewrite *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneSearchMultiTermQuery_TopTermsBoostOnlyBooleanQueryRewrite *new_OrgApacheLuceneSearchMultiTermQuery_TopTermsBoostOnlyBooleanQueryRewrite_initWithInt_(jint size) {
+OrgApacheLuceneSearchMultiTermQuery_TopTermsBoostOnlyBooleanQueryRewrite *new_OrgApacheLuceneSearchMultiTermQuery_TopTermsBoostOnlyBooleanQueryRewrite_init() {
   OrgApacheLuceneSearchMultiTermQuery_TopTermsBoostOnlyBooleanQueryRewrite *self = [OrgApacheLuceneSearchMultiTermQuery_TopTermsBoostOnlyBooleanQueryRewrite alloc];
-  OrgApacheLuceneSearchMultiTermQuery_TopTermsBoostOnlyBooleanQueryRewrite_initWithInt_(self, size);
+  OrgApacheLuceneSearchMultiTermQuery_TopTermsBoostOnlyBooleanQueryRewrite_init(self);
   return self;
 }
 

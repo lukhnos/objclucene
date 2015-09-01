@@ -10,86 +10,13 @@
 #include "java/io/PrintStream.h"
 #include "java/io/UnsupportedEncodingException.h"
 #include "java/lang/Double.h"
-#include "java/lang/IllegalStateException.h"
 #include "java/lang/Integer.h"
 #include "java/lang/RuntimeException.h"
 #include "java/util/Locale.h"
-#include "org/apache/lucene/codecs/BlockTermState.h"
-#include "org/apache/lucene/codecs/blocktree/SegmentTermsEnumFrame.h"
 #include "org/apache/lucene/codecs/blocktree/Stats.h"
-#include "org/apache/lucene/store/ByteArrayDataInput.h"
-#include "org/apache/lucene/util/ArrayUtil.h"
-#include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/IOUtils.h"
 
-@interface OrgApacheLuceneCodecsBlocktreeStats () {
- @public
-  jint startBlockCount_;
-  jint endBlockCount_;
-}
-
-@end
-
 @implementation OrgApacheLuceneCodecsBlocktreeStats
-
-- (instancetype)initWithNSString:(NSString *)segment
-                    withNSString:(NSString *)field {
-  OrgApacheLuceneCodecsBlocktreeStats_initWithNSString_withNSString_(self, segment, field);
-  return self;
-}
-
-- (void)startBlockWithOrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame:(OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *)frame
-                                                              withBoolean:(jboolean)isFloor {
-  totalBlockCount_++;
-  if (isFloor) {
-    if (((OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *) nil_chk(frame))->fp_ == frame->fpOrig_) {
-      floorBlockCount_++;
-    }
-    floorSubBlockCount_++;
-  }
-  else {
-    nonFloorBlockCount_++;
-  }
-  if (((IOSIntArray *) nil_chk(blockCountByPrefixLen_))->size_ <= ((OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *) nil_chk(frame))->prefix_) {
-    JreStrongAssign(&blockCountByPrefixLen_, OrgApacheLuceneUtilArrayUtil_growWithIntArray_withInt_(blockCountByPrefixLen_, 1 + frame->prefix_));
-  }
-  (*IOSIntArray_GetRef(nil_chk(blockCountByPrefixLen_), frame->prefix_))++;
-  startBlockCount_++;
-  totalBlockSuffixBytes_ += [((OrgApacheLuceneStoreByteArrayDataInput *) nil_chk(frame->suffixesReader_)) length];
-  totalBlockStatsBytes_ += [((OrgApacheLuceneStoreByteArrayDataInput *) nil_chk(frame->statsReader_)) length];
-}
-
-- (void)endBlockWithOrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame:(OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *)frame {
-  jint termCount = ((OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *) nil_chk(frame))->isLeafBlock_ ? frame->entCount_ : ((OrgApacheLuceneCodecsBlockTermState *) nil_chk(frame->state_))->termBlockOrd_;
-  jint subBlockCount = frame->entCount_ - termCount;
-  totalTermCount_ += termCount;
-  if (termCount != 0 && subBlockCount != 0) {
-    mixedBlockCount_++;
-  }
-  else if (termCount != 0) {
-    termsOnlyBlockCount_++;
-  }
-  else if (subBlockCount != 0) {
-    subBlocksOnlyBlockCount_++;
-  }
-  else {
-    @throw [new_JavaLangIllegalStateException_init() autorelease];
-  }
-  endBlockCount_++;
-  jlong otherBytes = frame->fpEnd_ - frame->fp_ - [((OrgApacheLuceneStoreByteArrayDataInput *) nil_chk(frame->suffixesReader_)) length] - [((OrgApacheLuceneStoreByteArrayDataInput *) nil_chk(frame->statsReader_)) length];
-  JreAssert((otherBytes > 0), (JreStrcat("$J$J$J", @"otherBytes=", otherBytes, @" frame.fp=", frame->fp_, @" frame.fpEnd=", frame->fpEnd_)));
-  totalBlockOtherBytes_ += otherBytes;
-}
-
-- (void)termWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term {
-  totalTermBytes_ += ((OrgApacheLuceneUtilBytesRef *) nil_chk(term))->length_;
-}
-
-- (void)finish {
-  JreAssert((startBlockCount_ == endBlockCount_), (JreStrcat("$I$I", @"startBlockCount=", startBlockCount_, @" endBlockCount=", endBlockCount_)));
-  JreAssert((totalBlockCount_ == floorSubBlockCount_ + nonFloorBlockCount_), (JreStrcat("$I$I$I", @"floorSubBlockCount=", floorSubBlockCount_, @" nonFloorBlockCount=", nonFloorBlockCount_, @" totalBlockCount=", totalBlockCount_)));
-  JreAssert((totalBlockCount_ == mixedBlockCount_ + termsOnlyBlockCount_ + subBlocksOnlyBlockCount_), (JreStrcat("$I$I$I$I", @"totalBlockCount=", totalBlockCount_, @" mixedBlockCount=", mixedBlockCount_, @" subBlocksOnlyBlockCount=", subBlocksOnlyBlockCount_, @" termsOnlyBlockCount=", termsOnlyBlockCount_)));
-}
 
 - (NSString *)description {
   JavaIoByteArrayOutputStream *bos = [new_JavaIoByteArrayOutputStream_initWithInt_(1024) autorelease];
@@ -136,27 +63,25 @@
   }
 }
 
+- (instancetype)init {
+  OrgApacheLuceneCodecsBlocktreeStats_init(self);
+  return self;
+}
+
 - (void)dealloc {
   RELEASE_(blockCountByPrefixLen_);
-  RELEASE_(segment_);
-  RELEASE_(field_);
   [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withNSString:", "Stats", NULL, 0x0, NULL, NULL },
-    { "startBlockWithOrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame:withBoolean:", "startBlock", "V", 0x0, NULL, NULL },
-    { "endBlockWithOrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame:", "endBlock", "V", 0x0, NULL, NULL },
-    { "termWithOrgApacheLuceneUtilBytesRef:", "term", "V", 0x0, NULL, NULL },
-    { "finish", NULL, "V", 0x0, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "indexNumBytes_", NULL, 0x1, "J", NULL, NULL, .constantValue.asLong = 0 },
     { "totalTermCount_", NULL, 0x1, "J", NULL, NULL, .constantValue.asLong = 0 },
     { "totalTermBytes_", NULL, 0x1, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "nonFloorBlockCount_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "floorBlockCount_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "floorSubBlockCount_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "mixedBlockCount_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
@@ -164,30 +89,24 @@
     { "subBlocksOnlyBlockCount_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "totalBlockCount_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "blockCountByPrefixLen_", NULL, 0x1, "[I", NULL, NULL, .constantValue.asLong = 0 },
-    { "startBlockCount_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "endBlockCount_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "totalBlockSuffixBytes_", NULL, 0x1, "J", NULL, NULL, .constantValue.asLong = 0 },
     { "totalBlockStatsBytes_", NULL, 0x1, "J", NULL, NULL, .constantValue.asLong = 0 },
     { "totalBlockOtherBytes_", NULL, 0x1, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "segment_", NULL, 0x11, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "field_", NULL, 0x11, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsBlocktreeStats = { 2, "Stats", "org.apache.lucene.codecs.blocktree", NULL, 0x1, 6, methods, 18, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsBlocktreeStats = { 2, "Stats", "org.apache.lucene.codecs.blocktree", NULL, 0x1, 2, methods, 13, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneCodecsBlocktreeStats;
 }
 
 @end
 
-void OrgApacheLuceneCodecsBlocktreeStats_initWithNSString_withNSString_(OrgApacheLuceneCodecsBlocktreeStats *self, NSString *segment, NSString *field) {
+void OrgApacheLuceneCodecsBlocktreeStats_init(OrgApacheLuceneCodecsBlocktreeStats *self) {
   NSObject_init(self);
   JreStrongAssignAndConsume(&self->blockCountByPrefixLen_, [IOSIntArray newArrayWithLength:10]);
-  JreStrongAssign(&self->segment_, segment);
-  JreStrongAssign(&self->field_, field);
 }
 
-OrgApacheLuceneCodecsBlocktreeStats *new_OrgApacheLuceneCodecsBlocktreeStats_initWithNSString_withNSString_(NSString *segment, NSString *field) {
+OrgApacheLuceneCodecsBlocktreeStats *new_OrgApacheLuceneCodecsBlocktreeStats_init() {
   OrgApacheLuceneCodecsBlocktreeStats *self = [OrgApacheLuceneCodecsBlocktreeStats alloc];
-  OrgApacheLuceneCodecsBlocktreeStats_initWithNSString_withNSString_(self, segment, field);
+  OrgApacheLuceneCodecsBlocktreeStats_init(self);
   return self;
 }
 

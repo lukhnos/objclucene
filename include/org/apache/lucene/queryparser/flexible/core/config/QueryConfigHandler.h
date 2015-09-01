@@ -20,18 +20,11 @@
 #define OrgApacheLuceneQueryparserFlexibleCoreConfigAbstractQueryConfig_INCLUDE 1
 #include "org/apache/lucene/queryparser/flexible/core/config/AbstractQueryConfig.h"
 
-@class OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig;
-@protocol OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener;
-
 @interface OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler : OrgApacheLuceneQueryparserFlexibleCoreConfigAbstractQueryConfig
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (void)addFieldConfigListenerWithOrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener:(id<OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfigListener>)listener;
-
-- (OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig *)getFieldConfigWithNSString:(NSString *)fieldName;
 
 @end
 

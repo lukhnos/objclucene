@@ -32,10 +32,6 @@
 #pragma mark Protected
 
 - (instancetype)initWithInt:(jint)skipInterval
-                    withInt:(jint)maxSkipLevels
-                    withInt:(jint)df;
-
-- (instancetype)initWithInt:(jint)skipInterval
                     withInt:(jint)skipMultiplier
                     withInt:(jint)maxSkipLevels
                     withInt:(jint)df;
@@ -52,8 +48,6 @@ withOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)skipBuffe
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCodecsMultiLevelSkipListWriter)
 
 FOUNDATION_EXPORT void OrgApacheLuceneCodecsMultiLevelSkipListWriter_initWithInt_withInt_withInt_withInt_(OrgApacheLuceneCodecsMultiLevelSkipListWriter *self, jint skipInterval, jint skipMultiplier, jint maxSkipLevels, jint df);
-
-FOUNDATION_EXPORT void OrgApacheLuceneCodecsMultiLevelSkipListWriter_initWithInt_withInt_withInt_(OrgApacheLuceneCodecsMultiLevelSkipListWriter *self, jint skipInterval, jint maxSkipLevels, jint df);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsMultiLevelSkipListWriter)
 

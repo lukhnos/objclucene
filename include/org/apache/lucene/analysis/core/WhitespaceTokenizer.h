@@ -20,19 +20,11 @@
 #define OrgApacheLuceneAnalysisUtilCharTokenizer_INCLUDE 1
 #include "org/apache/lucene/analysis/util/CharTokenizer.h"
 
-@class OrgApacheLuceneUtilAttributeFactory;
-
 @interface OrgApacheLuceneAnalysisCoreWhitespaceTokenizer : OrgApacheLuceneAnalysisUtilCharTokenizer
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (instancetype)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory;
-
-#pragma mark Protected
-
-- (jboolean)isTokenCharWithInt:(jint)c;
 
 @end
 
@@ -41,10 +33,6 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisCoreWhitespaceTokenizer)
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCoreWhitespaceTokenizer_init(OrgApacheLuceneAnalysisCoreWhitespaceTokenizer *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreWhitespaceTokenizer *new_OrgApacheLuceneAnalysisCoreWhitespaceTokenizer_init() NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCoreWhitespaceTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(OrgApacheLuceneAnalysisCoreWhitespaceTokenizer *self, OrgApacheLuceneUtilAttributeFactory *factory);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCoreWhitespaceTokenizer *new_OrgApacheLuceneAnalysisCoreWhitespaceTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(OrgApacheLuceneUtilAttributeFactory *factory) NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCoreWhitespaceTokenizer)
 

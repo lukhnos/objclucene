@@ -43,14 +43,6 @@ __attribute__((unused)) static OrgApacheLuceneStoreDirectory *OrgApacheLuceneSto
 
 @implementation OrgApacheLuceneStoreFileSwitchDirectory
 
-- (instancetype)initWithJavaUtilSet:(id<JavaUtilSet>)primaryExtensions
-  withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)primaryDir
-  withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)secondaryDir
-                        withBoolean:(jboolean)doClose {
-  OrgApacheLuceneStoreFileSwitchDirectory_initWithJavaUtilSet_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withBoolean_(self, primaryExtensions, primaryDir, secondaryDir, doClose);
-  return self;
-}
-
 - (OrgApacheLuceneStoreDirectory *)getPrimaryDir {
   return primaryDir_;
 }
@@ -156,6 +148,11 @@ __attribute__((unused)) static OrgApacheLuceneStoreDirectory *OrgApacheLuceneSto
   return [((OrgApacheLuceneStoreDirectory *) nil_chk(OrgApacheLuceneStoreFileSwitchDirectory_getDirectoryWithNSString_(self, name))) openInputWithNSString:name withOrgApacheLuceneStoreIOContext:context];
 }
 
+- (instancetype)init {
+  OrgApacheLuceneStoreFileSwitchDirectory_init(self);
+  return self;
+}
+
 - (void)dealloc {
   RELEASE_(secondaryDir_);
   RELEASE_(primaryDir_);
@@ -165,7 +162,6 @@ __attribute__((unused)) static OrgApacheLuceneStoreDirectory *OrgApacheLuceneSto
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilSet:withOrgApacheLuceneStoreDirectory:withOrgApacheLuceneStoreDirectory:withBoolean:", "FileSwitchDirectory", NULL, 0x1, NULL, NULL },
     { "getPrimaryDir", NULL, "Lorg.apache.lucene.store.Directory;", 0x1, NULL, NULL },
     { "getSecondaryDir", NULL, "Lorg.apache.lucene.store.Directory;", 0x1, NULL, NULL },
     { "obtainLockWithNSString:", "obtainLock", "Lorg.apache.lucene.store.Lock;", 0x1, "Ljava.io.IOException;", NULL },
@@ -179,6 +175,7 @@ __attribute__((unused)) static OrgApacheLuceneStoreDirectory *OrgApacheLuceneSto
     { "syncWithJavaUtilCollection:", "sync", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "renameFileWithNSString:withNSString:", "renameFile", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "openInputWithNSString:withOrgApacheLuceneStoreIOContext:", "openInput", "Lorg.apache.lucene.store.IndexInput;", 0x1, "Ljava.io.IOException;", NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "secondaryDir_", NULL, 0x12, "Lorg.apache.lucene.store.Directory;", NULL, NULL, .constantValue.asLong = 0 },
@@ -191,20 +188,6 @@ __attribute__((unused)) static OrgApacheLuceneStoreDirectory *OrgApacheLuceneSto
 }
 
 @end
-
-void OrgApacheLuceneStoreFileSwitchDirectory_initWithJavaUtilSet_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withBoolean_(OrgApacheLuceneStoreFileSwitchDirectory *self, id<JavaUtilSet> primaryExtensions, OrgApacheLuceneStoreDirectory *primaryDir, OrgApacheLuceneStoreDirectory *secondaryDir, jboolean doClose) {
-  OrgApacheLuceneStoreDirectory_init(self);
-  JreStrongAssign(&self->primaryExtensions_, primaryExtensions);
-  JreStrongAssign(&self->primaryDir_, primaryDir);
-  JreStrongAssign(&self->secondaryDir_, secondaryDir);
-  self->doClose_ = doClose;
-}
-
-OrgApacheLuceneStoreFileSwitchDirectory *new_OrgApacheLuceneStoreFileSwitchDirectory_initWithJavaUtilSet_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withBoolean_(id<JavaUtilSet> primaryExtensions, OrgApacheLuceneStoreDirectory *primaryDir, OrgApacheLuceneStoreDirectory *secondaryDir, jboolean doClose) {
-  OrgApacheLuceneStoreFileSwitchDirectory *self = [OrgApacheLuceneStoreFileSwitchDirectory alloc];
-  OrgApacheLuceneStoreFileSwitchDirectory_initWithJavaUtilSet_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withBoolean_(self, primaryExtensions, primaryDir, secondaryDir, doClose);
-  return self;
-}
 
 NSString *OrgApacheLuceneStoreFileSwitchDirectory_getExtensionWithNSString_(NSString *name) {
   OrgApacheLuceneStoreFileSwitchDirectory_initialize();
@@ -223,6 +206,16 @@ OrgApacheLuceneStoreDirectory *OrgApacheLuceneStoreFileSwitchDirectory_getDirect
   else {
     return self->secondaryDir_;
   }
+}
+
+void OrgApacheLuceneStoreFileSwitchDirectory_init(OrgApacheLuceneStoreFileSwitchDirectory *self) {
+  NSObject_init(self);
+}
+
+OrgApacheLuceneStoreFileSwitchDirectory *new_OrgApacheLuceneStoreFileSwitchDirectory_init() {
+  OrgApacheLuceneStoreFileSwitchDirectory *self = [OrgApacheLuceneStoreFileSwitchDirectory alloc];
+  OrgApacheLuceneStoreFileSwitchDirectory_init(self);
+  return self;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreFileSwitchDirectory)

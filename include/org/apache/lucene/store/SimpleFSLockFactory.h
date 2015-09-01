@@ -20,22 +20,19 @@
 #define OrgApacheLuceneStoreFSLockFactory_INCLUDE 1
 #include "org/apache/lucene/store/FSLockFactory.h"
 
-@class OrgApacheLuceneStoreFSDirectory;
-@class OrgApacheLuceneStoreLock;
-
 @interface OrgApacheLuceneStoreSimpleFSLockFactory : OrgApacheLuceneStoreFSLockFactory
 
-#pragma mark Protected
+#pragma mark Public
 
-- (OrgApacheLuceneStoreLock *)obtainFSLockWithOrgApacheLuceneStoreFSDirectory:(OrgApacheLuceneStoreFSDirectory *)dir
-                                                                 withNSString:(NSString *)lockName;
+- (instancetype)init;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneStoreSimpleFSLockFactory)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneStoreSimpleFSLockFactory)
 
-FOUNDATION_EXPORT OrgApacheLuceneStoreSimpleFSLockFactory *OrgApacheLuceneStoreSimpleFSLockFactory_INSTANCE_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneStoreSimpleFSLockFactory, INSTANCE_, OrgApacheLuceneStoreSimpleFSLockFactory *)
+FOUNDATION_EXPORT void OrgApacheLuceneStoreSimpleFSLockFactory_init(OrgApacheLuceneStoreSimpleFSLockFactory *self);
+
+FOUNDATION_EXPORT OrgApacheLuceneStoreSimpleFSLockFactory *new_OrgApacheLuceneStoreSimpleFSLockFactory_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreSimpleFSLockFactory)
 
@@ -48,31 +45,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreSimpleFSLockFactory)
 #define OrgApacheLuceneStoreLock_INCLUDE 1
 #include "org/apache/lucene/store/Lock.h"
 
-@class OrgLukhnosPortmobileFileAttributeFileTime;
-@class OrgLukhnosPortmobileFilePath;
-
 @interface OrgApacheLuceneStoreSimpleFSLockFactory_SimpleFSLock : OrgApacheLuceneStoreLock
-
-#pragma mark Public
-
-- (void)close;
-
-- (void)ensureValid;
-
-- (NSString *)description;
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)path
-       withOrgLukhnosPortmobileFileAttributeFileTime:(OrgLukhnosPortmobileFileAttributeFileTime *)creationTime;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneStoreSimpleFSLockFactory_SimpleFSLock)
 
-FOUNDATION_EXPORT void OrgApacheLuceneStoreSimpleFSLockFactory_SimpleFSLock_initWithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileAttributeFileTime_(OrgApacheLuceneStoreSimpleFSLockFactory_SimpleFSLock *self, OrgLukhnosPortmobileFilePath *path, OrgLukhnosPortmobileFileAttributeFileTime *creationTime);
+FOUNDATION_EXPORT void OrgApacheLuceneStoreSimpleFSLockFactory_SimpleFSLock_init(OrgApacheLuceneStoreSimpleFSLockFactory_SimpleFSLock *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneStoreSimpleFSLockFactory_SimpleFSLock *new_OrgApacheLuceneStoreSimpleFSLockFactory_SimpleFSLock_initWithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileAttributeFileTime_(OrgLukhnosPortmobileFilePath *path, OrgLukhnosPortmobileFileAttributeFileTime *creationTime) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneStoreSimpleFSLockFactory_SimpleFSLock *new_OrgApacheLuceneStoreSimpleFSLockFactory_SimpleFSLock_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreSimpleFSLockFactory_SimpleFSLock)
 

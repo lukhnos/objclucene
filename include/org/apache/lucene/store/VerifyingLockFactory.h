@@ -20,38 +20,19 @@
 #define OrgApacheLuceneStoreLockFactory_INCLUDE 1
 #include "org/apache/lucene/store/LockFactory.h"
 
-@class JavaIoInputStream;
-@class JavaIoOutputStream;
-@class OrgApacheLuceneStoreDirectory;
-@class OrgApacheLuceneStoreLock;
-
-@interface OrgApacheLuceneStoreVerifyingLockFactory : OrgApacheLuceneStoreLockFactory {
- @public
-  OrgApacheLuceneStoreLockFactory *lf_;
-  JavaIoInputStream *in_;
-  JavaIoOutputStream *out_;
-}
+@interface OrgApacheLuceneStoreVerifyingLockFactory : OrgApacheLuceneStoreLockFactory
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneStoreLockFactory:(OrgApacheLuceneStoreLockFactory *)lf
-                                  withJavaIoInputStream:(JavaIoInputStream *)inArg
-                                 withJavaIoOutputStream:(JavaIoOutputStream *)outArg;
-
-- (OrgApacheLuceneStoreLock *)obtainLockWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
-                                                             withNSString:(NSString *)lockName;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneStoreVerifyingLockFactory)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreVerifyingLockFactory, lf_, OrgApacheLuceneStoreLockFactory *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreVerifyingLockFactory, in_, JavaIoInputStream *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreVerifyingLockFactory, out_, JavaIoOutputStream *)
+FOUNDATION_EXPORT void OrgApacheLuceneStoreVerifyingLockFactory_init(OrgApacheLuceneStoreVerifyingLockFactory *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneStoreVerifyingLockFactory_initWithOrgApacheLuceneStoreLockFactory_withJavaIoInputStream_withJavaIoOutputStream_(OrgApacheLuceneStoreVerifyingLockFactory *self, OrgApacheLuceneStoreLockFactory *lf, JavaIoInputStream *inArg, JavaIoOutputStream *outArg);
-
-FOUNDATION_EXPORT OrgApacheLuceneStoreVerifyingLockFactory *new_OrgApacheLuceneStoreVerifyingLockFactory_initWithOrgApacheLuceneStoreLockFactory_withJavaIoInputStream_withJavaIoOutputStream_(OrgApacheLuceneStoreLockFactory *lf, JavaIoInputStream *inArg, JavaIoOutputStream *outArg) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneStoreVerifyingLockFactory *new_OrgApacheLuceneStoreVerifyingLockFactory_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreVerifyingLockFactory)
 

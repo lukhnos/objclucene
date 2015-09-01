@@ -21,7 +21,6 @@
 #include "org/apache/lucene/analysis/Tokenizer.h"
 
 @class IOSObjectArray;
-@class OrgApacheLuceneUtilAttributeFactory;
 
 #define OrgApacheLuceneAnalysisStandardStd40StandardTokenizer40_ALPHANUM 0
 #define OrgApacheLuceneAnalysisStandardStd40StandardTokenizer40_APOSTROPHE 1
@@ -44,13 +43,9 @@
 
 - (instancetype)init;
 
-- (instancetype)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory;
-
 - (void)close;
 
 - (void)end;
-
-- (jint)getMaxTokenLength;
 
 - (jboolean)incrementToken;
 
@@ -96,10 +91,6 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisStandardStd40StandardTokenizer
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisStandardStd40StandardTokenizer40_init(OrgApacheLuceneAnalysisStandardStd40StandardTokenizer40 *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisStandardStd40StandardTokenizer40 *new_OrgApacheLuceneAnalysisStandardStd40StandardTokenizer40_init() NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisStandardStd40StandardTokenizer40_initWithOrgApacheLuceneUtilAttributeFactory_(OrgApacheLuceneAnalysisStandardStd40StandardTokenizer40 *self, OrgApacheLuceneUtilAttributeFactory *factory);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisStandardStd40StandardTokenizer40 *new_OrgApacheLuceneAnalysisStandardStd40StandardTokenizer40_initWithOrgApacheLuceneUtilAttributeFactory_(OrgApacheLuceneUtilAttributeFactory *factory) NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisStandardStd40StandardTokenizer40)
 

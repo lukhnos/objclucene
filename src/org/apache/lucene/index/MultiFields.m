@@ -9,28 +9,21 @@
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
 #include "java/util/ArrayList.h"
-#include "java/util/Collection.h"
-#include "java/util/HashSet.h"
 #include "java/util/Iterator.h"
 #include "java/util/List.h"
 #include "java/util/Map.h"
 #include "java/util/concurrent/ConcurrentHashMap.h"
-#include "org/apache/lucene/index/FieldInfo.h"
 #include "org/apache/lucene/index/FieldInfos.h"
 #include "org/apache/lucene/index/Fields.h"
-#include "org/apache/lucene/index/IndexOptions.h"
 #include "org/apache/lucene/index/IndexReader.h"
 #include "org/apache/lucene/index/LeafReader.h"
 #include "org/apache/lucene/index/LeafReaderContext.h"
 #include "org/apache/lucene/index/MultiBits.h"
 #include "org/apache/lucene/index/MultiFields.h"
 #include "org/apache/lucene/index/MultiTerms.h"
-#include "org/apache/lucene/index/PostingsEnum.h"
 #include "org/apache/lucene/index/ReaderSlice.h"
 #include "org/apache/lucene/index/Terms.h"
-#include "org/apache/lucene/index/TermsEnum.h"
 #include "org/apache/lucene/util/Bits.h"
-#include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/MergedIterator.h"
 
 @interface OrgApacheLuceneIndexMultiFields () {
@@ -59,32 +52,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiFields, terms_, id<JavaUtilMap>)
 + (OrgApacheLuceneIndexTerms *)getTermsWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)r
                                                               withNSString:(NSString *)field {
   return OrgApacheLuceneIndexMultiFields_getTermsWithOrgApacheLuceneIndexIndexReader_withNSString_(r, field);
-}
-
-+ (OrgApacheLuceneIndexPostingsEnum *)getTermDocsEnumWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)r
-                                                                            withNSString:(NSString *)field
-                                                         withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term {
-  return OrgApacheLuceneIndexMultiFields_getTermDocsEnumWithOrgApacheLuceneIndexIndexReader_withNSString_withOrgApacheLuceneUtilBytesRef_(r, field, term);
-}
-
-+ (OrgApacheLuceneIndexPostingsEnum *)getTermDocsEnumWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)r
-                                                                            withNSString:(NSString *)field
-                                                         withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term
-                                                                                 withInt:(jint)flags {
-  return OrgApacheLuceneIndexMultiFields_getTermDocsEnumWithOrgApacheLuceneIndexIndexReader_withNSString_withOrgApacheLuceneUtilBytesRef_withInt_(r, field, term, flags);
-}
-
-+ (OrgApacheLuceneIndexPostingsEnum *)getTermPositionsEnumWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)r
-                                                                                 withNSString:(NSString *)field
-                                                              withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term {
-  return OrgApacheLuceneIndexMultiFields_getTermPositionsEnumWithOrgApacheLuceneIndexIndexReader_withNSString_withOrgApacheLuceneUtilBytesRef_(r, field, term);
-}
-
-+ (OrgApacheLuceneIndexPostingsEnum *)getTermPositionsEnumWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)r
-                                                                                 withNSString:(NSString *)field
-                                                              withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term
-                                                                                      withInt:(jint)flags {
-  return OrgApacheLuceneIndexMultiFields_getTermPositionsEnumWithOrgApacheLuceneIndexIndexReader_withNSString_withOrgApacheLuceneUtilBytesRef_withInt_(r, field, term, flags);
 }
 
 - (instancetype)initWithOrgApacheLuceneIndexFieldsArray:(IOSObjectArray *)subs
@@ -131,10 +98,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiFields, terms_, id<JavaUtilMap>)
   return OrgApacheLuceneIndexMultiFields_getMergedFieldInfosWithOrgApacheLuceneIndexIndexReader_(reader);
 }
 
-+ (id<JavaUtilCollection>)getIndexedFieldsWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader {
-  return OrgApacheLuceneIndexMultiFields_getIndexedFieldsWithOrgApacheLuceneIndexIndexReader_(reader);
-}
-
 - (void)dealloc {
   RELEASE_(subs_);
   RELEASE_(subSlices_);
@@ -151,23 +114,18 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiFields, terms_, id<JavaUtilMap>)
     { "getFieldsWithOrgApacheLuceneIndexIndexReader:", "getFields", "Lorg.apache.lucene.index.Fields;", 0x9, "Ljava.io.IOException;", NULL },
     { "getLiveDocsWithOrgApacheLuceneIndexIndexReader:", "getLiveDocs", "Lorg.apache.lucene.util.Bits;", 0x9, NULL, NULL },
     { "getTermsWithOrgApacheLuceneIndexIndexReader:withNSString:", "getTerms", "Lorg.apache.lucene.index.Terms;", 0x9, "Ljava.io.IOException;", NULL },
-    { "getTermDocsEnumWithOrgApacheLuceneIndexIndexReader:withNSString:withOrgApacheLuceneUtilBytesRef:", "getTermDocsEnum", "Lorg.apache.lucene.index.PostingsEnum;", 0x9, "Ljava.io.IOException;", NULL },
-    { "getTermDocsEnumWithOrgApacheLuceneIndexIndexReader:withNSString:withOrgApacheLuceneUtilBytesRef:withInt:", "getTermDocsEnum", "Lorg.apache.lucene.index.PostingsEnum;", 0x9, "Ljava.io.IOException;", NULL },
-    { "getTermPositionsEnumWithOrgApacheLuceneIndexIndexReader:withNSString:withOrgApacheLuceneUtilBytesRef:", "getTermPositionsEnum", "Lorg.apache.lucene.index.PostingsEnum;", 0x9, "Ljava.io.IOException;", NULL },
-    { "getTermPositionsEnumWithOrgApacheLuceneIndexIndexReader:withNSString:withOrgApacheLuceneUtilBytesRef:withInt:", "getTermPositionsEnum", "Lorg.apache.lucene.index.PostingsEnum;", 0x9, "Ljava.io.IOException;", NULL },
     { "initWithOrgApacheLuceneIndexFieldsArray:withOrgApacheLuceneIndexReaderSliceArray:", "MultiFields", NULL, 0x1, NULL, NULL },
     { "iterator", NULL, "Ljava.util.Iterator;", 0x1, NULL, NULL },
     { "termsWithNSString:", "terms", "Lorg.apache.lucene.index.Terms;", 0x1, "Ljava.io.IOException;", NULL },
     { "size", NULL, "I", 0x1, NULL, NULL },
     { "getMergedFieldInfosWithOrgApacheLuceneIndexIndexReader:", "getMergedFieldInfos", "Lorg.apache.lucene.index.FieldInfos;", 0x9, NULL, NULL },
-    { "getIndexedFieldsWithOrgApacheLuceneIndexIndexReader:", "getIndexedFields", "Ljava.util.Collection;", 0x9, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "subs_", NULL, 0x12, "[Lorg.apache.lucene.index.Fields;", NULL, NULL, .constantValue.asLong = 0 },
     { "subSlices_", NULL, 0x12, "[Lorg.apache.lucene.index.ReaderSlice;", NULL, NULL, .constantValue.asLong = 0 },
     { "terms_", NULL, 0x12, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/index/Terms;>;", .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiFields = { 2, "MultiFields", "org.apache.lucene.index", NULL, 0x11, 13, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexMultiFields = { 2, "MultiFields", "org.apache.lucene.index", NULL, 0x11, 8, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexMultiFields;
 }
 
@@ -230,44 +188,6 @@ OrgApacheLuceneIndexTerms *OrgApacheLuceneIndexMultiFields_getTermsWithOrgApache
   return [((OrgApacheLuceneIndexFields *) nil_chk(OrgApacheLuceneIndexMultiFields_getFieldsWithOrgApacheLuceneIndexIndexReader_(r))) termsWithNSString:field];
 }
 
-OrgApacheLuceneIndexPostingsEnum *OrgApacheLuceneIndexMultiFields_getTermDocsEnumWithOrgApacheLuceneIndexIndexReader_withNSString_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneIndexIndexReader *r, NSString *field, OrgApacheLuceneUtilBytesRef *term) {
-  OrgApacheLuceneIndexMultiFields_initialize();
-  return OrgApacheLuceneIndexMultiFields_getTermDocsEnumWithOrgApacheLuceneIndexIndexReader_withNSString_withOrgApacheLuceneUtilBytesRef_withInt_(r, field, term, OrgApacheLuceneIndexPostingsEnum_FREQS);
-}
-
-OrgApacheLuceneIndexPostingsEnum *OrgApacheLuceneIndexMultiFields_getTermDocsEnumWithOrgApacheLuceneIndexIndexReader_withNSString_withOrgApacheLuceneUtilBytesRef_withInt_(OrgApacheLuceneIndexIndexReader *r, NSString *field, OrgApacheLuceneUtilBytesRef *term, jint flags) {
-  OrgApacheLuceneIndexMultiFields_initialize();
-  JreAssert((field != nil), (@"org/apache/lucene/index/MultiFields.java:137 condition failed: assert field != null;"));
-  JreAssert((term != nil), (@"org/apache/lucene/index/MultiFields.java:138 condition failed: assert term != null;"));
-  OrgApacheLuceneIndexTerms *terms = OrgApacheLuceneIndexMultiFields_getTermsWithOrgApacheLuceneIndexIndexReader_withNSString_(r, field);
-  if (terms != nil) {
-    OrgApacheLuceneIndexTermsEnum *termsEnum = [terms iterator];
-    if ([((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum)) seekExactWithOrgApacheLuceneUtilBytesRef:term]) {
-      return [termsEnum postingsWithOrgApacheLuceneIndexPostingsEnum:nil withInt:flags];
-    }
-  }
-  return nil;
-}
-
-OrgApacheLuceneIndexPostingsEnum *OrgApacheLuceneIndexMultiFields_getTermPositionsEnumWithOrgApacheLuceneIndexIndexReader_withNSString_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneIndexIndexReader *r, NSString *field, OrgApacheLuceneUtilBytesRef *term) {
-  OrgApacheLuceneIndexMultiFields_initialize();
-  return OrgApacheLuceneIndexMultiFields_getTermPositionsEnumWithOrgApacheLuceneIndexIndexReader_withNSString_withOrgApacheLuceneUtilBytesRef_withInt_(r, field, term, OrgApacheLuceneIndexPostingsEnum_ALL);
-}
-
-OrgApacheLuceneIndexPostingsEnum *OrgApacheLuceneIndexMultiFields_getTermPositionsEnumWithOrgApacheLuceneIndexIndexReader_withNSString_withOrgApacheLuceneUtilBytesRef_withInt_(OrgApacheLuceneIndexIndexReader *r, NSString *field, OrgApacheLuceneUtilBytesRef *term, jint flags) {
-  OrgApacheLuceneIndexMultiFields_initialize();
-  JreAssert((field != nil), (@"org/apache/lucene/index/MultiFields.java:164 condition failed: assert field != null;"));
-  JreAssert((term != nil), (@"org/apache/lucene/index/MultiFields.java:165 condition failed: assert term != null;"));
-  OrgApacheLuceneIndexTerms *terms = OrgApacheLuceneIndexMultiFields_getTermsWithOrgApacheLuceneIndexIndexReader_withNSString_(r, field);
-  if (terms != nil) {
-    OrgApacheLuceneIndexTermsEnum *termsEnum = [terms iterator];
-    if ([((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum)) seekExactWithOrgApacheLuceneUtilBytesRef:term]) {
-      return [termsEnum postingsWithOrgApacheLuceneIndexPostingsEnum:nil withInt:flags];
-    }
-  }
-  return nil;
-}
-
 void OrgApacheLuceneIndexMultiFields_initWithOrgApacheLuceneIndexFieldsArray_withOrgApacheLuceneIndexReaderSliceArray_(OrgApacheLuceneIndexMultiFields *self, IOSObjectArray *subs, IOSObjectArray *subSlices) {
   OrgApacheLuceneIndexFields_init(self);
   JreStrongAssignAndConsume(&self->terms_, new_JavaUtilConcurrentConcurrentHashMap_init());
@@ -288,17 +208,6 @@ OrgApacheLuceneIndexFieldInfos *OrgApacheLuceneIndexMultiFields_getMergedFieldIn
     [builder addWithOrgApacheLuceneIndexFieldInfos:[((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(ctx)) reader])) getFieldInfos]];
   }
   return [builder finish];
-}
-
-id<JavaUtilCollection> OrgApacheLuceneIndexMultiFields_getIndexedFieldsWithOrgApacheLuceneIndexIndexReader_(OrgApacheLuceneIndexIndexReader *reader) {
-  OrgApacheLuceneIndexMultiFields_initialize();
-  id<JavaUtilCollection> fields = [new_JavaUtilHashSet_init() autorelease];
-  for (OrgApacheLuceneIndexFieldInfo * __strong fieldInfo in nil_chk(OrgApacheLuceneIndexMultiFields_getMergedFieldInfosWithOrgApacheLuceneIndexIndexReader_(reader))) {
-    if ([((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo)) getIndexOptions] != JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, NONE)) {
-      [fields addWithId:fieldInfo->name_];
-    }
-  }
-  return fields;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMultiFields)

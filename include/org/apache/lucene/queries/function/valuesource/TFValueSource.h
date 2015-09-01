@@ -20,32 +20,19 @@
 #define OrgApacheLuceneQueriesFunctionValuesourceTermFreqValueSource_INCLUDE 1
 #include "org/apache/lucene/queries/function/valuesource/TermFreqValueSource.h"
 
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneQueriesFunctionFunctionValues;
-@class OrgApacheLuceneUtilBytesRef;
-@protocol JavaUtilMap;
-
 @interface OrgApacheLuceneQueriesFunctionValuesourceTFValueSource : OrgApacheLuceneQueriesFunctionValuesourceTermFreqValueSource
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field
-                    withNSString:(NSString *)val
-                    withNSString:(NSString *)indexedField
- withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)indexedBytes;
-
-- (OrgApacheLuceneQueriesFunctionFunctionValues *)getValuesWithJavaUtilMap:(id<JavaUtilMap>)context
-                                 withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext;
-
-- (NSString *)name;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceTFValueSource)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceTFValueSource_initWithNSString_withNSString_withNSString_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneQueriesFunctionValuesourceTFValueSource *self, NSString *field, NSString *val, NSString *indexedField, OrgApacheLuceneUtilBytesRef *indexedBytes);
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceTFValueSource_init(OrgApacheLuceneQueriesFunctionValuesourceTFValueSource *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceTFValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceTFValueSource_initWithNSString_withNSString_withNSString_withOrgApacheLuceneUtilBytesRef_(NSString *field, NSString *val, NSString *indexedField, OrgApacheLuceneUtilBytesRef *indexedBytes) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceTFValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceTFValueSource_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceTFValueSource)
 

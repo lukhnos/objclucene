@@ -24,110 +24,23 @@
 #define OrgApacheLuceneUtilAccountable_INCLUDE 1
 #include "org/apache/lucene/util/Accountable.h"
 
-@class OrgApacheLuceneIndexLeafReader;
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneSearchDocIdSet;
-@class OrgApacheLuceneSearchDocIdSetIterator;
-@class OrgApacheLuceneSearchQuery;
-@class OrgApacheLuceneSearchWeight;
-@protocol JavaUtilCollection;
-@protocol JavaUtilList;
-@protocol OrgApacheLuceneSearchQueryCachingPolicy;
-
 #define OrgApacheLuceneSearchLRUQueryCache_QUERY_DEFAULT_RAM_BYTES_USED 192LL
 
 @interface OrgApacheLuceneSearchLRUQueryCache : NSObject < OrgApacheLuceneSearchQueryCache, OrgApacheLuceneUtilAccountable >
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)maxSize
-                   withLong:(jlong)maxRamBytesUsed;
-
-- (void)clear;
-
-- (void)clearCoreCacheKeyWithId:(id)coreKey;
-
-- (void)clearQueryWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
-
-- (OrgApacheLuceneSearchWeight *)doCacheWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
-                            withOrgApacheLuceneSearchQueryCachingPolicy:(id<OrgApacheLuceneSearchQueryCachingPolicy>)policy;
-
-- (jlong)getCacheCount;
-
-- (jlong)getCacheSize;
-
-- (id<JavaUtilCollection>)getChildResources;
-
-- (jlong)getEvictionCount;
-
-- (jlong)getHitCount;
-
-- (jlong)getMissCount;
-
-- (jlong)getTotalCount;
-
-- (jlong)ramBytesUsed;
-
-#pragma mark Protected
-
-- (OrgApacheLuceneSearchDocIdSet *)cacheImplWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)iterator
-                                                   withOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader;
-
-- (void)onClear;
-
-- (void)onDocIdSetCacheWithId:(id)readerCoreKey
-                     withLong:(jlong)ramBytesUsed;
-
-- (void)onDocIdSetEvictionWithId:(id)readerCoreKey
-                         withInt:(jint)numEntries
-                        withLong:(jlong)sumRamBytesUsed;
-
-- (void)onHitWithId:(id)readerCoreKey
-withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
-
-- (void)onMissWithId:(id)readerCoreKey
-withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
-
-- (void)onQueryCacheWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-                                          withLong:(jlong)ramBytesUsed;
-
-- (void)onQueryEvictionWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-                                             withLong:(jlong)ramBytesUsed;
-
-- (jlong)ramBytesUsedWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
-
-#pragma mark Package-Private
-
-- (void)assertConsistent;
-
-- (id<JavaUtilList>)cachedQueries;
-
-- (void)evictIfNecessary;
-
-- (OrgApacheLuceneSearchDocIdSet *)getWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)key
-                           withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
-
-- (void)putIfAbsentWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-        withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-                withOrgApacheLuceneSearchDocIdSet:(OrgApacheLuceneSearchDocIdSet *)set;
-
-- (jboolean)requiresEviction;
+- (instancetype)init;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneSearchLRUQueryCache)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchLRUQueryCache)
 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchLRUQueryCache, QUERY_DEFAULT_RAM_BYTES_USED, jlong)
 
-FOUNDATION_EXPORT jlong OrgApacheLuceneSearchLRUQueryCache_HASHTABLE_RAM_BYTES_PER_ENTRY_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchLRUQueryCache, HASHTABLE_RAM_BYTES_PER_ENTRY_, jlong)
+FOUNDATION_EXPORT void OrgApacheLuceneSearchLRUQueryCache_init(OrgApacheLuceneSearchLRUQueryCache *self);
 
-FOUNDATION_EXPORT jlong OrgApacheLuceneSearchLRUQueryCache_LINKED_HASHTABLE_RAM_BYTES_PER_ENTRY_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchLRUQueryCache, LINKED_HASHTABLE_RAM_BYTES_PER_ENTRY_, jlong)
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchLRUQueryCache_initWithInt_withLong_(OrgApacheLuceneSearchLRUQueryCache *self, jint maxSize, jlong maxRamBytesUsed);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchLRUQueryCache *new_OrgApacheLuceneSearchLRUQueryCache_initWithInt_withLong_(jint maxSize, jlong maxRamBytesUsed) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchLRUQueryCache *new_OrgApacheLuceneSearchLRUQueryCache_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchLRUQueryCache)
 

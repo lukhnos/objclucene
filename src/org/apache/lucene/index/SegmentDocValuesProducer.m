@@ -11,7 +11,6 @@
 #include "java/lang/Throwable.h"
 #include "java/lang/UnsupportedOperationException.h"
 #include "java/util/ArrayList.h"
-#include "java/util/Collection.h"
 #include "java/util/Collections.h"
 #include "java/util/HashMap.h"
 #include "java/util/IdentityHashMap.h"
@@ -32,8 +31,6 @@
 #include "org/apache/lucene/index/SortedNumericDocValues.h"
 #include "org/apache/lucene/index/SortedSetDocValues.h"
 #include "org/apache/lucene/store/Directory.h"
-#include "org/apache/lucene/util/Accountable.h"
-#include "org/apache/lucene/util/Accountables.h"
 #include "org/apache/lucene/util/Bits.h"
 #include "org/apache/lucene/util/RamUsageEstimator.h"
 #include "org/apache/lucene/util/Version.h"
@@ -114,14 +111,6 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexSegmentDocValuesProducer)
   return ramBytesUsed;
 }
 
-- (id<JavaUtilCollection>)getChildResources {
-  id<JavaUtilList> resources = [new_JavaUtilArrayList_init() autorelease];
-  for (id<OrgApacheLuceneUtilAccountable> __strong producer in nil_chk(dvProducers_)) {
-    [resources addWithId:OrgApacheLuceneUtilAccountables_namedAccountableWithNSString_withOrgApacheLuceneUtilAccountable_(@"delegate", producer)];
-  }
-  return JavaUtilCollections_unmodifiableListWithJavaUtilList_(resources);
-}
-
 - (NSString *)description {
   return JreStrcat("$$IC", [[self getClass] getSimpleName], @"(producers=", [((id<JavaUtilSet>) nil_chk(dvProducers_)) size], ')');
 }
@@ -153,7 +142,6 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexSegmentDocValuesProducer)
     { "checkIntegrity", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
     { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
     { "ramBytesUsed", NULL, "J", 0x1, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -163,7 +151,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexSegmentDocValuesProducer)
     { "dvProducers_", NULL, 0x10, "Ljava.util.Set;", NULL, "Ljava/util/Set<Lorg/apache/lucene/codecs/DocValuesProducer;>;", .constantValue.asLong = 0 },
     { "dvGens_", NULL, 0x10, "Ljava.util.List;", NULL, "Ljava/util/List<Ljava/lang/Long;>;", .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexSegmentDocValuesProducer = { 2, "SegmentDocValuesProducer", "org.apache.lucene.index", NULL, 0x0, 12, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexSegmentDocValuesProducer = { 2, "SegmentDocValuesProducer", "org.apache.lucene.index", NULL, 0x0, 11, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexSegmentDocValuesProducer;
 }
 

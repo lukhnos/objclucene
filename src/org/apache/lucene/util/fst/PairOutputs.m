@@ -118,11 +118,6 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)writer {
   return NO_OUTPUT_;
 }
 
-- (NSString *)outputToStringWithId:(OrgApacheLuceneUtilFstPairOutputs_Pair *)output {
-  JreAssert((OrgApacheLuceneUtilFstPairOutputs_validWithOrgApacheLuceneUtilFstPairOutputs_Pair_(self, output)), (@"org/apache/lucene/util/fst/PairOutputs.java:171 condition failed: assert valid(output);"));
-  return JreStrcat("$$C$C", @"<pair:", [((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs1_)) outputToStringWithId:((OrgApacheLuceneUtilFstPairOutputs_Pair *) nil_chk(output))->output1_], ',', [((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs2_)) outputToStringWithId:output->output2_], '>');
-}
-
 - (NSString *)description {
   return JreStrcat("$@C@C", @"PairOutputs<", outputs1_, ',', outputs2_, '>');
 }
@@ -164,7 +159,6 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)writer {
     { "readWithOrgApacheLuceneStoreDataInput:", "read", "Lorg.apache.lucene.util.fst.PairOutputs$Pair;", 0x1, "Ljava.io.IOException;", NULL },
     { "skipOutputWithOrgApacheLuceneStoreDataInput:", "skipOutput", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "getNoOutput", NULL, "Lorg.apache.lucene.util.fst.PairOutputs$Pair;", 0x1, NULL, NULL },
-    { "outputToStringWithId:", "outputToString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "ramBytesUsedWithId:", "ramBytesUsed", "J", 0x1, NULL, NULL },
   };
@@ -176,7 +170,7 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)writer {
   };
   static const char *superclass_type_args[] = {"Lorg.apache.lucene.util.fst.PairOutputs$Pair;"};
   static const char *inner_classes[] = {"Lorg.apache.lucene.util.fst.PairOutputs$Pair;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstPairOutputs = { 2, "PairOutputs", "org.apache.lucene.util.fst", NULL, 0x1, 13, methods, 4, fields, 1, superclass_type_args, 1, inner_classes, NULL, "<A:Ljava/lang/Object;B:Ljava/lang/Object;>Lorg/apache/lucene/util/fst/Outputs<Lorg/apache/lucene/util/fst/PairOutputs$Pair<TA;TB;>;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilFstPairOutputs = { 2, "PairOutputs", "org.apache.lucene.util.fst", NULL, 0x1, 12, methods, 4, fields, 1, superclass_type_args, 1, inner_classes, NULL, "<A:Ljava/lang/Object;B:Ljava/lang/Object;>Lorg/apache/lucene/util/fst/Outputs<Lorg/apache/lucene/util/fst/PairOutputs$Pair<TA;TB;>;>;" };
   return &_OrgApacheLuceneUtilFstPairOutputs;
 }
 

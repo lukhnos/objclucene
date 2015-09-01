@@ -3,73 +3,35 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/standard/config/FieldDateResolutionFCListener.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/util/Map.h"
-#include "org/apache/lucene/document/DateTools.h"
-#include "org/apache/lucene/queryparser/flexible/core/config/FieldConfig.h"
-#include "org/apache/lucene/queryparser/flexible/core/config/QueryConfigHandler.h"
 #include "org/apache/lucene/queryparser/flexible/standard/config/FieldDateResolutionFCListener.h"
-#include "org/apache/lucene/queryparser/flexible/standard/config/StandardQueryConfigHandler.h"
 
-@interface OrgApacheLuceneQueryparserFlexibleStandardConfigFieldDateResolutionFCListener () {
- @public
-  OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *config_;
-}
-
-@end
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleStandardConfigFieldDateResolutionFCListener, config_, OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *)
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneQueryparserFlexibleStandardConfigFieldDateResolutionFCListener
 
-- (instancetype)initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler:(OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *)config {
-  OrgApacheLuceneQueryparserFlexibleStandardConfigFieldDateResolutionFCListener_initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler_(self, config);
+- (instancetype)init {
+  OrgApacheLuceneQueryparserFlexibleStandardConfigFieldDateResolutionFCListener_init(self);
   return self;
-}
-
-- (void)buildFieldConfigWithOrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig:(OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig *)fieldConfig {
-  OrgApacheLuceneDocumentDateTools_ResolutionEnum *dateRes = nil;
-  id<JavaUtilMap> dateResMap = [((OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *) nil_chk(self->config_)) getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, FIELD_DATE_RESOLUTION_MAP_)];
-  if (dateResMap != nil) {
-    dateRes = [dateResMap getWithId:[((OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig *) nil_chk(fieldConfig)) getField]];
-  }
-  if (dateRes == nil) {
-    dateRes = [self->config_ getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, DATE_RESOLUTION_)];
-  }
-  if (dateRes != nil) {
-    [((OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig *) nil_chk(fieldConfig)) setWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, DATE_RESOLUTION_) withId:dateRes];
-  }
-}
-
-- (void)dealloc {
-  RELEASE_(config_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler:", "FieldDateResolutionFCListener", NULL, 0x1, NULL, NULL },
-    { "buildFieldConfigWithOrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig:", "buildFieldConfig", "V", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "config_", NULL, 0x2, "Lorg.apache.lucene.queryparser.flexible.core.config.QueryConfigHandler;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardConfigFieldDateResolutionFCListener = { 2, "FieldDateResolutionFCListener", "org.apache.lucene.queryparser.flexible.standard.config", NULL, 0x1, 2, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardConfigFieldDateResolutionFCListener = { 2, "FieldDateResolutionFCListener", "org.apache.lucene.queryparser.flexible.standard.config", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserFlexibleStandardConfigFieldDateResolutionFCListener;
 }
 
 @end
 
-void OrgApacheLuceneQueryparserFlexibleStandardConfigFieldDateResolutionFCListener_initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler_(OrgApacheLuceneQueryparserFlexibleStandardConfigFieldDateResolutionFCListener *self, OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *config) {
+void OrgApacheLuceneQueryparserFlexibleStandardConfigFieldDateResolutionFCListener_init(OrgApacheLuceneQueryparserFlexibleStandardConfigFieldDateResolutionFCListener *self) {
   NSObject_init(self);
-  JreStrongAssign(&self->config_, nil);
-  JreStrongAssign(&self->config_, config);
 }
 
-OrgApacheLuceneQueryparserFlexibleStandardConfigFieldDateResolutionFCListener *new_OrgApacheLuceneQueryparserFlexibleStandardConfigFieldDateResolutionFCListener_initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler_(OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *config) {
+OrgApacheLuceneQueryparserFlexibleStandardConfigFieldDateResolutionFCListener *new_OrgApacheLuceneQueryparserFlexibleStandardConfigFieldDateResolutionFCListener_init() {
   OrgApacheLuceneQueryparserFlexibleStandardConfigFieldDateResolutionFCListener *self = [OrgApacheLuceneQueryparserFlexibleStandardConfigFieldDateResolutionFCListener alloc];
-  OrgApacheLuceneQueryparserFlexibleStandardConfigFieldDateResolutionFCListener_initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler_(self, config);
+  OrgApacheLuceneQueryparserFlexibleStandardConfigFieldDateResolutionFCListener_init(self);
   return self;
 }
 

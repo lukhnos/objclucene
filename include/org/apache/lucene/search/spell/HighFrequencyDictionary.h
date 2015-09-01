@@ -20,71 +20,21 @@
 #define OrgApacheLuceneSearchSpellDictionary_INCLUDE 1
 #include "org/apache/lucene/search/spell/Dictionary.h"
 
-@class OrgApacheLuceneIndexIndexReader;
-@protocol OrgApacheLuceneSearchSuggestInputIterator;
-
 @interface OrgApacheLuceneSearchSpellHighFrequencyDictionary : NSObject < OrgApacheLuceneSearchSpellDictionary >
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
-                                           withNSString:(NSString *)field
-                                              withFloat:(jfloat)thresh;
-
-- (id<OrgApacheLuceneSearchSuggestInputIterator>)getEntryIterator;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSpellHighFrequencyDictionary)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSpellHighFrequencyDictionary_initWithOrgApacheLuceneIndexIndexReader_withNSString_withFloat_(OrgApacheLuceneSearchSpellHighFrequencyDictionary *self, OrgApacheLuceneIndexIndexReader *reader, NSString *field, jfloat thresh);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSpellHighFrequencyDictionary_init(OrgApacheLuceneSearchSpellHighFrequencyDictionary *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSpellHighFrequencyDictionary *new_OrgApacheLuceneSearchSpellHighFrequencyDictionary_initWithOrgApacheLuceneIndexIndexReader_withNSString_withFloat_(OrgApacheLuceneIndexIndexReader *reader, NSString *field, jfloat thresh) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSpellHighFrequencyDictionary *new_OrgApacheLuceneSearchSpellHighFrequencyDictionary_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpellHighFrequencyDictionary)
-
-#endif
-
-#if !defined (_OrgApacheLuceneSearchSpellHighFrequencyDictionary_HighFrequencyIterator_) && (OrgApacheLuceneSearchSpellHighFrequencyDictionary_INCLUDE_ALL || OrgApacheLuceneSearchSpellHighFrequencyDictionary_HighFrequencyIterator_INCLUDE)
-#define _OrgApacheLuceneSearchSpellHighFrequencyDictionary_HighFrequencyIterator_
-
-#define OrgApacheLuceneSearchSuggestInputIterator_RESTRICT 1
-#define OrgApacheLuceneSearchSuggestInputIterator_INCLUDE 1
-#include "org/apache/lucene/search/suggest/InputIterator.h"
-
-@class OrgApacheLuceneSearchSpellHighFrequencyDictionary;
-@class OrgApacheLuceneUtilBytesRef;
-@protocol JavaUtilSet;
-
-@interface OrgApacheLuceneSearchSpellHighFrequencyDictionary_HighFrequencyIterator : NSObject < OrgApacheLuceneSearchSuggestInputIterator >
-
-#pragma mark Public
-
-- (id<JavaUtilSet>)contexts;
-
-- (jboolean)hasContexts;
-
-- (jboolean)hasPayloads;
-
-- (OrgApacheLuceneUtilBytesRef *)next;
-
-- (OrgApacheLuceneUtilBytesRef *)payload;
-
-- (jlong)weight;
-
-#pragma mark Package-Private
-
-- (instancetype)initWithOrgApacheLuceneSearchSpellHighFrequencyDictionary:(OrgApacheLuceneSearchSpellHighFrequencyDictionary *)outer$;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSpellHighFrequencyDictionary_HighFrequencyIterator)
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSpellHighFrequencyDictionary_HighFrequencyIterator_initWithOrgApacheLuceneSearchSpellHighFrequencyDictionary_(OrgApacheLuceneSearchSpellHighFrequencyDictionary_HighFrequencyIterator *self, OrgApacheLuceneSearchSpellHighFrequencyDictionary *outer$);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSpellHighFrequencyDictionary_HighFrequencyIterator *new_OrgApacheLuceneSearchSpellHighFrequencyDictionary_HighFrequencyIterator_initWithOrgApacheLuceneSearchSpellHighFrequencyDictionary_(OrgApacheLuceneSearchSpellHighFrequencyDictionary *outer$) NS_RETURNS_RETAINED;
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpellHighFrequencyDictionary_HighFrequencyIterator)
 
 #endif
 

@@ -27,8 +27,6 @@
 
 #pragma mark Public
 
-+ (OrgApacheLuceneUtilSPIClassIterator *)getWithIOSClass:(IOSClass *)clazz;
-
 + (OrgApacheLuceneUtilSPIClassIterator *)getWithIOSClass:(IOSClass *)clazz
                                  withJavaLangClassLoader:(JavaLangClassLoader *)loader;
 
@@ -44,8 +42,6 @@
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneUtilSPIClassIterator)
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilSPIClassIterator *OrgApacheLuceneUtilSPIClassIterator_getWithIOSClass_(IOSClass *clazz);
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilSPIClassIterator *OrgApacheLuceneUtilSPIClassIterator_getWithIOSClass_withJavaLangClassLoader_(IOSClass *clazz, JavaLangClassLoader *loader);
 

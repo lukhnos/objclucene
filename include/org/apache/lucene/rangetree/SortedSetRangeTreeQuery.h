@@ -20,47 +20,19 @@
 #define OrgApacheLuceneSearchQuery_INCLUDE 1
 #include "org/apache/lucene/search/Query.h"
 
-@class OrgApacheLuceneSearchIndexSearcher;
-@class OrgApacheLuceneSearchWeight;
-@class OrgApacheLuceneUtilBytesRef;
-
-@interface OrgApacheLuceneRangetreeSortedSetRangeTreeQuery : OrgApacheLuceneSearchQuery {
- @public
-  NSString *field_;
-  OrgApacheLuceneUtilBytesRef *minValue_;
-  OrgApacheLuceneUtilBytesRef *maxValue_;
-  jboolean minInclusive_;
-  jboolean maxInclusive_;
-}
+@interface OrgApacheLuceneRangetreeSortedSetRangeTreeQuery : OrgApacheLuceneSearchQuery
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field
- withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)minValue
-                     withBoolean:(jboolean)minInclusive
- withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)maxValue
-                     withBoolean:(jboolean)maxInclusive;
-
-- (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
-                                                                        withBoolean:(jboolean)needsScores;
-
-- (jboolean)isEqual:(id)other;
-
-- (NSUInteger)hash;
-
-- (NSString *)toStringWithNSString:(NSString *)field;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery, field_, NSString *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery, minValue_, OrgApacheLuceneUtilBytesRef *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery, maxValue_, OrgApacheLuceneUtilBytesRef *)
+FOUNDATION_EXPORT void OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_init(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_initWithNSString_withOrgApacheLuceneUtilBytesRef_withBoolean_withOrgApacheLuceneUtilBytesRef_withBoolean_(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery *self, NSString *field, OrgApacheLuceneUtilBytesRef *minValue, jboolean minInclusive, OrgApacheLuceneUtilBytesRef *maxValue, jboolean maxInclusive);
-
-FOUNDATION_EXPORT OrgApacheLuceneRangetreeSortedSetRangeTreeQuery *new_OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_initWithNSString_withOrgApacheLuceneUtilBytesRef_withBoolean_withOrgApacheLuceneUtilBytesRef_withBoolean_(NSString *field, OrgApacheLuceneUtilBytesRef *minValue, jboolean minInclusive, OrgApacheLuceneUtilBytesRef *maxValue, jboolean maxInclusive) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneRangetreeSortedSetRangeTreeQuery *new_OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery)
 

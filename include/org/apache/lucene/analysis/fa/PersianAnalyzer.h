@@ -20,26 +20,11 @@
 #define OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_INCLUDE 1
 #include "org/apache/lucene/analysis/util/StopwordAnalyzerBase.h"
 
-@class JavaIoReader;
-@class OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;
-@class OrgApacheLuceneAnalysisUtilCharArraySet;
-
 @interface OrgApacheLuceneAnalysisFaPersianAnalyzer : OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords;
-
-+ (OrgApacheLuceneAnalysisUtilCharArraySet *)getDefaultStopSet;
-
-#pragma mark Protected
-
-- (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)createComponentsWithNSString:(NSString *)fieldName;
-
-- (JavaIoReader *)initReaderWithNSString:(NSString *)fieldName
-                        withJavaIoReader:(JavaIoReader *)reader OBJC_METHOD_FAMILY_NONE;
 
 @end
 
@@ -51,15 +36,9 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisFaPersianAnalyzer, DEFAULT_STO
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisFaPersianAnalyzer_STOPWORDS_COMMENT_;
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisFaPersianAnalyzer, STOPWORDS_COMMENT_, NSString *)
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisFaPersianAnalyzer_getDefaultStopSet();
-
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisFaPersianAnalyzer_init(OrgApacheLuceneAnalysisFaPersianAnalyzer *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisFaPersianAnalyzer *new_OrgApacheLuceneAnalysisFaPersianAnalyzer_init() NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisFaPersianAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisFaPersianAnalyzer *self, OrgApacheLuceneAnalysisUtilCharArraySet *stopwords);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisFaPersianAnalyzer *new_OrgApacheLuceneAnalysisFaPersianAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisUtilCharArraySet *stopwords) NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisFaPersianAnalyzer)
 

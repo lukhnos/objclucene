@@ -34,8 +34,6 @@
 - (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords
                     withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stemExclusionSet;
 
-+ (OrgApacheLuceneAnalysisUtilCharArraySet *)getDefaultStopSet;
-
 #pragma mark Protected
 
 - (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)createComponentsWithNSString:(NSString *)fieldName;
@@ -43,8 +41,6 @@
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisEnEnglishAnalyzer)
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisEnEnglishAnalyzer_getDefaultStopSet();
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisEnEnglishAnalyzer_init(OrgApacheLuceneAnalysisEnEnglishAnalyzer *self);
 

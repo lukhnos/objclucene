@@ -20,38 +20,19 @@
 #define OrgApacheLuceneDocumentField_INCLUDE 1
 #include "org/apache/lucene/document/Field.h"
 
-@class OrgApacheLuceneDocumentFieldType;
-@class OrgApacheLuceneDocumentField_StoreEnum;
-
 @interface OrgApacheLuceneDocumentDoubleField : OrgApacheLuceneDocumentField
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)name
-                      withDouble:(jdouble)value
-withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type;
-
-- (instancetype)initWithNSString:(NSString *)name
-                      withDouble:(jdouble)value
-withOrgApacheLuceneDocumentField_StoreEnum:(OrgApacheLuceneDocumentField_StoreEnum *)stored;
+- (instancetype)init;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneDocumentDoubleField)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneDocumentDoubleField)
 
-FOUNDATION_EXPORT OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentDoubleField_TYPE_NOT_STORED_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneDocumentDoubleField, TYPE_NOT_STORED_, OrgApacheLuceneDocumentFieldType *)
+FOUNDATION_EXPORT void OrgApacheLuceneDocumentDoubleField_init(OrgApacheLuceneDocumentDoubleField *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentDoubleField_TYPE_STORED_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneDocumentDoubleField, TYPE_STORED_, OrgApacheLuceneDocumentFieldType *)
-
-FOUNDATION_EXPORT void OrgApacheLuceneDocumentDoubleField_initWithNSString_withDouble_withOrgApacheLuceneDocumentField_StoreEnum_(OrgApacheLuceneDocumentDoubleField *self, NSString *name, jdouble value, OrgApacheLuceneDocumentField_StoreEnum *stored);
-
-FOUNDATION_EXPORT OrgApacheLuceneDocumentDoubleField *new_OrgApacheLuceneDocumentDoubleField_initWithNSString_withDouble_withOrgApacheLuceneDocumentField_StoreEnum_(NSString *name, jdouble value, OrgApacheLuceneDocumentField_StoreEnum *stored) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneDocumentDoubleField_initWithNSString_withDouble_withOrgApacheLuceneDocumentFieldType_(OrgApacheLuceneDocumentDoubleField *self, NSString *name, jdouble value, OrgApacheLuceneDocumentFieldType *type);
-
-FOUNDATION_EXPORT OrgApacheLuceneDocumentDoubleField *new_OrgApacheLuceneDocumentDoubleField_initWithNSString_withDouble_withOrgApacheLuceneDocumentFieldType_(NSString *name, jdouble value, OrgApacheLuceneDocumentFieldType *type) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneDocumentDoubleField *new_OrgApacheLuceneDocumentDoubleField_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentDoubleField)
 

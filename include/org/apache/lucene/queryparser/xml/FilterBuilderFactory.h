@@ -20,31 +20,15 @@
 #define OrgApacheLuceneQueryparserXmlFilterBuilder_INCLUDE 1
 #include "org/apache/lucene/queryparser/xml/FilterBuilder.h"
 
-@class JavaUtilHashMap;
-@class OrgApacheLuceneSearchFilter;
-@protocol OrgW3cDomElement;
-
-@interface OrgApacheLuceneQueryparserXmlFilterBuilderFactory : NSObject < OrgApacheLuceneQueryparserXmlFilterBuilder > {
- @public
-  JavaUtilHashMap *builders_;
-}
+@interface OrgApacheLuceneQueryparserXmlFilterBuilderFactory : NSObject < OrgApacheLuceneQueryparserXmlFilterBuilder >
 
 #pragma mark Public
 
 - (instancetype)init;
 
-- (void)addBuilderWithNSString:(NSString *)nodeName
-withOrgApacheLuceneQueryparserXmlFilterBuilder:(id<OrgApacheLuceneQueryparserXmlFilterBuilder>)builder;
-
-- (OrgApacheLuceneSearchFilter *)getFilterWithOrgW3cDomElement:(id<OrgW3cDomElement>)n;
-
-- (id<OrgApacheLuceneQueryparserXmlFilterBuilder>)getFilterBuilderWithNSString:(NSString *)nodeName;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserXmlFilterBuilderFactory)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserXmlFilterBuilderFactory, builders_, JavaUtilHashMap *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlFilterBuilderFactory_init(OrgApacheLuceneQueryparserXmlFilterBuilderFactory *self);
 

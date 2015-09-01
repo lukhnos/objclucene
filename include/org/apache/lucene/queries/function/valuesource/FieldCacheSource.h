@@ -20,30 +20,17 @@
 #define OrgApacheLuceneQueriesFunctionValueSource_INCLUDE 1
 #include "org/apache/lucene/queries/function/ValueSource.h"
 
-@interface OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource : OrgApacheLuceneQueriesFunctionValueSource {
- @public
-  NSString *field_;
-}
+@interface OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource : OrgApacheLuceneQueriesFunctionValueSource
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field;
-
-- (NSString *)description__;
-
-- (jboolean)isEqual:(id)o;
-
-- (NSString *)getField;
-
-- (NSUInteger)hash;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource, field_, NSString *)
-
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource_initWithNSString_(OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource *self, NSString *field);
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource_init(OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource)
 

@@ -38,11 +38,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexPostingsEnum, atts_, OrgApacheLuceneUtil
   return 0;
 }
 
-- (OrgApacheLuceneUtilAttributeSource *)attributes {
-  if (atts_ == nil) JreStrongAssignAndConsume(&atts_, new_OrgApacheLuceneUtilAttributeSource_init());
-  return atts_;
-}
-
 - (jint)nextPosition {
   // can't call an abstract method
   [self doesNotRecognizeSelector:_cmd];
@@ -77,7 +72,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexPostingsEnum, atts_, OrgApacheLuceneUtil
     { "featureRequestedWithInt:withShort:", "featureRequested", "Z", 0x9, NULL, NULL },
     { "init", "PostingsEnum", NULL, 0x4, NULL, NULL },
     { "freq", NULL, "I", 0x401, "Ljava.io.IOException;", NULL },
-    { "attributes", NULL, "Lorg.apache.lucene.util.AttributeSource;", 0x1, NULL, NULL },
     { "nextPosition", NULL, "I", 0x401, "Ljava.io.IOException;", NULL },
     { "startOffset", NULL, "I", 0x401, "Ljava.io.IOException;", NULL },
     { "endOffset", NULL, "I", 0x401, "Ljava.io.IOException;", NULL },
@@ -92,7 +86,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexPostingsEnum, atts_, OrgApacheLuceneUtil
     { "ALL", "ALL", 0x19, "S", NULL, NULL, .constantValue.asShort = OrgApacheLuceneIndexPostingsEnum_ALL },
     { "atts_", NULL, 0x2, "Lorg.apache.lucene.util.AttributeSource;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexPostingsEnum = { 2, "PostingsEnum", "org.apache.lucene.index", NULL, 0x401, 8, methods, 7, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexPostingsEnum = { 2, "PostingsEnum", "org.apache.lucene.index", NULL, 0x401, 7, methods, 7, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexPostingsEnum;
 }
 

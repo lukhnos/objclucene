@@ -43,8 +43,6 @@
 
 - (jint)docID;
 
-- (IOSObjectArray *)getSubSpans;
-
 - (jint)nextDoc;
 
 #pragma mark Package-Private

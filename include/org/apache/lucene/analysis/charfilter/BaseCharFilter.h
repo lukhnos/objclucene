@@ -20,28 +20,17 @@
 #define OrgApacheLuceneAnalysisCharFilter_INCLUDE 1
 #include "org/apache/lucene/analysis/CharFilter.h"
 
-@class JavaIoReader;
-
 @interface OrgApacheLuceneAnalysisCharfilterBaseCharFilter : OrgApacheLuceneAnalysisCharFilter
 
 #pragma mark Public
 
-- (instancetype)initWithJavaIoReader:(JavaIoReader *)inArg;
-
-#pragma mark Protected
-
-- (void)addOffCorrectMapWithInt:(jint)off
-                        withInt:(jint)cumulativeDiff;
-
-- (jint)correctWithInt:(jint)currentOff;
-
-- (jint)getLastCumulativeDiff;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisCharfilterBaseCharFilter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCharfilterBaseCharFilter_initWithJavaIoReader_(OrgApacheLuceneAnalysisCharfilterBaseCharFilter *self, JavaIoReader *inArg);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCharfilterBaseCharFilter_init(OrgApacheLuceneAnalysisCharfilterBaseCharFilter *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCharfilterBaseCharFilter)
 

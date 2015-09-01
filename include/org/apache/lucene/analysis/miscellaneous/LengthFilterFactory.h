@@ -20,21 +20,11 @@
 #define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
-@class OrgApacheLuceneAnalysisTokenFilter;
-@class OrgApacheLuceneAnalysisTokenStream;
-@protocol JavaUtilMap;
-
-@interface OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory {
- @public
-  jint min_;
-  jint max_;
-}
+@interface OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
-
-- (OrgApacheLuceneAnalysisTokenFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
+- (instancetype)init;
 
 @end
 
@@ -46,9 +36,9 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisMiscellaneousLengthFilterFacto
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory_MAX_KEY_;
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory, MAX_KEY_, NSString *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory *self, id<JavaUtilMap> args);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory_init(OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory *new_OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory *new_OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousLengthFilterFactory)
 

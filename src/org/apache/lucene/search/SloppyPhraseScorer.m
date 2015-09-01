@@ -278,10 +278,6 @@ withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer:(OrgApacheLuceneSearch
   return numMatches_;
 }
 
-- (jfloat)sloppyFreq {
-  return sloppyFreq_;
-}
-
 - (jint)docID {
   return [((OrgApacheLuceneSearchConjunctionDISI *) nil_chk(conjunction_)) docID];
 }
@@ -359,7 +355,6 @@ withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer:(OrgApacheLuceneSearch
     { "unionTermGroupsWithJavaUtilArrayList:", "unionTermGroups", "V", 0x2, NULL, NULL },
     { "termGroupsWithJavaUtilLinkedHashMap:withJavaUtilArrayList:", "termGroups", "Ljava.util.HashMap;", 0x2, "Ljava.io.IOException;", NULL },
     { "freq", NULL, "I", 0x1, NULL, NULL },
-    { "sloppyFreq", NULL, "F", 0x0, NULL, NULL },
     { "docID", NULL, "I", 0x1, NULL, NULL },
     { "nextDoc", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
     { "score", NULL, "F", 0x1, NULL, NULL },
@@ -385,7 +380,7 @@ withOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer:(OrgApacheLuceneSearch
     { "numMatches_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "needsScores_", NULL, 0x10, "Z", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSloppyPhraseScorer = { 2, "SloppyPhraseScorer", "org.apache.lucene.search", NULL, 0x10, 30, methods, 15, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSloppyPhraseScorer = { 2, "SloppyPhraseScorer", "org.apache.lucene.search", NULL, 0x10, 29, methods, 15, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchSloppyPhraseScorer;
 }
 

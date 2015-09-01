@@ -24,40 +24,17 @@
 #define JavaIoCloseable_INCLUDE 1
 #include "java/io/Closeable.h"
 
-@class OrgApacheLuceneSearchReferenceManager;
-
 @interface OrgApacheLuceneSearchLiveFieldValues : NSObject < OrgApacheLuceneSearchReferenceManager_RefreshListener, JavaIoCloseable >
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchReferenceManager:(OrgApacheLuceneSearchReferenceManager *)mgr
-                                                       withId:(id)missingValue;
-
-- (void)addWithNSString:(NSString *)id_
-                 withId:(id)value;
-
-- (void)afterRefreshWithBoolean:(jboolean)didRefresh;
-
-- (void)beforeRefresh;
-
-- (void)close;
-
-- (void)delete__WithNSString:(NSString *)id_;
-
-- (id)getWithNSString:(NSString *)id_;
-
-- (jint)size;
-
-#pragma mark Protected
-
-- (id)lookupFromSearcherWithId:(id)s
-                  withNSString:(NSString *)id_;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchLiveFieldValues)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchLiveFieldValues_initWithOrgApacheLuceneSearchReferenceManager_withId_(OrgApacheLuceneSearchLiveFieldValues *self, OrgApacheLuceneSearchReferenceManager *mgr, id missingValue);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchLiveFieldValues_init(OrgApacheLuceneSearchLiveFieldValues *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchLiveFieldValues)
 

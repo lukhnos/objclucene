@@ -3,10 +3,10 @@
 //  source: ./core/src/java/org/apache/lucene/index/TwoPhaseCommit.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
 #include "org/apache/lucene/index/TwoPhaseCommit.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @interface OrgApacheLuceneIndexTwoPhaseCommit : NSObject
 
@@ -15,12 +15,7 @@
 @implementation OrgApacheLuceneIndexTwoPhaseCommit
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "prepareCommit", NULL, "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "commit", NULL, "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "rollback", NULL, "V", 0x401, "Ljava.io.IOException;", NULL },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexTwoPhaseCommit = { 2, "TwoPhaseCommit", "org.apache.lucene.index", NULL, 0x609, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexTwoPhaseCommit = { 2, "TwoPhaseCommit", "org.apache.lucene.index", NULL, 0x609, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexTwoPhaseCommit;
 }
 

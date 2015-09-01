@@ -20,18 +20,11 @@
 #define OrgApacheLuceneSearchHighlightFragmenter_INCLUDE 1
 #include "org/apache/lucene/search/highlight/Fragmenter.h"
 
-@class OrgApacheLuceneAnalysisTokenStream;
-
 @interface OrgApacheLuceneSearchHighlightNullFragmenter : NSObject < OrgApacheLuceneSearchHighlightFragmenter >
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (jboolean)isNewFragment;
-
-- (void)startWithNSString:(NSString *)s
-withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tokenStream;
 
 @end
 

@@ -16,11 +16,8 @@
 #if !defined (_OrgApacheLuceneUtilRamUsageEstimator_) && (OrgApacheLuceneUtilRamUsageEstimator_INCLUDE_ALL || OrgApacheLuceneUtilRamUsageEstimator_INCLUDE)
 #define _OrgApacheLuceneUtilRamUsageEstimator_
 
-@class IOSBooleanArray;
 @class IOSByteArray;
-@class IOSCharArray;
 @class IOSClass;
-@class IOSDoubleArray;
 @class IOSFloatArray;
 @class IOSIntArray;
 @class IOSLongArray;
@@ -28,7 +25,6 @@
 @class IOSShortArray;
 @class JavaLangLong;
 @class JavaLangReflectField;
-@class JavaTextDecimalFormat;
 
 #define OrgApacheLuceneUtilRamUsageEstimator_ONE_KB 1024LL
 #define OrgApacheLuceneUtilRamUsageEstimator_ONE_MB 1048576LL
@@ -46,12 +42,9 @@
 
 #pragma mark Public
 
+- (instancetype)init;
+
 + (jlong)alignObjectSizeWithLong:(jlong)size;
-
-+ (NSString *)humanReadableUnitsWithLong:(jlong)bytes;
-
-+ (NSString *)humanReadableUnitsWithLong:(jlong)bytes
-               withJavaTextDecimalFormat:(JavaTextDecimalFormat *)df;
 
 + (jlong)shallowSizeOfWithId:(id)obj;
 
@@ -61,13 +54,7 @@
 
 + (jlong)sizeOfWithOrgApacheLuceneUtilAccountableArray:(IOSObjectArray *)accountables;
 
-+ (jlong)sizeOfWithBooleanArray:(IOSBooleanArray *)arr;
-
 + (jlong)sizeOfWithByteArray:(IOSByteArray *)arr;
-
-+ (jlong)sizeOfWithCharArray:(IOSCharArray *)arr;
-
-+ (jlong)sizeOfWithDoubleArray:(IOSDoubleArray *)arr;
 
 + (jlong)sizeOfWithFloatArray:(IOSFloatArray *)arr;
 
@@ -149,10 +136,6 @@ FOUNDATION_EXPORT jlong OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithJavaLangL
 
 FOUNDATION_EXPORT jlong OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithByteArray_(IOSByteArray *arr);
 
-FOUNDATION_EXPORT jlong OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithBooleanArray_(IOSBooleanArray *arr);
-
-FOUNDATION_EXPORT jlong OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithCharArray_(IOSCharArray *arr);
-
 FOUNDATION_EXPORT jlong OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithShortArray_(IOSShortArray *arr);
 
 FOUNDATION_EXPORT jlong OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithIntArray_(IOSIntArray *arr);
@@ -160,8 +143,6 @@ FOUNDATION_EXPORT jlong OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithIntArray_
 FOUNDATION_EXPORT jlong OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithFloatArray_(IOSFloatArray *arr);
 
 FOUNDATION_EXPORT jlong OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithLongArray_(IOSLongArray *arr);
-
-FOUNDATION_EXPORT jlong OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithDoubleArray_(IOSDoubleArray *arr);
 
 FOUNDATION_EXPORT jlong OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfWithNSObjectArray_(IOSObjectArray *arr);
 
@@ -171,11 +152,11 @@ FOUNDATION_EXPORT jlong OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstan
 
 FOUNDATION_EXPORT jlong OrgApacheLuceneUtilRamUsageEstimator_adjustForFieldWithLong_withJavaLangReflectField_(jlong sizeSoFar, JavaLangReflectField *f);
 
-FOUNDATION_EXPORT NSString *OrgApacheLuceneUtilRamUsageEstimator_humanReadableUnitsWithLong_(jlong bytes);
-
-FOUNDATION_EXPORT NSString *OrgApacheLuceneUtilRamUsageEstimator_humanReadableUnitsWithLong_withJavaTextDecimalFormat_(jlong bytes, JavaTextDecimalFormat *df);
-
 FOUNDATION_EXPORT jlong OrgApacheLuceneUtilRamUsageEstimator_sizeOfWithOrgApacheLuceneUtilAccountableArray_(IOSObjectArray *accountables);
+
+FOUNDATION_EXPORT void OrgApacheLuceneUtilRamUsageEstimator_init(OrgApacheLuceneUtilRamUsageEstimator *self);
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilRamUsageEstimator *new_OrgApacheLuceneUtilRamUsageEstimator_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilRamUsageEstimator)
 

@@ -21,18 +21,14 @@
 #include "org/apache/lucene/util/NamedSPILoader.h"
 
 @class IOSObjectArray;
-@class JavaLangClassLoader;
 @class OrgApacheLuceneCodecsFieldsConsumer;
 @class OrgApacheLuceneCodecsFieldsProducer;
 @class OrgApacheLuceneIndexSegmentReadState;
 @class OrgApacheLuceneIndexSegmentWriteState;
-@protocol JavaUtilSet;
 
 @interface OrgApacheLuceneCodecsPostingsFormat : NSObject < OrgApacheLuceneUtilNamedSPILoader_NamedSPI >
 
 #pragma mark Public
-
-+ (id<JavaUtilSet>)availablePostingsFormats;
 
 - (OrgApacheLuceneCodecsFieldsConsumer *)fieldsConsumerWithOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state;
 
@@ -41,8 +37,6 @@
 + (OrgApacheLuceneCodecsPostingsFormat *)forNameWithNSString:(NSString *)name;
 
 - (NSString *)getName;
-
-+ (void)reloadPostingsFormatsWithJavaLangClassLoader:(JavaLangClassLoader *)classloader;
 
 - (NSString *)description;
 
@@ -60,10 +54,6 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneCodecsPostingsFormat, EMPTY_, IOSObjec
 FOUNDATION_EXPORT void OrgApacheLuceneCodecsPostingsFormat_initWithNSString_(OrgApacheLuceneCodecsPostingsFormat *self, NSString *name);
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsPostingsFormat *OrgApacheLuceneCodecsPostingsFormat_forNameWithNSString_(NSString *name);
-
-FOUNDATION_EXPORT id<JavaUtilSet> OrgApacheLuceneCodecsPostingsFormat_availablePostingsFormats();
-
-FOUNDATION_EXPORT void OrgApacheLuceneCodecsPostingsFormat_reloadPostingsFormatsWithJavaLangClassLoader_(JavaLangClassLoader *classloader);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsPostingsFormat)
 

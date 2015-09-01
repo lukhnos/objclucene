@@ -20,19 +20,11 @@
 #define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
-@class OrgApacheLuceneAnalysisTokenStream;
-@class OrgApacheLuceneAnalysisUtilCharArraySet;
-
 @interface OrgApacheLuceneAnalysisCommongramsCommonGramsFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-               withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)commonWords;
-
-- (jboolean)incrementToken;
-
-- (void)reset;
+- (instancetype)init;
 
 @end
 
@@ -41,9 +33,9 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisCommongramsCommonGramsFilter)
 FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisCommongramsCommonGramsFilter_GRAM_TYPE_;
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisCommongramsCommonGramsFilter, GRAM_TYPE_, NSString *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCommongramsCommonGramsFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisCommongramsCommonGramsFilter *self, OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisUtilCharArraySet *commonWords);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCommongramsCommonGramsFilter_init(OrgApacheLuceneAnalysisCommongramsCommonGramsFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCommongramsCommonGramsFilter *new_OrgApacheLuceneAnalysisCommongramsCommonGramsFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisUtilCharArraySet *commonWords) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCommongramsCommonGramsFilter *new_OrgApacheLuceneAnalysisCommongramsCommonGramsFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCommongramsCommonGramsFilter)
 

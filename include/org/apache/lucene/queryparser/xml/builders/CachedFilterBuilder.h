@@ -20,28 +20,19 @@
 #define OrgApacheLuceneQueryparserXmlFilterBuilder_INCLUDE 1
 #include "org/apache/lucene/queryparser/xml/FilterBuilder.h"
 
-@class OrgApacheLuceneQueryparserXmlFilterBuilderFactory;
-@class OrgApacheLuceneQueryparserXmlQueryBuilderFactory;
-@class OrgApacheLuceneSearchFilter;
-@protocol OrgW3cDomElement;
-
 @interface OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder : NSObject < OrgApacheLuceneQueryparserXmlFilterBuilder >
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneQueryparserXmlQueryBuilderFactory:(OrgApacheLuceneQueryparserXmlQueryBuilderFactory *)queryFactory
-                   withOrgApacheLuceneQueryparserXmlFilterBuilderFactory:(OrgApacheLuceneQueryparserXmlFilterBuilderFactory *)filterFactory
-                                                                 withInt:(jint)cacheSize;
-
-- (OrgApacheLuceneSearchFilter *)getFilterWithOrgW3cDomElement:(id<OrgW3cDomElement>)e;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_initWithOrgApacheLuceneQueryparserXmlQueryBuilderFactory_withOrgApacheLuceneQueryparserXmlFilterBuilderFactory_withInt_(OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder *self, OrgApacheLuceneQueryparserXmlQueryBuilderFactory *queryFactory, OrgApacheLuceneQueryparserXmlFilterBuilderFactory *filterFactory, jint cacheSize);
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_init(OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder *new_OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_initWithOrgApacheLuceneQueryparserXmlQueryBuilderFactory_withOrgApacheLuceneQueryparserXmlFilterBuilderFactory_withInt_(OrgApacheLuceneQueryparserXmlQueryBuilderFactory *queryFactory, OrgApacheLuceneQueryparserXmlFilterBuilderFactory *filterFactory, jint cacheSize) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder *new_OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder)
 
@@ -54,28 +45,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuil
 #define JavaUtilLinkedHashMap_INCLUDE 1
 #include "java/util/LinkedHashMap.h"
 
-@protocol JavaUtilMap_Entry;
+@interface OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache : JavaUtilLinkedHashMap
 
-@interface OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache : JavaUtilLinkedHashMap {
- @public
-  jint maxsize_;
-}
+#pragma mark Package-Private
 
-#pragma mark Public
-
-- (instancetype)initWithInt:(jint)maxsize;
-
-#pragma mark Protected
-
-- (jboolean)removeEldestEntryWithJavaUtilMap_Entry:(id<JavaUtilMap_Entry>)eldest;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache_initWithInt_(OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache *self, jint maxsize);
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache_init(OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache *new_OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache_initWithInt_(jint maxsize) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache *new_OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache)
 

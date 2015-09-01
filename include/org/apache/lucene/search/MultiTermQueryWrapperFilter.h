@@ -20,42 +20,19 @@
 #define OrgApacheLuceneSearchFilter_INCLUDE 1
 #include "org/apache/lucene/search/Filter.h"
 
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneSearchDocIdSet;
-@class OrgApacheLuceneSearchMultiTermQuery;
-@protocol OrgApacheLuceneUtilBits;
-
-@interface OrgApacheLuceneSearchMultiTermQueryWrapperFilter : OrgApacheLuceneSearchFilter {
- @public
-  OrgApacheLuceneSearchMultiTermQuery *query_;
-}
+@interface OrgApacheLuceneSearchMultiTermQueryWrapperFilter : OrgApacheLuceneSearchFilter
 
 #pragma mark Public
 
-- (jboolean)isEqual:(id)o;
-
-- (OrgApacheLuceneSearchDocIdSet *)getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
-                                                            withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)acceptDocs;
-
-- (NSString *)getField;
-
-- (NSUInteger)hash;
-
-- (NSString *)toStringWithNSString:(NSString *)field;
-
-#pragma mark Protected
-
-- (instancetype)initWithOrgApacheLuceneSearchMultiTermQuery:(OrgApacheLuceneSearchMultiTermQuery *)query;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchMultiTermQueryWrapperFilter)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchMultiTermQueryWrapperFilter, query_, id)
+FOUNDATION_EXPORT void OrgApacheLuceneSearchMultiTermQueryWrapperFilter_init(OrgApacheLuceneSearchMultiTermQueryWrapperFilter *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchMultiTermQueryWrapperFilter_initWithOrgApacheLuceneSearchMultiTermQuery_(OrgApacheLuceneSearchMultiTermQueryWrapperFilter *self, OrgApacheLuceneSearchMultiTermQuery *query);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchMultiTermQueryWrapperFilter *new_OrgApacheLuceneSearchMultiTermQueryWrapperFilter_initWithOrgApacheLuceneSearchMultiTermQuery_(OrgApacheLuceneSearchMultiTermQuery *query) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchMultiTermQueryWrapperFilter *new_OrgApacheLuceneSearchMultiTermQueryWrapperFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMultiTermQueryWrapperFilter)
 

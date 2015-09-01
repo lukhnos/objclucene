@@ -20,33 +20,19 @@
 #define OrgApacheLuceneSearchJoinBitSetProducer_INCLUDE 1
 #include "org/apache/lucene/search/join/BitSetProducer.h"
 
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneSearchQuery;
-@class OrgApacheLuceneUtilBitSet;
-
 @interface OrgApacheLuceneSearchJoinQueryBitSetProducer : NSObject < OrgApacheLuceneSearchJoinBitSetProducer >
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query;
-
-- (jboolean)isEqual:(id)o;
-
-- (OrgApacheLuceneUtilBitSet *)getBitSetWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
-
-- (OrgApacheLuceneSearchQuery *)getQuery;
-
-- (NSUInteger)hash;
-
-- (NSString *)description;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinQueryBitSetProducer)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinQueryBitSetProducer_initWithOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchJoinQueryBitSetProducer *self, OrgApacheLuceneSearchQuery *query);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinQueryBitSetProducer_init(OrgApacheLuceneSearchJoinQueryBitSetProducer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchJoinQueryBitSetProducer *new_OrgApacheLuceneSearchJoinQueryBitSetProducer_initWithOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchQuery *query) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchJoinQueryBitSetProducer *new_OrgApacheLuceneSearchJoinQueryBitSetProducer_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinQueryBitSetProducer)
 

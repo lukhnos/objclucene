@@ -48,12 +48,6 @@
 
 - (void)decodeWithLongArray:(IOSLongArray *)blocks
                     withInt:(jint)blocksOffset
-               withIntArray:(IOSIntArray *)values
-                    withInt:(jint)valuesOffset
-                    withInt:(jint)iterations;
-
-- (void)decodeWithLongArray:(IOSLongArray *)blocks
-                    withInt:(jint)blocksOffset
               withLongArray:(IOSLongArray *)values
                     withInt:(jint)valuesOffset
                     withInt:(jint)iterations;
@@ -61,12 +55,6 @@
 - (void)encodeWithIntArray:(IOSIntArray *)values
                    withInt:(jint)valuesOffset
              withByteArray:(IOSByteArray *)blocks
-                   withInt:(jint)blocksOffset
-                   withInt:(jint)iterations;
-
-- (void)encodeWithIntArray:(IOSIntArray *)values
-                   withInt:(jint)valuesOffset
-             withLongArray:(IOSLongArray *)blocks
                    withInt:(jint)blocksOffset
                    withInt:(jint)iterations;
 

@@ -26,7 +26,6 @@
 
 @class IOSObjectArray;
 @class OrgApacheLuceneUtilPackedPackedInts_Mutable;
-@protocol JavaUtilCollection;
 
 #define OrgApacheLuceneUtilPackedAbstractPagedMutable_MIN_BLOCK_SIZE 64
 #define OrgApacheLuceneUtilPackedAbstractPagedMutable_MAX_BLOCK_SIZE 1073741824
@@ -43,10 +42,6 @@
 #pragma mark Public
 
 - (jlong)getWithLong:(jlong)index;
-
-- (id<JavaUtilCollection>)getChildResources;
-
-- (id)grow;
 
 - (id)growWithLong:(jlong)minSize;
 

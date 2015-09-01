@@ -6,8 +6,6 @@
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
-#include "java/util/ArrayList.h"
-#include "java/util/Collection.h"
 #include "org/apache/lucene/search/DocIdSetIterator.h"
 #include "org/apache/lucene/search/ReqOptSumScorer.h"
 #include "org/apache/lucene/search/Scorer.h"
@@ -57,13 +55,6 @@
   return (optScorer_ != nil && [optScorer_ docID] == [((OrgApacheLuceneSearchScorer *) nil_chk(reqScorer_)) docID]) ? 2 : 1;
 }
 
-- (id<JavaUtilCollection>)getChildren {
-  JavaUtilArrayList *children = [new_JavaUtilArrayList_initWithInt_(2) autorelease];
-  [children addWithId:[new_OrgApacheLuceneSearchScorer_ChildScorer_initWithOrgApacheLuceneSearchScorer_withNSString_(reqScorer_, @"MUST") autorelease]];
-  [children addWithId:[new_OrgApacheLuceneSearchScorer_ChildScorer_initWithOrgApacheLuceneSearchScorer_withNSString_(optScorer_, @"SHOULD") autorelease]];
-  return children;
-}
-
 - (jlong)cost {
   return [((OrgApacheLuceneSearchScorer *) nil_chk(reqScorer_)) cost];
 }
@@ -83,14 +74,13 @@
     { "docID", NULL, "I", 0x1, NULL, NULL },
     { "score", NULL, "F", 0x1, "Ljava.io.IOException;", NULL },
     { "freq", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
-    { "getChildren", NULL, "Ljava.util.Collection;", 0x1, NULL, NULL },
     { "cost", NULL, "J", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "reqScorer_", NULL, 0x14, "Lorg.apache.lucene.search.Scorer;", NULL, NULL, .constantValue.asLong = 0 },
     { "optScorer_", NULL, 0x4, "Lorg.apache.lucene.search.Scorer;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchReqOptSumScorer = { 2, "ReqOptSumScorer", "org.apache.lucene.search", NULL, 0x0, 9, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchReqOptSumScorer = { 2, "ReqOptSumScorer", "org.apache.lucene.search", NULL, 0x0, 8, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchReqOptSumScorer;
 }
 

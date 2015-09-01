@@ -27,8 +27,7 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)vector
-                                          withInt:(jint)maxStartOffset;
+- (instancetype)init;
 
 - (OrgApacheLuceneIndexTerms *)getTermVectorTerms;
 
@@ -43,9 +42,9 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneSearchHighlightTokenStreamFromTermVector)
 FOUNDATION_EXPORT OrgApacheLuceneUtilAttributeFactory *OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_ATTRIBUTE_FACTORY_;
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchHighlightTokenStreamFromTermVector, ATTRIBUTE_FACTORY_, OrgApacheLuceneUtilAttributeFactory *)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_initWithOrgApacheLuceneIndexTerms_withInt_(OrgApacheLuceneSearchHighlightTokenStreamFromTermVector *self, OrgApacheLuceneIndexTerms *vector, jint maxStartOffset);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_init(OrgApacheLuceneSearchHighlightTokenStreamFromTermVector *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightTokenStreamFromTermVector *new_OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_initWithOrgApacheLuceneIndexTerms_withInt_(OrgApacheLuceneIndexTerms *vector, jint maxStartOffset) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightTokenStreamFromTermVector *new_OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightTokenStreamFromTermVector)
 

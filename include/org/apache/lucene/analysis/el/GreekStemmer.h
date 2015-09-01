@@ -16,20 +16,15 @@
 #if !defined (_OrgApacheLuceneAnalysisElGreekStemmer_) && (OrgApacheLuceneAnalysisElGreekStemmer_INCLUDE_ALL || OrgApacheLuceneAnalysisElGreekStemmer_INCLUDE)
 #define _OrgApacheLuceneAnalysisElGreekStemmer_
 
-@class IOSCharArray;
-
 @interface OrgApacheLuceneAnalysisElGreekStemmer : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
-- (jint)stemWithCharArray:(IOSCharArray *)s
-                  withInt:(jint)len;
-
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisElGreekStemmer)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisElGreekStemmer)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisElGreekStemmer_init(OrgApacheLuceneAnalysisElGreekStemmer *self);
 

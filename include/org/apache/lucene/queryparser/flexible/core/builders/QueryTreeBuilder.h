@@ -20,30 +20,15 @@
 #define OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder_INCLUDE 1
 #include "org/apache/lucene/queryparser/flexible/core/builders/QueryBuilder.h"
 
-@class IOSClass;
-@protocol JavaLangCharSequence;
-@protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
-
 @interface OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder : NSObject < OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder >
 
 #pragma mark Public
 
 - (instancetype)init;
 
-- (id)buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryNode;
-
-- (void)setBuilderWithJavaLangCharSequence:(id<JavaLangCharSequence>)fieldName
-withOrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder:(id<OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder>)builder;
-
-- (void)setBuilderWithIOSClass:(IOSClass *)queryNodeClass
-withOrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder:(id<OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder>)builder;
-
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder)
-
-FOUNDATION_EXPORT NSString *OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_QUERY_TREE_BUILDER_TAGID_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder, QUERY_TREE_BUILDER_TAGID_, NSString *)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder)
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_init(OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder *self);
 

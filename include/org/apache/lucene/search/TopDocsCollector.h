@@ -32,11 +32,7 @@
 
 #pragma mark Public
 
-- (jint)getTotalHits;
-
 - (OrgApacheLuceneSearchTopDocs *)topDocs;
-
-- (OrgApacheLuceneSearchTopDocs *)topDocsWithInt:(jint)start;
 
 - (OrgApacheLuceneSearchTopDocs *)topDocsWithInt:(jint)start
                                          withInt:(jint)howMany;

@@ -3,77 +3,35 @@
 //  source: ./core/src/java/org/apache/lucene/util/packed/PackedDataOutput.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
-#include "java/lang/Math.h"
-#include "org/apache/lucene/store/DataOutput.h"
 #include "org/apache/lucene/util/packed/PackedDataOutput.h"
-#include "org/apache/lucene/util/packed/PackedInts.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneUtilPackedPackedDataOutput
 
-- (instancetype)initWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg {
-  OrgApacheLuceneUtilPackedPackedDataOutput_initWithOrgApacheLuceneStoreDataOutput_(self, outArg);
+- (instancetype)init {
+  OrgApacheLuceneUtilPackedPackedDataOutput_init(self);
   return self;
-}
-
-- (void)writeLongWithLong:(jlong)value
-                  withInt:(jint)bitsPerValue {
-  JreAssert((bitsPerValue == 64 || (value >= 0 && value <= OrgApacheLuceneUtilPackedPackedInts_maxValueWithInt_(bitsPerValue))), (@"org/apache/lucene/util/packed/PackedDataOutput.java:49 condition failed: assert bitsPerValue == 64 || (value >= 0 && value <= PackedInts.maxValue(bitsPerValue));"));
-  while (bitsPerValue > 0) {
-    if (remainingBits_ == 0) {
-      [((OrgApacheLuceneStoreDataOutput *) nil_chk(out_)) writeByteWithByte:(jbyte) current_];
-      current_ = 0LL;
-      remainingBits_ = 8;
-    }
-    jint bits = JavaLangMath_minWithInt_withInt_(remainingBits_, bitsPerValue);
-    current_ = current_ | (JreLShift64(((JreURShift64(value, (bitsPerValue - bits))) & ((JreLShift64(1LL, bits)) - 1)), (remainingBits_ - bits)));
-    bitsPerValue -= bits;
-    remainingBits_ -= bits;
-  }
-}
-
-- (void)flush {
-  if (remainingBits_ < 8) {
-    [((OrgApacheLuceneStoreDataOutput *) nil_chk(out_)) writeByteWithByte:(jbyte) current_];
-  }
-  remainingBits_ = 8;
-  current_ = 0LL;
-}
-
-- (void)dealloc {
-  RELEASE_(out_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneStoreDataOutput:", "PackedDataOutput", NULL, 0x1, NULL, NULL },
-    { "writeLongWithLong:withInt:", "writeLong", "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "flush", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "out_", NULL, 0x10, "Lorg.apache.lucene.store.DataOutput;", NULL, NULL, .constantValue.asLong = 0 },
-    { "current_", NULL, 0x0, "J", NULL, NULL, .constantValue.asLong = 0 },
-    { "remainingBits_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPackedDataOutput = { 2, "PackedDataOutput", "org.apache.lucene.util.packed", NULL, 0x11, 3, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedPackedDataOutput = { 2, "PackedDataOutput", "org.apache.lucene.util.packed", NULL, 0x11, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilPackedPackedDataOutput;
 }
 
 @end
 
-void OrgApacheLuceneUtilPackedPackedDataOutput_initWithOrgApacheLuceneStoreDataOutput_(OrgApacheLuceneUtilPackedPackedDataOutput *self, OrgApacheLuceneStoreDataOutput *outArg) {
+void OrgApacheLuceneUtilPackedPackedDataOutput_init(OrgApacheLuceneUtilPackedPackedDataOutput *self) {
   NSObject_init(self);
-  JreStrongAssign(&self->out_, outArg);
-  self->current_ = 0;
-  self->remainingBits_ = 8;
 }
 
-OrgApacheLuceneUtilPackedPackedDataOutput *new_OrgApacheLuceneUtilPackedPackedDataOutput_initWithOrgApacheLuceneStoreDataOutput_(OrgApacheLuceneStoreDataOutput *outArg) {
+OrgApacheLuceneUtilPackedPackedDataOutput *new_OrgApacheLuceneUtilPackedPackedDataOutput_init() {
   OrgApacheLuceneUtilPackedPackedDataOutput *self = [OrgApacheLuceneUtilPackedPackedDataOutput alloc];
-  OrgApacheLuceneUtilPackedPackedDataOutput_initWithOrgApacheLuceneStoreDataOutput_(self, outArg);
+  OrgApacheLuceneUtilPackedPackedDataOutput_init(self);
   return self;
 }
 

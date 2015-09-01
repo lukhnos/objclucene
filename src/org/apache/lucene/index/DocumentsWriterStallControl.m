@@ -83,28 +83,6 @@ __attribute__((unused)) static void OrgApacheLuceneIndexDocumentsWriterStallCont
   OrgApacheLuceneIndexDocumentsWriterStallControl_decrWaiters(self);
 }
 
-- (jboolean)hasBlocked {
-  @synchronized(self) {
-    return numWaiting_ > 0;
-  }
-}
-
-- (jboolean)isHealthy {
-  return !JreLoadVolatileBoolean(&stalled_);
-}
-
-- (jboolean)isThreadQueuedWithJavaLangThread:(JavaLangThread *)t {
-  @synchronized(self) {
-    return [((id<JavaUtilMap>) nil_chk(waiting_)) containsKeyWithId:t];
-  }
-}
-
-- (jboolean)wasStalled {
-  @synchronized(self) {
-    return wasStalled_;
-  }
-}
-
 - (void)dealloc {
   RELEASE_(waiting_);
   RELEASE_(infoStream_);
@@ -119,10 +97,6 @@ __attribute__((unused)) static void OrgApacheLuceneIndexDocumentsWriterStallCont
     { "anyStalledThreads", NULL, "Z", 0x0, NULL, NULL },
     { "incWaiters", NULL, "V", 0x2, NULL, NULL },
     { "decrWaiters", NULL, "V", 0x2, NULL, NULL },
-    { "hasBlocked", NULL, "Z", 0x20, NULL, NULL },
-    { "isHealthy", NULL, "Z", 0x0, NULL, NULL },
-    { "isThreadQueuedWithJavaLangThread:", "isThreadQueued", "Z", 0x20, NULL, NULL },
-    { "wasStalled", NULL, "Z", 0x20, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "stalled_", NULL, 0x42, "Z", NULL, NULL, .constantValue.asLong = 0 },
@@ -132,7 +106,7 @@ __attribute__((unused)) static void OrgApacheLuceneIndexDocumentsWriterStallCont
     { "infoStream_", NULL, 0x12, "Lorg.apache.lucene.util.InfoStream;", NULL, NULL, .constantValue.asLong = 0 },
     { "stallStartNS_", NULL, 0x0, "J", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocumentsWriterStallControl = { 2, "DocumentsWriterStallControl", "org.apache.lucene.index", NULL, 0x10, 10, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocumentsWriterStallControl = { 2, "DocumentsWriterStallControl", "org.apache.lucene.index", NULL, 0x10, 6, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexDocumentsWriterStallControl;
 }
 

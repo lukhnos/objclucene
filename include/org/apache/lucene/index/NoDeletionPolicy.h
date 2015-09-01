@@ -20,24 +20,19 @@
 #define OrgApacheLuceneIndexIndexDeletionPolicy_INCLUDE 1
 #include "org/apache/lucene/index/IndexDeletionPolicy.h"
 
-@protocol JavaUtilList;
-
 @interface OrgApacheLuceneIndexNoDeletionPolicy : OrgApacheLuceneIndexIndexDeletionPolicy
 
 #pragma mark Public
 
-- (OrgApacheLuceneIndexIndexDeletionPolicy *)clone;
-
-- (void)onCommitWithJavaUtilList:(id<JavaUtilList>)commits;
-
-- (void)onInitWithJavaUtilList:(id<JavaUtilList>)commits;
+- (instancetype)init;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneIndexNoDeletionPolicy)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexNoDeletionPolicy)
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexIndexDeletionPolicy *OrgApacheLuceneIndexNoDeletionPolicy_INSTANCE_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneIndexNoDeletionPolicy, INSTANCE_, OrgApacheLuceneIndexIndexDeletionPolicy *)
+FOUNDATION_EXPORT void OrgApacheLuceneIndexNoDeletionPolicy_init(OrgApacheLuceneIndexNoDeletionPolicy *self);
+
+FOUNDATION_EXPORT OrgApacheLuceneIndexNoDeletionPolicy *new_OrgApacheLuceneIndexNoDeletionPolicy_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexNoDeletionPolicy)
 

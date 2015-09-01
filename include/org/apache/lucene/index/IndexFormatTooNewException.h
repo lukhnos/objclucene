@@ -36,14 +36,6 @@
                          withInt:(jint)minVersion
                          withInt:(jint)maxVersion;
 
-- (jint)getMaxVersion;
-
-- (jint)getMinVersion;
-
-- (NSString *)getResourceDescription;
-
-- (jint)getVersion;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexIndexFormatTooNewException)

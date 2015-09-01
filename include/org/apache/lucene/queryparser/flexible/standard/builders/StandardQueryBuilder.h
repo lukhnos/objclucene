@@ -20,12 +20,7 @@
 #define OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder_INCLUDE 1
 #include "org/apache/lucene/queryparser/flexible/core/builders/QueryBuilder.h"
 
-@class OrgApacheLuceneSearchQuery;
-@protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
-
 @protocol OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardQueryBuilder < OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder, NSObject, JavaObject >
-
-- (OrgApacheLuceneSearchQuery *)buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryNode;
 
 @end
 

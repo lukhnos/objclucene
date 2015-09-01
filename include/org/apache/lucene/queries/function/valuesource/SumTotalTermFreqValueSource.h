@@ -20,43 +20,19 @@
 #define OrgApacheLuceneQueriesFunctionValueSource_INCLUDE 1
 #include "org/apache/lucene/queries/function/ValueSource.h"
 
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneQueriesFunctionFunctionValues;
-@class OrgApacheLuceneSearchIndexSearcher;
-@protocol JavaUtilMap;
-
-@interface OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource : OrgApacheLuceneQueriesFunctionValueSource {
- @public
-  NSString *indexedField_;
-}
+@interface OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource : OrgApacheLuceneQueriesFunctionValueSource
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)indexedField;
-
-- (void)createWeightWithJavaUtilMap:(id<JavaUtilMap>)context
-withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher;
-
-- (NSString *)description__;
-
-- (jboolean)isEqual:(id)o;
-
-- (OrgApacheLuceneQueriesFunctionFunctionValues *)getValuesWithJavaUtilMap:(id<JavaUtilMap>)context
-                                 withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext;
-
-- (NSUInteger)hash;
-
-- (NSString *)name;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource, indexedField_, NSString *)
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource_init(OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource_initWithNSString_(OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource *self, NSString *indexedField);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource_initWithNSString_(NSString *indexedField) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceSumTotalTermFreqValueSource)
 

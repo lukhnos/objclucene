@@ -20,21 +20,11 @@
 #define OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode_INCLUDE 1
 #include "org/apache/lucene/queryparser/flexible/core/nodes/DeletedQueryNode.h"
 
-@protocol JavaLangCharSequence;
-@protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
-@protocol OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax;
-
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesNoTokenFoundQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)cloneTree;
-
-- (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escaper;
-
-- (NSString *)description;
 
 @end
 

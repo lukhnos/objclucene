@@ -20,31 +20,19 @@
 #define OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode_INCLUDE 1
 #include "org/apache/lucene/queryparser/flexible/core/nodes/FieldQueryNode.h"
 
-@protocol JavaLangCharSequence;
-@protocol OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax;
-
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode
 
 #pragma mark Public
 
-- (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)field
-                    withJavaLangCharSequence:(id<JavaLangCharSequence>)text
-                                     withInt:(jint)begin
-                                     withInt:(jint)end;
-
-- (OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode *)cloneTree;
-
-- (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escaper;
-
-- (NSString *)description;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_withInt_withInt_(OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode *self, id<JavaLangCharSequence> field, id<JavaLangCharSequence> text, jint begin, jint end);
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode_init(OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_withInt_withInt_(id<JavaLangCharSequence> field, id<JavaLangCharSequence> text, jint begin, jint end) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode)
 

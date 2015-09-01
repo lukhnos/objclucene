@@ -20,45 +20,19 @@
 #define OrgApacheLuceneSearchSpansSpanTermQuery_INCLUDE 1
 #include "org/apache/lucene/search/spans/SpanTermQuery.h"
 
-@class OrgApacheLuceneIndexTerm;
-@class OrgApacheLuceneSearchIndexSearcher;
-@class OrgApacheLuceneSearchPayloadsPayloadFunction;
-@class OrgApacheLuceneSearchSpansSpanWeight;
-
-@interface OrgApacheLuceneSearchPayloadsPayloadTermQuery : OrgApacheLuceneSearchSpansSpanTermQuery {
- @public
-  OrgApacheLuceneSearchPayloadsPayloadFunction *function_;
-}
+@interface OrgApacheLuceneSearchPayloadsPayloadTermQuery : OrgApacheLuceneSearchSpansSpanTermQuery
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-withOrgApacheLuceneSearchPayloadsPayloadFunction:(OrgApacheLuceneSearchPayloadsPayloadFunction *)function;
-
-- (instancetype)initWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-withOrgApacheLuceneSearchPayloadsPayloadFunction:(OrgApacheLuceneSearchPayloadsPayloadFunction *)function
-                                     withBoolean:(jboolean)includeSpanScore;
-
-- (OrgApacheLuceneSearchSpansSpanWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
-                                                                                 withBoolean:(jboolean)needsScores;
-
-- (jboolean)isEqual:(id)obj;
-
-- (NSUInteger)hash;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchPayloadsPayloadTermQuery)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchPayloadsPayloadTermQuery, function_, OrgApacheLuceneSearchPayloadsPayloadFunction *)
+FOUNDATION_EXPORT void OrgApacheLuceneSearchPayloadsPayloadTermQuery_init(OrgApacheLuceneSearchPayloadsPayloadTermQuery *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchPayloadsPayloadTermQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneSearchPayloadsPayloadFunction_(OrgApacheLuceneSearchPayloadsPayloadTermQuery *self, OrgApacheLuceneIndexTerm *term, OrgApacheLuceneSearchPayloadsPayloadFunction *function);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsPayloadTermQuery *new_OrgApacheLuceneSearchPayloadsPayloadTermQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneSearchPayloadsPayloadFunction_(OrgApacheLuceneIndexTerm *term, OrgApacheLuceneSearchPayloadsPayloadFunction *function) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchPayloadsPayloadTermQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneSearchPayloadsPayloadFunction_withBoolean_(OrgApacheLuceneSearchPayloadsPayloadTermQuery *self, OrgApacheLuceneIndexTerm *term, OrgApacheLuceneSearchPayloadsPayloadFunction *function, jboolean includeSpanScore);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsPayloadTermQuery *new_OrgApacheLuceneSearchPayloadsPayloadTermQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneSearchPayloadsPayloadFunction_withBoolean_(OrgApacheLuceneIndexTerm *term, OrgApacheLuceneSearchPayloadsPayloadFunction *function, jboolean includeSpanScore) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchPayloadsPayloadTermQuery *new_OrgApacheLuceneSearchPayloadsPayloadTermQuery_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPayloadsPayloadTermQuery)
 

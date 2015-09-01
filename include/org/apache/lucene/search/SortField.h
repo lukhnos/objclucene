@@ -17,10 +17,7 @@
 #define _OrgApacheLuceneSearchSortField_
 
 @class OrgApacheLuceneSearchFieldComparator;
-@class OrgApacheLuceneSearchFieldComparatorSource;
-@class OrgApacheLuceneSearchIndexSearcher;
 @class OrgApacheLuceneSearchSortField_TypeEnum;
-@protocol JavaUtilComparator;
 
 @interface OrgApacheLuceneSearchSortField : NSObject {
  @public
@@ -31,13 +28,6 @@
 #pragma mark Public
 
 - (instancetype)initWithNSString:(NSString *)field
-withOrgApacheLuceneSearchFieldComparatorSource:(OrgApacheLuceneSearchFieldComparatorSource *)comparator;
-
-- (instancetype)initWithNSString:(NSString *)field
-withOrgApacheLuceneSearchFieldComparatorSource:(OrgApacheLuceneSearchFieldComparatorSource *)comparator
-                     withBoolean:(jboolean)reverse;
-
-- (instancetype)initWithNSString:(NSString *)field
 withOrgApacheLuceneSearchSortField_TypeEnum:(OrgApacheLuceneSearchSortField_TypeEnum *)type;
 
 - (instancetype)initWithNSString:(NSString *)field
@@ -46,28 +36,14 @@ withOrgApacheLuceneSearchSortField_TypeEnum:(OrgApacheLuceneSearchSortField_Type
 
 - (jboolean)isEqual:(id)o;
 
-- (id<JavaUtilComparator>)getBytesComparator;
-
 - (OrgApacheLuceneSearchFieldComparator *)getComparatorWithInt:(jint)numHits
                                                        withInt:(jint)sortPos;
 
-- (OrgApacheLuceneSearchFieldComparatorSource *)getComparatorSource;
-
-- (NSString *)getField;
-
 - (jboolean)getReverse;
-
-- (OrgApacheLuceneSearchSortField_TypeEnum *)getType;
 
 - (NSUInteger)hash;
 
 - (jboolean)needsScores;
-
-- (OrgApacheLuceneSearchSortField *)rewriteWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher;
-
-- (void)setBytesComparatorWithJavaUtilComparator:(id<JavaUtilComparator>)b;
-
-- (void)setMissingValueWithId:(id)missingValue;
 
 - (NSString *)description;
 
@@ -96,14 +72,6 @@ FOUNDATION_EXPORT OrgApacheLuceneSearchSortField *new_OrgApacheLuceneSearchSortF
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSortField_initWithNSString_withOrgApacheLuceneSearchSortField_TypeEnum_withBoolean_(OrgApacheLuceneSearchSortField *self, NSString *field, OrgApacheLuceneSearchSortField_TypeEnum *type, jboolean reverse);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSortField *new_OrgApacheLuceneSearchSortField_initWithNSString_withOrgApacheLuceneSearchSortField_TypeEnum_withBoolean_(NSString *field, OrgApacheLuceneSearchSortField_TypeEnum *type, jboolean reverse) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSortField_initWithNSString_withOrgApacheLuceneSearchFieldComparatorSource_(OrgApacheLuceneSearchSortField *self, NSString *field, OrgApacheLuceneSearchFieldComparatorSource *comparator);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSortField *new_OrgApacheLuceneSearchSortField_initWithNSString_withOrgApacheLuceneSearchFieldComparatorSource_(NSString *field, OrgApacheLuceneSearchFieldComparatorSource *comparator) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSortField_initWithNSString_withOrgApacheLuceneSearchFieldComparatorSource_withBoolean_(OrgApacheLuceneSearchSortField *self, NSString *field, OrgApacheLuceneSearchFieldComparatorSource *comparator, jboolean reverse);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSortField *new_OrgApacheLuceneSearchSortField_initWithNSString_withOrgApacheLuceneSearchFieldComparatorSource_withBoolean_(NSString *field, OrgApacheLuceneSearchFieldComparatorSource *comparator, jboolean reverse) NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortField)
 

@@ -16,8 +16,6 @@
 #if !defined (_OrgApacheLuceneAnalysisCkbSoraniNormalizer_) && (OrgApacheLuceneAnalysisCkbSoraniNormalizer_INCLUDE_ALL || OrgApacheLuceneAnalysisCkbSoraniNormalizer_INCLUDE)
 #define _OrgApacheLuceneAnalysisCkbSoraniNormalizer_
 
-@class IOSCharArray;
-
 #define OrgApacheLuceneAnalysisCkbSoraniNormalizer_YEH 0x064a
 #define OrgApacheLuceneAnalysisCkbSoraniNormalizer_DOTLESS_YEH 0x0649
 #define OrgApacheLuceneAnalysisCkbSoraniNormalizer_FARSI_YEH 0x06cc
@@ -46,9 +44,6 @@
 #pragma mark Public
 
 - (instancetype)init;
-
-- (jint)normalizeWithCharArray:(IOSCharArray *)s
-                       withInt:(jint)len;
 
 @end
 

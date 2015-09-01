@@ -20,33 +20,19 @@
 #define OrgApacheLuceneSearchJoinBitDocIdSetFilter_INCLUDE 1
 #include "org/apache/lucene/search/join/BitDocIdSetFilter.h"
 
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneSearchFilter;
-@class OrgApacheLuceneUtilBitDocIdSet;
-
 @interface OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter : OrgApacheLuceneSearchJoinBitDocIdSetFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter;
-
-- (jboolean)isEqual:(id)o;
-
-- (OrgApacheLuceneUtilBitDocIdSet *)getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
-
-- (OrgApacheLuceneSearchFilter *)getFilter;
-
-- (NSUInteger)hash;
-
-- (NSString *)toStringWithNSString:(NSString *)field;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter_initWithOrgApacheLuceneSearchFilter_(OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter *self, OrgApacheLuceneSearchFilter *filter);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter_init(OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter *new_OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter_initWithOrgApacheLuceneSearchFilter_(OrgApacheLuceneSearchFilter *filter) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter *new_OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter)
 

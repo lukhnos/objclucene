@@ -16,16 +16,11 @@
 #if !defined (_OrgApacheLuceneAnalysisHuHungarianLightStemmer_) && (OrgApacheLuceneAnalysisHuHungarianLightStemmer_INCLUDE_ALL || OrgApacheLuceneAnalysisHuHungarianLightStemmer_INCLUDE)
 #define _OrgApacheLuceneAnalysisHuHungarianLightStemmer_
 
-@class IOSCharArray;
-
 @interface OrgApacheLuceneAnalysisHuHungarianLightStemmer : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (jint)stemWithCharArray:(IOSCharArray *)s
-                  withInt:(jint)len;
 
 @end
 

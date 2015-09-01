@@ -23,9 +23,6 @@
 #define JavaIoCloseable_INCLUDE 1
 #include "java/io/Closeable.h"
 
-@class OrgApacheLuceneSearchIndexSearcher;
-@protocol OrgApacheLuceneSearchSearcherLifetimeManager_Pruner;
-
 #define OrgApacheLuceneSearchSearcherLifetimeManager_NANOS_PER_SEC 1.0E9
 
 @interface OrgApacheLuceneSearchSearcherLifetimeManager : NSObject < JavaIoCloseable >
@@ -33,16 +30,6 @@
 #pragma mark Public
 
 - (instancetype)init;
-
-- (OrgApacheLuceneSearchIndexSearcher *)acquireWithLong:(jlong)version_;
-
-- (void)close;
-
-- (void)pruneWithOrgApacheLuceneSearchSearcherLifetimeManager_Pruner:(id<OrgApacheLuceneSearchSearcherLifetimeManager_Pruner>)pruner;
-
-- (jlong)recordWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher;
-
-- (void)release__WithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)s;
 
 @end
 
@@ -61,12 +48,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSearcherLifetimeManager)
 #if !defined (_OrgApacheLuceneSearchSearcherLifetimeManager_Pruner_) && (OrgApacheLuceneSearchSearcherLifetimeManager_INCLUDE_ALL || OrgApacheLuceneSearchSearcherLifetimeManager_Pruner_INCLUDE)
 #define _OrgApacheLuceneSearchSearcherLifetimeManager_Pruner_
 
-@class OrgApacheLuceneSearchIndexSearcher;
-
 @protocol OrgApacheLuceneSearchSearcherLifetimeManager_Pruner < NSObject, JavaObject >
-
-- (jboolean)doPruneWithDouble:(jdouble)ageSec
-withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher;
 
 @end
 
@@ -79,24 +61,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSearcherLifetimeManager_Pruner)
 #if !defined (_OrgApacheLuceneSearchSearcherLifetimeManager_PruneByAge_) && (OrgApacheLuceneSearchSearcherLifetimeManager_INCLUDE_ALL || OrgApacheLuceneSearchSearcherLifetimeManager_PruneByAge_INCLUDE)
 #define _OrgApacheLuceneSearchSearcherLifetimeManager_PruneByAge_
 
-@class OrgApacheLuceneSearchIndexSearcher;
-
 @interface OrgApacheLuceneSearchSearcherLifetimeManager_PruneByAge : NSObject < OrgApacheLuceneSearchSearcherLifetimeManager_Pruner >
 
 #pragma mark Public
 
-- (instancetype)initWithDouble:(jdouble)maxAgeSec;
-
-- (jboolean)doPruneWithDouble:(jdouble)ageSec
-withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSearcherLifetimeManager_PruneByAge)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSearcherLifetimeManager_PruneByAge_initWithDouble_(OrgApacheLuceneSearchSearcherLifetimeManager_PruneByAge *self, jdouble maxAgeSec);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSearcherLifetimeManager_PruneByAge_init(OrgApacheLuceneSearchSearcherLifetimeManager_PruneByAge *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSearcherLifetimeManager_PruneByAge *new_OrgApacheLuceneSearchSearcherLifetimeManager_PruneByAge_initWithDouble_(jdouble maxAgeSec) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSearcherLifetimeManager_PruneByAge *new_OrgApacheLuceneSearchSearcherLifetimeManager_PruneByAge_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSearcherLifetimeManager_PruneByAge)
 

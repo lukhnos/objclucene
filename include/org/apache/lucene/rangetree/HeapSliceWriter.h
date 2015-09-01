@@ -20,44 +20,19 @@
 #define OrgApacheLuceneRangetreeSliceWriter_INCLUDE 1
 #include "org/apache/lucene/rangetree/SliceWriter.h"
 
-@class IOSIntArray;
-@class IOSLongArray;
-@protocol OrgApacheLuceneRangetreeSliceReader;
+@interface OrgApacheLuceneRangetreeHeapSliceWriter : NSObject < OrgApacheLuceneRangetreeSliceWriter >
 
-@interface OrgApacheLuceneRangetreeHeapSliceWriter : NSObject < OrgApacheLuceneRangetreeSliceWriter > {
- @public
-  IOSLongArray *values_;
-  IOSIntArray *docIDs_;
-  IOSLongArray *ords_;
-}
+#pragma mark Package-Private
 
-#pragma mark Public
-
-- (instancetype)initWithInt:(jint)count;
-
-- (void)appendWithLong:(jlong)value
-              withLong:(jlong)ord
-               withInt:(jint)docID;
-
-- (void)close;
-
-- (void)destroy;
-
-- (id<OrgApacheLuceneRangetreeSliceReader>)getReaderWithLong:(jlong)start;
-
-- (NSString *)description;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneRangetreeHeapSliceWriter)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeHeapSliceWriter, values_, IOSLongArray *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeHeapSliceWriter, docIDs_, IOSIntArray *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeHeapSliceWriter, ords_, IOSLongArray *)
+FOUNDATION_EXPORT void OrgApacheLuceneRangetreeHeapSliceWriter_init(OrgApacheLuceneRangetreeHeapSliceWriter *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneRangetreeHeapSliceWriter_initWithInt_(OrgApacheLuceneRangetreeHeapSliceWriter *self, jint count);
-
-FOUNDATION_EXPORT OrgApacheLuceneRangetreeHeapSliceWriter *new_OrgApacheLuceneRangetreeHeapSliceWriter_initWithInt_(jint count) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneRangetreeHeapSliceWriter *new_OrgApacheLuceneRangetreeHeapSliceWriter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeHeapSliceWriter)
 

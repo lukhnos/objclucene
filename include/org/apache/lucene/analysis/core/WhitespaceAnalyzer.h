@@ -20,17 +20,11 @@
 #define OrgApacheLuceneAnalysisAnalyzer_INCLUDE 1
 #include "org/apache/lucene/analysis/Analyzer.h"
 
-@class OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;
-
 @interface OrgApacheLuceneAnalysisCoreWhitespaceAnalyzer : OrgApacheLuceneAnalysisAnalyzer
 
 #pragma mark Public
 
 - (instancetype)init;
-
-#pragma mark Protected
-
-- (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)createComponentsWithNSString:(NSString *)fieldName;
 
 @end
 

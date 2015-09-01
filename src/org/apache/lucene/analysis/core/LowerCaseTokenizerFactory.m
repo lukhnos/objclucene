@@ -4,53 +4,34 @@
 //
 
 #include "J2ObjC_source.h"
-#include "java/lang/IllegalArgumentException.h"
-#include "java/util/HashMap.h"
-#include "java/util/Map.h"
-#include "org/apache/lucene/analysis/core/LowerCaseFilterFactory.h"
-#include "org/apache/lucene/analysis/core/LowerCaseTokenizer.h"
 #include "org/apache/lucene/analysis/core/LowerCaseTokenizerFactory.h"
-#include "org/apache/lucene/analysis/util/AbstractAnalysisFactory.h"
-#include "org/apache/lucene/analysis/util/TokenizerFactory.h"
-#include "org/apache/lucene/util/AttributeFactory.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneAnalysisCoreLowerCaseTokenizerFactory
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args {
-  OrgApacheLuceneAnalysisCoreLowerCaseTokenizerFactory_initWithJavaUtilMap_(self, args);
+- (instancetype)init {
+  OrgApacheLuceneAnalysisCoreLowerCaseTokenizerFactory_init(self);
   return self;
-}
-
-- (OrgApacheLuceneAnalysisCoreLowerCaseTokenizer *)createWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory {
-  return [new_OrgApacheLuceneAnalysisCoreLowerCaseTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(factory) autorelease];
-}
-
-- (OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory *)getMultiTermComponent {
-  return [new_OrgApacheLuceneAnalysisCoreLowerCaseFilterFactory_initWithJavaUtilMap_([new_JavaUtilHashMap_initWithJavaUtilMap_([self getOriginalArgs]) autorelease]) autorelease];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "LowerCaseTokenizerFactory", NULL, 0x1, NULL, NULL },
-    { "createWithOrgApacheLuceneUtilAttributeFactory:", "create", "Lorg.apache.lucene.analysis.core.LowerCaseTokenizer;", 0x1, NULL, NULL },
-    { "getMultiTermComponent", NULL, "Lorg.apache.lucene.analysis.util.AbstractAnalysisFactory;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCoreLowerCaseTokenizerFactory = { 2, "LowerCaseTokenizerFactory", "org.apache.lucene.analysis.core", NULL, 0x1, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCoreLowerCaseTokenizerFactory = { 2, "LowerCaseTokenizerFactory", "org.apache.lucene.analysis.core", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisCoreLowerCaseTokenizerFactory;
 }
 
 @end
 
-void OrgApacheLuceneAnalysisCoreLowerCaseTokenizerFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisCoreLowerCaseTokenizerFactory *self, id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisUtilTokenizerFactory_initWithJavaUtilMap_(self, args);
-  if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
-  }
+void OrgApacheLuceneAnalysisCoreLowerCaseTokenizerFactory_init(OrgApacheLuceneAnalysisCoreLowerCaseTokenizerFactory *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneAnalysisCoreLowerCaseTokenizerFactory *new_OrgApacheLuceneAnalysisCoreLowerCaseTokenizerFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+OrgApacheLuceneAnalysisCoreLowerCaseTokenizerFactory *new_OrgApacheLuceneAnalysisCoreLowerCaseTokenizerFactory_init() {
   OrgApacheLuceneAnalysisCoreLowerCaseTokenizerFactory *self = [OrgApacheLuceneAnalysisCoreLowerCaseTokenizerFactory alloc];
-  OrgApacheLuceneAnalysisCoreLowerCaseTokenizerFactory_initWithJavaUtilMap_(self, args);
+  OrgApacheLuceneAnalysisCoreLowerCaseTokenizerFactory_init(self);
   return self;
 }
 

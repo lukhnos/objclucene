@@ -20,52 +20,19 @@
 #define OrgApacheLuceneSearchQuery_INCLUDE 1
 #include "org/apache/lucene/search/Query.h"
 
-@class OrgApacheLuceneIndexIndexReader;
-
-@interface OrgApacheLuceneSearchGeoPointInBBoxQuery : OrgApacheLuceneSearchQuery {
- @public
-  NSString *field_;
-  jdouble minLon_;
-  jdouble minLat_;
-  jdouble maxLon_;
-  jdouble maxLat_;
-}
+@interface OrgApacheLuceneSearchGeoPointInBBoxQuery : OrgApacheLuceneSearchQuery
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field
-                      withDouble:(jdouble)minLon
-                      withDouble:(jdouble)minLat
-                      withDouble:(jdouble)maxLon
-                      withDouble:(jdouble)maxLat;
-
-- (jboolean)isEqual:(id)o;
-
-- (NSString *)getField;
-
-- (jdouble)getMaxLat;
-
-- (jdouble)getMaxLon;
-
-- (jdouble)getMinLat;
-
-- (jdouble)getMinLon;
-
-- (NSUInteger)hash;
-
-- (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
-
-- (NSString *)toStringWithNSString:(NSString *)field;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchGeoPointInBBoxQuery)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchGeoPointInBBoxQuery, field_, NSString *)
+FOUNDATION_EXPORT void OrgApacheLuceneSearchGeoPointInBBoxQuery_init(OrgApacheLuceneSearchGeoPointInBBoxQuery *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchGeoPointInBBoxQuery_initWithNSString_withDouble_withDouble_withDouble_withDouble_(OrgApacheLuceneSearchGeoPointInBBoxQuery *self, NSString *field, jdouble minLon, jdouble minLat, jdouble maxLon, jdouble maxLat);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchGeoPointInBBoxQuery *new_OrgApacheLuceneSearchGeoPointInBBoxQuery_initWithNSString_withDouble_withDouble_withDouble_withDouble_(NSString *field, jdouble minLon, jdouble minLat, jdouble maxLon, jdouble maxLat) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchGeoPointInBBoxQuery *new_OrgApacheLuceneSearchGeoPointInBBoxQuery_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchGeoPointInBBoxQuery)
 

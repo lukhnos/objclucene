@@ -3,149 +3,65 @@
 //  source: ./suggest/src/java/org/apache/lucene/search/suggest/document/TopSuggestDocs.java
 //
 
-#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/lang/CharSequence.h"
-#include "java/util/Comparator.h"
-#include "org/apache/lucene/search/ScoreDoc.h"
-#include "org/apache/lucene/search/TopDocs.h"
-#include "org/apache/lucene/search/suggest/Lookup.h"
-#include "org/apache/lucene/search/suggest/document/SuggestScoreDocPriorityQueue.h"
 #include "org/apache/lucene/search/suggest/document/TopSuggestDocs.h"
 
-J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs)
-
-OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs *OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_EMPTY_;
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs
 
-- (instancetype)initWithInt:(jint)totalHits
-withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDocArray:(IOSObjectArray *)scoreDocs
-                  withFloat:(jfloat)maxScore {
-  OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_initWithInt_withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDocArray_withFloat_(self, totalHits, scoreDocs, maxScore);
+- (instancetype)init {
+  OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_init(self);
   return self;
-}
-
-- (IOSObjectArray *)scoreLookupDocs {
-  return (IOSObjectArray *) check_class_cast(scoreDocs_, [IOSObjectArray class]);
-}
-
-+ (OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs *)mergeWithInt:(jint)topN
-         withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsArray:(IOSObjectArray *)shardHits {
-  return OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_mergeWithInt_withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsArray_(topN, shardHits);
-}
-
-+ (void)initialize {
-  if (self == [OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_EMPTY_, new_OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_initWithInt_withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDocArray_withFloat_(0, [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc_class_()], 0));
-    J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs)
-  }
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDocArray:withFloat:", "TopSuggestDocs", NULL, 0x1, NULL, NULL },
-    { "scoreLookupDocs", NULL, "[Lorg.apache.lucene.search.suggest.document.TopSuggestDocs$SuggestScoreDoc;", 0x1, NULL, NULL },
-    { "mergeWithInt:withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsArray:", "merge", "Lorg.apache.lucene.search.suggest.document.TopSuggestDocs;", 0x9, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "EMPTY_", NULL, 0x19, "Lorg.apache.lucene.search.suggest.document.TopSuggestDocs;", &OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_EMPTY_, NULL, .constantValue.asLong = 0 },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.search.suggest.document.TopSuggestDocs$SuggestScoreDoc;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs = { 2, "TopSuggestDocs", "org.apache.lucene.search.suggest.document", NULL, 0x1, 3, methods, 1, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs = { 2, "TopSuggestDocs", "org.apache.lucene.search.suggest.document", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 1, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs;
 }
 
 @end
 
-void OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_initWithInt_withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDocArray_withFloat_(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs *self, jint totalHits, IOSObjectArray *scoreDocs, jfloat maxScore) {
-  OrgApacheLuceneSearchTopDocs_initWithInt_withOrgApacheLuceneSearchScoreDocArray_withFloat_(self, totalHits, scoreDocs, maxScore);
+void OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_init(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs *new_OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_initWithInt_withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDocArray_withFloat_(jint totalHits, IOSObjectArray *scoreDocs, jfloat maxScore) {
+OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs *new_OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_init() {
   OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs *self = [OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs alloc];
-  OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_initWithInt_withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDocArray_withFloat_(self, totalHits, scoreDocs, maxScore);
+  OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_init(self);
   return self;
-}
-
-OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs *OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_mergeWithInt_withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsArray_(jint topN, IOSObjectArray *shardHits) {
-  OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_initialize();
-  OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue *priorityQueue = [new_OrgApacheLuceneSearchSuggestDocumentSuggestScoreDocPriorityQueue_initWithInt_(topN) autorelease];
-  {
-    IOSObjectArray *a__ = shardHits;
-    OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
-    OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs * const *e__ = b__ + a__->size_;
-    while (b__ < e__) {
-      OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs *shardHit = *b__++;
-      {
-        IOSObjectArray *a__ = [((OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs *) nil_chk(shardHit)) scoreLookupDocs];
-        OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
-        OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc * const *e__ = b__ + a__->size_;
-        while (b__ < e__) {
-          OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc *scoreDoc = *b__++;
-          if (scoreDoc == [priorityQueue insertWithOverflowWithId:scoreDoc]) {
-            break;
-          }
-        }
-      }
-    }
-  }
-  IOSObjectArray *topNResults = [priorityQueue getResults];
-  if (((IOSObjectArray *) nil_chk(topNResults))->size_ > 0) {
-    return [new_OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_initWithInt_withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDocArray_withFloat_(topNResults->size_, topNResults, ((OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc *) nil_chk(IOSObjectArray_Get(topNResults, 0)))->score_) autorelease];
-  }
-  else {
-    return OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_EMPTY_;
-  }
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs)
 
 @implementation OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc
 
-- (instancetype)initWithInt:(jint)doc
-   withJavaLangCharSequence:(id<JavaLangCharSequence>)key
-   withJavaLangCharSequence:(id<JavaLangCharSequence>)context
-                  withFloat:(jfloat)score {
-  OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc_initWithInt_withJavaLangCharSequence_withJavaLangCharSequence_withFloat_(self, doc, key, context, score);
+- (instancetype)init {
+  OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc_init(self);
   return self;
-}
-
-- (jint)compareToWithId:(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc *)o {
-  check_class_cast(o, [OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc class]);
-  return [((id<JavaUtilComparator>) nil_chk(JreLoadStatic(OrgApacheLuceneSearchSuggestLookup, CHARSEQUENCE_COMPARATOR_))) compareWithId:key_ withId:((OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc *) nil_chk(o))->key_];
-}
-
-- (void)dealloc {
-  RELEASE_(key_);
-  RELEASE_(context_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:withJavaLangCharSequence:withJavaLangCharSequence:withFloat:", "SuggestScoreDoc", NULL, 0x1, NULL, NULL },
-    { "compareToWithId:", "compareTo", "I", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "key_", NULL, 0x11, "Ljava.lang.CharSequence;", NULL, NULL, .constantValue.asLong = 0 },
-    { "context_", NULL, 0x11, "Ljava.lang.CharSequence;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc = { 2, "SuggestScoreDoc", "org.apache.lucene.search.suggest.document", "TopSuggestDocs", 0x9, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, "Lorg/apache/lucene/search/ScoreDoc;Ljava/lang/Comparable<Lorg/apache/lucene/search/suggest/document/TopSuggestDocs$SuggestScoreDoc;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc = { 2, "SuggestScoreDoc", "org.apache.lucene.search.suggest.document", "TopSuggestDocs", 0x9, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, "Lorg/apache/lucene/search/ScoreDoc;Ljava/lang/Comparable<Lorg/apache/lucene/search/suggest/document/TopSuggestDocs$SuggestScoreDoc;>;" };
   return &_OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc;
 }
 
 @end
 
-void OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc_initWithInt_withJavaLangCharSequence_withJavaLangCharSequence_withFloat_(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc *self, jint doc, id<JavaLangCharSequence> key, id<JavaLangCharSequence> context, jfloat score) {
-  OrgApacheLuceneSearchScoreDoc_initWithInt_withFloat_(self, doc, score);
-  JreStrongAssign(&self->key_, key);
-  JreStrongAssign(&self->context_, context);
+void OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc_init(OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc *new_OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc_initWithInt_withJavaLangCharSequence_withJavaLangCharSequence_withFloat_(jint doc, id<JavaLangCharSequence> key, id<JavaLangCharSequence> context, jfloat score) {
+OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc *new_OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc_init() {
   OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc *self = [OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc alloc];
-  OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc_initWithInt_withJavaLangCharSequence_withJavaLangCharSequence_withFloat_(self, doc, key, context, score);
+  OrgApacheLuceneSearchSuggestDocumentTopSuggestDocs_SuggestScoreDoc_init(self);
   return self;
 }
 

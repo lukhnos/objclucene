@@ -311,26 +311,6 @@ withOrgApacheLuceneIndexDocValuesTypeEnum:(OrgApacheLuceneIndexDocValuesTypeEnum
   }
 }
 
-- (jboolean)containsWithNSString:(NSString *)fieldName
-withOrgApacheLuceneIndexDocValuesTypeEnum:(OrgApacheLuceneIndexDocValuesTypeEnum *)dvType {
-  @synchronized(self) {
-    if (![((id<JavaUtilMap>) nil_chk(nameToNumber_)) containsKeyWithId:fieldName]) {
-      return NO;
-    }
-    else {
-      return dvType == [((id<JavaUtilMap>) nil_chk(docValuesType_)) getWithId:fieldName];
-    }
-  }
-}
-
-- (void)clear {
-  @synchronized(self) {
-    [((id<JavaUtilMap>) nil_chk(numberToName_)) clear];
-    [((id<JavaUtilMap>) nil_chk(nameToNumber_)) clear];
-    [((id<JavaUtilMap>) nil_chk(docValuesType_)) clear];
-  }
-}
-
 - (void)setDocValuesTypeWithInt:(jint)number
                    withNSString:(NSString *)name
 withOrgApacheLuceneIndexDocValuesTypeEnum:(OrgApacheLuceneIndexDocValuesTypeEnum *)dvType {
@@ -352,8 +332,6 @@ withOrgApacheLuceneIndexDocValuesTypeEnum:(OrgApacheLuceneIndexDocValuesTypeEnum
     { "init", "FieldNumbers", NULL, 0x0, NULL, NULL },
     { "addOrGetWithNSString:withInt:withOrgApacheLuceneIndexDocValuesTypeEnum:", "addOrGet", "I", 0x20, NULL, NULL },
     { "verifyConsistentWithJavaLangInteger:withNSString:withOrgApacheLuceneIndexDocValuesTypeEnum:", "verifyConsistent", "V", 0x20, NULL, NULL },
-    { "containsWithNSString:withOrgApacheLuceneIndexDocValuesTypeEnum:", "contains", "Z", 0x20, NULL, NULL },
-    { "clear", NULL, "V", 0x20, NULL, NULL },
     { "setDocValuesTypeWithInt:withNSString:withOrgApacheLuceneIndexDocValuesTypeEnum:", "setDocValuesType", "V", 0x20, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -362,7 +340,7 @@ withOrgApacheLuceneIndexDocValuesTypeEnum:(OrgApacheLuceneIndexDocValuesTypeEnum
     { "docValuesType_", NULL, 0x12, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/index/DocValuesType;>;", .constantValue.asLong = 0 },
     { "lowestUnassignedFieldNumber_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexFieldInfos_FieldNumbers = { 2, "FieldNumbers", "org.apache.lucene.index", "FieldInfos", 0x18, 6, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexFieldInfos_FieldNumbers = { 2, "FieldNumbers", "org.apache.lucene.index", "FieldInfos", 0x18, 4, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexFieldInfos_FieldNumbers;
 }
 

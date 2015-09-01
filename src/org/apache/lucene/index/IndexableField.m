@@ -6,7 +6,6 @@
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
-#include "java/io/Reader.h"
 #include "org/apache/lucene/analysis/Analyzer.h"
 #include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/index/IndexableField.h"
@@ -26,11 +25,10 @@
     { "boost", NULL, "F", 0x401, NULL, NULL },
     { "binaryValue", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x401, NULL, NULL },
     { "stringValue", NULL, "Ljava.lang.String;", 0x401, NULL, NULL },
-    { "readerValue", NULL, "Ljava.io.Reader;", 0x401, NULL, NULL },
     { "numericValue", NULL, "Ljava.lang.Number;", 0x401, NULL, NULL },
     { "tokenStreamWithOrgApacheLuceneAnalysisAnalyzer:withOrgApacheLuceneAnalysisTokenStream:", "tokenStream", "Lorg.apache.lucene.analysis.TokenStream;", 0x401, "Ljava.io.IOException;", NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexableField = { 2, "IndexableField", "org.apache.lucene.index", NULL, 0x609, 8, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexableField = { 2, "IndexableField", "org.apache.lucene.index", NULL, 0x609, 7, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexIndexableField;
 }
 

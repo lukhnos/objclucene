@@ -20,47 +20,19 @@
 #define OrgApacheLuceneQueriesFunctionDocvaluesIntDocValues_INCLUDE 1
 #include "org/apache/lucene/queries/function/docvalues/IntDocValues.h"
 
-@class OrgApacheLuceneQueriesFunctionValueSource;
-
-@interface OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues : OrgApacheLuceneQueriesFunctionDocvaluesIntDocValues {
- @public
-  jint ival_;
-  jfloat fval_;
-  jdouble dval_;
-  jlong lval_;
-  NSString *sval_;
-  OrgApacheLuceneQueriesFunctionValueSource *parent_;
-}
-
-#pragma mark Public
-
-- (jdouble)doubleValWithInt:(jint)doc;
-
-- (jfloat)floatValWithInt:(jint)doc;
-
-- (jint)intValWithInt:(jint)doc;
-
-- (jlong)longValWithInt:(jint)doc;
-
-- (NSString *)strValWithInt:(jint)doc;
-
-- (NSString *)toStringWithInt:(jint)doc;
+@interface OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues : OrgApacheLuceneQueriesFunctionDocvaluesIntDocValues
 
 #pragma mark Package-Private
 
-- (instancetype)initWithInt:(jint)val
-withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)parent;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues, sval_, NSString *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues, parent_, OrgApacheLuceneQueriesFunctionValueSource *)
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues_init(OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues_initWithInt_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues *self, jint val, OrgApacheLuceneQueriesFunctionValueSource *parent);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues *new_OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues_initWithInt_withOrgApacheLuceneQueriesFunctionValueSource_(jint val, OrgApacheLuceneQueriesFunctionValueSource *parent) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues *new_OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceConstIntDocValues)
 
@@ -73,47 +45,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceConstIntDocV
 #define OrgApacheLuceneQueriesFunctionDocvaluesDoubleDocValues_INCLUDE 1
 #include "org/apache/lucene/queries/function/docvalues/DoubleDocValues.h"
 
-@class OrgApacheLuceneQueriesFunctionValueSource;
-
-@interface OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues : OrgApacheLuceneQueriesFunctionDocvaluesDoubleDocValues {
- @public
-  jint ival_;
-  jfloat fval_;
-  jdouble dval_;
-  jlong lval_;
-  NSString *sval_;
-  OrgApacheLuceneQueriesFunctionValueSource *parent_;
-}
-
-#pragma mark Public
-
-- (jdouble)doubleValWithInt:(jint)doc;
-
-- (jfloat)floatValWithInt:(jint)doc;
-
-- (jint)intValWithInt:(jint)doc;
-
-- (jlong)longValWithInt:(jint)doc;
-
-- (NSString *)strValWithInt:(jint)doc;
-
-- (NSString *)toStringWithInt:(jint)doc;
+@interface OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues : OrgApacheLuceneQueriesFunctionDocvaluesDoubleDocValues
 
 #pragma mark Package-Private
 
-- (instancetype)initWithDouble:(jdouble)val
-withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)parent;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues, sval_, NSString *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues, parent_, OrgApacheLuceneQueriesFunctionValueSource *)
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues_init(OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues_initWithDouble_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues *self, jdouble val, OrgApacheLuceneQueriesFunctionValueSource *parent);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues *new_OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues_initWithDouble_withOrgApacheLuceneQueriesFunctionValueSource_(jdouble val, OrgApacheLuceneQueriesFunctionValueSource *parent) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues *new_OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceConstDoubleDocValues)
 
@@ -126,53 +70,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceConstDoubleD
 #define OrgApacheLuceneQueriesFunctionValueSource_INCLUDE 1
 #include "org/apache/lucene/queries/function/ValueSource.h"
 
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneQueriesFunctionFunctionValues;
-@class OrgApacheLuceneSearchIndexSearcher;
-@class OrgApacheLuceneUtilBytesRef;
-@protocol JavaUtilMap;
-
-@interface OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource : OrgApacheLuceneQueriesFunctionValueSource {
- @public
-  NSString *field_;
-  NSString *indexedField_;
-  NSString *val_;
-  OrgApacheLuceneUtilBytesRef *indexedBytes_;
-}
+@interface OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource : OrgApacheLuceneQueriesFunctionValueSource
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field
-                    withNSString:(NSString *)val
-                    withNSString:(NSString *)indexedField
- withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)indexedBytes;
-
-- (void)createWeightWithJavaUtilMap:(id<JavaUtilMap>)context
-withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher;
-
-- (NSString *)description__;
-
-- (jboolean)isEqual:(id)o;
-
-- (OrgApacheLuceneQueriesFunctionFunctionValues *)getValuesWithJavaUtilMap:(id<JavaUtilMap>)context
-                                 withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext;
-
-- (NSUInteger)hash;
-
-- (NSString *)name;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource, field_, NSString *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource, indexedField_, NSString *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource, val_, NSString *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource, indexedBytes_, OrgApacheLuceneUtilBytesRef *)
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource_init(OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource_initWithNSString_withNSString_withNSString_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource *self, NSString *field, NSString *val, NSString *indexedField, OrgApacheLuceneUtilBytesRef *indexedBytes);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource_initWithNSString_withNSString_withNSString_withOrgApacheLuceneUtilBytesRef_(NSString *field, NSString *val, NSString *indexedField, OrgApacheLuceneUtilBytesRef *indexedBytes) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource *new_OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceDocFreqValueSource)
 

@@ -27,7 +27,6 @@
 @class IOSByteArray;
 @class OrgApacheLuceneStoreDataOutput;
 @class OrgApacheLuceneStoreRAMFile;
-@protocol JavaUtilCollection;
 
 #define OrgApacheLuceneStoreRAMOutputStream_BUFFER_SIZE 1024
 
@@ -47,8 +46,6 @@
 - (void)close;
 
 - (jlong)getChecksum;
-
-- (id<JavaUtilCollection>)getChildResources;
 
 - (jlong)getFilePointer;
 

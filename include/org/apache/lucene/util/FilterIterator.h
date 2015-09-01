@@ -24,23 +24,13 @@
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilIterator:(id<JavaUtilIterator>)baseIterator;
-
-- (jboolean)hasNext;
-
-- (id)next;
-
-- (void)remove;
-
-#pragma mark Protected
-
-- (jboolean)predicateFunctionWithId:(id)object;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilFilterIterator)
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilFilterIterator_initWithJavaUtilIterator_(OrgApacheLuceneUtilFilterIterator *self, id<JavaUtilIterator> baseIterator);
+FOUNDATION_EXPORT void OrgApacheLuceneUtilFilterIterator_init(OrgApacheLuceneUtilFilterIterator *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFilterIterator)
 

@@ -36,9 +36,6 @@
 
 - (instancetype)init;
 
-- (OrgApacheLuceneIndexMergePolicy_MergeSpecification *)findForcedDeletesMergesWithOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)segmentInfos
-                                                                                withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer;
-
 - (OrgApacheLuceneIndexMergePolicy_MergeSpecification *)findForcedMergesWithOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)segmentInfos
                                                                                                      withInt:(jint)maxSegmentCount
                                                                                              withJavaUtilMap:(id<JavaUtilMap>)segmentsToMerge
@@ -51,10 +48,6 @@
 - (jdouble)getMaxCFSSegmentSizeMB;
 
 - (jdouble)getNoCFSRatio;
-
-- (void)setMaxCFSSegmentSizeMBWithDouble:(jdouble)v;
-
-- (void)setNoCFSRatioWithDouble:(jdouble)noCFSRatio;
 
 - (jboolean)useCompoundFileWithOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)infos
                       withOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)mergedInfo
@@ -149,8 +142,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergePolicy_DocMap)
 
 - (OrgApacheLuceneIndexMergePolicy_DocMap *)getDocMapWithOrgApacheLuceneIndexMergeState:(OrgApacheLuceneIndexMergeState *)mergeState;
 
-- (OrgApacheLuceneIndexSegmentCommitInfo *)getMergeInfo;
-
 - (id<JavaUtilList>)getMergeReaders;
 
 - (OrgApacheLuceneStoreMergeInfo *)getStoreMergeInfo;
@@ -160,10 +151,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergePolicy_DocMap)
 - (NSString *)segString;
 
 - (void)setMergeInfoWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)info;
-
-- (jlong)totalBytesSize;
-
-- (jint)totalNumDocs;
 
 #pragma mark Package-Private
 
@@ -193,7 +180,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergePolicy_OneMerge)
 #define _OrgApacheLuceneIndexMergePolicy_MergeSpecification_
 
 @class OrgApacheLuceneIndexMergePolicy_OneMerge;
-@class OrgApacheLuceneStoreDirectory;
 @protocol JavaUtilList;
 
 @interface OrgApacheLuceneIndexMergePolicy_MergeSpecification : NSObject {
@@ -206,8 +192,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergePolicy_OneMerge)
 - (instancetype)init;
 
 - (void)addWithOrgApacheLuceneIndexMergePolicy_OneMerge:(OrgApacheLuceneIndexMergePolicy_OneMerge *)merge;
-
-- (NSString *)segStringWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir;
 
 @end
 
@@ -242,8 +226,6 @@ withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir;
 
 - (instancetype)initWithJavaLangThrowable:(JavaLangThrowable *)exc
         withOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir;
-
-- (OrgApacheLuceneStoreDirectory *)getDirectory;
 
 @end
 

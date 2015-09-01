@@ -3,118 +3,35 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/util/FilesystemResourceLoader.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/FileInputStream.h"
-#include "java/io/FileNotFoundException.h"
-#include "java/io/IOException.h"
-#include "java/io/InputStream.h"
-#include "java/lang/IllegalArgumentException.h"
-#include "java/lang/NullPointerException.h"
-#include "org/apache/lucene/analysis/util/ClasspathResourceLoader.h"
 #include "org/apache/lucene/analysis/util/FilesystemResourceLoader.h"
-#include "org/apache/lucene/analysis/util/ResourceLoader.h"
-#include "org/lukhnos/portmobile/file/Files.h"
-#include "org/lukhnos/portmobile/file/NoSuchFileException.h"
-#include "org/lukhnos/portmobile/file/Path.h"
 
-@interface OrgApacheLuceneAnalysisUtilFilesystemResourceLoader () {
- @public
-  OrgLukhnosPortmobileFilePath *baseDirectory_;
-  id<OrgApacheLuceneAnalysisUtilResourceLoader> delegate_;
-}
-
-@end
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisUtilFilesystemResourceLoader, baseDirectory_, OrgLukhnosPortmobileFilePath *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisUtilFilesystemResourceLoader, delegate_, id<OrgApacheLuceneAnalysisUtilResourceLoader>)
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneAnalysisUtilFilesystemResourceLoader
 
-- (instancetype)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)baseDirectory {
-  OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_initWithOrgLukhnosPortmobileFilePath_(self, baseDirectory);
+- (instancetype)init {
+  OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_init(self);
   return self;
-}
-
-- (instancetype)initWithOrgLukhnosPortmobileFilePath:(OrgLukhnosPortmobileFilePath *)baseDirectory
-       withOrgApacheLuceneAnalysisUtilResourceLoader:(id<OrgApacheLuceneAnalysisUtilResourceLoader>)delegate {
-  OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneAnalysisUtilResourceLoader_(self, baseDirectory, delegate);
-  return self;
-}
-
-- (JavaIoInputStream *)openResourceWithNSString:(NSString *)resource {
-  @try {
-    return OrgLukhnosPortmobileFileFiles_newInputStreamWithOrgLukhnosPortmobileFilePath_([((OrgLukhnosPortmobileFilePath *) nil_chk(baseDirectory_)) resolveWithNSString:resource]);
-  }
-  @catch (JavaIoFileNotFoundException *fnfe) {
-    return [((id<OrgApacheLuceneAnalysisUtilResourceLoader>) nil_chk(delegate_)) openResourceWithNSString:resource];
-  }
-  @catch (OrgLukhnosPortmobileFileNoSuchFileException *fnfe) {
-    return [((id<OrgApacheLuceneAnalysisUtilResourceLoader>) nil_chk(delegate_)) openResourceWithNSString:resource];
-  }
-  @catch (JavaIoIOException *fnfe) {
-    return [((id<OrgApacheLuceneAnalysisUtilResourceLoader>) nil_chk(delegate_)) openResourceWithNSString:resource];
-  }
-}
-
-- (id)newInstanceWithNSString:(NSString *)cname
-                 withIOSClass:(IOSClass *)expectedType {
-  return [((id<OrgApacheLuceneAnalysisUtilResourceLoader>) nil_chk(delegate_)) newInstanceWithNSString:cname withIOSClass:expectedType];
-}
-
-- (IOSClass *)findClassWithNSString:(NSString *)cname
-                       withIOSClass:(IOSClass *)expectedType {
-  return [((id<OrgApacheLuceneAnalysisUtilResourceLoader>) nil_chk(delegate_)) findClassWithNSString:cname withIOSClass:expectedType];
-}
-
-- (void)dealloc {
-  RELEASE_(baseDirectory_);
-  RELEASE_(delegate_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgLukhnosPortmobileFilePath:", "FilesystemResourceLoader", NULL, 0x1, NULL, NULL },
-    { "initWithOrgLukhnosPortmobileFilePath:withOrgApacheLuceneAnalysisUtilResourceLoader:", "FilesystemResourceLoader", NULL, 0x1, NULL, NULL },
-    { "openResourceWithNSString:", "openResource", "Ljava.io.InputStream;", 0x1, "Ljava.io.IOException;", NULL },
-    { "newInstanceWithNSString:withIOSClass:", "newInstance", "TT;", 0x1, NULL, "<T:Ljava/lang/Object;>(Ljava/lang/String;Ljava/lang/Class<TT;>;)TT;" },
-    { "findClassWithNSString:withIOSClass:", "findClass", "Ljava.lang.Class;", 0x1, NULL, "<T:Ljava/lang/Object;>(Ljava/lang/String;Ljava/lang/Class<TT;>;)Ljava/lang/Class<+TT;>;" },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "baseDirectory_", NULL, 0x12, "Lorg.lukhnos.portmobile.file.Path;", NULL, NULL, .constantValue.asLong = 0 },
-    { "delegate_", NULL, 0x12, "Lorg.apache.lucene.analysis.util.ResourceLoader;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisUtilFilesystemResourceLoader = { 2, "FilesystemResourceLoader", "org.apache.lucene.analysis.util", NULL, 0x11, 5, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisUtilFilesystemResourceLoader = { 2, "FilesystemResourceLoader", "org.apache.lucene.analysis.util", NULL, 0x11, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisUtilFilesystemResourceLoader;
 }
 
 @end
 
-void OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_initWithOrgLukhnosPortmobileFilePath_(OrgApacheLuceneAnalysisUtilFilesystemResourceLoader *self, OrgLukhnosPortmobileFilePath *baseDirectory) {
-  OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneAnalysisUtilResourceLoader_(self, baseDirectory, [new_OrgApacheLuceneAnalysisUtilClasspathResourceLoader_init() autorelease]);
-}
-
-OrgApacheLuceneAnalysisUtilFilesystemResourceLoader *new_OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_initWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *baseDirectory) {
-  OrgApacheLuceneAnalysisUtilFilesystemResourceLoader *self = [OrgApacheLuceneAnalysisUtilFilesystemResourceLoader alloc];
-  OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_initWithOrgLukhnosPortmobileFilePath_(self, baseDirectory);
-  return self;
-}
-
-void OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneAnalysisUtilResourceLoader_(OrgApacheLuceneAnalysisUtilFilesystemResourceLoader *self, OrgLukhnosPortmobileFilePath *baseDirectory, id<OrgApacheLuceneAnalysisUtilResourceLoader> delegate) {
+void OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_init(OrgApacheLuceneAnalysisUtilFilesystemResourceLoader *self) {
   NSObject_init(self);
-  if (baseDirectory == nil) {
-    @throw [new_JavaLangNullPointerException_init() autorelease];
-  }
-  if (!OrgLukhnosPortmobileFileFiles_isDirectoryWithOrgLukhnosPortmobileFilePath_(baseDirectory)) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("@$", baseDirectory, @" is not a directory")) autorelease];
-  if (delegate == nil) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"delegate ResourceLoader may not be null") autorelease];
-  JreStrongAssign(&self->baseDirectory_, baseDirectory);
-  JreStrongAssign(&self->delegate_, delegate);
 }
 
-OrgApacheLuceneAnalysisUtilFilesystemResourceLoader *new_OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneAnalysisUtilResourceLoader_(OrgLukhnosPortmobileFilePath *baseDirectory, id<OrgApacheLuceneAnalysisUtilResourceLoader> delegate) {
+OrgApacheLuceneAnalysisUtilFilesystemResourceLoader *new_OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_init() {
   OrgApacheLuceneAnalysisUtilFilesystemResourceLoader *self = [OrgApacheLuceneAnalysisUtilFilesystemResourceLoader alloc];
-  OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_initWithOrgLukhnosPortmobileFilePath_withOrgApacheLuceneAnalysisUtilResourceLoader_(self, baseDirectory, delegate);
+  OrgApacheLuceneAnalysisUtilFilesystemResourceLoader_init(self);
   return self;
 }
 

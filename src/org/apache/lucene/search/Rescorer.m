@@ -3,31 +3,12 @@
 //  source: ./core/src/java/org/apache/lucene/search/Rescorer.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
-#include "org/apache/lucene/search/Explanation.h"
-#include "org/apache/lucene/search/IndexSearcher.h"
 #include "org/apache/lucene/search/Rescorer.h"
-#include "org/apache/lucene/search/TopDocs.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneSearchRescorer
-
-- (OrgApacheLuceneSearchTopDocs *)rescoreWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
-                                               withOrgApacheLuceneSearchTopDocs:(OrgApacheLuceneSearchTopDocs *)firstPassTopDocs
-                                                                        withInt:(jint)topN {
-  // can't call an abstract method
-  [self doesNotRecognizeSelector:_cmd];
-  return 0;
-}
-
-- (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
-                                               withOrgApacheLuceneSearchExplanation:(OrgApacheLuceneSearchExplanation *)firstPassExplanation
-                                                                            withInt:(jint)docID {
-  // can't call an abstract method
-  [self doesNotRecognizeSelector:_cmd];
-  return 0;
-}
 
 - (instancetype)init {
   OrgApacheLuceneSearchRescorer_init(self);
@@ -36,11 +17,9 @@
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "rescoreWithOrgApacheLuceneSearchIndexSearcher:withOrgApacheLuceneSearchTopDocs:withInt:", "rescore", "Lorg.apache.lucene.search.TopDocs;", 0x401, "Ljava.io.IOException;", NULL },
-    { "explainWithOrgApacheLuceneSearchIndexSearcher:withOrgApacheLuceneSearchExplanation:withInt:", "explain", "Lorg.apache.lucene.search.Explanation;", 0x401, "Ljava.io.IOException;", NULL },
     { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchRescorer = { 2, "Rescorer", "org.apache.lucene.search", NULL, 0x401, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchRescorer = { 2, "Rescorer", "org.apache.lucene.search", NULL, 0x401, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchRescorer;
 }
 

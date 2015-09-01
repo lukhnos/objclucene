@@ -20,41 +20,19 @@
 #define OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_INCLUDE 1
 #include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNodeImpl.h"
 
-@class OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText;
-@protocol JavaLangCharSequence;
-@protocol JavaUtilList;
-@protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
-@protocol OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax;
-
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)pathElements;
-
-- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)cloneTree;
-
-- (id<JavaLangCharSequence>)getFirstPathElement;
-
-- (OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText *)getPathElementWithInt:(jint)index;
-
-- (id<JavaUtilList>)getPathElements;
-
-- (id<JavaUtilList>)getPathElementsWithInt:(jint)startIndex;
-
-- (void)setPathElementsWithJavaUtilList:(id<JavaUtilList>)elements;
-
-- (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escaper;
-
-- (NSString *)description;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_initWithJavaUtilList_(OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode *self, id<JavaUtilList> pathElements);
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_init(OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_initWithJavaUtilList_(id<JavaUtilList> pathElements) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode)
 
@@ -63,40 +41,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryN
 #if !defined (_OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText_) && (OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText_INCLUDE)
 #define _OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText_
 
-@protocol JavaLangCharSequence;
-
-@interface OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText : NSObject < NSCopying > {
- @public
-  id<JavaLangCharSequence> value_;
-  jint begin_;
-  jint end_;
-}
+@interface OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText : NSObject < NSCopying >
 
 #pragma mark Public
 
-- (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)value
-                                     withInt:(jint)begin
-                                     withInt:(jint)end;
-
-- (OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText *)clone;
-
-- (jint)getBegin;
-
-- (jint)getEnd;
-
-- (id<JavaLangCharSequence>)getValue;
-
-- (NSString *)description;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText, value_, id<JavaLangCharSequence>)
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText_init(OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText_initWithJavaLangCharSequence_withInt_withInt_(OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText *self, id<JavaLangCharSequence> value, jint begin, jint end);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText *new_OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText_initWithJavaLangCharSequence_withInt_withInt_(id<JavaLangCharSequence> value, jint begin, jint end) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText *new_OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesPathQueryNode_QueryText)
 

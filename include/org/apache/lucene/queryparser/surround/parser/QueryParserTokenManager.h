@@ -20,81 +20,19 @@
 #define OrgApacheLuceneQueryparserSurroundParserQueryParserConstants_INCLUDE 1
 #include "org/apache/lucene/queryparser/surround/parser/QueryParserConstants.h"
 
-@class IOSIntArray;
-@class IOSLongArray;
-@class IOSObjectArray;
-@class OrgApacheLuceneQueryparserSurroundParserToken;
-@protocol OrgApacheLuceneQueryparserSurroundParserCharStream;
-
-@interface OrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager : NSObject < OrgApacheLuceneQueryparserSurroundParserQueryParserConstants > {
- @public
-  id<OrgApacheLuceneQueryparserSurroundParserCharStream> input_stream_;
-  jchar curChar_;
-  jint curLexState_;
-  jint defaultLexState_;
-  jint jjnewStateCnt_;
-  jint jjround_;
-  jint jjmatchedPos_;
-  jint jjmatchedKind_;
-}
+@interface OrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager : NSObject < OrgApacheLuceneQueryparserSurroundParserQueryParserConstants >
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneQueryparserSurroundParserCharStream:(id<OrgApacheLuceneQueryparserSurroundParserCharStream>)stream;
-
-- (instancetype)initWithOrgApacheLuceneQueryparserSurroundParserCharStream:(id<OrgApacheLuceneQueryparserSurroundParserCharStream>)stream
-                                                                   withInt:(jint)lexState;
-
-- (OrgApacheLuceneQueryparserSurroundParserToken *)getNextToken;
-
-- (void)ReInitWithOrgApacheLuceneQueryparserSurroundParserCharStream:(id<OrgApacheLuceneQueryparserSurroundParserCharStream>)stream;
-
-- (void)ReInitWithOrgApacheLuceneQueryparserSurroundParserCharStream:(id<OrgApacheLuceneQueryparserSurroundParserCharStream>)stream
-                                                             withInt:(jint)lexState;
-
-- (void)SwitchToWithInt:(jint)lexState;
-
-#pragma mark Protected
-
-- (OrgApacheLuceneQueryparserSurroundParserToken *)jjFillToken;
+- (instancetype)init;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager, input_stream_, id<OrgApacheLuceneQueryparserSurroundParserCharStream>)
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager_init(OrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager *self);
 
-FOUNDATION_EXPORT IOSLongArray *OrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager_jjbitVec0_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager, jjbitVec0_, IOSLongArray *)
-
-FOUNDATION_EXPORT IOSLongArray *OrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager_jjbitVec2_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager, jjbitVec2_, IOSLongArray *)
-
-FOUNDATION_EXPORT IOSIntArray *OrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager_jjnextStates_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager, jjnextStates_, IOSIntArray *)
-
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager_jjstrLiteralImages_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager, jjstrLiteralImages_, IOSObjectArray *)
-
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager_lexStateNames_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager, lexStateNames_, IOSObjectArray *)
-
-FOUNDATION_EXPORT IOSIntArray *OrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager_jjnewLexState_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager, jjnewLexState_, IOSIntArray *)
-
-FOUNDATION_EXPORT IOSLongArray *OrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager_jjtoToken_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager, jjtoToken_, IOSLongArray *)
-
-FOUNDATION_EXPORT IOSLongArray *OrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager_jjtoSkip_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager, jjtoSkip_, IOSLongArray *)
-
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager_initWithOrgApacheLuceneQueryparserSurroundParserCharStream_(OrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager *self, id<OrgApacheLuceneQueryparserSurroundParserCharStream> stream);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager *new_OrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager_initWithOrgApacheLuceneQueryparserSurroundParserCharStream_(id<OrgApacheLuceneQueryparserSurroundParserCharStream> stream) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager_initWithOrgApacheLuceneQueryparserSurroundParserCharStream_withInt_(OrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager *self, id<OrgApacheLuceneQueryparserSurroundParserCharStream> stream, jint lexState);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager *new_OrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager_initWithOrgApacheLuceneQueryparserSurroundParserCharStream_withInt_(id<OrgApacheLuceneQueryparserSurroundParserCharStream> stream, jint lexState) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager *new_OrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager)
 

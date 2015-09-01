@@ -20,28 +20,15 @@
 #define OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_INCLUDE 1
 #include "org/apache/lucene/queryparser/flexible/core/parser/EscapeQuerySyntax.h"
 
-@class JavaUtilLocale;
-@class OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum;
-@class OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence;
-@protocol JavaLangCharSequence;
-
 @interface OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl : NSObject < OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax >
 
 #pragma mark Public
 
 - (instancetype)init;
 
-+ (OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *)discardEscapeCharWithJavaLangCharSequence:(id<JavaLangCharSequence>)input;
-
-- (id<JavaLangCharSequence>)escapeWithJavaLangCharSequence:(id<JavaLangCharSequence>)text
-                                        withJavaUtilLocale:(JavaUtilLocale *)locale
-withOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum:(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum *)type;
-
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl)
-
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_discardEscapeCharWithJavaLangCharSequence_(id<JavaLangCharSequence> input);
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl)
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_init(OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl *self);
 

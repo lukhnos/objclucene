@@ -28,10 +28,6 @@
 
 - (jlong)docFreq;
 
-- (OrgApacheLuceneUtilBytesRef *)term;
-
-- (jlong)totalTermFreq;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchTermStatistics)

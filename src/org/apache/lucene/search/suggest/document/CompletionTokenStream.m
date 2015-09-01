@@ -97,23 +97,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_By
 
 @implementation OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_initWithOrgApacheLuceneAnalysisTokenStream_(self, input);
-  return self;
-}
-
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-                                               withBoolean:(jboolean)preserveSep
-                                               withBoolean:(jboolean)preservePositionIncrements
-                                                   withInt:(jint)maxGraphExpansions {
-  OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_withBoolean_withInt_(self, input, preserveSep, preservePositionIncrements, maxGraphExpansions);
-  return self;
-}
-
-- (void)setPayloadWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload {
-  JreStrongAssign(&self->payload_, payload);
-}
-
 - (jboolean)incrementToken {
   [self clearAttributes];
   if (finiteStrings_ == nil) {
@@ -187,6 +170,11 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_By
   return OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_replaceSepWithOrgApacheLuceneUtilAutomatonAutomaton_withBoolean_withInt_(a, preserveSep, sepLabel);
 }
 
+- (instancetype)init {
+  OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_init(self);
+  return self;
+}
+
 - (void)dealloc {
   RELEASE_(payloadAttr_);
   RELEASE_(bytesAtt_);
@@ -199,9 +187,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_By
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:", "CompletionTokenStream", NULL, 0x0, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withBoolean:withBoolean:withInt:", "CompletionTokenStream", NULL, 0x0, NULL, NULL },
-    { "setPayloadWithOrgApacheLuceneUtilBytesRef:", "setPayload", "V", 0x1, NULL, NULL },
     { "incrementToken", NULL, "Z", 0x1, "Ljava.io.IOException;", NULL },
     { "end", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
     { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
@@ -209,6 +194,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_By
     { "toAutomaton", NULL, "Lorg.apache.lucene.util.automaton.Automaton;", 0x1, "Ljava.io.IOException;", NULL },
     { "toAutomatonWithBoolean:", "toAutomaton", "Lorg.apache.lucene.util.automaton.Automaton;", 0x1, "Ljava.io.IOException;", NULL },
     { "replaceSepWithOrgApacheLuceneUtilAutomatonAutomaton:withBoolean:withInt:", "replaceSep", "Lorg.apache.lucene.util.automaton.Automaton;", 0xa, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "payloadAttr_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.PayloadAttribute;", NULL, NULL, .constantValue.asLong = 0 },
@@ -222,37 +208,11 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_By
     { "charTermAttribute_", NULL, 0x2, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.search.suggest.document.CompletionTokenStream$EscapingTokenStreamToAutomaton;", "Lorg.apache.lucene.search.suggest.document.CompletionTokenStream$BytesRefBuilderTermAttribute;", "Lorg.apache.lucene.search.suggest.document.CompletionTokenStream$BytesRefBuilderTermAttributeImpl;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream = { 2, "CompletionTokenStream", "org.apache.lucene.search.suggest.document", NULL, 0x11, 10, methods, 9, fields, 0, NULL, 3, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream = { 2, "CompletionTokenStream", "org.apache.lucene.search.suggest.document", NULL, 0x11, 8, methods, 9, fields, 0, NULL, 3, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream;
 }
 
 @end
-
-void OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *self, OrgApacheLuceneAnalysisTokenStream *input) {
-  OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_withBoolean_withInt_(self, input, OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_DEFAULT_PRESERVE_SEP, OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_DEFAULT_PRESERVE_POSITION_INCREMENTS, OrgApacheLuceneSearchSuggestDocumentCompletionAnalyzer_DEFAULT_MAX_GRAPH_EXPANSIONS);
-}
-
-OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *new_OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) {
-  OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *self = [OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream alloc];
-  OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_initWithOrgApacheLuceneAnalysisTokenStream_(self, input);
-  return self;
-}
-
-void OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_withBoolean_withInt_(OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *self, OrgApacheLuceneAnalysisTokenStream *input, jboolean preserveSep, jboolean preservePositionIncrements, jint maxGraphExpansions) {
-  OrgApacheLuceneAnalysisTokenStream_init(self);
-  JreStrongAssign(&self->payloadAttr_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPayloadAttribute_class_()]);
-  JreStrongAssign(&self->bytesAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttribute_class_()]);
-  JreStrongAssign(&self->input_, input);
-  self->preserveSep_ = preserveSep;
-  self->preservePositionIncrements_ = preservePositionIncrements;
-  self->maxGraphExpansions_ = maxGraphExpansions;
-}
-
-OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *new_OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_withBoolean_withInt_(OrgApacheLuceneAnalysisTokenStream *input, jboolean preserveSep, jboolean preservePositionIncrements, jint maxGraphExpansions) {
-  OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *self = [OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream alloc];
-  OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_withBoolean_withInt_(self, input, preserveSep, preservePositionIncrements, maxGraphExpansions);
-  return self;
-}
 
 OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_replaceSepWithOrgApacheLuceneUtilAutomatonAutomaton_withBoolean_withInt_(OrgApacheLuceneUtilAutomatonAutomaton *a, jboolean preserveSep, jint sepLabel) {
   OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_initialize();
@@ -289,6 +249,18 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneSearchSuggestDocumentCompl
   }
   [result finishState];
   return result;
+}
+
+void OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_init(OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *self) {
+  NSObject_init(self);
+  JreStrongAssign(&self->payloadAttr_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPayloadAttribute_class_()]);
+  JreStrongAssign(&self->bytesAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttribute_class_()]);
+}
+
+OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *new_OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_init() {
+  OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream *self = [OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream alloc];
+  OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_init(self);
+  return self;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream)

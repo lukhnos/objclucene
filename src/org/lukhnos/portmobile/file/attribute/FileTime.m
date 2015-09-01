@@ -14,10 +14,6 @@
   return self;
 }
 
-+ (OrgLukhnosPortmobileFileAttributeFileTime *)fromMillisWithLong:(jlong)value {
-  return OrgLukhnosPortmobileFileAttributeFileTime_fromMillisWithLong_(value);
-}
-
 - (NSString *)description {
   return JavaLangLong_toStringWithLong_(time_);
 }
@@ -40,7 +36,6 @@
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithLong:", "FileTime", NULL, 0x0, NULL, NULL },
-    { "fromMillisWithLong:", "fromMillis", "Lorg.lukhnos.portmobile.file.attribute.FileTime;", 0x9, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "isEqual:", "equals", "Z", 0x1, NULL, NULL },
     { "compareToWithId:", "compareTo", "I", 0x1, NULL, NULL },
@@ -48,7 +43,7 @@
   static const J2ObjcFieldInfo fields[] = {
     { "time_", NULL, 0x0, "J", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgLukhnosPortmobileFileAttributeFileTime = { 2, "FileTime", "org.lukhnos.portmobile.file.attribute", NULL, 0x1, 5, methods, 1, fields, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/lang/Comparable<Lorg/lukhnos/portmobile/file/attribute/FileTime;>;" };
+  static const J2ObjcClassInfo _OrgLukhnosPortmobileFileAttributeFileTime = { 2, "FileTime", "org.lukhnos.portmobile.file.attribute", NULL, 0x1, 4, methods, 1, fields, 0, NULL, 0, NULL, NULL, "Ljava/lang/Object;Ljava/lang/Comparable<Lorg/lukhnos/portmobile/file/attribute/FileTime;>;" };
   return &_OrgLukhnosPortmobileFileAttributeFileTime;
 }
 
@@ -63,11 +58,6 @@ OrgLukhnosPortmobileFileAttributeFileTime *new_OrgLukhnosPortmobileFileAttribute
   OrgLukhnosPortmobileFileAttributeFileTime *self = [OrgLukhnosPortmobileFileAttributeFileTime alloc];
   OrgLukhnosPortmobileFileAttributeFileTime_initWithLong_(self, time);
   return self;
-}
-
-OrgLukhnosPortmobileFileAttributeFileTime *OrgLukhnosPortmobileFileAttributeFileTime_fromMillisWithLong_(jlong value) {
-  OrgLukhnosPortmobileFileAttributeFileTime_initialize();
-  return [new_OrgLukhnosPortmobileFileAttributeFileTime_initWithLong_(value) autorelease];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgLukhnosPortmobileFileAttributeFileTime)

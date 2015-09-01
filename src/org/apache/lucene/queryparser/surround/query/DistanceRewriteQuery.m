@@ -3,48 +3,36 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/surround/query/DistanceRewriteQuery.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
-#include "org/apache/lucene/index/IndexReader.h"
-#include "org/apache/lucene/queryparser/surround/query/BasicQueryFactory.h"
-#include "org/apache/lucene/queryparser/surround/query/DistanceQuery.h"
 #include "org/apache/lucene/queryparser/surround/query/DistanceRewriteQuery.h"
-#include "org/apache/lucene/queryparser/surround/query/RewriteQuery.h"
-#include "org/apache/lucene/search/Query.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneQueryparserSurroundQueryDistanceRewriteQuery
 
-- (instancetype)initWithOrgApacheLuceneQueryparserSurroundQueryDistanceQuery:(OrgApacheLuceneQueryparserSurroundQueryDistanceQuery *)srndQuery
-                                                                withNSString:(NSString *)fieldName
-                withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *)qf {
-  OrgApacheLuceneQueryparserSurroundQueryDistanceRewriteQuery_initWithOrgApacheLuceneQueryparserSurroundQueryDistanceQuery_withNSString_withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_(self, srndQuery, fieldName, qf);
+- (instancetype)init {
+  OrgApacheLuceneQueryparserSurroundQueryDistanceRewriteQuery_init(self);
   return self;
-}
-
-- (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader {
-  return [((OrgApacheLuceneQueryparserSurroundQueryDistanceQuery *) nil_chk(srndQuery_)) getSpanNearQueryWithOrgApacheLuceneIndexIndexReader:reader withNSString:fieldName_ withFloat:[self getBoost] withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:qf_];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneQueryparserSurroundQueryDistanceQuery:withNSString:withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:", "DistanceRewriteQuery", NULL, 0x0, NULL, NULL },
-    { "rewriteWithOrgApacheLuceneIndexIndexReader:", "rewrite", "Lorg.apache.lucene.search.Query;", 0x1, "Ljava.io.IOException;", NULL },
+    { "init", NULL, NULL, 0x0, NULL, NULL },
   };
   static const char *superclass_type_args[] = {"Lorg.apache.lucene.queryparser.surround.query.DistanceQuery;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserSurroundQueryDistanceRewriteQuery = { 2, "DistanceRewriteQuery", "org.apache.lucene.queryparser.surround.query", NULL, 0x0, 2, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/queryparser/surround/query/RewriteQuery<Lorg/apache/lucene/queryparser/surround/query/DistanceQuery;>;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserSurroundQueryDistanceRewriteQuery = { 2, "DistanceRewriteQuery", "org.apache.lucene.queryparser.surround.query", NULL, 0x0, 1, methods, 0, NULL, 1, superclass_type_args, 0, NULL, NULL, "Lorg/apache/lucene/queryparser/surround/query/RewriteQuery<Lorg/apache/lucene/queryparser/surround/query/DistanceQuery;>;" };
   return &_OrgApacheLuceneQueryparserSurroundQueryDistanceRewriteQuery;
 }
 
 @end
 
-void OrgApacheLuceneQueryparserSurroundQueryDistanceRewriteQuery_initWithOrgApacheLuceneQueryparserSurroundQueryDistanceQuery_withNSString_withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_(OrgApacheLuceneQueryparserSurroundQueryDistanceRewriteQuery *self, OrgApacheLuceneQueryparserSurroundQueryDistanceQuery *srndQuery, NSString *fieldName, OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *qf) {
-  OrgApacheLuceneQueryparserSurroundQueryRewriteQuery_initWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery_withNSString_withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_(self, srndQuery, fieldName, qf);
+void OrgApacheLuceneQueryparserSurroundQueryDistanceRewriteQuery_init(OrgApacheLuceneQueryparserSurroundQueryDistanceRewriteQuery *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneQueryparserSurroundQueryDistanceRewriteQuery *new_OrgApacheLuceneQueryparserSurroundQueryDistanceRewriteQuery_initWithOrgApacheLuceneQueryparserSurroundQueryDistanceQuery_withNSString_withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_(OrgApacheLuceneQueryparserSurroundQueryDistanceQuery *srndQuery, NSString *fieldName, OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *qf) {
+OrgApacheLuceneQueryparserSurroundQueryDistanceRewriteQuery *new_OrgApacheLuceneQueryparserSurroundQueryDistanceRewriteQuery_init() {
   OrgApacheLuceneQueryparserSurroundQueryDistanceRewriteQuery *self = [OrgApacheLuceneQueryparserSurroundQueryDistanceRewriteQuery alloc];
-  OrgApacheLuceneQueryparserSurroundQueryDistanceRewriteQuery_initWithOrgApacheLuceneQueryparserSurroundQueryDistanceQuery_withNSString_withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_(self, srndQuery, fieldName, qf);
+  OrgApacheLuceneQueryparserSurroundQueryDistanceRewriteQuery_init(self);
   return self;
 }
 

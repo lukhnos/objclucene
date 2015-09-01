@@ -22,8 +22,6 @@
 
 @protocol OrgApacheLuceneAnalysisTokenattributesTypeAttribute < OrgApacheLuceneUtilAttribute, NSObject, JavaObject >
 
-- (NSString *)type;
-
 - (void)setTypeWithNSString:(NSString *)type;
 
 @end

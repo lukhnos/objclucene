@@ -27,8 +27,6 @@
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a;
-
 - (instancetype)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a
                                                   withBoolean:(jboolean)isBinary
                                                       withInt:(jint)maxDeterminizedStates;
@@ -40,10 +38,6 @@
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilAutomatonByteRunAutomaton)
-
-FOUNDATION_EXPORT void OrgApacheLuceneUtilAutomatonByteRunAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneUtilAutomatonByteRunAutomaton *self, OrgApacheLuceneUtilAutomatonAutomaton *a);
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonByteRunAutomaton *new_OrgApacheLuceneUtilAutomatonByteRunAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneUtilAutomatonAutomaton *a) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilAutomatonByteRunAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withBoolean_withInt_(OrgApacheLuceneUtilAutomatonByteRunAutomaton *self, OrgApacheLuceneUtilAutomatonAutomaton *a, jboolean isBinary, jint maxDeterminizedStates);
 

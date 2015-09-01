@@ -24,38 +24,19 @@
 #define OrgApacheLuceneAnalysisPayloadsPayloadEncoder_INCLUDE 1
 #include "org/apache/lucene/analysis/payloads/PayloadEncoder.h"
 
-@class IOSCharArray;
-@class JavaNioCharsetCharset;
-@class OrgApacheLuceneUtilBytesRef;
-
-@interface OrgApacheLuceneAnalysisPayloadsIdentityEncoder : OrgApacheLuceneAnalysisPayloadsAbstractEncoder < OrgApacheLuceneAnalysisPayloadsPayloadEncoder > {
- @public
-  JavaNioCharsetCharset *charset_;
-}
+@interface OrgApacheLuceneAnalysisPayloadsIdentityEncoder : OrgApacheLuceneAnalysisPayloadsAbstractEncoder < OrgApacheLuceneAnalysisPayloadsPayloadEncoder >
 
 #pragma mark Public
 
 - (instancetype)init;
 
-- (instancetype)initWithJavaNioCharsetCharset:(JavaNioCharsetCharset *)charset;
-
-- (OrgApacheLuceneUtilBytesRef *)encodeWithCharArray:(IOSCharArray *)buffer
-                                             withInt:(jint)offset
-                                             withInt:(jint)length;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisPayloadsIdentityEncoder)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPayloadsIdentityEncoder, charset_, JavaNioCharsetCharset *)
-
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPayloadsIdentityEncoder_init(OrgApacheLuceneAnalysisPayloadsIdentityEncoder *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisPayloadsIdentityEncoder *new_OrgApacheLuceneAnalysisPayloadsIdentityEncoder_init() NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisPayloadsIdentityEncoder_initWithJavaNioCharsetCharset_(OrgApacheLuceneAnalysisPayloadsIdentityEncoder *self, JavaNioCharsetCharset *charset);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisPayloadsIdentityEncoder *new_OrgApacheLuceneAnalysisPayloadsIdentityEncoder_initWithJavaNioCharsetCharset_(JavaNioCharsetCharset *charset) NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisPayloadsIdentityEncoder)
 

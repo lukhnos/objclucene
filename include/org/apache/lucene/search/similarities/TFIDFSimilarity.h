@@ -28,7 +28,6 @@
 @class OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer;
 @class OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight;
 @class OrgApacheLuceneSearchTermStatistics;
-@class OrgApacheLuceneUtilBytesRef;
 
 @interface OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity : OrgApacheLuceneSearchSimilaritiesSimilarity
 
@@ -41,9 +40,6 @@
 - (OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight *)computeWeightWithFloat:(jfloat)queryBoost
                                     withOrgApacheLuceneSearchCollectionStatistics:(OrgApacheLuceneSearchCollectionStatistics *)collectionStats
                                      withOrgApacheLuceneSearchTermStatisticsArray:(IOSObjectArray *)termStats;
-
-- (jfloat)coordWithInt:(jint)overlap
-               withInt:(jint)maxOverlap;
 
 - (jfloat)decodeNormValueWithLong:(jlong)norm;
 
@@ -59,13 +55,6 @@
                                                  withOrgApacheLuceneSearchTermStatisticsArray:(IOSObjectArray *)termStats;
 
 - (jfloat)lengthNormWithOrgApacheLuceneIndexFieldInvertState:(OrgApacheLuceneIndexFieldInvertState *)state;
-
-- (jfloat)queryNormWithFloat:(jfloat)sumOfSquaredWeights;
-
-- (jfloat)scorePayloadWithInt:(jint)doc
-                      withInt:(jint)start
-                      withInt:(jint)end
-withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload;
 
 - (OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *)simScorerWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight:(OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight *)stats
                                                                                     withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;

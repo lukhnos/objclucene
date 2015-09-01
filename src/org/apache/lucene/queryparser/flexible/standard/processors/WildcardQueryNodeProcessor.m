@@ -3,33 +3,10 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/standard/processors/WildcardQueryNodeProcessor.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/lang/CharSequence.h"
-#include "java/util/List.h"
-#include "org/apache/lucene/queryparser/flexible/core/QueryNodeException.h"
-#include "org/apache/lucene/queryparser/flexible/core/nodes/FieldQueryNode.h"
-#include "org/apache/lucene/queryparser/flexible/core/nodes/FuzzyQueryNode.h"
-#include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNode.h"
-#include "org/apache/lucene/queryparser/flexible/core/nodes/QuotedFieldQueryNode.h"
-#include "org/apache/lucene/queryparser/flexible/core/processors/QueryNodeProcessorImpl.h"
-#include "org/apache/lucene/queryparser/flexible/core/util/UnescapedCharSequence.h"
-#include "org/apache/lucene/queryparser/flexible/standard/nodes/PrefixWildcardQueryNode.h"
-#include "org/apache/lucene/queryparser/flexible/standard/nodes/TermRangeQueryNode.h"
-#include "org/apache/lucene/queryparser/flexible/standard/nodes/WildcardQueryNode.h"
 #include "org/apache/lucene/queryparser/flexible/standard/processors/WildcardQueryNodeProcessor.h"
 
-@interface OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor ()
-
-- (jboolean)isWildcardWithJavaLangCharSequence:(id<JavaLangCharSequence>)text;
-
-- (jboolean)isPrefixWildcardWithJavaLangCharSequence:(id<JavaLangCharSequence>)text;
-
-@end
-
-__attribute__((unused)) static jboolean OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor_isWildcardWithJavaLangCharSequence_(OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor *self, id<JavaLangCharSequence> text);
-
-__attribute__((unused)) static jboolean OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor_isPrefixWildcardWithJavaLangCharSequence_(OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor *self, id<JavaLangCharSequence> text);
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor
 
@@ -38,89 +15,24 @@ __attribute__((unused)) static jboolean OrgApacheLuceneQueryparserFlexibleStanda
   return self;
 }
 
-- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)postProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)node {
-  if ([node isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode class]] || [node isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode class]]) {
-    OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *fqn = (OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) check_class_cast(node, [OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode class]);
-    id<JavaLangCharSequence> text = [((OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) nil_chk(fqn)) getText];
-    if ([[fqn getParent] isKindOfClass:[OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode class]] || [fqn isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreNodesQuotedFieldQueryNode class]] || [((id<JavaLangCharSequence>) nil_chk(text)) length] <= 0) {
-      return node;
-    }
-    if (OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor_isPrefixWildcardWithJavaLangCharSequence_(self, text)) {
-      OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode *prefixWildcardQN = [new_OrgApacheLuceneQueryparserFlexibleStandardNodesPrefixWildcardQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode_(fqn) autorelease];
-      return prefixWildcardQN;
-    }
-    else if (OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor_isWildcardWithJavaLangCharSequence_(self, text)) {
-      OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode *wildcardQN = [new_OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode_(fqn) autorelease];
-      return wildcardQN;
-    }
-  }
-  return node;
-}
-
-- (jboolean)isWildcardWithJavaLangCharSequence:(id<JavaLangCharSequence>)text {
-  return OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor_isWildcardWithJavaLangCharSequence_(self, text);
-}
-
-- (jboolean)isPrefixWildcardWithJavaLangCharSequence:(id<JavaLangCharSequence>)text {
-  return OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor_isPrefixWildcardWithJavaLangCharSequence_(self, text);
-}
-
-- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)preProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)node {
-  return node;
-}
-
-- (id<JavaUtilList>)setChildrenOrderWithJavaUtilList:(id<JavaUtilList>)children {
-  return children;
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", "WildcardQueryNodeProcessor", NULL, 0x1, NULL, NULL },
-    { "postProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "postProcessNode", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
-    { "isWildcardWithJavaLangCharSequence:", "isWildcard", "Z", 0x2, NULL, NULL },
-    { "isPrefixWildcardWithJavaLangCharSequence:", "isPrefixWildcard", "Z", 0x2, NULL, NULL },
-    { "preProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "preProcessNode", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
-    { "setChildrenOrderWithJavaUtilList:", "setChildrenOrder", "Ljava.util.List;", 0x4, "Lorg.apache.lucene.queryparser.flexible.core.QueryNodeException;", NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor = { 2, "WildcardQueryNodeProcessor", "org.apache.lucene.queryparser.flexible.standard.processors", NULL, 0x1, 6, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor = { 2, "WildcardQueryNodeProcessor", "org.apache.lucene.queryparser.flexible.standard.processors", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor;
 }
 
 @end
 
 void OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor_init(OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor *self) {
-  OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_init(self);
+  NSObject_init(self);
 }
 
 OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor *new_OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor_init() {
   OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor *self = [OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor alloc];
   OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor_init(self);
   return self;
-}
-
-jboolean OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor_isWildcardWithJavaLangCharSequence_(OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor *self, id<JavaLangCharSequence> text) {
-  if (text == nil || [text length] <= 0) return NO;
-  for (jint i = [((id<JavaLangCharSequence>) nil_chk(text)) length] - 1; i >= 0; i--) {
-    if (([text charAtWithInt:i] == '*' || [text charAtWithInt:i] == '?') && !OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_wasEscapedWithJavaLangCharSequence_withInt_(text, i)) {
-      return YES;
-    }
-  }
-  return NO;
-}
-
-jboolean OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor_isPrefixWildcardWithJavaLangCharSequence_(OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor *self, id<JavaLangCharSequence> text) {
-  if (text == nil || [text length] <= 0 || !OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor_isWildcardWithJavaLangCharSequence_(self, text)) return NO;
-  if ([text charAtWithInt:[((id<JavaLangCharSequence>) nil_chk(text)) length] - 1] != '*') return NO;
-  if (OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_wasEscapedWithJavaLangCharSequence_withInt_(text, [text length] - 1)) return NO;
-  if ([text length] == 1) return NO;
-  for (jint i = 0; i < [text length]; i++) {
-    if ([text charAtWithInt:i] == '?') return NO;
-    if ([text charAtWithInt:i] == '*' && !OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_wasEscapedWithJavaLangCharSequence_withInt_(text, i)) {
-      if (i == [text length] - 1) return YES;
-      else return NO;
-    }
-  }
-  return NO;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor)

@@ -24,38 +24,19 @@
 #define OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_INCLUDE 1
 #include "org/apache/lucene/queryparser/flexible/core/nodes/FieldableNode.h"
 
-@protocol JavaLangCharSequence;
-@protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
-@protocol OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax;
-
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode : OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl < OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode >
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)query
-                                                                     withInt:(jint)value;
-
-- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)cloneTree;
-
-- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)getChild;
-
-- (id<JavaLangCharSequence>)getField;
-
-- (jint)getValue;
-
-- (void)setFieldWithJavaLangCharSequence:(id<JavaLangCharSequence>)fieldName;
-
-- (id<JavaLangCharSequence>)toQueryStringWithOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax:(id<OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax>)escapeSyntaxParser;
-
-- (NSString *)description;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_withInt_(OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode *self, id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> query, jint value);
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode_init(OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_withInt_(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> query, jint value) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreNodesPhraseSlopQueryNode)
 

@@ -3,68 +3,10 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/core/util/QueryNodeOperation.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/lang/CloneNotSupportedException.h"
-#include "java/lang/Enum.h"
-#include "java/lang/IllegalArgumentException.h"
-#include "java/util/ArrayList.h"
-#include "java/util/List.h"
-#include "org/apache/lucene/queryparser/flexible/core/QueryNodeError.h"
-#include "org/apache/lucene/queryparser/flexible/core/nodes/AndQueryNode.h"
-#include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNode.h"
 #include "org/apache/lucene/queryparser/flexible/core/util/QueryNodeOperation.h"
 
-@interface OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation ()
-
-- (instancetype)init;
-
-@end
-
-__attribute__((unused)) static void OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_init(OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation *self);
-
-__attribute__((unused)) static OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation *new_OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_init() NS_RETURNS_RETAINED;
-
-typedef NS_ENUM(NSUInteger, OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperation) {
-  OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperation_BOTH = 0,
-  OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperation_Q1 = 1,
-  OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperation_Q2 = 2,
-  OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperation_NONE = 3,
-};
-
-@interface OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum : JavaLangEnum < NSCopying >
-
-+ (IOSObjectArray *)values;
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum_values();
-
-+ (OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum *)valueOfWithNSString:(NSString *)name;
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum *OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum_valueOfWithNSString_(NSString *name);
-
-- (id)copyWithZone:(NSZone *)zone;
-
-@end
-
-J2OBJC_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum)
-
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum *OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum_values_[];
-
-#define OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum_BOTH OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum_values_[OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperation_BOTH]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum, BOTH)
-
-#define OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum_Q1 OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum_values_[OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperation_Q1]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum, Q1)
-
-#define OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum_Q2 OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum_values_[OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperation_Q2]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum, Q2)
-
-#define OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum_NONE OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum_values_[OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperation_NONE]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum, NONE)
-
-__attribute__((unused)) static void OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum_initWithNSString_withInt_(OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum *self, NSString *__name, jint __ordinal);
-
-__attribute__((unused)) static OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum *new_OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum_initWithNSString_withInt_(NSString *__name, jint __ordinal) NS_RETURNS_RETAINED;
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum)
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation
 
@@ -73,18 +15,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOp
   return self;
 }
 
-+ (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)logicalAndWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)q1
-                                                                      withOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)q2 {
-  return OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_logicalAndWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_withOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_(q1, q2);
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", "QueryNodeOperation", NULL, 0x2, NULL, NULL },
-    { "logicalAndWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:withOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:", "logicalAnd", "Lorg.apache.lucene.queryparser.flexible.core.nodes.QueryNode;", 0x19, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.queryparser.flexible.core.util.QueryNodeOperation$ANDOperation;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation = { 2, "QueryNodeOperation", "org.apache.lucene.queryparser.flexible.core.util", NULL, 0x11, 2, methods, 0, NULL, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation = { 2, "QueryNodeOperation", "org.apache.lucene.queryparser.flexible.core.util", NULL, 0x11, 1, methods, 0, NULL, 0, NULL, 1, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation;
 }
 
@@ -100,122 +36,4 @@ OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation *new_OrgApacheLucen
   return self;
 }
 
-id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_logicalAndWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_withOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> q1, id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> q2) {
-  OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_initialize();
-  if (q1 == nil) return q2;
-  if (q2 == nil) return q1;
-  OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum *op = nil;
-  if ([q1 isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNode class]] && [q2 isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNode class]]) op = JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum, BOTH);
-  else if ([q1 isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNode class]]) op = JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum, Q1);
-  else if ([q1 isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNode class]]) op = JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum, Q2);
-  else op = JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum, NONE);
-  @try {
-    id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> result = nil;
-    {
-      id<JavaUtilList> children;
-      switch ([op ordinal]) {
-        case OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperation_NONE:
-        children = [new_JavaUtilArrayList_init() autorelease];
-        [children addWithId:[((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(q1)) cloneTree]];
-        [children addWithId:[((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(q2)) cloneTree]];
-        result = [new_OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNode_initWithJavaUtilList_(children) autorelease];
-        return result;
-        case OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperation_Q1:
-        result = [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(q1)) cloneTree];
-        [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(result)) addWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:[((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(q2)) cloneTree]];
-        return result;
-        case OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperation_Q2:
-        result = [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(q2)) cloneTree];
-        [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(result)) addWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:[((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(q1)) cloneTree]];
-        return result;
-        case OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperation_BOTH:
-        result = [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(q1)) cloneTree];
-        [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(result)) addWithJavaUtilList:[((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk([((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(q2)) cloneTree])) getChildren]];
-        return result;
-      }
-    }
-  }
-  @catch (JavaLangCloneNotSupportedException *e) {
-    @throw [new_OrgApacheLuceneQueryparserFlexibleCoreQueryNodeError_initWithJavaLangThrowable_(e) autorelease];
-  }
-  return nil;
-}
-
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation)
-
-J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum)
-
-OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum *OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum_values_[4];
-
-@implementation OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum
-
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal {
-  OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
-}
-
-IOSObjectArray *OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum_values() {
-  OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum_initialize();
-  return [IOSObjectArray arrayWithObjects:OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum_values_ count:4 type:OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum_class_()];
-}
-
-+ (IOSObjectArray *)values {
-  return OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum_values();
-}
-
-+ (OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum *)valueOfWithNSString:(NSString *)name {
-  return OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum_valueOfWithNSString_(name);
-}
-
-OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum *OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum_valueOfWithNSString_(NSString *name) {
-  OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum_initialize();
-  for (int i = 0; i < 4; i++) {
-    OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum *e = OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum_values_[i];
-    if ([name isEqual:[e name]]) {
-      return e;
-    }
-  }
-  @throw [[[JavaLangIllegalArgumentException alloc] initWithNSString:name] autorelease];
-  return nil;
-}
-
-- (id)copyWithZone:(NSZone *)zone {
-  return [self retain];
-}
-
-+ (void)initialize {
-  if (self == [OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum class]) {
-    OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum_BOTH = new_OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum_initWithNSString_withInt_(@"BOTH", 0);
-    OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum_Q1 = new_OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum_initWithNSString_withInt_(@"Q1", 1);
-    OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum_Q2 = new_OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum_initWithNSString_withInt_(@"Q2", 2);
-    OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum_NONE = new_OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum_initWithNSString_withInt_(@"NONE", 3);
-    J2OBJC_SET_INITIALIZED(OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum)
-  }
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcFieldInfo fields[] = {
-    { "BOTH", "BOTH", 0x4019, "Lorg.apache.lucene.queryparser.flexible.core.util.QueryNodeOperation$ANDOperation;", &OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum_BOTH, NULL, .constantValue.asLong = 0 },
-    { "Q1", "Q1", 0x4019, "Lorg.apache.lucene.queryparser.flexible.core.util.QueryNodeOperation$ANDOperation;", &OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum_Q1, NULL, .constantValue.asLong = 0 },
-    { "Q2", "Q2", 0x4019, "Lorg.apache.lucene.queryparser.flexible.core.util.QueryNodeOperation$ANDOperation;", &OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum_Q2, NULL, .constantValue.asLong = 0 },
-    { "NONE", "NONE", 0x4019, "Lorg.apache.lucene.queryparser.flexible.core.util.QueryNodeOperation$ANDOperation;", &OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum_NONE, NULL, .constantValue.asLong = 0 },
-  };
-  static const char *superclass_type_args[] = {"Lorg.apache.lucene.queryparser.flexible.core.util.QueryNodeOperation$ANDOperation;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum = { 2, "ANDOperation", "org.apache.lucene.queryparser.flexible.core.util", "QueryNodeOperation", 0x401a, 0, NULL, 4, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/queryparser/flexible/core/util/QueryNodeOperation$ANDOperation;>;" };
-  return &_OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum;
-}
-
-@end
-
-void OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum_initWithNSString_withInt_(OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum *self, NSString *__name, jint __ordinal) {
-  JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
-}
-
-OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum *new_OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum_initWithNSString_withInt_(NSString *__name, jint __ordinal) {
-  OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum *self = [OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum alloc];
-  OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_ANDOperationEnum)

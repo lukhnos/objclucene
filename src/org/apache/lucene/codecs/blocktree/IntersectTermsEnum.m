@@ -217,19 +217,11 @@ OrgApacheLuceneUtilFstOutputs *OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum_
   return OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum_acceptsSuffixRangeWithInt_withInt_withInt_(self, state, start, end);
 }
 
-+ (NSString *)brToStringWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)b {
-  return OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum_brToStringWithOrgApacheLuceneUtilBytesRef_(b);
-}
-
 - (void)copyTerm {
   OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum_copyTerm(self);
 }
 
 - (jboolean)seekExactWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)text {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
-}
-
-- (void)seekExactWithLong:(jlong)ord {
   @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
 }
 
@@ -284,10 +276,8 @@ OrgApacheLuceneUtilFstOutputs *OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum_
     { "next", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, "Ljava.io.IOException;", NULL },
     { "_next", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x2, "Ljava.io.IOException;", NULL },
     { "acceptsSuffixRangeWithInt:withInt:withInt:", "acceptsSuffixRange", "Z", 0x2, NULL, NULL },
-    { "brToStringWithOrgApacheLuceneUtilBytesRef:", "brToString", "Ljava.lang.String;", 0x8, NULL, NULL },
     { "copyTerm", NULL, "V", 0x2, NULL, NULL },
     { "seekExactWithOrgApacheLuceneUtilBytesRef:", "seekExact", "Z", 0x1, NULL, NULL },
-    { "seekExactWithLong:", "seekExact", "V", 0x1, NULL, NULL },
     { "ord", NULL, "J", 0x1, NULL, NULL },
     { "seekCeilWithOrgApacheLuceneUtilBytesRef:", "seekCeil", "Lorg.apache.lucene.index.TermsEnum$SeekStatus;", 0x1, NULL, NULL },
   };
@@ -311,7 +301,7 @@ OrgApacheLuceneUtilFstOutputs *OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum_
     { "scratchTransition_", NULL, 0x12, "Lorg.apache.lucene.util.automaton.Transition;", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.codecs.blocktree.IntersectTermsEnum$NoMoreTermsException;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum = { 2, "IntersectTermsEnum", "org.apache.lucene.codecs.blocktree", NULL, 0x10, 23, methods, 17, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum = { 2, "IntersectTermsEnum", "org.apache.lucene.codecs.blocktree", NULL, 0x10, 21, methods, 17, fields, 0, NULL, 1, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum;
 }
 
@@ -759,16 +749,6 @@ jboolean OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum_acceptsSuffixRangeWith
     }
   }
   return NO;
-}
-
-NSString *OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum_brToStringWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilBytesRef *b) {
-  OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum_initialize();
-  @try {
-    return JreStrcat("$C@", [((OrgApacheLuceneUtilBytesRef *) nil_chk(b)) utf8ToString], ' ', b);
-  }
-  @catch (JavaLangThrowable *t) {
-    return [((OrgApacheLuceneUtilBytesRef *) nil_chk(b)) description];
-  }
 }
 
 void OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum_copyTerm(OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum *self) {

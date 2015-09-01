@@ -3,78 +3,10 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/wikipedia/WikipediaTokenizer.java
 //
 
-#include "IOSClass.h"
-#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/io/IOException.h"
-#include "java/io/Reader.h"
-#include "java/lang/IllegalArgumentException.h"
-#include "java/lang/StringBuilder.h"
-#include "java/util/ArrayList.h"
-#include "java/util/Collections.h"
-#include "java/util/Iterator.h"
-#include "java/util/List.h"
-#include "java/util/Set.h"
-#include "org/apache/lucene/analysis/Tokenizer.h"
-#include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
-#include "org/apache/lucene/analysis/tokenattributes/FlagsAttribute.h"
-#include "org/apache/lucene/analysis/tokenattributes/OffsetAttribute.h"
-#include "org/apache/lucene/analysis/tokenattributes/PositionIncrementAttribute.h"
-#include "org/apache/lucene/analysis/tokenattributes/TypeAttribute.h"
 #include "org/apache/lucene/analysis/wikipedia/WikipediaTokenizer.h"
-#include "org/apache/lucene/analysis/wikipedia/WikipediaTokenizerImpl.h"
-#include "org/apache/lucene/util/AttributeFactory.h"
-#include "org/apache/lucene/util/AttributeSource.h"
 
-@interface OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer () {
- @public
-  OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl *scanner_;
-  jint tokenOutput_;
-  id<JavaUtilSet> untokenizedTypes_;
-  id<JavaUtilIterator> tokens_;
-  id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute> offsetAtt_;
-  id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute> typeAtt_;
-  id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute> posIncrAtt_;
-  id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute> termAtt_;
-  id<OrgApacheLuceneAnalysisTokenattributesFlagsAttribute> flagsAtt_;
-  jboolean first_;
-}
-
-- (void)init__WithInt:(jint)tokenOutput
-      withJavaUtilSet:(id<JavaUtilSet>)untokenizedTypes OBJC_METHOD_FAMILY_NONE;
-
-- (void)collapseAndSaveTokensWithInt:(jint)tokenType
-                        withNSString:(NSString *)type;
-
-- (void)setupSavedTokenWithInt:(jint)positionInc
-                  withNSString:(NSString *)type;
-
-- (void)collapseTokensWithInt:(jint)tokenType;
-
-- (void)setupToken;
-
-@end
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, scanner_, OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, untokenizedTypes_, id<JavaUtilSet>)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, tokens_, id<JavaUtilIterator>)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, offsetAtt_, id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, typeAtt_, id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, posIncrAtt_, id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, termAtt_, id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer, flagsAtt_, id<OrgApacheLuceneAnalysisTokenattributesFlagsAttribute>)
-
-__attribute__((unused)) static void OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_init__WithInt_withJavaUtilSet_(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer *self, jint tokenOutput, id<JavaUtilSet> untokenizedTypes);
-
-__attribute__((unused)) static void OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_collapseAndSaveTokensWithInt_withNSString_(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer *self, jint tokenType, NSString *type);
-
-__attribute__((unused)) static void OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_setupSavedTokenWithInt_withNSString_(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer *self, jint positionInc, NSString *type);
-
-__attribute__((unused)) static void OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_collapseTokensWithInt_(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer *self, jint tokenType);
-
-__attribute__((unused)) static void OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_setupToken(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer *self);
-
-J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer)
+#pragma clang diagnostic ignored "-Wprotocol"
 
 NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_INTERNAL_LINK_ = @"il";
 NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_EXTERNAL_LINK_ = @"el";
@@ -86,7 +18,6 @@ NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_ITALICS_ = @"i";
 NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_BOLD_ITALICS_ = @"bi";
 NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_HEADING_ = @"h";
 NSString *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_SUB_HEADING_ = @"sh";
-IOSObjectArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_TOKEN_TYPES_;
 
 @implementation OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer
 
@@ -95,125 +26,9 @@ IOSObjectArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_TOKEN_TYPES_;
   return self;
 }
 
-- (instancetype)initWithInt:(jint)tokenOutput
-            withJavaUtilSet:(id<JavaUtilSet>)untokenizedTypes {
-  OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_initWithInt_withJavaUtilSet_(self, tokenOutput, untokenizedTypes);
-  return self;
-}
-
-- (instancetype)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory
-                                                    withInt:(jint)tokenOutput
-                                            withJavaUtilSet:(id<JavaUtilSet>)untokenizedTypes {
-  OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withJavaUtilSet_(self, factory, tokenOutput, untokenizedTypes);
-  return self;
-}
-
-- (void)init__WithInt:(jint)tokenOutput
-      withJavaUtilSet:(id<JavaUtilSet>)untokenizedTypes {
-  OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_init__WithInt_withJavaUtilSet_(self, tokenOutput, untokenizedTypes);
-}
-
-- (jboolean)incrementToken {
-  if (tokens_ != nil && [tokens_ hasNext]) {
-    OrgApacheLuceneUtilAttributeSource_State *state = [tokens_ next];
-    [self restoreStateWithOrgApacheLuceneUtilAttributeSource_State:state];
-    return YES;
-  }
-  [self clearAttributes];
-  jint tokenType = [((OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl *) nil_chk(scanner_)) getNextToken];
-  if (tokenType == OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_YYEOF) {
-    return NO;
-  }
-  NSString *type = IOSObjectArray_Get(nil_chk(JreLoadStatic(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl, TOKEN_TYPES_)), tokenType);
-  if (tokenOutput_ == OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_TOKENS_ONLY || [((id<JavaUtilSet>) nil_chk(untokenizedTypes_)) containsWithId:type] == NO) {
-    OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_setupToken(self);
-  }
-  else if (tokenOutput_ == OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_UNTOKENIZED_ONLY && [untokenizedTypes_ containsWithId:type] == YES) {
-    OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_collapseTokensWithInt_(self, tokenType);
-  }
-  else if (tokenOutput_ == OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_BOTH) {
-    OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_collapseAndSaveTokensWithInt_withNSString_(self, tokenType, type);
-  }
-  jint posinc = [scanner_ getPositionIncrement];
-  if (first_ && posinc == 0) {
-    posinc = 1;
-  }
-  [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posIncrAtt_)) setPositionIncrementWithInt:posinc];
-  [((id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>) nil_chk(typeAtt_)) setTypeWithNSString:type];
-  first_ = NO;
-  return YES;
-}
-
-- (void)collapseAndSaveTokensWithInt:(jint)tokenType
-                        withNSString:(NSString *)type {
-  OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_collapseAndSaveTokensWithInt_withNSString_(self, tokenType, type);
-}
-
-- (void)setupSavedTokenWithInt:(jint)positionInc
-                  withNSString:(NSString *)type {
-  OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_setupSavedTokenWithInt_withNSString_(self, positionInc, type);
-}
-
-- (void)collapseTokensWithInt:(jint)tokenType {
-  OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_collapseTokensWithInt_(self, tokenType);
-}
-
-- (void)setupToken {
-  OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_setupToken(self);
-}
-
-- (void)close {
-  [super close];
-  [((OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl *) nil_chk(scanner_)) yyresetWithJavaIoReader:input_];
-}
-
-- (void)reset {
-  [super reset];
-  [((OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl *) nil_chk(scanner_)) yyresetWithJavaIoReader:input_];
-  JreStrongAssign(&tokens_, nil);
-  [scanner_ reset];
-  first_ = YES;
-}
-
-- (void)end {
-  [super end];
-  jint finalOffset = [self correctOffsetWithInt:[((OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl *) nil_chk(scanner_)) yychar] + [scanner_ yylength]];
-  [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(self->offsetAtt_)) setOffsetWithInt:finalOffset withInt:finalOffset];
-}
-
-- (void)dealloc {
-  RELEASE_(scanner_);
-  RELEASE_(untokenizedTypes_);
-  RELEASE_(tokens_);
-  RELEASE_(offsetAtt_);
-  RELEASE_(typeAtt_);
-  RELEASE_(posIncrAtt_);
-  RELEASE_(termAtt_);
-  RELEASE_(flagsAtt_);
-  [super dealloc];
-}
-
-+ (void)initialize {
-  if (self == [OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_TOKEN_TYPES_, [IOSObjectArray newArrayWithObjects:(id[]){ @"<ALPHANUM>", @"<APOSTROPHE>", @"<ACRONYM>", @"<COMPANY>", @"<EMAIL>", @"<HOST>", @"<NUM>", @"<CJ>", OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_INTERNAL_LINK_, OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_EXTERNAL_LINK_, OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_CITATION_, OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_CATEGORY_, OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_BOLD_, OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_ITALICS_, OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_BOLD_ITALICS_, OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_HEADING_, OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_SUB_HEADING_, OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_EXTERNAL_LINK_URL_ } count:18 type:NSString_class_()]);
-    J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer)
-  }
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", "WikipediaTokenizer", NULL, 0x1, NULL, NULL },
-    { "initWithInt:withJavaUtilSet:", "WikipediaTokenizer", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneUtilAttributeFactory:withInt:withJavaUtilSet:", "WikipediaTokenizer", NULL, 0x1, NULL, NULL },
-    { "init__WithInt:withJavaUtilSet:", "init", "V", 0x2, NULL, NULL },
-    { "incrementToken", NULL, "Z", 0x11, "Ljava.io.IOException;", NULL },
-    { "collapseAndSaveTokensWithInt:withNSString:", "collapseAndSaveTokens", "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "setupSavedTokenWithInt:withNSString:", "setupSavedToken", "V", 0x2, NULL, NULL },
-    { "collapseTokensWithInt:", "collapseTokens", "V", 0x2, "Ljava.io.IOException;", NULL },
-    { "setupToken", NULL, "V", 0x2, NULL, NULL },
-    { "close", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "reset", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
-    { "end", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "INTERNAL_LINK_", NULL, 0x19, "Ljava.lang.String;", &OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_INTERNAL_LINK_, NULL, .constantValue.asLong = 0 },
@@ -244,155 +59,25 @@ IOSObjectArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_TOKEN_TYPES_;
     { "HEADING_ID", "HEADING_ID", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_HEADING_ID },
     { "SUB_HEADING_ID", "SUB_HEADING_ID", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_SUB_HEADING_ID },
     { "EXTERNAL_LINK_URL_ID", "EXTERNAL_LINK_URL_ID", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_EXTERNAL_LINK_URL_ID },
-    { "TOKEN_TYPES_", NULL, 0x19, "[Ljava.lang.String;", &OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_TOKEN_TYPES_, NULL, .constantValue.asLong = 0 },
     { "TOKENS_ONLY", "TOKENS_ONLY", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_TOKENS_ONLY },
     { "UNTOKENIZED_ONLY", "UNTOKENIZED_ONLY", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_UNTOKENIZED_ONLY },
     { "BOTH", "BOTH", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_BOTH },
     { "UNTOKENIZED_TOKEN_FLAG", "UNTOKENIZED_TOKEN_FLAG", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_UNTOKENIZED_TOKEN_FLAG },
-    { "scanner_", NULL, 0x12, "Lorg.apache.lucene.analysis.wikipedia.WikipediaTokenizerImpl;", NULL, NULL, .constantValue.asLong = 0 },
-    { "tokenOutput_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "untokenizedTypes_", NULL, 0x2, "Ljava.util.Set;", NULL, "Ljava/util/Set<Ljava/lang/String;>;", .constantValue.asLong = 0 },
-    { "tokens_", NULL, 0x2, "Ljava.util.Iterator;", NULL, "Ljava/util/Iterator<Lorg/apache/lucene/util/AttributeSource$State;>;", .constantValue.asLong = 0 },
-    { "offsetAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.OffsetAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "typeAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.TypeAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "posIncrAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "termAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "flagsAtt_", NULL, 0x12, "Lorg.apache.lucene.analysis.tokenattributes.FlagsAttribute;", NULL, NULL, .constantValue.asLong = 0 },
-    { "first_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer = { 2, "WikipediaTokenizer", "org.apache.lucene.analysis.wikipedia", NULL, 0x11, 12, methods, 43, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer = { 2, "WikipediaTokenizer", "org.apache.lucene.analysis.wikipedia", NULL, 0x11, 1, methods, 32, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer;
 }
 
 @end
 
 void OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_init(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer *self) {
-  OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_initWithInt_withJavaUtilSet_(self, OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_TOKENS_ONLY, JavaUtilCollections_emptySet());
+  NSObject_init(self);
 }
 
 OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer *new_OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_init() {
   OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer *self = [OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer alloc];
   OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_init(self);
   return self;
-}
-
-void OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_initWithInt_withJavaUtilSet_(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer *self, jint tokenOutput, id<JavaUtilSet> untokenizedTypes) {
-  OrgApacheLuceneAnalysisTokenizer_init(self);
-  self->tokenOutput_ = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_TOKENS_ONLY;
-  JreStrongAssign(&self->untokenizedTypes_, JavaUtilCollections_emptySet());
-  JreStrongAssign(&self->tokens_, nil);
-  JreStrongAssign(&self->offsetAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_class_()]);
-  JreStrongAssign(&self->typeAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesTypeAttribute_class_()]);
-  JreStrongAssign(&self->posIncrAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_class_()]);
-  JreStrongAssign(&self->termAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()]);
-  JreStrongAssign(&self->flagsAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesFlagsAttribute_class_()]);
-  JreStrongAssignAndConsume(&self->scanner_, new_OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_initWithJavaIoReader_(self->input_));
-  OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_init__WithInt_withJavaUtilSet_(self, tokenOutput, untokenizedTypes);
-}
-
-OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer *new_OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_initWithInt_withJavaUtilSet_(jint tokenOutput, id<JavaUtilSet> untokenizedTypes) {
-  OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer *self = [OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer alloc];
-  OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_initWithInt_withJavaUtilSet_(self, tokenOutput, untokenizedTypes);
-  return self;
-}
-
-void OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withJavaUtilSet_(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer *self, OrgApacheLuceneUtilAttributeFactory *factory, jint tokenOutput, id<JavaUtilSet> untokenizedTypes) {
-  OrgApacheLuceneAnalysisTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(self, factory);
-  self->tokenOutput_ = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_TOKENS_ONLY;
-  JreStrongAssign(&self->untokenizedTypes_, JavaUtilCollections_emptySet());
-  JreStrongAssign(&self->tokens_, nil);
-  JreStrongAssign(&self->offsetAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_class_()]);
-  JreStrongAssign(&self->typeAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesTypeAttribute_class_()]);
-  JreStrongAssign(&self->posIncrAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_class_()]);
-  JreStrongAssign(&self->termAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()]);
-  JreStrongAssign(&self->flagsAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesFlagsAttribute_class_()]);
-  JreStrongAssignAndConsume(&self->scanner_, new_OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_initWithJavaIoReader_(self->input_));
-  OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_init__WithInt_withJavaUtilSet_(self, tokenOutput, untokenizedTypes);
-}
-
-OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer *new_OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withJavaUtilSet_(OrgApacheLuceneUtilAttributeFactory *factory, jint tokenOutput, id<JavaUtilSet> untokenizedTypes) {
-  OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer *self = [OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer alloc];
-  OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withJavaUtilSet_(self, factory, tokenOutput, untokenizedTypes);
-  return self;
-}
-
-void OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_init__WithInt_withJavaUtilSet_(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer *self, jint tokenOutput, id<JavaUtilSet> untokenizedTypes) {
-  if (tokenOutput != OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_TOKENS_ONLY && tokenOutput != OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_UNTOKENIZED_ONLY && tokenOutput != OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_BOTH) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"tokenOutput must be TOKENS_ONLY, UNTOKENIZED_ONLY or BOTH") autorelease];
-  }
-  self->tokenOutput_ = tokenOutput;
-  JreStrongAssign(&self->untokenizedTypes_, untokenizedTypes);
-}
-
-void OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_collapseAndSaveTokensWithInt_withNSString_(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer *self, jint tokenType, NSString *type) {
-  JavaLangStringBuilder *buffer = [new_JavaLangStringBuilder_initWithInt_(32) autorelease];
-  jint numAdded = [((OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl *) nil_chk(self->scanner_)) setTextWithJavaLangStringBuilder:buffer];
-  jint theStart = [self->scanner_ yychar];
-  jint lastPos = theStart + numAdded;
-  jint tmpTokType;
-  jint numSeen = 0;
-  id<JavaUtilList> tmp = [new_JavaUtilArrayList_init() autorelease];
-  OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_setupSavedTokenWithInt_withNSString_(self, 0, type);
-  [tmp addWithId:[self captureState]];
-  while ((tmpTokType = [self->scanner_ getNextToken]) != OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_YYEOF && tmpTokType == tokenType && [self->scanner_ getNumWikiTokensSeen] > numSeen) {
-    jint currPos = [self->scanner_ yychar];
-    for (jint i = 0; i < (currPos - lastPos); i++) {
-      [buffer appendWithChar:' '];
-    }
-    numAdded = [self->scanner_ setTextWithJavaLangStringBuilder:buffer];
-    OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_setupSavedTokenWithInt_withNSString_(self, [self->scanner_ getPositionIncrement], type);
-    [tmp addWithId:[self captureState]];
-    numSeen++;
-    lastPos = currPos + numAdded;
-  }
-  NSString *s = [((NSString *) nil_chk([buffer description])) trim];
-  [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk([((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(self->termAtt_)) setEmpty])) appendWithNSString:s];
-  [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(self->offsetAtt_)) setOffsetWithInt:[self correctOffsetWithInt:theStart] withInt:[self correctOffsetWithInt:theStart + ((jint) [((NSString *) nil_chk(s)) length])]];
-  [((id<OrgApacheLuceneAnalysisTokenattributesFlagsAttribute>) nil_chk(self->flagsAtt_)) setFlagsWithInt:OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_UNTOKENIZED_TOKEN_FLAG];
-  if (tmpTokType != OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_YYEOF) {
-    [self->scanner_ yypushbackWithInt:[self->scanner_ yylength]];
-  }
-  JreStrongAssign(&self->tokens_, [tmp iterator]);
-}
-
-void OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_setupSavedTokenWithInt_withNSString_(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer *self, jint positionInc, NSString *type) {
-  OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_setupToken(self);
-  [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(self->posIncrAtt_)) setPositionIncrementWithInt:positionInc];
-  [((id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>) nil_chk(self->typeAtt_)) setTypeWithNSString:type];
-}
-
-void OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_collapseTokensWithInt_(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer *self, jint tokenType) {
-  JavaLangStringBuilder *buffer = [new_JavaLangStringBuilder_initWithInt_(32) autorelease];
-  jint numAdded = [((OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl *) nil_chk(self->scanner_)) setTextWithJavaLangStringBuilder:buffer];
-  jint theStart = [self->scanner_ yychar];
-  jint lastPos = theStart + numAdded;
-  jint tmpTokType;
-  jint numSeen = 0;
-  while ((tmpTokType = [self->scanner_ getNextToken]) != OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_YYEOF && tmpTokType == tokenType && [self->scanner_ getNumWikiTokensSeen] > numSeen) {
-    jint currPos = [self->scanner_ yychar];
-    for (jint i = 0; i < (currPos - lastPos); i++) {
-      [buffer appendWithChar:' '];
-    }
-    numAdded = [self->scanner_ setTextWithJavaLangStringBuilder:buffer];
-    numSeen++;
-    lastPos = currPos + numAdded;
-  }
-  NSString *s = [((NSString *) nil_chk([buffer description])) trim];
-  [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk([((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(self->termAtt_)) setEmpty])) appendWithNSString:s];
-  [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(self->offsetAtt_)) setOffsetWithInt:[self correctOffsetWithInt:theStart] withInt:[self correctOffsetWithInt:theStart + ((jint) [((NSString *) nil_chk(s)) length])]];
-  [((id<OrgApacheLuceneAnalysisTokenattributesFlagsAttribute>) nil_chk(self->flagsAtt_)) setFlagsWithInt:OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_UNTOKENIZED_TOKEN_FLAG];
-  if (tmpTokType != OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_YYEOF) {
-    [self->scanner_ yypushbackWithInt:[self->scanner_ yylength]];
-  }
-  else {
-    JreStrongAssign(&self->tokens_, nil);
-  }
-}
-
-void OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_setupToken(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer *self) {
-  [((OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl *) nil_chk(self->scanner_)) getTextWithOrgApacheLuceneAnalysisTokenattributesCharTermAttribute:self->termAtt_];
-  jint start = [self->scanner_ yychar];
-  [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(self->offsetAtt_)) setOffsetWithInt:[self correctOffsetWithInt:start] withInt:[self correctOffsetWithInt:start + [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(self->termAtt_)) length]]];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer)

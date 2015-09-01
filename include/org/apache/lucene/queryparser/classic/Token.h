@@ -29,21 +29,14 @@
   jint endColumn_;
   NSString *image_;
   OrgApacheLuceneQueryparserClassicToken *next_;
-  OrgApacheLuceneQueryparserClassicToken *specialToken_;
 }
 
 #pragma mark Public
 
 - (instancetype)init;
 
-- (instancetype)initWithInt:(jint)kind;
-
 - (instancetype)initWithInt:(jint)kind
                withNSString:(NSString *)image;
-
-- (id)getValue;
-
-+ (OrgApacheLuceneQueryparserClassicToken *)newTokenWithInt:(jint)ofKind OBJC_METHOD_FAMILY_NONE;
 
 + (OrgApacheLuceneQueryparserClassicToken *)newTokenWithInt:(jint)ofKind
                                                withNSString:(NSString *)image OBJC_METHOD_FAMILY_NONE;
@@ -56,23 +49,16 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserClassicToken)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserClassicToken, image_, NSString *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserClassicToken, next_, OrgApacheLuceneQueryparserClassicToken *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserClassicToken, specialToken_, OrgApacheLuceneQueryparserClassicToken *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserClassicToken_init(OrgApacheLuceneQueryparserClassicToken *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserClassicToken *new_OrgApacheLuceneQueryparserClassicToken_init() NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserClassicToken_initWithInt_(OrgApacheLuceneQueryparserClassicToken *self, jint kind);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserClassicToken *new_OrgApacheLuceneQueryparserClassicToken_initWithInt_(jint kind) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserClassicToken_initWithInt_withNSString_(OrgApacheLuceneQueryparserClassicToken *self, jint kind, NSString *image);
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserClassicToken *new_OrgApacheLuceneQueryparserClassicToken_initWithInt_withNSString_(jint kind, NSString *image) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserClassicToken *OrgApacheLuceneQueryparserClassicToken_newTokenWithInt_withNSString_(jint ofKind, NSString *image);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserClassicToken *OrgApacheLuceneQueryparserClassicToken_newTokenWithInt_(jint ofKind);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserClassicToken)
 

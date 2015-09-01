@@ -20,27 +20,19 @@
 #define OrgApacheLuceneIndexMergeScheduler_INCLUDE 1
 #include "org/apache/lucene/index/MergeScheduler.h"
 
-@class OrgApacheLuceneIndexIndexWriter;
-@class OrgApacheLuceneIndexMergeTriggerEnum;
-
 @interface OrgApacheLuceneIndexNoMergeScheduler : OrgApacheLuceneIndexMergeScheduler
 
 #pragma mark Public
 
-- (OrgApacheLuceneIndexMergeScheduler *)clone;
-
-- (void)close;
-
-- (void)mergeWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer
-        withOrgApacheLuceneIndexMergeTriggerEnum:(OrgApacheLuceneIndexMergeTriggerEnum *)trigger
-                                     withBoolean:(jboolean)newMergesFound;
+- (instancetype)init;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneIndexNoMergeScheduler)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexNoMergeScheduler)
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexMergeScheduler *OrgApacheLuceneIndexNoMergeScheduler_INSTANCE_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneIndexNoMergeScheduler, INSTANCE_, OrgApacheLuceneIndexMergeScheduler *)
+FOUNDATION_EXPORT void OrgApacheLuceneIndexNoMergeScheduler_init(OrgApacheLuceneIndexNoMergeScheduler *self);
+
+FOUNDATION_EXPORT OrgApacheLuceneIndexNoMergeScheduler *new_OrgApacheLuceneIndexNoMergeScheduler_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexNoMergeScheduler)
 

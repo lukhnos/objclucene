@@ -20,64 +20,19 @@
 #define OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight_INCLUDE 1
 #include "org/apache/lucene/search/similarities/Similarity.h"
 
-@interface OrgApacheLuceneSearchSimilaritiesBasicStats : OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight {
- @public
-  NSString *field_;
-  jlong numberOfDocuments_;
-  jlong numberOfFieldTokens_;
-  jfloat avgFieldLength_;
-  jlong docFreq_;
-  jlong totalTermFreq_;
-  jfloat queryBoost_;
-  jfloat topLevelBoost_;
-  jfloat totalBoost_;
-}
+@interface OrgApacheLuceneSearchSimilaritiesBasicStats : OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)field
-                       withFloat:(jfloat)queryBoost;
-
-- (jfloat)getAvgFieldLength;
-
-- (jlong)getDocFreq;
-
-- (jlong)getNumberOfDocuments;
-
-- (jlong)getNumberOfFieldTokens;
-
-- (jfloat)getTotalBoost;
-
-- (jlong)getTotalTermFreq;
-
-- (jfloat)getValueForNormalization;
-
-- (void)normalizeWithFloat:(jfloat)queryNorm
-                 withFloat:(jfloat)topLevelBoost;
-
-- (void)setAvgFieldLengthWithFloat:(jfloat)avgFieldLength;
-
-- (void)setDocFreqWithLong:(jlong)docFreq;
-
-- (void)setNumberOfDocumentsWithLong:(jlong)numberOfDocuments;
-
-- (void)setNumberOfFieldTokensWithLong:(jlong)numberOfFieldTokens;
-
-- (void)setTotalTermFreqWithLong:(jlong)totalTermFreq;
-
-#pragma mark Protected
-
-- (jfloat)rawNormalizationValue;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSimilaritiesBasicStats)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSimilaritiesBasicStats, field_, NSString *)
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesBasicStats_init(OrgApacheLuceneSearchSimilaritiesBasicStats *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesBasicStats_initWithNSString_withFloat_(OrgApacheLuceneSearchSimilaritiesBasicStats *self, NSString *field, jfloat queryBoost);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesBasicStats *new_OrgApacheLuceneSearchSimilaritiesBasicStats_initWithNSString_withFloat_(NSString *field, jfloat queryBoost) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesBasicStats *new_OrgApacheLuceneSearchSimilaritiesBasicStats_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesBasicStats)
 

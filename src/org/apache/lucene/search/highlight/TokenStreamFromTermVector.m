@@ -8,12 +8,10 @@
 #include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
-#include "java/lang/IllegalArgumentException.h"
 #include "java/lang/Integer.h"
 #include "java/lang/Math.h"
 #include "java/lang/Short.h"
 #include "java/lang/System.h"
-#include "org/apache/lucene/analysis/TokenStream.h"
 #include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
 #include "org/apache/lucene/analysis/tokenattributes/OffsetAttribute.h"
 #include "org/apache/lucene/analysis/tokenattributes/PackedTokenAttributeImpl.h"
@@ -106,12 +104,6 @@ OrgApacheLuceneUtilAttributeFactory *OrgApacheLuceneSearchHighlightTokenStreamFr
 
 @implementation OrgApacheLuceneSearchHighlightTokenStreamFromTermVector
 
-- (instancetype)initWithOrgApacheLuceneIndexTerms:(OrgApacheLuceneIndexTerms *)vector
-                                          withInt:(jint)maxStartOffset {
-  OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_initWithOrgApacheLuceneIndexTerms_withInt_(self, vector, maxStartOffset);
-  return self;
-}
-
 - (OrgApacheLuceneIndexTerms *)getTermVectorTerms {
   return vector_;
 }
@@ -163,6 +155,11 @@ OrgApacheLuceneUtilAttributeFactory *OrgApacheLuceneSearchHighlightTokenStreamFr
   return YES;
 }
 
+- (instancetype)init {
+  OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_init(self);
+  return self;
+}
+
 - (void)dealloc {
   RELEASE_(vector_);
   RELEASE_(termAttribute_);
@@ -186,12 +183,12 @@ OrgApacheLuceneUtilAttributeFactory *OrgApacheLuceneSearchHighlightTokenStreamFr
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneIndexTerms:withInt:", "TokenStreamFromTermVector", NULL, 0x1, "Ljava.io.IOException;", NULL },
     { "getTermVectorTerms", NULL, "Lorg.apache.lucene.index.Terms;", 0x1, NULL, NULL },
     { "reset", NULL, "V", 0x1, "Ljava.io.IOException;", NULL },
     { "init__", "init", "V", 0x2, "Ljava.io.IOException;", NULL },
     { "initTokensArray", NULL, "[Lorg.apache.lucene.search.highlight.TokenStreamFromTermVector$TokenLL;", 0x2, "Ljava.io.IOException;", NULL },
     { "incrementToken", NULL, "Z", 0x1, "Ljava.io.IOException;", NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "ATTRIBUTE_FACTORY_", NULL, 0x19, "Lorg.apache.lucene.util.AttributeFactory;", &OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_ATTRIBUTE_FACTORY_, NULL, .constantValue.asLong = 0 },
@@ -214,28 +211,6 @@ OrgApacheLuceneUtilAttributeFactory *OrgApacheLuceneSearchHighlightTokenStreamFr
 }
 
 @end
-
-void OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_initWithOrgApacheLuceneIndexTerms_withInt_(OrgApacheLuceneSearchHighlightTokenStreamFromTermVector *self, OrgApacheLuceneIndexTerms *vector, jint maxStartOffset) {
-  OrgApacheLuceneAnalysisTokenStream_initWithOrgApacheLuceneUtilAttributeFactory_(self, OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_ATTRIBUTE_FACTORY_);
-  JreStrongAssign(&self->firstToken_, nil);
-  JreStrongAssign(&self->incrementToken_, nil);
-  self->initialized_ = NO;
-  self->maxStartOffset_ = maxStartOffset < 0 ? JavaLangInteger_MAX_VALUE : maxStartOffset;
-  JreAssert((![self hasAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPayloadAttribute_class_()]), (@"AttributeFactory shouldn't have payloads *yet*"));
-  if (![((OrgApacheLuceneIndexTerms *) nil_chk(vector)) hasPositions] && ![vector hasOffsets]) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"The term vector needs positions and/or offsets.") autorelease];
-  }
-  JreAssert(([vector hasFreqs]), (@"org/apache/lucene/search/highlight/TokenStreamFromTermVector.java:99 condition failed: assert vector.hasFreqs();"));
-  JreStrongAssign(&self->vector_, vector);
-  JreStrongAssign(&self->termAttribute_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()]);
-  JreStrongAssign(&self->positionIncrementAttribute_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_class_()]);
-}
-
-OrgApacheLuceneSearchHighlightTokenStreamFromTermVector *new_OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_initWithOrgApacheLuceneIndexTerms_withInt_(OrgApacheLuceneIndexTerms *vector, jint maxStartOffset) {
-  OrgApacheLuceneSearchHighlightTokenStreamFromTermVector *self = [OrgApacheLuceneSearchHighlightTokenStreamFromTermVector alloc];
-  OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_initWithOrgApacheLuceneIndexTerms_withInt_(self, vector, maxStartOffset);
-  return self;
-}
 
 void OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_init__(OrgApacheLuceneSearchHighlightTokenStreamFromTermVector *self) {
   JreAssert((!self->initialized_), (@"org/apache/lucene/search/highlight/TokenStreamFromTermVector.java:115 condition failed: assert !initialized;"));
@@ -348,6 +323,19 @@ IOSObjectArray *OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_initToke
   jint originalPositionEstimate = JreFpToInt((sumTotalTermFreq * 1.5));
   jint offsetLimitPositionEstimate = JreFpToInt((self->maxStartOffset_ / 5.0));
   return [IOSObjectArray arrayWithLength:JavaLangMath_maxWithInt_withInt_(64, JavaLangMath_minWithInt_withInt_(originalPositionEstimate, offsetLimitPositionEstimate)) type:OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_TokenLL_class_()];
+}
+
+void OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_init(OrgApacheLuceneSearchHighlightTokenStreamFromTermVector *self) {
+  NSObject_init(self);
+  JreStrongAssign(&self->firstToken_, nil);
+  JreStrongAssign(&self->incrementToken_, nil);
+  self->initialized_ = NO;
+}
+
+OrgApacheLuceneSearchHighlightTokenStreamFromTermVector *new_OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_init() {
+  OrgApacheLuceneSearchHighlightTokenStreamFromTermVector *self = [OrgApacheLuceneSearchHighlightTokenStreamFromTermVector alloc];
+  OrgApacheLuceneSearchHighlightTokenStreamFromTermVector_init(self);
+  return self;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchHighlightTokenStreamFromTermVector)

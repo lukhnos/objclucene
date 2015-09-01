@@ -58,26 +58,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexIndexFormatTooOldException, maxVersion_,
   return self;
 }
 
-- (NSString *)getResourceDescription {
-  return resourceDescription_;
-}
-
-- (NSString *)getReason {
-  return reason_;
-}
-
-- (JavaLangInteger *)getVersion {
-  return version__;
-}
-
-- (JavaLangInteger *)getMaxVersion {
-  return maxVersion_;
-}
-
-- (JavaLangInteger *)getMinVersion {
-  return minVersion_;
-}
-
 - (void)dealloc {
   RELEASE_(resourceDescription_);
   RELEASE_(reason_);
@@ -93,11 +73,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexIndexFormatTooOldException, maxVersion_,
     { "initWithOrgApacheLuceneStoreDataInput:withNSString:", "IndexFormatTooOldException", NULL, 0x1, NULL, NULL },
     { "initWithNSString:withInt:withInt:withInt:", "IndexFormatTooOldException", NULL, 0x1, NULL, NULL },
     { "initWithOrgApacheLuceneStoreDataInput:withInt:withInt:withInt:", "IndexFormatTooOldException", NULL, 0x1, NULL, NULL },
-    { "getResourceDescription", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getReason", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getVersion", NULL, "Ljava.lang.Integer;", 0x1, NULL, NULL },
-    { "getMaxVersion", NULL, "Ljava.lang.Integer;", 0x1, NULL, NULL },
-    { "getMinVersion", NULL, "Ljava.lang.Integer;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "resourceDescription_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
@@ -106,7 +81,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexIndexFormatTooOldException, maxVersion_,
     { "minVersion_", NULL, 0x12, "Ljava.lang.Integer;", NULL, NULL, .constantValue.asLong = 0 },
     { "maxVersion_", NULL, 0x12, "Ljava.lang.Integer;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexFormatTooOldException = { 2, "IndexFormatTooOldException", "org.apache.lucene.index", NULL, 0x1, 9, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexIndexFormatTooOldException = { 2, "IndexFormatTooOldException", "org.apache.lucene.index", NULL, 0x1, 4, methods, 5, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexIndexFormatTooOldException;
 }
 

@@ -16,12 +16,7 @@
 #if !defined (_OrgApacheLuceneQueryparserXmlFilterBuilder_) && (OrgApacheLuceneQueryparserXmlFilterBuilder_INCLUDE_ALL || OrgApacheLuceneQueryparserXmlFilterBuilder_INCLUDE)
 #define _OrgApacheLuceneQueryparserXmlFilterBuilder_
 
-@class OrgApacheLuceneSearchFilter;
-@protocol OrgW3cDomElement;
-
 @protocol OrgApacheLuceneQueryparserXmlFilterBuilder < NSObject, JavaObject >
-
-- (OrgApacheLuceneSearchFilter *)getFilterWithOrgW3cDomElement:(id<OrgW3cDomElement>)e;
 
 @end
 

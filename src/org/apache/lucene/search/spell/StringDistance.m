@@ -6,6 +6,8 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/search/spell/StringDistance.h"
 
+#pragma clang diagnostic ignored "-Wprotocol"
+
 @interface OrgApacheLuceneSearchSpellStringDistance : NSObject
 
 @end
@@ -13,10 +15,7 @@
 @implementation OrgApacheLuceneSearchSpellStringDistance
 
 + (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "getDistanceWithNSString:withNSString:", "getDistance", "F", 0x401, NULL, NULL },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpellStringDistance = { 2, "StringDistance", "org.apache.lucene.search.spell", NULL, 0x609, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpellStringDistance = { 2, "StringDistance", "org.apache.lucene.search.spell", NULL, 0x609, 0, NULL, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchSpellStringDistance;
 }
 

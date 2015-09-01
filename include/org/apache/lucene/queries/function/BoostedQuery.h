@@ -20,40 +20,19 @@
 #define OrgApacheLuceneSearchQuery_INCLUDE 1
 #include "org/apache/lucene/search/Query.h"
 
-@class OrgApacheLuceneIndexIndexReader;
-@class OrgApacheLuceneQueriesFunctionValueSource;
-@class OrgApacheLuceneSearchIndexSearcher;
-@class OrgApacheLuceneSearchWeight;
-
 @interface OrgApacheLuceneQueriesFunctionBoostedQuery : OrgApacheLuceneSearchQuery
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)subQuery
-     withOrgApacheLuceneQueriesFunctionValueSource:(OrgApacheLuceneQueriesFunctionValueSource *)boostVal;
-
-- (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
-                                                                        withBoolean:(jboolean)needsScores;
-
-- (jboolean)isEqual:(id)o;
-
-- (OrgApacheLuceneSearchQuery *)getQuery;
-
-- (OrgApacheLuceneQueriesFunctionValueSource *)getValueSource;
-
-- (NSUInteger)hash;
-
-- (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
-
-- (NSString *)toStringWithNSString:(NSString *)field;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionBoostedQuery)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionBoostedQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneQueriesFunctionBoostedQuery *self, OrgApacheLuceneSearchQuery *subQuery, OrgApacheLuceneQueriesFunctionValueSource *boostVal);
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionBoostedQuery_init(OrgApacheLuceneQueriesFunctionBoostedQuery *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionBoostedQuery *new_OrgApacheLuceneQueriesFunctionBoostedQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneQueriesFunctionValueSource_(OrgApacheLuceneSearchQuery *subQuery, OrgApacheLuceneQueriesFunctionValueSource *boostVal) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueriesFunctionBoostedQuery *new_OrgApacheLuceneQueriesFunctionBoostedQuery_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionBoostedQuery)
 

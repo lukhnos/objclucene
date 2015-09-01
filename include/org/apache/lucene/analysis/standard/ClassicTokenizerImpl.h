@@ -16,10 +16,6 @@
 #if !defined (_OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_) && (OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_INCLUDE_ALL || OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_INCLUDE)
 #define _OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_
 
-@class IOSObjectArray;
-@class JavaIoReader;
-@protocol OrgApacheLuceneAnalysisTokenattributesCharTermAttribute;
-
 #define OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_YYEOF -1
 #define OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_YYINITIAL 0
 #define OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_ALPHANUM 0
@@ -34,39 +30,13 @@
 
 @interface OrgApacheLuceneAnalysisStandardClassicTokenizerImpl : NSObject
 
-#pragma mark Public
-
-- (jint)getNextToken;
-
-- (void)getTextWithOrgApacheLuceneAnalysisTokenattributesCharTermAttribute:(id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>)t;
-
-- (void)setBufferSizeWithInt:(jint)numChars;
-
-- (void)yybeginWithInt:(jint)newState;
-
-- (jint)yychar;
-
-- (jchar)yycharatWithInt:(jint)pos;
-
-- (void)yyclose;
-
-- (jint)yylength;
-
-- (void)yypushbackWithInt:(jint)number;
-
-- (void)yyresetWithJavaIoReader:(JavaIoReader *)reader;
-
-- (jint)yystate;
-
-- (NSString *)yytext;
-
 #pragma mark Package-Private
 
-- (instancetype)initWithJavaIoReader:(JavaIoReader *)inArg;
+- (instancetype)init;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisStandardClassicTokenizerImpl)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisStandardClassicTokenizerImpl)
 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisStandardClassicTokenizerImpl, YYEOF, jint)
 
@@ -90,12 +60,9 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisStandardClassicTokenizerImpl, 
 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisStandardClassicTokenizerImpl, ACRONYM_DEP, jint)
 
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_TOKEN_TYPES_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisStandardClassicTokenizerImpl, TOKEN_TYPES_, IOSObjectArray *)
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_init(OrgApacheLuceneAnalysisStandardClassicTokenizerImpl *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_initWithJavaIoReader_(OrgApacheLuceneAnalysisStandardClassicTokenizerImpl *self, JavaIoReader *inArg);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisStandardClassicTokenizerImpl *new_OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_initWithJavaIoReader_(JavaIoReader *inArg) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisStandardClassicTokenizerImpl *new_OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisStandardClassicTokenizerImpl)
 

@@ -20,40 +20,19 @@
 #define OrgApacheLuceneSearchSimilaritiesSimilarity_INCLUDE 1
 #include "org/apache/lucene/search/similarities/Similarity.h"
 
-@class IOSObjectArray;
-@class OrgApacheLuceneIndexFieldInvertState;
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneSearchCollectionStatistics;
-@class OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer;
-@class OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight;
-
-@interface OrgApacheLuceneSearchSimilaritiesMultiSimilarity : OrgApacheLuceneSearchSimilaritiesSimilarity {
- @public
-  IOSObjectArray *sims_;
-}
+@interface OrgApacheLuceneSearchSimilaritiesMultiSimilarity : OrgApacheLuceneSearchSimilaritiesSimilarity
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneSearchSimilaritiesSimilarityArray:(IOSObjectArray *)sims;
-
-- (jlong)computeNormWithOrgApacheLuceneIndexFieldInvertState:(OrgApacheLuceneIndexFieldInvertState *)state;
-
-- (OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight *)computeWeightWithFloat:(jfloat)queryBoost
-                                    withOrgApacheLuceneSearchCollectionStatistics:(OrgApacheLuceneSearchCollectionStatistics *)collectionStats
-                                     withOrgApacheLuceneSearchTermStatisticsArray:(IOSObjectArray *)termStats;
-
-- (OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer *)simScorerWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight:(OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight *)stats
-                                                                                    withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSimilaritiesMultiSimilarity)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSimilaritiesMultiSimilarity, sims_, IOSObjectArray *)
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesMultiSimilarity_init(OrgApacheLuceneSearchSimilaritiesMultiSimilarity *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesMultiSimilarity_initWithOrgApacheLuceneSearchSimilaritiesSimilarityArray_(OrgApacheLuceneSearchSimilaritiesMultiSimilarity *self, IOSObjectArray *sims);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesMultiSimilarity *new_OrgApacheLuceneSearchSimilaritiesMultiSimilarity_initWithOrgApacheLuceneSearchSimilaritiesSimilarityArray_(IOSObjectArray *sims) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesMultiSimilarity *new_OrgApacheLuceneSearchSimilaritiesMultiSimilarity_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesMultiSimilarity)
 
@@ -66,38 +45,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesMultiSimilarity)
 #define OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_INCLUDE 1
 #include "org/apache/lucene/search/similarities/Similarity.h"
 
-@class IOSObjectArray;
-@class OrgApacheLuceneSearchExplanation;
-@class OrgApacheLuceneUtilBytesRef;
-
 @interface OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer : OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer
-
-#pragma mark Public
-
-- (jfloat)computePayloadFactorWithInt:(jint)doc
-                              withInt:(jint)start
-                              withInt:(jint)end
-      withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload;
-
-- (jfloat)computeSlopFactorWithInt:(jint)distance;
-
-- (OrgApacheLuceneSearchExplanation *)explainWithInt:(jint)doc
-                withOrgApacheLuceneSearchExplanation:(OrgApacheLuceneSearchExplanation *)freq;
-
-- (jfloat)scoreWithInt:(jint)doc
-             withFloat:(jfloat)freq;
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorerArray:(IOSObjectArray *)subScorers;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer_initWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorerArray_(OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer *self, IOSObjectArray *subScorers);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer_init(OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer *new_OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer_initWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimScorerArray_(IOSObjectArray *subScorers) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer *new_OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiSimScorer)
 
@@ -110,33 +70,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesMultiSimilarity_Mult
 #define OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight_INCLUDE 1
 #include "org/apache/lucene/search/similarities/Similarity.h"
 
-@class IOSObjectArray;
-
-@interface OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats : OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight {
- @public
-  IOSObjectArray *subStats_;
-}
-
-#pragma mark Public
-
-- (jfloat)getValueForNormalization;
-
-- (void)normalizeWithFloat:(jfloat)queryNorm
-                 withFloat:(jfloat)topLevelBoost;
+@interface OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats : OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeightArray:(IOSObjectArray *)subStats;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats, subStats_, IOSObjectArray *)
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats_init(OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats_initWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeightArray_(OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats *self, IOSObjectArray *subStats);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats *new_OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats_initWithOrgApacheLuceneSearchSimilaritiesSimilarity_SimWeightArray_(IOSObjectArray *subStats) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats *new_OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesMultiSimilarity_MultiStats)
 

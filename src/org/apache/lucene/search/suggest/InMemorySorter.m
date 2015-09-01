@@ -4,81 +4,34 @@
 //
 
 #include "J2ObjC_source.h"
-#include "java/lang/IllegalStateException.h"
-#include "java/util/Comparator.h"
 #include "org/apache/lucene/search/suggest/InMemorySorter.h"
-#include "org/apache/lucene/util/BytesRef.h"
-#include "org/apache/lucene/util/BytesRefArray.h"
-#include "org/apache/lucene/util/BytesRefIterator.h"
-#include "org/apache/lucene/util/Counter.h"
 
-@interface OrgApacheLuceneSearchSuggestInMemorySorter () {
- @public
-  OrgApacheLuceneUtilBytesRefArray *buffer_;
-  jboolean closed_;
-  id<JavaUtilComparator> comparator_;
-}
-
-@end
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestInMemorySorter, buffer_, OrgApacheLuceneUtilBytesRefArray *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestInMemorySorter, comparator_, id<JavaUtilComparator>)
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneSearchSuggestInMemorySorter
 
-- (instancetype)initWithJavaUtilComparator:(id<JavaUtilComparator>)comparator {
-  OrgApacheLuceneSearchSuggestInMemorySorter_initWithJavaUtilComparator_(self, comparator);
+- (instancetype)init {
+  OrgApacheLuceneSearchSuggestInMemorySorter_init(self);
   return self;
-}
-
-- (void)addWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)utf8 {
-  if (closed_) @throw [new_JavaLangIllegalStateException_init() autorelease];
-  [((OrgApacheLuceneUtilBytesRefArray *) nil_chk(buffer_)) appendWithOrgApacheLuceneUtilBytesRef:utf8];
-}
-
-- (id<OrgApacheLuceneUtilBytesRefIterator>)iterator {
-  closed_ = YES;
-  return [((OrgApacheLuceneUtilBytesRefArray *) nil_chk(buffer_)) iteratorWithJavaUtilComparator:comparator_];
-}
-
-- (id<JavaUtilComparator>)getComparator {
-  return comparator_;
-}
-
-- (void)dealloc {
-  RELEASE_(buffer_);
-  RELEASE_(comparator_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilComparator:", "InMemorySorter", NULL, 0x1, NULL, NULL },
-    { "addWithOrgApacheLuceneUtilBytesRef:", "add", "V", 0x1, NULL, NULL },
-    { "iterator", NULL, "Lorg.apache.lucene.util.BytesRefIterator;", 0x1, NULL, NULL },
-    { "getComparator", NULL, "Ljava.util.Comparator;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "buffer_", NULL, 0x12, "Lorg.apache.lucene.util.BytesRefArray;", NULL, NULL, .constantValue.asLong = 0 },
-    { "closed_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "comparator_", NULL, 0x12, "Ljava.util.Comparator;", NULL, "Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;", .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestInMemorySorter = { 2, "InMemorySorter", "org.apache.lucene.search.suggest", NULL, 0x11, 4, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSuggestInMemorySorter = { 2, "InMemorySorter", "org.apache.lucene.search.suggest", NULL, 0x11, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchSuggestInMemorySorter;
 }
 
 @end
 
-void OrgApacheLuceneSearchSuggestInMemorySorter_initWithJavaUtilComparator_(OrgApacheLuceneSearchSuggestInMemorySorter *self, id<JavaUtilComparator> comparator) {
+void OrgApacheLuceneSearchSuggestInMemorySorter_init(OrgApacheLuceneSearchSuggestInMemorySorter *self) {
   NSObject_init(self);
-  JreStrongAssignAndConsume(&self->buffer_, new_OrgApacheLuceneUtilBytesRefArray_initWithOrgApacheLuceneUtilCounter_(OrgApacheLuceneUtilCounter_newCounter()));
-  self->closed_ = NO;
-  JreStrongAssign(&self->comparator_, comparator);
 }
 
-OrgApacheLuceneSearchSuggestInMemorySorter *new_OrgApacheLuceneSearchSuggestInMemorySorter_initWithJavaUtilComparator_(id<JavaUtilComparator> comparator) {
+OrgApacheLuceneSearchSuggestInMemorySorter *new_OrgApacheLuceneSearchSuggestInMemorySorter_init() {
   OrgApacheLuceneSearchSuggestInMemorySorter *self = [OrgApacheLuceneSearchSuggestInMemorySorter alloc];
-  OrgApacheLuceneSearchSuggestInMemorySorter_initWithJavaUtilComparator_(self, comparator);
+  OrgApacheLuceneSearchSuggestInMemorySorter_init(self);
   return self;
 }
 

@@ -20,54 +20,15 @@
 #define OrgApacheLuceneSearchSimilaritiesLMSimilarity_INCLUDE 1
 #include "org/apache/lucene/search/similarities/LMSimilarity.h"
 
-@class OrgApacheLuceneSearchSimilaritiesBasicStats;
-@protocol JavaUtilList;
-@protocol OrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel;
-
 @interface OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity : OrgApacheLuceneSearchSimilaritiesLMSimilarity
 
 #pragma mark Public
 
 - (instancetype)init;
 
-- (instancetype)initWithOrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel:(id<OrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel>)collectionModel;
-
-- (instancetype)initWithOrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel:(id<OrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel>)collectionModel
-                                                                            withFloat:(jfloat)mu;
-
-- (instancetype)initWithFloat:(jfloat)mu;
-
-- (jfloat)getMu;
-
-- (NSString *)getName;
-
-#pragma mark Protected
-
-- (void)explainWithJavaUtilList:(id<JavaUtilList>)subs
-withOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
-                        withInt:(jint)doc
-                      withFloat:(jfloat)freq
-                      withFloat:(jfloat)docLen;
-
-- (jfloat)scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
-                                                     withFloat:(jfloat)freq
-                                                     withFloat:(jfloat)docLen;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity)
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity_initWithOrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel_withFloat_(OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity *self, id<OrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel> collectionModel, jfloat mu);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity *new_OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity_initWithOrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel_withFloat_(id<OrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel> collectionModel, jfloat mu) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity_initWithFloat_(OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity *self, jfloat mu);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity *new_OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity_initWithFloat_(jfloat mu) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity_initWithOrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel_(OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity *self, id<OrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel> collectionModel);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity *new_OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity_initWithOrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel_(id<OrgApacheLuceneSearchSimilaritiesLMSimilarity_CollectionModel> collectionModel) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity_init(OrgApacheLuceneSearchSimilaritiesLMDirichletSimilarity *self);
 

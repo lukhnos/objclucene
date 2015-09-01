@@ -20,59 +20,19 @@
 #define JavaIoSerializable_INCLUDE 1
 #include "java/io/Serializable.h"
 
-@interface OrgApacheLuceneQueryparserSurroundParserToken : NSObject < JavaIoSerializable > {
- @public
-  jint kind_;
-  jint beginLine_;
-  jint beginColumn_;
-  jint endLine_;
-  jint endColumn_;
-  NSString *image_;
-  OrgApacheLuceneQueryparserSurroundParserToken *next_;
-  OrgApacheLuceneQueryparserSurroundParserToken *specialToken_;
-}
+@interface OrgApacheLuceneQueryparserSurroundParserToken : NSObject < JavaIoSerializable >
 
 #pragma mark Public
 
 - (instancetype)init;
 
-- (instancetype)initWithInt:(jint)kind;
-
-- (instancetype)initWithInt:(jint)kind
-               withNSString:(NSString *)image;
-
-- (id)getValue;
-
-+ (OrgApacheLuceneQueryparserSurroundParserToken *)newTokenWithInt:(jint)ofKind OBJC_METHOD_FAMILY_NONE;
-
-+ (OrgApacheLuceneQueryparserSurroundParserToken *)newTokenWithInt:(jint)ofKind
-                                                      withNSString:(NSString *)image OBJC_METHOD_FAMILY_NONE;
-
-- (NSString *)description;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserSurroundParserToken)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserSurroundParserToken, image_, NSString *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserSurroundParserToken, next_, OrgApacheLuceneQueryparserSurroundParserToken *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserSurroundParserToken, specialToken_, OrgApacheLuceneQueryparserSurroundParserToken *)
-
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundParserToken_init(OrgApacheLuceneQueryparserSurroundParserToken *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundParserToken *new_OrgApacheLuceneQueryparserSurroundParserToken_init() NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundParserToken_initWithInt_(OrgApacheLuceneQueryparserSurroundParserToken *self, jint kind);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundParserToken *new_OrgApacheLuceneQueryparserSurroundParserToken_initWithInt_(jint kind) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserSurroundParserToken_initWithInt_withNSString_(OrgApacheLuceneQueryparserSurroundParserToken *self, jint kind, NSString *image);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundParserToken *new_OrgApacheLuceneQueryparserSurroundParserToken_initWithInt_withNSString_(jint kind, NSString *image) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundParserToken *OrgApacheLuceneQueryparserSurroundParserToken_newTokenWithInt_withNSString_(jint ofKind, NSString *image);
-
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserSurroundParserToken *OrgApacheLuceneQueryparserSurroundParserToken_newTokenWithInt_(jint ofKind);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserSurroundParserToken)
 

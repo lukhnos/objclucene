@@ -20,48 +20,17 @@
 #define OrgApacheLuceneQueriesFunctionValuesourceBoolFunction_INCLUDE 1
 #include "org/apache/lucene/queries/function/valuesource/BoolFunction.h"
 
-@class IOSObjectArray;
-@class OrgApacheLuceneIndexLeafReaderContext;
-@class OrgApacheLuceneQueriesFunctionDocvaluesBoolDocValues;
-@class OrgApacheLuceneSearchIndexSearcher;
-@protocol JavaUtilList;
-@protocol JavaUtilMap;
-
-@interface OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction : OrgApacheLuceneQueriesFunctionValuesourceBoolFunction {
- @public
-  id<JavaUtilList> sources_;
-}
+@interface OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction : OrgApacheLuceneQueriesFunctionValuesourceBoolFunction
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilList:(id<JavaUtilList>)sources;
-
-- (void)createWeightWithJavaUtilMap:(id<JavaUtilMap>)context
-withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher;
-
-- (NSString *)description__;
-
-- (jboolean)isEqual:(id)o;
-
-- (OrgApacheLuceneQueriesFunctionDocvaluesBoolDocValues *)getValuesWithJavaUtilMap:(id<JavaUtilMap>)context
-                                         withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)readerContext;
-
-- (NSUInteger)hash;
-
-#pragma mark Protected
-
-- (jboolean)funcWithInt:(jint)doc
-withOrgApacheLuceneQueriesFunctionFunctionValuesArray:(IOSObjectArray *)vals;
-
-- (NSString *)name;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction, sources_, id<JavaUtilList>)
-
-FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_initWithJavaUtilList_(OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction *self, id<JavaUtilList> sources);
+FOUNDATION_EXPORT void OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction_init(OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction *self);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceMultiBoolFunction)
 

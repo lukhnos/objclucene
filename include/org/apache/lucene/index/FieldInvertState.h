@@ -52,29 +52,11 @@
                          withInt:(jint)offset
                        withFloat:(jfloat)boost;
 
-- (OrgApacheLuceneUtilAttributeSource *)getAttributeSource;
-
 - (jfloat)getBoost;
 
 - (jint)getLength;
 
-- (jint)getMaxTermFrequency;
-
-- (NSString *)getName;
-
 - (jint)getNumOverlap;
-
-- (jint)getOffset;
-
-- (jint)getPosition;
-
-- (jint)getUniqueTermCount;
-
-- (void)setBoostWithFloat:(jfloat)boost;
-
-- (void)setLengthWithInt:(jint)length;
-
-- (void)setNumOverlapWithInt:(jint)numOverlap;
 
 #pragma mark Package-Private
 

@@ -16,78 +16,21 @@
 #if !defined (_OrgApacheLuceneSearchSortedSetSelector_) && (OrgApacheLuceneSearchSortedSetSelector_INCLUDE_ALL || OrgApacheLuceneSearchSortedSetSelector_INCLUDE)
 #define _OrgApacheLuceneSearchSortedSetSelector_
 
-@class OrgApacheLuceneIndexSortedDocValues;
-@class OrgApacheLuceneIndexSortedSetDocValues;
-@class OrgApacheLuceneSearchSortedSetSelector_TypeEnum;
-
 @interface OrgApacheLuceneSearchSortedSetSelector : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
 
-+ (OrgApacheLuceneIndexSortedDocValues *)wrapWithOrgApacheLuceneIndexSortedSetDocValues:(OrgApacheLuceneIndexSortedSetDocValues *)sortedSet
-                                    withOrgApacheLuceneSearchSortedSetSelector_TypeEnum:(OrgApacheLuceneSearchSortedSetSelector_TypeEnum *)selector;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSortedSetSelector)
-
-FOUNDATION_EXPORT OrgApacheLuceneIndexSortedDocValues *OrgApacheLuceneSearchSortedSetSelector_wrapWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneSearchSortedSetSelector_TypeEnum_(OrgApacheLuceneIndexSortedSetDocValues *sortedSet, OrgApacheLuceneSearchSortedSetSelector_TypeEnum *selector);
 
 FOUNDATION_EXPORT void OrgApacheLuceneSearchSortedSetSelector_init(OrgApacheLuceneSearchSortedSetSelector *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchSortedSetSelector *new_OrgApacheLuceneSearchSortedSetSelector_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortedSetSelector)
-
-#endif
-
-#if !defined (_OrgApacheLuceneSearchSortedSetSelector_TypeEnum_) && (OrgApacheLuceneSearchSortedSetSelector_INCLUDE_ALL || OrgApacheLuceneSearchSortedSetSelector_TypeEnum_INCLUDE)
-#define _OrgApacheLuceneSearchSortedSetSelector_TypeEnum_
-
-#define JavaLangEnum_RESTRICT 1
-#define JavaLangEnum_INCLUDE 1
-#include "java/lang/Enum.h"
-
-typedef NS_ENUM(NSUInteger, OrgApacheLuceneSearchSortedSetSelector_Type) {
-  OrgApacheLuceneSearchSortedSetSelector_Type_MIN = 0,
-  OrgApacheLuceneSearchSortedSetSelector_Type_MAX = 1,
-  OrgApacheLuceneSearchSortedSetSelector_Type_MIDDLE_MIN = 2,
-  OrgApacheLuceneSearchSortedSetSelector_Type_MIDDLE_MAX = 3,
-};
-
-@interface OrgApacheLuceneSearchSortedSetSelector_TypeEnum : JavaLangEnum < NSCopying >
-
-#pragma mark Package-Private
-
-+ (IOSObjectArray *)values;
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneSearchSortedSetSelector_TypeEnum_values();
-
-+ (OrgApacheLuceneSearchSortedSetSelector_TypeEnum *)valueOfWithNSString:(NSString *)name;
-FOUNDATION_EXPORT OrgApacheLuceneSearchSortedSetSelector_TypeEnum *OrgApacheLuceneSearchSortedSetSelector_TypeEnum_valueOfWithNSString_(NSString *name);
-
-- (id)copyWithZone:(NSZone *)zone;
-
-@end
-
-J2OBJC_STATIC_INIT(OrgApacheLuceneSearchSortedSetSelector_TypeEnum)
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSortedSetSelector_TypeEnum *OrgApacheLuceneSearchSortedSetSelector_TypeEnum_values_[];
-
-#define OrgApacheLuceneSearchSortedSetSelector_TypeEnum_MIN OrgApacheLuceneSearchSortedSetSelector_TypeEnum_values_[OrgApacheLuceneSearchSortedSetSelector_Type_MIN]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneSearchSortedSetSelector_TypeEnum, MIN)
-
-#define OrgApacheLuceneSearchSortedSetSelector_TypeEnum_MAX OrgApacheLuceneSearchSortedSetSelector_TypeEnum_values_[OrgApacheLuceneSearchSortedSetSelector_Type_MAX]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneSearchSortedSetSelector_TypeEnum, MAX)
-
-#define OrgApacheLuceneSearchSortedSetSelector_TypeEnum_MIDDLE_MIN OrgApacheLuceneSearchSortedSetSelector_TypeEnum_values_[OrgApacheLuceneSearchSortedSetSelector_Type_MIDDLE_MIN]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneSearchSortedSetSelector_TypeEnum, MIDDLE_MIN)
-
-#define OrgApacheLuceneSearchSortedSetSelector_TypeEnum_MIDDLE_MAX OrgApacheLuceneSearchSortedSetSelector_TypeEnum_values_[OrgApacheLuceneSearchSortedSetSelector_Type_MIDDLE_MAX]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneSearchSortedSetSelector_TypeEnum, MIDDLE_MAX)
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortedSetSelector_TypeEnum)
 
 #endif
 
@@ -98,37 +41,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortedSetSelector_TypeEnum)
 #define OrgApacheLuceneIndexSortedDocValues_INCLUDE 1
 #include "org/apache/lucene/index/SortedDocValues.h"
 
-@class OrgApacheLuceneIndexSortedSetDocValues;
-@class OrgApacheLuceneUtilBytesRef;
-
-@interface OrgApacheLuceneSearchSortedSetSelector_MinValue : OrgApacheLuceneIndexSortedDocValues {
- @public
-  OrgApacheLuceneIndexSortedSetDocValues *in_;
-}
-
-#pragma mark Public
-
-- (jint)getOrdWithInt:(jint)docID;
-
-- (jint)getValueCount;
-
-- (OrgApacheLuceneUtilBytesRef *)lookupOrdWithInt:(jint)ord;
-
-- (jint)lookupTermWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)key;
+@interface OrgApacheLuceneSearchSortedSetSelector_MinValue : OrgApacheLuceneIndexSortedDocValues
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneIndexSortedSetDocValues:(OrgApacheLuceneIndexSortedSetDocValues *)inArg;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSortedSetSelector_MinValue)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSortedSetSelector_MinValue, in_, OrgApacheLuceneIndexSortedSetDocValues *)
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSortedSetSelector_MinValue_init(OrgApacheLuceneSearchSortedSetSelector_MinValue *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSortedSetSelector_MinValue_initWithOrgApacheLuceneIndexSortedSetDocValues_(OrgApacheLuceneSearchSortedSetSelector_MinValue *self, OrgApacheLuceneIndexSortedSetDocValues *inArg);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSortedSetSelector_MinValue *new_OrgApacheLuceneSearchSortedSetSelector_MinValue_initWithOrgApacheLuceneIndexSortedSetDocValues_(OrgApacheLuceneIndexSortedSetDocValues *inArg) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSortedSetSelector_MinValue *new_OrgApacheLuceneSearchSortedSetSelector_MinValue_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortedSetSelector_MinValue)
 
@@ -141,37 +66,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortedSetSelector_MinValue)
 #define OrgApacheLuceneIndexSortedDocValues_INCLUDE 1
 #include "org/apache/lucene/index/SortedDocValues.h"
 
-@class OrgApacheLuceneIndexRandomAccessOrds;
-@class OrgApacheLuceneUtilBytesRef;
-
-@interface OrgApacheLuceneSearchSortedSetSelector_MaxValue : OrgApacheLuceneIndexSortedDocValues {
- @public
-  OrgApacheLuceneIndexRandomAccessOrds *in_;
-}
-
-#pragma mark Public
-
-- (jint)getOrdWithInt:(jint)docID;
-
-- (jint)getValueCount;
-
-- (OrgApacheLuceneUtilBytesRef *)lookupOrdWithInt:(jint)ord;
-
-- (jint)lookupTermWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)key;
+@interface OrgApacheLuceneSearchSortedSetSelector_MaxValue : OrgApacheLuceneIndexSortedDocValues
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneIndexRandomAccessOrds:(OrgApacheLuceneIndexRandomAccessOrds *)inArg;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSortedSetSelector_MaxValue)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSortedSetSelector_MaxValue, in_, OrgApacheLuceneIndexRandomAccessOrds *)
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSortedSetSelector_MaxValue_init(OrgApacheLuceneSearchSortedSetSelector_MaxValue *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSortedSetSelector_MaxValue_initWithOrgApacheLuceneIndexRandomAccessOrds_(OrgApacheLuceneSearchSortedSetSelector_MaxValue *self, OrgApacheLuceneIndexRandomAccessOrds *inArg);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSortedSetSelector_MaxValue *new_OrgApacheLuceneSearchSortedSetSelector_MaxValue_initWithOrgApacheLuceneIndexRandomAccessOrds_(OrgApacheLuceneIndexRandomAccessOrds *inArg) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSortedSetSelector_MaxValue *new_OrgApacheLuceneSearchSortedSetSelector_MaxValue_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortedSetSelector_MaxValue)
 
@@ -184,37 +91,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortedSetSelector_MaxValue)
 #define OrgApacheLuceneIndexSortedDocValues_INCLUDE 1
 #include "org/apache/lucene/index/SortedDocValues.h"
 
-@class OrgApacheLuceneIndexRandomAccessOrds;
-@class OrgApacheLuceneUtilBytesRef;
-
-@interface OrgApacheLuceneSearchSortedSetSelector_MiddleMinValue : OrgApacheLuceneIndexSortedDocValues {
- @public
-  OrgApacheLuceneIndexRandomAccessOrds *in_;
-}
-
-#pragma mark Public
-
-- (jint)getOrdWithInt:(jint)docID;
-
-- (jint)getValueCount;
-
-- (OrgApacheLuceneUtilBytesRef *)lookupOrdWithInt:(jint)ord;
-
-- (jint)lookupTermWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)key;
+@interface OrgApacheLuceneSearchSortedSetSelector_MiddleMinValue : OrgApacheLuceneIndexSortedDocValues
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneIndexRandomAccessOrds:(OrgApacheLuceneIndexRandomAccessOrds *)inArg;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSortedSetSelector_MiddleMinValue)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSortedSetSelector_MiddleMinValue, in_, OrgApacheLuceneIndexRandomAccessOrds *)
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSortedSetSelector_MiddleMinValue_init(OrgApacheLuceneSearchSortedSetSelector_MiddleMinValue *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSortedSetSelector_MiddleMinValue_initWithOrgApacheLuceneIndexRandomAccessOrds_(OrgApacheLuceneSearchSortedSetSelector_MiddleMinValue *self, OrgApacheLuceneIndexRandomAccessOrds *inArg);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSortedSetSelector_MiddleMinValue *new_OrgApacheLuceneSearchSortedSetSelector_MiddleMinValue_initWithOrgApacheLuceneIndexRandomAccessOrds_(OrgApacheLuceneIndexRandomAccessOrds *inArg) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSortedSetSelector_MiddleMinValue *new_OrgApacheLuceneSearchSortedSetSelector_MiddleMinValue_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortedSetSelector_MiddleMinValue)
 
@@ -227,37 +116,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortedSetSelector_MiddleMinValue
 #define OrgApacheLuceneIndexSortedDocValues_INCLUDE 1
 #include "org/apache/lucene/index/SortedDocValues.h"
 
-@class OrgApacheLuceneIndexRandomAccessOrds;
-@class OrgApacheLuceneUtilBytesRef;
-
-@interface OrgApacheLuceneSearchSortedSetSelector_MiddleMaxValue : OrgApacheLuceneIndexSortedDocValues {
- @public
-  OrgApacheLuceneIndexRandomAccessOrds *in_;
-}
-
-#pragma mark Public
-
-- (jint)getOrdWithInt:(jint)docID;
-
-- (jint)getValueCount;
-
-- (OrgApacheLuceneUtilBytesRef *)lookupOrdWithInt:(jint)ord;
-
-- (jint)lookupTermWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)key;
+@interface OrgApacheLuceneSearchSortedSetSelector_MiddleMaxValue : OrgApacheLuceneIndexSortedDocValues
 
 #pragma mark Package-Private
 
-- (instancetype)initWithOrgApacheLuceneIndexRandomAccessOrds:(OrgApacheLuceneIndexRandomAccessOrds *)inArg;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSortedSetSelector_MiddleMaxValue)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSortedSetSelector_MiddleMaxValue, in_, OrgApacheLuceneIndexRandomAccessOrds *)
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSortedSetSelector_MiddleMaxValue_init(OrgApacheLuceneSearchSortedSetSelector_MiddleMaxValue *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSortedSetSelector_MiddleMaxValue_initWithOrgApacheLuceneIndexRandomAccessOrds_(OrgApacheLuceneSearchSortedSetSelector_MiddleMaxValue *self, OrgApacheLuceneIndexRandomAccessOrds *inArg);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSortedSetSelector_MiddleMaxValue *new_OrgApacheLuceneSearchSortedSetSelector_MiddleMaxValue_initWithOrgApacheLuceneIndexRandomAccessOrds_(OrgApacheLuceneIndexRandomAccessOrds *inArg) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSortedSetSelector_MiddleMaxValue *new_OrgApacheLuceneSearchSortedSetSelector_MiddleMaxValue_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortedSetSelector_MiddleMaxValue)
 

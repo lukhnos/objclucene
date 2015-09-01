@@ -20,83 +20,20 @@
 #define OrgXmlSaxHelpersDefaultHandler_INCLUDE 1
 #include "org/xml/sax/helpers/DefaultHandler.h"
 
-@class IOSCharArray;
-@class JavaLangStringBuilder;
-@class JavaUtilArrayList;
-@class OrgXmlSaxInputSource;
-@protocol OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer;
-@protocol OrgXmlSaxAttributes;
-@protocol OrgXmlSaxXMLReader;
-
 #define OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_ELEM_CLASSES 1
 #define OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_ELEM_EXCEPTIONS 2
 #define OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_ELEM_PATTERNS 3
 #define OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_ELEM_HYPHEN 4
 
-@interface OrgApacheLuceneAnalysisCompoundHyphenationPatternParser : OrgXmlSaxHelpersDefaultHandler {
- @public
-  id<OrgXmlSaxXMLReader> parser_;
-  jint currElement_;
-  id<OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer> consumer_;
-  JavaLangStringBuilder *token_;
-  JavaUtilArrayList *exception_;
-  jchar hyphenChar_;
-  NSString *errMsg_;
-}
+@interface OrgApacheLuceneAnalysisCompoundHyphenationPatternParser : OrgXmlSaxHelpersDefaultHandler
 
 #pragma mark Public
 
 - (instancetype)init;
 
-- (instancetype)initWithOrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer:(id<OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer>)consumer;
-
-- (void)charactersWithCharArray:(IOSCharArray *)ch
-                        withInt:(jint)start
-                        withInt:(jint)length;
-
-- (void)endElementWithNSString:(NSString *)uri
-                  withNSString:(NSString *)local
-                  withNSString:(NSString *)raw;
-
-- (void)parseWithOrgXmlSaxInputSource:(OrgXmlSaxInputSource *)source;
-
-- (void)parseWithNSString:(NSString *)filename;
-
-- (OrgXmlSaxInputSource *)resolveEntityWithNSString:(NSString *)publicId
-                                       withNSString:(NSString *)systemId;
-
-- (void)setConsumerWithOrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer:(id<OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer>)consumer;
-
-- (void)startElementWithNSString:(NSString *)uri
-                    withNSString:(NSString *)local
-                    withNSString:(NSString *)raw
-         withOrgXmlSaxAttributes:(id<OrgXmlSaxAttributes>)attrs;
-
-#pragma mark Protected
-
-- (NSString *)getExceptionWordWithJavaUtilArrayList:(JavaUtilArrayList *)ex;
-
-+ (NSString *)getInterletterValuesWithNSString:(NSString *)pat;
-
-+ (NSString *)getPatternWithNSString:(NSString *)word;
-
-- (JavaUtilArrayList *)normalizeExceptionWithJavaUtilArrayList:(JavaUtilArrayList *)ex;
-
-- (NSString *)readTokenWithJavaLangStringBuilder:(JavaLangStringBuilder *)chars;
-
-#pragma mark Package-Private
-
-+ (id<OrgXmlSaxXMLReader>)createParser;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisCompoundHyphenationPatternParser)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundHyphenationPatternParser, parser_, id<OrgXmlSaxXMLReader>)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundHyphenationPatternParser, consumer_, id<OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer>)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundHyphenationPatternParser, token_, JavaLangStringBuilder *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundHyphenationPatternParser, exception_, JavaUtilArrayList *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundHyphenationPatternParser, errMsg_, NSString *)
 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisCompoundHyphenationPatternParser, ELEM_CLASSES, jint)
 
@@ -109,16 +46,6 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisCompoundHyphenationPatternPars
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_init(OrgApacheLuceneAnalysisCompoundHyphenationPatternParser *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundHyphenationPatternParser *new_OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_init() NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_initWithOrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer_(OrgApacheLuceneAnalysisCompoundHyphenationPatternParser *self, id<OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer> consumer);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundHyphenationPatternParser *new_OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_initWithOrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer_(id<OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer> consumer) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT id<OrgXmlSaxXMLReader> OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_createParser();
-
-FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_getPatternWithNSString_(NSString *word);
-
-FOUNDATION_EXPORT NSString *OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_getInterletterValuesWithNSString_(NSString *pat);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCompoundHyphenationPatternParser)
 

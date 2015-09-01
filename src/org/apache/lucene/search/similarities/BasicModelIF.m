@@ -4,10 +4,9 @@
 //
 
 #include "J2ObjC_source.h"
-#include "org/apache/lucene/search/similarities/BasicModel.h"
 #include "org/apache/lucene/search/similarities/BasicModelIF.h"
-#include "org/apache/lucene/search/similarities/BasicStats.h"
-#include "org/apache/lucene/search/similarities/SimilarityBase.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneSearchSimilaritiesBasicModelIF
 
@@ -16,31 +15,18 @@
   return self;
 }
 
-- (jfloat)scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
-                                                     withFloat:(jfloat)tfn {
-  jlong N = [((OrgApacheLuceneSearchSimilaritiesBasicStats *) nil_chk(stats)) getNumberOfDocuments];
-  jlong F = [stats getTotalTermFreq];
-  return tfn * (jfloat) (OrgApacheLuceneSearchSimilaritiesSimilarityBase_log2WithDouble_(1 + (N + 1) / (F + 0.5)));
-}
-
-- (NSString *)description {
-  return @"I(F)";
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", "BasicModelIF", NULL, 0x1, NULL, NULL },
-    { "scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:withFloat:", "score", "F", 0x11, NULL, NULL },
-    { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesBasicModelIF = { 2, "BasicModelIF", "org.apache.lucene.search.similarities", NULL, 0x1, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSimilaritiesBasicModelIF = { 2, "BasicModelIF", "org.apache.lucene.search.similarities", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchSimilaritiesBasicModelIF;
 }
 
 @end
 
 void OrgApacheLuceneSearchSimilaritiesBasicModelIF_init(OrgApacheLuceneSearchSimilaritiesBasicModelIF *self) {
-  OrgApacheLuceneSearchSimilaritiesBasicModel_init(self);
+  NSObject_init(self);
 }
 
 OrgApacheLuceneSearchSimilaritiesBasicModelIF *new_OrgApacheLuceneSearchSimilaritiesBasicModelIF_init() {

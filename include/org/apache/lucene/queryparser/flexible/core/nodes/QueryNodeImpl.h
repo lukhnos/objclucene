@@ -20,61 +20,11 @@
 #define OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_INCLUDE 1
 #include "org/apache/lucene/queryparser/flexible/core/nodes/QueryNode.h"
 
-@protocol JavaLangCharSequence;
-@protocol JavaUtilList;
-@protocol JavaUtilMap;
-
-@interface OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl : NSObject < OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode, NSCopying > {
- @public
-  jboolean toQueryStringIgnoreFields_;
-}
+@interface OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl : NSObject < OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode, NSCopying >
 
 #pragma mark Public
 
 - (instancetype)init;
-
-- (void)addWithJavaUtilList:(id<JavaUtilList>)children;
-
-- (void)addWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)child;
-
-- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)clone;
-
-- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)cloneTree;
-
-- (jboolean)containsTagWithNSString:(NSString *)tagName;
-
-- (id<JavaUtilList>)getChildren;
-
-- (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)getParent;
-
-- (id)getTagWithNSString:(NSString *)tagName;
-
-- (id<JavaUtilMap>)getTagMap;
-
-- (jboolean)isLeaf;
-
-- (void)removeChildrenWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)childNode;
-
-- (void)removeFromParent;
-
-- (void)setWithJavaUtilList:(id<JavaUtilList>)children;
-
-- (void)setTagWithNSString:(NSString *)tagName
-                    withId:(id)value;
-
-- (NSString *)description;
-
-- (void)unsetTagWithNSString:(NSString *)tagName;
-
-#pragma mark Protected
-
-- (void)allocate OBJC_METHOD_FAMILY_NONE;
-
-- (jboolean)isDefaultFieldWithJavaLangCharSequence:(id<JavaLangCharSequence>)fld;
-
-- (jboolean)isRoot;
-
-- (void)setLeafWithBoolean:(jboolean)isLeaf;
 
 @end
 

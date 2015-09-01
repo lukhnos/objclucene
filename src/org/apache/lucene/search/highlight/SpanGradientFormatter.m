@@ -4,84 +4,34 @@
 //
 
 #include "J2ObjC_source.h"
-#include "java/lang/StringBuilder.h"
-#include "org/apache/lucene/search/highlight/GradientFormatter.h"
 #include "org/apache/lucene/search/highlight/SpanGradientFormatter.h"
-#include "org/apache/lucene/search/highlight/TokenGroup.h"
 
-static NSString *OrgApacheLuceneSearchHighlightSpanGradientFormatter_TEMPLATE_ = @"<span style=\"background: #EEEEEE; color: #000000;\">...</span>";
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchHighlightSpanGradientFormatter, TEMPLATE_, NSString *)
-
-static jint OrgApacheLuceneSearchHighlightSpanGradientFormatter_EXTRA_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchHighlightSpanGradientFormatter, EXTRA_, jint)
-
-J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchHighlightSpanGradientFormatter)
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneSearchHighlightSpanGradientFormatter
 
-- (instancetype)initWithFloat:(jfloat)maxScore
-                 withNSString:(NSString *)minForegroundColor
-                 withNSString:(NSString *)maxForegroundColor
-                 withNSString:(NSString *)minBackgroundColor
-                 withNSString:(NSString *)maxBackgroundColor {
-  OrgApacheLuceneSearchHighlightSpanGradientFormatter_initWithFloat_withNSString_withNSString_withNSString_withNSString_(self, maxScore, minForegroundColor, maxForegroundColor, minBackgroundColor, maxBackgroundColor);
+- (instancetype)init {
+  OrgApacheLuceneSearchHighlightSpanGradientFormatter_init(self);
   return self;
-}
-
-- (NSString *)highlightTermWithNSString:(NSString *)originalText
-withOrgApacheLuceneSearchHighlightTokenGroup:(OrgApacheLuceneSearchHighlightTokenGroup *)tokenGroup {
-  if ([((OrgApacheLuceneSearchHighlightTokenGroup *) nil_chk(tokenGroup)) getTotalScore] == 0) return originalText;
-  jfloat score = [tokenGroup getTotalScore];
-  if (score == 0) {
-    return originalText;
-  }
-  JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_initWithInt_(((jint) [((NSString *) nil_chk(originalText)) length]) + OrgApacheLuceneSearchHighlightSpanGradientFormatter_EXTRA_) autorelease];
-  [sb appendWithNSString:@"<span style=\""];
-  if (highlightForeground_) {
-    [sb appendWithNSString:@"color: "];
-    [sb appendWithNSString:[self getForegroundColorStringWithFloat:score]];
-    [sb appendWithNSString:@"; "];
-  }
-  if (highlightBackground_) {
-    [sb appendWithNSString:@"background: "];
-    [sb appendWithNSString:[self getBackgroundColorStringWithFloat:score]];
-    [sb appendWithNSString:@"; "];
-  }
-  [sb appendWithNSString:@"\">"];
-  [sb appendWithNSString:originalText];
-  [sb appendWithNSString:@"</span>"];
-  return [sb description];
-}
-
-+ (void)initialize {
-  if (self == [OrgApacheLuceneSearchHighlightSpanGradientFormatter class]) {
-    OrgApacheLuceneSearchHighlightSpanGradientFormatter_EXTRA_ = ((jint) [((NSString *) nil_chk(OrgApacheLuceneSearchHighlightSpanGradientFormatter_TEMPLATE_)) length]);
-    J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchHighlightSpanGradientFormatter)
-  }
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithFloat:withNSString:withNSString:withNSString:withNSString:", "SpanGradientFormatter", NULL, 0x1, NULL, NULL },
-    { "highlightTermWithNSString:withOrgApacheLuceneSearchHighlightTokenGroup:", "highlightTerm", "Ljava.lang.String;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "TEMPLATE_", NULL, 0x1a, "Ljava.lang.String;", &OrgApacheLuceneSearchHighlightSpanGradientFormatter_TEMPLATE_, NULL, .constantValue.asLong = 0 },
-    { "EXTRA_", NULL, 0x1a, "I", &OrgApacheLuceneSearchHighlightSpanGradientFormatter_EXTRA_, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightSpanGradientFormatter = { 2, "SpanGradientFormatter", "org.apache.lucene.search.highlight", NULL, 0x1, 2, methods, 2, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightSpanGradientFormatter = { 2, "SpanGradientFormatter", "org.apache.lucene.search.highlight", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchHighlightSpanGradientFormatter;
 }
 
 @end
 
-void OrgApacheLuceneSearchHighlightSpanGradientFormatter_initWithFloat_withNSString_withNSString_withNSString_withNSString_(OrgApacheLuceneSearchHighlightSpanGradientFormatter *self, jfloat maxScore, NSString *minForegroundColor, NSString *maxForegroundColor, NSString *minBackgroundColor, NSString *maxBackgroundColor) {
-  OrgApacheLuceneSearchHighlightGradientFormatter_initWithFloat_withNSString_withNSString_withNSString_withNSString_(self, maxScore, minForegroundColor, maxForegroundColor, minBackgroundColor, maxBackgroundColor);
+void OrgApacheLuceneSearchHighlightSpanGradientFormatter_init(OrgApacheLuceneSearchHighlightSpanGradientFormatter *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneSearchHighlightSpanGradientFormatter *new_OrgApacheLuceneSearchHighlightSpanGradientFormatter_initWithFloat_withNSString_withNSString_withNSString_withNSString_(jfloat maxScore, NSString *minForegroundColor, NSString *maxForegroundColor, NSString *minBackgroundColor, NSString *maxBackgroundColor) {
+OrgApacheLuceneSearchHighlightSpanGradientFormatter *new_OrgApacheLuceneSearchHighlightSpanGradientFormatter_init() {
   OrgApacheLuceneSearchHighlightSpanGradientFormatter *self = [OrgApacheLuceneSearchHighlightSpanGradientFormatter alloc];
-  OrgApacheLuceneSearchHighlightSpanGradientFormatter_initWithFloat_withNSString_withNSString_withNSString_withNSString_(self, maxScore, minForegroundColor, maxForegroundColor, minBackgroundColor, maxBackgroundColor);
+  OrgApacheLuceneSearchHighlightSpanGradientFormatter_init(self);
   return self;
 }
 

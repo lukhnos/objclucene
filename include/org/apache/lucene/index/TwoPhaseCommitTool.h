@@ -16,19 +16,19 @@
 #if !defined (_OrgApacheLuceneIndexTwoPhaseCommitTool_) && (OrgApacheLuceneIndexTwoPhaseCommitTool_INCLUDE_ALL || OrgApacheLuceneIndexTwoPhaseCommitTool_INCLUDE)
 #define _OrgApacheLuceneIndexTwoPhaseCommitTool_
 
-@class IOSObjectArray;
-
 @interface OrgApacheLuceneIndexTwoPhaseCommitTool : NSObject
 
 #pragma mark Public
 
-+ (void)executeWithOrgApacheLuceneIndexTwoPhaseCommitArray:(IOSObjectArray *)objects;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexTwoPhaseCommitTool)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexTwoPhaseCommitTool_executeWithOrgApacheLuceneIndexTwoPhaseCommitArray_(IOSObjectArray *objects);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexTwoPhaseCommitTool_init(OrgApacheLuceneIndexTwoPhaseCommitTool *self);
+
+FOUNDATION_EXPORT OrgApacheLuceneIndexTwoPhaseCommitTool *new_OrgApacheLuceneIndexTwoPhaseCommitTool_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexTwoPhaseCommitTool)
 
@@ -41,23 +41,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexTwoPhaseCommitTool)
 #define JavaIoIOException_INCLUDE 1
 #include "java/io/IOException.h"
 
-@class JavaLangThrowable;
-@protocol OrgApacheLuceneIndexTwoPhaseCommit;
-
 @interface OrgApacheLuceneIndexTwoPhaseCommitTool_PrepareCommitFailException : JavaIoIOException
 
 #pragma mark Public
 
-- (instancetype)initWithJavaLangThrowable:(JavaLangThrowable *)cause
-   withOrgApacheLuceneIndexTwoPhaseCommit:(id<OrgApacheLuceneIndexTwoPhaseCommit>)obj;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexTwoPhaseCommitTool_PrepareCommitFailException)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexTwoPhaseCommitTool_PrepareCommitFailException_initWithJavaLangThrowable_withOrgApacheLuceneIndexTwoPhaseCommit_(OrgApacheLuceneIndexTwoPhaseCommitTool_PrepareCommitFailException *self, JavaLangThrowable *cause, id<OrgApacheLuceneIndexTwoPhaseCommit> obj);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexTwoPhaseCommitTool_PrepareCommitFailException_init(OrgApacheLuceneIndexTwoPhaseCommitTool_PrepareCommitFailException *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexTwoPhaseCommitTool_PrepareCommitFailException *new_OrgApacheLuceneIndexTwoPhaseCommitTool_PrepareCommitFailException_initWithJavaLangThrowable_withOrgApacheLuceneIndexTwoPhaseCommit_(JavaLangThrowable *cause, id<OrgApacheLuceneIndexTwoPhaseCommit> obj) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexTwoPhaseCommitTool_PrepareCommitFailException *new_OrgApacheLuceneIndexTwoPhaseCommitTool_PrepareCommitFailException_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexTwoPhaseCommitTool_PrepareCommitFailException)
 
@@ -70,23 +66,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexTwoPhaseCommitTool_PrepareCommitF
 #define JavaIoIOException_INCLUDE 1
 #include "java/io/IOException.h"
 
-@class JavaLangThrowable;
-@protocol OrgApacheLuceneIndexTwoPhaseCommit;
-
 @interface OrgApacheLuceneIndexTwoPhaseCommitTool_CommitFailException : JavaIoIOException
 
 #pragma mark Public
 
-- (instancetype)initWithJavaLangThrowable:(JavaLangThrowable *)cause
-   withOrgApacheLuceneIndexTwoPhaseCommit:(id<OrgApacheLuceneIndexTwoPhaseCommit>)obj;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexTwoPhaseCommitTool_CommitFailException)
 
-FOUNDATION_EXPORT void OrgApacheLuceneIndexTwoPhaseCommitTool_CommitFailException_initWithJavaLangThrowable_withOrgApacheLuceneIndexTwoPhaseCommit_(OrgApacheLuceneIndexTwoPhaseCommitTool_CommitFailException *self, JavaLangThrowable *cause, id<OrgApacheLuceneIndexTwoPhaseCommit> obj);
+FOUNDATION_EXPORT void OrgApacheLuceneIndexTwoPhaseCommitTool_CommitFailException_init(OrgApacheLuceneIndexTwoPhaseCommitTool_CommitFailException *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneIndexTwoPhaseCommitTool_CommitFailException *new_OrgApacheLuceneIndexTwoPhaseCommitTool_CommitFailException_initWithJavaLangThrowable_withOrgApacheLuceneIndexTwoPhaseCommit_(JavaLangThrowable *cause, id<OrgApacheLuceneIndexTwoPhaseCommit> obj) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneIndexTwoPhaseCommitTool_CommitFailException *new_OrgApacheLuceneIndexTwoPhaseCommitTool_CommitFailException_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexTwoPhaseCommitTool_CommitFailException)
 

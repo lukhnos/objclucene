@@ -24,19 +24,15 @@
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)fieldName;
-
-- (NSString *)getField;
-
-- (NSString *)description;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig)
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig_initWithNSString_(OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig *self, NSString *fieldName);
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig_init(OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig *new_OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig_initWithNSString_(NSString *fieldName) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig *new_OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreConfigFieldConfig)
 

@@ -20,26 +20,19 @@
 #define OrgApacheLuceneDocumentField_INCLUDE 1
 #include "org/apache/lucene/document/Field.h"
 
-@class JavaTextCollator;
-
 @interface OrgApacheLuceneCollationCollationDocValuesField : OrgApacheLuceneDocumentField
 
 #pragma mark Public
 
-- (instancetype)initWithNSString:(NSString *)name
-            withJavaTextCollator:(JavaTextCollator *)collator;
-
-- (NSString *)name;
-
-- (void)setStringValueWithNSString:(NSString *)value;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneCollationCollationDocValuesField)
 
-FOUNDATION_EXPORT void OrgApacheLuceneCollationCollationDocValuesField_initWithNSString_withJavaTextCollator_(OrgApacheLuceneCollationCollationDocValuesField *self, NSString *name, JavaTextCollator *collator);
+FOUNDATION_EXPORT void OrgApacheLuceneCollationCollationDocValuesField_init(OrgApacheLuceneCollationCollationDocValuesField *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneCollationCollationDocValuesField *new_OrgApacheLuceneCollationCollationDocValuesField_initWithNSString_withJavaTextCollator_(NSString *name, JavaTextCollator *collator) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneCollationCollationDocValuesField *new_OrgApacheLuceneCollationCollationDocValuesField_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCollationCollationDocValuesField)
 

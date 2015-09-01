@@ -20,44 +20,19 @@
 #define OrgApacheLuceneUtilAccountable_INCLUDE 1
 #include "org/apache/lucene/util/Accountable.h"
 
-@class OrgApacheLuceneIndexSortedNumericDocValues;
-@class OrgApacheLuceneSearchDocIdSet;
-@class OrgApacheLuceneStoreIndexInput;
-@protocol JavaUtilCollection;
+@interface OrgApacheLuceneRangetreeRangeTreeReader : NSObject < OrgApacheLuceneUtilAccountable >
 
-@interface OrgApacheLuceneRangetreeRangeTreeReader : NSObject < OrgApacheLuceneUtilAccountable > {
- @public
-  OrgApacheLuceneStoreIndexInput *in_;
-  jlong globalMaxValue_;
-  jint approxDocsPerBlock_;
-}
+#pragma mark Package-Private
 
-#pragma mark Public
-
-- (instancetype)initWithOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)inArg;
-
-- (id<JavaUtilCollection>)getChildResources;
-
-- (jlong)getMaxValue;
-
-- (jlong)getMinValue;
-
-- (OrgApacheLuceneSearchDocIdSet *)intersectWithLong:(jlong)minIncl
-                                            withLong:(jlong)maxIncl
-      withOrgApacheLuceneIndexSortedNumericDocValues:(OrgApacheLuceneIndexSortedNumericDocValues *)sndv
-                                             withInt:(jint)maxDoc;
-
-- (jlong)ramBytesUsed;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneRangetreeRangeTreeReader)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneRangetreeRangeTreeReader, in_, OrgApacheLuceneStoreIndexInput *)
+FOUNDATION_EXPORT void OrgApacheLuceneRangetreeRangeTreeReader_init(OrgApacheLuceneRangetreeRangeTreeReader *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneRangetreeRangeTreeReader_initWithOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneRangetreeRangeTreeReader *self, OrgApacheLuceneStoreIndexInput *inArg);
-
-FOUNDATION_EXPORT OrgApacheLuceneRangetreeRangeTreeReader *new_OrgApacheLuceneRangetreeRangeTreeReader_initWithOrgApacheLuceneStoreIndexInput_(OrgApacheLuceneStoreIndexInput *inArg) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneRangetreeRangeTreeReader *new_OrgApacheLuceneRangetreeRangeTreeReader_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeRangeTreeReader)
 

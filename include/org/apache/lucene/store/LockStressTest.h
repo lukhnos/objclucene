@@ -16,15 +16,11 @@
 #if !defined (_OrgApacheLuceneStoreLockStressTest_) && (OrgApacheLuceneStoreLockStressTest_INCLUDE_ALL || OrgApacheLuceneStoreLockStressTest_INCLUDE)
 #define _OrgApacheLuceneStoreLockStressTest_
 
-@class IOSObjectArray;
-
 @interface OrgApacheLuceneStoreLockStressTest : NSObject
 
 #pragma mark Public
 
 - (instancetype)init;
-
-+ (void)mainWithNSStringArray:(IOSObjectArray *)args;
 
 @end
 
@@ -32,8 +28,6 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneStoreLockStressTest)
 
 FOUNDATION_EXPORT NSString *OrgApacheLuceneStoreLockStressTest_LOCK_FILE_NAME_;
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneStoreLockStressTest, LOCK_FILE_NAME_, NSString *)
-
-FOUNDATION_EXPORT void OrgApacheLuceneStoreLockStressTest_mainWithNSStringArray_(IOSObjectArray *args);
 
 FOUNDATION_EXPORT void OrgApacheLuceneStoreLockStressTest_init(OrgApacheLuceneStoreLockStressTest *self);
 

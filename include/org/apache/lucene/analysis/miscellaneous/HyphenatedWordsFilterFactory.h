@@ -20,25 +20,19 @@
 #define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
-@class OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter;
-@class OrgApacheLuceneAnalysisTokenStream;
-@protocol JavaUtilMap;
-
 @interface OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
-
-- (OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilterFactory)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilterFactory *self, id<JavaUtilMap> args);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilterFactory_init(OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilterFactory *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilterFactory *new_OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilterFactory *new_OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilterFactory_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilterFactory)
 

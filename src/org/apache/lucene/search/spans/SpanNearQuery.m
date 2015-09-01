@@ -12,7 +12,6 @@
 #include "java/lang/StringBuilder.h"
 #include "java/util/ArrayList.h"
 #include "java/util/Iterator.h"
-#include "java/util/LinkedList.h"
 #include "java/util/List.h"
 #include "java/util/Map.h"
 #include "java/util/Set.h"
@@ -24,26 +23,13 @@
 #include "org/apache/lucene/search/Query.h"
 #include "org/apache/lucene/search/spans/NearSpansOrdered.h"
 #include "org/apache/lucene/search/spans/NearSpansUnordered.h"
-#include "org/apache/lucene/search/spans/SpanCollector.h"
 #include "org/apache/lucene/search/spans/SpanNearQuery.h"
 #include "org/apache/lucene/search/spans/SpanQuery.h"
 #include "org/apache/lucene/search/spans/SpanWeight.h"
 #include "org/apache/lucene/search/spans/Spans.h"
 #include "org/apache/lucene/util/ToStringUtils.h"
-#include "org/lukhnos/portmobile/util/Objects.h"
 
-@interface OrgApacheLuceneSearchSpansSpanNearQuery_Builder () {
- @public
-  jboolean ordered_;
-  NSString *field_;
-  id<JavaUtilList> clauses_;
-  jint slop_;
-}
-
-@end
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpansSpanNearQuery_Builder, field_, NSString *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpansSpanNearQuery_Builder, clauses_, id<JavaUtilList>)
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @interface OrgApacheLuceneSearchSpansSpanNearQuery_SpanNearWeight () {
  @public
@@ -54,70 +40,21 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpansSpanNearQuery_Builder, clauses_, i
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpansSpanNearQuery_SpanNearWeight, this$0_, OrgApacheLuceneSearchSpansSpanNearQuery *)
 
-@interface OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery : OrgApacheLuceneSearchSpansSpanQuery {
- @public
-  NSString *field_;
-  jint width_;
-}
+@interface OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery : OrgApacheLuceneSearchSpansSpanQuery
 
-- (instancetype)initWithNSString:(NSString *)field
-                         withInt:(jint)width;
-
-- (NSString *)getField;
-
-- (NSString *)toStringWithNSString:(NSString *)field;
-
-- (OrgApacheLuceneSearchSpansSpanWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
-                                                                                 withBoolean:(jboolean)needsScores;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery, field_, NSString *)
+__attribute__((unused)) static void OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery_init(OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery *self);
 
-__attribute__((unused)) static void OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery_initWithNSString_withInt_(OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery *self, NSString *field, jint width);
-
-__attribute__((unused)) static OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery *new_OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery_initWithNSString_withInt_(NSString *field, jint width) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery *new_OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery)
 
-@interface OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery_SpanGapWeight : OrgApacheLuceneSearchSpansSpanWeight {
- @public
-  OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery *this$0_;
-}
-
-- (instancetype)initWithOrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery:(OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery *)outer$
-                                      withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher;
-
-- (void)extractTermContextsWithJavaUtilMap:(id<JavaUtilMap>)contexts;
-
-- (OrgApacheLuceneSearchSpansSpans *)getSpansWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)ctx
-                                 withOrgApacheLuceneSearchSpansSpanWeight_PostingsEnum:(OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum *)requiredPostings;
-
-- (void)extractTermsWithJavaUtilSet:(id<JavaUtilSet>)terms;
-
-@end
-
-J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery_SpanGapWeight)
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery_SpanGapWeight, this$0_, OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery *)
-
-__attribute__((unused)) static void OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery_SpanGapWeight_initWithOrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery_withOrgApacheLuceneSearchIndexSearcher_(OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery_SpanGapWeight *self, OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery *outer$, OrgApacheLuceneSearchIndexSearcher *searcher);
-
-__attribute__((unused)) static OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery_SpanGapWeight *new_OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery_SpanGapWeight_initWithOrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery_withOrgApacheLuceneSearchIndexSearcher_(OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery *outer$, OrgApacheLuceneSearchIndexSearcher *searcher) NS_RETURNS_RETAINED;
-
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery_SpanGapWeight)
-
 @implementation OrgApacheLuceneSearchSpansSpanNearQuery
-
-+ (OrgApacheLuceneSearchSpansSpanNearQuery_Builder *)newOrderedNearQueryWithNSString:(NSString *)field {
-  return OrgApacheLuceneSearchSpansSpanNearQuery_newOrderedNearQueryWithNSString_(field);
-}
-
-+ (OrgApacheLuceneSearchSpansSpanNearQuery_Builder *)newUnorderedNearQueryWithNSString:(NSString *)field {
-  return OrgApacheLuceneSearchSpansSpanNearQuery_newUnorderedNearQueryWithNSString_(field);
-}
 
 - (instancetype)initWithOrgApacheLuceneSearchSpansSpanQueryArray:(IOSObjectArray *)clauses
                                                          withInt:(jint)slop
@@ -140,10 +77,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery_
 
 - (jint)getSlop {
   return slop_;
-}
-
-- (jboolean)isInOrder {
-  return inOrder_;
 }
 
 - (NSString *)getField {
@@ -236,13 +169,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery_
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "newOrderedNearQueryWithNSString:", "newOrderedNearQuery", "Lorg.apache.lucene.search.spans.SpanNearQuery$Builder;", 0x9, NULL, NULL },
-    { "newUnorderedNearQueryWithNSString:", "newUnorderedNearQuery", "Lorg.apache.lucene.search.spans.SpanNearQuery$Builder;", 0x9, NULL, NULL },
     { "initWithOrgApacheLuceneSearchSpansSpanQueryArray:withInt:withBoolean:", "SpanNearQuery", NULL, 0x1, NULL, NULL },
     { "initWithOrgApacheLuceneSearchSpansSpanQueryArray:withInt:withBoolean:withBoolean:", "SpanNearQuery", NULL, 0x1, NULL, NULL },
     { "getClauses", NULL, "[Lorg.apache.lucene.search.spans.SpanQuery;", 0x1, NULL, NULL },
     { "getSlop", NULL, "I", 0x1, NULL, NULL },
-    { "isInOrder", NULL, "Z", 0x1, NULL, NULL },
     { "getField", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
     { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:", "createWeight", "Lorg.apache.lucene.search.spans.SpanWeight;", 0x1, "Ljava.io.IOException;", NULL },
@@ -258,21 +188,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery_
     { "field_", NULL, 0x4, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.search.spans.SpanNearQuery$Builder;", "Lorg.apache.lucene.search.spans.SpanNearQuery$SpanNearWeight;", "Lorg.apache.lucene.search.spans.SpanNearQuery$SpanGapQuery;", "Lorg.apache.lucene.search.spans.SpanNearQuery$GapSpans;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpanNearQuery = { 2, "SpanNearQuery", "org.apache.lucene.search.spans", NULL, 0x1, 14, methods, 4, fields, 0, NULL, 4, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpanNearQuery = { 2, "SpanNearQuery", "org.apache.lucene.search.spans", NULL, 0x1, 11, methods, 4, fields, 0, NULL, 4, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneSearchSpansSpanNearQuery;
 }
 
 @end
-
-OrgApacheLuceneSearchSpansSpanNearQuery_Builder *OrgApacheLuceneSearchSpansSpanNearQuery_newOrderedNearQueryWithNSString_(NSString *field) {
-  OrgApacheLuceneSearchSpansSpanNearQuery_initialize();
-  return [new_OrgApacheLuceneSearchSpansSpanNearQuery_Builder_initWithNSString_withBoolean_(field, YES) autorelease];
-}
-
-OrgApacheLuceneSearchSpansSpanNearQuery_Builder *OrgApacheLuceneSearchSpansSpanNearQuery_newUnorderedNearQueryWithNSString_(NSString *field) {
-  OrgApacheLuceneSearchSpansSpanNearQuery_initialize();
-  return [new_OrgApacheLuceneSearchSpansSpanNearQuery_Builder_initWithNSString_withBoolean_(field, NO) autorelease];
-}
 
 void OrgApacheLuceneSearchSpansSpanNearQuery_initWithOrgApacheLuceneSearchSpansSpanQueryArray_withInt_withBoolean_(OrgApacheLuceneSearchSpansSpanNearQuery *self, IOSObjectArray *clauses, jint slop, jboolean inOrder) {
   OrgApacheLuceneSearchSpansSpanNearQuery_initWithOrgApacheLuceneSearchSpansSpanQueryArray_withInt_withBoolean_withBoolean_(self, clauses, slop, inOrder, YES);
@@ -316,69 +236,28 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansSpanNearQuery)
 
 @implementation OrgApacheLuceneSearchSpansSpanNearQuery_Builder
 
-- (instancetype)initWithNSString:(NSString *)field
-                     withBoolean:(jboolean)ordered {
-  OrgApacheLuceneSearchSpansSpanNearQuery_Builder_initWithNSString_withBoolean_(self, field, ordered);
+- (instancetype)init {
+  OrgApacheLuceneSearchSpansSpanNearQuery_Builder_init(self);
   return self;
-}
-
-- (OrgApacheLuceneSearchSpansSpanNearQuery_Builder *)addClauseWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)clause {
-  if (OrgLukhnosPortmobileUtilObjects_equalsWithId_withId_([((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(clause)) getField], field_) == NO) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@$$", @"Cannot add clause ", clause, @" to SpanNearQuery for field ", field_)) autorelease];
-  [((id<JavaUtilList>) nil_chk(self->clauses_)) addWithId:clause];
-  return self;
-}
-
-- (OrgApacheLuceneSearchSpansSpanNearQuery_Builder *)addGapWithInt:(jint)width {
-  if (!ordered_) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"Gaps can only be added to ordered near queries") autorelease];
-  [((id<JavaUtilList>) nil_chk(self->clauses_)) addWithId:[new_OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery_initWithNSString_withInt_(field_, width) autorelease]];
-  return self;
-}
-
-- (OrgApacheLuceneSearchSpansSpanNearQuery_Builder *)setSlopWithInt:(jint)slop {
-  self->slop_ = slop;
-  return self;
-}
-
-- (OrgApacheLuceneSearchSpansSpanNearQuery *)build {
-  return [new_OrgApacheLuceneSearchSpansSpanNearQuery_initWithOrgApacheLuceneSearchSpansSpanQueryArray_withInt_withBoolean_([clauses_ toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:[((id<JavaUtilList>) nil_chk(clauses_)) size] type:OrgApacheLuceneSearchSpansSpanQuery_class_()]], slop_, ordered_) autorelease];
-}
-
-- (void)dealloc {
-  RELEASE_(field_);
-  RELEASE_(clauses_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withBoolean:", "Builder", NULL, 0x1, NULL, NULL },
-    { "addClauseWithOrgApacheLuceneSearchSpansSpanQuery:", "addClause", "Lorg.apache.lucene.search.spans.SpanNearQuery$Builder;", 0x1, NULL, NULL },
-    { "addGapWithInt:", "addGap", "Lorg.apache.lucene.search.spans.SpanNearQuery$Builder;", 0x1, NULL, NULL },
-    { "setSlopWithInt:", "setSlop", "Lorg.apache.lucene.search.spans.SpanNearQuery$Builder;", 0x1, NULL, NULL },
-    { "build", NULL, "Lorg.apache.lucene.search.spans.SpanNearQuery;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "ordered_", NULL, 0x12, "Z", NULL, NULL, .constantValue.asLong = 0 },
-    { "field_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "clauses_", NULL, 0x12, "Ljava.util.List;", NULL, "Ljava/util/List<Lorg/apache/lucene/search/spans/SpanQuery;>;", .constantValue.asLong = 0 },
-    { "slop_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpanNearQuery_Builder = { 2, "Builder", "org.apache.lucene.search.spans", "SpanNearQuery", 0x9, 5, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpanNearQuery_Builder = { 2, "Builder", "org.apache.lucene.search.spans", "SpanNearQuery", 0x9, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchSpansSpanNearQuery_Builder;
 }
 
 @end
 
-void OrgApacheLuceneSearchSpansSpanNearQuery_Builder_initWithNSString_withBoolean_(OrgApacheLuceneSearchSpansSpanNearQuery_Builder *self, NSString *field, jboolean ordered) {
+void OrgApacheLuceneSearchSpansSpanNearQuery_Builder_init(OrgApacheLuceneSearchSpansSpanNearQuery_Builder *self) {
   NSObject_init(self);
-  JreStrongAssignAndConsume(&self->clauses_, new_JavaUtilLinkedList_init());
-  JreStrongAssign(&self->field_, field);
-  self->ordered_ = ordered;
 }
 
-OrgApacheLuceneSearchSpansSpanNearQuery_Builder *new_OrgApacheLuceneSearchSpansSpanNearQuery_Builder_initWithNSString_withBoolean_(NSString *field, jboolean ordered) {
+OrgApacheLuceneSearchSpansSpanNearQuery_Builder *new_OrgApacheLuceneSearchSpansSpanNearQuery_Builder_init() {
   OrgApacheLuceneSearchSpansSpanNearQuery_Builder *self = [OrgApacheLuceneSearchSpansSpanNearQuery_Builder alloc];
-  OrgApacheLuceneSearchSpansSpanNearQuery_Builder_initWithNSString_withBoolean_(self, field, ordered);
+  OrgApacheLuceneSearchSpansSpanNearQuery_Builder_init(self);
   return self;
 }
 
@@ -464,121 +343,35 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansSpanNearQuery_SpanNea
 
 @implementation OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery
 
-- (instancetype)initWithNSString:(NSString *)field
-                         withInt:(jint)width {
-  OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery_initWithNSString_withInt_(self, field, width);
+- (instancetype)init {
+  OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery_init(self);
   return self;
-}
-
-- (NSString *)getField {
-  return field_;
-}
-
-- (NSString *)toStringWithNSString:(NSString *)field {
-  return JreStrcat("$$CIC", @"SpanGap(", field, ':', width_, ')');
-}
-
-- (OrgApacheLuceneSearchSpansSpanWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
-                                                                                 withBoolean:(jboolean)needsScores {
-  return [new_OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery_SpanGapWeight_initWithOrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery_withOrgApacheLuceneSearchIndexSearcher_(self, searcher) autorelease];
-}
-
-- (void)dealloc {
-  RELEASE_(field_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithNSString:withInt:", "SpanGapQuery", NULL, 0x1, NULL, NULL },
-    { "getField", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "toStringWithNSString:", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "createWeightWithOrgApacheLuceneSearchIndexSearcher:withBoolean:", "createWeight", "Lorg.apache.lucene.search.spans.SpanWeight;", 0x1, "Ljava.io.IOException;", NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "field_", NULL, 0x12, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-    { "width_", NULL, 0x12, "I", NULL, NULL, .constantValue.asLong = 0 },
+    { "init", NULL, NULL, 0x2, NULL, NULL },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.search.spans.SpanNearQuery$SpanGapQuery$SpanGapWeight;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery = { 2, "SpanGapQuery", "org.apache.lucene.search.spans", "SpanNearQuery", 0xa, 4, methods, 2, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery = { 2, "SpanGapQuery", "org.apache.lucene.search.spans", "SpanNearQuery", 0xa, 1, methods, 0, NULL, 0, NULL, 1, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery;
 }
 
 @end
 
-void OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery_initWithNSString_withInt_(OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery *self, NSString *field, jint width) {
-  OrgApacheLuceneSearchSpansSpanQuery_init(self);
-  JreStrongAssign(&self->field_, field);
-  self->width_ = width;
+void OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery_init(OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery *new_OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery_initWithNSString_withInt_(NSString *field, jint width) {
+OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery *new_OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery_init() {
   OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery *self = [OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery alloc];
-  OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery_initWithNSString_withInt_(self, field, width);
+  OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery_init(self);
   return self;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery)
 
-@implementation OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery_SpanGapWeight
-
-- (instancetype)initWithOrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery:(OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery *)outer$
-                                      withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher {
-  OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery_SpanGapWeight_initWithOrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery_withOrgApacheLuceneSearchIndexSearcher_(self, outer$, searcher);
-  return self;
-}
-
-- (void)extractTermContextsWithJavaUtilMap:(id<JavaUtilMap>)contexts {
-}
-
-- (OrgApacheLuceneSearchSpansSpans *)getSpansWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)ctx
-                                 withOrgApacheLuceneSearchSpansSpanWeight_PostingsEnum:(OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum *)requiredPostings {
-  return [new_OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans_initWithInt_(this$0_->width_) autorelease];
-}
-
-- (void)extractTermsWithJavaUtilSet:(id<JavaUtilSet>)terms {
-}
-
-- (void)dealloc {
-  RELEASE_(this$0_);
-  [super dealloc];
-}
-
-+ (const J2ObjcClassInfo *)__metadata {
-  static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery:withOrgApacheLuceneSearchIndexSearcher:", "SpanGapWeight", NULL, 0x0, NULL, NULL },
-    { "extractTermContextsWithJavaUtilMap:", "extractTermContexts", "V", 0x1, NULL, NULL },
-    { "getSpansWithOrgApacheLuceneIndexLeafReaderContext:withOrgApacheLuceneSearchSpansSpanWeight_PostingsEnum:", "getSpans", "Lorg.apache.lucene.search.spans.Spans;", 0x1, "Ljava.io.IOException;", NULL },
-    { "extractTermsWithJavaUtilSet:", "extractTerms", "V", 0x1, NULL, NULL },
-  };
-  static const J2ObjcFieldInfo fields[] = {
-    { "this$0_", NULL, 0x1012, "Lorg.apache.lucene.search.spans.SpanNearQuery$SpanGapQuery;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery_SpanGapWeight = { 2, "SpanGapWeight", "org.apache.lucene.search.spans", "SpanNearQuery$SpanGapQuery", 0x2, 4, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
-  return &_OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery_SpanGapWeight;
-}
-
-@end
-
-void OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery_SpanGapWeight_initWithOrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery_withOrgApacheLuceneSearchIndexSearcher_(OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery_SpanGapWeight *self, OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery *outer$, OrgApacheLuceneSearchIndexSearcher *searcher) {
-  JreStrongAssign(&self->this$0_, outer$);
-  OrgApacheLuceneSearchSpansSpanWeight_initWithOrgApacheLuceneSearchSpansSpanQuery_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_(self, outer$, searcher, nil);
-}
-
-OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery_SpanGapWeight *new_OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery_SpanGapWeight_initWithOrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery_withOrgApacheLuceneSearchIndexSearcher_(OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery *outer$, OrgApacheLuceneSearchIndexSearcher *searcher) {
-  OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery_SpanGapWeight *self = [OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery_SpanGapWeight alloc];
-  OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery_SpanGapWeight_initWithOrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery_withOrgApacheLuceneSearchIndexSearcher_(self, outer$, searcher);
-  return self;
-}
-
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery_SpanGapWeight)
-
 @implementation OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans
-
-- (instancetype)initWithInt:(jint)width {
-  OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans_initWithInt_(self, width);
-  return self;
-}
 
 - (jint)nextStartPosition {
   return ++pos_;
@@ -600,9 +393,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansSpanNearQuery_SpanGap
   return width_;
 }
 
-- (void)collectWithOrgApacheLuceneSearchSpansSpanCollector:(id<OrgApacheLuceneSearchSpansSpanCollector>)collector {
-}
-
 - (jint)docID {
   return doc_;
 }
@@ -621,41 +411,44 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansSpanNearQuery_SpanGap
   return 0;
 }
 
+- (instancetype)init {
+  OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans_init(self);
+  return self;
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithInt:", "GapSpans", NULL, 0x0, NULL, NULL },
     { "nextStartPosition", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
     { "skipToPositionWithInt:", "skipToPosition", "I", 0x1, "Ljava.io.IOException;", NULL },
     { "startPosition", NULL, "I", 0x1, NULL, NULL },
     { "endPosition", NULL, "I", 0x1, NULL, NULL },
     { "width", NULL, "I", 0x1, NULL, NULL },
-    { "collectWithOrgApacheLuceneSearchSpansSpanCollector:", "collect", "V", 0x1, "Ljava.io.IOException;", NULL },
     { "docID", NULL, "I", 0x1, NULL, NULL },
     { "nextDoc", NULL, "I", 0x1, "Ljava.io.IOException;", NULL },
     { "advanceWithInt:", "advance", "I", 0x1, "Ljava.io.IOException;", NULL },
     { "cost", NULL, "J", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "doc_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "pos_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "width_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans = { 2, "GapSpans", "org.apache.lucene.search.spans", "SpanNearQuery", 0x8, 11, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans = { 2, "GapSpans", "org.apache.lucene.search.spans", "SpanNearQuery", 0x8, 10, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans;
 }
 
 @end
 
-void OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans_initWithInt_(OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans *self, jint width) {
-  OrgApacheLuceneSearchSpansSpans_init(self);
+void OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans_init(OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans *self) {
+  NSObject_init(self);
   self->doc_ = -1;
   self->pos_ = -1;
-  self->width_ = width;
 }
 
-OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans *new_OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans_initWithInt_(jint width) {
+OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans *new_OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans_init() {
   OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans *self = [OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans alloc];
-  OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans_initWithInt_(self, width);
+  OrgApacheLuceneSearchSpansSpanNearQuery_GapSpans_init(self);
   return self;
 }
 

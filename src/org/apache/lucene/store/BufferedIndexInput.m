@@ -13,7 +13,6 @@
 #include "org/apache/lucene/store/BufferedIndexInput.h"
 #include "org/apache/lucene/store/IOContext.h"
 #include "org/apache/lucene/store/IndexInput.h"
-#include "org/apache/lucene/store/IndexOutput.h"
 
 @interface OrgApacheLuceneStoreBufferedIndexInput () {
  @public
@@ -78,11 +77,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreBufferedIndexInput_SlicedIndexInp
 - (jbyte)readByte {
   if (bufferPosition_ >= bufferLength_) OrgApacheLuceneStoreBufferedIndexInput_refill(self);
   return IOSByteArray_Get(nil_chk(buffer_), bufferPosition_++);
-}
-
-- (instancetype)initWithNSString:(NSString *)resourceDesc {
-  OrgApacheLuceneStoreBufferedIndexInput_initWithNSString_(self, resourceDesc);
-  return self;
 }
 
 - (instancetype)initWithNSString:(NSString *)resourceDesc
@@ -340,19 +334,6 @@ withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
   return OrgApacheLuceneStoreBufferedIndexInput_wrapWithNSString_withOrgApacheLuceneStoreIndexInput_withLong_withLong_(sliceDescription, self, offset, length);
 }
 
-- (jint)flushBufferWithOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)outArg
-                                              withLong:(jlong)numBytes {
-  jint toCopy = bufferLength_ - bufferPosition_;
-  if (toCopy > numBytes) {
-    toCopy = (jint) numBytes;
-  }
-  if (toCopy > 0) {
-    [((OrgApacheLuceneStoreIndexOutput *) nil_chk(outArg)) writeBytesWithByteArray:buffer_ withInt:bufferPosition_ withInt:toCopy];
-    bufferPosition_ += toCopy;
-  }
-  return toCopy;
-}
-
 + (jint)bufferSizeWithOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
   return OrgApacheLuceneStoreBufferedIndexInput_bufferSizeWithOrgApacheLuceneStoreIOContext_(context);
 }
@@ -372,7 +353,6 @@ withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "readByte", NULL, "B", 0x11, "Ljava.io.IOException;", NULL },
-    { "initWithNSString:", "BufferedIndexInput", NULL, 0x1, NULL, NULL },
     { "initWithNSString:withOrgApacheLuceneStoreIOContext:", "BufferedIndexInput", NULL, 0x1, NULL, NULL },
     { "initWithNSString:withInt:", "BufferedIndexInput", NULL, 0x1, NULL, NULL },
     { "setBufferSizeWithInt:", "setBufferSize", "V", 0x11, NULL, NULL },
@@ -397,7 +377,6 @@ withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
     { "seekInternalWithLong:", "seekInternal", "V", 0x404, "Ljava.io.IOException;", NULL },
     { "clone", NULL, "Lorg.apache.lucene.store.BufferedIndexInput;", 0x1, NULL, NULL },
     { "sliceWithNSString:withLong:withLong:", "slice", "Lorg.apache.lucene.store.IndexInput;", 0x1, "Ljava.io.IOException;", NULL },
-    { "flushBufferWithOrgApacheLuceneStoreIndexOutput:withLong:", "flushBuffer", "I", 0x14, "Ljava.io.IOException;", NULL },
     { "bufferSizeWithOrgApacheLuceneStoreIOContext:", "bufferSize", "I", 0x9, NULL, NULL },
     { "wrapWithNSString:withOrgApacheLuceneStoreIndexInput:withLong:withLong:", "wrap", "Lorg.apache.lucene.store.BufferedIndexInput;", 0x9, NULL, NULL },
   };
@@ -412,15 +391,11 @@ withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
     { "bufferPosition_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.store.BufferedIndexInput$SlicedIndexInput;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreBufferedIndexInput = { 2, "BufferedIndexInput", "org.apache.lucene.store", NULL, 0x401, 29, methods, 8, fields, 0, NULL, 1, inner_classes, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreBufferedIndexInput = { 2, "BufferedIndexInput", "org.apache.lucene.store", NULL, 0x401, 27, methods, 8, fields, 0, NULL, 1, inner_classes, NULL, NULL };
   return &_OrgApacheLuceneStoreBufferedIndexInput;
 }
 
 @end
-
-void OrgApacheLuceneStoreBufferedIndexInput_initWithNSString_(OrgApacheLuceneStoreBufferedIndexInput *self, NSString *resourceDesc) {
-  OrgApacheLuceneStoreBufferedIndexInput_initWithNSString_withInt_(self, resourceDesc, OrgApacheLuceneStoreBufferedIndexInput_BUFFER_SIZE);
-}
 
 void OrgApacheLuceneStoreBufferedIndexInput_initWithNSString_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneStoreBufferedIndexInput *self, NSString *resourceDesc, OrgApacheLuceneStoreIOContext *context) {
   OrgApacheLuceneStoreBufferedIndexInput_initWithNSString_withInt_(self, resourceDesc, OrgApacheLuceneStoreBufferedIndexInput_bufferSizeWithOrgApacheLuceneStoreIOContext_(context));

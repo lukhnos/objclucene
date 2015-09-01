@@ -20,7 +20,6 @@
 #define OrgApacheLuceneUtilNamedSPILoader_NamedSPI_INCLUDE 1
 #include "org/apache/lucene/util/NamedSPILoader.h"
 
-@class JavaLangClassLoader;
 @class OrgApacheLuceneCodecsCompoundFormat;
 @class OrgApacheLuceneCodecsDocValuesFormat;
 @class OrgApacheLuceneCodecsFieldInfosFormat;
@@ -30,13 +29,10 @@
 @class OrgApacheLuceneCodecsSegmentInfoFormat;
 @class OrgApacheLuceneCodecsStoredFieldsFormat;
 @class OrgApacheLuceneCodecsTermVectorsFormat;
-@protocol JavaUtilSet;
 
 @interface OrgApacheLuceneCodecsCodec : NSObject < OrgApacheLuceneUtilNamedSPILoader_NamedSPI >
 
 #pragma mark Public
-
-+ (id<JavaUtilSet>)availableCodecs;
 
 - (OrgApacheLuceneCodecsCompoundFormat *)compoundFormat;
 
@@ -56,11 +52,7 @@
 
 - (OrgApacheLuceneCodecsPostingsFormat *)postingsFormat;
 
-+ (void)reloadCodecsWithJavaLangClassLoader:(JavaLangClassLoader *)classloader;
-
 - (OrgApacheLuceneCodecsSegmentInfoFormat *)segmentInfoFormat;
-
-+ (void)setDefaultWithOrgApacheLuceneCodecsCodec:(OrgApacheLuceneCodecsCodec *)codec;
 
 - (OrgApacheLuceneCodecsStoredFieldsFormat *)storedFieldsFormat;
 
@@ -80,13 +72,7 @@ FOUNDATION_EXPORT void OrgApacheLuceneCodecsCodec_initWithNSString_(OrgApacheLuc
 
 FOUNDATION_EXPORT OrgApacheLuceneCodecsCodec *OrgApacheLuceneCodecsCodec_forNameWithNSString_(NSString *name);
 
-FOUNDATION_EXPORT id<JavaUtilSet> OrgApacheLuceneCodecsCodec_availableCodecs();
-
-FOUNDATION_EXPORT void OrgApacheLuceneCodecsCodec_reloadCodecsWithJavaLangClassLoader_(JavaLangClassLoader *classloader);
-
 FOUNDATION_EXPORT OrgApacheLuceneCodecsCodec *OrgApacheLuceneCodecsCodec_getDefault();
-
-FOUNDATION_EXPORT void OrgApacheLuceneCodecsCodec_setDefaultWithOrgApacheLuceneCodecsCodec_(OrgApacheLuceneCodecsCodec *codec);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCodec)
 

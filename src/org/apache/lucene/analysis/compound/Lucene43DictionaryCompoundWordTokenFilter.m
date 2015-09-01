@@ -4,64 +4,17 @@
 //
 
 #include "IOSClass.h"
-#include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/lang/CharSequence.h"
 #include "java/lang/Deprecated.h"
-#include "java/lang/IllegalArgumentException.h"
-#include "java/util/LinkedList.h"
-#include "org/apache/lucene/analysis/TokenStream.h"
-#include "org/apache/lucene/analysis/compound/Lucene43CompoundWordTokenFilterBase.h"
 #include "org/apache/lucene/analysis/compound/Lucene43DictionaryCompoundWordTokenFilter.h"
-#include "org/apache/lucene/analysis/tokenattributes/CharTermAttribute.h"
-#include "org/apache/lucene/analysis/util/CharArraySet.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-               withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)dictionary {
-  OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(self, input, dictionary);
+- (instancetype)init {
+  OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter_init(self);
   return self;
-}
-
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-               withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)dictionary
-                                                   withInt:(jint)minWordSize
-                                                   withInt:(jint)minSubwordSize
-                                                   withInt:(jint)maxSubwordSize
-                                               withBoolean:(jboolean)onlyLongestMatch {
-  OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_withInt_withInt_withInt_withBoolean_(self, input, dictionary, minWordSize, minSubwordSize, maxSubwordSize, onlyLongestMatch);
-  return self;
-}
-
-- (void)decompose {
-  jint len = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) length];
-  for (jint i = 0; i <= len - self->minSubwordSize_; ++i) {
-    OrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase_CompoundToken *longestMatchToken = nil;
-    for (jint j = self->minSubwordSize_; j <= self->maxSubwordSize_; ++j) {
-      if (i + j > len) {
-        break;
-      }
-      if ([((OrgApacheLuceneAnalysisUtilCharArraySet *) nil_chk(dictionary_)) containsWithCharArray:[termAtt_ buffer] withInt:i withInt:j]) {
-        if (self->onlyLongestMatch_) {
-          if (longestMatchToken != nil) {
-            if ([((id<JavaLangCharSequence>) nil_chk(longestMatchToken->txt_)) length] < j) {
-              longestMatchToken = [new_OrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase_CompoundToken_initWithOrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase_withInt_withInt_(self, i, j) autorelease];
-            }
-          }
-          else {
-            longestMatchToken = [new_OrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase_CompoundToken_initWithOrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase_withInt_withInt_(self, i, j) autorelease];
-          }
-        }
-        else {
-          [((JavaUtilLinkedList *) nil_chk(tokens_)) addWithId:[new_OrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase_CompoundToken_initWithOrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase_withInt_withInt_(self, i, j) autorelease]];
-        }
-      }
-    }
-    if (self->onlyLongestMatch_ && longestMatchToken != nil) {
-      [((JavaUtilLinkedList *) nil_chk(tokens_)) addWithId:longestMatchToken];
-    }
-  }
 }
 
 + (IOSObjectArray *)__annotations {
@@ -70,39 +23,21 @@
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisUtilCharArraySet:", "Lucene43DictionaryCompoundWordTokenFilter", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneAnalysisTokenStream:withOrgApacheLuceneAnalysisUtilCharArraySet:withInt:withInt:withInt:withBoolean:", "Lucene43DictionaryCompoundWordTokenFilter", NULL, 0x1, NULL, NULL },
-    { "decompose", NULL, "V", 0x4, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter = { 2, "Lucene43DictionaryCompoundWordTokenFilter", "org.apache.lucene.analysis.compound", NULL, 0x1, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter = { 2, "Lucene43DictionaryCompoundWordTokenFilter", "org.apache.lucene.analysis.compound", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter;
 }
 
 @end
 
-void OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter *self, OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisUtilCharArraySet *dictionary) {
-  OrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(self, input, dictionary);
-  if (dictionary == nil) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"dictionary cannot be null") autorelease];
-  }
+void OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter_init(OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter *new_OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisUtilCharArraySet *dictionary) {
+OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter *new_OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter_init() {
   OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter *self = [OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter alloc];
-  OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_(self, input, dictionary);
-  return self;
-}
-
-void OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_withInt_withInt_withInt_withBoolean_(OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter *self, OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisUtilCharArraySet *dictionary, jint minWordSize, jint minSubwordSize, jint maxSubwordSize, jboolean onlyLongestMatch) {
-  OrgApacheLuceneAnalysisCompoundLucene43CompoundWordTokenFilterBase_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_withInt_withInt_withInt_withBoolean_(self, input, dictionary, minWordSize, minSubwordSize, maxSubwordSize, onlyLongestMatch);
-  if (dictionary == nil) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"dictionary cannot be null") autorelease];
-  }
-}
-
-OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter *new_OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_withInt_withInt_withInt_withBoolean_(OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisUtilCharArraySet *dictionary, jint minWordSize, jint minSubwordSize, jint maxSubwordSize, jboolean onlyLongestMatch) {
-  OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter *self = [OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter alloc];
-  OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_withInt_withInt_withInt_withBoolean_(self, input, dictionary, minWordSize, minSubwordSize, maxSubwordSize, onlyLongestMatch);
+  OrgApacheLuceneAnalysisCompoundLucene43DictionaryCompoundWordTokenFilter_init(self);
   return self;
 }
 

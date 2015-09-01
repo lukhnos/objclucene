@@ -16,33 +16,19 @@
 #if !defined (_OrgApacheLuceneUtilPackedPackedDataOutput_) && (OrgApacheLuceneUtilPackedPackedDataOutput_INCLUDE_ALL || OrgApacheLuceneUtilPackedPackedDataOutput_INCLUDE)
 #define _OrgApacheLuceneUtilPackedPackedDataOutput_
 
-@class OrgApacheLuceneStoreDataOutput;
-
-@interface OrgApacheLuceneUtilPackedPackedDataOutput : NSObject {
- @public
-  OrgApacheLuceneStoreDataOutput *out_;
-  jlong current_;
-  jint remainingBits_;
-}
+@interface OrgApacheLuceneUtilPackedPackedDataOutput : NSObject
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg;
-
-- (void)flush;
-
-- (void)writeLongWithLong:(jlong)value
-                  withInt:(jint)bitsPerValue;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilPackedPackedDataOutput)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilPackedPackedDataOutput, out_, OrgApacheLuceneStoreDataOutput *)
+FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedPackedDataOutput_init(OrgApacheLuceneUtilPackedPackedDataOutput *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilPackedPackedDataOutput_initWithOrgApacheLuceneStoreDataOutput_(OrgApacheLuceneUtilPackedPackedDataOutput *self, OrgApacheLuceneStoreDataOutput *outArg);
-
-FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPackedDataOutput *new_OrgApacheLuceneUtilPackedPackedDataOutput_initWithOrgApacheLuceneStoreDataOutput_(OrgApacheLuceneStoreDataOutput *outArg) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilPackedPackedDataOutput *new_OrgApacheLuceneUtilPackedPackedDataOutput_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilPackedPackedDataOutput)
 

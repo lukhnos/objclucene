@@ -26,18 +26,6 @@
 
 - (instancetype)init;
 
-- (jboolean)getBool;
-
-- (jdouble)getDouble;
-
-- (jfloat)getFloat;
-
-- (jint)getInt;
-
-- (jlong)getLong;
-
-- (NSNumber *)getNumber;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueriesFunctionValuesourceConstNumberSource)

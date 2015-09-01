@@ -83,7 +83,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiDocValues)
 @class OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap;
 @class OrgApacheLuceneUtilLongValues;
 @class OrgApacheLuceneUtilPackedPackedLongValues;
-@protocol JavaUtilCollection;
 
 @interface OrgApacheLuceneIndexMultiDocValues_OrdinalMap : NSObject < OrgApacheLuceneUtilAccountable > {
  @public
@@ -109,8 +108,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiDocValues)
                         withOrgApacheLuceneIndexTermsEnumArray:(IOSObjectArray *)subs
                                                  withLongArray:(IOSLongArray *)weights
                                                      withFloat:(jfloat)acceptableOverheadRatio;
-
-- (id<JavaUtilCollection>)getChildResources;
 
 - (jint)getFirstSegmentNumberWithLong:(jlong)globalOrd;
 
@@ -161,13 +158,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiDocValues_OrdinalMap)
 #include "org/apache/lucene/util/Accountable.h"
 
 @class IOSLongArray;
-@protocol JavaUtilCollection;
 
 @interface OrgApacheLuceneIndexMultiDocValues_OrdinalMap_SegmentMap : NSObject < OrgApacheLuceneUtilAccountable >
 
 #pragma mark Public
-
-- (id<JavaUtilCollection>)getChildResources;
 
 - (jlong)ramBytesUsed;
 

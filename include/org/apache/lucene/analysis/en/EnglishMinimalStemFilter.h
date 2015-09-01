@@ -20,13 +20,11 @@
 #define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
-@class OrgApacheLuceneAnalysisTokenStream;
-
 @interface OrgApacheLuceneAnalysisEnEnglishMinimalStemFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
+- (instancetype)init;
 
 - (jboolean)incrementToken;
 
@@ -34,9 +32,9 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisEnEnglishMinimalStemFilter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisEnEnglishMinimalStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisEnEnglishMinimalStemFilter *self, OrgApacheLuceneAnalysisTokenStream *input);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisEnEnglishMinimalStemFilter_init(OrgApacheLuceneAnalysisEnEnglishMinimalStemFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisEnEnglishMinimalStemFilter *new_OrgApacheLuceneAnalysisEnEnglishMinimalStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisEnEnglishMinimalStemFilter *new_OrgApacheLuceneAnalysisEnEnglishMinimalStemFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisEnEnglishMinimalStemFilter)
 

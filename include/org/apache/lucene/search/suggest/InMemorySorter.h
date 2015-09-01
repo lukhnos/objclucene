@@ -20,29 +20,19 @@
 #define OrgApacheLuceneSearchSuggestFstBytesRefSorter_INCLUDE 1
 #include "org/apache/lucene/search/suggest/fst/BytesRefSorter.h"
 
-@class OrgApacheLuceneUtilBytesRef;
-@protocol JavaUtilComparator;
-@protocol OrgApacheLuceneUtilBytesRefIterator;
-
 @interface OrgApacheLuceneSearchSuggestInMemorySorter : NSObject < OrgApacheLuceneSearchSuggestFstBytesRefSorter >
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilComparator:(id<JavaUtilComparator>)comparator;
-
-- (void)addWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)utf8;
-
-- (id<JavaUtilComparator>)getComparator;
-
-- (id<OrgApacheLuceneUtilBytesRefIterator>)iterator;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestInMemorySorter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestInMemorySorter_initWithJavaUtilComparator_(OrgApacheLuceneSearchSuggestInMemorySorter *self, id<JavaUtilComparator> comparator);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestInMemorySorter_init(OrgApacheLuceneSearchSuggestInMemorySorter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestInMemorySorter *new_OrgApacheLuceneSearchSuggestInMemorySorter_initWithJavaUtilComparator_(id<JavaUtilComparator> comparator) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestInMemorySorter *new_OrgApacheLuceneSearchSuggestInMemorySorter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestInMemorySorter)
 

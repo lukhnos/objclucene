@@ -22,7 +22,6 @@
 #include "org/apache/lucene/index/CodecReader.h"
 #include "org/apache/lucene/index/FieldInfos.h"
 #include "org/apache/lucene/index/IndexReader.h"
-#include "org/apache/lucene/index/LeafReader.h"
 #include "org/apache/lucene/index/SegmentCommitInfo.h"
 #include "org/apache/lucene/index/SegmentCoreReaders.h"
 #include "org/apache/lucene/index/SegmentDocValues.h"
@@ -59,12 +58,6 @@ __attribute__((unused)) static OrgApacheLuceneIndexFieldInfos *OrgApacheLuceneIn
 - (instancetype)initWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)si
                             withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
   OrgApacheLuceneIndexSegmentReader_initWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreIOContext_(self, si, context);
-  return self;
-}
-
-- (instancetype)initWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)si
-                        withOrgApacheLuceneIndexSegmentReader:(OrgApacheLuceneIndexSegmentReader *)sr {
-  OrgApacheLuceneIndexSegmentReader_initWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneIndexSegmentReader_(self, si, sr);
   return self;
 }
 
@@ -150,10 +143,6 @@ __attribute__((unused)) static OrgApacheLuceneIndexFieldInfos *OrgApacheLuceneIn
   return [si_ toStringWithInt:[((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(si_))->info_)) maxDoc] - numDocs_ - [si_ getDelCount]];
 }
 
-- (NSString *)getSegmentName {
-  return ((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(si_))->info_))->name_;
-}
-
 - (OrgApacheLuceneIndexSegmentCommitInfo *)getSegmentInfo {
   return si_;
 }
@@ -164,20 +153,6 @@ __attribute__((unused)) static OrgApacheLuceneIndexFieldInfos *OrgApacheLuceneIn
 
 - (id)getCoreCacheKey {
   return core_;
-}
-
-- (id)getCombinedCoreAndDeletesKey {
-  return self;
-}
-
-- (void)addCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:(id<OrgApacheLuceneIndexLeafReader_CoreClosedListener>)listener {
-  [self ensureOpen];
-  [((OrgApacheLuceneIndexSegmentCoreReaders *) nil_chk(core_)) addCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:listener];
-}
-
-- (void)removeCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:(id<OrgApacheLuceneIndexLeafReader_CoreClosedListener>)listener {
-  [self ensureOpen];
-  [((OrgApacheLuceneIndexSegmentCoreReaders *) nil_chk(core_)) removeCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:listener];
 }
 
 - (void)dealloc {
@@ -193,7 +168,6 @@ __attribute__((unused)) static OrgApacheLuceneIndexFieldInfos *OrgApacheLuceneIn
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneIndexSegmentCommitInfo:withOrgApacheLuceneStoreIOContext:", "SegmentReader", NULL, 0x1, "Ljava.io.IOException;", NULL },
-    { "initWithOrgApacheLuceneIndexSegmentCommitInfo:withOrgApacheLuceneIndexSegmentReader:", "SegmentReader", NULL, 0x0, "Ljava.io.IOException;", NULL },
     { "initWithOrgApacheLuceneIndexSegmentCommitInfo:withOrgApacheLuceneIndexSegmentReader:withOrgApacheLuceneUtilBits:withInt:", "SegmentReader", NULL, 0x0, "Ljava.io.IOException;", NULL },
     { "initDocValuesProducer", NULL, "Lorg.apache.lucene.codecs.DocValuesProducer;", 0x2, "Ljava.io.IOException;", NULL },
     { "initFieldInfos", NULL, "Lorg.apache.lucene.index.FieldInfos;", 0x2, "Ljava.io.IOException;", NULL },
@@ -208,13 +182,9 @@ __attribute__((unused)) static OrgApacheLuceneIndexFieldInfos *OrgApacheLuceneIn
     { "getDocValuesReader", NULL, "Lorg.apache.lucene.codecs.DocValuesProducer;", 0x1, NULL, NULL },
     { "getPostingsReader", NULL, "Lorg.apache.lucene.codecs.FieldsProducer;", 0x1, NULL, NULL },
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
-    { "getSegmentName", NULL, "Ljava.lang.String;", 0x1, NULL, NULL },
     { "getSegmentInfo", NULL, "Lorg.apache.lucene.index.SegmentCommitInfo;", 0x1, NULL, NULL },
     { "directory", NULL, "Lorg.apache.lucene.store.Directory;", 0x1, NULL, NULL },
     { "getCoreCacheKey", NULL, "Ljava.lang.Object;", 0x1, NULL, NULL },
-    { "getCombinedCoreAndDeletesKey", NULL, "Ljava.lang.Object;", 0x1, NULL, NULL },
-    { "addCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:", "addCoreClosedListener", "V", 0x1, NULL, NULL },
-    { "removeCoreClosedListenerWithOrgApacheLuceneIndexLeafReader_CoreClosedListener:", "removeCoreClosedListener", "V", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "si_", NULL, 0x12, "Lorg.apache.lucene.index.SegmentCommitInfo;", NULL, NULL, .constantValue.asLong = 0 },
@@ -225,7 +195,7 @@ __attribute__((unused)) static OrgApacheLuceneIndexFieldInfos *OrgApacheLuceneIn
     { "docValuesProducer_", NULL, 0x10, "Lorg.apache.lucene.codecs.DocValuesProducer;", NULL, NULL, .constantValue.asLong = 0 },
     { "fieldInfos_", NULL, 0x10, "Lorg.apache.lucene.index.FieldInfos;", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexSegmentReader = { 2, "SegmentReader", "org.apache.lucene.index", NULL, 0x11, 23, methods, 7, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexSegmentReader = { 2, "SegmentReader", "org.apache.lucene.index", NULL, 0x11, 18, methods, 7, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexSegmentReader;
 }
 
@@ -261,16 +231,6 @@ void OrgApacheLuceneIndexSegmentReader_initWithOrgApacheLuceneIndexSegmentCommit
 OrgApacheLuceneIndexSegmentReader *new_OrgApacheLuceneIndexSegmentReader_initWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneIndexSegmentCommitInfo *si, OrgApacheLuceneStoreIOContext *context) {
   OrgApacheLuceneIndexSegmentReader *self = [OrgApacheLuceneIndexSegmentReader alloc];
   OrgApacheLuceneIndexSegmentReader_initWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreIOContext_(self, si, context);
-  return self;
-}
-
-void OrgApacheLuceneIndexSegmentReader_initWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneIndexSegmentReader_(OrgApacheLuceneIndexSegmentReader *self, OrgApacheLuceneIndexSegmentCommitInfo *si, OrgApacheLuceneIndexSegmentReader *sr) {
-  OrgApacheLuceneIndexSegmentReader_initWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneIndexSegmentReader_withOrgApacheLuceneUtilBits_withInt_(self, si, sr, [((OrgApacheLuceneCodecsLiveDocsFormat *) nil_chk([((OrgApacheLuceneCodecsCodec *) nil_chk([((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(si))->info_)) getCodec])) liveDocsFormat])) readLiveDocsWithOrgApacheLuceneStoreDirectory:si->info_->dir_ withOrgApacheLuceneIndexSegmentCommitInfo:si withOrgApacheLuceneStoreIOContext:JreLoadStatic(OrgApacheLuceneStoreIOContext, READONCE_)], [si->info_ maxDoc] - [si getDelCount]);
-}
-
-OrgApacheLuceneIndexSegmentReader *new_OrgApacheLuceneIndexSegmentReader_initWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneIndexSegmentReader_(OrgApacheLuceneIndexSegmentCommitInfo *si, OrgApacheLuceneIndexSegmentReader *sr) {
-  OrgApacheLuceneIndexSegmentReader *self = [OrgApacheLuceneIndexSegmentReader alloc];
-  OrgApacheLuceneIndexSegmentReader_initWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneIndexSegmentReader_(self, si, sr);
   return self;
 }
 

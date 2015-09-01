@@ -16,7 +16,6 @@
 #include "org/apache/lucene/util/StringHelper.h"
 #include "org/apache/lucene/util/automaton/Automata.h"
 #include "org/apache/lucene/util/automaton/Automaton.h"
-#include "org/apache/lucene/util/automaton/DaciukMihovAutomatonBuilder.h"
 #include "org/apache/lucene/util/automaton/Operations.h"
 
 @interface OrgApacheLuceneUtilAutomatonAutomata ()
@@ -90,19 +89,8 @@ __attribute__((unused)) static jboolean OrgApacheLuceneUtilAutomatonAutomata_suf
   return OrgApacheLuceneUtilAutomatonAutomata_makeAnyChar();
 }
 
-+ (jint)appendAnyCharWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a
-                                                       withInt:(jint)state {
-  return OrgApacheLuceneUtilAutomatonAutomata_appendAnyCharWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(a, state);
-}
-
 + (OrgApacheLuceneUtilAutomatonAutomaton *)makeCharWithInt:(jint)c {
   return OrgApacheLuceneUtilAutomatonAutomata_makeCharWithInt_(c);
-}
-
-+ (jint)appendCharWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a
-                                                    withInt:(jint)state
-                                                    withInt:(jint)c {
-  return OrgApacheLuceneUtilAutomatonAutomata_appendCharWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_withInt_(a, state, c);
 }
 
 + (OrgApacheLuceneUtilAutomatonAutomaton *)makeCharRangeWithInt:(jint)min
@@ -165,16 +153,6 @@ __attribute__((unused)) static jboolean OrgApacheLuceneUtilAutomatonAutomata_suf
   return OrgApacheLuceneUtilAutomatonAutomata_makeBinaryWithOrgApacheLuceneUtilBytesRef_(term);
 }
 
-+ (OrgApacheLuceneUtilAutomatonAutomaton *)makeStringWithIntArray:(IOSIntArray *)word
-                                                          withInt:(jint)offset
-                                                          withInt:(jint)length {
-  return OrgApacheLuceneUtilAutomatonAutomata_makeStringWithIntArray_withInt_withInt_(word, offset, length);
-}
-
-+ (OrgApacheLuceneUtilAutomatonAutomaton *)makeStringUnionWithJavaUtilCollection:(id<JavaUtilCollection>)utf8Strings {
-  return OrgApacheLuceneUtilAutomatonAutomata_makeStringUnionWithJavaUtilCollection_(utf8Strings);
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "init", "Automata", NULL, 0x2, NULL, NULL },
@@ -183,9 +161,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneUtilAutomatonAutomata_suf
     { "makeAnyString", NULL, "Lorg.apache.lucene.util.automaton.Automaton;", 0x9, NULL, NULL },
     { "makeAnyBinary", NULL, "Lorg.apache.lucene.util.automaton.Automaton;", 0x9, NULL, NULL },
     { "makeAnyChar", NULL, "Lorg.apache.lucene.util.automaton.Automaton;", 0x9, NULL, NULL },
-    { "appendAnyCharWithOrgApacheLuceneUtilAutomatonAutomaton:withInt:", "appendAnyChar", "I", 0x9, NULL, NULL },
     { "makeCharWithInt:", "makeChar", "Lorg.apache.lucene.util.automaton.Automaton;", 0x9, NULL, NULL },
-    { "appendCharWithOrgApacheLuceneUtilAutomatonAutomaton:withInt:withInt:", "appendChar", "I", 0x9, NULL, NULL },
     { "makeCharRangeWithInt:withInt:", "makeCharRange", "Lorg.apache.lucene.util.automaton.Automaton;", 0x9, NULL, NULL },
     { "anyOfRightLengthWithOrgApacheLuceneUtilAutomatonAutomaton_Builder:withNSString:withInt:", "anyOfRightLength", "I", 0xa, NULL, NULL },
     { "atLeastWithOrgApacheLuceneUtilAutomatonAutomaton_Builder:withNSString:withInt:withJavaUtilCollection:withBoolean:", "atLeast", "I", 0xa, NULL, NULL },
@@ -196,10 +172,8 @@ __attribute__((unused)) static jboolean OrgApacheLuceneUtilAutomatonAutomata_suf
     { "makeDecimalIntervalWithInt:withInt:withInt:", "makeDecimalInterval", "Lorg.apache.lucene.util.automaton.Automaton;", 0x9, "Ljava.lang.IllegalArgumentException;", NULL },
     { "makeStringWithNSString:", "makeString", "Lorg.apache.lucene.util.automaton.Automaton;", 0x9, NULL, NULL },
     { "makeBinaryWithOrgApacheLuceneUtilBytesRef:", "makeBinary", "Lorg.apache.lucene.util.automaton.Automaton;", 0x9, NULL, NULL },
-    { "makeStringWithIntArray:withInt:withInt:", "makeString", "Lorg.apache.lucene.util.automaton.Automaton;", 0x9, NULL, NULL },
-    { "makeStringUnionWithJavaUtilCollection:", "makeStringUnion", "Lorg.apache.lucene.util.automaton.Automaton;", 0x9, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonAutomata = { 2, "Automata", "org.apache.lucene.util.automaton", NULL, 0x11, 21, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilAutomatonAutomata = { 2, "Automata", "org.apache.lucene.util.automaton", NULL, 0x11, 17, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilAutomatonAutomata;
 }
 
@@ -255,23 +229,9 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonAutomata_make
   return OrgApacheLuceneUtilAutomatonAutomata_makeCharRangeWithInt_withInt_(JavaLangCharacter_MIN_CODE_POINT, JavaLangCharacter_MAX_CODE_POINT);
 }
 
-jint OrgApacheLuceneUtilAutomatonAutomata_appendAnyCharWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(OrgApacheLuceneUtilAutomatonAutomaton *a, jint state) {
-  OrgApacheLuceneUtilAutomatonAutomata_initialize();
-  jint newState = [((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(a)) createState];
-  [a addTransitionWithInt:state withInt:newState withInt:JavaLangCharacter_MIN_CODE_POINT withInt:JavaLangCharacter_MAX_CODE_POINT];
-  return newState;
-}
-
 OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonAutomata_makeCharWithInt_(jint c) {
   OrgApacheLuceneUtilAutomatonAutomata_initialize();
   return OrgApacheLuceneUtilAutomatonAutomata_makeCharRangeWithInt_withInt_(c, c);
-}
-
-jint OrgApacheLuceneUtilAutomatonAutomata_appendCharWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_withInt_(OrgApacheLuceneUtilAutomatonAutomaton *a, jint state, jint c) {
-  OrgApacheLuceneUtilAutomatonAutomata_initialize();
-  jint newState = [((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(a)) createState];
-  [a addTransitionWithInt:state withInt:newState withInt:c withInt:c];
-  return newState;
 }
 
 OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonAutomata_makeCharRangeWithInt_withInt_(jint min, jint max) {
@@ -607,31 +567,6 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonAutomata_make
   JreAssert(([a isDeterministic]), (@"org/apache/lucene/util/automaton/Automata.java:539 condition failed: assert a.isDeterministic();"));
   JreAssert((OrgApacheLuceneUtilAutomatonOperations_hasDeadStatesWithOrgApacheLuceneUtilAutomatonAutomaton_(a) == NO), (@"org/apache/lucene/util/automaton/Automata.java:540 condition failed: assert Operations.hasDeadStates(a) == false;"));
   return a;
-}
-
-OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonAutomata_makeStringWithIntArray_withInt_withInt_(IOSIntArray *word, jint offset, jint length) {
-  OrgApacheLuceneUtilAutomatonAutomata_initialize();
-  OrgApacheLuceneUtilAutomatonAutomaton *a = [new_OrgApacheLuceneUtilAutomatonAutomaton_init() autorelease];
-  [a createState];
-  jint s = 0;
-  for (jint i = offset; i < offset + length; i++) {
-    jint s2 = [a createState];
-    [a addTransitionWithInt:s withInt:s2 withInt:IOSIntArray_Get(nil_chk(word), i)];
-    s = s2;
-  }
-  [a setAcceptWithInt:s withBoolean:YES];
-  [a finishState];
-  return a;
-}
-
-OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonAutomata_makeStringUnionWithJavaUtilCollection_(id<JavaUtilCollection> utf8Strings) {
-  OrgApacheLuceneUtilAutomatonAutomata_initialize();
-  if ([((id<JavaUtilCollection>) nil_chk(utf8Strings)) isEmpty]) {
-    return OrgApacheLuceneUtilAutomatonAutomata_makeEmpty();
-  }
-  else {
-    return OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_buildWithJavaUtilCollection_(utf8Strings);
-  }
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonAutomata)

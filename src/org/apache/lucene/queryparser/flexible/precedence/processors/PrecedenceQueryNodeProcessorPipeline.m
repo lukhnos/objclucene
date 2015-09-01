@@ -3,20 +3,15 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/precedence/processors/PrecedenceQueryNodeProcessorPipeline.java
 //
 
-#include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "org/apache/lucene/queryparser/flexible/core/config/QueryConfigHandler.h"
-#include "org/apache/lucene/queryparser/flexible/core/processors/QueryNodeProcessor.h"
-#include "org/apache/lucene/queryparser/flexible/core/processors/QueryNodeProcessorPipeline.h"
-#include "org/apache/lucene/queryparser/flexible/precedence/processors/BooleanModifiersQueryNodeProcessor.h"
 #include "org/apache/lucene/queryparser/flexible/precedence/processors/PrecedenceQueryNodeProcessorPipeline.h"
-#include "org/apache/lucene/queryparser/flexible/standard/processors/BooleanQuery2ModifierNodeProcessor.h"
-#include "org/apache/lucene/queryparser/flexible/standard/processors/StandardQueryNodeProcessorPipeline.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsPrecedenceQueryNodeProcessorPipeline
 
-- (instancetype)initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler:(OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *)queryConfig {
-  OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsPrecedenceQueryNodeProcessorPipeline_initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler_(self, queryConfig);
+- (instancetype)init {
+  OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsPrecedenceQueryNodeProcessorPipeline_init(self);
   return self;
 }
 
@@ -26,7 +21,7 @@
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler:", "PrecedenceQueryNodeProcessorPipeline", NULL, 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsPrecedenceQueryNodeProcessorPipeline = { 2, "PrecedenceQueryNodeProcessorPipeline", "org.apache.lucene.queryparser.flexible.precedence.processors", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsPrecedenceQueryNodeProcessorPipeline;
@@ -34,19 +29,13 @@
 
 @end
 
-void OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsPrecedenceQueryNodeProcessorPipeline_initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler_(OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsPrecedenceQueryNodeProcessorPipeline *self, OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *queryConfig) {
-  OrgApacheLuceneQueryparserFlexibleStandardProcessorsStandardQueryNodeProcessorPipeline_initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler_(self, queryConfig);
-  for (jint i = 0; i < [self size]; i++) {
-    if ([[((id<OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor>) nil_chk([self getWithInt:i])) getClass] isEqual:OrgApacheLuceneQueryparserFlexibleStandardProcessorsBooleanQuery2ModifierNodeProcessor_class_()]) {
-      [self removeWithInt:i--];
-    }
-  }
-  [self addWithId:[new_OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsBooleanModifiersQueryNodeProcessor_init() autorelease]];
+void OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsPrecedenceQueryNodeProcessorPipeline_init(OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsPrecedenceQueryNodeProcessorPipeline *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsPrecedenceQueryNodeProcessorPipeline *new_OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsPrecedenceQueryNodeProcessorPipeline_initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler_(OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *queryConfig) {
+OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsPrecedenceQueryNodeProcessorPipeline *new_OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsPrecedenceQueryNodeProcessorPipeline_init() {
   OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsPrecedenceQueryNodeProcessorPipeline *self = [OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsPrecedenceQueryNodeProcessorPipeline alloc];
-  OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsPrecedenceQueryNodeProcessorPipeline_initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler_(self, queryConfig);
+  OrgApacheLuceneQueryparserFlexiblePrecedenceProcessorsPrecedenceQueryNodeProcessorPipeline_init(self);
   return self;
 }
 

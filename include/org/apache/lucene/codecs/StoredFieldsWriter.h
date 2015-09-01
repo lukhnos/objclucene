@@ -69,7 +69,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsStoredFieldsWriter)
 #include "org/apache/lucene/index/IndexableField.h"
 
 @class IOSByteArray;
-@class JavaIoReader;
 @class OrgApacheLuceneAnalysisAnalyzer;
 @class OrgApacheLuceneAnalysisTokenStream;
 @class OrgApacheLuceneCodecsStoredFieldsWriter;
@@ -121,8 +120,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsStoredFieldsWriter)
 - (OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum *)needsFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo;
 
 - (NSNumber *)numericValue;
-
-- (JavaIoReader *)readerValue;
 
 - (void)stringFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo
                                        withByteArray:(IOSByteArray *)value;

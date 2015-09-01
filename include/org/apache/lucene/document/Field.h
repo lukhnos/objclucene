@@ -25,9 +25,6 @@
 @class OrgApacheLuceneAnalysisAnalyzer;
 @class OrgApacheLuceneAnalysisTokenStream;
 @class OrgApacheLuceneDocumentFieldType;
-@class OrgApacheLuceneDocumentField_IndexEnum;
-@class OrgApacheLuceneDocumentField_StoreEnum;
-@class OrgApacheLuceneDocumentField_TermVectorEnum;
 @class OrgApacheLuceneUtilBytesRef;
 
 @interface OrgApacheLuceneDocumentField : NSObject < OrgApacheLuceneIndexIndexableField > {
@@ -42,16 +39,8 @@
 #pragma mark Public
 
 - (instancetype)initWithNSString:(NSString *)name
-                   withByteArray:(IOSByteArray *)value;
-
-- (instancetype)initWithNSString:(NSString *)name
                    withByteArray:(IOSByteArray *)value
 withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type;
-
-- (instancetype)initWithNSString:(NSString *)name
-                   withByteArray:(IOSByteArray *)value
-                         withInt:(jint)offset
-                         withInt:(jint)length;
 
 - (instancetype)initWithNSString:(NSString *)name
                    withByteArray:(IOSByteArray *)value
@@ -64,41 +53,8 @@ withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type;
 withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type;
 
 - (instancetype)initWithNSString:(NSString *)name
-                withJavaIoReader:(JavaIoReader *)reader;
-
-- (instancetype)initWithNSString:(NSString *)name
-                withJavaIoReader:(JavaIoReader *)reader
-withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type;
-
-- (instancetype)initWithNSString:(NSString *)name
-                withJavaIoReader:(JavaIoReader *)reader
-withOrgApacheLuceneDocumentField_TermVectorEnum:(OrgApacheLuceneDocumentField_TermVectorEnum *)termVector;
-
-- (instancetype)initWithNSString:(NSString *)name
                     withNSString:(NSString *)value
 withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type;
-
-- (instancetype)initWithNSString:(NSString *)name
-                    withNSString:(NSString *)value
-withOrgApacheLuceneDocumentField_StoreEnum:(OrgApacheLuceneDocumentField_StoreEnum *)store
-withOrgApacheLuceneDocumentField_IndexEnum:(OrgApacheLuceneDocumentField_IndexEnum *)index;
-
-- (instancetype)initWithNSString:(NSString *)name
-                    withNSString:(NSString *)value
-withOrgApacheLuceneDocumentField_StoreEnum:(OrgApacheLuceneDocumentField_StoreEnum *)store
-withOrgApacheLuceneDocumentField_IndexEnum:(OrgApacheLuceneDocumentField_IndexEnum *)index
-withOrgApacheLuceneDocumentField_TermVectorEnum:(OrgApacheLuceneDocumentField_TermVectorEnum *)termVector;
-
-- (instancetype)initWithNSString:(NSString *)name
-withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tokenStream;
-
-- (instancetype)initWithNSString:(NSString *)name
-withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tokenStream
-withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type;
-
-- (instancetype)initWithNSString:(NSString *)name
-withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tokenStream
-withOrgApacheLuceneDocumentField_TermVectorEnum:(OrgApacheLuceneDocumentField_TermVectorEnum *)termVector;
 
 - (OrgApacheLuceneUtilBytesRef *)binaryValue;
 
@@ -112,42 +68,20 @@ withOrgApacheLuceneDocumentField_TermVectorEnum:(OrgApacheLuceneDocumentField_Te
 
 - (JavaIoReader *)readerValue;
 
-- (void)setBoostWithFloat:(jfloat)boost;
-
-- (void)setBytesValueWithByteArray:(IOSByteArray *)value;
-
 - (void)setBytesValueWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)value;
-
-- (void)setByteValueWithByte:(jbyte)value;
-
-- (void)setDoubleValueWithDouble:(jdouble)value;
-
-- (void)setFloatValueWithFloat:(jfloat)value;
 
 - (void)setIntValueWithInt:(jint)value;
 
 - (void)setLongValueWithLong:(jlong)value;
 
-- (void)setReaderValueWithJavaIoReader:(JavaIoReader *)value;
-
-- (void)setShortValueWithShort:(jshort)value;
-
 - (void)setStringValueWithNSString:(NSString *)value;
-
-- (void)setTokenStreamWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tokenStream;
 
 - (NSString *)stringValue;
 
 - (OrgApacheLuceneAnalysisTokenStream *)tokenStreamWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
                                                 withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)reuse;
 
-- (OrgApacheLuceneAnalysisTokenStream *)tokenStreamValue;
-
 - (NSString *)description;
-
-+ (OrgApacheLuceneDocumentFieldType *)translateFieldTypeWithOrgApacheLuceneDocumentField_StoreEnum:(OrgApacheLuceneDocumentField_StoreEnum *)store
-                                                        withOrgApacheLuceneDocumentField_IndexEnum:(OrgApacheLuceneDocumentField_IndexEnum *)index
-                                                   withOrgApacheLuceneDocumentField_TermVectorEnum:(OrgApacheLuceneDocumentField_TermVectorEnum *)termVector;
 
 #pragma mark Protected
 
@@ -167,14 +101,6 @@ FOUNDATION_EXPORT void OrgApacheLuceneDocumentField_initWithNSString_withOrgApac
 
 FOUNDATION_EXPORT OrgApacheLuceneDocumentField *new_OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneDocumentFieldType_(NSString *name, OrgApacheLuceneDocumentFieldType *type) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT void OrgApacheLuceneDocumentField_initWithNSString_withJavaIoReader_withOrgApacheLuceneDocumentFieldType_(OrgApacheLuceneDocumentField *self, NSString *name, JavaIoReader *reader, OrgApacheLuceneDocumentFieldType *type);
-
-FOUNDATION_EXPORT OrgApacheLuceneDocumentField *new_OrgApacheLuceneDocumentField_initWithNSString_withJavaIoReader_withOrgApacheLuceneDocumentFieldType_(NSString *name, JavaIoReader *reader, OrgApacheLuceneDocumentFieldType *type) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneDocumentFieldType_(OrgApacheLuceneDocumentField *self, NSString *name, OrgApacheLuceneAnalysisTokenStream *tokenStream, OrgApacheLuceneDocumentFieldType *type);
-
-FOUNDATION_EXPORT OrgApacheLuceneDocumentField *new_OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneDocumentFieldType_(NSString *name, OrgApacheLuceneAnalysisTokenStream *tokenStream, OrgApacheLuceneDocumentFieldType *type) NS_RETURNS_RETAINED;
-
 FOUNDATION_EXPORT void OrgApacheLuceneDocumentField_initWithNSString_withByteArray_withOrgApacheLuceneDocumentFieldType_(OrgApacheLuceneDocumentField *self, NSString *name, IOSByteArray *value, OrgApacheLuceneDocumentFieldType *type);
 
 FOUNDATION_EXPORT OrgApacheLuceneDocumentField *new_OrgApacheLuceneDocumentField_initWithNSString_withByteArray_withOrgApacheLuceneDocumentFieldType_(NSString *name, IOSByteArray *value, OrgApacheLuceneDocumentFieldType *type) NS_RETURNS_RETAINED;
@@ -190,40 +116,6 @@ FOUNDATION_EXPORT OrgApacheLuceneDocumentField *new_OrgApacheLuceneDocumentField
 FOUNDATION_EXPORT void OrgApacheLuceneDocumentField_initWithNSString_withNSString_withOrgApacheLuceneDocumentFieldType_(OrgApacheLuceneDocumentField *self, NSString *name, NSString *value, OrgApacheLuceneDocumentFieldType *type);
 
 FOUNDATION_EXPORT OrgApacheLuceneDocumentField *new_OrgApacheLuceneDocumentField_initWithNSString_withNSString_withOrgApacheLuceneDocumentFieldType_(NSString *name, NSString *value, OrgApacheLuceneDocumentFieldType *type) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentField_translateFieldTypeWithOrgApacheLuceneDocumentField_StoreEnum_withOrgApacheLuceneDocumentField_IndexEnum_withOrgApacheLuceneDocumentField_TermVectorEnum_(OrgApacheLuceneDocumentField_StoreEnum *store, OrgApacheLuceneDocumentField_IndexEnum *index, OrgApacheLuceneDocumentField_TermVectorEnum *termVector);
-
-FOUNDATION_EXPORT void OrgApacheLuceneDocumentField_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_StoreEnum_withOrgApacheLuceneDocumentField_IndexEnum_(OrgApacheLuceneDocumentField *self, NSString *name, NSString *value, OrgApacheLuceneDocumentField_StoreEnum *store, OrgApacheLuceneDocumentField_IndexEnum *index);
-
-FOUNDATION_EXPORT OrgApacheLuceneDocumentField *new_OrgApacheLuceneDocumentField_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_StoreEnum_withOrgApacheLuceneDocumentField_IndexEnum_(NSString *name, NSString *value, OrgApacheLuceneDocumentField_StoreEnum *store, OrgApacheLuceneDocumentField_IndexEnum *index) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneDocumentField_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_StoreEnum_withOrgApacheLuceneDocumentField_IndexEnum_withOrgApacheLuceneDocumentField_TermVectorEnum_(OrgApacheLuceneDocumentField *self, NSString *name, NSString *value, OrgApacheLuceneDocumentField_StoreEnum *store, OrgApacheLuceneDocumentField_IndexEnum *index, OrgApacheLuceneDocumentField_TermVectorEnum *termVector);
-
-FOUNDATION_EXPORT OrgApacheLuceneDocumentField *new_OrgApacheLuceneDocumentField_initWithNSString_withNSString_withOrgApacheLuceneDocumentField_StoreEnum_withOrgApacheLuceneDocumentField_IndexEnum_withOrgApacheLuceneDocumentField_TermVectorEnum_(NSString *name, NSString *value, OrgApacheLuceneDocumentField_StoreEnum *store, OrgApacheLuceneDocumentField_IndexEnum *index, OrgApacheLuceneDocumentField_TermVectorEnum *termVector) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneDocumentField_initWithNSString_withJavaIoReader_(OrgApacheLuceneDocumentField *self, NSString *name, JavaIoReader *reader);
-
-FOUNDATION_EXPORT OrgApacheLuceneDocumentField *new_OrgApacheLuceneDocumentField_initWithNSString_withJavaIoReader_(NSString *name, JavaIoReader *reader) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneDocumentField_initWithNSString_withJavaIoReader_withOrgApacheLuceneDocumentField_TermVectorEnum_(OrgApacheLuceneDocumentField *self, NSString *name, JavaIoReader *reader, OrgApacheLuceneDocumentField_TermVectorEnum *termVector);
-
-FOUNDATION_EXPORT OrgApacheLuceneDocumentField *new_OrgApacheLuceneDocumentField_initWithNSString_withJavaIoReader_withOrgApacheLuceneDocumentField_TermVectorEnum_(NSString *name, JavaIoReader *reader, OrgApacheLuceneDocumentField_TermVectorEnum *termVector) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneDocumentField *self, NSString *name, OrgApacheLuceneAnalysisTokenStream *tokenStream);
-
-FOUNDATION_EXPORT OrgApacheLuceneDocumentField *new_OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneAnalysisTokenStream_(NSString *name, OrgApacheLuceneAnalysisTokenStream *tokenStream) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneDocumentField_TermVectorEnum_(OrgApacheLuceneDocumentField *self, NSString *name, OrgApacheLuceneAnalysisTokenStream *tokenStream, OrgApacheLuceneDocumentField_TermVectorEnum *termVector);
-
-FOUNDATION_EXPORT OrgApacheLuceneDocumentField *new_OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneDocumentField_TermVectorEnum_(NSString *name, OrgApacheLuceneAnalysisTokenStream *tokenStream, OrgApacheLuceneDocumentField_TermVectorEnum *termVector) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneDocumentField_initWithNSString_withByteArray_(OrgApacheLuceneDocumentField *self, NSString *name, IOSByteArray *value);
-
-FOUNDATION_EXPORT OrgApacheLuceneDocumentField *new_OrgApacheLuceneDocumentField_initWithNSString_withByteArray_(NSString *name, IOSByteArray *value) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneDocumentField_initWithNSString_withByteArray_withInt_withInt_(OrgApacheLuceneDocumentField *self, NSString *name, IOSByteArray *value, jint offset, jint length);
-
-FOUNDATION_EXPORT OrgApacheLuceneDocumentField *new_OrgApacheLuceneDocumentField_initWithNSString_withByteArray_withInt_withInt_(NSString *name, IOSByteArray *value, jint offset, jint length) NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentField)
 
@@ -286,21 +178,6 @@ typedef NS_ENUM(NSUInteger, OrgApacheLuceneDocumentField_Index) {
 
 @interface OrgApacheLuceneDocumentField_IndexEnum : JavaLangEnum < NSCopying >
 
-#pragma mark Public
-
-- (jboolean)isAnalyzed;
-
-- (jboolean)isIndexed;
-
-- (jboolean)omitNorms;
-
-+ (OrgApacheLuceneDocumentField_IndexEnum *)toIndexWithBoolean:(jboolean)indexed
-                                                   withBoolean:(jboolean)analyzed;
-
-+ (OrgApacheLuceneDocumentField_IndexEnum *)toIndexWithBoolean:(jboolean)indexed
-                                                   withBoolean:(jboolean)analyzed
-                                                   withBoolean:(jboolean)omitNorms;
-
 #pragma mark Package-Private
 
 + (IOSObjectArray *)values;
@@ -332,10 +209,6 @@ J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneDocumentField_IndexEnum, NOT_ANALYZED
 #define OrgApacheLuceneDocumentField_IndexEnum_ANALYZED_NO_NORMS OrgApacheLuceneDocumentField_IndexEnum_values_[OrgApacheLuceneDocumentField_Index_ANALYZED_NO_NORMS]
 J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneDocumentField_IndexEnum, ANALYZED_NO_NORMS)
 
-FOUNDATION_EXPORT OrgApacheLuceneDocumentField_IndexEnum *OrgApacheLuceneDocumentField_IndexEnum_toIndexWithBoolean_withBoolean_(jboolean indexed, jboolean analyzed);
-
-FOUNDATION_EXPORT OrgApacheLuceneDocumentField_IndexEnum *OrgApacheLuceneDocumentField_IndexEnum_toIndexWithBoolean_withBoolean_withBoolean_(jboolean indexed, jboolean analyzed, jboolean omitNorms);
-
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentField_IndexEnum)
 
 #endif
@@ -356,18 +229,6 @@ typedef NS_ENUM(NSUInteger, OrgApacheLuceneDocumentField_TermVector) {
 };
 
 @interface OrgApacheLuceneDocumentField_TermVectorEnum : JavaLangEnum < NSCopying >
-
-#pragma mark Public
-
-- (jboolean)isStored;
-
-+ (OrgApacheLuceneDocumentField_TermVectorEnum *)toTermVectorWithBoolean:(jboolean)stored
-                                                             withBoolean:(jboolean)withOffsets
-                                                             withBoolean:(jboolean)withPositions;
-
-- (jboolean)withOffsets;
-
-- (jboolean)withPositions;
 
 #pragma mark Package-Private
 
@@ -399,8 +260,6 @@ J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneDocumentField_TermVectorEnum, WITH_OF
 
 #define OrgApacheLuceneDocumentField_TermVectorEnum_WITH_POSITIONS_OFFSETS OrgApacheLuceneDocumentField_TermVectorEnum_values_[OrgApacheLuceneDocumentField_TermVector_WITH_POSITIONS_OFFSETS]
 J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneDocumentField_TermVectorEnum, WITH_POSITIONS_OFFSETS)
-
-FOUNDATION_EXPORT OrgApacheLuceneDocumentField_TermVectorEnum *OrgApacheLuceneDocumentField_TermVectorEnum_toTermVectorWithBoolean_withBoolean_withBoolean_(jboolean stored, jboolean withOffsets, jboolean withPositions);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneDocumentField_TermVectorEnum)
 

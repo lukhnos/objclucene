@@ -156,10 +156,6 @@ IOSByteArray *OrgApacheLuceneUtilBytesRef_EMPTY_BYTES_;
   return OrgApacheLuceneUtilBytesRef_getUTF8SortedAsUnicodeComparator();
 }
 
-+ (id<JavaUtilComparator>)getUTF8SortedAsUTF16Comparator {
-  return OrgApacheLuceneUtilBytesRef_getUTF8SortedAsUTF16Comparator();
-}
-
 + (OrgApacheLuceneUtilBytesRef *)deepCopyOfWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)other {
   return OrgApacheLuceneUtilBytesRef_deepCopyOfWithOrgApacheLuceneUtilBytesRef_(other);
 }
@@ -207,10 +203,6 @@ IOSByteArray *OrgApacheLuceneUtilBytesRef_EMPTY_BYTES_;
   }
 }
 
-+ (IOSObjectArray *)__annotations_getUTF8SortedAsUTF16Comparator {
-  return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
-}
-
 + (IOSObjectArray *)__annotations_utf8SortedAsUTF16SortOrder_ {
   return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
@@ -230,7 +222,6 @@ IOSByteArray *OrgApacheLuceneUtilBytesRef_EMPTY_BYTES_;
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
     { "compareToWithId:", "compareTo", "I", 0x1, NULL, NULL },
     { "getUTF8SortedAsUnicodeComparator", NULL, "Ljava.util.Comparator;", 0x9, NULL, NULL },
-    { "getUTF8SortedAsUTF16Comparator", NULL, "Ljava.util.Comparator;", 0x9, NULL, NULL },
     { "deepCopyOfWithOrgApacheLuceneUtilBytesRef:", "deepCopyOf", "Lorg.apache.lucene.util.BytesRef;", 0x9, NULL, NULL },
     { "isValid", NULL, "Z", 0x1, NULL, NULL },
   };
@@ -243,7 +234,7 @@ IOSByteArray *OrgApacheLuceneUtilBytesRef_EMPTY_BYTES_;
     { "utf8SortedAsUTF16SortOrder_", NULL, 0x1a, "Ljava.util.Comparator;", &OrgApacheLuceneUtilBytesRef_utf8SortedAsUTF16SortOrder_, "Ljava/util/Comparator<Lorg/apache/lucene/util/BytesRef;>;", .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.util.BytesRef$UTF8SortedAsUnicodeComparator;", "Lorg.apache.lucene.util.BytesRef$UTF8SortedAsUTF16Comparator;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilBytesRef = { 2, "BytesRef", "org.apache.lucene.util", NULL, 0x11, 16, methods, 6, fields, 0, NULL, 2, inner_classes, NULL, "Ljava/lang/Object;Ljava/lang/Comparable<Lorg/apache/lucene/util/BytesRef;>;Ljava/lang/Cloneable;" };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilBytesRef = { 2, "BytesRef", "org.apache.lucene.util", NULL, 0x11, 15, methods, 6, fields, 0, NULL, 2, inner_classes, NULL, "Ljava/lang/Object;Ljava/lang/Comparable<Lorg/apache/lucene/util/BytesRef;>;Ljava/lang/Cloneable;" };
   return &_OrgApacheLuceneUtilBytesRef;
 }
 
@@ -308,11 +299,6 @@ OrgApacheLuceneUtilBytesRef *new_OrgApacheLuceneUtilBytesRef_initWithJavaLangCha
 id<JavaUtilComparator> OrgApacheLuceneUtilBytesRef_getUTF8SortedAsUnicodeComparator() {
   OrgApacheLuceneUtilBytesRef_initialize();
   return OrgApacheLuceneUtilBytesRef_utf8SortedAsUnicodeSortOrder_;
-}
-
-id<JavaUtilComparator> OrgApacheLuceneUtilBytesRef_getUTF8SortedAsUTF16Comparator() {
-  OrgApacheLuceneUtilBytesRef_initialize();
-  return OrgApacheLuceneUtilBytesRef_utf8SortedAsUTF16SortOrder_;
 }
 
 OrgApacheLuceneUtilBytesRef *OrgApacheLuceneUtilBytesRef_deepCopyOfWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilBytesRef *other) {

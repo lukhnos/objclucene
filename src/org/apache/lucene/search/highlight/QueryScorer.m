@@ -4,11 +4,8 @@
 //
 
 #include "IOSClass.h"
-#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
 #include "java/io/IOException.h"
-#include "java/lang/Math.h"
-#include "java/util/HashMap.h"
 #include "java/util/HashSet.h"
 #include "java/util/Map.h"
 #include "java/util/Set.h"
@@ -27,7 +24,6 @@
   jfloat totalScore_;
   id<JavaUtilSet> foundTerms_;
   id<JavaUtilMap> fieldWeightedSpanTerms_;
-  jfloat maxTermWeight_;
   jint position_;
   NSString *defaultField_;
   id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute> termAtt_;
@@ -71,45 +67,8 @@ __attribute__((unused)) static OrgApacheLuceneAnalysisTokenStream *OrgApacheLuce
   return self;
 }
 
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-                                      withNSString:(NSString *)field {
-  OrgApacheLuceneSearchHighlightQueryScorer_initWithOrgApacheLuceneSearchQuery_withNSString_(self, query, field);
-  return self;
-}
-
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-               withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
-                                      withNSString:(NSString *)field {
-  OrgApacheLuceneSearchHighlightQueryScorer_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexReader_withNSString_(self, query, reader, field);
-  return self;
-}
-
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-               withOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
-                                      withNSString:(NSString *)field
-                                      withNSString:(NSString *)defaultField {
-  OrgApacheLuceneSearchHighlightQueryScorer_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexReader_withNSString_withNSString_(self, query, reader, field, defaultField);
-  return self;
-}
-
-- (instancetype)initWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
-                                      withNSString:(NSString *)field
-                                      withNSString:(NSString *)defaultField {
-  OrgApacheLuceneSearchHighlightQueryScorer_initWithOrgApacheLuceneSearchQuery_withNSString_withNSString_(self, query, field, defaultField);
-  return self;
-}
-
-- (instancetype)initWithOrgApacheLuceneSearchHighlightWeightedSpanTermArray:(IOSObjectArray *)weightedTerms {
-  OrgApacheLuceneSearchHighlightQueryScorer_initWithOrgApacheLuceneSearchHighlightWeightedSpanTermArray_(self, weightedTerms);
-  return self;
-}
-
 - (jfloat)getFragmentScore {
   return totalScore_;
-}
-
-- (jfloat)getMaxTermWeight {
-  return maxTermWeight_;
 }
 
 - (jfloat)getTokenScore {
@@ -167,26 +126,6 @@ __attribute__((unused)) static OrgApacheLuceneAnalysisTokenStream *OrgApacheLuce
   totalScore_ = 0;
 }
 
-- (jboolean)isExpandMultiTermQuery {
-  return expandMultiTermQuery_;
-}
-
-- (void)setExpandMultiTermQueryWithBoolean:(jboolean)expandMultiTermQuery {
-  self->expandMultiTermQuery_ = expandMultiTermQuery;
-}
-
-- (jboolean)isUsePayloads {
-  return usePayloads_;
-}
-
-- (void)setUsePayloadsWithBoolean:(jboolean)usePayloads {
-  self->usePayloads_ = usePayloads;
-}
-
-- (void)setWrapIfNotCachingTokenFilterWithBoolean:(jboolean)wrap {
-  self->wrapToCaching_ = wrap;
-}
-
 - (void)setMaxDocCharsToAnalyzeWithInt:(jint)maxDocCharsToAnalyze {
   self->maxCharsToAnalyze_ = maxDocCharsToAnalyze;
 }
@@ -206,13 +145,7 @@ __attribute__((unused)) static OrgApacheLuceneAnalysisTokenStream *OrgApacheLuce
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneSearchQuery:", "QueryScorer", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneSearchQuery:withNSString:", "QueryScorer", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneSearchQuery:withOrgApacheLuceneIndexIndexReader:withNSString:", "QueryScorer", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneSearchQuery:withOrgApacheLuceneIndexIndexReader:withNSString:withNSString:", "QueryScorer", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneSearchQuery:withNSString:withNSString:", "QueryScorer", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneSearchHighlightWeightedSpanTermArray:", "QueryScorer", NULL, 0x1, NULL, NULL },
     { "getFragmentScore", NULL, "F", 0x1, NULL, NULL },
-    { "getMaxTermWeight", NULL, "F", 0x1, NULL, NULL },
     { "getTokenScore", NULL, "F", 0x1, NULL, NULL },
     { "init__WithOrgApacheLuceneAnalysisTokenStream:", "init", "Lorg.apache.lucene.analysis.TokenStream;", 0x1, "Ljava.io.IOException;", NULL },
     { "getWeightedSpanTermWithNSString:", "getWeightedSpanTerm", "Lorg.apache.lucene.search.highlight.WeightedSpanTerm;", 0x1, NULL, NULL },
@@ -220,18 +153,12 @@ __attribute__((unused)) static OrgApacheLuceneAnalysisTokenStream *OrgApacheLuce
     { "initExtractorWithOrgApacheLuceneAnalysisTokenStream:", "initExtractor", "Lorg.apache.lucene.analysis.TokenStream;", 0x2, "Ljava.io.IOException;", NULL },
     { "newTermExtractorWithNSString:", "newTermExtractor", "Lorg.apache.lucene.search.highlight.WeightedSpanTermExtractor;", 0x4, NULL, NULL },
     { "startFragmentWithOrgApacheLuceneSearchHighlightTextFragment:", "startFragment", "V", 0x1, NULL, NULL },
-    { "isExpandMultiTermQuery", NULL, "Z", 0x1, NULL, NULL },
-    { "setExpandMultiTermQueryWithBoolean:", "setExpandMultiTermQuery", "V", 0x1, NULL, NULL },
-    { "isUsePayloads", NULL, "Z", 0x1, NULL, NULL },
-    { "setUsePayloadsWithBoolean:", "setUsePayloads", "V", 0x1, NULL, NULL },
-    { "setWrapIfNotCachingTokenFilterWithBoolean:", "setWrapIfNotCachingTokenFilter", "V", 0x1, NULL, NULL },
     { "setMaxDocCharsToAnalyzeWithInt:", "setMaxDocCharsToAnalyze", "V", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "totalScore_", NULL, 0x2, "F", NULL, NULL, .constantValue.asLong = 0 },
     { "foundTerms_", NULL, 0x2, "Ljava.util.Set;", NULL, "Ljava/util/Set<Ljava/lang/String;>;", .constantValue.asLong = 0 },
     { "fieldWeightedSpanTerms_", NULL, 0x2, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/String;Lorg/apache/lucene/search/highlight/WeightedSpanTerm;>;", .constantValue.asLong = 0 },
-    { "maxTermWeight_", NULL, 0x2, "F", NULL, NULL, .constantValue.asLong = 0 },
     { "position_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "defaultField_", NULL, 0x2, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
     { "termAtt_", NULL, 0x2, "Lorg.apache.lucene.analysis.tokenattributes.CharTermAttribute;", NULL, NULL, .constantValue.asLong = 0 },
@@ -245,7 +172,7 @@ __attribute__((unused)) static OrgApacheLuceneAnalysisTokenStream *OrgApacheLuce
     { "maxCharsToAnalyze_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "usePayloads_", NULL, 0x2, "Z", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightQueryScorer = { 2, "QueryScorer", "org.apache.lucene.search.highlight", NULL, 0x1, 21, methods, 16, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchHighlightQueryScorer = { 2, "QueryScorer", "org.apache.lucene.search.highlight", NULL, 0x1, 10, methods, 15, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchHighlightQueryScorer;
 }
 
@@ -263,91 +190,6 @@ void OrgApacheLuceneSearchHighlightQueryScorer_initWithOrgApacheLuceneSearchQuer
 OrgApacheLuceneSearchHighlightQueryScorer *new_OrgApacheLuceneSearchHighlightQueryScorer_initWithOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchQuery *query) {
   OrgApacheLuceneSearchHighlightQueryScorer *self = [OrgApacheLuceneSearchHighlightQueryScorer alloc];
   OrgApacheLuceneSearchHighlightQueryScorer_initWithOrgApacheLuceneSearchQuery_(self, query);
-  return self;
-}
-
-void OrgApacheLuceneSearchHighlightQueryScorer_initWithOrgApacheLuceneSearchQuery_withNSString_(OrgApacheLuceneSearchHighlightQueryScorer *self, OrgApacheLuceneSearchQuery *query, NSString *field) {
-  NSObject_init(self);
-  self->position_ = -1;
-  self->expandMultiTermQuery_ = YES;
-  self->wrapToCaching_ = YES;
-  self->usePayloads_ = NO;
-  OrgApacheLuceneSearchHighlightQueryScorer_init__WithOrgApacheLuceneSearchQuery_withNSString_withOrgApacheLuceneIndexIndexReader_withBoolean_(self, query, field, nil, YES);
-}
-
-OrgApacheLuceneSearchHighlightQueryScorer *new_OrgApacheLuceneSearchHighlightQueryScorer_initWithOrgApacheLuceneSearchQuery_withNSString_(OrgApacheLuceneSearchQuery *query, NSString *field) {
-  OrgApacheLuceneSearchHighlightQueryScorer *self = [OrgApacheLuceneSearchHighlightQueryScorer alloc];
-  OrgApacheLuceneSearchHighlightQueryScorer_initWithOrgApacheLuceneSearchQuery_withNSString_(self, query, field);
-  return self;
-}
-
-void OrgApacheLuceneSearchHighlightQueryScorer_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexReader_withNSString_(OrgApacheLuceneSearchHighlightQueryScorer *self, OrgApacheLuceneSearchQuery *query, OrgApacheLuceneIndexIndexReader *reader, NSString *field) {
-  NSObject_init(self);
-  self->position_ = -1;
-  self->expandMultiTermQuery_ = YES;
-  self->wrapToCaching_ = YES;
-  self->usePayloads_ = NO;
-  OrgApacheLuceneSearchHighlightQueryScorer_init__WithOrgApacheLuceneSearchQuery_withNSString_withOrgApacheLuceneIndexIndexReader_withBoolean_(self, query, field, reader, YES);
-}
-
-OrgApacheLuceneSearchHighlightQueryScorer *new_OrgApacheLuceneSearchHighlightQueryScorer_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexReader_withNSString_(OrgApacheLuceneSearchQuery *query, OrgApacheLuceneIndexIndexReader *reader, NSString *field) {
-  OrgApacheLuceneSearchHighlightQueryScorer *self = [OrgApacheLuceneSearchHighlightQueryScorer alloc];
-  OrgApacheLuceneSearchHighlightQueryScorer_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexReader_withNSString_(self, query, reader, field);
-  return self;
-}
-
-void OrgApacheLuceneSearchHighlightQueryScorer_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexReader_withNSString_withNSString_(OrgApacheLuceneSearchHighlightQueryScorer *self, OrgApacheLuceneSearchQuery *query, OrgApacheLuceneIndexIndexReader *reader, NSString *field, NSString *defaultField) {
-  NSObject_init(self);
-  self->position_ = -1;
-  self->expandMultiTermQuery_ = YES;
-  self->wrapToCaching_ = YES;
-  self->usePayloads_ = NO;
-  JreStrongAssign(&self->defaultField_, defaultField);
-  OrgApacheLuceneSearchHighlightQueryScorer_init__WithOrgApacheLuceneSearchQuery_withNSString_withOrgApacheLuceneIndexIndexReader_withBoolean_(self, query, field, reader, YES);
-}
-
-OrgApacheLuceneSearchHighlightQueryScorer *new_OrgApacheLuceneSearchHighlightQueryScorer_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexReader_withNSString_withNSString_(OrgApacheLuceneSearchQuery *query, OrgApacheLuceneIndexIndexReader *reader, NSString *field, NSString *defaultField) {
-  OrgApacheLuceneSearchHighlightQueryScorer *self = [OrgApacheLuceneSearchHighlightQueryScorer alloc];
-  OrgApacheLuceneSearchHighlightQueryScorer_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexReader_withNSString_withNSString_(self, query, reader, field, defaultField);
-  return self;
-}
-
-void OrgApacheLuceneSearchHighlightQueryScorer_initWithOrgApacheLuceneSearchQuery_withNSString_withNSString_(OrgApacheLuceneSearchHighlightQueryScorer *self, OrgApacheLuceneSearchQuery *query, NSString *field, NSString *defaultField) {
-  NSObject_init(self);
-  self->position_ = -1;
-  self->expandMultiTermQuery_ = YES;
-  self->wrapToCaching_ = YES;
-  self->usePayloads_ = NO;
-  JreStrongAssign(&self->defaultField_, defaultField);
-  OrgApacheLuceneSearchHighlightQueryScorer_init__WithOrgApacheLuceneSearchQuery_withNSString_withOrgApacheLuceneIndexIndexReader_withBoolean_(self, query, field, nil, YES);
-}
-
-OrgApacheLuceneSearchHighlightQueryScorer *new_OrgApacheLuceneSearchHighlightQueryScorer_initWithOrgApacheLuceneSearchQuery_withNSString_withNSString_(OrgApacheLuceneSearchQuery *query, NSString *field, NSString *defaultField) {
-  OrgApacheLuceneSearchHighlightQueryScorer *self = [OrgApacheLuceneSearchHighlightQueryScorer alloc];
-  OrgApacheLuceneSearchHighlightQueryScorer_initWithOrgApacheLuceneSearchQuery_withNSString_withNSString_(self, query, field, defaultField);
-  return self;
-}
-
-void OrgApacheLuceneSearchHighlightQueryScorer_initWithOrgApacheLuceneSearchHighlightWeightedSpanTermArray_(OrgApacheLuceneSearchHighlightQueryScorer *self, IOSObjectArray *weightedTerms) {
-  NSObject_init(self);
-  self->position_ = -1;
-  self->expandMultiTermQuery_ = YES;
-  self->wrapToCaching_ = YES;
-  self->usePayloads_ = NO;
-  JreStrongAssignAndConsume(&self->fieldWeightedSpanTerms_, new_JavaUtilHashMap_initWithInt_(((IOSObjectArray *) nil_chk(weightedTerms))->size_));
-  for (jint i = 0; i < weightedTerms->size_; i++) {
-    OrgApacheLuceneSearchHighlightWeightedSpanTerm *existingTerm = [self->fieldWeightedSpanTerms_ getWithId:((OrgApacheLuceneSearchHighlightWeightedSpanTerm *) nil_chk(IOSObjectArray_Get(weightedTerms, i)))->term_];
-    if ((existingTerm == nil) || (existingTerm->weight_ < ((OrgApacheLuceneSearchHighlightWeightedSpanTerm *) nil_chk(IOSObjectArray_Get(weightedTerms, i)))->weight_)) {
-      [self->fieldWeightedSpanTerms_ putWithId:((OrgApacheLuceneSearchHighlightWeightedSpanTerm *) nil_chk(IOSObjectArray_Get(weightedTerms, i)))->term_ withId:IOSObjectArray_Get(weightedTerms, i)];
-      self->maxTermWeight_ = JavaLangMath_maxWithFloat_withFloat_(self->maxTermWeight_, [((OrgApacheLuceneSearchHighlightWeightedSpanTerm *) nil_chk(IOSObjectArray_Get(weightedTerms, i))) getWeight]);
-    }
-  }
-  self->skipInitExtractor_ = YES;
-}
-
-OrgApacheLuceneSearchHighlightQueryScorer *new_OrgApacheLuceneSearchHighlightQueryScorer_initWithOrgApacheLuceneSearchHighlightWeightedSpanTermArray_(IOSObjectArray *weightedTerms) {
-  OrgApacheLuceneSearchHighlightQueryScorer *self = [OrgApacheLuceneSearchHighlightQueryScorer alloc];
-  OrgApacheLuceneSearchHighlightQueryScorer_initWithOrgApacheLuceneSearchHighlightWeightedSpanTermArray_(self, weightedTerms);
   return self;
 }
 

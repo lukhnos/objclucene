@@ -20,46 +20,19 @@
 #define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
-@class IOSCharArray;
-@class OrgApacheLuceneAnalysisTokenStream;
-
 @interface OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
-
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input
-                                               withBoolean:(jboolean)preserveOriginal;
-
-- (void)foldToASCIIWithCharArray:(IOSCharArray *)input
-                         withInt:(jint)length;
-
-+ (jint)foldToASCIIWithCharArray:(IOSCharArray *)input
-                         withInt:(jint)inputPos
-                   withCharArray:(IOSCharArray *)output
-                         withInt:(jint)outputPos
-                         withInt:(jint)length;
-
-- (jboolean)incrementToken;
-
-- (jboolean)isPreserveOriginal;
-
-- (void)reset;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilter *self, OrgApacheLuceneAnalysisTokenStream *input);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilter_init(OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilter *new_OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilter_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_(OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilter *self, OrgApacheLuceneAnalysisTokenStream *input, jboolean preserveOriginal);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilter *new_OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilter_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_(OrgApacheLuceneAnalysisTokenStream *input, jboolean preserveOriginal) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT jint OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilter_foldToASCIIWithCharArray_withInt_withCharArray_withInt_withInt_(IOSCharArray *input, jint inputPos, IOSCharArray *output, jint outputPos, jint length);
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilter *new_OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilter)
 

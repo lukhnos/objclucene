@@ -20,34 +20,19 @@
 #define OrgApacheLuceneAnalysisTokenFilter_INCLUDE 1
 #include "org/apache/lucene/analysis/TokenFilter.h"
 
-@class OrgApacheLuceneAnalysisTokenStream;
-
 @interface OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilter : OrgApacheLuceneAnalysisTokenFilter
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
-                                                   withInt:(jint)maxTokenPosition;
-
-- (instancetype)initWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inArg
-                                                   withInt:(jint)maxTokenPosition
-                                               withBoolean:(jboolean)consumeAllTokens;
-
-- (jboolean)incrementToken;
-
-- (void)reset;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilter)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilter *self, OrgApacheLuceneAnalysisTokenStream *inArg, jint maxTokenPosition);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilter_init(OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilter *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilter *new_OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(OrgApacheLuceneAnalysisTokenStream *inArg, jint maxTokenPosition) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withBoolean_(OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilter *self, OrgApacheLuceneAnalysisTokenStream *inArg, jint maxTokenPosition, jboolean consumeAllTokens);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilter *new_OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withBoolean_(OrgApacheLuceneAnalysisTokenStream *inArg, jint maxTokenPosition, jboolean consumeAllTokens) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilter *new_OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilter_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilter)
 

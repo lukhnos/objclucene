@@ -28,13 +28,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreByteArrayDataOutput, bytes_, IOSByteArra
   return self;
 }
 
-- (instancetype)initWithByteArray:(IOSByteArray *)bytes
-                          withInt:(jint)offset
-                          withInt:(jint)len {
-  OrgApacheLuceneStoreByteArrayDataOutput_initWithByteArray_withInt_withInt_(self, bytes, offset, len);
-  return self;
-}
-
 - (instancetype)init {
   OrgApacheLuceneStoreByteArrayDataOutput_init(self);
   return self;
@@ -77,7 +70,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreByteArrayDataOutput, bytes_, IOSByteArra
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithByteArray:", "ByteArrayDataOutput", NULL, 0x1, NULL, NULL },
-    { "initWithByteArray:withInt:withInt:", "ByteArrayDataOutput", NULL, 0x1, NULL, NULL },
     { "init", "ByteArrayDataOutput", NULL, 0x1, NULL, NULL },
     { "resetWithByteArray:", "reset", "V", 0x1, NULL, NULL },
     { "resetWithByteArray:withInt:withInt:", "reset", "V", 0x1, NULL, NULL },
@@ -90,7 +82,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreByteArrayDataOutput, bytes_, IOSByteArra
     { "pos_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "limit_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneStoreByteArrayDataOutput = { 2, "ByteArrayDataOutput", "org.apache.lucene.store", NULL, 0x1, 8, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneStoreByteArrayDataOutput = { 2, "ByteArrayDataOutput", "org.apache.lucene.store", NULL, 0x1, 7, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneStoreByteArrayDataOutput;
 }
 
@@ -104,17 +96,6 @@ void OrgApacheLuceneStoreByteArrayDataOutput_initWithByteArray_(OrgApacheLuceneS
 OrgApacheLuceneStoreByteArrayDataOutput *new_OrgApacheLuceneStoreByteArrayDataOutput_initWithByteArray_(IOSByteArray *bytes) {
   OrgApacheLuceneStoreByteArrayDataOutput *self = [OrgApacheLuceneStoreByteArrayDataOutput alloc];
   OrgApacheLuceneStoreByteArrayDataOutput_initWithByteArray_(self, bytes);
-  return self;
-}
-
-void OrgApacheLuceneStoreByteArrayDataOutput_initWithByteArray_withInt_withInt_(OrgApacheLuceneStoreByteArrayDataOutput *self, IOSByteArray *bytes, jint offset, jint len) {
-  OrgApacheLuceneStoreDataOutput_init(self);
-  [self resetWithByteArray:bytes withInt:offset withInt:len];
-}
-
-OrgApacheLuceneStoreByteArrayDataOutput *new_OrgApacheLuceneStoreByteArrayDataOutput_initWithByteArray_withInt_withInt_(IOSByteArray *bytes, jint offset, jint len) {
-  OrgApacheLuceneStoreByteArrayDataOutput *self = [OrgApacheLuceneStoreByteArrayDataOutput alloc];
-  OrgApacheLuceneStoreByteArrayDataOutput_initWithByteArray_withInt_withInt_(self, bytes, offset, len);
   return self;
 }
 

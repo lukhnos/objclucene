@@ -26,10 +26,6 @@
 
 - (instancetype)init;
 
-- (NSString *)encodeTextWithNSString:(NSString *)originalText;
-
-+ (NSString *)htmlEncodeWithNSString:(NSString *)plainText;
-
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchHighlightSimpleHTMLEncoder)
@@ -37,8 +33,6 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchHighlightSimpleHTMLEncoder)
 FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightSimpleHTMLEncoder_init(OrgApacheLuceneSearchHighlightSimpleHTMLEncoder *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightSimpleHTMLEncoder *new_OrgApacheLuceneSearchHighlightSimpleHTMLEncoder_init() NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT NSString *OrgApacheLuceneSearchHighlightSimpleHTMLEncoder_htmlEncodeWithNSString_(NSString *plainText);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightSimpleHTMLEncoder)
 

@@ -16,20 +16,19 @@
 #if !defined (_OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_) && (OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_INCLUDE)
 #define _OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_
 
-@protocol OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode;
-
 @interface OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation : NSObject
 
 #pragma mark Public
 
-+ (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)logicalAndWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)q1
-                                                                      withOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)q2;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation)
 
-FOUNDATION_EXPORT id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_logicalAndWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_withOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> q1, id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> q2);
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_init(OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation *self);
+
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation *new_OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation)
 

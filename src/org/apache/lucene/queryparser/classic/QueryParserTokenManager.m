@@ -18,12 +18,6 @@
   IOSIntArray *jjstateSet_;
 }
 
-- (jint)jjStopStringLiteralDfa_2WithInt:(jint)pos
-                               withLong:(jlong)active0;
-
-- (jint)jjStartNfa_2WithInt:(jint)pos
-                   withLong:(jlong)active0;
-
 - (jint)jjStopAtPosWithInt:(jint)pos
                    withInt:(jint)kind;
 
@@ -94,8 +88,6 @@
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserClassicQueryParserTokenManager, jjrounds_, IOSIntArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserClassicQueryParserTokenManager, jjstateSet_, IOSIntArray *)
 
-__attribute__((unused)) static jint OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjStopStringLiteralDfa_2WithInt_withLong_(OrgApacheLuceneQueryparserClassicQueryParserTokenManager *self, jint pos, jlong active0);
-
 __attribute__((unused)) static jint OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjStopAtPosWithInt_withInt_(OrgApacheLuceneQueryparserClassicQueryParserTokenManager *self, jint pos, jint kind);
 
 __attribute__((unused)) static jint OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjMoveStringLiteralDfa0_2(OrgApacheLuceneQueryparserClassicQueryParserTokenManager *self);
@@ -150,16 +142,6 @@ IOSLongArray *OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjtoToken
 IOSLongArray *OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjtoSkip_;
 
 @implementation OrgApacheLuceneQueryparserClassicQueryParserTokenManager
-
-- (jint)jjStopStringLiteralDfa_2WithInt:(jint)pos
-                               withLong:(jlong)active0 {
-  return OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjStopStringLiteralDfa_2WithInt_withLong_(self, pos, active0);
-}
-
-- (jint)jjStartNfa_2WithInt:(jint)pos
-                   withLong:(jlong)active0 {
-  return OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjMoveNfa_2WithInt_withInt_(self, OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjStopStringLiteralDfa_2WithInt_withLong_(self, pos, active0), pos + 1);
-}
 
 - (jint)jjStopAtPosWithInt:(jint)pos
                    withInt:(jint)kind {
@@ -248,12 +230,6 @@ IOSLongArray *OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjtoSkip_
   return self;
 }
 
-- (instancetype)initWithOrgApacheLuceneQueryparserClassicCharStream:(id<OrgApacheLuceneQueryparserClassicCharStream>)stream
-                                                            withInt:(jint)lexState {
-  OrgApacheLuceneQueryparserClassicQueryParserTokenManager_initWithOrgApacheLuceneQueryparserClassicCharStream_withInt_(self, stream, lexState);
-  return self;
-}
-
 - (void)ReInitWithOrgApacheLuceneQueryparserClassicCharStream:(id<OrgApacheLuceneQueryparserClassicCharStream>)stream {
   jjmatchedPos_ = jjnewStateCnt_ = 0;
   curLexState_ = defaultLexState_;
@@ -263,17 +239,6 @@ IOSLongArray *OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjtoSkip_
 
 - (void)ReInitRounds {
   OrgApacheLuceneQueryparserClassicQueryParserTokenManager_ReInitRounds(self);
-}
-
-- (void)ReInitWithOrgApacheLuceneQueryparserClassicCharStream:(id<OrgApacheLuceneQueryparserClassicCharStream>)stream
-                                                      withInt:(jint)lexState {
-  [self ReInitWithOrgApacheLuceneQueryparserClassicCharStream:stream];
-  [self SwitchToWithInt:lexState];
-}
-
-- (void)SwitchToWithInt:(jint)lexState {
-  if (lexState >= 3 || lexState < 0) @throw [new_OrgApacheLuceneQueryparserClassicTokenMgrError_initWithNSString_withInt_(JreStrcat("$I$", @"Error: Ignoring invalid lexical state : ", lexState, @". State unchanged."), OrgApacheLuceneQueryparserClassicTokenMgrError_INVALID_LEXICAL_STATE) autorelease];
-  else curLexState_ = lexState;
 }
 
 - (OrgApacheLuceneQueryparserClassicToken *)jjFillToken {
@@ -410,8 +375,6 @@ IOSLongArray *OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjtoSkip_
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "jjStopStringLiteralDfa_2WithInt:withLong:", "jjStopStringLiteralDfa_2", "I", 0x12, NULL, NULL },
-    { "jjStartNfa_2WithInt:withLong:", "jjStartNfa_2", "I", 0x12, NULL, NULL },
     { "jjStopAtPosWithInt:withInt:", "jjStopAtPos", "I", 0x2, NULL, NULL },
     { "jjMoveStringLiteralDfa0_2", NULL, "I", 0x2, NULL, NULL },
     { "jjStartNfaWithStates_2WithInt:withInt:withInt:", "jjStartNfaWithStates_2", "I", 0x2, NULL, NULL },
@@ -428,11 +391,8 @@ IOSLongArray *OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjtoSkip_
     { "jjCanMove_1WithInt:withInt:withInt:withLong:withLong:", "jjCanMove_1", "Z", 0x1a, NULL, NULL },
     { "jjCanMove_2WithInt:withInt:withInt:withLong:withLong:", "jjCanMove_2", "Z", 0x1a, NULL, NULL },
     { "initWithOrgApacheLuceneQueryparserClassicCharStream:", "QueryParserTokenManager", NULL, 0x1, NULL, NULL },
-    { "initWithOrgApacheLuceneQueryparserClassicCharStream:withInt:", "QueryParserTokenManager", NULL, 0x1, NULL, NULL },
     { "ReInitWithOrgApacheLuceneQueryparserClassicCharStream:", "ReInit", "V", 0x1, NULL, NULL },
     { "ReInitRounds", NULL, "V", 0x2, NULL, NULL },
-    { "ReInitWithOrgApacheLuceneQueryparserClassicCharStream:withInt:", "ReInit", "V", 0x1, NULL, NULL },
-    { "SwitchToWithInt:", "SwitchTo", "V", 0x1, NULL, NULL },
     { "jjFillToken", NULL, "Lorg.apache.lucene.queryparser.classic.Token;", 0x4, NULL, NULL },
     { "getNextToken", NULL, "Lorg.apache.lucene.queryparser.classic.Token;", 0x1, NULL, NULL },
     { "jjCheckNAddWithInt:", "jjCheckNAdd", "V", 0x2, NULL, NULL },
@@ -462,18 +422,11 @@ IOSLongArray *OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjtoSkip_
     { "jjmatchedPos_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "jjmatchedKind_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserClassicQueryParserTokenManager = { 2, "QueryParserTokenManager", "org.apache.lucene.queryparser.classic", NULL, 0x1, 29, methods, 20, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserClassicQueryParserTokenManager = { 2, "QueryParserTokenManager", "org.apache.lucene.queryparser.classic", NULL, 0x1, 24, methods, 20, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserClassicQueryParserTokenManager;
 }
 
 @end
-
-jint OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjStopStringLiteralDfa_2WithInt_withLong_(OrgApacheLuceneQueryparserClassicQueryParserTokenManager *self, jint pos, jlong active0) {
-  switch (pos) {
-    default:
-    return -1;
-  }
-}
 
 jint OrgApacheLuceneQueryparserClassicQueryParserTokenManager_jjStopAtPosWithInt_withInt_(OrgApacheLuceneQueryparserClassicQueryParserTokenManager *self, jint pos, jint kind) {
   self->jjmatchedKind_ = kind;
@@ -1229,17 +1182,6 @@ void OrgApacheLuceneQueryparserClassicQueryParserTokenManager_initWithOrgApacheL
 OrgApacheLuceneQueryparserClassicQueryParserTokenManager *new_OrgApacheLuceneQueryparserClassicQueryParserTokenManager_initWithOrgApacheLuceneQueryparserClassicCharStream_(id<OrgApacheLuceneQueryparserClassicCharStream> stream) {
   OrgApacheLuceneQueryparserClassicQueryParserTokenManager *self = [OrgApacheLuceneQueryparserClassicQueryParserTokenManager alloc];
   OrgApacheLuceneQueryparserClassicQueryParserTokenManager_initWithOrgApacheLuceneQueryparserClassicCharStream_(self, stream);
-  return self;
-}
-
-void OrgApacheLuceneQueryparserClassicQueryParserTokenManager_initWithOrgApacheLuceneQueryparserClassicCharStream_withInt_(OrgApacheLuceneQueryparserClassicQueryParserTokenManager *self, id<OrgApacheLuceneQueryparserClassicCharStream> stream, jint lexState) {
-  OrgApacheLuceneQueryparserClassicQueryParserTokenManager_initWithOrgApacheLuceneQueryparserClassicCharStream_(self, stream);
-  [self SwitchToWithInt:lexState];
-}
-
-OrgApacheLuceneQueryparserClassicQueryParserTokenManager *new_OrgApacheLuceneQueryparserClassicQueryParserTokenManager_initWithOrgApacheLuceneQueryparserClassicCharStream_withInt_(id<OrgApacheLuceneQueryparserClassicCharStream> stream, jint lexState) {
-  OrgApacheLuceneQueryparserClassicQueryParserTokenManager *self = [OrgApacheLuceneQueryparserClassicQueryParserTokenManager alloc];
-  OrgApacheLuceneQueryparserClassicQueryParserTokenManager_initWithOrgApacheLuceneQueryparserClassicCharStream_withInt_(self, stream, lexState);
   return self;
 }
 

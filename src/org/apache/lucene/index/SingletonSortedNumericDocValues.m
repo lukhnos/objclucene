@@ -30,14 +30,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSingletonSortedNumericDocValues, docsWit
   return self;
 }
 
-- (OrgApacheLuceneIndexNumericDocValues *)getNumericDocValues {
-  return in_;
-}
-
-- (id<OrgApacheLuceneUtilBits>)getDocsWithField {
-  return docsWithField_;
-}
-
 - (void)setDocumentWithInt:(jint)doc {
   value_ = [((OrgApacheLuceneIndexNumericDocValues *) nil_chk(in_)) getWithInt:doc];
   if (docsWithField_ != nil && value_ == 0 && [docsWithField_ getWithInt:doc] == NO) {
@@ -65,8 +57,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSingletonSortedNumericDocValues, docsWit
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithOrgApacheLuceneIndexNumericDocValues:withOrgApacheLuceneUtilBits:", "SingletonSortedNumericDocValues", NULL, 0x1, NULL, NULL },
-    { "getNumericDocValues", NULL, "Lorg.apache.lucene.index.NumericDocValues;", 0x1, NULL, NULL },
-    { "getDocsWithField", NULL, "Lorg.apache.lucene.util.Bits;", 0x1, NULL, NULL },
     { "setDocumentWithInt:", "setDocument", "V", 0x1, NULL, NULL },
     { "valueAtWithInt:", "valueAt", "J", 0x1, NULL, NULL },
     { "count", NULL, "I", 0x1, NULL, NULL },
@@ -77,7 +67,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSingletonSortedNumericDocValues, docsWit
     { "value_", NULL, 0x2, "J", NULL, NULL, .constantValue.asLong = 0 },
     { "count_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexSingletonSortedNumericDocValues = { 2, "SingletonSortedNumericDocValues", "org.apache.lucene.index", NULL, 0x10, 6, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexSingletonSortedNumericDocValues = { 2, "SingletonSortedNumericDocValues", "org.apache.lucene.index", NULL, 0x10, 4, methods, 4, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexSingletonSortedNumericDocValues;
 }
 

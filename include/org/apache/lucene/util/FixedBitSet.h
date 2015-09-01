@@ -40,17 +40,6 @@
 - (instancetype)initWithLongArray:(IOSLongArray *)storedBits
                           withInt:(jint)numBits;
 
-- (void)and__WithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)iter;
-
-- (void)and__WithOrgApacheLuceneUtilFixedBitSet:(OrgApacheLuceneUtilFixedBitSet *)other;
-
-- (void)andNotWithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)iter;
-
-- (void)andNotWithOrgApacheLuceneUtilFixedBitSet:(OrgApacheLuceneUtilFixedBitSet *)other;
-
-+ (jlong)andNotCountWithOrgApacheLuceneUtilFixedBitSet:(OrgApacheLuceneUtilFixedBitSet *)a
-                    withOrgApacheLuceneUtilFixedBitSet:(OrgApacheLuceneUtilFixedBitSet *)b;
-
 + (jint)bits2wordsWithInt:(jint)numBits;
 
 - (jint)cardinality;
@@ -67,23 +56,11 @@
 
 - (jboolean)isEqual:(id)o;
 
-- (void)flipWithInt:(jint)index;
-
-- (void)flipWithInt:(jint)startIndex
-            withInt:(jint)endIndex;
-
 - (jboolean)getWithInt:(jint)index;
-
-- (jboolean)getAndClearWithInt:(jint)index;
-
-- (jboolean)getAndSetWithInt:(jint)index;
 
 - (IOSLongArray *)getBits;
 
 - (NSUInteger)hash;
-
-+ (jlong)intersectionCountWithOrgApacheLuceneUtilFixedBitSet:(OrgApacheLuceneUtilFixedBitSet *)a
-                          withOrgApacheLuceneUtilFixedBitSet:(OrgApacheLuceneUtilFixedBitSet *)b;
 
 - (jboolean)intersectsWithOrgApacheLuceneUtilFixedBitSet:(OrgApacheLuceneUtilFixedBitSet *)other;
 
@@ -99,19 +76,10 @@
 
 - (jlong)ramBytesUsed;
 
-- (jboolean)scanIsEmpty;
-
 - (void)setWithInt:(jint)index;
 
 - (void)setWithInt:(jint)startIndex
            withInt:(jint)endIndex;
-
-+ (jlong)unionCountWithOrgApacheLuceneUtilFixedBitSet:(OrgApacheLuceneUtilFixedBitSet *)a
-                   withOrgApacheLuceneUtilFixedBitSet:(OrgApacheLuceneUtilFixedBitSet *)b;
-
-- (void)xor__WithOrgApacheLuceneSearchDocIdSetIterator:(OrgApacheLuceneSearchDocIdSetIterator *)iter;
-
-- (void)xor__WithOrgApacheLuceneUtilFixedBitSet:(OrgApacheLuceneUtilFixedBitSet *)other;
 
 @end
 
@@ -120,12 +88,6 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneUtilFixedBitSet)
 FOUNDATION_EXPORT OrgApacheLuceneUtilFixedBitSet *OrgApacheLuceneUtilFixedBitSet_ensureCapacityWithOrgApacheLuceneUtilFixedBitSet_withInt_(OrgApacheLuceneUtilFixedBitSet *bits, jint numBits);
 
 FOUNDATION_EXPORT jint OrgApacheLuceneUtilFixedBitSet_bits2wordsWithInt_(jint numBits);
-
-FOUNDATION_EXPORT jlong OrgApacheLuceneUtilFixedBitSet_intersectionCountWithOrgApacheLuceneUtilFixedBitSet_withOrgApacheLuceneUtilFixedBitSet_(OrgApacheLuceneUtilFixedBitSet *a, OrgApacheLuceneUtilFixedBitSet *b);
-
-FOUNDATION_EXPORT jlong OrgApacheLuceneUtilFixedBitSet_unionCountWithOrgApacheLuceneUtilFixedBitSet_withOrgApacheLuceneUtilFixedBitSet_(OrgApacheLuceneUtilFixedBitSet *a, OrgApacheLuceneUtilFixedBitSet *b);
-
-FOUNDATION_EXPORT jlong OrgApacheLuceneUtilFixedBitSet_andNotCountWithOrgApacheLuceneUtilFixedBitSet_withOrgApacheLuceneUtilFixedBitSet_(OrgApacheLuceneUtilFixedBitSet *a, OrgApacheLuceneUtilFixedBitSet *b);
 
 FOUNDATION_EXPORT void OrgApacheLuceneUtilFixedBitSet_initWithInt_(OrgApacheLuceneUtilFixedBitSet *self, jint numBits);
 

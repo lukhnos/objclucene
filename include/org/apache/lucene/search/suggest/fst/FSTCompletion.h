@@ -16,44 +16,23 @@
 #if !defined (_OrgApacheLuceneSearchSuggestFstFSTCompletion_) && (OrgApacheLuceneSearchSuggestFstFSTCompletion_INCLUDE_ALL || OrgApacheLuceneSearchSuggestFstFSTCompletion_INCLUDE)
 #define _OrgApacheLuceneSearchSuggestFstFSTCompletion_
 
-@class OrgApacheLuceneUtilFstFST;
-@protocol JavaLangCharSequence;
-@protocol JavaUtilList;
-
 #define OrgApacheLuceneSearchSuggestFstFSTCompletion_DEFAULT_BUCKETS 10
 
 @interface OrgApacheLuceneSearchSuggestFstFSTCompletion : NSObject
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)automaton;
-
-- (instancetype)initWithOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)automaton
-                                      withBoolean:(jboolean)higherWeightsFirst
-                                      withBoolean:(jboolean)exactFirst;
-
-- (jint)getBucketWithJavaLangCharSequence:(id<JavaLangCharSequence>)key;
-
-- (jint)getBucketCount;
-
-- (OrgApacheLuceneUtilFstFST *)getFST;
-
-- (id<JavaUtilList>)lookupWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
-                                           withInt:(jint)num;
+- (instancetype)init;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneSearchSuggestFstFSTCompletion)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestFstFSTCompletion)
 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchSuggestFstFSTCompletion, DEFAULT_BUCKETS, jint)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestFstFSTCompletion_initWithOrgApacheLuceneUtilFstFST_withBoolean_withBoolean_(OrgApacheLuceneSearchSuggestFstFSTCompletion *self, OrgApacheLuceneUtilFstFST *automaton, jboolean higherWeightsFirst, jboolean exactFirst);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestFstFSTCompletion_init(OrgApacheLuceneSearchSuggestFstFSTCompletion *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestFstFSTCompletion *new_OrgApacheLuceneSearchSuggestFstFSTCompletion_initWithOrgApacheLuceneUtilFstFST_withBoolean_withBoolean_(OrgApacheLuceneUtilFstFST *automaton, jboolean higherWeightsFirst, jboolean exactFirst) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestFstFSTCompletion_initWithOrgApacheLuceneUtilFstFST_(OrgApacheLuceneSearchSuggestFstFSTCompletion *self, OrgApacheLuceneUtilFstFST *automaton);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestFstFSTCompletion *new_OrgApacheLuceneSearchSuggestFstFSTCompletion_initWithOrgApacheLuceneUtilFstFST_(OrgApacheLuceneUtilFstFST *automaton) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestFstFSTCompletion *new_OrgApacheLuceneSearchSuggestFstFSTCompletion_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestFstFSTCompletion)
 
@@ -66,34 +45,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestFstFSTCompletion)
 #define JavaLangComparable_INCLUDE 1
 #include "java/lang/Comparable.h"
 
-@class OrgApacheLuceneUtilBytesRef;
-
-@interface OrgApacheLuceneSearchSuggestFstFSTCompletion_Completion : NSObject < JavaLangComparable > {
- @public
-  OrgApacheLuceneUtilBytesRef *utf8_;
-  jint bucket_;
-}
+@interface OrgApacheLuceneSearchSuggestFstFSTCompletion_Completion : NSObject < JavaLangComparable >
 
 #pragma mark Public
 
-- (jint)compareToWithId:(OrgApacheLuceneSearchSuggestFstFSTCompletion_Completion *)o;
-
-- (NSString *)description;
-
-#pragma mark Package-Private
-
-- (instancetype)initWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)key
-                                            withInt:(jint)bucket;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchSuggestFstFSTCompletion_Completion)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestFstFSTCompletion_Completion, utf8_, OrgApacheLuceneUtilBytesRef *)
+FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestFstFSTCompletion_Completion_init(OrgApacheLuceneSearchSuggestFstFSTCompletion_Completion *self);
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchSuggestFstFSTCompletion_Completion_initWithOrgApacheLuceneUtilBytesRef_withInt_(OrgApacheLuceneSearchSuggestFstFSTCompletion_Completion *self, OrgApacheLuceneUtilBytesRef *key, jint bucket);
-
-FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestFstFSTCompletion_Completion *new_OrgApacheLuceneSearchSuggestFstFSTCompletion_Completion_initWithOrgApacheLuceneUtilBytesRef_withInt_(OrgApacheLuceneUtilBytesRef *key, jint bucket) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchSuggestFstFSTCompletion_Completion *new_OrgApacheLuceneSearchSuggestFstFSTCompletion_Completion_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestFstFSTCompletion_Completion)
 

@@ -20,24 +20,19 @@
 #define OrgApacheLuceneAnalysisUtilTokenFilterFactory_INCLUDE 1
 #include "org/apache/lucene/analysis/util/TokenFilterFactory.h"
 
-@class OrgApacheLuceneAnalysisTokenStream;
-@protocol JavaUtilMap;
-
 @interface OrgApacheLuceneAnalysisCzCzechStemFilterFactory : OrgApacheLuceneAnalysisUtilTokenFilterFactory
 
 #pragma mark Public
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args;
-
-- (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisCzCzechStemFilterFactory)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCzCzechStemFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisCzCzechStemFilterFactory *self, id<JavaUtilMap> args);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCzCzechStemFilterFactory_init(OrgApacheLuceneAnalysisCzCzechStemFilterFactory *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisCzCzechStemFilterFactory *new_OrgApacheLuceneAnalysisCzCzechStemFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCzCzechStemFilterFactory *new_OrgApacheLuceneAnalysisCzCzechStemFilterFactory_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCzCzechStemFilterFactory)
 

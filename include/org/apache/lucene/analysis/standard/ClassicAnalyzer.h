@@ -20,10 +20,6 @@
 #define OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_INCLUDE 1
 #include "org/apache/lucene/analysis/util/StopwordAnalyzerBase.h"
 
-@class JavaIoReader;
-@class OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents;
-@class OrgApacheLuceneAnalysisUtilCharArraySet;
-
 #define OrgApacheLuceneAnalysisStandardClassicAnalyzer_DEFAULT_MAX_TOKEN_LENGTH 255
 
 @interface OrgApacheLuceneAnalysisStandardClassicAnalyzer : OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase
@@ -32,38 +28,15 @@
 
 - (instancetype)init;
 
-- (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopWords;
-
-- (instancetype)initWithJavaIoReader:(JavaIoReader *)stopwords;
-
-- (jint)getMaxTokenLength;
-
-- (void)setMaxTokenLengthWithInt:(jint)length;
-
-#pragma mark Protected
-
-- (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)createComponentsWithNSString:(NSString *)fieldName;
-
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneAnalysisStandardClassicAnalyzer)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisStandardClassicAnalyzer)
 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisStandardClassicAnalyzer, DEFAULT_MAX_TOKEN_LENGTH, jint)
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisStandardClassicAnalyzer_STOP_WORDS_SET_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisStandardClassicAnalyzer, STOP_WORDS_SET_, OrgApacheLuceneAnalysisUtilCharArraySet *)
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisStandardClassicAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisStandardClassicAnalyzer *self, OrgApacheLuceneAnalysisUtilCharArraySet *stopWords);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisStandardClassicAnalyzer *new_OrgApacheLuceneAnalysisStandardClassicAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(OrgApacheLuceneAnalysisUtilCharArraySet *stopWords) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisStandardClassicAnalyzer_init(OrgApacheLuceneAnalysisStandardClassicAnalyzer *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisStandardClassicAnalyzer *new_OrgApacheLuceneAnalysisStandardClassicAnalyzer_init() NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisStandardClassicAnalyzer_initWithJavaIoReader_(OrgApacheLuceneAnalysisStandardClassicAnalyzer *self, JavaIoReader *stopwords);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisStandardClassicAnalyzer *new_OrgApacheLuceneAnalysisStandardClassicAnalyzer_initWithJavaIoReader_(JavaIoReader *stopwords) NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisStandardClassicAnalyzer)
 

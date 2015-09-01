@@ -4,9 +4,9 @@
 //
 
 #include "J2ObjC_source.h"
-#include "org/apache/lucene/analysis/Analyzer.h"
 #include "org/apache/lucene/analysis/core/KeywordAnalyzer.h"
-#include "org/apache/lucene/analysis/core/KeywordTokenizer.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneAnalysisCoreKeywordAnalyzer
 
@@ -15,23 +15,18 @@
   return self;
 }
 
-- (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)createComponentsWithNSString:(NSString *)fieldName {
-  return [new_OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuceneAnalysisTokenizer_([new_OrgApacheLuceneAnalysisCoreKeywordTokenizer_init() autorelease]) autorelease];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", "KeywordAnalyzer", NULL, 0x1, NULL, NULL },
-    { "createComponentsWithNSString:", "createComponents", "Lorg.apache.lucene.analysis.Analyzer$TokenStreamComponents;", 0x4, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCoreKeywordAnalyzer = { 2, "KeywordAnalyzer", "org.apache.lucene.analysis.core", NULL, 0x11, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCoreKeywordAnalyzer = { 2, "KeywordAnalyzer", "org.apache.lucene.analysis.core", NULL, 0x11, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisCoreKeywordAnalyzer;
 }
 
 @end
 
 void OrgApacheLuceneAnalysisCoreKeywordAnalyzer_init(OrgApacheLuceneAnalysisCoreKeywordAnalyzer *self) {
-  OrgApacheLuceneAnalysisAnalyzer_init(self);
+  NSObject_init(self);
 }
 
 OrgApacheLuceneAnalysisCoreKeywordAnalyzer *new_OrgApacheLuceneAnalysisCoreKeywordAnalyzer_init() {

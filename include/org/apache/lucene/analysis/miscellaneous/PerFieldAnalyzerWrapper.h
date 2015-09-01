@@ -20,35 +20,19 @@
 #define OrgApacheLuceneAnalysisDelegatingAnalyzerWrapper_INCLUDE 1
 #include "org/apache/lucene/analysis/DelegatingAnalyzerWrapper.h"
 
-@class OrgApacheLuceneAnalysisAnalyzer;
-@protocol JavaUtilMap;
-
 @interface OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper : OrgApacheLuceneAnalysisDelegatingAnalyzerWrapper
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)defaultAnalyzer;
-
-- (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)defaultAnalyzer
-                                        withJavaUtilMap:(id<JavaUtilMap>)fieldAnalyzers;
-
-- (NSString *)description;
-
-#pragma mark Protected
-
-- (OrgApacheLuceneAnalysisAnalyzer *)getWrappedAnalyzerWithNSString:(NSString *)fieldName;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper)
 
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper_initWithOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper *self, OrgApacheLuceneAnalysisAnalyzer *defaultAnalyzer);
+FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper_init(OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper *new_OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper_initWithOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneAnalysisAnalyzer *defaultAnalyzer) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper_initWithOrgApacheLuceneAnalysisAnalyzer_withJavaUtilMap_(OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper *self, OrgApacheLuceneAnalysisAnalyzer *defaultAnalyzer, id<JavaUtilMap> fieldAnalyzers);
-
-FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper *new_OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper_initWithOrgApacheLuceneAnalysisAnalyzer_withJavaUtilMap_(OrgApacheLuceneAnalysisAnalyzer *defaultAnalyzer, id<JavaUtilMap> fieldAnalyzers) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper *new_OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisMiscellaneousPerFieldAnalyzerWrapper)
 

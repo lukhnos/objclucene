@@ -40,8 +40,6 @@
 
 - (NSString *)getField;
 
-- (OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *)getRewriteMethod;
-
 - (NSUInteger)hash;
 
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
@@ -128,38 +126,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMultiTermQuery_RewriteMethod)
 #define OrgApacheLuceneSearchTopTermsRewrite_INCLUDE 1
 #include "org/apache/lucene/search/TopTermsRewrite.h"
 
-@class OrgApacheLuceneIndexTerm;
-@class OrgApacheLuceneIndexTermContext;
-@class OrgApacheLuceneSearchBooleanQuery_Builder;
-@class OrgApacheLuceneSearchQuery;
-
 @interface OrgApacheLuceneSearchMultiTermQuery_TopTermsScoringBooleanQueryRewrite : OrgApacheLuceneSearchTopTermsRewrite
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)size;
-
-#pragma mark Protected
-
-- (void)addClauseWithId:(OrgApacheLuceneSearchBooleanQuery_Builder *)topLevel
-withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-                withInt:(jint)docCount
-              withFloat:(jfloat)boost
-withOrgApacheLuceneIndexTermContext:(OrgApacheLuceneIndexTermContext *)states;
-
-- (OrgApacheLuceneSearchQuery *)buildWithId:(OrgApacheLuceneSearchBooleanQuery_Builder *)builder;
-
-- (jint)getMaxSize;
-
-- (OrgApacheLuceneSearchBooleanQuery_Builder *)getTopLevelBuilder;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchMultiTermQuery_TopTermsScoringBooleanQueryRewrite)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchMultiTermQuery_TopTermsScoringBooleanQueryRewrite_initWithInt_(OrgApacheLuceneSearchMultiTermQuery_TopTermsScoringBooleanQueryRewrite *self, jint size);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchMultiTermQuery_TopTermsScoringBooleanQueryRewrite_init(OrgApacheLuceneSearchMultiTermQuery_TopTermsScoringBooleanQueryRewrite *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchMultiTermQuery_TopTermsScoringBooleanQueryRewrite *new_OrgApacheLuceneSearchMultiTermQuery_TopTermsScoringBooleanQueryRewrite_initWithInt_(jint size) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchMultiTermQuery_TopTermsScoringBooleanQueryRewrite *new_OrgApacheLuceneSearchMultiTermQuery_TopTermsScoringBooleanQueryRewrite_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMultiTermQuery_TopTermsScoringBooleanQueryRewrite)
 
@@ -216,38 +195,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMultiTermQuery_TopTermsBlendedFr
 #define OrgApacheLuceneSearchTopTermsRewrite_INCLUDE 1
 #include "org/apache/lucene/search/TopTermsRewrite.h"
 
-@class OrgApacheLuceneIndexTerm;
-@class OrgApacheLuceneIndexTermContext;
-@class OrgApacheLuceneSearchBooleanQuery_Builder;
-@class OrgApacheLuceneSearchQuery;
-
 @interface OrgApacheLuceneSearchMultiTermQuery_TopTermsBoostOnlyBooleanQueryRewrite : OrgApacheLuceneSearchTopTermsRewrite
 
 #pragma mark Public
 
-- (instancetype)initWithInt:(jint)size;
-
-#pragma mark Protected
-
-- (void)addClauseWithId:(OrgApacheLuceneSearchBooleanQuery_Builder *)topLevel
-withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
-                withInt:(jint)docFreq
-              withFloat:(jfloat)boost
-withOrgApacheLuceneIndexTermContext:(OrgApacheLuceneIndexTermContext *)states;
-
-- (OrgApacheLuceneSearchQuery *)buildWithId:(OrgApacheLuceneSearchBooleanQuery_Builder *)builder;
-
-- (jint)getMaxSize;
-
-- (OrgApacheLuceneSearchBooleanQuery_Builder *)getTopLevelBuilder;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchMultiTermQuery_TopTermsBoostOnlyBooleanQueryRewrite)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchMultiTermQuery_TopTermsBoostOnlyBooleanQueryRewrite_initWithInt_(OrgApacheLuceneSearchMultiTermQuery_TopTermsBoostOnlyBooleanQueryRewrite *self, jint size);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchMultiTermQuery_TopTermsBoostOnlyBooleanQueryRewrite_init(OrgApacheLuceneSearchMultiTermQuery_TopTermsBoostOnlyBooleanQueryRewrite *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchMultiTermQuery_TopTermsBoostOnlyBooleanQueryRewrite *new_OrgApacheLuceneSearchMultiTermQuery_TopTermsBoostOnlyBooleanQueryRewrite_initWithInt_(jint size) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneSearchMultiTermQuery_TopTermsBoostOnlyBooleanQueryRewrite *new_OrgApacheLuceneSearchMultiTermQuery_TopTermsBoostOnlyBooleanQueryRewrite_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMultiTermQuery_TopTermsBoostOnlyBooleanQueryRewrite)
 

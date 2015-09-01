@@ -20,59 +20,19 @@
 #define OrgApacheLuceneUtilFstOutputs_INCLUDE 1
 #include "org/apache/lucene/util/fst/Outputs.h"
 
-@class OrgApacheLuceneStoreDataInput;
-@class OrgApacheLuceneStoreDataOutput;
-@protocol JavaUtilList;
-
 @interface OrgApacheLuceneUtilFstListOfOutputs : OrgApacheLuceneUtilFstOutputs
 
 #pragma mark Public
 
-- (instancetype)initWithOrgApacheLuceneUtilFstOutputs:(OrgApacheLuceneUtilFstOutputs *)outputs;
-
-- (id)addWithId:(id)prefix
-         withId:(id)output;
-
-- (id<JavaUtilList>)asListWithId:(id)output;
-
-- (id)commonWithId:(id)output1
-            withId:(id)output2;
-
-- (id)getNoOutput;
-
-- (id)mergeWithId:(id)first
-           withId:(id)second;
-
-- (NSString *)outputToStringWithId:(id)output;
-
-- (jlong)ramBytesUsedWithId:(id)output;
-
-- (id)readWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg;
-
-- (id)readFinalOutputWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg;
-
-- (void)skipFinalOutputWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg;
-
-- (void)skipOutputWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg;
-
-- (id)subtractWithId:(id)object
-              withId:(id)inc;
-
-- (NSString *)description;
-
-- (void)writeWithId:(id)output
-withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg;
-
-- (void)writeFinalOutputWithId:(id)output
-withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg;
+- (instancetype)init;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneUtilFstListOfOutputs)
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilFstListOfOutputs)
 
-FOUNDATION_EXPORT void OrgApacheLuceneUtilFstListOfOutputs_initWithOrgApacheLuceneUtilFstOutputs_(OrgApacheLuceneUtilFstListOfOutputs *self, OrgApacheLuceneUtilFstOutputs *outputs);
+FOUNDATION_EXPORT void OrgApacheLuceneUtilFstListOfOutputs_init(OrgApacheLuceneUtilFstListOfOutputs *self);
 
-FOUNDATION_EXPORT OrgApacheLuceneUtilFstListOfOutputs *new_OrgApacheLuceneUtilFstListOfOutputs_initWithOrgApacheLuceneUtilFstOutputs_(OrgApacheLuceneUtilFstOutputs *outputs) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneUtilFstListOfOutputs *new_OrgApacheLuceneUtilFstListOfOutputs_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstListOfOutputs)
 

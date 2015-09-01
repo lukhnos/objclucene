@@ -29,7 +29,6 @@
 @class OrgApacheLuceneIndexSortedSetDocValues;
 @class OrgApacheLuceneIndexSorter_DocMap;
 @class OrgApacheLuceneIndexStoredFieldVisitor;
-@class OrgApacheLuceneSearchSort;
 @protocol OrgApacheLuceneUtilBits;
 
 @interface OrgApacheLuceneIndexSortingLeafReader : OrgApacheLuceneIndexFilterLeafReader {
@@ -64,9 +63,6 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 
 - (NSString *)description;
 
-+ (OrgApacheLuceneIndexLeafReader *)wrapWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader
-                                             withOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)sort;
-
 #pragma mark Package-Private
 
 + (OrgApacheLuceneIndexLeafReader *)wrapWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader
@@ -77,8 +73,6 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneIndexSortingLeafReader)
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSortingLeafReader, docMap_, OrgApacheLuceneIndexSorter_DocMap *)
-
-FOUNDATION_EXPORT OrgApacheLuceneIndexLeafReader *OrgApacheLuceneIndexSortingLeafReader_wrapWithOrgApacheLuceneIndexLeafReader_withOrgApacheLuceneSearchSort_(OrgApacheLuceneIndexLeafReader *reader, OrgApacheLuceneSearchSort *sort);
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexLeafReader *OrgApacheLuceneIndexSortingLeafReader_wrapWithOrgApacheLuceneIndexLeafReader_withOrgApacheLuceneIndexSorter_DocMap_(OrgApacheLuceneIndexLeafReader *reader, OrgApacheLuceneIndexSorter_DocMap *docMap);
 
@@ -126,8 +120,6 @@ withOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)inArg
 withOrgApacheLuceneIndexSorter_DocMap:(OrgApacheLuceneIndexSorter_DocMap *)docMap;
 
 - (OrgApacheLuceneIndexPostingsEnum *)getWrapped;
-
-- (jboolean)reusedWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)other;
 
 @end
 
@@ -181,8 +173,6 @@ withOrgApacheLuceneIndexSorter_DocMap:(OrgApacheLuceneIndexSorter_DocMap *)docMa
                 withBoolean:(jboolean)storeOffsets;
 
 - (OrgApacheLuceneIndexPostingsEnum *)getWrapped;
-
-- (jboolean)reusedWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)other;
 
 @end
 

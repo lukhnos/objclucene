@@ -16,21 +16,19 @@
 #if !defined (_OrgApacheLuceneSearchJoinCheckJoinIndex_) && (OrgApacheLuceneSearchJoinCheckJoinIndex_INCLUDE_ALL || OrgApacheLuceneSearchJoinCheckJoinIndex_INCLUDE)
 #define _OrgApacheLuceneSearchJoinCheckJoinIndex_
 
-@class OrgApacheLuceneIndexIndexReader;
-@protocol OrgApacheLuceneSearchJoinBitSetProducer;
-
 @interface OrgApacheLuceneSearchJoinCheckJoinIndex : NSObject
 
 #pragma mark Public
 
-+ (void)checkWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
-     withOrgApacheLuceneSearchJoinBitSetProducer:(id<OrgApacheLuceneSearchJoinBitSetProducer>)parentsFilter;
+- (instancetype)init;
 
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneSearchJoinCheckJoinIndex)
 
-FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinCheckJoinIndex_checkWithOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneSearchJoinBitSetProducer_(OrgApacheLuceneIndexIndexReader *reader, id<OrgApacheLuceneSearchJoinBitSetProducer> parentsFilter);
+FOUNDATION_EXPORT void OrgApacheLuceneSearchJoinCheckJoinIndex_init(OrgApacheLuceneSearchJoinCheckJoinIndex *self);
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchJoinCheckJoinIndex *new_OrgApacheLuceneSearchJoinCheckJoinIndex_init() NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinCheckJoinIndex)
 

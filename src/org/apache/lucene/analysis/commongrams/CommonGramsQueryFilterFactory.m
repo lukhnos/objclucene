@@ -4,44 +4,34 @@
 //
 
 #include "J2ObjC_source.h"
-#include "java/util/Map.h"
-#include "org/apache/lucene/analysis/TokenFilter.h"
-#include "org/apache/lucene/analysis/TokenStream.h"
-#include "org/apache/lucene/analysis/commongrams/CommonGramsFilter.h"
-#include "org/apache/lucene/analysis/commongrams/CommonGramsFilterFactory.h"
-#include "org/apache/lucene/analysis/commongrams/CommonGramsQueryFilter.h"
 #include "org/apache/lucene/analysis/commongrams/CommonGramsQueryFilterFactory.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory
 
-- (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)args {
-  OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory_initWithJavaUtilMap_(self, args);
+- (instancetype)init {
+  OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory_init(self);
   return self;
-}
-
-- (OrgApacheLuceneAnalysisTokenFilter *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
-  OrgApacheLuceneAnalysisCommongramsCommonGramsFilter *commonGrams = (OrgApacheLuceneAnalysisCommongramsCommonGramsFilter *) check_class_cast([super createWithOrgApacheLuceneAnalysisTokenStream:input], [OrgApacheLuceneAnalysisCommongramsCommonGramsFilter class]);
-  return [new_OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter_initWithOrgApacheLuceneAnalysisCommongramsCommonGramsFilter_(commonGrams) autorelease];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaUtilMap:", "CommonGramsQueryFilterFactory", NULL, 0x1, NULL, NULL },
-    { "createWithOrgApacheLuceneAnalysisTokenStream:", "create", "Lorg.apache.lucene.analysis.TokenFilter;", 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory = { 2, "CommonGramsQueryFilterFactory", "org.apache.lucene.analysis.commongrams", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory = { 2, "CommonGramsQueryFilterFactory", "org.apache.lucene.analysis.commongrams", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory;
 }
 
 @end
 
-void OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory *self, id<JavaUtilMap> args) {
-  OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory_initWithJavaUtilMap_(self, args);
+void OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory_init(OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory *self) {
+  NSObject_init(self);
 }
 
-OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory *new_OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {
+OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory *new_OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory_init() {
   OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory *self = [OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory alloc];
-  OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory_initWithJavaUtilMap_(self, args);
+  OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilterFactory_init(self);
   return self;
 }
 

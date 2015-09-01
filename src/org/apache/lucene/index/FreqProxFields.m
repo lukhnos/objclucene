@@ -85,8 +85,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFreqProxFields_FreqProxTerms)
 
 - (OrgApacheLuceneIndexTermsEnum_SeekStatusEnum *)seekCeilWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)text;
 
-- (void)seekExactWithLong:(jlong)ord;
-
 - (OrgApacheLuceneUtilBytesRef *)next;
 
 - (OrgApacheLuceneUtilBytesRef *)term;
@@ -118,8 +116,6 @@ __attribute__((unused)) static OrgApacheLuceneIndexFreqProxFields_FreqProxTermsE
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum)
 
 @interface OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_$1 : OrgApacheLuceneIndexTermState
-
-- (void)copyFromWithOrgApacheLuceneIndexTermState:(OrgApacheLuceneIndexTermState *)other OBJC_METHOD_FAMILY_NONE;
 
 - (instancetype)init;
 
@@ -430,12 +426,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexFreqProxFields_FreqProxTerm
   }
 }
 
-- (void)seekExactWithLong:(jlong)ord {
-  self->ord_ = (jint) ord;
-  jint textStart = IOSIntArray_Get(nil_chk(((OrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray *) nil_chk(postingsArray_))->textStarts_), IOSIntArray_Get(nil_chk(sortedTermIDs_), self->ord_));
-  [((OrgApacheLuceneUtilByteBlockPool *) nil_chk(((OrgApacheLuceneIndexFreqProxTermsWriterPerField *) nil_chk(terms_))->bytePool_)) setBytesRefWithOrgApacheLuceneUtilBytesRef:scratch_ withInt:textStart];
-}
-
 - (OrgApacheLuceneUtilBytesRef *)next {
   ord_++;
   if (ord_ >= numTerms_) {
@@ -520,7 +510,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexFreqProxFields_FreqProxTerm
     { "initWithOrgApacheLuceneIndexFreqProxTermsWriterPerField:", "FreqProxTermsEnum", NULL, 0x1, NULL, NULL },
     { "reset", NULL, "V", 0x1, NULL, NULL },
     { "seekCeilWithOrgApacheLuceneUtilBytesRef:", "seekCeil", "Lorg.apache.lucene.index.TermsEnum$SeekStatus;", 0x1, NULL, NULL },
-    { "seekExactWithLong:", "seekExact", "V", 0x1, NULL, NULL },
     { "next", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
     { "term", NULL, "Lorg.apache.lucene.util.BytesRef;", 0x1, NULL, NULL },
     { "ord", NULL, "J", 0x1, NULL, NULL },
@@ -537,7 +526,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexFreqProxFields_FreqProxTerm
     { "numTerms_", NULL, 0x10, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "ord_", NULL, 0x0, "I", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum = { 2, "FreqProxTermsEnum", "org.apache.lucene.index", "FreqProxFields", 0xa, 11, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum = { 2, "FreqProxTermsEnum", "org.apache.lucene.index", "FreqProxFields", 0xa, 10, methods, 6, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum;
 }
 
@@ -563,10 +552,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexFreqProxFields_FreqProxTerm
 
 @implementation OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_$1
 
-- (void)copyFromWithOrgApacheLuceneIndexTermState:(OrgApacheLuceneIndexTermState *)other {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
-}
-
 - (instancetype)init {
   OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_$1_init(self);
   return self;
@@ -574,11 +559,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexFreqProxFields_FreqProxTerm
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "copyFromWithOrgApacheLuceneIndexTermState:", "copyFrom", "V", 0x1, NULL, NULL },
     { "init", "", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjCEnclosingMethodInfo enclosing_method = { "OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum", "termState" };
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_$1 = { 2, "", "org.apache.lucene.index", "FreqProxFields$FreqProxTermsEnum", 0x8008, 2, methods, 0, NULL, 0, NULL, 0, NULL, &enclosing_method, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_$1 = { 2, "", "org.apache.lucene.index", "FreqProxFields$FreqProxTermsEnum", 0x8008, 1, methods, 0, NULL, 0, NULL, 0, NULL, &enclosing_method, NULL };
   return &_OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_$1;
 }
 

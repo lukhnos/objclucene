@@ -6,6 +6,8 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/search/spell/SuggestWord.h"
 
+#pragma clang diagnostic ignored "-Wprotocol"
+
 @implementation OrgApacheLuceneSearchSpellSuggestWord
 
 - (instancetype)init {
@@ -13,21 +15,11 @@
   return self;
 }
 
-- (void)dealloc {
-  RELEASE_(string_);
-  [super dealloc];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", "SuggestWord", NULL, 0x1, NULL, NULL },
+    { "init", NULL, NULL, 0x1, NULL, NULL },
   };
-  static const J2ObjcFieldInfo fields[] = {
-    { "score_", NULL, 0x1, "F", NULL, NULL, .constantValue.asLong = 0 },
-    { "freq_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "string_", NULL, 0x1, "Ljava.lang.String;", NULL, NULL, .constantValue.asLong = 0 },
-  };
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpellSuggestWord = { 2, "SuggestWord", "org.apache.lucene.search.spell", NULL, 0x11, 1, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchSpellSuggestWord = { 2, "SuggestWord", "org.apache.lucene.search.spell", NULL, 0x11, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneSearchSpellSuggestWord;
 }
 

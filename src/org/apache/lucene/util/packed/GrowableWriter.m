@@ -57,10 +57,6 @@ __attribute__((unused)) static void OrgApacheLuceneUtilPackedGrowableWriter_ensu
   return [((OrgApacheLuceneUtilPackedPackedInts_Mutable *) nil_chk(current_)) getBitsPerValue];
 }
 
-- (OrgApacheLuceneUtilPackedPackedInts_Mutable *)getMutable {
-  return current_;
-}
-
 - (void)ensureCapacityWithLong:(jlong)value {
   OrgApacheLuceneUtilPackedGrowableWriter_ensureCapacityWithLong_(self, value);
 }
@@ -128,7 +124,6 @@ __attribute__((unused)) static void OrgApacheLuceneUtilPackedGrowableWriter_ensu
     { "getWithInt:", "get", "J", 0x1, NULL, NULL },
     { "size", NULL, "I", 0x1, NULL, NULL },
     { "getBitsPerValue", NULL, "I", 0x1, NULL, NULL },
-    { "getMutable", NULL, "Lorg.apache.lucene.util.packed.PackedInts$Mutable;", 0x1, NULL, NULL },
     { "ensureCapacityWithLong:", "ensureCapacity", "V", 0x2, NULL, NULL },
     { "setWithInt:withLong:", "set", "V", 0x1, NULL, NULL },
     { "clear", NULL, "V", 0x1, NULL, NULL },
@@ -144,7 +139,7 @@ __attribute__((unused)) static void OrgApacheLuceneUtilPackedGrowableWriter_ensu
     { "current_", NULL, 0x2, "Lorg.apache.lucene.util.packed.PackedInts$Mutable;", NULL, NULL, .constantValue.asLong = 0 },
     { "acceptableOverheadRatio_", NULL, 0x12, "F", NULL, NULL, .constantValue.asLong = 0 },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedGrowableWriter = { 2, "GrowableWriter", "org.apache.lucene.util.packed", NULL, 0x1, 15, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneUtilPackedGrowableWriter = { 2, "GrowableWriter", "org.apache.lucene.util.packed", NULL, 0x1, 14, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilPackedGrowableWriter;
 }
 

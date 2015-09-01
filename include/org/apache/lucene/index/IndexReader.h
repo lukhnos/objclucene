@@ -25,16 +25,12 @@
 @class OrgApacheLuceneIndexIndexReaderContext;
 @class OrgApacheLuceneIndexStoredFieldVisitor;
 @class OrgApacheLuceneIndexTerm;
-@class OrgApacheLuceneIndexTerms;
 @protocol JavaUtilList;
 @protocol JavaUtilSet;
-@protocol OrgApacheLuceneIndexIndexReader_ReaderClosedListener;
 
 @interface OrgApacheLuceneIndexIndexReader : NSObject < JavaIoCloseable >
 
 #pragma mark Public
-
-- (void)addReaderClosedListenerWithOrgApacheLuceneIndexIndexReader_ReaderClosedListener:(id<OrgApacheLuceneIndexIndexReader_ReaderClosedListener>)listener;
 
 - (void)close;
 
@@ -52,22 +48,11 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 
 - (jboolean)isEqual:(id)obj;
 
-- (id)getCombinedCoreAndDeletesKey;
-
 - (OrgApacheLuceneIndexIndexReaderContext *)getContext;
 
 - (id)getCoreCacheKey;
 
-- (jint)getDocCountWithNSString:(NSString *)field;
-
 - (jint)getRefCount;
-
-- (jlong)getSumDocFreqWithNSString:(NSString *)field;
-
-- (jlong)getSumTotalTermFreqWithNSString:(NSString *)field;
-
-- (OrgApacheLuceneIndexTerms *)getTermVectorWithInt:(jint)docID
-                                       withNSString:(NSString *)field;
 
 - (OrgApacheLuceneIndexFields *)getTermVectorsWithInt:(jint)docID;
 
@@ -86,10 +71,6 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 - (jint)numDocs;
 
 - (void)registerParentReaderWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader;
-
-- (void)removeReaderClosedListenerWithOrgApacheLuceneIndexIndexReader_ReaderClosedListener:(id<OrgApacheLuceneIndexIndexReader_ReaderClosedListener>)listener;
-
-- (jlong)totalTermFreqWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term;
 
 - (jboolean)tryIncRef;
 

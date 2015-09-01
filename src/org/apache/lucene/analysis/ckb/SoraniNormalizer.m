@@ -3,72 +3,12 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/ckb/SoraniNormalizer.java
 //
 
-#include "IOSPrimitiveArray.h"
 #include "J2ObjC_source.h"
-#include "java/lang/Character.h"
 #include "org/apache/lucene/analysis/ckb/SoraniNormalizer.h"
-#include "org/apache/lucene/analysis/util/StemmerUtil.h"
+
+#pragma clang diagnostic ignored "-Wprotocol"
 
 @implementation OrgApacheLuceneAnalysisCkbSoraniNormalizer
-
-- (jint)normalizeWithCharArray:(IOSCharArray *)s
-                       withInt:(jint)len {
-  for (jint i = 0; i < len; i++) {
-    switch (IOSCharArray_Get(nil_chk(s), i)) {
-      case OrgApacheLuceneAnalysisCkbSoraniNormalizer_YEH:
-      case OrgApacheLuceneAnalysisCkbSoraniNormalizer_DOTLESS_YEH:
-      *IOSCharArray_GetRef(s, i) = OrgApacheLuceneAnalysisCkbSoraniNormalizer_FARSI_YEH;
-      break;
-      case OrgApacheLuceneAnalysisCkbSoraniNormalizer_KAF:
-      *IOSCharArray_GetRef(s, i) = OrgApacheLuceneAnalysisCkbSoraniNormalizer_KEHEH;
-      break;
-      case OrgApacheLuceneAnalysisCkbSoraniNormalizer_ZWNJ:
-      if (i > 0 && IOSCharArray_Get(s, i - 1) == OrgApacheLuceneAnalysisCkbSoraniNormalizer_HEH) {
-        *IOSCharArray_GetRef(s, i - 1) = OrgApacheLuceneAnalysisCkbSoraniNormalizer_AE;
-      }
-      len = OrgApacheLuceneAnalysisUtilStemmerUtil_delete__WithCharArray_withInt_withInt_(s, i, len);
-      i--;
-      break;
-      case OrgApacheLuceneAnalysisCkbSoraniNormalizer_HEH:
-      if (i == len - 1) {
-        *IOSCharArray_GetRef(s, i) = OrgApacheLuceneAnalysisCkbSoraniNormalizer_AE;
-      }
-      break;
-      case OrgApacheLuceneAnalysisCkbSoraniNormalizer_TEH_MARBUTA:
-      *IOSCharArray_GetRef(s, i) = OrgApacheLuceneAnalysisCkbSoraniNormalizer_AE;
-      break;
-      case OrgApacheLuceneAnalysisCkbSoraniNormalizer_HEH_DOACHASHMEE:
-      *IOSCharArray_GetRef(s, i) = OrgApacheLuceneAnalysisCkbSoraniNormalizer_HEH;
-      break;
-      case OrgApacheLuceneAnalysisCkbSoraniNormalizer_REH:
-      if (i == 0) {
-        *IOSCharArray_GetRef(s, i) = OrgApacheLuceneAnalysisCkbSoraniNormalizer_RREH;
-      }
-      break;
-      case OrgApacheLuceneAnalysisCkbSoraniNormalizer_RREH_ABOVE:
-      *IOSCharArray_GetRef(s, i) = OrgApacheLuceneAnalysisCkbSoraniNormalizer_RREH;
-      break;
-      case OrgApacheLuceneAnalysisCkbSoraniNormalizer_TATWEEL:
-      case OrgApacheLuceneAnalysisCkbSoraniNormalizer_KASRATAN:
-      case OrgApacheLuceneAnalysisCkbSoraniNormalizer_DAMMATAN:
-      case OrgApacheLuceneAnalysisCkbSoraniNormalizer_FATHATAN:
-      case OrgApacheLuceneAnalysisCkbSoraniNormalizer_FATHA:
-      case OrgApacheLuceneAnalysisCkbSoraniNormalizer_DAMMA:
-      case OrgApacheLuceneAnalysisCkbSoraniNormalizer_KASRA:
-      case OrgApacheLuceneAnalysisCkbSoraniNormalizer_SHADDA:
-      case OrgApacheLuceneAnalysisCkbSoraniNormalizer_SUKUN:
-      len = OrgApacheLuceneAnalysisUtilStemmerUtil_delete__WithCharArray_withInt_withInt_(s, i, len);
-      i--;
-      break;
-      default:
-      if (JavaLangCharacter_getTypeWithChar_(IOSCharArray_Get(s, i)) == JavaLangCharacter_FORMAT) {
-        len = OrgApacheLuceneAnalysisUtilStemmerUtil_delete__WithCharArray_withInt_withInt_(s, i, len);
-        i--;
-      }
-    }
-  }
-  return len;
-}
 
 - (instancetype)init {
   OrgApacheLuceneAnalysisCkbSoraniNormalizer_init(self);
@@ -77,7 +17,6 @@
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "normalizeWithCharArray:withInt:", "normalize", "I", 0x1, NULL, NULL },
     { "init", NULL, NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
@@ -104,7 +43,7 @@
     { "SHADDA", "SHADDA", 0x18, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisCkbSoraniNormalizer_SHADDA },
     { "SUKUN", "SUKUN", 0x18, "C", NULL, NULL, .constantValue.asUnichar = OrgApacheLuceneAnalysisCkbSoraniNormalizer_SUKUN },
   };
-  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCkbSoraniNormalizer = { 2, "SoraniNormalizer", "org.apache.lucene.analysis.ckb", NULL, 0x1, 2, methods, 22, fields, 0, NULL, 0, NULL, NULL, NULL };
+  static const J2ObjcClassInfo _OrgApacheLuceneAnalysisCkbSoraniNormalizer = { 2, "SoraniNormalizer", "org.apache.lucene.analysis.ckb", NULL, 0x1, 1, methods, 22, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisCkbSoraniNormalizer;
 }
 

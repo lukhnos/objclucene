@@ -20,13 +20,10 @@
 #define JavaLangIterable_INCLUDE 1
 #include "java/lang/Iterable.h"
 
-@class IOSByteArray;
 @class IOSObjectArray;
-@class JavaIoPrintStream;
 @class OrgApacheLuceneIndexMergePolicy_OneMerge;
 @class OrgApacheLuceneIndexSegmentCommitInfo;
 @class OrgApacheLuceneStoreDirectory;
-@class OrgApacheLuceneUtilVersion;
 @protocol JavaUtilCollection;
 @protocol JavaUtilIterator;
 @protocol JavaUtilList;
@@ -67,30 +64,15 @@
 
 - (id<JavaUtilCollection>)filesWithBoolean:(jboolean)includeSegmentsFile;
 
-- (id<JavaUtilCollection>)filesWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
-                                                     withBoolean:(jboolean)includeSegmentsFile;
-
 + (jlong)generationFromSegmentsFileNameWithNSString:(NSString *)fileName;
-
-- (OrgApacheLuceneUtilVersion *)getCommitLuceneVersion;
 
 - (jlong)getGeneration;
 
-- (IOSByteArray *)getId;
-
-+ (JavaIoPrintStream *)getInfoStream;
-
-+ (jlong)getLastCommitGenerationWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory;
-
 + (jlong)getLastCommitGenerationWithNSStringArray:(IOSObjectArray *)files;
-
-+ (NSString *)getLastCommitSegmentsFileNameWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory;
 
 + (NSString *)getLastCommitSegmentsFileNameWithNSStringArray:(IOSObjectArray *)files;
 
 - (jlong)getLastGeneration;
-
-- (OrgApacheLuceneUtilVersion *)getMinSegmentLuceneVersion;
 
 - (NSString *)getSegmentsFileName;
 
@@ -109,13 +91,9 @@
 
 - (void)removeWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)si;
 
-+ (void)setInfoStreamWithJavaIoPrintStream:(JavaIoPrintStream *)infoStream;
-
 - (jint)size;
 
 - (NSString *)description;
-
-- (NSString *)toStringWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir;
 
 - (jint)totalMaxDoc;
 
@@ -123,8 +101,6 @@
 
 - (void)applyMergeChangesWithOrgApacheLuceneIndexMergePolicy_OneMerge:(OrgApacheLuceneIndexMergePolicy_OneMerge *)merge
                                                           withBoolean:(jboolean)dropSegment;
-
-- (void)commitWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir;
 
 - (jboolean)containsWithOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)si;
 
@@ -145,8 +121,6 @@
 - (void)rollbackSegmentInfosWithJavaUtilList:(id<JavaUtilList>)infos;
 
 - (void)setNextWriteGenerationWithLong:(jlong)generation;
-
-- (void)setUserDataWithJavaUtilMap:(id<JavaUtilMap>)data;
 
 - (void)updateGenerationWithOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)other;
 
@@ -181,21 +155,13 @@ FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentInfos *new_OrgApacheLuceneIndexSegm
 
 FOUNDATION_EXPORT jlong OrgApacheLuceneIndexSegmentInfos_getLastCommitGenerationWithNSStringArray_(IOSObjectArray *files);
 
-FOUNDATION_EXPORT jlong OrgApacheLuceneIndexSegmentInfos_getLastCommitGenerationWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *directory);
-
 FOUNDATION_EXPORT NSString *OrgApacheLuceneIndexSegmentInfos_getLastCommitSegmentsFileNameWithNSStringArray_(IOSObjectArray *files);
-
-FOUNDATION_EXPORT NSString *OrgApacheLuceneIndexSegmentInfos_getLastCommitSegmentsFileNameWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *directory);
 
 FOUNDATION_EXPORT jlong OrgApacheLuceneIndexSegmentInfos_generationFromSegmentsFileNameWithNSString_(NSString *fileName);
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentInfos *OrgApacheLuceneIndexSegmentInfos_readCommitWithOrgApacheLuceneStoreDirectory_withNSString_(OrgApacheLuceneStoreDirectory *directory, NSString *segmentFileName);
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexSegmentInfos *OrgApacheLuceneIndexSegmentInfos_readLatestCommitWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *directory);
-
-FOUNDATION_EXPORT void OrgApacheLuceneIndexSegmentInfos_setInfoStreamWithJavaIoPrintStream_(JavaIoPrintStream *infoStream);
-
-FOUNDATION_EXPORT JavaIoPrintStream *OrgApacheLuceneIndexSegmentInfos_getInfoStream();
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSegmentInfos)
 

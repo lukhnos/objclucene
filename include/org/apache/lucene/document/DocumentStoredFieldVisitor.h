@@ -21,7 +21,6 @@
 #include "org/apache/lucene/index/StoredFieldVisitor.h"
 
 @class IOSByteArray;
-@class IOSObjectArray;
 @class OrgApacheLuceneDocumentDocument;
 @class OrgApacheLuceneIndexFieldInfo;
 @class OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum;
@@ -34,8 +33,6 @@
 - (instancetype)init;
 
 - (instancetype)initWithJavaUtilSet:(id<JavaUtilSet>)fieldsToAdd;
-
-- (instancetype)initWithNSStringArray:(IOSObjectArray *)fields;
 
 - (void)binaryFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo
                                        withByteArray:(IOSByteArray *)value;
@@ -66,10 +63,6 @@ J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneDocumentDocumentStoredFieldVisitor)
 FOUNDATION_EXPORT void OrgApacheLuceneDocumentDocumentStoredFieldVisitor_initWithJavaUtilSet_(OrgApacheLuceneDocumentDocumentStoredFieldVisitor *self, id<JavaUtilSet> fieldsToAdd);
 
 FOUNDATION_EXPORT OrgApacheLuceneDocumentDocumentStoredFieldVisitor *new_OrgApacheLuceneDocumentDocumentStoredFieldVisitor_initWithJavaUtilSet_(id<JavaUtilSet> fieldsToAdd) NS_RETURNS_RETAINED;
-
-FOUNDATION_EXPORT void OrgApacheLuceneDocumentDocumentStoredFieldVisitor_initWithNSStringArray_(OrgApacheLuceneDocumentDocumentStoredFieldVisitor *self, IOSObjectArray *fields);
-
-FOUNDATION_EXPORT OrgApacheLuceneDocumentDocumentStoredFieldVisitor *new_OrgApacheLuceneDocumentDocumentStoredFieldVisitor_initWithNSStringArray_(IOSObjectArray *fields) NS_RETURNS_RETAINED;
 
 FOUNDATION_EXPORT void OrgApacheLuceneDocumentDocumentStoredFieldVisitor_init(OrgApacheLuceneDocumentDocumentStoredFieldVisitor *self);
 
