@@ -5,6 +5,9 @@ ObjCLucene is an experimental Objective-C port of Lucene. The port is done
 by using Google's [j2objc](http://j2objc.org), and the goal is to make the
 porting process applicable to subsequent versions of Lucene.
 
+A sample app can be found here:
+[LuceneSearchDemo-iOS](https://github.com/lukhnos/LuceneSearchDemo-iOS).
+
 Currently an Xcode project is provided to build the static library of all
 the translated Lucene packages:
 
