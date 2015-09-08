@@ -186,6 +186,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreNativeFSLockFactory)
         [((JavaNioChannelsFileLock *) nil_chk(self->lock_)) release__];
       }
       @finally {
+        JreAssignVolatileBoolean(&closed_, YES);
+        OrgApacheLuceneStoreNativeFSLockFactory_clearLockHeldWithOrgLukhnosPortmobileFilePath_(path_);
         @try {
           [channel close];
         }
@@ -196,8 +198,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreNativeFSLockFactory)
             __mainException = e;
           }
         }
-        JreAssignVolatileBoolean(&closed_, YES);
-        OrgApacheLuceneStoreNativeFSLockFactory_clearLockHeldWithOrgLukhnosPortmobileFilePath_(path_);
         if (__mainException) {
           @throw __mainException;
         }

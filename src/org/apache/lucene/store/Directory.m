@@ -98,6 +98,9 @@
       success = YES;
     }
     @finally {
+      if (!success) {
+        OrgApacheLuceneUtilIOUtils_deleteFilesIgnoringExceptionsWithOrgApacheLuceneStoreDirectory_withNSStringArray_(self, [IOSObjectArray arrayWithObjects:(id[]){ dest } count:1 type:NSString_class_()]);
+      }
       @try {
         [os close];
       }
@@ -117,9 +120,6 @@
         } else {
           __mainException = e;
         }
-      }
-      if (!success) {
-        OrgApacheLuceneUtilIOUtils_deleteFilesIgnoringExceptionsWithOrgApacheLuceneStoreDirectory_withNSStringArray_(self, [IOSObjectArray arrayWithObjects:(id[]){ dest } count:1 type:NSString_class_()]);
       }
       if (__mainException) {
         @throw __mainException;

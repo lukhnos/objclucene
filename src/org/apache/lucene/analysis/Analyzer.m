@@ -120,7 +120,7 @@ OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *OrgApacheLuceneAnalysisAnalyzer_P
     [reuseStrategy_ setReusableComponentsWithOrgApacheLuceneAnalysisAnalyzer:self withNSString:fieldName withOrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents:components];
   }
   [((OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *) nil_chk(components)) setReaderWithJavaIoReader:r];
-  JreStrongAssign(&components->reusableStringReader_, strReader);
+  components->reusableStringReader_ = strReader;
   return [components getTokenStream];
 }
 
@@ -238,11 +238,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisAnalyzer)
   return source_;
 }
 
-- (void)dealloc {
-  RELEASE_(source_);
-  RELEASE_(sink_);
-  RELEASE_(reusableStringReader_);
-  [super dealloc];
+- (void)__javaClone {
+  [super __javaClone];
+  [source_ release];
+  [sink_ release];
+  [reusableStringReader_ release];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -266,8 +266,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisAnalyzer)
 
 void OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *self, OrgApacheLuceneAnalysisTokenizer *source, OrgApacheLuceneAnalysisTokenStream *result) {
   NSObject_init(self);
-  JreStrongAssign(&self->source_, source);
-  JreStrongAssign(&self->sink_, result);
+  self->source_ = source;
+  self->sink_ = result;
 }
 
 OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *new_OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenizer *source, OrgApacheLuceneAnalysisTokenStream *result) {
@@ -278,8 +278,8 @@ OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *new_OrgApacheLuceneAnalys
 
 void OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuceneAnalysisTokenizer_(OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *self, OrgApacheLuceneAnalysisTokenizer *source) {
   NSObject_init(self);
-  JreStrongAssign(&self->source_, source);
-  JreStrongAssign(&self->sink_, source);
+  self->source_ = source;
+  self->sink_ = source;
 }
 
 OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *new_OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuceneAnalysisTokenizer_(OrgApacheLuceneAnalysisTokenizer *source) {

@@ -100,7 +100,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstBuilder)
 @interface OrgApacheLuceneUtilFstBuilder_Arc : NSObject {
  @public
   jint label_;
-  id<OrgApacheLuceneUtilFstBuilder_Node> target_;
+  __weak id<OrgApacheLuceneUtilFstBuilder_Node> target_;
   jboolean isFinal_;
   id output_;
   id nextFinalOutput_;
@@ -114,7 +114,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstBuilder)
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilFstBuilder_Arc)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstBuilder_Arc, target_, id<OrgApacheLuceneUtilFstBuilder_Node>)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstBuilder_Arc, output_, id)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstBuilder_Arc, nextFinalOutput_, id)
 
@@ -178,7 +177,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilFstBuilder_CompiledNode)
 
 @interface OrgApacheLuceneUtilFstBuilder_UnCompiledNode : NSObject < OrgApacheLuceneUtilFstBuilder_Node > {
  @public
-  OrgApacheLuceneUtilFstBuilder *owner_;
+  __weak OrgApacheLuceneUtilFstBuilder *owner_;
   jint numArcs_;
   IOSObjectArray *arcs_;
   id output_;
@@ -218,7 +217,6 @@ withOrgApacheLuceneUtilFstBuilder_Node:(id<OrgApacheLuceneUtilFstBuilder_Node>)t
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilFstBuilder_UnCompiledNode)
 
-J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstBuilder_UnCompiledNode, owner_, OrgApacheLuceneUtilFstBuilder *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstBuilder_UnCompiledNode, arcs_, IOSObjectArray *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstBuilder_UnCompiledNode, output_, id)
 

@@ -218,6 +218,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreLockVerifyServer)
       @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(ioe) autorelease];
     }
     @finally {
+      OrgApacheLuceneUtilIOUtils_closeWhileHandlingExceptionWithJavaIoCloseableArray_([IOSObjectArray arrayWithObjects:(id[]){ val$cs_ } count:1 type:JavaIoCloseable_class_()]);
       @try {
         [os close];
       }
@@ -238,7 +239,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreLockVerifyServer)
           __mainException = e;
         }
       }
-      OrgApacheLuceneUtilIOUtils_closeWhileHandlingExceptionWithJavaIoCloseableArray_([IOSObjectArray arrayWithObjects:(id[]){ val$cs_ } count:1 type:JavaIoCloseable_class_()]);
       if (__mainException) {
         @throw __mainException;
       }

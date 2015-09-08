@@ -204,6 +204,9 @@ void OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_initWithOrgApa
       success = YES;
     }
     @finally {
+      if (success == NO) {
+        OrgApacheLuceneUtilIOUtils_closeWhileHandlingExceptionWithJavaIoCloseableArray_([IOSObjectArray arrayWithObjects:(id[]){ self->delegateFieldsProducer_, self->dictIn_ } count:2 type:JavaIoCloseable_class_()]);
+      }
       @try {
         [index close];
       }
@@ -213,9 +216,6 @@ void OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_initWithOrgApa
         } else {
           __mainException = e;
         }
-      }
-      if (success == NO) {
-        OrgApacheLuceneUtilIOUtils_closeWhileHandlingExceptionWithJavaIoCloseableArray_([IOSObjectArray arrayWithObjects:(id[]){ self->delegateFieldsProducer_, self->dictIn_ } count:2 type:JavaIoCloseable_class_()]);
       }
       if (__mainException) {
         @throw __mainException;

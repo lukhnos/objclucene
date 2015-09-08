@@ -482,17 +482,6 @@
 		6A49A4561B8CC4AC00FF2824 /* LatLonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499CBF1B8CC4AA00FF2824 /* LatLonWriter.m */; };
 		6A49A4571B8CC4AC00FF2824 /* OfflineLatLonReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499CC01B8CC4AA00FF2824 /* OfflineLatLonReader.m */; };
 		6A49A4581B8CC4AC00FF2824 /* OfflineLatLonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499CC11B8CC4AA00FF2824 /* OfflineLatLonWriter.m */; };
-		6A49A4591B8CC4AC00FF2824 /* AutoPrefixPostingsFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499CC41B8CC4AA00FF2824 /* AutoPrefixPostingsFormat.m */; };
-		6A49A45A1B8CC4AC00FF2824 /* package-info.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499CC51B8CC4AA00FF2824 /* package-info.m */; };
-		6A49A45B1B8CC4AC00FF2824 /* BlockTermsReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499CC71B8CC4AA00FF2824 /* BlockTermsReader.m */; };
-		6A49A45C1B8CC4AC00FF2824 /* BlockTermsWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499CC81B8CC4AA00FF2824 /* BlockTermsWriter.m */; };
-		6A49A45D1B8CC4AC00FF2824 /* FixedGapTermsIndexReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499CC91B8CC4AA00FF2824 /* FixedGapTermsIndexReader.m */; };
-		6A49A45E1B8CC4AC00FF2824 /* FixedGapTermsIndexWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499CCA1B8CC4AA00FF2824 /* FixedGapTermsIndexWriter.m */; };
-		6A49A45F1B8CC4AC00FF2824 /* package-info.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499CCB1B8CC4AA00FF2824 /* package-info.m */; };
-		6A49A4601B8CC4AC00FF2824 /* TermsIndexReaderBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499CCC1B8CC4AA00FF2824 /* TermsIndexReaderBase.m */; };
-		6A49A4611B8CC4AC00FF2824 /* TermsIndexWriterBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499CCD1B8CC4AA00FF2824 /* TermsIndexWriterBase.m */; };
-		6A49A4621B8CC4AC00FF2824 /* VariableGapTermsIndexReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499CCE1B8CC4AA00FF2824 /* VariableGapTermsIndexReader.m */; };
-		6A49A4631B8CC4AC00FF2824 /* VariableGapTermsIndexWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499CCF1B8CC4AA00FF2824 /* VariableGapTermsIndexWriter.m */; };
 		6A49A4641B8CC4AC00FF2824 /* BlockTermState.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499CD01B8CC4AA00FF2824 /* BlockTermState.m */; };
 		6A49A4651B8CC4AC00FF2824 /* AutoPrefixTermsWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499CD21B8CC4AA00FF2824 /* AutoPrefixTermsWriter.m */; };
 		6A49A4661B8CC4AC00FF2824 /* BitSetPostingsEnum.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499CD31B8CC4AA00FF2824 /* BitSetPostingsEnum.m */; };
@@ -506,23 +495,6 @@
 		6A49A46E1B8CC4AC00FF2824 /* SegmentTermsEnum.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499CDB1B8CC4AA00FF2824 /* SegmentTermsEnum.m */; };
 		6A49A46F1B8CC4AC00FF2824 /* SegmentTermsEnumFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499CDC1B8CC4AA00FF2824 /* SegmentTermsEnumFrame.m */; };
 		6A49A4701B8CC4AC00FF2824 /* Stats.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499CDD1B8CC4AA00FF2824 /* Stats.m */; };
-		6A49A4711B8CC4AC00FF2824 /* BlockTreeOrdsPostingsFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499CDF1B8CC4AA00FF2824 /* BlockTreeOrdsPostingsFormat.m */; };
-		6A49A4721B8CC4AC00FF2824 /* FSTOrdsOutputs.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499CE01B8CC4AA00FF2824 /* FSTOrdsOutputs.m */; };
-		6A49A4731B8CC4AC00FF2824 /* OrdsBlockTreeTermsReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499CE11B8CC4AA00FF2824 /* OrdsBlockTreeTermsReader.m */; };
-		6A49A4741B8CC4AC00FF2824 /* OrdsBlockTreeTermsWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499CE21B8CC4AA00FF2824 /* OrdsBlockTreeTermsWriter.m */; };
-		6A49A4751B8CC4AC00FF2824 /* OrdsFieldReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499CE31B8CC4AA00FF2824 /* OrdsFieldReader.m */; };
-		6A49A4761B8CC4AC00FF2824 /* OrdsIntersectTermsEnum.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499CE41B8CC4AA00FF2824 /* OrdsIntersectTermsEnum.m */; };
-		6A49A4771B8CC4AC00FF2824 /* OrdsIntersectTermsEnumFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499CE51B8CC4AA00FF2824 /* OrdsIntersectTermsEnumFrame.m */; };
-		6A49A4781B8CC4AC00FF2824 /* OrdsSegmentTermsEnum.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499CE61B8CC4AA00FF2824 /* OrdsSegmentTermsEnum.m */; };
-		6A49A4791B8CC4AC00FF2824 /* OrdsSegmentTermsEnumFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499CE71B8CC4AA00FF2824 /* OrdsSegmentTermsEnumFrame.m */; };
-		6A49A47A1B8CC4AC00FF2824 /* package-info.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499CE81B8CC4AA00FF2824 /* package-info.m */; };
-		6A49A47B1B8CC4AC00FF2824 /* BloomFilterFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499CEA1B8CC4AA00FF2824 /* BloomFilterFactory.m */; };
-		6A49A47C1B8CC4AC00FF2824 /* BloomFilteringPostingsFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499CEB1B8CC4AA00FF2824 /* BloomFilteringPostingsFormat.m */; };
-		6A49A47D1B8CC4AC00FF2824 /* DefaultBloomFilterFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499CEC1B8CC4AA00FF2824 /* DefaultBloomFilterFactory.m */; };
-		6A49A47E1B8CC4AC00FF2824 /* FuzzySet.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499CED1B8CC4AA00FF2824 /* FuzzySet.m */; };
-		6A49A47F1B8CC4AC00FF2824 /* HashFunction.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499CEE1B8CC4AA00FF2824 /* HashFunction.m */; };
-		6A49A4801B8CC4AC00FF2824 /* MurmurHash2.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499CEF1B8CC4AA00FF2824 /* MurmurHash2.m */; };
-		6A49A4811B8CC4AC00FF2824 /* package-info.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499CF01B8CC4AA00FF2824 /* package-info.m */; };
 		6A49A4821B8CC4AC00FF2824 /* Codec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499CF11B8CC4AA00FF2824 /* Codec.m */; };
 		6A49A4831B8CC4AC00FF2824 /* CodecUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499CF21B8CC4AA00FF2824 /* CodecUtil.m */; };
 		6A49A4841B8CC4AC00FF2824 /* CompoundFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499CF31B8CC4AA00FF2824 /* CompoundFormat.m */; };
@@ -582,22 +554,6 @@
 		6A49A4BA1B8CC4AC00FF2824 /* Lucene53NormsFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D2D1B8CC4AA00FF2824 /* Lucene53NormsFormat.m */; };
 		6A49A4BB1B8CC4AC00FF2824 /* Lucene53NormsProducer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D2E1B8CC4AA00FF2824 /* Lucene53NormsProducer.m */; };
 		6A49A4BC1B8CC4AC00FF2824 /* package-info.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D2F1B8CC4AA00FF2824 /* package-info.m */; };
-		6A49A4BD1B8CC4AC00FF2824 /* DirectDocValuesConsumer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D311B8CC4AA00FF2824 /* DirectDocValuesConsumer.m */; };
-		6A49A4BE1B8CC4AC00FF2824 /* DirectDocValuesFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D321B8CC4AA00FF2824 /* DirectDocValuesFormat.m */; };
-		6A49A4BF1B8CC4AC00FF2824 /* DirectDocValuesProducer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D331B8CC4AA00FF2824 /* DirectDocValuesProducer.m */; };
-		6A49A4C01B8CC4AC00FF2824 /* DirectPostingsFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D341B8CC4AA00FF2824 /* DirectPostingsFormat.m */; };
-		6A49A4C11B8CC4AC00FF2824 /* FSTOrdPostingsFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D351B8CC4AA00FF2824 /* FSTOrdPostingsFormat.m */; };
-		6A49A4C21B8CC4AC00FF2824 /* FSTOrdTermsReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D361B8CC4AA00FF2824 /* FSTOrdTermsReader.m */; };
-		6A49A4C31B8CC4AC00FF2824 /* FSTOrdTermsWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D371B8CC4AA00FF2824 /* FSTOrdTermsWriter.m */; };
-		6A49A4C41B8CC4AC00FF2824 /* FSTPostingsFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D381B8CC4AA00FF2824 /* FSTPostingsFormat.m */; };
-		6A49A4C51B8CC4AC00FF2824 /* FSTTermOutputs.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D391B8CC4AA00FF2824 /* FSTTermOutputs.m */; };
-		6A49A4C61B8CC4AC00FF2824 /* FSTTermsReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D3A1B8CC4AA00FF2824 /* FSTTermsReader.m */; };
-		6A49A4C71B8CC4AC00FF2824 /* FSTTermsWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D3B1B8CC4AA00FF2824 /* FSTTermsWriter.m */; };
-		6A49A4C81B8CC4AC00FF2824 /* MemoryDocValuesConsumer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D3C1B8CC4AA00FF2824 /* MemoryDocValuesConsumer.m */; };
-		6A49A4C91B8CC4AC00FF2824 /* MemoryDocValuesFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D3D1B8CC4AA00FF2824 /* MemoryDocValuesFormat.m */; };
-		6A49A4CA1B8CC4AC00FF2824 /* MemoryDocValuesProducer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D3E1B8CC4AA00FF2824 /* MemoryDocValuesProducer.m */; };
-		6A49A4CB1B8CC4AC00FF2824 /* MemoryPostingsFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D3F1B8CC4AA00FF2824 /* MemoryPostingsFormat.m */; };
-		6A49A4CC1B8CC4AC00FF2824 /* package-info.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D401B8CC4AA00FF2824 /* package-info.m */; };
 		6A49A4CD1B8CC4AC00FF2824 /* MultiLevelSkipListReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D411B8CC4AA00FF2824 /* MultiLevelSkipListReader.m */; };
 		6A49A4CE1B8CC4AC00FF2824 /* MultiLevelSkipListWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D421B8CC4AA00FF2824 /* MultiLevelSkipListWriter.m */; };
 		6A49A4CF1B8CC4AC00FF2824 /* NormsConsumer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D431B8CC4AA00FF2824 /* NormsConsumer.m */; };
@@ -612,26 +568,6 @@
 		6A49A4D81B8CC4AC00FF2824 /* PostingsWriterBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D4D1B8CC4AA00FF2824 /* PostingsWriterBase.m */; };
 		6A49A4D91B8CC4AC00FF2824 /* PushPostingsWriterBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D4E1B8CC4AA00FF2824 /* PushPostingsWriterBase.m */; };
 		6A49A4DA1B8CC4AC00FF2824 /* SegmentInfoFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D4F1B8CC4AA00FF2824 /* SegmentInfoFormat.m */; };
-		6A49A4DB1B8CC4AC00FF2824 /* package-info.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D511B8CC4AA00FF2824 /* package-info.m */; };
-		6A49A4DC1B8CC4AC00FF2824 /* SimpleTextCodec.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D521B8CC4AA00FF2824 /* SimpleTextCodec.m */; };
-		6A49A4DD1B8CC4AC00FF2824 /* SimpleTextCompoundFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D531B8CC4AA00FF2824 /* SimpleTextCompoundFormat.m */; };
-		6A49A4DE1B8CC4AC00FF2824 /* SimpleTextDocValuesFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D541B8CC4AA00FF2824 /* SimpleTextDocValuesFormat.m */; };
-		6A49A4DF1B8CC4AC00FF2824 /* SimpleTextDocValuesReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D551B8CC4AA00FF2824 /* SimpleTextDocValuesReader.m */; };
-		6A49A4E01B8CC4AC00FF2824 /* SimpleTextDocValuesWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D561B8CC4AA00FF2824 /* SimpleTextDocValuesWriter.m */; };
-		6A49A4E11B8CC4AC00FF2824 /* SimpleTextFieldInfosFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D571B8CC4AA00FF2824 /* SimpleTextFieldInfosFormat.m */; };
-		6A49A4E21B8CC4AC00FF2824 /* SimpleTextFieldsReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D581B8CC4AA00FF2824 /* SimpleTextFieldsReader.m */; };
-		6A49A4E31B8CC4AC00FF2824 /* SimpleTextFieldsWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D591B8CC4AA00FF2824 /* SimpleTextFieldsWriter.m */; };
-		6A49A4E41B8CC4AC00FF2824 /* SimpleTextLiveDocsFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D5A1B8CC4AA00FF2824 /* SimpleTextLiveDocsFormat.m */; };
-		6A49A4E51B8CC4AC00FF2824 /* SimpleTextNormsFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D5B1B8CC4AA00FF2824 /* SimpleTextNormsFormat.m */; };
-		6A49A4E61B8CC4AC00FF2824 /* SimpleTextPostingsFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D5C1B8CC4AA00FF2824 /* SimpleTextPostingsFormat.m */; };
-		6A49A4E71B8CC4AC00FF2824 /* SimpleTextSegmentInfoFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D5D1B8CC4AA00FF2824 /* SimpleTextSegmentInfoFormat.m */; };
-		6A49A4E81B8CC4AC00FF2824 /* SimpleTextStoredFieldsFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D5E1B8CC4AA00FF2824 /* SimpleTextStoredFieldsFormat.m */; };
-		6A49A4E91B8CC4AC00FF2824 /* SimpleTextStoredFieldsReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D5F1B8CC4AA00FF2824 /* SimpleTextStoredFieldsReader.m */; };
-		6A49A4EA1B8CC4AC00FF2824 /* SimpleTextStoredFieldsWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D601B8CC4AA00FF2824 /* SimpleTextStoredFieldsWriter.m */; };
-		6A49A4EB1B8CC4AC00FF2824 /* SimpleTextTermVectorsFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D611B8CC4AA00FF2824 /* SimpleTextTermVectorsFormat.m */; };
-		6A49A4EC1B8CC4AC00FF2824 /* SimpleTextTermVectorsReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D621B8CC4AA00FF2824 /* SimpleTextTermVectorsReader.m */; };
-		6A49A4ED1B8CC4AC00FF2824 /* SimpleTextTermVectorsWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D631B8CC4AA00FF2824 /* SimpleTextTermVectorsWriter.m */; };
-		6A49A4EE1B8CC4AC00FF2824 /* SimpleTextUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D641B8CC4AA00FF2824 /* SimpleTextUtil.m */; };
 		6A49A4EF1B8CC4AC00FF2824 /* StoredFieldsFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D651B8CC4AA00FF2824 /* StoredFieldsFormat.m */; };
 		6A49A4F01B8CC4AC00FF2824 /* StoredFieldsReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D661B8CC4AA00FF2824 /* StoredFieldsReader.m */; };
 		6A49A4F11B8CC4AC00FF2824 /* StoredFieldsWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D671B8CC4AA00FF2824 /* StoredFieldsWriter.m */; };
@@ -668,18 +604,6 @@
 		6A49A5101B8CC4AC00FF2824 /* StoredField.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D891B8CC4AA00FF2824 /* StoredField.m */; };
 		6A49A5111B8CC4AC00FF2824 /* StringField.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D8A1B8CC4AA00FF2824 /* StringField.m */; };
 		6A49A5121B8CC4AC00FF2824 /* TextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D8B1B8CC4AA00FF2824 /* TextField.m */; };
-		6A49A5131B8CC4AC00FF2824 /* Bindings.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D8D1B8CC4AA00FF2824 /* Bindings.m */; };
-		6A49A5141B8CC4AC00FF2824 /* Expression.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D8E1B8CC4AA00FF2824 /* Expression.m */; };
-		6A49A5151B8CC4AC00FF2824 /* ExpressionComparator.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D8F1B8CC4AA00FF2824 /* ExpressionComparator.m */; };
-		6A49A5161B8CC4AC00FF2824 /* ExpressionFunctionValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D901B8CC4AA00FF2824 /* ExpressionFunctionValues.m */; };
-		6A49A5171B8CC4AC00FF2824 /* ExpressionRescorer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D911B8CC4AA00FF2824 /* ExpressionRescorer.m */; };
-		6A49A5181B8CC4AC00FF2824 /* ExpressionSortField.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D921B8CC4AA00FF2824 /* ExpressionSortField.m */; };
-		6A49A5191B8CC4AC00FF2824 /* ExpressionValueSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D931B8CC4AA00FF2824 /* ExpressionValueSource.m */; };
-		6A49A51A1B8CC4AC00FF2824 /* FakeScorer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D941B8CC4AA00FF2824 /* FakeScorer.m */; };
-		6A49A51B1B8CC4AC00FF2824 /* package-info.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D951B8CC4AA00FF2824 /* package-info.m */; };
-		6A49A51C1B8CC4AC00FF2824 /* ScoreFunctionValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D961B8CC4AA00FF2824 /* ScoreFunctionValues.m */; };
-		6A49A51D1B8CC4AC00FF2824 /* ScoreValueSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D971B8CC4AA00FF2824 /* ScoreValueSource.m */; };
-		6A49A51E1B8CC4AC00FF2824 /* SimpleBindings.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D981B8CC4AA00FF2824 /* SimpleBindings.m */; };
 		6A49A51F1B8CC4AC00FF2824 /* AbortingException.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D9A1B8CC4AA00FF2824 /* AbortingException.m */; };
 		6A49A5201B8CC4AC00FF2824 /* AutomatonTermsEnum.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D9B1B8CC4AA00FF2824 /* AutomatonTermsEnum.m */; };
 		6A49A5211B8CC4AC00FF2824 /* BaseCompositeReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499D9C1B8CC4AA00FF2824 /* BaseCompositeReader.m */; };
@@ -1250,33 +1174,6 @@
 		6A49A7561B8CC4AC00FF2824 /* GeoPointTermQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499FF91B8CC4AB00FF2824 /* GeoPointTermQuery.m */; };
 		6A49A7571B8CC4AC00FF2824 /* GeoPointTermQueryConstantScoreWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499FFA1B8CC4AB00FF2824 /* GeoPointTermQueryConstantScoreWrapper.m */; };
 		6A49A7581B8CC4AC00FF2824 /* GeoPointTermsEnum.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499FFB1B8CC4AB00FF2824 /* GeoPointTermsEnum.m */; };
-		6A49A7591B8CC4AC00FF2824 /* AbstractAllGroupHeadsCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499FFD1B8CC4AB00FF2824 /* AbstractAllGroupHeadsCollector.m */; };
-		6A49A75A1B8CC4AC00FF2824 /* AbstractAllGroupsCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499FFE1B8CC4AB00FF2824 /* AbstractAllGroupsCollector.m */; };
-		6A49A75B1B8CC4AC00FF2824 /* AbstractDistinctValuesCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A499FFF1B8CC4AB00FF2824 /* AbstractDistinctValuesCollector.m */; };
-		6A49A75C1B8CC4AC00FF2824 /* AbstractFirstPassGroupingCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A49A0001B8CC4AB00FF2824 /* AbstractFirstPassGroupingCollector.m */; };
-		6A49A75D1B8CC4AC00FF2824 /* AbstractGroupFacetCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A49A0011B8CC4AB00FF2824 /* AbstractGroupFacetCollector.m */; };
-		6A49A75E1B8CC4AC00FF2824 /* AbstractSecondPassGroupingCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A49A0021B8CC4AB00FF2824 /* AbstractSecondPassGroupingCollector.m */; };
-		6A49A75F1B8CC4AC00FF2824 /* BlockGroupingCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A49A0031B8CC4AB00FF2824 /* BlockGroupingCollector.m */; };
-		6A49A7601B8CC4AC00FF2824 /* CollectedSearchGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A49A0041B8CC4AB00FF2824 /* CollectedSearchGroup.m */; };
-		6A49A7611B8CC4AC00FF2824 /* FakeScorer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A49A0051B8CC4AB00FF2824 /* FakeScorer.m */; };
-		6A49A7621B8CC4AC00FF2824 /* FunctionAllGroupHeadsCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A49A0071B8CC4AB00FF2824 /* FunctionAllGroupHeadsCollector.m */; };
-		6A49A7631B8CC4AC00FF2824 /* FunctionAllGroupsCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A49A0081B8CC4AB00FF2824 /* FunctionAllGroupsCollector.m */; };
-		6A49A7641B8CC4AC00FF2824 /* FunctionDistinctValuesCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A49A0091B8CC4AB00FF2824 /* FunctionDistinctValuesCollector.m */; };
-		6A49A7651B8CC4AC00FF2824 /* FunctionFirstPassGroupingCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A49A00A1B8CC4AB00FF2824 /* FunctionFirstPassGroupingCollector.m */; };
-		6A49A7661B8CC4AC00FF2824 /* FunctionSecondPassGroupingCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A49A00B1B8CC4AB00FF2824 /* FunctionSecondPassGroupingCollector.m */; };
-		6A49A7671B8CC4AC00FF2824 /* package-info.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A49A00C1B8CC4AB00FF2824 /* package-info.m */; };
-		6A49A7681B8CC4AC00FF2824 /* GroupDocs.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A49A00D1B8CC4AB00FF2824 /* GroupDocs.m */; };
-		6A49A7691B8CC4AC00FF2824 /* GroupingSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A49A00E1B8CC4AB00FF2824 /* GroupingSearch.m */; };
-		6A49A76A1B8CC4AC00FF2824 /* package-info.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A49A00F1B8CC4AB00FF2824 /* package-info.m */; };
-		6A49A76B1B8CC4AC00FF2824 /* SearchGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A49A0101B8CC4AB00FF2824 /* SearchGroup.m */; };
-		6A49A76C1B8CC4AC00FF2824 /* package-info.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A49A0121B8CC4AB00FF2824 /* package-info.m */; };
-		6A49A76D1B8CC4AC00FF2824 /* TermAllGroupHeadsCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A49A0131B8CC4AB00FF2824 /* TermAllGroupHeadsCollector.m */; };
-		6A49A76E1B8CC4AC00FF2824 /* TermAllGroupsCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A49A0141B8CC4AB00FF2824 /* TermAllGroupsCollector.m */; };
-		6A49A76F1B8CC4AC00FF2824 /* TermDistinctValuesCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A49A0151B8CC4AB00FF2824 /* TermDistinctValuesCollector.m */; };
-		6A49A7701B8CC4AC00FF2824 /* TermFirstPassGroupingCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A49A0161B8CC4AB00FF2824 /* TermFirstPassGroupingCollector.m */; };
-		6A49A7711B8CC4AC00FF2824 /* TermGroupFacetCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A49A0171B8CC4AB00FF2824 /* TermGroupFacetCollector.m */; };
-		6A49A7721B8CC4AC00FF2824 /* TermSecondPassGroupingCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A49A0181B8CC4AB00FF2824 /* TermSecondPassGroupingCollector.m */; };
-		6A49A7731B8CC4AC00FF2824 /* TopGroups.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A49A0191B8CC4AB00FF2824 /* TopGroups.m */; };
 		6A49A7741B8CC4AC00FF2824 /* DefaultEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A49A01B1B8CC4AB00FF2824 /* DefaultEncoder.m */; };
 		6A49A7751B8CC4AC00FF2824 /* Encoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A49A01C1B8CC4AB00FF2824 /* Encoder.m */; };
 		6A49A7761B8CC4AC00FF2824 /* Formatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A49A01D1B8CC4AB00FF2824 /* Formatter.m */; };
@@ -1327,7 +1224,6 @@
 		6A49A7A31B8CC4AC00FF2824 /* TermsQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A49A04B1B8CC4AB00FF2824 /* TermsQuery.m */; };
 		6A49A7A41B8CC4AC00FF2824 /* TermsWithScoreCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A49A04C1B8CC4AB00FF2824 /* TermsWithScoreCollector.m */; };
 		6A49A7A51B8CC4AC00FF2824 /* ToChildBlockJoinQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A49A04D1B8CC4AB00FF2824 /* ToChildBlockJoinQuery.m */; };
-		6A49A7A61B8CC4AC00FF2824 /* ToParentBlockJoinCollector.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A49A04E1B8CC4AB00FF2824 /* ToParentBlockJoinCollector.m */; };
 		6A49A7A71B8CC4AC00FF2824 /* ToParentBlockJoinIndexSearcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A49A04F1B8CC4AB00FF2824 /* ToParentBlockJoinIndexSearcher.m */; };
 		6A49A7A81B8CC4AC00FF2824 /* ToParentBlockJoinQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A49A0501B8CC4AB00FF2824 /* ToParentBlockJoinQuery.m */; };
 		6A49A7A91B8CC4AC00FF2824 /* ToParentBlockJoinSortField.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A49A0511B8CC4AB00FF2824 /* ToParentBlockJoinSortField.m */; };
@@ -1608,12 +1504,6 @@
 		6A49A8BC1B8CC4AC00FF2824 /* SleepingLockWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A49A16F1B8CC4AB00FF2824 /* SleepingLockWrapper.m */; };
 		6A49A8BD1B8CC4AC00FF2824 /* TrackingDirectoryWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A49A1701B8CC4AB00FF2824 /* TrackingDirectoryWrapper.m */; };
 		6A49A8BE1B8CC4AC00FF2824 /* VerifyingLockFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A49A1711B8CC4AB00FF2824 /* VerifyingLockFactory.m */; };
-		6A49A8BF1B8CC4AC00FF2824 /* DocTermOrds.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A49A1731B8CC4AB00FF2824 /* DocTermOrds.m */; };
-		6A49A8C01B8CC4AC00FF2824 /* FieldCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A49A1741B8CC4AB00FF2824 /* FieldCache.m */; };
-		6A49A8C11B8CC4AC00FF2824 /* FieldCacheImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A49A1751B8CC4AB00FF2824 /* FieldCacheImpl.m */; };
-		6A49A8C21B8CC4AC00FF2824 /* FieldCacheSanityChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A49A1761B8CC4AB00FF2824 /* FieldCacheSanityChecker.m */; };
-		6A49A8C31B8CC4AC00FF2824 /* package-info.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A49A1771B8CC4AB00FF2824 /* package-info.m */; };
-		6A49A8C41B8CC4AC00FF2824 /* UninvertingReader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A49A1781B8CC4AB00FF2824 /* UninvertingReader.m */; };
 		6A49A8C51B8CC4AC00FF2824 /* Accountable.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A49A17A1B8CC4AB00FF2824 /* Accountable.m */; };
 		6A49A8C61B8CC4AC00FF2824 /* Accountables.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A49A17B1B8CC4AB00FF2824 /* Accountables.m */; };
 		6A49A8C71B8CC4AC00FF2824 /* ArrayInPlaceMergeSorter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6A49A17C1B8CC4AB00FF2824 /* ArrayInPlaceMergeSorter.m */; };
@@ -2364,17 +2254,6 @@
 		6A499CBF1B8CC4AA00FF2824 /* LatLonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LatLonWriter.m; sourceTree = "<group>"; };
 		6A499CC01B8CC4AA00FF2824 /* OfflineLatLonReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfflineLatLonReader.m; sourceTree = "<group>"; };
 		6A499CC11B8CC4AA00FF2824 /* OfflineLatLonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfflineLatLonWriter.m; sourceTree = "<group>"; };
-		6A499CC41B8CC4AA00FF2824 /* AutoPrefixPostingsFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoPrefixPostingsFormat.m; sourceTree = "<group>"; };
-		6A499CC51B8CC4AA00FF2824 /* package-info.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "package-info.m"; sourceTree = "<group>"; };
-		6A499CC71B8CC4AA00FF2824 /* BlockTermsReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockTermsReader.m; sourceTree = "<group>"; };
-		6A499CC81B8CC4AA00FF2824 /* BlockTermsWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockTermsWriter.m; sourceTree = "<group>"; };
-		6A499CC91B8CC4AA00FF2824 /* FixedGapTermsIndexReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixedGapTermsIndexReader.m; sourceTree = "<group>"; };
-		6A499CCA1B8CC4AA00FF2824 /* FixedGapTermsIndexWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixedGapTermsIndexWriter.m; sourceTree = "<group>"; };
-		6A499CCB1B8CC4AA00FF2824 /* package-info.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "package-info.m"; sourceTree = "<group>"; };
-		6A499CCC1B8CC4AA00FF2824 /* TermsIndexReaderBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TermsIndexReaderBase.m; sourceTree = "<group>"; };
-		6A499CCD1B8CC4AA00FF2824 /* TermsIndexWriterBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TermsIndexWriterBase.m; sourceTree = "<group>"; };
-		6A499CCE1B8CC4AA00FF2824 /* VariableGapTermsIndexReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VariableGapTermsIndexReader.m; sourceTree = "<group>"; };
-		6A499CCF1B8CC4AA00FF2824 /* VariableGapTermsIndexWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VariableGapTermsIndexWriter.m; sourceTree = "<group>"; };
 		6A499CD01B8CC4AA00FF2824 /* BlockTermState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockTermState.m; sourceTree = "<group>"; };
 		6A499CD21B8CC4AA00FF2824 /* AutoPrefixTermsWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoPrefixTermsWriter.m; sourceTree = "<group>"; };
 		6A499CD31B8CC4AA00FF2824 /* BitSetPostingsEnum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BitSetPostingsEnum.m; sourceTree = "<group>"; };
@@ -2388,23 +2267,6 @@
 		6A499CDB1B8CC4AA00FF2824 /* SegmentTermsEnum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentTermsEnum.m; sourceTree = "<group>"; };
 		6A499CDC1B8CC4AA00FF2824 /* SegmentTermsEnumFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentTermsEnumFrame.m; sourceTree = "<group>"; };
 		6A499CDD1B8CC4AA00FF2824 /* Stats.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Stats.m; sourceTree = "<group>"; };
-		6A499CDF1B8CC4AA00FF2824 /* BlockTreeOrdsPostingsFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockTreeOrdsPostingsFormat.m; sourceTree = "<group>"; };
-		6A499CE01B8CC4AA00FF2824 /* FSTOrdsOutputs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTOrdsOutputs.m; sourceTree = "<group>"; };
-		6A499CE11B8CC4AA00FF2824 /* OrdsBlockTreeTermsReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrdsBlockTreeTermsReader.m; sourceTree = "<group>"; };
-		6A499CE21B8CC4AA00FF2824 /* OrdsBlockTreeTermsWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrdsBlockTreeTermsWriter.m; sourceTree = "<group>"; };
-		6A499CE31B8CC4AA00FF2824 /* OrdsFieldReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrdsFieldReader.m; sourceTree = "<group>"; };
-		6A499CE41B8CC4AA00FF2824 /* OrdsIntersectTermsEnum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrdsIntersectTermsEnum.m; sourceTree = "<group>"; };
-		6A499CE51B8CC4AA00FF2824 /* OrdsIntersectTermsEnumFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrdsIntersectTermsEnumFrame.m; sourceTree = "<group>"; };
-		6A499CE61B8CC4AA00FF2824 /* OrdsSegmentTermsEnum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrdsSegmentTermsEnum.m; sourceTree = "<group>"; };
-		6A499CE71B8CC4AA00FF2824 /* OrdsSegmentTermsEnumFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrdsSegmentTermsEnumFrame.m; sourceTree = "<group>"; };
-		6A499CE81B8CC4AA00FF2824 /* package-info.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "package-info.m"; sourceTree = "<group>"; };
-		6A499CEA1B8CC4AA00FF2824 /* BloomFilterFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BloomFilterFactory.m; sourceTree = "<group>"; };
-		6A499CEB1B8CC4AA00FF2824 /* BloomFilteringPostingsFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BloomFilteringPostingsFormat.m; sourceTree = "<group>"; };
-		6A499CEC1B8CC4AA00FF2824 /* DefaultBloomFilterFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultBloomFilterFactory.m; sourceTree = "<group>"; };
-		6A499CED1B8CC4AA00FF2824 /* FuzzySet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FuzzySet.m; sourceTree = "<group>"; };
-		6A499CEE1B8CC4AA00FF2824 /* HashFunction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HashFunction.m; sourceTree = "<group>"; };
-		6A499CEF1B8CC4AA00FF2824 /* MurmurHash2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MurmurHash2.m; sourceTree = "<group>"; };
-		6A499CF01B8CC4AA00FF2824 /* package-info.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "package-info.m"; sourceTree = "<group>"; };
 		6A499CF11B8CC4AA00FF2824 /* Codec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Codec.m; sourceTree = "<group>"; };
 		6A499CF21B8CC4AA00FF2824 /* CodecUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CodecUtil.m; sourceTree = "<group>"; };
 		6A499CF31B8CC4AA00FF2824 /* CompoundFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompoundFormat.m; sourceTree = "<group>"; };
@@ -2464,22 +2326,6 @@
 		6A499D2D1B8CC4AA00FF2824 /* Lucene53NormsFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Lucene53NormsFormat.m; sourceTree = "<group>"; };
 		6A499D2E1B8CC4AA00FF2824 /* Lucene53NormsProducer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Lucene53NormsProducer.m; sourceTree = "<group>"; };
 		6A499D2F1B8CC4AA00FF2824 /* package-info.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "package-info.m"; sourceTree = "<group>"; };
-		6A499D311B8CC4AA00FF2824 /* DirectDocValuesConsumer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectDocValuesConsumer.m; sourceTree = "<group>"; };
-		6A499D321B8CC4AA00FF2824 /* DirectDocValuesFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectDocValuesFormat.m; sourceTree = "<group>"; };
-		6A499D331B8CC4AA00FF2824 /* DirectDocValuesProducer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectDocValuesProducer.m; sourceTree = "<group>"; };
-		6A499D341B8CC4AA00FF2824 /* DirectPostingsFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectPostingsFormat.m; sourceTree = "<group>"; };
-		6A499D351B8CC4AA00FF2824 /* FSTOrdPostingsFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTOrdPostingsFormat.m; sourceTree = "<group>"; };
-		6A499D361B8CC4AA00FF2824 /* FSTOrdTermsReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTOrdTermsReader.m; sourceTree = "<group>"; };
-		6A499D371B8CC4AA00FF2824 /* FSTOrdTermsWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTOrdTermsWriter.m; sourceTree = "<group>"; };
-		6A499D381B8CC4AA00FF2824 /* FSTPostingsFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTPostingsFormat.m; sourceTree = "<group>"; };
-		6A499D391B8CC4AA00FF2824 /* FSTTermOutputs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTTermOutputs.m; sourceTree = "<group>"; };
-		6A499D3A1B8CC4AA00FF2824 /* FSTTermsReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTTermsReader.m; sourceTree = "<group>"; };
-		6A499D3B1B8CC4AA00FF2824 /* FSTTermsWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSTTermsWriter.m; sourceTree = "<group>"; };
-		6A499D3C1B8CC4AA00FF2824 /* MemoryDocValuesConsumer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemoryDocValuesConsumer.m; sourceTree = "<group>"; };
-		6A499D3D1B8CC4AA00FF2824 /* MemoryDocValuesFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemoryDocValuesFormat.m; sourceTree = "<group>"; };
-		6A499D3E1B8CC4AA00FF2824 /* MemoryDocValuesProducer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemoryDocValuesProducer.m; sourceTree = "<group>"; };
-		6A499D3F1B8CC4AA00FF2824 /* MemoryPostingsFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemoryPostingsFormat.m; sourceTree = "<group>"; };
-		6A499D401B8CC4AA00FF2824 /* package-info.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "package-info.m"; sourceTree = "<group>"; };
 		6A499D411B8CC4AA00FF2824 /* MultiLevelSkipListReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiLevelSkipListReader.m; sourceTree = "<group>"; };
 		6A499D421B8CC4AA00FF2824 /* MultiLevelSkipListWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiLevelSkipListWriter.m; sourceTree = "<group>"; };
 		6A499D431B8CC4AA00FF2824 /* NormsConsumer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NormsConsumer.m; sourceTree = "<group>"; };
@@ -2494,26 +2340,6 @@
 		6A499D4D1B8CC4AA00FF2824 /* PostingsWriterBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostingsWriterBase.m; sourceTree = "<group>"; };
 		6A499D4E1B8CC4AA00FF2824 /* PushPostingsWriterBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushPostingsWriterBase.m; sourceTree = "<group>"; };
 		6A499D4F1B8CC4AA00FF2824 /* SegmentInfoFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SegmentInfoFormat.m; sourceTree = "<group>"; };
-		6A499D511B8CC4AA00FF2824 /* package-info.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "package-info.m"; sourceTree = "<group>"; };
-		6A499D521B8CC4AA00FF2824 /* SimpleTextCodec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleTextCodec.m; sourceTree = "<group>"; };
-		6A499D531B8CC4AA00FF2824 /* SimpleTextCompoundFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleTextCompoundFormat.m; sourceTree = "<group>"; };
-		6A499D541B8CC4AA00FF2824 /* SimpleTextDocValuesFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleTextDocValuesFormat.m; sourceTree = "<group>"; };
-		6A499D551B8CC4AA00FF2824 /* SimpleTextDocValuesReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleTextDocValuesReader.m; sourceTree = "<group>"; };
-		6A499D561B8CC4AA00FF2824 /* SimpleTextDocValuesWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleTextDocValuesWriter.m; sourceTree = "<group>"; };
-		6A499D571B8CC4AA00FF2824 /* SimpleTextFieldInfosFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleTextFieldInfosFormat.m; sourceTree = "<group>"; };
-		6A499D581B8CC4AA00FF2824 /* SimpleTextFieldsReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleTextFieldsReader.m; sourceTree = "<group>"; };
-		6A499D591B8CC4AA00FF2824 /* SimpleTextFieldsWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleTextFieldsWriter.m; sourceTree = "<group>"; };
-		6A499D5A1B8CC4AA00FF2824 /* SimpleTextLiveDocsFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleTextLiveDocsFormat.m; sourceTree = "<group>"; };
-		6A499D5B1B8CC4AA00FF2824 /* SimpleTextNormsFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleTextNormsFormat.m; sourceTree = "<group>"; };
-		6A499D5C1B8CC4AA00FF2824 /* SimpleTextPostingsFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleTextPostingsFormat.m; sourceTree = "<group>"; };
-		6A499D5D1B8CC4AA00FF2824 /* SimpleTextSegmentInfoFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleTextSegmentInfoFormat.m; sourceTree = "<group>"; };
-		6A499D5E1B8CC4AA00FF2824 /* SimpleTextStoredFieldsFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleTextStoredFieldsFormat.m; sourceTree = "<group>"; };
-		6A499D5F1B8CC4AA00FF2824 /* SimpleTextStoredFieldsReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleTextStoredFieldsReader.m; sourceTree = "<group>"; };
-		6A499D601B8CC4AA00FF2824 /* SimpleTextStoredFieldsWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleTextStoredFieldsWriter.m; sourceTree = "<group>"; };
-		6A499D611B8CC4AA00FF2824 /* SimpleTextTermVectorsFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleTextTermVectorsFormat.m; sourceTree = "<group>"; };
-		6A499D621B8CC4AA00FF2824 /* SimpleTextTermVectorsReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleTextTermVectorsReader.m; sourceTree = "<group>"; };
-		6A499D631B8CC4AA00FF2824 /* SimpleTextTermVectorsWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleTextTermVectorsWriter.m; sourceTree = "<group>"; };
-		6A499D641B8CC4AA00FF2824 /* SimpleTextUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleTextUtil.m; sourceTree = "<group>"; };
 		6A499D651B8CC4AA00FF2824 /* StoredFieldsFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoredFieldsFormat.m; sourceTree = "<group>"; };
 		6A499D661B8CC4AA00FF2824 /* StoredFieldsReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoredFieldsReader.m; sourceTree = "<group>"; };
 		6A499D671B8CC4AA00FF2824 /* StoredFieldsWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoredFieldsWriter.m; sourceTree = "<group>"; };
@@ -2550,18 +2376,6 @@
 		6A499D891B8CC4AA00FF2824 /* StoredField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoredField.m; sourceTree = "<group>"; };
 		6A499D8A1B8CC4AA00FF2824 /* StringField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringField.m; sourceTree = "<group>"; };
 		6A499D8B1B8CC4AA00FF2824 /* TextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextField.m; sourceTree = "<group>"; };
-		6A499D8D1B8CC4AA00FF2824 /* Bindings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bindings.m; sourceTree = "<group>"; };
-		6A499D8E1B8CC4AA00FF2824 /* Expression.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Expression.m; sourceTree = "<group>"; };
-		6A499D8F1B8CC4AA00FF2824 /* ExpressionComparator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpressionComparator.m; sourceTree = "<group>"; };
-		6A499D901B8CC4AA00FF2824 /* ExpressionFunctionValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpressionFunctionValues.m; sourceTree = "<group>"; };
-		6A499D911B8CC4AA00FF2824 /* ExpressionRescorer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpressionRescorer.m; sourceTree = "<group>"; };
-		6A499D921B8CC4AA00FF2824 /* ExpressionSortField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpressionSortField.m; sourceTree = "<group>"; };
-		6A499D931B8CC4AA00FF2824 /* ExpressionValueSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpressionValueSource.m; sourceTree = "<group>"; };
-		6A499D941B8CC4AA00FF2824 /* FakeScorer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FakeScorer.m; sourceTree = "<group>"; };
-		6A499D951B8CC4AA00FF2824 /* package-info.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "package-info.m"; sourceTree = "<group>"; };
-		6A499D961B8CC4AA00FF2824 /* ScoreFunctionValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreFunctionValues.m; sourceTree = "<group>"; };
-		6A499D971B8CC4AA00FF2824 /* ScoreValueSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreValueSource.m; sourceTree = "<group>"; };
-		6A499D981B8CC4AA00FF2824 /* SimpleBindings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SimpleBindings.m; sourceTree = "<group>"; };
 		6A499D9A1B8CC4AA00FF2824 /* AbortingException.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbortingException.m; sourceTree = "<group>"; };
 		6A499D9B1B8CC4AA00FF2824 /* AutomatonTermsEnum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutomatonTermsEnum.m; sourceTree = "<group>"; };
 		6A499D9C1B8CC4AA00FF2824 /* BaseCompositeReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseCompositeReader.m; sourceTree = "<group>"; };
@@ -3132,33 +2946,6 @@
 		6A499FF91B8CC4AB00FF2824 /* GeoPointTermQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoPointTermQuery.m; sourceTree = "<group>"; };
 		6A499FFA1B8CC4AB00FF2824 /* GeoPointTermQueryConstantScoreWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoPointTermQueryConstantScoreWrapper.m; sourceTree = "<group>"; };
 		6A499FFB1B8CC4AB00FF2824 /* GeoPointTermsEnum.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeoPointTermsEnum.m; sourceTree = "<group>"; };
-		6A499FFD1B8CC4AB00FF2824 /* AbstractAllGroupHeadsCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractAllGroupHeadsCollector.m; sourceTree = "<group>"; };
-		6A499FFE1B8CC4AB00FF2824 /* AbstractAllGroupsCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractAllGroupsCollector.m; sourceTree = "<group>"; };
-		6A499FFF1B8CC4AB00FF2824 /* AbstractDistinctValuesCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractDistinctValuesCollector.m; sourceTree = "<group>"; };
-		6A49A0001B8CC4AB00FF2824 /* AbstractFirstPassGroupingCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractFirstPassGroupingCollector.m; sourceTree = "<group>"; };
-		6A49A0011B8CC4AB00FF2824 /* AbstractGroupFacetCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractGroupFacetCollector.m; sourceTree = "<group>"; };
-		6A49A0021B8CC4AB00FF2824 /* AbstractSecondPassGroupingCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AbstractSecondPassGroupingCollector.m; sourceTree = "<group>"; };
-		6A49A0031B8CC4AB00FF2824 /* BlockGroupingCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockGroupingCollector.m; sourceTree = "<group>"; };
-		6A49A0041B8CC4AB00FF2824 /* CollectedSearchGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectedSearchGroup.m; sourceTree = "<group>"; };
-		6A49A0051B8CC4AB00FF2824 /* FakeScorer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FakeScorer.m; sourceTree = "<group>"; };
-		6A49A0071B8CC4AB00FF2824 /* FunctionAllGroupHeadsCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FunctionAllGroupHeadsCollector.m; sourceTree = "<group>"; };
-		6A49A0081B8CC4AB00FF2824 /* FunctionAllGroupsCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FunctionAllGroupsCollector.m; sourceTree = "<group>"; };
-		6A49A0091B8CC4AB00FF2824 /* FunctionDistinctValuesCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FunctionDistinctValuesCollector.m; sourceTree = "<group>"; };
-		6A49A00A1B8CC4AB00FF2824 /* FunctionFirstPassGroupingCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FunctionFirstPassGroupingCollector.m; sourceTree = "<group>"; };
-		6A49A00B1B8CC4AB00FF2824 /* FunctionSecondPassGroupingCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FunctionSecondPassGroupingCollector.m; sourceTree = "<group>"; };
-		6A49A00C1B8CC4AB00FF2824 /* package-info.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "package-info.m"; sourceTree = "<group>"; };
-		6A49A00D1B8CC4AB00FF2824 /* GroupDocs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupDocs.m; sourceTree = "<group>"; };
-		6A49A00E1B8CC4AB00FF2824 /* GroupingSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupingSearch.m; sourceTree = "<group>"; };
-		6A49A00F1B8CC4AB00FF2824 /* package-info.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "package-info.m"; sourceTree = "<group>"; };
-		6A49A0101B8CC4AB00FF2824 /* SearchGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchGroup.m; sourceTree = "<group>"; };
-		6A49A0121B8CC4AB00FF2824 /* package-info.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "package-info.m"; sourceTree = "<group>"; };
-		6A49A0131B8CC4AB00FF2824 /* TermAllGroupHeadsCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TermAllGroupHeadsCollector.m; sourceTree = "<group>"; };
-		6A49A0141B8CC4AB00FF2824 /* TermAllGroupsCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TermAllGroupsCollector.m; sourceTree = "<group>"; };
-		6A49A0151B8CC4AB00FF2824 /* TermDistinctValuesCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TermDistinctValuesCollector.m; sourceTree = "<group>"; };
-		6A49A0161B8CC4AB00FF2824 /* TermFirstPassGroupingCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TermFirstPassGroupingCollector.m; sourceTree = "<group>"; };
-		6A49A0171B8CC4AB00FF2824 /* TermGroupFacetCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TermGroupFacetCollector.m; sourceTree = "<group>"; };
-		6A49A0181B8CC4AB00FF2824 /* TermSecondPassGroupingCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TermSecondPassGroupingCollector.m; sourceTree = "<group>"; };
-		6A49A0191B8CC4AB00FF2824 /* TopGroups.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopGroups.m; sourceTree = "<group>"; };
 		6A49A01B1B8CC4AB00FF2824 /* DefaultEncoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultEncoder.m; sourceTree = "<group>"; };
 		6A49A01C1B8CC4AB00FF2824 /* Encoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Encoder.m; sourceTree = "<group>"; };
 		6A49A01D1B8CC4AB00FF2824 /* Formatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Formatter.m; sourceTree = "<group>"; };
@@ -3209,7 +2996,6 @@
 		6A49A04B1B8CC4AB00FF2824 /* TermsQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TermsQuery.m; sourceTree = "<group>"; };
 		6A49A04C1B8CC4AB00FF2824 /* TermsWithScoreCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TermsWithScoreCollector.m; sourceTree = "<group>"; };
 		6A49A04D1B8CC4AB00FF2824 /* ToChildBlockJoinQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToChildBlockJoinQuery.m; sourceTree = "<group>"; };
-		6A49A04E1B8CC4AB00FF2824 /* ToParentBlockJoinCollector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToParentBlockJoinCollector.m; sourceTree = "<group>"; };
 		6A49A04F1B8CC4AB00FF2824 /* ToParentBlockJoinIndexSearcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToParentBlockJoinIndexSearcher.m; sourceTree = "<group>"; };
 		6A49A0501B8CC4AB00FF2824 /* ToParentBlockJoinQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToParentBlockJoinQuery.m; sourceTree = "<group>"; };
 		6A49A0511B8CC4AB00FF2824 /* ToParentBlockJoinSortField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToParentBlockJoinSortField.m; sourceTree = "<group>"; };
@@ -3490,12 +3276,6 @@
 		6A49A16F1B8CC4AB00FF2824 /* SleepingLockWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SleepingLockWrapper.m; sourceTree = "<group>"; };
 		6A49A1701B8CC4AB00FF2824 /* TrackingDirectoryWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrackingDirectoryWrapper.m; sourceTree = "<group>"; };
 		6A49A1711B8CC4AB00FF2824 /* VerifyingLockFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerifyingLockFactory.m; sourceTree = "<group>"; };
-		6A49A1731B8CC4AB00FF2824 /* DocTermOrds.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocTermOrds.m; sourceTree = "<group>"; };
-		6A49A1741B8CC4AB00FF2824 /* FieldCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FieldCache.m; sourceTree = "<group>"; };
-		6A49A1751B8CC4AB00FF2824 /* FieldCacheImpl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FieldCacheImpl.m; sourceTree = "<group>"; };
-		6A49A1761B8CC4AB00FF2824 /* FieldCacheSanityChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FieldCacheSanityChecker.m; sourceTree = "<group>"; };
-		6A49A1771B8CC4AB00FF2824 /* package-info.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "package-info.m"; sourceTree = "<group>"; };
-		6A49A1781B8CC4AB00FF2824 /* UninvertingReader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UninvertingReader.m; sourceTree = "<group>"; };
 		6A49A17A1B8CC4AB00FF2824 /* Accountable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Accountable.m; sourceTree = "<group>"; };
 		6A49A17B1B8CC4AB00FF2824 /* Accountables.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Accountables.m; sourceTree = "<group>"; };
 		6A49A17C1B8CC4AB00FF2824 /* ArrayInPlaceMergeSorter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArrayInPlaceMergeSorter.m; sourceTree = "<group>"; };
@@ -3811,7 +3591,6 @@
 				6A499CC21B8CC4AA00FF2824 /* codecs */,
 				6A499D6C1B8CC4AA00FF2824 /* collation */,
 				6A499D741B8CC4AA00FF2824 /* document */,
-				6A499D8C1B8CC4AA00FF2824 /* expressions */,
 				6A499D991B8CC4AA00FF2824 /* index */,
 				6A499E3C1B8CC4AA00FF2824 /* LucenePackage.m */,
 				6A499E3D1B8CC4AA00FF2824 /* misc */,
@@ -3822,7 +3601,6 @@
 				6A499FAA1B8CC4AB00FF2824 /* sandbox */,
 				6A499FB11B8CC4AB00FF2824 /* search */,
 				6A49A13F1B8CC4AB00FF2824 /* store */,
-				6A49A1721B8CC4AB00FF2824 /* uninverting */,
 				6A49A1791B8CC4AB00FF2824 /* util */,
 			);
 			path = lucene;
@@ -4774,12 +4552,8 @@
 		6A499CC21B8CC4AA00FF2824 /* codecs */ = {
 			isa = PBXGroup;
 			children = (
-				6A499CC31B8CC4AA00FF2824 /* autoprefix */,
-				6A499CC61B8CC4AA00FF2824 /* blockterms */,
 				6A499CD01B8CC4AA00FF2824 /* BlockTermState.m */,
 				6A499CD11B8CC4AA00FF2824 /* blocktree */,
-				6A499CDE1B8CC4AA00FF2824 /* blocktreeords */,
-				6A499CE91B8CC4AA00FF2824 /* bloom */,
 				6A499CF11B8CC4AA00FF2824 /* Codec.m */,
 				6A499CF21B8CC4AA00FF2824 /* CodecUtil.m */,
 				6A499CF31B8CC4AA00FF2824 /* CompoundFormat.m */,
@@ -4795,7 +4569,6 @@
 				6A499D171B8CC4AA00FF2824 /* LiveDocsFormat.m */,
 				6A499D181B8CC4AA00FF2824 /* lucene50 */,
 				6A499D2A1B8CC4AA00FF2824 /* lucene53 */,
-				6A499D301B8CC4AA00FF2824 /* memory */,
 				6A499D411B8CC4AA00FF2824 /* MultiLevelSkipListReader.m */,
 				6A499D421B8CC4AA00FF2824 /* MultiLevelSkipListWriter.m */,
 				6A499D431B8CC4AA00FF2824 /* NormsConsumer.m */,
@@ -4808,7 +4581,6 @@
 				6A499D4D1B8CC4AA00FF2824 /* PostingsWriterBase.m */,
 				6A499D4E1B8CC4AA00FF2824 /* PushPostingsWriterBase.m */,
 				6A499D4F1B8CC4AA00FF2824 /* SegmentInfoFormat.m */,
-				6A499D501B8CC4AA00FF2824 /* simpletext */,
 				6A499D651B8CC4AA00FF2824 /* StoredFieldsFormat.m */,
 				6A499D661B8CC4AA00FF2824 /* StoredFieldsReader.m */,
 				6A499D671B8CC4AA00FF2824 /* StoredFieldsWriter.m */,
@@ -4818,31 +4590,6 @@
 				6A499D6B1B8CC4AA00FF2824 /* TermVectorsWriter.m */,
 			);
 			path = codecs;
-			sourceTree = "<group>";
-		};
-		6A499CC31B8CC4AA00FF2824 /* autoprefix */ = {
-			isa = PBXGroup;
-			children = (
-				6A499CC41B8CC4AA00FF2824 /* AutoPrefixPostingsFormat.m */,
-				6A499CC51B8CC4AA00FF2824 /* package-info.m */,
-			);
-			path = autoprefix;
-			sourceTree = "<group>";
-		};
-		6A499CC61B8CC4AA00FF2824 /* blockterms */ = {
-			isa = PBXGroup;
-			children = (
-				6A499CC71B8CC4AA00FF2824 /* BlockTermsReader.m */,
-				6A499CC81B8CC4AA00FF2824 /* BlockTermsWriter.m */,
-				6A499CC91B8CC4AA00FF2824 /* FixedGapTermsIndexReader.m */,
-				6A499CCA1B8CC4AA00FF2824 /* FixedGapTermsIndexWriter.m */,
-				6A499CCB1B8CC4AA00FF2824 /* package-info.m */,
-				6A499CCC1B8CC4AA00FF2824 /* TermsIndexReaderBase.m */,
-				6A499CCD1B8CC4AA00FF2824 /* TermsIndexWriterBase.m */,
-				6A499CCE1B8CC4AA00FF2824 /* VariableGapTermsIndexReader.m */,
-				6A499CCF1B8CC4AA00FF2824 /* VariableGapTermsIndexWriter.m */,
-			);
-			path = blockterms;
 			sourceTree = "<group>";
 		};
 		6A499CD11B8CC4AA00FF2824 /* blocktree */ = {
@@ -4862,37 +4609,6 @@
 				6A499CDD1B8CC4AA00FF2824 /* Stats.m */,
 			);
 			path = blocktree;
-			sourceTree = "<group>";
-		};
-		6A499CDE1B8CC4AA00FF2824 /* blocktreeords */ = {
-			isa = PBXGroup;
-			children = (
-				6A499CDF1B8CC4AA00FF2824 /* BlockTreeOrdsPostingsFormat.m */,
-				6A499CE01B8CC4AA00FF2824 /* FSTOrdsOutputs.m */,
-				6A499CE11B8CC4AA00FF2824 /* OrdsBlockTreeTermsReader.m */,
-				6A499CE21B8CC4AA00FF2824 /* OrdsBlockTreeTermsWriter.m */,
-				6A499CE31B8CC4AA00FF2824 /* OrdsFieldReader.m */,
-				6A499CE41B8CC4AA00FF2824 /* OrdsIntersectTermsEnum.m */,
-				6A499CE51B8CC4AA00FF2824 /* OrdsIntersectTermsEnumFrame.m */,
-				6A499CE61B8CC4AA00FF2824 /* OrdsSegmentTermsEnum.m */,
-				6A499CE71B8CC4AA00FF2824 /* OrdsSegmentTermsEnumFrame.m */,
-				6A499CE81B8CC4AA00FF2824 /* package-info.m */,
-			);
-			path = blocktreeords;
-			sourceTree = "<group>";
-		};
-		6A499CE91B8CC4AA00FF2824 /* bloom */ = {
-			isa = PBXGroup;
-			children = (
-				6A499CEA1B8CC4AA00FF2824 /* BloomFilterFactory.m */,
-				6A499CEB1B8CC4AA00FF2824 /* BloomFilteringPostingsFormat.m */,
-				6A499CEC1B8CC4AA00FF2824 /* DefaultBloomFilterFactory.m */,
-				6A499CED1B8CC4AA00FF2824 /* FuzzySet.m */,
-				6A499CEE1B8CC4AA00FF2824 /* HashFunction.m */,
-				6A499CEF1B8CC4AA00FF2824 /* MurmurHash2.m */,
-				6A499CF01B8CC4AA00FF2824 /* package-info.m */,
-			);
-			path = bloom;
 			sourceTree = "<group>";
 		};
 		6A499CF41B8CC4AA00FF2824 /* compressing */ = {
@@ -4971,29 +4687,6 @@
 			path = lucene53;
 			sourceTree = "<group>";
 		};
-		6A499D301B8CC4AA00FF2824 /* memory */ = {
-			isa = PBXGroup;
-			children = (
-				6A499D311B8CC4AA00FF2824 /* DirectDocValuesConsumer.m */,
-				6A499D321B8CC4AA00FF2824 /* DirectDocValuesFormat.m */,
-				6A499D331B8CC4AA00FF2824 /* DirectDocValuesProducer.m */,
-				6A499D341B8CC4AA00FF2824 /* DirectPostingsFormat.m */,
-				6A499D351B8CC4AA00FF2824 /* FSTOrdPostingsFormat.m */,
-				6A499D361B8CC4AA00FF2824 /* FSTOrdTermsReader.m */,
-				6A499D371B8CC4AA00FF2824 /* FSTOrdTermsWriter.m */,
-				6A499D381B8CC4AA00FF2824 /* FSTPostingsFormat.m */,
-				6A499D391B8CC4AA00FF2824 /* FSTTermOutputs.m */,
-				6A499D3A1B8CC4AA00FF2824 /* FSTTermsReader.m */,
-				6A499D3B1B8CC4AA00FF2824 /* FSTTermsWriter.m */,
-				6A499D3C1B8CC4AA00FF2824 /* MemoryDocValuesConsumer.m */,
-				6A499D3D1B8CC4AA00FF2824 /* MemoryDocValuesFormat.m */,
-				6A499D3E1B8CC4AA00FF2824 /* MemoryDocValuesProducer.m */,
-				6A499D3F1B8CC4AA00FF2824 /* MemoryPostingsFormat.m */,
-				6A499D401B8CC4AA00FF2824 /* package-info.m */,
-			);
-			path = memory;
-			sourceTree = "<group>";
-		};
 		6A499D471B8CC4AA00FF2824 /* perfield */ = {
 			isa = PBXGroup;
 			children = (
@@ -5002,33 +4695,6 @@
 				6A499D4A1B8CC4AA00FF2824 /* PerFieldPostingsFormat.m */,
 			);
 			path = perfield;
-			sourceTree = "<group>";
-		};
-		6A499D501B8CC4AA00FF2824 /* simpletext */ = {
-			isa = PBXGroup;
-			children = (
-				6A499D511B8CC4AA00FF2824 /* package-info.m */,
-				6A499D521B8CC4AA00FF2824 /* SimpleTextCodec.m */,
-				6A499D531B8CC4AA00FF2824 /* SimpleTextCompoundFormat.m */,
-				6A499D541B8CC4AA00FF2824 /* SimpleTextDocValuesFormat.m */,
-				6A499D551B8CC4AA00FF2824 /* SimpleTextDocValuesReader.m */,
-				6A499D561B8CC4AA00FF2824 /* SimpleTextDocValuesWriter.m */,
-				6A499D571B8CC4AA00FF2824 /* SimpleTextFieldInfosFormat.m */,
-				6A499D581B8CC4AA00FF2824 /* SimpleTextFieldsReader.m */,
-				6A499D591B8CC4AA00FF2824 /* SimpleTextFieldsWriter.m */,
-				6A499D5A1B8CC4AA00FF2824 /* SimpleTextLiveDocsFormat.m */,
-				6A499D5B1B8CC4AA00FF2824 /* SimpleTextNormsFormat.m */,
-				6A499D5C1B8CC4AA00FF2824 /* SimpleTextPostingsFormat.m */,
-				6A499D5D1B8CC4AA00FF2824 /* SimpleTextSegmentInfoFormat.m */,
-				6A499D5E1B8CC4AA00FF2824 /* SimpleTextStoredFieldsFormat.m */,
-				6A499D5F1B8CC4AA00FF2824 /* SimpleTextStoredFieldsReader.m */,
-				6A499D601B8CC4AA00FF2824 /* SimpleTextStoredFieldsWriter.m */,
-				6A499D611B8CC4AA00FF2824 /* SimpleTextTermVectorsFormat.m */,
-				6A499D621B8CC4AA00FF2824 /* SimpleTextTermVectorsReader.m */,
-				6A499D631B8CC4AA00FF2824 /* SimpleTextTermVectorsWriter.m */,
-				6A499D641B8CC4AA00FF2824 /* SimpleTextUtil.m */,
-			);
-			path = simpletext;
 			sourceTree = "<group>";
 		};
 		6A499D6C1B8CC4AA00FF2824 /* collation */ = {
@@ -5080,25 +4746,6 @@
 				6A499D8B1B8CC4AA00FF2824 /* TextField.m */,
 			);
 			path = document;
-			sourceTree = "<group>";
-		};
-		6A499D8C1B8CC4AA00FF2824 /* expressions */ = {
-			isa = PBXGroup;
-			children = (
-				6A499D8D1B8CC4AA00FF2824 /* Bindings.m */,
-				6A499D8E1B8CC4AA00FF2824 /* Expression.m */,
-				6A499D8F1B8CC4AA00FF2824 /* ExpressionComparator.m */,
-				6A499D901B8CC4AA00FF2824 /* ExpressionFunctionValues.m */,
-				6A499D911B8CC4AA00FF2824 /* ExpressionRescorer.m */,
-				6A499D921B8CC4AA00FF2824 /* ExpressionSortField.m */,
-				6A499D931B8CC4AA00FF2824 /* ExpressionValueSource.m */,
-				6A499D941B8CC4AA00FF2824 /* FakeScorer.m */,
-				6A499D951B8CC4AA00FF2824 /* package-info.m */,
-				6A499D961B8CC4AA00FF2824 /* ScoreFunctionValues.m */,
-				6A499D971B8CC4AA00FF2824 /* ScoreValueSource.m */,
-				6A499D981B8CC4AA00FF2824 /* SimpleBindings.m */,
-			);
-			path = expressions;
 			sourceTree = "<group>";
 		};
 		6A499D991B8CC4AA00FF2824 /* index */ = {
@@ -5986,7 +5633,6 @@
 				6A499FF91B8CC4AB00FF2824 /* GeoPointTermQuery.m */,
 				6A499FFA1B8CC4AB00FF2824 /* GeoPointTermQueryConstantScoreWrapper.m */,
 				6A499FFB1B8CC4AB00FF2824 /* GeoPointTermsEnum.m */,
-				6A499FFC1B8CC4AB00FF2824 /* grouping */,
 				6A49A01A1B8CC4AB00FF2824 /* highlight */,
 				6A49A0371B8CC4AB00FF2824 /* HitQueue.m */,
 				6A49A0381B8CC4AB00FF2824 /* IndexSearcher.m */,
@@ -6076,56 +5722,6 @@
 			path = search;
 			sourceTree = "<group>";
 		};
-		6A499FFC1B8CC4AB00FF2824 /* grouping */ = {
-			isa = PBXGroup;
-			children = (
-				6A499FFD1B8CC4AB00FF2824 /* AbstractAllGroupHeadsCollector.m */,
-				6A499FFE1B8CC4AB00FF2824 /* AbstractAllGroupsCollector.m */,
-				6A499FFF1B8CC4AB00FF2824 /* AbstractDistinctValuesCollector.m */,
-				6A49A0001B8CC4AB00FF2824 /* AbstractFirstPassGroupingCollector.m */,
-				6A49A0011B8CC4AB00FF2824 /* AbstractGroupFacetCollector.m */,
-				6A49A0021B8CC4AB00FF2824 /* AbstractSecondPassGroupingCollector.m */,
-				6A49A0031B8CC4AB00FF2824 /* BlockGroupingCollector.m */,
-				6A49A0041B8CC4AB00FF2824 /* CollectedSearchGroup.m */,
-				6A49A0051B8CC4AB00FF2824 /* FakeScorer.m */,
-				6A49A0061B8CC4AB00FF2824 /* function */,
-				6A49A00D1B8CC4AB00FF2824 /* GroupDocs.m */,
-				6A49A00E1B8CC4AB00FF2824 /* GroupingSearch.m */,
-				6A49A00F1B8CC4AB00FF2824 /* package-info.m */,
-				6A49A0101B8CC4AB00FF2824 /* SearchGroup.m */,
-				6A49A0111B8CC4AB00FF2824 /* term */,
-				6A49A0191B8CC4AB00FF2824 /* TopGroups.m */,
-			);
-			path = grouping;
-			sourceTree = "<group>";
-		};
-		6A49A0061B8CC4AB00FF2824 /* function */ = {
-			isa = PBXGroup;
-			children = (
-				6A49A0071B8CC4AB00FF2824 /* FunctionAllGroupHeadsCollector.m */,
-				6A49A0081B8CC4AB00FF2824 /* FunctionAllGroupsCollector.m */,
-				6A49A0091B8CC4AB00FF2824 /* FunctionDistinctValuesCollector.m */,
-				6A49A00A1B8CC4AB00FF2824 /* FunctionFirstPassGroupingCollector.m */,
-				6A49A00B1B8CC4AB00FF2824 /* FunctionSecondPassGroupingCollector.m */,
-				6A49A00C1B8CC4AB00FF2824 /* package-info.m */,
-			);
-			path = function;
-			sourceTree = "<group>";
-		};
-		6A49A0111B8CC4AB00FF2824 /* term */ = {
-			isa = PBXGroup;
-			children = (
-				6A49A0121B8CC4AB00FF2824 /* package-info.m */,
-				6A49A0131B8CC4AB00FF2824 /* TermAllGroupHeadsCollector.m */,
-				6A49A0141B8CC4AB00FF2824 /* TermAllGroupsCollector.m */,
-				6A49A0151B8CC4AB00FF2824 /* TermDistinctValuesCollector.m */,
-				6A49A0161B8CC4AB00FF2824 /* TermFirstPassGroupingCollector.m */,
-				6A49A0171B8CC4AB00FF2824 /* TermGroupFacetCollector.m */,
-				6A49A0181B8CC4AB00FF2824 /* TermSecondPassGroupingCollector.m */,
-			);
-			path = term;
-			sourceTree = "<group>";
-		};
 		6A49A01A1B8CC4AB00FF2824 /* highlight */ = {
 			isa = PBXGroup;
 			children = (
@@ -6184,7 +5780,6 @@
 				6A49A04B1B8CC4AB00FF2824 /* TermsQuery.m */,
 				6A49A04C1B8CC4AB00FF2824 /* TermsWithScoreCollector.m */,
 				6A49A04D1B8CC4AB00FF2824 /* ToChildBlockJoinQuery.m */,
-				6A49A04E1B8CC4AB00FF2824 /* ToParentBlockJoinCollector.m */,
 				6A49A04F1B8CC4AB00FF2824 /* ToParentBlockJoinIndexSearcher.m */,
 				6A49A0501B8CC4AB00FF2824 /* ToParentBlockJoinQuery.m */,
 				6A49A0511B8CC4AB00FF2824 /* ToParentBlockJoinSortField.m */,
@@ -6473,19 +6068,6 @@
 				6A49A1711B8CC4AB00FF2824 /* VerifyingLockFactory.m */,
 			);
 			path = store;
-			sourceTree = "<group>";
-		};
-		6A49A1721B8CC4AB00FF2824 /* uninverting */ = {
-			isa = PBXGroup;
-			children = (
-				6A49A1731B8CC4AB00FF2824 /* DocTermOrds.m */,
-				6A49A1741B8CC4AB00FF2824 /* FieldCache.m */,
-				6A49A1751B8CC4AB00FF2824 /* FieldCacheImpl.m */,
-				6A49A1761B8CC4AB00FF2824 /* FieldCacheSanityChecker.m */,
-				6A49A1771B8CC4AB00FF2824 /* package-info.m */,
-				6A49A1781B8CC4AB00FF2824 /* UninvertingReader.m */,
-			);
-			path = uninverting;
 			sourceTree = "<group>";
 		};
 		6A49A1791B8CC4AB00FF2824 /* util */ = {
@@ -7005,15 +6587,12 @@
 				6A49A4AD1B8CC4AC00FF2824 /* Lucene50FieldInfosFormat.m in Sources */,
 				6A49A8FF1B8CC4AC00FF2824 /* ByteSequenceOutputs.m in Sources */,
 				6A49A87C1B8CC4AC00FF2824 /* TermScorer.m in Sources */,
-				6A49A4EC1B8CC4AC00FF2824 /* SimpleTextTermVectorsReader.m in Sources */,
 				6A49A34D1B8CC4AC00FF2824 /* package-info.m in Sources */,
 				6A49A6221B8CC4AC00FF2824 /* Extensions.m in Sources */,
 				6A49A59C1B8CC4AC00FF2824 /* SegmentWriteState.m in Sources */,
-				6A49A75A1B8CC4AC00FF2824 /* AbstractAllGroupsCollector.m in Sources */,
 				6A49A42C1B8CC4AC00FF2824 /* TurkishLowerCaseFilterFactory.m in Sources */,
 				6A49A73E1B8CC4AC00FF2824 /* FakeScorer.m in Sources */,
 				6A49A5C21B8CC4AC00FF2824 /* HighFreqTerms.m in Sources */,
-				6A49A8C41B8CC4AC00FF2824 /* UninvertingReader.m in Sources */,
 				6A49A38A1B8CC4AC00FF2824 /* TrimFilterFactory.m in Sources */,
 				6A49A7991B8CC4AC00FF2824 /* GlobalOrdinalsCollector.m in Sources */,
 				6A49A7811B8CC4AC00FF2824 /* QueryTermScorer.m in Sources */,
@@ -7021,7 +6600,6 @@
 				6A49A3FD1B8CC4AC00FF2824 /* UAX29URLEmailTokenizerImpl40.m in Sources */,
 				6A49A57C1B8CC4AC00FF2824 /* NoDeletionPolicy.m in Sources */,
 				6A49A2D41B8CC4AC00FF2824 /* TypeTokenFilter.m in Sources */,
-				6A49A8C11B8CC4AC00FF2824 /* FieldCacheImpl.m in Sources */,
 				6A49A8231B8CC4AC00FF2824 /* Spans.m in Sources */,
 				6A49A9491B8CC4AC00FF2824 /* BulkOperationPacked20.m in Sources */,
 				6A49A3C11B8CC4AC00FF2824 /* TokenOffsetPayloadTokenFilter.m in Sources */,
@@ -7033,7 +6611,6 @@
 				6A49A2EB1B8CC4AC00FF2824 /* GermanNormalizationFilter.m in Sources */,
 				6A49A2D71B8CC4AC00FF2824 /* UpperCaseFilterFactory.m in Sources */,
 				6A49A6461B8CC4AC00FF2824 /* QuotedFieldQueryNode.m in Sources */,
-				6A49A5131B8CC4AC00FF2824 /* Bindings.m in Sources */,
 				6A49A7081B8CC4AC00FF2824 /* SliceWriter.m in Sources */,
 				6A49A3D71B8CC4AC00FF2824 /* package-info.m in Sources */,
 				6A49A6A21B8CC4AC00FF2824 /* FuzzyQueryNodeProcessor.m in Sources */,
@@ -7058,7 +6635,6 @@
 				6A49A88E1B8CC4AC00FF2824 /* BaseDirectory.m in Sources */,
 				6A49A44F1B8CC4AC00FF2824 /* BKDTreeReader.m in Sources */,
 				6A49A4661B8CC4AC00FF2824 /* BitSetPostingsEnum.m in Sources */,
-				6A49A8BF1B8CC4AC00FF2824 /* DocTermOrds.m in Sources */,
 				6A49A7C11B8CC4AC00FF2824 /* PayloadFunction.m in Sources */,
 				6A49A5361B8CC4AC00FF2824 /* DocumentsWriter.m in Sources */,
 				6A49A8DA1B8CC4AC00FF2824 /* Lev2ParametricDescription.m in Sources */,
@@ -7119,7 +6695,6 @@
 				6A49A3F71B8CC4AC00FF2824 /* StandardTokenizer.m in Sources */,
 				6A49A7051B8CC4AC00FF2824 /* RangeTreeSortedSetDocValues.m in Sources */,
 				6A49A5651B8CC4AC00FF2824 /* LiveIndexWriterConfig.m in Sources */,
-				6A49A7711B8CC4AC00FF2824 /* TermGroupFacetCollector.m in Sources */,
 				6A49A7F21B8CC4AC00FF2824 /* DistributionSPL.m in Sources */,
 				6A49A8981B8CC4AC00FF2824 /* Directory.m in Sources */,
 				6A49A3141B8CC4AC00FF2824 /* package-info.m in Sources */,
@@ -7134,7 +6709,6 @@
 				6A49A71C1B8CC4AC00FF2824 /* CachingWrapperFilter.m in Sources */,
 				6A49A57F1B8CC4AC00FF2824 /* NormValuesWriter.m in Sources */,
 				6A49A3B21B8CC4AC00FF2824 /* PatternReplaceFilter.m in Sources */,
-				6A49A4811B8CC4AC00FF2824 /* package-info.m in Sources */,
 				6A49A4AB1B8CC4AC00FF2824 /* Lucene50DocValuesFormat.m in Sources */,
 				6A49A7161B8CC4AC00FF2824 /* BooleanTopLevelScorers.m in Sources */,
 				6A49A57E1B8CC4AC00FF2824 /* NoMergeScheduler.m in Sources */,
@@ -7156,8 +6730,6 @@
 				6A49A7A31B8CC4AC00FF2824 /* TermsQuery.m in Sources */,
 				6A49A96F1B8CC4AC00FF2824 /* PagedMutable.m in Sources */,
 				6A49A5591B8CC4AC00FF2824 /* IndexFormatTooOldException.m in Sources */,
-				6A49A4EE1B8CC4AC00FF2824 /* SimpleTextUtil.m in Sources */,
-				6A49A4C31B8CC4AC00FF2824 /* FSTOrdTermsWriter.m in Sources */,
 				6A49A7251B8CC4AC00FF2824 /* ConstantScoreScorer.m in Sources */,
 				6A49A6D11B8CC4AC00FF2824 /* TooManyBasicQueries.m in Sources */,
 				6A49A7FE1B8CC4AC00FF2824 /* NormalizationH3.m in Sources */,
@@ -7173,7 +6745,6 @@
 				6A49A4B71B8CC4AC00FF2824 /* package-info.m in Sources */,
 				6A49A3261B8CC4AC00FF2824 /* FrenchMinimalStemFilterFactory.m in Sources */,
 				6A49A32E1B8CC4AC00FF2824 /* GalicianMinimalStemFilter.m in Sources */,
-				6A49A4C81B8CC4AC00FF2824 /* MemoryDocValuesConsumer.m in Sources */,
 				6A49A2D91B8CC4AC00FF2824 /* WhitespaceTokenizer.m in Sources */,
 				6A49A8721B8CC4AC00FF2824 /* TernaryTreeNode.m in Sources */,
 				6A49A4B51B8CC4AC00FF2824 /* Lucene50StoredFieldsFormat.m in Sources */,
@@ -7228,7 +6799,6 @@
 				6A49A7031B8CC4AC00FF2824 /* RangeTreeReader.m in Sources */,
 				6A49A55F1B8CC4AC00FF2824 /* IndexUpgrader.m in Sources */,
 				6A49A6991B8CC4AC00FF2824 /* StandardSyntaxParserTokenManager.m in Sources */,
-				6A49A75E1B8CC4AC00FF2824 /* AbstractSecondPassGroupingCollector.m in Sources */,
 				6A49A5C51B8CC4AC00FF2824 /* SweetSpotSimilarity.m in Sources */,
 				6A49A6501B8CC4AC00FF2824 /* NoChildOptimizationQueryNodeProcessor.m in Sources */,
 				6A49A5CA1B8CC4AC00FF2824 /* CommonTermsQuery.m in Sources */,
@@ -7267,7 +6837,6 @@
 				6A49A73F1B8CC4AC00FF2824 /* FieldComparator.m in Sources */,
 				6A49A78C1B8CC4AC00FF2824 /* TokenStreamFromTermVector.m in Sources */,
 				6A49A83C1B8CC4AC00FF2824 /* AnalyzingInfixSuggester.m in Sources */,
-				6A49A4E01B8CC4AC00FF2824 /* SimpleTextDocValuesWriter.m in Sources */,
 				6A49A5A51B8CC4AC00FF2824 /* SortedDocValues.m in Sources */,
 				6A49A8251B8CC4AC00FF2824 /* SpanTermQuery.m in Sources */,
 				6A49A55B1B8CC4AC00FF2824 /* IndexOptions.m in Sources */,
@@ -7284,12 +6853,10 @@
 				6A49A5AC1B8CC4AC00FF2824 /* SortedSetDocValuesWriter.m in Sources */,
 				6A49A8671B8CC4AC00FF2824 /* package-info.m in Sources */,
 				6A49A6821B8CC4AC00FF2824 /* NumericConfig.m in Sources */,
-				6A49A4C41B8CC4AC00FF2824 /* FSTPostingsFormat.m in Sources */,
 				6A49A32F1B8CC4AC00FF2824 /* GalicianMinimalStemFilterFactory.m in Sources */,
 				6A49A3391B8CC4AC00FF2824 /* HindiStemFilter.m in Sources */,
 				6A49A4D91B8CC4AC00FF2824 /* PushPostingsWriterBase.m in Sources */,
 				6A49A82E1B8CC4AC00FF2824 /* LevensteinDistance.m in Sources */,
-				6A49A8C21B8CC4AC00FF2824 /* FieldCacheSanityChecker.m in Sources */,
 				6A49A7BA1B8CC4AC00FF2824 /* NumericRangeFilter.m in Sources */,
 				6A49A2F51B8CC4AC00FF2824 /* GreekStemFilter.m in Sources */,
 				6A49A3231B8CC4AC00FF2824 /* FrenchLightStemFilterFactory.m in Sources */,
@@ -7321,7 +6888,6 @@
 				6A49A8E31B8CC4AC00FF2824 /* SortedIntSet.m in Sources */,
 				6A49A6551B8CC4AC00FF2824 /* RemoveDeletedQueryNodesProcessor.m in Sources */,
 				6A49A8031B8CC4AC00FF2824 /* SimilarityBase.m in Sources */,
-				6A49A76E1B8CC4AC00FF2824 /* TermAllGroupsCollector.m in Sources */,
 				6A49A8A91B8CC4AC00FF2824 /* MergeInfo.m in Sources */,
 				6A49A5AE1B8CC4AC00FF2824 /* SortingLeafReader.m in Sources */,
 				6A49A80D1B8CC4AC00FF2824 /* SortField.m in Sources */,
@@ -7330,7 +6896,6 @@
 				6A49A8331B8CC4AC00FF2824 /* PlainTextDictionary.m in Sources */,
 				6A49A7A81B8CC4AC00FF2824 /* ToParentBlockJoinQuery.m in Sources */,
 				6A49A6151B8CC4AC00FF2824 /* MultiFieldQueryParser.m in Sources */,
-				6A49A7691B8CC4AC00FF2824 /* GroupingSearch.m in Sources */,
 				6A49A5571B8CC4AC00FF2824 /* IndexFileNames.m in Sources */,
 				6A49A5CE1B8CC4AC00FF2824 /* BoostedQuery.m in Sources */,
 				6A49A92D1B8CC4AC00FF2824 /* MutableValueStr.m in Sources */,
@@ -7399,8 +6964,6 @@
 				6A49A34C1B8CC4AC00FF2824 /* IndonesianStemmer.m in Sources */,
 				6A49A2FC1B8CC4AC00FF2824 /* EnglishMinimalStemmer.m in Sources */,
 				6A49A6D41B8CC4AC00FF2824 /* BoostingQueryBuilder.m in Sources */,
-				6A49A76B1B8CC4AC00FF2824 /* SearchGroup.m in Sources */,
-				6A49A7701B8CC4AC00FF2824 /* TermFirstPassGroupingCollector.m in Sources */,
 				6A49A5631B8CC4AC00FF2824 /* LeafReader.m in Sources */,
 				6A49A77A1B8CC4AC00FF2824 /* InvalidTokenOffsetsException.m in Sources */,
 				6A49A8081B8CC4AC00FF2824 /* Sort.m in Sources */,
@@ -7423,7 +6986,6 @@
 				6A49A6851B8CC4AC00FF2824 /* StandardQueryConfigHandler.m in Sources */,
 				6A49A46C1B8CC4AC00FF2824 /* IntersectTermsEnumFrame.m in Sources */,
 				6A49A65D1B8CC4AC00FF2824 /* UnescapedCharSequence.m in Sources */,
-				6A49A4C21B8CC4AC00FF2824 /* FSTOrdTermsReader.m in Sources */,
 				6A49A8EF1B8CC4AC00FF2824 /* BytesRefArray.m in Sources */,
 				6A49A67B1B8CC4AC00FF2824 /* TermRangeQueryNodeBuilder.m in Sources */,
 				6A49A4B81B8CC4AC00FF2824 /* Lucene53Codec.m in Sources */,
@@ -7431,7 +6993,6 @@
 				6A49A74F1B8CC4AC00FF2824 /* FuzzyTermsEnum.m in Sources */,
 				6A49A6CF1B8CC4AC00FF2824 /* SrndTermQuery.m in Sources */,
 				6A49A8FD1B8CC4AC00FF2824 /* FrequencyTrackingRingBuffer.m in Sources */,
-				6A49A4E11B8CC4AC00FF2824 /* SimpleTextFieldInfosFormat.m in Sources */,
 				6A49A5461B8CC4AC00FF2824 /* Fields.m in Sources */,
 				6A49A6881B8CC4AC00FF2824 /* MultiPhraseQueryNode.m in Sources */,
 				6A49A7061B8CC4AC00FF2824 /* RangeTreeWriter.m in Sources */,
@@ -7448,7 +7009,6 @@
 				6A49A9171B8CC4AC00FF2824 /* InfoStream.m in Sources */,
 				6A49A5351B8CC4AC00FF2824 /* DocsEnum.m in Sources */,
 				6A49A42D1B8CC4AC00FF2824 /* AbstractAnalysisFactory.m in Sources */,
-				6A49A4801B8CC4AC00FF2824 /* MurmurHash2.m in Sources */,
 				6A49A5711B8CC4AC00FF2824 /* MergeScheduler.m in Sources */,
 				6A49A6B91B8CC4AC00FF2824 /* QueryParser.m in Sources */,
 				6A49A9521B8CC4AC00FF2824 /* BulkOperationPacked7.m in Sources */,
@@ -7457,7 +7017,6 @@
 				6A49A3A31B8CC4AC00FF2824 /* NorwegianMinimalStemFilter.m in Sources */,
 				6A49A9571B8CC4AC00FF2824 /* Direct16.m in Sources */,
 				6A49A9651B8CC4AC00FF2824 /* Packed64.m in Sources */,
-				6A49A45C1B8CC4AC00FF2824 /* BlockTermsWriter.m in Sources */,
 				6A49A9901B8CC4AC00FF2824 /* DirectoryStream.m in Sources */,
 				6A49A5D91B8CC4AC00FF2824 /* package-info.m in Sources */,
 				6A49A55D1B8CC4AC00FF2824 /* IndexReaderContext.m in Sources */,
@@ -7465,7 +7024,6 @@
 				6A49A8F21B8CC4AC00FF2824 /* BytesRefIterator.m in Sources */,
 				6A49A8761B8CC4AC00FF2824 /* TermAutomatonQuery.m in Sources */,
 				6A49A3471B8CC4AC00FF2824 /* ArmenianAnalyzer.m in Sources */,
-				6A49A75C1B8CC4AC00FF2824 /* AbstractFirstPassGroupingCollector.m in Sources */,
 				6A49A2911B8CC4AC00FF2824 /* BrazilianStemFilterFactory.m in Sources */,
 				6A49A4241B8CC4AC00FF2824 /* Tokenizer.m in Sources */,
 				6A49A33D1B8CC4AC00FF2824 /* HungarianAnalyzer.m in Sources */,
@@ -7487,10 +7045,8 @@
 				6A49A4FA1B8CC4AC00FF2824 /* CollatedTermAttributeImpl.m in Sources */,
 				6A49A5C31B8CC4AC00FF2824 /* IndexMergeTool.m in Sources */,
 				6A49A57D1B8CC4AC00FF2824 /* NoMergePolicy.m in Sources */,
-				6A49A7681B8CC4AC00FF2824 /* GroupDocs.m in Sources */,
 				6A49A6D21B8CC4AC00FF2824 /* BooleanFilterBuilder.m in Sources */,
 				6A49A5991B8CC4AC00FF2824 /* SegmentMerger.m in Sources */,
-				6A49A4591B8CC4AC00FF2824 /* AutoPrefixPostingsFormat.m in Sources */,
 				6A49A5451B8CC4AC00FF2824 /* FieldInvertState.m in Sources */,
 				6A49A5381B8CC4AC00FF2824 /* DocumentsWriterFlushControl.m in Sources */,
 				6A49A3E01B8CC4AC00FF2824 /* ShingleFilter.m in Sources */,
@@ -7509,7 +7065,6 @@
 				6A49A5B51B8CC4AC00FF2824 /* TermsEnum.m in Sources */,
 				6A49A3AE1B8CC4AC00FF2824 /* PatternCaptureGroupFilterFactory.m in Sources */,
 				6A49A6C21B8CC4AC00FF2824 /* DistanceRewriteQuery.m in Sources */,
-				6A49A47C1B8CC4AC00FF2824 /* BloomFilteringPostingsFormat.m in Sources */,
 				6A49A6D71B8CC4AC00FF2824 /* ConstantScoreQueryBuilder.m in Sources */,
 				6A49A8531B8CC4AC00FF2824 /* ContextSuggestField.m in Sources */,
 				6A49A7AE1B8CC4AC00FF2824 /* LRUQueryCache.m in Sources */,
@@ -7548,7 +7103,6 @@
 				6A49A30D1B8CC4AC00FF2824 /* PorterStemmer.m in Sources */,
 				6A49A36A1B8CC4AC00FF2824 /* KeywordMarkerFilterFactory.m in Sources */,
 				6A49A8F91B8CC4AC00FF2824 /* Counter.m in Sources */,
-				6A49A76A1B8CC4AC00FF2824 /* package-info.m in Sources */,
 				6A49A85C1B8CC4AC00FF2824 /* SuggestScoreDocPriorityQueue.m in Sources */,
 				6A49A8111B8CC4AC00FF2824 /* FieldMaskingSpanQuery.m in Sources */,
 				6A49A7B01B8CC4AC00FF2824 /* MatchNoDocsQuery.m in Sources */,
@@ -7576,7 +7130,6 @@
 				6A49A5F51B8CC4AC00FF2824 /* NormValueSource.m in Sources */,
 				6A49A6471B8CC4AC00FF2824 /* RangeQueryNode.m in Sources */,
 				6A49A89C1B8CC4AC00FF2824 /* FSDirectory.m in Sources */,
-				6A49A7591B8CC4AC00FF2824 /* AbstractAllGroupHeadsCollector.m in Sources */,
 				6A49A2DD1B8CC4AC00FF2824 /* CzechAnalyzer.m in Sources */,
 				6A49A8D81B8CC4AC00FF2824 /* Lev1ParametricDescription.m in Sources */,
 				6A49A3321B8CC4AC00FF2824 /* GalicianStemFilterFactory.m in Sources */,
@@ -7605,7 +7158,6 @@
 				6A49A9BA1B8CC4AC00FF2824 /* package-info.m in Sources */,
 				6A49A6A91B8CC4AC00FF2824 /* NumericRangeQueryNodeProcessor.m in Sources */,
 				6A49A8C71B8CC4AC00FF2824 /* ArrayInPlaceMergeSorter.m in Sources */,
-				6A49A75F1B8CC4AC00FF2824 /* BlockGroupingCollector.m in Sources */,
 				6A49A3731B8CC4AC00FF2824 /* LimitTokenOffsetFilterFactory.m in Sources */,
 				6A49A3341B8CC4AC00FF2824 /* package-info.m in Sources */,
 				6A49A8191B8CC4AC00FF2824 /* SpanContainQuery.m in Sources */,
@@ -7675,7 +7227,6 @@
 				6A49A9851B8CC4AC00FF2824 /* TimSorter.m in Sources */,
 				6A49A66B1B8CC4AC00FF2824 /* FieldQueryNodeBuilder.m in Sources */,
 				6A49A7311B8CC4AC00FF2824 /* DocIdSetIterator.m in Sources */,
-				6A49A4E81B8CC4AC00FF2824 /* SimpleTextStoredFieldsFormat.m in Sources */,
 				6A49A6021B8CC4AC00FF2824 /* SumFloatFunction.m in Sources */,
 				6A49A6541B8CC4AC00FF2824 /* QueryNodeProcessorPipeline.m in Sources */,
 				6A49A90F1B8CC4AC00FF2824 /* ReverseBytesReader.m in Sources */,
@@ -7689,19 +7240,15 @@
 				6A49A63B1B8CC4AC00FF2824 /* MatchNoDocsQueryNode.m in Sources */,
 				6A49A3DB1B8CC4AC00FF2824 /* RussianLightStemFilter.m in Sources */,
 				6A49A3431B8CC4AC00FF2824 /* HunspellStemFilter.m in Sources */,
-				6A49A5151B8CC4AC00FF2824 /* ExpressionComparator.m in Sources */,
 				6A49A5C41B8CC4AC00FF2824 /* package-info.m in Sources */,
 				6A49A6EF1B8CC4AC00FF2824 /* UserInputQueryBuilder.m in Sources */,
-				6A49A4731B8CC4AC00FF2824 /* OrdsBlockTreeTermsReader.m in Sources */,
 				6A49A4F21B8CC4AC00FF2824 /* TermStats.m in Sources */,
 				6A49A43B1B8CC4AC00FF2824 /* OpenStringBuilder.m in Sources */,
-				6A49A4BF1B8CC4AC00FF2824 /* DirectDocValuesProducer.m in Sources */,
 				6A49A3CF1B8CC4AC00FF2824 /* PortugueseStemmer.m in Sources */,
 				6A49A3211B8CC4AC00FF2824 /* FrenchAnalyzer.m in Sources */,
 				6A49A5D31B8CC4AC00FF2824 /* IntDocValues.m in Sources */,
 				6A49A4931B8CC4AC00FF2824 /* DocValuesConsumer.m in Sources */,
 				6A49A3251B8CC4AC00FF2824 /* FrenchMinimalStemFilter.m in Sources */,
-				6A49A4CB1B8CC4AC00FF2824 /* MemoryPostingsFormat.m in Sources */,
 				6A49A6871B8CC4AC00FF2824 /* BooleanModifierNode.m in Sources */,
 				6A49A4001B8CC4AC00FF2824 /* UAX29URLEmailTokenizerFactory.m in Sources */,
 				6A49A86A1B8CC4AC00FF2824 /* InputIterator.m in Sources */,
@@ -7726,7 +7273,6 @@
 				6A49A3461B8CC4AC00FF2824 /* Stemmer.m in Sources */,
 				6A49A7461B8CC4AC00FF2824 /* FilterCache.m in Sources */,
 				6A49A62B1B8CC4AC00FF2824 /* FieldConfigListener.m in Sources */,
-				6A49A4771B8CC4AC00FF2824 /* OrdsIntersectTermsEnumFrame.m in Sources */,
 				6A49A2AC1B8CC4AC00FF2824 /* SoraniStemmer.m in Sources */,
 				6A49A4321B8CC4AC00FF2824 /* CharFilterFactory.m in Sources */,
 				6A49A6BA1B8CC4AC00FF2824 /* QueryParserConstants.m in Sources */,
@@ -7743,7 +7289,6 @@
 				6A49A9A61B8CC4AC00FF2824 /* EnglishStemmer.m in Sources */,
 				6A49A3291B8CC4AC00FF2824 /* IrishAnalyzer.m in Sources */,
 				6A49A8901B8CC4AC00FF2824 /* BufferedChecksumIndexInput.m in Sources */,
-				6A49A4741B8CC4AC00FF2824 /* OrdsBlockTreeTermsWriter.m in Sources */,
 				6A49A53F1B8CC4AC00FF2824 /* DocValuesType.m in Sources */,
 				6A49A2921B8CC4AC00FF2824 /* BrazilianStemmer.m in Sources */,
 				6A49A7F81B8CC4AC00FF2824 /* LMJelinekMercerSimilarity.m in Sources */,
@@ -7777,10 +7322,8 @@
 				6A49A3BB1B8CC4AC00FF2824 /* IntegerEncoder.m in Sources */,
 				6A49A2C81B8CC4AC00FF2824 /* LetterTokenizerFactory.m in Sources */,
 				6A49A8041B8CC4AC00FF2824 /* TFIDFSimilarity.m in Sources */,
-				6A49A45F1B8CC4AC00FF2824 /* package-info.m in Sources */,
 				6A49A7EC1B8CC4AC00FF2824 /* BasicStats.m in Sources */,
 				6A49A6B71B8CC4AC00FF2824 /* package-info.m in Sources */,
-				6A49A51A1B8CC4AC00FF2824 /* FakeScorer.m in Sources */,
 				6A49A98C1B8CC4AC00FF2824 /* AccessDeniedException.m in Sources */,
 				6A49A7531B8CC4AC00FF2824 /* GeoPointInBBoxQuery.m in Sources */,
 				6A49A9451B8CC4AC00FF2824 /* BulkOperationPacked17.m in Sources */,
@@ -7796,7 +7339,6 @@
 				6A49A77E1B8CC4AC00FF2824 /* PositionSpan.m in Sources */,
 				6A49A7AB1B8CC4AC00FF2824 /* LeafFieldComparator.m in Sources */,
 				6A49A6831B8CC4AC00FF2824 /* NumericFieldConfigListener.m in Sources */,
-				6A49A4631B8CC4AC00FF2824 /* VariableGapTermsIndexWriter.m in Sources */,
 				6A49A5C91B8CC4AC00FF2824 /* BoostingQuery.m in Sources */,
 				6A49A5471B8CC4AC00FF2824 /* FieldTermIterator.m in Sources */,
 				6A49A93C1B8CC4AC00FF2824 /* BulkOperationPacked.m in Sources */,
@@ -7843,7 +7385,6 @@
 				6A49A8521B8CC4AC00FF2824 /* ContextQuery.m in Sources */,
 				6A49A3021B8CC4AC00FF2824 /* KStemData4.m in Sources */,
 				6A49A3BA1B8CC4AC00FF2824 /* IdentityEncoder.m in Sources */,
-				6A49A4C01B8CC4AC00FF2824 /* DirectPostingsFormat.m in Sources */,
 				6A49A8931B8CC4AC00FF2824 /* ByteArrayDataOutput.m in Sources */,
 				6A49A4521B8CC4AC00FF2824 /* GrowingHeapLatLonWriter.m in Sources */,
 				6A49A6401B8CC4AC00FF2824 /* package-info.m in Sources */,
@@ -7859,7 +7400,6 @@
 				6A49A8561B8CC4AC00FF2824 /* NRTSuggesterBuilder.m in Sources */,
 				6A49A3531B8CC4AC00FF2824 /* ItalianLightStemFilter.m in Sources */,
 				6A49A2B81B8CC4AC00FF2824 /* Hyphenation.m in Sources */,
-				6A49A45B1B8CC4AC00FF2824 /* BlockTermsReader.m in Sources */,
 				6A49A7FA1B8CC4AC00FF2824 /* MultiSimilarity.m in Sources */,
 				6A49A4041B8CC4AC00FF2824 /* SwedishLightStemFilter.m in Sources */,
 				6A49A97B1B8CC4AC00FF2824 /* SetOnce.m in Sources */,
@@ -7868,7 +7408,6 @@
 				6A49A4A71B8CC4AC00FF2824 /* ForUtil.m in Sources */,
 				6A49A9381B8CC4AC00FF2824 /* BlockPackedReader.m in Sources */,
 				6A49A8341B8CC4AC00FF2824 /* SpellChecker.m in Sources */,
-				6A49A8C01B8CC4AC00FF2824 /* FieldCache.m in Sources */,
 				6A49A8E41B8CC4AC00FF2824 /* StatePair.m in Sources */,
 				6A49A9561B8CC4AC00FF2824 /* DeltaPackedLongValues.m in Sources */,
 				6A49A4F71B8CC4AC00FF2824 /* CollationDocValuesField.m in Sources */,
@@ -7912,7 +7451,6 @@
 				6A49A6441B8CC4AC00FF2824 /* QueryNode.m in Sources */,
 				6A49A5201B8CC4AC00FF2824 /* AutomatonTermsEnum.m in Sources */,
 				6A49A7BB1B8CC4AC00FF2824 /* NumericRangeQuery.m in Sources */,
-				6A49A51D1B8CC4AC00FF2824 /* ScoreValueSource.m in Sources */,
 				6A49A31F1B8CC4AC00FF2824 /* FinnishLightStemmer.m in Sources */,
 				6A49A90D1B8CC4AC00FF2824 /* PairOutputs.m in Sources */,
 				6A49A5641B8CC4AC00FF2824 /* LeafReaderContext.m in Sources */,
@@ -7945,7 +7483,6 @@
 				6A49A7921B8CC4AC00FF2824 /* BaseGlobalOrdinalScorer.m in Sources */,
 				6A49A2891B8CC4AC00FF2824 /* package-info.m in Sources */,
 				6A49A6251B8CC4AC00FF2824 /* package-info.m in Sources */,
-				6A49A7631B8CC4AC00FF2824 /* FunctionAllGroupsCollector.m in Sources */,
 				6A49A8001B8CC4AC00FF2824 /* package-info.m in Sources */,
 				6A49A5F31B8CC4AC00FF2824 /* MultiFunction.m in Sources */,
 				6A49A2CC1B8CC4AC00FF2824 /* LowerCaseTokenizerFactory.m in Sources */,
@@ -7954,7 +7491,6 @@
 				6A49A2AD1B8CC4AC00FF2824 /* CommonGramsFilter.m in Sources */,
 				6A49A3A51B8CC4AC00FF2824 /* NorwegianMinimalStemmer.m in Sources */,
 				6A49A85F1B8CC4AC00FF2824 /* DocumentDictionary.m in Sources */,
-				6A49A51E1B8CC4AC00FF2824 /* SimpleBindings.m in Sources */,
 				6A49A9421B8CC4AC00FF2824 /* BulkOperationPacked14.m in Sources */,
 				6A49A2F81B8CC4AC00FF2824 /* package-info.m in Sources */,
 				6A49A2EF1B8CC4AC00FF2824 /* GermanStemmer.m in Sources */,
@@ -7979,7 +7515,6 @@
 				6A49A3421B8CC4AC00FF2824 /* Dictionary.m in Sources */,
 				6A49A95A1B8CC4AC00FF2824 /* Direct8.m in Sources */,
 				6A49A67E1B8CC4AC00FF2824 /* FieldBoostMapFCListener.m in Sources */,
-				6A49A4E21B8CC4AC00FF2824 /* SimpleTextFieldsReader.m in Sources */,
 				6A49A5611B8CC4AC00FF2824 /* IndexWriterConfig.m in Sources */,
 				6A49A3241B8CC4AC00FF2824 /* FrenchLightStemmer.m in Sources */,
 				6A49A4641B8CC4AC00FF2824 /* BlockTermState.m in Sources */,
@@ -8013,7 +7548,6 @@
 				6A49A2941B8CC4AC00FF2824 /* CatalanAnalyzer.m in Sources */,
 				6A49A32A1B8CC4AC00FF2824 /* IrishLowerCaseFilter.m in Sources */,
 				6A49A7001B8CC4AC00FF2824 /* RangeTreeDocValuesConsumer.m in Sources */,
-				6A49A4C51B8CC4AC00FF2824 /* FSTTermOutputs.m in Sources */,
 				6A49A4881B8CC4AC00FF2824 /* CompressingStoredFieldsReader.m in Sources */,
 				6A49A93D1B8CC4AC00FF2824 /* BulkOperationPacked1.m in Sources */,
 				6A49A6371B8CC4AC00FF2824 /* FieldValuePairQueryNode.m in Sources */,
@@ -8024,7 +7558,6 @@
 				6A49A8591B8CC4AC00FF2824 /* RegexCompletionQuery.m in Sources */,
 				6A49A7B91B8CC4AC00FF2824 /* NGramPhraseQuery.m in Sources */,
 				6A49A7851B8CC4AC00FF2824 /* SimpleHTMLFormatter.m in Sources */,
-				6A49A7731B8CC4AC00FF2824 /* TopGroups.m in Sources */,
 				6A49A5551B8CC4AC00FF2824 /* IndexDeletionPolicy.m in Sources */,
 				6A49A60B1B8CC4AC00FF2824 /* MoreLikeThisQuery.m in Sources */,
 				6A49A7261B8CC4AC00FF2824 /* ConstantScoreWeight.m in Sources */,
@@ -8047,7 +7580,6 @@
 				6A49A5D71B8CC4AC00FF2824 /* FunctionQuery.m in Sources */,
 				6A49A6A11B8CC4AC00FF2824 /* DefaultPhraseSlopQueryNodeProcessor.m in Sources */,
 				6A49A5AB1B8CC4AC00FF2824 /* SortedSetDocValuesTermsEnum.m in Sources */,
-				6A49A47A1B8CC4AC00FF2824 /* package-info.m in Sources */,
 				6A49A49C1B8CC4AC00FF2824 /* IDVersionPostingsWriter.m in Sources */,
 				6A49A49F1B8CC4AC00FF2824 /* IDVersionTermState.m in Sources */,
 				6A49A5BB1B8CC4AC00FF2824 /* TieredMergePolicy.m in Sources */,
@@ -8064,7 +7596,6 @@
 				6A49A6511B8CC4AC00FF2824 /* package-info.m in Sources */,
 				6A49A3D31B8CC4AC00FF2824 /* ReusableStringReader.m in Sources */,
 				6A49A41F1B8CC4AC00FF2824 /* PositionLengthAttributeImpl.m in Sources */,
-				6A49A4DD1B8CC4AC00FF2824 /* SimpleTextCompoundFormat.m in Sources */,
 				6A49A8501B8CC4AC00FF2824 /* CompletionTokenStream.m in Sources */,
 				6A49A7D91B8CC4AC00FF2824 /* Rescorer.m in Sources */,
 				6A49A41B1B8CC4AC00FF2824 /* PayloadAttributeImpl.m in Sources */,
@@ -8088,13 +7619,11 @@
 				6A49A95C1B8CC4AC00FF2824 /* DirectPackedReader.m in Sources */,
 				6A49A8171B8CC4AC00FF2824 /* SpanCollector.m in Sources */,
 				6A49A8631B8CC4AC00FF2824 /* ExternalRefSorter.m in Sources */,
-				6A49A4621B8CC4AC00FF2824 /* VariableGapTermsIndexReader.m in Sources */,
 				6A49A5001B8CC4AC00FF2824 /* DocumentStoredFieldVisitor.m in Sources */,
 				6A49A6951B8CC4AC00FF2824 /* package-info.m in Sources */,
 				6A49A3371B8CC4AC00FF2824 /* HindiNormalizationFilterFactory.m in Sources */,
 				6A49A3331B8CC4AC00FF2824 /* GalicianStemmer.m in Sources */,
 				6A49A6F71B8CC4AC00FF2824 /* QueryBuilder.m in Sources */,
-				6A49A4761B8CC4AC00FF2824 /* OrdsIntersectTermsEnum.m in Sources */,
 				6A49A5E91B8CC4AC00FF2824 /* IntFieldSource.m in Sources */,
 				6A49A44A1B8CC4AC00FF2824 /* BKDPointInBBoxQuery.m in Sources */,
 				6A49A6D81B8CC4AC00FF2824 /* DisjunctionMaxQueryBuilder.m in Sources */,
@@ -8118,14 +7647,12 @@
 				6A49A5231B8CC4AC00FF2824 /* BinaryDocValuesFieldUpdates.m in Sources */,
 				6A49A60F1B8CC4AC00FF2824 /* TermsFilter.m in Sources */,
 				6A49A58C1B8CC4AC00FF2824 /* QueryTimeout.m in Sources */,
-				6A49A45E1B8CC4AC00FF2824 /* FixedGapTermsIndexWriter.m in Sources */,
 				6A49A3501B8CC4AC00FF2824 /* IndicNormalizer.m in Sources */,
 				6A49A5E71B8CC4AC00FF2824 /* IDFValueSource.m in Sources */,
 				6A49A7891B8CC4AC00FF2824 /* TextFragment.m in Sources */,
 				6A49A8261B8CC4AC00FF2824 /* SpanWeight.m in Sources */,
 				6A49A4101B8CC4AC00FF2824 /* CharTermAttribute.m in Sources */,
 				6A49A6811B8CC4AC00FF2824 /* NumberDateFormat.m in Sources */,
-				6A49A7621B8CC4AC00FF2824 /* FunctionAllGroupHeadsCollector.m in Sources */,
 				6A49A4891B8CC4AC00FF2824 /* CompressingStoredFieldsWriter.m in Sources */,
 				6A49A84D1B8CC4AC00FF2824 /* CompletionScorer.m in Sources */,
 				6A49A3DA1B8CC4AC00FF2824 /* RussianAnalyzer.m in Sources */,
@@ -8163,7 +7690,6 @@
 				6A49A3981B8CC4AC00FF2824 /* NGramFilterFactory.m in Sources */,
 				6A49A8EA1B8CC4AC00FF2824 /* BitSet.m in Sources */,
 				6A49A91A1B8CC4AC00FF2824 /* IntBlockPool.m in Sources */,
-				6A49A7611B8CC4AC00FF2824 /* FakeScorer.m in Sources */,
 				6A49A7541B8CC4AC00FF2824 /* GeoPointInBBoxQueryImpl.m in Sources */,
 				6A49A5681B8CC4AC00FF2824 /* LogMergePolicy.m in Sources */,
 				6A49A4541B8CC4AC00FF2824 /* HeapLatLonWriter.m in Sources */,
@@ -8194,7 +7720,6 @@
 				6A49A71B1B8CC4AC00FF2824 /* CachingCollector.m in Sources */,
 				6A49A9131B8CC4AC00FF2824 /* GeoHashUtils.m in Sources */,
 				6A49A2951B8CC4AC00FF2824 /* package-info.m in Sources */,
-				6A49A4E31B8CC4AC00FF2824 /* SimpleTextFieldsWriter.m in Sources */,
 				6A49A6751B8CC4AC00FF2824 /* PrefixWildcardQueryNodeBuilder.m in Sources */,
 				6A49A2B31B8CC4AC00FF2824 /* DictionaryCompoundWordTokenFilter.m in Sources */,
 				6A49A7F91B8CC4AC00FF2824 /* LMSimilarity.m in Sources */,
@@ -8228,28 +7753,22 @@
 				6A49A6091B8CC4AC00FF2824 /* ValueSourceScorer.m in Sources */,
 				6A49A3B51B8CC4AC00FF2824 /* PatternTokenizerFactory.m in Sources */,
 				6A49A8FB1B8CC4AC00FF2824 /* FilterIterator.m in Sources */,
-				6A49A4BD1B8CC4AC00FF2824 /* DirectDocValuesConsumer.m in Sources */,
 				6A49A8621B8CC4AC00FF2824 /* BytesRefSorter.m in Sources */,
 				6A49A60E1B8CC4AC00FF2824 /* TermFilter.m in Sources */,
 				6A49A6BC1B8CC4AC00FF2824 /* Token.m in Sources */,
 				6A49A8211B8CC4AC00FF2824 /* SpanPositionRangeQuery.m in Sources */,
 				6A49A86E1B8CC4AC00FF2824 /* Lookup.m in Sources */,
-				6A49A4C71B8CC4AC00FF2824 /* FSTTermsWriter.m in Sources */,
 				6A49A7F31B8CC4AC00FF2824 /* IBSimilarity.m in Sources */,
 				6A49A35D1B8CC4AC00FF2824 /* package-info.m in Sources */,
 				6A49A6741B8CC4AC00FF2824 /* PhraseQueryNodeBuilder.m in Sources */,
 				6A49A50A1B8CC4AC00FF2824 /* LongField.m in Sources */,
 				6A49A9B51B8CC4AC00FF2824 /* RomanianStemmer.m in Sources */,
-				6A49A5181B8CC4AC00FF2824 /* ExpressionSortField.m in Sources */,
 				6A49A41D1B8CC4AC00FF2824 /* PositionIncrementAttributeImpl.m in Sources */,
 				6A49A65B1B8CC4AC00FF2824 /* QueryNodeOperation.m in Sources */,
-				6A49A51C1B8CC4AC00FF2824 /* ScoreFunctionValues.m in Sources */,
 				6A49A8D71B8CC4AC00FF2824 /* FiniteStringsIterator.m in Sources */,
 				6A49A8EE1B8CC4AC00FF2824 /* BytesRef.m in Sources */,
 				6A49A6031B8CC4AC00FF2824 /* SumTotalTermFreqValueSource.m in Sources */,
 				6A49A5671B8CC4AC00FF2824 /* LogDocMergePolicy.m in Sources */,
-				6A49A7651B8CC4AC00FF2824 /* FunctionFirstPassGroupingCollector.m in Sources */,
-				6A49A8C31B8CC4AC00FF2824 /* package-info.m in Sources */,
 				6A49A3C51B8CC4AC00FF2824 /* package-info.m in Sources */,
 				6A49A7BC1B8CC4AC00FF2824 /* package-info.m in Sources */,
 				6A49A5C71B8CC4AC00FF2824 /* package-info.m in Sources */,
@@ -8260,12 +7779,10 @@
 				6A49A5881B8CC4AC00FF2824 /* PersistentSnapshotDeletionPolicy.m in Sources */,
 				6A49A5751B8CC4AC00FF2824 /* MultiDocValues.m in Sources */,
 				6A49A4261B8CC4AC00FF2824 /* TokenStreamToAutomaton.m in Sources */,
-				6A49A7661B8CC4AC00FF2824 /* FunctionSecondPassGroupingCollector.m in Sources */,
 				6A49A2871B8CC4AC00FF2824 /* ArabicStemFilterFactory.m in Sources */,
 				6A49A3CA1B8CC4AC00FF2824 /* PortugueseMinimalStemFilter.m in Sources */,
 				6A49A5A21B8CC4AC00FF2824 /* SlowCodecReaderWrapper.m in Sources */,
 				6A49A7041B8CC4AC00FF2824 /* RangeTreeSortedNumericDocValues.m in Sources */,
-				6A49A4C91B8CC4AC00FF2824 /* MemoryDocValuesFormat.m in Sources */,
 				6A49A3AC1B8CC4AC00FF2824 /* ReversePathHierarchyTokenizer.m in Sources */,
 				6A49A99B1B8CC4AC00FF2824 /* StandardOpenOption.m in Sources */,
 				6A49A7AD1B8CC4AC00FF2824 /* LRUFilterCache.m in Sources */,
@@ -8291,9 +7808,6 @@
 				6A49A49A1B8CC4AC00FF2824 /* IDVersionPostingsFormat.m in Sources */,
 				6A49A69B1B8CC4AC00FF2824 /* TokenMgrError.m in Sources */,
 				6A49A8CB1B8CC4AC00FF2824 /* Attribute.m in Sources */,
-				6A49A4DE1B8CC4AC00FF2824 /* SimpleTextDocValuesFormat.m in Sources */,
-				6A49A4BE1B8CC4AC00FF2824 /* DirectDocValuesFormat.m in Sources */,
-				6A49A5161B8CC4AC00FF2824 /* ExpressionFunctionValues.m in Sources */,
 				6A49A4A81B8CC4AC00FF2824 /* Lucene50CompoundFormat.m in Sources */,
 				6A49A9111B8CC4AC00FF2824 /* Util.m in Sources */,
 				6A49A2A91B8CC4AC00FF2824 /* SoraniNormalizer.m in Sources */,
@@ -8339,7 +7853,6 @@
 				6A49A8E61B8CC4AC00FF2824 /* Transition.m in Sources */,
 				6A49A37C1B8CC4AC00FF2824 /* PerFieldAnalyzerWrapper.m in Sources */,
 				6A49A79F1B8CC4AC00FF2824 /* QueryBitSetProducer.m in Sources */,
-				6A49A47F1B8CC4AC00FF2824 /* HashFunction.m in Sources */,
 				6A49A3BF1B8CC4AC00FF2824 /* PayloadEncoder.m in Sources */,
 				6A49A2AF1B8CC4AC00FF2824 /* CommonGramsQueryFilter.m in Sources */,
 				6A49A3EE1B8CC4AC00FF2824 /* ClassicFilter.m in Sources */,
@@ -8347,7 +7860,6 @@
 				6A49A87A1B8CC4AC00FF2824 /* TermRangeFilter.m in Sources */,
 				6A49A9861B8CC4AC00FF2824 /* ToStringUtils.m in Sources */,
 				6A49A61E1B8CC4AC00FF2824 /* ComplexPhraseQueryParser.m in Sources */,
-				6A49A4CC1B8CC4AC00FF2824 /* package-info.m in Sources */,
 				6A49A7101B8CC4AC00FF2824 /* BitsFilteredDocIdSet.m in Sources */,
 				6A49A6301B8CC4AC00FF2824 /* AndQueryNode.m in Sources */,
 				6A49A3361B8CC4AC00FF2824 /* HindiNormalizationFilter.m in Sources */,
@@ -8363,7 +7875,6 @@
 				6A49A7441B8CC4AC00FF2824 /* FieldValueQuery.m in Sources */,
 				6A49A5CF1B8CC4AC00FF2824 /* BoolDocValues.m in Sources */,
 				6A49A7291B8CC4AC00FF2824 /* DisiWrapper.m in Sources */,
-				6A49A4711B8CC4AC00FF2824 /* BlockTreeOrdsPostingsFormat.m in Sources */,
 				6A49A7BF1B8CC4AC00FF2824 /* MinPayloadFunction.m in Sources */,
 				6A49A5871B8CC4AC00FF2824 /* ParallelPostingsArray.m in Sources */,
 				6A49A96E1B8CC4AC00FF2824 /* PagedGrowableWriter.m in Sources */,
@@ -8381,7 +7892,6 @@
 				6A49A4B21B8CC4AC00FF2824 /* Lucene50SegmentInfoFormat.m in Sources */,
 				6A49A6661B8CC4AC00FF2824 /* PrecedenceQueryNodeProcessorPipeline.m in Sources */,
 				6A49A7451B8CC4AC00FF2824 /* Filter.m in Sources */,
-				6A49A51B1B8CC4AC00FF2824 /* package-info.m in Sources */,
 				6A49A6DE1B8CC4AC00FF2824 /* NumericRangeFilterBuilder.m in Sources */,
 				6A49A5EB1B8CC4AC00FF2824 /* LinearFloatFunction.m in Sources */,
 				6A49A4BB1B8CC4AC00FF2824 /* Lucene53NormsProducer.m in Sources */,
@@ -8403,7 +7913,6 @@
 				6A49A7151B8CC4AC00FF2824 /* BooleanScorer.m in Sources */,
 				6A49A91E1B8CC4AC00FF2824 /* IOUtils.m in Sources */,
 				6A49A4B91B8CC4AC00FF2824 /* Lucene53NormsConsumer.m in Sources */,
-				6A49A4601B8CC4AC00FF2824 /* TermsIndexReaderBase.m in Sources */,
 				6A49A3611B8CC4AC00FF2824 /* CapitalizationFilterFactory.m in Sources */,
 				6A49A3311B8CC4AC00FF2824 /* GalicianStemFilter.m in Sources */,
 				6A49A6FA1B8CC4AC00FF2824 /* GrowingHeapSliceWriter.m in Sources */,
@@ -8416,7 +7925,6 @@
 				6A49A66E1B8CC4AC00FF2824 /* MatchAllDocsQueryNodeBuilder.m in Sources */,
 				6A49A7D01B8CC4AC00FF2824 /* QueryCache.m in Sources */,
 				6A49A2CA1B8CC4AC00FF2824 /* LowerCaseFilterFactory.m in Sources */,
-				6A49A4EA1B8CC4AC00FF2824 /* SimpleTextStoredFieldsWriter.m in Sources */,
 				6A49A4D31B8CC4AC00FF2824 /* package-info.m in Sources */,
 				6A49A7351B8CC4AC00FF2824 /* DocValuesNumbersQuery.m in Sources */,
 				6A49A3521B8CC4AC00FF2824 /* ItalianAnalyzer.m in Sources */,
@@ -8428,12 +7936,10 @@
 				6A49A8491B8CC4AC00FF2824 /* CompletionFieldsConsumer.m in Sources */,
 				6A49A46F1B8CC4AC00FF2824 /* SegmentTermsEnumFrame.m in Sources */,
 				6A49A95D1B8CC4AC00FF2824 /* DirectReader.m in Sources */,
-				6A49A4EB1B8CC4AC00FF2824 /* SimpleTextTermVectorsFormat.m in Sources */,
 				6A49A9601B8CC4AC00FF2824 /* MonotonicBlockPackedReader.m in Sources */,
 				6A49A53C1B8CC4AC00FF2824 /* DocumentsWriterStallControl.m in Sources */,
 				6A49A34E1B8CC4AC00FF2824 /* IndicNormalizationFilter.m in Sources */,
 				6A49A3E81B8CC4AC00FF2824 /* SnowballFilter.m in Sources */,
-				6A49A4E61B8CC4AC00FF2824 /* SimpleTextPostingsFormat.m in Sources */,
 				6A49A8661B8CC4AC00FF2824 /* FSTCompletionLookup.m in Sources */,
 				6A49A6C91B8CC4AC00FF2824 /* SimpleTerm.m in Sources */,
 				6A49A60D1B8CC4AC00FF2824 /* package-info.m in Sources */,
@@ -8444,19 +7950,16 @@
 				6A49A2E21B8CC4AC00FF2824 /* DanishAnalyzer.m in Sources */,
 				6A49A4561B8CC4AC00FF2824 /* LatLonWriter.m in Sources */,
 				6A49A8D11B8CC4AC00FF2824 /* Automaton.m in Sources */,
-				6A49A5191B8CC4AC00FF2824 /* ExpressionValueSource.m in Sources */,
 				6A49A8A61B8CC4AC00FF2824 /* LockStressTest.m in Sources */,
 				6A49A6921B8CC4AC00FF2824 /* CharStream.m in Sources */,
 				6A49A5521B8CC4AC00FF2824 /* IndexableField.m in Sources */,
 				6A49A9011B8CC4AC00FF2824 /* BytesStore.m in Sources */,
 				6A49A34F1B8CC4AC00FF2824 /* IndicNormalizationFilterFactory.m in Sources */,
 				6A49A7121B8CC4AC00FF2824 /* BlockJoinComparatorSource.m in Sources */,
-				6A49A4DF1B8CC4AC00FF2824 /* SimpleTextDocValuesReader.m in Sources */,
 				6A49A9881B8CC4AC00FF2824 /* Version.m in Sources */,
 				6A49A5E11B8CC4AC00FF2824 /* DoubleConstValueSource.m in Sources */,
 				6A49A3151B8CC4AC00FF2824 /* package-info.m in Sources */,
 				6A49A8281B8CC4AC00FF2824 /* TermSpans.m in Sources */,
-				6A49A4611B8CC4AC00FF2824 /* TermsIndexWriterBase.m in Sources */,
 				6A49A53D1B8CC4AC00FF2824 /* DocValues.m in Sources */,
 				6A49A8471B8CC4AC00FF2824 /* Completion50PostingsFormat.m in Sources */,
 				6A49A37D1B8CC4AC00FF2824 /* PrefixAndSuffixAwareTokenFilter.m in Sources */,
@@ -8479,19 +7982,15 @@
 				6A49A5C01B8CC4AC00FF2824 /* LucenePackage.m in Sources */,
 				6A49A5891B8CC4AC00FF2824 /* PKIndexSplitter.m in Sources */,
 				6A49A73B1B8CC4AC00FF2824 /* EarlyTerminatingSortingCollector.m in Sources */,
-				6A49A47E1B8CC4AC00FF2824 /* FuzzySet.m in Sources */,
 				6A49A5321B8CC4AC00FF2824 /* DirectoryReader.m in Sources */,
 				6A49A3EC1B8CC4AC00FF2824 /* SerbianNormalizationFilterFactory.m in Sources */,
-				6A49A76F1B8CC4AC00FF2824 /* TermDistinctValuesCollector.m in Sources */,
 				6A49A8DE1B8CC4AC00FF2824 /* MinimizationOperations.m in Sources */,
 				6A49A8201B8CC4AC00FF2824 /* SpanPositionQueue.m in Sources */,
 				6A49A66A1B8CC4AC00FF2824 /* DummyQueryNodeBuilder.m in Sources */,
-				6A49A47B1B8CC4AC00FF2824 /* BloomFilterFactory.m in Sources */,
 				6A49A9B31B8CC4AC00FF2824 /* PorterStemmer.m in Sources */,
 				6A49A5861B8CC4AC00FF2824 /* ParallelLeafReader.m in Sources */,
 				6A49A8F41B8CC4AC00FF2824 /* CharsRefBuilder.m in Sources */,
 				6A49A3AB1B8CC4AC00FF2824 /* PathHierarchyTokenizerFactory.m in Sources */,
-				6A49A5141B8CC4AC00FF2824 /* Expression.m in Sources */,
 				6A49A7B31B8CC4AC00FF2824 /* MinShouldMatchSumScorer.m in Sources */,
 				6A49A4BA1B8CC4AC00FF2824 /* Lucene53NormsFormat.m in Sources */,
 				6A49A9341B8CC4AC00FF2824 /* OfflineSorter.m in Sources */,
@@ -8501,7 +8000,6 @@
 				6A49A6B21B8CC4AC00FF2824 /* StandardQueryParser.m in Sources */,
 				6A49A6001B8CC4AC00FF2824 /* SingleFunction.m in Sources */,
 				6A49A5A41B8CC4AC00FF2824 /* SnapshotDeletionPolicy.m in Sources */,
-				6A49A5171B8CC4AC00FF2824 /* ExpressionRescorer.m in Sources */,
 				6A49A9AA1B8CC4AC00FF2824 /* GermanStemmer.m in Sources */,
 				6A49A6C71B8CC4AC00FF2824 /* package-info.m in Sources */,
 				6A49A9A91B8CC4AC00FF2824 /* German2Stemmer.m in Sources */,
@@ -8548,7 +8046,6 @@
 				6A49A8B81B8CC4AC00FF2824 /* RateLimiter.m in Sources */,
 				6A49A4D21B8CC4AC00FF2824 /* package-info.m in Sources */,
 				6A49A4111B8CC4AC00FF2824 /* CharTermAttributeImpl.m in Sources */,
-				6A49A75B1B8CC4AC00FF2824 /* AbstractDistinctValuesCollector.m in Sources */,
 				6A49A8F01B8CC4AC00FF2824 /* BytesRefBuilder.m in Sources */,
 				6A49A5C61B8CC4AC00FF2824 /* TermStats.m in Sources */,
 				6A49A68C1B8CC4AC00FF2824 /* PrefixWildcardQueryNode.m in Sources */,
@@ -8563,8 +8060,6 @@
 				6A49A2981B8CC4AC00FF2824 /* HTMLStripCharFilter.m in Sources */,
 				6A49A3E21B8CC4AC00FF2824 /* DateRecognizerSinkFilter.m in Sources */,
 				6A49A3E11B8CC4AC00FF2824 /* ShingleFilterFactory.m in Sources */,
-				6A49A7601B8CC4AC00FF2824 /* CollectedSearchGroup.m in Sources */,
-				6A49A4E51B8CC4AC00FF2824 /* SimpleTextNormsFormat.m in Sources */,
 				6A49A8A71B8CC4AC00FF2824 /* LockValidatingDirectoryWrapper.m in Sources */,
 				6A49A8441B8CC4AC00FF2824 /* SuggestStopFilterFactory.m in Sources */,
 				6A49A6771B8CC4AC00FF2824 /* SlopQueryNodeBuilder.m in Sources */,
@@ -8574,12 +8069,10 @@
 				6A49A57A1B8CC4AC00FF2824 /* MultiTerms.m in Sources */,
 				6A49A8A31B8CC4AC00FF2824 /* LockFactory.m in Sources */,
 				6A49A5911B8CC4AC00FF2824 /* ReaderSlice.m in Sources */,
-				6A49A4ED1B8CC4AC00FF2824 /* SimpleTextTermVectorsWriter.m in Sources */,
 				6A49A35C1B8CC4AC00FF2824 /* LatvianStemmer.m in Sources */,
 				6A49A73A1B8CC4AC00FF2824 /* DocValuesTermsQuery.m in Sources */,
 				6A49A7341B8CC4AC00FF2824 /* DocValuesDocIdSet.m in Sources */,
 				6A49A9361B8CC4AC00FF2824 /* AbstractBlockPackedWriter.m in Sources */,
-				6A49A7A61B8CC4AC00FF2824 /* ToParentBlockJoinCollector.m in Sources */,
 				6A49A8731B8CC4AC00FF2824 /* TSTAutocomplete.m in Sources */,
 				6A49A5291B8CC4AC00FF2824 /* ByteSliceWriter.m in Sources */,
 				6A49A5931B8CC4AC00FF2824 /* SegmentCommitInfo.m in Sources */,
@@ -8587,7 +8080,6 @@
 				6A49A90E1B8CC4AC00FF2824 /* PositiveIntOutputs.m in Sources */,
 				6A49A87D1B8CC4AC00FF2824 /* TermStatistics.m in Sources */,
 				6A49A4A01B8CC4AC00FF2824 /* package-info.m in Sources */,
-				6A49A4E91B8CC4AC00FF2824 /* SimpleTextStoredFieldsReader.m in Sources */,
 				6A49A8E51B8CC4AC00FF2824 /* TooComplexToDeterminizeException.m in Sources */,
 				6A49A6F11B8CC4AC00FF2824 /* CorePlusExtensionsParser.m in Sources */,
 				6A49A8A21B8CC4AC00FF2824 /* Lock.m in Sources */,
@@ -8611,7 +8103,6 @@
 				6A49A4421B8CC4AC00FF2824 /* TokenFilterFactory.m in Sources */,
 				6A49A8611B8CC4AC00FF2824 /* FileDictionary.m in Sources */,
 				6A49A94D1B8CC4AC00FF2824 /* BulkOperationPacked24.m in Sources */,
-				6A49A7671B8CC4AC00FF2824 /* package-info.m in Sources */,
 				6A49A9A41B8CC4AC00FF2824 /* DanishStemmer.m in Sources */,
 				6A49A4491B8CC4AC00FF2824 /* BKDPointField.m in Sources */,
 				6A49A5691B8CC4AC00FF2824 /* MappedMultiFields.m in Sources */,
@@ -8628,26 +8119,20 @@
 				6A49A3951B8CC4AC00FF2824 /* Lucene43EdgeNGramTokenizer.m in Sources */,
 				6A49A28B1B8CC4AC00FF2824 /* BulgarianStemFilter.m in Sources */,
 				6A49A6521B8CC4AC00FF2824 /* QueryNodeProcessor.m in Sources */,
-				6A49A7721B8CC4AC00FF2824 /* TermSecondPassGroupingCollector.m in Sources */,
 				6A49A5731B8CC4AC00FF2824 /* MergeTrigger.m in Sources */,
 				6A49A5F21B8CC4AC00FF2824 /* MultiFloatFunction.m in Sources */,
 				6A49A3131B8CC4AC00FF2824 /* BasqueAnalyzer.m in Sources */,
 				6A49A28E1B8CC4AC00FF2824 /* package-info.m in Sources */,
-				6A49A4721B8CC4AC00FF2824 /* FSTOrdsOutputs.m in Sources */,
 				6A49A6E91B8CC4AC00FF2824 /* SpanQueryBuilder.m in Sources */,
 				6A49A6611B8CC4AC00FF2824 /* NLSException.m in Sources */,
 				6A49A5081B8CC4AC00FF2824 /* IntField.m in Sources */,
 				6A49A8E11B8CC4AC00FF2824 /* RegExp.m in Sources */,
 				6A49A6111B8CC4AC00FF2824 /* AnalyzingQueryParser.m in Sources */,
-				6A49A4751B8CC4AC00FF2824 /* OrdsFieldReader.m in Sources */,
 				6A49A8BA1B8CC4AC00FF2824 /* SimpleFSLockFactory.m in Sources */,
 				6A49A3111B8CC4AC00FF2824 /* SpanishLightStemFilterFactory.m in Sources */,
 				6A49A7521B8CC4AC00FF2824 /* GeoPointDistanceQueryImpl.m in Sources */,
-				6A49A45A1B8CC4AC00FF2824 /* package-info.m in Sources */,
 				6A49A7DE1B8CC4AC00FF2824 /* SearcherFactory.m in Sources */,
 				6A49A40A1B8CC4AC00FF2824 /* SynonymFilterFactory.m in Sources */,
-				6A49A4781B8CC4AC00FF2824 /* OrdsSegmentTermsEnum.m in Sources */,
-				6A49A4C61B8CC4AC00FF2824 /* FSTTermsReader.m in Sources */,
 				6A49A9621B8CC4AC00FF2824 /* MonotonicLongValues.m in Sources */,
 				6A49A6B01B8CC4AC00FF2824 /* WildcardQueryNodeProcessor.m in Sources */,
 				6A49A9931B8CC4AC00FF2824 /* FileStore.m in Sources */,
@@ -8676,7 +8161,6 @@
 				6A49A3041B8CC4AC00FF2824 /* KStemData6.m in Sources */,
 				6A49A7191B8CC4AC00FF2824 /* BoostAttributeImpl.m in Sources */,
 				6A49A88B1B8CC4AC00FF2824 /* Weight.m in Sources */,
-				6A49A75D1B8CC4AC00FF2824 /* AbstractGroupFacetCollector.m in Sources */,
 				6A49A94B1B8CC4AC00FF2824 /* BulkOperationPacked22.m in Sources */,
 				6A49A5411B8CC4AC00FF2824 /* DocValuesWriter.m in Sources */,
 				6A49A97F1B8CC4AC00FF2824 /* SparseFixedBitSet.m in Sources */,
@@ -8699,10 +8183,8 @@
 				6A49A8FE1B8CC4AC00FF2824 /* Builder.m in Sources */,
 				6A49A6291B8CC4AC00FF2824 /* ConfigurationKey.m in Sources */,
 				6A49A43E1B8CC4AC00FF2824 /* ResourceLoaderAware.m in Sources */,
-				6A49A47D1B8CC4AC00FF2824 /* DefaultBloomFilterFactory.m in Sources */,
 				6A49A6961B8CC4AC00FF2824 /* ParseException.m in Sources */,
 				6A49A6BE1B8CC4AC00FF2824 /* AndQuery.m in Sources */,
-				6A49A7641B8CC4AC00FF2824 /* FunctionDistinctValuesCollector.m in Sources */,
 				6A49A4F51B8CC4AC00FF2824 /* TermVectorsWriter.m in Sources */,
 				6A49A4481B8CC4AC00FF2824 /* WikipediaTokenizerImpl.m in Sources */,
 				6A49A5E01B8CC4AC00FF2824 /* DocFreqValueSource.m in Sources */,
@@ -8732,7 +8214,6 @@
 				6A49A4501B8CC4AC00FF2824 /* BKDTreeSortedNumericDocValues.m in Sources */,
 				6A49A9711B8CC4AC00FF2824 /* PrintStreamInfoStream.m in Sources */,
 				6A49A8891B8CC4AC00FF2824 /* UsageTrackingFilterCachingPolicy.m in Sources */,
-				6A49A76D1B8CC4AC00FF2824 /* TermAllGroupHeadsCollector.m in Sources */,
 				6A49A6901B8CC4AC00FF2824 /* WildcardQueryNode.m in Sources */,
 				6A49A6EA1B8CC4AC00FF2824 /* SpanQueryBuilderFactory.m in Sources */,
 				6A49A6691B8CC4AC00FF2824 /* BoostQueryNodeBuilder.m in Sources */,
@@ -8748,10 +8229,8 @@
 				6A49A30A1B8CC4AC00FF2824 /* package-info.m in Sources */,
 				6A49A8011B8CC4AC00FF2824 /* PerFieldSimilarityWrapper.m in Sources */,
 				6A49A7411B8CC4AC00FF2824 /* FieldDoc.m in Sources */,
-				6A49A45D1B8CC4AC00FF2824 /* FixedGapTermsIndexReader.m in Sources */,
 				6A49A2841B8CC4AC00FF2824 /* ArabicNormalizationFilterFactory.m in Sources */,
 				6A49A8AC1B8CC4AC00FF2824 /* NIOFSDirectory.m in Sources */,
-				6A49A4E41B8CC4AC00FF2824 /* SimpleTextLiveDocsFormat.m in Sources */,
 				6A49A8BE1B8CC4AC00FF2824 /* VerifyingLockFactory.m in Sources */,
 				6A49A28A1B8CC4AC00FF2824 /* BulgarianAnalyzer.m in Sources */,
 				6A49A8431B8CC4AC00FF2824 /* SuggestStopFilter.m in Sources */,
@@ -8765,7 +8244,6 @@
 				6A49A3B31B8CC4AC00FF2824 /* PatternReplaceFilterFactory.m in Sources */,
 				6A49A7971B8CC4AC00FF2824 /* CheckJoinIndex.m in Sources */,
 				6A49A5511B8CC4AC00FF2824 /* FrozenBufferedUpdates.m in Sources */,
-				6A49A76C1B8CC4AC00FF2824 /* package-info.m in Sources */,
 				6A49A5021B8CC4AC00FF2824 /* DoubleField.m in Sources */,
 				6A49A58A1B8CC4AC00FF2824 /* PostingsEnum.m in Sources */,
 				6A49A81C1B8CC4AC00FF2824 /* SpanNearQuery.m in Sources */,
@@ -8779,7 +8257,6 @@
 				6A49A8181B8CC4AC00FF2824 /* SpanContainingQuery.m in Sources */,
 				6A49A85D1B8CC4AC00FF2824 /* TopSuggestDocs.m in Sources */,
 				6A49A6571B8CC4AC00FF2824 /* QueryNodeException.m in Sources */,
-				6A49A4DB1B8CC4AC00FF2824 /* package-info.m in Sources */,
 				6A49A5301B8CC4AC00FF2824 /* CorruptIndexException.m in Sources */,
 				6A49A9AD1B8CC4AC00FF2824 /* ItalianStemmer.m in Sources */,
 				6A49A37E1B8CC4AC00FF2824 /* PrefixAwareTokenFilter.m in Sources */,
@@ -8798,7 +8275,6 @@
 				6A49A4FD1B8CC4AC00FF2824 /* CompressionTools.m in Sources */,
 				6A49A5781B8CC4AC00FF2824 /* MultiPostingsEnum.m in Sources */,
 				6A49A9721B8CC4AC00FF2824 /* PriorityQueue.m in Sources */,
-				6A49A4CA1B8CC4AC00FF2824 /* MemoryDocValuesProducer.m in Sources */,
 				6A49A8E91B8CC4AC00FF2824 /* Bits.m in Sources */,
 				6A49A3A21B8CC4AC00FF2824 /* NorwegianLightStemmer.m in Sources */,
 				6A49A5581B8CC4AC00FF2824 /* IndexFormatTooNewException.m in Sources */,
@@ -8832,12 +8308,10 @@
 				6A49A7EB1B8CC4AC00FF2824 /* BasicModelP.m in Sources */,
 				6A49A2AB1B8CC4AC00FF2824 /* SoraniStemFilterFactory.m in Sources */,
 				6A49A3C81B8CC4AC00FF2824 /* PortugueseLightStemFilterFactory.m in Sources */,
-				6A49A4E71B8CC4AC00FF2824 /* SimpleTextSegmentInfoFormat.m in Sources */,
 				6A49A4061B8CC4AC00FF2824 /* SwedishLightStemmer.m in Sources */,
 				6A49A9B11B8CC4AC00FF2824 /* NorwegianStemmer.m in Sources */,
 				6A49A6311B8CC4AC00FF2824 /* AnyQueryNode.m in Sources */,
 				6A49A3CC1B8CC4AC00FF2824 /* PortugueseMinimalStemmer.m in Sources */,
-				6A49A4DC1B8CC4AC00FF2824 /* SimpleTextCodec.m in Sources */,
 				6A49A9891B8CC4AC00FF2824 /* VirtualMethod.m in Sources */,
 				6A49A9391B8CC4AC00FF2824 /* BlockPackedReaderIterator.m in Sources */,
 				6A49A6631B8CC4AC00FF2824 /* package-info.m in Sources */,
@@ -8846,13 +8320,11 @@
 				6A49A7B41B8CC4AC00FF2824 /* MultiCollector.m in Sources */,
 				6A49A56E1B8CC4AC00FF2824 /* MergePolicy.m in Sources */,
 				6A49A31D1B8CC4AC00FF2824 /* FinnishLightStemFilter.m in Sources */,
-				6A49A4791B8CC4AC00FF2824 /* OrdsSegmentTermsEnumFrame.m in Sources */,
 				6A49A39E1B8CC4AC00FF2824 /* package-info.m in Sources */,
 				6A49A6DC1B8CC4AC00FF2824 /* LikeThisQueryBuilder.m in Sources */,
 				6A49A5E61B8CC4AC00FF2824 /* FloatFieldSource.m in Sources */,
 				6A49A63A1B8CC4AC00FF2824 /* MatchAllDocsQueryNode.m in Sources */,
 				6A49A95F1B8CC4AC00FF2824 /* GrowableWriter.m in Sources */,
-				6A49A4C11B8CC4AC00FF2824 /* FSTOrdPostingsFormat.m in Sources */,
 				6A49A9031B8CC4AC00FF2824 /* ForwardBytesReader.m in Sources */,
 				6A49A9221B8CC4AC00FF2824 /* LSBRadixSorter.m in Sources */,
 				6A49A56F1B8CC4AC00FF2824 /* MergeRateLimiter.m in Sources */,

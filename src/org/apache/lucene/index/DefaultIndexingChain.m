@@ -768,6 +768,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDefaultIndexingChain)
       succeededInProcessingField = YES;
     }
     @finally {
+      if (!succeededInProcessingField && [((OrgApacheLuceneUtilInfoStream *) nil_chk(((OrgApacheLuceneIndexDocumentsWriterPerThread_DocState *) nil_chk(this$0_->docState_))->infoStream_)) isEnabledWithNSString:@"DW"]) {
+        [this$0_->docState_->infoStream_ messageWithNSString:@"DW" withNSString:JreStrcat("$$", @"An exception was thrown while processing field ", fieldInfo_->name_)];
+      }
       @try {
         [stream close];
       }
@@ -777,9 +780,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDefaultIndexingChain)
         } else {
           __mainException = e;
         }
-      }
-      if (!succeededInProcessingField && [((OrgApacheLuceneUtilInfoStream *) nil_chk(((OrgApacheLuceneIndexDocumentsWriterPerThread_DocState *) nil_chk(this$0_->docState_))->infoStream_)) isEnabledWithNSString:@"DW"]) {
-        [this$0_->docState_->infoStream_ messageWithNSString:@"DW" withNSString:JreStrcat("$$", @"An exception was thrown while processing field ", fieldInfo_->name_)];
       }
       if (__mainException) {
         @throw __mainException;

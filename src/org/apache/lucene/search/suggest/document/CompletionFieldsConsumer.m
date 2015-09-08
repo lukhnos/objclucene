@@ -169,6 +169,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsC
       success = YES;
     }
     @finally {
+      if (success == NO) {
+        OrgApacheLuceneUtilIOUtils_closeWhileHandlingExceptionWithJavaIoCloseableArray_([IOSObjectArray arrayWithObjects:(id[]){ dictOut_, delegateFieldsConsumer_ } count:2 type:JavaIoCloseable_class_()]);
+      }
       @try {
         [indexOut close];
       }
@@ -178,9 +181,6 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsC
         } else {
           __mainException = e;
         }
-      }
-      if (success == NO) {
-        OrgApacheLuceneUtilIOUtils_closeWhileHandlingExceptionWithJavaIoCloseableArray_([IOSObjectArray arrayWithObjects:(id[]){ dictOut_, delegateFieldsConsumer_ } count:2 type:JavaIoCloseable_class_()]);
       }
       if (__mainException) {
         @throw __mainException;

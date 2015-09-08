@@ -68,7 +68,7 @@
   JavaUtilConcurrentAtomicAtomicLong *pendingNumDocs_;
   OrgApacheLuceneIndexLiveIndexWriterConfig *indexWriterConfig_;
   jboolean enableTestPoints_;
-  OrgApacheLuceneIndexIndexWriter *indexWriter_;
+  __weak OrgApacheLuceneIndexIndexWriter *indexWriter_;
   id<JavaUtilSet> filesToDelete_;
 }
 
@@ -85,7 +85,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriterPerThread, deleteSlice_, 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriterPerThread, nf_, JavaTextNumberFormat *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriterPerThread, pendingNumDocs_, JavaUtilConcurrentAtomicAtomicLong *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriterPerThread, indexWriterConfig_, OrgApacheLuceneIndexLiveIndexWriterConfig *)
-J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriterPerThread, indexWriter_, OrgApacheLuceneIndexIndexWriter *)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriterPerThread, filesToDelete_, id<JavaUtilSet>)
 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneIndexDocumentsWriterPerThread, INFO_VERBOSE, jboolean)
@@ -207,7 +206,7 @@ OrgApacheLuceneIndexDocumentsWriterPerThread_IndexingChain *OrgApacheLuceneIndex
        withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
               withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)delTerm {
   OrgApacheLuceneIndexDocumentsWriterPerThread_testPointWithNSString_(self, @"DocumentsWriterPerThread addDocument start");
-  JreAssert((deleteQueue_ != nil), (@"org/apache/lucene/index/DocumentsWriterPerThread.java:217 condition failed: assert deleteQueue != null;"));
+  JreAssert((deleteQueue_ != nil), (@"org/apache/lucene/index/DocumentsWriterPerThread.java:221 condition failed: assert deleteQueue != null;"));
   OrgApacheLuceneIndexDocumentsWriterPerThread_reserveOneDoc(self);
   JreStrongAssign(&((OrgApacheLuceneIndexDocumentsWriterPerThread_DocState *) nil_chk(docState_))->doc_, doc);
   JreStrongAssign(&docState_->analyzer_, analyzer);
@@ -235,7 +234,7 @@ OrgApacheLuceneIndexDocumentsWriterPerThread_IndexingChain *OrgApacheLuceneIndex
         withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
                withOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)delTerm {
   OrgApacheLuceneIndexDocumentsWriterPerThread_testPointWithNSString_(self, @"DocumentsWriterPerThread addDocuments start");
-  JreAssert((deleteQueue_ != nil), (@"org/apache/lucene/index/DocumentsWriterPerThread.java:251 condition failed: assert deleteQueue != null;"));
+  JreAssert((deleteQueue_ != nil), (@"org/apache/lucene/index/DocumentsWriterPerThread.java:255 condition failed: assert deleteQueue != null;"));
   JreStrongAssign(&((OrgApacheLuceneIndexDocumentsWriterPerThread_DocState *) nil_chk(docState_))->analyzer_, analyzer);
   jint docCount = 0;
   jboolean allDocsIndexed = NO;
@@ -295,18 +294,18 @@ OrgApacheLuceneIndexDocumentsWriterPerThread_IndexingChain *OrgApacheLuceneIndex
 }
 
 - (OrgApacheLuceneIndexFrozenBufferedUpdates *)prepareFlush {
-  JreAssert((numDocsInRAM_ > 0), (@"org/apache/lucene/index/DocumentsWriterPerThread.java:375 condition failed: assert numDocsInRAM > 0;"));
+  JreAssert((numDocsInRAM_ > 0), (@"org/apache/lucene/index/DocumentsWriterPerThread.java:379 condition failed: assert numDocsInRAM > 0;"));
   OrgApacheLuceneIndexFrozenBufferedUpdates *globalUpdates = [((OrgApacheLuceneIndexDocumentsWriterDeleteQueue *) nil_chk(deleteQueue_)) freezeGlobalBufferWithOrgApacheLuceneIndexDocumentsWriterDeleteQueue_DeleteSlice:deleteSlice_];
   if (deleteSlice_ != nil) {
     [deleteSlice_ applyWithOrgApacheLuceneIndexBufferedUpdates:pendingUpdates_ withInt:numDocsInRAM_];
-    JreAssert(([deleteSlice_ isEmpty]), (@"org/apache/lucene/index/DocumentsWriterPerThread.java:382 condition failed: assert deleteSlice.isEmpty();"));
+    JreAssert(([deleteSlice_ isEmpty]), (@"org/apache/lucene/index/DocumentsWriterPerThread.java:386 condition failed: assert deleteSlice.isEmpty();"));
     [deleteSlice_ reset];
   }
   return globalUpdates;
 }
 
 - (OrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment *)flush {
-  JreAssert((numDocsInRAM_ > 0), (@"org/apache/lucene/index/DocumentsWriterPerThread.java:390 condition failed: assert numDocsInRAM > 0;"));
+  JreAssert((numDocsInRAM_ > 0), (@"org/apache/lucene/index/DocumentsWriterPerThread.java:394 condition failed: assert numDocsInRAM > 0;"));
   JreAssert(([((OrgApacheLuceneIndexDocumentsWriterDeleteQueue_DeleteSlice *) nil_chk(deleteSlice_)) isEmpty]), (@"all deletes must be applied in prepareFlush"));
   [((OrgApacheLuceneIndexSegmentInfo *) nil_chk(segmentInfo_)) setMaxDocWithInt:numDocsInRAM_];
   OrgApacheLuceneIndexSegmentWriteState *flushState = [new_OrgApacheLuceneIndexSegmentWriteState_initWithOrgApacheLuceneUtilInfoStream_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfo_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexBufferedUpdates_withOrgApacheLuceneStoreIOContext_(infoStream_, directory_, segmentInfo_, [((OrgApacheLuceneIndexFieldInfos_Builder *) nil_chk(fieldInfos_)) finish], pendingUpdates_, [new_OrgApacheLuceneStoreIOContext_initWithOrgApacheLuceneStoreFlushInfo_([new_OrgApacheLuceneStoreFlushInfo_initWithInt_withLong_(numDocsInRAM_, [self bytesUsed]) autorelease]) autorelease]) autorelease];
@@ -353,7 +352,7 @@ OrgApacheLuceneIndexDocumentsWriterPerThread_IndexingChain *OrgApacheLuceneIndex
       jdouble newSegmentSize = [segmentInfoPerCommit sizeInBytes] / 1024. / 1024.;
       [infoStream_ messageWithNSString:@"DWPT" withNSString:JreStrcat("$$$$$$$$", @"flushed: segment=", segmentInfo_->name_, @" ramUsed=", [((JavaTextNumberFormat *) nil_chk(nf_)) formatWithDouble:startMBUsed], @" MB newFlushedSize=", [nf_ formatWithDouble:newSegmentSize], @" MB docs/MB=", [nf_ formatWithDouble:[((OrgApacheLuceneIndexSegmentInfo *) nil_chk(flushState->segmentInfo_)) maxDoc] / newSegmentSize])];
     }
-    JreAssert((segmentInfo_ != nil), (@"org/apache/lucene/index/DocumentsWriterPerThread.java:455 condition failed: assert segmentInfo != null;"));
+    JreAssert((segmentInfo_ != nil), (@"org/apache/lucene/index/DocumentsWriterPerThread.java:459 condition failed: assert segmentInfo != null;"));
     OrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment *fs = [new_OrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment_initWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneIndexFieldInfos_withOrgApacheLuceneIndexBufferedUpdates_withOrgApacheLuceneUtilMutableBits_withInt_(segmentInfoPerCommit, flushState->fieldInfos_, segmentDeletes, flushState->liveDocs_, flushState->delCountOnFlush_) autorelease];
     [self sealFlushedSegmentWithOrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment:fs];
     return fs;
@@ -369,7 +368,7 @@ OrgApacheLuceneIndexDocumentsWriterPerThread_IndexingChain *OrgApacheLuceneIndex
 }
 
 - (void)sealFlushedSegmentWithOrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment:(OrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment *)flushedSegment {
-  JreAssert((flushedSegment != nil), (@"org/apache/lucene/index/DocumentsWriterPerThread.java:478 condition failed: assert flushedSegment != null;"));
+  JreAssert((flushedSegment != nil), (@"org/apache/lucene/index/DocumentsWriterPerThread.java:482 condition failed: assert flushedSegment != null;"));
   OrgApacheLuceneIndexSegmentCommitInfo *newSegment = ((OrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment *) nil_chk(flushedSegment))->segmentInfo_;
   OrgApacheLuceneIndexIndexWriter_setDiagnosticsWithOrgApacheLuceneIndexSegmentInfo_withNSString_(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(newSegment))->info_, OrgApacheLuceneIndexIndexWriter_SOURCE_FLUSH_);
   OrgApacheLuceneStoreIOContext *context = [new_OrgApacheLuceneStoreIOContext_initWithOrgApacheLuceneStoreFlushInfo_([new_OrgApacheLuceneStoreFlushInfo_initWithInt_withLong_([((OrgApacheLuceneIndexSegmentInfo *) nil_chk(newSegment->info_)) maxDoc], [newSegment sizeInBytes]) autorelease]) autorelease];
@@ -384,7 +383,7 @@ OrgApacheLuceneIndexDocumentsWriterPerThread_IndexingChain *OrgApacheLuceneIndex
     [((OrgApacheLuceneCodecsSegmentInfoFormat *) nil_chk([((OrgApacheLuceneCodecsCodec *) nil_chk(codec_)) segmentInfoFormat])) writeWithOrgApacheLuceneStoreDirectory:directory_ withOrgApacheLuceneIndexSegmentInfo:newSegment->info_ withOrgApacheLuceneStoreIOContext:context];
     if (flushedSegment->liveDocs_ != nil) {
       jint delCount = flushedSegment->delCount_;
-      JreAssert((delCount > 0), (@"org/apache/lucene/index/DocumentsWriterPerThread.java:511 condition failed: assert delCount > 0;"));
+      JreAssert((delCount > 0), (@"org/apache/lucene/index/DocumentsWriterPerThread.java:515 condition failed: assert delCount > 0;"));
       if ([((OrgApacheLuceneUtilInfoStream *) nil_chk(infoStream_)) isEnabledWithNSString:@"DWPT"]) {
         [infoStream_ messageWithNSString:@"DWPT" withNSString:JreStrcat("$I$J", @"flush: write ", delCount, @" deletes gen=", [((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(flushedSegment->segmentInfo_)) getDelGen])];
       }
@@ -436,9 +435,13 @@ OrgApacheLuceneIndexDocumentsWriterPerThread_IndexingChain *OrgApacheLuceneIndex
   RELEASE_(intBlockAllocator_);
   RELEASE_(pendingNumDocs_);
   RELEASE_(indexWriterConfig_);
-  RELEASE_(indexWriter_);
   RELEASE_(filesToDelete_);
   [super dealloc];
+}
+
+- (void)__javaClone {
+  [super __javaClone];
+  [indexWriter_ release];
 }
 
 + (void)initialize {
@@ -510,7 +513,7 @@ void OrgApacheLuceneIndexDocumentsWriterPerThread_initWithOrgApacheLuceneIndexIn
   self->aborted_ = NO;
   JreStrongAssign(&self->nf_, JavaTextNumberFormat_getInstanceWithJavaUtilLocale_(JreLoadStatic(JavaUtilLocale, ROOT_)));
   JreStrongAssignAndConsume(&self->filesToDelete_, new_JavaUtilHashSet_init());
-  JreStrongAssign(&self->indexWriter_, writer);
+  self->indexWriter_ = writer;
   JreStrongAssign(&self->directoryOrig_, directoryOrig);
   JreStrongAssignAndConsume(&self->directory_, new_OrgApacheLuceneStoreTrackingDirectoryWrapper_initWithOrgApacheLuceneStoreDirectory_(directory));
   JreStrongAssign(&self->fieldInfos_, fieldInfos);
@@ -529,7 +532,7 @@ void OrgApacheLuceneIndexDocumentsWriterPerThread_initWithOrgApacheLuceneIndexIn
   [self->pendingUpdates_ clear];
   JreStrongAssign(&self->deleteSlice_, [((OrgApacheLuceneIndexDocumentsWriterDeleteQueue *) nil_chk(deleteQueue)) newSlice]);
   JreStrongAssignAndConsume(&self->segmentInfo_, new_OrgApacheLuceneIndexSegmentInfo_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneUtilVersion_withNSString_withInt_withBoolean_withOrgApacheLuceneCodecsCodec_withJavaUtilMap_withByteArray_withJavaUtilMap_(directoryOrig, JreLoadStatic(OrgApacheLuceneUtilVersion, LATEST_), segmentName, -1, NO, self->codec_, JavaUtilCollections_emptyMap(), OrgApacheLuceneUtilStringHelper_randomId(), [new_JavaUtilHashMap_init() autorelease]));
-  JreAssert((self->numDocsInRAM_ == 0), (@"org/apache/lucene/index/DocumentsWriterPerThread.java:184 condition failed: assert numDocsInRAM == 0;"));
+  JreAssert((self->numDocsInRAM_ == 0), (@"org/apache/lucene/index/DocumentsWriterPerThread.java:188 condition failed: assert numDocsInRAM == 0;"));
   JreStrongAssign(&self->consumer_, [((OrgApacheLuceneIndexDocumentsWriterPerThread_IndexingChain *) nil_chk([indexWriterConfig getIndexingChain])) getChainWithOrgApacheLuceneIndexDocumentsWriterPerThread:self]);
   self->enableTestPoints_ = enableTestPoints;
 }
@@ -542,7 +545,7 @@ OrgApacheLuceneIndexDocumentsWriterPerThread *new_OrgApacheLuceneIndexDocumentsW
 
 void OrgApacheLuceneIndexDocumentsWriterPerThread_testPointWithNSString_(OrgApacheLuceneIndexDocumentsWriterPerThread *self, NSString *message) {
   if (self->enableTestPoints_) {
-    JreAssert(([((OrgApacheLuceneUtilInfoStream *) nil_chk(self->infoStream_)) isEnabledWithNSString:@"TP"]), (@"org/apache/lucene/index/DocumentsWriterPerThread.java:200 condition failed: assert infoStream.isEnabled(\"TP\");"));
+    JreAssert(([((OrgApacheLuceneUtilInfoStream *) nil_chk(self->infoStream_)) isEnabledWithNSString:@"TP"]), (@"org/apache/lucene/index/DocumentsWriterPerThread.java:204 condition failed: assert infoStream.isEnabled(\"TP\");"));
     [self->infoStream_ messageWithNSString:@"TP" withNSString:message];
   }
 }

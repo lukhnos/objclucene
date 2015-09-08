@@ -376,7 +376,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexBinaryDocValuesWriter_Bytes
 }
 
 - (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
-  return JreDefaultFastEnumeration(self, state, stackbuf, len);
+  // Essentially disables fast-enumeration for correctness.
+  return JreDefaultFastEnumeration(self, state, stackbuf, 1);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
