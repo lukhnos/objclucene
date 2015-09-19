@@ -93,9 +93,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisAnalyzer)
 
 @interface OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents : NSObject {
  @public
-  __weak OrgApacheLuceneAnalysisTokenizer *source_;
-  __weak OrgApacheLuceneAnalysisTokenStream *sink_;
-  __weak OrgApacheLuceneAnalysisReusableStringReader *reusableStringReader_;
+  OrgApacheLuceneAnalysisTokenizer *source_;
+  OrgApacheLuceneAnalysisTokenStream *sink_;
+  OrgApacheLuceneAnalysisReusableStringReader *reusableStringReader_;
 }
 
 #pragma mark Public
@@ -116,6 +116,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisAnalyzer)
 @end
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents)
+
+J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents, source_, OrgApacheLuceneAnalysisTokenizer *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents, sink_, OrgApacheLuceneAnalysisTokenStream *)
+J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents, reusableStringReader_, OrgApacheLuceneAnalysisReusableStringReader *)
 
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *self, OrgApacheLuceneAnalysisTokenizer *source, OrgApacheLuceneAnalysisTokenStream *result);
 
