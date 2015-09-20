@@ -65,18 +65,20 @@
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return YES;
-  if (obj == nil) return NO;
-  if ([self getClass] != [nil_chk(obj) getClass]) return NO;
+  if (self == obj) return true;
+  if (obj == nil) return false;
+  if ([self getClass] != [nil_chk(obj) getClass]) return false;
   OrgApacheLuceneSearchQuery *other = (OrgApacheLuceneSearchQuery *) check_class_cast(obj, [OrgApacheLuceneSearchQuery class]);
-  if (JavaLangFloat_floatToIntBitsWithFloat_(boost_) != JavaLangFloat_floatToIntBitsWithFloat_(other->boost_)) return NO;
-  return YES;
+  if (JavaLangFloat_floatToIntBitsWithFloat_(boost_) != JavaLangFloat_floatToIntBitsWithFloat_(other->boost_)) return false;
+  return true;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchQuery_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (id)copyWithZone:(NSZone *)zone {
   return [[self clone] retain];

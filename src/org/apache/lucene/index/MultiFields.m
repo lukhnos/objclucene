@@ -218,7 +218,7 @@ id<OrgApacheLuceneUtilBits> OrgApacheLuceneIndexMultiFields_getLiveDocsWithOrgAp
       *IOSIntArray_GetRef(starts, i) = ctx->docBase_;
     }
     *IOSIntArray_GetRef(starts, size) = [reader maxDoc];
-    return [new_OrgApacheLuceneIndexMultiBits_initWithOrgApacheLuceneUtilBitsArray_withIntArray_withBoolean_(liveDocs, starts, YES) autorelease];
+    return [new_OrgApacheLuceneIndexMultiBits_initWithOrgApacheLuceneUtilBitsArray_withIntArray_withBoolean_(liveDocs, starts, true) autorelease];
   }
   else {
     return nil;

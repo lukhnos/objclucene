@@ -51,10 +51,12 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneStoreRateLimiter_SimpleRateLimiter, MI
   return 0;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneStoreRateLimiter_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -110,7 +112,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreRateLimiter)
     lastNS_ = targetNS;
   }
   jlong curNS = startNS;
-  while (YES) {
+  while (true) {
     jlong pauseNS = targetNS - curNS;
     if (pauseNS > 0) {
       @try {

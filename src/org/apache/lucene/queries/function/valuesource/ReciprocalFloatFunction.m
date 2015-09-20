@@ -76,7 +76,7 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
 }
 
 - (jboolean)isEqual:(id)o {
-  if (OrgApacheLuceneQueriesFunctionValuesourceReciprocalFloatFunction_class_() != [nil_chk(o) getClass]) return NO;
+  if (OrgApacheLuceneQueriesFunctionValuesourceReciprocalFloatFunction_class_() != [nil_chk(o) getClass]) return false;
   OrgApacheLuceneQueriesFunctionValuesourceReciprocalFloatFunction *other = (OrgApacheLuceneQueriesFunctionValuesourceReciprocalFloatFunction *) check_class_cast(o, [OrgApacheLuceneQueriesFunctionValuesourceReciprocalFloatFunction class]);
   return self->m_ == other->m_ && self->a_ == other->a_ && self->b_ == other->b_ && [((OrgApacheLuceneQueriesFunctionValueSource *) nil_chk(self->source_)) isEqual:other->source_];
 }

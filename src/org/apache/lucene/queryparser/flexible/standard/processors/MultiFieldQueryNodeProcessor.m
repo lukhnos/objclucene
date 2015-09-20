@@ -30,10 +30,12 @@
 
 @implementation OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiFieldQueryNodeProcessor
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiFieldQueryNodeProcessor_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)postProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)node {
   return node;
@@ -44,13 +46,13 @@
     [super processChildrenWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:queryTree];
   }
   else {
-    self->processChildren_ = YES;
+    self->processChildren_ = true;
   }
 }
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)preProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)node {
   if ([OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_class_() isInstance:node]) {
-    self->processChildren_ = NO;
+    self->processChildren_ = false;
     id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode> fieldNode = (id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) check_protocol_cast(node, OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_class_());
     if ([((id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) nil_chk(fieldNode)) getField] == nil) {
       IOSObjectArray *fields = [((OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *) nil_chk([self getQueryConfigHandler])) getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, MULTI_FIELDS_)];
@@ -105,7 +107,7 @@
 
 void OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiFieldQueryNodeProcessor_init(OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiFieldQueryNodeProcessor *self) {
   OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_init(self);
-  self->processChildren_ = YES;
+  self->processChildren_ = true;
 }
 
 OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiFieldQueryNodeProcessor *new_OrgApacheLuceneQueryparserFlexibleStandardProcessorsMultiFieldQueryNodeProcessor_init() {

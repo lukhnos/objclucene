@@ -46,10 +46,12 @@ NSString *OrgApacheLuceneAnalysisElGreekAnalyzer_DEFAULT_STOPWORD_FILE_ = @"stop
   return OrgApacheLuceneAnalysisElGreekAnalyzer_getDefaultStopSet();
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisElGreekAnalyzer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords {
   OrgApacheLuceneAnalysisElGreekAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(self, stopwords);
@@ -119,16 +121,18 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisElGreekAnalyzer_DefaultSetHolder)
 
 @implementation OrgApacheLuceneAnalysisElGreekAnalyzer_DefaultSetHolder
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisElGreekAnalyzer_DefaultSetHolder_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisElGreekAnalyzer_DefaultSetHolder class]) {
     {
       @try {
-        JreStrongAssign(&OrgApacheLuceneAnalysisElGreekAnalyzer_DefaultSetHolder_DEFAULT_SET_, OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_loadStopwordSetWithBoolean_withIOSClass_withNSString_withNSString_(NO, OrgApacheLuceneAnalysisElGreekAnalyzer_class_(), OrgApacheLuceneAnalysisElGreekAnalyzer_DEFAULT_STOPWORD_FILE_, @"#"));
+        JreStrongAssign(&OrgApacheLuceneAnalysisElGreekAnalyzer_DefaultSetHolder_DEFAULT_SET_, OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_loadStopwordSetWithBoolean_withIOSClass_withNSString_withNSString_(false, OrgApacheLuceneAnalysisElGreekAnalyzer_class_(), OrgApacheLuceneAnalysisElGreekAnalyzer_DEFAULT_STOPWORD_FILE_, @"#"));
       }
       @catch (JavaIoIOException *ex) {
         @throw [new_JavaLangRuntimeException_initWithNSString_(@"Unable to load default stopword set") autorelease];

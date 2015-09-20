@@ -143,12 +143,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsC
   if (closed_) {
     return;
   }
-  closed_ = YES;
+  closed_ = true;
   NSString *indexFile = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentWriteState *) nil_chk(state_))->segmentInfo_))->name_, state_->segmentSuffix_, OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat_INDEX_EXTENSION_);
-  jboolean success = NO;
-  {
-    JavaLangThrowable *__mainException = nil;
+  jboolean success = false;
+  @try {
     OrgApacheLuceneStoreIndexOutput *indexOut = [((OrgApacheLuceneStoreDirectory *) nil_chk(state_->directory_)) createOutputWithNSString:indexFile withOrgApacheLuceneStoreIOContext:state_->context_];
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
       [((OrgApacheLuceneCodecsFieldsConsumer *) nil_chk(delegateFieldsConsumer_)) close];
       OrgApacheLuceneCodecsCodecUtil_writeIndexHeaderWithOrgApacheLuceneStoreDataOutput_withNSString_withInt_withByteArray_withNSString_(indexOut, OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat_CODEC_NAME_, OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat_COMPLETION_VERSION_CURRENT, [state_->segmentInfo_ getId], state_->segmentSuffix_);
@@ -166,25 +166,29 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsC
       OrgApacheLuceneCodecsCodecUtil_writeFooterWithOrgApacheLuceneStoreIndexOutput_(indexOut);
       OrgApacheLuceneCodecsCodecUtil_writeFooterWithOrgApacheLuceneStoreIndexOutput_(dictOut_);
       OrgApacheLuceneUtilIOUtils_closeWithJavaIoCloseableArray_([IOSObjectArray arrayWithObjects:(id[]){ dictOut_ } count:1 type:JavaIoCloseable_class_()]);
-      success = YES;
+      success = true;
+    }
+    @catch (JavaLangThrowable *e) {
+      __primaryException1 = e;
+      @throw e;
     }
     @finally {
-      if (success == NO) {
-        OrgApacheLuceneUtilIOUtils_closeWhileHandlingExceptionWithJavaIoCloseableArray_([IOSObjectArray arrayWithObjects:(id[]){ dictOut_, delegateFieldsConsumer_ } count:2 type:JavaIoCloseable_class_()]);
-      }
-      @try {
-        [indexOut close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
+      if (indexOut != nil) {
+        if (__primaryException1 != nil) {
+          @try {
+            [indexOut close];
+          } @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
         } else {
-          __mainException = e;
+          [indexOut close];
         }
       }
-      if (__mainException) {
-        @throw __mainException;
-      }
+    }
+  }
+  @finally {
+    if (success == false) {
+      OrgApacheLuceneUtilIOUtils_closeWhileHandlingExceptionWithJavaIoCloseableArray_([IOSObjectArray arrayWithObjects:(id[]){ dictOut_, delegateFieldsConsumer_ } count:2 type:JavaIoCloseable_class_()]);
     }
   }
 }
@@ -222,19 +226,19 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsC
 void OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_initWithOrgApacheLuceneCodecsPostingsFormat_withOrgApacheLuceneIndexSegmentWriteState_(OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer *self, OrgApacheLuceneCodecsPostingsFormat *delegatePostingsFormat, OrgApacheLuceneIndexSegmentWriteState *state) {
   OrgApacheLuceneCodecsFieldsConsumer_init(self);
   JreStrongAssignAndConsume(&self->seenFields_, new_JavaUtilHashMap_init());
-  self->closed_ = NO;
+  self->closed_ = false;
   JreStrongAssign(&self->delegatePostingsFormatName_, [((OrgApacheLuceneCodecsPostingsFormat *) nil_chk(delegatePostingsFormat)) getName]);
   JreStrongAssign(&self->state_, state);
   NSString *dictFile = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentWriteState *) nil_chk(state))->segmentInfo_))->name_, state->segmentSuffix_, OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat_DICT_EXTENSION_);
-  jboolean success = NO;
+  jboolean success = false;
   @try {
     JreStrongAssign(&self->delegateFieldsConsumer_, [delegatePostingsFormat fieldsConsumerWithOrgApacheLuceneIndexSegmentWriteState:state]);
     JreStrongAssign(&self->dictOut_, [((OrgApacheLuceneStoreDirectory *) nil_chk(state->directory_)) createOutputWithNSString:dictFile withOrgApacheLuceneStoreIOContext:state->context_]);
     OrgApacheLuceneCodecsCodecUtil_writeIndexHeaderWithOrgApacheLuceneStoreDataOutput_withNSString_withInt_withByteArray_withNSString_(self->dictOut_, OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat_CODEC_NAME_, OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat_COMPLETION_VERSION_CURRENT, [state->segmentInfo_ getId], state->segmentSuffix_);
-    success = YES;
+    success = true;
   }
   @finally {
-    if (success == NO) {
+    if (success == false) {
       OrgApacheLuceneUtilIOUtils_closeWhileHandlingExceptionWithJavaIoCloseableArray_([IOSObjectArray arrayWithObjects:(id[]){ self->dictOut_, self->delegateFieldsConsumer_ } count:2 type:JavaIoCloseable_class_()]);
     }
   }
@@ -292,10 +296,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentCompletionF
 
 @implementation OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_CompletionTermWriter
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_CompletionTermWriter_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jboolean)finishWithOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)output {
   jboolean stored = [((OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder *) nil_chk(builder_)) storeWithOrgApacheLuceneStoreDataOutput:output];
@@ -328,7 +334,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentCompletionF
       jbyte type = [input readByte];
       if (first_) {
         self->type_ = type;
-        first_ = NO;
+        first_ = false;
       }
       else if (self->type_ != type) {
         @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"single field name has mixed types") autorelease];
@@ -378,7 +384,7 @@ void OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_CompletionTerm
   self->minWeight_ = JavaLangLong_MAX_VALUE;
   JreStrongAssignAndConsume(&self->scratch_, new_OrgApacheLuceneUtilBytesRefBuilder_init());
   JreStrongAssignAndConsume(&self->builder_, new_OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder_init());
-  self->first_ = YES;
+  self->first_ = true;
 }
 
 OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_CompletionTermWriter *new_OrgApacheLuceneSearchSuggestDocumentCompletionFieldsConsumer_CompletionTermWriter_init() {

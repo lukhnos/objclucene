@@ -107,7 +107,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum)
   jlong startNS = JavaLangSystem_nanoTime();
   jlong curNS = startNS;
   jlong pausedNS = 0;
-  while (YES) {
+  while (true) {
     OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum *result = OrgApacheLuceneIndexMergeRateLimiter_maybePauseWithLong_withLong_(self, bytes, curNS);
     if (result == JreLoadStatic(OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum, NO)) {
       lastNS_ = curNS;
@@ -155,7 +155,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMergeRateLimiter_PauseResultEnum)
 
 - (void)setAbort {
   @synchronized(self) {
-    abort_ = YES;
+    abort_ = true;
     [self notify];
   }
 }

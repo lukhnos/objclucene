@@ -128,10 +128,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilAttributeSource)
 
 @implementation OrgApacheLuceneUtilAttributeSource
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilAttributeSource_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithOrgApacheLuceneUtilAttributeSource:(OrgApacheLuceneUtilAttributeSource *)input {
   OrgApacheLuceneUtilAttributeSource_initWithOrgApacheLuceneUtilAttributeSource_(self, input);
@@ -230,33 +232,33 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilAttributeSource)
 
 - (jboolean)isEqual:(id)obj {
   if (obj == self) {
-    return YES;
+    return true;
   }
   if ([obj isKindOfClass:[OrgApacheLuceneUtilAttributeSource class]]) {
     OrgApacheLuceneUtilAttributeSource *other = (OrgApacheLuceneUtilAttributeSource *) check_class_cast(obj, [OrgApacheLuceneUtilAttributeSource class]);
     if (OrgApacheLuceneUtilAttributeSource_hasAttributes(self)) {
       if (!OrgApacheLuceneUtilAttributeSource_hasAttributes(nil_chk(other))) {
-        return NO;
+        return false;
       }
       if ([((id<JavaUtilMap>) nil_chk(self->attributeImpls_)) size] != [other->attributeImpls_ size]) {
-        return NO;
+        return false;
       }
       OrgApacheLuceneUtilAttributeSource_State *thisState = OrgApacheLuceneUtilAttributeSource_getCurrentState(self);
       OrgApacheLuceneUtilAttributeSource_State *otherState = OrgApacheLuceneUtilAttributeSource_getCurrentState(other);
       while (thisState != nil && otherState != nil) {
         if ([((OrgApacheLuceneUtilAttributeImpl *) nil_chk(((OrgApacheLuceneUtilAttributeSource_State *) nil_chk(otherState))->attribute_)) getClass] != [((OrgApacheLuceneUtilAttributeSource_State *) nil_chk(thisState))->attribute_ getClass] || ![otherState->attribute_ isEqual:thisState->attribute_]) {
-          return NO;
+          return false;
         }
         thisState = thisState->next_;
         otherState = otherState->next_;
       }
-      return YES;
+      return true;
     }
     else {
       return !OrgApacheLuceneUtilAttributeSource_hasAttributes(nil_chk(other));
     }
   }
-  else return NO;
+  else return false;
 }
 
 - (NSString *)reflectAsStringWithBoolean:(jboolean)prependAttClass {
@@ -291,7 +293,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilAttributeSource)
 }
 
 - (NSString *)description {
-  return JreStrcat("$C$C$", [[self getClass] getSimpleName], '@', JavaLangInteger_toHexStringWithInt_(JavaLangSystem_identityHashCodeWithId_(self)), ' ', OrgApacheLuceneUtilAttributeSource_reflectAsStringWithBoolean_(self, NO));
+  return JreStrcat("$C$C$", [[self getClass] getSimpleName], '@', JavaLangInteger_toHexStringWithInt_(JavaLangSystem_identityHashCodeWithId_(self)), ' ', OrgApacheLuceneUtilAttributeSource_reflectAsStringWithBoolean_(self, false));
 }
 
 - (void)dealloc {
@@ -458,10 +460,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAttributeSource)
   return clone;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilAttributeSource_State_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(attribute_);
@@ -583,10 +587,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAttributeSource_$2)
   return a;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilAttributeSource_$1_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

@@ -125,17 +125,17 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldValueFilter_$2)
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return YES;
-  if ([super isEqual:obj] == NO) {
-    return NO;
+  if (self == obj) return true;
+  if ([super isEqual:obj] == false) {
+    return false;
   }
   OrgApacheLuceneSearchFieldValueFilter *other = (OrgApacheLuceneSearchFieldValueFilter *) check_class_cast(obj, [OrgApacheLuceneSearchFieldValueFilter class]);
   if (field_ == nil) {
-    if (((OrgApacheLuceneSearchFieldValueFilter *) nil_chk(other))->field_ != nil) return NO;
+    if (((OrgApacheLuceneSearchFieldValueFilter *) nil_chk(other))->field_ != nil) return false;
   }
-  else if (![field_ isEqual:((OrgApacheLuceneSearchFieldValueFilter *) nil_chk(other))->field_]) return NO;
-  if (negate_ != ((OrgApacheLuceneSearchFieldValueFilter *) nil_chk(other))->negate_) return NO;
-  return YES;
+  else if (![field_ isEqual:((OrgApacheLuceneSearchFieldValueFilter *) nil_chk(other))->field_]) return false;
+  if (negate_ != ((OrgApacheLuceneSearchFieldValueFilter *) nil_chk(other))->negate_) return false;
+  return true;
 }
 
 - (NSString *)toStringWithNSString:(NSString *)defaultField {
@@ -173,7 +173,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldValueFilter_$2)
 @end
 
 void OrgApacheLuceneSearchFieldValueFilter_initWithNSString_(OrgApacheLuceneSearchFieldValueFilter *self, NSString *field) {
-  OrgApacheLuceneSearchFieldValueFilter_initWithNSString_withBoolean_(self, field, NO);
+  OrgApacheLuceneSearchFieldValueFilter_initWithNSString_withBoolean_(self, field, false);
 }
 
 OrgApacheLuceneSearchFieldValueFilter *new_OrgApacheLuceneSearchFieldValueFilter_initWithNSString_(NSString *field) {

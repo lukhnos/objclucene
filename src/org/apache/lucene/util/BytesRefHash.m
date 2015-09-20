@@ -117,10 +117,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilBytesRefHash_$1)
 
 @implementation OrgApacheLuceneUtilBytesRefHash
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilBytesRefHash_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithOrgApacheLuceneUtilByteBlockPool:(OrgApacheLuceneUtilByteBlockPool *)pool {
   OrgApacheLuceneUtilBytesRefHash_initWithOrgApacheLuceneUtilByteBlockPool_(self, pool);
@@ -182,7 +184,7 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)b {
   lastCount_ = count_;
   count_ = 0;
   if (resetPool) {
-    [((OrgApacheLuceneUtilByteBlockPool *) nil_chk(pool_)) resetWithBoolean:NO withBoolean:NO];
+    [((OrgApacheLuceneUtilByteBlockPool *) nil_chk(pool_)) resetWithBoolean:false withBoolean:false];
   }
   JreStrongAssign(&bytesStart_, [((OrgApacheLuceneUtilBytesRefHash_BytesStartArray *) nil_chk(bytesStartArray_)) clear]);
   if (lastCount_ != -1 && OrgApacheLuceneUtilBytesRefHash_shrinkWithInt_(self, lastCount_)) {
@@ -192,11 +194,11 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)b {
 }
 
 - (void)clear {
-  [self clearWithBoolean:YES];
+  [self clearWithBoolean:true];
 }
 
 - (void)close {
-  [self clearWithBoolean:YES];
+  [self clearWithBoolean:true];
   JreStrongAssign(&ids_, nil);
   [((OrgApacheLuceneUtilCounter *) nil_chk(bytesUsed_)) addAndGetWithLong:OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT * -hashSize_];
 }
@@ -237,7 +239,7 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)b {
     JreAssert((IOSIntArray_Get(ids_, hashPos) == -1), (@"org/apache/lucene/util/BytesRefHash.java:319 condition failed: assert ids[hashPos] == -1;"));
     *IOSIntArray_GetRef(ids_, hashPos) = e;
     if (count_ == hashHalfSize_) {
-      OrgApacheLuceneUtilBytesRefHash_rehashWithInt_withBoolean_(self, 2 * hashSize_, YES);
+      OrgApacheLuceneUtilBytesRefHash_rehashWithInt_withBoolean_(self, 2 * hashSize_, true);
     }
     return e;
   }
@@ -275,7 +277,7 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)b {
     JreAssert((IOSIntArray_Get(ids_, hashPos) == -1), (@"org/apache/lucene/util/BytesRefHash.java:394 condition failed: assert ids[hashPos] == -1;"));
     *IOSIntArray_GetRef(ids_, hashPos) = e;
     if (count_ == hashHalfSize_) {
-      OrgApacheLuceneUtilBytesRefHash_rehashWithInt_withBoolean_(self, 2 * hashSize_, NO);
+      OrgApacheLuceneUtilBytesRefHash_rehashWithInt_withBoolean_(self, 2 * hashSize_, false);
     }
     return e;
   }
@@ -422,10 +424,10 @@ jboolean OrgApacheLuceneUtilBytesRefHash_shrinkWithInt_(OrgApacheLuceneUtilBytes
     JavaUtilArrays_fillWithIntArray_withInt_(self->ids_, -1);
     self->hashHalfSize_ = newSize / 2;
     self->hashMask_ = newSize - 1;
-    return YES;
+    return true;
   }
   else {
-    return NO;
+    return false;
   }
 }
 
@@ -553,10 +555,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilBytesRefHash_MaxBytesLengthE
   return 0;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilBytesRefHash_BytesStartArray_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

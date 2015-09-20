@@ -88,10 +88,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisDeGermanStemmer)
   OrgApacheLuceneAnalysisDeGermanStemmer_resubstituteWithJavaLangStringBuilder_(self, buffer);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisDeGermanStemmer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(sb_);
@@ -129,13 +131,13 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisDeGermanStemmer)
 
 jboolean OrgApacheLuceneAnalysisDeGermanStemmer_isStemmableWithNSString_(OrgApacheLuceneAnalysisDeGermanStemmer *self, NSString *term) {
   for (jint c = 0; c < ((jint) [((NSString *) nil_chk(term)) length]); c++) {
-    if (!JavaLangCharacter_isLetterWithChar_([term charAtWithInt:c])) return NO;
+    if (!JavaLangCharacter_isLetterWithChar_([term charAtWithInt:c])) return false;
   }
-  return YES;
+  return true;
 }
 
 void OrgApacheLuceneAnalysisDeGermanStemmer_stripWithJavaLangStringBuilder_(OrgApacheLuceneAnalysisDeGermanStemmer *self, JavaLangStringBuilder *buffer) {
-  jboolean doMore = YES;
+  jboolean doMore = true;
   while (doMore && [((JavaLangStringBuilder *) nil_chk(buffer)) length] > 3) {
     if (([((JavaLangStringBuilder *) nil_chk(buffer)) length] + self->substCount_ > 5) && [((NSString *) nil_chk([buffer substringWithInt:[buffer length] - 2 withInt:[buffer length]])) isEqual:@"nd"]) {
       [buffer delete__WithInt:[buffer length] - 2 withInt:[buffer length]];
@@ -159,7 +161,7 @@ void OrgApacheLuceneAnalysisDeGermanStemmer_stripWithJavaLangStringBuilder_(OrgA
       [buffer deleteCharAtWithInt:[buffer length] - 1];
     }
     else {
-      doMore = NO;
+      doMore = false;
     }
   }
 }

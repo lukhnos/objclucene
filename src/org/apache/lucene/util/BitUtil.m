@@ -36,10 +36,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilBitUtil)
 
 @implementation OrgApacheLuceneUtilBitUtil
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilBitUtil_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (jint)bitCountWithByte:(jbyte)b {
   return OrgApacheLuceneUtilBitUtil_bitCountWithByte_(b);

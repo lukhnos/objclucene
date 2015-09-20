@@ -66,7 +66,7 @@ __attribute__((unused)) static OrgApacheLuceneStoreDirectory *OrgApacheLuceneSto
 - (void)close {
   if (doClose_) {
     OrgApacheLuceneUtilIOUtils_closeWithJavaIoCloseableArray_([IOSObjectArray arrayWithObjects:(id[]){ primaryDir_, secondaryDir_ } count:2 type:JavaIoCloseable_class_()]);
-    doClose_ = NO;
+    doClose_ = false;
   }
 }
 

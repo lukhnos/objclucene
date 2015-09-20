@@ -42,10 +42,12 @@ withOrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder:(id<OrgApacheLuceneQue
   return [((id<OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilder>) nil_chk(builder)) getSpanQueryWithOrgW3cDomElement:e];
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueryparserXmlBuildersSpanQueryBuilderFactory_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(builders_);

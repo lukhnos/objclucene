@@ -76,7 +76,7 @@ NSString *OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_FORCE_
 void OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory *self, id<JavaUtilMap> args) {
   OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
   JreStrongAssign(&self->okPrefix_, JavaUtilCollections_emptyList());
-  jboolean ignoreCase = [self getBooleanWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_KEEP_IGNORE_CASE_ withBoolean:NO];
+  jboolean ignoreCase = [self getBooleanWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_KEEP_IGNORE_CASE_ withBoolean:false];
   id<JavaUtilSet> k = [self getSetWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_KEEP_];
   if (k != nil) {
     JreStrongAssignAndConsume(&self->keep_, new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithInt_withBoolean_(10, ignoreCase));
@@ -92,8 +92,8 @@ void OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_initWithJav
   self->minWordLength_ = [self getIntWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_MIN_WORD_LENGTH_ withInt:0];
   self->maxWordCount_ = [self getIntWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_MAX_WORD_COUNT_ withInt:OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_DEFAULT_MAX_WORD_COUNT];
   self->maxTokenLength_ = [self getIntWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_MAX_TOKEN_LENGTH_ withInt:OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_DEFAULT_MAX_TOKEN_LENGTH];
-  self->onlyFirstWord_ = [self getBooleanWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_ONLY_FIRST_WORD_ withBoolean:YES];
-  self->forceFirstLetter_ = [self getBooleanWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_FORCE_FIRST_LETTER_ withBoolean:YES];
+  self->onlyFirstWord_ = [self getBooleanWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_ONLY_FIRST_WORD_ withBoolean:true];
+  self->forceFirstLetter_ = [self getBooleanWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilterFactory_FORCE_FIRST_LETTER_ withBoolean:true];
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
   }

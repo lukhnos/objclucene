@@ -35,11 +35,11 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter, offs
 }
 
 - (jboolean)incrementToken {
-  if (![((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) return NO;
+  if (![((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) return false;
   IOSCharArray *termBuffer = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer];
   jint len = [termAtt_ length];
   if (len == 0) {
-    return YES;
+    return true;
   }
   jint start = 0;
   jint end = 0;
@@ -62,7 +62,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousLucene43TrimFilter, offs
       [offsetAtt_ setOffsetWithInt:newStart withInt:newEnd];
     }
   }
-  return YES;
+  return true;
 }
 
 - (void)dealloc {

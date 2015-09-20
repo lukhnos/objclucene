@@ -92,10 +92,12 @@ __attribute__((unused)) static jboolean OrgApacheLuceneUtilGeoUtils_lineCrossesS
 
 @implementation OrgApacheLuceneUtilGeoUtils
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilGeoUtils_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (JavaLangLong *)mortonHashWithDouble:(jdouble)lon
                             withDouble:(jdouble)lat {
@@ -453,7 +455,7 @@ jboolean OrgApacheLuceneUtilGeoUtils_bboxContainsWithDouble_withDouble_withDoubl
 jboolean OrgApacheLuceneUtilGeoUtils_pointInPolygonWithDoubleArray_withDoubleArray_withDouble_withDouble_(IOSDoubleArray *x, IOSDoubleArray *y, jdouble lat, jdouble lon) {
   OrgApacheLuceneUtilGeoUtils_initialize();
   JreAssert((((IOSDoubleArray *) nil_chk(x))->size_ == ((IOSDoubleArray *) nil_chk(y))->size_), (@"org/apache/lucene/util/GeoUtils.java:128 condition failed: assert x.length == y.length;"));
-  jboolean inPoly = NO;
+  jboolean inPoly = false;
   for (jint i = 1; i < x->size_; i++) {
     if ((IOSDoubleArray_Get(x, i) < lon && IOSDoubleArray_Get(x, i - 1) >= lon) || (IOSDoubleArray_Get(x, i - 1) < lon && IOSDoubleArray_Get(x, i) >= lon)) {
       if (IOSDoubleArray_Get(y, i) + (lon - IOSDoubleArray_Get(x, i)) / (IOSDoubleArray_Get(x, i - 1) - IOSDoubleArray_Get(x, i)) * (IOSDoubleArray_Get(y, i - 1) - IOSDoubleArray_Get(y, i)) < lat) {
@@ -505,7 +507,7 @@ jboolean OrgApacheLuceneUtilGeoUtils_rectIntersectsWithDouble_withDouble_withDou
 jboolean OrgApacheLuceneUtilGeoUtils_rectCrossesPolyWithDouble_withDouble_withDouble_withDouble_withDoubleArray_withDoubleArray_withDouble_withDouble_withDouble_withDouble_(jdouble rMinX, jdouble rMinY, jdouble rMaxX, jdouble rMaxY, IOSDoubleArray *shapeX, IOSDoubleArray *shapeY, jdouble sMinX, jdouble sMinY, jdouble sMaxX, jdouble sMaxY) {
   OrgApacheLuceneUtilGeoUtils_initialize();
   if (OrgApacheLuceneUtilGeoUtils_rectDisjointWithDouble_withDouble_withDouble_withDouble_withDouble_withDouble_withDouble_withDouble_(rMinX, rMinY, rMaxX, rMaxY, sMinX, sMinY, sMaxX, sMaxY)) {
-    return NO;
+    return false;
   }
   IOSObjectArray *bbox = [IOSObjectArray arrayWithObjects:(id[]){ [IOSDoubleArray arrayWithDoubles:(jdouble[]){ rMinX, rMinY } count:2], [IOSDoubleArray arrayWithDoubles:(jdouble[]){ rMaxX, rMinY } count:2], [IOSDoubleArray arrayWithDoubles:(jdouble[]){ rMaxX, rMaxY } count:2], [IOSDoubleArray arrayWithDoubles:(jdouble[]){ rMinX, rMaxY } count:2], [IOSDoubleArray arrayWithDoubles:(jdouble[]){ rMinX, rMinY } count:2] } count:5 type:IOSClass_doubleArray(1)];
   jint polyLength = ((IOSDoubleArray *) nil_chk(shapeX))->size_ - 1;
@@ -533,12 +535,12 @@ jboolean OrgApacheLuceneUtilGeoUtils_rectCrossesPolyWithDouble_withDouble_withDo
         y11 = JavaLangStrictMath_maxWithDouble_withDouble_(IOSDoubleArray_Get(shapeY, p), IOSDoubleArray_Get(shapeY, p + 1)) + OrgApacheLuceneUtilGeoUtils_TOLERANCE;
         jboolean touching = ((x00 == s && y00 == t) || (x01 == s && y01 == t)) || ((x10 == s && y10 == t) || (x11 == s && y11 == t));
         if (!(touching || x00 > s || x01 < s || y00 > t || y01 < t || x10 > s || x11 < s || y10 > t || y11 < t)) {
-          return YES;
+          return true;
         }
       }
     }
   }
-  return NO;
+  return false;
 }
 
 JavaUtilArrayList *OrgApacheLuceneUtilGeoUtils_circleToPolyWithDouble_withDouble_withDouble_(jdouble lon, jdouble lat, jdouble radius) {
@@ -609,7 +611,7 @@ jboolean OrgApacheLuceneUtilGeoUtils_lineCrossesSphereWithDouble_withDouble_with
   jdouble c = (fX * fX + fY * fY + fZ * fZ) - (radius * radius);
   jdouble discrim = (b * b) - (4 * a * c);
   if (discrim < 0) {
-    return NO;
+    return false;
   }
   discrim = JavaLangStrictMath_sqrtWithDouble_(discrim);
   jdouble a2 = 2 * a;
@@ -618,17 +620,17 @@ jboolean OrgApacheLuceneUtilGeoUtils_lineCrossesSphereWithDouble_withDouble_with
   if ((t1 < 0 || t1 > 1)) {
     return !(t2 < 0 || t2 > 1);
   }
-  return YES;
+  return true;
 }
 
 jboolean OrgApacheLuceneUtilGeoUtils_isValidLatWithDouble_(jdouble lat) {
   OrgApacheLuceneUtilGeoUtils_initialize();
-  return JavaLangDouble_isNaNWithDouble_(lat) == NO && lat >= OrgApacheLuceneUtilGeoUtils_MIN_LAT_INCL && lat <= OrgApacheLuceneUtilGeoUtils_MAX_LAT_INCL;
+  return JavaLangDouble_isNaNWithDouble_(lat) == false && lat >= OrgApacheLuceneUtilGeoUtils_MIN_LAT_INCL && lat <= OrgApacheLuceneUtilGeoUtils_MAX_LAT_INCL;
 }
 
 jboolean OrgApacheLuceneUtilGeoUtils_isValidLonWithDouble_(jdouble lon) {
   OrgApacheLuceneUtilGeoUtils_initialize();
-  return JavaLangDouble_isNaNWithDouble_(lon) == NO && lon >= OrgApacheLuceneUtilGeoUtils_MIN_LON_INCL && lon <= OrgApacheLuceneUtilGeoUtils_MAX_LON_INCL;
+  return JavaLangDouble_isNaNWithDouble_(lon) == false && lon >= OrgApacheLuceneUtilGeoUtils_MIN_LON_INCL && lon <= OrgApacheLuceneUtilGeoUtils_MAX_LON_INCL;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilGeoUtils)

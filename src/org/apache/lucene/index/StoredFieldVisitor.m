@@ -18,10 +18,12 @@ __attribute__((unused)) static OrgApacheLuceneIndexStoredFieldVisitor_StatusEnum
 
 @implementation OrgApacheLuceneIndexStoredFieldVisitor
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexStoredFieldVisitor_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)binaryFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo
                                        withByteArray:(IOSByteArray *)value {

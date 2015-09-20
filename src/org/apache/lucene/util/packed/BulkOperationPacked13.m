@@ -10,10 +10,12 @@
 
 @implementation OrgApacheLuceneUtilPackedBulkOperationPacked13
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilPackedBulkOperationPacked13_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)decodeWithLongArray:(IOSLongArray *)blocks
                     withInt:(jint)blocksOffset

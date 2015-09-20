@@ -129,7 +129,7 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
 }
 
 - (jboolean)isEqual:(id)o {
-  if (OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_class_() != [nil_chk(o) getClass]) return NO;
+  if (OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_class_() != [nil_chk(o) getClass]) return false;
   OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction *other = (OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction *) check_class_cast(o, [OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction class]);
   return self->min_ == other->min_ && self->max_ == other->max_ && [((OrgApacheLuceneQueriesFunctionValueSource *) nil_chk(self->source_)) isEqual:other->source_];
 }
@@ -211,10 +211,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceScaleF
 
 @implementation OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_ScaleInfo
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueriesFunctionValuesourceScaleFloatFunction_ScaleInfo_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

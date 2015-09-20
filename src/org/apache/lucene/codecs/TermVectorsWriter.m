@@ -28,10 +28,12 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsTermVectorsWriter_addAl
 
 @implementation OrgApacheLuceneCodecsTermVectorsWriter
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsTermVectorsWriter_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)startDocumentWithInt:(jint)numVectorFields {
   // can't call an abstract method

@@ -57,10 +57,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreSingleInstanceLockFactory_SingleI
   }
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneStoreSingleInstanceLockFactory_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(locks_);
@@ -127,7 +129,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreSingleInstanceLockFactory)
       }
     }
     @finally {
-      JreAssignVolatileBoolean(&closed_, YES);
+      JreAssignVolatileBoolean(&closed_, true);
     }
   }
 }

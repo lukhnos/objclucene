@@ -193,8 +193,8 @@ withOrgApacheLuceneSearchSortField_TypeEnum:(OrgApacheLuceneSearchSortField_Type
 }
 
 - (jboolean)isEqual:(id)o {
-  if (self == o) return YES;
-  if (!([o isKindOfClass:[OrgApacheLuceneSearchSortField class]])) return NO;
+  if (self == o) return true;
+  if (!([o isKindOfClass:[OrgApacheLuceneSearchSortField class]])) return false;
   OrgApacheLuceneSearchSortField *other = (OrgApacheLuceneSearchSortField *) check_class_cast(o, [OrgApacheLuceneSearchSortField class]);
   return (OrgApacheLuceneUtilStringHelper_equalsWithNSString_withNSString_(((OrgApacheLuceneSearchSortField *) nil_chk(other))->field_, self->field_) && other->type_ == self->type_ && other->reverse_ == self->reverse_ && (other->comparatorSource_ == nil ? self->comparatorSource_ == nil : [other->comparatorSource_ isEqual:self->comparatorSource_]));
 }
@@ -312,7 +312,7 @@ withOrgApacheLuceneSearchSortField_TypeEnum:(OrgApacheLuceneSearchSortField_Type
 
 void OrgApacheLuceneSearchSortField_initWithNSString_withOrgApacheLuceneSearchSortField_TypeEnum_(OrgApacheLuceneSearchSortField *self, NSString *field, OrgApacheLuceneSearchSortField_TypeEnum *type) {
   NSObject_init(self);
-  self->reverse_ = NO;
+  self->reverse_ = false;
   JreStrongAssign(&self->missingValue_, nil);
   JreStrongAssign(&self->bytesComparator_, OrgApacheLuceneUtilBytesRef_getUTF8SortedAsUnicodeComparator());
   OrgApacheLuceneSearchSortField_initFieldTypeWithNSString_withOrgApacheLuceneSearchSortField_TypeEnum_(self, field, type);
@@ -326,7 +326,7 @@ OrgApacheLuceneSearchSortField *new_OrgApacheLuceneSearchSortField_initWithNSStr
 
 void OrgApacheLuceneSearchSortField_initWithNSString_withOrgApacheLuceneSearchSortField_TypeEnum_withBoolean_(OrgApacheLuceneSearchSortField *self, NSString *field, OrgApacheLuceneSearchSortField_TypeEnum *type, jboolean reverse) {
   NSObject_init(self);
-  self->reverse_ = NO;
+  self->reverse_ = false;
   JreStrongAssign(&self->missingValue_, nil);
   JreStrongAssign(&self->bytesComparator_, OrgApacheLuceneUtilBytesRef_getUTF8SortedAsUnicodeComparator());
   OrgApacheLuceneSearchSortField_initFieldTypeWithNSString_withOrgApacheLuceneSearchSortField_TypeEnum_(self, field, type);
@@ -341,7 +341,7 @@ OrgApacheLuceneSearchSortField *new_OrgApacheLuceneSearchSortField_initWithNSStr
 
 void OrgApacheLuceneSearchSortField_initWithNSString_withOrgApacheLuceneSearchFieldComparatorSource_(OrgApacheLuceneSearchSortField *self, NSString *field, OrgApacheLuceneSearchFieldComparatorSource *comparator) {
   NSObject_init(self);
-  self->reverse_ = NO;
+  self->reverse_ = false;
   JreStrongAssign(&self->missingValue_, nil);
   JreStrongAssign(&self->bytesComparator_, OrgApacheLuceneUtilBytesRef_getUTF8SortedAsUnicodeComparator());
   OrgApacheLuceneSearchSortField_initFieldTypeWithNSString_withOrgApacheLuceneSearchSortField_TypeEnum_(self, field, JreLoadStatic(OrgApacheLuceneSearchSortField_TypeEnum, CUSTOM));
@@ -356,7 +356,7 @@ OrgApacheLuceneSearchSortField *new_OrgApacheLuceneSearchSortField_initWithNSStr
 
 void OrgApacheLuceneSearchSortField_initWithNSString_withOrgApacheLuceneSearchFieldComparatorSource_withBoolean_(OrgApacheLuceneSearchSortField *self, NSString *field, OrgApacheLuceneSearchFieldComparatorSource *comparator, jboolean reverse) {
   NSObject_init(self);
-  self->reverse_ = NO;
+  self->reverse_ = false;
   JreStrongAssign(&self->missingValue_, nil);
   JreStrongAssign(&self->bytesComparator_, OrgApacheLuceneUtilBytesRef_getUTF8SortedAsUnicodeComparator());
   OrgApacheLuceneSearchSortField_initFieldTypeWithNSString_withOrgApacheLuceneSearchSortField_TypeEnum_(self, field, JreLoadStatic(OrgApacheLuceneSearchSortField_TypeEnum, CUSTOM));
@@ -481,10 +481,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSortField_TypeEnum)
   return @"SortField.STRING_FIRST";
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSortField_$1_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -515,10 +517,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSortField_$1)
   return @"SortField.STRING_LAST";
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSortField_$2_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

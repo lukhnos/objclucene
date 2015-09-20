@@ -94,7 +94,7 @@ __attribute__((unused)) static OrgApacheLuceneSearchQuery *OrgApacheLuceneUtilQu
   if (operator_ != JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, SHOULD) && operator_ != JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, MUST)) {
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"invalid operator: only SHOULD or MUST are allowed") autorelease];
   }
-  return OrgApacheLuceneUtilQueryBuilder_createFieldQueryWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneSearchBooleanClause_OccurEnum_withNSString_withNSString_withBoolean_withInt_(self, analyzer_, operator_, field, queryText, NO, 0);
+  return OrgApacheLuceneUtilQueryBuilder_createFieldQueryWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneSearchBooleanClause_OccurEnum_withNSString_withNSString_withBoolean_withInt_(self, analyzer_, operator_, field, queryText, false, 0);
 }
 
 - (OrgApacheLuceneSearchQuery *)createPhraseQueryWithNSString:(NSString *)field
@@ -105,7 +105,7 @@ __attribute__((unused)) static OrgApacheLuceneSearchQuery *OrgApacheLuceneUtilQu
 - (OrgApacheLuceneSearchQuery *)createPhraseQueryWithNSString:(NSString *)field
                                                  withNSString:(NSString *)queryText
                                                       withInt:(jint)phraseSlop {
-  return OrgApacheLuceneUtilQueryBuilder_createFieldQueryWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneSearchBooleanClause_OccurEnum_withNSString_withNSString_withBoolean_withInt_(self, analyzer_, JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, MUST), field, queryText, YES, phraseSlop);
+  return OrgApacheLuceneUtilQueryBuilder_createFieldQueryWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneSearchBooleanClause_OccurEnum_withNSString_withNSString_withBoolean_withInt_(self, analyzer_, JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, MUST), field, queryText, true, phraseSlop);
 }
 
 - (OrgApacheLuceneSearchQuery *)createMinShouldMatchQueryWithNSString:(NSString *)field
@@ -117,7 +117,7 @@ __attribute__((unused)) static OrgApacheLuceneSearchQuery *OrgApacheLuceneUtilQu
   if (fraction == 1) {
     return [self createBooleanQueryWithNSString:field withNSString:queryText withOrgApacheLuceneSearchBooleanClause_OccurEnum:JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, MUST)];
   }
-  OrgApacheLuceneSearchQuery *query = OrgApacheLuceneUtilQueryBuilder_createFieldQueryWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneSearchBooleanClause_OccurEnum_withNSString_withNSString_withBoolean_withInt_(self, analyzer_, JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, SHOULD), field, queryText, NO, 0);
+  OrgApacheLuceneSearchQuery *query = OrgApacheLuceneUtilQueryBuilder_createFieldQueryWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneSearchBooleanClause_OccurEnum_withNSString_withNSString_withBoolean_withInt_(self, analyzer_, JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, SHOULD), field, queryText, false, 0);
   if ([query isKindOfClass:[OrgApacheLuceneSearchBooleanQuery class]]) {
     OrgApacheLuceneSearchBooleanQuery *bq = (OrgApacheLuceneSearchBooleanQuery *) check_class_cast(query, [OrgApacheLuceneSearchBooleanQuery class]);
     OrgApacheLuceneSearchBooleanQuery_Builder *builder = [new_OrgApacheLuceneSearchBooleanQuery_Builder_init() autorelease];
@@ -244,7 +244,7 @@ __attribute__((unused)) static OrgApacheLuceneSearchQuery *OrgApacheLuceneUtilQu
 
 void OrgApacheLuceneUtilQueryBuilder_initWithOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneUtilQueryBuilder *self, OrgApacheLuceneAnalysisAnalyzer *analyzer) {
   NSObject_init(self);
-  self->enablePositionIncrements_ = YES;
+  self->enablePositionIncrements_ = true;
   JreStrongAssign(&self->analyzer_, analyzer);
 }
 
@@ -256,82 +256,93 @@ OrgApacheLuceneUtilQueryBuilder *new_OrgApacheLuceneUtilQueryBuilder_initWithOrg
 
 OrgApacheLuceneSearchQuery *OrgApacheLuceneUtilQueryBuilder_createFieldQueryWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneSearchBooleanClause_OccurEnum_withNSString_withNSString_withBoolean_withInt_(OrgApacheLuceneUtilQueryBuilder *self, OrgApacheLuceneAnalysisAnalyzer *analyzer, OrgApacheLuceneSearchBooleanClause_OccurEnum *operator_, NSString *field, NSString *queryText, jboolean quoted, jint phraseSlop) {
   JreAssert((operator_ == JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, SHOULD) || operator_ == JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, MUST)), (@"org/apache/lucene/util/QueryBuilder.java:200 condition failed: assert operator == BooleanClause.Occur.SHOULD || operator == BooleanClause.Occur.MUST;"));
-  {
-    JavaLangThrowable *__mainException = nil;
+  @try {
     OrgApacheLuceneAnalysisTokenStream *source = [((OrgApacheLuceneAnalysisAnalyzer *) nil_chk(analyzer)) tokenStreamWithNSString:field withNSString:queryText];
-    OrgApacheLuceneAnalysisCachingTokenFilter *stream = [new_OrgApacheLuceneAnalysisCachingTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(source) autorelease];
+    JavaLangThrowable *__primaryException2 = nil;
     @try {
-      id<OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute> termAtt = [stream getAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute_class_()];
-      id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute> posIncAtt = [stream addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_class_()];
-      if (termAtt == nil) {
-        return nil;
-      }
-      jint numTokens = 0;
-      jint positionCount = 0;
-      jboolean hasSynonyms = NO;
-      [stream reset];
-      while ([stream incrementToken]) {
-        numTokens++;
-        jint positionIncrement = [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posIncAtt)) getPositionIncrement];
-        if (positionIncrement != 0) {
-          positionCount += positionIncrement;
+      OrgApacheLuceneAnalysisCachingTokenFilter *stream = [new_OrgApacheLuceneAnalysisCachingTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(source) autorelease];
+      JavaLangThrowable *__primaryException1 = nil;
+      @try {
+        id<OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute> termAtt = [stream getAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute_class_()];
+        id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute> posIncAtt = [stream addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_class_()];
+        if (termAtt == nil) {
+          return nil;
+        }
+        jint numTokens = 0;
+        jint positionCount = 0;
+        jboolean hasSynonyms = false;
+        [stream reset];
+        while ([stream incrementToken]) {
+          numTokens++;
+          jint positionIncrement = [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posIncAtt)) getPositionIncrement];
+          if (positionIncrement != 0) {
+            positionCount += positionIncrement;
+          }
+          else {
+            hasSynonyms = true;
+          }
+        }
+        if (numTokens == 0) {
+          return nil;
+        }
+        else if (numTokens == 1) {
+          return OrgApacheLuceneUtilQueryBuilder_analyzeTermWithNSString_withOrgApacheLuceneAnalysisTokenStream_(self, field, stream);
+        }
+        else if (quoted && positionCount > 1) {
+          if (hasSynonyms) {
+            return OrgApacheLuceneUtilQueryBuilder_analyzeMultiPhraseWithNSString_withOrgApacheLuceneAnalysisTokenStream_withInt_(self, field, stream, phraseSlop);
+          }
+          else {
+            return OrgApacheLuceneUtilQueryBuilder_analyzePhraseWithNSString_withOrgApacheLuceneAnalysisTokenStream_withInt_(self, field, stream, phraseSlop);
+          }
         }
         else {
-          hasSynonyms = YES;
+          if (positionCount == 1) {
+            return OrgApacheLuceneUtilQueryBuilder_analyzeBooleanWithNSString_withOrgApacheLuceneAnalysisTokenStream_(self, field, stream);
+          }
+          else {
+            return OrgApacheLuceneUtilQueryBuilder_analyzeMultiBooleanWithNSString_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneSearchBooleanClause_OccurEnum_(self, field, stream, operator_);
+          }
         }
       }
-      if (numTokens == 0) {
-        return nil;
+      @catch (JavaLangThrowable *e) {
+        __primaryException1 = e;
+        @throw e;
       }
-      else if (numTokens == 1) {
-        return OrgApacheLuceneUtilQueryBuilder_analyzeTermWithNSString_withOrgApacheLuceneAnalysisTokenStream_(self, field, stream);
-      }
-      else if (quoted && positionCount > 1) {
-        if (hasSynonyms) {
-          return OrgApacheLuceneUtilQueryBuilder_analyzeMultiPhraseWithNSString_withOrgApacheLuceneAnalysisTokenStream_withInt_(self, field, stream, phraseSlop);
-        }
-        else {
-          return OrgApacheLuceneUtilQueryBuilder_analyzePhraseWithNSString_withOrgApacheLuceneAnalysisTokenStream_withInt_(self, field, stream, phraseSlop);
-        }
-      }
-      else {
-        if (positionCount == 1) {
-          return OrgApacheLuceneUtilQueryBuilder_analyzeBooleanWithNSString_withOrgApacheLuceneAnalysisTokenStream_(self, field, stream);
-        }
-        else {
-          return OrgApacheLuceneUtilQueryBuilder_analyzeMultiBooleanWithNSString_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneSearchBooleanClause_OccurEnum_(self, field, stream, operator_);
+      @finally {
+        if (stream != nil) {
+          if (__primaryException1 != nil) {
+            @try {
+              [stream close];
+            } @catch (JavaLangThrowable *e) {
+              [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+            }
+          } else {
+            [stream close];
+          }
         }
       }
     }
-    @catch (JavaIoIOException *e) {
-      __mainException = e;
-      @throw [new_JavaLangRuntimeException_initWithNSString_withJavaLangThrowable_(@"Error analyzing query text", e) autorelease];
+    @catch (JavaLangThrowable *e) {
+      __primaryException2 = e;
+      @throw e;
     }
     @finally {
-      @try {
-        [stream close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
+      if (source != nil) {
+        if (__primaryException2 != nil) {
+          @try {
+            [source close];
+          } @catch (JavaLangThrowable *e) {
+            [__primaryException2 addSuppressedWithJavaLangThrowable:e];
+          }
         } else {
-          __mainException = e;
+          [source close];
         }
-      }
-      @try {
-        [source close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
-        } else {
-          __mainException = e;
-        }
-      }
-      if (__mainException) {
-        @throw __mainException;
       }
     }
+  }
+  @catch (JavaIoIOException *e) {
+    @throw [new_JavaLangRuntimeException_initWithNSString_withJavaLangThrowable_(@"Error analyzing query text", e) autorelease];
   }
 }
 
@@ -346,7 +357,7 @@ OrgApacheLuceneSearchQuery *OrgApacheLuceneUtilQueryBuilder_analyzeTermWithNSStr
 
 OrgApacheLuceneSearchQuery *OrgApacheLuceneUtilQueryBuilder_analyzeBooleanWithNSString_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneUtilQueryBuilder *self, NSString *field, OrgApacheLuceneAnalysisTokenStream *stream) {
   OrgApacheLuceneSearchBooleanQuery_Builder *q = [new_OrgApacheLuceneSearchBooleanQuery_Builder_init() autorelease];
-  [q setDisableCoordWithBoolean:YES];
+  [q setDisableCoordWithBoolean:true];
   id<OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute> termAtt = [((OrgApacheLuceneAnalysisTokenStream *) nil_chk(stream)) getAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute_class_()];
   [stream reset];
   while ([stream incrementToken]) {
@@ -369,8 +380,8 @@ void OrgApacheLuceneUtilQueryBuilder_addWithOrgApacheLuceneSearchBooleanQuery_Bu
 }
 
 OrgApacheLuceneSearchQuery *OrgApacheLuceneUtilQueryBuilder_analyzeMultiBooleanWithNSString_withOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneSearchBooleanClause_OccurEnum_(OrgApacheLuceneUtilQueryBuilder *self, NSString *field, OrgApacheLuceneAnalysisTokenStream *stream, OrgApacheLuceneSearchBooleanClause_OccurEnum *operator_) {
-  OrgApacheLuceneSearchBooleanQuery_Builder *q = [self newBooleanQueryWithBoolean:NO];
-  OrgApacheLuceneSearchBooleanQuery_Builder *currentQuery = [self newBooleanQueryWithBoolean:YES];
+  OrgApacheLuceneSearchBooleanQuery_Builder *q = [self newBooleanQueryWithBoolean:false];
+  OrgApacheLuceneSearchBooleanQuery_Builder *currentQuery = [self newBooleanQueryWithBoolean:true];
   id<OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute> termAtt = [((OrgApacheLuceneAnalysisTokenStream *) nil_chk(stream)) getAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute_class_()];
   id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute> posIncrAtt = [stream getAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_class_()];
   [stream reset];
@@ -378,7 +389,7 @@ OrgApacheLuceneSearchQuery *OrgApacheLuceneUtilQueryBuilder_analyzeMultiBooleanW
     OrgApacheLuceneUtilBytesRef *bytes = [((id<OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute>) nil_chk(termAtt)) getBytesRef];
     if ([((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posIncrAtt)) getPositionIncrement] != 0) {
       OrgApacheLuceneUtilQueryBuilder_addWithOrgApacheLuceneSearchBooleanQuery_Builder_withOrgApacheLuceneSearchBooleanQuery_withOrgApacheLuceneSearchBooleanClause_OccurEnum_(self, q, [((OrgApacheLuceneSearchBooleanQuery_Builder *) nil_chk(currentQuery)) build], operator_);
-      currentQuery = [self newBooleanQueryWithBoolean:YES];
+      currentQuery = [self newBooleanQueryWithBoolean:true];
     }
     [((OrgApacheLuceneSearchBooleanQuery_Builder *) nil_chk(currentQuery)) addWithOrgApacheLuceneSearchQuery:[self newTermQueryWithOrgApacheLuceneIndexTerm:[new_OrgApacheLuceneIndexTerm_initWithNSString_withOrgApacheLuceneUtilBytesRef_(field, OrgApacheLuceneUtilBytesRef_deepCopyOfWithOrgApacheLuceneUtilBytesRef_(bytes)) autorelease]] withOrgApacheLuceneSearchBooleanClause_OccurEnum:JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, SHOULD)];
   }

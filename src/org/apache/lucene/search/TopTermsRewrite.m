@@ -144,12 +144,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchTopTermsRewrite)
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return YES;
-  if (obj == nil) return NO;
-  if ([self getClass] != [nil_chk(obj) getClass]) return NO;
+  if (self == obj) return true;
+  if (obj == nil) return false;
+  if ([self getClass] != [nil_chk(obj) getClass]) return false;
   OrgApacheLuceneSearchTopTermsRewrite *other = (OrgApacheLuceneSearchTopTermsRewrite *) check_class_cast(obj, [OrgApacheLuceneSearchTopTermsRewrite class]);
-  if (size_ != other->size_) return NO;
-  return YES;
+  if (size_ != other->size_) return false;
+  return true;
 }
 
 + (void)initialize {
@@ -254,8 +254,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm)
   JreAssert((OrgApacheLuceneSearchTopTermsRewrite_$2_compareToLastTermWithOrgApacheLuceneUtilBytesRef_(self, bytes)), (@"org/apache/lucene/search/TopTermsRewrite.java:110 condition failed: assert compareToLastTerm(bytes);"));
   if ([((JavaUtilPriorityQueue *) nil_chk(val$stQueue_)) size] == val$maxSize_) {
     OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm *t = [val$stQueue_ peek];
-    if (boost < ((OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm *) nil_chk(t))->boost_) return YES;
-    if (boost == t->boost_ && [((OrgApacheLuceneUtilBytesRef *) nil_chk(bytes)) compareToWithId:[((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(t->bytes_)) get]] > 0) return YES;
+    if (boost < ((OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm *) nil_chk(t))->boost_) return true;
+    if (boost == t->boost_ && [((OrgApacheLuceneUtilBytesRef *) nil_chk(bytes)) compareToWithId:[((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(t->bytes_)) get]] > 0) return true;
   }
   OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm *t = [((id<JavaUtilMap>) nil_chk(visitedTerms_)) getWithId:bytes];
   OrgApacheLuceneIndexTermState *state = [((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum_)) termState];
@@ -286,7 +286,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm)
       [maxBoostAtt_ setCompetitiveTermWithOrgApacheLuceneUtilBytesRef:[t->bytes_ get]];
     }
   }
-  return YES;
+  return true;
 }
 
 - (instancetype)initWithJavaUtilPriorityQueue:(JavaUtilPriorityQueue *)capture$0
@@ -342,7 +342,7 @@ jboolean OrgApacheLuceneSearchTopTermsRewrite_$2_compareToLastTermWithOrgApacheL
     JreAssert(([((OrgApacheLuceneUtilBytesRef *) nil_chk([((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(self->lastTerm_)) get])) compareToWithId:t] < 0), (JreStrcat("$@$@", @"lastTerm=", self->lastTerm_, @" t=", t)));
     [self->lastTerm_ copyBytesWithOrgApacheLuceneUtilBytesRef:t];
   }
-  return YES;
+  return true;
 }
 
 void OrgApacheLuceneSearchTopTermsRewrite_$2_initWithJavaUtilPriorityQueue_withInt_(OrgApacheLuceneSearchTopTermsRewrite_$2 *self, JavaUtilPriorityQueue *capture$0, jint capture$1) {
@@ -368,10 +368,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopTermsRewrite_$2)
   return [((OrgApacheLuceneUtilBytesRef *) nil_chk([((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(((OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm *) nil_chk(st1))->bytes_)) get])) compareToWithId:[((OrgApacheLuceneSearchTopTermsRewrite_ScoreTerm *) nil_chk(st2))->bytes_ get]];
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchTopTermsRewrite_$1_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

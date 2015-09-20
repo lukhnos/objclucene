@@ -70,7 +70,7 @@ void OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode_initWithOrgApache
     @throw [new_OrgApacheLuceneQueryparserFlexibleCoreQueryNodeError_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_([new_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_withNSObjectArray_(JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, PARAMETER_VALUE_NOT_SUPPORTED_), [IOSObjectArray arrayWithObjects:(id[]){ @"query", @"null" } count:2 type:NSObject_class_()]) autorelease]) autorelease];
   }
   [self allocate];
-  [self setLeafWithBoolean:NO];
+  [self setLeafWithBoolean:false];
   [self addWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:query];
 }
 

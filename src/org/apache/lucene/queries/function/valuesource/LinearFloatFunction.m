@@ -77,7 +77,7 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
 }
 
 - (jboolean)isEqual:(id)o {
-  if (OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction_class_() != [nil_chk(o) getClass]) return NO;
+  if (OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction_class_() != [nil_chk(o) getClass]) return false;
   OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction *other = (OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction *) check_class_cast(o, [OrgApacheLuceneQueriesFunctionValuesourceLinearFloatFunction class]);
   return self->slope_ == other->slope_ && self->intercept_ == other->intercept_ && [((OrgApacheLuceneQueriesFunctionValueSource *) nil_chk(self->source_)) isEqual:other->source_];
 }

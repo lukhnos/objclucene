@@ -20,10 +20,12 @@ OrgApacheLuceneSearchSort *OrgApacheLuceneSearchSort_INDEXORDER_;
 
 @implementation OrgApacheLuceneSearchSort
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSort_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithOrgApacheLuceneSearchSortField:(OrgApacheLuceneSearchSortField *)field {
   OrgApacheLuceneSearchSort_initWithOrgApacheLuceneSearchSortField_(self, field);
@@ -48,12 +50,12 @@ OrgApacheLuceneSearchSort *OrgApacheLuceneSearchSort_INDEXORDER_;
 }
 
 - (OrgApacheLuceneSearchSort *)rewriteWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher {
-  jboolean changed = NO;
+  jboolean changed = false;
   IOSObjectArray *rewrittenSortFields = [IOSObjectArray arrayWithLength:((IOSObjectArray *) nil_chk(fields_))->size_ type:OrgApacheLuceneSearchSortField_class_()];
   for (jint i = 0; i < fields_->size_; i++) {
     IOSObjectArray_Set(rewrittenSortFields, i, [((OrgApacheLuceneSearchSortField *) nil_chk(IOSObjectArray_Get(fields_, i))) rewriteWithOrgApacheLuceneSearchIndexSearcher:searcher]);
     if (IOSObjectArray_Get(fields_, i) != IOSObjectArray_Get(rewrittenSortFields, i)) {
-      changed = YES;
+      changed = true;
     }
   }
   return (changed) ? [new_OrgApacheLuceneSearchSort_initWithOrgApacheLuceneSearchSortFieldArray_(rewrittenSortFields) autorelease] : self;
@@ -69,8 +71,8 @@ OrgApacheLuceneSearchSort *OrgApacheLuceneSearchSort_INDEXORDER_;
 }
 
 - (jboolean)isEqual:(id)o {
-  if (self == o) return YES;
-  if (!([o isKindOfClass:[OrgApacheLuceneSearchSort class]])) return NO;
+  if (self == o) return true;
+  if (!([o isKindOfClass:[OrgApacheLuceneSearchSort class]])) return false;
   OrgApacheLuceneSearchSort *other = (OrgApacheLuceneSearchSort *) check_class_cast(o, [OrgApacheLuceneSearchSort class]);
   return JavaUtilArrays_equalsWithNSObjectArray_withNSObjectArray_(self->fields_, ((OrgApacheLuceneSearchSort *) nil_chk(other))->fields_);
 }
@@ -87,11 +89,11 @@ OrgApacheLuceneSearchSort *OrgApacheLuceneSearchSort_INDEXORDER_;
     while (b__ < e__) {
       OrgApacheLuceneSearchSortField *sortField = *b__++;
       if ([((OrgApacheLuceneSearchSortField *) nil_chk(sortField)) needsScores]) {
-        return YES;
+        return true;
       }
     }
   }
-  return NO;
+  return false;
 }
 
 - (void)dealloc {

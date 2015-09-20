@@ -10,10 +10,12 @@
 
 @implementation OrgApacheLuceneSearchSimilaritiesLambda
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSimilaritiesLambda_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jfloat)lambdaWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats {
   // can't call an abstract method

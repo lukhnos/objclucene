@@ -46,7 +46,7 @@
 
 void OrgApacheLuceneAnalysisIdIndonesianStemFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisIdIndonesianStemFilterFactory *self, id<JavaUtilMap> args) {
   OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
-  self->stemDerivational_ = [self getBooleanWithJavaUtilMap:args withNSString:@"stemDerivational" withBoolean:YES];
+  self->stemDerivational_ = [self getBooleanWithJavaUtilMap:args withNSString:@"stemDerivational" withBoolean:true];
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
   }

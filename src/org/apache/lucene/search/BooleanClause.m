@@ -112,7 +112,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchBooleanClause_Occur_$4Enum)
 }
 
 - (jboolean)isEqual:(id)o {
-  if (o == nil || !([o isKindOfClass:[OrgApacheLuceneSearchBooleanClause class]])) return NO;
+  if (o == nil || !([o isKindOfClass:[OrgApacheLuceneSearchBooleanClause class]])) return false;
   OrgApacheLuceneSearchBooleanClause *other = (OrgApacheLuceneSearchBooleanClause *) check_class_cast(o, [OrgApacheLuceneSearchBooleanClause class]);
   return [((OrgApacheLuceneSearchQuery *) nil_chk(self->query_)) isEqual:((OrgApacheLuceneSearchBooleanClause *) nil_chk(other))->query_] && self->occur_ == other->occur_;
 }

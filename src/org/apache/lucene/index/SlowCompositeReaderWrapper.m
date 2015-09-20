@@ -104,7 +104,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSlowCompositeReaderWrapper, cachedOrdMap
       OrgApacheLuceneIndexSortedDocValues *dv = OrgApacheLuceneIndexMultiDocValues_getSortedValuesWithOrgApacheLuceneIndexIndexReader_withNSString_(in_, field);
       if ([dv isKindOfClass:[OrgApacheLuceneIndexMultiDocValues_MultiSortedDocValues class]]) {
         map = ((OrgApacheLuceneIndexMultiDocValues_MultiSortedDocValues *) nil_chk(((OrgApacheLuceneIndexMultiDocValues_MultiSortedDocValues *) check_class_cast(dv, [OrgApacheLuceneIndexMultiDocValues_MultiSortedDocValues class]))))->mapping_;
-        if (((OrgApacheLuceneIndexMultiDocValues_OrdinalMap *) nil_chk(map))->owner_ == [self getCoreCacheKey] && merging_ == NO) {
+        if (((OrgApacheLuceneIndexMultiDocValues_OrdinalMap *) nil_chk(map))->owner_ == [self getCoreCacheKey] && merging_ == false) {
           [cachedOrdMaps_ putWithId:field withId:map];
         }
       }
@@ -139,7 +139,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSlowCompositeReaderWrapper, cachedOrdMap
       OrgApacheLuceneIndexSortedSetDocValues *dv = OrgApacheLuceneIndexMultiDocValues_getSortedSetValuesWithOrgApacheLuceneIndexIndexReader_withNSString_(in_, field);
       if ([dv isKindOfClass:[OrgApacheLuceneIndexMultiDocValues_MultiSortedSetDocValues class]]) {
         map = ((OrgApacheLuceneIndexMultiDocValues_MultiSortedSetDocValues *) nil_chk(((OrgApacheLuceneIndexMultiDocValues_MultiSortedSetDocValues *) check_class_cast(dv, [OrgApacheLuceneIndexMultiDocValues_MultiSortedSetDocValues class]))))->mapping_;
-        if (((OrgApacheLuceneIndexMultiDocValues_OrdinalMap *) nil_chk(map))->owner_ == [self getCoreCacheKey] && merging_ == NO) {
+        if (((OrgApacheLuceneIndexMultiDocValues_OrdinalMap *) nil_chk(map))->owner_ == [self getCoreCacheKey] && merging_ == false) {
           [cachedOrdMaps_ putWithId:field withId:map];
         }
       }
@@ -267,7 +267,7 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 OrgApacheLuceneIndexLeafReader *OrgApacheLuceneIndexSlowCompositeReaderWrapper_wrapWithOrgApacheLuceneIndexIndexReader_(OrgApacheLuceneIndexIndexReader *reader) {
   OrgApacheLuceneIndexSlowCompositeReaderWrapper_initialize();
   if ([reader isKindOfClass:[OrgApacheLuceneIndexCompositeReader class]]) {
-    return [new_OrgApacheLuceneIndexSlowCompositeReaderWrapper_initWithOrgApacheLuceneIndexCompositeReader_withBoolean_((OrgApacheLuceneIndexCompositeReader *) check_class_cast(reader, [OrgApacheLuceneIndexCompositeReader class]), NO) autorelease];
+    return [new_OrgApacheLuceneIndexSlowCompositeReaderWrapper_initWithOrgApacheLuceneIndexCompositeReader_withBoolean_((OrgApacheLuceneIndexCompositeReader *) check_class_cast(reader, [OrgApacheLuceneIndexCompositeReader class]), false) autorelease];
   }
   else {
     JreAssert(([reader isKindOfClass:[OrgApacheLuceneIndexLeafReader class]]), (@"org/apache/lucene/index/SlowCompositeReaderWrapper.java:59 condition failed: assert reader instanceof LeafReader;"));

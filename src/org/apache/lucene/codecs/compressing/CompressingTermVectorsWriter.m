@@ -498,7 +498,7 @@ withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)offsets {
         [vectorsReader checkIntegrity];
       }
       for (jint i = 0; i < maxDoc; i++) {
-        if (liveDocs != nil && [liveDocs getWithInt:i] == NO) {
+        if (liveDocs != nil && [liveDocs getWithInt:i] == false) {
           continue;
         }
         OrgApacheLuceneIndexFields *vectors;
@@ -546,7 +546,7 @@ withOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)offsets {
     OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_FLAGS_BITS_ = OrgApacheLuceneUtilPackedPackedInts_bitsRequiredWithLong_(OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_POSITIONS | OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_OFFSETS | OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_PAYLOADS);
     JreStrongAssign(&OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_BULK_MERGE_ENABLED_SYSPROP_, JreStrcat("$$", [OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_class_() getName], @".enableBulkMerge"));
     {
-      jboolean v = YES;
+      jboolean v = true;
       @try {
         v = JavaLangBoolean_parseBooleanWithNSString_(JavaLangSystem_getPropertyWithNSString_withNSString_(OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_BULK_MERGE_ENABLED_SYSPROP_, @"true"));
       }
@@ -665,7 +665,7 @@ void OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_initWithOrgApa
   JreStrongAssignAndConsume(&self->termSuffixes_, new_OrgApacheLuceneUtilGrowableByteArrayDataOutput_initWithInt_(OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(chunkSize, 1)));
   JreStrongAssignAndConsume(&self->payloadBytes_, new_OrgApacheLuceneUtilGrowableByteArrayDataOutput_initWithInt_(OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(1, 1)));
   JreStrongAssignAndConsume(&self->lastTerm_, new_OrgApacheLuceneUtilBytesRef_initWithInt_(OrgApacheLuceneUtilArrayUtil_oversizeWithInt_withInt_(30, 1)));
-  jboolean success = NO;
+  jboolean success = false;
   OrgApacheLuceneStoreIndexOutput *indexStream = [((OrgApacheLuceneStoreDirectory *) nil_chk(directory)) createOutputWithNSString:OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(self->segment_, segmentSuffix, OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_VECTORS_INDEX_EXTENSION_) withOrgApacheLuceneStoreIOContext:context];
   @try {
     JreStrongAssign(&self->vectorsStream_, [directory createOutputWithNSString:OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(self->segment_, segmentSuffix, OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_VECTORS_EXTENSION_) withOrgApacheLuceneStoreIOContext:context]);
@@ -684,7 +684,7 @@ void OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_initWithOrgApa
     JreStrongAssignAndConsume(&self->startOffsetsBuf_, [IOSIntArray newArrayWithLength:1024]);
     JreStrongAssignAndConsume(&self->lengthsBuf_, [IOSIntArray newArrayWithLength:1024]);
     JreStrongAssignAndConsume(&self->payloadLengthsBuf_, [IOSIntArray newArrayWithLength:1024]);
-    success = YES;
+    success = true;
   }
   @finally {
     if (!success) {
@@ -789,7 +789,7 @@ void OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_flushFieldsWit
 }
 
 void OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_flushFlagsWithInt_withIntArray_(OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter *self, jint totalFields, IOSIntArray *fieldNums) {
-  jboolean nonChangingFlags = YES;
+  jboolean nonChangingFlags = true;
   IOSIntArray *fieldFlags = [IOSIntArray arrayWithLength:((IOSIntArray *) nil_chk(fieldNums))->size_];
   JavaUtilArrays_fillWithIntArray_withInt_(fieldFlags, -1);
   for (OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_DocData * __strong dd in nil_chk(self->pendingDocs_)) {
@@ -800,7 +800,7 @@ void OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_flushFlagsWith
         *IOSIntArray_GetRef(fieldFlags, fieldNumOff) = fd->flags_;
       }
       else if (IOSIntArray_Get(fieldFlags, fieldNumOff) != fd->flags_) {
-        nonChangingFlags = NO;
+        nonChangingFlags = false;
         goto break_outer;
       }
     }
@@ -909,7 +909,7 @@ void OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_flushPositions
 }
 
 void OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_flushOffsetsWithIntArray_(OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter *self, IOSIntArray *fieldNums) {
-  jboolean hasOffsets = NO;
+  jboolean hasOffsets = false;
   IOSLongArray *sumPos = [IOSLongArray arrayWithLength:((IOSIntArray *) nil_chk(fieldNums))->size_];
   IOSLongArray *sumOffsets = [IOSLongArray arrayWithLength:fieldNums->size_];
   for (OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_DocData * __strong dd in nil_chk(self->pendingDocs_)) {

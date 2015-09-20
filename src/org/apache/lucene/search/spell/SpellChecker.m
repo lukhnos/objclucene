@@ -399,7 +399,7 @@ withOrgApacheLuceneDocumentDocument:(OrgApacheLuceneDocumentDocument *)doc
 - (void)close {
   @synchronized(searcherLock_) {
     OrgApacheLuceneSearchSpellSpellChecker_ensureOpen(self);
-    JreAssignVolatileBoolean(&closed_, YES);
+    JreAssignVolatileBoolean(&closed_, true);
     if (searcher_ != nil) {
       [((OrgApacheLuceneIndexIndexReader *) nil_chk([searcher_ getIndexReader])) close];
     }
@@ -509,7 +509,7 @@ void OrgApacheLuceneSearchSpellSpellChecker_initWithOrgApacheLuceneStoreDirector
   self->bEnd_ = 1.0f;
   JreStrongAssignAndConsume(&self->searcherLock_, new_NSObject_init());
   JreStrongAssignAndConsume(&self->modifyCurrentIndexLock_, new_NSObject_init());
-  JreAssignVolatileBoolean(&self->closed_, NO);
+  JreAssignVolatileBoolean(&self->closed_, false);
   self->accuracy_ = OrgApacheLuceneSearchSpellSpellChecker_DEFAULT_ACCURACY;
   [self setSpellIndexWithOrgApacheLuceneStoreDirectory:spellIndex];
   [self setStringDistanceWithOrgApacheLuceneSearchSpellStringDistance:sd];

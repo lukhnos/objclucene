@@ -122,14 +122,14 @@ __attribute__((unused)) static void OrgApacheLuceneUtilFstBuilder_compileAllTarg
   JreAssert((OrgApacheLuceneUtilFstBuilder_validOutputWithId_(self, output)), (@"org/apache/lucene/util/fst/Builder.java:378 condition failed: assert validOutput(output);"));
   if (((OrgApacheLuceneUtilIntsRef *) nil_chk(input))->length_ == 0) {
     ((OrgApacheLuceneUtilFstBuilder_UnCompiledNode *) nil_chk(IOSObjectArray_Get(nil_chk(frontier_), 0)))->inputCount_++;
-    ((OrgApacheLuceneUtilFstBuilder_UnCompiledNode *) nil_chk(IOSObjectArray_Get(frontier_, 0)))->isFinal_ = YES;
+    ((OrgApacheLuceneUtilFstBuilder_UnCompiledNode *) nil_chk(IOSObjectArray_Get(frontier_, 0)))->isFinal_ = true;
     [((OrgApacheLuceneUtilFstFST *) nil_chk(fst_)) setEmptyOutputWithId:output];
     return;
   }
   jint pos1 = 0;
   jint pos2 = input->offset_;
   jint pos1Stop = JavaLangMath_minWithInt_withInt_([lastInput_ length], input->length_);
-  while (YES) {
+  while (true) {
     ((OrgApacheLuceneUtilFstBuilder_UnCompiledNode *) nil_chk(IOSObjectArray_Get(nil_chk(frontier_), pos1)))->inputCount_++;
     if (pos1 >= pos1Stop || [lastInput_ intAtWithInt:pos1] != IOSIntArray_Get(nil_chk(input->ints_), pos2)) {
       break;
@@ -153,7 +153,7 @@ __attribute__((unused)) static void OrgApacheLuceneUtilFstBuilder_compileAllTarg
   }
   OrgApacheLuceneUtilFstBuilder_UnCompiledNode *lastNode = IOSObjectArray_Get(frontier_, input->length_);
   if ([lastInput_ length] != input->length_ || prefixLenPlus1 != input->length_ + 1) {
-    ((OrgApacheLuceneUtilFstBuilder_UnCompiledNode *) nil_chk(lastNode))->isFinal_ = YES;
+    ((OrgApacheLuceneUtilFstBuilder_UnCompiledNode *) nil_chk(lastNode))->isFinal_ = true;
     JreStrongAssign(&lastNode->output_, NO_OUTPUT_);
   }
   for (jint idx = 1; idx < prefixLenPlus1; idx++) {
@@ -278,7 +278,7 @@ __attribute__((unused)) static void OrgApacheLuceneUtilFstBuilder_compileAllTarg
 @end
 
 void OrgApacheLuceneUtilFstBuilder_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_withOrgApacheLuceneUtilFstOutputs_(OrgApacheLuceneUtilFstBuilder *self, OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum *inputType, OrgApacheLuceneUtilFstOutputs *outputs) {
-  OrgApacheLuceneUtilFstBuilder_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_withInt_withInt_withBoolean_withBoolean_withInt_withOrgApacheLuceneUtilFstOutputs_withBoolean_withFloat_withBoolean_withInt_(self, inputType, 0, 0, YES, YES, JavaLangInteger_MAX_VALUE, outputs, NO, OrgApacheLuceneUtilPackedPackedInts_COMPACT, YES, 15);
+  OrgApacheLuceneUtilFstBuilder_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_withInt_withInt_withBoolean_withBoolean_withInt_withOrgApacheLuceneUtilFstOutputs_withBoolean_withFloat_withBoolean_withInt_(self, inputType, 0, 0, true, true, JavaLangInteger_MAX_VALUE, outputs, false, OrgApacheLuceneUtilPackedPackedInts_COMPACT, true, 15);
 }
 
 OrgApacheLuceneUtilFstBuilder *new_OrgApacheLuceneUtilFstBuilder_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_withOrgApacheLuceneUtilFstOutputs_(OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum *inputType, OrgApacheLuceneUtilFstOutputs *outputs) {
@@ -302,7 +302,7 @@ void OrgApacheLuceneUtilFstBuilder_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPEE
   JreStrongAssign(&self->bytes_, self->fst_->bytes_);
   JreAssert((self->bytes_ != nil), (@"org/apache/lucene/util/fst/Builder.java:177 condition failed: assert bytes != null;"));
   if (doShareSuffix) {
-    JreStrongAssignAndConsume(&self->dedupHash_, new_OrgApacheLuceneUtilFstNodeHash_initWithOrgApacheLuceneUtilFstFST_withOrgApacheLuceneUtilFstFST_BytesReader_(self->fst_, [((OrgApacheLuceneUtilFstBytesStore *) nil_chk(self->bytes_)) getReverseReaderWithBoolean:NO]));
+    JreStrongAssignAndConsume(&self->dedupHash_, new_OrgApacheLuceneUtilFstNodeHash_initWithOrgApacheLuceneUtilFstFST_withOrgApacheLuceneUtilFstFST_BytesReader_(self->fst_, [((OrgApacheLuceneUtilFstBytesStore *) nil_chk(self->bytes_)) getReverseReaderWithBoolean:false]));
   }
   else {
     JreStrongAssign(&self->dedupHash_, nil);
@@ -351,22 +351,22 @@ OrgApacheLuceneUtilFstBuilder_CompiledNode *OrgApacheLuceneUtilFstBuilder_compil
 void OrgApacheLuceneUtilFstBuilder_freezeTailWithInt_(OrgApacheLuceneUtilFstBuilder *self, jint prefixLenPlus1) {
   jint downTo = JavaLangMath_maxWithInt_withInt_(1, prefixLenPlus1);
   for (jint idx = [((OrgApacheLuceneUtilIntsRefBuilder *) nil_chk(self->lastInput_)) length]; idx >= downTo; idx--) {
-    jboolean doPrune = NO;
-    jboolean doCompile = NO;
+    jboolean doPrune = false;
+    jboolean doCompile = false;
     OrgApacheLuceneUtilFstBuilder_UnCompiledNode *node = IOSObjectArray_Get(nil_chk(self->frontier_), idx);
     OrgApacheLuceneUtilFstBuilder_UnCompiledNode *parent = IOSObjectArray_Get(self->frontier_, idx - 1);
     if (((OrgApacheLuceneUtilFstBuilder_UnCompiledNode *) nil_chk(node))->inputCount_ < self->minSuffixCount1_) {
-      doPrune = YES;
-      doCompile = YES;
+      doPrune = true;
+      doCompile = true;
     }
     else if (idx > prefixLenPlus1) {
       if (((OrgApacheLuceneUtilFstBuilder_UnCompiledNode *) nil_chk(parent))->inputCount_ < self->minSuffixCount2_ || (self->minSuffixCount2_ == 1 && parent->inputCount_ == 1 && idx > 1)) {
-        doPrune = YES;
+        doPrune = true;
       }
       else {
-        doPrune = NO;
+        doPrune = false;
       }
-      doCompile = YES;
+      doCompile = true;
     }
     else {
       doCompile = (self->minSuffixCount2_ == 0);
@@ -409,7 +409,7 @@ void OrgApacheLuceneUtilFstBuilder_compileAllTargetsWithOrgApacheLuceneUtilFstBu
     if (![((id<OrgApacheLuceneUtilFstBuilder_Node>) nil_chk(((OrgApacheLuceneUtilFstBuilder_Arc *) nil_chk(arc))->target_)) isCompiled]) {
       OrgApacheLuceneUtilFstBuilder_UnCompiledNode *n = (OrgApacheLuceneUtilFstBuilder_UnCompiledNode *) check_class_cast(arc->target_, [OrgApacheLuceneUtilFstBuilder_UnCompiledNode class]);
       if (n->numArcs_ == 0) {
-        arc->isFinal_ = n->isFinal_ = YES;
+        arc->isFinal_ = n->isFinal_ = true;
       }
       arc->target_ = OrgApacheLuceneUtilFstBuilder_compileNodeWithOrgApacheLuceneUtilFstBuilder_UnCompiledNode_withInt_(self, n, tailLength - 1);
     }
@@ -420,10 +420,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstBuilder)
 
 @implementation OrgApacheLuceneUtilFstBuilder_Arc
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilFstBuilder_Arc_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(output_);
@@ -482,13 +484,15 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstBuilder_Node)
 @implementation OrgApacheLuceneUtilFstBuilder_CompiledNode
 
 - (jboolean)isCompiled {
-  return YES;
+  return true;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilFstBuilder_CompiledNode_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -525,12 +529,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstBuilder_CompiledNode)
 }
 
 - (jboolean)isCompiled {
-  return NO;
+  return false;
 }
 
 - (void)clear {
   numArcs_ = 0;
-  isFinal_ = NO;
+  isFinal_ = false;
   JreStrongAssign(&output_, ((OrgApacheLuceneUtilFstBuilder *) nil_chk(owner_))->NO_OUTPUT_);
   inputCount_ = 0;
 }
@@ -557,7 +561,7 @@ withOrgApacheLuceneUtilFstBuilder_Node:(id<OrgApacheLuceneUtilFstBuilder_Node>)t
   ((OrgApacheLuceneUtilFstBuilder_Arc *) nil_chk(arc))->label_ = label;
   arc->target_ = target;
   JreStrongAssign(&arc->output_, JreStrongAssign(&arc->nextFinalOutput_, ((OrgApacheLuceneUtilFstBuilder *) nil_chk(owner_))->NO_OUTPUT_));
-  arc->isFinal_ = NO;
+  arc->isFinal_ = false;
 }
 
 - (void)replaceLastWithInt:(jint)labelToMatch

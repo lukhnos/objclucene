@@ -92,14 +92,14 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilMergedIterator_TermMergeQueue)
 
 - (jboolean)hasNext {
   if ([((OrgApacheLuceneUtilMergedIterator_TermMergeQueue *) nil_chk(queue_)) size] > 0) {
-    return YES;
+    return true;
   }
   for (jint i = 0; i < numTop_; i++) {
     if ([((id<JavaUtilIterator>) nil_chk(((OrgApacheLuceneUtilMergedIterator_SubIterator *) nil_chk(IOSObjectArray_Get(nil_chk(top_), i)))->iterator_)) hasNext]) {
-      return YES;
+      return true;
     }
   }
-  return NO;
+  return false;
 }
 
 - (id)next {
@@ -160,7 +160,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilMergedIterator_TermMergeQueue)
 @end
 
 void OrgApacheLuceneUtilMergedIterator_initWithJavaUtilIteratorArray_(OrgApacheLuceneUtilMergedIterator *self, IOSObjectArray *iterators) {
-  OrgApacheLuceneUtilMergedIterator_initWithBoolean_withJavaUtilIteratorArray_(self, YES, iterators);
+  OrgApacheLuceneUtilMergedIterator_initWithBoolean_withJavaUtilIteratorArray_(self, true, iterators);
 }
 
 OrgApacheLuceneUtilMergedIterator *new_OrgApacheLuceneUtilMergedIterator_initWithJavaUtilIteratorArray_(IOSObjectArray *iterators) {
@@ -226,10 +226,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilMergedIterator)
 
 @implementation OrgApacheLuceneUtilMergedIterator_SubIterator
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilMergedIterator_SubIterator_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(iterator_);

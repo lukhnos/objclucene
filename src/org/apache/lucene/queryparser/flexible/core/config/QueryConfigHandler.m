@@ -34,10 +34,12 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandl
   [((JavaUtilLinkedList *) nil_chk(self->listeners_)) addWithId:listener];
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(listeners_);

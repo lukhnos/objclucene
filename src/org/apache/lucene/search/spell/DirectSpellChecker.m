@@ -64,10 +64,12 @@ id<OrgApacheLuceneSearchSpellStringDistance> OrgApacheLuceneSearchSpellDirectSpe
 
 @implementation OrgApacheLuceneSearchSpellDirectSpellChecker
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSpellDirectSpellChecker_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)getMaxEdits {
   return maxEdits_;
@@ -238,7 +240,7 @@ id<OrgApacheLuceneSearchSpellStringDistance> OrgApacheLuceneSearchSpellDirectSpe
   if (terms == nil) {
     return JavaUtilCollections_emptyList();
   }
-  OrgApacheLuceneSearchFuzzyTermsEnum *e = [new_OrgApacheLuceneSearchFuzzyTermsEnum_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneUtilAttributeSource_withOrgApacheLuceneIndexTerm_withFloat_withInt_withBoolean_(terms, atts, term, editDistance, JavaLangMath_maxWithInt_withInt_(minPrefix_, editDistance - 1), YES) autorelease];
+  OrgApacheLuceneSearchFuzzyTermsEnum *e = [new_OrgApacheLuceneSearchFuzzyTermsEnum_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneUtilAttributeSource_withOrgApacheLuceneIndexTerm_withFloat_withInt_withBoolean_(terms, atts, term, editDistance, JavaLangMath_maxWithInt_withInt_(minPrefix_, editDistance - 1), true) autorelease];
   JavaUtilPriorityQueue *stQueue = [new_JavaUtilPriorityQueue_init() autorelease];
   OrgApacheLuceneUtilBytesRef *queryTerm = [new_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_([term text]) autorelease];
   OrgApacheLuceneUtilBytesRef *candidateTerm;
@@ -344,7 +346,7 @@ void OrgApacheLuceneSearchSpellDirectSpellChecker_init(OrgApacheLuceneSearchSpel
   self->thresholdFrequency_ = 0.0f;
   self->minQueryLength_ = 4;
   self->maxQueryFrequency_ = 0.01f;
-  self->lowerCaseTerms_ = YES;
+  self->lowerCaseTerms_ = true;
   JreStrongAssign(&self->comparator_, JreLoadStatic(OrgApacheLuceneSearchSpellSuggestWordQueue, DEFAULT_COMPARATOR_));
   JreStrongAssign(&self->distance_, OrgApacheLuceneSearchSpellDirectSpellChecker_INTERNAL_LEVENSHTEIN_);
 }
@@ -359,10 +361,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpellDirectSpellChecker)
 
 @implementation OrgApacheLuceneSearchSpellDirectSpellChecker_ScoreTerm
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSpellDirectSpellChecker_ScoreTerm_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)compareToWithId:(OrgApacheLuceneSearchSpellDirectSpellChecker_ScoreTerm *)other {
   check_class_cast(other, [OrgApacheLuceneSearchSpellDirectSpellChecker_ScoreTerm class]);
@@ -379,15 +383,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpellDirectSpellChecker)
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return YES;
-  if (obj == nil) return NO;
-  if ([self getClass] != [nil_chk(obj) getClass]) return NO;
+  if (self == obj) return true;
+  if (obj == nil) return false;
+  if ([self getClass] != [nil_chk(obj) getClass]) return false;
   OrgApacheLuceneSearchSpellDirectSpellChecker_ScoreTerm *other = (OrgApacheLuceneSearchSpellDirectSpellChecker_ScoreTerm *) check_class_cast(obj, [OrgApacheLuceneSearchSpellDirectSpellChecker_ScoreTerm class]);
   if (term_ == nil) {
-    if (other->term_ != nil) return NO;
+    if (other->term_ != nil) return false;
   }
-  else if (![term_ bytesEqualsWithOrgApacheLuceneUtilBytesRef:other->term_]) return NO;
-  return YES;
+  else if (![term_ bytesEqualsWithOrgApacheLuceneUtilBytesRef:other->term_]) return false;
+  return true;
 }
 
 - (void)dealloc {

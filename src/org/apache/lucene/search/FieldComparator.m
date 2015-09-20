@@ -179,10 +179,12 @@ __attribute__((unused)) static OrgApacheLuceneUtilBytesRef *OrgApacheLuceneSearc
   }
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchFieldComparator_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -918,17 +920,17 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFieldComparator_DocCompara
   if (topValue_ != nil) {
     jint ord = [((OrgApacheLuceneIndexSortedDocValues *) nil_chk(termsIndex_)) lookupTermWithOrgApacheLuceneUtilBytesRef:topValue_];
     if (ord >= 0) {
-      topSameReader_ = YES;
+      topSameReader_ = true;
       topOrd_ = ord;
     }
     else {
-      topSameReader_ = NO;
+      topSameReader_ = false;
       topOrd_ = -ord - 2;
     }
   }
   else {
     topOrd_ = missingOrd_;
-    topSameReader_ = YES;
+    topSameReader_ = true;
   }
   if (bottomSlot_ != -1) {
     [self setBottomWithInt:bottomSlot_];
@@ -941,24 +943,24 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFieldComparator_DocCompara
   JreStrongAssign(&bottomValue_, IOSObjectArray_Get(nil_chk(values_), bottomSlot_));
   if (currentReaderGen_ == IOSIntArray_Get(nil_chk(readerGen_), bottomSlot_)) {
     bottomOrd_ = IOSIntArray_Get(nil_chk(ords_), bottomSlot_);
-    bottomSameReader_ = YES;
+    bottomSameReader_ = true;
   }
   else {
     if (bottomValue_ == nil) {
       JreAssert((IOSIntArray_Get(nil_chk(ords_), bottomSlot_) == missingOrd_), (@"org/apache/lucene/search/FieldComparator.java:805 condition failed: assert ords[bottomSlot] == missingOrd;"));
       bottomOrd_ = missingOrd_;
-      bottomSameReader_ = YES;
+      bottomSameReader_ = true;
       *IOSIntArray_GetRef(readerGen_, bottomSlot_) = currentReaderGen_;
     }
     else {
       jint ord = [((OrgApacheLuceneIndexSortedDocValues *) nil_chk(termsIndex_)) lookupTermWithOrgApacheLuceneUtilBytesRef:bottomValue_];
       if (ord < 0) {
         bottomOrd_ = -ord - 2;
-        bottomSameReader_ = NO;
+        bottomSameReader_ = false;
       }
       else {
         bottomOrd_ = ord;
-        bottomSameReader_ = YES;
+        bottomSameReader_ = true;
         *IOSIntArray_GetRef(readerGen_, bottomSlot_) = currentReaderGen_;
         *IOSIntArray_GetRef(nil_chk(ords_), bottomSlot_) = bottomOrd_;
       }
@@ -1061,7 +1063,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFieldComparator_DocCompara
 @end
 
 void OrgApacheLuceneSearchFieldComparator_TermOrdValComparator_initWithInt_withNSString_(OrgApacheLuceneSearchFieldComparator_TermOrdValComparator *self, jint numHits, NSString *field) {
-  OrgApacheLuceneSearchFieldComparator_TermOrdValComparator_initWithInt_withNSString_withBoolean_(self, numHits, field, NO);
+  OrgApacheLuceneSearchFieldComparator_TermOrdValComparator_initWithInt_withNSString_withBoolean_(self, numHits, field, false);
 }
 
 OrgApacheLuceneSearchFieldComparator_TermOrdValComparator *new_OrgApacheLuceneSearchFieldComparator_TermOrdValComparator_initWithInt_withNSString_(jint numHits, NSString *field) {
@@ -1145,7 +1147,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFieldComparator_TermOrdVal
 
 - (jboolean)isNullWithInt:(jint)doc
 withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term {
-  return docsWithField_ != nil && [docsWithField_ getWithInt:doc] == NO;
+  return docsWithField_ != nil && [docsWithField_ getWithInt:doc] == false;
 }
 
 - (id<OrgApacheLuceneSearchLeafFieldComparator>)getLeafComparatorWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {

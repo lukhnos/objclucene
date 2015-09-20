@@ -151,10 +151,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneCodecsPostingsFormat_Holder)
 
 @implementation OrgApacheLuceneCodecsPostingsFormat_Holder
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsPostingsFormat_Holder_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (OrgApacheLuceneUtilNamedSPILoader *)getLoader {
   return OrgApacheLuceneCodecsPostingsFormat_Holder_getLoader();

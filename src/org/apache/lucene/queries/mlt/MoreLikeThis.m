@@ -708,8 +708,8 @@ void OrgApacheLuceneQueriesMltMoreLikeThis_addTermFrequenciesWithJavaIoReader_wi
     @throw [new_JavaLangUnsupportedOperationException_initWithNSString_(@"To use MoreLikeThis without term vectors, you must provide an Analyzer") autorelease];
   }
   {
-    JavaLangThrowable *__mainException = nil;
     OrgApacheLuceneAnalysisTokenStream *ts = [((OrgApacheLuceneAnalysisAnalyzer *) nil_chk(self->analyzer_)) tokenStreamWithNSString:fieldName withJavaIoReader:r];
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
       jint tokenCount = 0;
       id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute> termAtt = [((OrgApacheLuceneAnalysisTokenStream *) nil_chk(ts)) addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()];
@@ -733,19 +733,21 @@ void OrgApacheLuceneQueriesMltMoreLikeThis_addTermFrequenciesWithJavaIoReader_wi
       }
       [ts end];
     }
+    @catch (JavaLangThrowable *e) {
+      __primaryException1 = e;
+      @throw e;
+    }
     @finally {
-      @try {
-        [ts close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
+      if (ts != nil) {
+        if (__primaryException1 != nil) {
+          @try {
+            [ts close];
+          } @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
         } else {
-          __mainException = e;
+          [ts close];
         }
-      }
-      if (__mainException) {
-        @throw __mainException;
       }
     }
   }
@@ -754,10 +756,10 @@ void OrgApacheLuceneQueriesMltMoreLikeThis_addTermFrequenciesWithJavaIoReader_wi
 jboolean OrgApacheLuceneQueriesMltMoreLikeThis_isNoiseWordWithNSString_(OrgApacheLuceneQueriesMltMoreLikeThis *self, NSString *term) {
   jint len = ((jint) [((NSString *) nil_chk(term)) length]);
   if (self->minWordLen_ > 0 && len < self->minWordLen_) {
-    return YES;
+    return true;
   }
   if (self->maxWordLen_ > 0 && len > self->maxWordLen_) {
-    return YES;
+    return true;
   }
   return self->stopWords_ != nil && [self->stopWords_ containsWithId:term];
 }
@@ -877,10 +879,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesMltMoreLikeThis_ScoreTerm
 
 @implementation OrgApacheLuceneQueriesMltMoreLikeThis_Int
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueriesMltMoreLikeThis_Int_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

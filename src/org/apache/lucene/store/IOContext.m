@@ -40,10 +40,12 @@ OrgApacheLuceneStoreIOContext *OrgApacheLuceneStoreIOContext_READ_;
 
 @implementation OrgApacheLuceneStoreIOContext
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneStoreIOContext_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithOrgApacheLuceneStoreFlushInfo:(OrgApacheLuceneStoreFlushInfo *)flushInfo {
   OrgApacheLuceneStoreIOContext_initWithOrgApacheLuceneStoreFlushInfo_(self, flushInfo);
@@ -88,21 +90,21 @@ OrgApacheLuceneStoreIOContext *OrgApacheLuceneStoreIOContext_READ_;
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return YES;
-  if (obj == nil) return NO;
-  if ([self getClass] != [nil_chk(obj) getClass]) return NO;
+  if (self == obj) return true;
+  if (obj == nil) return false;
+  if ([self getClass] != [nil_chk(obj) getClass]) return false;
   OrgApacheLuceneStoreIOContext *other = (OrgApacheLuceneStoreIOContext *) check_class_cast(obj, [OrgApacheLuceneStoreIOContext class]);
-  if (context_ != other->context_) return NO;
+  if (context_ != other->context_) return false;
   if (flushInfo_ == nil) {
-    if (other->flushInfo_ != nil) return NO;
+    if (other->flushInfo_ != nil) return false;
   }
-  else if (![flushInfo_ isEqual:other->flushInfo_]) return NO;
+  else if (![flushInfo_ isEqual:other->flushInfo_]) return false;
   if (mergeInfo_ == nil) {
-    if (other->mergeInfo_ != nil) return NO;
+    if (other->mergeInfo_ != nil) return false;
   }
-  else if (![mergeInfo_ isEqual:other->mergeInfo_]) return NO;
-  if (readOnce_ != other->readOnce_) return NO;
-  return YES;
+  else if (![mergeInfo_ isEqual:other->mergeInfo_]) return false;
+  if (readOnce_ != other->readOnce_) return false;
+  return true;
 }
 
 - (NSString *)description {
@@ -119,8 +121,8 @@ OrgApacheLuceneStoreIOContext *OrgApacheLuceneStoreIOContext_READ_;
 + (void)initialize {
   if (self == [OrgApacheLuceneStoreIOContext class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneStoreIOContext_DEFAULT_, new_OrgApacheLuceneStoreIOContext_initWithOrgApacheLuceneStoreIOContext_ContextEnum_(JreLoadStatic(OrgApacheLuceneStoreIOContext_ContextEnum, DEFAULT)));
-    JreStrongAssignAndConsume(&OrgApacheLuceneStoreIOContext_READONCE_, new_OrgApacheLuceneStoreIOContext_initWithBoolean_(YES));
-    JreStrongAssignAndConsume(&OrgApacheLuceneStoreIOContext_READ_, new_OrgApacheLuceneStoreIOContext_initWithBoolean_(NO));
+    JreStrongAssignAndConsume(&OrgApacheLuceneStoreIOContext_READONCE_, new_OrgApacheLuceneStoreIOContext_initWithBoolean_(true));
+    JreStrongAssignAndConsume(&OrgApacheLuceneStoreIOContext_READ_, new_OrgApacheLuceneStoreIOContext_initWithBoolean_(false));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneStoreIOContext)
   }
 }
@@ -155,7 +157,7 @@ OrgApacheLuceneStoreIOContext *OrgApacheLuceneStoreIOContext_READ_;
 @end
 
 void OrgApacheLuceneStoreIOContext_init(OrgApacheLuceneStoreIOContext *self) {
-  OrgApacheLuceneStoreIOContext_initWithBoolean_(self, NO);
+  OrgApacheLuceneStoreIOContext_initWithBoolean_(self, false);
 }
 
 OrgApacheLuceneStoreIOContext *new_OrgApacheLuceneStoreIOContext_init() {
@@ -169,7 +171,7 @@ void OrgApacheLuceneStoreIOContext_initWithOrgApacheLuceneStoreFlushInfo_(OrgApa
   JreAssert((flushInfo != nil), (@"org/apache/lucene/store/IOContext.java:58 condition failed: assert flushInfo != null;"));
   JreStrongAssign(&self->context_, JreLoadStatic(OrgApacheLuceneStoreIOContext_ContextEnum, FLUSH));
   JreStrongAssign(&self->mergeInfo_, nil);
-  self->readOnce_ = NO;
+  self->readOnce_ = false;
   JreStrongAssign(&self->flushInfo_, flushInfo);
 }
 
@@ -218,7 +220,7 @@ void OrgApacheLuceneStoreIOContext_initWithOrgApacheLuceneStoreIOContext_Context
   JreAssert((context != JreLoadStatic(OrgApacheLuceneStoreIOContext_ContextEnum, MERGE) || mergeInfo != nil), (@"MergeInfo must not be null if context is MERGE"));
   JreAssert((context != JreLoadStatic(OrgApacheLuceneStoreIOContext_ContextEnum, FLUSH)), (@"Use IOContext(FlushInfo) to create a FLUSH IOContext"));
   JreStrongAssign(&self->context_, context);
-  self->readOnce_ = NO;
+  self->readOnce_ = false;
   JreStrongAssign(&self->mergeInfo_, mergeInfo);
   JreStrongAssign(&self->flushInfo_, nil);
 }

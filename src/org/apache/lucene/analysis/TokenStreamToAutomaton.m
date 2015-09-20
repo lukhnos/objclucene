@@ -71,10 +71,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTokenStreamToAutomaton_Positio
 
 @implementation OrgApacheLuceneAnalysisTokenStreamToAutomaton
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisTokenStreamToAutomaton_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)setPreservePositionIncrementsWithBoolean:(jboolean)enablePositionIncrements {
   self->preservePositionIncrements_ = enablePositionIncrements;
@@ -166,7 +168,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTokenStreamToAutomaton_Positio
   jint endState = -1;
   if ([((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAtt)) endOffset] > maxOffset) {
     endState = [builder createState];
-    [builder setAcceptWithInt:endState withBoolean:YES];
+    [builder setAcceptWithInt:endState withBoolean:true];
   }
   pos++;
   while (pos <= [positions getMaxPos]) {
@@ -176,7 +178,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTokenStreamToAutomaton_Positio
         [builder addTransitionWithInt:posData->arriving_ withInt:endState withInt:OrgApacheLuceneAnalysisTokenStreamToAutomaton_POS_SEP];
       }
       else {
-        [builder setAcceptWithInt:posData->arriving_ withBoolean:YES];
+        [builder setAcceptWithInt:posData->arriving_ withBoolean:true];
       }
     }
     pos++;
@@ -214,7 +216,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisTokenStreamToAutomaton_Positio
 
 void OrgApacheLuceneAnalysisTokenStreamToAutomaton_init(OrgApacheLuceneAnalysisTokenStreamToAutomaton *self) {
   NSObject_init(self);
-  self->preservePositionIncrements_ = YES;
+  self->preservePositionIncrements_ = true;
 }
 
 OrgApacheLuceneAnalysisTokenStreamToAutomaton *new_OrgApacheLuceneAnalysisTokenStreamToAutomaton_init() {
@@ -262,10 +264,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisTokenStreamToAutomaton)
   leaving_ = -1;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisTokenStreamToAutomaton_Position_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -302,10 +306,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisTokenStreamToAutomaton_P
   return [new_OrgApacheLuceneAnalysisTokenStreamToAutomaton_Position_init() autorelease];
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisTokenStreamToAutomaton_Positions_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

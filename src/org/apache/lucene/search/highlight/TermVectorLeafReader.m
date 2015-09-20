@@ -202,7 +202,7 @@ void OrgApacheLuceneSearchHighlightTermVectorLeafReader_initWithNSString_withOrg
   else {
     indexOptions = JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS);
   }
-  OrgApacheLuceneIndexFieldInfo *fieldInfo = [new_OrgApacheLuceneIndexFieldInfo_initWithNSString_withInt_withBoolean_withBoolean_withBoolean_withOrgApacheLuceneIndexIndexOptionsEnum_withOrgApacheLuceneIndexDocValuesTypeEnum_withLong_withJavaUtilMap_(field, 0, YES, YES, [terms hasPayloads], indexOptions, JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, NONE), -1, JavaUtilCollections_emptyMap()) autorelease];
+  OrgApacheLuceneIndexFieldInfo *fieldInfo = [new_OrgApacheLuceneIndexFieldInfo_initWithNSString_withInt_withBoolean_withBoolean_withBoolean_withOrgApacheLuceneIndexIndexOptionsEnum_withOrgApacheLuceneIndexDocValuesTypeEnum_withLong_withJavaUtilMap_(field, 0, true, true, [terms hasPayloads], indexOptions, JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, NONE), -1, JavaUtilCollections_emptyMap()) autorelease];
   JreStrongAssignAndConsume(&self->fieldInfos_, new_OrgApacheLuceneIndexFieldInfos_initWithOrgApacheLuceneIndexFieldInfoArray_([IOSObjectArray arrayWithObjects:(id[]){ fieldInfo } count:1 type:OrgApacheLuceneIndexFieldInfo_class_()]));
 }
 

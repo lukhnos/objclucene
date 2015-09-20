@@ -49,7 +49,7 @@ jint OrgApacheLuceneUtilByteBlockPool_FIRST_LEVEL_SIZE_;
 }
 
 - (void)reset {
-  [self resetWithBoolean:YES withBoolean:YES];
+  [self resetWithBoolean:true withBoolean:true];
 }
 
 - (void)resetWithBoolean:(jboolean)zeroFillBuffers
@@ -162,7 +162,7 @@ jint OrgApacheLuceneUtilByteBlockPool_FIRST_LEVEL_SIZE_;
       overflow = overflow - OrgApacheLuceneUtilByteBlockPool_BYTE_BLOCK_SIZE;
     }
   }
-  while (YES);
+  while (true);
 }
 
 - (void)readBytesWithLong:(jlong)offset
@@ -193,7 +193,7 @@ jint OrgApacheLuceneUtilByteBlockPool_FIRST_LEVEL_SIZE_;
       overflow = overflow - OrgApacheLuceneUtilByteBlockPool_BYTE_BLOCK_SIZE;
     }
   }
-  while (YES);
+  while (true);
 }
 
 - (void)dealloc {
@@ -310,10 +310,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilByteBlockPool_Allocator)
 
 @implementation OrgApacheLuceneUtilByteBlockPool_DirectAllocator
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilByteBlockPool_DirectAllocator_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithInt:(jint)blockSize {
   OrgApacheLuceneUtilByteBlockPool_DirectAllocator_initWithInt_(self, blockSize);

@@ -188,10 +188,10 @@ withOrgApacheLuceneUtilBytesRefBuilder:(OrgApacheLuceneUtilBytesRefBuilder *)tar
   NSString *s = [self strValWithInt:doc];
   if (s == nil) {
     [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(target)) clear];
-    return NO;
+    return false;
   }
   [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(target)) copyCharsWithJavaLangCharSequence:s];
-  return YES;
+  return true;
 }
 
 - (id)objectValWithInt:(jint)doc {
@@ -199,7 +199,7 @@ withOrgApacheLuceneUtilBytesRefBuilder:(OrgApacheLuceneUtilBytesRefBuilder *)tar
 }
 
 - (jboolean)existsWithInt:(jint)doc {
-  return YES;
+  return true;
 }
 
 - (jint)ordValWithInt:(jint)doc {
@@ -298,10 +298,12 @@ withOrgApacheLuceneUtilBytesRefBuilder:(OrgApacheLuceneUtilBytesRefBuilder *)tar
   }
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueriesFunctionFunctionValues_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -358,10 +360,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionFunctionValues)
   [self doesNotRecognizeSelector:_cmd];
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

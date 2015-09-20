@@ -111,7 +111,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchQueryRescorer_$3)
   IOSObjectArray *hits = [((IOSObjectArray *) nil_chk(((OrgApacheLuceneSearchTopDocs *) nil_chk(firstPassTopDocs))->scoreDocs_)) clone];
   JavaUtilArrays_sortWithNSObjectArray_withJavaUtilComparator_(hits, [new_OrgApacheLuceneSearchQueryRescorer_$1_init() autorelease]);
   id<JavaUtilList> leaves = [((OrgApacheLuceneIndexIndexReader *) nil_chk([((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) getIndexReader])) leaves];
-  OrgApacheLuceneSearchWeight *weight = [searcher createNormalizedWeightWithOrgApacheLuceneSearchQuery:query_ withBoolean:YES];
+  OrgApacheLuceneSearchWeight *weight = [searcher createNormalizedWeightWithOrgApacheLuceneSearchQuery:query_ withBoolean:true];
   jint hitUpto = 0;
   jint readerUpto = -1;
   jint endDoc = 0;
@@ -137,15 +137,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchQueryRescorer_$3)
         actualDoc = [scorer advanceWithInt:targetDoc];
       }
       if (actualDoc == targetDoc) {
-        hit->score_ = [self combineWithFloat:hit->score_ withBoolean:YES withFloat:[scorer score]];
+        hit->score_ = [self combineWithFloat:hit->score_ withBoolean:true withFloat:[scorer score]];
       }
       else {
         JreAssert((actualDoc > targetDoc), (@"org/apache/lucene/search/QueryRescorer.java:100 condition failed: assert actualDoc > targetDoc;"));
-        hit->score_ = [self combineWithFloat:hit->score_ withBoolean:NO withFloat:0.0f];
+        hit->score_ = [self combineWithFloat:hit->score_ withBoolean:false withFloat:0.0f];
       }
     }
     else {
-      hit->score_ = [self combineWithFloat:hit->score_ withBoolean:NO withFloat:0.0f];
+      hit->score_ = [self combineWithFloat:hit->score_ withBoolean:false withFloat:0.0f];
     }
     hitUpto++;
   }
@@ -165,10 +165,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchQueryRescorer_$3)
   JavaLangFloat *secondPassScore = [((OrgApacheLuceneSearchExplanation *) nil_chk(secondPassExplanation)) isMatch] ? JavaLangFloat_valueOfWithFloat_([secondPassExplanation getValue]) : nil;
   jfloat score;
   if (secondPassScore == nil) {
-    score = [self combineWithFloat:[((OrgApacheLuceneSearchExplanation *) nil_chk(firstPassExplanation)) getValue] withBoolean:NO withFloat:0.0f];
+    score = [self combineWithFloat:[((OrgApacheLuceneSearchExplanation *) nil_chk(firstPassExplanation)) getValue] withBoolean:false withFloat:0.0f];
   }
   else {
-    score = [self combineWithFloat:[((OrgApacheLuceneSearchExplanation *) nil_chk(firstPassExplanation)) getValue] withBoolean:YES withFloat:[secondPassScore floatValue]];
+    score = [self combineWithFloat:[((OrgApacheLuceneSearchExplanation *) nil_chk(firstPassExplanation)) getValue] withBoolean:true withFloat:[secondPassScore floatValue]];
   }
   OrgApacheLuceneSearchExplanation *first = OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_([((OrgApacheLuceneSearchExplanation *) nil_chk(firstPassExplanation)) getValue], @"first pass score", [IOSObjectArray arrayWithObjects:(id[]){ firstPassExplanation } count:1 type:OrgApacheLuceneSearchExplanation_class_()]);
   OrgApacheLuceneSearchExplanation *second;
@@ -230,10 +230,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchQueryRescorer)
   return ((OrgApacheLuceneSearchScoreDoc *) nil_chk(a))->doc_ - ((OrgApacheLuceneSearchScoreDoc *) nil_chk(b))->doc_;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchQueryRescorer_$1_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -274,10 +276,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchQueryRescorer_$1)
   }
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchQueryRescorer_$2_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

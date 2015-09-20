@@ -68,9 +68,9 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBui
       NSString * const *e__ = b__ + a__->size_;
       while (b__ < e__) {
         NSString *field = *b__++;
-        {
-          JavaLangThrowable *__mainException = nil;
+        @try {
           OrgApacheLuceneAnalysisTokenStream *ts = [((OrgApacheLuceneAnalysisAnalyzer *) nil_chk(analyzer_)) tokenStreamWithNSString:field withNSString:stopWords];
+          JavaLangThrowable *__primaryException1 = nil;
           @try {
             id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute> termAtt = [((OrgApacheLuceneAnalysisTokenStream *) nil_chk(ts)) addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()];
             [ts reset];
@@ -79,25 +79,26 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserXmlBuildersLikeThisQueryBui
             }
             [ts end];
           }
-          @catch (JavaIoIOException *ioe) {
-            __mainException = ioe;
-            @throw [new_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_(JreStrcat("$$C$", @"IoException parsing stop words list in ", [[self getClass] getName], ':', [((JavaIoIOException *) nil_chk(ioe)) getLocalizedMessage])) autorelease];
+          @catch (JavaLangThrowable *e) {
+            __primaryException1 = e;
+            @throw e;
           }
           @finally {
-            @try {
-              [ts close];
-            }
-            @catch (JavaLangThrowable *e) {
-              if (__mainException) {
-                [__mainException addSuppressedWithJavaLangThrowable:e];
+            if (ts != nil) {
+              if (__primaryException1 != nil) {
+                @try {
+                  [ts close];
+                } @catch (JavaLangThrowable *e) {
+                  [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+                }
               } else {
-                __mainException = e;
+                [ts close];
               }
             }
-            if (__mainException) {
-              @throw __mainException;
-            }
           }
+        }
+        @catch (JavaIoIOException *ioe) {
+          @throw [new_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_(JreStrcat("$$C$", @"IoException parsing stop words list in ", [[self getClass] getName], ':', [((JavaIoIOException *) nil_chk(ioe)) getLocalizedMessage])) autorelease];
         }
       }
     }

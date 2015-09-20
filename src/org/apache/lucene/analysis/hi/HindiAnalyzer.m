@@ -71,10 +71,12 @@ NSString *OrgApacheLuceneAnalysisHiHindiAnalyzer_DEFAULT_STOPWORD_FILE_ = @"stop
   return self;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisHiHindiAnalyzer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)createComponentsWithNSString:(NSString *)fieldName {
   OrgApacheLuceneAnalysisTokenizer *source;
@@ -160,16 +162,18 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisHiHindiAnalyzer_DefaultSetHolder)
 
 @implementation OrgApacheLuceneAnalysisHiHindiAnalyzer_DefaultSetHolder
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisHiHindiAnalyzer_DefaultSetHolder_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisHiHindiAnalyzer_DefaultSetHolder class]) {
     {
       @try {
-        JreStrongAssign(&OrgApacheLuceneAnalysisHiHindiAnalyzer_DefaultSetHolder_DEFAULT_STOP_SET_, OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_loadStopwordSetWithBoolean_withIOSClass_withNSString_withNSString_(NO, OrgApacheLuceneAnalysisHiHindiAnalyzer_class_(), OrgApacheLuceneAnalysisHiHindiAnalyzer_DEFAULT_STOPWORD_FILE_, OrgApacheLuceneAnalysisHiHindiAnalyzer_STOPWORDS_COMMENT_));
+        JreStrongAssign(&OrgApacheLuceneAnalysisHiHindiAnalyzer_DefaultSetHolder_DEFAULT_STOP_SET_, OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_loadStopwordSetWithBoolean_withIOSClass_withNSString_withNSString_(false, OrgApacheLuceneAnalysisHiHindiAnalyzer_class_(), OrgApacheLuceneAnalysisHiHindiAnalyzer_DEFAULT_STOPWORD_FILE_, OrgApacheLuceneAnalysisHiHindiAnalyzer_STOPWORDS_COMMENT_));
       }
       @catch (JavaIoIOException *ex) {
         @throw [new_JavaLangRuntimeException_initWithNSString_(@"Unable to load default stopword set") autorelease];

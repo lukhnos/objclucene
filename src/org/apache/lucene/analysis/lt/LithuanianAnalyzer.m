@@ -55,10 +55,12 @@ NSString *OrgApacheLuceneAnalysisLtLithuanianAnalyzer_DEFAULT_STOPWORD_FILE_ = @
   return OrgApacheLuceneAnalysisLtLithuanianAnalyzer_getDefaultStopSet();
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisLtLithuanianAnalyzer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords {
   OrgApacheLuceneAnalysisLtLithuanianAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(self, stopwords);
@@ -147,16 +149,18 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisLtLithuanianAnalyzer_DefaultSetHo
 
 @implementation OrgApacheLuceneAnalysisLtLithuanianAnalyzer_DefaultSetHolder
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisLtLithuanianAnalyzer_DefaultSetHolder_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisLtLithuanianAnalyzer_DefaultSetHolder class]) {
     {
       @try {
-        JreStrongAssign(&OrgApacheLuceneAnalysisLtLithuanianAnalyzer_DefaultSetHolder_DEFAULT_STOP_SET_, OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_loadStopwordSetWithBoolean_withIOSClass_withNSString_withNSString_(NO, OrgApacheLuceneAnalysisLtLithuanianAnalyzer_class_(), OrgApacheLuceneAnalysisLtLithuanianAnalyzer_DEFAULT_STOPWORD_FILE_, @"#"));
+        JreStrongAssign(&OrgApacheLuceneAnalysisLtLithuanianAnalyzer_DefaultSetHolder_DEFAULT_STOP_SET_, OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_loadStopwordSetWithBoolean_withIOSClass_withNSString_withNSString_(false, OrgApacheLuceneAnalysisLtLithuanianAnalyzer_class_(), OrgApacheLuceneAnalysisLtLithuanianAnalyzer_DEFAULT_STOPWORD_FILE_, @"#"));
       }
       @catch (JavaIoIOException *ex) {
         @throw [new_JavaLangRuntimeException_initWithNSString_(@"Unable to load default stopword set") autorelease];

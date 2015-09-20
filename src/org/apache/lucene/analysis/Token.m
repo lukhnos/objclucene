@@ -37,10 +37,12 @@ OrgApacheLuceneUtilAttributeFactory *OrgApacheLuceneAnalysisToken_TOKEN_ATTRIBUT
 
 @implementation OrgApacheLuceneAnalysisToken
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisToken_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithJavaLangCharSequence:(id<JavaLangCharSequence>)text
                                      withInt:(jint)start
@@ -72,12 +74,12 @@ OrgApacheLuceneUtilAttributeFactory *OrgApacheLuceneAnalysisToken_TOKEN_ATTRIBUT
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (obj == self) return YES;
+  if (obj == self) return true;
   if ([obj isKindOfClass:[OrgApacheLuceneAnalysisToken class]]) {
     OrgApacheLuceneAnalysisToken *other = (OrgApacheLuceneAnalysisToken *) check_class_cast(obj, [OrgApacheLuceneAnalysisToken class]);
     return (flags_ == ((OrgApacheLuceneAnalysisToken *) nil_chk(other))->flags_ && (payload_ == nil ? other->payload_ == nil : [payload_ isEqual:other->payload_]) && [super isEqual:obj]);
   }
-  else return NO;
+  else return false;
 }
 
 - (NSUInteger)hash {

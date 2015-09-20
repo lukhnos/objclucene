@@ -103,7 +103,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceIntFieldSour
 }
 
 - (jboolean)isEqual:(id)o {
-  if ([nil_chk(o) getClass] != OrgApacheLuceneQueriesFunctionValuesourceIntFieldSource_class_()) return NO;
+  if ([nil_chk(o) getClass] != OrgApacheLuceneQueriesFunctionValuesourceIntFieldSource_class_()) return false;
   OrgApacheLuceneQueriesFunctionValuesourceIntFieldSource *other = (OrgApacheLuceneQueriesFunctionValuesourceIntFieldSource *) check_class_cast(o, [OrgApacheLuceneQueriesFunctionValuesourceIntFieldSource class]);
   return [super isEqual:other];
 }

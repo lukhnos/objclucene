@@ -16,10 +16,12 @@
   return self;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgLukhnosPortmobileFileAttributeBasicFileAttributes_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgLukhnosPortmobileFileAttributeFileTime *)creationTime {
   if (file_ != nil) {

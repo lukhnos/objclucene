@@ -95,7 +95,7 @@
   JavaIoByteArrayOutputStream *bos = [new_JavaIoByteArrayOutputStream_initWithInt_(1024) autorelease];
   JavaIoPrintStream *out;
   @try {
-    out = [new_JavaIoPrintStream_initWithJavaIoOutputStream_withBoolean_withNSString_(bos, NO, JreLoadStatic(OrgApacheLuceneUtilIOUtils, UTF_8_)) autorelease];
+    out = [new_JavaIoPrintStream_initWithJavaIoOutputStream_withBoolean_withNSString_(bos, false, JreLoadStatic(OrgApacheLuceneUtilIOUtils, UTF_8_)) autorelease];
   }
   @catch (JavaIoUnsupportedEncodingException *bogus) {
     @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(bogus) autorelease];

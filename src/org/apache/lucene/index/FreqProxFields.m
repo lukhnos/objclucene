@@ -567,10 +567,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexFreqProxFields_FreqProxTerm
   @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexFreqProxFields_FreqProxTermsEnum_$1_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -607,7 +609,7 @@ withOrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray:(OrgAp
 - (void)resetWithInt:(jint)termID {
   self->termID_ = termID;
   [((OrgApacheLuceneIndexFreqProxTermsWriterPerField *) nil_chk(terms_)) initReaderWithOrgApacheLuceneIndexByteSliceReader:reader_ withInt:termID withInt:0];
-  ended_ = NO;
+  ended_ = false;
   docID_ = -1;
 }
 
@@ -649,7 +651,7 @@ withOrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray:(OrgAp
       return OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS;
     }
     else {
-      ended_ = YES;
+      ended_ = true;
       docID_ = IOSIntArray_Get(nil_chk(((OrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray *) nil_chk(postingsArray_))->lastDocIDs_), termID_);
       if (readTermFreq_) {
         freq_ = IOSIntArray_Get(nil_chk(postingsArray_->termFreqs_), termID_);
@@ -749,7 +751,7 @@ withOrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray:(OrgAp
   self->termID_ = termID;
   [((OrgApacheLuceneIndexFreqProxTermsWriterPerField *) nil_chk(terms_)) initReaderWithOrgApacheLuceneIndexByteSliceReader:reader_ withInt:termID withInt:0];
   [terms_ initReaderWithOrgApacheLuceneIndexByteSliceReader:posReader_ withInt:termID withInt:1];
-  ended_ = NO;
+  ended_ = false;
   docID_ = -1;
   posLeft_ = 0;
 }
@@ -774,7 +776,7 @@ withOrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray:(OrgAp
       return OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS;
     }
     else {
-      ended_ = YES;
+      ended_ = true;
       docID_ = IOSIntArray_Get(nil_chk(((OrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray *) nil_chk(postingsArray_))->lastDocIDs_), termID_);
       freq_ = IOSIntArray_Get(nil_chk(postingsArray_->termFreqs_), termID_);
     }
@@ -810,13 +812,13 @@ withOrgApacheLuceneIndexFreqProxTermsWriterPerField_FreqProxPostingsArray:(OrgAp
   jint code = [((OrgApacheLuceneIndexByteSliceReader *) nil_chk(posReader_)) readVInt];
   pos_ += JreURShift32(code, 1);
   if ((code & 1) != 0) {
-    hasPayload_ = YES;
+    hasPayload_ = true;
     [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(payload_)) setLengthWithInt:[posReader_ readVInt]];
     [payload_ growWithInt:[payload_ length]];
     [posReader_ readBytesWithByteArray:[payload_ bytes] withInt:0 withInt:[payload_ length]];
   }
   else {
-    hasPayload_ = NO;
+    hasPayload_ = false;
   }
   if (readOffsets_) {
     startOffset_ += [posReader_ readVInt];

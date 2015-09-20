@@ -64,10 +64,12 @@ IOSIntArray *OrgApacheLuceneUtilUnicodeUtil_utf8CodeLength_;
 
 @implementation OrgApacheLuceneUtilUnicodeUtil
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilUnicodeUtil_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (jint)UTF16toUTF8WithCharArray:(IOSCharArray *)source
                          withInt:(jint)offset
@@ -270,13 +272,13 @@ jboolean OrgApacheLuceneUtilUnicodeUtil_validUTF16StringWithJavaLangCharSequence
         jchar nextCH = [s charAtWithInt:i];
         if (nextCH >= OrgApacheLuceneUtilUnicodeUtil_UNI_SUR_LOW_START && nextCH <= OrgApacheLuceneUtilUnicodeUtil_UNI_SUR_LOW_END) {
         }
-        else return NO;
+        else return false;
       }
-      else return NO;
+      else return false;
     }
-    else if (ch >= OrgApacheLuceneUtilUnicodeUtil_UNI_SUR_LOW_START && ch <= OrgApacheLuceneUtilUnicodeUtil_UNI_SUR_LOW_END) return NO;
+    else if (ch >= OrgApacheLuceneUtilUnicodeUtil_UNI_SUR_LOW_START && ch <= OrgApacheLuceneUtilUnicodeUtil_UNI_SUR_LOW_END) return false;
   }
-  return YES;
+  return true;
 }
 
 jboolean OrgApacheLuceneUtilUnicodeUtil_validUTF16StringWithCharArray_withInt_(IOSCharArray *s, jint size) {
@@ -289,13 +291,13 @@ jboolean OrgApacheLuceneUtilUnicodeUtil_validUTF16StringWithCharArray_withInt_(I
         jchar nextCH = IOSCharArray_Get(s, i);
         if (nextCH >= OrgApacheLuceneUtilUnicodeUtil_UNI_SUR_LOW_START && nextCH <= OrgApacheLuceneUtilUnicodeUtil_UNI_SUR_LOW_END) {
         }
-        else return NO;
+        else return false;
       }
-      else return NO;
+      else return false;
     }
-    else if (ch >= OrgApacheLuceneUtilUnicodeUtil_UNI_SUR_LOW_START && ch <= OrgApacheLuceneUtilUnicodeUtil_UNI_SUR_LOW_END) return NO;
+    else if (ch >= OrgApacheLuceneUtilUnicodeUtil_UNI_SUR_LOW_START && ch <= OrgApacheLuceneUtilUnicodeUtil_UNI_SUR_LOW_END) return false;
   }
-  return YES;
+  return true;
 }
 
 jint OrgApacheLuceneUtilUnicodeUtil_codePointCountWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilBytesRef *utf8) {
@@ -376,7 +378,7 @@ NSString *OrgApacheLuceneUtilUnicodeUtil_newStringWithIntArray_withInt_withInt_(
     if (cp < 0 || cp > (jint) 0x10ffff) {
       @throw [new_JavaLangIllegalArgumentException_init() autorelease];
     }
-    while (YES) {
+    while (true) {
       @try {
         if (cp < (jint) 0x010000) {
           *IOSCharArray_GetRef(chars, w) = (jchar) cp;

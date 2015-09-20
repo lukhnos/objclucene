@@ -25,10 +25,12 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilBytesRefBuilder, ref_, OrgApacheLuceneUti
 
 @implementation OrgApacheLuceneUtilBytesRefBuilder
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilBytesRefBuilder_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (IOSByteArray *)bytes {
   return ((OrgApacheLuceneUtilBytesRef *) nil_chk(ref_))->bytes_;

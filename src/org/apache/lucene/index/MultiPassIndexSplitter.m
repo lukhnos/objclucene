@@ -133,10 +133,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiPassIndexSplitter_FakeDelete
   OrgApacheLuceneIndexMultiPassIndexSplitter_mainWithNSStringArray_(args);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexMultiPassIndexSplitter_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -164,7 +166,7 @@ void OrgApacheLuceneIndexMultiPassIndexSplitter_mainWithNSStringArray_(IOSObject
   JavaUtilArrayList *indexes = [new_JavaUtilArrayList_init() autorelease];
   NSString *outDir = nil;
   jint numParts = -1;
-  jboolean seq = NO;
+  jboolean seq = false;
   for (jint i = 0; i < args->size_; i++) {
     if ([((NSString *) nil_chk(IOSObjectArray_Get(args, i))) isEqual:@"-out"]) {
       outDir = IOSObjectArray_Get(args, ++i);
@@ -173,7 +175,7 @@ void OrgApacheLuceneIndexMultiPassIndexSplitter_mainWithNSStringArray_(IOSObject
       numParts = JavaLangInteger_parseIntWithNSString_(IOSObjectArray_Get(args, ++i));
     }
     else if ([((NSString *) nil_chk(IOSObjectArray_Get(args, i))) isEqual:@"-seq"]) {
-      seq = YES;
+      seq = true;
     }
     else {
       OrgLukhnosPortmobileFilePath *file = OrgLukhnosPortmobileFilePaths_getWithNSString_(IOSObjectArray_Get(args, i));

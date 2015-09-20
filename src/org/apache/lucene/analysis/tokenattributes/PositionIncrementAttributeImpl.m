@@ -21,10 +21,12 @@
 
 @implementation OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttributeImpl
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttributeImpl_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)setPositionIncrementWithInt:(jint)positionIncrement {
   if (positionIncrement < 0) {
@@ -43,13 +45,13 @@
 
 - (jboolean)isEqual:(id)other {
   if (other == self) {
-    return YES;
+    return true;
   }
   if ([other isKindOfClass:[OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttributeImpl class]]) {
     OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttributeImpl *_other = (OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttributeImpl *) check_class_cast(other, [OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttributeImpl class]);
     return positionIncrement_ == ((OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttributeImpl *) nil_chk(_other))->positionIncrement_;
   }
-  return NO;
+  return false;
 }
 
 - (NSUInteger)hash {

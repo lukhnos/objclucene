@@ -53,10 +53,12 @@ id<JavaUtilComparator> OrgApacheLuceneSearchSuggestLookup_CHARSEQUENCE_COMPARATO
 
 @implementation OrgApacheLuceneSearchSuggestLookup
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSuggestLookup_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)buildWithOrgApacheLuceneSearchSpellDictionary:(id<OrgApacheLuceneSearchSpellDictionary>)dict {
   [self buildWithOrgApacheLuceneSearchSuggestInputIterator:[((id<OrgApacheLuceneSearchSpellDictionary>) nil_chk(dict)) getEntryIterator]];
@@ -332,10 +334,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestLookup_LookupResult
   return l1 - l2;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSuggestLookup_CharSequenceComparator_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

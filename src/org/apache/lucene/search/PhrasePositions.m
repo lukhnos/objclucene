@@ -88,9 +88,9 @@ OrgApacheLuceneSearchPhrasePositions *new_OrgApacheLuceneSearchPhrasePositions_i
 jboolean OrgApacheLuceneSearchPhrasePositions_nextPosition(OrgApacheLuceneSearchPhrasePositions *self) {
   if (self->count_-- > 0) {
     self->position_ = [((OrgApacheLuceneIndexPostingsEnum *) nil_chk(self->postings_)) nextPosition] - self->offset_;
-    return YES;
+    return true;
   }
-  else return NO;
+  else return false;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchPhrasePositions)

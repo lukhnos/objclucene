@@ -45,7 +45,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionValueSourceScorer, liveDocs_, 
 }
 
 - (jboolean)matchesValueWithInt:(jint)doc {
-  return YES;
+  return true;
 }
 
 - (jint)docID {
@@ -118,7 +118,7 @@ void OrgApacheLuceneQueriesFunctionValueSourceScorer_initWithOrgApacheLuceneInde
   JreStrongAssign(&self->reader_, reader);
   self->maxDoc_ = [((OrgApacheLuceneIndexIndexReader *) nil_chk(reader)) maxDoc];
   JreStrongAssign(&self->values_, values);
-  [self setCheckDeletesWithBoolean:YES];
+  [self setCheckDeletesWithBoolean:true];
   JreStrongAssign(&self->liveDocs_, OrgApacheLuceneIndexMultiFields_getLiveDocsWithOrgApacheLuceneIndexIndexReader_(reader));
 }
 

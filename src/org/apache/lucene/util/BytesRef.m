@@ -64,10 +64,12 @@ IOSByteArray *OrgApacheLuceneUtilBytesRef_EMPTY_BYTES_;
 
 @implementation OrgApacheLuceneUtilBytesRef
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilBytesRef_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithByteArray:(IOSByteArray *)bytes
                           withInt:(jint)offset
@@ -99,13 +101,13 @@ IOSByteArray *OrgApacheLuceneUtilBytesRef_EMPTY_BYTES_;
     jint end = offset_ + length_;
     for (jint upto = offset_; upto < end; upto++, otherUpto++) {
       if (IOSByteArray_Get(nil_chk(bytes_), upto) != IOSByteArray_Get(nil_chk(otherBytes), otherUpto)) {
-        return NO;
+        return false;
       }
     }
-    return YES;
+    return true;
   }
   else {
-    return NO;
+    return false;
   }
 }
 
@@ -119,12 +121,12 @@ IOSByteArray *OrgApacheLuceneUtilBytesRef_EMPTY_BYTES_;
 
 - (jboolean)isEqual:(id)other {
   if (other == nil) {
-    return NO;
+    return false;
   }
   if ([other isKindOfClass:[OrgApacheLuceneUtilBytesRef class]]) {
     return [self bytesEqualsWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *) check_class_cast(other, [OrgApacheLuceneUtilBytesRef class])];
   }
-  return NO;
+  return false;
 }
 
 - (NSString *)utf8ToString {
@@ -186,7 +188,7 @@ IOSByteArray *OrgApacheLuceneUtilBytesRef_EMPTY_BYTES_;
   if (offset_ + length_ > bytes_->size_) {
     @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$I$I", @"offset+length out of bounds: offset=", offset_, @",length=", length_, @",bytes.length=", bytes_->size_)) autorelease];
   }
-  return YES;
+  return true;
 }
 
 - (void)dealloc {
@@ -328,10 +330,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilBytesRef)
 
 @implementation OrgApacheLuceneUtilBytesRef_UTF8SortedAsUnicodeComparator
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilBytesRef_UTF8SortedAsUnicodeComparator_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)compareWithId:(OrgApacheLuceneUtilBytesRef *)a
                withId:(OrgApacheLuceneUtilBytesRef *)b {
@@ -376,10 +380,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilBytesRef_UTF8SortedAsUnicode
 
 @implementation OrgApacheLuceneUtilBytesRef_UTF8SortedAsUTF16Comparator
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilBytesRef_UTF8SortedAsUTF16Comparator_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)compareWithId:(OrgApacheLuceneUtilBytesRef *)a
                withId:(OrgApacheLuceneUtilBytesRef *)b {

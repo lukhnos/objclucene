@@ -163,10 +163,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilBitSet_$2)
   return JavaUtilCollections_emptyList();
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilBitSet_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (IOSObjectArray *)__annotations_and__WithOrgApacheLuceneSearchDocIdSetIterator_ {
   return [IOSObjectArray arrayWithObjects:(id[]) { [[[JavaLangDeprecated alloc] init] autorelease] } count:1 type:JavaLangAnnotationAnnotation_class_()];
@@ -225,7 +227,7 @@ void OrgApacheLuceneUtilBitSet_leapFrogWithOrgApacheLuceneSearchDocIdSetIterator
   jint length = [self length];
   jint bitSetDoc = -1;
   jint disiDoc = [((OrgApacheLuceneSearchDocIdSetIterator *) nil_chk(iter)) nextDoc];
-  while (YES) {
+  while (true) {
     JreAssert((bitSetDoc <= disiDoc), (@"org/apache/lucene/util/BitSet.java:111 condition failed: assert bitSetDoc <= disiDoc;"));
     if (disiDoc >= length) {
       [((OrgApacheLuceneUtilBitSet_LeapFrogCallBack *) nil_chk(callback)) finish];
@@ -260,10 +262,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilBitSet)
 - (void)finish {
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilBitSet_LeapFrogCallBack_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

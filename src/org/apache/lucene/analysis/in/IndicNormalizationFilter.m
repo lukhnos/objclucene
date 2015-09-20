@@ -35,10 +35,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisInIndicNormalizationFilter, normalize
 - (jboolean)incrementToken {
   if ([((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
     [termAtt_ setLengthWithInt:[((OrgApacheLuceneAnalysisInIndicNormalizer *) nil_chk(normalizer_)) normalizeWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer] withInt:[termAtt_ length]]];
-    return YES;
+    return true;
   }
   else {
-    return NO;
+    return false;
   }
 }
 

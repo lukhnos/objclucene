@@ -59,7 +59,7 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisPatternPatternTokeniz
 }
 
 - (jboolean)incrementToken {
-  if (index_ >= [((JavaLangStringBuilder *) nil_chk(str_)) length]) return NO;
+  if (index_ >= [((JavaLangStringBuilder *) nil_chk(str_)) length]) return false;
   [self clearAttributes];
   if (group_ >= 0) {
     while ([((JavaUtilRegexMatcher *) nil_chk(matcher_)) find]) {
@@ -68,10 +68,10 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisPatternPatternTokeniz
       if (index_ == endIndex) continue;
       [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk([((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) setEmpty])) appendWithJavaLangCharSequence:str_ withInt:index_ withInt:endIndex];
       [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAtt_)) setOffsetWithInt:[self correctOffsetWithInt:index_] withInt:[self correctOffsetWithInt:endIndex]];
-      return YES;
+      return true;
     }
     index_ = JavaLangInteger_MAX_VALUE;
-    return NO;
+    return false;
   }
   else {
     while ([((JavaUtilRegexMatcher *) nil_chk(matcher_)) find]) {
@@ -79,18 +79,18 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisPatternPatternTokeniz
         [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk([((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) setEmpty])) appendWithJavaLangCharSequence:str_ withInt:index_ withInt:[matcher_ start]];
         [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAtt_)) setOffsetWithInt:[self correctOffsetWithInt:index_] withInt:[self correctOffsetWithInt:[matcher_ start]]];
         index_ = [matcher_ end];
-        return YES;
+        return true;
       }
       index_ = [matcher_ end];
     }
     if ([str_ length] - index_ == 0) {
       index_ = JavaLangInteger_MAX_VALUE;
-      return NO;
+      return false;
     }
     [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk([((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) setEmpty])) appendWithJavaLangCharSequence:str_ withInt:index_ withInt:[str_ length]];
     [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAtt_)) setOffsetWithInt:[self correctOffsetWithInt:index_] withInt:[self correctOffsetWithInt:[str_ length]]];
     index_ = JavaLangInteger_MAX_VALUE;
-    return YES;
+    return true;
   }
 }
 

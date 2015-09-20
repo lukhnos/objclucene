@@ -10,10 +10,12 @@
 
 @implementation OrgApacheLuceneSearchSuggestDocumentCompletion50PostingsFormat
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSuggestDocumentCompletion50PostingsFormat_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneCodecsPostingsFormat *)delegatePostingsFormat {
   return OrgApacheLuceneCodecsPostingsFormat_forNameWithNSString_(@"Lucene50");

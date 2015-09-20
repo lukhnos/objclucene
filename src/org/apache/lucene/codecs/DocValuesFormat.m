@@ -138,10 +138,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneCodecsDocValuesFormat_Holder)
 
 @implementation OrgApacheLuceneCodecsDocValuesFormat_Holder
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsDocValuesFormat_Holder_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (OrgApacheLuceneUtilNamedSPILoader *)getLoader {
   return OrgApacheLuceneCodecsDocValuesFormat_Holder_getLoader();

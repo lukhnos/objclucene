@@ -53,16 +53,16 @@
 }
 
 - (jboolean)isEqual:(id)o {
-  if (self == o) return YES;
-  if (!([o isKindOfClass:[OrgApacheLuceneSearchGeoPointInBBoxQuery class]])) return NO;
-  if (![super isEqual:o]) return NO;
+  if (self == o) return true;
+  if (!([o isKindOfClass:[OrgApacheLuceneSearchGeoPointInBBoxQuery class]])) return false;
+  if (![super isEqual:o]) return false;
   OrgApacheLuceneSearchGeoPointInBBoxQuery *that = (OrgApacheLuceneSearchGeoPointInBBoxQuery *) check_class_cast(o, [OrgApacheLuceneSearchGeoPointInBBoxQuery class]);
-  if (JavaLangDouble_compareWithDouble_withDouble_(((OrgApacheLuceneSearchGeoPointInBBoxQuery *) nil_chk(that))->maxLat_, maxLat_) != 0) return NO;
-  if (JavaLangDouble_compareWithDouble_withDouble_(that->maxLon_, maxLon_) != 0) return NO;
-  if (JavaLangDouble_compareWithDouble_withDouble_(that->minLat_, minLat_) != 0) return NO;
-  if (JavaLangDouble_compareWithDouble_withDouble_(that->minLon_, minLon_) != 0) return NO;
-  if (![((NSString *) nil_chk(field_)) isEqual:that->field_]) return NO;
-  return YES;
+  if (JavaLangDouble_compareWithDouble_withDouble_(((OrgApacheLuceneSearchGeoPointInBBoxQuery *) nil_chk(that))->maxLat_, maxLat_) != 0) return false;
+  if (JavaLangDouble_compareWithDouble_withDouble_(that->maxLon_, maxLon_) != 0) return false;
+  if (JavaLangDouble_compareWithDouble_withDouble_(that->minLat_, minLat_) != 0) return false;
+  if (JavaLangDouble_compareWithDouble_withDouble_(that->minLon_, minLon_) != 0) return false;
+  if (![((NSString *) nil_chk(field_)) isEqual:that->field_]) return false;
+  return true;
 }
 
 - (NSUInteger)hash {

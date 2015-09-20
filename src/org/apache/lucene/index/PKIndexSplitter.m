@@ -150,12 +150,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexPKIndexSplitter_DocumentFilteredL
 }
 
 - (void)split {
-  jboolean success = NO;
+  jboolean success = false;
   OrgApacheLuceneIndexDirectoryReader *reader = OrgApacheLuceneIndexDirectoryReader_openWithOrgApacheLuceneStoreDirectory_(input_);
   @try {
-    OrgApacheLuceneIndexPKIndexSplitter_createIndexWithOrgApacheLuceneIndexIndexWriterConfig_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexDirectoryReader_withOrgApacheLuceneSearchQuery_withBoolean_(self, config1_, dir1_, reader, docsInFirstIndex_, NO);
-    OrgApacheLuceneIndexPKIndexSplitter_createIndexWithOrgApacheLuceneIndexIndexWriterConfig_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexDirectoryReader_withOrgApacheLuceneSearchQuery_withBoolean_(self, config2_, dir2_, reader, docsInFirstIndex_, YES);
-    success = YES;
+    OrgApacheLuceneIndexPKIndexSplitter_createIndexWithOrgApacheLuceneIndexIndexWriterConfig_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexDirectoryReader_withOrgApacheLuceneSearchQuery_withBoolean_(self, config1_, dir1_, reader, docsInFirstIndex_, false);
+    OrgApacheLuceneIndexPKIndexSplitter_createIndexWithOrgApacheLuceneIndexIndexWriterConfig_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexDirectoryReader_withOrgApacheLuceneSearchQuery_withBoolean_(self, config2_, dir2_, reader, docsInFirstIndex_, true);
+    success = true;
   }
   @finally {
     if (success) {
@@ -264,7 +264,7 @@ OrgApacheLuceneIndexPKIndexSplitter *new_OrgApacheLuceneIndexPKIndexSplitter_ini
 }
 
 void OrgApacheLuceneIndexPKIndexSplitter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexTerm_(OrgApacheLuceneIndexPKIndexSplitter *self, OrgApacheLuceneStoreDirectory *input, OrgApacheLuceneStoreDirectory *dir1, OrgApacheLuceneStoreDirectory *dir2, OrgApacheLuceneIndexTerm *midTerm) {
-  OrgApacheLuceneIndexPKIndexSplitter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneSearchQuery_(self, input, dir1, dir2, [new_OrgApacheLuceneSearchTermRangeQuery_initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_([((OrgApacheLuceneIndexTerm *) nil_chk(midTerm)) field], nil, [midTerm bytes], YES, NO) autorelease]);
+  OrgApacheLuceneIndexPKIndexSplitter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneSearchQuery_(self, input, dir1, dir2, [new_OrgApacheLuceneSearchTermRangeQuery_initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_([((OrgApacheLuceneIndexTerm *) nil_chk(midTerm)) field], nil, [midTerm bytes], true, false) autorelease]);
 }
 
 OrgApacheLuceneIndexPKIndexSplitter *new_OrgApacheLuceneIndexPKIndexSplitter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexTerm_(OrgApacheLuceneStoreDirectory *input, OrgApacheLuceneStoreDirectory *dir1, OrgApacheLuceneStoreDirectory *dir2, OrgApacheLuceneIndexTerm *midTerm) {
@@ -274,7 +274,7 @@ OrgApacheLuceneIndexPKIndexSplitter *new_OrgApacheLuceneIndexPKIndexSplitter_ini
 }
 
 void OrgApacheLuceneIndexPKIndexSplitter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexTerm_withOrgApacheLuceneIndexIndexWriterConfig_withOrgApacheLuceneIndexIndexWriterConfig_(OrgApacheLuceneIndexPKIndexSplitter *self, OrgApacheLuceneStoreDirectory *input, OrgApacheLuceneStoreDirectory *dir1, OrgApacheLuceneStoreDirectory *dir2, OrgApacheLuceneIndexTerm *midTerm, OrgApacheLuceneIndexIndexWriterConfig *config1, OrgApacheLuceneIndexIndexWriterConfig *config2) {
-  OrgApacheLuceneIndexPKIndexSplitter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexWriterConfig_withOrgApacheLuceneIndexIndexWriterConfig_(self, input, dir1, dir2, [new_OrgApacheLuceneSearchTermRangeQuery_initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_([((OrgApacheLuceneIndexTerm *) nil_chk(midTerm)) field], nil, [midTerm bytes], YES, NO) autorelease], config1, config2);
+  OrgApacheLuceneIndexPKIndexSplitter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexWriterConfig_withOrgApacheLuceneIndexIndexWriterConfig_(self, input, dir1, dir2, [new_OrgApacheLuceneSearchTermRangeQuery_initWithNSString_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withBoolean_withBoolean_([((OrgApacheLuceneIndexTerm *) nil_chk(midTerm)) field], nil, [midTerm bytes], true, false) autorelease], config1, config2);
 }
 
 OrgApacheLuceneIndexPKIndexSplitter *new_OrgApacheLuceneIndexPKIndexSplitter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexTerm_withOrgApacheLuceneIndexIndexWriterConfig_withOrgApacheLuceneIndexIndexWriterConfig_(OrgApacheLuceneStoreDirectory *input, OrgApacheLuceneStoreDirectory *dir1, OrgApacheLuceneStoreDirectory *dir2, OrgApacheLuceneIndexTerm *midTerm, OrgApacheLuceneIndexIndexWriterConfig *config1, OrgApacheLuceneIndexIndexWriterConfig *config2) {
@@ -284,12 +284,12 @@ OrgApacheLuceneIndexPKIndexSplitter *new_OrgApacheLuceneIndexPKIndexSplitter_ini
 }
 
 void OrgApacheLuceneIndexPKIndexSplitter_createIndexWithOrgApacheLuceneIndexIndexWriterConfig_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexDirectoryReader_withOrgApacheLuceneSearchQuery_withBoolean_(OrgApacheLuceneIndexPKIndexSplitter *self, OrgApacheLuceneIndexIndexWriterConfig *config, OrgApacheLuceneStoreDirectory *target, OrgApacheLuceneIndexDirectoryReader *reader, OrgApacheLuceneSearchQuery *preserveFilter, jboolean negateFilter) {
-  jboolean success = NO;
+  jboolean success = false;
   OrgApacheLuceneIndexIndexWriter *w = [new_OrgApacheLuceneIndexIndexWriter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_(target, config) autorelease];
   @try {
     OrgApacheLuceneSearchIndexSearcher *searcher = [new_OrgApacheLuceneSearchIndexSearcher_initWithOrgApacheLuceneIndexIndexReader_(reader) autorelease];
     [searcher setQueryCacheWithOrgApacheLuceneSearchQueryCache:nil];
-    jboolean needsScores = NO;
+    jboolean needsScores = false;
     OrgApacheLuceneSearchWeight *preserveWeight = [searcher createNormalizedWeightWithOrgApacheLuceneSearchQuery:preserveFilter withBoolean:needsScores];
     id<JavaUtilList> leaves = [((OrgApacheLuceneIndexDirectoryReader *) nil_chk(reader)) leaves];
     IOSObjectArray *subReaders = [IOSObjectArray arrayWithLength:[((id<JavaUtilList>) nil_chk(leaves)) size] type:OrgApacheLuceneIndexCodecReader_class_()];
@@ -298,7 +298,7 @@ void OrgApacheLuceneIndexPKIndexSplitter_createIndexWithOrgApacheLuceneIndexInde
       IOSObjectArray_SetAndConsume(subReaders, i++, new_OrgApacheLuceneIndexPKIndexSplitter_DocumentFilteredLeafIndexReader_initWithOrgApacheLuceneIndexLeafReaderContext_withOrgApacheLuceneSearchWeight_withBoolean_(ctx, preserveWeight, negateFilter));
     }
     [w addIndexesWithOrgApacheLuceneIndexCodecReaderArray:subReaders];
-    success = YES;
+    success = true;
   }
   @finally {
     if (success) {

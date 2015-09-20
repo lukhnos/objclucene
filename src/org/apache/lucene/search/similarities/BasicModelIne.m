@@ -12,10 +12,12 @@
 
 @implementation OrgApacheLuceneSearchSimilaritiesBasicModelIne
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSimilaritiesBasicModelIne_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jfloat)scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
                                                      withFloat:(jfloat)tfn {

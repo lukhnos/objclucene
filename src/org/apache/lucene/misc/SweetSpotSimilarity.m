@@ -27,10 +27,12 @@
 
 @implementation OrgApacheLuceneMiscSweetSpotSimilarity
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneMiscSweetSpotSimilarity_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)setBaselineTfFactorsWithFloat:(jfloat)base
                             withFloat:(jfloat)min {

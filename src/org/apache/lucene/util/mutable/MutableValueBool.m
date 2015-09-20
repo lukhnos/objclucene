@@ -11,7 +11,7 @@
 @implementation OrgApacheLuceneUtilMutableMutableValueBool
 
 - (id)toObject {
-  JreAssert((exists_ || (NO == value_)), (@"org/apache/lucene/util/mutable/MutableValueBool.java:30 condition failed: assert exists || (false == value);"));
+  JreAssert((exists_ || (false == value_)), (@"org/apache/lucene/util/mutable/MutableValueBool.java:30 condition failed: assert exists || (false == value);"));
   return exists_ ? JavaLangBoolean_valueOfWithBoolean_(value_) : nil;
 }
 
@@ -29,13 +29,13 @@
 }
 
 - (jboolean)equalsSameTypeWithId:(id)other {
-  JreAssert((exists_ || (NO == value_)), (@"org/apache/lucene/util/mutable/MutableValueBool.java:51 condition failed: assert exists || (false == value);"));
+  JreAssert((exists_ || (false == value_)), (@"org/apache/lucene/util/mutable/MutableValueBool.java:51 condition failed: assert exists || (false == value);"));
   OrgApacheLuceneUtilMutableMutableValueBool *b = (OrgApacheLuceneUtilMutableMutableValueBool *) check_class_cast(other, [OrgApacheLuceneUtilMutableMutableValueBool class]);
   return value_ == ((OrgApacheLuceneUtilMutableMutableValueBool *) nil_chk(b))->value_ && exists_ == b->exists_;
 }
 
 - (jint)compareSameTypeWithId:(id)other {
-  JreAssert((exists_ || (NO == value_)), (@"org/apache/lucene/util/mutable/MutableValueBool.java:58 condition failed: assert exists || (false == value);"));
+  JreAssert((exists_ || (false == value_)), (@"org/apache/lucene/util/mutable/MutableValueBool.java:58 condition failed: assert exists || (false == value);"));
   OrgApacheLuceneUtilMutableMutableValueBool *b = (OrgApacheLuceneUtilMutableMutableValueBool *) check_class_cast(other, [OrgApacheLuceneUtilMutableMutableValueBool class]);
   if (value_ != ((OrgApacheLuceneUtilMutableMutableValueBool *) nil_chk(b))->value_) return value_ ? 1 : -1;
   if (exists_ == b->exists_) return 0;
@@ -43,14 +43,16 @@
 }
 
 - (NSUInteger)hash {
-  JreAssert((exists_ || (NO == value_)), (@"org/apache/lucene/util/mutable/MutableValueBool.java:67 condition failed: assert exists || (false == value);"));
+  JreAssert((exists_ || (false == value_)), (@"org/apache/lucene/util/mutable/MutableValueBool.java:67 condition failed: assert exists || (false == value);"));
   return value_ ? 2 : (exists_ ? 1 : 0);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilMutableMutableValueBool_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

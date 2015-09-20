@@ -29,7 +29,7 @@
   jint l = ((jint) [((NSString *) nil_chk(s)) length]);
   for (jint i = 0, cp = 0; i < l; i += JavaLangCharacter_charCountWithInt_(cp)) {
     p = [self stepWithInt:p withInt:cp = [s codePointAt:i]];
-    if (p == -1) return NO;
+    if (p == -1) return false;
   }
   return IOSBooleanArray_Get(nil_chk(accept_), p);
 }
@@ -41,7 +41,7 @@
   jint l = offset + length;
   for (jint i = offset, cp = 0; i < l; i += JavaLangCharacter_charCountWithInt_(cp)) {
     p = [self stepWithInt:p withInt:cp = JavaLangCharacter_codePointAtWithCharArray_withInt_withInt_(s, i, l)];
-    if (p == -1) return NO;
+    if (p == -1) return false;
   }
   return IOSBooleanArray_Get(nil_chk(accept_), p);
 }
@@ -70,7 +70,7 @@ OrgApacheLuceneUtilAutomatonCharacterRunAutomaton *new_OrgApacheLuceneUtilAutoma
 }
 
 void OrgApacheLuceneUtilAutomatonCharacterRunAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(OrgApacheLuceneUtilAutomatonCharacterRunAutomaton *self, OrgApacheLuceneUtilAutomatonAutomaton *a, jint maxDeterminizedStates) {
-  OrgApacheLuceneUtilAutomatonRunAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_withBoolean_withInt_(self, a, JavaLangCharacter_MAX_CODE_POINT, NO, maxDeterminizedStates);
+  OrgApacheLuceneUtilAutomatonRunAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_withBoolean_withInt_(self, a, JavaLangCharacter_MAX_CODE_POINT, false, maxDeterminizedStates);
 }
 
 OrgApacheLuceneUtilAutomatonCharacterRunAutomaton *new_OrgApacheLuceneUtilAutomatonCharacterRunAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(OrgApacheLuceneUtilAutomatonAutomaton *a, jint maxDeterminizedStates) {

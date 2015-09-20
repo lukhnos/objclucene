@@ -216,11 +216,11 @@ jboolean OrgApacheLuceneIndexDirectoryReader_indexExistsWithOrgApacheLuceneStore
     while (b__ < e__) {
       NSString *file = *b__++;
       if ([((NSString *) nil_chk(file)) hasPrefix:prefix]) {
-        return YES;
+        return true;
       }
     }
   }
-  return NO;
+  return false;
 }
 
 void OrgApacheLuceneIndexDirectoryReader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexLeafReaderArray_(OrgApacheLuceneIndexDirectoryReader *self, OrgApacheLuceneStoreDirectory *directory, IOSObjectArray *segmentReaders) {

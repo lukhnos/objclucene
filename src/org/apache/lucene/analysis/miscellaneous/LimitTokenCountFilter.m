@@ -38,29 +38,29 @@
 
 - (jboolean)incrementToken {
   if (exhausted_) {
-    return NO;
+    return false;
   }
   else if (tokenCount_ < maxTokenCount_) {
     if ([((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
       tokenCount_++;
-      return YES;
+      return true;
     }
     else {
-      exhausted_ = YES;
-      return NO;
+      exhausted_ = true;
+      return false;
     }
   }
   else {
     while (consumeAllTokens_ && [((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
     }
-    return NO;
+    return false;
   }
 }
 
 - (void)reset {
   [super reset];
   tokenCount_ = 0;
-  exhausted_ = NO;
+  exhausted_ = false;
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -83,7 +83,7 @@
 @end
 
 void OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilter *self, OrgApacheLuceneAnalysisTokenStream *inArg, jint maxTokenCount) {
-  OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withBoolean_(self, inArg, maxTokenCount, NO);
+  OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withBoolean_(self, inArg, maxTokenCount, false);
 }
 
 OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilter *new_OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(OrgApacheLuceneAnalysisTokenStream *inArg, jint maxTokenCount) {
@@ -95,7 +95,7 @@ OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilter *new_OrgApacheLuceneAn
 void OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withBoolean_(OrgApacheLuceneAnalysisMiscellaneousLimitTokenCountFilter *self, OrgApacheLuceneAnalysisTokenStream *inArg, jint maxTokenCount, jboolean consumeAllTokens) {
   OrgApacheLuceneAnalysisTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, inArg);
   self->tokenCount_ = 0;
-  self->exhausted_ = NO;
+  self->exhausted_ = false;
   if (maxTokenCount < 1) {
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"maxTokenCount must be greater than zero") autorelease];
   }

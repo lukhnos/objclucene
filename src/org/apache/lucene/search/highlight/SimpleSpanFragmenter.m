@@ -57,7 +57,7 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchHighlightSimpleSpanFragmenter, D
     waitForPos_ = -1;
   }
   else if (waitForPos_ != -1) {
-    return NO;
+    return false;
   }
   OrgApacheLuceneSearchHighlightWeightedSpanTerm *wSpanTerm = [((OrgApacheLuceneSearchHighlightQueryScorer *) nil_chk(queryScorer_)) getWeightedSpanTermWithNSString:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) description]];
   if (wSpanTerm != nil) {

@@ -23,10 +23,12 @@
   return self;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSpellNGramDistance_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jfloat)getDistanceWithNSString:(NSString *)source
                      withNSString:(NSString *)target {
@@ -108,8 +110,8 @@
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return YES;
-  if (nil == obj || [self getClass] != [obj getClass]) return NO;
+  if (self == obj) return true;
+  if (nil == obj || [self getClass] != [obj getClass]) return false;
   OrgApacheLuceneSearchSpellNGramDistance *o = (OrgApacheLuceneSearchSpellNGramDistance *) check_class_cast(obj, [OrgApacheLuceneSearchSpellNGramDistance class]);
   return ((OrgApacheLuceneSearchSpellNGramDistance *) nil_chk(o))->n_ == self->n_;
 }

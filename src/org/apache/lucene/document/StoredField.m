@@ -74,7 +74,7 @@ OrgApacheLuceneDocumentFieldType *OrgApacheLuceneDocumentStoredField_TYPE_;
   if (self == [OrgApacheLuceneDocumentStoredField class]) {
     {
       JreStrongAssignAndConsume(&OrgApacheLuceneDocumentStoredField_TYPE_, new_OrgApacheLuceneDocumentFieldType_init());
-      [OrgApacheLuceneDocumentStoredField_TYPE_ setStoredWithBoolean:YES];
+      [OrgApacheLuceneDocumentStoredField_TYPE_ setStoredWithBoolean:true];
       [OrgApacheLuceneDocumentStoredField_TYPE_ freeze];
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneDocumentStoredField)

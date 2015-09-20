@@ -8,10 +8,12 @@
 
 @implementation OrgApacheLuceneIndexNumericDocValues
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexNumericDocValues_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jlong)getWithInt:(jint)docID {
   // can't call an abstract method

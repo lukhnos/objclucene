@@ -45,10 +45,12 @@ __attribute__((unused)) static OrgApacheLuceneStoreRAMDirectory *new_OrgApacheLu
 
 @implementation OrgApacheLuceneStoreRAMDirectory
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneStoreRAMDirectory_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithOrgApacheLuceneStoreLockFactory:(OrgApacheLuceneStoreLockFactory *)lockFactory {
   OrgApacheLuceneStoreRAMDirectory_initWithOrgApacheLuceneStoreLockFactory_(self, lockFactory);
@@ -121,7 +123,7 @@ __attribute__((unused)) static OrgApacheLuceneStoreRAMDirectory *new_OrgApacheLu
     JreStrongAssign(&existing->directory_, nil);
   }
   [fileMap_ putWithId:name withId:file];
-  return [new_OrgApacheLuceneStoreRAMOutputStream_initWithNSString_withOrgApacheLuceneStoreRAMFile_withBoolean_(name, file, YES) autorelease];
+  return [new_OrgApacheLuceneStoreRAMOutputStream_initWithNSString_withOrgApacheLuceneStoreRAMFile_withBoolean_(name, file, true) autorelease];
 }
 
 - (OrgApacheLuceneStoreRAMFile *)newRAMFile {
@@ -153,7 +155,7 @@ __attribute__((unused)) static OrgApacheLuceneStoreRAMDirectory *new_OrgApacheLu
 }
 
 - (void)close {
-  JreAssignVolatileBoolean(&isOpen_, NO);
+  JreAssignVolatileBoolean(&isOpen_, false);
   [((id<JavaUtilMap>) nil_chk(fileMap_)) clear];
 }
 
@@ -215,7 +217,7 @@ OrgApacheLuceneStoreRAMDirectory *new_OrgApacheLuceneStoreRAMDirectory_initWithO
 }
 
 void OrgApacheLuceneStoreRAMDirectory_initWithOrgApacheLuceneStoreFSDirectory_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneStoreRAMDirectory *self, OrgApacheLuceneStoreFSDirectory *dir, OrgApacheLuceneStoreIOContext *context) {
-  OrgApacheLuceneStoreRAMDirectory_initWithOrgApacheLuceneStoreFSDirectory_withBoolean_withOrgApacheLuceneStoreIOContext_(self, dir, NO, context);
+  OrgApacheLuceneStoreRAMDirectory_initWithOrgApacheLuceneStoreFSDirectory_withBoolean_withOrgApacheLuceneStoreIOContext_(self, dir, false, context);
 }
 
 OrgApacheLuceneStoreRAMDirectory *new_OrgApacheLuceneStoreRAMDirectory_initWithOrgApacheLuceneStoreFSDirectory_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneStoreFSDirectory *dir, OrgApacheLuceneStoreIOContext *context) {

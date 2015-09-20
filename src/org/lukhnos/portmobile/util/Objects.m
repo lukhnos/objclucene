@@ -37,10 +37,12 @@
   return OrgLukhnosPortmobileUtilObjects_equalsWithId_withId_(a, b);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgLukhnosPortmobileUtilObjects_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -92,9 +94,9 @@ NSString *OrgLukhnosPortmobileUtilObjects_toStringWithId_(id o) {
 jboolean OrgLukhnosPortmobileUtilObjects_equalsWithId_withId_(id a, id b) {
   OrgLukhnosPortmobileUtilObjects_initialize();
   if (a == nil) {
-    return b == nil ? YES : NO;
+    return b == nil ? true : false;
   }
-  return b == nil ? NO : [nil_chk(a) isEqual:b];
+  return b == nil ? false : [nil_chk(a) isEqual:b];
 }
 
 void OrgLukhnosPortmobileUtilObjects_init(OrgLukhnosPortmobileUtilObjects *self) {

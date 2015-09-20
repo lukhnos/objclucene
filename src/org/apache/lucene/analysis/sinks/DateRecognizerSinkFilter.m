@@ -17,10 +17,12 @@ NSString *OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter_DATE_TYPE_ = @"da
 
 @implementation OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithJavaTextDateFormat:(JavaTextDateFormat *)dateFormat {
   OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter_initWithJavaTextDateFormat_(self, dateFormat);
@@ -34,12 +36,12 @@ NSString *OrgApacheLuceneAnalysisSinksDateRecognizerSinkFilter_DATE_TYPE_ = @"da
   @try {
     JavaUtilDate *date = [((JavaTextDateFormat *) nil_chk(dateFormat_)) parseWithNSString:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) description]];
     if (date != nil) {
-      return YES;
+      return true;
     }
   }
   @catch (JavaTextParseException *e) {
   }
-  return NO;
+  return false;
 }
 
 - (void)dealloc {

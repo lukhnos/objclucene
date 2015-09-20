@@ -189,7 +189,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$2)
   OrgApacheLuceneUtilFstUtil_TopNSearcher *searcher = [new_OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$1_initWithOrgApacheLuceneSearchSuggestDocumentNRTSuggester_withOrgApacheLuceneSearchSuggestDocumentCompletionScorer_withOrgApacheLuceneUtilBits_withOrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector_withOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_withJavaUtilComparator_(self, scorer, acceptDocs, collector, fst_, [collector getCountToCollect], queueSize, comparator, [new_OrgApacheLuceneSearchSuggestDocumentNRTSuggester_ScoringPathComparator_initWithOrgApacheLuceneSearchSuggestDocumentCompletionScorer_(scorer) autorelease]) autorelease];
   for (OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path * __strong path in prefixPaths) {
     [((OrgApacheLuceneSearchSuggestDocumentCompletionWeight *) nil_chk(scorer->weight_)) setNextMatchWithOrgApacheLuceneUtilIntsRef:[((OrgApacheLuceneUtilIntsRefBuilder *) nil_chk(((OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path *) nil_chk(path))->input_)) get]];
-    [searcher addStartPathsWithOrgApacheLuceneUtilFstFST_Arc:path->fstNode_ withId:path->output_ withBoolean:NO withOrgApacheLuceneUtilIntsRefBuilder:path->input_ withFloat:[scorer->weight_ boost] withJavaLangCharSequence:[scorer->weight_ context]];
+    [searcher addStartPathsWithOrgApacheLuceneUtilFstFST_Arc:path->fstNode_ withId:path->output_ withBoolean:false withOrgApacheLuceneUtilIntsRefBuilder:path->input_ withFloat:[scorer->weight_ boost] withJavaLangCharSequence:[scorer->weight_ context]];
   }
   [searcher search];
 }
@@ -375,10 +375,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentNRTSuggeste
   return OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor_makeWithOrgApacheLuceneUtilBytesRef_withInt_withInt_(surface, docID, payloadSep);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -446,12 +448,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentNRTSuggeste
   jint payloadSepIndex = OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor_parseSurfaceFormWithOrgApacheLuceneUtilBytesRef_withInt_withOrgApacheLuceneUtilCharsRefBuilder_(((OrgApacheLuceneUtilFstPairOutputs_Pair *) nil_chk(((OrgApacheLuceneUtilFstUtil_FSTPath *) nil_chk(path))->cost_))->output2_, this$0_->payloadSep_, spare_);
   jint docID = OrgApacheLuceneSearchSuggestDocumentNRTSuggester_PayLoadProcessor_parseDocIDWithOrgApacheLuceneUtilBytesRef_withInt_(((OrgApacheLuceneUtilFstPairOutputs_Pair *) path->cost_)->output2_, payloadSepIndex);
   if (![((OrgApacheLuceneSearchSuggestDocumentCompletionScorer *) nil_chk(val$scorer_)) acceptWithInt:docID withOrgApacheLuceneUtilBits:val$acceptDocs_]) {
-    return NO;
+    return false;
   }
   @try {
     jfloat score = [val$scorer_ scoreWithFloat:OrgApacheLuceneSearchSuggestDocumentNRTSuggester_decodeWithLong_([((JavaLangLong *) nil_chk(((OrgApacheLuceneUtilFstPairOutputs_Pair *) path->cost_)->output1_)) longLongValue]) withFloat:path->boost_];
     [((OrgApacheLuceneSearchSuggestDocumentTopSuggestDocsCollector *) nil_chk(val$collector_)) collectWithInt:docID withJavaLangCharSequence:[((OrgApacheLuceneUtilCharsRefBuilder *) nil_chk(spare_)) toCharsRef] withJavaLangCharSequence:path->context_ withFloat:score];
-    return YES;
+    return true;
   }
   @catch (JavaIoIOException *e) {
     @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(e) autorelease];
@@ -524,10 +526,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentNRTSuggeste
   return JavaLangLong_compareWithLong_withLong_([((JavaLangLong *) nil_chk(((OrgApacheLuceneUtilFstPairOutputs_Pair *) nil_chk(o1))->output1_)) longLongValue], [((JavaLangLong *) ((OrgApacheLuceneUtilFstPairOutputs_Pair *) nil_chk(o2))->output1_) longLongValue]);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSuggestDocumentNRTSuggester_$2_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

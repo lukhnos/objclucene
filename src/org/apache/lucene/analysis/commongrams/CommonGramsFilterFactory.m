@@ -97,7 +97,7 @@ void OrgApacheLuceneAnalysisCommongramsCommonGramsFilterFactory_initWithJavaUtil
   OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
   JreStrongAssign(&self->commonWordFiles_, [self getWithJavaUtilMap:args withNSString:@"words"]);
   JreStrongAssign(&self->format_, [self getWithJavaUtilMap:args withNSString:@"format"]);
-  self->ignoreCase_ = [self getBooleanWithJavaUtilMap:args withNSString:@"ignoreCase" withBoolean:NO];
+  self->ignoreCase_ = [self getBooleanWithJavaUtilMap:args withNSString:@"ignoreCase" withBoolean:false];
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
   }

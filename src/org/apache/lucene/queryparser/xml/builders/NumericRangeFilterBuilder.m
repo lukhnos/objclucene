@@ -44,8 +44,8 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterB
   NSString *field = OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithInheritanceOrFailWithOrgW3cDomElement_withNSString_(e, @"fieldName");
   NSString *lowerTerm = OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeOrFailWithOrgW3cDomElement_withNSString_(e, @"lowerTerm");
   NSString *upperTerm = OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeOrFailWithOrgW3cDomElement_withNSString_(e, @"upperTerm");
-  jboolean lowerInclusive = OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withBoolean_(e, @"includeLower", YES);
-  jboolean upperInclusive = OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withBoolean_(e, @"includeUpper", YES);
+  jboolean lowerInclusive = OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withBoolean_(e, @"includeLower", true);
+  jboolean upperInclusive = OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withBoolean_(e, @"includeUpper", true);
   jint precisionStep = OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withInt_(e, @"precisionStep", OrgApacheLuceneUtilNumericUtils_PRECISION_STEP_DEFAULT);
   NSString *type = OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withNSString_(e, @"type", @"int");
   @try {
@@ -75,10 +75,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterB
   }
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder class]) {
@@ -106,7 +108,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterB
 
 void OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_init(OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder *self) {
   NSObject_init(self);
-  self->strictMode_ = NO;
+  self->strictMode_ = false;
 }
 
 OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder *new_OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_init() {
@@ -128,10 +130,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserXmlBuildersNumericRan
   return @"NoMatchFilter()";
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueryparserXmlBuildersNumericRangeFilterBuilder_NoMatchFilter_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

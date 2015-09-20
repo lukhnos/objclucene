@@ -37,14 +37,14 @@
 
 - (jboolean)next {
   if (countLeft_ == 0) {
-    return NO;
+    return false;
   }
   countLeft_--;
   latEnc_ = [((OrgApacheLuceneStoreInputStreamDataInput *) nil_chk(in_)) readInt];
   lonEnc_ = [in_ readInt];
   ord_ = [in_ readLong];
   docID_ = [in_ readInt];
-  return YES;
+  return true;
 }
 
 - (jint)latEnc {

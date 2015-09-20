@@ -105,10 +105,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilCollectionUtil_ListTimSorter)
 
 @implementation OrgApacheLuceneUtilCollectionUtil
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilCollectionUtil_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)introSortWithJavaUtilList:(id<JavaUtilList>)list
            withJavaUtilComparator:(id<JavaUtilComparator>)comp {

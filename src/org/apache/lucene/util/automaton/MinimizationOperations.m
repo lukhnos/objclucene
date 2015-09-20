@@ -29,10 +29,12 @@ __attribute__((unused)) static OrgApacheLuceneUtilAutomatonMinimizationOperation
 
 @implementation OrgApacheLuceneUtilAutomatonMinimizationOperations
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilAutomatonMinimizationOperations_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (OrgApacheLuceneUtilAutomatonAutomaton *)minimizeWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a
                                                                                      withInt:(jint)maxDeterminizedStates {
@@ -63,7 +65,7 @@ OrgApacheLuceneUtilAutomatonMinimizationOperations *new_OrgApacheLuceneUtilAutom
 
 OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonMinimizationOperations_minimizeWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(OrgApacheLuceneUtilAutomatonAutomaton *a, jint maxDeterminizedStates) {
   OrgApacheLuceneUtilAutomatonMinimizationOperations_initialize();
-  if ([((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(a)) getNumStates] == 0 || ([a isAcceptWithInt:0] == NO && [a getNumTransitionsWithInt:0] == 0)) {
+  if ([((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(a)) getNumStates] == 0 || ([a isAcceptWithInt:0] == false && [a getNumTransitionsWithInt:0] == 0)) {
     return [new_OrgApacheLuceneUtilAutomatonAutomaton_init() autorelease];
   }
   a = OrgApacheLuceneUtilAutomatonOperations_determinizeWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(a, maxDeterminizedStates);
@@ -189,11 +191,11 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonMinimizationO
   IOSIntArray *stateRep = [IOSIntArray arrayWithLength:k];
   [result createState];
   for (jint n = 0; n < k; n++) {
-    jboolean isInitial = NO;
+    jboolean isInitial = false;
     for (JavaLangInteger *boxed__ in nil_chk(IOSObjectArray_Get(partition, n))) {
       jint q = [((JavaLangInteger *) nil_chk(boxed__)) intValue];
       if (q == 0) {
-        isInitial = YES;
+        isInitial = true;
         break;
       }
     }
@@ -266,10 +268,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonMinimizationOperati
   return [new_OrgApacheLuceneUtilAutomatonMinimizationOperations_StateListNode_initWithInt_withOrgApacheLuceneUtilAutomatonMinimizationOperations_StateList_(q, self) autorelease];
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilAutomatonMinimizationOperations_StateList_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(first_);

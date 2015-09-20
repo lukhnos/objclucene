@@ -39,13 +39,13 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPatternPatternReplaceFilter, m_, Java
 }
 
 - (jboolean)incrementToken {
-  if (![((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) return NO;
+  if (![((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) return false;
   [((JavaUtilRegexMatcher *) nil_chk(m_)) reset];
   if ([m_ find]) {
     NSString *transformed = all_ ? [m_ replaceAllWithNSString:replacement_] : [m_ replaceFirstWithNSString:replacement_];
     [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk([((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) setEmpty])) appendWithNSString:transformed];
   }
-  return YES;
+  return true;
 }
 
 - (void)dealloc {

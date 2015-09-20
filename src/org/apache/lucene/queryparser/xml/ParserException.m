@@ -10,10 +10,12 @@
 
 @implementation OrgApacheLuceneQueryparserXmlParserException
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueryparserXmlParserException_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithNSString:(NSString *)message {
   OrgApacheLuceneQueryparserXmlParserException_initWithNSString_(self, message);

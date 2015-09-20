@@ -22,10 +22,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer)
   return [((OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *) nil_chk(OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer_pluralStep_)) applyWithCharArray:s withInt:len];
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisPtPortugueseMinimalStemmer class]) {

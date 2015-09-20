@@ -8,10 +8,12 @@
 
 @implementation OrgApacheLuceneUtilAutomatonTransition
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilAutomatonTransition_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (NSString *)description {
   return JreStrcat("I$ICCCC", source_, @" --> ", dest_, ' ', (jchar) min_, '-', (jchar) max_);

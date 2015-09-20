@@ -54,10 +54,10 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisCachingTokenFilter_fi
     JreStrongAssign(&iterator_, [cache_ iterator]);
   }
   if (![((id<JavaUtilIterator>) nil_chk(iterator_)) hasNext]) {
-    return NO;
+    return false;
   }
   [self restoreStateWithOrgApacheLuceneUtilAttributeSource_State:[iterator_ next]];
-  return YES;
+  return true;
 }
 
 - (void)end {

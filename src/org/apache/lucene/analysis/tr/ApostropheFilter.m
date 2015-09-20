@@ -30,14 +30,14 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisTrApostropheFilter, termAtt_, id<OrgA
 }
 
 - (jboolean)incrementToken {
-  if (![((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) return NO;
+  if (![((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) return false;
   IOSCharArray *buffer = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer];
   jint length = [termAtt_ length];
   for (jint i = 0; i < length; i++) if (IOSCharArray_Get(nil_chk(buffer), i) == '\'' || IOSCharArray_Get(buffer, i) == 0x2019) {
     [termAtt_ setLengthWithInt:i];
-    return YES;
+    return true;
   }
-  return YES;
+  return true;
 }
 
 - (void)dealloc {

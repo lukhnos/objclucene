@@ -104,7 +104,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestSortedInputIterator_$1)
 }
 
 - (OrgApacheLuceneUtilBytesRef *)next {
-  jboolean success = NO;
+  jboolean success = false;
   if (done_) {
     return nil;
   }
@@ -119,16 +119,16 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestSortedInputIterator_$1)
       if (hasContexts_) {
         JreStrongAssign(&contexts_, [self decodeContextsWithOrgApacheLuceneUtilBytesRef:bytes withOrgApacheLuceneStoreByteArrayDataInput:input]);
       }
-      success = YES;
+      success = true;
       return bytes;
     }
     OrgApacheLuceneSearchSuggestSortedInputIterator_close(self);
-    success = done_ = YES;
+    success = done_ = true;
     return nil;
   }
   @finally {
     if (!success) {
-      done_ = YES;
+      done_ = true;
       OrgApacheLuceneSearchSuggestSortedInputIterator_close(self);
     }
   }
@@ -305,7 +305,7 @@ OrgApacheLuceneSearchSuggestSortedInputIterator *new_OrgApacheLuceneSearchSugges
 
 void OrgApacheLuceneSearchSuggestSortedInputIterator_initWithOrgApacheLuceneSearchSuggestInputIterator_withJavaUtilComparator_(OrgApacheLuceneSearchSuggestSortedInputIterator *self, id<OrgApacheLuceneSearchSuggestInputIterator> source, id<JavaUtilComparator> comparator) {
   NSObject_init(self);
-  self->done_ = NO;
+  self->done_ = false;
   JreStrongAssignAndConsume(&self->scratch_, new_OrgApacheLuceneUtilBytesRefBuilder_init());
   JreStrongAssignAndConsume(&self->payload_, new_OrgApacheLuceneUtilBytesRef_init());
   JreStrongAssign(&self->contexts_, nil);
@@ -329,7 +329,7 @@ OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader *OrgApacheLuceneSearchSugge
   JreStrongAssign(&self->tempInput_, OrgLukhnosPortmobileFileFiles_createTempFileWithOrgLukhnosPortmobileFilePath_withNSString_withNSString_(directory, prefix, @".input"));
   JreStrongAssign(&self->tempSorted_, OrgLukhnosPortmobileFileFiles_createTempFileWithOrgLukhnosPortmobileFilePath_withNSString_withNSString_(directory, prefix, @".sorted"));
   OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter *writer = [new_OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter_initWithOrgLukhnosPortmobileFilePath_(self->tempInput_) autorelease];
-  jboolean success = NO;
+  jboolean success = false;
   @try {
     OrgApacheLuceneUtilBytesRef *spare;
     IOSByteArray *buffer = [IOSByteArray arrayWithLength:0];
@@ -340,7 +340,7 @@ OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader *OrgApacheLuceneSearchSugge
     [writer close];
     [((OrgApacheLuceneUtilOfflineSorter *) [new_OrgApacheLuceneUtilOfflineSorter_initWithJavaUtilComparator_(self->tieBreakByCostComparator_) autorelease]) sortWithOrgLukhnosPortmobileFilePath:self->tempInput_ withOrgLukhnosPortmobileFilePath:self->tempSorted_];
     OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader *reader = [new_OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader_initWithOrgLukhnosPortmobileFilePath_(self->tempSorted_) autorelease];
-    success = YES;
+    success = true;
     return reader;
   }
   @finally {
@@ -359,10 +359,10 @@ OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader *OrgApacheLuceneSearchSugge
 }
 
 void OrgApacheLuceneSearchSuggestSortedInputIterator_close(OrgApacheLuceneSearchSuggestSortedInputIterator *self) {
-  jboolean success = NO;
+  jboolean success = false;
   @try {
     OrgApacheLuceneUtilIOUtils_closeWithJavaIoCloseableArray_([IOSObjectArray arrayWithObjects:(id[]){ self->reader_ } count:1 type:JavaIoCloseable_class_()]);
-    success = YES;
+    success = true;
   }
   @finally {
     if (success) {

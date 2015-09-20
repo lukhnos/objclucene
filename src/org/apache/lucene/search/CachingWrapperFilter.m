@@ -104,8 +104,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchCachingWrapperFilter, cache_, id<JavaUt
 }
 
 - (jboolean)isEqual:(id)o {
-  if ([super isEqual:o] == NO) {
-    return NO;
+  if ([super isEqual:o] == false) {
+    return false;
   }
   OrgApacheLuceneSearchCachingWrapperFilter *other = (OrgApacheLuceneSearchCachingWrapperFilter *) check_class_cast(o, [OrgApacheLuceneSearchCachingWrapperFilter class]);
   return [((OrgApacheLuceneSearchFilter *) nil_chk(self->filter_)) isEqual:((OrgApacheLuceneSearchCachingWrapperFilter *) nil_chk(other))->filter_];

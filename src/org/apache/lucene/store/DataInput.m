@@ -98,7 +98,7 @@ __attribute__((unused)) static jlong OrgApacheLuceneStoreDataInput_readVLongWith
 }
 
 - (jlong)readVLong {
-  return OrgApacheLuceneStoreDataInput_readVLongWithBoolean_(self, NO);
+  return OrgApacheLuceneStoreDataInput_readVLongWithBoolean_(self, false);
 }
 
 - (jlong)readVLongWithBoolean:(jboolean)allowNegative {
@@ -106,7 +106,7 @@ __attribute__((unused)) static jlong OrgApacheLuceneStoreDataInput_readVLongWith
 }
 
 - (jlong)readZLong {
-  return OrgApacheLuceneUtilBitUtil_zigZagDecodeWithLong_(OrgApacheLuceneStoreDataInput_readVLongWithBoolean_(self, YES));
+  return OrgApacheLuceneUtilBitUtil_zigZagDecodeWithLong_(OrgApacheLuceneStoreDataInput_readVLongWithBoolean_(self, true));
 }
 
 - (NSString *)readString {
@@ -191,15 +191,17 @@ __attribute__((unused)) static jlong OrgApacheLuceneStoreDataInput_readVLongWith
   JreAssert((((IOSByteArray *) nil_chk(skipBuffer_))->size_ == OrgApacheLuceneStoreDataInput_SKIP_BUFFER_SIZE), (@"org/apache/lucene/store/DataInput.java:347 condition failed: assert skipBuffer.length == SKIP_BUFFER_SIZE;"));
   for (jlong skipped = 0; skipped < numBytes; ) {
     jint step = (jint) JavaLangMath_minWithLong_withLong_(OrgApacheLuceneStoreDataInput_SKIP_BUFFER_SIZE, numBytes - skipped);
-    [self readBytesWithByteArray:skipBuffer_ withInt:0 withInt:step withBoolean:NO];
+    [self readBytesWithByteArray:skipBuffer_ withInt:0 withInt:step withBoolean:false];
     skipped += step;
   }
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneStoreDataInput_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(skipBuffer_);

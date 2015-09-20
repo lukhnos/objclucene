@@ -35,7 +35,7 @@
 }
 
 - (OrgApacheLuceneUtilPackedPagedGrowableWriter *)newUnfilledCopyWithLong:(jlong)newSize {
-  return [new_OrgApacheLuceneUtilPackedPagedGrowableWriter_initWithLong_withInt_withInt_withFloat_withBoolean_(newSize, [self pageSize], bitsPerValue_, acceptableOverheadRatio_, NO) autorelease];
+  return [new_OrgApacheLuceneUtilPackedPagedGrowableWriter_initWithLong_withInt_withInt_withFloat_withBoolean_(newSize, [self pageSize], bitsPerValue_, acceptableOverheadRatio_, false) autorelease];
 }
 
 - (jlong)baseRamBytesUsed {
@@ -61,7 +61,7 @@
 @end
 
 void OrgApacheLuceneUtilPackedPagedGrowableWriter_initWithLong_withInt_withInt_withFloat_(OrgApacheLuceneUtilPackedPagedGrowableWriter *self, jlong size, jint pageSize, jint startBitsPerValue, jfloat acceptableOverheadRatio) {
-  OrgApacheLuceneUtilPackedPagedGrowableWriter_initWithLong_withInt_withInt_withFloat_withBoolean_(self, size, pageSize, startBitsPerValue, acceptableOverheadRatio, YES);
+  OrgApacheLuceneUtilPackedPagedGrowableWriter_initWithLong_withInt_withInt_withFloat_withBoolean_(self, size, pageSize, startBitsPerValue, acceptableOverheadRatio, true);
 }
 
 OrgApacheLuceneUtilPackedPagedGrowableWriter *new_OrgApacheLuceneUtilPackedPagedGrowableWriter_initWithLong_withInt_withInt_withFloat_(jlong size, jint pageSize, jint startBitsPerValue, jfloat acceptableOverheadRatio) {

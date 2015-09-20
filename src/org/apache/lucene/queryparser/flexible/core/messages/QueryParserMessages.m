@@ -44,10 +44,12 @@ NSString *OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_NUME
 
 @implementation OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages class]) {

@@ -65,10 +65,12 @@ __attribute__((unused)) static OrgApacheLuceneSearchUsageTrackingFilterCachingPo
   return self;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithOrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments:(OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments *)segmentPolicy
                                                                               withInt:(jint)historySize
@@ -88,23 +90,23 @@ __attribute__((unused)) static OrgApacheLuceneSearchUsageTrackingFilterCachingPo
 - (jboolean)shouldCacheWithOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter
              withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                      withOrgApacheLuceneSearchDocIdSet:(OrgApacheLuceneSearchDocIdSet *)set {
-  if ([((OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments *) nil_chk(segmentPolicy_)) shouldCacheWithOrgApacheLuceneSearchFilter:filter withOrgApacheLuceneIndexLeafReaderContext:context withOrgApacheLuceneSearchDocIdSet:set] == NO) {
-    return NO;
+  if ([((OrgApacheLuceneSearchFilterCachingPolicy_CacheOnLargeSegments *) nil_chk(segmentPolicy_)) shouldCacheWithOrgApacheLuceneSearchFilter:filter withOrgApacheLuceneIndexLeafReaderContext:context withOrgApacheLuceneSearchDocIdSet:set] == false) {
+    return false;
   }
   jint frequency;
   @synchronized(self) {
     frequency = [((OrgApacheLuceneUtilFrequencyTrackingRingBuffer *) nil_chk(recentlyUsedFilters_)) frequencyWithInt:((jint) [((OrgApacheLuceneSearchFilter *) nil_chk(filter)) hash])];
   }
   if (frequency >= minFrequencyOtherFilters_) {
-    return YES;
+    return true;
   }
   else if (OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy_isCostlyWithOrgApacheLuceneSearchFilter_(filter) && frequency >= minFrequencyCostlyFilters_) {
-    return YES;
+    return true;
   }
   else if (OrgApacheLuceneSearchUsageTrackingFilterCachingPolicy_isCheapToCacheWithOrgApacheLuceneSearchDocIdSet_(set) && frequency >= minFrequencyCheapFilters_) {
-    return YES;
+    return true;
   }
-  return NO;
+  return false;
 }
 
 - (void)dealloc {

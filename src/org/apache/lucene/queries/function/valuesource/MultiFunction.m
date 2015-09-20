@@ -91,7 +91,7 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
 }
 
 - (jboolean)isEqual:(id)o {
-  if ([self getClass] != [nil_chk(o) getClass]) return NO;
+  if ([self getClass] != [nil_chk(o) getClass]) return false;
   OrgApacheLuceneQueriesFunctionValuesourceMultiFunction *other = (OrgApacheLuceneQueriesFunctionValuesourceMultiFunction *) check_class_cast(o, [OrgApacheLuceneQueriesFunctionValuesourceMultiFunction class]);
   return [((id<JavaUtilList>) nil_chk(self->sources_)) isEqual:other->sources_];
 }
@@ -141,11 +141,11 @@ jboolean OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_allExistsWithInt
     while (b__ < e__) {
       OrgApacheLuceneQueriesFunctionFunctionValues *v = *b__++;
       if (![((OrgApacheLuceneQueriesFunctionFunctionValues *) nil_chk(v)) existsWithInt:doc]) {
-        return NO;
+        return false;
       }
     }
   }
-  return YES;
+  return true;
 }
 
 jboolean OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_anyExistsWithInt_withOrgApacheLuceneQueriesFunctionFunctionValuesArray_(jint doc, IOSObjectArray *values) {
@@ -157,11 +157,11 @@ jboolean OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_anyExistsWithInt
     while (b__ < e__) {
       OrgApacheLuceneQueriesFunctionFunctionValues *v = *b__++;
       if ([((OrgApacheLuceneQueriesFunctionFunctionValues *) nil_chk(v)) existsWithInt:doc]) {
-        return YES;
+        return true;
       }
     }
   }
-  return NO;
+  return false;
 }
 
 jboolean OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_allExistsWithInt_withOrgApacheLuceneQueriesFunctionFunctionValues_withOrgApacheLuceneQueriesFunctionFunctionValues_(jint doc, OrgApacheLuceneQueriesFunctionFunctionValues *values1, OrgApacheLuceneQueriesFunctionFunctionValues *values2) {
@@ -178,10 +178,10 @@ NSString *OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_description__Wi
   OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_initialize();
   JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
   [((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:name])) appendWithChar:'('];
-  jboolean firstTime = YES;
+  jboolean firstTime = true;
   for (OrgApacheLuceneQueriesFunctionValueSource * __strong source in nil_chk(sources)) {
     if (firstTime) {
-      firstTime = NO;
+      firstTime = false;
     }
     else {
       [sb appendWithChar:','];
@@ -206,7 +206,7 @@ NSString *OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_toStringWithNSS
   OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_initialize();
   JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
   [((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:name])) appendWithChar:'('];
-  jboolean firstTime = YES;
+  jboolean firstTime = true;
   {
     IOSObjectArray *a__ = valsArr;
     OrgApacheLuceneQueriesFunctionFunctionValues * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
@@ -214,7 +214,7 @@ NSString *OrgApacheLuceneQueriesFunctionValuesourceMultiFunction_toStringWithNSS
     while (b__ < e__) {
       OrgApacheLuceneQueriesFunctionFunctionValues *vals = *b__++;
       if (firstTime) {
-        firstTime = NO;
+        firstTime = false;
       }
       else {
         [sb appendWithChar:','];

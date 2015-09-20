@@ -51,10 +51,12 @@
   return 0;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexIndexCommit_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jboolean)isEqual:(id)other {
   if ([other isKindOfClass:[OrgApacheLuceneIndexIndexCommit class]]) {
@@ -62,7 +64,7 @@
     return [((OrgApacheLuceneIndexIndexCommit *) nil_chk(otherCommit)) getDirectory] == [self getDirectory] && [otherCommit getGeneration] == [self getGeneration];
   }
   else {
-    return NO;
+    return false;
   }
 }
 

@@ -88,7 +88,7 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisHunspellHunspellStemFilterFact
 }
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tokenStream {
-  return [new_OrgApacheLuceneAnalysisHunspellHunspellStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisHunspellDictionary_withBoolean_withBoolean_(tokenStream, dictionary_, YES, longestOnly_) autorelease];
+  return [new_OrgApacheLuceneAnalysisHunspellHunspellStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisHunspellDictionary_withBoolean_withBoolean_(tokenStream, dictionary_, true, longestOnly_) autorelease];
 }
 
 - (void)dealloc {
@@ -126,9 +126,9 @@ void OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_initWithJavaUtilMa
   OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
   JreStrongAssign(&self->dictionaryFiles_, [self requireWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_PARAM_DICTIONARY_]);
   JreStrongAssign(&self->affixFile_, [self getWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_PARAM_AFFIX_]);
-  self->ignoreCase_ = [self getBooleanWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_PARAM_IGNORE_CASE_ withBoolean:NO];
-  self->longestOnly_ = [self getBooleanWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_PARAM_LONGEST_ONLY_ withBoolean:NO];
-  [self getBooleanWithJavaUtilMap:args withNSString:@"strictAffixParsing" withBoolean:YES];
+  self->ignoreCase_ = [self getBooleanWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_PARAM_IGNORE_CASE_ withBoolean:false];
+  self->longestOnly_ = [self getBooleanWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisHunspellHunspellStemFilterFactory_PARAM_LONGEST_ONLY_ withBoolean:false];
+  [self getBooleanWithJavaUtilMap:args withNSString:@"strictAffixParsing" withBoolean:true];
   [self getIntWithJavaUtilMap:args withNSString:@"recursionCap" withInt:0];
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];

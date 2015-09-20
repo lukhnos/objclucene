@@ -113,7 +113,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum_Linea
 @end
 
 void OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneUtilAttributeSource_withOrgApacheLuceneIndexTerm_withFloat_withInt_(OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum *self, OrgApacheLuceneIndexTerms *terms, OrgApacheLuceneUtilAttributeSource *atts, OrgApacheLuceneIndexTerm *term, jfloat minSimilarity, jint prefixLength) {
-  OrgApacheLuceneSearchFuzzyTermsEnum_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneUtilAttributeSource_withOrgApacheLuceneIndexTerm_withFloat_withInt_withBoolean_(self, terms, atts, term, minSimilarity, prefixLength, NO);
+  OrgApacheLuceneSearchFuzzyTermsEnum_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneUtilAttributeSource_withOrgApacheLuceneIndexTerm_withFloat_withInt_withBoolean_(self, terms, atts, term, minSimilarity, prefixLength, false);
 }
 
 OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum *new_OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum_initWithOrgApacheLuceneIndexTerms_withOrgApacheLuceneUtilAttributeSource_withOrgApacheLuceneIndexTerm_withFloat_withInt_(OrgApacheLuceneIndexTerms *terms, OrgApacheLuceneUtilAttributeSource *atts, OrgApacheLuceneIndexTerm *term, jfloat minSimilarity, jint prefixLength) {
@@ -138,11 +138,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum
     if (distance == JavaLangInteger_MIN_VALUE) {
       return JreLoadStatic(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum, NO);
     }
-    if (this$0_->raw_ == YES && distance > this$0_->maxEdits_) {
+    if (this$0_->raw_ == true && distance > this$0_->maxEdits_) {
       return JreLoadStatic(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum, NO);
     }
     jfloat similarity = OrgApacheLuceneSandboxQueriesSlowFuzzyTermsEnum_LinearFuzzyTermsEnum_calcSimilarityWithInt_withInt_withInt_(self, distance, ([utf32_ length] - this$0_->realPrefixLength_), ((IOSIntArray *) nil_chk(text_))->size_);
-    if (this$0_->raw_ == YES || (this$0_->raw_ == NO && similarity > this$0_->minSimilarity_)) {
+    if (this$0_->raw_ == true || (this$0_->raw_ == false && similarity > this$0_->minSimilarity_)) {
       [((id<OrgApacheLuceneSearchBoostAttribute>) nil_chk(boostAtt_)) setBoostWithFloat:(similarity - this$0_->minSimilarity_) * this$0_->scale_factor_];
       return JreLoadStatic(OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatusEnum, YES);
     }

@@ -83,7 +83,7 @@ __attribute__((unused)) static OrgApacheLuceneAnalysisToken *OrgApacheLuceneAnal
   if (!prefixExhausted_) {
     OrgApacheLuceneAnalysisToken *nextToken = OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter_getNextPrefixInputTokenWithOrgApacheLuceneAnalysisToken_(self, reusableToken_);
     if (nextToken == nil) {
-      prefixExhausted_ = YES;
+      prefixExhausted_ = true;
     }
     else {
       [((OrgApacheLuceneAnalysisToken *) nil_chk(previousPrefixToken_)) reinitWithOrgApacheLuceneAnalysisToken:nextToken];
@@ -92,16 +92,16 @@ __attribute__((unused)) static OrgApacheLuceneAnalysisToken *OrgApacheLuceneAnal
         [previousPrefixToken_ setPayloadWithOrgApacheLuceneUtilBytesRef:[p clone]];
       }
       OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter_setCurrentTokenWithOrgApacheLuceneAnalysisToken_(self, nextToken);
-      return YES;
+      return true;
     }
   }
   OrgApacheLuceneAnalysisToken *nextToken = OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter_getNextSuffixInputTokenWithOrgApacheLuceneAnalysisToken_(self, reusableToken_);
   if (nextToken == nil) {
-    return NO;
+    return false;
   }
   nextToken = [self updateSuffixTokenWithOrgApacheLuceneAnalysisToken:nextToken withOrgApacheLuceneAnalysisToken:previousPrefixToken_];
   OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter_setCurrentTokenWithOrgApacheLuceneAnalysisToken_(self, nextToken);
-  return YES;
+  return true;
 }
 
 - (void)setCurrentTokenWithOrgApacheLuceneAnalysisToken:(OrgApacheLuceneAnalysisToken *)token {
@@ -135,7 +135,7 @@ __attribute__((unused)) static OrgApacheLuceneAnalysisToken *OrgApacheLuceneAnal
 - (void)reset {
   [super reset];
   if (prefix_ != nil) {
-    prefixExhausted_ = NO;
+    prefixExhausted_ = false;
     [prefix_ reset];
   }
   if (suffix_ != nil) {
@@ -226,7 +226,7 @@ void OrgApacheLuceneAnalysisMiscellaneousPrefixAwareTokenFilter_initWithOrgApach
   JreStrongAssignAndConsume(&self->reusableToken_, new_OrgApacheLuceneAnalysisToken_init());
   JreStrongAssign(&self->suffix_, suffix);
   JreStrongAssign(&self->prefix_, prefix);
-  self->prefixExhausted_ = NO;
+  self->prefixExhausted_ = false;
   JreStrongAssign(&self->termAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()]);
   JreStrongAssign(&self->posIncrAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_class_()]);
   JreStrongAssign(&self->payloadAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPayloadAttribute_class_()]);

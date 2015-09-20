@@ -73,10 +73,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchSimilaritiesSimilarityBase)
 
 @implementation OrgApacheLuceneSearchSimilaritiesSimilarityBase
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSimilaritiesSimilarityBase_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)setDiscountOverlapsWithBoolean:(jboolean)v {
   discountOverlaps_ = v;
@@ -243,7 +245,7 @@ withOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilariti
 
 void OrgApacheLuceneSearchSimilaritiesSimilarityBase_init(OrgApacheLuceneSearchSimilaritiesSimilarityBase *self) {
   OrgApacheLuceneSearchSimilaritiesSimilarity_init(self);
-  self->discountOverlaps_ = YES;
+  self->discountOverlaps_ = true;
 }
 
 jdouble OrgApacheLuceneSearchSimilaritiesSimilarityBase_log2WithDouble_(jdouble x) {

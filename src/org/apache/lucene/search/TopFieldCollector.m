@@ -960,7 +960,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopFieldCollector_NonScori
 @end
 
 void OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector_initWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchFieldValueHitQueue_withInt_withBoolean_(OrgApacheLuceneSearchTopFieldCollector_ScoringNoMaxScoreCollector *self, OrgApacheLuceneSearchSort *sort, OrgApacheLuceneSearchFieldValueHitQueue *queue, jint numHits, jboolean fillFields) {
-  OrgApacheLuceneSearchTopFieldCollector_initWithOrgApacheLuceneUtilPriorityQueue_withInt_withBoolean_withBoolean_(self, queue, numHits, fillFields, YES);
+  OrgApacheLuceneSearchTopFieldCollector_initWithOrgApacheLuceneUtilPriorityQueue_withInt_withBoolean_withBoolean_(self, queue, numHits, fillFields, true);
   JreStrongAssign(&self->queue_, queue);
 }
 
@@ -1142,7 +1142,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopFieldCollector_ScoringN
 @end
 
 void OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector_initWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchFieldValueHitQueue_withInt_withBoolean_(OrgApacheLuceneSearchTopFieldCollector_ScoringMaxScoreCollector *self, OrgApacheLuceneSearchSort *sort, OrgApacheLuceneSearchFieldValueHitQueue *queue, jint numHits, jboolean fillFields) {
-  OrgApacheLuceneSearchTopFieldCollector_initWithOrgApacheLuceneUtilPriorityQueue_withInt_withBoolean_withBoolean_(self, queue, numHits, fillFields, YES);
+  OrgApacheLuceneSearchTopFieldCollector_initWithOrgApacheLuceneUtilPriorityQueue_withInt_withBoolean_withBoolean_(self, queue, numHits, fillFields, true);
   JreStrongAssign(&self->queue_, queue);
   self->maxScore_ = JavaLangFloat_MIN_NORMAL;
 }

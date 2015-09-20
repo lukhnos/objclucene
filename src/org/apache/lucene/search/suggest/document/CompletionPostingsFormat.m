@@ -22,10 +22,12 @@ NSString *OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat_DICT_EXTE
 
 @implementation OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneCodecsPostingsFormat *)delegatePostingsFormat {
   // can't call an abstract method

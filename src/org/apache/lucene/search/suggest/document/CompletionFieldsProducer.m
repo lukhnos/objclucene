@@ -73,14 +73,14 @@ __attribute__((unused)) static OrgApacheLuceneSearchSuggestDocumentCompletionFie
 }
 
 - (void)close {
-  jboolean success = NO;
+  jboolean success = false;
   @try {
     [((OrgApacheLuceneCodecsFieldsProducer *) nil_chk(delegateFieldsProducer_)) close];
     OrgApacheLuceneUtilIOUtils_closeWithJavaIoCloseableArray_([IOSObjectArray arrayWithObjects:(id[]){ dictIn_ } count:1 type:JavaIoCloseable_class_()]);
-    success = YES;
+    success = true;
   }
   @finally {
-    if (success == NO) {
+    if (success == false) {
       OrgApacheLuceneUtilIOUtils_closeWhileHandlingExceptionWithJavaIoCloseableArray_([IOSObjectArray arrayWithObjects:(id[]){ delegateFieldsProducer_, dictIn_ } count:2 type:JavaIoCloseable_class_()]);
     }
   }
@@ -177,10 +177,10 @@ void OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_initWithOrgApa
   OrgApacheLuceneCodecsFieldsProducer_init(self);
   NSString *indexFile = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentReadState *) nil_chk(state))->segmentInfo_))->name_, state->segmentSuffix_, OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat_INDEX_EXTENSION_);
   JreStrongAssign(&self->delegateFieldsProducer_, nil);
-  jboolean success = NO;
-  {
-    JavaLangThrowable *__mainException = nil;
+  jboolean success = false;
+  @try {
     OrgApacheLuceneStoreChecksumIndexInput *index = [((OrgApacheLuceneStoreDirectory *) nil_chk(state->directory_)) openChecksumInputWithNSString:indexFile withOrgApacheLuceneStoreIOContext:state->context_];
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
       NSString *dictFile = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(state->segmentInfo_->name_, state->segmentSuffix_, OrgApacheLuceneSearchSuggestDocumentCompletionPostingsFormat_DICT_EXTENSION_);
       JreStrongAssign(&self->dictIn_, [state->directory_ openInputWithNSString:dictFile withOrgApacheLuceneStoreIOContext:state->context_]);
@@ -201,25 +201,29 @@ void OrgApacheLuceneSearchSuggestDocumentCompletionFieldsProducer_initWithOrgApa
         [self->readers_ putWithId:((OrgApacheLuceneIndexFieldInfo *) nil_chk(fieldInfo))->name_ withId:[new_OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader_initWithOrgApacheLuceneStoreIndexInput_withLong_withLong_withLong_withByte_(self->dictIn_, offset, minWeight, maxWeight, type) autorelease]];
       }
       OrgApacheLuceneCodecsCodecUtil_checkFooterWithOrgApacheLuceneStoreChecksumIndexInput_(index);
-      success = YES;
+      success = true;
+    }
+    @catch (JavaLangThrowable *e) {
+      __primaryException1 = e;
+      @throw e;
     }
     @finally {
-      if (success == NO) {
-        OrgApacheLuceneUtilIOUtils_closeWhileHandlingExceptionWithJavaIoCloseableArray_([IOSObjectArray arrayWithObjects:(id[]){ self->delegateFieldsProducer_, self->dictIn_ } count:2 type:JavaIoCloseable_class_()]);
-      }
-      @try {
-        [index close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
+      if (index != nil) {
+        if (__primaryException1 != nil) {
+          @try {
+            [index close];
+          } @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
         } else {
-          __mainException = e;
+          [index close];
         }
       }
-      if (__mainException) {
-        @throw __mainException;
-      }
+    }
+  }
+  @finally {
+    if (success == false) {
+      OrgApacheLuceneUtilIOUtils_closeWhileHandlingExceptionWithJavaIoCloseableArray_([IOSObjectArray arrayWithObjects:(id[]){ self->delegateFieldsProducer_, self->dictIn_ } count:2 type:JavaIoCloseable_class_()]);
     }
   }
 }

@@ -98,10 +98,12 @@ NSString *OrgApacheLuceneIndexConcurrentMergeScheduler_DEFAULT_SPINS_PROPERTY_ =
 
 @implementation OrgApacheLuceneIndexConcurrentMergeScheduler
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexConcurrentMergeScheduler_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)setMaxMergesAndThreadsWithInt:(jint)maxMergeCount
                               withInt:(jint)maxThreadCount {
@@ -169,7 +171,7 @@ NSString *OrgApacheLuceneIndexConcurrentMergeScheduler_DEFAULT_SPINS_PROPERTY_ =
 
 - (void)enableAutoIOThrottle {
   @synchronized(self) {
-    doAutoIOThrottle_ = YES;
+    doAutoIOThrottle_ = true;
     targetMBPerSec_ = OrgApacheLuceneIndexConcurrentMergeScheduler_START_MB_PER_SEC;
     [self updateMergeThreads];
   }
@@ -177,7 +179,7 @@ NSString *OrgApacheLuceneIndexConcurrentMergeScheduler_DEFAULT_SPINS_PROPERTY_ =
 
 - (void)disableAutoIOThrottle {
   @synchronized(self) {
-    doAutoIOThrottle_ = NO;
+    doAutoIOThrottle_ = false;
     [self updateMergeThreads];
   }
 }
@@ -220,7 +222,7 @@ NSString *OrgApacheLuceneIndexConcurrentMergeScheduler_DEFAULT_SPINS_PROPERTY_ =
         return;
       }
     }
-    JreAssert((NO), (JreStrcat("$@$", @"merge thread ", currentThread, @" was not found")));
+    JreAssert((false), (JreStrcat("$@$", @"merge thread ", currentThread, @" was not found")));
   }
 }
 
@@ -267,7 +269,7 @@ NSString *OrgApacheLuceneIndexConcurrentMergeScheduler_DEFAULT_SPINS_PROPERTY_ =
       else if (((OrgApacheLuceneIndexMergePolicy_OneMerge *) nil_chk(merge))->maxNumSegments_ != -1) {
         newMBPerSec = forceMergeMBPerSec_;
       }
-      else if (doAutoIOThrottle_ == NO) {
+      else if (doAutoIOThrottle_ == false) {
         newMBPerSec = JavaLangDouble_POSITIVE_INFINITY;
       }
       else if (JreLoadVolatileLong(&merge->estimatedMergeBytes_) < OrgApacheLuceneIndexConcurrentMergeScheduler_MIN_BIG_MERGE_MB * 1024 * 1024) {
@@ -328,9 +330,9 @@ NSString *OrgApacheLuceneIndexConcurrentMergeScheduler_DEFAULT_SPINS_PROPERTY_ =
 }
 
 - (void)sync {
-  jboolean interrupted = NO;
+  jboolean interrupted = false;
   @try {
-    while (YES) {
+    while (true) {
       OrgApacheLuceneIndexConcurrentMergeScheduler_MergeThread *toSync = nil;
       @synchronized(self) {
         for (OrgApacheLuceneIndexConcurrentMergeScheduler_MergeThread * __strong t in nil_chk(mergeThreads_)) {
@@ -345,7 +347,7 @@ NSString *OrgApacheLuceneIndexConcurrentMergeScheduler_DEFAULT_SPINS_PROPERTY_ =
           [toSync join];
         }
         @catch (JavaLangInterruptedException *ie) {
-          interrupted = YES;
+          interrupted = true;
         }
       }
       else {
@@ -363,7 +365,7 @@ NSString *OrgApacheLuceneIndexConcurrentMergeScheduler_DEFAULT_SPINS_PROPERTY_ =
     JavaLangThread *currentThread = JavaLangThread_currentThread();
     jint count = 0;
     for (OrgApacheLuceneIndexConcurrentMergeScheduler_MergeThread * __strong mergeThread in nil_chk(mergeThreads_)) {
-      if (currentThread != mergeThread && [((OrgApacheLuceneIndexConcurrentMergeScheduler_MergeThread *) nil_chk(mergeThread)) isAlive] && [((OrgApacheLuceneIndexMergeRateLimiter *) nil_chk(((OrgApacheLuceneIndexMergePolicy_OneMerge *) nil_chk(mergeThread->merge_))->rateLimiter_)) getAbort] == NO) {
+      if (currentThread != mergeThread && [((OrgApacheLuceneIndexConcurrentMergeScheduler_MergeThread *) nil_chk(mergeThread)) isAlive] && [((OrgApacheLuceneIndexMergeRateLimiter *) nil_chk(((OrgApacheLuceneIndexMergePolicy_OneMerge *) nil_chk(mergeThread->merge_))->rateLimiter_)) getAbort] == false) {
         count++;
       }
     }
@@ -385,8 +387,8 @@ NSString *OrgApacheLuceneIndexConcurrentMergeScheduler_DEFAULT_SPINS_PROPERTY_ =
       [self messageWithNSString:@"now merge"];
       [self messageWithNSString:JreStrcat("$$", @"  index: ", [((OrgApacheLuceneIndexIndexWriter *) nil_chk(writer)) segString])];
     }
-    while (YES) {
-      if ([self maybeStallWithOrgApacheLuceneIndexIndexWriter:writer] == NO) {
+    while (true) {
+      if ([self maybeStallWithOrgApacheLuceneIndexIndexWriter:writer] == false) {
         break;
       }
       OrgApacheLuceneIndexMergePolicy_OneMerge *merge = [((OrgApacheLuceneIndexIndexWriter *) nil_chk(writer)) getNextMerge];
@@ -397,7 +399,7 @@ NSString *OrgApacheLuceneIndexConcurrentMergeScheduler_DEFAULT_SPINS_PROPERTY_ =
         return;
       }
       OrgApacheLuceneIndexConcurrentMergeScheduler_updateIOThrottleWithOrgApacheLuceneIndexMergePolicy_OneMerge_(self, merge);
-      jboolean success = NO;
+      jboolean success = false;
       @try {
         if ([self verbose]) {
           [self messageWithNSString:JreStrcat("$$", @"  consider merge ", [writer segStringWithJavaLangIterable:((OrgApacheLuceneIndexMergePolicy_OneMerge *) nil_chk(merge))->segments_])];
@@ -409,7 +411,7 @@ NSString *OrgApacheLuceneIndexConcurrentMergeScheduler_DEFAULT_SPINS_PROPERTY_ =
         }
         [((OrgApacheLuceneIndexConcurrentMergeScheduler_MergeThread *) nil_chk(merger)) start];
         [self updateMergeThreads];
-        success = YES;
+        success = true;
       }
       @finally {
         if (!success) {
@@ -425,7 +427,7 @@ NSString *OrgApacheLuceneIndexConcurrentMergeScheduler_DEFAULT_SPINS_PROPERTY_ =
     jlong startStallTime = 0;
     while ([((OrgApacheLuceneIndexIndexWriter *) nil_chk(writer)) hasPendingMerges] && [self mergeThreadCount] >= maxMergeCount_) {
       if ([((id<JavaUtilList>) nil_chk(mergeThreads_)) containsWithId:JavaLangThread_currentThread()]) {
-        return NO;
+        return false;
       }
       if ([self verbose] && startStallTime == 0) {
         [self messageWithNSString:@"    too many merges; stalling..."];
@@ -436,7 +438,7 @@ NSString *OrgApacheLuceneIndexConcurrentMergeScheduler_DEFAULT_SPINS_PROPERTY_ =
     if ([self verbose] && startStallTime != 0) {
       [self messageWithNSString:JreStrcat("$J$", @"  stalled for ", (JavaLangSystem_currentTimeMillis() - startStallTime), @" msec")];
     }
-    return YES;
+    return true;
   }
 }
 
@@ -460,7 +462,7 @@ NSString *OrgApacheLuceneIndexConcurrentMergeScheduler_DEFAULT_SPINS_PROPERTY_ =
                                                                    withOrgApacheLuceneIndexMergePolicy_OneMerge:(OrgApacheLuceneIndexMergePolicy_OneMerge *)merge {
   @synchronized(self) {
     OrgApacheLuceneIndexConcurrentMergeScheduler_MergeThread *thread = [new_OrgApacheLuceneIndexConcurrentMergeScheduler_MergeThread_initWithOrgApacheLuceneIndexConcurrentMergeScheduler_withOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexMergePolicy_OneMerge_(self, writer, merge) autorelease];
-    [thread setDaemonWithBoolean:YES];
+    [thread setDaemonWithBoolean:true];
     [thread setNameWithNSString:JreStrcat("$I", @"Lucene Merge Thread #", mergeThreadCount_++)];
     return thread;
   }
@@ -472,11 +474,11 @@ NSString *OrgApacheLuceneIndexConcurrentMergeScheduler_DEFAULT_SPINS_PROPERTY_ =
 }
 
 - (void)setSuppressExceptions {
-  suppressExceptions_ = YES;
+  suppressExceptions_ = true;
 }
 
 - (void)clearSuppressExceptions {
-  suppressExceptions_ = NO;
+  suppressExceptions_ = false;
 }
 
 - (NSString *)description {
@@ -577,7 +579,7 @@ void OrgApacheLuceneIndexConcurrentMergeScheduler_init(OrgApacheLuceneIndexConcu
   self->maxThreadCount_ = OrgApacheLuceneIndexConcurrentMergeScheduler_AUTO_DETECT_MERGES_AND_THREADS;
   self->maxMergeCount_ = OrgApacheLuceneIndexConcurrentMergeScheduler_AUTO_DETECT_MERGES_AND_THREADS;
   self->targetMBPerSec_ = OrgApacheLuceneIndexConcurrentMergeScheduler_START_MB_PER_SEC;
-  self->doAutoIOThrottle_ = YES;
+  self->doAutoIOThrottle_ = true;
   self->forceMergeMBPerSec_ = JavaLangDouble_POSITIVE_INFINITY;
 }
 
@@ -628,16 +630,16 @@ jboolean OrgApacheLuceneIndexConcurrentMergeScheduler_isBacklogWithLong_withOrgA
       jdouble otherMergeMB = OrgApacheLuceneIndexConcurrentMergeScheduler_bytesToMBWithLong_(JreLoadVolatileLong(&mergeThread->merge_->estimatedMergeBytes_));
       jdouble ratio = otherMergeMB / mergeMB;
       if (ratio > 0.3 && ratio < 3.0) {
-        return YES;
+        return true;
       }
     }
   }
-  return NO;
+  return false;
 }
 
 void OrgApacheLuceneIndexConcurrentMergeScheduler_updateIOThrottleWithOrgApacheLuceneIndexMergePolicy_OneMerge_(OrgApacheLuceneIndexConcurrentMergeScheduler *self, OrgApacheLuceneIndexMergePolicy_OneMerge *newMerge) {
   @synchronized(self) {
-    if (self->doAutoIOThrottle_ == NO) {
+    if (self->doAutoIOThrottle_ == false) {
       return;
     }
     jdouble mergeMB = OrgApacheLuceneIndexConcurrentMergeScheduler_bytesToMBWithLong_(JreLoadVolatileLong(&((OrgApacheLuceneIndexMergePolicy_OneMerge *) nil_chk(newMerge))->estimatedMergeBytes_));
@@ -646,15 +648,15 @@ void OrgApacheLuceneIndexConcurrentMergeScheduler_updateIOThrottleWithOrgApacheL
     }
     jlong now = JavaLangSystem_nanoTime();
     jboolean newBacklog = OrgApacheLuceneIndexConcurrentMergeScheduler_isBacklogWithLong_withOrgApacheLuceneIndexMergePolicy_OneMerge_(self, now, newMerge);
-    jboolean curBacklog = NO;
-    if (newBacklog == NO) {
+    jboolean curBacklog = false;
+    if (newBacklog == false) {
       if ([((id<JavaUtilList>) nil_chk(self->mergeThreads_)) size] > self->maxThreadCount_) {
-        curBacklog = YES;
+        curBacklog = true;
       }
       else {
         for (OrgApacheLuceneIndexConcurrentMergeScheduler_MergeThread * __strong mergeThread in self->mergeThreads_) {
           if (OrgApacheLuceneIndexConcurrentMergeScheduler_isBacklogWithLong_withOrgApacheLuceneIndexMergePolicy_OneMerge_(self, now, ((OrgApacheLuceneIndexConcurrentMergeScheduler_MergeThread *) nil_chk(mergeThread))->merge_)) {
-            curBacklog = YES;
+            curBacklog = true;
             break;
           }
         }
@@ -742,7 +744,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexConcurrentMergeScheduler)
       [this$0_ messageWithNSString:@"  merge thread: done"];
     }
     @try {
-      [this$0_ mergeWithOrgApacheLuceneIndexIndexWriter:writer_ withOrgApacheLuceneIndexMergeTriggerEnum:JreLoadStatic(OrgApacheLuceneIndexMergeTriggerEnum, MERGE_FINISHED) withBoolean:YES];
+      [this$0_ mergeWithOrgApacheLuceneIndexIndexWriter:writer_ withOrgApacheLuceneIndexMergeTriggerEnum:JreLoadStatic(OrgApacheLuceneIndexMergeTriggerEnum, MERGE_FINISHED) withBoolean:true];
     }
     @catch (OrgApacheLuceneStoreAlreadyClosedException *ace) {
     }
@@ -753,7 +755,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexConcurrentMergeScheduler)
   @catch (JavaLangThrowable *exc) {
     if ([exc isKindOfClass:[OrgApacheLuceneIndexMergePolicy_MergeAbortedException class]]) {
     }
-    else if (this$0_->suppressExceptions_ == NO) {
+    else if (this$0_->suppressExceptions_ == false) {
       [this$0_ handleMergeExceptionWithOrgApacheLuceneStoreDirectory:[((OrgApacheLuceneIndexIndexWriter *) nil_chk(writer_)) getDirectory] withJavaLangThrowable:exc];
     }
   }

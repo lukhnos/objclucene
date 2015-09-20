@@ -92,7 +92,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansFilterSpans_$2)
 }
 
 - (jint)nextDoc {
-  while (YES) {
+  while (true) {
     jint doc = [((OrgApacheLuceneSearchSpansSpans *) nil_chk(in_)) nextDoc];
     if (doc == OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS) {
       return OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS;
@@ -120,7 +120,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansFilterSpans_$2)
 
 - (jint)nextStartPosition {
   if (atFirstInCurrentDoc_) {
-    atFirstInCurrentDoc_ = NO;
+    atFirstInCurrentDoc_ = false;
     return startPos_;
   }
   for (; ; ) {
@@ -213,20 +213,20 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansFilterSpans_$2)
 
 void OrgApacheLuceneSearchSpansFilterSpans_initWithOrgApacheLuceneSearchSpansSpans_(OrgApacheLuceneSearchSpansFilterSpans *self, OrgApacheLuceneSearchSpansSpans *inArg) {
   OrgApacheLuceneSearchSpansSpans_init(self);
-  self->atFirstInCurrentDoc_ = NO;
+  self->atFirstInCurrentDoc_ = false;
   self->startPos_ = -1;
   JreStrongAssign(&self->in_, OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_(inArg));
 }
 
 jboolean OrgApacheLuceneSearchSpansFilterSpans_twoPhaseCurrentDocMatches(OrgApacheLuceneSearchSpansFilterSpans *self) {
-  self->atFirstInCurrentDoc_ = NO;
+  self->atFirstInCurrentDoc_ = false;
   self->startPos_ = [((OrgApacheLuceneSearchSpansSpans *) nil_chk(self->in_)) nextStartPosition];
   JreAssert((self->startPos_ != OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS), (@"org/apache/lucene/search/spans/FilterSpans.java:166 condition failed: assert startPos != NO_MORE_POSITIONS;"));
   for (; ; ) {
     switch ([[self acceptWithOrgApacheLuceneSearchSpansSpans:self->in_] ordinal]) {
       case OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_YES:
-      self->atFirstInCurrentDoc_ = YES;
-      return YES;
+      self->atFirstInCurrentDoc_ = true;
+      return true;
       case OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_NO:
       self->startPos_ = [self->in_ nextStartPosition];
       if (self->startPos_ != OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS) {
@@ -234,7 +234,7 @@ jboolean OrgApacheLuceneSearchSpansFilterSpans_twoPhaseCurrentDocMatches(OrgApac
       }
       case OrgApacheLuceneSearchSpansFilterSpans_AcceptStatus_NO_MORE_IN_CURRENT_DOC:
       self->startPos_ = -1;
-      return NO;
+      return false;
     }
   }
 }

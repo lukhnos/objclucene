@@ -48,10 +48,12 @@ __attribute__((unused)) static OrgApacheLuceneDocumentFieldType_NumericTypeEnum 
   return self;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneDocumentFieldType_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)checkIfFrozen {
   if (frozen_) {
@@ -60,7 +62,7 @@ __attribute__((unused)) static OrgApacheLuceneDocumentFieldType_NumericTypeEnum 
 }
 
 - (void)freeze {
-  self->frozen_ = YES;
+  self->frozen_ = true;
 }
 
 - (jboolean)stored {
@@ -236,22 +238,22 @@ __attribute__((unused)) static OrgApacheLuceneDocumentFieldType_NumericTypeEnum 
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return YES;
-  if (obj == nil) return NO;
-  if ([self getClass] != [nil_chk(obj) getClass]) return NO;
+  if (self == obj) return true;
+  if (obj == nil) return false;
+  if ([self getClass] != [nil_chk(obj) getClass]) return false;
   OrgApacheLuceneDocumentFieldType *other = (OrgApacheLuceneDocumentFieldType *) check_class_cast(obj, [OrgApacheLuceneDocumentFieldType class]);
-  if (docValuesType_ != other->docValuesType_) return NO;
-  if (indexOptions_ != other->indexOptions_) return NO;
-  if (numericPrecisionStep_ != other->numericPrecisionStep_) return NO;
-  if (numericType_ != other->numericType_) return NO;
-  if (omitNorms_ != other->omitNorms_) return NO;
-  if (storeTermVectorOffsets_ != other->storeTermVectorOffsets_) return NO;
-  if (storeTermVectorPayloads_ != other->storeTermVectorPayloads_) return NO;
-  if (storeTermVectorPositions_ != other->storeTermVectorPositions_) return NO;
-  if (storeTermVectors_ != other->storeTermVectors_) return NO;
-  if (stored_ != other->stored_) return NO;
-  if (tokenized_ != other->tokenized_) return NO;
-  return YES;
+  if (docValuesType_ != other->docValuesType_) return false;
+  if (indexOptions_ != other->indexOptions_) return false;
+  if (numericPrecisionStep_ != other->numericPrecisionStep_) return false;
+  if (numericType_ != other->numericType_) return false;
+  if (omitNorms_ != other->omitNorms_) return false;
+  if (storeTermVectorOffsets_ != other->storeTermVectorOffsets_) return false;
+  if (storeTermVectorPayloads_ != other->storeTermVectorPayloads_) return false;
+  if (storeTermVectorPositions_ != other->storeTermVectorPositions_) return false;
+  if (storeTermVectors_ != other->storeTermVectors_) return false;
+  if (stored_ != other->stored_) return false;
+  if (tokenized_ != other->tokenized_) return false;
+  return true;
 }
 
 - (void)dealloc {
@@ -316,7 +318,7 @@ __attribute__((unused)) static OrgApacheLuceneDocumentFieldType_NumericTypeEnum 
 
 void OrgApacheLuceneDocumentFieldType_initWithOrgApacheLuceneDocumentFieldType_(OrgApacheLuceneDocumentFieldType *self, OrgApacheLuceneDocumentFieldType *ref) {
   NSObject_init(self);
-  self->tokenized_ = YES;
+  self->tokenized_ = true;
   JreStrongAssign(&self->indexOptions_, JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, NONE));
   self->numericPrecisionStep_ = OrgApacheLuceneUtilNumericUtils_PRECISION_STEP_DEFAULT;
   JreStrongAssign(&self->docValuesType_, JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, NONE));
@@ -341,7 +343,7 @@ OrgApacheLuceneDocumentFieldType *new_OrgApacheLuceneDocumentFieldType_initWithO
 
 void OrgApacheLuceneDocumentFieldType_init(OrgApacheLuceneDocumentFieldType *self) {
   NSObject_init(self);
-  self->tokenized_ = YES;
+  self->tokenized_ = true;
   JreStrongAssign(&self->indexOptions_, JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, NONE));
   self->numericPrecisionStep_ = OrgApacheLuceneUtilNumericUtils_PRECISION_STEP_DEFAULT;
   JreStrongAssign(&self->docValuesType_, JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, NONE));

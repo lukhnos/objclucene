@@ -108,14 +108,14 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery_$1_$1
     OrgApacheLuceneRangetreeSortedSetRangeTreeQuery *q = (OrgApacheLuceneRangetreeSortedSetRangeTreeQuery *) check_class_cast(other, [OrgApacheLuceneRangetreeSortedSetRangeTreeQuery class]);
     return ((((OrgApacheLuceneRangetreeSortedSetRangeTreeQuery *) nil_chk(q))->minValue_ == nil ? minValue_ == nil : [q->minValue_ isEqual:minValue_]) && (q->maxValue_ == nil ? maxValue_ == nil : [q->maxValue_ isEqual:maxValue_]) && minInclusive_ == q->minInclusive_ && maxInclusive_ == q->maxInclusive_);
   }
-  return NO;
+  return false;
 }
 
 - (NSString *)toStringWithNSString:(NSString *)field {
   JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
   [sb appendWithNSString:[[self getClass] getSimpleName]];
   [sb appendWithChar:':'];
-  if ([((NSString *) nil_chk(self->field_)) isEqual:field] == NO) {
+  if ([((NSString *) nil_chk(self->field_)) isEqual:field] == false) {
     [sb appendWithNSString:@"field="];
     [sb appendWithNSString:self->field_];
     [sb appendWithChar:':'];
@@ -176,7 +176,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneRangetreeSortedSetRangeTreeQuery
   if (ssdv == nil) {
     return nil;
   }
-  if ([ssdv isKindOfClass:[OrgApacheLuceneRangetreeRangeTreeSortedSetDocValues class]] == NO) {
+  if ([ssdv isKindOfClass:[OrgApacheLuceneRangetreeRangeTreeSortedSetDocValues class]] == false) {
     @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$@", @"field \"", this$0_->field_, @"\" was not indexed with RangeTreeDocValuesFormat: got: ", ssdv)) autorelease];
   }
   OrgApacheLuceneRangetreeRangeTreeSortedSetDocValues *treeDV = (OrgApacheLuceneRangetreeRangeTreeSortedSetDocValues *) check_class_cast(ssdv, [OrgApacheLuceneRangetreeRangeTreeSortedSetDocValues class]);

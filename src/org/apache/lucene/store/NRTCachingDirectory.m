@@ -27,7 +27,7 @@
 #include "org/apache/lucene/util/Accountables.h"
 #include "org/apache/lucene/util/IOUtils.h"
 
-#define OrgApacheLuceneStoreNRTCachingDirectory_VERBOSE NO
+#define OrgApacheLuceneStoreNRTCachingDirectory_VERBOSE false
 
 @interface OrgApacheLuceneStoreNRTCachingDirectory () {
  @public
@@ -160,7 +160,7 @@ __attribute__((unused)) static void OrgApacheLuceneStoreNRTCachingDirectory_unCa
 }
 
 - (void)close {
-  jboolean success = NO;
+  jboolean success = false;
   @try {
     if (JreLoadVolatileBoolean(&((OrgApacheLuceneStoreRAMDirectory *) nil_chk(cache_))->isOpen_)) {
       {
@@ -173,7 +173,7 @@ __attribute__((unused)) static void OrgApacheLuceneStoreNRTCachingDirectory_unCa
         }
       }
     }
-    success = YES;
+    success = true;
   }
   @finally {
     if (success) {

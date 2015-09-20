@@ -75,23 +75,23 @@ NSString *OrgApacheLuceneAnalysisCommongramsCommonGramsFilter_GRAM_TYPE_ = @"gra
     [self restoreStateWithOrgApacheLuceneUtilAttributeSource_State:savedState_];
     JreStrongAssign(&savedState_, nil);
     OrgApacheLuceneAnalysisCommongramsCommonGramsFilter_saveTermBuffer(self);
-    return YES;
+    return true;
   }
   else if (![((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
-    return NO;
+    return false;
   }
   if (lastWasCommon_ || (OrgApacheLuceneAnalysisCommongramsCommonGramsFilter_isCommon(self) && [((JavaLangStringBuilder *) nil_chk(buffer_)) length] > 0)) {
     JreStrongAssign(&savedState_, [self captureState]);
     OrgApacheLuceneAnalysisCommongramsCommonGramsFilter_gramToken(self);
-    return YES;
+    return true;
   }
   OrgApacheLuceneAnalysisCommongramsCommonGramsFilter_saveTermBuffer(self);
-  return YES;
+  return true;
 }
 
 - (void)reset {
   [super reset];
-  lastWasCommon_ = NO;
+  lastWasCommon_ = false;
   JreStrongAssign(&savedState_, nil);
   [((JavaLangStringBuilder *) nil_chk(buffer_)) setLengthWithInt:0];
 }

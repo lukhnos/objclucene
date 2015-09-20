@@ -66,10 +66,12 @@ NSString *OrgApacheLuceneAnalysisCaCatalanAnalyzer_DEFAULT_STOPWORD_FILE_ = @"st
   return OrgApacheLuceneAnalysisCaCatalanAnalyzer_getDefaultStopSet();
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisCaCatalanAnalyzer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords {
   OrgApacheLuceneAnalysisCaCatalanAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(self, stopwords);
@@ -106,7 +108,7 @@ NSString *OrgApacheLuceneAnalysisCaCatalanAnalyzer_DEFAULT_STOPWORD_FILE_ = @"st
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisCaCatalanAnalyzer class]) {
-    JreStrongAssign(&OrgApacheLuceneAnalysisCaCatalanAnalyzer_DEFAULT_ARTICLES_, OrgApacheLuceneAnalysisUtilCharArraySet_unmodifiableSetWithOrgApacheLuceneAnalysisUtilCharArraySet_([new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ @"d", @"l", @"m", @"n", @"s", @"t" } count:6 type:NSString_class_()]), YES) autorelease]));
+    JreStrongAssign(&OrgApacheLuceneAnalysisCaCatalanAnalyzer_DEFAULT_ARTICLES_, OrgApacheLuceneAnalysisUtilCharArraySet_unmodifiableSetWithOrgApacheLuceneAnalysisUtilCharArraySet_([new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ @"d", @"l", @"m", @"n", @"s", @"t" } count:6 type:NSString_class_()]), true) autorelease]));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisCaCatalanAnalyzer)
   }
 }
@@ -173,16 +175,18 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolde
 
 @implementation OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder class]) {
     {
       @try {
-        JreStrongAssign(&OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder_DEFAULT_STOP_SET_, OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_loadStopwordSetWithBoolean_withIOSClass_withNSString_withNSString_(NO, OrgApacheLuceneAnalysisCaCatalanAnalyzer_class_(), OrgApacheLuceneAnalysisCaCatalanAnalyzer_DEFAULT_STOPWORD_FILE_, @"#"));
+        JreStrongAssign(&OrgApacheLuceneAnalysisCaCatalanAnalyzer_DefaultSetHolder_DEFAULT_STOP_SET_, OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_loadStopwordSetWithBoolean_withIOSClass_withNSString_withNSString_(false, OrgApacheLuceneAnalysisCaCatalanAnalyzer_class_(), OrgApacheLuceneAnalysisCaCatalanAnalyzer_DEFAULT_STOPWORD_FILE_, @"#"));
       }
       @catch (JavaIoIOException *ex) {
         @throw [new_JavaLangRuntimeException_initWithNSString_(@"Unable to load default stopword set") autorelease];

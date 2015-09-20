@@ -51,7 +51,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinTermsCollector_SV, fromDocTerms_, O
 }
 
 - (jboolean)needsScores {
-  return NO;
+  return false;
 }
 
 - (void)dealloc {

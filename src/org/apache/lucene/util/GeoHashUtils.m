@@ -66,10 +66,12 @@ NSString *OrgApacheLuceneUtilGeoHashUtils_BASE_32_STRING_;
   return OrgApacheLuceneUtilGeoHashUtils_mortonEncodeWithLong_(geoHashLong);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilGeoHashUtils_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilGeoHashUtils class]) {

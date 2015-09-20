@@ -145,10 +145,10 @@ NSString *OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_PLAINTEXT_FIE
 }
 
 - (jboolean)isDefaultFieldWithJavaLangCharSequence:(id<JavaLangCharSequence>)fld {
-  if (self->toQueryStringIgnoreFields_) return YES;
-  if (fld == nil) return YES;
-  if ([((NSString *) nil_chk(OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_PLAINTEXT_FIELD_NAME_)) isEqual:OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_toStringWithId_(fld)]) return YES;
-  return NO;
+  if (self->toQueryStringIgnoreFields_) return true;
+  if (fld == nil) return true;
+  if ([((NSString *) nil_chk(OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_PLAINTEXT_FIELD_NAME_)) isEqual:OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_toStringWithId_(fld)]) return true;
+  return false;
 }
 
 - (NSString *)description {
@@ -177,10 +177,12 @@ NSString *OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_PLAINTEXT_FIE
   }
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(tags_);
@@ -265,11 +267,11 @@ void OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_setParentWithOrgAp
 
 void OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_init(OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl *self) {
   NSObject_init(self);
-  self->isLeaf_ = YES;
+  self->isLeaf_ = true;
   JreStrongAssignAndConsume(&self->tags_, new_JavaUtilHashtable_init());
   JreStrongAssign(&self->clauses_, nil);
   JreStrongAssign(&self->parent_, nil);
-  self->toQueryStringIgnoreFields_ = NO;
+  self->toQueryStringIgnoreFields_ = false;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl)

@@ -444,7 +444,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsCompressingCompressingTermVector
 - (void)close {
   if (!closed_) {
     OrgApacheLuceneUtilIOUtils_closeWithJavaIoCloseableArray_([IOSObjectArray arrayWithObjects:(id[]){ vectorsStream_ } count:1 type:JavaIoCloseable_class_()]);
-    closed_ = YES;
+    closed_ = true;
   }
 }
 
@@ -878,7 +878,7 @@ void OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_initWithOrgApa
   self->numChunks_ = reader->numChunks_;
   self->numDirtyChunks_ = reader->numDirtyChunks_;
   self->maxPointer_ = reader->maxPointer_;
-  self->closed_ = NO;
+  self->closed_ = false;
 }
 
 OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader *new_OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_initWithOrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_(OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader *reader) {
@@ -891,7 +891,7 @@ void OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_initWithOrgApa
   OrgApacheLuceneCodecsTermVectorsReader_init(self);
   JreStrongAssign(&self->compressionMode_, compressionMode);
   NSString *segment = ((OrgApacheLuceneIndexSegmentInfo *) nil_chk(si))->name_;
-  jboolean success = NO;
+  jboolean success = false;
   JreStrongAssign(&self->fieldInfos_, fn);
   self->numDocs_ = [si maxDoc];
   jint version_ = -1;
@@ -899,8 +899,8 @@ void OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_initWithOrgApa
   jlong maxPointer = -1;
   NSString *indexName = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(segment, segmentSuffix, OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_VECTORS_INDEX_EXTENSION_);
   {
-    JavaLangThrowable *__mainException = nil;
     OrgApacheLuceneStoreChecksumIndexInput *input = [((OrgApacheLuceneStoreDirectory *) nil_chk(d)) openChecksumInputWithNSString:indexName withOrgApacheLuceneStoreIOContext:context];
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
       JavaLangThrowable *priorE = nil;
       @try {
@@ -917,19 +917,21 @@ void OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_initWithOrgApa
         OrgApacheLuceneCodecsCodecUtil_checkFooterWithOrgApacheLuceneStoreChecksumIndexInput_withJavaLangThrowable_(input, priorE);
       }
     }
+    @catch (JavaLangThrowable *e) {
+      __primaryException1 = e;
+      @throw e;
+    }
     @finally {
-      @try {
-        [input close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
+      if (input != nil) {
+        if (__primaryException1 != nil) {
+          @try {
+            [input close];
+          } @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
         } else {
-          __mainException = e;
+          [input close];
         }
-      }
-      if (__mainException) {
-        @throw __mainException;
       }
     }
   }
@@ -963,7 +965,7 @@ void OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_initWithOrgApa
     self->chunkSize_ = [self->vectorsStream_ readVInt];
     JreStrongAssign(&self->decompressor_, [((OrgApacheLuceneCodecsCompressingCompressionMode *) nil_chk(compressionMode)) newDecompressor]);
     JreStrongAssignAndConsume(&self->reader_, new_OrgApacheLuceneUtilPackedBlockPackedReaderIterator_initWithOrgApacheLuceneStoreDataInput_withInt_withInt_withLong_(self->vectorsStream_, self->packedIntsVersion_, OrgApacheLuceneCodecsCompressingCompressingTermVectorsWriter_PACKED_BLOCK_SIZE, 0));
-    success = YES;
+    success = true;
   }
   @finally {
     if (!success) {
@@ -1301,7 +1303,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsCompressingCompressingTerm
 }
 
 - (jboolean)hasFreqs {
-  return YES;
+  return true;
 }
 
 - (jboolean)hasOffsets {
@@ -1389,10 +1391,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsCompressingCompressingTerm
 
 @implementation OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVTermsEnum
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVTermsEnum_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)resetWithInt:(jint)numTerms
              withInt:(jint)flags
@@ -1454,7 +1458,7 @@ withOrgApacheLuceneStoreByteArrayDataInput:(OrgApacheLuceneStoreByteArrayDataInp
       [self reset];
     }
   }
-  while (YES) {
+  while (true) {
     OrgApacheLuceneUtilBytesRef *term = [self next];
     if (term == nil) {
       return JreLoadStatic(OrgApacheLuceneIndexTermsEnum_SeekStatusEnum, END);
@@ -1573,10 +1577,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsCompressingCompressingTerm
 
 @implementation OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVPostingsEnum
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsCompressingCompressingTermVectorsReader_TVPostingsEnum_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)resetWithInt:(jint)freq
              withInt:(jint)positionIndex

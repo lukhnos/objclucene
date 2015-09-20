@@ -49,7 +49,7 @@ NSString *OrgApacheLuceneAnalysisSnowballSnowballPorterFilterFactory_PROTECTED_T
   NSString *className_ = JreStrcat("$$$", @"org.tartarus.snowball.ext.", language_, @"Stemmer");
   JreStrongAssign(&stemClass_, [((OrgTartarusSnowballSnowballProgram *) nil_chk([((id<OrgApacheLuceneAnalysisUtilResourceLoader>) nil_chk(loader)) newInstanceWithNSString:className_ withIOSClass:OrgTartarusSnowballSnowballProgram_class_()])) getClass]);
   if (wordFiles_ != nil) {
-    JreStrongAssign(&protectedWords_, [self getWordSetWithOrgApacheLuceneAnalysisUtilResourceLoader:loader withNSString:wordFiles_ withBoolean:NO]);
+    JreStrongAssign(&protectedWords_, [self getWordSetWithOrgApacheLuceneAnalysisUtilResourceLoader:loader withNSString:wordFiles_ withBoolean:false]);
   }
 }
 

@@ -45,7 +45,7 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilBits)
 }
 
 - (jboolean)getWithInt:(jint)index {
-  return YES;
+  return true;
 }
 
 - (jint)length {
@@ -88,7 +88,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilBits_MatchAllBits)
 }
 
 - (jboolean)getWithInt:(jint)index {
-  return NO;
+  return false;
 }
 
 - (jint)length {

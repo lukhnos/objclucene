@@ -32,10 +32,12 @@
   return self;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (OrgApacheLuceneAnalysisUtilCharArraySet *)loadStopwordSetWithBoolean:(jboolean)ignoreCase
                                                            withIOSClass:(IOSClass *)aClass

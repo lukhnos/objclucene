@@ -311,17 +311,17 @@ id<JavaUtilComparator> OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_we
   OrgApacheLuceneIndexIndexWriter *writer = [new_OrgApacheLuceneIndexIndexWriter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_(dir, iwc) autorelease];
   OrgApacheLuceneDocumentFieldType *ft = [new_OrgApacheLuceneDocumentFieldType_initWithOrgApacheLuceneDocumentFieldType_(JreLoadStatic(OrgApacheLuceneDocumentTextField, TYPE_NOT_STORED_)) autorelease];
   [ft setIndexOptionsWithOrgApacheLuceneIndexIndexOptionsEnum:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS)];
-  [ft setOmitNormsWithBoolean:YES];
+  [ft setOmitNormsWithBoolean:true];
   [ft freeze];
   OrgApacheLuceneDocumentDocument *doc = [new_OrgApacheLuceneDocumentDocument_init() autorelease];
   OrgApacheLuceneDocumentField *field = [new_OrgApacheLuceneDocumentField_initWithNSString_withNSString_withOrgApacheLuceneDocumentFieldType_(@"body", @"", ft) autorelease];
   [doc addWithOrgApacheLuceneIndexIndexableField:field];
   totTokens_ = 0;
   OrgApacheLuceneIndexIndexReader *reader = nil;
-  jboolean success = NO;
+  jboolean success = false;
   count_ = 0;
   @try {
-    while (YES) {
+    while (true) {
       OrgApacheLuceneUtilBytesRef *surfaceForm = [iterator next];
       if (surfaceForm == nil) {
         break;
@@ -330,7 +330,7 @@ id<JavaUtilComparator> OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_we
       [writer addDocumentWithJavaLangIterable:doc];
       count_++;
     }
-    reader = OrgApacheLuceneIndexDirectoryReader_openWithOrgApacheLuceneIndexIndexWriter_withBoolean_(writer, NO);
+    reader = OrgApacheLuceneIndexDirectoryReader_openWithOrgApacheLuceneIndexIndexWriter_withBoolean_(writer, false);
     OrgApacheLuceneIndexTerms *terms = OrgApacheLuceneIndexMultiFields_getTermsWithOrgApacheLuceneIndexIndexReader_withNSString_(reader, @"body");
     if (terms == nil) {
       @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"need at least one suggestion") autorelease];
@@ -339,7 +339,7 @@ id<JavaUtilComparator> OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_we
     OrgApacheLuceneUtilFstOutputs *outputs = OrgApacheLuceneUtilFstPositiveIntOutputs_getSingleton();
     OrgApacheLuceneUtilFstBuilder *builder = [new_OrgApacheLuceneUtilFstBuilder_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_withOrgApacheLuceneUtilFstOutputs_(JreLoadStatic(OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum, BYTE1), outputs) autorelease];
     OrgApacheLuceneUtilIntsRefBuilder *scratchInts = [new_OrgApacheLuceneUtilIntsRefBuilder_init() autorelease];
-    while (YES) {
+    while (true) {
       OrgApacheLuceneUtilBytesRef *term = [((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum)) next];
       if (term == nil) {
         break;
@@ -358,7 +358,7 @@ id<JavaUtilComparator> OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_we
       @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"need at least one suggestion") autorelease];
     }
     [writer rollback];
-    success = YES;
+    success = true;
   }
   @finally {
     @try {
@@ -382,7 +382,7 @@ id<JavaUtilComparator> OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_we
   [output writeVIntWithInt:grams_];
   [output writeVLongWithLong:totTokens_];
   [((OrgApacheLuceneUtilFstFST *) nil_chk(fst_)) saveWithOrgApacheLuceneStoreDataOutput:output];
-  return YES;
+  return true;
 }
 
 - (jboolean)load__WithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)input {
@@ -398,7 +398,7 @@ id<JavaUtilComparator> OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_we
   }
   totTokens_ = [input readVLong];
   JreStrongAssignAndConsume(&fst_, new_OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneStoreDataInput_withOrgApacheLuceneUtilFstOutputs_(input, OrgApacheLuceneUtilFstPositiveIntOutputs_getSingleton()));
-  return YES;
+  return true;
 }
 
 - (id<JavaUtilList>)lookupWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
@@ -409,7 +409,7 @@ id<JavaUtilComparator> OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_we
 
 - (id<JavaUtilList>)lookupWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
                                            withInt:(jint)num {
-  return [self lookupWithJavaLangCharSequence:key withJavaUtilSet:nil withBoolean:YES withInt:num];
+  return [self lookupWithJavaLangCharSequence:key withJavaUtilSet:nil withBoolean:true withInt:num];
 }
 
 - (id<JavaUtilList>)lookupWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
@@ -442,8 +442,8 @@ id<JavaUtilComparator> OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_we
     @throw [new_JavaLangIllegalStateException_initWithNSString_(@"Lookup not supported at this time") autorelease];
   }
   {
-    JavaLangThrowable *__mainException = nil;
     OrgApacheLuceneAnalysisTokenStream *ts = [((OrgApacheLuceneAnalysisAnalyzer *) nil_chk(queryAnalyzer_)) tokenStreamWithNSString:@"" withNSString:[((id<JavaLangCharSequence>) nil_chk(key)) description]];
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
       id<OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute> termBytesAtt = [((OrgApacheLuceneAnalysisTokenStream *) nil_chk(ts)) addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute_class_()];
       id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute> offsetAtt = [ts addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_class_()];
@@ -452,7 +452,7 @@ id<JavaUtilComparator> OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_we
       [ts reset];
       IOSObjectArray *lastTokens = [IOSObjectArray arrayWithLength:grams_ type:OrgApacheLuceneUtilBytesRefBuilder_class_()];
       jint maxEndOffset = -1;
-      jboolean sawRealToken = NO;
+      jboolean sawRealToken = false;
       while ([ts incrementToken]) {
         OrgApacheLuceneUtilBytesRef *tokenBytes = [((id<OrgApacheLuceneAnalysisTokenattributesTermToBytesRefAttribute>) nil_chk(termBytesAtt)) getBytesRef];
         sawRealToken |= (((OrgApacheLuceneUtilBytesRef *) nil_chk(tokenBytes))->length_ > 0);
@@ -530,7 +530,7 @@ id<JavaUtilComparator> OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_we
         OrgApacheLuceneUtilFstUtil_TopResults *completions = nil;
         @try {
           OrgApacheLuceneUtilFstUtil_TopNSearcher *searcher = [new_OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$3_initWithOrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_withOrgApacheLuceneUtilBytesRefBuilder_withJavaUtilSet_withOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_(self, finalLastToken, seen, fst_, num, num + [seen size], OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_weightComparator_) autorelease];
-          [searcher addStartPathsWithOrgApacheLuceneUtilFstFST_Arc:arc withId:prefixOutput withBoolean:YES withOrgApacheLuceneUtilIntsRefBuilder:[new_OrgApacheLuceneUtilIntsRefBuilder_init() autorelease]];
+          [searcher addStartPathsWithOrgApacheLuceneUtilFstFST_Arc:arc withId:prefixOutput withBoolean:true withOrgApacheLuceneUtilIntsRefBuilder:[new_OrgApacheLuceneUtilIntsRefBuilder_init() autorelease]];
           completions = [searcher search];
           JreAssert((((OrgApacheLuceneUtilFstUtil_TopResults *) nil_chk(completions))->isComplete_), (@"org/apache/lucene/search/suggest/analyzing/FreeTextSuggester.java:674 condition failed: assert completions.isComplete;"));
         }
@@ -571,19 +571,21 @@ id<JavaUtilComparator> OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_we
       }
       return results;
     }
+    @catch (JavaLangThrowable *e) {
+      __primaryException1 = e;
+      @throw e;
+    }
     @finally {
-      @try {
-        [ts close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
+      if (ts != nil) {
+        if (__primaryException1 != nil) {
+          @try {
+            [ts close];
+          } @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
         } else {
-          __mainException = e;
+          [ts close];
         }
-      }
-      if (__mainException) {
-        @throw __mainException;
       }
     }
   }
@@ -796,10 +798,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSu
   return [scratchA_ compareToWithId:scratchB_];
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_AnalyzingComparator_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(readerA_);
@@ -915,7 +919,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSu
   [val$finalLastToken_ growWithInt:[((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(val$finalLastToken_)) length] + [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(scratchBytes_)) length]];
   jint lenSav = [val$finalLastToken_ length];
   [val$finalLastToken_ appendWithOrgApacheLuceneUtilBytesRefBuilder:scratchBytes_];
-  jboolean ret = [((id<JavaUtilSet>) nil_chk(val$seen_)) containsWithId:[val$finalLastToken_ get]] == NO;
+  jboolean ret = [((id<JavaUtilSet>) nil_chk(val$seen_)) containsWithId:[val$finalLastToken_ get]] == false;
   [val$finalLastToken_ setLengthWithInt:lenSav];
   return ret;
 }
@@ -990,10 +994,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSu
   }
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$4_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -1026,10 +1032,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestAnalyzingFreeTextSu
   return [((JavaLangLong *) nil_chk(left)) compareToWithId:right];
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSuggestAnalyzingFreeTextSuggester_$1_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

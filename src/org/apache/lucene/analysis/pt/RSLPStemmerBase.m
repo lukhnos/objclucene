@@ -97,10 +97,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisPtRSLPStemmerBase)
   return OrgApacheLuceneAnalysisPtRSLPStemmerBase_readLineWithJavaIoLineNumberReader_(r);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisPtRSLPStemmerBase_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisPtRSLPStemmerBase class]) {
@@ -331,7 +333,7 @@ void OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetExceptions_initWithNSSt
   for (jint i = 0; i < ((IOSObjectArray *) nil_chk(exceptions))->size_; i++) {
     if (![((NSString *) nil_chk(IOSObjectArray_Get(exceptions, i))) hasSuffix:suffix]) @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$$C", @"useless exception '", IOSObjectArray_Get(exceptions, i), @"' does not end with '", suffix, '\'')) autorelease];
   }
-  JreStrongAssignAndConsume(&self->exceptions_, new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JavaUtilArrays_asListWithNSObjectArray_(exceptions), NO));
+  JreStrongAssignAndConsume(&self->exceptions_, new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JavaUtilArrays_asListWithNSObjectArray_(exceptions), false));
 }
 
 OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetExceptions *new_OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWithSetExceptions_initWithNSString_withInt_withNSString_withNSStringArray_(NSString *suffix, jint min, NSString *replacement, IOSObjectArray *exceptions) {
@@ -354,9 +356,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleWi
 
 - (jboolean)matchesWithCharArray:(IOSCharArray *)s
                          withInt:(jint)len {
-  if (![super matchesWithCharArray:s withInt:len]) return NO;
-  for (jint i = 0; i < ((IOSObjectArray *) nil_chk(exceptions_))->size_; i++) if (OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withCharArray_(s, len, IOSObjectArray_Get(exceptions_, i))) return NO;
-  return YES;
+  if (![super matchesWithCharArray:s withInt:len]) return false;
+  for (jint i = 0; i < ((IOSObjectArray *) nil_chk(exceptions_))->size_; i++) if (OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withCharArray_(s, len, IOSObjectArray_Get(exceptions_, i))) return false;
+  return true;
 }
 
 - (void)dealloc {
@@ -409,9 +411,9 @@ withOrgApacheLuceneAnalysisPtRSLPStemmerBase_RuleArray:(IOSObjectArray *)rules
                    withInt:(jint)len {
   if (len < min_) return len;
   if (suffixes_ != nil) {
-    jboolean found = NO;
+    jboolean found = false;
     for (jint i = 0; i < suffixes_->size_; i++) if (OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withCharArray_(s, len, IOSObjectArray_Get(suffixes_, i))) {
-      found = YES;
+      found = true;
       break;
     }
     if (!found) return len;

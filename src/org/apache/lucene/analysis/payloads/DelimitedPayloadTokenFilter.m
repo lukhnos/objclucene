@@ -47,13 +47,13 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPayloadsDelimitedPayloadTokenFilter, 
       if (IOSCharArray_Get(nil_chk(buffer), i) == delimiter_) {
         [((id<OrgApacheLuceneAnalysisTokenattributesPayloadAttribute>) nil_chk(payAtt_)) setPayloadWithOrgApacheLuceneUtilBytesRef:[((id<OrgApacheLuceneAnalysisPayloadsPayloadEncoder>) nil_chk(encoder_)) encodeWithCharArray:buffer withInt:i + 1 withInt:(length - (i + 1))]];
         [termAtt_ setLengthWithInt:i];
-        return YES;
+        return true;
       }
     }
     [((id<OrgApacheLuceneAnalysisTokenattributesPayloadAttribute>) nil_chk(payAtt_)) setPayloadWithOrgApacheLuceneUtilBytesRef:nil];
-    return YES;
+    return true;
   }
-  else return NO;
+  else return false;
 }
 
 - (void)dealloc {

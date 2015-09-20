@@ -36,10 +36,12 @@ __attribute__((unused)) static NSString *OrgApacheLuceneQueryparserSurroundParse
   return self;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueryparserSurroundParserParseException_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithNSString:(NSString *)message {
   OrgApacheLuceneQueryparserSurroundParserParseException_initWithNSString_(self, message);

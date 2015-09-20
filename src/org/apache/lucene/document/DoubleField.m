@@ -36,19 +36,19 @@ withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type {
   if (self == [OrgApacheLuceneDocumentDoubleField class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneDocumentDoubleField_TYPE_NOT_STORED_, new_OrgApacheLuceneDocumentFieldType_init());
     {
-      [OrgApacheLuceneDocumentDoubleField_TYPE_NOT_STORED_ setTokenizedWithBoolean:YES];
-      [OrgApacheLuceneDocumentDoubleField_TYPE_NOT_STORED_ setOmitNormsWithBoolean:YES];
+      [OrgApacheLuceneDocumentDoubleField_TYPE_NOT_STORED_ setTokenizedWithBoolean:true];
+      [OrgApacheLuceneDocumentDoubleField_TYPE_NOT_STORED_ setOmitNormsWithBoolean:true];
       [OrgApacheLuceneDocumentDoubleField_TYPE_NOT_STORED_ setIndexOptionsWithOrgApacheLuceneIndexIndexOptionsEnum:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS)];
       [OrgApacheLuceneDocumentDoubleField_TYPE_NOT_STORED_ setNumericTypeWithOrgApacheLuceneDocumentFieldType_NumericTypeEnum:JreLoadStatic(OrgApacheLuceneDocumentFieldType_NumericTypeEnum, DOUBLE)];
       [OrgApacheLuceneDocumentDoubleField_TYPE_NOT_STORED_ freeze];
     }
     JreStrongAssignAndConsume(&OrgApacheLuceneDocumentDoubleField_TYPE_STORED_, new_OrgApacheLuceneDocumentFieldType_init());
     {
-      [OrgApacheLuceneDocumentDoubleField_TYPE_STORED_ setTokenizedWithBoolean:YES];
-      [OrgApacheLuceneDocumentDoubleField_TYPE_STORED_ setOmitNormsWithBoolean:YES];
+      [OrgApacheLuceneDocumentDoubleField_TYPE_STORED_ setTokenizedWithBoolean:true];
+      [OrgApacheLuceneDocumentDoubleField_TYPE_STORED_ setOmitNormsWithBoolean:true];
       [OrgApacheLuceneDocumentDoubleField_TYPE_STORED_ setIndexOptionsWithOrgApacheLuceneIndexIndexOptionsEnum:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS)];
       [OrgApacheLuceneDocumentDoubleField_TYPE_STORED_ setNumericTypeWithOrgApacheLuceneDocumentFieldType_NumericTypeEnum:JreLoadStatic(OrgApacheLuceneDocumentFieldType_NumericTypeEnum, DOUBLE)];
-      [OrgApacheLuceneDocumentDoubleField_TYPE_STORED_ setStoredWithBoolean:YES];
+      [OrgApacheLuceneDocumentDoubleField_TYPE_STORED_ setStoredWithBoolean:true];
       [OrgApacheLuceneDocumentDoubleField_TYPE_STORED_ freeze];
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneDocumentDoubleField)

@@ -37,8 +37,8 @@ withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type {
   if (self == [OrgApacheLuceneDocumentIntField class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneDocumentIntField_TYPE_NOT_STORED_, new_OrgApacheLuceneDocumentFieldType_init());
     {
-      [OrgApacheLuceneDocumentIntField_TYPE_NOT_STORED_ setTokenizedWithBoolean:YES];
-      [OrgApacheLuceneDocumentIntField_TYPE_NOT_STORED_ setOmitNormsWithBoolean:YES];
+      [OrgApacheLuceneDocumentIntField_TYPE_NOT_STORED_ setTokenizedWithBoolean:true];
+      [OrgApacheLuceneDocumentIntField_TYPE_NOT_STORED_ setOmitNormsWithBoolean:true];
       [OrgApacheLuceneDocumentIntField_TYPE_NOT_STORED_ setIndexOptionsWithOrgApacheLuceneIndexIndexOptionsEnum:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS)];
       [OrgApacheLuceneDocumentIntField_TYPE_NOT_STORED_ setNumericTypeWithOrgApacheLuceneDocumentFieldType_NumericTypeEnum:JreLoadStatic(OrgApacheLuceneDocumentFieldType_NumericTypeEnum, INT)];
       [OrgApacheLuceneDocumentIntField_TYPE_NOT_STORED_ setNumericPrecisionStepWithInt:OrgApacheLuceneUtilNumericUtils_PRECISION_STEP_DEFAULT_32];
@@ -46,12 +46,12 @@ withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type {
     }
     JreStrongAssignAndConsume(&OrgApacheLuceneDocumentIntField_TYPE_STORED_, new_OrgApacheLuceneDocumentFieldType_init());
     {
-      [OrgApacheLuceneDocumentIntField_TYPE_STORED_ setTokenizedWithBoolean:YES];
-      [OrgApacheLuceneDocumentIntField_TYPE_STORED_ setOmitNormsWithBoolean:YES];
+      [OrgApacheLuceneDocumentIntField_TYPE_STORED_ setTokenizedWithBoolean:true];
+      [OrgApacheLuceneDocumentIntField_TYPE_STORED_ setOmitNormsWithBoolean:true];
       [OrgApacheLuceneDocumentIntField_TYPE_STORED_ setIndexOptionsWithOrgApacheLuceneIndexIndexOptionsEnum:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS)];
       [OrgApacheLuceneDocumentIntField_TYPE_STORED_ setNumericTypeWithOrgApacheLuceneDocumentFieldType_NumericTypeEnum:JreLoadStatic(OrgApacheLuceneDocumentFieldType_NumericTypeEnum, INT)];
       [OrgApacheLuceneDocumentIntField_TYPE_STORED_ setNumericPrecisionStepWithInt:OrgApacheLuceneUtilNumericUtils_PRECISION_STEP_DEFAULT_32];
-      [OrgApacheLuceneDocumentIntField_TYPE_STORED_ setStoredWithBoolean:YES];
+      [OrgApacheLuceneDocumentIntField_TYPE_STORED_ setStoredWithBoolean:true];
       [OrgApacheLuceneDocumentIntField_TYPE_STORED_ freeze];
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneDocumentIntField)

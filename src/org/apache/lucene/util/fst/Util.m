@@ -92,10 +92,12 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstUtil_TopNSearcher, pathComparator_, id
 
 @implementation OrgApacheLuceneUtilFstUtil
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilFstUtil_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (id)getWithOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)fst
         withOrgApacheLuceneUtilIntsRef:(OrgApacheLuceneUtilIntsRef *)input {
@@ -271,7 +273,7 @@ OrgApacheLuceneUtilIntsRef *OrgApacheLuceneUtilFstUtil_getByOutputWithOrgApacheL
   OrgApacheLuceneUtilFstUtil_initialize();
   jlong output = [((JavaLangLong *) nil_chk(((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc))->output_)) longLongValue];
   jint upto = 0;
-  while (YES) {
+  while (true) {
     if ([arc isFinal]) {
       jlong finalOutput = output + [((JavaLangLong *) nil_chk(arc->nextFinalOutput_)) longLongValue];
       if (finalOutput == targetOutput) {
@@ -289,7 +291,7 @@ OrgApacheLuceneUtilIntsRef *OrgApacheLuceneUtilFstUtil_getByOutputWithOrgApacheL
         jint low = 0;
         jint high = arc->numArcs_ - 1;
         jint mid = 0;
-        jboolean exact = NO;
+        jboolean exact = false;
         while (low <= high) {
           mid = JreURShift32((low + high), 1);
           [((OrgApacheLuceneUtilFstFST_BytesReader *) nil_chk(inArg)) setPositionWithLong:arc->posArcsStart_];
@@ -305,7 +307,7 @@ OrgApacheLuceneUtilIntsRef *OrgApacheLuceneUtilFstUtil_getByOutputWithOrgApacheL
             minArcOutput = output;
           }
           if (minArcOutput == targetOutput) {
-            exact = YES;
+            exact = true;
             break;
           }
           else if (minArcOutput < targetOutput) {
@@ -330,7 +332,7 @@ OrgApacheLuceneUtilIntsRef *OrgApacheLuceneUtilFstUtil_getByOutputWithOrgApacheL
       }
       else {
         OrgApacheLuceneUtilFstFST_Arc *prevArc = nil;
-        while (YES) {
+        while (true) {
           jlong minArcOutput = output + [((JavaLangLong *) arc->output_) longLongValue];
           if (minArcOutput == targetOutput) {
             output = minArcOutput;
@@ -405,11 +407,11 @@ void OrgApacheLuceneUtilFstUtil_toDotWithOrgApacheLuceneUtilFstFST_withJavaIoWri
     jboolean isFinal;
     id finalOutput;
     if ([startArc isFinal]) {
-      isFinal = YES;
+      isFinal = true;
       finalOutput = startArc->nextFinalOutput_ == NO_OUTPUT ? nil : startArc->nextFinalOutput_;
     }
     else {
-      isFinal = NO;
+      isFinal = false;
       finalOutput = nil;
     }
     OrgApacheLuceneUtilFstUtil_emitDotStateWithJavaIoWriter_withNSString_withNSString_withNSString_withNSString_(outArg, JavaLangLong_toStringWithLong_(startArc->target_), isFinal ? finalStateShape : stateShape, stateColor, finalOutput == nil ? @"" : [fst->outputs_ outputToStringWithId:finalOutput]);
@@ -426,7 +428,7 @@ void OrgApacheLuceneUtilFstUtil_toDotWithOrgApacheLuceneUtilFstFST_withJavaIoWri
       if (OrgApacheLuceneUtilFstFST_targetHasArcsWithOrgApacheLuceneUtilFstFST_Arc_(arc)) {
         jlong node = ((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc))->target_;
         [fst readFirstRealTargetArcWithLong:arc->target_ withOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilFstFST_BytesReader:r];
-        while (YES) {
+        while (true) {
           if (arc->target_ >= 0 && ![seen getWithInt:(jint) arc->target_]) {
             NSString *stateColor;
             if ([fst isExpandedTargetWithOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilFstFST_BytesReader:r]) {
@@ -618,7 +620,7 @@ OrgApacheLuceneUtilFstFST_Arc *OrgApacheLuceneUtilFstUtil_readCeilArcWithInt_wit
     return [fst readNextRealArcWithOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilFstFST_BytesReader:inArg];
   }
   [fst readFirstRealTargetArcWithLong:((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(follow))->target_ withOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilFstFST_BytesReader:inArg];
-  while (YES) {
+  while (true) {
     if (arc->label_ >= label) {
       return arc;
     }
@@ -832,7 +834,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstUtil_TieBreakByInputCompa
   }
   OrgApacheLuceneUtilFstUtil_FSTPath *path = [new_OrgApacheLuceneUtilFstUtil_FSTPath_initWithId_withOrgApacheLuceneUtilFstFST_Arc_withOrgApacheLuceneUtilIntsRefBuilder_withFloat_withJavaLangCharSequence_(startOutput, node, input, boost, context) autorelease];
   [fst_ readFirstTargetArcWithOrgApacheLuceneUtilFstFST_Arc:node withOrgApacheLuceneUtilFstFST_Arc:path->arc_ withOrgApacheLuceneUtilFstFST_BytesReader:bytesReader_];
-  while (YES) {
+  while (true) {
     if (allowEmptyString || ((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(path->arc_))->label_ != OrgApacheLuceneUtilFstFST_END_LABEL) {
       [self addIfCompetitiveWithOrgApacheLuceneUtilFstUtil_FSTPath:path];
     }
@@ -865,18 +867,18 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstUtil_TieBreakByInputCompa
     if ([results size] == topN_ - 1 && maxQueueDepth_ == topN_) {
       JreStrongAssign(&queue_, nil);
     }
-    while (YES) {
+    while (true) {
       [fst_ readFirstTargetArcWithOrgApacheLuceneUtilFstFST_Arc:path->arc_ withOrgApacheLuceneUtilFstFST_Arc:path->arc_ withOrgApacheLuceneUtilFstFST_BytesReader:fstReader];
-      jboolean foundZero = NO;
-      while (YES) {
+      jboolean foundZero = false;
+      while (true) {
         if ([((id<JavaUtilComparator>) nil_chk(comparator_)) compareWithId:NO_OUTPUT withId:path->arc_->output_] == 0) {
           if (queue_ == nil) {
-            foundZero = YES;
+            foundZero = true;
             break;
           }
           else if (!foundZero) {
             [((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(scratchArc_)) copyFromWithOrgApacheLuceneUtilFstFST_Arc:path->arc_];
-            foundZero = YES;
+            foundZero = true;
           }
           else {
             [self addIfCompetitiveWithOrgApacheLuceneUtilFstUtil_FSTPath:path];
@@ -919,7 +921,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstUtil_TieBreakByInputCompa
 
 - (jboolean)acceptResultWithOrgApacheLuceneUtilIntsRef:(OrgApacheLuceneUtilIntsRef *)input
                                                 withId:(id)output {
-  return YES;
+  return true;
 }
 
 - (void)dealloc {

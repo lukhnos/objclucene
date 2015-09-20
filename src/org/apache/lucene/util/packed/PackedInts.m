@@ -257,10 +257,12 @@ NSString *OrgApacheLuceneUtilPackedPackedInts_CODEC_NAME_ = @"PackedInts";
   return OrgApacheLuceneUtilPackedPackedInts_numBlocksWithLong_withInt_(size, blockSize);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilPackedPackedInts_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -965,10 +967,12 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedPackedInts_Encoder
   return JavaUtilCollections_emptyList();
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilPackedPackedInts_Reader_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -1120,10 +1124,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPackedPackedInts_ReaderItera
   return JreLoadStatic(OrgApacheLuceneUtilPackedPackedInts_FormatEnum, PACKED);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilPackedPackedInts_Mutable_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

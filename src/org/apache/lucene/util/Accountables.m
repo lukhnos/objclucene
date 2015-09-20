@@ -82,10 +82,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAccountables_$2)
 
 @implementation OrgApacheLuceneUtilAccountables
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilAccountables_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (NSString *)toStringWithOrgApacheLuceneUtilAccountable:(id<OrgApacheLuceneUtilAccountable>)a {
   return OrgApacheLuceneUtilAccountables_toStringWithOrgApacheLuceneUtilAccountable_(a);
@@ -203,10 +205,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAccountables)
   return [((NSString *) nil_chk([((id<OrgApacheLuceneUtilAccountable>) nil_chk(o1)) description])) compareToWithId:[((id<OrgApacheLuceneUtilAccountable>) nil_chk(o2)) description]];
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilAccountables_$1_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

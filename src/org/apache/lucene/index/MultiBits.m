@@ -80,11 +80,11 @@ __attribute__((unused)) static jboolean OrgApacheLuceneIndexMultiBits_checkLengt
   JreAssert((reader < ((IOSObjectArray *) nil_chk(subs_))->size_), (JreStrcat("$@$I", @"slice=", slice, @" starts[-1]=", IOSIntArray_Get(starts_, ((IOSIntArray *) nil_chk(starts_))->size_ - 1))));
   OrgApacheLuceneIndexMultiBits_SubResult *subResult = [new_OrgApacheLuceneIndexMultiBits_SubResult_init() autorelease];
   if (IOSIntArray_Get(starts_, reader) == slice->start_ && IOSIntArray_Get(starts_, 1 + reader) == slice->start_ + slice->length_) {
-    subResult->matches_ = YES;
+    subResult->matches_ = true;
     JreStrongAssign(&subResult->result_, IOSObjectArray_Get(subs_, reader));
   }
   else {
-    subResult->matches_ = NO;
+    subResult->matches_ = false;
   }
   return subResult;
 }
@@ -137,17 +137,19 @@ OrgApacheLuceneIndexMultiBits *new_OrgApacheLuceneIndexMultiBits_initWithOrgApac
 jboolean OrgApacheLuceneIndexMultiBits_checkLengthWithInt_withInt_(OrgApacheLuceneIndexMultiBits *self, jint reader, jint doc) {
   jint length = IOSIntArray_Get(nil_chk(self->starts_), 1 + reader) - IOSIntArray_Get(self->starts_, reader);
   JreAssert((doc - IOSIntArray_Get(self->starts_, reader) < length), (JreStrcat("$I$I$I$I", @"doc=", doc, @" reader=", reader, @" starts[reader]=", IOSIntArray_Get(self->starts_, reader), @" length=", length)));
-  return YES;
+  return true;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMultiBits)
 
 @implementation OrgApacheLuceneIndexMultiBits_SubResult
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexMultiBits_SubResult_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(result_);

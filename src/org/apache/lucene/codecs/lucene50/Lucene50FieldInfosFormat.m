@@ -58,10 +58,12 @@ NSString *OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_CODEC_NAME_ = @"
 
 @implementation OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneIndexFieldInfos *)readWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)directory
                                       withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)segmentInfo
@@ -69,8 +71,8 @@ NSString *OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_CODEC_NAME_ = @"
                                         withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
   NSString *fileName = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(((OrgApacheLuceneIndexSegmentInfo *) nil_chk(segmentInfo))->name_, segmentSuffix, OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_EXTENSION_);
   {
-    JavaLangThrowable *__mainException = nil;
     OrgApacheLuceneStoreChecksumIndexInput *input = [((OrgApacheLuceneStoreDirectory *) nil_chk(directory)) openChecksumInputWithNSString:fileName withOrgApacheLuceneStoreIOContext:context];
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
       JavaLangThrowable *priorE = nil;
       IOSObjectArray *infos = nil;
@@ -120,19 +122,21 @@ NSString *OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_CODEC_NAME_ = @"
       }
       return [new_OrgApacheLuceneIndexFieldInfos_initWithOrgApacheLuceneIndexFieldInfoArray_(infos) autorelease];
     }
+    @catch (JavaLangThrowable *e) {
+      __primaryException1 = e;
+      @throw e;
+    }
     @finally {
-      @try {
-        [input close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
+      if (input != nil) {
+        if (__primaryException1 != nil) {
+          @try {
+            [input close];
+          } @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
         } else {
-          __mainException = e;
+          [input close];
         }
-      }
-      if (__mainException) {
-        @throw __mainException;
       }
     }
   }
@@ -163,8 +167,8 @@ NSString *OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_CODEC_NAME_ = @"
              withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
   NSString *fileName = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(((OrgApacheLuceneIndexSegmentInfo *) nil_chk(segmentInfo))->name_, segmentSuffix, OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_EXTENSION_);
   {
-    JavaLangThrowable *__mainException = nil;
     OrgApacheLuceneStoreIndexOutput *output = [((OrgApacheLuceneStoreDirectory *) nil_chk(directory)) createOutputWithNSString:fileName withOrgApacheLuceneStoreIOContext:context];
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
       OrgApacheLuceneCodecsCodecUtil_writeIndexHeaderWithOrgApacheLuceneStoreDataOutput_withNSString_withInt_withByteArray_withNSString_(output, OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_CODEC_NAME_, OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_FORMAT_CURRENT, [segmentInfo getId], segmentSuffix);
       [((OrgApacheLuceneStoreIndexOutput *) nil_chk(output)) writeVIntWithInt:[((OrgApacheLuceneIndexFieldInfos *) nil_chk(infos)) size]];
@@ -184,19 +188,21 @@ NSString *OrgApacheLuceneCodecsLucene50Lucene50FieldInfosFormat_CODEC_NAME_ = @"
       }
       OrgApacheLuceneCodecsCodecUtil_writeFooterWithOrgApacheLuceneStoreIndexOutput_(output);
     }
+    @catch (JavaLangThrowable *e) {
+      __primaryException1 = e;
+      @throw e;
+    }
     @finally {
-      @try {
-        [output close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
+      if (output != nil) {
+        if (__primaryException1 != nil) {
+          @try {
+            [output close];
+          } @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
         } else {
-          __mainException = e;
+          [output close];
         }
-      }
-      if (__mainException) {
-        @throw __mainException;
       }
     }
   }

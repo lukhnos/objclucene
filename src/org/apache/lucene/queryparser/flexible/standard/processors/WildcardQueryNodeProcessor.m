@@ -33,10 +33,12 @@ __attribute__((unused)) static jboolean OrgApacheLuceneQueryparserFlexibleStanda
 
 @implementation OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)postProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)node {
   if ([node isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode class]] || [node isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode class]]) {
@@ -99,28 +101,28 @@ OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor *
 }
 
 jboolean OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor_isWildcardWithJavaLangCharSequence_(OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor *self, id<JavaLangCharSequence> text) {
-  if (text == nil || [text length] <= 0) return NO;
+  if (text == nil || [text length] <= 0) return false;
   for (jint i = [((id<JavaLangCharSequence>) nil_chk(text)) length] - 1; i >= 0; i--) {
     if (([text charAtWithInt:i] == '*' || [text charAtWithInt:i] == '?') && !OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_wasEscapedWithJavaLangCharSequence_withInt_(text, i)) {
-      return YES;
+      return true;
     }
   }
-  return NO;
+  return false;
 }
 
 jboolean OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor_isPrefixWildcardWithJavaLangCharSequence_(OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor *self, id<JavaLangCharSequence> text) {
-  if (text == nil || [text length] <= 0 || !OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor_isWildcardWithJavaLangCharSequence_(self, text)) return NO;
-  if ([text charAtWithInt:[((id<JavaLangCharSequence>) nil_chk(text)) length] - 1] != '*') return NO;
-  if (OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_wasEscapedWithJavaLangCharSequence_withInt_(text, [text length] - 1)) return NO;
-  if ([text length] == 1) return NO;
+  if (text == nil || [text length] <= 0 || !OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor_isWildcardWithJavaLangCharSequence_(self, text)) return false;
+  if ([text charAtWithInt:[((id<JavaLangCharSequence>) nil_chk(text)) length] - 1] != '*') return false;
+  if (OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_wasEscapedWithJavaLangCharSequence_withInt_(text, [text length] - 1)) return false;
+  if ([text length] == 1) return false;
   for (jint i = 0; i < [text length]; i++) {
-    if ([text charAtWithInt:i] == '?') return NO;
+    if ([text charAtWithInt:i] == '?') return false;
     if ([text charAtWithInt:i] == '*' && !OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_wasEscapedWithJavaLangCharSequence_withInt_(text, i)) {
-      if (i == [text length] - 1) return YES;
-      else return NO;
+      if (i == [text length] - 1) return true;
+      else return false;
     }
   }
-  return NO;
+  return false;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleStandardProcessorsWildcardQueryNodeProcessor)

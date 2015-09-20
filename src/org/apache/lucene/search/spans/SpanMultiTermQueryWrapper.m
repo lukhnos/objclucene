@@ -173,7 +173,7 @@ OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SpanRewriteMethod *OrgApache
 
 - (jboolean)isEqual:(id)obj {
   if (![super isEqual:obj]) {
-    return NO;
+    return false;
   }
   OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper *other = (OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper *) check_class_cast(obj, [OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper class]);
   return [((OrgApacheLuceneSearchMultiTermQuery *) nil_chk(query_)) isEqual:((OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper *) nil_chk(other))->query_];
@@ -249,10 +249,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansSpanMultiTermQueryWra
   return 0;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_SpanRewriteMethod_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -292,9 +294,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansSpanMultiTermQueryWra
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return YES;
-  if (obj == nil) return NO;
-  if ([self getClass] != [nil_chk(obj) getClass]) return NO;
+  if (self == obj) return true;
+  if (obj == nil) return false;
+  if ([self getClass] != [nil_chk(obj) getClass]) return false;
   OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite *other = (OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite *) check_class_cast(obj, [OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_TopTermsSpanBooleanQueryRewrite class]);
   return [((OrgApacheLuceneSearchTopTermsRewrite *) nil_chk(delegate_)) isEqual:other->delegate_];
 }
@@ -398,10 +400,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansSpanMultiTermQueryWra
   return (OrgApacheLuceneSearchSpansSpanQuery *) check_class_cast([((OrgApacheLuceneSearchScoringRewrite *) nil_chk(delegate_)) rewriteWithOrgApacheLuceneIndexIndexReader:reader withOrgApacheLuceneSearchMultiTermQuery:query], [OrgApacheLuceneSearchSpansSpanQuery class]);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_$1_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(delegate_);
@@ -458,10 +462,12 @@ withOrgApacheLuceneIndexTermContext:(OrgApacheLuceneIndexTermContext *)states {
   [((OrgApacheLuceneSearchSpansSpanOrQuery *) nil_chk(topLevel)) addClauseWithOrgApacheLuceneSearchSpansSpanQuery:q];
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSpansSpanMultiTermQueryWrapper_$1_$1_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

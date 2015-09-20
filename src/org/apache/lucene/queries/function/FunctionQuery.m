@@ -67,7 +67,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFunctionFunctionQuery_AllScorer, this$
 }
 
 - (jboolean)isEqual:(id)o {
-  if (![OrgApacheLuceneQueriesFunctionFunctionQuery_class_() isInstance:o]) return NO;
+  if (![OrgApacheLuceneQueriesFunctionFunctionQuery_class_() isInstance:o]) return false;
   OrgApacheLuceneQueriesFunctionFunctionQuery *other = (OrgApacheLuceneQueriesFunctionFunctionQuery *) check_class_cast(o, [OrgApacheLuceneQueriesFunctionFunctionQuery class]);
   return [super isEqual:o] && [((OrgApacheLuceneQueriesFunctionValueSource *) nil_chk(self->func_)) isEqual:((OrgApacheLuceneQueriesFunctionFunctionQuery *) nil_chk(other))->func_];
 }

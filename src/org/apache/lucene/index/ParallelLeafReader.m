@@ -307,7 +307,7 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 @end
 
 void OrgApacheLuceneIndexParallelLeafReader_initWithOrgApacheLuceneIndexLeafReaderArray_(OrgApacheLuceneIndexParallelLeafReader *self, IOSObjectArray *readers) {
-  OrgApacheLuceneIndexParallelLeafReader_initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_(self, YES, readers);
+  OrgApacheLuceneIndexParallelLeafReader_initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_(self, true, readers);
 }
 
 OrgApacheLuceneIndexParallelLeafReader *new_OrgApacheLuceneIndexParallelLeafReader_initWithOrgApacheLuceneIndexLeafReaderArray_(IOSObjectArray *readers) {
@@ -344,7 +344,7 @@ void OrgApacheLuceneIndexParallelLeafReader_initWithBoolean_withOrgApacheLuceneI
   }
   else {
     self->maxDoc_ = self->numDocs_ = 0;
-    self->hasDeletions_ = NO;
+    self->hasDeletions_ = false;
   }
   JavaUtilCollections_addAllWithJavaUtilCollection_withNSObjectArray_(self->completeReaderSet_, self->parallelReaders_);
   JavaUtilCollections_addAllWithJavaUtilCollection_withNSObjectArray_(self->completeReaderSet_, self->storedFieldsReaders_);

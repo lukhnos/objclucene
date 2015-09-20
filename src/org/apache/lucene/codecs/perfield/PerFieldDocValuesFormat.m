@@ -148,10 +148,12 @@ NSString *OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_PER_FIELD_SUFFIX_
 
 @implementation OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneCodecsDocValuesConsumer *)fieldsConsumerWithOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state {
   return [new_OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_FieldsWriter_initWithOrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_withOrgApacheLuceneIndexSegmentWriteState_(self, state) autorelease];
@@ -233,10 +235,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsPerfieldPerFieldDocValuesF
   [((OrgApacheLuceneCodecsDocValuesConsumer *) nil_chk(consumer_)) close];
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_ConsumerAndSuffix_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(consumer_);
@@ -555,7 +559,7 @@ void OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_FieldsReader_initWithO
   OrgApacheLuceneCodecsDocValuesProducer_init(self);
   JreStrongAssignAndConsume(&self->fields_, new_JavaUtilTreeMap_init());
   JreStrongAssignAndConsume(&self->formats_, new_JavaUtilHashMap_init());
-  jboolean success = NO;
+  jboolean success = false;
   @try {
     for (OrgApacheLuceneIndexFieldInfo * __strong fi in nil_chk(((OrgApacheLuceneIndexSegmentReadState *) nil_chk(readState))->fieldInfos_)) {
       if ([((OrgApacheLuceneIndexFieldInfo *) nil_chk(fi)) getDocValuesType] != JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, NONE)) {
@@ -575,7 +579,7 @@ void OrgApacheLuceneCodecsPerfieldPerFieldDocValuesFormat_FieldsReader_initWithO
         }
       }
     }
-    success = YES;
+    success = true;
   }
   @finally {
     if (!success) {

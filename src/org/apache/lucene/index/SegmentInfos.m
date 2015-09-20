@@ -121,10 +121,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexSegmentInfos)
 
 @implementation OrgApacheLuceneIndexSegmentInfos
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexSegmentInfos_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneIndexSegmentCommitInfo *)infoWithInt:(jint)i {
   return [((id<JavaUtilList>) nil_chk(segments_)) getWithInt:i];
@@ -327,7 +329,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexSegmentInfos)
 - (void)applyMergeChangesWithOrgApacheLuceneIndexMergePolicy_OneMerge:(OrgApacheLuceneIndexMergePolicy_OneMerge *)merge
                                                           withBoolean:(jboolean)dropSegment {
   id<JavaUtilSet> mergedAway = [new_JavaUtilHashSet_initWithJavaUtilCollection_(((OrgApacheLuceneIndexMergePolicy_OneMerge *) nil_chk(merge))->segments_) autorelease];
-  jboolean inserted = NO;
+  jboolean inserted = false;
   jint newSegIdx = 0;
   for (jint segIdx = 0, cnt = [((id<JavaUtilList>) nil_chk(segments_)) size]; segIdx < cnt; segIdx++) {
     JreAssert((segIdx >= newSegIdx), (@"org/apache/lucene/index/SegmentInfos.java:953 condition failed: assert segIdx >= newSegIdx;"));
@@ -335,7 +337,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexSegmentInfos)
     if ([mergedAway containsWithId:info]) {
       if (!inserted && !dropSegment) {
         [segments_ setWithInt:segIdx withId:merge->info_];
-        inserted = YES;
+        inserted = true;
         newSegIdx++;
       }
     }
@@ -604,8 +606,8 @@ OrgApacheLuceneIndexSegmentInfos *OrgApacheLuceneIndexSegmentInfos_readCommitWit
   OrgApacheLuceneIndexSegmentInfos_initialize();
   jlong generation = OrgApacheLuceneIndexSegmentInfos_generationFromSegmentsFileNameWithNSString_(segmentFileName);
   {
-    JavaLangThrowable *__mainException = nil;
     OrgApacheLuceneStoreChecksumIndexInput *input = [((OrgApacheLuceneStoreDirectory *) nil_chk(directory)) openChecksumInputWithNSString:segmentFileName withOrgApacheLuceneStoreIOContext:JreLoadStatic(OrgApacheLuceneStoreIOContext, READ_)];
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
       jint magic = [((OrgApacheLuceneStoreChecksumIndexInput *) nil_chk(input)) readInt];
       if (magic != OrgApacheLuceneCodecsCodecUtil_CODEC_MAGIC) {
@@ -636,7 +638,7 @@ OrgApacheLuceneIndexSegmentInfos *OrgApacheLuceneIndexSegmentInfos_readCommitWit
       if (format >= OrgApacheLuceneIndexSegmentInfos_VERSION_53) {
         if (numSegments > 0) {
           JreStrongAssign(&infos->minSegmentLuceneVersion_, OrgApacheLuceneUtilVersion_fromBitsWithInt_withInt_withInt_([input readVInt], [input readVInt], [input readVInt]));
-          if ([((OrgApacheLuceneUtilVersion *) nil_chk(infos->minSegmentLuceneVersion_)) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_0_0_ALPHA_)] == NO) {
+          if ([((OrgApacheLuceneUtilVersion *) nil_chk(infos->minSegmentLuceneVersion_)) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_0_0_ALPHA_)] == false) {
             @throw [new_OrgApacheLuceneIndexIndexFormatTooOldException_initWithOrgApacheLuceneStoreDataInput_withNSString_(input, JreStrcat("$@C", @"this index contains a too-old segment (version: ", infos->minSegmentLuceneVersion_, ')')) autorelease];
           }
         }
@@ -731,11 +733,11 @@ OrgApacheLuceneIndexSegmentInfos *OrgApacheLuceneIndexSegmentInfos_readCommitWit
         [infos addWithOrgApacheLuceneIndexSegmentCommitInfo:siPerCommit];
         OrgApacheLuceneUtilVersion *segmentVersion = [info getVersion];
         if (format < OrgApacheLuceneIndexSegmentInfos_VERSION_53) {
-          if (infos->minSegmentLuceneVersion_ == nil || [((OrgApacheLuceneUtilVersion *) nil_chk(segmentVersion)) onOrAfterWithOrgApacheLuceneUtilVersion:infos->minSegmentLuceneVersion_] == NO) {
+          if (infos->minSegmentLuceneVersion_ == nil || [((OrgApacheLuceneUtilVersion *) nil_chk(segmentVersion)) onOrAfterWithOrgApacheLuceneUtilVersion:infos->minSegmentLuceneVersion_] == false) {
             JreStrongAssign(&infos->minSegmentLuceneVersion_, segmentVersion);
           }
         }
-        else if ([((OrgApacheLuceneUtilVersion *) nil_chk(segmentVersion)) onOrAfterWithOrgApacheLuceneUtilVersion:infos->minSegmentLuceneVersion_] == NO) {
+        else if ([((OrgApacheLuceneUtilVersion *) nil_chk(segmentVersion)) onOrAfterWithOrgApacheLuceneUtilVersion:infos->minSegmentLuceneVersion_] == false) {
           @throw [new_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$@$@$@", @"segments file recorded minSegmentLuceneVersion=", infos->minSegmentLuceneVersion_, @" but segment=", info, @" has older version=", segmentVersion), input) autorelease];
         }
       }
@@ -761,19 +763,21 @@ OrgApacheLuceneIndexSegmentInfos *OrgApacheLuceneIndexSegmentInfos_readCommitWit
       }
       return infos;
     }
+    @catch (JavaLangThrowable *e) {
+      __primaryException1 = e;
+      @throw e;
+    }
     @finally {
-      @try {
-        [input close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
+      if (input != nil) {
+        if (__primaryException1 != nil) {
+          @try {
+            [input close];
+          } @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
         } else {
-          __mainException = e;
+          [input close];
         }
-      }
-      if (__mainException) {
-        @throw __mainException;
       }
     }
   }
@@ -809,7 +813,7 @@ void OrgApacheLuceneIndexSegmentInfos_writeWithOrgApacheLuceneStoreDirectory_(Or
   NSString *segmentFileName = OrgApacheLuceneIndexIndexFileNames_fileNameFromGenerationWithNSString_withNSString_withLong_(OrgApacheLuceneIndexIndexFileNames_PENDING_SEGMENTS_, @"", nextGeneration);
   self->generation_ = nextGeneration;
   OrgApacheLuceneStoreIndexOutput *segnOutput = nil;
-  jboolean success = NO;
+  jboolean success = false;
   @try {
     segnOutput = [((OrgApacheLuceneStoreDirectory *) nil_chk(directory)) createOutputWithNSString:segmentFileName withOrgApacheLuceneStoreIOContext:JreLoadStatic(OrgApacheLuceneStoreIOContext, DEFAULT_)];
     OrgApacheLuceneCodecsCodecUtil_writeIndexHeaderWithOrgApacheLuceneStoreDataOutput_withNSString_withInt_withByteArray_withNSString_(segnOutput, @"segments", OrgApacheLuceneIndexSegmentInfos_VERSION_CURRENT, OrgApacheLuceneUtilStringHelper_randomId(), JavaLangLong_toStringWithLong_withInt_(nextGeneration, JavaLangCharacter_MAX_RADIX));
@@ -823,7 +827,7 @@ void OrgApacheLuceneIndexSegmentInfos_writeWithOrgApacheLuceneStoreDirectory_(Or
       OrgApacheLuceneUtilVersion *minSegmentVersion = nil;
       for (OrgApacheLuceneIndexSegmentCommitInfo * __strong siPerCommit in self) {
         OrgApacheLuceneUtilVersion *segmentVersion = [((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(siPerCommit))->info_)) getVersion];
-        if (minSegmentVersion == nil || [((OrgApacheLuceneUtilVersion *) nil_chk(segmentVersion)) onOrAfterWithOrgApacheLuceneUtilVersion:minSegmentVersion] == NO) {
+        if (minSegmentVersion == nil || [((OrgApacheLuceneUtilVersion *) nil_chk(segmentVersion)) onOrAfterWithOrgApacheLuceneUtilVersion:minSegmentVersion] == false) {
           minSegmentVersion = segmentVersion;
         }
       }
@@ -866,11 +870,11 @@ void OrgApacheLuceneIndexSegmentInfos_writeWithOrgApacheLuceneStoreDirectory_(Or
     OrgApacheLuceneCodecsCodecUtil_writeFooterWithOrgApacheLuceneStoreIndexOutput_(segnOutput);
     [segnOutput close];
     [directory syncWithJavaUtilCollection:JavaUtilCollections_singletonWithId_(segmentFileName)];
-    success = YES;
+    success = true;
   }
   @finally {
     if (success) {
-      self->pendingCommit_ = YES;
+      self->pendingCommit_ = true;
     }
     else {
       OrgApacheLuceneUtilIOUtils_closeWhileHandlingExceptionWithJavaIoCloseableArray_([IOSObjectArray arrayWithObjects:(id[]){ segnOutput } count:1 type:JavaIoCloseable_class_()]);
@@ -896,7 +900,7 @@ void OrgApacheLuceneIndexSegmentInfos_messageWithNSString_(NSString *message) {
 
 void OrgApacheLuceneIndexSegmentInfos_rollbackCommitWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexSegmentInfos *self, OrgApacheLuceneStoreDirectory *dir) {
   if (self->pendingCommit_) {
-    self->pendingCommit_ = NO;
+    self->pendingCommit_ = false;
     NSString *pending = OrgApacheLuceneIndexIndexFileNames_fileNameFromGenerationWithNSString_withNSString_withLong_(OrgApacheLuceneIndexIndexFileNames_PENDING_SEGMENTS_, @"", self->generation_);
     OrgApacheLuceneUtilIOUtils_deleteFilesIgnoringExceptionsWithOrgApacheLuceneStoreDirectory_withNSStringArray_(dir, [IOSObjectArray arrayWithObjects:(id[]){ pending } count:1 type:NSString_class_()]);
   }
@@ -910,23 +914,23 @@ void OrgApacheLuceneIndexSegmentInfos_prepareCommitWithOrgApacheLuceneStoreDirec
 }
 
 NSString *OrgApacheLuceneIndexSegmentInfos_finishCommitWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexSegmentInfos *self, OrgApacheLuceneStoreDirectory *dir) {
-  if (self->pendingCommit_ == NO) {
+  if (self->pendingCommit_ == false) {
     @throw [new_JavaLangIllegalStateException_initWithNSString_(@"prepareCommit was not called") autorelease];
   }
-  jboolean success = NO;
+  jboolean success = false;
   NSString *dest;
   @try {
     NSString *src = OrgApacheLuceneIndexIndexFileNames_fileNameFromGenerationWithNSString_withNSString_withLong_(OrgApacheLuceneIndexIndexFileNames_PENDING_SEGMENTS_, @"", self->generation_);
     dest = OrgApacheLuceneIndexIndexFileNames_fileNameFromGenerationWithNSString_withNSString_withLong_(OrgApacheLuceneIndexIndexFileNames_SEGMENTS_, @"", self->generation_);
     [((OrgApacheLuceneStoreDirectory *) nil_chk(dir)) renameFileWithNSString:src withNSString:dest];
-    success = YES;
+    success = true;
   }
   @finally {
     if (!success) {
       OrgApacheLuceneIndexSegmentInfos_rollbackCommitWithOrgApacheLuceneStoreDirectory_(self, dir);
     }
   }
-  self->pendingCommit_ = NO;
+  self->pendingCommit_ = false;
   self->lastGeneration_ = self->generation_;
   return dest;
 }

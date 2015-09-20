@@ -49,10 +49,12 @@ OrgApacheLuceneStoreSimpleFSLockFactory *OrgApacheLuceneStoreSimpleFSLockFactory
 
 @implementation OrgApacheLuceneStoreSimpleFSLockFactory
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneStoreSimpleFSLockFactory_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneStoreLock *)obtainFSLockWithOrgApacheLuceneStoreFSDirectory:(OrgApacheLuceneStoreFSDirectory *)dir
                                                                  withNSString:(NSString *)lockName {
@@ -147,7 +149,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreSimpleFSLockFactory)
       }
     }
     @finally {
-      JreAssignVolatileBoolean(&closed_, YES);
+      JreAssignVolatileBoolean(&closed_, true);
     }
   }
 }

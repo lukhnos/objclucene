@@ -65,7 +65,7 @@ withJavaLangCharSequence:(id<JavaLangCharSequence>)context
 }
 
 - (jboolean)needsScores {
-  return YES;
+  return true;
 }
 
 - (void)dealloc {

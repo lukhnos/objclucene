@@ -82,10 +82,10 @@ NSString *OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_SNAPSHOTS_PREFIX_
 - (OrgApacheLuceneIndexIndexCommit *)snapshot {
   @synchronized(self) {
     OrgApacheLuceneIndexIndexCommit *ic = [super snapshot];
-    jboolean success = NO;
+    jboolean success = false;
     @try {
       OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_persist(self);
-      success = YES;
+      success = true;
     }
     @finally {
       if (!success) {
@@ -103,10 +103,10 @@ NSString *OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_SNAPSHOTS_PREFIX_
 - (void)release__WithOrgApacheLuceneIndexIndexCommit:(OrgApacheLuceneIndexIndexCommit *)commit {
   @synchronized(self) {
     [super release__WithOrgApacheLuceneIndexIndexCommit:commit];
-    jboolean success = NO;
+    jboolean success = false;
     @try {
       OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_persist(self);
-      success = YES;
+      success = true;
     }
     @finally {
       if (!success) {
@@ -211,7 +211,7 @@ void OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_persist(OrgApacheLucen
   @synchronized(self) {
     NSString *fileName = JreStrcat("$J", OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_SNAPSHOTS_PREFIX_, self->nextWriteGen_);
     OrgApacheLuceneStoreIndexOutput *out = [((OrgApacheLuceneStoreDirectory *) nil_chk(self->dir_)) createOutputWithNSString:fileName withOrgApacheLuceneStoreIOContext:JreLoadStatic(OrgApacheLuceneStoreIOContext, DEFAULT_)];
-    jboolean success = NO;
+    jboolean success = false;
     @try {
       OrgApacheLuceneCodecsCodecUtil_writeHeaderWithOrgApacheLuceneStoreDataOutput_withNSString_withInt_(out, OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_CODEC_NAME_, OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_VERSION_CURRENT);
       [((OrgApacheLuceneStoreIndexOutput *) nil_chk(out)) writeVIntWithInt:[((id<JavaUtilMap>) nil_chk(self->refCounts_)) size]];
@@ -219,7 +219,7 @@ void OrgApacheLuceneIndexPersistentSnapshotDeletionPolicy_persist(OrgApacheLucen
         [out writeVLongWithLong:[((JavaLangLong *) nil_chk([((id<JavaUtilMap_Entry>) nil_chk(ent)) getKey])) longLongValue]];
         [out writeVIntWithInt:[((JavaLangInteger *) nil_chk([ent getValue])) intValue]];
       }
-      success = YES;
+      success = true;
     }
     @finally {
       if (!success) {

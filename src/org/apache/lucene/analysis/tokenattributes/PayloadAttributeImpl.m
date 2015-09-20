@@ -22,10 +22,12 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl, 
 
 @implementation OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload {
   OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl_initWithOrgApacheLuceneUtilBytesRef_(self, payload);
@@ -54,7 +56,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl, 
 
 - (jboolean)isEqual:(id)other {
   if (other == self) {
-    return YES;
+    return true;
   }
   if ([OrgApacheLuceneAnalysisTokenattributesPayloadAttribute_class_() isInstance:other]) {
     OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl *o = (OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl *) check_class_cast(other, [OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl class]);
@@ -63,7 +65,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisTokenattributesPayloadAttributeImpl, 
     }
     return [((OrgApacheLuceneUtilBytesRef *) nil_chk(o->payload_)) isEqual:payload_];
   }
-  return NO;
+  return false;
 }
 
 - (NSUInteger)hash {

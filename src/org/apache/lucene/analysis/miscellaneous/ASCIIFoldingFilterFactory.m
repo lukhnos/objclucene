@@ -51,7 +51,7 @@
 
 void OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilterFactory *self, id<JavaUtilMap> args) {
   OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
-  self->preserveOriginal_ = [self getBooleanWithJavaUtilMap:args withNSString:@"preserveOriginal" withBoolean:NO];
+  self->preserveOriginal_ = [self getBooleanWithJavaUtilMap:args withNSString:@"preserveOriginal" withBoolean:false];
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
   }

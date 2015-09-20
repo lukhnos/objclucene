@@ -171,13 +171,13 @@ JavaLangInteger *OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource_DEFAUL
 }
 
 - (jboolean)isEqual:(id)o {
-  if (self == o) return YES;
-  if (o == nil || [self getClass] != [o getClass]) return NO;
-  if (![super isEqual:o]) return NO;
+  if (self == o) return true;
+  if (o == nil || [self getClass] != [o getClass]) return false;
+  if (![super isEqual:o]) return false;
   OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource *that = (OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource *) check_class_cast(o, [OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource class]);
-  if (![((id<JavaUtilMap>) nil_chk(enumIntToStringMap_)) isEqual:((OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource *) nil_chk(that))->enumIntToStringMap_]) return NO;
-  if (![((id<JavaUtilMap>) nil_chk(enumStringToIntMap_)) isEqual:that->enumStringToIntMap_]) return NO;
-  return YES;
+  if (![((id<JavaUtilMap>) nil_chk(enumIntToStringMap_)) isEqual:((OrgApacheLuceneQueriesFunctionValuesourceEnumFieldSource *) nil_chk(that))->enumIntToStringMap_]) return false;
+  if (![((id<JavaUtilMap>) nil_chk(enumStringToIntMap_)) isEqual:that->enumStringToIntMap_]) return false;
+  return true;
 }
 
 - (NSUInteger)hash {

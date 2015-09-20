@@ -39,10 +39,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFstIntSequenceOutputs)
 
 @implementation OrgApacheLuceneUtilFstIntSequenceOutputs
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilFstIntSequenceOutputs_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (OrgApacheLuceneUtilFstIntSequenceOutputs *)getSingleton {
   return OrgApacheLuceneUtilFstIntSequenceOutputs_getSingleton();

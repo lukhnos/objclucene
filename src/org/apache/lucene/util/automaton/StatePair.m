@@ -26,7 +26,7 @@
     OrgApacheLuceneUtilAutomatonStatePair *p = (OrgApacheLuceneUtilAutomatonStatePair *) check_class_cast(obj, [OrgApacheLuceneUtilAutomatonStatePair class]);
     return ((OrgApacheLuceneUtilAutomatonStatePair *) nil_chk(p))->s1_ == s1_ && p->s2_ == s2_;
   }
-  else return NO;
+  else return false;
 }
 
 - (NSUInteger)hash {

@@ -259,13 +259,13 @@ jboolean OrgApacheLuceneCodecsMultiLevelSkipListReader_loadNextSkipWithInt_(OrgA
   if (IOSIntArray_Get(self->numSkipped_, level) > self->docCount_) {
     *IOSIntArray_GetRef(nil_chk(self->skipDoc_), level) = JavaLangInteger_MAX_VALUE;
     if (self->numberOfSkipLevels_ > level) self->numberOfSkipLevels_ = level;
-    return NO;
+    return false;
   }
   *IOSIntArray_GetRef(nil_chk(self->skipDoc_), level) += [self readSkipDataWithInt:level withOrgApacheLuceneStoreIndexInput:IOSObjectArray_Get(nil_chk(self->skipStream_), level)];
   if (level != 0) {
     *IOSLongArray_GetRef(nil_chk(self->childPointer_), level) = [((OrgApacheLuceneStoreIndexInput *) nil_chk(IOSObjectArray_Get(self->skipStream_, level))) readVLong] + IOSLongArray_Get(nil_chk(self->skipPointer_), level - 1);
   }
-  return YES;
+  return true;
 }
 
 void OrgApacheLuceneCodecsMultiLevelSkipListReader_loadSkipLevels(OrgApacheLuceneCodecsMultiLevelSkipListReader *self) {

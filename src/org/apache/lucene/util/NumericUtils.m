@@ -136,10 +136,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilNumericUtils_$4)
 
 @implementation OrgApacheLuceneUtilNumericUtils
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilNumericUtils_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)longToPrefixCodedWithLong:(jlong)val
                           withInt:(jint)shift
@@ -545,10 +547,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilNumericUtils)
   [self addRangeWithOrgApacheLuceneUtilBytesRef:[minBytes get] withOrgApacheLuceneUtilBytesRef:[maxBytes get]];
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilNumericUtils_LongRangeBuilder_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -584,10 +588,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilNumericUtils_LongRangeBuilde
   [self addRangeWithOrgApacheLuceneUtilBytesRef:[minBytes get] withOrgApacheLuceneUtilBytesRef:[maxBytes get]];
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilNumericUtils_IntRangeBuilder_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -640,7 +646,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilNumericUtils_IntRangeBuilder
 @end
 
 void OrgApacheLuceneUtilNumericUtils_SeekingNumericFilteredTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneUtilNumericUtils_SeekingNumericFilteredTermsEnum *self, OrgApacheLuceneIndexTermsEnum *tenum) {
-  OrgApacheLuceneIndexFilteredTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withBoolean_(self, tenum, NO);
+  OrgApacheLuceneIndexFilteredTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withBoolean_(self, tenum, false);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilNumericUtils_SeekingNumericFilteredTermsEnum)

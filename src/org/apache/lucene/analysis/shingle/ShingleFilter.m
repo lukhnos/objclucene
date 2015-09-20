@@ -202,7 +202,7 @@ NSString *OrgApacheLuceneAnalysisShingleShingleFilter_DEFAULT_TOKEN_SEPARATOR_ =
 }
 
 - (jboolean)incrementToken {
-  jboolean tokenAvailable = NO;
+  jboolean tokenAvailable = false;
   jint builtGramSize = 0;
   if ([((OrgApacheLuceneAnalysisShingleShingleFilter_CircularSequence *) nil_chk(gramSize_)) atMinValue] || [((JavaUtilLinkedList *) nil_chk(inputWindow_)) size] < [gramSize_ getValue]) {
     OrgApacheLuceneAnalysisShingleShingleFilter_shiftInputWindow(self);
@@ -212,7 +212,7 @@ NSString *OrgApacheLuceneAnalysisShingleShingleFilter_DEFAULT_TOKEN_SEPARATOR_ =
     builtGramSize = [gramSize_ getPreviousValue];
   }
   if ([((JavaUtilLinkedList *) nil_chk(inputWindow_)) size] >= [gramSize_ getValue]) {
-    jboolean isAllFiller = YES;
+    jboolean isAllFiller = true;
     OrgApacheLuceneAnalysisShingleShingleFilter_InputWindowToken *nextToken = nil;
     id<JavaUtilIterator> iter = [inputWindow_ iterator];
     for (jint gramNum = 1; [((id<JavaUtilIterator>) nil_chk(iter)) hasNext] && builtGramSize < [gramSize_ getValue]; ++gramNum) {
@@ -230,7 +230,7 @@ NSString *OrgApacheLuceneAnalysisShingleShingleFilter_DEFAULT_TOKEN_SEPARATOR_ =
         }
       }
       else {
-        isAllFiller = NO;
+        isAllFiller = false;
       }
     }
     if (!isAllFiller && builtGramSize == [gramSize_ getValue]) {
@@ -239,13 +239,13 @@ NSString *OrgApacheLuceneAnalysisShingleShingleFilter_DEFAULT_TOKEN_SEPARATOR_ =
       [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk([((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) setEmpty])) appendWithJavaLangStringBuilder:gramBuilder_];
       if ([gramSize_ getValue] > 1) {
         [((id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>) nil_chk(typeAtt_)) setTypeWithNSString:tokenType_];
-        noShingleOutput_ = NO;
+        noShingleOutput_ = false;
       }
       [offsetAtt_ setOffsetWithInt:[((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAtt_)) startOffset] withInt:[((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(((OrgApacheLuceneAnalysisShingleShingleFilter_InputWindowToken *) nil_chk(nextToken))->offsetAtt_)) endOffset]];
       [((id<OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute>) nil_chk(posLenAtt_)) setPositionLengthWithInt:builtGramSize];
-      isOutputHere_ = YES;
+      isOutputHere_ = true;
       [gramSize_ advance];
-      tokenAvailable = YES;
+      tokenAvailable = true;
     }
   }
   return tokenAvailable;
@@ -273,11 +273,11 @@ NSString *OrgApacheLuceneAnalysisShingleShingleFilter_DEFAULT_TOKEN_SEPARATOR_ =
   [((OrgApacheLuceneAnalysisShingleShingleFilter_CircularSequence *) nil_chk(gramSize_)) reset];
   [((JavaUtilLinkedList *) nil_chk(inputWindow_)) clear];
   JreStrongAssign(&nextInputStreamToken_, nil);
-  isNextInputStreamToken_ = NO;
+  isNextInputStreamToken_ = false;
   numFillerTokensToInsert_ = 0;
-  isOutputHere_ = NO;
-  noShingleOutput_ = YES;
-  exhausted_ = NO;
+  isOutputHere_ = false;
+  noShingleOutput_ = true;
+  exhausted_ = false;
   JreStrongAssign(&endState_, nil);
   if (outputUnigramsIfNoShingles_ && !outputUnigrams_) {
     gramSize_->minValue_ = minShingleSize_;
@@ -363,11 +363,11 @@ void OrgApacheLuceneAnalysisShingleShingleFilter_initWithOrgApacheLuceneAnalysis
   JreStrongAssign(&self->tokenType_, OrgApacheLuceneAnalysisShingleShingleFilter_DEFAULT_TOKEN_TYPE_);
   JreStrongAssign(&self->tokenSeparator_, OrgApacheLuceneAnalysisShingleShingleFilter_DEFAULT_TOKEN_SEPARATOR_);
   JreStrongAssign(&self->fillerToken_, [((NSString *) nil_chk(OrgApacheLuceneAnalysisShingleShingleFilter_DEFAULT_FILLER_TOKEN_)) toCharArray]);
-  self->outputUnigrams_ = YES;
-  self->outputUnigramsIfNoShingles_ = NO;
-  self->isNextInputStreamToken_ = NO;
-  self->isOutputHere_ = NO;
-  self->noShingleOutput_ = YES;
+  self->outputUnigrams_ = true;
+  self->outputUnigramsIfNoShingles_ = false;
+  self->isNextInputStreamToken_ = false;
+  self->isOutputHere_ = false;
+  self->noShingleOutput_ = true;
   JreStrongAssign(&self->termAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()]);
   JreStrongAssign(&self->offsetAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_class_()]);
   JreStrongAssign(&self->posIncrAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_class_()]);
@@ -425,7 +425,7 @@ OrgApacheLuceneAnalysisShingleShingleFilter_InputWindowToken *OrgApacheLuceneAna
     }
     [((OrgApacheLuceneAnalysisShingleShingleFilter_InputWindowToken *) nil_chk(newTarget))->offsetAtt_ setOffsetWithInt:[((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(newTarget->offsetAtt_)) startOffset] withInt:[newTarget->offsetAtt_ startOffset]];
     [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(newTarget->termAtt_)) copyBufferWithCharArray:self->fillerToken_ withInt:0 withInt:((IOSCharArray *) nil_chk(self->fillerToken_))->size_];
-    newTarget->isFiller_ = YES;
+    newTarget->isFiller_ = true;
     --self->numFillerTokensToInsert_;
   }
   else if (self->isNextInputStreamToken_) {
@@ -435,8 +435,8 @@ OrgApacheLuceneAnalysisShingleShingleFilter_InputWindowToken *OrgApacheLuceneAna
     else {
       [((OrgApacheLuceneUtilAttributeSource *) nil_chk(self->nextInputStreamToken_)) copyToWithOrgApacheLuceneUtilAttributeSource:target->attSource_];
     }
-    self->isNextInputStreamToken_ = NO;
-    ((OrgApacheLuceneAnalysisShingleShingleFilter_InputWindowToken *) nil_chk(newTarget))->isFiller_ = NO;
+    self->isNextInputStreamToken_ = false;
+    ((OrgApacheLuceneAnalysisShingleShingleFilter_InputWindowToken *) nil_chk(newTarget))->isFiller_ = false;
   }
   else if (!self->exhausted_) {
     if ([((OrgApacheLuceneAnalysisTokenStream *) nil_chk(self->input_)) incrementToken]) {
@@ -454,18 +454,18 @@ OrgApacheLuceneAnalysisShingleShingleFilter_InputWindowToken *OrgApacheLuceneAna
         else {
           [self copyToWithOrgApacheLuceneUtilAttributeSource:self->nextInputStreamToken_];
         }
-        self->isNextInputStreamToken_ = YES;
+        self->isNextInputStreamToken_ = true;
         [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(((OrgApacheLuceneAnalysisShingleShingleFilter_InputWindowToken *) nil_chk(newTarget))->offsetAtt_)) setOffsetWithInt:[((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(self->offsetAtt_)) startOffset] withInt:[self->offsetAtt_ startOffset]];
         [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(newTarget->termAtt_)) copyBufferWithCharArray:self->fillerToken_ withInt:0 withInt:((IOSCharArray *) nil_chk(self->fillerToken_))->size_];
-        newTarget->isFiller_ = YES;
+        newTarget->isFiller_ = true;
         --self->numFillerTokensToInsert_;
       }
       else {
-        ((OrgApacheLuceneAnalysisShingleShingleFilter_InputWindowToken *) nil_chk(newTarget))->isFiller_ = NO;
+        ((OrgApacheLuceneAnalysisShingleShingleFilter_InputWindowToken *) nil_chk(newTarget))->isFiller_ = false;
       }
     }
     else {
-      self->exhausted_ = YES;
+      self->exhausted_ = true;
       [self->input_ end];
       JreStrongAssign(&self->endState_, [self captureState]);
       self->numFillerTokensToInsert_ = JavaLangMath_minWithInt_withInt_([((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(self->posIncrAtt_)) getPositionIncrement], self->maxShingleSize_ - 1);
@@ -516,7 +516,7 @@ void OrgApacheLuceneAnalysisShingleShingleFilter_shiftInputWindow(OrgApacheLucen
     self->gramSize_->minValue_ = 1;
   }
   [((OrgApacheLuceneAnalysisShingleShingleFilter_CircularSequence *) nil_chk(self->gramSize_)) reset];
-  self->isOutputHere_ = NO;
+  self->isOutputHere_ = false;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisShingleShingleFilter)
@@ -631,7 +631,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisShingleShingleFilter_Cir
 
 void OrgApacheLuceneAnalysisShingleShingleFilter_InputWindowToken_initWithOrgApacheLuceneAnalysisShingleShingleFilter_withOrgApacheLuceneUtilAttributeSource_(OrgApacheLuceneAnalysisShingleShingleFilter_InputWindowToken *self, OrgApacheLuceneAnalysisShingleShingleFilter *outer$, OrgApacheLuceneUtilAttributeSource *attSource) {
   NSObject_init(self);
-  self->isFiller_ = NO;
+  self->isFiller_ = false;
   JreStrongAssign(&self->attSource_, attSource);
   JreStrongAssign(&self->termAtt_, [((OrgApacheLuceneUtilAttributeSource *) nil_chk(attSource)) getAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()]);
   JreStrongAssign(&self->offsetAtt_, [attSource getAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_class_()]);

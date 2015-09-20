@@ -151,25 +151,25 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansNearSpansUnordered_SpanPosi
 
 - (jboolean)twoPhaseCurrentDocMatches {
   OrgApacheLuceneSearchSpansNearSpansUnordered_subSpanCellsToPositionQueue(self);
-  while (YES) {
+  while (true) {
     if (OrgApacheLuceneSearchSpansNearSpansUnordered_atMatch(self)) {
-      atFirstInCurrentDoc_ = YES;
-      oneExhaustedInCurrentDoc_ = NO;
-      return YES;
+      atFirstInCurrentDoc_ = true;
+      oneExhaustedInCurrentDoc_ = false;
+      return true;
     }
     JreAssert(([((OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell *) nil_chk(OrgApacheLuceneSearchSpansNearSpansUnordered_minPositionCell(self))) startPosition] != OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS), (@"org/apache/lucene/search/spans/NearSpansUnordered.java:201 condition failed: assert minPositionCell().startPosition() != NO_MORE_POSITIONS;"));
     if ([((OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell *) nil_chk(OrgApacheLuceneSearchSpansNearSpansUnordered_minPositionCell(self))) nextStartPosition] != OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS) {
       [((OrgApacheLuceneSearchSpansNearSpansUnordered_SpanPositionQueue *) nil_chk(spanPositionQueue_)) updateTop];
     }
     else {
-      return NO;
+      return false;
     }
   }
 }
 
 - (jint)nextStartPosition {
   if (atFirstInCurrentDoc_) {
-    atFirstInCurrentDoc_ = NO;
+    atFirstInCurrentDoc_ = false;
     return [((OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell *) nil_chk(OrgApacheLuceneSearchSpansNearSpansUnordered_minPositionCell(self))) startPosition];
   }
   while ([((OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell *) nil_chk(OrgApacheLuceneSearchSpansNearSpansUnordered_minPositionCell(self))) startPosition] == -1) {
@@ -177,9 +177,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansNearSpansUnordered_SpanPosi
     [((OrgApacheLuceneSearchSpansNearSpansUnordered_SpanPositionQueue *) nil_chk(spanPositionQueue_)) updateTop];
   }
   JreAssert(([((OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell *) nil_chk(OrgApacheLuceneSearchSpansNearSpansUnordered_minPositionCell(self))) startPosition] != OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS), (@"org/apache/lucene/search/spans/NearSpansUnordered.java:221 condition failed: assert minPositionCell().startPosition() != NO_MORE_POSITIONS;"));
-  while (YES) {
+  while (true) {
     if ([((OrgApacheLuceneSearchSpansNearSpansUnordered_SpansCell *) nil_chk(OrgApacheLuceneSearchSpansNearSpansUnordered_minPositionCell(self))) nextStartPosition] == OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS) {
-      oneExhaustedInCurrentDoc_ = YES;
+      oneExhaustedInCurrentDoc_ = true;
       return OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS;
     }
     [((OrgApacheLuceneSearchSpansNearSpansUnordered_SpanPositionQueue *) nil_chk(spanPositionQueue_)) updateTop];

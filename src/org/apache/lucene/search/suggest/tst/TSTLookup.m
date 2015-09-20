@@ -68,10 +68,12 @@ __attribute__((unused)) static void OrgApacheLuceneSearchSuggestTstTSTLookup_wri
 
 @implementation OrgApacheLuceneSearchSuggestTstTSTLookup
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSuggestTstTSTLookup_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)buildWithOrgApacheLuceneSearchSuggestInputIterator:(id<OrgApacheLuceneSearchSuggestInputIterator>)iterator {
   if ([((id<OrgApacheLuceneSearchSuggestInputIterator>) nil_chk(iterator)) hasPayloads]) {
@@ -99,7 +101,7 @@ __attribute__((unused)) static void OrgApacheLuceneSearchSuggestTstTSTLookup_wri
 - (jboolean)addWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
                                  withId:(id)value {
   [((OrgApacheLuceneSearchSuggestTstTSTAutocomplete *) nil_chk(autocomplete_)) insertWithOrgApacheLuceneSearchSuggestTstTernaryTreeNode:root_ withJavaLangCharSequence:key withId:value withInt:0];
-  return YES;
+  return true;
 }
 
 - (id)getWithJavaLangCharSequence:(id<JavaLangCharSequence>)key {
@@ -171,7 +173,7 @@ __attribute__((unused)) static void OrgApacheLuceneSearchSuggestTstTSTLookup_wri
   @synchronized(self) {
     [((OrgApacheLuceneStoreDataOutput *) nil_chk(output)) writeVLongWithLong:count_];
     OrgApacheLuceneSearchSuggestTstTSTLookup_writeRecursivelyWithOrgApacheLuceneStoreDataOutput_withOrgApacheLuceneSearchSuggestTstTernaryTreeNode_(self, output, root_);
-    return YES;
+    return true;
   }
 }
 
@@ -180,7 +182,7 @@ __attribute__((unused)) static void OrgApacheLuceneSearchSuggestTstTSTLookup_wri
     count_ = [((OrgApacheLuceneStoreDataInput *) nil_chk(input)) readVLong];
     JreStrongAssignAndConsume(&root_, new_OrgApacheLuceneSearchSuggestTstTernaryTreeNode_init());
     OrgApacheLuceneSearchSuggestTstTSTLookup_readRecursivelyWithOrgApacheLuceneStoreDataInput_withOrgApacheLuceneSearchSuggestTstTernaryTreeNode_(self, input, root_);
-    return YES;
+    return true;
   }
 }
 
@@ -250,14 +252,14 @@ jboolean OrgApacheLuceneSearchSuggestTstTSTLookup_charSeqEqualsWithJavaLangCharS
   OrgApacheLuceneSearchSuggestTstTSTLookup_initialize();
   jint len = [((id<JavaLangCharSequence>) nil_chk(left)) length];
   if (len != [((id<JavaLangCharSequence>) nil_chk(right)) length]) {
-    return NO;
+    return false;
   }
   for (jint i = 0; i < len; i++) {
     if ([left charAtWithInt:i] != [right charAtWithInt:i]) {
-      return NO;
+      return false;
     }
   }
-  return YES;
+  return true;
 }
 
 void OrgApacheLuceneSearchSuggestTstTSTLookup_readRecursivelyWithOrgApacheLuceneStoreDataInput_withOrgApacheLuceneSearchSuggestTstTernaryTreeNode_(OrgApacheLuceneSearchSuggestTstTSTLookup *self, OrgApacheLuceneStoreDataInput *inArg, OrgApacheLuceneSearchSuggestTstTernaryTreeNode *node) {

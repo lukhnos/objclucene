@@ -20,10 +20,12 @@
 
 @implementation OrgApacheLuceneIndexCompositeReader
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexCompositeReader_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (NSString *)description {
   JavaLangStringBuilder *buffer = [new_JavaLangStringBuilder_init() autorelease];

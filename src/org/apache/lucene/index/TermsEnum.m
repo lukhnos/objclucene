@@ -100,10 +100,12 @@ OrgApacheLuceneIndexTermsEnum *OrgApacheLuceneIndexTermsEnum_EMPTY_;
 
 @implementation OrgApacheLuceneIndexTermsEnum
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexTermsEnum_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneUtilAttributeSource *)attributes {
   if (atts_ == nil) JreStrongAssignAndConsume(&atts_, new_OrgApacheLuceneUtilAttributeSource_init());
@@ -394,10 +396,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexTermsEnum_SeekStatusEnum)
   @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexTermsEnum_$2_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -472,10 +476,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexTermsEnum_$2)
   @throw [new_JavaLangIllegalStateException_initWithNSString_(@"this method should never be called") autorelease];
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexTermsEnum_$1_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

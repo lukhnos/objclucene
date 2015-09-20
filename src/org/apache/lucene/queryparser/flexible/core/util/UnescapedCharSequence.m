@@ -168,7 +168,7 @@ void OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_initWithJav
   JreStrongAssignAndConsume(&self->wasEscaped_, [IOSBooleanArray newArrayWithLength:[text length]]);
   for (jint i = 0; i < [text length]; i++) {
     *IOSCharArray_GetRef(self->chars_, i) = [text charAtWithInt:i];
-    *IOSBooleanArray_GetRef(self->wasEscaped_, i) = NO;
+    *IOSBooleanArray_GetRef(self->wasEscaped_, i) = false;
   }
 }
 
@@ -197,7 +197,7 @@ OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *new_OrgApacheLu
 jboolean OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_wasEscapedWithJavaLangCharSequence_withInt_(id<JavaLangCharSequence> text, jint index) {
   OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_initialize();
   if ([text isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence class]]) return IOSBooleanArray_Get(nil_chk(((OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *) nil_chk(((OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *) check_class_cast(text, [OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence class]))))->wasEscaped_), index);
-  else return NO;
+  else return false;
 }
 
 id<JavaLangCharSequence> OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_toLowerCaseWithJavaLangCharSequence_withJavaUtilLocale_(id<JavaLangCharSequence> text, JavaUtilLocale *locale) {

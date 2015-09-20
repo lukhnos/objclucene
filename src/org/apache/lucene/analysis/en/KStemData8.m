@@ -23,10 +23,12 @@ IOSObjectArray *OrgApacheLuceneAnalysisEnKStemData8_data_;
 
 @implementation OrgApacheLuceneAnalysisEnKStemData8
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisEnKStemData8_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisEnKStemData8 class]) {

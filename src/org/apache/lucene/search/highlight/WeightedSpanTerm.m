@@ -40,10 +40,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchHighlightWeightedSpanTerm, positionSpan
   while ([((id<JavaUtilIterator>) nil_chk(positionSpanIt)) hasNext]) {
     OrgApacheLuceneSearchHighlightPositionSpan *posSpan = [positionSpanIt next];
     if (((position >= ((OrgApacheLuceneSearchHighlightPositionSpan *) nil_chk(posSpan))->start_) && (position <= posSpan->end_))) {
-      return YES;
+      return true;
     }
   }
-  return NO;
+  return false;
 }
 
 - (void)addPositionSpansWithJavaUtilList:(id<JavaUtilList>)positionSpans {

@@ -63,10 +63,12 @@ OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisStandardClassicA
   return self;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisStandardClassicAnalyzer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithJavaIoReader:(JavaIoReader *)stopwords {
   OrgApacheLuceneAnalysisStandardClassicAnalyzer_initWithJavaIoReader_(self, stopwords);

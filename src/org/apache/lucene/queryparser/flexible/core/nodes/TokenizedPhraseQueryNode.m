@@ -17,10 +17,12 @@
 
 @implementation OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (NSString *)description {
   if ([self getChildren] == nil || [((id<JavaUtilList>) nil_chk([self getChildren])) size] == 0) return @"<tokenizedphrase/>";
@@ -88,7 +90,7 @@
 
 void OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode_init(OrgApacheLuceneQueryparserFlexibleCoreNodesTokenizedPhraseQueryNode *self) {
   OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_init(self);
-  [self setLeafWithBoolean:NO];
+  [self setLeafWithBoolean:false];
   [self allocate];
 }
 

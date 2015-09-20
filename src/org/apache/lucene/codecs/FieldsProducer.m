@@ -13,10 +13,12 @@
 
 @implementation OrgApacheLuceneCodecsFieldsProducer
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsFieldsProducer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)close {
   // can't call an abstract method

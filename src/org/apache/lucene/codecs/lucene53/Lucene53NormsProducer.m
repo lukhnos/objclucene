@@ -255,8 +255,8 @@ void OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_initWithOrgApacheLuceneI
   NSString *metaName = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(state->segmentInfo_->name_, state->segmentSuffix_, metaExtension);
   jint version_ = -1;
   {
-    JavaLangThrowable *__mainException = nil;
     OrgApacheLuceneStoreChecksumIndexInput *in = [((OrgApacheLuceneStoreDirectory *) nil_chk(state->directory_)) openChecksumInputWithNSString:metaName withOrgApacheLuceneStoreIOContext:state->context_];
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
       JavaLangThrowable *priorE = nil;
       @try {
@@ -270,32 +270,34 @@ void OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_initWithOrgApacheLuceneI
         OrgApacheLuceneCodecsCodecUtil_checkFooterWithOrgApacheLuceneStoreChecksumIndexInput_withJavaLangThrowable_(in, priorE);
       }
     }
+    @catch (JavaLangThrowable *e) {
+      __primaryException1 = e;
+      @throw e;
+    }
     @finally {
-      @try {
-        [in close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
+      if (in != nil) {
+        if (__primaryException1 != nil) {
+          @try {
+            [in close];
+          } @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
         } else {
-          __mainException = e;
+          [in close];
         }
-      }
-      if (__mainException) {
-        @throw __mainException;
       }
     }
   }
   NSString *dataName = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(state->segmentInfo_->name_, state->segmentSuffix_, dataExtension);
   JreStrongAssign(&self->data_, [((OrgApacheLuceneStoreDirectory *) nil_chk(state->directory_)) openInputWithNSString:dataName withOrgApacheLuceneStoreIOContext:state->context_]);
-  jboolean success = NO;
+  jboolean success = false;
   @try {
     jint version2 = OrgApacheLuceneCodecsCodecUtil_checkIndexHeaderWithOrgApacheLuceneStoreDataInput_withNSString_withInt_withInt_withByteArray_withNSString_(self->data_, dataCodec, OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_VERSION_START, OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_VERSION_CURRENT, [state->segmentInfo_ getId], state->segmentSuffix_);
     if (version_ != version2) {
       @throw [new_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$I$I", @"Format versions mismatch: meta=", version_, @",data=", version2), self->data_) autorelease];
     }
     OrgApacheLuceneCodecsCodecUtil_retrieveChecksumWithOrgApacheLuceneStoreIndexInput_(self->data_);
-    success = YES;
+    success = true;
   }
   @finally {
     if (!success) {
@@ -342,10 +344,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene53Lucene53NormsProdu
 
 @implementation OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_NormsEntry
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsLucene53Lucene53NormsProducer_NormsEntry_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

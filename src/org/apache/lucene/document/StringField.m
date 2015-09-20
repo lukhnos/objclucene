@@ -36,14 +36,14 @@ withOrgApacheLuceneDocumentField_StoreEnum:(OrgApacheLuceneDocumentField_StoreEn
     JreStrongAssignAndConsume(&OrgApacheLuceneDocumentStringField_TYPE_NOT_STORED_, new_OrgApacheLuceneDocumentFieldType_init());
     JreStrongAssignAndConsume(&OrgApacheLuceneDocumentStringField_TYPE_STORED_, new_OrgApacheLuceneDocumentFieldType_init());
     {
-      [OrgApacheLuceneDocumentStringField_TYPE_NOT_STORED_ setOmitNormsWithBoolean:YES];
+      [OrgApacheLuceneDocumentStringField_TYPE_NOT_STORED_ setOmitNormsWithBoolean:true];
       [OrgApacheLuceneDocumentStringField_TYPE_NOT_STORED_ setIndexOptionsWithOrgApacheLuceneIndexIndexOptionsEnum:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS)];
-      [OrgApacheLuceneDocumentStringField_TYPE_NOT_STORED_ setTokenizedWithBoolean:NO];
+      [OrgApacheLuceneDocumentStringField_TYPE_NOT_STORED_ setTokenizedWithBoolean:false];
       [OrgApacheLuceneDocumentStringField_TYPE_NOT_STORED_ freeze];
-      [OrgApacheLuceneDocumentStringField_TYPE_STORED_ setOmitNormsWithBoolean:YES];
+      [OrgApacheLuceneDocumentStringField_TYPE_STORED_ setOmitNormsWithBoolean:true];
       [OrgApacheLuceneDocumentStringField_TYPE_STORED_ setIndexOptionsWithOrgApacheLuceneIndexIndexOptionsEnum:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS)];
-      [OrgApacheLuceneDocumentStringField_TYPE_STORED_ setStoredWithBoolean:YES];
-      [OrgApacheLuceneDocumentStringField_TYPE_STORED_ setTokenizedWithBoolean:NO];
+      [OrgApacheLuceneDocumentStringField_TYPE_STORED_ setStoredWithBoolean:true];
+      [OrgApacheLuceneDocumentStringField_TYPE_STORED_ setTokenizedWithBoolean:false];
       [OrgApacheLuceneDocumentStringField_TYPE_STORED_ freeze];
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneDocumentStringField)

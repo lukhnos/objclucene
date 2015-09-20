@@ -153,10 +153,10 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
 - (NSString *)description__ {
   JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
   [((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:[self name]])) appendWithChar:'('];
-  jboolean firstTime = YES;
+  jboolean firstTime = true;
   for (OrgApacheLuceneQueriesFunctionValueSource * __strong source in nil_chk(sources_)) {
     if (firstTime) {
-      firstTime = NO;
+      firstTime = false;
     }
     else {
       [sb appendWithChar:','];
@@ -168,8 +168,8 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
 }
 
 - (jboolean)isEqual:(id)o {
-  if (self == o) return YES;
-  if (!([o isKindOfClass:[OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource class]])) return NO;
+  if (self == o) return true;
+  if (!([o isKindOfClass:[OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource class]])) return false;
   OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource *that = (OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource *) check_class_cast(o, [OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource class]);
   return [((id<JavaUtilList>) nil_chk(sources_)) isEqual:((OrgApacheLuceneQueriesFunctionValuesourceVectorValueSource *) nil_chk(that))->sources_];
 }
@@ -372,7 +372,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceVector
 - (NSString *)toStringWithInt:(jint)doc {
   JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
   [((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:[this$0_ name]])) appendWithChar:'('];
-  jboolean firstTime = YES;
+  jboolean firstTime = true;
   {
     IOSObjectArray *a__ = val$valsArr_;
     OrgApacheLuceneQueriesFunctionFunctionValues * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
@@ -380,7 +380,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceVector
     while (b__ < e__) {
       OrgApacheLuceneQueriesFunctionFunctionValues *vals = *b__++;
       if (firstTime) {
-        firstTime = NO;
+        firstTime = false;
       }
       else {
         [sb appendWithChar:','];

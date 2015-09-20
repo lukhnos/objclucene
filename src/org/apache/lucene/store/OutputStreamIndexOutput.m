@@ -51,27 +51,29 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreOutputStreamIndexOutput, os_, JavaIoBuff
 
 - (void)close {
   {
-    JavaLangThrowable *__mainException = nil;
     JavaIoOutputStream *o = os_;
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
       if (!flushedOnClose_) {
-        flushedOnClose_ = YES;
+        flushedOnClose_ = true;
         [((JavaIoOutputStream *) nil_chk(o)) flush];
       }
     }
+    @catch (JavaLangThrowable *e) {
+      __primaryException1 = e;
+      @throw e;
+    }
     @finally {
-      @try {
-        [o close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
+      if (o != nil) {
+        if (__primaryException1 != nil) {
+          @try {
+            [o close];
+          } @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
         } else {
-          __mainException = e;
+          [o close];
         }
-      }
-      if (__mainException) {
-        @throw __mainException;
       }
     }
   }
@@ -117,7 +119,7 @@ void OrgApacheLuceneStoreOutputStreamIndexOutput_initWithNSString_withJavaIoOutp
   OrgApacheLuceneStoreIndexOutput_initWithNSString_(self, resourceDescription);
   JreStrongAssignAndConsume(&self->crc_, new_JavaUtilZipCRC32_init());
   self->bytesWritten_ = 0LL;
-  self->flushedOnClose_ = NO;
+  self->flushedOnClose_ = false;
   JreStrongAssignAndConsume(&self->os_, new_JavaIoBufferedOutputStream_initWithJavaIoOutputStream_withInt_([new_JavaUtilZipCheckedOutputStream_initWithJavaIoOutputStream_withJavaUtilZipChecksum_(outArg, self->crc_) autorelease], bufferSize));
 }
 

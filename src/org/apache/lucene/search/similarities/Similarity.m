@@ -18,10 +18,12 @@
 
 @implementation OrgApacheLuceneSearchSimilaritiesSimilarity
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSimilaritiesSimilarity_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jfloat)coordWithInt:(jint)overlap
                withInt:(jint)maxOverlap {
@@ -77,10 +79,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSimilaritiesSimilarity)
 
 @implementation OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSimilaritiesSimilarity_SimScorer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jfloat)scoreWithInt:(jint)doc
              withFloat:(jfloat)freq {
@@ -131,10 +135,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSimilaritiesSimilarity_Sim
 
 @implementation OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jfloat)getValueForNormalization {
   // can't call an abstract method

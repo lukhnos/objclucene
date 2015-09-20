@@ -62,10 +62,12 @@ NSString *OrgApacheLuceneAnalysisPtPortugueseAnalyzer_DEFAULT_STOPWORD_FILE_ = @
   return OrgApacheLuceneAnalysisPtPortugueseAnalyzer_getDefaultStopSet();
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisPtPortugueseAnalyzer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords {
   OrgApacheLuceneAnalysisPtPortugueseAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(self, stopwords);
@@ -160,10 +162,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisPtPortugueseAnalyzer_DefaultSetHo
 
 @implementation OrgApacheLuceneAnalysisPtPortugueseAnalyzer_DefaultSetHolder
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisPtPortugueseAnalyzer_DefaultSetHolder_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisPtPortugueseAnalyzer_DefaultSetHolder class]) {

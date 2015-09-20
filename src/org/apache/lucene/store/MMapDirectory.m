@@ -166,26 +166,28 @@ jboolean OrgApacheLuceneStoreMMapDirectory_UNMAP_SUPPORTED_;
   [self ensureOpen];
   OrgLukhnosPortmobileFilePath *path = [((OrgLukhnosPortmobileFilePath *) nil_chk(directory_)) resolveWithNSString:name];
   {
-    JavaLangThrowable *__mainException = nil;
     JavaNioChannelsFileChannel *c = OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_openWithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileStandardOpenOptionEnumArray_(path, [IOSObjectArray arrayWithObjects:(id[]){ JreLoadStatic(OrgLukhnosPortmobileFileStandardOpenOptionEnum, READ) } count:1 type:OrgLukhnosPortmobileFileStandardOpenOptionEnum_class_()]);
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
       NSString *resourceDescription = JreStrcat("$$$", @"MMapIndexInput(path=\"", [((OrgLukhnosPortmobileFilePath *) nil_chk(path)) description], @"\")");
       jboolean useUnmap = [self getUseUnmap];
       return OrgApacheLuceneStoreByteBufferIndexInput_newInstanceWithNSString_withJavaNioByteBufferArray_withLong_withInt_withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner_withBoolean_(resourceDescription, OrgApacheLuceneStoreMMapDirectory_mapWithNSString_withJavaNioChannelsFileChannel_withLong_withLong_(self, resourceDescription, c, 0, [((JavaNioChannelsFileChannel *) nil_chk(c)) size]), [c size], chunkSizePower_, useUnmap ? OrgApacheLuceneStoreMMapDirectory_CLEANER_ : nil, useUnmap);
     }
+    @catch (JavaLangThrowable *e) {
+      __primaryException1 = e;
+      @throw e;
+    }
     @finally {
-      @try {
-        [c close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
+      if (c != nil) {
+        if (__primaryException1 != nil) {
+          @try {
+            [c close];
+          } @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
         } else {
-          __mainException = e;
+          [c close];
         }
-      }
-      if (__mainException) {
-        @throw __mainException;
       }
     }
   }
@@ -349,18 +351,20 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreMMapDirectory)
   @try {
     IOSClass *clazz = IOSClass_forName_(@"java.nio.DirectByteBuffer");
     JavaLangReflectMethod *method = [((IOSClass *) nil_chk(clazz)) getMethod:@"cleaner" parameterTypes:[IOSObjectArray arrayWithLength:0 type:IOSClass_class_()]];
-    [((JavaLangReflectMethod *) nil_chk(method)) setAccessibleWithBoolean:YES];
-    return JavaLangBoolean_valueOfWithBoolean_(YES);
+    [((JavaLangReflectMethod *) nil_chk(method)) setAccessibleWithBoolean:true];
+    return JavaLangBoolean_valueOfWithBoolean_(true);
   }
   @catch (JavaLangException *e) {
-    return JavaLangBoolean_valueOfWithBoolean_(NO);
+    return JavaLangBoolean_valueOfWithBoolean_(false);
   }
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneStoreMMapDirectory_$1_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -397,10 +401,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreMMapDirectory_$1)
   }
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneStoreMMapDirectory_$2_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -429,7 +435,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreMMapDirectory_$2)
 
 - (id)run {
   JavaLangReflectMethod *getCleanerMethod = [[((JavaNioByteBuffer *) nil_chk(val$buffer_)) getClass] getMethod:@"cleaner" parameterTypes:[IOSObjectArray arrayWithLength:0 type:IOSClass_class_()]];
-  [((JavaLangReflectMethod *) nil_chk(getCleanerMethod)) setAccessibleWithBoolean:YES];
+  [((JavaLangReflectMethod *) nil_chk(getCleanerMethod)) setAccessibleWithBoolean:true];
   id cleaner = [getCleanerMethod invokeWithId:val$buffer_ withNSObjectArray:[IOSObjectArray arrayWithLength:0 type:NSObject_class_()]];
   if (cleaner != nil) {
     [((JavaLangReflectMethod *) nil_chk([[cleaner getClass] getMethod:@"clean" parameterTypes:[IOSObjectArray arrayWithLength:0 type:IOSClass_class_()]])) invokeWithId:cleaner withNSObjectArray:[IOSObjectArray arrayWithLength:0 type:NSObject_class_()]];

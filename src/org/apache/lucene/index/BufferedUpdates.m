@@ -19,7 +19,7 @@
 #include "org/apache/lucene/util/BytesRef.h"
 #include "org/apache/lucene/util/RamUsageEstimator.h"
 
-#define OrgApacheLuceneIndexBufferedUpdates_VERBOSE_DELETES NO
+#define OrgApacheLuceneIndexBufferedUpdates_VERBOSE_DELETES false
 
 J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneIndexBufferedUpdates, VERBOSE_DELETES, jboolean)
 
@@ -36,10 +36,12 @@ JavaLangInteger *OrgApacheLuceneIndexBufferedUpdates_MAX_INT_;
 
 @implementation OrgApacheLuceneIndexBufferedUpdates
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexBufferedUpdates_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (NSString *)description {
   {

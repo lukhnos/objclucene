@@ -99,7 +99,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldS
 }
 
 - (jboolean)isEqual:(id)o {
-  if ([nil_chk(o) getClass] != OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_class_()) return NO;
+  if ([nil_chk(o) getClass] != OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource_class_()) return false;
   OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource *other = (OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource *) check_class_cast(o, [OrgApacheLuceneQueriesFunctionValuesourceDoubleFieldSource class]);
   return [super isEqual:other];
 }

@@ -50,7 +50,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilFstReverseBytesReader, bytes_, IOSByteArr
 }
 
 - (jboolean)reversed {
-  return YES;
+  return true;
 }
 
 - (void)dealloc {

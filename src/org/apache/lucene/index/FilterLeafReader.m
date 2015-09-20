@@ -589,7 +589,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexFilterLeafReader_FilterPost
 
 - (jboolean)isEqual:(id)obj {
   if (obj == nil || [obj getClass] != OrgApacheLuceneIndexFilterLeafReader_CoreClosedListenerWrapper_class_()) {
-    return NO;
+    return false;
   }
   OrgApacheLuceneIndexFilterLeafReader_CoreClosedListenerWrapper *that = (OrgApacheLuceneIndexFilterLeafReader_CoreClosedListenerWrapper *) check_class_cast(obj, [OrgApacheLuceneIndexFilterLeafReader_CoreClosedListenerWrapper class]);
   return [((id<OrgApacheLuceneIndexLeafReader_CoreClosedListener>) nil_chk(in_)) isEqual:((OrgApacheLuceneIndexFilterLeafReader_CoreClosedListenerWrapper *) nil_chk(that))->in_] && thisCoreKey_ == that->thisCoreKey_;

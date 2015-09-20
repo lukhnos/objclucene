@@ -63,10 +63,12 @@ __attribute__((unused)) static OrgApacheLuceneSearchUsageTrackingQueryCachingPol
   return self;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchUsageTrackingQueryCachingPolicy_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithOrgApacheLuceneSearchQueryCachingPolicy_CacheOnLargeSegments:(OrgApacheLuceneSearchQueryCachingPolicy_CacheOnLargeSegments *)segmentPolicy
                                                                              withInt:(jint)historySize {
@@ -102,8 +104,8 @@ __attribute__((unused)) static OrgApacheLuceneSearchUsageTrackingQueryCachingPol
 
 - (jboolean)shouldCacheWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
             withOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
-  if ([((OrgApacheLuceneSearchQueryCachingPolicy_CacheOnLargeSegments *) nil_chk(segmentPolicy_)) shouldCacheWithOrgApacheLuceneSearchQuery:query withOrgApacheLuceneIndexLeafReaderContext:context] == NO) {
-    return NO;
+  if ([((OrgApacheLuceneSearchQueryCachingPolicy_CacheOnLargeSegments *) nil_chk(segmentPolicy_)) shouldCacheWithOrgApacheLuceneSearchQuery:query withOrgApacheLuceneIndexLeafReaderContext:context] == false) {
+    return false;
   }
   jint frequency = [self frequencyWithOrgApacheLuceneSearchQuery:query];
   jint minFrequency = [self minFrequencyToCacheWithOrgApacheLuceneSearchQuery:query];

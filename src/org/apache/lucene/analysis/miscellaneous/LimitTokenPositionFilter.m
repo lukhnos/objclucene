@@ -43,30 +43,30 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilter
 
 - (jboolean)incrementToken {
   if (exhausted_) {
-    return NO;
+    return false;
   }
   if ([((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
     tokenPosition_ += [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posIncAtt_)) getPositionIncrement];
     if (tokenPosition_ <= maxTokenPosition_) {
-      return YES;
+      return true;
     }
     else {
       while (consumeAllTokens_ && [input_ incrementToken]) {
       }
-      exhausted_ = YES;
-      return NO;
+      exhausted_ = true;
+      return false;
     }
   }
   else {
-    exhausted_ = YES;
-    return NO;
+    exhausted_ = true;
+    return false;
   }
 }
 
 - (void)reset {
   [super reset];
   tokenPosition_ = 0;
-  exhausted_ = NO;
+  exhausted_ = false;
 }
 
 - (void)dealloc {
@@ -95,7 +95,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilter
 @end
 
 void OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilter *self, OrgApacheLuceneAnalysisTokenStream *inArg, jint maxTokenPosition) {
-  OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withBoolean_(self, inArg, maxTokenPosition, NO);
+  OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withBoolean_(self, inArg, maxTokenPosition, false);
 }
 
 OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilter *new_OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(OrgApacheLuceneAnalysisTokenStream *inArg, jint maxTokenPosition) {
@@ -107,7 +107,7 @@ OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilter *new_OrgApacheLucen
 void OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withBoolean_(OrgApacheLuceneAnalysisMiscellaneousLimitTokenPositionFilter *self, OrgApacheLuceneAnalysisTokenStream *inArg, jint maxTokenPosition, jboolean consumeAllTokens) {
   OrgApacheLuceneAnalysisTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, inArg);
   self->tokenPosition_ = 0;
-  self->exhausted_ = NO;
+  self->exhausted_ = false;
   JreStrongAssign(&self->posIncAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_class_()]);
   if (maxTokenPosition < 1) {
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"maxTokenPosition must be greater than zero") autorelease];

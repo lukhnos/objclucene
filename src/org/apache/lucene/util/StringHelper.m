@@ -70,10 +70,12 @@ jint OrgApacheLuceneUtilStringHelper_GOOD_FAST_HASH_SEED_;
   return OrgApacheLuceneUtilStringHelper_sortKeyLengthWithOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_(priorTerm, currentTerm);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilStringHelper_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (jboolean)equalsWithNSString:(NSString *)s1
                   withNSString:(NSString *)s2 {
@@ -152,44 +154,45 @@ jint OrgApacheLuceneUtilStringHelper_GOOD_FAST_HASH_SEED_;
         x1 = x0;
       }
       else {
-        {
-          JavaLangThrowable *__mainException = nil;
+        @try {
           JavaIoDataInputStream *is = [new_JavaIoDataInputStream_initWithJavaIoInputStream_(OrgLukhnosPortmobileFileFiles_newInputStreamWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePaths_getWithNSString_(@"/dev/urandom"))) autorelease];
+          JavaLangThrowable *__primaryException1 = nil;
           @try {
             x0 = [is readLong];
             x1 = [is readLong];
           }
-          @catch (JavaLangException *unavailable) {
-            __mainException = unavailable;
-            x0 = JavaLangSystem_nanoTime();
-            x1 = JreLShift32(((jint) [OrgApacheLuceneUtilStringHelper_class_() hash]), 32);
-            JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
-            @try {
-              JavaUtilProperties *p = JavaLangSystem_getProperties();
-              for (NSString * __strong s in nil_chk([((JavaUtilProperties *) nil_chk(p)) stringPropertyNames])) {
-                [sb appendWithNSString:s];
-                [sb appendWithNSString:[p getPropertyWithNSString:s]];
-              }
-              x1 |= ((jint) [((NSString *) nil_chk([sb description])) hash]);
-            }
-            @catch (JavaLangSecurityException *notallowed) {
-              x1 |= ((jint) [JavaLangStringBuffer_class_() hash]);
-            }
+          @catch (JavaLangThrowable *e) {
+            __primaryException1 = e;
+            @throw e;
           }
           @finally {
-            @try {
-              [is close];
-            }
-            @catch (JavaLangThrowable *e) {
-              if (__mainException) {
-                [__mainException addSuppressedWithJavaLangThrowable:e];
+            if (is != nil) {
+              if (__primaryException1 != nil) {
+                @try {
+                  [is close];
+                } @catch (JavaLangThrowable *e) {
+                  [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+                }
               } else {
-                __mainException = e;
+                [is close];
               }
             }
-            if (__mainException) {
-              @throw __mainException;
+          }
+        }
+        @catch (JavaLangException *unavailable) {
+          x0 = JavaLangSystem_nanoTime();
+          x1 = JreLShift32(((jint) [OrgApacheLuceneUtilStringHelper_class_() hash]), 32);
+          JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
+          @try {
+            JavaUtilProperties *p = JavaLangSystem_getProperties();
+            for (NSString * __strong s in nil_chk([((JavaUtilProperties *) nil_chk(p)) stringPropertyNames])) {
+              [sb appendWithNSString:s];
+              [sb appendWithNSString:[p getPropertyWithNSString:s]];
             }
+            x1 |= ((jint) [((NSString *) nil_chk([sb description])) hash]);
+          }
+          @catch (JavaLangSecurityException *notallowed) {
+            x1 |= ((jint) [JavaLangStringBuffer_class_() hash]);
           }
         }
       }
@@ -281,14 +284,14 @@ jboolean OrgApacheLuceneUtilStringHelper_equalsWithNSString_withNSString_(NSStri
 jboolean OrgApacheLuceneUtilStringHelper_startsWithWithByteArray_withOrgApacheLuceneUtilBytesRef_(IOSByteArray *ref, OrgApacheLuceneUtilBytesRef *prefix) {
   OrgApacheLuceneUtilStringHelper_initialize();
   if (((IOSByteArray *) nil_chk(ref))->size_ < ((OrgApacheLuceneUtilBytesRef *) nil_chk(prefix))->length_) {
-    return NO;
+    return false;
   }
   for (jint i = 0; i < prefix->length_; i++) {
     if (IOSByteArray_Get(ref, i) != IOSByteArray_Get(nil_chk(prefix->bytes_), prefix->offset_ + i)) {
-      return NO;
+      return false;
     }
   }
-  return YES;
+  return true;
 }
 
 jboolean OrgApacheLuceneUtilStringHelper_startsWithWithOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilBytesRef *ref, OrgApacheLuceneUtilBytesRef *prefix) {
@@ -304,17 +307,17 @@ jboolean OrgApacheLuceneUtilStringHelper_endsWithWithOrgApacheLuceneUtilBytesRef
 jboolean OrgApacheLuceneUtilStringHelper_sliceEqualsWithOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_withInt_(OrgApacheLuceneUtilBytesRef *sliceToTest, OrgApacheLuceneUtilBytesRef *other, jint pos) {
   OrgApacheLuceneUtilStringHelper_initialize();
   if (pos < 0 || ((OrgApacheLuceneUtilBytesRef *) nil_chk(sliceToTest))->length_ - pos < ((OrgApacheLuceneUtilBytesRef *) nil_chk(other))->length_) {
-    return NO;
+    return false;
   }
   jint i = ((OrgApacheLuceneUtilBytesRef *) nil_chk(sliceToTest))->offset_ + pos;
   jint j = ((OrgApacheLuceneUtilBytesRef *) nil_chk(other))->offset_;
   jint k = other->offset_ + other->length_;
   while (j < k) {
     if (IOSByteArray_Get(nil_chk(sliceToTest->bytes_), i++) != IOSByteArray_Get(other->bytes_, j++)) {
-      return NO;
+      return false;
     }
   }
-  return YES;
+  return true;
 }
 
 jint OrgApacheLuceneUtilStringHelper_murmurhash3_x86_32WithByteArray_withInt_withInt_withInt_(IOSByteArray *data, jint offset, jint len, jint seed) {

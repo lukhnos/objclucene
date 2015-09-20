@@ -91,10 +91,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsNormsConsumer_$1_$1)
 
 @implementation OrgApacheLuceneCodecsNormsConsumer
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsNormsConsumer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)addNormsFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)field
                                   withJavaLangIterable:(id<JavaLangIterable>)values {
@@ -228,7 +230,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsNormsConsumer_$1)
     @throw [new_JavaUtilNoSuchElementException_init() autorelease];
   }
   JreAssert((nextIsSet_), (@"org/apache/lucene/codecs/NormsConsumer.java:138 condition failed: assert nextIsSet;"));
-  nextIsSet_ = NO;
+  nextIsSet_ = false;
   return JavaLangLong_valueOfWithLong_(nextValue_);
 }
 
@@ -274,9 +276,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsNormsConsumer_$1)
 @end
 
 jboolean OrgApacheLuceneCodecsNormsConsumer_$1_$1_setNext(OrgApacheLuceneCodecsNormsConsumer_$1_$1 *self) {
-  while (YES) {
+  while (true) {
     if (self->readerUpto_ == [((id<JavaUtilList>) nil_chk(self->this$0_->val$toMerge_)) size]) {
-      return NO;
+      return false;
     }
     if (self->currentValues_ == nil || self->docIDUpto_ == self->maxDoc_) {
       self->readerUpto_++;
@@ -289,10 +291,10 @@ jboolean OrgApacheLuceneCodecsNormsConsumer_$1_$1_setNext(OrgApacheLuceneCodecsN
       continue;
     }
     if (self->currentLiveDocs_ == nil || [self->currentLiveDocs_ getWithInt:self->docIDUpto_]) {
-      self->nextIsSet_ = YES;
+      self->nextIsSet_ = true;
       self->nextValue_ = [((OrgApacheLuceneIndexNumericDocValues *) nil_chk(self->currentValues_)) getWithInt:self->docIDUpto_];
       self->docIDUpto_++;
-      return YES;
+      return true;
     }
     self->docIDUpto_++;
   }

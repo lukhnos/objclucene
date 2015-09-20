@@ -25,10 +25,12 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsIdversionSinglePostingsEnum, payload_, 
 
 @implementation OrgApacheLuceneCodecsIdversionSinglePostingsEnum
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsIdversionSinglePostingsEnum_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)resetWithInt:(jint)singleDocID
             withLong:(jlong)version_ {

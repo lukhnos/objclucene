@@ -11,10 +11,12 @@
 
 @implementation OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)onInitWithJavaUtilList:(id<JavaUtilList>)commits {
   [self onCommitWithJavaUtilList:commits];

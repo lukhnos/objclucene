@@ -182,7 +182,7 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)value {
 - (void)flushWithOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state
             withOrgApacheLuceneCodecsDocValuesConsumer:(OrgApacheLuceneCodecsDocValuesConsumer *)dvConsumer {
   jint maxDoc = [((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentWriteState *) nil_chk(state))->segmentInfo_)) maxDoc];
-  [((OrgApacheLuceneUtilPagedBytes *) nil_chk(bytes_)) freezeWithBoolean:NO];
+  [((OrgApacheLuceneUtilPagedBytes *) nil_chk(bytes_)) freezeWithBoolean:false];
   OrgApacheLuceneUtilPackedPackedLongValues *lengths = [((OrgApacheLuceneUtilPackedPackedLongValues_Builder *) nil_chk(self->lengths_)) build];
   [((OrgApacheLuceneCodecsDocValuesConsumer *) nil_chk(dvConsumer)) addBinaryFieldWithOrgApacheLuceneIndexFieldInfo:fieldInfo_ withJavaLangIterable:[new_OrgApacheLuceneIndexBinaryDocValuesWriter_$1_initWithOrgApacheLuceneIndexBinaryDocValuesWriter_withInt_withOrgApacheLuceneUtilPackedPackedLongValues_(self, maxDoc, lengths) autorelease]];
 }

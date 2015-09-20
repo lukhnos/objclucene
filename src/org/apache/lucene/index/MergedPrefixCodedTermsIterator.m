@@ -124,10 +124,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMergedPrefixCodedTermsItera
                     withId:(OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *)b {
   jint cmp = [((OrgApacheLuceneUtilBytesRef *) nil_chk(((OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *) nil_chk(a))->bytes_)) compareToWithId:((OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *) nil_chk(b))->bytes_];
   if (cmp < 0) {
-    return YES;
+    return true;
   }
   else if (cmp > 0) {
-    return NO;
+    return false;
   }
   else {
     return [a delGen] > [b delGen];

@@ -54,7 +54,7 @@ __attribute__((unused)) static OrgApacheLuceneSearchQuery *OrgApacheLuceneQueryp
   if (field == nil) {
     id<JavaUtilList> clauses = [new_JavaUtilArrayList_init() autorelease];
     for (jint i = 0; i < ((IOSObjectArray *) nil_chk(fields_))->size_; i++) {
-      OrgApacheLuceneSearchQuery *q = [super getFieldQueryWithNSString:IOSObjectArray_Get(fields_, i) withNSString:queryText withBoolean:YES];
+      OrgApacheLuceneSearchQuery *q = [super getFieldQueryWithNSString:IOSObjectArray_Get(fields_, i) withNSString:queryText withBoolean:true];
       if (q != nil) {
         if (boosts_ != nil) {
           JavaLangFloat *boost = [boosts_ getWithId:IOSObjectArray_Get(fields_, i)];
@@ -67,9 +67,9 @@ __attribute__((unused)) static OrgApacheLuceneSearchQuery *OrgApacheLuceneQueryp
       }
     }
     if ([clauses size] == 0) return nil;
-    return [self getBooleanQueryWithJavaUtilList:clauses withBoolean:YES];
+    return [self getBooleanQueryWithJavaUtilList:clauses withBoolean:true];
   }
-  OrgApacheLuceneSearchQuery *q = [super getFieldQueryWithNSString:field withNSString:queryText withBoolean:YES];
+  OrgApacheLuceneSearchQuery *q = [super getFieldQueryWithNSString:field withNSString:queryText withBoolean:true];
   q = OrgApacheLuceneQueryparserClassicMultiFieldQueryParser_applySlopWithOrgApacheLuceneSearchQuery_withInt_(self, q, slop);
   return q;
 }
@@ -97,7 +97,7 @@ __attribute__((unused)) static OrgApacheLuceneSearchQuery *OrgApacheLuceneQueryp
       }
     }
     if ([clauses size] == 0) return nil;
-    return [self getBooleanQueryWithJavaUtilList:clauses withBoolean:YES];
+    return [self getBooleanQueryWithJavaUtilList:clauses withBoolean:true];
   }
   OrgApacheLuceneSearchQuery *q = [super getFieldQueryWithNSString:field withNSString:queryText withBoolean:quoted];
   return q;
@@ -111,7 +111,7 @@ __attribute__((unused)) static OrgApacheLuceneSearchQuery *OrgApacheLuceneQueryp
     for (jint i = 0; i < ((IOSObjectArray *) nil_chk(fields_))->size_; i++) {
       [clauses addWithId:[new_OrgApacheLuceneSearchBooleanClause_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_OccurEnum_([self getFuzzyQueryWithNSString:IOSObjectArray_Get(fields_, i) withNSString:termStr withFloat:minSimilarity], JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, SHOULD)) autorelease]];
     }
-    return [self getBooleanQueryWithJavaUtilList:clauses withBoolean:YES];
+    return [self getBooleanQueryWithJavaUtilList:clauses withBoolean:true];
   }
   return [super getFuzzyQueryWithNSString:field withNSString:termStr withFloat:minSimilarity];
 }
@@ -123,7 +123,7 @@ __attribute__((unused)) static OrgApacheLuceneSearchQuery *OrgApacheLuceneQueryp
     for (jint i = 0; i < ((IOSObjectArray *) nil_chk(fields_))->size_; i++) {
       [clauses addWithId:[new_OrgApacheLuceneSearchBooleanClause_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_OccurEnum_([self getPrefixQueryWithNSString:IOSObjectArray_Get(fields_, i) withNSString:termStr], JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, SHOULD)) autorelease]];
     }
-    return [self getBooleanQueryWithJavaUtilList:clauses withBoolean:YES];
+    return [self getBooleanQueryWithJavaUtilList:clauses withBoolean:true];
   }
   return [super getPrefixQueryWithNSString:field withNSString:termStr];
 }
@@ -135,7 +135,7 @@ __attribute__((unused)) static OrgApacheLuceneSearchQuery *OrgApacheLuceneQueryp
     for (jint i = 0; i < ((IOSObjectArray *) nil_chk(fields_))->size_; i++) {
       [clauses addWithId:[new_OrgApacheLuceneSearchBooleanClause_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_OccurEnum_([self getWildcardQueryWithNSString:IOSObjectArray_Get(fields_, i) withNSString:termStr], JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, SHOULD)) autorelease]];
     }
-    return [self getBooleanQueryWithJavaUtilList:clauses withBoolean:YES];
+    return [self getBooleanQueryWithJavaUtilList:clauses withBoolean:true];
   }
   return [super getWildcardQueryWithNSString:field withNSString:termStr];
 }
@@ -150,7 +150,7 @@ __attribute__((unused)) static OrgApacheLuceneSearchQuery *OrgApacheLuceneQueryp
     for (jint i = 0; i < ((IOSObjectArray *) nil_chk(fields_))->size_; i++) {
       [clauses addWithId:[new_OrgApacheLuceneSearchBooleanClause_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_OccurEnum_([self getRangeQueryWithNSString:IOSObjectArray_Get(fields_, i) withNSString:part1 withNSString:part2 withBoolean:startInclusive withBoolean:endInclusive], JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, SHOULD)) autorelease]];
     }
-    return [self getBooleanQueryWithJavaUtilList:clauses withBoolean:YES];
+    return [self getBooleanQueryWithJavaUtilList:clauses withBoolean:true];
   }
   return [super getRangeQueryWithNSString:field withNSString:part1 withNSString:part2 withBoolean:startInclusive withBoolean:endInclusive];
 }
@@ -162,7 +162,7 @@ __attribute__((unused)) static OrgApacheLuceneSearchQuery *OrgApacheLuceneQueryp
     for (jint i = 0; i < ((IOSObjectArray *) nil_chk(fields_))->size_; i++) {
       [clauses addWithId:[new_OrgApacheLuceneSearchBooleanClause_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_OccurEnum_([self getRegexpQueryWithNSString:IOSObjectArray_Get(fields_, i) withNSString:termStr], JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, SHOULD)) autorelease]];
     }
-    return [self getBooleanQueryWithJavaUtilList:clauses withBoolean:YES];
+    return [self getBooleanQueryWithJavaUtilList:clauses withBoolean:true];
   }
   return [super getRegexpQueryWithNSString:field withNSString:termStr];
 }

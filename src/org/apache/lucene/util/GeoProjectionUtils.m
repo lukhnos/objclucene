@@ -106,10 +106,12 @@ jdouble OrgApacheLuceneUtilGeoProjectionUtils_ECCENTRICITY_;
   return OrgApacheLuceneUtilGeoProjectionUtils_pointFromLonLatBearingWithDouble_withDouble_withDouble_withDouble_withDoubleArray_(lon, lat, bearing, dist, pt);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilGeoProjectionUtils_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilGeoProjectionUtils class]) {
@@ -148,7 +150,7 @@ jdouble OrgApacheLuceneUtilGeoProjectionUtils_ECCENTRICITY_;
 
 IOSDoubleArray *OrgApacheLuceneUtilGeoProjectionUtils_ecfToLLAWithDouble_withDouble_withDouble_withDoubleArray_(jdouble x, jdouble y, jdouble z, IOSDoubleArray *lla) {
   OrgApacheLuceneUtilGeoProjectionUtils_initialize();
-  jboolean atPole = NO;
+  jboolean atPole = false;
   jdouble ad_c = 1.0026000;
   jdouble e2 = (OrgApacheLuceneUtilGeoProjectionUtils_SEMIMAJOR_AXIS2 - OrgApacheLuceneUtilGeoProjectionUtils_SEMIMINOR_AXIS2) / (OrgApacheLuceneUtilGeoProjectionUtils_SEMIMAJOR_AXIS2);
   jdouble ep2 = (OrgApacheLuceneUtilGeoProjectionUtils_SEMIMAJOR_AXIS2 - OrgApacheLuceneUtilGeoProjectionUtils_SEMIMINOR_AXIS2) / (OrgApacheLuceneUtilGeoProjectionUtils_SEMIMINOR_AXIS2);
@@ -167,7 +169,7 @@ IOSDoubleArray *OrgApacheLuceneUtilGeoProjectionUtils_ecfToLLAWithDouble_withDou
       *IOSDoubleArray_GetRef(nil_chk(lla), 0) = -OrgApacheLuceneUtilGeoProjectionUtils_PI_OVER_2;
     }
     else {
-      atPole = YES;
+      atPole = true;
       *IOSDoubleArray_GetRef(nil_chk(lla), 0) = 0.0;
       if (z > 0.0) {
         *IOSDoubleArray_GetRef(lla, 1) = OrgApacheLuceneUtilGeoProjectionUtils_PI_OVER_2;

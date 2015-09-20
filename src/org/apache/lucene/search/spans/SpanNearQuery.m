@@ -174,7 +174,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery_
                                                                                  withBoolean:(jboolean)needsScores {
   id<JavaUtilList> subWeights = [new_JavaUtilArrayList_init() autorelease];
   for (OrgApacheLuceneSearchSpansSpanQuery * __strong q in nil_chk(clauses_)) {
-    [subWeights addWithId:[((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(q)) createWeightWithOrgApacheLuceneSearchIndexSearcher:searcher withBoolean:NO]];
+    [subWeights addWithId:[((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(q)) createWeightWithOrgApacheLuceneSearchIndexSearcher:searcher withBoolean:false]];
   }
   return [new_OrgApacheLuceneSearchSpansSpanNearQuery_SpanNearWeight_initWithOrgApacheLuceneSearchSpansSpanNearQuery_withJavaUtilList_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_(self, subWeights, searcher, needsScores ? OrgApacheLuceneSearchSpansSpanQuery_getTermContextsWithJavaUtilCollection_(subWeights) : nil) autorelease];
 }
@@ -210,7 +210,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery_
 
 - (jboolean)isEqual:(id)o {
   if (![super isEqual:o]) {
-    return NO;
+    return false;
   }
   OrgApacheLuceneSearchSpansSpanNearQuery *spanNearQuery = (OrgApacheLuceneSearchSpansSpanNearQuery *) check_class_cast(o, [OrgApacheLuceneSearchSpansSpanNearQuery class]);
   return (inOrder_ == ((OrgApacheLuceneSearchSpansSpanNearQuery *) nil_chk(spanNearQuery))->inOrder_) && (slop_ == spanNearQuery->slop_) && [((id<JavaUtilList>) nil_chk(clauses_)) isEqual:spanNearQuery->clauses_];
@@ -266,16 +266,16 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanNearQuery_SpanGapQuery_
 
 OrgApacheLuceneSearchSpansSpanNearQuery_Builder *OrgApacheLuceneSearchSpansSpanNearQuery_newOrderedNearQueryWithNSString_(NSString *field) {
   OrgApacheLuceneSearchSpansSpanNearQuery_initialize();
-  return [new_OrgApacheLuceneSearchSpansSpanNearQuery_Builder_initWithNSString_withBoolean_(field, YES) autorelease];
+  return [new_OrgApacheLuceneSearchSpansSpanNearQuery_Builder_initWithNSString_withBoolean_(field, true) autorelease];
 }
 
 OrgApacheLuceneSearchSpansSpanNearQuery_Builder *OrgApacheLuceneSearchSpansSpanNearQuery_newUnorderedNearQueryWithNSString_(NSString *field) {
   OrgApacheLuceneSearchSpansSpanNearQuery_initialize();
-  return [new_OrgApacheLuceneSearchSpansSpanNearQuery_Builder_initWithNSString_withBoolean_(field, NO) autorelease];
+  return [new_OrgApacheLuceneSearchSpansSpanNearQuery_Builder_initWithNSString_withBoolean_(field, false) autorelease];
 }
 
 void OrgApacheLuceneSearchSpansSpanNearQuery_initWithOrgApacheLuceneSearchSpansSpanQueryArray_withInt_withBoolean_(OrgApacheLuceneSearchSpansSpanNearQuery *self, IOSObjectArray *clauses, jint slop, jboolean inOrder) {
-  OrgApacheLuceneSearchSpansSpanNearQuery_initWithOrgApacheLuceneSearchSpansSpanQueryArray_withInt_withBoolean_withBoolean_(self, clauses, slop, inOrder, YES);
+  OrgApacheLuceneSearchSpansSpanNearQuery_initWithOrgApacheLuceneSearchSpansSpanQueryArray_withInt_withBoolean_withBoolean_(self, clauses, slop, inOrder, true);
 }
 
 OrgApacheLuceneSearchSpansSpanNearQuery *new_OrgApacheLuceneSearchSpansSpanNearQuery_initWithOrgApacheLuceneSearchSpansSpanQueryArray_withInt_withBoolean_(IOSObjectArray *clauses, jint slop, jboolean inOrder) {
@@ -323,7 +323,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansSpanNearQuery)
 }
 
 - (OrgApacheLuceneSearchSpansSpanNearQuery_Builder *)addClauseWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)clause {
-  if (OrgLukhnosPortmobileUtilObjects_equalsWithId_withId_([((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(clause)) getField], field_) == NO) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@$$", @"Cannot add clause ", clause, @" to SpanNearQuery for field ", field_)) autorelease];
+  if (OrgLukhnosPortmobileUtilObjects_equalsWithId_withId_([((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(clause)) getField], field_) == false) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@$$", @"Cannot add clause ", clause, @" to SpanNearQuery for field ", field_)) autorelease];
   [((id<JavaUtilList>) nil_chk(self->clauses_)) addWithId:clause];
   return self;
 }

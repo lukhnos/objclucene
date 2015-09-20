@@ -20,10 +20,12 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleCoreConfigAbstractQueryCon
 
 @implementation OrgApacheLuceneQueryparserFlexibleCoreConfigAbstractQueryConfig
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueryparserFlexibleCoreConfigAbstractQueryConfig_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (id)getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:(OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey *)key {
   if (key == nil) {

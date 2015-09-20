@@ -8,10 +8,12 @@
 
 @implementation OrgApacheLuceneSearchHighlightDefaultEncoder
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchHighlightDefaultEncoder_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (NSString *)encodeTextWithNSString:(NSString *)originalText {
   return originalText;

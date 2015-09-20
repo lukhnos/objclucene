@@ -38,10 +38,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPayloadsTypeAsPayloadTokenFilter, typ
     if (type != nil && ![type isEmpty]) {
       [((id<OrgApacheLuceneAnalysisTokenattributesPayloadAttribute>) nil_chk(payloadAtt_)) setPayloadWithOrgApacheLuceneUtilBytesRef:[new_OrgApacheLuceneUtilBytesRef_initWithJavaLangCharSequence_(type) autorelease]];
     }
-    return YES;
+    return true;
   }
   else {
-    return NO;
+    return false;
   }
 }
 

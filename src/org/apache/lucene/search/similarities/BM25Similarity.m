@@ -137,10 +137,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchSimilaritiesBM25Similarity)
   return self;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSimilaritiesBM25Similarity_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jfloat)idfWithLong:(jlong)docFreq
              withLong:(jlong)numDocs {
@@ -313,7 +315,7 @@ withOrgApacheLuceneSearchSimilaritiesBM25Similarity_BM25Stats:(OrgApacheLuceneSe
 
 void OrgApacheLuceneSearchSimilaritiesBM25Similarity_initWithFloat_withFloat_(OrgApacheLuceneSearchSimilaritiesBM25Similarity *self, jfloat k1, jfloat b) {
   OrgApacheLuceneSearchSimilaritiesSimilarity_init(self);
-  self->discountOverlaps_ = YES;
+  self->discountOverlaps_ = true;
   self->k1_ = k1;
   self->b_ = b;
 }
@@ -326,7 +328,7 @@ OrgApacheLuceneSearchSimilaritiesBM25Similarity *new_OrgApacheLuceneSearchSimila
 
 void OrgApacheLuceneSearchSimilaritiesBM25Similarity_init(OrgApacheLuceneSearchSimilaritiesBM25Similarity *self) {
   OrgApacheLuceneSearchSimilaritiesSimilarity_init(self);
-  self->discountOverlaps_ = YES;
+  self->discountOverlaps_ = true;
   self->k1_ = 1.2f;
   self->b_ = 0.75f;
 }

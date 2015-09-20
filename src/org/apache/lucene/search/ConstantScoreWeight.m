@@ -54,7 +54,7 @@
   OrgApacheLuceneSearchScorer *s = [self scorerWithOrgApacheLuceneIndexLeafReaderContext:context];
   jboolean exists;
   if (s == nil) {
-    exists = NO;
+    exists = false;
   }
   else {
     OrgApacheLuceneSearchTwoPhaseIterator *twoPhase = [s asTwoPhaseIterator];

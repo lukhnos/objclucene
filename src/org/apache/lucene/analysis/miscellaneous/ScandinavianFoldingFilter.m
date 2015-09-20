@@ -63,7 +63,7 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldi
 
 - (jboolean)incrementToken {
   if (![((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
-    return NO;
+    return false;
   }
   IOSCharArray *buffer = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(charTermAttribute_)) buffer];
   jint length = [charTermAttribute_ length];
@@ -91,7 +91,7 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisMiscellaneousScandinavianFoldi
     }
   }
   [charTermAttribute_ setLengthWithInt:length];
-  return YES;
+  return true;
 }
 
 - (void)dealloc {

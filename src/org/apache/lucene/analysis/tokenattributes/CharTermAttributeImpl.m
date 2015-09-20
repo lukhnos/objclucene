@@ -50,10 +50,12 @@ __attribute__((unused)) static id<OrgApacheLuceneAnalysisTokenattributesCharTerm
 
 @implementation OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)copyBufferWithCharArray:(IOSCharArray *)buffer
                         withInt:(jint)offset
@@ -172,19 +174,19 @@ __attribute__((unused)) static id<OrgApacheLuceneAnalysisTokenattributesCharTerm
 
 - (jboolean)isEqual:(id)other {
   if (other == self) {
-    return YES;
+    return true;
   }
   if ([other isKindOfClass:[OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl class]]) {
     OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl *o = ((OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl *) check_class_cast(other, [OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl class]));
-    if (termLength_ != ((OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl *) nil_chk(o))->termLength_) return NO;
+    if (termLength_ != ((OrgApacheLuceneAnalysisTokenattributesCharTermAttributeImpl *) nil_chk(o))->termLength_) return false;
     for (jint i = 0; i < termLength_; i++) {
       if (IOSCharArray_Get(nil_chk(termBuffer_), i) != IOSCharArray_Get(o->termBuffer_, i)) {
-        return NO;
+        return false;
       }
     }
-    return YES;
+    return true;
   }
-  return NO;
+  return false;
 }
 
 - (NSString *)description {

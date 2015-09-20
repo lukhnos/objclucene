@@ -17,10 +17,12 @@
 
 @implementation OrgApacheLuceneQueryparserFlexibleStandardBuildersRegexpQueryNodeBuilder
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueryparserFlexibleStandardBuildersRegexpQueryNodeBuilder_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneSearchRegexpQuery *)buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryNode {
   OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode *regexpNode = (OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode *) check_class_cast(queryNode, [OrgApacheLuceneQueryparserFlexibleStandardNodesRegexpQueryNode class]);

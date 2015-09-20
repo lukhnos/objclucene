@@ -76,7 +76,7 @@ NSString *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilterFactory_TYPES_ 
 
 - (void)informWithOrgApacheLuceneAnalysisUtilResourceLoader:(id<OrgApacheLuceneAnalysisUtilResourceLoader>)loader {
   if (wordFiles_ != nil) {
-    JreStrongAssign(&protectedWords_, [self getWordSetWithOrgApacheLuceneAnalysisUtilResourceLoader:loader withNSString:wordFiles_ withBoolean:NO]);
+    JreStrongAssign(&protectedWords_, [self getWordSetWithOrgApacheLuceneAnalysisUtilResourceLoader:loader withNSString:wordFiles_ withBoolean:false]);
   }
   if (types_ != nil) {
     id<JavaUtilList> files = [self splitFileNamesWithNSString:types_];

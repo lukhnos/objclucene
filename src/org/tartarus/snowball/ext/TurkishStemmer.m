@@ -458,7 +458,7 @@ J2OBJC_INITIALIZED_DEFN(OrgTartarusSnowballExtTurkishStemmer)
   jint v_1;
   jint v_2;
   if (!OrgTartarusSnowballExtTurkishStemmer_r_more_than_one_syllable_word(self)) {
-    return NO;
+    return false;
   }
   limit_backward_ = cursor_;
   cursor_ = limit_;
@@ -471,7 +471,7 @@ J2OBJC_INITIALIZED_DEFN(OrgTartarusSnowballExtTurkishStemmer)
   break_lab0: ;
   cursor_ = limit_ - v_1;
   if (!(B_continue_stemming_noun_suffixes_)) {
-    return NO;
+    return false;
   }
   v_2 = limit_ - cursor_;
   {
@@ -483,9 +483,9 @@ J2OBJC_INITIALIZED_DEFN(OrgTartarusSnowballExtTurkishStemmer)
   cursor_ = limit_ - v_2;
   cursor_ = limit_backward_;
   if (!OrgTartarusSnowballExtTurkishStemmer_r_postlude(self)) {
-    return NO;
+    return false;
   }
-  return YES;
+  return true;
 }
 
 - (jboolean)isEqual:(id)o {
@@ -496,10 +496,12 @@ J2OBJC_INITIALIZED_DEFN(OrgTartarusSnowballExtTurkishStemmer)
   return ((jint) [((NSString *) nil_chk([OrgTartarusSnowballExtTurkishStemmer_class_() getName])) hash]);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgTartarusSnowballExtTurkishStemmer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgTartarusSnowballExtTurkishStemmer class]) {
@@ -645,7 +647,7 @@ jboolean OrgTartarusSnowballExtTurkishStemmer_r_check_vowel_harmony(OrgTartarusS
   jint v_10;
   jint v_11;
   v_1 = self->limit_ - self->cursor_;
-  while (YES) {
+  while (true) {
     v_2 = self->limit_ - self->cursor_;
     {
       if (!([self in_grouping_bWithCharArray:OrgTartarusSnowballExtTurkishStemmer_g_vowel_ withInt:97 withInt:305])) {
@@ -657,7 +659,7 @@ jboolean OrgTartarusSnowballExtTurkishStemmer_r_check_vowel_harmony(OrgTartarusS
     break_lab1: ;
     self->cursor_ = self->limit_ - v_2;
     if (self->cursor_ <= self->limit_backward_) {
-      return NO;
+      return false;
     }
     self->cursor_--;
   }
@@ -668,7 +670,7 @@ jboolean OrgTartarusSnowballExtTurkishStemmer_r_check_vowel_harmony(OrgTartarusS
       if (!([self eq_s_bWithInt:1 withJavaLangCharSequence:@"a"])) {
         goto break_lab3;
       }
-      while (YES) {
+      while (true) {
         v_4 = self->limit_ - self->cursor_;
         {
           if (!([self in_grouping_bWithCharArray:OrgTartarusSnowballExtTurkishStemmer_g_vowel1_ withInt:97 withInt:305])) {
@@ -693,7 +695,7 @@ jboolean OrgTartarusSnowballExtTurkishStemmer_r_check_vowel_harmony(OrgTartarusS
       if (!([self eq_s_bWithInt:1 withJavaLangCharSequence:@"e"])) {
         goto break_lab6;
       }
-      while (YES) {
+      while (true) {
         v_5 = self->limit_ - self->cursor_;
         {
           if (!([self in_grouping_bWithCharArray:OrgTartarusSnowballExtTurkishStemmer_g_vowel2_ withInt:101 withInt:252])) {
@@ -718,7 +720,7 @@ jboolean OrgTartarusSnowballExtTurkishStemmer_r_check_vowel_harmony(OrgTartarusS
       if (!([self eq_s_bWithInt:1 withJavaLangCharSequence:@"\u0131"])) {
         goto break_lab9;
       }
-      while (YES) {
+      while (true) {
         v_6 = self->limit_ - self->cursor_;
         {
           if (!([self in_grouping_bWithCharArray:OrgTartarusSnowballExtTurkishStemmer_g_vowel3_ withInt:97 withInt:305])) {
@@ -743,7 +745,7 @@ jboolean OrgTartarusSnowballExtTurkishStemmer_r_check_vowel_harmony(OrgTartarusS
       if (!([self eq_s_bWithInt:1 withJavaLangCharSequence:@"i"])) {
         goto break_lab12;
       }
-      while (YES) {
+      while (true) {
         v_7 = self->limit_ - self->cursor_;
         {
           if (!([self in_grouping_bWithCharArray:OrgTartarusSnowballExtTurkishStemmer_g_vowel4_ withInt:101 withInt:105])) {
@@ -768,7 +770,7 @@ jboolean OrgTartarusSnowballExtTurkishStemmer_r_check_vowel_harmony(OrgTartarusS
       if (!([self eq_s_bWithInt:1 withJavaLangCharSequence:@"o"])) {
         goto break_lab15;
       }
-      while (YES) {
+      while (true) {
         v_8 = self->limit_ - self->cursor_;
         {
           if (!([self in_grouping_bWithCharArray:OrgTartarusSnowballExtTurkishStemmer_g_vowel5_ withInt:111 withInt:117])) {
@@ -793,7 +795,7 @@ jboolean OrgTartarusSnowballExtTurkishStemmer_r_check_vowel_harmony(OrgTartarusS
       if (!([self eq_s_bWithInt:1 withJavaLangCharSequence:@"\u00f6"])) {
         goto break_lab18;
       }
-      while (YES) {
+      while (true) {
         v_9 = self->limit_ - self->cursor_;
         {
           if (!([self in_grouping_bWithCharArray:OrgTartarusSnowballExtTurkishStemmer_g_vowel6_ withInt:246 withInt:252])) {
@@ -818,7 +820,7 @@ jboolean OrgTartarusSnowballExtTurkishStemmer_r_check_vowel_harmony(OrgTartarusS
       if (!([self eq_s_bWithInt:1 withJavaLangCharSequence:@"u"])) {
         goto break_lab21;
       }
-      while (YES) {
+      while (true) {
         v_10 = self->limit_ - self->cursor_;
         {
           if (!([self in_grouping_bWithCharArray:OrgTartarusSnowballExtTurkishStemmer_g_vowel5_ withInt:111 withInt:117])) {
@@ -840,9 +842,9 @@ jboolean OrgTartarusSnowballExtTurkishStemmer_r_check_vowel_harmony(OrgTartarusS
     break_lab21: ;
     self->cursor_ = self->limit_ - v_3;
     if (!([self eq_s_bWithInt:1 withJavaLangCharSequence:@"\u00fc"])) {
-      return NO;
+      return false;
     }
-    while (YES) {
+    while (true) {
       v_11 = self->limit_ - self->cursor_;
       {
         if (!([self in_grouping_bWithCharArray:OrgTartarusSnowballExtTurkishStemmer_g_vowel6_ withInt:246 withInt:252])) {
@@ -854,7 +856,7 @@ jboolean OrgTartarusSnowballExtTurkishStemmer_r_check_vowel_harmony(OrgTartarusS
       break_lab25: ;
       self->cursor_ = self->limit_ - v_11;
       if (self->cursor_ <= self->limit_backward_) {
-        return NO;
+        return false;
       }
       self->cursor_--;
     }
@@ -862,7 +864,7 @@ jboolean OrgTartarusSnowballExtTurkishStemmer_r_check_vowel_harmony(OrgTartarusS
   }
   break_lab2: ;
   self->cursor_ = self->limit_ - v_1;
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtTurkishStemmer_r_mark_suffix_with_optional_n_consonant(OrgTartarusSnowballExtTurkishStemmer *self) {
@@ -902,25 +904,25 @@ jboolean OrgTartarusSnowballExtTurkishStemmer_r_mark_suffix_with_optional_n_cons
           goto break_lab2;
         }
         self->cursor_ = self->limit_ - v_5;
-        return NO;
+        return false;
       }
       break_lab2: ;
       self->cursor_ = self->limit_ - v_4;
     }
     v_6 = self->limit_ - self->cursor_;
     if (self->cursor_ <= self->limit_backward_) {
-      return NO;
+      return false;
     }
     self->cursor_--;
     v_7 = self->limit_ - self->cursor_;
     if (!([self in_grouping_bWithCharArray:OrgTartarusSnowballExtTurkishStemmer_g_vowel_ withInt:97 withInt:305])) {
-      return NO;
+      return false;
     }
     self->cursor_ = self->limit_ - v_7;
     self->cursor_ = self->limit_ - v_6;
   }
   break_lab0: ;
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtTurkishStemmer_r_mark_suffix_with_optional_s_consonant(OrgTartarusSnowballExtTurkishStemmer *self) {
@@ -960,25 +962,25 @@ jboolean OrgTartarusSnowballExtTurkishStemmer_r_mark_suffix_with_optional_s_cons
           goto break_lab2;
         }
         self->cursor_ = self->limit_ - v_5;
-        return NO;
+        return false;
       }
       break_lab2: ;
       self->cursor_ = self->limit_ - v_4;
     }
     v_6 = self->limit_ - self->cursor_;
     if (self->cursor_ <= self->limit_backward_) {
-      return NO;
+      return false;
     }
     self->cursor_--;
     v_7 = self->limit_ - self->cursor_;
     if (!([self in_grouping_bWithCharArray:OrgTartarusSnowballExtTurkishStemmer_g_vowel_ withInt:97 withInt:305])) {
-      return NO;
+      return false;
     }
     self->cursor_ = self->limit_ - v_7;
     self->cursor_ = self->limit_ - v_6;
   }
   break_lab0: ;
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtTurkishStemmer_r_mark_suffix_with_optional_y_consonant(OrgTartarusSnowballExtTurkishStemmer *self) {
@@ -1018,25 +1020,25 @@ jboolean OrgTartarusSnowballExtTurkishStemmer_r_mark_suffix_with_optional_y_cons
           goto break_lab2;
         }
         self->cursor_ = self->limit_ - v_5;
-        return NO;
+        return false;
       }
       break_lab2: ;
       self->cursor_ = self->limit_ - v_4;
     }
     v_6 = self->limit_ - self->cursor_;
     if (self->cursor_ <= self->limit_backward_) {
-      return NO;
+      return false;
     }
     self->cursor_--;
     v_7 = self->limit_ - self->cursor_;
     if (!([self in_grouping_bWithCharArray:OrgTartarusSnowballExtTurkishStemmer_g_vowel_ withInt:97 withInt:305])) {
-      return NO;
+      return false;
     }
     self->cursor_ = self->limit_ - v_7;
     self->cursor_ = self->limit_ - v_6;
   }
   break_lab0: ;
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtTurkishStemmer_r_mark_suffix_with_optional_U_vowel(OrgTartarusSnowballExtTurkishStemmer *self) {
@@ -1076,313 +1078,313 @@ jboolean OrgTartarusSnowballExtTurkishStemmer_r_mark_suffix_with_optional_U_vowe
           goto break_lab2;
         }
         self->cursor_ = self->limit_ - v_5;
-        return NO;
+        return false;
       }
       break_lab2: ;
       self->cursor_ = self->limit_ - v_4;
     }
     v_6 = self->limit_ - self->cursor_;
     if (self->cursor_ <= self->limit_backward_) {
-      return NO;
+      return false;
     }
     self->cursor_--;
     v_7 = self->limit_ - self->cursor_;
     if (!([self out_grouping_bWithCharArray:OrgTartarusSnowballExtTurkishStemmer_g_vowel_ withInt:97 withInt:305])) {
-      return NO;
+      return false;
     }
     self->cursor_ = self->limit_ - v_7;
     self->cursor_ = self->limit_ - v_6;
   }
   break_lab0: ;
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtTurkishStemmer_r_mark_possessives(OrgTartarusSnowballExtTurkishStemmer *self) {
   if ([self find_among_bWithOrgTartarusSnowballAmongArray:OrgTartarusSnowballExtTurkishStemmer_a_0_ withInt:10] == 0) {
-    return NO;
+    return false;
   }
   if (!OrgTartarusSnowballExtTurkishStemmer_r_mark_suffix_with_optional_U_vowel(self)) {
-    return NO;
+    return false;
   }
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtTurkishStemmer_r_mark_sU(OrgTartarusSnowballExtTurkishStemmer *self) {
   if (!OrgTartarusSnowballExtTurkishStemmer_r_check_vowel_harmony(self)) {
-    return NO;
+    return false;
   }
   if (!([self in_grouping_bWithCharArray:OrgTartarusSnowballExtTurkishStemmer_g_U_ withInt:105 withInt:305])) {
-    return NO;
+    return false;
   }
   if (!OrgTartarusSnowballExtTurkishStemmer_r_mark_suffix_with_optional_s_consonant(self)) {
-    return NO;
+    return false;
   }
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtTurkishStemmer_r_mark_lArI(OrgTartarusSnowballExtTurkishStemmer *self) {
   if ([self find_among_bWithOrgTartarusSnowballAmongArray:OrgTartarusSnowballExtTurkishStemmer_a_1_ withInt:2] == 0) {
-    return NO;
+    return false;
   }
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtTurkishStemmer_r_mark_yU(OrgTartarusSnowballExtTurkishStemmer *self) {
   if (!OrgTartarusSnowballExtTurkishStemmer_r_check_vowel_harmony(self)) {
-    return NO;
+    return false;
   }
   if (!([self in_grouping_bWithCharArray:OrgTartarusSnowballExtTurkishStemmer_g_U_ withInt:105 withInt:305])) {
-    return NO;
+    return false;
   }
   if (!OrgTartarusSnowballExtTurkishStemmer_r_mark_suffix_with_optional_y_consonant(self)) {
-    return NO;
+    return false;
   }
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtTurkishStemmer_r_mark_nU(OrgTartarusSnowballExtTurkishStemmer *self) {
   if (!OrgTartarusSnowballExtTurkishStemmer_r_check_vowel_harmony(self)) {
-    return NO;
+    return false;
   }
   if ([self find_among_bWithOrgTartarusSnowballAmongArray:OrgTartarusSnowballExtTurkishStemmer_a_2_ withInt:4] == 0) {
-    return NO;
+    return false;
   }
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtTurkishStemmer_r_mark_nUn(OrgTartarusSnowballExtTurkishStemmer *self) {
   if (!OrgTartarusSnowballExtTurkishStemmer_r_check_vowel_harmony(self)) {
-    return NO;
+    return false;
   }
   if ([self find_among_bWithOrgTartarusSnowballAmongArray:OrgTartarusSnowballExtTurkishStemmer_a_3_ withInt:4] == 0) {
-    return NO;
+    return false;
   }
   if (!OrgTartarusSnowballExtTurkishStemmer_r_mark_suffix_with_optional_n_consonant(self)) {
-    return NO;
+    return false;
   }
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtTurkishStemmer_r_mark_yA(OrgTartarusSnowballExtTurkishStemmer *self) {
   if (!OrgTartarusSnowballExtTurkishStemmer_r_check_vowel_harmony(self)) {
-    return NO;
+    return false;
   }
   if ([self find_among_bWithOrgTartarusSnowballAmongArray:OrgTartarusSnowballExtTurkishStemmer_a_4_ withInt:2] == 0) {
-    return NO;
+    return false;
   }
   if (!OrgTartarusSnowballExtTurkishStemmer_r_mark_suffix_with_optional_y_consonant(self)) {
-    return NO;
+    return false;
   }
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtTurkishStemmer_r_mark_nA(OrgTartarusSnowballExtTurkishStemmer *self) {
   if (!OrgTartarusSnowballExtTurkishStemmer_r_check_vowel_harmony(self)) {
-    return NO;
+    return false;
   }
   if ([self find_among_bWithOrgTartarusSnowballAmongArray:OrgTartarusSnowballExtTurkishStemmer_a_5_ withInt:2] == 0) {
-    return NO;
+    return false;
   }
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtTurkishStemmer_r_mark_DA(OrgTartarusSnowballExtTurkishStemmer *self) {
   if (!OrgTartarusSnowballExtTurkishStemmer_r_check_vowel_harmony(self)) {
-    return NO;
+    return false;
   }
   if ([self find_among_bWithOrgTartarusSnowballAmongArray:OrgTartarusSnowballExtTurkishStemmer_a_6_ withInt:4] == 0) {
-    return NO;
+    return false;
   }
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtTurkishStemmer_r_mark_ndA(OrgTartarusSnowballExtTurkishStemmer *self) {
   if (!OrgTartarusSnowballExtTurkishStemmer_r_check_vowel_harmony(self)) {
-    return NO;
+    return false;
   }
   if ([self find_among_bWithOrgTartarusSnowballAmongArray:OrgTartarusSnowballExtTurkishStemmer_a_7_ withInt:2] == 0) {
-    return NO;
+    return false;
   }
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtTurkishStemmer_r_mark_DAn(OrgTartarusSnowballExtTurkishStemmer *self) {
   if (!OrgTartarusSnowballExtTurkishStemmer_r_check_vowel_harmony(self)) {
-    return NO;
+    return false;
   }
   if ([self find_among_bWithOrgTartarusSnowballAmongArray:OrgTartarusSnowballExtTurkishStemmer_a_8_ withInt:4] == 0) {
-    return NO;
+    return false;
   }
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtTurkishStemmer_r_mark_ndAn(OrgTartarusSnowballExtTurkishStemmer *self) {
   if (!OrgTartarusSnowballExtTurkishStemmer_r_check_vowel_harmony(self)) {
-    return NO;
+    return false;
   }
   if ([self find_among_bWithOrgTartarusSnowballAmongArray:OrgTartarusSnowballExtTurkishStemmer_a_9_ withInt:2] == 0) {
-    return NO;
+    return false;
   }
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtTurkishStemmer_r_mark_ylA(OrgTartarusSnowballExtTurkishStemmer *self) {
   if (!OrgTartarusSnowballExtTurkishStemmer_r_check_vowel_harmony(self)) {
-    return NO;
+    return false;
   }
   if ([self find_among_bWithOrgTartarusSnowballAmongArray:OrgTartarusSnowballExtTurkishStemmer_a_10_ withInt:2] == 0) {
-    return NO;
+    return false;
   }
   if (!OrgTartarusSnowballExtTurkishStemmer_r_mark_suffix_with_optional_y_consonant(self)) {
-    return NO;
+    return false;
   }
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtTurkishStemmer_r_mark_ki(OrgTartarusSnowballExtTurkishStemmer *self) {
   if (!([self eq_s_bWithInt:2 withJavaLangCharSequence:@"ki"])) {
-    return NO;
+    return false;
   }
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtTurkishStemmer_r_mark_ncA(OrgTartarusSnowballExtTurkishStemmer *self) {
   if (!OrgTartarusSnowballExtTurkishStemmer_r_check_vowel_harmony(self)) {
-    return NO;
+    return false;
   }
   if ([self find_among_bWithOrgTartarusSnowballAmongArray:OrgTartarusSnowballExtTurkishStemmer_a_11_ withInt:2] == 0) {
-    return NO;
+    return false;
   }
   if (!OrgTartarusSnowballExtTurkishStemmer_r_mark_suffix_with_optional_n_consonant(self)) {
-    return NO;
+    return false;
   }
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtTurkishStemmer_r_mark_yUm(OrgTartarusSnowballExtTurkishStemmer *self) {
   if (!OrgTartarusSnowballExtTurkishStemmer_r_check_vowel_harmony(self)) {
-    return NO;
+    return false;
   }
   if ([self find_among_bWithOrgTartarusSnowballAmongArray:OrgTartarusSnowballExtTurkishStemmer_a_12_ withInt:4] == 0) {
-    return NO;
+    return false;
   }
   if (!OrgTartarusSnowballExtTurkishStemmer_r_mark_suffix_with_optional_y_consonant(self)) {
-    return NO;
+    return false;
   }
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtTurkishStemmer_r_mark_sUn(OrgTartarusSnowballExtTurkishStemmer *self) {
   if (!OrgTartarusSnowballExtTurkishStemmer_r_check_vowel_harmony(self)) {
-    return NO;
+    return false;
   }
   if ([self find_among_bWithOrgTartarusSnowballAmongArray:OrgTartarusSnowballExtTurkishStemmer_a_13_ withInt:4] == 0) {
-    return NO;
+    return false;
   }
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtTurkishStemmer_r_mark_yUz(OrgTartarusSnowballExtTurkishStemmer *self) {
   if (!OrgTartarusSnowballExtTurkishStemmer_r_check_vowel_harmony(self)) {
-    return NO;
+    return false;
   }
   if ([self find_among_bWithOrgTartarusSnowballAmongArray:OrgTartarusSnowballExtTurkishStemmer_a_14_ withInt:4] == 0) {
-    return NO;
+    return false;
   }
   if (!OrgTartarusSnowballExtTurkishStemmer_r_mark_suffix_with_optional_y_consonant(self)) {
-    return NO;
+    return false;
   }
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtTurkishStemmer_r_mark_sUnUz(OrgTartarusSnowballExtTurkishStemmer *self) {
   if ([self find_among_bWithOrgTartarusSnowballAmongArray:OrgTartarusSnowballExtTurkishStemmer_a_15_ withInt:4] == 0) {
-    return NO;
+    return false;
   }
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtTurkishStemmer_r_mark_lAr(OrgTartarusSnowballExtTurkishStemmer *self) {
   if (!OrgTartarusSnowballExtTurkishStemmer_r_check_vowel_harmony(self)) {
-    return NO;
+    return false;
   }
   if ([self find_among_bWithOrgTartarusSnowballAmongArray:OrgTartarusSnowballExtTurkishStemmer_a_16_ withInt:2] == 0) {
-    return NO;
+    return false;
   }
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtTurkishStemmer_r_mark_nUz(OrgTartarusSnowballExtTurkishStemmer *self) {
   if (!OrgTartarusSnowballExtTurkishStemmer_r_check_vowel_harmony(self)) {
-    return NO;
+    return false;
   }
   if ([self find_among_bWithOrgTartarusSnowballAmongArray:OrgTartarusSnowballExtTurkishStemmer_a_17_ withInt:4] == 0) {
-    return NO;
+    return false;
   }
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtTurkishStemmer_r_mark_DUr(OrgTartarusSnowballExtTurkishStemmer *self) {
   if (!OrgTartarusSnowballExtTurkishStemmer_r_check_vowel_harmony(self)) {
-    return NO;
+    return false;
   }
   if ([self find_among_bWithOrgTartarusSnowballAmongArray:OrgTartarusSnowballExtTurkishStemmer_a_18_ withInt:8] == 0) {
-    return NO;
+    return false;
   }
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtTurkishStemmer_r_mark_cAsInA(OrgTartarusSnowballExtTurkishStemmer *self) {
   if ([self find_among_bWithOrgTartarusSnowballAmongArray:OrgTartarusSnowballExtTurkishStemmer_a_19_ withInt:2] == 0) {
-    return NO;
+    return false;
   }
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtTurkishStemmer_r_mark_yDU(OrgTartarusSnowballExtTurkishStemmer *self) {
   if (!OrgTartarusSnowballExtTurkishStemmer_r_check_vowel_harmony(self)) {
-    return NO;
+    return false;
   }
   if ([self find_among_bWithOrgTartarusSnowballAmongArray:OrgTartarusSnowballExtTurkishStemmer_a_20_ withInt:32] == 0) {
-    return NO;
+    return false;
   }
   if (!OrgTartarusSnowballExtTurkishStemmer_r_mark_suffix_with_optional_y_consonant(self)) {
-    return NO;
+    return false;
   }
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtTurkishStemmer_r_mark_ysA(OrgTartarusSnowballExtTurkishStemmer *self) {
   if ([self find_among_bWithOrgTartarusSnowballAmongArray:OrgTartarusSnowballExtTurkishStemmer_a_21_ withInt:8] == 0) {
-    return NO;
+    return false;
   }
   if (!OrgTartarusSnowballExtTurkishStemmer_r_mark_suffix_with_optional_y_consonant(self)) {
-    return NO;
+    return false;
   }
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtTurkishStemmer_r_mark_ymUs_(OrgTartarusSnowballExtTurkishStemmer *self) {
   if (!OrgTartarusSnowballExtTurkishStemmer_r_check_vowel_harmony(self)) {
-    return NO;
+    return false;
   }
   if ([self find_among_bWithOrgTartarusSnowballAmongArray:OrgTartarusSnowballExtTurkishStemmer_a_22_ withInt:4] == 0) {
-    return NO;
+    return false;
   }
   if (!OrgTartarusSnowballExtTurkishStemmer_r_mark_suffix_with_optional_y_consonant(self)) {
-    return NO;
+    return false;
   }
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtTurkishStemmer_r_mark_yken(OrgTartarusSnowballExtTurkishStemmer *self) {
   if (!([self eq_s_bWithInt:3 withJavaLangCharSequence:@"ken"])) {
-    return NO;
+    return false;
   }
   if (!OrgTartarusSnowballExtTurkishStemmer_r_mark_suffix_with_optional_y_consonant(self)) {
-    return NO;
+    return false;
   }
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtTurkishStemmer_r_stem_nominal_verb_suffixes(OrgTartarusSnowballExtTurkishStemmer *self) {
@@ -1397,7 +1399,7 @@ jboolean OrgTartarusSnowballExtTurkishStemmer_r_stem_nominal_verb_suffixes(OrgTa
   jint v_9;
   jint v_10;
   self->ket_ = self->cursor_;
-  self->B_continue_stemming_noun_suffixes_ = YES;
+  self->B_continue_stemming_noun_suffixes_ = true;
   {
     v_1 = self->limit_ - self->cursor_;
     {
@@ -1534,7 +1536,7 @@ jboolean OrgTartarusSnowballExtTurkishStemmer_r_stem_nominal_verb_suffixes(OrgTa
         break_lab15: ;
       }
       break_lab14: ;
-      self->B_continue_stemming_noun_suffixes_ = NO;
+      self->B_continue_stemming_noun_suffixes_ = false;
       goto break_lab0;
     }
     break_lab13: ;
@@ -1610,7 +1612,7 @@ jboolean OrgTartarusSnowballExtTurkishStemmer_r_stem_nominal_verb_suffixes(OrgTa
     break_lab22: ;
     self->cursor_ = self->limit_ - v_1;
     if (!OrgTartarusSnowballExtTurkishStemmer_r_mark_DUr(self)) {
-      return NO;
+      return false;
     }
     self->bra_ = self->cursor_;
     [self slice_del];
@@ -1671,7 +1673,7 @@ jboolean OrgTartarusSnowballExtTurkishStemmer_r_stem_nominal_verb_suffixes(OrgTa
   break_lab0: ;
   self->bra_ = self->cursor_;
   [self slice_del];
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtTurkishStemmer_r_stem_suffix_chain_before_ki(OrgTartarusSnowballExtTurkishStemmer *self) {
@@ -1688,7 +1690,7 @@ jboolean OrgTartarusSnowballExtTurkishStemmer_r_stem_suffix_chain_before_ki(OrgT
   jint v_11;
   self->ket_ = self->cursor_;
   if (!OrgTartarusSnowballExtTurkishStemmer_r_mark_ki(self)) {
-    return NO;
+    return false;
   }
   {
     v_1 = self->limit_ - self->cursor_;
@@ -1822,7 +1824,7 @@ jboolean OrgTartarusSnowballExtTurkishStemmer_r_stem_suffix_chain_before_ki(OrgT
     break_lab7: ;
     self->cursor_ = self->limit_ - v_1;
     if (!OrgTartarusSnowballExtTurkishStemmer_r_mark_ndA(self)) {
-      return NO;
+      return false;
     }
     {
       v_10 = self->limit_ - self->cursor_;
@@ -1862,13 +1864,13 @@ jboolean OrgTartarusSnowballExtTurkishStemmer_r_stem_suffix_chain_before_ki(OrgT
       break_lab17: ;
       self->cursor_ = self->limit_ - v_10;
       if (!OrgTartarusSnowballExtTurkishStemmer_r_stem_suffix_chain_before_ki(self)) {
-        return NO;
+        return false;
       }
     }
     break_lab15: ;
   }
   break_lab0: ;
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtTurkishStemmer_r_stem_noun_suffixes(OrgTartarusSnowballExtTurkishStemmer *self) {
@@ -2370,7 +2372,7 @@ jboolean OrgTartarusSnowballExtTurkishStemmer_r_stem_noun_suffixes(OrgTartarusSn
       break_lab52: ;
       self->cursor_ = self->limit_ - v_26;
       if (!OrgTartarusSnowballExtTurkishStemmer_r_mark_sU(self)) {
-        return NO;
+        return false;
       }
     }
     break_lab51: ;
@@ -2393,7 +2395,7 @@ jboolean OrgTartarusSnowballExtTurkishStemmer_r_stem_noun_suffixes(OrgTartarusSn
     break_lab53: ;
   }
   break_lab0: ;
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtTurkishStemmer_r_post_process_last_consonants(OrgTartarusSnowballExtTurkishStemmer *self) {
@@ -2401,12 +2403,12 @@ jboolean OrgTartarusSnowballExtTurkishStemmer_r_post_process_last_consonants(Org
   self->ket_ = self->cursor_;
   among_var = [self find_among_bWithOrgTartarusSnowballAmongArray:OrgTartarusSnowballExtTurkishStemmer_a_23_ withInt:4];
   if (among_var == 0) {
-    return NO;
+    return false;
   }
   self->bra_ = self->cursor_;
   switch (among_var) {
     case 0:
-    return NO;
+    return false;
     case 1:
     [self slice_fromWithJavaLangCharSequence:@"p"];
     break;
@@ -2420,7 +2422,7 @@ jboolean OrgTartarusSnowballExtTurkishStemmer_r_post_process_last_consonants(Org
     [self slice_fromWithJavaLangCharSequence:@"k"];
     break;
   }
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtTurkishStemmer_r_append_U_to_stems_ending_with_d_or_g(OrgTartarusSnowballExtTurkishStemmer *self) {
@@ -2451,7 +2453,7 @@ jboolean OrgTartarusSnowballExtTurkishStemmer_r_append_U_to_stems_ending_with_d_
     break_lab1: ;
     self->cursor_ = self->limit_ - v_2;
     if (!([self eq_s_bWithInt:1 withJavaLangCharSequence:@"g"])) {
-      return NO;
+      return false;
     }
   }
   break_lab0: ;
@@ -2460,7 +2462,7 @@ jboolean OrgTartarusSnowballExtTurkishStemmer_r_append_U_to_stems_ending_with_d_
     v_3 = self->limit_ - self->cursor_;
     {
       v_4 = self->limit_ - self->cursor_;
-      while (YES) {
+      while (true) {
         v_5 = self->limit_ - self->cursor_;
         {
           if (!([self in_grouping_bWithCharArray:OrgTartarusSnowballExtTurkishStemmer_g_vowel_ withInt:97 withInt:305])) {
@@ -2504,7 +2506,7 @@ jboolean OrgTartarusSnowballExtTurkishStemmer_r_append_U_to_stems_ending_with_d_
     self->cursor_ = self->limit_ - v_3;
     {
       v_7 = self->limit_ - self->cursor_;
-      while (YES) {
+      while (true) {
         v_8 = self->limit_ - self->cursor_;
         {
           if (!([self in_grouping_bWithCharArray:OrgTartarusSnowballExtTurkishStemmer_g_vowel_ withInt:97 withInt:305])) {
@@ -2548,7 +2550,7 @@ jboolean OrgTartarusSnowballExtTurkishStemmer_r_append_U_to_stems_ending_with_d_
     self->cursor_ = self->limit_ - v_3;
     {
       v_10 = self->limit_ - self->cursor_;
-      while (YES) {
+      while (true) {
         v_11 = self->limit_ - self->cursor_;
         {
           if (!([self in_grouping_bWithCharArray:OrgTartarusSnowballExtTurkishStemmer_g_vowel_ withInt:97 withInt:305])) {
@@ -2591,7 +2593,7 @@ jboolean OrgTartarusSnowballExtTurkishStemmer_r_append_U_to_stems_ending_with_d_
     break_lab13: ;
     self->cursor_ = self->limit_ - v_3;
     v_13 = self->limit_ - self->cursor_;
-    while (YES) {
+    while (true) {
       v_14 = self->limit_ - self->cursor_;
       {
         if (!([self in_grouping_bWithCharArray:OrgTartarusSnowballExtTurkishStemmer_g_vowel_ withInt:97 withInt:305])) {
@@ -2603,7 +2605,7 @@ jboolean OrgTartarusSnowballExtTurkishStemmer_r_append_U_to_stems_ending_with_d_
       break_lab19: ;
       self->cursor_ = self->limit_ - v_14;
       if (self->cursor_ <= self->limit_backward_) {
-        return NO;
+        return false;
       }
       self->cursor_--;
     }
@@ -2619,7 +2621,7 @@ jboolean OrgTartarusSnowballExtTurkishStemmer_r_append_U_to_stems_ending_with_d_
       break_lab21: ;
       self->cursor_ = self->limit_ - v_15;
       if (!([self eq_s_bWithInt:1 withJavaLangCharSequence:@"\u00fc"])) {
-        return NO;
+        return false;
       }
     }
     break_lab20: ;
@@ -2631,7 +2633,7 @@ jboolean OrgTartarusSnowballExtTurkishStemmer_r_append_U_to_stems_ending_with_d_
     }
   }
   break_lab2: ;
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtTurkishStemmer_r_more_than_one_syllable_word(OrgTartarusSnowballExtTurkishStemmer *self) {
@@ -2640,11 +2642,11 @@ jboolean OrgTartarusSnowballExtTurkishStemmer_r_more_than_one_syllable_word(OrgT
   v_1 = self->cursor_;
   {
     jint v_2 = 2;
-    while (YES) {
+    while (true) {
       {
         v_3 = self->cursor_;
         {
-          while (YES) {
+          while (true) {
             {
               if (!([self in_groupingWithCharArray:OrgTartarusSnowballExtTurkishStemmer_g_vowel_ withInt:97 withInt:305])) {
                 goto break_lab3;
@@ -2669,11 +2671,11 @@ jboolean OrgTartarusSnowballExtTurkishStemmer_r_more_than_one_syllable_word(OrgT
     }
     break_replab0: ;
     if (v_2 > 0) {
-      return NO;
+      return false;
     }
   }
   self->cursor_ = v_1;
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtTurkishStemmer_r_is_reserved_word(OrgTartarusSnowballExtTurkishStemmer *self) {
@@ -2684,7 +2686,7 @@ jboolean OrgTartarusSnowballExtTurkishStemmer_r_is_reserved_word(OrgTartarusSnow
     v_1 = self->cursor_;
     {
       v_2 = self->cursor_;
-      while (YES) {
+      while (true) {
         {
           if (!([self eq_sWithInt:2 withJavaLangCharSequence:@"ad"])) {
             goto break_lab3;
@@ -2708,7 +2710,7 @@ jboolean OrgTartarusSnowballExtTurkishStemmer_r_is_reserved_word(OrgTartarusSnow
     break_lab1: ;
     self->cursor_ = v_1;
     v_4 = self->cursor_;
-    while (YES) {
+    while (true) {
       {
         if (!([self eq_sWithInt:5 withJavaLangCharSequence:@"soyad"])) {
           goto break_lab5;
@@ -2717,19 +2719,19 @@ jboolean OrgTartarusSnowballExtTurkishStemmer_r_is_reserved_word(OrgTartarusSnow
       }
       break_lab5: ;
       if (self->cursor_ >= self->limit_) {
-        return NO;
+        return false;
       }
       self->cursor_++;
     }
     break_golab4: ;
     self->I_strlen_ = 5;
     if (!(self->I_strlen_ == self->limit_)) {
-      return NO;
+      return false;
     }
     self->cursor_ = v_4;
   }
   break_lab0: ;
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtTurkishStemmer_r_postlude(OrgTartarusSnowballExtTurkishStemmer *self) {
@@ -2742,7 +2744,7 @@ jboolean OrgTartarusSnowballExtTurkishStemmer_r_postlude(OrgTartarusSnowballExtT
       if (!OrgTartarusSnowballExtTurkishStemmer_r_is_reserved_word(self)) {
         goto break_lab0;
       }
-      return NO;
+      return false;
     }
     break_lab0: ;
     self->cursor_ = v_1;
@@ -2766,7 +2768,7 @@ jboolean OrgTartarusSnowballExtTurkishStemmer_r_postlude(OrgTartarusSnowballExtT
   break_lab2: ;
   self->cursor_ = self->limit_ - v_3;
   self->cursor_ = self->limit_backward_;
-  return YES;
+  return true;
 }
 
 void OrgTartarusSnowballExtTurkishStemmer_init(OrgTartarusSnowballExtTurkishStemmer *self) {

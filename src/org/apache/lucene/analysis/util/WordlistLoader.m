@@ -39,10 +39,12 @@ __attribute__((unused)) static JavaIoBufferedReader *OrgApacheLuceneAnalysisUtil
 
 @implementation OrgApacheLuceneAnalysisUtilWordlistLoader
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisUtilWordlistLoader_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (OrgApacheLuceneAnalysisUtilCharArraySet *)getWordSetWithJavaIoReader:(JavaIoReader *)reader
                             withOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)result {
@@ -137,12 +139,12 @@ OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisUtilWordlistLoad
 
 OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisUtilWordlistLoader_getWordSetWithJavaIoReader_(JavaIoReader *reader) {
   OrgApacheLuceneAnalysisUtilWordlistLoader_initialize();
-  return OrgApacheLuceneAnalysisUtilWordlistLoader_getWordSetWithJavaIoReader_withOrgApacheLuceneAnalysisUtilCharArraySet_(reader, [new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithInt_withBoolean_(OrgApacheLuceneAnalysisUtilWordlistLoader_INITIAL_CAPACITY, NO) autorelease]);
+  return OrgApacheLuceneAnalysisUtilWordlistLoader_getWordSetWithJavaIoReader_withOrgApacheLuceneAnalysisUtilCharArraySet_(reader, [new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithInt_withBoolean_(OrgApacheLuceneAnalysisUtilWordlistLoader_INITIAL_CAPACITY, false) autorelease]);
 }
 
 OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisUtilWordlistLoader_getWordSetWithJavaIoReader_withNSString_(JavaIoReader *reader, NSString *comment) {
   OrgApacheLuceneAnalysisUtilWordlistLoader_initialize();
-  return OrgApacheLuceneAnalysisUtilWordlistLoader_getWordSetWithJavaIoReader_withNSString_withOrgApacheLuceneAnalysisUtilCharArraySet_(reader, comment, [new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithInt_withBoolean_(OrgApacheLuceneAnalysisUtilWordlistLoader_INITIAL_CAPACITY, NO) autorelease]);
+  return OrgApacheLuceneAnalysisUtilWordlistLoader_getWordSetWithJavaIoReader_withNSString_withOrgApacheLuceneAnalysisUtilCharArraySet_(reader, comment, [new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithInt_withBoolean_(OrgApacheLuceneAnalysisUtilWordlistLoader_INITIAL_CAPACITY, false) autorelease]);
 }
 
 OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisUtilWordlistLoader_getWordSetWithJavaIoReader_withNSString_withOrgApacheLuceneAnalysisUtilCharArraySet_(JavaIoReader *reader, NSString *comment, OrgApacheLuceneAnalysisUtilCharArraySet *result) {
@@ -152,7 +154,7 @@ OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisUtilWordlistLoad
     br = OrgApacheLuceneAnalysisUtilWordlistLoader_getBufferedReaderWithJavaIoReader_(reader);
     NSString *word = nil;
     while ((word = [((JavaIoBufferedReader *) nil_chk(br)) readLine]) != nil) {
-      if ([((NSString *) nil_chk(word)) hasPrefix:comment] == NO) {
+      if ([((NSString *) nil_chk(word)) hasPrefix:comment] == false) {
         [((OrgApacheLuceneAnalysisUtilCharArraySet *) nil_chk(result)) addWithNSString:[word trim]];
       }
     }
@@ -184,7 +186,7 @@ OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisUtilWordlistLoad
 
 OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisUtilWordlistLoader_getSnowballWordSetWithJavaIoReader_(JavaIoReader *reader) {
   OrgApacheLuceneAnalysisUtilWordlistLoader_initialize();
-  return OrgApacheLuceneAnalysisUtilWordlistLoader_getSnowballWordSetWithJavaIoReader_withOrgApacheLuceneAnalysisUtilCharArraySet_(reader, [new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithInt_withBoolean_(OrgApacheLuceneAnalysisUtilWordlistLoader_INITIAL_CAPACITY, NO) autorelease]);
+  return OrgApacheLuceneAnalysisUtilWordlistLoader_getSnowballWordSetWithJavaIoReader_withOrgApacheLuceneAnalysisUtilCharArraySet_(reader, [new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithInt_withBoolean_(OrgApacheLuceneAnalysisUtilWordlistLoader_INITIAL_CAPACITY, false) autorelease]);
 }
 
 OrgApacheLuceneAnalysisUtilCharArrayMap *OrgApacheLuceneAnalysisUtilWordlistLoader_getStemDictWithJavaIoReader_withOrgApacheLuceneAnalysisUtilCharArrayMap_(JavaIoReader *reader, OrgApacheLuceneAnalysisUtilCharArrayMap *result) {
@@ -208,7 +210,7 @@ id<JavaUtilList> OrgApacheLuceneAnalysisUtilWordlistLoader_getLinesWithJavaIoInp
   OrgApacheLuceneAnalysisUtilWordlistLoader_initialize();
   JavaIoBufferedReader *input = nil;
   JavaUtilArrayList *lines;
-  jboolean success = NO;
+  jboolean success = false;
   @try {
     input = OrgApacheLuceneAnalysisUtilWordlistLoader_getBufferedReaderWithJavaIoReader_(OrgApacheLuceneUtilIOUtils_getDecodingReaderWithJavaIoInputStream_withJavaNioCharsetCharset_(stream, charset));
     lines = [new_JavaUtilArrayList_init() autorelease];
@@ -219,7 +221,7 @@ id<JavaUtilList> OrgApacheLuceneAnalysisUtilWordlistLoader_getLinesWithJavaIoInp
       if (((jint) [((NSString *) nil_chk(word)) length]) == 0) continue;
       [lines addWithId:word];
     }
-    success = YES;
+    success = true;
     return lines;
   }
   @finally {

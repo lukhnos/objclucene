@@ -132,7 +132,7 @@ withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
 - (void)readBytesWithByteArray:(IOSByteArray *)b
                        withInt:(jint)offset
                        withInt:(jint)len {
-  OrgApacheLuceneStoreBufferedIndexInput_readBytesWithByteArray_withInt_withInt_withBoolean_(self, b, offset, len, YES);
+  OrgApacheLuceneStoreBufferedIndexInput_readBytesWithByteArray_withInt_withInt_withBoolean_(self, b, offset, len, true);
 }
 
 - (void)readBytesWithByteArray:(IOSByteArray *)b
@@ -538,7 +538,7 @@ withOrgApacheLuceneStoreIndexInput:(OrgApacheLuceneStoreIndexInput *)base
     @throw [new_JavaIoEOFException_initWithNSString_(JreStrcat("$@", @"read past EOF: ", self)) autorelease];
   }
   [((OrgApacheLuceneStoreIndexInput *) nil_chk(base_)) seekWithLong:fileOffset_ + start];
-  [base_ readBytesWithByteArray:b withInt:offset withInt:len withBoolean:NO];
+  [base_ readBytesWithByteArray:b withInt:offset withInt:len withBoolean:false];
 }
 
 - (void)seekInternalWithLong:(jlong)pos {

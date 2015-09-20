@@ -17,10 +17,12 @@ IOSObjectArray *OrgApacheLuceneIndexFields_EMPTY_ARRAY_;
 
 @implementation OrgApacheLuceneIndexFields
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexFields_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (id<JavaUtilIterator>)iterator {
   // can't call an abstract method

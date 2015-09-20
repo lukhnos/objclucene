@@ -24,10 +24,12 @@ OrgApacheLuceneIndexIndexDeletionPolicy *OrgApacheLuceneIndexNoDeletionPolicy_IN
 
 @implementation OrgApacheLuceneIndexNoDeletionPolicy
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexNoDeletionPolicy_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)onCommitWithJavaUtilList:(id<JavaUtilList>)commits {
 }

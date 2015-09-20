@@ -122,7 +122,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_By
   }
   OrgApacheLuceneUtilIntsRef *string = [((OrgApacheLuceneUtilAutomatonFiniteStringsIterator *) nil_chk(finiteStrings_)) next];
   if (string == nil) {
-    return NO;
+    return false;
   }
   OrgApacheLuceneUtilFstUtil_toBytesRefWithOrgApacheLuceneUtilIntsRef_withOrgApacheLuceneUtilBytesRefBuilder_(string, [((id<OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttribute>) nil_chk(bytesAtt_)) builder]);
   if (charTermAttribute_ != nil) {
@@ -132,7 +132,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_By
   if (payload_ != nil) {
     [((id<OrgApacheLuceneAnalysisTokenattributesPayloadAttribute>) nil_chk(payloadAttr_)) setPayloadWithOrgApacheLuceneUtilBytesRef:self->payload_];
   }
-  return YES;
+  return true;
 }
 
 - (void)end {
@@ -157,7 +157,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_By
 }
 
 - (OrgApacheLuceneUtilAutomatonAutomaton *)toAutomaton {
-  return [self toAutomatonWithBoolean:NO];
+  return [self toAutomatonWithBoolean:false];
 }
 
 - (OrgApacheLuceneUtilAutomatonAutomaton *)toAutomatonWithBoolean:(jboolean)unicodeAware {
@@ -369,10 +369,12 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentComplet
 
 @implementation OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttributeImpl
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSuggestDocumentCompletionTokenStream_BytesRefBuilderTermAttributeImpl_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneUtilBytesRefBuilder *)builder {
   return bytes_;

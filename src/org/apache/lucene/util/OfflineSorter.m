@@ -124,10 +124,12 @@ id<JavaUtilComparator> OrgApacheLuceneUtilOfflineSorter_DEFAULT_COMPARATOR_;
 
 @implementation OrgApacheLuceneUtilOfflineSorter
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilOfflineSorter_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithJavaUtilComparator:(id<JavaUtilComparator>)comparator {
   OrgApacheLuceneUtilOfflineSorter_initWithJavaUtilComparator_(self, comparator);
@@ -148,10 +150,10 @@ withOrgApacheLuceneUtilOfflineSorter_BufferSize:(OrgApacheLuceneUtilOfflineSorte
   sortInfo_->totalTime_ = JavaLangSystem_currentTimeMillis();
   OrgLukhnosPortmobileFileFiles_deleteIfExistsWithOrgLukhnosPortmobileFilePath_(output);
   JavaUtilArrayList *merges = [new_JavaUtilArrayList_init() autorelease];
-  jboolean success3 = NO;
+  jboolean success3 = false;
   @try {
     OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader *is = [new_OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader_initWithOrgLukhnosPortmobileFilePath_(input) autorelease];
-    jboolean success = NO;
+    jboolean success = false;
     @try {
       jint lines = 0;
       while ((lines = [self readPartitionWithOrgApacheLuceneUtilOfflineSorter_ByteSequencesReader:is]) > 0) {
@@ -160,10 +162,10 @@ withOrgApacheLuceneUtilOfflineSorter_BufferSize:(OrgApacheLuceneUtilOfflineSorte
         sortInfo_->lines_ += lines;
         if ([merges size] == maxTempFiles_) {
           OrgLukhnosPortmobileFilePath *intermediate = OrgLukhnosPortmobileFileFiles_createTempFileWithOrgLukhnosPortmobileFilePath_withNSString_withNSString_(tempDirectory_, @"sort", @"intermediate");
-          jboolean success2 = NO;
+          jboolean success2 = false;
           @try {
             [self mergePartitionsWithJavaUtilList:merges withOrgLukhnosPortmobileFilePath:intermediate];
-            success2 = YES;
+            success2 = true;
           }
           @finally {
             if (success2) {
@@ -178,7 +180,7 @@ withOrgApacheLuceneUtilOfflineSorter_BufferSize:(OrgApacheLuceneUtilOfflineSorte
           sortInfo_->tempMergeFiles_++;
         }
       }
-      success = YES;
+      success = true;
     }
     @finally {
       if (success) OrgApacheLuceneUtilIOUtils_closeWithJavaIoCloseableArray_([IOSObjectArray arrayWithObjects:(id[]){ is } count:1 type:JavaIoCloseable_class_()]);
@@ -202,7 +204,7 @@ withOrgApacheLuceneUtilOfflineSorter_BufferSize:(OrgApacheLuceneUtilOfflineSorte
     else {
       [self mergePartitionsWithJavaUtilList:merges withOrgLukhnosPortmobileFilePath:output];
     }
-    success3 = YES;
+    success3 = true;
   }
   @finally {
     if (success3) {
@@ -670,12 +672,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilOfflineSorter_ByteSequencesW
     length = [((id<JavaIoDataInput>) nil_chk(is_)) readShort];
   }
   @catch (JavaIoEOFException *e) {
-    return NO;
+    return false;
   }
   [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(ref)) growWithInt:length];
   [ref setLengthWithInt:length];
   [((id<JavaIoDataInput>) nil_chk(is_)) readFullyWithByteArray:[ref bytes] withInt:0 withInt:length];
-  return YES;
+  return true;
 }
 
 - (IOSByteArray *)read {

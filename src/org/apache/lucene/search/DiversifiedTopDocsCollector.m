@@ -87,7 +87,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDiversifiedTopDocsCollector_$1)
 }
 
 - (jboolean)needsScores {
-  return YES;
+  return true;
 }
 
 - (OrgApacheLuceneSearchTopDocs *)newTopDocsWithOrgApacheLuceneSearchScoreDocArray:(IOSObjectArray *)results

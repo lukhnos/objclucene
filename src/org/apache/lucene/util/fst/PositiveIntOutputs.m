@@ -38,10 +38,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFstPositiveIntOutputs)
 
 @implementation OrgApacheLuceneUtilFstPositiveIntOutputs
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilFstPositiveIntOutputs_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (OrgApacheLuceneUtilFstPositiveIntOutputs *)getSingleton {
   return OrgApacheLuceneUtilFstPositiveIntOutputs_getSingleton();
@@ -180,7 +182,7 @@ OrgApacheLuceneUtilFstPositiveIntOutputs *OrgApacheLuceneUtilFstPositiveIntOutpu
 jboolean OrgApacheLuceneUtilFstPositiveIntOutputs_validWithJavaLangLong_(OrgApacheLuceneUtilFstPositiveIntOutputs *self, JavaLangLong *o) {
   JreAssert((o != nil), (@"org/apache/lucene/util/fst/PositiveIntOutputs.java:104 condition failed: assert o != null;"));
   JreAssert((o == OrgApacheLuceneUtilFstPositiveIntOutputs_NO_OUTPUT_ || [((JavaLangLong *) nil_chk(o)) longLongValue] > 0), (JreStrcat("$@", @"o=", o)));
-  return YES;
+  return true;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstPositiveIntOutputs)

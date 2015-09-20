@@ -16,10 +16,12 @@
 
 @implementation OrgApacheLuceneQueryparserFlexibleStandardBuildersWildcardQueryNodeBuilder
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueryparserFlexibleStandardBuildersWildcardQueryNodeBuilder_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneSearchWildcardQuery *)buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryNode {
   OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode *wildcardNode = (OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode *) check_class_cast(queryNode, [OrgApacheLuceneQueryparserFlexibleStandardNodesWildcardQueryNode class]);

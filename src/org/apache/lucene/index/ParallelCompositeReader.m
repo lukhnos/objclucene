@@ -137,7 +137,7 @@ withOrgApacheLuceneIndexCompositeReaderArray:(IOSObjectArray *)storedFieldReader
 @end
 
 void OrgApacheLuceneIndexParallelCompositeReader_initWithOrgApacheLuceneIndexCompositeReaderArray_(OrgApacheLuceneIndexParallelCompositeReader *self, IOSObjectArray *readers) {
-  OrgApacheLuceneIndexParallelCompositeReader_initWithBoolean_withOrgApacheLuceneIndexCompositeReaderArray_(self, YES, readers);
+  OrgApacheLuceneIndexParallelCompositeReader_initWithBoolean_withOrgApacheLuceneIndexCompositeReaderArray_(self, true, readers);
 }
 
 OrgApacheLuceneIndexParallelCompositeReader *new_OrgApacheLuceneIndexParallelCompositeReader_initWithOrgApacheLuceneIndexCompositeReaderArray_(IOSObjectArray *readers) {
@@ -202,7 +202,7 @@ IOSObjectArray *OrgApacheLuceneIndexParallelCompositeReader_prepareLeafReadersWi
       for (jint j = 0; j < storedFieldsReaders->size_; j++) {
         IOSObjectArray_Set(storedSubs, j, [((OrgApacheLuceneIndexLeafReaderContext *) nil_chk([((id<JavaUtilList>) nil_chk([((OrgApacheLuceneIndexCompositeReader *) nil_chk(IOSObjectArray_Get(storedFieldsReaders, j))) leaves])) getWithInt:i])) reader]);
       }
-      IOSObjectArray_SetAndConsume(wrappedLeaves, i, new_OrgApacheLuceneIndexParallelCompositeReader_$1_initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexLeafReaderArray_(YES, subs, storedSubs));
+      IOSObjectArray_SetAndConsume(wrappedLeaves, i, new_OrgApacheLuceneIndexParallelCompositeReader_$1_initWithBoolean_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexLeafReaderArray_(true, subs, storedSubs));
     }
     return wrappedLeaves;
   }

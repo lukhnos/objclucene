@@ -144,7 +144,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneQueryparserSimpleSimpleQu
 
 - (OrgApacheLuceneSearchQuery *)newDefaultQueryWithNSString:(NSString *)text {
   OrgApacheLuceneSearchBooleanQuery_Builder *bq = [new_OrgApacheLuceneSearchBooleanQuery_Builder_init() autorelease];
-  [bq setDisableCoordWithBoolean:YES];
+  [bq setDisableCoordWithBoolean:true];
   for (id<JavaUtilMap_Entry> __strong entry_ in nil_chk([((id<JavaUtilMap>) nil_chk(weights_)) entrySet])) {
     OrgApacheLuceneSearchQuery *q = [self createBooleanQueryWithNSString:[((id<JavaUtilMap_Entry>) nil_chk(entry_)) getKey] withNSString:text withOrgApacheLuceneSearchBooleanClause_OccurEnum:defaultOperator_];
     if (q != nil) {
@@ -158,7 +158,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneQueryparserSimpleSimpleQu
 - (OrgApacheLuceneSearchQuery *)newFuzzyQueryWithNSString:(NSString *)text
                                                   withInt:(jint)fuzziness {
   OrgApacheLuceneSearchBooleanQuery_Builder *bq = [new_OrgApacheLuceneSearchBooleanQuery_Builder_init() autorelease];
-  [bq setDisableCoordWithBoolean:YES];
+  [bq setDisableCoordWithBoolean:true];
   for (id<JavaUtilMap_Entry> __strong entry_ in nil_chk([((id<JavaUtilMap>) nil_chk(weights_)) entrySet])) {
     OrgApacheLuceneSearchQuery *q = [new_OrgApacheLuceneSearchFuzzyQuery_initWithOrgApacheLuceneIndexTerm_withInt_([new_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_([((id<JavaUtilMap_Entry>) nil_chk(entry_)) getKey], text) autorelease], fuzziness) autorelease];
     if (q != nil) {
@@ -172,7 +172,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneQueryparserSimpleSimpleQu
 - (OrgApacheLuceneSearchQuery *)newPhraseQueryWithNSString:(NSString *)text
                                                    withInt:(jint)slop {
   OrgApacheLuceneSearchBooleanQuery_Builder *bq = [new_OrgApacheLuceneSearchBooleanQuery_Builder_init() autorelease];
-  [bq setDisableCoordWithBoolean:YES];
+  [bq setDisableCoordWithBoolean:true];
   for (id<JavaUtilMap_Entry> __strong entry_ in nil_chk([((id<JavaUtilMap>) nil_chk(weights_)) entrySet])) {
     OrgApacheLuceneSearchQuery *q = [self createPhraseQueryWithNSString:[((id<JavaUtilMap_Entry>) nil_chk(entry_)) getKey] withNSString:text withInt:slop];
     if (q != nil) {
@@ -185,7 +185,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneQueryparserSimpleSimpleQu
 
 - (OrgApacheLuceneSearchQuery *)newPrefixQueryWithNSString:(NSString *)text {
   OrgApacheLuceneSearchBooleanQuery_Builder *bq = [new_OrgApacheLuceneSearchBooleanQuery_Builder_init() autorelease];
-  [bq setDisableCoordWithBoolean:YES];
+  [bq setDisableCoordWithBoolean:true];
   for (id<JavaUtilMap_Entry> __strong entry_ in nil_chk([((id<JavaUtilMap>) nil_chk(weights_)) entrySet])) {
     OrgApacheLuceneSearchPrefixQuery *prefix = [new_OrgApacheLuceneSearchPrefixQuery_initWithOrgApacheLuceneIndexTerm_([new_OrgApacheLuceneIndexTerm_initWithNSString_withNSString_([((id<JavaUtilMap_Entry>) nil_chk(entry_)) getKey], text) autorelease]) autorelease];
     [prefix setBoostWithFloat:[((JavaLangFloat *) nil_chk([entry_ getValue])) floatValue]];
@@ -342,11 +342,11 @@ void OrgApacheLuceneQueryparserSimpleSimpleQueryParser_consumeSubQueryWithOrgApa
   JreAssert(((self->flags_ & OrgApacheLuceneQueryparserSimpleSimpleQueryParser_PRECEDENCE_OPERATORS) != 0), (@"org/apache/lucene/queryparser/simple/SimpleQueryParser.java:221 condition failed: assert (flags & PRECEDENCE_OPERATORS) != 0;"));
   jint start = ++((OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State *) nil_chk(state))->index_;
   jint precedence = 1;
-  jboolean escaped = NO;
+  jboolean escaped = false;
   while (state->index_ < state->length_) {
     if (!escaped) {
       if (IOSCharArray_Get(nil_chk(state->data_), state->index_) == '\\' && (self->flags_ & OrgApacheLuceneQueryparserSimpleSimpleQueryParser_ESCAPE_OPERATOR) != 0) {
-        escaped = YES;
+        escaped = true;
         ++state->index_;
         continue;
       }
@@ -360,7 +360,7 @@ void OrgApacheLuceneQueryparserSimpleSimpleQueryParser_consumeSubQueryWithOrgApa
         }
       }
     }
-    escaped = NO;
+    escaped = false;
     ++state->index_;
   }
   if (state->index_ == state->length_) {
@@ -382,12 +382,12 @@ void OrgApacheLuceneQueryparserSimpleSimpleQueryParser_consumePhraseWithOrgApach
   JreAssert(((self->flags_ & OrgApacheLuceneQueryparserSimpleSimpleQueryParser_PHRASE_OPERATOR) != 0), (@"org/apache/lucene/queryparser/simple/SimpleQueryParser.java:280 condition failed: assert (flags & PHRASE_OPERATOR) != 0;"));
   jint start = ++((OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State *) nil_chk(state))->index_;
   jint copied = 0;
-  jboolean escaped = NO;
-  jboolean hasSlop = NO;
+  jboolean escaped = false;
+  jboolean hasSlop = false;
   while (state->index_ < state->length_) {
     if (!escaped) {
       if (IOSCharArray_Get(nil_chk(state->data_), state->index_) == '\\' && (self->flags_ & OrgApacheLuceneQueryparserSimpleSimpleQueryParser_ESCAPE_OPERATOR) != 0) {
-        escaped = YES;
+        escaped = true;
         ++state->index_;
         continue;
       }
@@ -395,7 +395,7 @@ void OrgApacheLuceneQueryparserSimpleSimpleQueryParser_consumePhraseWithOrgApach
         if (state->length_ > (state->index_ + 1) && IOSCharArray_Get(state->data_, state->index_ + 1) == '~' && (self->flags_ & OrgApacheLuceneQueryparserSimpleSimpleQueryParser_NEAR_OPERATOR) != 0) {
           state->index_++;
           if (state->length_ > (state->index_ + 1)) {
-            hasSlop = YES;
+            hasSlop = true;
           }
           break;
         }
@@ -404,7 +404,7 @@ void OrgApacheLuceneQueryparserSimpleSimpleQueryParser_consumePhraseWithOrgApach
         }
       }
     }
-    escaped = NO;
+    escaped = false;
     *IOSCharArray_GetRef(nil_chk(state->buffer_), copied++) = IOSCharArray_Get(nil_chk(state->data_), state->index_++);
   }
   if (state->index_ == state->length_) {
@@ -430,14 +430,14 @@ void OrgApacheLuceneQueryparserSimpleSimpleQueryParser_consumePhraseWithOrgApach
 
 void OrgApacheLuceneQueryparserSimpleSimpleQueryParser_consumeTokenWithOrgApacheLuceneQueryparserSimpleSimpleQueryParser_State_(OrgApacheLuceneQueryparserSimpleSimpleQueryParser *self, OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State *state) {
   jint copied = 0;
-  jboolean escaped = NO;
-  jboolean prefix = NO;
-  jboolean fuzzy = NO;
+  jboolean escaped = false;
+  jboolean prefix = false;
+  jboolean fuzzy = false;
   while (((OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State *) nil_chk(state))->index_ < state->length_) {
     if (!escaped) {
       if (IOSCharArray_Get(nil_chk(state->data_), state->index_) == '\\' && (self->flags_ & OrgApacheLuceneQueryparserSimpleSimpleQueryParser_ESCAPE_OPERATOR) != 0) {
-        escaped = YES;
-        prefix = NO;
+        escaped = true;
+        prefix = false;
         ++state->index_;
         continue;
       }
@@ -445,12 +445,12 @@ void OrgApacheLuceneQueryparserSimpleSimpleQueryParser_consumeTokenWithOrgApache
         break;
       }
       else if (copied > 0 && IOSCharArray_Get(state->data_, state->index_) == '~' && (self->flags_ & OrgApacheLuceneQueryparserSimpleSimpleQueryParser_FUZZY_OPERATOR) != 0) {
-        fuzzy = YES;
+        fuzzy = true;
         break;
       }
       prefix = (copied > 0 && IOSCharArray_Get(state->data_, state->index_) == '*' && (self->flags_ & OrgApacheLuceneQueryparserSimpleSimpleQueryParser_PREFIX_OPERATOR) != 0);
     }
-    escaped = NO;
+    escaped = false;
     *IOSCharArray_GetRef(nil_chk(state->buffer_), copied++) = IOSCharArray_Get(nil_chk(state->data_), state->index_++);
   }
   if (copied > 0) {
@@ -547,9 +547,9 @@ jint OrgApacheLuceneQueryparserSimpleSimpleQueryParser_parseFuzzinessWithOrgApac
 
 jboolean OrgApacheLuceneQueryparserSimpleSimpleQueryParser_tokenFinishedWithOrgApacheLuceneQueryparserSimpleSimpleQueryParser_State_(OrgApacheLuceneQueryparserSimpleSimpleQueryParser *self, OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State *state) {
   if ((IOSCharArray_Get(nil_chk(((OrgApacheLuceneQueryparserSimpleSimpleQueryParser_State *) nil_chk(state))->data_), state->index_) == '"' && (self->flags_ & OrgApacheLuceneQueryparserSimpleSimpleQueryParser_PHRASE_OPERATOR) != 0) || (IOSCharArray_Get(state->data_, state->index_) == '|' && (self->flags_ & OrgApacheLuceneQueryparserSimpleSimpleQueryParser_OR_OPERATOR) != 0) || (IOSCharArray_Get(state->data_, state->index_) == '+' && (self->flags_ & OrgApacheLuceneQueryparserSimpleSimpleQueryParser_AND_OPERATOR) != 0) || (IOSCharArray_Get(state->data_, state->index_) == '(' && (self->flags_ & OrgApacheLuceneQueryparserSimpleSimpleQueryParser_PRECEDENCE_OPERATORS) != 0) || (IOSCharArray_Get(state->data_, state->index_) == ')' && (self->flags_ & OrgApacheLuceneQueryparserSimpleSimpleQueryParser_PRECEDENCE_OPERATORS) != 0) || ((IOSCharArray_Get(state->data_, state->index_) == ' ' || IOSCharArray_Get(state->data_, state->index_) == 0x0009 || IOSCharArray_Get(state->data_, state->index_) == 0x000a || IOSCharArray_Get(state->data_, state->index_) == 0x000d) && (self->flags_ & OrgApacheLuceneQueryparserSimpleSimpleQueryParser_WHITESPACE_OPERATOR) != 0)) {
-    return YES;
+    return true;
   }
-  return NO;
+  return false;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserSimpleSimpleQueryParser)

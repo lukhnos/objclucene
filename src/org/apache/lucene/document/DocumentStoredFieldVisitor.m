@@ -44,10 +44,12 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneDocumentDocumentStoredFieldVisitor, fieldsToA
   return self;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneDocumentDocumentStoredFieldVisitor_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)binaryFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo
                                        withByteArray:(IOSByteArray *)value {

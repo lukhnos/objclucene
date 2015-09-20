@@ -134,10 +134,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinBlockJoinSelector_$3)
 
 @implementation OrgApacheLuceneSearchJoinBlockJoinSelector
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchJoinBlockJoinSelector_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (id<OrgApacheLuceneUtilBits>)wrapWithOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)docsWithValue
                                  withOrgApacheLuceneUtilBitSet:(OrgApacheLuceneUtilBitSet *)parents
@@ -327,15 +329,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinBlockJoinSelector_Type
 - (jboolean)getWithInt:(jint)docID {
   JreAssert(([((OrgApacheLuceneUtilBitSet *) nil_chk(val$parents_)) getWithInt:docID]), (@"this selector may only be used on parent documents"));
   if (docID == 0) {
-    return NO;
+    return false;
   }
   jint firstChild = [val$parents_ prevSetBitWithInt:docID - 1] + 1;
   for (jint child = [((OrgApacheLuceneUtilBitSet *) nil_chk(val$children_)) nextSetBitWithInt:firstChild]; child < docID; child = [val$children_ nextSetBitWithInt:child + 1]) {
     if ([((id<OrgApacheLuceneUtilBits>) nil_chk(val$docsWithValue_)) getWithInt:child]) {
-      return YES;
+      return true;
     }
   }
-  return NO;
+  return false;
 }
 
 - (jint)length {
@@ -488,11 +490,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinBlockJoinSelector_$2)
   }
   jint firstChild = [val$parents_ prevSetBitWithInt:docID - 1] + 1;
   jlong value = 0;
-  jboolean hasValue = NO;
+  jboolean hasValue = false;
   for (jint child = [((OrgApacheLuceneUtilBitSet *) nil_chk(val$children_)) nextSetBitWithInt:firstChild]; child < docID; child = [val$children_ nextSetBitWithInt:child + 1]) {
     jlong childValue = [((OrgApacheLuceneIndexNumericDocValues *) nil_chk(val$values_)) getWithInt:child];
     jboolean childHasValue = value != 0 || [((id<OrgApacheLuceneUtilBits>) nil_chk(val$docsWithValue_)) getWithInt:child];
-    if (hasValue == NO) {
+    if (hasValue == false) {
       value = childValue;
       hasValue = childHasValue;
     }

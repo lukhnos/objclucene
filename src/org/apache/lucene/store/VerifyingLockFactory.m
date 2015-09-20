@@ -112,25 +112,27 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreVerifyingLockFactory)
 
 - (void)close {
   {
-    JavaLangThrowable *__mainException = nil;
     OrgApacheLuceneStoreLock *l = lock_;
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
       [((OrgApacheLuceneStoreLock *) nil_chk(l)) ensureValid];
       OrgApacheLuceneStoreVerifyingLockFactory_CheckedLock_verifyWithByte_(self, (jbyte) 0);
     }
+    @catch (JavaLangThrowable *e) {
+      __primaryException1 = e;
+      @throw e;
+    }
     @finally {
-      @try {
-        [l close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
+      if (l != nil) {
+        if (__primaryException1 != nil) {
+          @try {
+            [l close];
+          } @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
         } else {
-          __mainException = e;
+          [l close];
         }
-      }
-      if (__mainException) {
-        @throw __mainException;
       }
     }
   }

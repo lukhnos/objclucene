@@ -215,8 +215,8 @@ withOrgApacheLuceneSearchFilteredQuery_FilterStrategy:(OrgApacheLuceneSearchFilt
 }
 
 - (jboolean)isEqual:(id)o {
-  if (o == self) return YES;
-  if (![super isEqual:o]) return NO;
+  if (o == self) return true;
+  if (![super isEqual:o]) return false;
   JreAssert(([o isKindOfClass:[OrgApacheLuceneSearchFilteredQuery class]]), (@"org/apache/lucene/search/FilteredQuery.java:122 condition failed: assert o instanceof FilteredQuery;"));
   OrgApacheLuceneSearchFilteredQuery *fq = (OrgApacheLuceneSearchFilteredQuery *) check_class_cast(o, [OrgApacheLuceneSearchFilteredQuery class]);
   return [((OrgApacheLuceneSearchQuery *) nil_chk(((OrgApacheLuceneSearchFilteredQuery *) nil_chk(fq))->query_)) isEqual:self->query_] && [((OrgApacheLuceneSearchFilter *) nil_chk(fq->filter_)) isEqual:self->filter_] && [((OrgApacheLuceneSearchFilteredQuery_FilterStrategy *) nil_chk(fq->strategy_)) isEqual:self->strategy_];
@@ -312,10 +312,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFilteredQuery)
   return 0;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchFilteredQuery_FilterStrategy_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -346,13 +348,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFilteredQuery_FilterStrate
 }
 
 - (jboolean)alwaysUseRandomAccess {
-  return NO;
+  return false;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchFilteredQuery_RandomAccessFilterStrategy_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -388,8 +392,8 @@ withOrgApacheLuceneSearchFilteredQuery_RandomAccessFilterStrategy:(OrgApacheLuce
 }
 
 - (jboolean)isEqual:(id)obj {
-  if ([super isEqual:obj] == NO) {
-    return NO;
+  if ([super isEqual:obj] == false) {
+    return false;
   }
   OrgApacheLuceneSearchFilteredQuery_RandomAccessFilterWrapperQuery *that = (OrgApacheLuceneSearchFilteredQuery_RandomAccessFilterWrapperQuery *) check_class_cast(obj, [OrgApacheLuceneSearchFilteredQuery_RandomAccessFilterWrapperQuery class]);
   return [((OrgApacheLuceneSearchFilter *) nil_chk(filter_)) isEqual:((OrgApacheLuceneSearchFilteredQuery_RandomAccessFilterWrapperQuery *) nil_chk(that))->filter_] && [((OrgApacheLuceneSearchFilteredQuery_RandomAccessFilterStrategy *) nil_chk(strategy_)) isEqual:that->strategy_];
@@ -464,7 +468,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFilteredQuery_RandomAccess
   OrgApacheLuceneSearchScorer *s = [self scorerWithOrgApacheLuceneIndexLeafReaderContext:context];
   jboolean match;
   if (s == nil) {
-    match = NO;
+    match = false;
   }
   else {
     OrgApacheLuceneSearchTwoPhaseIterator *twoPhase = [s asTwoPhaseIterator];
@@ -607,13 +611,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFilteredQuery_RandomAccess
 
 - (jboolean)useRandomAccessWithOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)bits
                                               withLong:(jlong)filterCost {
-  return NO;
+  return false;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchFilteredQuery_$1_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -641,13 +647,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchFilteredQuery_$1)
 @implementation OrgApacheLuceneSearchFilteredQuery_$2
 
 - (jboolean)alwaysUseRandomAccess {
-  return YES;
+  return true;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchFilteredQuery_$2_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

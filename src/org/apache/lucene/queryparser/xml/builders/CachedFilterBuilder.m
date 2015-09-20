@@ -143,7 +143,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserXmlBuildersCachedFilt
 @end
 
 void OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache_initWithInt_(OrgApacheLuceneQueryparserXmlBuildersCachedFilterBuilder_LRUCache *self, jint maxsize) {
-  JavaUtilLinkedHashMap_initWithInt_withFloat_withBoolean_(self, maxsize * 4 / 3 + 1, 0.75f, YES);
+  JavaUtilLinkedHashMap_initWithInt_withFloat_withBoolean_(self, maxsize * 4 / 3 + 1, 0.75f, true);
   self->maxsize_ = maxsize;
 }
 

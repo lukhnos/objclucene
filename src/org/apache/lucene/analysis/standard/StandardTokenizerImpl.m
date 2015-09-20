@@ -216,16 +216,16 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisStandardStandardTokenizerImpl)
 }
 
 - (void)yyclose {
-  zzAtEOF_ = YES;
+  zzAtEOF_ = true;
   zzEndRead_ = zzStartRead_;
   if (zzReader_ != nil) [zzReader_ close];
 }
 
 - (void)yyresetWithJavaIoReader:(JavaIoReader *)reader {
   JreStrongAssign(&zzReader_, reader);
-  zzAtBOL_ = YES;
-  zzAtEOF_ = NO;
-  zzEOFDone_ = NO;
+  zzAtBOL_ = true;
+  zzAtEOF_ = false;
+  zzEOFDone_ = false;
   zzEndRead_ = zzStartRead_ = 0;
   zzCurrentPos_ = zzMarkedPos_ = 0;
   zzFinalHighSurrogate_ = 0;
@@ -274,7 +274,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisStandardStandardTokenizerImpl)
   IOSIntArray *zzTransL = OrgApacheLuceneAnalysisStandardStandardTokenizerImpl_ZZ_TRANS_;
   IOSIntArray *zzRowMapL = OrgApacheLuceneAnalysisStandardStandardTokenizerImpl_ZZ_ROWMAP_;
   IOSIntArray *zzAttrL = OrgApacheLuceneAnalysisStandardStandardTokenizerImpl_ZZ_ATTRIBUTE_;
-  while (YES) {
+  while (true) {
     zzMarkedPosL = zzMarkedPos_;
     yychar_ += zzMarkedPosL - zzStartRead_;
     zzAction = -1;
@@ -285,7 +285,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisStandardStandardTokenizerImpl)
       zzAction = zzState_;
     }
     {
-      while (YES) {
+      while (true) {
         if (zzCurrentPosL < zzEndReadL) {
           zzInput = JavaLangCharacter_codePointAtWithCharArray_withInt_withInt_(zzBufferL, zzCurrentPosL, zzEndReadL);
           zzCurrentPosL += JavaLangCharacter_charCountWithInt_(zzInput);
@@ -375,7 +375,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisStandardStandardTokenizerImpl)
       break;
       default:
       if (zzInput == OrgApacheLuceneAnalysisStandardStandardTokenizerImpl_YYEOF && zzStartRead_ == zzCurrentPos_) {
-        zzAtEOF_ = YES;
+        zzAtEOF_ = true;
         {
           return OrgApacheLuceneAnalysisStandardStandardTokenizerImpl_YYEOF;
         }
@@ -574,7 +574,7 @@ void OrgApacheLuceneAnalysisStandardStandardTokenizerImpl_initWithJavaIoReader_(
   self->ZZ_BUFFERSIZE_ = 255;
   self->zzLexicalState_ = OrgApacheLuceneAnalysisStandardStandardTokenizerImpl_YYINITIAL;
   JreStrongAssignAndConsume(&self->zzBuffer_, [IOSCharArray newArrayWithLength:self->ZZ_BUFFERSIZE_]);
-  self->zzAtBOL_ = YES;
+  self->zzAtBOL_ = true;
   self->zzFinalHighSurrogate_ = 0;
   JreStrongAssign(&self->zzReader_, inArg);
 }
@@ -625,13 +625,13 @@ jboolean OrgApacheLuceneAnalysisStandardStandardTokenizerImpl_zzRefill(OrgApache
         --self->zzEndRead_;
         self->zzFinalHighSurrogate_ = 1;
         if (totalRead == 1) {
-          return YES;
+          return true;
         }
       }
     }
-    return NO;
+    return false;
   }
-  return YES;
+  return true;
 }
 
 jint OrgApacheLuceneAnalysisStandardStandardTokenizerImpl_yylength(OrgApacheLuceneAnalysisStandardStandardTokenizerImpl *self) {

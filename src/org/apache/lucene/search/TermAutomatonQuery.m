@@ -197,7 +197,7 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term {
 
 - (jboolean)isEqual:(id)o {
   if (!([o isKindOfClass:[OrgApacheLuceneSearchTermAutomatonQuery class]])) {
-    return NO;
+    return false;
   }
   OrgApacheLuceneSearchTermAutomatonQuery *other = (OrgApacheLuceneSearchTermAutomatonQuery *) check_class_cast(o, [OrgApacheLuceneSearchTermAutomatonQuery class]);
   if (det_ == nil) {
@@ -409,7 +409,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTermAutomatonQuery_EnumAnd
 
 - (OrgApacheLuceneSearchScorer *)scorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
   IOSObjectArray *enums = [IOSObjectArray arrayWithLength:[((id<JavaUtilMap>) nil_chk(this$0_->idToTerm_)) size] type:OrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorer_class_()];
-  jboolean any = NO;
+  jboolean any = false;
   for (id<JavaUtilMap_Entry> __strong ent in nil_chk([((id<JavaUtilMap>) nil_chk(termStates_)) entrySet])) {
     OrgApacheLuceneIndexTermContext *termContext = [((id<JavaUtilMap_Entry>) nil_chk(ent)) getValue];
     JreAssert((((OrgApacheLuceneIndexTermContext *) nil_chk(termContext))->topReaderContext_ == OrgApacheLuceneIndexReaderUtil_getTopLevelContextWithOrgApacheLuceneIndexIndexReaderContext_(context)), (JreStrcat("$@$@", @"The top-reader used to create Weight (", termContext->topReaderContext_, @") is not the same as the current reader's top-reader (", OrgApacheLuceneIndexReaderUtil_getTopLevelContextWithOrgApacheLuceneIndexIndexReaderContext_(context))));
@@ -419,7 +419,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTermAutomatonQuery_EnumAnd
       OrgApacheLuceneIndexTermsEnum *termsEnum = [((OrgApacheLuceneIndexTerms *) nil_chk([((OrgApacheLuceneIndexLeafReader *) nil_chk([context reader])) termsWithNSString:this$0_->field_])) iterator];
       [((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum)) seekExactWithOrgApacheLuceneUtilBytesRef:term withOrgApacheLuceneIndexTermState:state];
       IOSObjectArray_SetAndConsume(enums, [((JavaLangInteger *) nil_chk([ent getKey])) intValue], new_OrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorer_initWithInt_withOrgApacheLuceneIndexPostingsEnum_([((JavaLangInteger *) nil_chk([ent getKey])) intValue], [termsEnum postingsWithOrgApacheLuceneIndexPostingsEnum:nil withInt:OrgApacheLuceneIndexPostingsEnum_POSITIONS]));
-      any = YES;
+      any = true;
     }
   }
   if (any) {
@@ -475,7 +475,7 @@ void OrgApacheLuceneSearchTermAutomatonQuery_TermAutomatonWeight_initWithOrgApac
   JreStrongAssign(&self->automaton_, automaton);
   JreStrongAssign(&self->searcher_, searcher);
   JreStrongAssign(&self->termStates_, termStates);
-  JreStrongAssign(&self->similarity_, [((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) getSimilarityWithBoolean:YES]);
+  JreStrongAssign(&self->similarity_, [((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) getSimilarityWithBoolean:true]);
   id<JavaUtilList> allTermStats = [new_JavaUtilArrayList_init() autorelease];
   for (id<JavaUtilMap_Entry> __strong ent in nil_chk([((id<JavaUtilMap>) nil_chk(outer$->idToTerm_)) entrySet])) {
     JavaLangInteger *termID = [((id<JavaUtilMap_Entry>) nil_chk(ent)) getKey];

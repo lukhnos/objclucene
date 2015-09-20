@@ -39,10 +39,12 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsStoredFieldsWriter_MergeVisitor, this$0
 
 @implementation OrgApacheLuceneCodecsStoredFieldsWriter
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsStoredFieldsWriter_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)startDocument {
   // can't call an abstract method

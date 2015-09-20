@@ -69,7 +69,7 @@
 
 @class OrgApacheLuceneIndexMemoryMemoryIndex_SliceByteStartArray;
 
-#define OrgApacheLuceneIndexMemoryMemoryIndex_DEBUG NO
+#define OrgApacheLuceneIndexMemoryMemoryIndex_DEBUG false
 
 @interface OrgApacheLuceneIndexMemoryMemoryIndex () {
  @public
@@ -486,10 +486,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMemoryMemoryIndex_$2)
 
 @implementation OrgApacheLuceneIndexMemoryMemoryIndex
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexMemoryMemoryIndex_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithBoolean:(jboolean)storeOffsets {
   OrgApacheLuceneIndexMemoryMemoryIndex_initWithBoolean_(self, storeOffsets);
@@ -553,9 +555,9 @@ withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tok
                    withFloat:(jfloat)boost
                      withInt:(jint)positionIncrementGap
                      withInt:(jint)offsetGap {
-  {
-    JavaLangThrowable *__mainException = nil;
+  @try {
     OrgApacheLuceneAnalysisTokenStream *stream = tokenStream;
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
       if (frozen_) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"Cannot call addField() when MemoryIndex is frozen") autorelease];
       if (fieldName == nil) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"fieldName must not be null") autorelease];
@@ -582,7 +584,7 @@ withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tok
         sumTotalTermFreq = info->sumTotalTermFreq_;
       }
       else {
-        fieldInfo = [new_OrgApacheLuceneIndexFieldInfo_initWithNSString_withInt_withBoolean_withBoolean_withBoolean_withOrgApacheLuceneIndexIndexOptionsEnum_withOrgApacheLuceneIndexDocValuesTypeEnum_withLong_withJavaUtilMap_(fieldName, [fields_ size], YES, NO, self->storePayloads_, self->storeOffsets_ ? JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS) : JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS_AND_POSITIONS), JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, NONE), -1, JavaUtilCollections_emptyMap()) autorelease];
+        fieldInfo = [new_OrgApacheLuceneIndexFieldInfo_initWithNSString_withInt_withBoolean_withBoolean_withBoolean_withOrgApacheLuceneIndexIndexOptionsEnum_withOrgApacheLuceneIndexDocValuesTypeEnum_withLong_withJavaUtilMap_(fieldName, [fields_ size], true, false, self->storePayloads_, self->storeOffsets_ ? JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS) : JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS_AND_POSITIONS), JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, NONE), -1, JavaUtilCollections_emptyMap()) autorelease];
         sliceArray = [new_OrgApacheLuceneIndexMemoryMemoryIndex_SliceByteStartArray_initWithInt_(OrgApacheLuceneUtilBytesRefHash_DEFAULT_CAPACITY) autorelease];
         terms = [new_OrgApacheLuceneUtilBytesRefHash_initWithOrgApacheLuceneUtilByteBlockPool_withInt_withOrgApacheLuceneUtilBytesRefHash_BytesStartArray_(byteBlockPool_, OrgApacheLuceneUtilBytesRefHash_DEFAULT_CAPACITY, sliceArray) autorelease];
       }
@@ -629,25 +631,26 @@ withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tok
         [fields_ putWithId:fieldName withId:[new_OrgApacheLuceneIndexMemoryMemoryIndex_Info_initWithOrgApacheLuceneIndexMemoryMemoryIndex_withOrgApacheLuceneIndexFieldInfo_withOrgApacheLuceneUtilBytesRefHash_withOrgApacheLuceneIndexMemoryMemoryIndex_SliceByteStartArray_withInt_withInt_withFloat_withInt_withInt_withLong_(self, fieldInfo, terms, sliceArray, numTokens, numOverlapTokens, boost, pos, [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAtt)) endOffset] + offset, sumTotalTermFreq) autorelease]];
       }
     }
-    @catch (JavaIoIOException *e) {
-      __mainException = e;
-      @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(e) autorelease];
+    @catch (JavaLangThrowable *e) {
+      __primaryException1 = e;
+      @throw e;
     }
     @finally {
-      @try {
-        [stream close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
+      if (stream != nil) {
+        if (__primaryException1 != nil) {
+          @try {
+            [stream close];
+          } @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
         } else {
-          __mainException = e;
+          [stream close];
         }
       }
-      if (__mainException) {
-        @throw __mainException;
-      }
     }
+  }
+  @catch (JavaIoIOException *e) {
+    @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(e) autorelease];
   }
 }
 
@@ -668,7 +671,7 @@ withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tok
 }
 
 - (void)freeze {
-  self->frozen_ = YES;
+  self->frozen_ = true;
   for (OrgApacheLuceneIndexMemoryMemoryIndex_Info * __strong info in nil_chk([((id<JavaUtilSortedMap>) nil_chk(fields_)) values])) {
     [((OrgApacheLuceneIndexMemoryMemoryIndex_Info *) nil_chk(info)) sortTerms];
     [info getNormDocValues];
@@ -744,12 +747,12 @@ withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tok
 - (void)reset {
   [((id<JavaUtilSortedMap>) nil_chk(fields_)) clear];
   JreStrongAssign(&self->normSimilarity_, OrgApacheLuceneSearchIndexSearcher_getDefaultSimilarity());
-  [((OrgApacheLuceneUtilByteBlockPool *) nil_chk(byteBlockPool_)) resetWithBoolean:NO withBoolean:NO];
-  [((OrgApacheLuceneUtilIntBlockPool *) nil_chk(intBlockPool_)) resetWithBoolean:YES withBoolean:NO];
+  [((OrgApacheLuceneUtilByteBlockPool *) nil_chk(byteBlockPool_)) resetWithBoolean:false withBoolean:false];
+  [((OrgApacheLuceneUtilIntBlockPool *) nil_chk(intBlockPool_)) resetWithBoolean:true withBoolean:false];
   if (payloadsBytesRefs_ != nil) {
     [payloadsBytesRefs_ clear];
   }
-  self->frozen_ = NO;
+  self->frozen_ = false;
 }
 
 - (void)dealloc {
@@ -803,7 +806,7 @@ withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)tok
 @end
 
 void OrgApacheLuceneIndexMemoryMemoryIndex_init(OrgApacheLuceneIndexMemoryMemoryIndex *self) {
-  OrgApacheLuceneIndexMemoryMemoryIndex_initWithBoolean_(self, NO);
+  OrgApacheLuceneIndexMemoryMemoryIndex_initWithBoolean_(self, false);
 }
 
 OrgApacheLuceneIndexMemoryMemoryIndex *new_OrgApacheLuceneIndexMemoryMemoryIndex_init() {
@@ -813,7 +816,7 @@ OrgApacheLuceneIndexMemoryMemoryIndex *new_OrgApacheLuceneIndexMemoryMemoryIndex
 }
 
 void OrgApacheLuceneIndexMemoryMemoryIndex_initWithBoolean_(OrgApacheLuceneIndexMemoryMemoryIndex *self, jboolean storeOffsets) {
-  OrgApacheLuceneIndexMemoryMemoryIndex_initWithBoolean_withBoolean_(self, storeOffsets, NO);
+  OrgApacheLuceneIndexMemoryMemoryIndex_initWithBoolean_withBoolean_(self, storeOffsets, false);
 }
 
 OrgApacheLuceneIndexMemoryMemoryIndex *new_OrgApacheLuceneIndexMemoryMemoryIndex_initWithBoolean_(jboolean storeOffsets) {
@@ -835,7 +838,7 @@ OrgApacheLuceneIndexMemoryMemoryIndex *new_OrgApacheLuceneIndexMemoryMemoryIndex
 void OrgApacheLuceneIndexMemoryMemoryIndex_initWithBoolean_withBoolean_withLong_(OrgApacheLuceneIndexMemoryMemoryIndex *self, jboolean storeOffsets, jboolean storePayloads, jlong maxReusedBytes) {
   NSObject_init(self);
   JreStrongAssignAndConsume(&self->fields_, new_JavaUtilTreeMap_init());
-  self->frozen_ = NO;
+  self->frozen_ = false;
   JreStrongAssign(&self->normSimilarity_, OrgApacheLuceneSearchIndexSearcher_getDefaultSimilarity());
   self->storeOffsets_ = storeOffsets;
   self->storePayloads_ = storePayloads;
@@ -1214,7 +1217,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryInd
 }
 
 - (jboolean)hasFreqs {
-  return YES;
+  return true;
 }
 
 - (jboolean)hasOffsets {
@@ -1222,7 +1225,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryInd
 }
 
 - (jboolean)hasPositions {
-  return YES;
+  return true;
 }
 
 - (jboolean)hasPayloads {
@@ -1457,7 +1460,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryInd
                                            withInt:(jint)freq {
   [((OrgApacheLuceneUtilIntBlockPool_SliceReader *) nil_chk(self->sliceReader_)) resetWithInt:start withInt:end];
   posUpto_ = 0;
-  hasNext_ = YES;
+  hasNext_ = true;
   doc_ = -1;
   self->freq_ = freq;
   return self;
@@ -1470,7 +1473,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMemoryMemoryIndex_MemoryInd
 - (jint)nextDoc {
   pos_ = -1;
   if (hasNext_) {
-    hasNext_ = NO;
+    hasNext_ = false;
     return doc_ = 0;
   }
   else {
@@ -1652,7 +1655,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMemoryMemoryIndex_SliceByte
 @implementation OrgApacheLuceneIndexMemoryMemoryIndex_$1
 
 - (jboolean)incrementToken {
-  if (![((id<JavaUtilIterator>) nil_chk(iter_)) hasNext]) return NO;
+  if (![((id<JavaUtilIterator>) nil_chk(iter_)) hasNext]) return false;
   id obj = [iter_ next];
   if (obj == nil) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"keyword must not be null") autorelease];
   NSString *term = [nil_chk(obj) description];
@@ -1660,7 +1663,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMemoryMemoryIndex_SliceByte
   [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk([((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) setEmpty])) appendWithNSString:term];
   [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAtt_)) setOffsetWithInt:start_ withInt:start_ + [termAtt_ length]];
   start_ += ((jint) [((NSString *) nil_chk(term)) length]) + 1;
-  return YES;
+  return true;
 }
 
 - (instancetype)initWithJavaUtilCollection:(id<JavaUtilCollection>)capture$0 {
@@ -1723,7 +1726,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMemoryMemoryIndex_$1)
 }
 
 - (jboolean)needsScores {
-  return YES;
+  return true;
 }
 
 - (instancetype)initWithFloatArray:(IOSFloatArray *)capture$0 {

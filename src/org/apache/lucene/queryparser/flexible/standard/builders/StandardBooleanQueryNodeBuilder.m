@@ -32,10 +32,12 @@ __attribute__((unused)) static OrgApacheLuceneSearchBooleanClause_OccurEnum *Org
 
 @implementation OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardBooleanQueryNodeBuilder
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardBooleanQueryNodeBuilder_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneSearchBooleanQuery *)buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryNode {
   OrgApacheLuceneQueryparserFlexibleStandardNodesStandardBooleanQueryNode *booleanNode = (OrgApacheLuceneQueryparserFlexibleStandardNodesStandardBooleanQueryNode *) check_class_cast(queryNode, [OrgApacheLuceneQueryparserFlexibleStandardNodesStandardBooleanQueryNode class]);

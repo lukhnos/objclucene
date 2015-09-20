@@ -88,7 +88,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisQueryQueryAutoStopWordAnalyzer, stopW
   if (stopWords == nil) {
     return components;
   }
-  OrgApacheLuceneAnalysisCoreStopFilter *stopFilter = [new_OrgApacheLuceneAnalysisCoreStopFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_([((OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *) nil_chk(components)) getTokenStream], [new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(stopWords, NO) autorelease]) autorelease];
+  OrgApacheLuceneAnalysisCoreStopFilter *stopFilter = [new_OrgApacheLuceneAnalysisCoreStopFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisUtilCharArraySet_([((OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *) nil_chk(components)) getTokenStream], [new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(stopWords, false) autorelease]) autorelease];
   return [new_OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents_initWithOrgApacheLuceneAnalysisTokenizer_withOrgApacheLuceneAnalysisTokenStream_([components getTokenizer], stopFilter) autorelease];
 }
 

@@ -67,7 +67,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSortRescorer_$1)
   IOSObjectArray *hits = [((IOSObjectArray *) nil_chk(((OrgApacheLuceneSearchTopDocs *) nil_chk(firstPassTopDocs))->scoreDocs_)) clone];
   JavaUtilArrays_sortWithNSObjectArray_withJavaUtilComparator_(hits, [new_OrgApacheLuceneSearchSortRescorer_$1_init() autorelease]);
   id<JavaUtilList> leaves = [((OrgApacheLuceneIndexIndexReader *) nil_chk([((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) getIndexReader])) leaves];
-  OrgApacheLuceneSearchTopFieldCollector *collector = OrgApacheLuceneSearchTopFieldCollector_createWithOrgApacheLuceneSearchSort_withInt_withBoolean_withBoolean_withBoolean_(sort_, topN, YES, YES, YES);
+  OrgApacheLuceneSearchTopFieldCollector *collector = OrgApacheLuceneSearchTopFieldCollector_createWithOrgApacheLuceneSearchSort_withInt_withBoolean_withBoolean_withBoolean_(sort_, topN, true, true, true);
   jint hitUpto = 0;
   jint readerUpto = -1;
   jint endDoc = 0;
@@ -153,10 +153,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSortRescorer)
   return ((OrgApacheLuceneSearchScoreDoc *) nil_chk(a))->doc_ - ((OrgApacheLuceneSearchScoreDoc *) nil_chk(b))->doc_;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSortRescorer_$1_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

@@ -36,19 +36,19 @@ withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type {
   if (self == [OrgApacheLuceneDocumentLongField class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneDocumentLongField_TYPE_NOT_STORED_, new_OrgApacheLuceneDocumentFieldType_init());
     {
-      [OrgApacheLuceneDocumentLongField_TYPE_NOT_STORED_ setTokenizedWithBoolean:YES];
-      [OrgApacheLuceneDocumentLongField_TYPE_NOT_STORED_ setOmitNormsWithBoolean:YES];
+      [OrgApacheLuceneDocumentLongField_TYPE_NOT_STORED_ setTokenizedWithBoolean:true];
+      [OrgApacheLuceneDocumentLongField_TYPE_NOT_STORED_ setOmitNormsWithBoolean:true];
       [OrgApacheLuceneDocumentLongField_TYPE_NOT_STORED_ setIndexOptionsWithOrgApacheLuceneIndexIndexOptionsEnum:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS)];
       [OrgApacheLuceneDocumentLongField_TYPE_NOT_STORED_ setNumericTypeWithOrgApacheLuceneDocumentFieldType_NumericTypeEnum:JreLoadStatic(OrgApacheLuceneDocumentFieldType_NumericTypeEnum, LONG)];
       [OrgApacheLuceneDocumentLongField_TYPE_NOT_STORED_ freeze];
     }
     JreStrongAssignAndConsume(&OrgApacheLuceneDocumentLongField_TYPE_STORED_, new_OrgApacheLuceneDocumentFieldType_init());
     {
-      [OrgApacheLuceneDocumentLongField_TYPE_STORED_ setTokenizedWithBoolean:YES];
-      [OrgApacheLuceneDocumentLongField_TYPE_STORED_ setOmitNormsWithBoolean:YES];
+      [OrgApacheLuceneDocumentLongField_TYPE_STORED_ setTokenizedWithBoolean:true];
+      [OrgApacheLuceneDocumentLongField_TYPE_STORED_ setOmitNormsWithBoolean:true];
       [OrgApacheLuceneDocumentLongField_TYPE_STORED_ setIndexOptionsWithOrgApacheLuceneIndexIndexOptionsEnum:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS)];
       [OrgApacheLuceneDocumentLongField_TYPE_STORED_ setNumericTypeWithOrgApacheLuceneDocumentFieldType_NumericTypeEnum:JreLoadStatic(OrgApacheLuceneDocumentFieldType_NumericTypeEnum, LONG)];
-      [OrgApacheLuceneDocumentLongField_TYPE_STORED_ setStoredWithBoolean:YES];
+      [OrgApacheLuceneDocumentLongField_TYPE_STORED_ setStoredWithBoolean:true];
       [OrgApacheLuceneDocumentLongField_TYPE_STORED_ freeze];
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneDocumentLongField)

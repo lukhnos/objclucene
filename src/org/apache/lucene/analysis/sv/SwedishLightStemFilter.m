@@ -41,10 +41,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisSvSwedishLightStemFilter, keywordAttr
       jint newlen = [((OrgApacheLuceneAnalysisSvSwedishLightStemmer *) nil_chk(stemmer_)) stemWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer] withInt:[termAtt_ length]];
       [termAtt_ setLengthWithInt:newlen];
     }
-    return YES;
+    return true;
   }
   else {
-    return NO;
+    return false;
   }
 }
 

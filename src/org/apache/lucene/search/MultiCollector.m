@@ -82,11 +82,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMultiCollector_MultiLeafCollecto
     while (b__ < e__) {
       id<OrgApacheLuceneSearchCollector> collector = *b__++;
       if ([((id<OrgApacheLuceneSearchCollector>) nil_chk(collector)) needsScores]) {
-        return YES;
+        return true;
       }
     }
   }
-  return NO;
+  return false;
 }
 
 - (id<OrgApacheLuceneSearchLeafCollector>)getLeafCollectorWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {

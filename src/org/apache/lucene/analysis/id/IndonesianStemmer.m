@@ -120,10 +120,12 @@ __attribute__((unused)) static jint OrgApacheLuceneAnalysisIdIndonesianStemmer_r
   return OrgApacheLuceneAnalysisIdIndonesianStemmer_removeSuffixWithCharArray_withInt_(self, text, length);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisIdIndonesianStemmer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -176,9 +178,9 @@ jboolean OrgApacheLuceneAnalysisIdIndonesianStemmer_isVowelWithChar_(OrgApacheLu
     case 'i':
     case 'o':
     case 'u':
-    return YES;
+    return true;
     default:
-    return NO;
+    return false;
   }
 }
 

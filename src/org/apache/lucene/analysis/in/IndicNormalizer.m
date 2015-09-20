@@ -91,10 +91,12 @@ withOrgApacheLuceneAnalysisInIndicNormalizer_ScriptData:(OrgApacheLuceneAnalysis
   return OrgApacheLuceneAnalysisInIndicNormalizer_composeWithInt_withJavaLangCharacter_UnicodeBlock_withOrgApacheLuceneAnalysisInIndicNormalizer_ScriptData_withCharArray_withInt_withInt_(self, ch0, block0, sd, text, pos, len);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisInIndicNormalizer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisInIndicNormalizer class]) {

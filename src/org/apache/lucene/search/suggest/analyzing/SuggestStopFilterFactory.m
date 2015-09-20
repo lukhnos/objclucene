@@ -107,7 +107,7 @@ void OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilterFactory_initWithJavaU
   OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
   JreStrongAssign(&self->stopWordFiles_, [self getWithJavaUtilMap:args withNSString:@"words"]);
   JreStrongAssign(&self->format_, [self getWithJavaUtilMap:args withNSString:@"format" withNSString:(nil == self->stopWordFiles_ ? nil : OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilterFactory_FORMAT_WORDSET_)]);
-  self->ignoreCase_ = [self getBooleanWithJavaUtilMap:args withNSString:@"ignoreCase" withBoolean:NO];
+  self->ignoreCase_ = [self getBooleanWithJavaUtilMap:args withNSString:@"ignoreCase" withBoolean:false];
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
   }

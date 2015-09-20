@@ -41,16 +41,16 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter, 
 
 - (jboolean)incrementToken {
   if (![((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
-    return NO;
+    return false;
   }
   if ([((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAttrib_)) startOffset] <= maxStartOffset_) {
-    return YES;
+    return true;
   }
   if (consumeAllTokens_) {
     while ([input_ incrementToken]) {
     }
   }
-  return NO;
+  return false;
 }
 
 - (void)dealloc {
@@ -76,7 +76,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter, 
 @end
 
 void OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter *self, OrgApacheLuceneAnalysisTokenStream *input, jint maxStartOffset) {
-  OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withBoolean_(self, input, maxStartOffset, NO);
+  OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withBoolean_(self, input, maxStartOffset, false);
 }
 
 OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter *new_OrgApacheLuceneAnalysisMiscellaneousLimitTokenOffsetFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(OrgApacheLuceneAnalysisTokenStream *input, jint maxStartOffset) {

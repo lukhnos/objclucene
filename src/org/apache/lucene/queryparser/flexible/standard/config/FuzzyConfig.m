@@ -17,10 +17,12 @@
 
 @implementation OrgApacheLuceneQueryparserFlexibleStandardConfigFuzzyConfig
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueryparserFlexibleStandardConfigFuzzyConfig_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)getPrefixLength {
   return prefixLength_;

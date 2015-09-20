@@ -43,10 +43,10 @@ __attribute__((unused)) static OrgApacheLuceneSearchDocIdSetIterator *OrgApacheL
                                                             withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)acceptDocs {
   OrgApacheLuceneUtilBitDocIdSet_Builder *res = nil;
   OrgApacheLuceneIndexLeafReader *reader = [((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader];
-  jboolean hasShouldClauses = NO;
+  jboolean hasShouldClauses = false;
   for (OrgApacheLuceneQueriesFilterClause * __strong fc in nil_chk(clauses_)) {
     if ([((OrgApacheLuceneQueriesFilterClause *) nil_chk(fc)) getOccur] == JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, SHOULD)) {
-      hasShouldClauses = YES;
+      hasShouldClauses = true;
       OrgApacheLuceneSearchDocIdSetIterator *disi = OrgApacheLuceneQueriesBooleanFilter_getDISIWithOrgApacheLuceneSearchFilter_withOrgApacheLuceneIndexLeafReaderContext_([fc getFilter], context);
       if (disi == nil) continue;
       if (res == nil) {
@@ -60,7 +60,7 @@ __attribute__((unused)) static OrgApacheLuceneSearchDocIdSetIterator *OrgApacheL
     if ([((OrgApacheLuceneQueriesFilterClause *) nil_chk(fc)) getOccur] == JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, MUST_NOT)) {
       if (res == nil) {
         JreAssert((!hasShouldClauses), (@"org/apache/lucene/queries/BooleanFilter.java:79 condition failed: assert !hasShouldClauses;"));
-        res = [new_OrgApacheLuceneUtilBitDocIdSet_Builder_initWithInt_withBoolean_([((OrgApacheLuceneIndexLeafReader *) nil_chk(reader)) maxDoc], YES) autorelease];
+        res = [new_OrgApacheLuceneUtilBitDocIdSet_Builder_initWithInt_withBoolean_([((OrgApacheLuceneIndexLeafReader *) nil_chk(reader)) maxDoc], true) autorelease];
       }
       OrgApacheLuceneSearchDocIdSetIterator *disi = OrgApacheLuceneQueriesBooleanFilter_getDISIWithOrgApacheLuceneSearchFilter_withOrgApacheLuceneIndexLeafReaderContext_([fc getFilter], context);
       if (disi != nil) {
@@ -113,10 +113,10 @@ withOrgApacheLuceneSearchBooleanClause_OccurEnum:(OrgApacheLuceneSearchBooleanCl
 
 - (jboolean)isEqual:(id)obj {
   if (self == obj) {
-    return YES;
+    return true;
   }
-  if ([super isEqual:obj] == NO) {
-    return NO;
+  if ([super isEqual:obj] == false) {
+    return false;
   }
   OrgApacheLuceneQueriesBooleanFilter *other = (OrgApacheLuceneQueriesBooleanFilter *) check_class_cast(obj, [OrgApacheLuceneQueriesBooleanFilter class]);
   return [((id<JavaUtilList>) nil_chk(clauses_)) isEqual:((OrgApacheLuceneQueriesBooleanFilter *) nil_chk(other))->clauses_];
@@ -138,10 +138,12 @@ withOrgApacheLuceneSearchBooleanClause_OccurEnum:(OrgApacheLuceneSearchBooleanCl
   return [((JavaLangStringBuilder *) nil_chk([buffer appendWithChar:')'])) description];
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueriesBooleanFilter_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(clauses_);

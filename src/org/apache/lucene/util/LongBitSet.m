@@ -158,9 +158,9 @@ __attribute__((unused)) static jboolean OrgApacheLuceneUtilLongBitSet_verifyGhos
 - (jboolean)intersectsWithOrgApacheLuceneUtilLongBitSet:(OrgApacheLuceneUtilLongBitSet *)other {
   jint pos = JavaLangMath_minWithInt_withInt_(numWords_, ((OrgApacheLuceneUtilLongBitSet *) nil_chk(other))->numWords_);
   while (--pos >= 0) {
-    if ((IOSLongArray_Get(nil_chk(bits_), pos) & IOSLongArray_Get(other->bits_, pos)) != 0) return YES;
+    if ((IOSLongArray_Get(nil_chk(bits_), pos) & IOSLongArray_Get(other->bits_, pos)) != 0) return true;
   }
-  return NO;
+  return false;
 }
 
 - (void)and__WithOrgApacheLuceneUtilLongBitSet:(OrgApacheLuceneUtilLongBitSet *)other {
@@ -183,9 +183,9 @@ __attribute__((unused)) static jboolean OrgApacheLuceneUtilLongBitSet_verifyGhos
 - (jboolean)scanIsEmpty {
   jint count = numWords_;
   for (jint i = 0; i < count; i++) {
-    if (IOSLongArray_Get(nil_chk(bits_), i) != 0) return NO;
+    if (IOSLongArray_Get(nil_chk(bits_), i) != 0) return false;
   }
-  return YES;
+  return true;
 }
 
 - (void)flipWithLong:(jlong)startIndex
@@ -267,14 +267,14 @@ __attribute__((unused)) static jboolean OrgApacheLuceneUtilLongBitSet_verifyGhos
 
 - (jboolean)isEqual:(id)o {
   if (self == o) {
-    return YES;
+    return true;
   }
   if (!([o isKindOfClass:[OrgApacheLuceneUtilLongBitSet class]])) {
-    return NO;
+    return false;
   }
   OrgApacheLuceneUtilLongBitSet *other = (OrgApacheLuceneUtilLongBitSet *) check_class_cast(o, [OrgApacheLuceneUtilLongBitSet class]);
   if (numBits_ != ((OrgApacheLuceneUtilLongBitSet *) nil_chk(other))->numBits_) {
-    return NO;
+    return false;
   }
   return JavaUtilArrays_equalsWithLongArray_withLongArray_(bits_, other->bits_);
 }
@@ -387,9 +387,9 @@ OrgApacheLuceneUtilLongBitSet *new_OrgApacheLuceneUtilLongBitSet_initWithLongArr
 
 jboolean OrgApacheLuceneUtilLongBitSet_verifyGhostBitsClear(OrgApacheLuceneUtilLongBitSet *self) {
   for (jint i = self->numWords_; i < ((IOSLongArray *) nil_chk(self->bits_))->size_; i++) {
-    if (IOSLongArray_Get(self->bits_, i) != 0) return NO;
+    if (IOSLongArray_Get(self->bits_, i) != 0) return false;
   }
-  if ((self->numBits_ & (jint) 0x3f) == 0) return YES;
+  if ((self->numBits_ & (jint) 0x3f) == 0) return true;
   jlong mask = JreLShift64(-1LL, self->numBits_);
   return (IOSLongArray_Get(self->bits_, self->numWords_ - 1) & mask) == 0;
 }

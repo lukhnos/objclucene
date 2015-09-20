@@ -129,10 +129,12 @@ IOSIntArray *OrgApacheLuceneUtilAutomatonUTF32ToUTF8_MASKS_;
 
 @implementation OrgApacheLuceneUtilAutomatonUTF32ToUTF8
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilAutomatonUTF32ToUTF8_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)convertOneEdgeWithInt:(jint)start
                       withInt:(jint)end
@@ -296,15 +298,15 @@ void OrgApacheLuceneUtilAutomatonUTF32ToUTF8_buildWithInt_withInt_withOrgApacheL
       [((OrgApacheLuceneUtilAutomatonAutomaton_Builder *) nil_chk(self->utf8_)) addTransitionWithInt:start withInt:end withInt:[startUTF8 byteAtWithInt:upto] withInt:[endUTF8 byteAtWithInt:upto]];
     }
     else {
-      OrgApacheLuceneUtilAutomatonUTF32ToUTF8_startWithInt_withInt_withOrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence_withInt_withBoolean_(self, start, end, startUTF8, upto, NO);
+      OrgApacheLuceneUtilAutomatonUTF32ToUTF8_startWithInt_withInt_withOrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence_withInt_withBoolean_(self, start, end, startUTF8, upto, false);
       if ([endUTF8 byteAtWithInt:upto] - [startUTF8 byteAtWithInt:upto] > 1) {
         OrgApacheLuceneUtilAutomatonUTF32ToUTF8_allWithInt_withInt_withInt_withInt_withInt_(self, start, end, [startUTF8 byteAtWithInt:upto] + 1, [endUTF8 byteAtWithInt:upto] - 1, startUTF8->len_ - upto - 1);
       }
-      OrgApacheLuceneUtilAutomatonUTF32ToUTF8_endWithInt_withInt_withOrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence_withInt_withBoolean_(self, start, end, endUTF8, upto, NO);
+      OrgApacheLuceneUtilAutomatonUTF32ToUTF8_endWithInt_withInt_withOrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence_withInt_withBoolean_(self, start, end, endUTF8, upto, false);
     }
   }
   else {
-    OrgApacheLuceneUtilAutomatonUTF32ToUTF8_startWithInt_withInt_withOrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence_withInt_withBoolean_(self, start, end, startUTF8, upto, YES);
+    OrgApacheLuceneUtilAutomatonUTF32ToUTF8_startWithInt_withInt_withOrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence_withInt_withBoolean_(self, start, end, startUTF8, upto, true);
     jint byteCount = 1 + startUTF8->len_ - upto;
     jint limit = endUTF8->len_ - upto;
     while (byteCount < limit) {
@@ -313,7 +315,7 @@ void OrgApacheLuceneUtilAutomatonUTF32ToUTF8_buildWithInt_withInt_withOrgApacheL
       OrgApacheLuceneUtilAutomatonUTF32ToUTF8_allWithInt_withInt_withInt_withInt_withInt_(self, start, end, [self->tmpUTF8a_ byteAtWithInt:0], [self->tmpUTF8b_ byteAtWithInt:0], self->tmpUTF8a_->len_ - 1);
       byteCount++;
     }
-    OrgApacheLuceneUtilAutomatonUTF32ToUTF8_endWithInt_withInt_withOrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence_withInt_withBoolean_(self, start, end, endUTF8, upto, YES);
+    OrgApacheLuceneUtilAutomatonUTF32ToUTF8_endWithInt_withInt_withOrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence_withInt_withBoolean_(self, start, end, endUTF8, upto, true);
   }
 }
 
@@ -324,7 +326,7 @@ void OrgApacheLuceneUtilAutomatonUTF32ToUTF8_startWithInt_withInt_withOrgApacheL
   else {
     jint n = [((OrgApacheLuceneUtilAutomatonAutomaton_Builder *) nil_chk(self->utf8_)) createState];
     [self->utf8_ addTransitionWithInt:start withInt:n withInt:[startUTF8 byteAtWithInt:upto]];
-    OrgApacheLuceneUtilAutomatonUTF32ToUTF8_startWithInt_withInt_withOrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence_withInt_withBoolean_(self, n, end, startUTF8, 1 + upto, YES);
+    OrgApacheLuceneUtilAutomatonUTF32ToUTF8_startWithInt_withInt_withOrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence_withInt_withBoolean_(self, n, end, startUTF8, 1 + upto, true);
     jint endCode = [startUTF8 byteAtWithInt:upto] | IOSIntArray_Get(nil_chk(OrgApacheLuceneUtilAutomatonUTF32ToUTF8_MASKS_), [startUTF8 numBitsWithInt:upto] - 1);
     if (doAll && [startUTF8 byteAtWithInt:upto] != endCode) {
       OrgApacheLuceneUtilAutomatonUTF32ToUTF8_allWithInt_withInt_withInt_withInt_withInt_(self, start, end, [startUTF8 byteAtWithInt:upto] + 1, endCode, startUTF8->len_ - upto - 1);
@@ -349,7 +351,7 @@ void OrgApacheLuceneUtilAutomatonUTF32ToUTF8_endWithInt_withInt_withOrgApacheLuc
     }
     jint n = [((OrgApacheLuceneUtilAutomatonAutomaton_Builder *) nil_chk(self->utf8_)) createState];
     [self->utf8_ addTransitionWithInt:start withInt:n withInt:[endUTF8 byteAtWithInt:upto]];
-    OrgApacheLuceneUtilAutomatonUTF32ToUTF8_endWithInt_withInt_withOrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence_withInt_withBoolean_(self, n, end, endUTF8, 1 + upto, YES);
+    OrgApacheLuceneUtilAutomatonUTF32ToUTF8_endWithInt_withInt_withOrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence_withInt_withBoolean_(self, n, end, endUTF8, 1 + upto, true);
   }
 }
 
@@ -374,10 +376,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonUTF32ToUTF8)
 
 @implementation OrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Byte
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Byte_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -407,10 +411,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Byt
 
 @implementation OrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Sequence_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)byteAtWithInt:(jint)idx {
   return ((OrgApacheLuceneUtilAutomatonUTF32ToUTF8_UTF8Byte *) nil_chk(IOSObjectArray_Get(nil_chk(bytes_), idx)))->value_;

@@ -73,7 +73,7 @@ withOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)payOut {
       lastPayFP_ = [((OrgApacheLuceneStoreIndexOutput *) nil_chk(payOut_)) getFilePointer];
     }
   }
-  initialized_ = NO;
+  initialized_ = false;
 }
 
 - (void)initSkip {
@@ -90,7 +90,7 @@ withOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)payOut {
         JavaUtilArrays_fillWithLongArray_withLong_(lastSkipPayPointer_, lastPayFP_);
       }
     }
-    initialized_ = YES;
+    initialized_ = true;
   }
 }
 

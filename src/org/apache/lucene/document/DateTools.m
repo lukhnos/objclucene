@@ -76,10 +76,12 @@ JavaUtilTimeZone *OrgApacheLuceneDocumentDateTools_GMT_;
 
 @implementation OrgApacheLuceneDocumentDateTools
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneDocumentDateTools_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (NSString *)dateToStringWithJavaUtilDate:(JavaUtilDate *)date
 withOrgApacheLuceneDocumentDateTools_ResolutionEnum:(OrgApacheLuceneDocumentDateTools_ResolutionEnum *)resolution {
@@ -310,10 +312,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentDateTools_ResolutionEnum
   return JavaUtilCalendar_getInstanceWithJavaUtilTimeZone_withJavaUtilLocale_(JreLoadStatic(OrgApacheLuceneDocumentDateTools, GMT_), JreLoadStatic(JavaUtilLocale, ROOT_));
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneDocumentDateTools_$1_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -355,10 +359,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneDocumentDateTools_$1)
   return arr;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneDocumentDateTools_$2_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

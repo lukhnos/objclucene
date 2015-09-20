@@ -48,10 +48,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisIdIndonesianStemFilter, stemmer_, Org
       jint newlen = [((OrgApacheLuceneAnalysisIdIndonesianStemmer *) nil_chk(stemmer_)) stemWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer] withInt:[termAtt_ length] withBoolean:stemDerivational_];
       [termAtt_ setLengthWithInt:newlen];
     }
-    return YES;
+    return true;
   }
   else {
-    return NO;
+    return false;
   }
 }
 
@@ -81,7 +81,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisIdIndonesianStemFilter, stemmer_, Org
 @end
 
 void OrgApacheLuceneAnalysisIdIndonesianStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisIdIndonesianStemFilter *self, OrgApacheLuceneAnalysisTokenStream *input) {
-  OrgApacheLuceneAnalysisIdIndonesianStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_(self, input, YES);
+  OrgApacheLuceneAnalysisIdIndonesianStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_(self, input, true);
 }
 
 OrgApacheLuceneAnalysisIdIndonesianStemFilter *new_OrgApacheLuceneAnalysisIdIndonesianStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) {

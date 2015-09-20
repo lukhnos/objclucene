@@ -61,10 +61,12 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper, filler
   return self;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithInt:(jint)minShingleSize
                     withInt:(jint)maxShingleSize {
@@ -172,7 +174,7 @@ OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper *new_OrgApacheLuceneAnalysi
 }
 
 void OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper_initWithOrgApacheLuceneAnalysisAnalyzer_withInt_withInt_(OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper *self, OrgApacheLuceneAnalysisAnalyzer *defaultAnalyzer, jint minShingleSize, jint maxShingleSize) {
-  OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper_initWithOrgApacheLuceneAnalysisAnalyzer_withInt_withInt_withNSString_withBoolean_withBoolean_withNSString_(self, defaultAnalyzer, minShingleSize, maxShingleSize, OrgApacheLuceneAnalysisShingleShingleFilter_DEFAULT_TOKEN_SEPARATOR_, YES, NO, OrgApacheLuceneAnalysisShingleShingleFilter_DEFAULT_FILLER_TOKEN_);
+  OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper_initWithOrgApacheLuceneAnalysisAnalyzer_withInt_withInt_withNSString_withBoolean_withBoolean_withNSString_(self, defaultAnalyzer, minShingleSize, maxShingleSize, OrgApacheLuceneAnalysisShingleShingleFilter_DEFAULT_TOKEN_SEPARATOR_, true, false, OrgApacheLuceneAnalysisShingleShingleFilter_DEFAULT_FILLER_TOKEN_);
 }
 
 OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper *new_OrgApacheLuceneAnalysisShingleShingleAnalyzerWrapper_initWithOrgApacheLuceneAnalysisAnalyzer_withInt_withInt_(OrgApacheLuceneAnalysisAnalyzer *defaultAnalyzer, jint minShingleSize, jint maxShingleSize) {

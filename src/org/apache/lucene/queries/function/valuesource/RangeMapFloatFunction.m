@@ -98,7 +98,7 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
 }
 
 - (jboolean)isEqual:(id)o {
-  if (OrgApacheLuceneQueriesFunctionValuesourceRangeMapFloatFunction_class_() != [nil_chk(o) getClass]) return NO;
+  if (OrgApacheLuceneQueriesFunctionValuesourceRangeMapFloatFunction_class_() != [nil_chk(o) getClass]) return false;
   OrgApacheLuceneQueriesFunctionValuesourceRangeMapFloatFunction *other = (OrgApacheLuceneQueriesFunctionValuesourceRangeMapFloatFunction *) check_class_cast(o, [OrgApacheLuceneQueriesFunctionValuesourceRangeMapFloatFunction class]);
   return self->min_ == other->min_ && self->max_ == other->max_ && [((OrgApacheLuceneQueriesFunctionValueSource *) nil_chk(self->target_)) isEqual:other->target_] && [((OrgApacheLuceneQueriesFunctionValueSource *) nil_chk(self->source_)) isEqual:other->source_] && (self->defaultVal_ == other->defaultVal_ || (self->defaultVal_ != nil && [self->defaultVal_ isEqual:other->defaultVal_]));
 }

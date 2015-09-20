@@ -10,10 +10,12 @@
 
 @implementation OrgApacheLuceneIndexTermState
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexTermState_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)copyFromWithOrgApacheLuceneIndexTermState:(OrgApacheLuceneIndexTermState *)other {
   // can't call an abstract method
@@ -30,7 +32,7 @@
 }
 
 - (jboolean)isRealTerm {
-  return YES;
+  return true;
 }
 
 - (NSString *)description {

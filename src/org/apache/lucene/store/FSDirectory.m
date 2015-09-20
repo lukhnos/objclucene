@@ -109,12 +109,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreFSDirectory_FSIndexOutput_$1)
                   withNSString:(NSString *)dest {
   [self ensureOpen];
   OrgLukhnosPortmobileFileFiles_moveWithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileStandardCopyOptionArray_([((OrgLukhnosPortmobileFilePath *) nil_chk(directory_)) resolveWithNSString:source], [directory_ resolveWithNSString:dest], [IOSObjectArray arrayWithObjects:(id[]){ JreLoadStatic(OrgLukhnosPortmobileFileStandardCopyOption, ATOMIC_MOVE_) } count:1 type:OrgLukhnosPortmobileFileStandardCopyOption_class_()]);
-  OrgApacheLuceneUtilIOUtils_fsyncWithOrgLukhnosPortmobileFilePath_withBoolean_(directory_, YES);
+  OrgApacheLuceneUtilIOUtils_fsyncWithOrgLukhnosPortmobileFilePath_withBoolean_(directory_, true);
 }
 
 - (void)close {
   @synchronized(self) {
-    JreAssignVolatileBoolean(&isOpen_, NO);
+    JreAssignVolatileBoolean(&isOpen_, false);
   }
 }
 
@@ -128,7 +128,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreFSDirectory_FSIndexOutput_$1)
 }
 
 - (void)fsyncWithNSString:(NSString *)name {
-  OrgApacheLuceneUtilIOUtils_fsyncWithOrgLukhnosPortmobileFilePath_withBoolean_([((OrgLukhnosPortmobileFilePath *) nil_chk(directory_)) resolveWithNSString:name], NO);
+  OrgApacheLuceneUtilIOUtils_fsyncWithOrgLukhnosPortmobileFilePath_withBoolean_([((OrgLukhnosPortmobileFilePath *) nil_chk(directory_)) resolveWithNSString:name], false);
 }
 
 - (void)dealloc {
@@ -194,26 +194,28 @@ IOSObjectArray *OrgApacheLuceneStoreFSDirectory_listAllWithOrgLukhnosPortmobileF
   OrgApacheLuceneStoreFSDirectory_initialize();
   id<JavaUtilList> entries = [new_JavaUtilArrayList_init() autorelease];
   {
-    JavaLangThrowable *__mainException = nil;
     id<OrgLukhnosPortmobileFileDirectoryStream> stream = OrgLukhnosPortmobileFileFiles_newDirectoryStreamWithOrgLukhnosPortmobileFilePath_(dir);
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
       for (OrgLukhnosPortmobileFilePath * __strong path in nil_chk(stream)) {
         [entries addWithId:[((OrgLukhnosPortmobileFilePath *) nil_chk([((OrgLukhnosPortmobileFilePath *) nil_chk(path)) getFileName])) description]];
       }
     }
+    @catch (JavaLangThrowable *e) {
+      __primaryException1 = e;
+      @throw e;
+    }
     @finally {
-      @try {
-        [stream close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
+      if (stream != nil) {
+        if (__primaryException1 != nil) {
+          @try {
+            [stream close];
+          } @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
         } else {
-          __mainException = e;
+          [stream close];
         }
-      }
-      if (__mainException) {
-        @throw __mainException;
       }
     }
   }

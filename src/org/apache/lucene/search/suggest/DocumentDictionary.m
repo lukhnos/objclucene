@@ -172,7 +172,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentDictionary)
 }
 
 - (OrgApacheLuceneUtilBytesRef *)next {
-  while (YES) {
+  while (true) {
     if (nextFieldsPosition_ < ((IOSObjectArray *) nil_chk(currentDocFields_))->size_) {
       id<OrgApacheLuceneIndexIndexableField> fieldValue = IOSObjectArray_Get(currentDocFields_, nextFieldsPosition_++);
       if ([((id<OrgApacheLuceneIndexIndexableField>) nil_chk(fieldValue)) binaryValue] != nil) {

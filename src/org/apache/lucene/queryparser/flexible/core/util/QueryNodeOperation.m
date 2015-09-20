@@ -68,10 +68,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOp
 
 @implementation OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueryparserFlexibleCoreUtilQueryNodeOperation_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)logicalAndWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)q1
                                                                       withOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)q2 {

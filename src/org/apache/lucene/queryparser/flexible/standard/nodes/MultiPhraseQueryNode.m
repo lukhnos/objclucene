@@ -17,10 +17,12 @@
 
 @implementation OrgApacheLuceneQueryparserFlexibleStandardNodesMultiPhraseQueryNode
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueryparserFlexibleStandardNodesMultiPhraseQueryNode_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (NSString *)description {
   if ([self getChildren] == nil || [((id<JavaUtilList>) nil_chk([self getChildren])) size] == 0) return @"<multiPhrase/>";
@@ -88,7 +90,7 @@
 
 void OrgApacheLuceneQueryparserFlexibleStandardNodesMultiPhraseQueryNode_init(OrgApacheLuceneQueryparserFlexibleStandardNodesMultiPhraseQueryNode *self) {
   OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_init(self);
-  [self setLeafWithBoolean:NO];
+  [self setLeafWithBoolean:false];
   [self allocate];
 }
 

@@ -66,10 +66,10 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisCjkCJKWidthFilter)
       }
     }
     [termAtt_ setLengthWithInt:length];
-    return YES;
+    return true;
   }
   else {
-    return NO;
+    return false;
   }
 }
 
@@ -129,7 +129,7 @@ jboolean OrgApacheLuceneAnalysisCjkCJKWidthFilter_combineWithCharArray_withInt_w
     *IOSCharArray_GetRef(text, pos - 1) += (ch == (jint) 0xFF9F) ? IOSByteArray_Get(nil_chk(OrgApacheLuceneAnalysisCjkCJKWidthFilter_KANA_COMBINE_HALF_VOICED_), prev - (jint) 0x30A6) : IOSByteArray_Get(nil_chk(OrgApacheLuceneAnalysisCjkCJKWidthFilter_KANA_COMBINE_VOICED_), prev - (jint) 0x30A6);
     return IOSCharArray_Get(text, pos - 1) != prev;
   }
-  return NO;
+  return false;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCjkCJKWidthFilter)

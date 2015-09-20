@@ -343,7 +343,7 @@ OrgApacheLuceneUtilBytesRef *OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter_
     OrgApacheLuceneIndexTermsEnum *termsEnum = [((OrgApacheLuceneIndexTerms *) nil_chk(terms)) iterator];
     OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter_TermsWriter *termsWriter = [new_OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter_TermsWriter_initWithOrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter_withOrgApacheLuceneIndexFieldInfo_(self, [fieldInfos_ fieldInfoWithNSString:field]) autorelease];
     jint prefixTermUpto = 0;
-    while (YES) {
+    while (true) {
       OrgApacheLuceneUtilBytesRef *term = [((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum)) next];
       if (prefixTerms != nil) {
         while (prefixTermUpto < [prefixTerms size] && (term == nil || [((OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm *) nil_chk([prefixTerms getWithInt:prefixTermUpto])) compareToWithOrgApacheLuceneUtilBytesRef:term] <= 0)) {
@@ -385,8 +385,8 @@ OrgApacheLuceneUtilBytesRef *OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter_
   if (closed_) {
     return;
   }
-  closed_ = YES;
-  jboolean success = NO;
+  closed_ = true;
+  jboolean success = false;
   @try {
     jlong dirStart = [((OrgApacheLuceneStoreIndexOutput *) nil_chk(termsOut_)) getFilePointer];
     jlong indexDirStart = [((OrgApacheLuceneStoreIndexOutput *) nil_chk(indexOut_)) getFilePointer];
@@ -412,7 +412,7 @@ OrgApacheLuceneUtilBytesRef *OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter_
     OrgApacheLuceneCodecsCodecUtil_writeFooterWithOrgApacheLuceneStoreIndexOutput_(termsOut_);
     OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter_writeIndexTrailerWithOrgApacheLuceneStoreIndexOutput_withLong_(self, indexOut_, indexDirStart);
     OrgApacheLuceneCodecsCodecUtil_writeFooterWithOrgApacheLuceneStoreIndexOutput_(indexOut_);
-    success = YES;
+    success = true;
   }
   @finally {
     if (success) {
@@ -530,7 +530,7 @@ void OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter_initWithOrgApacheLuceneI
   JreStrongAssign(&self->postingsWriter_, postingsWriter);
   NSString *termsName = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(state->segmentInfo_->name_, state->segmentSuffix_, OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_TERMS_EXTENSION_);
   JreStrongAssign(&self->termsOut_, [((OrgApacheLuceneStoreDirectory *) nil_chk(state->directory_)) createOutputWithNSString:termsName withOrgApacheLuceneStoreIOContext:state->context_]);
-  jboolean success = NO;
+  jboolean success = false;
   OrgApacheLuceneStoreIndexOutput *indexOut = nil;
   @try {
     OrgApacheLuceneCodecsCodecUtil_writeIndexHeaderWithOrgApacheLuceneStoreDataOutput_withNSString_withInt_withByteArray_withNSString_(self->termsOut_, OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_TERMS_CODEC_NAME_, OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_VERSION_CURRENT, [state->segmentInfo_ getId], state->segmentSuffix_);
@@ -545,7 +545,7 @@ void OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter_initWithOrgApacheLuceneI
     OrgApacheLuceneCodecsCodecUtil_writeIndexHeaderWithOrgApacheLuceneStoreDataOutput_withNSString_withInt_withByteArray_withNSString_(indexOut, OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_TERMS_INDEX_CODEC_NAME_, OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_VERSION_CURRENT, [state->segmentInfo_ getId], state->segmentSuffix_);
     [((OrgApacheLuceneCodecsPostingsWriterBase *) nil_chk(postingsWriter)) init__WithOrgApacheLuceneStoreIndexOutput:self->termsOut_ withOrgApacheLuceneIndexSegmentWriteState:state];
     JreStrongAssign(&self->indexOut_, indexOut);
-    success = YES;
+    success = true;
   }
   @finally {
     if (!success) {
@@ -786,7 +786,7 @@ withOrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm:(OrgApacheLuc
 @end
 
 void OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter_PendingTerm_initWithOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneCodecsBlockTermState_withOrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm_(OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter_PendingTerm *self, OrgApacheLuceneUtilBytesRef *term, OrgApacheLuceneCodecsBlockTermState *state, OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm *prefixTerm) {
-  OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter_PendingEntry_initWithBoolean_(self, YES);
+  OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter_PendingEntry_initWithBoolean_(self, true);
   JreStrongAssignAndConsume(&self->termBytes_, [IOSByteArray newArrayWithLength:((OrgApacheLuceneUtilBytesRef *) nil_chk(term))->length_]);
   JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(term->bytes_, term->offset_, self->termBytes_, 0, term->length_);
   JreStrongAssign(&self->state_, state);
@@ -820,7 +820,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWri
 - (void)compileIndexWithJavaUtilList:(id<JavaUtilList>)blocks
 withOrgApacheLuceneStoreRAMOutputStream:(OrgApacheLuceneStoreRAMOutputStream *)scratchBytes
 withOrgApacheLuceneUtilIntsRefBuilder:(OrgApacheLuceneUtilIntsRefBuilder *)scratchIntsRef {
-  JreAssert(((isFloor_ && [((id<JavaUtilList>) nil_chk(blocks)) size] > 1) || (isFloor_ == NO && [((id<JavaUtilList>) nil_chk(blocks)) size] == 1)), (JreStrcat("$Z$@", @"isFloor=", isFloor_, @" blocks=", blocks)));
+  JreAssert(((isFloor_ && [((id<JavaUtilList>) nil_chk(blocks)) size] > 1) || (isFloor_ == false && [((id<JavaUtilList>) nil_chk(blocks)) size] == 1)), (JreStrcat("$Z$@", @"isFloor=", isFloor_, @" blocks=", blocks)));
   JreAssert((self == [((id<JavaUtilList>) nil_chk(blocks)) getWithInt:0]), (@"org/apache/lucene/codecs/blocktree/BlockTreeTermsWriter.java:571 condition failed: assert this == blocks.get(0);"));
   JreAssert(([((OrgApacheLuceneStoreRAMOutputStream *) nil_chk(scratchBytes)) getFilePointer] == 0), (@"org/apache/lucene/codecs/blocktree/BlockTreeTermsWriter.java:573 condition failed: assert scratchBytes.getFilePointer() == 0;"));
   [scratchBytes writeVLongWithLong:OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter_encodeOutputWithLong_withBoolean_withBoolean_(fp_, hasTerms_, isFloor_)];
@@ -835,7 +835,7 @@ withOrgApacheLuceneUtilIntsRefBuilder:(OrgApacheLuceneUtilIntsRefBuilder *)scrat
     }
   }
   OrgApacheLuceneUtilFstByteSequenceOutputs *outputs = OrgApacheLuceneUtilFstByteSequenceOutputs_getSingleton();
-  OrgApacheLuceneUtilFstBuilder *indexBuilder = [new_OrgApacheLuceneUtilFstBuilder_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_withInt_withInt_withBoolean_withBoolean_withInt_withOrgApacheLuceneUtilFstOutputs_withBoolean_withFloat_withBoolean_withInt_(JreLoadStatic(OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum, BYTE1), 0, 0, YES, NO, JavaLangInteger_MAX_VALUE, outputs, NO, OrgApacheLuceneUtilPackedPackedInts_COMPACT, YES, 15) autorelease];
+  OrgApacheLuceneUtilFstBuilder *indexBuilder = [new_OrgApacheLuceneUtilFstBuilder_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_withInt_withInt_withBoolean_withBoolean_withInt_withOrgApacheLuceneUtilFstOutputs_withBoolean_withFloat_withBoolean_withInt_(JreLoadStatic(OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum, BYTE1), 0, 0, true, false, JavaLangInteger_MAX_VALUE, outputs, false, OrgApacheLuceneUtilPackedPackedInts_COMPACT, true, 15) autorelease];
   IOSByteArray *bytes = [IOSByteArray arrayWithLength:(jint) [scratchBytes getFilePointer]];
   JreAssert((bytes->size_ > 0), (@"org/apache/lucene/codecs/blocktree/BlockTreeTermsWriter.java:603 condition failed: assert bytes.length > 0;"));
   [scratchBytes writeToWithByteArray:bytes withInt:0];
@@ -889,7 +889,7 @@ withOrgApacheLuceneUtilIntsRefBuilder:(OrgApacheLuceneUtilIntsRefBuilder *)scrat
 @end
 
 void OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter_PendingBlock_initWithOrgApacheLuceneUtilBytesRef_withLong_withBoolean_withBoolean_withInt_withJavaUtilList_(OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter_PendingBlock *self, OrgApacheLuceneUtilBytesRef *prefix, jlong fp, jboolean hasTerms, jboolean isFloor, jint floorLeadByte, id<JavaUtilList> subIndices) {
-  OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter_PendingEntry_initWithBoolean_(self, NO);
+  OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter_PendingEntry_initWithBoolean_(self, false);
   JreStrongAssign(&self->prefix_, prefix);
   self->fp_ = fp;
   self->hasTerms_ = hasTerms;
@@ -921,9 +921,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWri
   JreAssert((count > 0), (@"org/apache/lucene/codecs/blocktree/BlockTreeTermsWriter.java:684 condition failed: assert count > 0;"));
   JreAssert((prefixLength > 0 || count == [((id<JavaUtilList>) nil_chk(pending_)) size]), (@"org/apache/lucene/codecs/blocktree/BlockTreeTermsWriter.java:693 condition failed: assert prefixLength > 0 || count == pending.size();"));
   jint lastSuffixLeadLabel = -1;
-  jboolean hasTerms = NO;
-  jboolean hasPrefixTerms = NO;
-  jboolean hasSubBlocks = NO;
+  jboolean hasTerms = false;
+  jboolean hasPrefixTerms = false;
+  jboolean hasSubBlocks = false;
   jint start = [((id<JavaUtilList>) nil_chk(pending_)) size] - count;
   jint end = [pending_ size];
   jint nextBlockStart = start;
@@ -951,20 +951,20 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWri
       if (itemsInBlock >= this$0_->minItemsInBlock_ && end - nextBlockStart > this$0_->maxItemsInBlock_) {
         jboolean isFloor = itemsInBlock < count;
         [((id<JavaUtilList>) nil_chk(newBlocks_)) addWithId:OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter_TermsWriter_writeBlockWithInt_withBoolean_withInt_withInt_withInt_withBoolean_withBoolean_withBoolean_(self, prefixLength, isFloor, nextFloorLeadLabel, nextBlockStart, i, hasTerms, hasPrefixTerms, hasSubBlocks)];
-        hasTerms = NO;
-        hasSubBlocks = NO;
-        hasPrefixTerms = NO;
+        hasTerms = false;
+        hasSubBlocks = false;
+        hasPrefixTerms = false;
         nextFloorLeadLabel = suffixLeadLabel;
         nextBlockStart = i;
       }
       lastSuffixLeadLabel = suffixLeadLabel;
     }
     if (ent->isTerm_) {
-      hasTerms = YES;
+      hasTerms = true;
       hasPrefixTerms |= (((OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter_PendingTerm *) check_class_cast(ent, [OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter_PendingTerm class]))->prefixTerm_ != nil);
     }
     else {
-      hasSubBlocks = YES;
+      hasSubBlocks = true;
     }
   }
   if (nextBlockStart < end) {
@@ -972,7 +972,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWri
     jboolean isFloor = itemsInBlock < count;
     [((id<JavaUtilList>) nil_chk(newBlocks_)) addWithId:OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter_TermsWriter_writeBlockWithInt_withBoolean_withInt_withInt_withInt_withBoolean_withBoolean_withBoolean_(self, prefixLength, isFloor, nextFloorLeadLabel, nextBlockStart, end, hasTerms, hasPrefixTerms, hasSubBlocks)];
   }
-  JreAssert(([((id<JavaUtilList>) nil_chk(newBlocks_)) isEmpty] == NO), (@"org/apache/lucene/codecs/blocktree/BlockTreeTermsWriter.java:769 condition failed: assert newBlocks.isEmpty() == false;"));
+  JreAssert(([((id<JavaUtilList>) nil_chk(newBlocks_)) isEmpty] == false), (@"org/apache/lucene/codecs/blocktree/BlockTreeTermsWriter.java:769 condition failed: assert newBlocks.isEmpty() == false;"));
   OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter_PendingBlock *firstBlock = [newBlocks_ getWithInt:0];
   JreAssert((((OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter_PendingBlock *) nil_chk(firstBlock))->isFloor_ || [newBlocks_ size] == 1), (@"org/apache/lucene/codecs/blocktree/BlockTreeTermsWriter.java:773 condition failed: assert firstBlock.isFloor || newBlocks.size() == 1;"));
   [firstBlock compileIndexWithJavaUtilList:newBlocks_ withOrgApacheLuceneStoreRAMOutputStream:this$0_->scratchBytes_ withOrgApacheLuceneUtilIntsRefBuilder:this$0_->scratchIntsRef_];
@@ -1115,9 +1115,9 @@ OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter_PendingBlock *OrgApacheLucene
     code |= 1;
   }
   [self->this$0_->termsOut_ writeVIntWithInt:code];
-  jboolean isLeafBlock = hasSubBlocks == NO && hasPrefixTerms == NO;
+  jboolean isLeafBlock = hasSubBlocks == false && hasPrefixTerms == false;
   id<JavaUtilList> subIndices;
-  jboolean absolute = YES;
+  jboolean absolute = true;
   if (isLeafBlock) {
     subIndices = nil;
     for (jint i = start; i < end; i++) {
@@ -1143,12 +1143,12 @@ OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter_PendingBlock *OrgApacheLucene
       }
       [((OrgApacheLuceneStoreRAMOutputStream *) nil_chk(self->bytesWriter_)) writeToWithOrgApacheLuceneStoreDataOutput:self->metaWriter_];
       [self->bytesWriter_ reset];
-      absolute = NO;
+      absolute = false;
     }
   }
   else {
     subIndices = [new_JavaUtilArrayList_init() autorelease];
-    jboolean sawAutoPrefixTerm = NO;
+    jboolean sawAutoPrefixTerm = false;
     for (jint i = start; i < end; i++) {
       OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter_PendingEntry *ent = [self->pending_ getWithInt:i];
       if (((OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter_PendingEntry *) nil_chk(ent))->isTerm_) {
@@ -1165,7 +1165,7 @@ OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter_PendingBlock *OrgApacheLucene
           jint floorLeadEnd = -1;
           if (term->prefixTerm_ != nil) {
             JreAssert((self->this$0_->minItemsInAutoPrefix_ > 0), (@"org/apache/lucene/codecs/blocktree/BlockTreeTermsWriter.java:910 condition failed: assert minItemsInAutoPrefix > 0;"));
-            sawAutoPrefixTerm = YES;
+            sawAutoPrefixTerm = true;
             OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm *prefixTerm = term->prefixTerm_;
             floorLeadEnd = prefixTerm->floorLeadEnd_;
             JreAssert((floorLeadEnd != -1), (@"org/apache/lucene/codecs/blocktree/BlockTreeTermsWriter.java:914 condition failed: assert floorLeadEnd != -1;"));
@@ -1195,7 +1195,7 @@ OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter_PendingBlock *OrgApacheLucene
         }
         [((OrgApacheLuceneStoreRAMOutputStream *) nil_chk(self->bytesWriter_)) writeToWithOrgApacheLuceneStoreDataOutput:self->metaWriter_];
         [self->bytesWriter_ reset];
-        absolute = NO;
+        absolute = false;
       }
       else {
         OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter_PendingBlock *block = (OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter_PendingBlock *) check_class_cast(ent, [OrgApacheLuceneCodecsBlocktreeBlockTreeTermsWriter_PendingBlock class]);

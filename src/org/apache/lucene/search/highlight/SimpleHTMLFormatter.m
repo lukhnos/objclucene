@@ -33,10 +33,12 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchHighlightSimpleHTMLFormatter, DE
   return self;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchHighlightSimpleHTMLFormatter_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (NSString *)highlightTermWithNSString:(NSString *)originalText
 withOrgApacheLuceneSearchHighlightTokenGroup:(OrgApacheLuceneSearchHighlightTokenGroup *)tokenGroup {

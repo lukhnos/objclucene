@@ -27,10 +27,12 @@
   return [((OrgApacheLuceneSearchFilteredQuery_FilterStrategy *) nil_chk(JreLoadStatic(OrgApacheLuceneSearchFilteredQuery, RANDOM_ACCESS_FILTER_STRATEGY_))) rewriteWithOrgApacheLuceneSearchFilter:self];
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchFilter_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

@@ -75,7 +75,7 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilAutomatonSortedIntSet, TREE_MAP_CU
   *IOSIntArray_GetRef(nil_chk(counts_), upto_) = 1;
   upto_++;
   if (upto_ == OrgApacheLuceneUtilAutomatonSortedIntSet_TREE_MAP_CUTOVER) {
-    useTreeMap_ = YES;
+    useTreeMap_ = true;
     for (jint i = 0; i < upto_; i++) {
       [((id<JavaUtilMap>) nil_chk(map_)) putWithId:JavaLangInteger_valueOfWithInt_(IOSIntArray_Get(values_, i)) withId:JavaLangInteger_valueOfWithInt_(IOSIntArray_Get(counts_, i))];
     }
@@ -92,7 +92,7 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilAutomatonSortedIntSet, TREE_MAP_CU
       [map_ putWithId:JavaLangInteger_valueOfWithInt_(num) withId:JavaLangInteger_valueOfWithInt_(count - 1)];
     }
     if ([map_ size] == 0) {
-      useTreeMap_ = NO;
+      useTreeMap_ = false;
       upto_ = 0;
     }
     return;
@@ -112,7 +112,7 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilAutomatonSortedIntSet, TREE_MAP_CU
       return;
     }
   }
-  JreAssert((NO), (@"org/apache/lucene/util/automaton/SortedIntSet.java:132 condition failed: assert false;"));
+  JreAssert((false), (@"org/apache/lucene/util/automaton/SortedIntSet.java:132 condition failed: assert false;"));
 }
 
 - (void)computeHash {
@@ -150,24 +150,24 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilAutomatonSortedIntSet, TREE_MAP_CU
 
 - (jboolean)isEqual:(id)_other {
   if (_other == nil) {
-    return NO;
+    return false;
   }
   if (!([_other isKindOfClass:[OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet class]])) {
-    return NO;
+    return false;
   }
   OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet *other = (OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet *) check_class_cast(_other, [OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet class]);
   if (hashCode_ != ((OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet *) nil_chk(other))->hashCode_) {
-    return NO;
+    return false;
   }
   if (((IOSIntArray *) nil_chk(other->values_))->size_ != upto_) {
-    return NO;
+    return false;
   }
   for (jint i = 0; i < upto_; i++) {
     if (IOSIntArray_Get(other->values_, i) != IOSIntArray_Get(nil_chk(values_), i)) {
-      return NO;
+      return false;
     }
   }
-  return YES;
+  return true;
 }
 
 - (NSString *)description {
@@ -253,39 +253,39 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonSortedIntSet)
 
 - (jboolean)isEqual:(id)_other {
   if (_other == nil) {
-    return NO;
+    return false;
   }
   if ([_other isKindOfClass:[OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet class]]) {
     OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet *other = (OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet *) check_class_cast(_other, [OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet class]);
     if (hashCode_ != ((OrgApacheLuceneUtilAutomatonSortedIntSet_FrozenIntSet *) nil_chk(other))->hashCode_) {
-      return NO;
+      return false;
     }
     if (((IOSIntArray *) nil_chk(other->values_))->size_ != values_->size_) {
-      return NO;
+      return false;
     }
     for (jint i = 0; i < values_->size_; i++) {
       if (IOSIntArray_Get(other->values_, i) != IOSIntArray_Get(values_, i)) {
-        return NO;
+        return false;
       }
     }
-    return YES;
+    return true;
   }
   else if ([_other isKindOfClass:[OrgApacheLuceneUtilAutomatonSortedIntSet class]]) {
     OrgApacheLuceneUtilAutomatonSortedIntSet *other = (OrgApacheLuceneUtilAutomatonSortedIntSet *) check_class_cast(_other, [OrgApacheLuceneUtilAutomatonSortedIntSet class]);
     if (hashCode_ != ((OrgApacheLuceneUtilAutomatonSortedIntSet *) nil_chk(other))->hashCode_) {
-      return NO;
+      return false;
     }
     if (((IOSIntArray *) nil_chk(other->values_))->size_ != ((IOSIntArray *) nil_chk(values_))->size_) {
-      return NO;
+      return false;
     }
     for (jint i = 0; i < values_->size_; i++) {
       if (IOSIntArray_Get(other->values_, i) != IOSIntArray_Get(values_, i)) {
-        return NO;
+        return false;
       }
     }
-    return YES;
+    return true;
   }
-  return NO;
+  return false;
 }
 
 - (NSString *)description {

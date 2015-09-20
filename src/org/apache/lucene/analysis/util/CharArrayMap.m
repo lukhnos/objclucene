@@ -367,7 +367,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisUtilCharArrayMap)
 }
 
 - (OrgApacheLuceneAnalysisUtilCharArrayMap_EntrySet *)createEntrySet {
-  return [new_OrgApacheLuceneAnalysisUtilCharArrayMap_EntrySet_initWithOrgApacheLuceneAnalysisUtilCharArrayMap_withBoolean_(self, YES) autorelease];
+  return [new_OrgApacheLuceneAnalysisUtilCharArrayMap_EntrySet_initWithOrgApacheLuceneAnalysisUtilCharArrayMap_withBoolean_(self, true) autorelease];
 }
 
 - (OrgApacheLuceneAnalysisUtilCharArrayMap_EntrySet *)entrySet {
@@ -562,39 +562,39 @@ void OrgApacheLuceneAnalysisUtilCharArrayMap_rehash(OrgApacheLuceneAnalysisUtilC
 }
 
 jboolean OrgApacheLuceneAnalysisUtilCharArrayMap_equalsWithCharArray_withInt_withInt_withCharArray_(OrgApacheLuceneAnalysisUtilCharArrayMap *self, IOSCharArray *text1, jint off, jint len, IOSCharArray *text2) {
-  if (len != ((IOSCharArray *) nil_chk(text2))->size_) return NO;
+  if (len != ((IOSCharArray *) nil_chk(text2))->size_) return false;
   jint limit = off + len;
   if (self->ignoreCase_) {
     for (jint i = 0; i < len; ) {
       jint codePointAt = [((OrgApacheLuceneAnalysisUtilCharacterUtils *) nil_chk(self->charUtils_)) codePointAtWithCharArray:text1 withInt:off + i withInt:limit];
-      if (JavaLangCharacter_toLowerCaseWithInt_(codePointAt) != [self->charUtils_ codePointAtWithCharArray:text2 withInt:i withInt:text2->size_]) return NO;
+      if (JavaLangCharacter_toLowerCaseWithInt_(codePointAt) != [self->charUtils_ codePointAtWithCharArray:text2 withInt:i withInt:text2->size_]) return false;
       i += JavaLangCharacter_charCountWithInt_(codePointAt);
     }
   }
   else {
     for (jint i = 0; i < len; i++) {
-      if (IOSCharArray_Get(nil_chk(text1), off + i) != IOSCharArray_Get(text2, i)) return NO;
+      if (IOSCharArray_Get(nil_chk(text1), off + i) != IOSCharArray_Get(text2, i)) return false;
     }
   }
-  return YES;
+  return true;
 }
 
 jboolean OrgApacheLuceneAnalysisUtilCharArrayMap_equalsWithJavaLangCharSequence_withCharArray_(OrgApacheLuceneAnalysisUtilCharArrayMap *self, id<JavaLangCharSequence> text1, IOSCharArray *text2) {
   jint len = [((id<JavaLangCharSequence>) nil_chk(text1)) length];
-  if (len != ((IOSCharArray *) nil_chk(text2))->size_) return NO;
+  if (len != ((IOSCharArray *) nil_chk(text2))->size_) return false;
   if (self->ignoreCase_) {
     for (jint i = 0; i < len; ) {
       jint codePointAt = [((OrgApacheLuceneAnalysisUtilCharacterUtils *) nil_chk(self->charUtils_)) codePointAtWithJavaLangCharSequence:text1 withInt:i];
-      if (JavaLangCharacter_toLowerCaseWithInt_(codePointAt) != [self->charUtils_ codePointAtWithCharArray:text2 withInt:i withInt:text2->size_]) return NO;
+      if (JavaLangCharacter_toLowerCaseWithInt_(codePointAt) != [self->charUtils_ codePointAtWithCharArray:text2 withInt:i withInt:text2->size_]) return false;
       i += JavaLangCharacter_charCountWithInt_(codePointAt);
     }
   }
   else {
     for (jint i = 0; i < len; i++) {
-      if ([text1 charAtWithInt:i] != IOSCharArray_Get(text2, i)) return NO;
+      if ([text1 charAtWithInt:i] != IOSCharArray_Get(text2, i)) return false;
     }
   }
-  return YES;
+  return true;
 }
 
 jint OrgApacheLuceneAnalysisUtilCharArrayMap_getHashCodeWithCharArray_withInt_withInt_(OrgApacheLuceneAnalysisUtilCharArrayMap *self, IOSCharArray *text, jint offset, jint len) {
@@ -664,7 +664,7 @@ OrgApacheLuceneAnalysisUtilCharArrayMap *OrgApacheLuceneAnalysisUtilCharArrayMap
     JreStrongAssign(&m->values_, values);
     return m;
   }
-  return [new_OrgApacheLuceneAnalysisUtilCharArrayMap_initWithJavaUtilMap_withBoolean_(map, NO) autorelease];
+  return [new_OrgApacheLuceneAnalysisUtilCharArrayMap_initWithJavaUtilMap_withBoolean_(map, false) autorelease];
 }
 
 OrgApacheLuceneAnalysisUtilCharArrayMap *OrgApacheLuceneAnalysisUtilCharArrayMap_emptyMap() {
@@ -850,7 +850,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisUtilCharArrayMap_MapEntr
 }
 
 - (jboolean)containsWithId:(id)o {
-  if (!([JavaUtilMap_Entry_class_() isInstance:o])) return NO;
+  if (!([JavaUtilMap_Entry_class_() isInstance:o])) return false;
   id<JavaUtilMap_Entry> e = (id<JavaUtilMap_Entry>) check_protocol_cast(o, JavaUtilMap_Entry_class_());
   id key = [((id<JavaUtilMap_Entry>) nil_chk(e)) getKey];
   id val = [e getValue];
@@ -950,7 +950,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisUtilCharArrayMap_EntrySe
 }
 
 - (OrgApacheLuceneAnalysisUtilCharArrayMap_EntrySet *)createEntrySet {
-  return [new_OrgApacheLuceneAnalysisUtilCharArrayMap_EntrySet_initWithOrgApacheLuceneAnalysisUtilCharArrayMap_withBoolean_(self, NO) autorelease];
+  return [new_OrgApacheLuceneAnalysisUtilCharArrayMap_EntrySet_initWithOrgApacheLuceneAnalysisUtilCharArrayMap_withBoolean_(self, false) autorelease];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -985,26 +985,28 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisUtilCharArrayMap_Unmodif
 
 @implementation OrgApacheLuceneAnalysisUtilCharArrayMap_EmptyCharArrayMap
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisUtilCharArrayMap_EmptyCharArrayMap_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jboolean)containsKeyWithCharArray:(IOSCharArray *)text
                              withInt:(jint)off
                              withInt:(jint)len {
   if (text == nil) @throw [new_JavaLangNullPointerException_init() autorelease];
-  return NO;
+  return false;
 }
 
 - (jboolean)containsKeyWithJavaLangCharSequence:(id<JavaLangCharSequence>)cs {
   if (cs == nil) @throw [new_JavaLangNullPointerException_init() autorelease];
-  return NO;
+  return false;
 }
 
 - (jboolean)containsKeyWithId:(id)o {
   if (o == nil) @throw [new_JavaLangNullPointerException_init() autorelease];
-  return NO;
+  return false;
 }
 
 - (id)getWithCharArray:(IOSCharArray *)text
@@ -1042,7 +1044,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisUtilCharArrayMap_Unmodif
 @end
 
 void OrgApacheLuceneAnalysisUtilCharArrayMap_EmptyCharArrayMap_init(OrgApacheLuceneAnalysisUtilCharArrayMap_EmptyCharArrayMap *self) {
-  OrgApacheLuceneAnalysisUtilCharArrayMap_UnmodifiableCharArrayMap_initWithOrgApacheLuceneAnalysisUtilCharArrayMap_(self, [new_OrgApacheLuceneAnalysisUtilCharArrayMap_initWithInt_withBoolean_(0, NO) autorelease]);
+  OrgApacheLuceneAnalysisUtilCharArrayMap_UnmodifiableCharArrayMap_initWithOrgApacheLuceneAnalysisUtilCharArrayMap_(self, [new_OrgApacheLuceneAnalysisUtilCharArrayMap_initWithInt_withBoolean_(0, false) autorelease]);
 }
 
 OrgApacheLuceneAnalysisUtilCharArrayMap_EmptyCharArrayMap *new_OrgApacheLuceneAnalysisUtilCharArrayMap_EmptyCharArrayMap_init() {

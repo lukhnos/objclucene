@@ -16,10 +16,12 @@ __attribute__((unused)) static jfloat OrgApacheLuceneSearchSimilaritiesBasicMode
 
 @implementation OrgApacheLuceneSearchSimilaritiesBasicModelIn
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSimilaritiesBasicModelIn_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jfloat)scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
                                                      withFloat:(jfloat)tfn {

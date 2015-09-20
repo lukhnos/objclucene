@@ -68,10 +68,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexLeafReader_CoreClosedListenerWrap
 
 @implementation OrgApacheLuceneIndexLeafReader
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexLeafReader_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneIndexLeafReaderContext *)getContext {
   [self ensureOpen];
@@ -372,7 +374,7 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexLeafReader_CoreClosedLi
 
 - (jboolean)isEqual:(id)other {
   if (!([other isKindOfClass:[OrgApacheLuceneIndexLeafReader_CoreClosedListenerWrapper class]])) {
-    return NO;
+    return false;
   }
   return [((id<OrgApacheLuceneIndexLeafReader_CoreClosedListener>) nil_chk(listener_)) isEqual:((OrgApacheLuceneIndexLeafReader_CoreClosedListenerWrapper *) nil_chk(((OrgApacheLuceneIndexLeafReader_CoreClosedListenerWrapper *) check_class_cast(other, [OrgApacheLuceneIndexLeafReader_CoreClosedListenerWrapper class]))))->listener_];
 }

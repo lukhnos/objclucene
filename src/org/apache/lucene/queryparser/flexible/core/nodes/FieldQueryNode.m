@@ -161,7 +161,7 @@ void OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode_initWithJavaLangC
   JreStrongAssign(&self->text_, text);
   self->begin_ = begin;
   self->end_ = end;
-  [self setLeafWithBoolean:YES];
+  [self setLeafWithBoolean:true];
 }
 
 OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_withInt_withInt_(id<JavaLangCharSequence> field, id<JavaLangCharSequence> text, jint begin, jint end) {

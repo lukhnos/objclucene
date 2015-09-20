@@ -170,7 +170,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneCodecsIdversionIDVersionS
   OrgApacheLuceneUtilFstPairOutputs_Pair *output;
   jlong startFrameFP = ((OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnumFrame *) nil_chk(currentFrame_))->fp_;
   targetBeforeCurrentLength_ = currentFrame_->ord_;
-  jboolean changed = NO;
+  jboolean changed = false;
   if (currentFrame_ != staticFrame_) {
     arc = IOSObjectArray_Get(nil_chk(arcs_), 0);
     JreAssert(([((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc)) isFinal]), (@"org/apache/lucene/codecs/idversion/IDVersionSegmentTermsEnum.java:279 condition failed: assert arc.isFinal();"));
@@ -215,7 +215,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneCodecsIdversionIDVersionS
     }
     else if (cmp > 0) {
       targetBeforeCurrentLength_ = 0;
-      changed = YES;
+      changed = true;
       JreStrongAssign(&currentFrame_, lastFrame);
       [((OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnumFrame *) nil_chk(currentFrame_)) rewind];
     }
@@ -223,13 +223,13 @@ __attribute__((unused)) static jboolean OrgApacheLuceneCodecsIdversionIDVersionS
       JreAssert(([term_ length] == target->length_), (@"org/apache/lucene/codecs/idversion/IDVersionSegmentTermsEnum.java:364 condition failed: assert term.length() == target.length;"));
       if (termExists_) {
         if (currentFrame_->maxIDVersion_ < minIDVersion) {
-          return NO;
+          return false;
         }
         [currentFrame_ decodeMetaData];
         if (((OrgApacheLuceneCodecsIdversionIDVersionTermState *) nil_chk(((OrgApacheLuceneCodecsIdversionIDVersionTermState *) check_class_cast(currentFrame_->state_, [OrgApacheLuceneCodecsIdversionIDVersionTermState class]))))->idVersion_ < minIDVersion) {
-          return NO;
+          return false;
         }
-        return YES;
+        return true;
       }
       else {
       }
@@ -252,39 +252,39 @@ __attribute__((unused)) static jboolean OrgApacheLuceneCodecsIdversionIDVersionS
       validIndexPrefix_ = ((OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnumFrame *) nil_chk(currentFrame_))->prefix_;
       [currentFrame_ scanToFloorFrameWithOrgApacheLuceneUtilBytesRef:target];
       if (!currentFrame_->hasTerms_) {
-        termExists_ = NO;
+        termExists_ = false;
         [term_ setByteAtWithInt:targetUpto withByte:(jbyte) targetLabel];
         [term_ setLengthWithInt:1 + targetUpto];
-        return NO;
+        return false;
       }
       if (currentFrame_->maxIDVersion_ < minIDVersion) {
         if (currentFrame_->fp_ != startFrameFP || changed) {
-          termExists_ = NO;
+          termExists_ = false;
           [term_ setByteAtWithInt:targetUpto withByte:(jbyte) targetLabel];
           [term_ setLengthWithInt:1 + targetUpto];
           validIndexPrefix_ = JavaLangMath_minWithInt_withInt_(validIndexPrefix_, [term_ length]);
         }
-        return NO;
+        return false;
       }
       [currentFrame_ loadBlock];
-      OrgApacheLuceneIndexTermsEnum_SeekStatusEnum *result = [currentFrame_ scanToTermWithOrgApacheLuceneUtilBytesRef:target withBoolean:YES];
+      OrgApacheLuceneIndexTermsEnum_SeekStatusEnum *result = [currentFrame_ scanToTermWithOrgApacheLuceneUtilBytesRef:target withBoolean:true];
       if (result == JreLoadStatic(OrgApacheLuceneIndexTermsEnum_SeekStatusEnum, FOUND)) {
         [currentFrame_ decodeMetaData];
         if (((OrgApacheLuceneCodecsIdversionIDVersionTermState *) nil_chk(((OrgApacheLuceneCodecsIdversionIDVersionTermState *) check_class_cast(currentFrame_->state_, [OrgApacheLuceneCodecsIdversionIDVersionTermState class]))))->idVersion_ < minIDVersion) {
-          return NO;
+          return false;
         }
-        return YES;
+        return true;
       }
       else {
-        return NO;
+        return false;
       }
     }
     else {
       arc = nextArc;
       if ([term_ byteAtWithInt:targetUpto] != (jbyte) targetLabel) {
-        changed = YES;
+        changed = true;
         [term_ setByteAtWithInt:targetUpto withByte:(jbyte) targetLabel];
-        termExists_ = NO;
+        termExists_ = false;
       }
       JreAssert((arc->output_ != nil), (@"org/apache/lucene/codecs/idversion/IDVersionSegmentTermsEnum.java:520 condition failed: assert arc.output != null;"));
       if (arc->output_ != JreLoadStatic(OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter, NO_OUTPUT_)) {
@@ -299,26 +299,26 @@ __attribute__((unused)) static jboolean OrgApacheLuceneCodecsIdversionIDVersionS
   validIndexPrefix_ = ((OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnumFrame *) nil_chk(currentFrame_))->prefix_;
   [currentFrame_ scanToFloorFrameWithOrgApacheLuceneUtilBytesRef:target];
   if (!currentFrame_->hasTerms_) {
-    termExists_ = NO;
+    termExists_ = false;
     [term_ setLengthWithInt:targetUpto];
-    return NO;
+    return false;
   }
   if (currentFrame_->maxIDVersion_ < minIDVersion) {
-    termExists_ = NO;
+    termExists_ = false;
     [term_ setLengthWithInt:targetUpto];
-    return NO;
+    return false;
   }
   [currentFrame_ loadBlock];
-  OrgApacheLuceneIndexTermsEnum_SeekStatusEnum *result = [currentFrame_ scanToTermWithOrgApacheLuceneUtilBytesRef:target withBoolean:YES];
+  OrgApacheLuceneIndexTermsEnum_SeekStatusEnum *result = [currentFrame_ scanToTermWithOrgApacheLuceneUtilBytesRef:target withBoolean:true];
   if (result == JreLoadStatic(OrgApacheLuceneIndexTermsEnum_SeekStatusEnum, FOUND)) {
     [currentFrame_ decodeMetaData];
     if (((OrgApacheLuceneCodecsIdversionIDVersionTermState *) nil_chk(((OrgApacheLuceneCodecsIdversionIDVersionTermState *) check_class_cast(currentFrame_->state_, [OrgApacheLuceneCodecsIdversionIDVersionTermState class]))))->idVersion_ < minIDVersion) {
-      return NO;
+      return false;
     }
-    return YES;
+    return true;
   }
   else {
-    return NO;
+    return false;
   }
 }
 
@@ -405,10 +405,10 @@ __attribute__((unused)) static jboolean OrgApacheLuceneCodecsIdversionIDVersionS
       validIndexPrefix_ = ((OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnumFrame *) nil_chk(currentFrame_))->prefix_;
       [currentFrame_ scanToFloorFrameWithOrgApacheLuceneUtilBytesRef:target];
       [currentFrame_ loadBlock];
-      OrgApacheLuceneIndexTermsEnum_SeekStatusEnum *result = [currentFrame_ scanToTermWithOrgApacheLuceneUtilBytesRef:target withBoolean:NO];
+      OrgApacheLuceneIndexTermsEnum_SeekStatusEnum *result = [currentFrame_ scanToTermWithOrgApacheLuceneUtilBytesRef:target withBoolean:false];
       if (result == JreLoadStatic(OrgApacheLuceneIndexTermsEnum_SeekStatusEnum, END)) {
         [term_ copyBytesWithOrgApacheLuceneUtilBytesRef:target];
-        termExists_ = NO;
+        termExists_ = false;
         if ([self next] != nil) {
           return JreLoadStatic(OrgApacheLuceneIndexTermsEnum_SeekStatusEnum, NOT_FOUND);
         }
@@ -436,10 +436,10 @@ __attribute__((unused)) static jboolean OrgApacheLuceneCodecsIdversionIDVersionS
   validIndexPrefix_ = ((OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnumFrame *) nil_chk(currentFrame_))->prefix_;
   [currentFrame_ scanToFloorFrameWithOrgApacheLuceneUtilBytesRef:target];
   [currentFrame_ loadBlock];
-  OrgApacheLuceneIndexTermsEnum_SeekStatusEnum *result = [currentFrame_ scanToTermWithOrgApacheLuceneUtilBytesRef:target withBoolean:NO];
+  OrgApacheLuceneIndexTermsEnum_SeekStatusEnum *result = [currentFrame_ scanToTermWithOrgApacheLuceneUtilBytesRef:target withBoolean:false];
   if (result == JreLoadStatic(OrgApacheLuceneIndexTermsEnum_SeekStatusEnum, END)) {
     [term_ copyBytesWithOrgApacheLuceneUtilBytesRef:target];
-    termExists_ = NO;
+    termExists_ = false;
     if ([self next] != nil) {
       return JreLoadStatic(OrgApacheLuceneIndexTermsEnum_SeekStatusEnum, NOT_FOUND);
     }
@@ -459,8 +459,8 @@ __attribute__((unused)) static jboolean OrgApacheLuceneCodecsIdversionIDVersionS
   else {
     [((JavaIoPrintStream *) nil_chk(outArg)) printlnWithNSString:@"  prior seek state:"];
     jint ord = 0;
-    jboolean isSeekFrame = YES;
-    while (YES) {
+    jboolean isSeekFrame = true;
+    while (true) {
       OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnumFrame *f = OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum_getFrameWithInt_(self, ord);
       JreAssert((f != nil), (@"org/apache/lucene/codecs/idversion/IDVersionSegmentTermsEnum.java:848 condition failed: assert f != null;"));
       OrgApacheLuceneUtilBytesRef *prefix = [new_OrgApacheLuceneUtilBytesRef_initWithByteArray_withInt_withInt_([((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(term_)) bytes], 0, ((OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnumFrame *) nil_chk(f))->prefix_) autorelease];
@@ -495,7 +495,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneCodecsIdversionIDVersionS
         break;
       }
       if (f->prefix_ == validIndexPrefix_) {
-        isSeekFrame = NO;
+        isSeekFrame = false;
       }
       ord++;
     }
@@ -531,7 +531,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneCodecsIdversionIDVersionS
         [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(term_)) clear];
         validIndexPrefix_ = 0;
         [currentFrame_ rewind];
-        termExists_ = NO;
+        termExists_ = false;
         return nil;
       }
       jlong lastFP = currentFrame_->fpOrig_;
@@ -544,10 +544,10 @@ __attribute__((unused)) static jboolean OrgApacheLuceneCodecsIdversionIDVersionS
       validIndexPrefix_ = JavaLangMath_minWithInt_withInt_(validIndexPrefix_, currentFrame_->prefix_);
     }
   }
-  while (YES) {
+  while (true) {
     if ([((OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnumFrame *) nil_chk(currentFrame_)) next]) {
       JreStrongAssign(&currentFrame_, [self pushFrameWithOrgApacheLuceneUtilFstFST_Arc:nil withLong:currentFrame_->lastSubFP_ withInt:[((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(term_)) length]]);
-      ((OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnumFrame *) nil_chk(currentFrame_))->isFloor_ = NO;
+      ((OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnumFrame *) nil_chk(currentFrame_))->isFloor_ = false;
       [currentFrame_ loadBlock];
     }
     else {
@@ -736,13 +736,13 @@ OrgApacheLuceneUtilFstFST_Arc *OrgApacheLuceneCodecsIdversionIDVersionSegmentTer
 }
 
 jboolean OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum_clearEOF(OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum *self) {
-  self->eof_ = NO;
-  return YES;
+  self->eof_ = false;
+  return true;
 }
 
 jboolean OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum_setEOF(OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum *self) {
-  self->eof_ = YES;
-  return YES;
+  self->eof_ = true;
+  return true;
 }
 
 NSString *OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum_brToStringWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneUtilBytesRef *b) {

@@ -199,21 +199,21 @@ jboolean OrgApacheLuceneUtilFstPairOutputs_validWithOrgApacheLuceneUtilFstPairOu
   jboolean noOutput1 = [nil_chk(((OrgApacheLuceneUtilFstPairOutputs_Pair *) nil_chk(pair))->output1_) isEqual:[((OrgApacheLuceneUtilFstOutputs *) nil_chk(self->outputs1_)) getNoOutput]];
   jboolean noOutput2 = [nil_chk(pair->output2_) isEqual:[((OrgApacheLuceneUtilFstOutputs *) nil_chk(self->outputs2_)) getNoOutput]];
   if (noOutput1 && pair->output1_ != [self->outputs1_ getNoOutput]) {
-    return NO;
+    return false;
   }
   if (noOutput2 && pair->output2_ != [self->outputs2_ getNoOutput]) {
-    return NO;
+    return false;
   }
   if (noOutput1 && noOutput2) {
     if (pair != self->NO_OUTPUT_) {
-      return NO;
+      return false;
     }
     else {
-      return YES;
+      return true;
     }
   }
   else {
-    return YES;
+    return true;
   }
 }
 
@@ -229,14 +229,14 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstPairOutputs)
 
 - (jboolean)isEqual:(id)other {
   if (other == self) {
-    return YES;
+    return true;
   }
   else if ([other isKindOfClass:[OrgApacheLuceneUtilFstPairOutputs_Pair class]]) {
     OrgApacheLuceneUtilFstPairOutputs_Pair *pair = (OrgApacheLuceneUtilFstPairOutputs_Pair *) check_class_cast(other, [OrgApacheLuceneUtilFstPairOutputs_Pair class]);
     return [nil_chk(output1_) isEqual:((OrgApacheLuceneUtilFstPairOutputs_Pair *) nil_chk(pair))->output1_] && [nil_chk(output2_) isEqual:pair->output2_];
   }
   else {
-    return NO;
+    return false;
   }
 }
 

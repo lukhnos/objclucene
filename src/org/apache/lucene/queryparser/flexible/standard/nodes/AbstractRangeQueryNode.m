@@ -26,10 +26,12 @@
 
 @implementation OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (id<JavaLangCharSequence>)getField {
   id<JavaLangCharSequence> field = nil;
@@ -158,7 +160,7 @@
 
 void OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode_init(OrgApacheLuceneQueryparserFlexibleStandardNodesAbstractRangeQueryNode *self) {
   OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_init(self);
-  [self setLeafWithBoolean:NO];
+  [self setLeafWithBoolean:false];
   [self allocate];
 }
 

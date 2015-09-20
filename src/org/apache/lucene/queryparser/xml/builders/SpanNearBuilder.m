@@ -38,7 +38,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserXmlBuildersSpanNearBuilder, factor
 - (OrgApacheLuceneSearchSpansSpanQuery *)getSpanQueryWithOrgW3cDomElement:(id<OrgW3cDomElement>)e {
   NSString *slopString = OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeOrFailWithOrgW3cDomElement_withNSString_(e, @"slop");
   jint slop = JavaLangInteger_parseIntWithNSString_(slopString);
-  jboolean inOrder = OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withBoolean_(e, @"inOrder", NO);
+  jboolean inOrder = OrgApacheLuceneQueryparserXmlDOMUtils_getAttributeWithOrgW3cDomElement_withNSString_withBoolean_(e, @"inOrder", false);
   id<JavaUtilList> spans = [new_JavaUtilArrayList_init() autorelease];
   for (id<OrgW3cDomNode> kid = [((id<OrgW3cDomElement>) nil_chk(e)) getFirstChild]; kid != nil; kid = [kid getNextSibling]) {
     if ([((id<OrgW3cDomNode>) nil_chk(kid)) getNodeType] == OrgW3cDomNode_ELEMENT_NODE) {

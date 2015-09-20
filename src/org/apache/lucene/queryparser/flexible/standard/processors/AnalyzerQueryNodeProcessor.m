@@ -53,16 +53,18 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleStandardProcessorsAnalyzer
 
 @implementation OrgApacheLuceneQueryparserFlexibleStandardProcessorsAnalyzerQueryNodeProcessor
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueryparserFlexibleStandardProcessorsAnalyzerQueryNodeProcessor_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)processWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryTree {
   OrgApacheLuceneAnalysisAnalyzer *analyzer = [((OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *) nil_chk([self getQueryConfigHandler])) getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, ANALYZER_)];
   if (analyzer != nil) {
     JreStrongAssign(&self->analyzer_, analyzer);
-    self->positionIncrementsEnabled_ = NO;
+    self->positionIncrementsEnabled_ = false;
     JavaLangBoolean *positionIncrementsEnabled = [((OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *) nil_chk([self getQueryConfigHandler])) getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, ENABLE_POSITION_INCREMENTS_)];
     OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_OperatorEnum *defaultOperator = [((OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *) nil_chk([self getQueryConfigHandler])) getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, DEFAULT_OPERATOR_)];
     JreStrongAssign(&self->defaultOperator_, defaultOperator != nil ? defaultOperator : JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_OperatorEnum, OR));
@@ -85,11 +87,11 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleStandardProcessorsAnalyzer
     id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute> posIncrAtt = nil;
     jint numTokens = 0;
     jint positionCount = 0;
-    jboolean severalTokensAtSamePosition = NO;
+    jboolean severalTokensAtSamePosition = false;
     @try {
-      {
-        JavaLangThrowable *__mainException = nil;
+      @try {
         OrgApacheLuceneAnalysisTokenStream *source = [((OrgApacheLuceneAnalysisAnalyzer *) nil_chk(self->analyzer_)) tokenStreamWithNSString:field withNSString:text];
+        JavaLangThrowable *__primaryException1 = nil;
         @try {
           buffer = [new_OrgApacheLuceneAnalysisCachingTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(source) autorelease];
           [buffer reset];
@@ -104,7 +106,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleStandardProcessorsAnalyzer
                 positionCount += positionIncrement;
               }
               else {
-                severalTokensAtSamePosition = YES;
+                severalTokensAtSamePosition = true;
               }
             }
           }
@@ -112,25 +114,26 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleStandardProcessorsAnalyzer
           }
           [buffer reset];
         }
-        @catch (JavaIoIOException *e) {
-          __mainException = e;
-          @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(e) autorelease];
+        @catch (JavaLangThrowable *e) {
+          __primaryException1 = e;
+          @throw e;
         }
         @finally {
-          @try {
-            [source close];
-          }
-          @catch (JavaLangThrowable *e) {
-            if (__mainException) {
-              [__mainException addSuppressedWithJavaLangThrowable:e];
+          if (source != nil) {
+            if (__primaryException1 != nil) {
+              @try {
+                [source close];
+              } @catch (JavaLangThrowable *e) {
+                [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+              }
             } else {
-              __mainException = e;
+              [source close];
             }
           }
-          if (__mainException) {
-            @throw __mainException;
-          }
         }
+      }
+      @catch (JavaIoIOException *e) {
+        @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(e) autorelease];
       }
       if (![((OrgApacheLuceneAnalysisCachingTokenFilter *) nil_chk(buffer)) hasAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()]) {
         return [new_OrgApacheLuceneQueryparserFlexibleCoreNodesNoTokenFoundQueryNode_init() autorelease];
@@ -144,7 +147,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleStandardProcessorsAnalyzer
         @try {
           jboolean hasNext;
           hasNext = [buffer incrementToken];
-          JreAssert((hasNext == YES), (@"org/apache/lucene/queryparser/flexible/standard/processors/AnalyzerQueryNodeProcessor.java:179 condition failed: assert hasNext == true;"));
+          JreAssert((hasNext == true), (@"org/apache/lucene/queryparser/flexible/standard/processors/AnalyzerQueryNodeProcessor.java:179 condition failed: assert hasNext == true;"));
           term = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt)) description];
         }
         @catch (JavaIoIOException *e) {
@@ -160,7 +163,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleStandardProcessorsAnalyzer
               NSString *term = nil;
               @try {
                 jboolean hasNext = [buffer incrementToken];
-                JreAssert((hasNext == YES), (@"org/apache/lucene/queryparser/flexible/standard/processors/AnalyzerQueryNodeProcessor.java:202 condition failed: assert hasNext == true;"));
+                JreAssert((hasNext == true), (@"org/apache/lucene/queryparser/flexible/standard/processors/AnalyzerQueryNodeProcessor.java:202 condition failed: assert hasNext == true;"));
                 term = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt)) description];
               }
               @catch (JavaIoIOException *e) {
@@ -170,13 +173,13 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleStandardProcessorsAnalyzer
             return [new_OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode_initWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_([new_OrgApacheLuceneQueryparserFlexibleStandardNodesStandardBooleanQueryNode_initWithJavaUtilList_withBoolean_(children, positionCount == 1) autorelease]) autorelease];
           }
           else {
-            id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> q = [new_OrgApacheLuceneQueryparserFlexibleStandardNodesStandardBooleanQueryNode_initWithJavaUtilList_withBoolean_(JavaUtilCollections_emptyList(), NO) autorelease];
+            id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> q = [new_OrgApacheLuceneQueryparserFlexibleStandardNodesStandardBooleanQueryNode_initWithJavaUtilList_withBoolean_(JavaUtilCollections_emptyList(), false) autorelease];
             id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> currentQuery = nil;
             for (jint i = 0; i < numTokens; i++) {
               NSString *term = nil;
               @try {
                 jboolean hasNext = [buffer incrementToken];
-                JreAssert((hasNext == YES), (@"org/apache/lucene/queryparser/flexible/standard/processors/AnalyzerQueryNodeProcessor.java:222 condition failed: assert hasNext == true;"));
+                JreAssert((hasNext == true), (@"org/apache/lucene/queryparser/flexible/standard/processors/AnalyzerQueryNodeProcessor.java:222 condition failed: assert hasNext == true;"));
                 term = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt)) description];
               }
               @catch (JavaIoIOException *e) {
@@ -184,7 +187,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleStandardProcessorsAnalyzer
               if (posIncrAtt != nil && [posIncrAtt getPositionIncrement] == 0) {
                 if (!([currentQuery isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode class]])) {
                   id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> t = currentQuery;
-                  currentQuery = [new_OrgApacheLuceneQueryparserFlexibleStandardNodesStandardBooleanQueryNode_initWithJavaUtilList_withBoolean_(JavaUtilCollections_emptyList(), YES) autorelease];
+                  currentQuery = [new_OrgApacheLuceneQueryparserFlexibleStandardNodesStandardBooleanQueryNode_initWithJavaUtilList_withBoolean_(JavaUtilCollections_emptyList(), true) autorelease];
                   [((OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode *) check_class_cast(currentQuery, [OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode class])) addWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:t];
                 }
                 [((OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode *) nil_chk(((OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode *) check_class_cast(currentQuery, [OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode class])))) addWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:[new_OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_withInt_withInt_(field, term, -1, -1) autorelease]];
@@ -224,7 +227,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleStandardProcessorsAnalyzer
             jint positionIncrement = 1;
             @try {
               jboolean hasNext = [buffer incrementToken];
-              JreAssert((hasNext == YES), (@"org/apache/lucene/queryparser/flexible/standard/processors/AnalyzerQueryNodeProcessor.java:269 condition failed: assert hasNext == true;"));
+              JreAssert((hasNext == true), (@"org/apache/lucene/queryparser/flexible/standard/processors/AnalyzerQueryNodeProcessor.java:269 condition failed: assert hasNext == true;"));
               term = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt)) description];
               if (posIncrAtt != nil) {
                 positionIncrement = [posIncrAtt getPositionIncrement];
@@ -268,7 +271,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserFlexibleStandardProcessorsAnalyzer
           jint positionIncrement = 1;
           @try {
             jboolean hasNext = [buffer incrementToken];
-            JreAssert((hasNext == YES), (@"org/apache/lucene/queryparser/flexible/standard/processors/AnalyzerQueryNodeProcessor.java:335 condition failed: assert hasNext == true;"));
+            JreAssert((hasNext == true), (@"org/apache/lucene/queryparser/flexible/standard/processors/AnalyzerQueryNodeProcessor.java:335 condition failed: assert hasNext == true;"));
             term = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt)) description];
             if (posIncrAtt != nil) {
               positionIncrement = [posIncrAtt getPositionIncrement];

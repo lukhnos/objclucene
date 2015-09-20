@@ -421,7 +421,7 @@ OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_LUCENE_4_9_;
 OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_parseWithNSString_(NSString *version_) {
   OrgApacheLuceneUtilVersion_initialize();
   OrgApacheLuceneUtilStrictStringTokenizer *tokens = [new_OrgApacheLuceneUtilStrictStringTokenizer_initWithNSString_withChar_(version_, '.') autorelease];
-  if ([tokens hasMoreTokens] == NO) {
+  if ([tokens hasMoreTokens] == false) {
     @throw [new_JavaTextParseException_initWithNSString_withInt_(JreStrcat("$$C", @"Version is not in form major.minor.bugfix(.prerelease) (got: ", version_, ')'), 0) autorelease];
   }
   jint major;
@@ -434,7 +434,7 @@ OrgApacheLuceneUtilVersion *OrgApacheLuceneUtilVersion_parseWithNSString_(NSStri
     [p initCauseWithJavaLangThrowable:nfe];
     @throw p;
   }
-  if ([tokens hasMoreTokens] == NO) {
+  if ([tokens hasMoreTokens] == false) {
     @throw [new_JavaTextParseException_initWithNSString_withInt_(JreStrcat("$$C", @"Version is not in form major.minor.bugfix(.prerelease) (got: ", version_, ')'), 0) autorelease];
   }
   jint minor;
@@ -569,7 +569,7 @@ jboolean OrgApacheLuceneUtilVersion_encodedIsValid(OrgApacheLuceneUtilVersion *s
   JreAssert((self->minor_ == ((JreURShift32(self->encodedValue_, 10)) & (jint) 0xFF)), (@"org/apache/lucene/util/Version.java:508 condition failed: assert minor == ((encodedValue >>> 10) & 0xFF);"));
   JreAssert((self->bugfix_ == ((JreURShift32(self->encodedValue_, 2)) & (jint) 0xFF)), (@"org/apache/lucene/util/Version.java:509 condition failed: assert bugfix == ((encodedValue >>> 2) & 0xFF);"));
   JreAssert((self->prerelease_ == (self->encodedValue_ & (jint) 0x03)), (@"org/apache/lucene/util/Version.java:510 condition failed: assert prerelease == (encodedValue & 0x03);"));
-  return YES;
+  return true;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilVersion)

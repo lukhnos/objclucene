@@ -16,10 +16,12 @@
 
 @implementation OrgApacheLuceneCodecsLiveDocsFormat
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsLiveDocsFormat_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (id<OrgApacheLuceneUtilMutableBits>)newLiveDocsWithInt:(jint)size {
   // can't call an abstract method

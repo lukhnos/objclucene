@@ -62,10 +62,12 @@ NSString *OrgApacheLuceneAnalysisFiFinnishAnalyzer_DEFAULT_STOPWORD_FILE_ = @"fi
   return OrgApacheLuceneAnalysisFiFinnishAnalyzer_getDefaultStopSet();
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisFiFinnishAnalyzer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords {
   OrgApacheLuceneAnalysisFiFinnishAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(self, stopwords);
@@ -160,10 +162,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisFiFinnishAnalyzer_DefaultSetHolde
 
 @implementation OrgApacheLuceneAnalysisFiFinnishAnalyzer_DefaultSetHolder
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisFiFinnishAnalyzer_DefaultSetHolder_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisFiFinnishAnalyzer_DefaultSetHolder class]) {

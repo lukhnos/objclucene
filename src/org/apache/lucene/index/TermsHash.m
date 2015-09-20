@@ -40,8 +40,8 @@
 }
 
 - (void)reset {
-  [((OrgApacheLuceneUtilIntBlockPool *) nil_chk(intPool_)) resetWithBoolean:NO withBoolean:NO];
-  [((OrgApacheLuceneUtilByteBlockPool *) nil_chk(bytePool_)) resetWithBoolean:NO withBoolean:NO];
+  [((OrgApacheLuceneUtilIntBlockPool *) nil_chk(intPool_)) resetWithBoolean:false withBoolean:false];
+  [((OrgApacheLuceneUtilByteBlockPool *) nil_chk(bytePool_)) resetWithBoolean:false withBoolean:false];
 }
 
 - (void)flushWithJavaUtilMap:(id<JavaUtilMap>)fieldsToFlush

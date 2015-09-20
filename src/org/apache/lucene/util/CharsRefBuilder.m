@@ -29,10 +29,12 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilCharsRefBuilder, NULL_STRING_, NSS
 
 @implementation OrgApacheLuceneUtilCharsRefBuilder
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilCharsRefBuilder_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (IOSCharArray *)chars {
   return ((OrgApacheLuceneUtilCharsRef *) nil_chk(ref_))->chars_;

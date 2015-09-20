@@ -20,10 +20,12 @@
 
 @implementation OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)getFlags {
   return flags_;
@@ -39,12 +41,12 @@
 
 - (jboolean)isEqual:(id)other {
   if (self == other) {
-    return YES;
+    return true;
   }
   if ([other isKindOfClass:[OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl class]]) {
     return ((OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl *) nil_chk(((OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl *) check_class_cast(other, [OrgApacheLuceneAnalysisTokenattributesFlagsAttributeImpl class]))))->flags_ == flags_;
   }
-  return NO;
+  return false;
 }
 
 - (NSUInteger)hash {

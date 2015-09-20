@@ -341,17 +341,17 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopDocs_ShardRef)
   jfloat firstScore = ((OrgApacheLuceneSearchScoreDoc *) nil_chk(IOSObjectArray_Get(nil_chk(IOSObjectArray_Get(nil_chk(shardHits_), ((OrgApacheLuceneSearchTopDocs_ShardRef *) nil_chk(first))->shardIndex_)), first->hitIndex_)))->score_;
   jfloat secondScore = ((OrgApacheLuceneSearchScoreDoc *) nil_chk(IOSObjectArray_Get(nil_chk(IOSObjectArray_Get(shardHits_, ((OrgApacheLuceneSearchTopDocs_ShardRef *) nil_chk(second))->shardIndex_)), second->hitIndex_)))->score_;
   if (firstScore < secondScore) {
-    return NO;
+    return false;
   }
   else if (firstScore > secondScore) {
-    return YES;
+    return true;
   }
   else {
     if (first->shardIndex_ < second->shardIndex_) {
-      return YES;
+      return true;
     }
     else if (first->shardIndex_ > second->shardIndex_) {
-      return NO;
+      return false;
     }
     else {
       JreAssert((first->hitIndex_ != second->hitIndex_), (@"org/apache/lucene/search/TopDocs.java:112 condition failed: assert first.hitIndex != second.hitIndex;"));
@@ -417,10 +417,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopDocs_ScoreMergeSortQueu
     }
   }
   if (first->shardIndex_ < second->shardIndex_) {
-    return YES;
+    return true;
   }
   else if (first->shardIndex_ > second->shardIndex_) {
-    return NO;
+    return false;
   }
   else {
     JreAssert((first->hitIndex_ != second->hitIndex_), (@"org/apache/lucene/search/TopDocs.java:189 condition failed: assert first.hitIndex != second.hitIndex;"));

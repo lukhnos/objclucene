@@ -96,7 +96,7 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
 }
 
 - (jboolean)isEqual:(id)o {
-  if ([self getClass] != [nil_chk(o) getClass]) return NO;
+  if ([self getClass] != [nil_chk(o) getClass]) return false;
   OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction *other = (OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction *) check_class_cast(o, [OrgApacheLuceneQueriesFunctionValuesourceDualFloatFunction class]);
   return [((OrgApacheLuceneQueriesFunctionValueSource *) nil_chk(self->a_)) isEqual:other->a_] && [((OrgApacheLuceneQueriesFunctionValueSource *) nil_chk(self->b_)) isEqual:other->b_];
 }

@@ -101,7 +101,7 @@ void OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_initWithJava
   OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
   JreStrongAssign(&self->wordFiles_, [self getWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_PROTECTED_TOKENS_]);
   JreStrongAssign(&self->stringPattern_, [self getWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisMiscellaneousKeywordMarkerFilterFactory_PATTERN_]);
-  self->ignoreCase_ = [self getBooleanWithJavaUtilMap:args withNSString:@"ignoreCase" withBoolean:NO];
+  self->ignoreCase_ = [self getBooleanWithJavaUtilMap:args withNSString:@"ignoreCase" withBoolean:false];
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
   }

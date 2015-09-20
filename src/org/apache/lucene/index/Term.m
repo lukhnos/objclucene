@@ -54,19 +54,19 @@ __attribute__((unused)) static NSString *OrgApacheLuceneIndexTerm_text(OrgApache
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return YES;
-  if (obj == nil) return NO;
-  if ([self getClass] != [nil_chk(obj) getClass]) return NO;
+  if (self == obj) return true;
+  if (obj == nil) return false;
+  if ([self getClass] != [nil_chk(obj) getClass]) return false;
   OrgApacheLuceneIndexTerm *other = (OrgApacheLuceneIndexTerm *) check_class_cast(obj, [OrgApacheLuceneIndexTerm class]);
   if (field_ == nil) {
-    if (other->field_ != nil) return NO;
+    if (other->field_ != nil) return false;
   }
-  else if (![field_ isEqual:other->field_]) return NO;
+  else if (![field_ isEqual:other->field_]) return false;
   if (bytes_ == nil) {
-    if (other->bytes_ != nil) return NO;
+    if (other->bytes_ != nil) return false;
   }
-  else if (![bytes_ isEqual:other->bytes_]) return NO;
-  return YES;
+  else if (![bytes_ isEqual:other->bytes_]) return false;
+  return true;
 }
 
 - (NSUInteger)hash {

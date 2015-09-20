@@ -147,13 +147,13 @@ __attribute__((unused)) static void OrgApacheLuceneIndexSegmentInfo_checkFileNam
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return YES;
+  if (self == obj) return true;
   if ([obj isKindOfClass:[OrgApacheLuceneIndexSegmentInfo class]]) {
     OrgApacheLuceneIndexSegmentInfo *other = (OrgApacheLuceneIndexSegmentInfo *) check_class_cast(obj, [OrgApacheLuceneIndexSegmentInfo class]);
     return ((OrgApacheLuceneIndexSegmentInfo *) nil_chk(other))->dir_ == dir_ && [((NSString *) nil_chk(other->name_)) isEqual:name_];
   }
   else {
-    return NO;
+    return false;
   }
 }
 

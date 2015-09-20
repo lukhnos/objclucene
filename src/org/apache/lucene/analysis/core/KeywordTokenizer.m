@@ -31,10 +31,12 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCoreKeywordTokenizer, offsetAtt_, id<
 
 @implementation OrgApacheLuceneAnalysisCoreKeywordTokenizer
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisCoreKeywordTokenizer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithInt:(jint)bufferSize {
   OrgApacheLuceneAnalysisCoreKeywordTokenizer_initWithInt_(self, bufferSize);
@@ -50,10 +52,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCoreKeywordTokenizer, offsetAtt_, id<
 - (jboolean)incrementToken {
   if (!done_) {
     [self clearAttributes];
-    done_ = YES;
+    done_ = true;
     jint upto = 0;
     IOSCharArray *buffer = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer];
-    while (YES) {
+    while (true) {
       jint length = [((JavaIoReader *) nil_chk(input_)) readWithCharArray:buffer withInt:upto withInt:((IOSCharArray *) nil_chk(buffer))->size_ - upto];
       if (length == -1) break;
       upto += length;
@@ -62,9 +64,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCoreKeywordTokenizer, offsetAtt_, id<
     [termAtt_ setLengthWithInt:upto];
     finalOffset_ = [self correctOffsetWithInt:upto];
     [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAtt_)) setOffsetWithInt:[self correctOffsetWithInt:0] withInt:finalOffset_];
-    return YES;
+    return true;
   }
-  return NO;
+  return false;
 }
 
 - (void)end {
@@ -74,7 +76,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCoreKeywordTokenizer, offsetAtt_, id<
 
 - (void)reset {
   [super reset];
-  self->done_ = NO;
+  self->done_ = false;
 }
 
 - (void)dealloc {
@@ -117,7 +119,7 @@ OrgApacheLuceneAnalysisCoreKeywordTokenizer *new_OrgApacheLuceneAnalysisCoreKeyw
 
 void OrgApacheLuceneAnalysisCoreKeywordTokenizer_initWithInt_(OrgApacheLuceneAnalysisCoreKeywordTokenizer *self, jint bufferSize) {
   OrgApacheLuceneAnalysisTokenizer_init(self);
-  self->done_ = NO;
+  self->done_ = false;
   JreStrongAssign(&self->termAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()]);
   JreStrongAssign(&self->offsetAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_class_()]);
   if (bufferSize <= 0) {
@@ -134,7 +136,7 @@ OrgApacheLuceneAnalysisCoreKeywordTokenizer *new_OrgApacheLuceneAnalysisCoreKeyw
 
 void OrgApacheLuceneAnalysisCoreKeywordTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_(OrgApacheLuceneAnalysisCoreKeywordTokenizer *self, OrgApacheLuceneUtilAttributeFactory *factory, jint bufferSize) {
   OrgApacheLuceneAnalysisTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(self, factory);
-  self->done_ = NO;
+  self->done_ = false;
   JreStrongAssign(&self->termAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()]);
   JreStrongAssign(&self->offsetAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_class_()]);
   if (bufferSize <= 0) {

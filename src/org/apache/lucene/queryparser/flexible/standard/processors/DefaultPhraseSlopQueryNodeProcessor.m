@@ -27,10 +27,12 @@
 
 @implementation OrgApacheLuceneQueryparserFlexibleStandardProcessorsDefaultPhraseSlopQueryNodeProcessor
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueryparserFlexibleStandardProcessorsDefaultPhraseSlopQueryNodeProcessor_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)processWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryTree {
   OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *queryConfig = [self getQueryConfigHandler];
@@ -53,7 +55,7 @@
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)preProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)node {
   if ([node isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreNodesSlopQueryNode class]]) {
-    self->processChildren_ = NO;
+    self->processChildren_ = false;
   }
   return node;
 }
@@ -63,7 +65,7 @@
     [super processChildrenWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:queryTree];
   }
   else {
-    self->processChildren_ = YES;
+    self->processChildren_ = true;
   }
 }
 
@@ -92,7 +94,7 @@
 
 void OrgApacheLuceneQueryparserFlexibleStandardProcessorsDefaultPhraseSlopQueryNodeProcessor_init(OrgApacheLuceneQueryparserFlexibleStandardProcessorsDefaultPhraseSlopQueryNodeProcessor *self) {
   OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_init(self);
-  self->processChildren_ = YES;
+  self->processChildren_ = true;
 }
 
 OrgApacheLuceneQueryparserFlexibleStandardProcessorsDefaultPhraseSlopQueryNodeProcessor *new_OrgApacheLuceneQueryparserFlexibleStandardProcessorsDefaultPhraseSlopQueryNodeProcessor_init() {

@@ -57,7 +57,7 @@
 
 - (jboolean)isEqual:(id)o {
   if (![super isEqual:o]) {
-    return NO;
+    return false;
   }
   OrgApacheLuceneSearchSpansSpanPositionRangeQuery *other = (OrgApacheLuceneSearchSpansSpanPositionRangeQuery *) check_class_cast(o, [OrgApacheLuceneSearchSpansSpanPositionRangeQuery class]);
   return self->end_ == ((OrgApacheLuceneSearchSpansSpanPositionRangeQuery *) nil_chk(other))->end_ && self->start_ == other->start_;

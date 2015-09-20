@@ -666,7 +666,7 @@ id<JavaUtilMap> OrgApacheLuceneAnalysisHunspellDictionary_CHARSET_ALIASES_;
 @end
 
 void OrgApacheLuceneAnalysisHunspellDictionary_initWithJavaIoInputStream_withJavaIoInputStream_(OrgApacheLuceneAnalysisHunspellDictionary *self, JavaIoInputStream *affix, JavaIoInputStream *dictionary) {
-  OrgApacheLuceneAnalysisHunspellDictionary_initWithJavaIoInputStream_withJavaUtilList_withBoolean_(self, affix, JavaUtilCollections_singletonListWithId_(dictionary), NO);
+  OrgApacheLuceneAnalysisHunspellDictionary_initWithJavaIoInputStream_withJavaUtilList_withBoolean_(self, affix, JavaUtilCollections_singletonListWithId_(dictionary), false);
 }
 
 OrgApacheLuceneAnalysisHunspellDictionary *new_OrgApacheLuceneAnalysisHunspellDictionary_initWithJavaIoInputStream_withJavaIoInputStream_(JavaIoInputStream *affix, JavaIoInputStream *dictionary) {
@@ -693,13 +693,13 @@ void OrgApacheLuceneAnalysisHunspellDictionary_initWithJavaIoInputStream_withJav
   self->onlyincompound_ = -1;
   self->ignoreCase_ = ignoreCase;
   self->needsInputCleaning_ = ignoreCase;
-  self->needsOutputCleaning_ = NO;
+  self->needsOutputCleaning_ = false;
   [self->flagLookup_ addWithOrgApacheLuceneUtilBytesRef:[new_OrgApacheLuceneUtilBytesRef_init() autorelease]];
   OrgLukhnosPortmobileFilePath *aff = OrgLukhnosPortmobileFileFiles_createTempFileWithOrgLukhnosPortmobileFilePath_withNSString_withNSString_(self->tempDir_, @"affix", @"aff");
   JavaIoOutputStream *out = [new_JavaIoBufferedOutputStream_initWithJavaIoOutputStream_(OrgLukhnosPortmobileFileFiles_newOutputStreamWithOrgLukhnosPortmobileFilePath_(aff)) autorelease];
   JavaIoInputStream *aff1 = nil;
   JavaIoInputStream *aff2 = nil;
-  jboolean success = NO;
+  jboolean success = false;
   @try {
     IOSByteArray *buffer = [IOSByteArray arrayWithLength:1024 * 8];
     jint len;
@@ -718,7 +718,7 @@ void OrgApacheLuceneAnalysisHunspellDictionary_initWithJavaIoInputStream_withJav
     JreStrongAssign(&self->words_, [b finish]);
     JreStrongAssign(&self->aliases_, nil);
     JreStrongAssign(&self->morphAliases_, nil);
-    success = YES;
+    success = true;
   }
   @finally {
     OrgApacheLuceneUtilIOUtils_closeWhileHandlingExceptionWithJavaIoCloseableArray_([IOSObjectArray arrayWithObjects:(id[]){ out, aff1, aff2 } count:3 type:JavaIoCloseable_class_()]);
@@ -767,7 +767,7 @@ void OrgApacheLuceneAnalysisHunspellDictionary_readAffixFileWithJavaIoInputStrea
       JreStrongAssign(&self->flagParsingStrategy_, OrgApacheLuceneAnalysisHunspellDictionary_getFlagParsingStrategyWithNSString_(line));
     }
     else if ([line isEqual:OrgApacheLuceneAnalysisHunspellDictionary_COMPLEXPREFIXES_KEY_]) {
-      self->complexPrefixes_ = YES;
+      self->complexPrefixes_ = true;
     }
     else if ([line hasPrefix:OrgApacheLuceneAnalysisHunspellDictionary_CIRCUMFIX_KEY_]) {
       IOSObjectArray *parts = [line split:@"\\s+"];
@@ -804,7 +804,7 @@ void OrgApacheLuceneAnalysisHunspellDictionary_readAffixFileWithJavaIoInputStrea
       }
       JreStrongAssign(&self->ignore_, [((NSString *) nil_chk(IOSObjectArray_Get(parts, 1))) toCharArray]);
       JavaUtilArrays_sortWithCharArray_(self->ignore_);
-      self->needsInputCleaning_ = YES;
+      self->needsInputCleaning_ = true;
     }
     else if ([line hasPrefix:OrgApacheLuceneAnalysisHunspellDictionary_ICONV_KEY_] || [line hasPrefix:OrgApacheLuceneAnalysisHunspellDictionary_OCONV_KEY_]) {
       IOSObjectArray *parts = [line split:@"\\s+"];
@@ -824,7 +824,7 @@ void OrgApacheLuceneAnalysisHunspellDictionary_readAffixFileWithJavaIoInputStrea
       }
     }
     else if ([line hasPrefix:OrgApacheLuceneAnalysisHunspellDictionary_FULLSTRIP_KEY_]) {
-      self->fullStrip_ = YES;
+      self->fullStrip_ = true;
     }
     else if ([line hasPrefix:OrgApacheLuceneAnalysisHunspellDictionary_LANG_KEY_]) {
       JreStrongAssign(&self->language_, [((NSString *) nil_chk([line substring:((jint) [((NSString *) nil_chk(OrgApacheLuceneAnalysisHunspellDictionary_LANG_KEY_)) length])])) trim]);
@@ -914,7 +914,7 @@ void OrgApacheLuceneAnalysisHunspellDictionary_parseAffixWithJavaUtilTreeMap_wit
       }
       appendFlags = [self->flagParsingStrategy_ parseFlagsWithNSString:flagPart];
       JavaUtilArrays_sortWithCharArray_(appendFlags);
-      self->twoStageAffix_ = YES;
+      self->twoStageAffix_ = true;
     }
     if ([@"0" isEqual:affixArg]) {
       affixArg = @"";
@@ -1104,8 +1104,8 @@ void OrgApacheLuceneAnalysisHunspellDictionary_readDictionaryFilesWithJavaUtilLi
   JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
   OrgLukhnosPortmobileFilePath *unsorted = OrgLukhnosPortmobileFileFiles_createTempFileWithOrgLukhnosPortmobileFilePath_withNSString_withNSString_(self->tempDir_, @"unsorted", @"dat");
   {
-    JavaLangThrowable *__mainException = nil;
     OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter *writer = [new_OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter_initWithOrgLukhnosPortmobileFilePath_(unsorted) autorelease];
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
       for (JavaIoInputStream * __strong dictionary in nil_chk(dictionaries)) {
         JavaIoBufferedReader *lines = [new_JavaIoBufferedReader_initWithJavaIoReader_([new_JavaIoInputStreamReader_initWithJavaIoInputStream_withJavaNioCharsetCharsetDecoder_(dictionary, decoder) autorelease]) autorelease];
@@ -1115,7 +1115,7 @@ void OrgApacheLuceneAnalysisHunspellDictionary_readDictionaryFilesWithJavaUtilLi
             continue;
           }
           line = [self unescapeEntryWithNSString:line];
-          if (self->hasStemExceptions_ == NO) {
+          if (self->hasStemExceptions_ == false) {
             jint morphStart = [((NSString *) nil_chk(line)) indexOf:OrgApacheLuceneAnalysisHunspellDictionary_MORPH_SEPARATOR];
             if (morphStart >= 0 && morphStart < ((jint) [line length])) {
               self->hasStemExceptions_ = (OrgApacheLuceneAnalysisHunspellDictionary_parseStemExceptionWithNSString_(self, [line substring:morphStart + 1]) != nil);
@@ -1147,28 +1147,30 @@ void OrgApacheLuceneAnalysisHunspellDictionary_readDictionaryFilesWithJavaUtilLi
         }
       }
     }
+    @catch (JavaLangThrowable *e) {
+      __primaryException1 = e;
+      @throw e;
+    }
     @finally {
-      @try {
-        [writer close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
+      if (writer != nil) {
+        if (__primaryException1 != nil) {
+          @try {
+            [writer close];
+          } @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
         } else {
-          __mainException = e;
+          [writer close];
         }
-      }
-      if (__mainException) {
-        @throw __mainException;
       }
     }
   }
   OrgLukhnosPortmobileFilePath *sorted = OrgLukhnosPortmobileFileFiles_createTempFileWithOrgLukhnosPortmobileFilePath_withNSString_withNSString_(self->tempDir_, @"sorted", @"dat");
   OrgApacheLuceneUtilOfflineSorter *sorter = [new_OrgApacheLuceneUtilOfflineSorter_initWithJavaUtilComparator_([new_OrgApacheLuceneAnalysisHunspellDictionary_$1_initWithOrgApacheLuceneAnalysisHunspellDictionary_(self) autorelease]) autorelease];
-  jboolean success = NO;
+  jboolean success = false;
   @try {
     [sorter sortWithOrgLukhnosPortmobileFilePath:unsorted withOrgLukhnosPortmobileFilePath:sorted];
-    success = YES;
+    success = true;
   }
   @finally {
     if (success) {
@@ -1178,7 +1180,7 @@ void OrgApacheLuceneAnalysisHunspellDictionary_readDictionaryFilesWithJavaUtilLi
       OrgApacheLuceneUtilIOUtils_deleteFilesIgnoringExceptionsWithOrgLukhnosPortmobileFilePathArray_([IOSObjectArray arrayWithObjects:(id[]){ unsorted } count:1 type:OrgLukhnosPortmobileFilePath_class_()]);
     }
   }
-  jboolean success2 = NO;
+  jboolean success2 = false;
   OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader *reader = [new_OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader_initWithOrgLukhnosPortmobileFilePath_(sorted) autorelease];
   @try {
     OrgApacheLuceneUtilBytesRefBuilder *scratchLine = [new_OrgApacheLuceneUtilBytesRefBuilder_init() autorelease];
@@ -1247,7 +1249,7 @@ void OrgApacheLuceneAnalysisHunspellDictionary_readDictionaryFilesWithJavaUtilLi
     }
     OrgApacheLuceneUtilFstUtil_toUTF32WithJavaLangCharSequence_withOrgApacheLuceneUtilIntsRefBuilder_(currentEntry, scratchInts);
     [((OrgApacheLuceneUtilFstBuilder *) nil_chk(words)) addWithOrgApacheLuceneUtilIntsRef:[scratchInts get] withId:[currentOrds get]];
-    success2 = YES;
+    success2 = true;
   }
   @finally {
     OrgApacheLuceneUtilIOUtils_closeWhileHandlingExceptionWithJavaIoCloseableArray_([IOSObjectArray arrayWithObjects:(id[]){ reader } count:1 type:JavaIoCloseable_class_()]);
@@ -1399,10 +1401,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisHunspellDictionary)
   return 0;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisHunspellDictionary_FlagParsingStrategy_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -1428,10 +1432,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisHunspellDictionary_FlagP
   return [((NSString *) nil_chk(rawFlags)) toCharArray];
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisHunspellDictionary_SimpleFlagParsingStrategy_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -1475,10 +1481,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisHunspellDictionary_Simpl
   return flags;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisHunspellDictionary_NumFlagParsingStrategy_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -1527,10 +1535,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisHunspellDictionary_NumFl
   return flags;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisHunspellDictionary_DoubleASCIIFlagParsingStrategy_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

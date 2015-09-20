@@ -63,10 +63,12 @@ NSString *OrgApacheLuceneAnalysisDeGermanAnalyzer_DEFAULT_STOPWORD_FILE_ = @"ger
   return OrgApacheLuceneAnalysisDeGermanAnalyzer_getDefaultStopSet();
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisDeGermanAnalyzer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords {
   OrgApacheLuceneAnalysisDeGermanAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(self, stopwords);
@@ -162,10 +164,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisDeGermanAnalyzer_DefaultSetHolder
 
 @implementation OrgApacheLuceneAnalysisDeGermanAnalyzer_DefaultSetHolder
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisDeGermanAnalyzer_DefaultSetHolder_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisDeGermanAnalyzer_DefaultSetHolder class]) {

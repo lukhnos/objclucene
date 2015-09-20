@@ -14,10 +14,12 @@
 
 @implementation OrgApacheLuceneQueryparserFlexibleCoreNodesMatchAllDocsQueryNode
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueryparserFlexibleCoreNodesMatchAllDocsQueryNode_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (NSString *)description {
   return @"<matchAllDocs field='*' term='*'/>";

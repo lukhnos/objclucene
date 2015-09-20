@@ -168,7 +168,7 @@ void OrgApacheLuceneIndexSegmentCoreReaders_initWithOrgApacheLuceneIndexSegmentR
   JreStrongAssign(&self->coreClosedListeners_, JavaUtilCollections_synchronizedSetWithJavaUtilSet_([new_JavaUtilLinkedHashSet_init() autorelease]));
   OrgApacheLuceneCodecsCodec *codec = [((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(si))->info_)) getCodec];
   OrgApacheLuceneStoreDirectory *cfsDir;
-  jboolean success = NO;
+  jboolean success = false;
   @try {
     if ([si->info_ getUseCompoundFile]) {
       cfsDir = JreStrongAssign(&self->cfsReader_, [((OrgApacheLuceneCodecsCompoundFormat *) nil_chk([((OrgApacheLuceneCodecsCodec *) nil_chk(codec)) compoundFormat])) getCompoundReaderWithOrgApacheLuceneStoreDirectory:dir withOrgApacheLuceneIndexSegmentInfo:si->info_ withOrgApacheLuceneStoreIOContext:context]);
@@ -196,7 +196,7 @@ void OrgApacheLuceneIndexSegmentCoreReaders_initWithOrgApacheLuceneIndexSegmentR
     else {
       JreStrongAssign(&self->termVectorsReaderOrig_, nil);
     }
-    success = YES;
+    success = true;
   }
   @finally {
     if (!success) {

@@ -338,7 +338,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFstBytesStore)
 }
 
 - (OrgApacheLuceneUtilFstFST_BytesReader *)getReverseReader {
-  return [self getReverseReaderWithBoolean:YES];
+  return [self getReverseReaderWithBoolean:true];
 }
 
 - (OrgApacheLuceneUtilFstFST_BytesReader *)getReverseReaderWithBoolean:(jboolean)allowSingle {
@@ -511,7 +511,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstBytesStore)
 }
 
 - (jboolean)reversed {
-  return NO;
+  return false;
 }
 
 - (instancetype)initWithOrgApacheLuceneUtilFstBytesStore:(OrgApacheLuceneUtilFstBytesStore *)outer$ {
@@ -597,7 +597,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstBytesStore_$1)
 }
 
 - (jboolean)reversed {
-  return YES;
+  return true;
 }
 
 - (instancetype)initWithOrgApacheLuceneUtilFstBytesStore:(OrgApacheLuceneUtilFstBytesStore *)outer$ {

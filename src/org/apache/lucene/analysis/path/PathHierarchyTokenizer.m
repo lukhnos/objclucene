@@ -47,10 +47,12 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisPathPathHierarchyTokenizer, DE
 
 @implementation OrgApacheLuceneAnalysisPathPathHierarchyTokenizer
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisPathPathHierarchyTokenizer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithInt:(jint)skip {
   OrgApacheLuceneAnalysisPathPathHierarchyTokenizer_initWithInt_(self, skip);
@@ -111,14 +113,14 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisPathPathHierarchyTokenizer, DE
     [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posAtt_)) setPositionIncrementWithInt:0];
   }
   jint length = 0;
-  jboolean added = NO;
+  jboolean added = false;
   if (endDelimiter_) {
     [termAtt_ appendWithChar:replacement_];
     length++;
-    endDelimiter_ = NO;
-    added = YES;
+    endDelimiter_ = false;
+    added = true;
   }
-  while (YES) {
+  while (true) {
     jint c = [((JavaIoReader *) nil_chk(input_)) read];
     if (c >= 0) {
       charsRead_++;
@@ -135,11 +137,11 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisPathPathHierarchyTokenizer, DE
         return added;
       }
       else {
-        return NO;
+        return false;
       }
     }
     if (!added) {
-      added = YES;
+      added = true;
       skipped_++;
       if (skipped_ > skip_) {
         [termAtt_ appendWithChar:c == delimiter_ ? replacement_ : (jchar) c];
@@ -152,7 +154,7 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisPathPathHierarchyTokenizer, DE
     else {
       if (c == delimiter_) {
         if (skipped_ > skip_) {
-          endDelimiter_ = YES;
+          endDelimiter_ = true;
           break;
         }
         skipped_++;
@@ -180,7 +182,7 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisPathPathHierarchyTokenizer, DE
   [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAtt_)) setOffsetWithInt:[self correctOffsetWithInt:startPosition_] withInt:[self correctOffsetWithInt:startPosition_ + length]];
   [resultToken_ setLengthWithInt:0];
   [resultToken_ appendWithCharArray:[termAtt_ buffer] withInt:0 withInt:length];
-  return YES;
+  return true;
 }
 
 - (void)end {
@@ -193,7 +195,7 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisPathPathHierarchyTokenizer, DE
   [super reset];
   [((JavaLangStringBuilder *) nil_chk(resultToken_)) setLengthWithInt:0];
   charsRead_ = 0;
-  endDelimiter_ = NO;
+  endDelimiter_ = false;
   skipped_ = 0;
   startPosition_ = 0;
 }
@@ -319,7 +321,7 @@ void OrgApacheLuceneAnalysisPathPathHierarchyTokenizer_initWithOrgApacheLuceneUt
   JreStrongAssign(&self->posAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_class_()]);
   self->startPosition_ = 0;
   self->skipped_ = 0;
-  self->endDelimiter_ = NO;
+  self->endDelimiter_ = false;
   self->charsRead_ = 0;
   if (bufferSize < 0) {
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"bufferSize cannot be negative") autorelease];

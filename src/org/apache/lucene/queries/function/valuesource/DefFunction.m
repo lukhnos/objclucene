@@ -157,11 +157,11 @@ withOrgApacheLuceneUtilBytesRefBuilder:(OrgApacheLuceneUtilBytesRefBuilder *)tar
     while (b__ < e__) {
       OrgApacheLuceneQueriesFunctionFunctionValues *vals = *b__++;
       if ([((OrgApacheLuceneQueriesFunctionFunctionValues *) nil_chk(vals)) existsWithInt:doc]) {
-        return YES;
+        return true;
       }
     }
   }
-  return NO;
+  return false;
 }
 
 - (OrgApacheLuceneQueriesFunctionFunctionValues_ValueFiller *)getValueFiller {

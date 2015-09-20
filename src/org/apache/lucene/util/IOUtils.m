@@ -107,10 +107,12 @@ NSString *OrgApacheLuceneUtilIOUtils_UTF_8_;
 
 @implementation OrgApacheLuceneUtilIOUtils
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilIOUtils_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)closeWithJavaIoCloseableArray:(IOSObjectArray *)objects {
   OrgApacheLuceneUtilIOUtils_closeWithJavaIoCloseableArray_(objects);
@@ -313,11 +315,11 @@ JavaIoReader *OrgApacheLuceneUtilIOUtils_getDecodingReaderWithJavaIoInputStream_
 JavaIoReader *OrgApacheLuceneUtilIOUtils_getDecodingReaderWithIOSClass_withNSString_withJavaNioCharsetCharset_(IOSClass *clazz, NSString *resource, JavaNioCharsetCharset *charSet) {
   OrgApacheLuceneUtilIOUtils_initialize();
   JavaIoInputStream *stream = nil;
-  jboolean success = NO;
+  jboolean success = false;
   @try {
     stream = [((IOSClass *) nil_chk(clazz)) getResourceAsStream:resource];
     JavaIoReader *reader = OrgApacheLuceneUtilIOUtils_getDecodingReaderWithJavaIoInputStream_withJavaNioCharsetCharset_(stream, charSet);
-    success = YES;
+    success = true;
     return reader;
   }
   @finally {
@@ -450,13 +452,13 @@ void OrgApacheLuceneUtilIOUtils_fsyncWithOrgLukhnosPortmobileFilePath_withBoolea
   if (isDir) {
     return;
   }
-  {
-    JavaLangThrowable *__mainException = nil;
+  @try {
     JavaNioChannelsFileChannel *file = OrgLukhnosPortmobileChannelsUtilsFileChannelUtils_openWithOrgLukhnosPortmobileFilePath_withOrgLukhnosPortmobileFileStandardOpenOptionEnumArray_(fileToSync, [IOSObjectArray arrayWithObjects:(id[]){ isDir ? JreLoadStatic(OrgLukhnosPortmobileFileStandardOpenOptionEnum, READ) : JreLoadStatic(OrgLukhnosPortmobileFileStandardOpenOptionEnum, WRITE) } count:1 type:OrgLukhnosPortmobileFileStandardOpenOptionEnum_class_()]);
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
       for (jint retry = 0; retry < 5; retry++) {
         @try {
-          [((JavaNioChannelsFileChannel *) nil_chk(file)) forceWithBoolean:YES];
+          [((JavaNioChannelsFileChannel *) nil_chk(file)) forceWithBoolean:true];
           return;
         }
         @catch (JavaIoIOException *ioe) {
@@ -474,30 +476,31 @@ void OrgApacheLuceneUtilIOUtils_fsyncWithOrgLukhnosPortmobileFilePath_withBoolea
         }
       }
     }
-    @catch (JavaIoIOException *ioe) {
-      __mainException = ioe;
-      if (exc == nil) {
-        exc = ioe;
-      }
+    @catch (JavaLangThrowable *e) {
+      __primaryException1 = e;
+      @throw e;
     }
     @finally {
-      @try {
-        [file close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
+      if (file != nil) {
+        if (__primaryException1 != nil) {
+          @try {
+            [file close];
+          } @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
         } else {
-          __mainException = e;
+          [file close];
         }
-      }
-      if (__mainException) {
-        @throw __mainException;
       }
     }
   }
+  @catch (JavaIoIOException *ioe) {
+    if (exc == nil) {
+      exc = ioe;
+    }
+  }
   if (isDir) {
-    JreAssert(((JreLoadStatic(OrgApacheLuceneUtilConstants, LINUX_) || JreLoadStatic(OrgApacheLuceneUtilConstants, MAC_OS_X_)) == NO || JreLoadStatic(OrgApacheLuceneUtilConstants, JRE_IS_MINIMUM_JAVA9_)), (JreStrcat("$@", @"On Linux and MacOSX fsyncing a directory should not throw IOException, we just don't want to rely on that in production (undocumented). Got: ", exc)));
+    JreAssert(((JreLoadStatic(OrgApacheLuceneUtilConstants, LINUX_) || JreLoadStatic(OrgApacheLuceneUtilConstants, MAC_OS_X_)) == false || JreLoadStatic(OrgApacheLuceneUtilConstants, JRE_IS_MINIMUM_JAVA9_)), (JreStrcat("$@", @"On Linux and MacOSX fsyncing a directory should not throw IOException, we just don't want to rely on that in production (undocumented). Got: ", exc)));
     return;
   }
   @throw exc;
@@ -511,13 +514,13 @@ jboolean OrgApacheLuceneUtilIOUtils_spinsWithOrgApacheLuceneStoreDirectory_(OrgA
     return OrgApacheLuceneUtilIOUtils_spinsWithOrgApacheLuceneStoreDirectory_([((OrgApacheLuceneStoreFileSwitchDirectory *) nil_chk(fsd)) getPrimaryDir]) || OrgApacheLuceneUtilIOUtils_spinsWithOrgApacheLuceneStoreDirectory_([fsd getSecondaryDir]);
   }
   else if ([dir isKindOfClass:[OrgApacheLuceneStoreRAMDirectory class]]) {
-    return NO;
+    return false;
   }
   else if ([dir isKindOfClass:[OrgApacheLuceneStoreFSDirectory class]]) {
     return OrgApacheLuceneUtilIOUtils_spinsWithOrgLukhnosPortmobileFilePath_([((OrgApacheLuceneStoreFSDirectory *) nil_chk(((OrgApacheLuceneStoreFSDirectory *) check_class_cast(dir, [OrgApacheLuceneStoreFSDirectory class])))) getDirectory]);
   }
   else {
-    return YES;
+    return true;
   }
 }
 
@@ -525,19 +528,19 @@ jboolean OrgApacheLuceneUtilIOUtils_spinsWithOrgLukhnosPortmobileFilePath_(OrgLu
   OrgApacheLuceneUtilIOUtils_initialize();
   path = [((OrgLukhnosPortmobileFilePath *) nil_chk(path)) toRealPath];
   if (!JreLoadStatic(OrgApacheLuceneUtilConstants, LINUX_)) {
-    return YES;
+    return true;
   }
   @try {
     return OrgApacheLuceneUtilIOUtils_spinsLinuxWithOrgLukhnosPortmobileFilePath_(path);
   }
   @catch (JavaLangException *exc) {
-    return YES;
+    return true;
   }
 }
 
 jboolean OrgApacheLuceneUtilIOUtils_spinsLinuxWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *path) {
   OrgApacheLuceneUtilIOUtils_initialize();
-  return NO;
+  return false;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilIOUtils)

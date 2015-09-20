@@ -180,9 +180,9 @@ withOrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_BlenderTypeEnum:(
 - (OrgApacheLuceneDocumentFieldType *)getTextFieldType {
   OrgApacheLuceneDocumentFieldType *ft = [new_OrgApacheLuceneDocumentFieldType_initWithOrgApacheLuceneDocumentFieldType_(JreLoadStatic(OrgApacheLuceneDocumentTextField, TYPE_NOT_STORED_)) autorelease];
   [ft setIndexOptionsWithOrgApacheLuceneIndexIndexOptionsEnum:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS_AND_POSITIONS)];
-  [ft setStoreTermVectorsWithBoolean:YES];
-  [ft setStoreTermVectorPositionsWithBoolean:YES];
-  [ft setOmitNormsWithBoolean:YES];
+  [ft setStoreTermVectorsWithBoolean:true];
+  [ft setStoreTermVectorPositionsWithBoolean:true];
+  [ft setOmitNormsWithBoolean:true];
   return ft;
 }
 
@@ -493,10 +493,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestAnalyzingBlendedInf
   return 0;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSuggestAnalyzingBlendedInfixSuggester_LookUpComparator_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

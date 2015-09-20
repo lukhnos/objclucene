@@ -22,10 +22,12 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl
 
 @implementation OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisTokenattributesBytesTermAttributeImpl_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneUtilBytesRef *)getBytesRef {
   return bytes_;

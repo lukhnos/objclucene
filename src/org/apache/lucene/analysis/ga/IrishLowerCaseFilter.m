@@ -52,10 +52,10 @@ __attribute__((unused)) static jboolean OrgApacheLuceneAnalysisGaIrishLowerCaseF
     for (jint i = idx; i < chLen; ) {
       i += JavaLangCharacter_toCharsWithInt_withCharArray_withInt_(JavaLangCharacter_toLowerCaseWithChar_(IOSCharArray_Get(nil_chk(chArray), i)), chArray, i);
     }
-    return YES;
+    return true;
   }
   else {
-    return NO;
+    return false;
   }
 }
 
@@ -106,9 +106,9 @@ jboolean OrgApacheLuceneAnalysisGaIrishLowerCaseFilter_isUpperVowelWithInt_(OrgA
     case 0x00cd:
     case 0x00d3:
     case 0x00da:
-    return YES;
+    return true;
     default:
-    return NO;
+    return false;
   }
 }
 

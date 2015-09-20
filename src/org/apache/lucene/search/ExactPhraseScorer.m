@@ -222,14 +222,14 @@ jboolean OrgApacheLuceneSearchExactPhraseScorer_advancePositionWithOrgApacheLuce
   OrgApacheLuceneSearchExactPhraseScorer_initialize();
   while (((OrgApacheLuceneSearchExactPhraseScorer_PostingsAndPosition *) nil_chk(posting))->pos_ < target) {
     if (posting->upTo_ == posting->freq_) {
-      return NO;
+      return false;
     }
     else {
       posting->pos_ = [((OrgApacheLuceneIndexPostingsEnum *) nil_chk(posting->postings_)) nextPosition];
       posting->upTo_ += 1;
     }
   }
-  return YES;
+  return true;
 }
 
 jint OrgApacheLuceneSearchExactPhraseScorer_phraseFreq(OrgApacheLuceneSearchExactPhraseScorer *self) {
@@ -247,13 +247,13 @@ jint OrgApacheLuceneSearchExactPhraseScorer_phraseFreq(OrgApacheLuceneSearchExac
   }
   jint freq = 0;
   OrgApacheLuceneSearchExactPhraseScorer_PostingsAndPosition *lead = IOSObjectArray_Get(nil_chk(postings), 0);
-  while (YES) {
+  while (true) {
     {
       jint phrasePos = ((OrgApacheLuceneSearchExactPhraseScorer_PostingsAndPosition *) nil_chk(lead))->pos_ - lead->offset_;
       for (jint j = 1; j < postings->size_; ++j) {
         OrgApacheLuceneSearchExactPhraseScorer_PostingsAndPosition *posting = IOSObjectArray_Get(postings, j);
         jint expectedPos = phrasePos + ((OrgApacheLuceneSearchExactPhraseScorer_PostingsAndPosition *) nil_chk(posting))->offset_;
-        if (OrgApacheLuceneSearchExactPhraseScorer_advancePositionWithOrgApacheLuceneSearchExactPhraseScorer_PostingsAndPosition_withInt_(posting, expectedPos) == NO) {
+        if (OrgApacheLuceneSearchExactPhraseScorer_advancePositionWithOrgApacheLuceneSearchExactPhraseScorer_PostingsAndPosition_withInt_(posting, expectedPos) == false) {
           goto break_advanceHead;
         }
         if (posting->pos_ != expectedPos) {
@@ -266,7 +266,7 @@ jint OrgApacheLuceneSearchExactPhraseScorer_phraseFreq(OrgApacheLuceneSearchExac
         }
       }
       freq += 1;
-      if (self->needsScores_ == NO) {
+      if (self->needsScores_ == false) {
         break;
       }
       if (lead->upTo_ == lead->freq_) {

@@ -62,10 +62,12 @@ NSString *OrgApacheLuceneAnalysisRuRussianAnalyzer_DEFAULT_STOPWORD_FILE_ = @"ru
   return OrgApacheLuceneAnalysisRuRussianAnalyzer_getDefaultStopSet();
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisRuRussianAnalyzer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords {
   OrgApacheLuceneAnalysisRuRussianAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(self, stopwords);
@@ -160,10 +162,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisRuRussianAnalyzer_DefaultSetHolde
 
 @implementation OrgApacheLuceneAnalysisRuRussianAnalyzer_DefaultSetHolder
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisRuRussianAnalyzer_DefaultSetHolder_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisRuRussianAnalyzer_DefaultSetHolder class]) {

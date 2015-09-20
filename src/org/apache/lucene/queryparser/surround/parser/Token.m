@@ -17,10 +17,12 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserSurroundParserToken, serial
   return nil;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueryparserSurroundParserToken_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithInt:(jint)kind {
   OrgApacheLuceneQueryparserSurroundParserToken_initWithInt_(self, kind);

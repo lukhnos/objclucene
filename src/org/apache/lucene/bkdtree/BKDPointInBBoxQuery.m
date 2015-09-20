@@ -119,7 +119,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1_$1)
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader {
   if (maxLon_ < minLon_) {
     OrgApacheLuceneSearchBooleanQuery_Builder *q = [new_OrgApacheLuceneSearchBooleanQuery_Builder_init() autorelease];
-    [q setDisableCoordWithBoolean:YES];
+    [q setDisableCoordWithBoolean:true];
     OrgApacheLuceneBkdtreeBKDPointInBBoxQuery *left = [new_OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_initWithNSString_withDouble_withDouble_withDouble_withDouble_(field_, minLat_, maxLat_, OrgApacheLuceneBkdtreeBKDTreeWriter_MIN_LON_INCL, maxLon_) autorelease];
     [left setBoostWithFloat:[self getBoost]];
     [q addWithOrgApacheLuceneSearchBooleanClause:[new_OrgApacheLuceneSearchBooleanClause_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchBooleanClause_OccurEnum_(left, JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, SHOULD)) autorelease]];
@@ -147,14 +147,14 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1_$1)
     OrgApacheLuceneBkdtreeBKDPointInBBoxQuery *q = (OrgApacheLuceneBkdtreeBKDPointInBBoxQuery *) check_class_cast(other, [OrgApacheLuceneBkdtreeBKDPointInBBoxQuery class]);
     return [((NSString *) nil_chk(field_)) isEqual:((OrgApacheLuceneBkdtreeBKDPointInBBoxQuery *) nil_chk(q))->field_] && minLat_ == q->minLat_ && maxLat_ == q->maxLat_ && minLon_ == q->minLon_ && maxLon_ == q->maxLon_;
   }
-  return NO;
+  return false;
 }
 
 - (NSString *)toStringWithNSString:(NSString *)field {
   JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
   [sb appendWithNSString:[[self getClass] getSimpleName]];
   [sb appendWithChar:':'];
-  if ([((NSString *) nil_chk(self->field_)) isEqual:field] == NO) {
+  if ([((NSString *) nil_chk(self->field_)) isEqual:field] == false) {
     [sb appendWithNSString:@"field="];
     [sb appendWithNSString:self->field_];
     [sb appendWithChar:':'];
@@ -192,16 +192,16 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_$1_$1)
 void OrgApacheLuceneBkdtreeBKDPointInBBoxQuery_initWithNSString_withDouble_withDouble_withDouble_withDouble_(OrgApacheLuceneBkdtreeBKDPointInBBoxQuery *self, NSString *field, jdouble minLat, jdouble maxLat, jdouble minLon, jdouble maxLon) {
   OrgApacheLuceneSearchQuery_init(self);
   JreStrongAssign(&self->field_, field);
-  if (OrgApacheLuceneBkdtreeBKDTreeWriter_validLatWithDouble_(minLat) == NO) {
+  if (OrgApacheLuceneBkdtreeBKDTreeWriter_validLatWithDouble_(minLat) == false) {
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D$", @"minLat=", minLat, @" is not a valid latitude")) autorelease];
   }
-  if (OrgApacheLuceneBkdtreeBKDTreeWriter_validLatWithDouble_(maxLat) == NO) {
+  if (OrgApacheLuceneBkdtreeBKDTreeWriter_validLatWithDouble_(maxLat) == false) {
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D$", @"maxLat=", maxLat, @" is not a valid latitude")) autorelease];
   }
-  if (OrgApacheLuceneBkdtreeBKDTreeWriter_validLonWithDouble_(minLon) == NO) {
+  if (OrgApacheLuceneBkdtreeBKDTreeWriter_validLonWithDouble_(minLon) == false) {
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D$", @"minLon=", minLon, @" is not a valid longitude")) autorelease];
   }
-  if (OrgApacheLuceneBkdtreeBKDTreeWriter_validLonWithDouble_(maxLon) == NO) {
+  if (OrgApacheLuceneBkdtreeBKDTreeWriter_validLonWithDouble_(maxLon) == false) {
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D$", @"maxLon=", maxLon, @" is not a valid longitude")) autorelease];
   }
   self->minLon_ = minLon;
@@ -252,7 +252,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneBkdtreeBKDPointInBBoxQuery)
   if (sdv == nil) {
     return nil;
   }
-  if ([sdv isKindOfClass:[OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues class]] == NO) {
+  if ([sdv isKindOfClass:[OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues class]] == false) {
     @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$@", @"field \"", this$0_->field_, @"\" was not indexed with BKDTreeDocValuesFormat: got: ", sdv)) autorelease];
   }
   OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues *treeDV = (OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues *) check_class_cast(sdv, [OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues class]);

@@ -332,7 +332,7 @@ withOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)_
 }
 
 - (void)close {
-  jboolean success = NO;
+  jboolean success = false;
   @try {
     if (docOut_ != nil) {
       OrgApacheLuceneCodecsCodecUtil_writeFooterWithOrgApacheLuceneStoreIndexOutput_(docOut_);
@@ -343,7 +343,7 @@ withOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)_
     if (payOut_ != nil) {
       OrgApacheLuceneCodecsCodecUtil_writeFooterWithOrgApacheLuceneStoreIndexOutput_(payOut_);
     }
-    success = YES;
+    success = true;
   }
   @finally {
     if (success) {
@@ -440,7 +440,7 @@ void OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter_initWithOrgApacheLucene
   JreStrongAssign(&self->docOut_, [((OrgApacheLuceneStoreDirectory *) nil_chk(state->directory_)) createOutputWithNSString:docFileName withOrgApacheLuceneStoreIOContext:state->context_]);
   OrgApacheLuceneStoreIndexOutput *posOut = nil;
   OrgApacheLuceneStoreIndexOutput *payOut = nil;
-  jboolean success = NO;
+  jboolean success = false;
   @try {
     OrgApacheLuceneCodecsCodecUtil_writeIndexHeaderWithOrgApacheLuceneStoreDataOutput_withNSString_withInt_withByteArray_withNSString_(self->docOut_, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_DOC_CODEC_, OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_VERSION_CURRENT, [state->segmentInfo_ getId], state->segmentSuffix_);
     JreStrongAssignAndConsume(&self->forUtil_, new_OrgApacheLuceneCodecsLucene50ForUtil_initWithFloat_withOrgApacheLuceneStoreDataOutput_(acceptableOverheadRatio, self->docOut_));
@@ -480,7 +480,7 @@ void OrgApacheLuceneCodecsLucene50Lucene50PostingsWriter_initWithOrgApacheLucene
     }
     JreStrongAssign(&self->payOut_, payOut);
     JreStrongAssign(&self->posOut_, posOut);
-    success = YES;
+    success = true;
   }
   @finally {
     if (!success) {

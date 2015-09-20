@@ -109,7 +109,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchSuggestFstFSTCompletion)
       return OrgApacheLuceneSearchSuggestFstFSTCompletion_lookupSortedAlphabeticallyWithOrgApacheLuceneUtilBytesRef_withInt_(self, keyUtf8, num);
     }
     else {
-      return OrgApacheLuceneSearchSuggestFstFSTCompletion_lookupSortedByWeightWithOrgApacheLuceneUtilBytesRef_withInt_withBoolean_(self, keyUtf8, num, NO);
+      return OrgApacheLuceneSearchSuggestFstFSTCompletion_lookupSortedByWeightWithOrgApacheLuceneUtilBytesRef_withInt_withBoolean_(self, keyUtf8, num, false);
     }
   }
   @catch (JavaIoIOException *e) {
@@ -222,7 +222,7 @@ OrgApacheLuceneSearchSuggestFstFSTCompletion *new_OrgApacheLuceneSearchSuggestFs
 }
 
 void OrgApacheLuceneSearchSuggestFstFSTCompletion_initWithOrgApacheLuceneUtilFstFST_(OrgApacheLuceneSearchSuggestFstFSTCompletion *self, OrgApacheLuceneUtilFstFST *automaton) {
-  OrgApacheLuceneSearchSuggestFstFSTCompletion_initWithOrgApacheLuceneUtilFstFST_withBoolean_withBoolean_(self, automaton, YES, YES);
+  OrgApacheLuceneSearchSuggestFstFSTCompletion_initWithOrgApacheLuceneUtilFstFST_withBoolean_withBoolean_(self, automaton, true, true);
 }
 
 OrgApacheLuceneSearchSuggestFstFSTCompletion *new_OrgApacheLuceneSearchSuggestFstFSTCompletion_initWithOrgApacheLuceneUtilFstFST_(OrgApacheLuceneUtilFstFST *automaton) {
@@ -238,7 +238,7 @@ IOSObjectArray *OrgApacheLuceneSearchSuggestFstFSTCompletion_cacheRootArcsWithOr
     OrgApacheLuceneUtilFstFST_Arc *arc = [((OrgApacheLuceneUtilFstFST *) nil_chk(automaton)) getFirstArcWithOrgApacheLuceneUtilFstFST_Arc:[new_OrgApacheLuceneUtilFstFST_Arc_init() autorelease]];
     OrgApacheLuceneUtilFstFST_BytesReader *fstReader = [automaton getBytesReader];
     [automaton readFirstTargetArcWithOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilFstFST_BytesReader:fstReader];
-    while (YES) {
+    while (true) {
       [rootArcs addWithId:[((OrgApacheLuceneUtilFstFST_Arc *) [new_OrgApacheLuceneUtilFstFST_Arc_init() autorelease]) copyFromWithOrgApacheLuceneUtilFstFST_Arc:arc]];
       if ([((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc)) isLast]) break;
       [automaton readNextArcWithOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilFstFST_BytesReader:fstReader];
@@ -273,7 +273,7 @@ jint OrgApacheLuceneSearchSuggestFstFSTCompletion_getExactMatchStartingFromRootA
 }
 
 id<JavaUtilList> OrgApacheLuceneSearchSuggestFstFSTCompletion_lookupSortedAlphabeticallyWithOrgApacheLuceneUtilBytesRef_withInt_(OrgApacheLuceneSearchSuggestFstFSTCompletion *self, OrgApacheLuceneUtilBytesRef *key, jint num) {
-  id<JavaUtilList> res = OrgApacheLuceneSearchSuggestFstFSTCompletion_lookupSortedByWeightWithOrgApacheLuceneUtilBytesRef_withInt_withBoolean_(self, key, num, YES);
+  id<JavaUtilList> res = OrgApacheLuceneSearchSuggestFstFSTCompletion_lookupSortedByWeightWithOrgApacheLuceneUtilBytesRef_withInt_withBoolean_(self, key, num, true);
   JavaUtilCollections_sortWithJavaUtilList_(res);
   if ([((id<JavaUtilList>) nil_chk(res)) size] > num) {
     res = [res subListWithInt:0 withInt:num];
@@ -312,10 +312,10 @@ jboolean OrgApacheLuceneSearchSuggestFstFSTCompletion_checkExistingAndReorderWit
   for (jint i = [((JavaUtilArrayList *) nil_chk(list)) size]; --i >= 0; ) {
     if ([((OrgApacheLuceneUtilBytesRef *) nil_chk(key)) isEqual:((OrgApacheLuceneSearchSuggestFstFSTCompletion_Completion *) nil_chk([list getWithInt:i]))->utf8_]) {
       [list addWithInt:0 withId:[list removeWithInt:i]];
-      return YES;
+      return true;
     }
   }
-  return NO;
+  return false;
 }
 
 jboolean OrgApacheLuceneSearchSuggestFstFSTCompletion_descendWithPrefixWithOrgApacheLuceneUtilFstFST_Arc_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneSearchSuggestFstFSTCompletion *self, OrgApacheLuceneUtilFstFST_Arc *arc, OrgApacheLuceneUtilBytesRef *utf8) {
@@ -323,10 +323,10 @@ jboolean OrgApacheLuceneSearchSuggestFstFSTCompletion_descendWithPrefixWithOrgAp
   OrgApacheLuceneUtilFstFST_BytesReader *fstReader = [((OrgApacheLuceneUtilFstFST *) nil_chk(self->automaton_)) getBytesReader];
   for (jint i = utf8->offset_; i < max; i++) {
     if ([self->automaton_ findTargetArcWithInt:IOSByteArray_Get(nil_chk(utf8->bytes_), i) & (jint) 0xff withOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilFstFST_BytesReader:fstReader] == nil) {
-      return NO;
+      return false;
     }
   }
-  return YES;
+  return true;
 }
 
 jboolean OrgApacheLuceneSearchSuggestFstFSTCompletion_collectWithJavaUtilList_withInt_withInt_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilFstFST_Arc_(OrgApacheLuceneSearchSuggestFstFSTCompletion *self, id<JavaUtilList> res, jint num, jint bucket, OrgApacheLuceneUtilBytesRef *output, OrgApacheLuceneUtilFstFST_Arc *arc) {
@@ -337,15 +337,15 @@ jboolean OrgApacheLuceneSearchSuggestFstFSTCompletion_collectWithJavaUtilList_wi
   *IOSByteArray_GetRef(nil_chk(output->bytes_), output->length_++) = (jbyte) ((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc))->label_;
   OrgApacheLuceneUtilFstFST_BytesReader *fstReader = [((OrgApacheLuceneUtilFstFST *) nil_chk(self->automaton_)) getBytesReader];
   [self->automaton_ readFirstTargetArcWithOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilFstFST_BytesReader:fstReader];
-  while (YES) {
+  while (true) {
     if (arc->label_ == OrgApacheLuceneUtilFstFST_END_LABEL) {
       [((id<JavaUtilList>) nil_chk(res)) addWithId:[new_OrgApacheLuceneSearchSuggestFstFSTCompletion_Completion_initWithOrgApacheLuceneUtilBytesRef_withInt_(output, bucket) autorelease]];
-      if ([res size] >= num) return YES;
+      if ([res size] >= num) return true;
     }
     else {
       jint save = output->length_;
       if (OrgApacheLuceneSearchSuggestFstFSTCompletion_collectWithJavaUtilList_withInt_withInt_withOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilFstFST_Arc_(self, res, num, bucket, output, [((OrgApacheLuceneUtilFstFST_Arc *) [new_OrgApacheLuceneUtilFstFST_Arc_init() autorelease]) copyFromWithOrgApacheLuceneUtilFstFST_Arc:arc])) {
-        return YES;
+        return true;
       }
       output->length_ = save;
     }
@@ -354,7 +354,7 @@ jboolean OrgApacheLuceneSearchSuggestFstFSTCompletion_collectWithJavaUtilList_wi
     }
     [self->automaton_ readNextArcWithOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilFstFST_BytesReader:fstReader];
   }
-  return NO;
+  return false;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestFstFSTCompletion)

@@ -60,13 +60,13 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter, endS
 
 - (jboolean)incrementToken {
   if (endState_ != nil) {
-    return NO;
+    return false;
   }
   if (![((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
-    return NO;
+    return false;
   }
   jint skippedPositions = 0;
-  while (YES) {
+  while (true) {
     if ([((OrgApacheLuceneAnalysisUtilCharArraySet *) nil_chk(stopWords_)) containsWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer] withInt:0 withInt:[termAtt_ length]]) {
       jint posInc = [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posIncAtt_)) getPositionIncrement];
       jint endOffset = [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAtt_)) endOffset];
@@ -81,19 +81,19 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestAnalyzingSuggestStopFilter, endS
         jint finalEndOffset = [offsetAtt_ endOffset];
         JreAssert((finalEndOffset >= endOffset), (@"org/apache/lucene/search/suggest/analyzing/SuggestStopFilter.java:103 condition failed: assert finalEndOffset >= endOffset;"));
         if (finalEndOffset > endOffset) {
-          return NO;
+          return false;
         }
         else {
           [self restoreStateWithOrgApacheLuceneUtilAttributeSource_State:sav];
           [posIncAtt_ setPositionIncrementWithInt:skippedPositions + [posIncAtt_ getPositionIncrement]];
-          [((id<OrgApacheLuceneAnalysisTokenattributesKeywordAttribute>) nil_chk(keywordAtt_)) setKeywordWithBoolean:YES];
-          return YES;
+          [((id<OrgApacheLuceneAnalysisTokenattributesKeywordAttribute>) nil_chk(keywordAtt_)) setKeywordWithBoolean:true];
+          return true;
         }
       }
     }
     else {
       [posIncAtt_ setPositionIncrementWithInt:skippedPositions + [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posIncAtt_)) getPositionIncrement]];
-      return YES;
+      return true;
     }
   }
 }

@@ -181,10 +181,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonOperations_PointTransitio
 
 @implementation OrgApacheLuceneUtilAutomatonOperations
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilAutomatonOperations_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (OrgApacheLuceneUtilAutomatonAutomaton *)concatenateWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a1
                                                       withOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a2 {
@@ -472,7 +474,7 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonOperations_co
         OrgApacheLuceneUtilAutomatonAutomaton *followA = nextA;
         jint followOffset = stateOffset;
         jint upto = i + 1;
-        while (YES) {
+        while (true) {
           if (followA != nil) {
             numTransitions = [followA initTransitionWithInt:0 withOrgApacheLuceneUtilAutomatonTransition:t];
             for (jint j = 0; j < numTransitions; j++) {
@@ -489,7 +491,7 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonOperations_co
             }
           }
           else {
-            [result setAcceptWithInt:stateOffset + s withBoolean:YES];
+            [result setAcceptWithInt:stateOffset + s withBoolean:true];
             break;
           }
         }
@@ -508,7 +510,7 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonOperations_op
   OrgApacheLuceneUtilAutomatonOperations_initialize();
   OrgApacheLuceneUtilAutomatonAutomaton *result = [new_OrgApacheLuceneUtilAutomatonAutomaton_init() autorelease];
   [result createState];
-  [result setAcceptWithInt:0 withBoolean:YES];
+  [result setAcceptWithInt:0 withBoolean:true];
   if ([((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(a)) getNumStates] > 0) {
     [result copy__WithOrgApacheLuceneUtilAutomatonAutomaton:a];
     [result addEpsilonWithInt:0 withInt:1];
@@ -524,7 +526,7 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonOperations_re
   }
   OrgApacheLuceneUtilAutomatonAutomaton_Builder *builder = [new_OrgApacheLuceneUtilAutomatonAutomaton_Builder_init() autorelease];
   [builder createState];
-  [builder setAcceptWithInt:0 withBoolean:YES];
+  [builder setAcceptWithInt:0 withBoolean:true];
   [builder copy__WithOrgApacheLuceneUtilAutomatonAutomaton:a];
   OrgApacheLuceneUtilAutomatonTransition *t = [new_OrgApacheLuceneUtilAutomatonTransition_init() autorelease];
   jint count = [a initTransitionWithInt:0 withOrgApacheLuceneUtilAutomatonTransition:t];
@@ -676,7 +678,7 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonOperations_in
 jboolean OrgApacheLuceneUtilAutomatonOperations_sameLanguageWithOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneUtilAutomatonAutomaton *a1, OrgApacheLuceneUtilAutomatonAutomaton *a2) {
   OrgApacheLuceneUtilAutomatonOperations_initialize();
   if (a1 == a2) {
-    return YES;
+    return true;
   }
   return OrgApacheLuceneUtilAutomatonOperations_subsetOfWithOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneUtilAutomatonAutomaton_(a2, a1) && OrgApacheLuceneUtilAutomatonOperations_subsetOfWithOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneUtilAutomatonAutomaton_(a1, a2);
 }
@@ -695,7 +697,7 @@ jboolean OrgApacheLuceneUtilAutomatonOperations_hasDeadStatesFromInitialWithOrgA
   JavaUtilBitSet *reachableFromInitial = OrgApacheLuceneUtilAutomatonOperations_getLiveStatesFromInitialWithOrgApacheLuceneUtilAutomatonAutomaton_(a);
   JavaUtilBitSet *reachableFromAccept = OrgApacheLuceneUtilAutomatonOperations_getLiveStatesToAcceptWithOrgApacheLuceneUtilAutomatonAutomaton_(a);
   [((JavaUtilBitSet *) nil_chk(reachableFromInitial)) andNotWithJavaUtilBitSet:reachableFromAccept];
-  return [reachableFromInitial isEmpty] == NO;
+  return [reachableFromInitial isEmpty] == false;
 }
 
 jboolean OrgApacheLuceneUtilAutomatonOperations_hasDeadStatesToAcceptWithOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneUtilAutomatonAutomaton *a) {
@@ -703,21 +705,21 @@ jboolean OrgApacheLuceneUtilAutomatonOperations_hasDeadStatesToAcceptWithOrgApac
   JavaUtilBitSet *reachableFromInitial = OrgApacheLuceneUtilAutomatonOperations_getLiveStatesFromInitialWithOrgApacheLuceneUtilAutomatonAutomaton_(a);
   JavaUtilBitSet *reachableFromAccept = OrgApacheLuceneUtilAutomatonOperations_getLiveStatesToAcceptWithOrgApacheLuceneUtilAutomatonAutomaton_(a);
   [((JavaUtilBitSet *) nil_chk(reachableFromAccept)) andNotWithJavaUtilBitSet:reachableFromInitial];
-  return [reachableFromAccept isEmpty] == NO;
+  return [reachableFromAccept isEmpty] == false;
 }
 
 jboolean OrgApacheLuceneUtilAutomatonOperations_subsetOfWithOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneUtilAutomatonAutomaton *a1, OrgApacheLuceneUtilAutomatonAutomaton *a2) {
   OrgApacheLuceneUtilAutomatonOperations_initialize();
-  if ([((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(a1)) isDeterministic] == NO) {
+  if ([((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(a1)) isDeterministic] == false) {
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"a1 must be deterministic") autorelease];
   }
-  if ([((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(a2)) isDeterministic] == NO) {
+  if ([((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(a2)) isDeterministic] == false) {
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"a2 must be deterministic") autorelease];
   }
-  JreAssert((OrgApacheLuceneUtilAutomatonOperations_hasDeadStatesFromInitialWithOrgApacheLuceneUtilAutomatonAutomaton_(a1) == NO), (@"org/apache/lucene/util/automaton/Operations.java:428 condition failed: assert hasDeadStatesFromInitial(a1) == false;"));
-  JreAssert((OrgApacheLuceneUtilAutomatonOperations_hasDeadStatesFromInitialWithOrgApacheLuceneUtilAutomatonAutomaton_(a2) == NO), (@"org/apache/lucene/util/automaton/Operations.java:429 condition failed: assert hasDeadStatesFromInitial(a2) == false;"));
+  JreAssert((OrgApacheLuceneUtilAutomatonOperations_hasDeadStatesFromInitialWithOrgApacheLuceneUtilAutomatonAutomaton_(a1) == false), (@"org/apache/lucene/util/automaton/Operations.java:428 condition failed: assert hasDeadStatesFromInitial(a1) == false;"));
+  JreAssert((OrgApacheLuceneUtilAutomatonOperations_hasDeadStatesFromInitialWithOrgApacheLuceneUtilAutomatonAutomaton_(a2) == false), (@"org/apache/lucene/util/automaton/Operations.java:429 condition failed: assert hasDeadStatesFromInitial(a2) == false;"));
   if ([a1 getNumStates] == 0) {
-    return YES;
+    return true;
   }
   else if ([a2 getNumStates] == 0) {
     return OrgApacheLuceneUtilAutomatonOperations_isEmptyWithOrgApacheLuceneUtilAutomatonAutomaton_(a1);
@@ -731,8 +733,8 @@ jboolean OrgApacheLuceneUtilAutomatonOperations_subsetOfWithOrgApacheLuceneUtilA
   [visited addWithId:p];
   while ([worklist size] > 0) {
     p = [worklist removeFirst];
-    if ([a1 isAcceptWithInt:((OrgApacheLuceneUtilAutomatonStatePair *) nil_chk(p))->s1_] && [a2 isAcceptWithInt:p->s2_] == NO) {
-      return NO;
+    if ([a1 isAcceptWithInt:((OrgApacheLuceneUtilAutomatonStatePair *) nil_chk(p))->s1_] && [a2 isAcceptWithInt:p->s2_] == false) {
+      return false;
     }
     IOSObjectArray *t1 = IOSObjectArray_Get(nil_chk(transitions1), p->s1_);
     IOSObjectArray *t2 = IOSObjectArray_Get(nil_chk(transitions2), p->s2_);
@@ -743,7 +745,7 @@ jboolean OrgApacheLuceneUtilAutomatonOperations_subsetOfWithOrgApacheLuceneUtilA
       jint min1 = ((OrgApacheLuceneUtilAutomatonTransition *) nil_chk(IOSObjectArray_Get(t1, n1)))->min_, max1 = ((OrgApacheLuceneUtilAutomatonTransition *) nil_chk(IOSObjectArray_Get(t1, n1)))->max_;
       for (jint n2 = b2; n2 < t2->size_ && ((OrgApacheLuceneUtilAutomatonTransition *) nil_chk(IOSObjectArray_Get(t1, n1)))->max_ >= ((OrgApacheLuceneUtilAutomatonTransition *) nil_chk(IOSObjectArray_Get(t2, n2)))->min_; n2++) {
         if (((OrgApacheLuceneUtilAutomatonTransition *) nil_chk(IOSObjectArray_Get(t2, n2)))->min_ > min1) {
-          return NO;
+          return false;
         }
         if (((OrgApacheLuceneUtilAutomatonTransition *) nil_chk(IOSObjectArray_Get(t2, n2)))->max_ < JavaLangCharacter_MAX_CODE_POINT) {
           min1 = ((OrgApacheLuceneUtilAutomatonTransition *) nil_chk(IOSObjectArray_Get(t2, n2)))->max_ + 1;
@@ -759,11 +761,11 @@ jboolean OrgApacheLuceneUtilAutomatonOperations_subsetOfWithOrgApacheLuceneUtilA
         }
       }
       if (min1 <= max1) {
-        return NO;
+        return false;
       }
     }
   }
-  return YES;
+  return true;
 }
 
 OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonOperations_union__WithOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneUtilAutomatonAutomaton *a1, OrgApacheLuceneUtilAutomatonAutomaton *a2) {
@@ -844,7 +846,7 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonOperations_de
           [newstate putWithId:p withId:q];
         }
         else {
-          JreAssert(((accCount > 0 ? YES : NO) == [b isAcceptWithInt:[q intValue]]), (JreStrcat("$I$Z$@", @"accCount=", accCount, @" vs existing accept=", [b isAcceptWithInt:[q intValue]], @" states=", statesSet)));
+          JreAssert(((accCount > 0 ? true : false) == [b isAcceptWithInt:[q intValue]]), (JreStrcat("$I$Z$@", @"accCount=", accCount, @" vs existing accept=", [b isAcceptWithInt:[q intValue]], @" states=", statesSet)));
         }
         [b addTransitionWithInt:r withInt:[((JavaLangInteger *) nil_chk(q)) intValue] withInt:lastPoint withInt:point - 1];
       }
@@ -877,34 +879,34 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonOperations_de
 jboolean OrgApacheLuceneUtilAutomatonOperations_isEmptyWithOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneUtilAutomatonAutomaton *a) {
   OrgApacheLuceneUtilAutomatonOperations_initialize();
   if ([((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(a)) getNumStates] == 0) {
-    return YES;
+    return true;
   }
-  if ([a isAcceptWithInt:0] == NO && [a getNumTransitionsWithInt:0] == 0) {
-    return YES;
+  if ([a isAcceptWithInt:0] == false && [a getNumTransitionsWithInt:0] == 0) {
+    return true;
   }
-  if ([a isAcceptWithInt:0] == YES) {
-    return NO;
+  if ([a isAcceptWithInt:0] == true) {
+    return false;
   }
   JavaUtilLinkedList *workList = [new_JavaUtilLinkedList_init() autorelease];
   JavaUtilBitSet *seen = [new_JavaUtilBitSet_initWithInt_([a getNumStates]) autorelease];
   [workList addWithId:JavaLangInteger_valueOfWithInt_(0)];
   [seen setWithInt:0];
   OrgApacheLuceneUtilAutomatonTransition *t = [new_OrgApacheLuceneUtilAutomatonTransition_init() autorelease];
-  while ([workList isEmpty] == NO) {
+  while ([workList isEmpty] == false) {
     jint state = [((JavaLangInteger *) nil_chk([workList removeFirst])) intValue];
     if ([a isAcceptWithInt:state]) {
-      return NO;
+      return false;
     }
     jint count = [a initTransitionWithInt:state withOrgApacheLuceneUtilAutomatonTransition:t];
     for (jint i = 0; i < count; i++) {
       [a getNextTransitionWithOrgApacheLuceneUtilAutomatonTransition:t];
-      if ([seen getWithInt:t->dest_] == NO) {
+      if ([seen getWithInt:t->dest_] == false) {
         [workList addWithId:JavaLangInteger_valueOfWithInt_(t->dest_)];
         [seen setWithInt:t->dest_];
       }
     }
   }
-  return YES;
+  return true;
 }
 
 jboolean OrgApacheLuceneUtilAutomatonOperations_isTotalWithOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneUtilAutomatonAutomaton *a) {
@@ -919,7 +921,7 @@ jboolean OrgApacheLuceneUtilAutomatonOperations_isTotalWithOrgApacheLuceneUtilAu
     [a getTransitionWithInt:0 withInt:0 withOrgApacheLuceneUtilAutomatonTransition:t];
     return t->dest_ == 0 && t->min_ == minAlphabet && t->max_ == maxAlphabet;
   }
-  return NO;
+  return false;
 }
 
 jboolean OrgApacheLuceneUtilAutomatonOperations_runWithOrgApacheLuceneUtilAutomatonAutomaton_withNSString_(OrgApacheLuceneUtilAutomatonAutomaton *a, NSString *s) {
@@ -929,7 +931,7 @@ jboolean OrgApacheLuceneUtilAutomatonOperations_runWithOrgApacheLuceneUtilAutoma
   for (jint i = 0, cp = 0; i < ((jint) [((NSString *) nil_chk(s)) length]); i += JavaLangCharacter_charCountWithInt_(cp)) {
     jint nextState = [a stepWithInt:state withInt:cp = [s codePointAt:i]];
     if (nextState == -1) {
-      return NO;
+      return false;
     }
     state = nextState;
   }
@@ -943,7 +945,7 @@ jboolean OrgApacheLuceneUtilAutomatonOperations_runWithOrgApacheLuceneUtilAutoma
   for (jint i = 0; i < ((OrgApacheLuceneUtilIntsRef *) nil_chk(s))->length_; i++) {
     jint nextState = [a stepWithInt:state withInt:IOSIntArray_Get(nil_chk(s->ints_), s->offset_ + i)];
     if (nextState == -1) {
-      return NO;
+      return false;
     }
     state = nextState;
   }
@@ -968,12 +970,12 @@ JavaUtilBitSet *OrgApacheLuceneUtilAutomatonOperations_getLiveStatesFromInitialW
   [live setWithInt:0];
   [workList addWithId:JavaLangInteger_valueOfWithInt_(0)];
   OrgApacheLuceneUtilAutomatonTransition *t = [new_OrgApacheLuceneUtilAutomatonTransition_init() autorelease];
-  while ([workList isEmpty] == NO) {
+  while ([workList isEmpty] == false) {
     jint s = [((JavaLangInteger *) nil_chk([workList removeFirst])) intValue];
     jint count = [a initTransitionWithInt:s withOrgApacheLuceneUtilAutomatonTransition:t];
     for (jint i = 0; i < count; i++) {
       [a getNextTransitionWithOrgApacheLuceneUtilAutomatonTransition:t];
-      if ([live getWithInt:t->dest_] == NO) {
+      if ([live getWithInt:t->dest_] == false) {
         [live setWithInt:t->dest_];
         [workList addWithId:JavaLangInteger_valueOfWithInt_(t->dest_)];
       }
@@ -1007,12 +1009,12 @@ JavaUtilBitSet *OrgApacheLuceneUtilAutomatonOperations_getLiveStatesToAcceptWith
     [workList addWithId:JavaLangInteger_valueOfWithInt_(s)];
     s++;
   }
-  while ([workList isEmpty] == NO) {
+  while ([workList isEmpty] == false) {
     s = [((JavaLangInteger *) nil_chk([workList removeFirst])) intValue];
     jint count = [((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(a2)) initTransitionWithInt:s withOrgApacheLuceneUtilAutomatonTransition:t];
     for (jint i = 0; i < count; i++) {
       [a2 getNextTransitionWithOrgApacheLuceneUtilAutomatonTransition:t];
-      if ([live getWithInt:t->dest_] == NO) {
+      if ([live getWithInt:t->dest_] == false) {
         [live setWithInt:t->dest_];
         [workList addWithId:JavaLangInteger_valueOfWithInt_(t->dest_)];
       }
@@ -1046,7 +1048,7 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonOperations_re
     }
   }
   [result finishState];
-  JreAssert((OrgApacheLuceneUtilAutomatonOperations_hasDeadStatesWithOrgApacheLuceneUtilAutomatonAutomaton_(result) == NO), (@"org/apache/lucene/util/automaton/Operations.java:1011 condition failed: assert hasDeadStates(result) == false;"));
+  JreAssert((OrgApacheLuceneUtilAutomatonOperations_hasDeadStatesWithOrgApacheLuceneUtilAutomatonAutomaton_(result) == false), (@"org/apache/lucene/util/automaton/Operations.java:1011 condition failed: assert hasDeadStates(result) == false;"));
   return result;
 }
 
@@ -1066,7 +1068,7 @@ jint OrgApacheLuceneUtilAutomatonOperations_findIndexWithInt_withIntArray_(jint 
 jboolean OrgApacheLuceneUtilAutomatonOperations_isFiniteWithOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneUtilAutomatonAutomaton *a) {
   OrgApacheLuceneUtilAutomatonOperations_initialize();
   if ([((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(a)) getNumStates] == 0) {
-    return YES;
+    return true;
   }
   return OrgApacheLuceneUtilAutomatonOperations_isFiniteWithOrgApacheLuceneUtilAutomatonTransition_withOrgApacheLuceneUtilAutomatonAutomaton_withInt_withJavaUtilBitSet_withJavaUtilBitSet_([new_OrgApacheLuceneUtilAutomatonTransition_init() autorelease], a, 0, [new_JavaUtilBitSet_initWithInt_([a getNumStates]) autorelease], [new_JavaUtilBitSet_initWithInt_([a getNumStates]) autorelease]);
 }
@@ -1078,17 +1080,17 @@ jboolean OrgApacheLuceneUtilAutomatonOperations_isFiniteWithOrgApacheLuceneUtilA
   for (jint t = 0; t < numTransitions; t++) {
     [a getTransitionWithInt:state withInt:t withOrgApacheLuceneUtilAutomatonTransition:scratch];
     if ([path getWithInt:((OrgApacheLuceneUtilAutomatonTransition *) nil_chk(scratch))->dest_] || (![((JavaUtilBitSet *) nil_chk(visited)) getWithInt:scratch->dest_] && !OrgApacheLuceneUtilAutomatonOperations_isFiniteWithOrgApacheLuceneUtilAutomatonTransition_withOrgApacheLuceneUtilAutomatonAutomaton_withInt_withJavaUtilBitSet_withJavaUtilBitSet_(scratch, a, scratch->dest_, path, visited))) {
-      return NO;
+      return false;
     }
   }
   [path clearWithInt:state];
   [((JavaUtilBitSet *) nil_chk(visited)) setWithInt:state];
-  return YES;
+  return true;
 }
 
 NSString *OrgApacheLuceneUtilAutomatonOperations_getCommonPrefixWithOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneUtilAutomatonAutomaton *a) {
   OrgApacheLuceneUtilAutomatonOperations_initialize();
-  if ([((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(a)) isDeterministic] == NO) {
+  if ([((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(a)) isDeterministic] == false) {
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"input automaton must be deterministic") autorelease];
   }
   JavaLangStringBuilder *b = [new_JavaLangStringBuilder_init() autorelease];
@@ -1097,14 +1099,14 @@ NSString *OrgApacheLuceneUtilAutomatonOperations_getCommonPrefixWithOrgApacheLuc
   jboolean done;
   OrgApacheLuceneUtilAutomatonTransition *t = [new_OrgApacheLuceneUtilAutomatonTransition_init() autorelease];
   do {
-    done = YES;
+    done = true;
     [visited addWithId:JavaLangInteger_valueOfWithInt_(s)];
-    if ([a isAcceptWithInt:s] == NO && [a getNumTransitionsWithInt:s] == 1) {
+    if ([a isAcceptWithInt:s] == false && [a getNumTransitionsWithInt:s] == 1) {
       [a getTransitionWithInt:s withInt:0 withOrgApacheLuceneUtilAutomatonTransition:t];
       if (t->min_ == t->max_ && ![visited containsWithId:JavaLangInteger_valueOfWithInt_(t->dest_)]) {
         [b appendCodePointWithInt:t->min_];
         s = t->dest_;
-        done = NO;
+        done = false;
       }
     }
   }
@@ -1120,14 +1122,14 @@ OrgApacheLuceneUtilBytesRef *OrgApacheLuceneUtilAutomatonOperations_getCommonPre
   jboolean done;
   OrgApacheLuceneUtilAutomatonTransition *t = [new_OrgApacheLuceneUtilAutomatonTransition_init() autorelease];
   do {
-    done = YES;
+    done = true;
     [visited addWithId:JavaLangInteger_valueOfWithInt_(s)];
-    if ([((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(a)) isAcceptWithInt:s] == NO && [a getNumTransitionsWithInt:s] == 1) {
+    if ([((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(a)) isAcceptWithInt:s] == false && [a getNumTransitionsWithInt:s] == 1) {
       [a getTransitionWithInt:s withInt:0 withOrgApacheLuceneUtilAutomatonTransition:t];
       if (t->min_ == t->max_ && ![visited containsWithId:JavaLangInteger_valueOfWithInt_(t->dest_)]) {
         [builder appendWithByte:(jbyte) t->min_];
         s = t->dest_;
-        done = NO;
+        done = false;
       }
     }
   }
@@ -1137,16 +1139,16 @@ OrgApacheLuceneUtilBytesRef *OrgApacheLuceneUtilAutomatonOperations_getCommonPre
 
 OrgApacheLuceneUtilIntsRef *OrgApacheLuceneUtilAutomatonOperations_getSingletonWithOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneUtilAutomatonAutomaton *a) {
   OrgApacheLuceneUtilAutomatonOperations_initialize();
-  if ([((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(a)) isDeterministic] == NO) {
+  if ([((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(a)) isDeterministic] == false) {
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"input automaton must be deterministic") autorelease];
   }
   OrgApacheLuceneUtilIntsRefBuilder *builder = [new_OrgApacheLuceneUtilIntsRefBuilder_init() autorelease];
   JavaUtilHashSet *visited = [new_JavaUtilHashSet_init() autorelease];
   jint s = 0;
   OrgApacheLuceneUtilAutomatonTransition *t = [new_OrgApacheLuceneUtilAutomatonTransition_init() autorelease];
-  while (YES) {
+  while (true) {
     [visited addWithId:JavaLangInteger_valueOfWithInt_(s)];
-    if ([a isAcceptWithInt:s] == NO) {
+    if ([a isAcceptWithInt:s] == false) {
       if ([a getNumTransitionsWithInt:s] == 1) {
         [a getTransitionWithInt:s withInt:0 withOrgApacheLuceneUtilAutomatonTransition:t];
         if (t->min_ == t->max_ && ![visited containsWithId:JavaLangInteger_valueOfWithInt_(t->dest_)]) {
@@ -1198,7 +1200,7 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonOperations_re
   for (jint s = 0; s < numStates; s++) {
     [builder createState];
   }
-  [builder setAcceptWithInt:1 withBoolean:YES];
+  [builder setAcceptWithInt:1 withBoolean:true];
   OrgApacheLuceneUtilAutomatonTransition *t = [new_OrgApacheLuceneUtilAutomatonTransition_init() autorelease];
   for (jint s = 0; s < numStates; s++) {
     jint numTransitions = [a getNumTransitionsWithInt:s];
@@ -1306,10 +1308,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonOperations)
   next_ += 3;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilAutomatonOperations_TransitionList_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(transitions_);
@@ -1365,10 +1369,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonOperations_Transiti
   return point_;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilAutomatonOperations_PointTransitions_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(ends_);
@@ -1422,7 +1428,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonOperations_PointTra
 - (void)reset {
   if (useHash_) {
     [((JavaUtilHashMap *) nil_chk(map_)) clear];
-    useHash_ = NO;
+    useHash_ = false;
   }
   count_ = 0;
 }
@@ -1447,10 +1453,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonOperations_PointTra
   return [s description];
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(points_);
@@ -1518,7 +1526,7 @@ OrgApacheLuceneUtilAutomatonOperations_PointTransitions *OrgApacheLuceneUtilAuto
       for (jint i = 0; i < self->count_; i++) {
         [self->map_ putWithId:JavaLangInteger_valueOfWithInt_(((OrgApacheLuceneUtilAutomatonOperations_PointTransitions *) nil_chk(IOSObjectArray_Get(nil_chk(self->points_), i)))->point_) withId:IOSObjectArray_Get(self->points_, i)];
       }
-      self->useHash_ = YES;
+      self->useHash_ = true;
     }
     return p;
   }
@@ -1528,7 +1536,7 @@ void OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet_init(OrgApacheLuc
   NSObject_init(self);
   JreStrongAssignAndConsume(&self->points_, [IOSObjectArray newArrayWithLength:5 type:OrgApacheLuceneUtilAutomatonOperations_PointTransitions_class_()]);
   JreStrongAssignAndConsume(&self->map_, new_JavaUtilHashMap_init());
-  self->useHash_ = NO;
+  self->useHash_ = false;
 }
 
 OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet *new_OrgApacheLuceneUtilAutomatonOperations_PointTransitionSet_init() {

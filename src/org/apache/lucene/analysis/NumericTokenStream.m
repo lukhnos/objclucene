@@ -81,10 +81,12 @@ NSString *OrgApacheLuceneAnalysisNumericTokenStream_TOKEN_TYPE_LOWER_PREC_ = @"l
 
 @implementation OrgApacheLuceneAnalysisNumericTokenStream
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisNumericTokenStream_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithInt:(jint)precisionStep {
   OrgApacheLuceneAnalysisNumericTokenStream_initWithInt_(self, precisionStep);
@@ -280,10 +282,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisNumericTokenStream_Numer
 
 @implementation OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneUtilBytesRef *)getBytesRef {
   JreAssert((valueSize_ == 64 || valueSize_ == 32), (@"org/apache/lucene/analysis/NumericTokenStream.java:161 condition failed: assert valueSize == 64 || valueSize == 32;"));
@@ -353,15 +357,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisNumericTokenStream_Numer
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return YES;
-  if (obj == nil) return NO;
-  if ([self getClass] != [nil_chk(obj) getClass]) return NO;
+  if (self == obj) return true;
+  if (obj == nil) return false;
+  if ([self getClass] != [nil_chk(obj) getClass]) return false;
   OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl *other = (OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl *) check_class_cast(obj, [OrgApacheLuceneAnalysisNumericTokenStream_NumericTermAttributeImpl class]);
-  if (precisionStep_ != other->precisionStep_) return NO;
-  if (shift_ != other->shift_) return NO;
-  if (value_ != other->value_) return NO;
-  if (valueSize_ != other->valueSize_) return NO;
-  return YES;
+  if (precisionStep_ != other->precisionStep_) return false;
+  if (shift_ != other->shift_) return false;
+  if (value_ != other->value_) return false;
+  if (valueSize_ != other->valueSize_) return false;
+  return true;
 }
 
 - (void)dealloc {

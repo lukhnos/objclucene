@@ -31,14 +31,14 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisEnEnglishPossessiveFilter, termAtt_, 
 
 - (jboolean)incrementToken {
   if (![((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
-    return NO;
+    return false;
   }
   IOSCharArray *buffer = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer];
   jint bufferLength = [termAtt_ length];
   if (bufferLength >= 2 && (IOSCharArray_Get(nil_chk(buffer), bufferLength - 2) == '\'' || IOSCharArray_Get(buffer, bufferLength - 2) == 0x2019 || IOSCharArray_Get(buffer, bufferLength - 2) == 0xff07) && (IOSCharArray_Get(buffer, bufferLength - 1) == 's' || IOSCharArray_Get(buffer, bufferLength - 1) == 'S')) {
     [termAtt_ setLengthWithInt:bufferLength - 2];
   }
-  return YES;
+  return true;
 }
 
 - (void)dealloc {

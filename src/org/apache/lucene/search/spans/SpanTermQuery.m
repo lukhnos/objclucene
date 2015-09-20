@@ -92,7 +92,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpansSpanTermQuery_SpanTermWeight, this
 
 - (jboolean)isEqual:(id)obj {
   if (![super isEqual:obj]) {
-    return NO;
+    return false;
   }
   OrgApacheLuceneSearchSpansSpanTermQuery *other = (OrgApacheLuceneSearchSpansSpanTermQuery *) check_class_cast(obj, [OrgApacheLuceneSearchSpansSpanTermQuery class]);
   return [((OrgApacheLuceneIndexTerm *) nil_chk(term_)) isEqual:((OrgApacheLuceneSearchSpansSpanTermQuery *) nil_chk(other))->term_];
@@ -180,7 +180,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansSpanTermQuery)
   }
   OrgApacheLuceneIndexTerms *terms = [((OrgApacheLuceneIndexLeafReader *) nil_chk([context reader])) termsWithNSString:[((OrgApacheLuceneIndexTerm *) nil_chk(this$0_->term_)) field]];
   if (terms == nil) return nil;
-  if ([((OrgApacheLuceneIndexTerms *) nil_chk(terms)) hasPositions] == NO) @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$$C", @"field \"", [this$0_->term_ field], @"\" was indexed without position data; cannot run SpanTermQuery (term=", [this$0_->term_ text], ')')) autorelease];
+  if ([((OrgApacheLuceneIndexTerms *) nil_chk(terms)) hasPositions] == false) @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$$C", @"field \"", [this$0_->term_ field], @"\" was indexed without position data; cannot run SpanTermQuery (term=", [this$0_->term_ text], ')')) autorelease];
   OrgApacheLuceneIndexTermsEnum *termsEnum = [terms iterator];
   [((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum)) seekExactWithOrgApacheLuceneUtilBytesRef:[this$0_->term_ bytes] withOrgApacheLuceneIndexTermState:state];
   OrgApacheLuceneIndexPostingsEnum *postings = [termsEnum postingsWithOrgApacheLuceneIndexPostingsEnum:nil withInt:[((OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum *) nil_chk(requiredPostings)) getRequiredPostings]];

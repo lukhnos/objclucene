@@ -309,16 +309,16 @@ jboolean OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_hasHolesWithOrgApacheL
   jint end = ((OrgApacheLuceneUtilCharsRef *) nil_chk(chars))->offset_ + chars->length_;
   for (jint idx = chars->offset_ + 1; idx < end; idx++) {
     if (IOSCharArray_Get(nil_chk(chars->chars_), idx) == OrgApacheLuceneAnalysisSynonymSynonymMap_WORD_SEPARATOR && IOSCharArray_Get(chars->chars_, idx - 1) == OrgApacheLuceneAnalysisSynonymSynonymMap_WORD_SEPARATOR) {
-      return YES;
+      return true;
     }
   }
   if (IOSCharArray_Get(nil_chk(chars->chars_), chars->offset_) == 0x0000) {
-    return YES;
+    return true;
   }
   if (IOSCharArray_Get(chars->chars_, chars->offset_ + chars->length_ - 1) == 0x0000) {
-    return YES;
+    return true;
   }
-  return NO;
+  return false;
 }
 
 void OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_addWithOrgApacheLuceneUtilCharsRef_withInt_withOrgApacheLuceneUtilCharsRef_withInt_withBoolean_(OrgApacheLuceneAnalysisSynonymSynonymMap_Builder *self, OrgApacheLuceneUtilCharsRef *input, jint numInputWords, OrgApacheLuceneUtilCharsRef *output, jint numOutputWords, jboolean includeOrig) {
@@ -370,10 +370,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisSynonymSynonymMap_Builde
 
 @implementation OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_MapEntry
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisSynonymSynonymMap_Builder_MapEntry_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(ords_);
@@ -423,8 +425,8 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer 
 - (OrgApacheLuceneUtilCharsRef *)analyzeWithNSString:(NSString *)text
               withOrgApacheLuceneUtilCharsRefBuilder:(OrgApacheLuceneUtilCharsRefBuilder *)reuse {
   {
-    JavaLangThrowable *__mainException = nil;
     OrgApacheLuceneAnalysisTokenStream *ts = [((OrgApacheLuceneAnalysisAnalyzer *) nil_chk(analyzer_)) tokenStreamWithNSString:@"" withNSString:text];
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
       id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute> termAtt = [((OrgApacheLuceneAnalysisTokenStream *) nil_chk(ts)) addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()];
       id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute> posIncAtt = [ts addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_class_()];
@@ -449,19 +451,21 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer 
       }
       [ts end];
     }
+    @catch (JavaLangThrowable *e) {
+      __primaryException1 = e;
+      @throw e;
+    }
     @finally {
-      @try {
-        [ts close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
+      if (ts != nil) {
+        if (__primaryException1 != nil) {
+          @try {
+            [ts close];
+          } @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
         } else {
-          __mainException = e;
+          [ts close];
         }
-      }
-      if (__mainException) {
-        @throw __mainException;
       }
     }
   }

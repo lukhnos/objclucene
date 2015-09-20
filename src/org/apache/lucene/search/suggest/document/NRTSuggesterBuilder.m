@@ -73,10 +73,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuild
 
 @implementation OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)startTermWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)analyzed {
   [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(self->analyzed_)) copyBytesWithOrgApacheLuceneUtilBytesRef:analyzed];
@@ -114,14 +116,14 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)surfaceForm
 - (jboolean)storeWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)output {
   OrgApacheLuceneUtilFstFST *build = [((OrgApacheLuceneUtilFstBuilder *) nil_chk(builder_)) finish];
   if (build == nil) {
-    return NO;
+    return false;
   }
   [((OrgApacheLuceneUtilFstFST *) nil_chk(build)) saveWithOrgApacheLuceneStoreDataOutput:output];
   JreAssert((maxAnalyzedPathsPerOutput_ > 0), (@"org/apache/lucene/search/suggest/document/NRTSuggesterBuilder.java:128 condition failed: assert maxAnalyzedPathsPerOutput > 0;"));
   [((OrgApacheLuceneStoreDataOutput *) nil_chk(output)) writeVIntWithInt:maxAnalyzedPathsPerOutput_];
   [output writeVIntWithInt:OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder_END_BYTE];
   [output writeVIntWithInt:OrgApacheLuceneSearchSuggestDocumentNRTSuggesterBuilder_PAYLOAD_SEP];
-  return YES;
+  return true;
 }
 
 + (jint)maxNumArcsForDedupByteWithInt:(jint)currentNumDedupBytes {

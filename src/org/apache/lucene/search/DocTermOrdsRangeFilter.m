@@ -113,15 +113,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1_$1)
 }
 
 - (jboolean)isEqual:(id)o {
-  if (self == o) return YES;
-  if ([super isEqual:o] == NO) return NO;
+  if (self == o) return true;
+  if ([super isEqual:o] == false) return false;
   OrgApacheLuceneSearchDocTermOrdsRangeFilter *other = (OrgApacheLuceneSearchDocTermOrdsRangeFilter *) check_class_cast(o, [OrgApacheLuceneSearchDocTermOrdsRangeFilter class]);
   if (![((NSString *) nil_chk(self->field_)) isEqual:((OrgApacheLuceneSearchDocTermOrdsRangeFilter *) nil_chk(other))->field_] || self->includeLower_ != other->includeLower_ || self->includeUpper_ != other->includeUpper_) {
-    return NO;
+    return false;
   }
-  if (self->lowerVal_ != nil ? ![self->lowerVal_ isEqual:other->lowerVal_] : other->lowerVal_ != nil) return NO;
-  if (self->upperVal_ != nil ? ![self->upperVal_ isEqual:other->upperVal_] : other->upperVal_ != nil) return NO;
-  return YES;
+  if (self->lowerVal_ != nil ? ![self->lowerVal_ isEqual:other->lowerVal_] : other->lowerVal_ != nil) return false;
+  if (self->upperVal_ != nil ? ![self->upperVal_ isEqual:other->upperVal_] : other->upperVal_ != nil) return false;
+  return true;
 }
 
 - (NSUInteger)hash {
@@ -287,13 +287,13 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocTermOrdsRangeFilter_$1)
   jlong ord;
   while ((ord = [val$docTermOrds_ nextOrd]) != OrgApacheLuceneIndexSortedSetDocValues_NO_MORE_ORDS) {
     if (ord > val$inclusiveUpperPoint_) {
-      return NO;
+      return false;
     }
     else if (ord >= val$inclusiveLowerPoint_) {
-      return YES;
+      return true;
     }
   }
-  return NO;
+  return false;
 }
 
 - (instancetype)initWithOrgApacheLuceneIndexSortedSetDocValues:(OrgApacheLuceneIndexSortedSetDocValues *)capture$0

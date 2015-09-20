@@ -242,16 +242,16 @@ IOSObjectArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_TOKEN_TYP
 }
 
 - (void)yyclose {
-  zzAtEOF_ = YES;
+  zzAtEOF_ = true;
   zzEndRead_ = zzStartRead_;
   if (zzReader_ != nil) [zzReader_ close];
 }
 
 - (void)yyresetWithJavaIoReader:(JavaIoReader *)reader {
   JreStrongAssign(&zzReader_, reader);
-  zzAtBOL_ = YES;
-  zzAtEOF_ = NO;
-  zzEOFDone_ = NO;
+  zzAtBOL_ = true;
+  zzAtEOF_ = false;
+  zzEOFDone_ = false;
   zzEndRead_ = zzStartRead_ = 0;
   zzCurrentPos_ = zzMarkedPos_ = 0;
   zzFinalHighSurrogate_ = 0;
@@ -300,7 +300,7 @@ IOSObjectArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_TOKEN_TYP
   IOSIntArray *zzTransL = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_TRANS_;
   IOSIntArray *zzRowMapL = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_ROWMAP_;
   IOSIntArray *zzAttrL = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_ATTRIBUTE_;
-  while (YES) {
+  while (true) {
     zzMarkedPosL = zzMarkedPos_;
     yychar_ += zzMarkedPosL - zzStartRead_;
     zzAction = -1;
@@ -311,7 +311,7 @@ IOSObjectArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_TOKEN_TYP
       zzAction = zzState_;
     }
     {
-      while (YES) {
+      while (true) {
         if (zzCurrentPosL < zzEndReadL) {
           zzInput = JavaLangCharacter_codePointAtWithCharArray_withInt_withInt_(zzBufferL, zzCurrentPosL, zzEndReadL);
           zzCurrentPosL += JavaLangCharacter_charCountWithInt_(zzInput);
@@ -748,7 +748,7 @@ IOSObjectArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_TOKEN_TYP
       break;
       default:
       if (zzInput == OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_YYEOF && zzStartRead_ == zzCurrentPos_) {
-        zzAtEOF_ = YES;
+        zzAtEOF_ = true;
         return OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_YYEOF;
       }
       else {
@@ -974,7 +974,7 @@ void OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_initWithJavaIoReader
   NSObject_init(self);
   self->zzLexicalState_ = OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_YYINITIAL;
   JreStrongAssignAndConsume(&self->zzBuffer_, [IOSCharArray newArrayWithLength:OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_ZZ_BUFFERSIZE]);
-  self->zzAtBOL_ = YES;
+  self->zzAtBOL_ = true;
   self->zzFinalHighSurrogate_ = 0;
   self->numBalanced_ = 0;
   self->positionInc_ = 1;
@@ -1037,9 +1037,9 @@ jboolean OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_zzRefill(OrgApac
         self->zzFinalHighSurrogate_ = 1;
       }
     }
-    return NO;
+    return false;
   }
-  return YES;
+  return true;
 }
 
 void OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_yybeginWithInt_(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl *self, jint newState) {

@@ -294,7 +294,7 @@ withOrgApacheLuceneUtilWeakIdentityMap:(OrgApacheLuceneUtilWeakIdentityMap *)clo
   IOSObjectArray *newBuffers = OrgApacheLuceneStoreByteBufferIndexInput_buildSliceWithJavaNioByteBufferArray_withLong_withLong_(self, buffers_, offset, length);
   jint ofs = (jint) (offset & chunkSizeMask_);
   OrgApacheLuceneStoreByteBufferIndexInput *clone = [self newCloneInstanceWithNSString:[self getFullSliceDescriptionWithNSString:sliceDescription] withJavaNioByteBufferArray:newBuffers withInt:ofs withLong:length];
-  ((OrgApacheLuceneStoreByteBufferIndexInput *) nil_chk(clone))->isClone_ = YES;
+  ((OrgApacheLuceneStoreByteBufferIndexInput *) nil_chk(clone))->isClone_ = true;
   if (clones_ != nil) {
     [self->clones_ putWithId:clone withId:JreLoadStatic(JavaLangBoolean, TRUE__)];
   }
@@ -426,7 +426,7 @@ OrgApacheLuceneStoreByteBufferIndexInput *OrgApacheLuceneStoreByteBufferIndexInp
 void OrgApacheLuceneStoreByteBufferIndexInput_initWithNSString_withJavaNioByteBufferArray_withLong_withInt_withOrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner_withOrgApacheLuceneUtilWeakIdentityMap_(OrgApacheLuceneStoreByteBufferIndexInput *self, NSString *resourceDescription, IOSObjectArray *buffers, jlong length, jint chunkSizePower, id<OrgApacheLuceneStoreByteBufferIndexInput_BufferCleaner> cleaner, OrgApacheLuceneUtilWeakIdentityMap *clones) {
   OrgApacheLuceneStoreIndexInput_initWithNSString_(self, resourceDescription);
   self->curBufIndex_ = -1;
-  self->isClone_ = NO;
+  self->isClone_ = false;
   JreStrongAssign(&self->buffers_, buffers);
   self->length_ = length;
   self->chunkSizePower_ = chunkSizePower;

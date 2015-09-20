@@ -70,8 +70,8 @@ __attribute__((unused)) static OrgApacheLuceneUtilBitDocIdSet *OrgApacheLuceneSe
 }
 
 - (jboolean)isEqual:(id)o {
-  if ([super isEqual:o] == NO) {
-    return NO;
+  if ([super isEqual:o] == false) {
+    return false;
   }
   OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter *other = (OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter *) check_class_cast(o, [OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter class]);
   return [((OrgApacheLuceneSearchFilter *) nil_chk(self->filter_)) isEqual:((OrgApacheLuceneSearchJoinBitDocIdSetCachingWrapperFilter *) nil_chk(other))->filter_];

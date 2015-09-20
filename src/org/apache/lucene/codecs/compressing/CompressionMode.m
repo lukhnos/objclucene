@@ -217,10 +217,12 @@ OrgApacheLuceneCodecsCompressingCompressionMode *OrgApacheLuceneCodecsCompressin
 
 @implementation OrgApacheLuceneCodecsCompressingCompressionMode
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsCompressingCompressionMode_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneCodecsCompressingCompressor *)newCompressor {
   // can't call an abstract method
@@ -271,10 +273,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsCompressingCompressionMode
 
 @implementation OrgApacheLuceneCodecsCompressingCompressionMode_LZ4FastCompressor
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsCompressingCompressionMode_LZ4FastCompressor_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)compressWithByteArray:(IOSByteArray *)bytes
                       withInt:(jint)off
@@ -317,10 +321,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsCompressingCompressionMode
 
 @implementation OrgApacheLuceneCodecsCompressingCompressionMode_LZ4HighCompressor
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsCompressingCompressionMode_LZ4HighCompressor_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)compressWithByteArray:(IOSByteArray *)bytes
                       withInt:(jint)off
@@ -363,10 +369,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsCompressingCompressionMode
 
 @implementation OrgApacheLuceneCodecsCompressingCompressionMode_DeflateDecompressor
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsCompressingCompressionMode_DeflateDecompressor_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)decompressWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
                                             withInt:(jint)originalLength
@@ -431,7 +439,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsCompressingCompressionMode
 
 void OrgApacheLuceneCodecsCompressingCompressionMode_DeflateDecompressor_init(OrgApacheLuceneCodecsCompressingCompressionMode_DeflateDecompressor *self) {
   OrgApacheLuceneCodecsCompressingDecompressor_init(self);
-  JreStrongAssignAndConsume(&self->decompressor_, new_JavaUtilZipInflater_initWithBoolean_(YES));
+  JreStrongAssignAndConsume(&self->decompressor_, new_JavaUtilZipInflater_initWithBoolean_(true));
   JreStrongAssignAndConsume(&self->compressed_, [IOSByteArray newArrayWithLength:0]);
 }
 
@@ -501,7 +509,7 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg {
 
 void OrgApacheLuceneCodecsCompressingCompressionMode_DeflateCompressor_initWithInt_(OrgApacheLuceneCodecsCompressingCompressionMode_DeflateCompressor *self, jint level) {
   OrgApacheLuceneCodecsCompressingCompressor_init(self);
-  JreStrongAssignAndConsume(&self->compressor_, new_JavaUtilZipDeflater_initWithInt_withBoolean_(level, YES));
+  JreStrongAssignAndConsume(&self->compressor_, new_JavaUtilZipDeflater_initWithInt_withBoolean_(level, true));
   JreStrongAssignAndConsume(&self->compressed_, [IOSByteArray newArrayWithLength:64]);
 }
 
@@ -527,10 +535,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsCompressingCompressionMode
   return @"FAST";
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsCompressingCompressionMode_$1_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -571,10 +581,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsCompressingCompressionMode
   return @"HIGH_COMPRESSION";
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsCompressingCompressionMode_$2_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -615,10 +627,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsCompressingCompressionMode
   return @"FAST_DECOMPRESSION";
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsCompressingCompressionMode_$3_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -668,10 +682,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsCompressingCompressionMode
   return self;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsCompressingCompressionMode_$4_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

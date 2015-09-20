@@ -174,7 +174,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilRoaringDocIdSet)
 }
 
 - (jboolean)isCacheable {
-  return YES;
+  return true;
 }
 
 - (jlong)ramBytesUsed {
@@ -638,7 +638,7 @@ OrgApacheLuceneUtilRoaringDocIdSet_Iterator *new_OrgApacheLuceneUtilRoaringDocId
 }
 
 jint OrgApacheLuceneUtilRoaringDocIdSet_Iterator_firstDocFromNextBlock(OrgApacheLuceneUtilRoaringDocIdSet_Iterator *self) {
-  while (YES) {
+  while (true) {
     self->block_ += 1;
     if (self->block_ >= ((IOSObjectArray *) nil_chk(self->this$0_->docIdSets_))->size_) {
       JreStrongAssign(&self->sub_, nil);

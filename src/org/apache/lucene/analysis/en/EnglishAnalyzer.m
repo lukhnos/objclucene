@@ -53,10 +53,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisEnEnglishAnalyzer_DefaultSetHo
   return OrgApacheLuceneAnalysisEnEnglishAnalyzer_getDefaultStopSet();
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisEnEnglishAnalyzer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords {
   OrgApacheLuceneAnalysisEnEnglishAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(self, stopwords);
@@ -151,10 +153,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisEnEnglishAnalyzer_DefaultSetHolde
 
 @implementation OrgApacheLuceneAnalysisEnEnglishAnalyzer_DefaultSetHolder
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisEnEnglishAnalyzer_DefaultSetHolder_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisEnEnglishAnalyzer_DefaultSetHolder class]) {

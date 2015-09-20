@@ -84,7 +84,7 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
 }
 
 - (jboolean)isEqual:(id)o {
-  if ([self getClass] != [nil_chk(o) getClass]) return NO;
+  if ([self getClass] != [nil_chk(o) getClass]) return false;
   OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource *other = (OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource *) check_class_cast(o, [OrgApacheLuceneQueriesFunctionValuesourceTotalTermFreqValueSource class]);
   return [((NSString *) nil_chk(self->indexedField_)) isEqual:other->indexedField_] && [((OrgApacheLuceneUtilBytesRef *) nil_chk(self->indexedBytes_)) isEqual:other->indexedBytes_];
 }

@@ -253,10 +253,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexMultiDocValues_$4)
 
 @implementation OrgApacheLuceneIndexMultiDocValues
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexMultiDocValues_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (OrgApacheLuceneIndexNumericDocValues *)getNormValuesWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)r
                                                                               withNSString:(NSString *)field {
@@ -332,10 +334,10 @@ OrgApacheLuceneIndexNumericDocValues *OrgApacheLuceneIndexMultiDocValues_getNorm
     return [((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk([leaves getWithInt:0])) reader])) getNormValuesWithNSString:field];
   }
   OrgApacheLuceneIndexFieldInfo *fi = [((OrgApacheLuceneIndexFieldInfos *) nil_chk(OrgApacheLuceneIndexMultiFields_getMergedFieldInfosWithOrgApacheLuceneIndexIndexReader_(r))) fieldInfoWithNSString:field];
-  if (fi == nil || [fi hasNorms] == NO) {
+  if (fi == nil || [fi hasNorms] == false) {
     return nil;
   }
-  jboolean anyReal = NO;
+  jboolean anyReal = false;
   IOSObjectArray *values = [IOSObjectArray arrayWithLength:size type:OrgApacheLuceneIndexNumericDocValues_class_()];
   IOSIntArray *starts = [IOSIntArray arrayWithLength:size + 1];
   for (jint i = 0; i < size; i++) {
@@ -345,7 +347,7 @@ OrgApacheLuceneIndexNumericDocValues *OrgApacheLuceneIndexMultiDocValues_getNorm
       v = OrgApacheLuceneIndexDocValues_emptyNumeric();
     }
     else {
-      anyReal = YES;
+      anyReal = true;
     }
     IOSObjectArray_Set(values, i, v);
     *IOSIntArray_GetRef(starts, i) = context->docBase_;
@@ -365,7 +367,7 @@ OrgApacheLuceneIndexNumericDocValues *OrgApacheLuceneIndexMultiDocValues_getNume
   else if (size == 1) {
     return [((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk([leaves getWithInt:0])) reader])) getNumericDocValuesWithNSString:field];
   }
-  jboolean anyReal = NO;
+  jboolean anyReal = false;
   IOSObjectArray *values = [IOSObjectArray arrayWithLength:size type:OrgApacheLuceneIndexNumericDocValues_class_()];
   IOSIntArray *starts = [IOSIntArray arrayWithLength:size + 1];
   for (jint i = 0; i < size; i++) {
@@ -375,7 +377,7 @@ OrgApacheLuceneIndexNumericDocValues *OrgApacheLuceneIndexMultiDocValues_getNume
       v = OrgApacheLuceneIndexDocValues_emptyNumeric();
     }
     else {
-      anyReal = YES;
+      anyReal = true;
     }
     IOSObjectArray_Set(values, i, v);
     *IOSIntArray_GetRef(starts, i) = context->docBase_;
@@ -399,8 +401,8 @@ id<OrgApacheLuceneUtilBits> OrgApacheLuceneIndexMultiDocValues_getDocsWithFieldW
   else if (size == 1) {
     return [((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk([leaves getWithInt:0])) reader])) getDocsWithFieldWithNSString:field];
   }
-  jboolean anyReal = NO;
-  jboolean anyMissing = NO;
+  jboolean anyReal = false;
+  jboolean anyMissing = false;
   IOSObjectArray *values = [IOSObjectArray arrayWithLength:size type:OrgApacheLuceneUtilBits_class_()];
   IOSIntArray *starts = [IOSIntArray arrayWithLength:size + 1];
   for (jint i = 0; i < size; i++) {
@@ -408,12 +410,12 @@ id<OrgApacheLuceneUtilBits> OrgApacheLuceneIndexMultiDocValues_getDocsWithFieldW
     id<OrgApacheLuceneUtilBits> v = [((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader])) getDocsWithFieldWithNSString:field];
     if (v == nil) {
       v = [new_OrgApacheLuceneUtilBits_MatchNoBits_initWithInt_([((OrgApacheLuceneIndexLeafReader *) nil_chk([context reader])) maxDoc]) autorelease];
-      anyMissing = YES;
+      anyMissing = true;
     }
     else {
-      anyReal = YES;
-      if ([v isKindOfClass:[OrgApacheLuceneUtilBits_MatchAllBits class]] == NO) {
-        anyMissing = YES;
+      anyReal = true;
+      if ([v isKindOfClass:[OrgApacheLuceneUtilBits_MatchAllBits class]] == false) {
+        anyMissing = true;
       }
     }
     IOSObjectArray_Set(values, i, v);
@@ -427,7 +429,7 @@ id<OrgApacheLuceneUtilBits> OrgApacheLuceneIndexMultiDocValues_getDocsWithFieldW
     return [new_OrgApacheLuceneUtilBits_MatchAllBits_initWithInt_([r maxDoc]) autorelease];
   }
   else {
-    return [new_OrgApacheLuceneIndexMultiBits_initWithOrgApacheLuceneUtilBitsArray_withIntArray_withBoolean_(values, starts, NO) autorelease];
+    return [new_OrgApacheLuceneIndexMultiBits_initWithOrgApacheLuceneUtilBitsArray_withIntArray_withBoolean_(values, starts, false) autorelease];
   }
 }
 
@@ -441,7 +443,7 @@ OrgApacheLuceneIndexBinaryDocValues *OrgApacheLuceneIndexMultiDocValues_getBinar
   else if (size == 1) {
     return [((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk([leaves getWithInt:0])) reader])) getBinaryDocValuesWithNSString:field];
   }
-  jboolean anyReal = NO;
+  jboolean anyReal = false;
   IOSObjectArray *values = [IOSObjectArray arrayWithLength:size type:OrgApacheLuceneIndexBinaryDocValues_class_()];
   IOSIntArray *starts = [IOSIntArray arrayWithLength:size + 1];
   for (jint i = 0; i < size; i++) {
@@ -451,7 +453,7 @@ OrgApacheLuceneIndexBinaryDocValues *OrgApacheLuceneIndexMultiDocValues_getBinar
       v = OrgApacheLuceneIndexDocValues_emptyBinary();
     }
     else {
-      anyReal = YES;
+      anyReal = true;
     }
     IOSObjectArray_Set(values, i, v);
     *IOSIntArray_GetRef(starts, i) = context->docBase_;
@@ -475,7 +477,7 @@ OrgApacheLuceneIndexSortedNumericDocValues *OrgApacheLuceneIndexMultiDocValues_g
   else if (size == 1) {
     return [((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk([leaves getWithInt:0])) reader])) getSortedNumericDocValuesWithNSString:field];
   }
-  jboolean anyReal = NO;
+  jboolean anyReal = false;
   IOSObjectArray *values = [IOSObjectArray arrayWithLength:size type:OrgApacheLuceneIndexSortedNumericDocValues_class_()];
   IOSIntArray *starts = [IOSIntArray arrayWithLength:size + 1];
   for (jint i = 0; i < size; i++) {
@@ -485,7 +487,7 @@ OrgApacheLuceneIndexSortedNumericDocValues *OrgApacheLuceneIndexMultiDocValues_g
       v = OrgApacheLuceneIndexDocValues_emptySortedNumericWithInt_([((OrgApacheLuceneIndexLeafReader *) nil_chk([context reader])) maxDoc]);
     }
     else {
-      anyReal = YES;
+      anyReal = true;
     }
     IOSObjectArray_Set(values, i, v);
     *IOSIntArray_GetRef(starts, i) = context->docBase_;
@@ -509,7 +511,7 @@ OrgApacheLuceneIndexSortedDocValues *OrgApacheLuceneIndexMultiDocValues_getSorte
   else if (size == 1) {
     return [((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk([leaves getWithInt:0])) reader])) getSortedDocValuesWithNSString:field];
   }
-  jboolean anyReal = NO;
+  jboolean anyReal = false;
   IOSObjectArray *values = [IOSObjectArray arrayWithLength:size type:OrgApacheLuceneIndexSortedDocValues_class_()];
   IOSIntArray *starts = [IOSIntArray arrayWithLength:size + 1];
   for (jint i = 0; i < size; i++) {
@@ -519,7 +521,7 @@ OrgApacheLuceneIndexSortedDocValues *OrgApacheLuceneIndexMultiDocValues_getSorte
       v = OrgApacheLuceneIndexDocValues_emptySorted();
     }
     else {
-      anyReal = YES;
+      anyReal = true;
     }
     IOSObjectArray_Set(values, i, v);
     *IOSIntArray_GetRef(starts, i) = context->docBase_;
@@ -544,7 +546,7 @@ OrgApacheLuceneIndexSortedSetDocValues *OrgApacheLuceneIndexMultiDocValues_getSo
   else if (size == 1) {
     return [((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk([leaves getWithInt:0])) reader])) getSortedSetDocValuesWithNSString:field];
   }
-  jboolean anyReal = NO;
+  jboolean anyReal = false;
   IOSObjectArray *values = [IOSObjectArray arrayWithLength:size type:OrgApacheLuceneIndexSortedSetDocValues_class_()];
   IOSIntArray *starts = [IOSIntArray arrayWithLength:size + 1];
   for (jint i = 0; i < size; i++) {
@@ -554,7 +556,7 @@ OrgApacheLuceneIndexSortedSetDocValues *OrgApacheLuceneIndexMultiDocValues_getSo
       v = OrgApacheLuceneIndexDocValues_emptySortedSet();
     }
     else {
-      anyReal = YES;
+      anyReal = true;
     }
     IOSObjectArray_Set(values, i, v);
     *IOSIntArray_GetRef(starts, i) = context->docBase_;

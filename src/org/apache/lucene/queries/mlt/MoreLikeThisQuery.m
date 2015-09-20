@@ -158,32 +158,32 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return YES;
-  if (![super isEqual:obj]) return NO;
-  if ([self getClass] != [nil_chk(obj) getClass]) return NO;
+  if (self == obj) return true;
+  if (![super isEqual:obj]) return false;
+  if ([self getClass] != [nil_chk(obj) getClass]) return false;
   OrgApacheLuceneQueriesMltMoreLikeThisQuery *other = (OrgApacheLuceneQueriesMltMoreLikeThisQuery *) check_class_cast(obj, [OrgApacheLuceneQueriesMltMoreLikeThisQuery class]);
   if (analyzer_ == nil) {
-    if (other->analyzer_ != nil) return NO;
+    if (other->analyzer_ != nil) return false;
   }
-  else if (![analyzer_ isEqual:other->analyzer_]) return NO;
+  else if (![analyzer_ isEqual:other->analyzer_]) return false;
   if (fieldName_ == nil) {
-    if (other->fieldName_ != nil) return NO;
+    if (other->fieldName_ != nil) return false;
   }
-  else if (![fieldName_ isEqual:other->fieldName_]) return NO;
+  else if (![fieldName_ isEqual:other->fieldName_]) return false;
   if (likeText_ == nil) {
-    if (other->likeText_ != nil) return NO;
+    if (other->likeText_ != nil) return false;
   }
-  else if (![likeText_ isEqual:other->likeText_]) return NO;
-  if (maxQueryTerms_ != other->maxQueryTerms_) return NO;
-  if (minDocFreq_ != other->minDocFreq_) return NO;
-  if (minTermFrequency_ != other->minTermFrequency_) return NO;
-  if (!JavaUtilArrays_equalsWithNSObjectArray_withNSObjectArray_(moreLikeFields_, other->moreLikeFields_)) return NO;
-  if (JavaLangFloat_floatToIntBitsWithFloat_(percentTermsToMatch_) != JavaLangFloat_floatToIntBitsWithFloat_(other->percentTermsToMatch_)) return NO;
+  else if (![likeText_ isEqual:other->likeText_]) return false;
+  if (maxQueryTerms_ != other->maxQueryTerms_) return false;
+  if (minDocFreq_ != other->minDocFreq_) return false;
+  if (minTermFrequency_ != other->minTermFrequency_) return false;
+  if (!JavaUtilArrays_equalsWithNSObjectArray_withNSObjectArray_(moreLikeFields_, other->moreLikeFields_)) return false;
+  if (JavaLangFloat_floatToIntBitsWithFloat_(percentTermsToMatch_) != JavaLangFloat_floatToIntBitsWithFloat_(other->percentTermsToMatch_)) return false;
   if (stopWords_ == nil) {
-    if (other->stopWords_ != nil) return NO;
+    if (other->stopWords_ != nil) return false;
   }
-  else if (![stopWords_ isEqual:other->stopWords_]) return NO;
-  return YES;
+  else if (![stopWords_ isEqual:other->stopWords_]) return false;
+  return true;
 }
 
 - (void)dealloc {

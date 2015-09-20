@@ -155,7 +155,7 @@ J2OBJC_INITIALIZED_DEFN(OrgTartarusSnowballExtGerman2Stemmer)
   }
   break_lab3: ;
   cursor_ = v_4;
-  return YES;
+  return true;
 }
 
 - (jboolean)isEqual:(id)o {
@@ -166,10 +166,12 @@ J2OBJC_INITIALIZED_DEFN(OrgTartarusSnowballExtGerman2Stemmer)
   return ((jint) [((NSString *) nil_chk([OrgTartarusSnowballExtGerman2Stemmer_class_() getName])) hash]);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgTartarusSnowballExtGerman2Stemmer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgTartarusSnowballExtGerman2Stemmer class]) {
@@ -231,11 +233,11 @@ jboolean OrgTartarusSnowballExtGerman2Stemmer_r_prelude(OrgTartarusSnowballExtGe
   jint v_4;
   jint v_5;
   v_1 = self->cursor_;
-  while (YES) {
+  while (true) {
     {
       v_2 = self->cursor_;
       {
-        while (YES) {
+        while (true) {
           v_3 = self->cursor_;
           {
             if (!([self in_groupingWithCharArray:OrgTartarusSnowballExtGerman2Stemmer_g_v_ withInt:97 withInt:252])) {
@@ -288,7 +290,7 @@ jboolean OrgTartarusSnowballExtGerman2Stemmer_r_prelude(OrgTartarusSnowballExtGe
   }
   break_replab0: ;
   self->cursor_ = v_1;
-  while (YES) {
+  while (true) {
     {
       v_5 = self->cursor_;
       {
@@ -338,7 +340,7 @@ jboolean OrgTartarusSnowballExtGerman2Stemmer_r_prelude(OrgTartarusSnowballExtGe
     continue_replab6: ;
   }
   break_replab6: ;
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtGerman2Stemmer_r_mark_regions(OrgTartarusSnowballExtGerman2Stemmer *self) {
@@ -349,13 +351,13 @@ jboolean OrgTartarusSnowballExtGerman2Stemmer_r_mark_regions(OrgTartarusSnowball
   {
     jint c = self->cursor_ + 3;
     if (0 > c || c > self->limit_) {
-      return NO;
+      return false;
     }
     self->cursor_ = c;
   }
   self->I_x_ = self->cursor_;
   self->cursor_ = v_1;
-  while (YES) {
+  while (true) {
     {
       if (!([self in_groupingWithCharArray:OrgTartarusSnowballExtGerman2Stemmer_g_v_ withInt:97 withInt:252])) {
         goto break_lab1;
@@ -364,12 +366,12 @@ jboolean OrgTartarusSnowballExtGerman2Stemmer_r_mark_regions(OrgTartarusSnowball
     }
     break_lab1: ;
     if (self->cursor_ >= self->limit_) {
-      return NO;
+      return false;
     }
     self->cursor_++;
   }
   break_golab0: ;
-  while (YES) {
+  while (true) {
     {
       if (!([self out_groupingWithCharArray:OrgTartarusSnowballExtGerman2Stemmer_g_v_ withInt:97 withInt:252])) {
         goto break_lab3;
@@ -378,7 +380,7 @@ jboolean OrgTartarusSnowballExtGerman2Stemmer_r_mark_regions(OrgTartarusSnowball
     }
     break_lab3: ;
     if (self->cursor_ >= self->limit_) {
-      return NO;
+      return false;
     }
     self->cursor_++;
   }
@@ -391,7 +393,7 @@ jboolean OrgTartarusSnowballExtGerman2Stemmer_r_mark_regions(OrgTartarusSnowball
     self->I_p1_ = self->I_x_;
   }
   break_lab4: ;
-  while (YES) {
+  while (true) {
     {
       if (!([self in_groupingWithCharArray:OrgTartarusSnowballExtGerman2Stemmer_g_v_ withInt:97 withInt:252])) {
         goto break_lab6;
@@ -400,12 +402,12 @@ jboolean OrgTartarusSnowballExtGerman2Stemmer_r_mark_regions(OrgTartarusSnowball
     }
     break_lab6: ;
     if (self->cursor_ >= self->limit_) {
-      return NO;
+      return false;
     }
     self->cursor_++;
   }
   break_golab5: ;
-  while (YES) {
+  while (true) {
     {
       if (!([self out_groupingWithCharArray:OrgTartarusSnowballExtGerman2Stemmer_g_v_ withInt:97 withInt:252])) {
         goto break_lab8;
@@ -414,19 +416,19 @@ jboolean OrgTartarusSnowballExtGerman2Stemmer_r_mark_regions(OrgTartarusSnowball
     }
     break_lab8: ;
     if (self->cursor_ >= self->limit_) {
-      return NO;
+      return false;
     }
     self->cursor_++;
   }
   break_golab7: ;
   self->I_p2_ = self->cursor_;
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtGerman2Stemmer_r_postlude(OrgTartarusSnowballExtGerman2Stemmer *self) {
   jint among_var;
   jint v_1;
-  while (YES) {
+  while (true) {
     {
       v_1 = self->cursor_;
       {
@@ -470,21 +472,21 @@ jboolean OrgTartarusSnowballExtGerman2Stemmer_r_postlude(OrgTartarusSnowballExtG
     continue_replab0: ;
   }
   break_replab0: ;
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtGerman2Stemmer_r_R1(OrgTartarusSnowballExtGerman2Stemmer *self) {
   if (!(self->I_p1_ <= self->cursor_)) {
-    return NO;
+    return false;
   }
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtGerman2Stemmer_r_R2(OrgTartarusSnowballExtGerman2Stemmer *self) {
   if (!(self->I_p2_ <= self->cursor_)) {
-    return NO;
+    return false;
   }
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtGerman2Stemmer_r_standard_suffix(OrgTartarusSnowballExtGerman2Stemmer *self) {
@@ -683,7 +685,7 @@ jboolean OrgTartarusSnowballExtGerman2Stemmer_r_standard_suffix(OrgTartarusSnowb
   }
   break_lab2: ;
   self->cursor_ = self->limit_ - v_3;
-  return YES;
+  return true;
 }
 
 void OrgTartarusSnowballExtGerman2Stemmer_init(OrgTartarusSnowballExtGerman2Stemmer *self) {

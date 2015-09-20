@@ -193,7 +193,7 @@ void OrgApacheLuceneSearchTimeLimitingCollector_initWithOrgApacheLuceneSearchCol
   NSObject_init(self);
   self->t0_ = JavaLangLong_MIN_VALUE;
   self->timeout_ = JavaLangLong_MIN_VALUE;
-  self->greedy_ = NO;
+  self->greedy_ = false;
   JreStrongAssign(&self->collector_, collector);
   JreStrongAssign(&self->clock_, clock);
   self->ticksAllowed_ = ticksAllowed;
@@ -275,15 +275,17 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchTimeLimitingCollector_TimerThreadHo
 
 @implementation OrgApacheLuceneSearchTimeLimitingCollector_TimerThreadHolder
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchTimeLimitingCollector_TimerThreadHolder_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneSearchTimeLimitingCollector_TimerThreadHolder class]) {
     {
-      JreStrongAssignAndConsume(&OrgApacheLuceneSearchTimeLimitingCollector_TimerThreadHolder_THREAD_, new_OrgApacheLuceneSearchTimeLimitingCollector_TimerThread_initWithOrgApacheLuceneUtilCounter_(OrgApacheLuceneUtilCounter_newCounterWithBoolean_(YES)));
+      JreStrongAssignAndConsume(&OrgApacheLuceneSearchTimeLimitingCollector_TimerThreadHolder_THREAD_, new_OrgApacheLuceneSearchTimeLimitingCollector_TimerThread_initWithOrgApacheLuceneUtilCounter_(OrgApacheLuceneUtilCounter_newCounterWithBoolean_(true)));
       [OrgApacheLuceneSearchTimeLimitingCollector_TimerThreadHolder_THREAD_ start];
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchTimeLimitingCollector_TimerThreadHolder)
@@ -347,7 +349,7 @@ withOrgApacheLuceneUtilCounter:(OrgApacheLuceneUtilCounter *)counter {
 }
 
 - (void)stopTimer {
-  JreAssignVolatileBoolean(&stop_, YES);
+  JreAssignVolatileBoolean(&stop_, true);
 }
 
 - (jlong)getResolution {
@@ -390,10 +392,10 @@ withOrgApacheLuceneUtilCounter:(OrgApacheLuceneUtilCounter *)counter {
 void OrgApacheLuceneSearchTimeLimitingCollector_TimerThread_initWithLong_withOrgApacheLuceneUtilCounter_(OrgApacheLuceneSearchTimeLimitingCollector_TimerThread *self, jlong resolution, OrgApacheLuceneUtilCounter *counter) {
   JavaLangThread_initWithNSString_(self, OrgApacheLuceneSearchTimeLimitingCollector_TimerThread_THREAD_NAME_);
   JreAssignVolatileLong(&self->time_, 0);
-  JreAssignVolatileBoolean(&self->stop_, NO);
+  JreAssignVolatileBoolean(&self->stop_, false);
   JreAssignVolatileLong(&self->resolution_, resolution);
   JreStrongAssign(&self->counter_, counter);
-  [self setDaemonWithBoolean:YES];
+  [self setDaemonWithBoolean:true];
 }
 
 OrgApacheLuceneSearchTimeLimitingCollector_TimerThread *new_OrgApacheLuceneSearchTimeLimitingCollector_TimerThread_initWithLong_withOrgApacheLuceneUtilCounter_(jlong resolution, OrgApacheLuceneUtilCounter *counter) {

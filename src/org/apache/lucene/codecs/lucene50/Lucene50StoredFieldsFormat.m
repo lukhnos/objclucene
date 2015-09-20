@@ -32,10 +32,12 @@ NSString *OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_MODE_KEY_;
 
 @implementation OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithOrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_ModeEnum:(OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_ModeEnum *)mode {
   OrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_initWithOrgApacheLuceneCodecsLucene50Lucene50StoredFieldsFormat_ModeEnum_(self, mode);

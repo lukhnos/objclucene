@@ -58,10 +58,12 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisReusableStringReader, s_, NSString *)
   JreStrongAssign(&s_, nil);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisReusableStringReader_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(s_);

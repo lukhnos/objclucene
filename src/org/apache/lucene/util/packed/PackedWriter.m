@@ -58,7 +58,7 @@ __attribute__((unused)) static void OrgApacheLuceneUtilPackedPackedWriter_flush(
     }
   }
   OrgApacheLuceneUtilPackedPackedWriter_flush(self);
-  finished_ = YES;
+  finished_ = true;
 }
 
 - (void)flush {
@@ -111,7 +111,7 @@ void OrgApacheLuceneUtilPackedPackedWriter_initWithOrgApacheLuceneUtilPackedPack
   JreStrongAssignAndConsume(&self->nextValues_, [IOSLongArray newArrayWithLength:self->iterations_ * [self->encoder_ byteValueCount]]);
   self->off_ = 0;
   self->written_ = 0;
-  self->finished_ = NO;
+  self->finished_ = false;
 }
 
 OrgApacheLuceneUtilPackedPackedWriter *new_OrgApacheLuceneUtilPackedPackedWriter_initWithOrgApacheLuceneUtilPackedPackedInts_FormatEnum_withOrgApacheLuceneStoreDataOutput_withInt_withInt_withInt_(OrgApacheLuceneUtilPackedPackedInts_FormatEnum *format, OrgApacheLuceneStoreDataOutput *outArg, jint valueCount, jint bitsPerValue, jint mem) {

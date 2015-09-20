@@ -54,10 +54,12 @@ __attribute__((unused)) static jint OrgApacheLuceneAnalysisCzCzechStemmer_normal
   return OrgApacheLuceneAnalysisCzCzechStemmer_normalizeWithCharArray_withInt_(self, s, len);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisCzCzechStemmer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

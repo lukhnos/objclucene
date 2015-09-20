@@ -36,13 +36,13 @@
 
 - (jboolean)next {
   if (countLeft_ == 0) {
-    return NO;
+    return false;
   }
   countLeft_--;
   value_ = [((OrgApacheLuceneStoreInputStreamDataInput *) nil_chk(in_)) readLong];
   ord_ = [in_ readLong];
   docID_ = [in_ readInt];
-  return YES;
+  return true;
 }
 
 - (jlong)value {

@@ -14,10 +14,12 @@
 
 @implementation OrgApacheLuceneAnalysisUtilOpenStringBuilder
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisUtilOpenStringBuilder_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithInt:(jint)size {
   OrgApacheLuceneAnalysisUtilOpenStringBuilder_initWithInt_(self, size);

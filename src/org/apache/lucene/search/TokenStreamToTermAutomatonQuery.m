@@ -27,10 +27,12 @@
 
 @implementation OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)setPreservePositionIncrementsWithBoolean:(jboolean)enablePositionIncrements {
   self->preservePositionIncrements_ = enablePositionIncrements;
@@ -51,7 +53,7 @@
   jint state = -1;
   while ([inArg incrementToken]) {
     jint posInc = [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posIncAtt)) getPositionIncrement];
-    if (preservePositionIncrements_ == NO && posInc > 1) {
+    if (preservePositionIncrements_ == false && posInc > 1) {
       posInc = 1;
     }
     JreAssert((pos > -1 || posInc > 0), (@"org/apache/lucene/search/TokenStreamToTermAutomatonQuery.java:78 condition failed: assert pos > -1 || posInc > 0;"));
@@ -76,7 +78,7 @@
     maxPos = JavaLangMath_maxWithInt_withInt_(maxPos, endPos);
   }
   [inArg end];
-  [query setAcceptWithInt:state withBoolean:YES];
+  [query setAcceptWithInt:state withBoolean:true];
   [query finish];
   return query;
 }
@@ -98,7 +100,7 @@
 
 void OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery_init(OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery *self) {
   NSObject_init(self);
-  self->preservePositionIncrements_ = YES;
+  self->preservePositionIncrements_ = true;
 }
 
 OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery *new_OrgApacheLuceneSearchTokenStreamToTermAutomatonQuery_init() {

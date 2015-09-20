@@ -305,13 +305,13 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg {
     }
     jint maxDoc = IOSIntArray_Get(mergeState->maxDocs_, readerIndex);
     id<OrgApacheLuceneUtilBits> liveDocs = IOSObjectArray_Get(nil_chk(mergeState->liveDocs_), readerIndex);
-    if (matchingFieldsReader == nil || [matchingFieldsReader getVersion] != OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_VERSION_CURRENT || OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_BULK_MERGE_ENABLED_ == NO) {
+    if (matchingFieldsReader == nil || [matchingFieldsReader getVersion] != OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_VERSION_CURRENT || OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_BULK_MERGE_ENABLED_ == false) {
       OrgApacheLuceneCodecsStoredFieldsReader *storedFieldsReader = IOSObjectArray_Get(nil_chk(mergeState->storedFieldsReaders_), readerIndex);
       if (storedFieldsReader != nil) {
         [storedFieldsReader checkIntegrity];
       }
       for (jint docID = 0; docID < maxDoc; docID++) {
-        if (liveDocs != nil && [liveDocs getWithInt:docID] == NO) {
+        if (liveDocs != nil && [liveDocs getWithInt:docID] == false) {
           continue;
         }
         [self startDocument];
@@ -366,7 +366,7 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg {
       JreAssert(([matchingFieldsReader getVersion] == OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_VERSION_CURRENT), (@"org/apache/lucene/codecs/compressing/CompressingStoredFieldsWriter.java:605 condition failed: assert matchingFieldsReader.getVersion() == VERSION_CURRENT;"));
       [matchingFieldsReader checkIntegrity];
       for (jint docID = 0; docID < maxDoc; docID++) {
-        if (liveDocs != nil && [liveDocs getWithInt:docID] == NO) {
+        if (liveDocs != nil && [liveDocs getWithInt:docID] == false) {
           continue;
         }
         OrgApacheLuceneCodecsCompressingCompressingStoredFieldsReader_SerializedDocument *doc = [matchingFieldsReader documentWithInt:docID];
@@ -407,7 +407,7 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg {
     OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_NEGATIVE_ZERO_DOUBLE_ = JavaLangDouble_doubleToLongBitsWithDouble_(-0.0);
     JreStrongAssign(&OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_BULK_MERGE_ENABLED_SYSPROP_, JreStrcat("$$", [OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_class_() getName], @".enableBulkMerge"));
     {
-      jboolean v = YES;
+      jboolean v = true;
       @try {
         v = JavaLangBoolean_parseBooleanWithNSString_(JavaLangSystem_getPropertyWithNSString_withNSString_(OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_BULK_MERGE_ENABLED_SYSPROP_, @"true"));
       }
@@ -500,7 +500,7 @@ void OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_initWithOrgAp
   JreStrongAssignAndConsume(&self->numStoredFields_, [IOSIntArray newArrayWithLength:16]);
   JreStrongAssignAndConsume(&self->endOffsets_, [IOSIntArray newArrayWithLength:16]);
   self->numBufferedDocs_ = 0;
-  jboolean success = NO;
+  jboolean success = false;
   OrgApacheLuceneStoreIndexOutput *indexStream = [((OrgApacheLuceneStoreDirectory *) nil_chk(directory)) createOutputWithNSString:OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(self->segment_, segmentSuffix, OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_FIELDS_INDEX_EXTENSION_) withOrgApacheLuceneStoreIOContext:context];
   @try {
     JreStrongAssign(&self->fieldsStream_, [directory createOutputWithNSString:OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(self->segment_, segmentSuffix, OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_FIELDS_EXTENSION_) withOrgApacheLuceneStoreIOContext:context]);
@@ -514,7 +514,7 @@ void OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_initWithOrgAp
     indexStream = nil;
     [self->fieldsStream_ writeVIntWithInt:chunkSize];
     [self->fieldsStream_ writeVIntWithInt:OrgApacheLuceneUtilPackedPackedInts_VERSION_CURRENT];
-    success = YES;
+    success = true;
   }
   @finally {
     if (!success) {
@@ -536,10 +536,10 @@ void OrgApacheLuceneCodecsCompressingCompressingStoredFieldsWriter_saveIntsWithI
     [((OrgApacheLuceneStoreDataOutput *) nil_chk(outArg)) writeVIntWithInt:IOSIntArray_Get(nil_chk(values), 0)];
   }
   else {
-    jboolean allEqual = YES;
+    jboolean allEqual = true;
     for (jint i = 1; i < length; ++i) {
       if (IOSIntArray_Get(nil_chk(values), i) != IOSIntArray_Get(values, 0)) {
-        allEqual = NO;
+        allEqual = false;
         break;
       }
     }

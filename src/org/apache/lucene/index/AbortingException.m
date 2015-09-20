@@ -42,7 +42,7 @@ __attribute__((unused)) static OrgApacheLuceneIndexAbortingException *new_OrgApa
 
 void OrgApacheLuceneIndexAbortingException_initWithJavaLangThrowable_(OrgApacheLuceneIndexAbortingException *self, JavaLangThrowable *cause) {
   JavaLangException_initWithJavaLangThrowable_(self, cause);
-  JreAssert(([cause isKindOfClass:[OrgApacheLuceneIndexAbortingException class]] == NO), (@"org/apache/lucene/index/AbortingException.java:26 condition failed: assert cause instanceof AbortingException == false;"));
+  JreAssert(([cause isKindOfClass:[OrgApacheLuceneIndexAbortingException class]] == false), (@"org/apache/lucene/index/AbortingException.java:26 condition failed: assert cause instanceof AbortingException == false;"));
 }
 
 OrgApacheLuceneIndexAbortingException *new_OrgApacheLuceneIndexAbortingException_initWithJavaLangThrowable_(JavaLangThrowable *cause) {

@@ -54,10 +54,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreProcessorsQuery
 
 @implementation OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler:(OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *)queryConfigHandler {
   OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler_(self, queryConfigHandler);
@@ -89,7 +91,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreProcessorsQuery
       [queryTree setWithJavaUtilList:orderedChildrenList];
     }
     @finally {
-      ((OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList *) nil_chk(newChildren))->beingUsed_ = NO;
+      ((OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList *) nil_chk(newChildren))->beingUsed_ = false;
     }
   }
 }
@@ -186,7 +188,7 @@ OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenL
     list = [new_OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList_init() autorelease];
     [self->childrenListPool_ addWithId:list];
   }
-  ((OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList *) nil_chk(list))->beingUsed_ = YES;
+  ((OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList *) nil_chk(list))->beingUsed_ = true;
   return list;
 }
 
@@ -194,10 +196,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleCoreProcessor
 
 @implementation OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessorImpl_ChildrenList_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (NSUInteger)countByEnumeratingWithState:(NSFastEnumerationState *)state objects:(__unsafe_unretained id *)stackbuf count:(NSUInteger)len {
   return JreDefaultFastEnumeration(self, state, stackbuf, len);

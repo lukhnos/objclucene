@@ -29,10 +29,12 @@ NSString *OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_CODEC_NAME_ = @
 
 @implementation OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneIndexSegmentInfo *)readWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
                                                               withNSString:(NSString *)segment
@@ -40,8 +42,8 @@ NSString *OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_CODEC_NAME_ = @
                                          withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
   NSString *fileName = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(segment, @"", OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_SI_EXTENSION_);
   {
-    JavaLangThrowable *__mainException = nil;
     OrgApacheLuceneStoreChecksumIndexInput *input = [((OrgApacheLuceneStoreDirectory *) nil_chk(dir)) openChecksumInputWithNSString:fileName withOrgApacheLuceneStoreIOContext:context];
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
       JavaLangThrowable *priorE = nil;
       OrgApacheLuceneIndexSegmentInfo *si = nil;
@@ -77,19 +79,21 @@ NSString *OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_CODEC_NAME_ = @
       }
       return si;
     }
+    @catch (JavaLangThrowable *e) {
+      __primaryException1 = e;
+      @throw e;
+    }
     @finally {
-      @try {
-        [input close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
+      if (input != nil) {
+        if (__primaryException1 != nil) {
+          @try {
+            [input close];
+          } @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
         } else {
-          __mainException = e;
+          [input close];
         }
-      }
-      if (__mainException) {
-        @throw __mainException;
       }
     }
   }
@@ -100,8 +104,8 @@ NSString *OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_CODEC_NAME_ = @
              withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)ioContext {
   NSString *fileName = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(((OrgApacheLuceneIndexSegmentInfo *) nil_chk(si))->name_, @"", OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_SI_EXTENSION_);
   {
-    JavaLangThrowable *__mainException = nil;
     OrgApacheLuceneStoreIndexOutput *output = [((OrgApacheLuceneStoreDirectory *) nil_chk(dir)) createOutputWithNSString:fileName withOrgApacheLuceneStoreIOContext:ioContext];
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
       [si addFileWithNSString:fileName];
       OrgApacheLuceneCodecsCodecUtil_writeIndexHeaderWithOrgApacheLuceneStoreDataOutput_withNSString_withInt_withByteArray_withNSString_(output, OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_CODEC_NAME_, OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_VERSION_CURRENT, [si getId], @"");
@@ -126,19 +130,21 @@ NSString *OrgApacheLuceneCodecsLucene50Lucene50SegmentInfoFormat_CODEC_NAME_ = @
       [output writeMapOfStringsWithJavaUtilMap:[si getAttributes]];
       OrgApacheLuceneCodecsCodecUtil_writeFooterWithOrgApacheLuceneStoreIndexOutput_(output);
     }
+    @catch (JavaLangThrowable *e) {
+      __primaryException1 = e;
+      @throw e;
+    }
     @finally {
-      @try {
-        [output close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
+      if (output != nil) {
+        if (__primaryException1 != nil) {
+          @try {
+            [output close];
+          } @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
         } else {
-          __mainException = e;
+          [output close];
         }
-      }
-      if (__mainException) {
-        @throw __mainException;
       }
     }
   }

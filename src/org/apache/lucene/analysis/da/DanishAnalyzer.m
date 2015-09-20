@@ -62,10 +62,12 @@ NSString *OrgApacheLuceneAnalysisDaDanishAnalyzer_DEFAULT_STOPWORD_FILE_ = @"dan
   return OrgApacheLuceneAnalysisDaDanishAnalyzer_getDefaultStopSet();
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisDaDanishAnalyzer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords {
   OrgApacheLuceneAnalysisDaDanishAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(self, stopwords);
@@ -160,10 +162,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisDaDanishAnalyzer_DefaultSetHolder
 
 @implementation OrgApacheLuceneAnalysisDaDanishAnalyzer_DefaultSetHolder
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisDaDanishAnalyzer_DefaultSetHolder_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisDaDanishAnalyzer_DefaultSetHolder class]) {

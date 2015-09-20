@@ -249,10 +249,10 @@ withOrgApacheLuceneUtilBytesRefArray:(IOSObjectArray *)terms {
 
 - (jboolean)isEqual:(id)obj {
   if (self == obj) {
-    return YES;
+    return true;
   }
-  if ([super isEqual:obj] == NO) {
-    return NO;
+  if ([super isEqual:obj] == false) {
+    return false;
   }
   OrgApacheLuceneQueriesTermsFilter *test = (OrgApacheLuceneQueriesTermsFilter *) check_class_cast(obj, [OrgApacheLuceneQueriesTermsFilter class]);
   if (((OrgApacheLuceneQueriesTermsFilter *) nil_chk(test))->hashCode_ == hashCode_ && JavaUtilArrays_equalsWithNSObjectArray_withNSObjectArray_(termsAndFields_, test->termsAndFields_)) {
@@ -261,7 +261,7 @@ withOrgApacheLuceneUtilBytesRefArray:(IOSObjectArray *)terms {
       return OrgApacheLuceneUtilArrayUtil_equalsWithByteArray_withInt_withByteArray_withInt_withInt_(termsBytes_, 0, test->termsBytes_, 0, IOSIntArray_Get(nil_chk(offsets_), lastOffset));
     }
   }
-  return NO;
+  return false;
 }
 
 - (NSUInteger)hash {
@@ -271,7 +271,7 @@ withOrgApacheLuceneUtilBytesRefArray:(IOSObjectArray *)terms {
 - (NSString *)toStringWithNSString:(NSString *)defaultField {
   JavaLangStringBuilder *builder = [new_JavaLangStringBuilder_init() autorelease];
   OrgApacheLuceneUtilBytesRef *spare = [new_OrgApacheLuceneUtilBytesRef_initWithByteArray_(termsBytes_) autorelease];
-  jboolean first = YES;
+  jboolean first = true;
   for (jint i = 0; i < ((IOSObjectArray *) nil_chk(termsAndFields_))->size_; i++) {
     OrgApacheLuceneQueriesTermsFilter_TermsAndField *current = IOSObjectArray_Get(termsAndFields_, i);
     for (jint j = ((OrgApacheLuceneQueriesTermsFilter_TermsAndField *) nil_chk(current))->start_; j < current->end_; j++) {
@@ -280,7 +280,7 @@ withOrgApacheLuceneUtilBytesRefArray:(IOSObjectArray *)terms {
       if (!first) {
         [builder appendWithChar:' '];
       }
-      first = NO;
+      first = false;
       [((JavaLangStringBuilder *) nil_chk([builder appendWithNSString:current->field_])) appendWithChar:':'];
       [builder appendWithNSString:[spare utf8ToString]];
     }
@@ -477,17 +477,17 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneQueriesTermsFilter_TermsAndField)
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return YES;
-  if (obj == nil) return NO;
-  if ([self getClass] != [nil_chk(obj) getClass]) return NO;
+  if (self == obj) return true;
+  if (obj == nil) return false;
+  if ([self getClass] != [nil_chk(obj) getClass]) return false;
   OrgApacheLuceneQueriesTermsFilter_TermsAndField *other = (OrgApacheLuceneQueriesTermsFilter_TermsAndField *) check_class_cast(obj, [OrgApacheLuceneQueriesTermsFilter_TermsAndField class]);
   if (field_ == nil) {
-    if (other->field_ != nil) return NO;
+    if (other->field_ != nil) return false;
   }
-  else if (![field_ isEqual:other->field_]) return NO;
-  if (end_ != other->end_) return NO;
-  if (start_ != other->start_) return NO;
-  return YES;
+  else if (![field_ isEqual:other->field_]) return false;
+  if (end_ != other->end_) return false;
+  if (start_ != other->start_) return false;
+  return true;
 }
 
 - (void)dealloc {
@@ -545,10 +545,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesTermsFilter_TermsAndField
   return 0;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueriesTermsFilter_FieldAndTermEnum_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithNSString:(NSString *)field {
   OrgApacheLuceneQueriesTermsFilter_FieldAndTermEnum_initWithNSString_(self, field);

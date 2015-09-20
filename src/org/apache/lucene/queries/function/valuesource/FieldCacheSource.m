@@ -23,7 +23,7 @@
 }
 
 - (jboolean)isEqual:(id)o {
-  if (!([o isKindOfClass:[OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource class]])) return NO;
+  if (!([o isKindOfClass:[OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource class]])) return false;
   OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource *other = (OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource *) check_class_cast(o, [OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource class]);
   return [((NSString *) nil_chk(self->field_)) isEqual:((OrgApacheLuceneQueriesFunctionValuesourceFieldCacheSource *) nil_chk(other))->field_];
 }

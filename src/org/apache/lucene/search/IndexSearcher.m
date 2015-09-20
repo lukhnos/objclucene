@@ -426,7 +426,7 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
                                             withOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter
                                                                     withInt:(jint)n
                                               withOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)sort {
-  return OrgApacheLuceneSearchIndexSearcher_searchWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchFilter_withInt_withOrgApacheLuceneSearchSort_withBoolean_withBoolean_(self, query, filter, n, sort, NO, NO);
+  return OrgApacheLuceneSearchIndexSearcher_searchWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchFilter_withInt_withOrgApacheLuceneSearchSort_withBoolean_withBoolean_(self, query, filter, n, sort, false, false);
 }
 
 - (OrgApacheLuceneSearchTopFieldDocs *)searchWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
@@ -451,20 +451,20 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
                                                     withOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter
                                                                             withInt:(jint)n
                                                       withOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)sort {
-  return OrgApacheLuceneSearchIndexSearcher_searchAfterWithOrgApacheLuceneSearchScoreDoc_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchFilter_withInt_withOrgApacheLuceneSearchSort_withBoolean_withBoolean_(self, after, query, filter, n, sort, NO, NO);
+  return OrgApacheLuceneSearchIndexSearcher_searchAfterWithOrgApacheLuceneSearchScoreDoc_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchFilter_withInt_withOrgApacheLuceneSearchSort_withBoolean_withBoolean_(self, after, query, filter, n, sort, false, false);
 }
 
 - (OrgApacheLuceneSearchTopFieldDocs *)searchWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
                                                                     withInt:(jint)n
                                               withOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)sort {
-  return OrgApacheLuceneSearchIndexSearcher_searchWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchFilter_withInt_withOrgApacheLuceneSearchSort_withBoolean_withBoolean_(self, query, nil, n, sort, NO, NO);
+  return OrgApacheLuceneSearchIndexSearcher_searchWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchFilter_withInt_withOrgApacheLuceneSearchSort_withBoolean_withBoolean_(self, query, nil, n, sort, false, false);
 }
 
 - (OrgApacheLuceneSearchTopDocs *)searchAfterWithOrgApacheLuceneSearchScoreDoc:(OrgApacheLuceneSearchScoreDoc *)after
                                                 withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
                                                                        withInt:(jint)n
                                                  withOrgApacheLuceneSearchSort:(OrgApacheLuceneSearchSort *)sort {
-  return OrgApacheLuceneSearchIndexSearcher_searchAfterWithOrgApacheLuceneSearchScoreDoc_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchFilter_withInt_withOrgApacheLuceneSearchSort_withBoolean_withBoolean_(self, after, query, nil, n, sort, NO, NO);
+  return OrgApacheLuceneSearchIndexSearcher_searchAfterWithOrgApacheLuceneSearchScoreDoc_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchFilter_withInt_withOrgApacheLuceneSearchSort_withBoolean_withBoolean_(self, after, query, nil, n, sort, false, false);
 }
 
 - (OrgApacheLuceneSearchTopFieldDocs *)searchAfterWithOrgApacheLuceneSearchScoreDoc:(OrgApacheLuceneSearchScoreDoc *)after
@@ -507,7 +507,7 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
   }
   else {
     id<JavaUtilList> collectors = [new_JavaUtilArrayList_initWithInt_(((IOSObjectArray *) nil_chk(leafSlices_))->size_) autorelease];
-    jboolean needsScores = NO;
+    jboolean needsScores = false;
     for (jint i = 0; i < leafSlices_->size_; ++i) {
       id<OrgApacheLuceneSearchCollector> collector = [((id<OrgApacheLuceneSearchCollectorManager>) nil_chk(collectorManager)) newCollector];
       [collectors addWithId:collector];
@@ -568,7 +568,7 @@ withOrgApacheLuceneSearchCollector:(id<OrgApacheLuceneSearchCollector>)collector
 
 - (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query
                                                                     withInt:(jint)doc {
-  return [self explainWithOrgApacheLuceneSearchWeight:[self createNormalizedWeightWithOrgApacheLuceneSearchQuery:query withBoolean:YES] withInt:doc];
+  return [self explainWithOrgApacheLuceneSearchWeight:[self createNormalizedWeightWithOrgApacheLuceneSearchQuery:query withBoolean:true] withInt:doc];
 }
 
 - (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneSearchWeight:(OrgApacheLuceneSearchWeight *)weight
@@ -577,7 +577,7 @@ withOrgApacheLuceneSearchCollector:(id<OrgApacheLuceneSearchCollector>)collector
   OrgApacheLuceneIndexLeafReaderContext *ctx = [((id<JavaUtilList>) nil_chk(leafContexts_)) getWithInt:n];
   jint deBasedDoc = doc - ((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(ctx))->docBase_;
   id<OrgApacheLuceneUtilBits> liveDocs = [((OrgApacheLuceneIndexLeafReader *) nil_chk([ctx reader])) getLiveDocs];
-  if (liveDocs != nil && [liveDocs getWithInt:deBasedDoc] == NO) {
+  if (liveDocs != nil && [liveDocs getWithInt:deBasedDoc] == false) {
     return OrgApacheLuceneSearchExplanation_noMatchWithNSString_withOrgApacheLuceneSearchExplanationArray_(JreStrcat("$I$", @"Document ", doc, @" is deleted"), [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchExplanation_class_()]);
   }
   return [((OrgApacheLuceneSearchWeight *) nil_chk(weight)) explainWithOrgApacheLuceneIndexLeafReaderContext:ctx withInt:deBasedDoc];
@@ -600,7 +600,7 @@ withOrgApacheLuceneSearchCollector:(id<OrgApacheLuceneSearchCollector>)collector
                                                                 withBoolean:(jboolean)needsScores {
   id<OrgApacheLuceneSearchQueryCache> queryCache = self->queryCache_;
   OrgApacheLuceneSearchWeight *weight = [((OrgApacheLuceneSearchQuery *) nil_chk(query)) createWeightWithOrgApacheLuceneSearchIndexSearcher:self withBoolean:needsScores];
-  if (needsScores == NO && queryCache != nil) {
+  if (needsScores == false && queryCache != nil) {
     weight = [queryCache doCacheWithOrgApacheLuceneSearchWeight:weight withOrgApacheLuceneSearchQueryCachingPolicy:queryCachingPolicy_];
   }
   return weight;
@@ -914,10 +914,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchIndexSearcher_LeafSlice)
   return [new_OrgApacheLuceneSearchIndexSearcher_$1_$2_init() autorelease];
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchIndexSearcher_$1_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -954,10 +956,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchIndexSearcher_$1)
                  withFloat:(jfloat)topLevelBoost {
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchIndexSearcher_$1_$1_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -1002,10 +1006,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchIndexSearcher_$1_$1)
   return 1.0f;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchIndexSearcher_$1_$2_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -1047,10 +1053,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchIndexSearcher_$1_$2)
   return JavaLangInteger_valueOfWithInt_(total);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchIndexSearcher_$2_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -1137,7 +1145,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchIndexSearcher_$3)
 @implementation OrgApacheLuceneSearchIndexSearcher_$4
 
 - (OrgApacheLuceneSearchTopFieldCollector *)newCollector {
-  jboolean fillFields = YES;
+  jboolean fillFields = true;
   return OrgApacheLuceneSearchTopFieldCollector_createWithOrgApacheLuceneSearchSort_withInt_withOrgApacheLuceneSearchFieldDoc_withBoolean_withBoolean_withBoolean_(val$sort_, val$cappedNumHits_, val$after_, fillFields, val$doDocScores_, val$doMaxScore_);
 }
 

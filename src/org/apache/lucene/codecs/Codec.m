@@ -219,10 +219,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneCodecsCodec_Holder)
 
 @implementation OrgApacheLuceneCodecsCodec_Holder
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsCodec_Holder_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (OrgApacheLuceneUtilNamedSPILoader *)getLoader {
   return OrgApacheLuceneCodecsCodec_Holder_getLoader();

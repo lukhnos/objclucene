@@ -27,10 +27,12 @@ __attribute__((unused)) static void OrgApacheLuceneIndexTwoPhaseCommitTool_rollb
 
 @implementation OrgApacheLuceneIndexTwoPhaseCommitTool
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexTwoPhaseCommitTool_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)rollbackWithOrgApacheLuceneIndexTwoPhaseCommitArray:(IOSObjectArray *)objects {
   OrgApacheLuceneIndexTwoPhaseCommitTool_rollbackWithOrgApacheLuceneIndexTwoPhaseCommitArray_(objects);

@@ -110,11 +110,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesBoostingQuery_$1_$1)
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores {
-  if (needsScores == NO) {
+  if (needsScores == false) {
     return [((OrgApacheLuceneSearchQuery *) nil_chk(match_)) createWeightWithOrgApacheLuceneSearchIndexSearcher:searcher withBoolean:needsScores];
   }
   OrgApacheLuceneSearchWeight *matchWeight = [((OrgApacheLuceneSearchQuery *) nil_chk(match_)) createWeightWithOrgApacheLuceneSearchIndexSearcher:searcher withBoolean:needsScores];
-  OrgApacheLuceneSearchWeight *contextWeight = [((OrgApacheLuceneSearchQuery *) nil_chk(context_)) createWeightWithOrgApacheLuceneSearchIndexSearcher:searcher withBoolean:NO];
+  OrgApacheLuceneSearchWeight *contextWeight = [((OrgApacheLuceneSearchQuery *) nil_chk(context_)) createWeightWithOrgApacheLuceneSearchIndexSearcher:searcher withBoolean:false];
   return [new_OrgApacheLuceneQueriesBoostingQuery_$1_initWithOrgApacheLuceneQueriesBoostingQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_(self, matchWeight, contextWeight, self) autorelease];
 }
 
@@ -123,8 +123,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesBoostingQuery_$1_$1)
 }
 
 - (jboolean)isEqual:(id)obj {
-  if ([super isEqual:obj] == NO) {
-    return NO;
+  if ([super isEqual:obj] == false) {
+    return false;
   }
   OrgApacheLuceneQueriesBoostingQuery *that = (OrgApacheLuceneQueriesBoostingQuery *) check_class_cast(obj, [OrgApacheLuceneQueriesBoostingQuery class]);
   return [((OrgApacheLuceneSearchQuery *) nil_chk(match_)) isEqual:((OrgApacheLuceneQueriesBoostingQuery *) nil_chk(that))->match_] && [((OrgApacheLuceneSearchQuery *) nil_chk(context_)) isEqual:that->context_] && JavaLangFloat_floatToIntBitsWithFloat_(boost_BoostingQuery_) == JavaLangFloat_floatToIntBitsWithFloat_(that->boost_BoostingQuery_);
@@ -188,7 +188,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesBoostingQuery)
                                                                                withInt:(jint)doc {
   OrgApacheLuceneSearchExplanation *matchExplanation = [((OrgApacheLuceneSearchWeight *) nil_chk(val$matchWeight_)) explainWithOrgApacheLuceneIndexLeafReaderContext:context withInt:doc];
   OrgApacheLuceneSearchExplanation *contextExplanation = [((OrgApacheLuceneSearchWeight *) nil_chk(val$contextWeight_)) explainWithOrgApacheLuceneIndexLeafReaderContext:context withInt:doc];
-  if ([((OrgApacheLuceneSearchExplanation *) nil_chk(matchExplanation)) isMatch] == NO || [((OrgApacheLuceneSearchExplanation *) nil_chk(contextExplanation)) isMatch] == NO) {
+  if ([((OrgApacheLuceneSearchExplanation *) nil_chk(matchExplanation)) isMatch] == false || [((OrgApacheLuceneSearchExplanation *) nil_chk(contextExplanation)) isMatch] == false) {
     return matchExplanation;
   }
   return OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_([matchExplanation getValue] * this$0_->boost_BoostingQuery_, @"product of:", [IOSObjectArray arrayWithObjects:(id[]){ matchExplanation, OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_(this$0_->boost_BoostingQuery_, @"boost", [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchExplanation_class_()]) } count:2 type:OrgApacheLuceneSearchExplanation_class_()]);

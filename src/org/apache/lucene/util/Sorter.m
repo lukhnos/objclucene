@@ -13,10 +13,12 @@ __attribute__((unused)) static void OrgApacheLuceneUtilSorter_rotateWithInt_with
 
 @implementation OrgApacheLuceneUtilSorter
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilSorter_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)compareWithInt:(jint)i
                withInt:(jint)j {

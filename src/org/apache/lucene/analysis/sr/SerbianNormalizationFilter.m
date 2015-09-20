@@ -155,10 +155,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisSrSerbianNormalizationFilter, termAtt
       }
     }
     [termAtt_ setLengthWithInt:length];
-    return YES;
+    return true;
   }
   else {
-    return NO;
+    return false;
   }
 }
 

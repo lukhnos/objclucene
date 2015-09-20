@@ -37,10 +37,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousTruncateTokenFilter, key
 - (jboolean)incrementToken {
   if ([((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
     if (![((id<OrgApacheLuceneAnalysisTokenattributesKeywordAttribute>) nil_chk(keywordAttr_)) isKeyword] && [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAttribute_)) length] > length_) [termAttribute_ setLengthWithInt:length_];
-    return YES;
+    return true;
   }
   else {
-    return NO;
+    return false;
   }
 }
 

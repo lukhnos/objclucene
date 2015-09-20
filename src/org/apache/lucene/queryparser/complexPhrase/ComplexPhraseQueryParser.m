@@ -97,7 +97,7 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)a {
   }
   JreStrongAssignAndConsume(&complexPhrases_, new_JavaUtilArrayList_init());
   OrgApacheLuceneSearchQuery *q = [super parseWithNSString:query];
-  isPass2ResolvingPhrases_ = YES;
+  isPass2ResolvingPhrases_ = true;
   @try {
     for (id<JavaUtilIterator> iterator = [complexPhrases_ iterator]; [((id<JavaUtilIterator>) nil_chk(iterator)) hasNext]; ) {
       JreStrongAssign(&currentPhraseQuery_, [iterator next]);
@@ -105,7 +105,7 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)a {
     }
   }
   @finally {
-    isPass2ResolvingPhrases_ = NO;
+    isPass2ResolvingPhrases_ = false;
   }
   return q;
 }
@@ -202,7 +202,7 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)a {
 void OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser *self, NSString *f, OrgApacheLuceneAnalysisAnalyzer *a) {
   OrgApacheLuceneQueryparserClassicQueryParser_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_(self, f, a);
   JreStrongAssign(&self->complexPhrases_, nil);
-  self->inOrder_ = YES;
+  self->inOrder_ = true;
   JreStrongAssign(&self->currentPhraseQuery_, nil);
 }
 
@@ -324,22 +324,22 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserComplexPhraseComplexP
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return YES;
-  if (obj == nil) return NO;
-  if ([self getClass] != [nil_chk(obj) getClass]) return NO;
+  if (self == obj) return true;
+  if (obj == nil) return false;
+  if ([self getClass] != [nil_chk(obj) getClass]) return false;
   if (![super isEqual:obj]) {
-    return NO;
+    return false;
   }
   OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser_ComplexPhraseQuery *other = (OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser_ComplexPhraseQuery *) check_class_cast(obj, [OrgApacheLuceneQueryparserComplexPhraseComplexPhraseQueryParser_ComplexPhraseQuery class]);
   if (field_ == nil) {
-    if (other->field_ != nil) return NO;
+    if (other->field_ != nil) return false;
   }
-  else if (![field_ isEqual:other->field_]) return NO;
+  else if (![field_ isEqual:other->field_]) return false;
   if (phrasedQueryStringContents_ == nil) {
-    if (other->phrasedQueryStringContents_ != nil) return NO;
+    if (other->phrasedQueryStringContents_ != nil) return false;
   }
-  else if (![phrasedQueryStringContents_ isEqual:other->phrasedQueryStringContents_]) return NO;
-  if (slopFactor_ != other->slopFactor_) return NO;
+  else if (![phrasedQueryStringContents_ isEqual:other->phrasedQueryStringContents_]) return false;
+  if (slopFactor_ != other->slopFactor_) return false;
   return inOrder_ == other->inOrder_;
 }
 

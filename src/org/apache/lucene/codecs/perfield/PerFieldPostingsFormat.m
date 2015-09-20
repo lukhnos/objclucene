@@ -146,10 +146,12 @@ NSString *OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_PER_FIELD_SUFFIX_K
 
 @implementation OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (NSString *)getSuffixWithNSString:(NSString *)formatName
                        withNSString:(NSString *)suffix {
@@ -228,10 +230,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFo
 
 @implementation OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsGroup_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(fields_);
@@ -316,7 +320,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFo
       @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$$$$$I", @"found existing value for ", JreLoadStatic(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat, PER_FIELD_SUFFIX_KEY_), @", field=", fieldInfo->name_, @", old=", previousValue, @", new=", group->suffix_)) autorelease];
     }
   }
-  jboolean success = NO;
+  jboolean success = false;
   @try {
     for (id<JavaUtilMap_Entry> __strong ent in nil_chk([formatToGroups entrySet])) {
       OrgApacheLuceneCodecsPostingsFormat *format = [((id<JavaUtilMap_Entry>) nil_chk(ent)) getKey];
@@ -326,10 +330,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsPerfieldPerFieldPostingsFo
       [((id<JavaUtilList>) nil_chk(toClose_)) addWithId:consumer];
       [((OrgApacheLuceneCodecsFieldsConsumer *) nil_chk(consumer)) writeWithOrgApacheLuceneIndexFields:maskedFields];
     }
-    success = YES;
+    success = true;
   }
   @finally {
-    if (success == NO) {
+    if (success == false) {
       OrgApacheLuceneUtilIOUtils_closeWhileHandlingExceptionWithJavaLangIterable_(toClose_);
     }
   }
@@ -558,7 +562,7 @@ void OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader_initWithOr
   OrgApacheLuceneCodecsFieldsProducer_init(self);
   JreStrongAssignAndConsume(&self->fields_, new_JavaUtilTreeMap_init());
   JreStrongAssignAndConsume(&self->formats_, new_JavaUtilHashMap_init());
-  jboolean success = NO;
+  jboolean success = false;
   @try {
     for (OrgApacheLuceneIndexFieldInfo * __strong fi in nil_chk(((OrgApacheLuceneIndexSegmentReadState *) nil_chk(readState))->fieldInfos_)) {
       if ([((OrgApacheLuceneIndexFieldInfo *) nil_chk(fi)) getIndexOptions] != JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, NONE)) {
@@ -578,7 +582,7 @@ void OrgApacheLuceneCodecsPerfieldPerFieldPostingsFormat_FieldsReader_initWithOr
         }
       }
     }
-    success = YES;
+    success = true;
   }
   @finally {
     if (!success) {

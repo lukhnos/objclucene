@@ -40,12 +40,12 @@ withOrgApacheLuceneSearchPhraseQuery:(OrgApacheLuceneSearchPhraseQuery *)query {
   if (isOptimizable) {
     for (jint i = 1; i < ((IOSIntArray *) nil_chk(positions))->size_; ++i) {
       if (IOSIntArray_Get(positions, i) != IOSIntArray_Get(positions, i - 1) + 1) {
-        isOptimizable = NO;
+        isOptimizable = false;
         break;
       }
     }
   }
-  if (isOptimizable == NO) {
+  if (isOptimizable == false) {
     return [phraseQuery_ rewriteWithOrgApacheLuceneIndexIndexReader:reader];
   }
   OrgApacheLuceneSearchPhraseQuery_Builder *builder = [new_OrgApacheLuceneSearchPhraseQuery_Builder_init() autorelease];
@@ -60,8 +60,8 @@ withOrgApacheLuceneSearchPhraseQuery:(OrgApacheLuceneSearchPhraseQuery *)query {
 }
 
 - (jboolean)isEqual:(id)o {
-  if ([super isEqual:o] == NO) {
-    return NO;
+  if ([super isEqual:o] == false) {
+    return false;
   }
   OrgApacheLuceneSearchNGramPhraseQuery *other = (OrgApacheLuceneSearchNGramPhraseQuery *) check_class_cast(o, [OrgApacheLuceneSearchNGramPhraseQuery class]);
   return n_ == ((OrgApacheLuceneSearchNGramPhraseQuery *) nil_chk(other))->n_ && [((OrgApacheLuceneSearchPhraseQuery *) nil_chk(phraseQuery_)) isEqual:other->phraseQuery_];

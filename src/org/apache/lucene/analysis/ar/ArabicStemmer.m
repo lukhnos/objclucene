@@ -40,14 +40,14 @@ IOSObjectArray *OrgApacheLuceneAnalysisArArabicStemmer_suffixes_;
                                        withInt:(jint)len
                                  withCharArray:(IOSCharArray *)prefix {
   if (((IOSCharArray *) nil_chk(prefix))->size_ == 1 && len < 4) {
-    return NO;
+    return false;
   }
   else if (len < prefix->size_ + 2) {
-    return NO;
+    return false;
   }
   else {
-    for (jint i = 0; i < prefix->size_; i++) if (IOSCharArray_Get(nil_chk(s), i) != IOSCharArray_Get(prefix, i)) return NO;
-    return YES;
+    for (jint i = 0; i < prefix->size_; i++) if (IOSCharArray_Get(nil_chk(s), i) != IOSCharArray_Get(prefix, i)) return false;
+    return true;
   }
 }
 
@@ -55,18 +55,20 @@ IOSObjectArray *OrgApacheLuceneAnalysisArArabicStemmer_suffixes_;
                                      withInt:(jint)len
                                withCharArray:(IOSCharArray *)suffix {
   if (len < ((IOSCharArray *) nil_chk(suffix))->size_ + 2) {
-    return NO;
+    return false;
   }
   else {
-    for (jint i = 0; i < suffix->size_; i++) if (IOSCharArray_Get(nil_chk(s), len - suffix->size_ + i) != IOSCharArray_Get(suffix, i)) return NO;
-    return YES;
+    for (jint i = 0; i < suffix->size_; i++) if (IOSCharArray_Get(nil_chk(s), len - suffix->size_ + i) != IOSCharArray_Get(suffix, i)) return false;
+    return true;
   }
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisArArabicStemmer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisArArabicStemmer class]) {

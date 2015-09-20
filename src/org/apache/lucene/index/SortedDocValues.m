@@ -21,10 +21,12 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSortedDocValues, empty_, OrgApacheLucene
 
 @implementation OrgApacheLuceneIndexSortedDocValues
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexSortedDocValues_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)getOrdWithInt:(jint)docID {
   // can't call an abstract method

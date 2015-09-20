@@ -259,18 +259,18 @@ jboolean OrgApacheLuceneIndexSorter_isConsistentWithOrgApacheLuceneIndexSorter_D
     JreAssert((newID >= 0 && newID < maxDoc), (JreStrcat("$I$I", @"doc IDs must be in [0-", maxDoc, @"[, got ", newID)));
     JreAssert((i == oldID), (JreStrcat("$I$I$I", @"mapping is inconsistent: ", i, @" --oldToNew--> ", newID, @" --newToOld--> ", oldID)));
     if (i != oldID || newID < 0 || newID >= maxDoc) {
-      return NO;
+      return false;
     }
   }
-  return YES;
+  return true;
 }
 
 OrgApacheLuceneIndexSorter_DocMap *OrgApacheLuceneIndexSorter_sortWithInt_withOrgApacheLuceneIndexSorter_DocComparator_(jint maxDoc, OrgApacheLuceneIndexSorter_DocComparator *comparator) {
   OrgApacheLuceneIndexSorter_initialize();
-  jboolean sorted = YES;
+  jboolean sorted = true;
   for (jint i = 1; i < maxDoc; ++i) {
     if ([((OrgApacheLuceneIndexSorter_DocComparator *) nil_chk(comparator)) compareWithInt:i - 1 withInt:i] > 0) {
-      sorted = NO;
+      sorted = false;
       break;
     }
   }
@@ -321,10 +321,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSorter)
   return 0;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexSorter_DocMap_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -354,10 +356,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSorter_DocMap)
   return 0;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexSorter_DocComparator_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

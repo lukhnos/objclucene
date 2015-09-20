@@ -151,7 +151,7 @@ OrgApacheLuceneSearchSuggestFileDictionary *new_OrgApacheLuceneSearchSuggestFile
 
 void OrgApacheLuceneSearchSuggestFileDictionary_initWithJavaIoReader_withNSString_(OrgApacheLuceneSearchSuggestFileDictionary *self, JavaIoReader *reader, NSString *fieldDelimiter) {
   NSObject_init(self);
-  self->done_ = NO;
+  self->done_ = false;
   JreStrongAssignAndConsume(&self->in_, new_JavaIoBufferedReader_initWithJavaIoReader_(reader));
   JreStrongAssign(&self->fieldDelimiter_, fieldDelimiter);
 }
@@ -164,7 +164,7 @@ OrgApacheLuceneSearchSuggestFileDictionary *new_OrgApacheLuceneSearchSuggestFile
 
 void OrgApacheLuceneSearchSuggestFileDictionary_initWithJavaIoInputStream_withNSString_(OrgApacheLuceneSearchSuggestFileDictionary *self, JavaIoInputStream *dictFile, NSString *fieldDelimiter) {
   NSObject_init(self);
-  self->done_ = NO;
+  self->done_ = false;
   JreStrongAssignAndConsume(&self->in_, new_JavaIoBufferedReader_initWithJavaIoReader_(OrgApacheLuceneUtilIOUtils_getDecodingReaderWithJavaIoInputStream_withJavaNioCharsetCharset_(dictFile, JreLoadStatic(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8_))));
   JreStrongAssign(&self->fieldDelimiter_, fieldDelimiter);
 }
@@ -193,7 +193,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestFileDictionary)
     return nil;
   }
   if (isFirstLine_) {
-    isFirstLine_ = NO;
+    isFirstLine_ = false;
     return [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(spare_)) get];
   }
   JreStrongAssign(&this$0_->line_, [((JavaIoBufferedReader *) nil_chk(this$0_->in_)) readLine]);
@@ -226,7 +226,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestFileDictionary)
     return [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(spare_)) get];
   }
   else {
-    this$0_->done_ = YES;
+    this$0_->done_ = true;
     OrgApacheLuceneUtilIOUtils_closeWithJavaIoCloseableArray_([IOSObjectArray arrayWithObjects:(id[]){ this$0_->in_ } count:1 type:JavaIoCloseable_class_()]);
     return nil;
   }
@@ -249,7 +249,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestFileDictionary)
 }
 
 - (jboolean)hasContexts {
-  return NO;
+  return false;
 }
 
 - (void)dealloc {
@@ -289,11 +289,11 @@ void OrgApacheLuceneSearchSuggestFileDictionary_FileIterator_initWithOrgApacheLu
   NSObject_init(self);
   JreStrongAssignAndConsume(&self->spare_, new_OrgApacheLuceneUtilBytesRefBuilder_init());
   JreStrongAssignAndConsume(&self->curPayload_, new_OrgApacheLuceneUtilBytesRefBuilder_init());
-  self->isFirstLine_ = YES;
-  self->hasPayloads_ = NO;
+  self->isFirstLine_ = true;
+  self->hasPayloads_ = false;
   JreStrongAssign(&outer$->line_, [((JavaIoBufferedReader *) nil_chk(outer$->in_)) readLine]);
   if (outer$->line_ == nil) {
-    outer$->done_ = YES;
+    outer$->done_ = true;
     OrgApacheLuceneUtilIOUtils_closeWithJavaIoCloseableArray_([IOSObjectArray arrayWithObjects:(id[]){ outer$->in_ } count:1 type:JavaIoCloseable_class_()]);
   }
   else {
@@ -302,7 +302,7 @@ void OrgApacheLuceneSearchSuggestFileDictionary_FileIterator_initWithOrgApacheLu
       @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"More than 3 fields in one line") autorelease];
     }
     else if (fields->size_ == 3) {
-      self->hasPayloads_ = YES;
+      self->hasPayloads_ = true;
       [self->spare_ copyCharsWithJavaLangCharSequence:IOSObjectArray_Get(fields, 0)];
       OrgApacheLuceneSearchSuggestFileDictionary_FileIterator_readWeightWithNSString_(self, IOSObjectArray_Get(fields, 1));
       [self->curPayload_ copyCharsWithJavaLangCharSequence:IOSObjectArray_Get(fields, 2)];

@@ -164,10 +164,12 @@ __attribute__((unused)) static void OrgApacheLuceneSearchReferenceManager_notify
   [((id<JavaUtilList>) nil_chk(refreshListeners_)) removeWithId:listener];
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchReferenceManager_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   JreReleaseVolatile(&current_);
@@ -245,12 +247,12 @@ id OrgApacheLuceneSearchReferenceManager_acquire(OrgApacheLuceneSearchReferenceM
       @throw [new_JavaLangIllegalStateException_initWithNSString_(@"The managed reference has already closed - this is likely a bug when the reference count is modified outside of the ReferenceManager") autorelease];
     }
   }
-  while (YES);
+  while (true);
 }
 
 void OrgApacheLuceneSearchReferenceManager_doMaybeRefresh(OrgApacheLuceneSearchReferenceManager *self) {
   [((id<JavaUtilConcurrentLocksLock>) nil_chk(self->refreshLock_)) lock];
-  jboolean refreshed = NO;
+  jboolean refreshed = false;
   @try {
     id reference = OrgApacheLuceneSearchReferenceManager_acquire(self);
     @try {
@@ -260,7 +262,7 @@ void OrgApacheLuceneSearchReferenceManager_doMaybeRefresh(OrgApacheLuceneSearchR
         JreAssert((newReference != reference), (@"refreshIfNeeded should return null if refresh wasn't needed"));
         @try {
           OrgApacheLuceneSearchReferenceManager_swapReferenceWithId_(self, newReference);
-          refreshed = YES;
+          refreshed = true;
         }
         @finally {
           if (!refreshed) {

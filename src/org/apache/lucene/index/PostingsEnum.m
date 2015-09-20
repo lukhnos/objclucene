@@ -27,10 +27,12 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexPostingsEnum, atts_, OrgApacheLuceneUtil
   return OrgApacheLuceneIndexPostingsEnum_featureRequestedWithInt_withShort_(flags, feature);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexPostingsEnum_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)freq {
   // can't call an abstract method

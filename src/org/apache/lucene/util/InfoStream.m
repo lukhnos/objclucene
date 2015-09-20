@@ -60,10 +60,12 @@ OrgApacheLuceneUtilInfoStream *OrgApacheLuceneUtilInfoStream_NO_OUTPUT_;
   OrgApacheLuceneUtilInfoStream_setDefaultWithOrgApacheLuceneUtilInfoStream_(infoStream);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilInfoStream_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilInfoStream class]) {
@@ -119,20 +121,22 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilInfoStream)
 
 - (void)messageWithNSString:(NSString *)component
                withNSString:(NSString *)message {
-  JreAssert((NO), (@"message() should not be called when isEnabled returns false"));
+  JreAssert((false), (@"message() should not be called when isEnabled returns false"));
 }
 
 - (jboolean)isEnabledWithNSString:(NSString *)component {
-  return NO;
+  return false;
 }
 
 - (void)close {
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilInfoStream_NoOutput_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

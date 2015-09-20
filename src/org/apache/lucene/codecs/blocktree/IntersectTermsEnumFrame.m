@@ -79,7 +79,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame, ite_,
     if ((code & OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_OUTPUT_FLAG_IS_FLOOR) != 0) {
       numFollowFloorBlocks_ = [floorDataReader_ readVInt];
       nextFloorLabel_ = [floorDataReader_ readByte] & (jint) 0xff;
-      if ([((OrgApacheLuceneUtilAutomatonRunAutomaton *) nil_chk(((OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum *) nil_chk(ite_))->runAutomaton_)) isAcceptWithInt:state_] == NO && transitionCount_ != 0) {
+      if ([((OrgApacheLuceneUtilAutomatonRunAutomaton *) nil_chk(((OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum *) nil_chk(ite_))->runAutomaton_)) isAcceptWithInt:state_] == false && transitionCount_ != 0) {
         JreAssert((transitionIndex_ == 0), (JreStrcat("$I", @"transitionIndex=", transitionIndex_)));
         while (numFollowFloorBlocks_ != 0 && nextFloorLabel_ <= ((OrgApacheLuceneUtilAutomatonTransition *) nil_chk(transition_))->min_) {
           fp_ = fpOrig_ + (JreURShift64([floorDataReader_ readVLong], 1));
@@ -125,13 +125,13 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame, ite_,
   if (!isLastInFloor_) {
     fpEnd_ = [ite_->in_ getFilePointer];
   }
-  isAutoPrefixTerm_ = NO;
+  isAutoPrefixTerm_ = false;
 }
 
 - (jboolean)next {
   if (isLeafBlock_) {
     [self nextLeaf];
-    return NO;
+    return false;
   }
   else {
     return [self nextNonLeaf];
@@ -150,17 +150,17 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame, ite_,
   JreAssert((nextEnt_ != -1 && nextEnt_ < entCount_), (JreStrcat("$I$I$J", @"nextEnt=", nextEnt_, @" entCount=", entCount_, @" fp=", fp_)));
   nextEnt_++;
   jint code = [((OrgApacheLuceneStoreByteArrayDataInput *) nil_chk(suffixesReader_)) readVInt];
-  if (versionAutoPrefix_ == NO) {
+  if (versionAutoPrefix_ == false) {
     suffix_ = JreURShift32(code, 1);
     startBytePos_ = [suffixesReader_ getPosition];
     [suffixesReader_ skipBytesWithLong:suffix_];
     if ((code & 1) == 0) {
       ((OrgApacheLuceneCodecsBlockTermState *) nil_chk(termState_))->termBlockOrd_++;
-      return NO;
+      return false;
     }
     else {
       lastSubFP_ = fp_ - [suffixesReader_ readVLong];
-      return YES;
+      return true;
     }
   }
   else {
@@ -169,13 +169,13 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame, ite_,
     [suffixesReader_ skipBytesWithLong:suffix_];
     switch (code & 3) {
       case 0:
-      isAutoPrefixTerm_ = NO;
+      isAutoPrefixTerm_ = false;
       ((OrgApacheLuceneCodecsBlockTermState *) nil_chk(termState_))->termBlockOrd_++;
-      return NO;
+      return false;
       case 1:
-      isAutoPrefixTerm_ = NO;
+      isAutoPrefixTerm_ = false;
       lastSubFP_ = fp_ - [suffixesReader_ readVLong];
-      return YES;
+      return true;
       case 2:
       floorSuffixLeadStart_ = -1;
       ((OrgApacheLuceneCodecsBlockTermState *) nil_chk(termState_))->termBlockOrd_++;
@@ -183,8 +183,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame, ite_,
       if (floorSuffixLeadEnd_ == (jint) 0xff) {
         floorSuffixLeadEnd_ = -1;
       }
-      isAutoPrefixTerm_ = YES;
-      return NO;
+      isAutoPrefixTerm_ = true;
+      return false;
       case 3:
       if (suffix_ == 0) {
         JreAssert((ord_ > 0), (@"org/apache/lucene/codecs/blocktree/IntersectTermsEnumFrame.java:298 condition failed: assert ord > 0;"));
@@ -195,12 +195,12 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame, ite_,
         floorSuffixLeadStart_ = IOSByteArray_Get(nil_chk(suffixBytes_), startBytePos_ + suffix_ - 1) & (jint) 0xff;
       }
       ((OrgApacheLuceneCodecsBlockTermState *) nil_chk(termState_))->termBlockOrd_++;
-      isAutoPrefixTerm_ = YES;
+      isAutoPrefixTerm_ = true;
       floorSuffixLeadEnd_ = [suffixesReader_ readByte] & (jint) 0xff;
-      return NO;
+      return false;
       default:
-      JreAssert((NO), (@"org/apache/lucene/codecs/blocktree/IntersectTermsEnumFrame.java:310 condition failed: assert false;"));
-      return NO;
+      JreAssert((false), (@"org/apache/lucene/codecs/blocktree/IntersectTermsEnumFrame.java:310 condition failed: assert false;"));
+      return false;
     }
   }
 }
@@ -223,7 +223,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame, ite_,
     }
     [((OrgApacheLuceneCodecsPostingsReaderBase *) nil_chk(((OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader *) nil_chk(ite_->fr_->parent_))->postingsReader_)) decodeTermWithLongArray:longs_ withOrgApacheLuceneStoreDataInput:bytesReader_ withOrgApacheLuceneIndexFieldInfo:ite_->fr_->fieldInfo_ withOrgApacheLuceneCodecsBlockTermState:termState_ withBoolean:absolute];
     metaDataUpto_++;
-    absolute = NO;
+    absolute = false;
   }
   ((OrgApacheLuceneCodecsBlockTermState *) nil_chk(termState_))->termBlockOrd_ = metaDataUpto_;
 }

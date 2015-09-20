@@ -13,10 +13,12 @@
 
 @implementation OrgApacheLuceneCodecsStoredFieldsReader
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsStoredFieldsReader_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)visitDocumentWithInt:(jint)docID
 withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisitor *)visitor {

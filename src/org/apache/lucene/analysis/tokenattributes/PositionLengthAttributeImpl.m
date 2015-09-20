@@ -21,10 +21,12 @@
 
 @implementation OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)setPositionLengthWithInt:(jint)positionLength {
   if (positionLength < 1) {
@@ -43,13 +45,13 @@
 
 - (jboolean)isEqual:(id)other {
   if (other == self) {
-    return YES;
+    return true;
   }
   if ([other isKindOfClass:[OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl class]]) {
     OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl *_other = (OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl *) check_class_cast(other, [OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl class]);
     return positionLength_ == ((OrgApacheLuceneAnalysisTokenattributesPositionLengthAttributeImpl *) nil_chk(_other))->positionLength_;
   }
-  return NO;
+  return false;
 }
 
 - (NSUInteger)hash {

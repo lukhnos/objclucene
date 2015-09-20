@@ -169,12 +169,12 @@ void OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_initWithOrgApacheLucene
   NSString *dataFileName = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(self->segmentName_, @"", OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_DATA_EXTENSION_);
   NSString *entriesFileName = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(self->segmentName_, @"", OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_ENTRIES_EXTENSION_);
   JreStrongAssign(&self->entries_, OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_readEntriesWithByteArray_withOrgApacheLuceneStoreDirectory_withNSString_(self, [si getId], directory, entriesFileName));
-  jboolean success = NO;
+  jboolean success = false;
   JreStrongAssign(&self->handle_, [((OrgApacheLuceneStoreDirectory *) nil_chk(directory)) openInputWithNSString:dataFileName withOrgApacheLuceneStoreIOContext:context]);
   @try {
     OrgApacheLuceneCodecsCodecUtil_checkIndexHeaderWithOrgApacheLuceneStoreDataInput_withNSString_withInt_withInt_withByteArray_withNSString_(self->handle_, OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_DATA_CODEC_, self->version__, self->version__, [si getId], @"");
     OrgApacheLuceneCodecsCodecUtil_retrieveChecksumWithOrgApacheLuceneStoreIndexInput_(self->handle_);
-    success = YES;
+    success = true;
   }
   @finally {
     if (!success) {
@@ -192,8 +192,8 @@ OrgApacheLuceneCodecsLucene50Lucene50CompoundReader *new_OrgApacheLuceneCodecsLu
 id<JavaUtilMap> OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_readEntriesWithByteArray_withOrgApacheLuceneStoreDirectory_withNSString_(OrgApacheLuceneCodecsLucene50Lucene50CompoundReader *self, IOSByteArray *segmentID, OrgApacheLuceneStoreDirectory *dir, NSString *entriesFileName) {
   id<JavaUtilMap> mapping = nil;
   {
-    JavaLangThrowable *__mainException = nil;
     OrgApacheLuceneStoreChecksumIndexInput *entriesStream = [((OrgApacheLuceneStoreDirectory *) nil_chk(dir)) openChecksumInputWithNSString:entriesFileName withOrgApacheLuceneStoreIOContext:JreLoadStatic(OrgApacheLuceneStoreIOContext, READONCE_)];
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
       JavaLangThrowable *priorE = nil;
       @try {
@@ -218,19 +218,21 @@ id<JavaUtilMap> OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_readEntriesW
         OrgApacheLuceneCodecsCodecUtil_checkFooterWithOrgApacheLuceneStoreChecksumIndexInput_withJavaLangThrowable_(entriesStream, priorE);
       }
     }
+    @catch (JavaLangThrowable *e) {
+      __primaryException1 = e;
+      @throw e;
+    }
     @finally {
-      @try {
-        [entriesStream close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
+      if (entriesStream != nil) {
+        if (__primaryException1 != nil) {
+          @try {
+            [entriesStream close];
+          } @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
         } else {
-          __mainException = e;
+          [entriesStream close];
         }
-      }
-      if (__mainException) {
-        @throw __mainException;
       }
     }
   }
@@ -241,10 +243,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50CompoundRe
 
 @implementation OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_FileEntry
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsLucene50Lucene50CompoundReader_FileEntry_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

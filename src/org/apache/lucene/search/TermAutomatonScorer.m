@@ -331,7 +331,7 @@ void OrgApacheLuceneSearchTermAutomatonScorer_pushCurrentDoc(OrgApacheLuceneSear
 jint OrgApacheLuceneSearchTermAutomatonScorer_doNext(OrgApacheLuceneSearchTermAutomatonScorer *self) {
   JreAssert((self->numSubsOnDoc_ == 0), (@"org/apache/lucene/search/TermAutomatonScorer.java:176 condition failed: assert numSubsOnDoc == 0;"));
   JreAssert(([((OrgApacheLuceneIndexPostingsEnum *) nil_chk(((OrgApacheLuceneSearchTermAutomatonQuery_EnumAndScorer *) nil_chk([((OrgApacheLuceneUtilPriorityQueue *) nil_chk(self->docIDQueue_)) top]))->posEnum_)) docID] > self->docID_), (@"org/apache/lucene/search/TermAutomatonScorer.java:177 condition failed: assert docIDQueue.top().posEnum.docID() > docID;"));
-  while (YES) {
+  while (true) {
     OrgApacheLuceneSearchTermAutomatonScorer_popCurrentDoc(self);
     if (self->docID_ == OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS) {
       return self->docID_;
@@ -469,7 +469,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTermAutomatonScorer)
 @end
 
 void OrgApacheLuceneSearchTermAutomatonScorer_DocIDQueue_initWithInt_(OrgApacheLuceneSearchTermAutomatonScorer_DocIDQueue *self, jint maxSize) {
-  OrgApacheLuceneUtilPriorityQueue_initWithInt_withBoolean_(self, maxSize, NO);
+  OrgApacheLuceneUtilPriorityQueue_initWithInt_withBoolean_(self, maxSize, false);
 }
 
 OrgApacheLuceneSearchTermAutomatonScorer_DocIDQueue *new_OrgApacheLuceneSearchTermAutomatonScorer_DocIDQueue_initWithInt_(jint maxSize) {
@@ -505,7 +505,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTermAutomatonScorer_DocIDQ
 @end
 
 void OrgApacheLuceneSearchTermAutomatonScorer_PositionQueue_initWithInt_(OrgApacheLuceneSearchTermAutomatonScorer_PositionQueue *self, jint maxSize) {
-  OrgApacheLuceneUtilPriorityQueue_initWithInt_withBoolean_(self, maxSize, NO);
+  OrgApacheLuceneUtilPriorityQueue_initWithInt_withBoolean_(self, maxSize, false);
 }
 
 OrgApacheLuceneSearchTermAutomatonScorer_PositionQueue *new_OrgApacheLuceneSearchTermAutomatonScorer_PositionQueue_initWithInt_(jint maxSize) {
@@ -535,7 +535,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTermAutomatonScorer_Positi
 @end
 
 void OrgApacheLuceneSearchTermAutomatonScorer_TermRunAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(OrgApacheLuceneSearchTermAutomatonScorer_TermRunAutomaton *self, OrgApacheLuceneUtilAutomatonAutomaton *a, jint termCount) {
-  OrgApacheLuceneUtilAutomatonRunAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_withBoolean_(self, a, termCount, YES);
+  OrgApacheLuceneUtilAutomatonRunAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_withBoolean_(self, a, termCount, true);
 }
 
 OrgApacheLuceneSearchTermAutomatonScorer_TermRunAutomaton *new_OrgApacheLuceneSearchTermAutomatonScorer_TermRunAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withInt_(OrgApacheLuceneUtilAutomatonAutomaton *a, jint termCount) {
@@ -555,10 +555,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTermAutomatonScorer_TermRu
   *IOSIntArray_GetRef(nil_chk(states_), count_++) = state;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchTermAutomatonScorer_PosState_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(states_);

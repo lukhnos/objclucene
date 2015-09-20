@@ -125,10 +125,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocValuesFieldUpdates)
   [self doesNotRecognizeSelector:_cmd];
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexDocValuesFieldUpdates_Iterator_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -155,15 +157,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocValuesFieldUpdates_Itera
 - (jboolean)any {
   for (OrgApacheLuceneIndexNumericDocValuesFieldUpdates * __strong updates in nil_chk([((id<JavaUtilMap>) nil_chk(numericDVUpdates_)) values])) {
     if ([((OrgApacheLuceneIndexNumericDocValuesFieldUpdates *) nil_chk(updates)) any]) {
-      return YES;
+      return true;
     }
   }
   for (OrgApacheLuceneIndexBinaryDocValuesFieldUpdates * __strong updates in nil_chk([((id<JavaUtilMap>) nil_chk(binaryDVUpdates_)) values])) {
     if ([((OrgApacheLuceneIndexBinaryDocValuesFieldUpdates *) nil_chk(updates)) any]) {
-      return YES;
+      return true;
     }
   }
-  return NO;
+  return false;
 }
 
 - (jint)size {
@@ -220,10 +222,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocValuesFieldUpdates_Itera
   return JreStrcat("$@$@", @"numericDVUpdates=", numericDVUpdates_, @" binaryDVUpdates=", binaryDVUpdates_);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexDocValuesFieldUpdates_Container_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(numericDVUpdates_);

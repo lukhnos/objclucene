@@ -25,10 +25,12 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisCompoundHyphenationCharVector,
 
 @implementation OrgApacheLuceneAnalysisCompoundHyphenationCharVector
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisCompoundHyphenationCharVector_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithInt:(jint)capacity {
   OrgApacheLuceneAnalysisCompoundHyphenationCharVector_initWithInt_(self, capacity);

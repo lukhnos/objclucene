@@ -65,10 +65,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestFstExternalRefSorter_ByteSequenc
   if (sorted_ == nil) {
     OrgApacheLuceneSearchSuggestFstExternalRefSorter_closeWriter(self);
     JreStrongAssign(&sorted_, OrgLukhnosPortmobileFileFiles_createTempFileWithOrgLukhnosPortmobileFilePath_withNSString_withNSString_(OrgApacheLuceneUtilOfflineSorter_defaultTempDir(), @"RefSorter-", @".sorted"));
-    jboolean success = NO;
+    jboolean success = false;
     @try {
       [((OrgApacheLuceneUtilOfflineSorter *) nil_chk(sort_)) sortWithOrgLukhnosPortmobileFilePath:input_ withOrgLukhnosPortmobileFilePath:sorted_];
-      success = YES;
+      success = true;
     }
     @finally {
       if (success) {
@@ -88,10 +88,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestFstExternalRefSorter_ByteSequenc
 }
 
 - (void)close {
-  jboolean success = NO;
+  jboolean success = false;
   @try {
     OrgApacheLuceneSearchSuggestFstExternalRefSorter_closeWriter(self);
-    success = YES;
+    success = true;
   }
   @finally {
     if (success) {
@@ -171,7 +171,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestFstExternalRefSorte
   if (scratch_ == nil) {
     return nil;
   }
-  jboolean success = NO;
+  jboolean success = false;
   @try {
     IOSByteArray *next = [((OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader *) nil_chk(reader_)) read];
     if (next != nil) {
@@ -183,7 +183,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestFstExternalRefSorte
       OrgApacheLuceneUtilIOUtils_closeWithJavaIoCloseableArray_([IOSObjectArray arrayWithObjects:(id[]){ reader_ } count:1 type:JavaIoCloseable_class_()]);
       JreStrongAssign(&scratch_, nil);
     }
-    success = YES;
+    success = true;
     return scratch_;
   }
   @finally {

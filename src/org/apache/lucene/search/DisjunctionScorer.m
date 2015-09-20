@@ -64,10 +64,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDisjunctionScorer_$1)
 }
 
 - (OrgApacheLuceneSearchTwoPhaseIterator *)asTwoPhaseIterator {
-  jboolean hasApproximation = NO;
+  jboolean hasApproximation = false;
   for (OrgApacheLuceneSearchDisiWrapper * __strong w in nil_chk(subScorers_)) {
     if (((OrgApacheLuceneSearchDisiWrapper *) nil_chk(w))->twoPhaseView_ != nil) {
-      hasApproximation = YES;
+      hasApproximation = true;
       break;
     }
   }
@@ -196,7 +196,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDisjunctionScorer)
   while (((OrgApacheLuceneSearchDisiWrapper *) nil_chk(topScorers))->twoPhaseView_ != nil && ![topScorers->twoPhaseView_ matches]) {
     topScorers = topScorers->next_;
     if (topScorers == nil) {
-      return NO;
+      return false;
     }
   }
   if (this$0_->needsScores_) {
@@ -214,7 +214,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDisjunctionScorer)
     JreStrongAssign(&((OrgApacheLuceneSearchDisiWrapper *) nil_chk(topScorers))->next_, nil);
   }
   JreStrongAssign(&this$0_->topScorers_, topScorers);
-  return YES;
+  return true;
 }
 
 - (instancetype)initWithOrgApacheLuceneSearchDisjunctionScorer:(OrgApacheLuceneSearchDisjunctionScorer *)outer$

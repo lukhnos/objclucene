@@ -151,12 +151,12 @@ J2OBJC_INITIALIZED_DEFN(OrgTartarusSnowballExtFinnishStemmer)
 
 - (jboolean)r_VI {
   if (!([self eq_s_bWithInt:1 withJavaLangCharSequence:@"i"])) {
-    return NO;
+    return false;
   }
   if (!([self in_grouping_bWithCharArray:OrgTartarusSnowballExtFinnishStemmer_g_V2_ withInt:97 withInt:246])) {
-    return NO;
+    return false;
   }
-  return YES;
+  return true;
 }
 
 - (jboolean)r_case_ending {
@@ -197,7 +197,7 @@ J2OBJC_INITIALIZED_DEFN(OrgTartarusSnowballExtFinnishStemmer)
   }
   break_lab0: ;
   cursor_ = v_1;
-  B_ending_removed_ = NO;
+  B_ending_removed_ = false;
   limit_backward_ = cursor_;
   cursor_ = limit_;
   v_2 = limit_ - cursor_;
@@ -269,7 +269,7 @@ J2OBJC_INITIALIZED_DEFN(OrgTartarusSnowballExtFinnishStemmer)
   break_lab9: ;
   cursor_ = limit_ - v_9;
   cursor_ = limit_backward_;
-  return YES;
+  return true;
 }
 
 - (jboolean)isEqual:(id)o {
@@ -280,10 +280,12 @@ J2OBJC_INITIALIZED_DEFN(OrgTartarusSnowballExtFinnishStemmer)
   return ((jint) [((NSString *) nil_chk([OrgTartarusSnowballExtFinnishStemmer_class_() getName])) hash]);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgTartarusSnowballExtFinnishStemmer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(S_x_);
@@ -363,7 +365,7 @@ jboolean OrgTartarusSnowballExtFinnishStemmer_r_mark_regions(OrgTartarusSnowball
   jint v_3;
   self->I_p1_ = self->limit_;
   self->I_p2_ = self->limit_;
-  while (YES) {
+  while (true) {
     v_1 = self->cursor_;
     {
       if (!([self in_groupingWithCharArray:OrgTartarusSnowballExtFinnishStemmer_g_V1_ withInt:97 withInt:246])) {
@@ -375,12 +377,12 @@ jboolean OrgTartarusSnowballExtFinnishStemmer_r_mark_regions(OrgTartarusSnowball
     break_lab1: ;
     self->cursor_ = v_1;
     if (self->cursor_ >= self->limit_) {
-      return NO;
+      return false;
     }
     self->cursor_++;
   }
   break_golab0: ;
-  while (YES) {
+  while (true) {
     {
       if (!([self out_groupingWithCharArray:OrgTartarusSnowballExtFinnishStemmer_g_V1_ withInt:97 withInt:246])) {
         goto break_lab3;
@@ -389,13 +391,13 @@ jboolean OrgTartarusSnowballExtFinnishStemmer_r_mark_regions(OrgTartarusSnowball
     }
     break_lab3: ;
     if (self->cursor_ >= self->limit_) {
-      return NO;
+      return false;
     }
     self->cursor_++;
   }
   break_golab2: ;
   self->I_p1_ = self->cursor_;
-  while (YES) {
+  while (true) {
     v_3 = self->cursor_;
     {
       if (!([self in_groupingWithCharArray:OrgTartarusSnowballExtFinnishStemmer_g_V1_ withInt:97 withInt:246])) {
@@ -407,12 +409,12 @@ jboolean OrgTartarusSnowballExtFinnishStemmer_r_mark_regions(OrgTartarusSnowball
     break_lab5: ;
     self->cursor_ = v_3;
     if (self->cursor_ >= self->limit_) {
-      return NO;
+      return false;
     }
     self->cursor_++;
   }
   break_golab4: ;
-  while (YES) {
+  while (true) {
     {
       if (!([self out_groupingWithCharArray:OrgTartarusSnowballExtFinnishStemmer_g_V1_ withInt:97 withInt:246])) {
         goto break_lab7;
@@ -421,20 +423,20 @@ jboolean OrgTartarusSnowballExtFinnishStemmer_r_mark_regions(OrgTartarusSnowball
     }
     break_lab7: ;
     if (self->cursor_ >= self->limit_) {
-      return NO;
+      return false;
     }
     self->cursor_++;
   }
   break_golab6: ;
   self->I_p2_ = self->cursor_;
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtFinnishStemmer_r_R2(OrgTartarusSnowballExtFinnishStemmer *self) {
   if (!(self->I_p2_ <= self->cursor_)) {
-    return NO;
+    return false;
   }
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtFinnishStemmer_r_particle_etc(OrgTartarusSnowballExtFinnishStemmer *self) {
@@ -443,7 +445,7 @@ jboolean OrgTartarusSnowballExtFinnishStemmer_r_particle_etc(OrgTartarusSnowball
   jint v_2;
   v_1 = self->limit_ - self->cursor_;
   if (self->cursor_ < self->I_p1_) {
-    return NO;
+    return false;
   }
   self->cursor_ = self->I_p1_;
   v_2 = self->limit_backward_;
@@ -453,26 +455,26 @@ jboolean OrgTartarusSnowballExtFinnishStemmer_r_particle_etc(OrgTartarusSnowball
   among_var = [self find_among_bWithOrgTartarusSnowballAmongArray:OrgTartarusSnowballExtFinnishStemmer_a_0_ withInt:10];
   if (among_var == 0) {
     self->limit_backward_ = v_2;
-    return NO;
+    return false;
   }
   self->bra_ = self->cursor_;
   self->limit_backward_ = v_2;
   switch (among_var) {
     case 0:
-    return NO;
+    return false;
     case 1:
     if (!([self in_grouping_bWithCharArray:OrgTartarusSnowballExtFinnishStemmer_g_particle_end_ withInt:97 withInt:246])) {
-      return NO;
+      return false;
     }
     break;
     case 2:
     if (!OrgTartarusSnowballExtFinnishStemmer_r_R2(self)) {
-      return NO;
+      return false;
     }
     break;
   }
   [self slice_del];
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtFinnishStemmer_r_possessive(OrgTartarusSnowballExtFinnishStemmer *self) {
@@ -482,7 +484,7 @@ jboolean OrgTartarusSnowballExtFinnishStemmer_r_possessive(OrgTartarusSnowballEx
   jint v_3;
   v_1 = self->limit_ - self->cursor_;
   if (self->cursor_ < self->I_p1_) {
-    return NO;
+    return false;
   }
   self->cursor_ = self->I_p1_;
   v_2 = self->limit_backward_;
@@ -492,13 +494,13 @@ jboolean OrgTartarusSnowballExtFinnishStemmer_r_possessive(OrgTartarusSnowballEx
   among_var = [self find_among_bWithOrgTartarusSnowballAmongArray:OrgTartarusSnowballExtFinnishStemmer_a_4_ withInt:9];
   if (among_var == 0) {
     self->limit_backward_ = v_2;
-    return NO;
+    return false;
   }
   self->bra_ = self->cursor_;
   self->limit_backward_ = v_2;
   switch (among_var) {
     case 0:
-    return NO;
+    return false;
     case 1:
     {
       v_3 = self->limit_ - self->cursor_;
@@ -506,7 +508,7 @@ jboolean OrgTartarusSnowballExtFinnishStemmer_r_possessive(OrgTartarusSnowballEx
         if (!([self eq_s_bWithInt:1 withJavaLangCharSequence:@"k"])) {
           goto break_lab0;
         }
-        return NO;
+        return false;
       }
       break_lab0: ;
       self->cursor_ = self->limit_ - v_3;
@@ -517,7 +519,7 @@ jboolean OrgTartarusSnowballExtFinnishStemmer_r_possessive(OrgTartarusSnowballEx
     [self slice_del];
     self->ket_ = self->cursor_;
     if (!([self eq_s_bWithInt:3 withJavaLangCharSequence:@"kse"])) {
-      return NO;
+      return false;
     }
     self->bra_ = self->cursor_;
     [self slice_fromWithJavaLangCharSequence:@"ksi"];
@@ -527,31 +529,31 @@ jboolean OrgTartarusSnowballExtFinnishStemmer_r_possessive(OrgTartarusSnowballEx
     break;
     case 4:
     if ([self find_among_bWithOrgTartarusSnowballAmongArray:OrgTartarusSnowballExtFinnishStemmer_a_1_ withInt:6] == 0) {
-      return NO;
+      return false;
     }
     [self slice_del];
     break;
     case 5:
     if ([self find_among_bWithOrgTartarusSnowballAmongArray:OrgTartarusSnowballExtFinnishStemmer_a_2_ withInt:6] == 0) {
-      return NO;
+      return false;
     }
     [self slice_del];
     break;
     case 6:
     if ([self find_among_bWithOrgTartarusSnowballAmongArray:OrgTartarusSnowballExtFinnishStemmer_a_3_ withInt:2] == 0) {
-      return NO;
+      return false;
     }
     [self slice_del];
     break;
   }
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtFinnishStemmer_r_LONG(OrgTartarusSnowballExtFinnishStemmer *self) {
   if ([self find_among_bWithOrgTartarusSnowballAmongArray:OrgTartarusSnowballExtFinnishStemmer_a_5_ withInt:7] == 0) {
-    return NO;
+    return false;
   }
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtFinnishStemmer_r_case_ending(OrgTartarusSnowballExtFinnishStemmer *self) {
@@ -563,7 +565,7 @@ jboolean OrgTartarusSnowballExtFinnishStemmer_r_case_ending(OrgTartarusSnowballE
   jint v_5;
   v_1 = self->limit_ - self->cursor_;
   if (self->cursor_ < self->I_p1_) {
-    return NO;
+    return false;
   }
   self->cursor_ = self->I_p1_;
   v_2 = self->limit_backward_;
@@ -573,41 +575,41 @@ jboolean OrgTartarusSnowballExtFinnishStemmer_r_case_ending(OrgTartarusSnowballE
   among_var = [self find_among_bWithOrgTartarusSnowballAmongArray:OrgTartarusSnowballExtFinnishStemmer_a_6_ withInt:30];
   if (among_var == 0) {
     self->limit_backward_ = v_2;
-    return NO;
+    return false;
   }
   self->bra_ = self->cursor_;
   self->limit_backward_ = v_2;
   switch (among_var) {
     case 0:
-    return NO;
+    return false;
     case 1:
     if (!([self eq_s_bWithInt:1 withJavaLangCharSequence:@"a"])) {
-      return NO;
+      return false;
     }
     break;
     case 2:
     if (!([self eq_s_bWithInt:1 withJavaLangCharSequence:@"e"])) {
-      return NO;
+      return false;
     }
     break;
     case 3:
     if (!([self eq_s_bWithInt:1 withJavaLangCharSequence:@"i"])) {
-      return NO;
+      return false;
     }
     break;
     case 4:
     if (!([self eq_s_bWithInt:1 withJavaLangCharSequence:@"o"])) {
-      return NO;
+      return false;
     }
     break;
     case 5:
     if (!([self eq_s_bWithInt:1 withJavaLangCharSequence:@"\u00e4"])) {
-      return NO;
+      return false;
     }
     break;
     case 6:
     if (!([self eq_s_bWithInt:1 withJavaLangCharSequence:@"\u00f6"])) {
-      return NO;
+      return false;
     }
     break;
     case 7:
@@ -644,21 +646,21 @@ jboolean OrgTartarusSnowballExtFinnishStemmer_r_case_ending(OrgTartarusSnowballE
     break;
     case 8:
     if (!([self in_grouping_bWithCharArray:OrgTartarusSnowballExtFinnishStemmer_g_V1_ withInt:97 withInt:246])) {
-      return NO;
+      return false;
     }
     if (!([self out_grouping_bWithCharArray:OrgTartarusSnowballExtFinnishStemmer_g_V1_ withInt:97 withInt:246])) {
-      return NO;
+      return false;
     }
     break;
     case 9:
     if (!([self eq_s_bWithInt:1 withJavaLangCharSequence:@"e"])) {
-      return NO;
+      return false;
     }
     break;
   }
   [self slice_del];
-  self->B_ending_removed_ = YES;
-  return YES;
+  self->B_ending_removed_ = true;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtFinnishStemmer_r_other_endings(OrgTartarusSnowballExtFinnishStemmer *self) {
@@ -668,7 +670,7 @@ jboolean OrgTartarusSnowballExtFinnishStemmer_r_other_endings(OrgTartarusSnowbal
   jint v_3;
   v_1 = self->limit_ - self->cursor_;
   if (self->cursor_ < self->I_p2_) {
-    return NO;
+    return false;
   }
   self->cursor_ = self->I_p2_;
   v_2 = self->limit_backward_;
@@ -678,13 +680,13 @@ jboolean OrgTartarusSnowballExtFinnishStemmer_r_other_endings(OrgTartarusSnowbal
   among_var = [self find_among_bWithOrgTartarusSnowballAmongArray:OrgTartarusSnowballExtFinnishStemmer_a_7_ withInt:14];
   if (among_var == 0) {
     self->limit_backward_ = v_2;
-    return NO;
+    return false;
   }
   self->bra_ = self->cursor_;
   self->limit_backward_ = v_2;
   switch (among_var) {
     case 0:
-    return NO;
+    return false;
     case 1:
     {
       v_3 = self->limit_ - self->cursor_;
@@ -692,7 +694,7 @@ jboolean OrgTartarusSnowballExtFinnishStemmer_r_other_endings(OrgTartarusSnowbal
         if (!([self eq_s_bWithInt:2 withJavaLangCharSequence:@"po"])) {
           goto break_lab0;
         }
-        return NO;
+        return false;
       }
       break_lab0: ;
       self->cursor_ = self->limit_ - v_3;
@@ -700,7 +702,7 @@ jboolean OrgTartarusSnowballExtFinnishStemmer_r_other_endings(OrgTartarusSnowbal
     break;
   }
   [self slice_del];
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtFinnishStemmer_r_i_plural(OrgTartarusSnowballExtFinnishStemmer *self) {
@@ -708,7 +710,7 @@ jboolean OrgTartarusSnowballExtFinnishStemmer_r_i_plural(OrgTartarusSnowballExtF
   jint v_2;
   v_1 = self->limit_ - self->cursor_;
   if (self->cursor_ < self->I_p1_) {
-    return NO;
+    return false;
   }
   self->cursor_ = self->I_p1_;
   v_2 = self->limit_backward_;
@@ -717,12 +719,12 @@ jboolean OrgTartarusSnowballExtFinnishStemmer_r_i_plural(OrgTartarusSnowballExtF
   self->ket_ = self->cursor_;
   if ([self find_among_bWithOrgTartarusSnowballAmongArray:OrgTartarusSnowballExtFinnishStemmer_a_8_ withInt:2] == 0) {
     self->limit_backward_ = v_2;
-    return NO;
+    return false;
   }
   self->bra_ = self->cursor_;
   self->limit_backward_ = v_2;
   [self slice_del];
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtFinnishStemmer_r_t_plural(OrgTartarusSnowballExtFinnishStemmer *self) {
@@ -735,7 +737,7 @@ jboolean OrgTartarusSnowballExtFinnishStemmer_r_t_plural(OrgTartarusSnowballExtF
   jint v_6;
   v_1 = self->limit_ - self->cursor_;
   if (self->cursor_ < self->I_p1_) {
-    return NO;
+    return false;
   }
   self->cursor_ = self->I_p1_;
   v_2 = self->limit_backward_;
@@ -744,20 +746,20 @@ jboolean OrgTartarusSnowballExtFinnishStemmer_r_t_plural(OrgTartarusSnowballExtF
   self->ket_ = self->cursor_;
   if (!([self eq_s_bWithInt:1 withJavaLangCharSequence:@"t"])) {
     self->limit_backward_ = v_2;
-    return NO;
+    return false;
   }
   self->bra_ = self->cursor_;
   v_3 = self->limit_ - self->cursor_;
   if (!([self in_grouping_bWithCharArray:OrgTartarusSnowballExtFinnishStemmer_g_V1_ withInt:97 withInt:246])) {
     self->limit_backward_ = v_2;
-    return NO;
+    return false;
   }
   self->cursor_ = self->limit_ - v_3;
   [self slice_del];
   self->limit_backward_ = v_2;
   v_4 = self->limit_ - self->cursor_;
   if (self->cursor_ < self->I_p2_) {
-    return NO;
+    return false;
   }
   self->cursor_ = self->I_p2_;
   v_5 = self->limit_backward_;
@@ -767,13 +769,13 @@ jboolean OrgTartarusSnowballExtFinnishStemmer_r_t_plural(OrgTartarusSnowballExtF
   among_var = [self find_among_bWithOrgTartarusSnowballAmongArray:OrgTartarusSnowballExtFinnishStemmer_a_9_ withInt:2];
   if (among_var == 0) {
     self->limit_backward_ = v_5;
-    return NO;
+    return false;
   }
   self->bra_ = self->cursor_;
   self->limit_backward_ = v_5;
   switch (among_var) {
     case 0:
-    return NO;
+    return false;
     case 1:
     {
       v_6 = self->limit_ - self->cursor_;
@@ -781,7 +783,7 @@ jboolean OrgTartarusSnowballExtFinnishStemmer_r_t_plural(OrgTartarusSnowballExtF
         if (!([self eq_s_bWithInt:2 withJavaLangCharSequence:@"po"])) {
           goto break_lab0;
         }
-        return NO;
+        return false;
       }
       break_lab0: ;
       self->cursor_ = self->limit_ - v_6;
@@ -789,7 +791,7 @@ jboolean OrgTartarusSnowballExtFinnishStemmer_r_t_plural(OrgTartarusSnowballExtF
     break;
   }
   [self slice_del];
-  return YES;
+  return true;
 }
 
 jboolean OrgTartarusSnowballExtFinnishStemmer_r_tidy(OrgTartarusSnowballExtFinnishStemmer *self) {
@@ -804,7 +806,7 @@ jboolean OrgTartarusSnowballExtFinnishStemmer_r_tidy(OrgTartarusSnowballExtFinni
   jint v_9;
   v_1 = self->limit_ - self->cursor_;
   if (self->cursor_ < self->I_p1_) {
-    return NO;
+    return false;
   }
   self->cursor_ = self->I_p1_;
   v_2 = self->limit_backward_;
@@ -882,7 +884,7 @@ jboolean OrgTartarusSnowballExtFinnishStemmer_r_tidy(OrgTartarusSnowballExtFinni
   break_lab5: ;
   self->cursor_ = self->limit_ - v_8;
   self->limit_backward_ = v_2;
-  while (YES) {
+  while (true) {
     v_9 = self->limit_ - self->cursor_;
     {
       if (!([self out_grouping_bWithCharArray:OrgTartarusSnowballExtFinnishStemmer_g_V1_ withInt:97 withInt:246])) {
@@ -894,23 +896,23 @@ jboolean OrgTartarusSnowballExtFinnishStemmer_r_tidy(OrgTartarusSnowballExtFinni
     break_lab7: ;
     self->cursor_ = self->limit_ - v_9;
     if (self->cursor_ <= self->limit_backward_) {
-      return NO;
+      return false;
     }
     self->cursor_--;
   }
   break_golab6: ;
   self->ket_ = self->cursor_;
   if (self->cursor_ <= self->limit_backward_) {
-    return NO;
+    return false;
   }
   self->cursor_--;
   self->bra_ = self->cursor_;
   JreStrongAssign(&self->S_x_, [self slice_toWithJavaLangStringBuilder:self->S_x_]);
   if (!([self eq_v_bWithJavaLangCharSequence:self->S_x_])) {
-    return NO;
+    return false;
   }
   [self slice_del];
-  return YES;
+  return true;
 }
 
 void OrgTartarusSnowballExtFinnishStemmer_init(OrgTartarusSnowballExtFinnishStemmer *self) {

@@ -25,10 +25,12 @@ OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisCoreStopAnalyzer
 
 @implementation OrgApacheLuceneAnalysisCoreStopAnalyzer
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisCoreStopAnalyzer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopWords {
   OrgApacheLuceneAnalysisCoreStopAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(self, stopWords);
@@ -54,7 +56,7 @@ OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisCoreStopAnalyzer
   if (self == [OrgApacheLuceneAnalysisCoreStopAnalyzer class]) {
     {
       id<JavaUtilList> stopWords = JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ @"a", @"an", @"and", @"are", @"as", @"at", @"be", @"but", @"by", @"for", @"if", @"in", @"into", @"is", @"it", @"no", @"not", @"of", @"on", @"or", @"such", @"that", @"the", @"their", @"then", @"there", @"these", @"they", @"this", @"to", @"was", @"will", @"with" } count:33 type:NSString_class_()]);
-      OrgApacheLuceneAnalysisUtilCharArraySet *stopSet = [new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(stopWords, NO) autorelease];
+      OrgApacheLuceneAnalysisUtilCharArraySet *stopSet = [new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(stopWords, false) autorelease];
       JreStrongAssign(&OrgApacheLuceneAnalysisCoreStopAnalyzer_ENGLISH_STOP_WORDS_SET_, OrgApacheLuceneAnalysisUtilCharArraySet_unmodifiableSetWithOrgApacheLuceneAnalysisUtilCharArraySet_(stopSet));
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisCoreStopAnalyzer)

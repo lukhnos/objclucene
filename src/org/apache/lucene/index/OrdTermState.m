@@ -10,10 +10,12 @@
 
 @implementation OrgApacheLuceneIndexOrdTermState
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexOrdTermState_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)copyFromWithOrgApacheLuceneIndexTermState:(OrgApacheLuceneIndexTermState *)other {
   JreAssert(([other isKindOfClass:[OrgApacheLuceneIndexOrdTermState class]]), (JreStrcat("$$", @"can not copy from ", [[((OrgApacheLuceneIndexTermState *) nil_chk(other)) getClass] getName])));

@@ -180,10 +180,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexDocValues_$6)
 
 @implementation OrgApacheLuceneIndexDocValues
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexDocValues_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (OrgApacheLuceneIndexBinaryDocValues *)emptyBinary {
   return OrgApacheLuceneIndexDocValues_emptyBinary();
@@ -539,10 +541,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocValues_$1)
   return 0;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexDocValues_$2_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

@@ -100,17 +100,17 @@ __attribute__((unused)) static jint OrgApacheLuceneUtilAutomatonRunAutomaton_get
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return YES;
-  if (obj == nil) return NO;
-  if ([self getClass] != [nil_chk(obj) getClass]) return NO;
+  if (self == obj) return true;
+  if (obj == nil) return false;
+  if ([self getClass] != [nil_chk(obj) getClass]) return false;
   OrgApacheLuceneUtilAutomatonRunAutomaton *other = (OrgApacheLuceneUtilAutomatonRunAutomaton *) check_class_cast(obj, [OrgApacheLuceneUtilAutomatonRunAutomaton class]);
-  if (initial_ != other->initial_) return NO;
-  if (maxInterval_ != other->maxInterval_) return NO;
-  if (size_ != other->size_) return NO;
-  if (!JavaUtilArrays_equalsWithIntArray_withIntArray_(points_, other->points_)) return NO;
-  if (!JavaUtilArrays_equalsWithBooleanArray_withBooleanArray_(accept_, other->accept_)) return NO;
-  if (!JavaUtilArrays_equalsWithIntArray_withIntArray_(transitions_, other->transitions_)) return NO;
-  return YES;
+  if (initial_ != other->initial_) return false;
+  if (maxInterval_ != other->maxInterval_) return false;
+  if (size_ != other->size_) return false;
+  if (!JavaUtilArrays_equalsWithIntArray_withIntArray_(points_, other->points_)) return false;
+  if (!JavaUtilArrays_equalsWithBooleanArray_withBooleanArray_(accept_, other->accept_)) return false;
+  if (!JavaUtilArrays_equalsWithIntArray_withIntArray_(transitions_, other->transitions_)) return false;
+  return true;
 }
 
 - (void)dealloc {

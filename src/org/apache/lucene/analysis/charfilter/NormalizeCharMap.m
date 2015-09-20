@@ -80,7 +80,7 @@ void OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_initWithOrgApacheLuceneUt
       [map getFirstArcWithOrgApacheLuceneUtilFstFST_Arc:scratchArc];
       if (OrgApacheLuceneUtilFstFST_targetHasArcsWithOrgApacheLuceneUtilFstFST_Arc_(scratchArc)) {
         [map readFirstRealTargetArcWithLong:scratchArc->target_ withOrgApacheLuceneUtilFstFST_Arc:scratchArc withOrgApacheLuceneUtilFstFST_BytesReader:fstReader];
-        while (YES) {
+        while (true) {
           JreAssert((scratchArc->label_ != OrgApacheLuceneUtilFstFST_END_LABEL), (@"org/apache/lucene/analysis/charfilter/NormalizeCharMap.java:58 condition failed: assert scratchArc.label != FST.END_LABEL;"));
           [self->cachedRootArcs_ putWithId:JavaLangCharacter_valueOfWithChar_((jchar) scratchArc->label_) withId:[((OrgApacheLuceneUtilFstFST_Arc *) [new_OrgApacheLuceneUtilFstFST_Arc_init() autorelease]) copyFromWithOrgApacheLuceneUtilFstFST_Arc:scratchArc]];
           if ([scratchArc isLast]) {
@@ -135,10 +135,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCharfilterNormalizeCharM
   return [new_OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_initWithOrgApacheLuceneUtilFstFST_(map) autorelease];
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisCharfilterNormalizeCharMap_Builder_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(pendingPairs_);

@@ -69,7 +69,7 @@ IOSIntArray *OrgApacheLuceneUtilPackedDirectWriter_SUPPORTED_BITS_PER_VALUE_;
   for (jint i = 0; i < 3; i++) {
     [((OrgApacheLuceneStoreIndexOutput *) nil_chk(output_)) writeByteWithByte:(jbyte) 0];
   }
-  finished_ = YES;
+  finished_ = true;
 }
 
 + (OrgApacheLuceneUtilPackedDirectWriter *)getInstanceWithOrgApacheLuceneStoreIndexOutput:(OrgApacheLuceneStoreIndexOutput *)output

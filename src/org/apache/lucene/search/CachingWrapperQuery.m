@@ -135,7 +135,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchCachingWrapperQuery_$1)
 }
 
 - (jboolean)isEqual:(id)o {
-  if (o == nil || ![[self getClass] isEqual:[o getClass]]) return NO;
+  if (o == nil || ![[self getClass] isEqual:[o getClass]]) return false;
   OrgApacheLuceneSearchCachingWrapperQuery *other = (OrgApacheLuceneSearchCachingWrapperQuery *) check_class_cast(o, [OrgApacheLuceneSearchCachingWrapperQuery class]);
   return [((OrgApacheLuceneSearchQuery *) nil_chk(self->query_)) isEqual:((OrgApacheLuceneSearchCachingWrapperQuery *) nil_chk(other))->query_];
 }
@@ -231,7 +231,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchCachingWrapperQuery)
 }
 
 - (OrgApacheLuceneSearchScorer *)scorerWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context {
-  if ([((JavaUtilConcurrentAtomicAtomicBoolean *) nil_chk(used_)) compareAndSetWithBoolean:NO withBoolean:YES]) {
+  if ([((JavaUtilConcurrentAtomicAtomicBoolean *) nil_chk(used_)) compareAndSetWithBoolean:false withBoolean:true]) {
     [((id<OrgApacheLuceneSearchQueryCachingPolicy>) nil_chk(this$0_->policy_)) onUseWithOrgApacheLuceneSearchQuery:[self getQuery]];
   }
   OrgApacheLuceneIndexLeafReader *reader = [((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader];
@@ -301,7 +301,7 @@ void OrgApacheLuceneSearchCachingWrapperQuery_$1_initWithOrgApacheLuceneSearchCa
   JreStrongAssign(&self->this$0_, outer$);
   JreStrongAssign(&self->val$weight_, capture$0);
   OrgApacheLuceneSearchConstantScoreWeight_initWithOrgApacheLuceneSearchQuery_(self, arg$0);
-  JreStrongAssignAndConsume(&self->used_, new_JavaUtilConcurrentAtomicAtomicBoolean_initWithBoolean_(NO));
+  JreStrongAssignAndConsume(&self->used_, new_JavaUtilConcurrentAtomicAtomicBoolean_initWithBoolean_(false));
 }
 
 OrgApacheLuceneSearchCachingWrapperQuery_$1 *new_OrgApacheLuceneSearchCachingWrapperQuery_$1_initWithOrgApacheLuceneSearchCachingWrapperQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchCachingWrapperQuery *outer$, OrgApacheLuceneSearchWeight *capture$0, OrgApacheLuceneSearchQuery *arg$0) {

@@ -15,10 +15,12 @@
 
 @implementation OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jlong)computeNormWithOrgApacheLuceneIndexFieldInvertState:(OrgApacheLuceneIndexFieldInvertState *)state {
   return [((OrgApacheLuceneSearchSimilaritiesSimilarity *) nil_chk([self getWithNSString:[((OrgApacheLuceneIndexFieldInvertState *) nil_chk(state)) getName]])) computeNormWithOrgApacheLuceneIndexFieldInvertState:state];
@@ -77,10 +79,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSimilaritiesPerFieldSimila
   [((OrgApacheLuceneSearchSimilaritiesSimilarity_SimWeight *) nil_chk(delegateWeight_)) normalizeWithFloat:queryNorm withFloat:topLevelBoost];
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSimilaritiesPerFieldSimilarityWrapper_PerFieldSimWeight_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(delegate_);

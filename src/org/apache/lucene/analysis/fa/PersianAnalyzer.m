@@ -49,10 +49,12 @@ NSString *OrgApacheLuceneAnalysisFaPersianAnalyzer_STOPWORDS_COMMENT_ = @"#";
   return OrgApacheLuceneAnalysisFaPersianAnalyzer_getDefaultStopSet();
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisFaPersianAnalyzer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords {
   OrgApacheLuceneAnalysisFaPersianAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(self, stopwords);
@@ -128,16 +130,18 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisFaPersianAnalyzer_DefaultSetHolde
 
 @implementation OrgApacheLuceneAnalysisFaPersianAnalyzer_DefaultSetHolder
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisFaPersianAnalyzer_DefaultSetHolder_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisFaPersianAnalyzer_DefaultSetHolder class]) {
     {
       @try {
-        JreStrongAssign(&OrgApacheLuceneAnalysisFaPersianAnalyzer_DefaultSetHolder_DEFAULT_STOP_SET_, OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_loadStopwordSetWithBoolean_withIOSClass_withNSString_withNSString_(NO, OrgApacheLuceneAnalysisFaPersianAnalyzer_class_(), OrgApacheLuceneAnalysisFaPersianAnalyzer_DEFAULT_STOPWORD_FILE_, OrgApacheLuceneAnalysisFaPersianAnalyzer_STOPWORDS_COMMENT_));
+        JreStrongAssign(&OrgApacheLuceneAnalysisFaPersianAnalyzer_DefaultSetHolder_DEFAULT_STOP_SET_, OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_loadStopwordSetWithBoolean_withIOSClass_withNSString_withNSString_(false, OrgApacheLuceneAnalysisFaPersianAnalyzer_class_(), OrgApacheLuceneAnalysisFaPersianAnalyzer_DEFAULT_STOPWORD_FILE_, OrgApacheLuceneAnalysisFaPersianAnalyzer_STOPWORDS_COMMENT_));
       }
       @catch (JavaIoIOException *ex) {
         @throw [new_JavaLangRuntimeException_initWithNSString_(@"Unable to load default stopword set") autorelease];

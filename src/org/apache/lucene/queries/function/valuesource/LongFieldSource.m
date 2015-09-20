@@ -124,7 +124,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceLongFieldSou
 }
 
 - (jboolean)isEqual:(id)o {
-  if ([nil_chk(o) getClass] != [self getClass]) return NO;
+  if ([nil_chk(o) getClass] != [self getClass]) return false;
   OrgApacheLuceneQueriesFunctionValuesourceLongFieldSource *other = (OrgApacheLuceneQueriesFunctionValuesourceLongFieldSource *) check_class_cast(o, [OrgApacheLuceneQueriesFunctionValuesourceLongFieldSource class]);
   return [super isEqual:other];
 }

@@ -37,10 +37,12 @@ JavaxXmlTransformTransformerFactory *OrgApacheLuceneQueryparserXmlQueryTemplateM
 
 @implementation OrgApacheLuceneQueryparserXmlQueryTemplateManager
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueryparserXmlQueryTemplateManager_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithJavaIoInputStream:(JavaIoInputStream *)xslIs {
   OrgApacheLuceneQueryparserXmlQueryTemplateManager_initWithJavaIoInputStream_(self, xslIs);
@@ -220,7 +222,7 @@ id<OrgW3cDomDocument> OrgApacheLuceneQueryparserXmlQueryTemplateManager_getQuery
 
 void OrgApacheLuceneQueryparserXmlQueryTemplateManager_transformCriteriaWithJavaUtilProperties_withJavaIoInputStream_withJavaxXmlTransformResult_(JavaUtilProperties *formProperties, JavaIoInputStream *xslIs, id<JavaxXmlTransformResult> result) {
   OrgApacheLuceneQueryparserXmlQueryTemplateManager_initialize();
-  [((JavaxXmlParsersDocumentBuilderFactory *) nil_chk(OrgApacheLuceneQueryparserXmlQueryTemplateManager_dbf_)) setNamespaceAwareWithBoolean:YES];
+  [((JavaxXmlParsersDocumentBuilderFactory *) nil_chk(OrgApacheLuceneQueryparserXmlQueryTemplateManager_dbf_)) setNamespaceAwareWithBoolean:true];
   JavaxXmlParsersDocumentBuilder *builder = [OrgApacheLuceneQueryparserXmlQueryTemplateManager_dbf_ newDocumentBuilder];
   id<OrgW3cDomDocument> xslDoc = [((JavaxXmlParsersDocumentBuilder *) nil_chk(builder)) parseWithJavaIoInputStream:xslIs];
   JavaxXmlTransformDomDOMSource *ds = [new_JavaxXmlTransformDomDOMSource_initWithOrgW3cDomNode_(xslDoc) autorelease];
@@ -238,7 +240,7 @@ void OrgApacheLuceneQueryparserXmlQueryTemplateManager_transformCriteriaWithJava
 
 void OrgApacheLuceneQueryparserXmlQueryTemplateManager_transformCriteriaWithJavaUtilProperties_withJavaxXmlTransformTransformer_withJavaxXmlTransformResult_(JavaUtilProperties *formProperties, JavaxXmlTransformTransformer *transformer, id<JavaxXmlTransformResult> result) {
   OrgApacheLuceneQueryparserXmlQueryTemplateManager_initialize();
-  [((JavaxXmlParsersDocumentBuilderFactory *) nil_chk(OrgApacheLuceneQueryparserXmlQueryTemplateManager_dbf_)) setNamespaceAwareWithBoolean:YES];
+  [((JavaxXmlParsersDocumentBuilderFactory *) nil_chk(OrgApacheLuceneQueryparserXmlQueryTemplateManager_dbf_)) setNamespaceAwareWithBoolean:true];
   JavaxXmlParsersDocumentBuilder *db = [OrgApacheLuceneQueryparserXmlQueryTemplateManager_dbf_ newDocumentBuilder];
   id<OrgW3cDomDocument> doc = [((JavaxXmlParsersDocumentBuilder *) nil_chk(db)) newDocument];
   id<OrgW3cDomElement> root = [((id<OrgW3cDomDocument>) nil_chk(doc)) createElementWithNSString:@"Document"];
@@ -257,7 +259,7 @@ void OrgApacheLuceneQueryparserXmlQueryTemplateManager_transformCriteriaWithJava
 
 id<JavaxXmlTransformTemplates> OrgApacheLuceneQueryparserXmlQueryTemplateManager_getTemplatesWithJavaIoInputStream_(JavaIoInputStream *xslIs) {
   OrgApacheLuceneQueryparserXmlQueryTemplateManager_initialize();
-  [((JavaxXmlParsersDocumentBuilderFactory *) nil_chk(OrgApacheLuceneQueryparserXmlQueryTemplateManager_dbf_)) setNamespaceAwareWithBoolean:YES];
+  [((JavaxXmlParsersDocumentBuilderFactory *) nil_chk(OrgApacheLuceneQueryparserXmlQueryTemplateManager_dbf_)) setNamespaceAwareWithBoolean:true];
   JavaxXmlParsersDocumentBuilder *builder = [OrgApacheLuceneQueryparserXmlQueryTemplateManager_dbf_ newDocumentBuilder];
   id<OrgW3cDomDocument> xslDoc = [((JavaxXmlParsersDocumentBuilder *) nil_chk(builder)) parseWithJavaIoInputStream:xslIs];
   JavaxXmlTransformDomDOMSource *ds = [new_JavaxXmlTransformDomDOMSource_initWithOrgW3cDomNode_(xslDoc) autorelease];

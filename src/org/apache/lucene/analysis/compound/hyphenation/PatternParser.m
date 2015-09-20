@@ -33,10 +33,12 @@
 
 @implementation OrgApacheLuceneAnalysisCompoundHyphenationPatternParser
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithOrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer:(id<OrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer>)consumer {
   OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_initWithOrgApacheLuceneAnalysisCompoundHyphenationPatternConsumer_(self, consumer);
@@ -66,11 +68,11 @@
 
 - (NSString *)readTokenWithJavaLangStringBuilder:(JavaLangStringBuilder *)chars {
   NSString *word;
-  jboolean space = NO;
+  jboolean space = false;
   jint i;
   for (i = 0; i < [((JavaLangStringBuilder *) nil_chk(chars)) length]; i++) {
     if (JavaLangCharacter_isWhitespaceWithChar_([chars charAtWithInt:i])) {
-      space = YES;
+      space = true;
     }
     else {
       break;
@@ -87,10 +89,10 @@
       return word;
     }
   }
-  space = NO;
+  space = false;
   for (i = 0; i < [chars length]; i++) {
     if (JavaLangCharacter_isWhitespaceWithChar_([chars charAtWithInt:i])) {
-      space = YES;
+      space = true;
       break;
     }
   }
@@ -353,7 +355,7 @@ id<OrgXmlSaxXMLReader> OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_c
   OrgApacheLuceneAnalysisCompoundHyphenationPatternParser_initialize();
   @try {
     JavaxXmlParsersSAXParserFactory *factory = JavaxXmlParsersSAXParserFactory_newInstance();
-    [((JavaxXmlParsersSAXParserFactory *) nil_chk(factory)) setNamespaceAwareWithBoolean:YES];
+    [((JavaxXmlParsersSAXParserFactory *) nil_chk(factory)) setNamespaceAwareWithBoolean:true];
     return [((JavaxXmlParsersSAXParser *) nil_chk([factory newSAXParser])) getXMLReader];
   }
   @catch (JavaLangException *e) {

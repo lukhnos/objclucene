@@ -11,10 +11,12 @@
 
 @implementation OrgApacheLuceneCodecsBlockTermState
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsBlockTermState_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)copyFromWithOrgApacheLuceneIndexTermState:(OrgApacheLuceneIndexTermState *)_other {
   JreAssert(([_other isKindOfClass:[OrgApacheLuceneCodecsBlockTermState class]]), (JreStrcat("$$", @"can not copy from ", [[((OrgApacheLuceneIndexTermState *) nil_chk(_other)) getClass] getName])));
@@ -57,7 +59,7 @@
 
 void OrgApacheLuceneCodecsBlockTermState_init(OrgApacheLuceneCodecsBlockTermState *self) {
   OrgApacheLuceneIndexOrdTermState_init(self);
-  self->isRealTerm_ = YES;
+  self->isRealTerm_ = true;
 }
 
 OrgApacheLuceneCodecsBlockTermState *new_OrgApacheLuceneCodecsBlockTermState_init() {

@@ -19,10 +19,12 @@ __attribute__((unused)) static OrgApacheLuceneUtilSmallFloat *new_OrgApacheLucen
 
 @implementation OrgApacheLuceneUtilSmallFloat
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilSmallFloat_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (jbyte)floatToByteWithFloat:(jfloat)f
                       withInt:(jint)numMantissaBits

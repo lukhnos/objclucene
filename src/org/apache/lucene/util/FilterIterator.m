@@ -54,7 +54,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneUtilFilterIterator_setNex
     return next_;
   }
   @finally {
-    nextIsSet_ = NO;
+    nextIsSet_ = false;
     JreStrongAssign(&next_, nil);
   }
 }
@@ -96,7 +96,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneUtilFilterIterator_setNex
 void OrgApacheLuceneUtilFilterIterator_initWithJavaUtilIterator_(OrgApacheLuceneUtilFilterIterator *self, id<JavaUtilIterator> baseIterator) {
   NSObject_init(self);
   JreStrongAssign(&self->next_, nil);
-  self->nextIsSet_ = NO;
+  self->nextIsSet_ = false;
   JreStrongAssign(&self->iterator_, baseIterator);
 }
 
@@ -109,11 +109,11 @@ jboolean OrgApacheLuceneUtilFilterIterator_setNext(OrgApacheLuceneUtilFilterIter
     id object = [self->iterator_ next];
     if ([self predicateFunctionWithId:object]) {
       JreStrongAssign(&self->next_, object);
-      self->nextIsSet_ = YES;
-      return YES;
+      self->nextIsSet_ = true;
+      return true;
     }
   }
-  return NO;
+  return false;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFilterIterator)

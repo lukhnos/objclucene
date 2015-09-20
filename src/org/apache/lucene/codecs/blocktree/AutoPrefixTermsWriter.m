@@ -107,12 +107,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_P
   jint start = [((id<JavaUtilList>) nil_chk(pending_)) size] - count;
   JreAssert((start >= 0), (@"org/apache/lucene/codecs/blocktree/AutoPrefixTermsWriter.java:287 condition failed: assert start >=0;"));
   id o = [pending_ getWithInt:start];
-  jboolean skippedEmptyStringSuffix = NO;
+  jboolean skippedEmptyStringSuffix = false;
   if ([o isKindOfClass:[IOSByteArray class]]) {
     if (((IOSByteArray *) nil_chk(((IOSByteArray *) check_class_cast(o, [IOSByteArray class]))))->size_ == prefixLength) {
       start++;
       count--;
-      skippedEmptyStringSuffix = YES;
+      skippedEmptyStringSuffix = true;
     }
   }
   else {
@@ -120,7 +120,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_P
     if (((IOSByteArray *) nil_chk(((OrgApacheLuceneUtilBytesRef *) nil_chk(((OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_PrefixTerm *) nil_chk(prefix))->term_))->bytes_))->size_ == prefixLength) {
       start++;
       count--;
-      skippedEmptyStringSuffix = YES;
+      skippedEmptyStringSuffix = true;
     }
   }
   jint end = [pending_ size];
@@ -252,7 +252,7 @@ void OrgApacheLuceneCodecsBlocktreeAutoPrefixTermsWriter_initWithOrgApacheLucene
   self->minItemsInPrefix_ = minItemsInPrefix;
   self->maxItemsInPrefix_ = maxItemsInPrefix;
   OrgApacheLuceneIndexTermsEnum *termsEnum = [((OrgApacheLuceneIndexTerms *) nil_chk(terms)) iterator];
-  while (YES) {
+  while (true) {
     OrgApacheLuceneUtilBytesRef *term = [((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum)) next];
     if (term == nil) {
       break;

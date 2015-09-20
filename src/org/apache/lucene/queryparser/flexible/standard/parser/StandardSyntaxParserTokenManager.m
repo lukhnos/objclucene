@@ -340,13 +340,13 @@ IOSLongArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxPars
       jint error_line = [((id<OrgApacheLuceneQueryparserFlexibleStandardParserCharStream>) nil_chk(input_stream_)) getEndLine];
       jint error_column = [input_stream_ getEndColumn];
       NSString *error_after = nil;
-      jboolean EOFSeen = NO;
+      jboolean EOFSeen = false;
       @try {
         [input_stream_ readChar];
         [input_stream_ backupWithInt:1];
       }
       @catch (JavaIoIOException *e1) {
-        EOFSeen = YES;
+        EOFSeen = true;
         error_after = curPos <= 1 ? @"" : [input_stream_ GetImage];
         if (curChar_ == 0x000a || curChar_ == 0x000d) {
           error_line++;
@@ -1030,7 +1030,7 @@ jboolean OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTok
     case 48:
     return ((IOSLongArray_Get(nil_chk(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_jjbitVec0_), i2) & l2) != 0LL);
     default:
-    return NO;
+    return false;
   }
 }
 
@@ -1040,8 +1040,8 @@ jboolean OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTok
     case 0:
     return ((IOSLongArray_Get(nil_chk(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_jjbitVec3_), i2) & l2) != 0LL);
     default:
-    if ((IOSLongArray_Get(nil_chk(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_jjbitVec1_), i1) & l1) != 0LL) return YES;
-    return NO;
+    if ((IOSLongArray_Get(nil_chk(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_jjbitVec1_), i1) & l1) != 0LL) return true;
+    return false;
   }
 }
 
@@ -1053,8 +1053,8 @@ jboolean OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTok
     case 48:
     return ((IOSLongArray_Get(nil_chk(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_jjbitVec1_), i2) & l2) != 0LL);
     default:
-    if ((IOSLongArray_Get(nil_chk(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_jjbitVec4_), i1) & l1) != 0LL) return YES;
-    return NO;
+    if ((IOSLongArray_Get(nil_chk(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserTokenManager_jjbitVec4_), i1) & l1) != 0LL) return true;
+    return false;
   }
 }
 

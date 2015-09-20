@@ -162,14 +162,14 @@ OrgApacheLuceneSearchSearcherManager *new_OrgApacheLuceneSearchSearcherManager_i
 
 OrgApacheLuceneSearchIndexSearcher *OrgApacheLuceneSearchSearcherManager_getSearcherWithOrgApacheLuceneSearchSearcherFactory_withOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneIndexIndexReader_(OrgApacheLuceneSearchSearcherFactory *searcherFactory, OrgApacheLuceneIndexIndexReader *reader, OrgApacheLuceneIndexIndexReader *previousReader) {
   OrgApacheLuceneSearchSearcherManager_initialize();
-  jboolean success = NO;
+  jboolean success = false;
   OrgApacheLuceneSearchIndexSearcher *searcher;
   @try {
     searcher = [((OrgApacheLuceneSearchSearcherFactory *) nil_chk(searcherFactory)) newSearcherWithOrgApacheLuceneIndexIndexReader:reader withOrgApacheLuceneIndexIndexReader:previousReader];
     if ([((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) getIndexReader] != reader) {
       @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$@$@C", @"SearcherFactory must wrap exactly the provided reader (got ", [searcher getIndexReader], @" but expected ", reader, ')')) autorelease];
     }
-    success = YES;
+    success = true;
   }
   @finally {
     if (!success) {

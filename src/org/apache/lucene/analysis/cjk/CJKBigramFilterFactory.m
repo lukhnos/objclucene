@@ -41,20 +41,20 @@
 void OrgApacheLuceneAnalysisCjkCJKBigramFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisCjkCJKBigramFilterFactory *self, id<JavaUtilMap> args) {
   OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
   jint flags = 0;
-  if ([self getBooleanWithJavaUtilMap:args withNSString:@"han" withBoolean:YES]) {
+  if ([self getBooleanWithJavaUtilMap:args withNSString:@"han" withBoolean:true]) {
     flags |= OrgApacheLuceneAnalysisCjkCJKBigramFilter_HAN;
   }
-  if ([self getBooleanWithJavaUtilMap:args withNSString:@"hiragana" withBoolean:YES]) {
+  if ([self getBooleanWithJavaUtilMap:args withNSString:@"hiragana" withBoolean:true]) {
     flags |= OrgApacheLuceneAnalysisCjkCJKBigramFilter_HIRAGANA;
   }
-  if ([self getBooleanWithJavaUtilMap:args withNSString:@"katakana" withBoolean:YES]) {
+  if ([self getBooleanWithJavaUtilMap:args withNSString:@"katakana" withBoolean:true]) {
     flags |= OrgApacheLuceneAnalysisCjkCJKBigramFilter_KATAKANA;
   }
-  if ([self getBooleanWithJavaUtilMap:args withNSString:@"hangul" withBoolean:YES]) {
+  if ([self getBooleanWithJavaUtilMap:args withNSString:@"hangul" withBoolean:true]) {
     flags |= OrgApacheLuceneAnalysisCjkCJKBigramFilter_HANGUL;
   }
   self->flags_ = flags;
-  self->outputUnigrams_ = [self getBooleanWithJavaUtilMap:args withNSString:@"outputUnigrams" withBoolean:NO];
+  self->outputUnigrams_ = [self getBooleanWithJavaUtilMap:args withNSString:@"outputUnigrams" withBoolean:false];
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
   }

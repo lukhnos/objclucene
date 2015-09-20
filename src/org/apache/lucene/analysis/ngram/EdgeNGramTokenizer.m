@@ -39,7 +39,7 @@
 @end
 
 void OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer_initWithInt_withInt_(OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer *self, jint minGram, jint maxGram) {
-  OrgApacheLuceneAnalysisNgramNGramTokenizer_initWithInt_withInt_withBoolean_(self, minGram, maxGram, YES);
+  OrgApacheLuceneAnalysisNgramNGramTokenizer_initWithInt_withInt_withBoolean_(self, minGram, maxGram, true);
 }
 
 OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer *new_OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer_initWithInt_withInt_(jint minGram, jint maxGram) {
@@ -49,7 +49,7 @@ OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer *new_OrgApacheLuceneAnalysisNgram
 }
 
 void OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withInt_(OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer *self, OrgApacheLuceneUtilAttributeFactory *factory, jint minGram, jint maxGram) {
-  OrgApacheLuceneAnalysisNgramNGramTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withInt_withBoolean_(self, factory, minGram, maxGram, YES);
+  OrgApacheLuceneAnalysisNgramNGramTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withInt_withBoolean_(self, factory, minGram, maxGram, true);
 }
 
 OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer *new_OrgApacheLuceneAnalysisNgramEdgeNGramTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withInt_(OrgApacheLuceneUtilAttributeFactory *factory, jint minGram, jint maxGram) {

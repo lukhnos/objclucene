@@ -46,7 +46,7 @@ withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inp
         if (skippedPositions != 0) {
           [posIncrAtt_ setPositionIncrementWithInt:[((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posIncrAtt_)) getPositionIncrement] + skippedPositions];
         }
-        return YES;
+        return true;
       }
       skippedPositions += [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posIncrAtt_)) getPositionIncrement];
     }
@@ -58,18 +58,18 @@ withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inp
           if ([((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posIncrAtt_)) getPositionIncrement] == 0) {
             [posIncrAtt_ setPositionIncrementWithInt:1];
           }
-          first_ = NO;
+          first_ = false;
         }
-        return YES;
+        return true;
       }
     }
   }
-  return NO;
+  return false;
 }
 
 - (void)reset {
   [super reset];
-  first_ = YES;
+  first_ = true;
 }
 
 - (void)dealloc {
@@ -102,7 +102,7 @@ withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)inp
 void OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter_initWithBoolean_withOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisUtilLucene43FilteringTokenFilter *self, jboolean enablePositionIncrements, OrgApacheLuceneAnalysisTokenStream *input) {
   OrgApacheLuceneAnalysisTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, input);
   JreStrongAssign(&self->posIncrAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_class_()]);
-  self->first_ = YES;
+  self->first_ = true;
   self->enablePositionIncrements_ = enablePositionIncrements;
 }
 

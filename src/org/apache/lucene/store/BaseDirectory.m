@@ -56,7 +56,7 @@
 
 void OrgApacheLuceneStoreBaseDirectory_initWithOrgApacheLuceneStoreLockFactory_(OrgApacheLuceneStoreBaseDirectory *self, OrgApacheLuceneStoreLockFactory *lockFactory) {
   OrgApacheLuceneStoreDirectory_init(self);
-  JreAssignVolatileBoolean(&self->isOpen_, YES);
+  JreAssignVolatileBoolean(&self->isOpen_, true);
   if (lockFactory == nil) {
     @throw [new_JavaLangNullPointerException_initWithNSString_(@"LockFactory cannot be null, use an explicit instance!") autorelease];
   }

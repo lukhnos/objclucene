@@ -221,10 +221,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisUtilCharacterUtils)
   return OrgApacheLuceneAnalysisUtilCharacterUtils_readFullyWithJavaIoReader_withCharArray_withInt_withInt_(reader, dest, offset, len);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisUtilCharacterUtils_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisUtilCharacterUtils class]) {
@@ -306,10 +308,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisUtilCharacterUtils)
 
 @implementation OrgApacheLuceneAnalysisUtilCharacterUtils_Java5CharacterUtils
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisUtilCharacterUtils_Java5CharacterUtils_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)codePointAtWithJavaLangCharSequence:(id<JavaLangCharSequence>)seq
                                     withInt:(jint)offset {
@@ -393,10 +397,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisUtilCharacterUtils_Java5
 
 @implementation OrgApacheLuceneAnalysisUtilCharacterUtils_Java4CharacterUtils
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisUtilCharacterUtils_Java4CharacterUtils_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)codePointAtWithJavaLangCharSequence:(id<JavaLangCharSequence>)seq
                                     withInt:(jint)offset {

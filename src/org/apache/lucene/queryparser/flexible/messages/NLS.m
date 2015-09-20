@@ -84,10 +84,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneQueryparserFlexibleMessagesNLS)
 
 @implementation OrgApacheLuceneQueryparserFlexibleMessagesNLS
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueryparserFlexibleMessagesNLS_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (NSString *)getLocalizedMessageWithNSString:(NSString *)key {
   return OrgApacheLuceneQueryparserFlexibleMessagesNLS_getLocalizedMessageWithNSString_(key);
@@ -280,7 +282,7 @@ void OrgApacheLuceneQueryparserFlexibleMessagesNLS_validateMessageWithNSString_w
 void OrgApacheLuceneQueryparserFlexibleMessagesNLS_makeAccessibleWithJavaLangReflectField_(JavaLangReflectField *field) {
   OrgApacheLuceneQueryparserFlexibleMessagesNLS_initialize();
   if (JavaLangSystem_getSecurityManager() == nil) {
-    [((JavaLangReflectField *) nil_chk(field)) setAccessibleWithBoolean:YES];
+    [((JavaLangReflectField *) nil_chk(field)) setAccessibleWithBoolean:true];
   }
   else {
     JavaSecurityAccessController_doPrivilegedWithJavaSecurityPrivilegedAction_([new_OrgApacheLuceneQueryparserFlexibleMessagesNLS_$1_initWithJavaLangReflectField_(field) autorelease]);
@@ -292,7 +294,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleMessagesNLS)
 @implementation OrgApacheLuceneQueryparserFlexibleMessagesNLS_$1
 
 - (id)run {
-  [((JavaLangReflectField *) nil_chk(val$field_)) setAccessibleWithBoolean:YES];
+  [((JavaLangReflectField *) nil_chk(val$field_)) setAccessibleWithBoolean:true];
   return nil;
 }
 

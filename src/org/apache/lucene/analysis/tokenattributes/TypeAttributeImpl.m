@@ -21,10 +21,12 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl, typ
 
 @implementation OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithNSString:(NSString *)type {
   OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl_initWithNSString_(self, type);
@@ -45,13 +47,13 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl, typ
 
 - (jboolean)isEqual:(id)other {
   if (other == self) {
-    return YES;
+    return true;
   }
   if ([other isKindOfClass:[OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl class]]) {
     OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl *o = (OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl *) check_class_cast(other, [OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl class]);
     return (self->type_ == nil ? ((OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl *) nil_chk(o))->type_ == nil : [self->type_ isEqual:((OrgApacheLuceneAnalysisTokenattributesTypeAttributeImpl *) nil_chk(o))->type_]);
   }
-  return NO;
+  return false;
 }
 
 - (NSUInteger)hash {

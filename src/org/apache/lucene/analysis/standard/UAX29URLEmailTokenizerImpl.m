@@ -224,16 +224,16 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImp
 }
 
 - (void)yyclose {
-  zzAtEOF_ = YES;
+  zzAtEOF_ = true;
   zzEndRead_ = zzStartRead_;
   if (zzReader_ != nil) [zzReader_ close];
 }
 
 - (void)yyresetWithJavaIoReader:(JavaIoReader *)reader {
   JreStrongAssign(&zzReader_, reader);
-  zzAtBOL_ = YES;
-  zzAtEOF_ = NO;
-  zzEOFDone_ = NO;
+  zzAtBOL_ = true;
+  zzAtEOF_ = false;
+  zzEOFDone_ = false;
   zzEndRead_ = zzStartRead_ = 0;
   zzCurrentPos_ = zzMarkedPos_ = 0;
   zzFinalHighSurrogate_ = 0;
@@ -282,7 +282,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImp
   IOSIntArray *zzTransL = OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_ZZ_TRANS_;
   IOSIntArray *zzRowMapL = OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_ZZ_ROWMAP_;
   IOSIntArray *zzAttrL = OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_ZZ_ATTRIBUTE_;
-  while (YES) {
+  while (true) {
     zzMarkedPosL = zzMarkedPos_;
     yychar_ += zzMarkedPosL - zzStartRead_;
     zzAction = -1;
@@ -293,7 +293,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImp
       zzAction = zzState_;
     }
     {
-      while (YES) {
+      while (true) {
         if (zzCurrentPosL < zzEndReadL) {
           zzInput = JavaLangCharacter_codePointAtWithCharArray_withInt_withInt_(zzBufferL, zzCurrentPosL, zzEndReadL);
           zzCurrentPosL += JavaLangCharacter_charCountWithInt_(zzInput);
@@ -434,7 +434,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImp
       break;
       default:
       if (zzInput == OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_YYEOF && zzStartRead_ == zzCurrentPos_) {
-        zzAtEOF_ = YES;
+        zzAtEOF_ = true;
         switch (zzLexicalState_) {
           case OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_YYINITIAL:
           {
@@ -654,7 +654,7 @@ void OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_initWithJavaIoRea
   self->ZZ_BUFFERSIZE_ = 255;
   self->zzLexicalState_ = OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_YYINITIAL;
   JreStrongAssignAndConsume(&self->zzBuffer_, [IOSCharArray newArrayWithLength:self->ZZ_BUFFERSIZE_]);
-  self->zzAtBOL_ = YES;
+  self->zzAtBOL_ = true;
   self->zzFinalHighSurrogate_ = 0;
   JreStrongAssign(&self->zzReader_, inArg);
 }
@@ -705,13 +705,13 @@ jboolean OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_zzRefill(OrgA
         --self->zzEndRead_;
         self->zzFinalHighSurrogate_ = 1;
         if (totalRead == 1) {
-          return YES;
+          return true;
         }
       }
     }
-    return NO;
+    return false;
   }
-  return YES;
+  return true;
 }
 
 void OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl_yybeginWithInt_(OrgApacheLuceneAnalysisStandardUAX29URLEmailTokenizerImpl *self, jint newState) {

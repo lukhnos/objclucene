@@ -19,10 +19,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchSimilaritiesDefaultSimilarity)
 
 @implementation OrgApacheLuceneSearchSimilaritiesDefaultSimilarity
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSimilaritiesDefaultSimilarity_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jfloat)coordWithInt:(jint)overlap
                withInt:(jint)maxOverlap {
@@ -120,7 +122,7 @@ withOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)payload {
 
 void OrgApacheLuceneSearchSimilaritiesDefaultSimilarity_init(OrgApacheLuceneSearchSimilaritiesDefaultSimilarity *self) {
   OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_init(self);
-  self->discountOverlaps_ = YES;
+  self->discountOverlaps_ = true;
 }
 
 OrgApacheLuceneSearchSimilaritiesDefaultSimilarity *new_OrgApacheLuceneSearchSimilaritiesDefaultSimilarity_init() {

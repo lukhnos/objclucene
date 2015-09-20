@@ -93,10 +93,12 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisNgramNGramTokenizer_c
   return self;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisNgramNGramTokenizer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)init__WithInt:(jint)minGram
               withInt:(jint)maxGram
@@ -106,7 +108,7 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisNgramNGramTokenizer_c
 
 - (jboolean)incrementToken {
   [self clearAttributes];
-  while (YES) {
+  while (true) {
     if (bufferStart_ >= bufferEnd_ - maxGram_ - 1 && !exhausted_) {
       JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(buffer_, bufferStart_, buffer_, 0, bufferEnd_ - bufferStart_);
       bufferEnd_ -= bufferStart_;
@@ -119,7 +121,7 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisNgramNGramTokenizer_c
     if (gramSize_ > maxGram_ || (bufferStart_ + gramSize_) > bufferEnd_) {
       if (bufferStart_ + 1 + minGram_ > bufferEnd_) {
         JreAssert((exhausted_), (@"org/apache/lucene/analysis/ngram/NGramTokenizer.java:155 condition failed: assert exhausted;"));
-        return NO;
+        return false;
       }
       OrgApacheLuceneAnalysisNgramNGramTokenizer_consume(self);
       gramSize_ = minGram_;
@@ -138,7 +140,7 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisNgramNGramTokenizer_c
     [((id<OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute>) nil_chk(posLenAtt_)) setPositionLengthWithInt:1];
     [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAtt_)) setOffsetWithInt:[self correctOffsetWithInt:offset_] withInt:[self correctOffsetWithInt:offset_ + length]];
     ++gramSize_;
-    return YES;
+    return true;
   }
 }
 
@@ -151,7 +153,7 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisNgramNGramTokenizer_c
 }
 
 - (jboolean)isTokenCharWithInt:(jint)chr {
-  return YES;
+  return true;
 }
 
 - (void)end {
@@ -171,7 +173,7 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisNgramNGramTokenizer_c
   lastNonTokenChar_ = lastCheckedChar_ = bufferStart_ - 1;
   offset_ = 0;
   gramSize_ = minGram_;
-  exhausted_ = NO;
+  exhausted_ = false;
   [((OrgApacheLuceneAnalysisUtilCharacterUtils_CharacterBuffer *) nil_chk(charBuffer_)) reset];
 }
 
@@ -244,7 +246,7 @@ OrgApacheLuceneAnalysisNgramNGramTokenizer *new_OrgApacheLuceneAnalysisNgramNGra
 }
 
 void OrgApacheLuceneAnalysisNgramNGramTokenizer_initWithInt_withInt_(OrgApacheLuceneAnalysisNgramNGramTokenizer *self, jint minGram, jint maxGram) {
-  OrgApacheLuceneAnalysisNgramNGramTokenizer_initWithInt_withInt_withBoolean_(self, minGram, maxGram, NO);
+  OrgApacheLuceneAnalysisNgramNGramTokenizer_initWithInt_withInt_withBoolean_(self, minGram, maxGram, false);
 }
 
 OrgApacheLuceneAnalysisNgramNGramTokenizer *new_OrgApacheLuceneAnalysisNgramNGramTokenizer_initWithInt_withInt_(jint minGram, jint maxGram) {
@@ -269,7 +271,7 @@ OrgApacheLuceneAnalysisNgramNGramTokenizer *new_OrgApacheLuceneAnalysisNgramNGra
 }
 
 void OrgApacheLuceneAnalysisNgramNGramTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withInt_(OrgApacheLuceneAnalysisNgramNGramTokenizer *self, OrgApacheLuceneUtilAttributeFactory *factory, jint minGram, jint maxGram) {
-  OrgApacheLuceneAnalysisNgramNGramTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withInt_withBoolean_(self, factory, minGram, maxGram, NO);
+  OrgApacheLuceneAnalysisNgramNGramTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withInt_withBoolean_(self, factory, minGram, maxGram, false);
 }
 
 OrgApacheLuceneAnalysisNgramNGramTokenizer *new_OrgApacheLuceneAnalysisNgramNGramTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_withInt_withInt_(OrgApacheLuceneUtilAttributeFactory *factory, jint minGram, jint maxGram) {

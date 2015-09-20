@@ -42,7 +42,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFi
 }
 
 - (void)informWithOrgApacheLuceneAnalysisUtilResourceLoader:(id<OrgApacheLuceneAnalysisUtilResourceLoader>)loader {
-  JreStrongAssign(&dictionary_, [super getWordSetWithOrgApacheLuceneAnalysisUtilResourceLoader:loader withNSString:dictFile_ withBoolean:NO]);
+  JreStrongAssign(&dictionary_, [super getWordSetWithOrgApacheLuceneAnalysisUtilResourceLoader:loader withNSString:dictFile_ withBoolean:false]);
 }
 
 - (OrgApacheLuceneAnalysisTokenStream *)createWithOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)input {
@@ -87,7 +87,7 @@ void OrgApacheLuceneAnalysisCompoundDictionaryCompoundWordTokenFilterFactory_ini
   self->minWordSize_ = [self getIntWithJavaUtilMap:args withNSString:@"minWordSize" withInt:OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_DEFAULT_MIN_WORD_SIZE];
   self->minSubwordSize_ = [self getIntWithJavaUtilMap:args withNSString:@"minSubwordSize" withInt:OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_DEFAULT_MIN_SUBWORD_SIZE];
   self->maxSubwordSize_ = [self getIntWithJavaUtilMap:args withNSString:@"maxSubwordSize" withInt:OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_DEFAULT_MAX_SUBWORD_SIZE];
-  self->onlyLongestMatch_ = [self getBooleanWithJavaUtilMap:args withNSString:@"onlyLongestMatch" withBoolean:YES];
+  self->onlyLongestMatch_ = [self getBooleanWithJavaUtilMap:args withNSString:@"onlyLongestMatch" withBoolean:true];
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
   }

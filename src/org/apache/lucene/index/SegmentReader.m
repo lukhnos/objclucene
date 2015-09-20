@@ -236,7 +236,7 @@ void OrgApacheLuceneIndexSegmentReader_initWithOrgApacheLuceneIndexSegmentCommit
   JreStrongAssign(&self->si_, si);
   JreStrongAssignAndConsume(&self->core_, new_OrgApacheLuceneIndexSegmentCoreReaders_initWithOrgApacheLuceneIndexSegmentReader_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreIOContext_(self, ((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(si))->info_))->dir_, si, context));
   JreStrongAssignAndConsume(&self->segDocValues_, new_OrgApacheLuceneIndexSegmentDocValues_init());
-  jboolean success = NO;
+  jboolean success = false;
   OrgApacheLuceneCodecsCodec *codec = [si->info_ getCodec];
   @try {
     if ([si hasDeletions]) {
@@ -249,7 +249,7 @@ void OrgApacheLuceneIndexSegmentReader_initWithOrgApacheLuceneIndexSegmentCommit
     self->numDocs_ = [si->info_ maxDoc] - [si getDelCount];
     JreStrongAssign(&self->fieldInfos_, OrgApacheLuceneIndexSegmentReader_initFieldInfos(self));
     JreStrongAssign(&self->docValuesProducer_, OrgApacheLuceneIndexSegmentReader_initDocValuesProducer(self));
-    success = YES;
+    success = true;
   }
   @finally {
     if (!success) {
@@ -288,11 +288,11 @@ void OrgApacheLuceneIndexSegmentReader_initWithOrgApacheLuceneIndexSegmentCommit
   JreStrongAssign(&self->core_, ((OrgApacheLuceneIndexSegmentReader *) nil_chk(sr))->core_);
   [((OrgApacheLuceneIndexSegmentCoreReaders *) nil_chk(self->core_)) incRef];
   JreStrongAssign(&self->segDocValues_, sr->segDocValues_);
-  jboolean success = NO;
+  jboolean success = false;
   @try {
     JreStrongAssign(&self->fieldInfos_, OrgApacheLuceneIndexSegmentReader_initFieldInfos(self));
     JreStrongAssign(&self->docValuesProducer_, OrgApacheLuceneIndexSegmentReader_initDocValuesProducer(self));
-    success = YES;
+    success = true;
   }
   @finally {
     if (!success) {

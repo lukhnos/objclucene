@@ -80,7 +80,7 @@ withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo {
 }
 
 - (void)reset {
-  [((OrgApacheLuceneUtilBytesRefHash *) nil_chk(bytesHash_)) clearWithBoolean:NO];
+  [((OrgApacheLuceneUtilBytesRefHash *) nil_chk(bytesHash_)) clearWithBoolean:false];
   if (nextPerField_ != nil) {
     [nextPerField_ reset];
   }
@@ -213,7 +213,7 @@ withOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)fieldInfo {
   if (nextPerField_ != nil) {
     doNextCall_ = [nextPerField_ startWithOrgApacheLuceneIndexIndexableField:field withBoolean:first];
   }
-  return YES;
+  return true;
 }
 
 - (void)newTermWithInt:(jint)termID {

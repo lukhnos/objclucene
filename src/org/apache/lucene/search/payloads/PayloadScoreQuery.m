@@ -143,11 +143,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchPayloadsPayloadScoreQuery_Payloa
 }
 
 - (jboolean)isEqual:(id)o {
-  if (self == o) return YES;
-  if (!([o isKindOfClass:[OrgApacheLuceneSearchPayloadsPayloadScoreQuery class]])) return NO;
-  if (![super isEqual:o]) return NO;
+  if (self == o) return true;
+  if (!([o isKindOfClass:[OrgApacheLuceneSearchPayloadsPayloadScoreQuery class]])) return false;
+  if (![super isEqual:o]) return false;
   OrgApacheLuceneSearchPayloadsPayloadScoreQuery *that = (OrgApacheLuceneSearchPayloadsPayloadScoreQuery *) check_class_cast(o, [OrgApacheLuceneSearchPayloadsPayloadScoreQuery class]);
-  if (wrappedQuery_ != nil ? ![wrappedQuery_ isEqual:((OrgApacheLuceneSearchPayloadsPayloadScoreQuery *) nil_chk(that))->wrappedQuery_] : ((OrgApacheLuceneSearchPayloadsPayloadScoreQuery *) nil_chk(that))->wrappedQuery_ != nil) return NO;
+  if (wrappedQuery_ != nil ? ![wrappedQuery_ isEqual:((OrgApacheLuceneSearchPayloadsPayloadScoreQuery *) nil_chk(that))->wrappedQuery_] : ((OrgApacheLuceneSearchPayloadsPayloadScoreQuery *) nil_chk(that))->wrappedQuery_ != nil) return false;
   return !(function_ != nil ? ![function_ isEqual:((OrgApacheLuceneSearchPayloadsPayloadScoreQuery *) nil_chk(that))->function_] : ((OrgApacheLuceneSearchPayloadsPayloadScoreQuery *) nil_chk(that))->function_ != nil);
 }
 

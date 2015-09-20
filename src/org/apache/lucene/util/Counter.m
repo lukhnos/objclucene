@@ -73,10 +73,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilCounter_AtomicCounter)
   return OrgApacheLuceneUtilCounter_newCounterWithBoolean_(threadSafe);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilCounter_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -95,7 +97,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilCounter_AtomicCounter)
 
 OrgApacheLuceneUtilCounter *OrgApacheLuceneUtilCounter_newCounter() {
   OrgApacheLuceneUtilCounter_initialize();
-  return OrgApacheLuceneUtilCounter_newCounterWithBoolean_(NO);
+  return OrgApacheLuceneUtilCounter_newCounterWithBoolean_(false);
 }
 
 OrgApacheLuceneUtilCounter *OrgApacheLuceneUtilCounter_newCounterWithBoolean_(jboolean threadSafe) {
@@ -119,10 +121,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilCounter)
   return count_;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilCounter_SerialCounter_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -162,10 +166,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilCounter_SerialCounter)
   return [((JavaUtilConcurrentAtomicAtomicLong *) nil_chk(count_)) get];
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilCounter_AtomicCounter_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(count_);

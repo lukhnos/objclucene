@@ -76,14 +76,14 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneRangetreeNumericRangeTreeQuery_$1)
     OrgApacheLuceneRangetreeNumericRangeTreeQuery *q = (OrgApacheLuceneRangetreeNumericRangeTreeQuery *) check_class_cast(other, [OrgApacheLuceneRangetreeNumericRangeTreeQuery class]);
     return ((((OrgApacheLuceneRangetreeNumericRangeTreeQuery *) nil_chk(q))->minValue_ == nil ? minValue_ == nil : [q->minValue_ isEqual:minValue_]) && (q->maxValue_ == nil ? maxValue_ == nil : [q->maxValue_ isEqual:maxValue_]) && minInclusive_ == q->minInclusive_ && maxInclusive_ == q->maxInclusive_);
   }
-  return NO;
+  return false;
 }
 
 - (NSString *)toStringWithNSString:(NSString *)field {
   JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
   [sb appendWithNSString:[[self getClass] getSimpleName]];
   [sb appendWithChar:':'];
-  if ([((NSString *) nil_chk(self->field_)) isEqual:field] == NO) {
+  if ([((NSString *) nil_chk(self->field_)) isEqual:field] == false) {
     [sb appendWithNSString:@"field="];
     [sb appendWithNSString:self->field_];
     [sb appendWithChar:':'];
@@ -144,20 +144,20 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneRangetreeNumericRangeTreeQuery)
   if (sdv == nil) {
     return nil;
   }
-  if ([sdv isKindOfClass:[OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues class]] == NO) {
+  if ([sdv isKindOfClass:[OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues class]] == false) {
     @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$@", @"field \"", this$0_->field_, @"\" was not indexed with RangeTreeDocValuesFormat: got: ", sdv)) autorelease];
   }
   OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues *treeDV = (OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues *) check_class_cast(sdv, [OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues class]);
   OrgApacheLuceneRangetreeRangeTreeReader *tree = [((OrgApacheLuceneRangetreeRangeTreeSortedNumericDocValues *) nil_chk(treeDV)) getRangeTreeReader];
   jlong minBoundIncl = (this$0_->minValue_ == nil) ? JavaLangLong_MIN_VALUE : [this$0_->minValue_ longLongValue];
-  if (this$0_->minInclusive_ == NO && this$0_->minValue_ != nil) {
+  if (this$0_->minInclusive_ == false && this$0_->minValue_ != nil) {
     if (minBoundIncl == JavaLangLong_MAX_VALUE) {
       return nil;
     }
     minBoundIncl++;
   }
   jlong maxBoundIncl = (this$0_->maxValue_ == nil) ? JavaLangLong_MAX_VALUE : [this$0_->maxValue_ longLongValue];
-  if (this$0_->maxInclusive_ == NO && this$0_->maxValue_ != nil) {
+  if (this$0_->maxInclusive_ == false && this$0_->maxValue_ != nil) {
     if (maxBoundIncl == JavaLangLong_MIN_VALUE) {
       return nil;
     }

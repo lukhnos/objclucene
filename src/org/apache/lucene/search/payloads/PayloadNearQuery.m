@@ -76,7 +76,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpa
                                                                                  withBoolean:(jboolean)needsScores {
   id<JavaUtilList> subWeights = [new_JavaUtilArrayList_init() autorelease];
   for (OrgApacheLuceneSearchSpansSpanQuery * __strong q in nil_chk(clauses_)) {
-    [subWeights addWithId:[((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(q)) createWeightWithOrgApacheLuceneSearchIndexSearcher:searcher withBoolean:NO]];
+    [subWeights addWithId:[((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(q)) createWeightWithOrgApacheLuceneSearchIndexSearcher:searcher withBoolean:false]];
   }
   return [new_OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpanWeight_initWithOrgApacheLuceneSearchPayloadsPayloadNearQuery_withJavaUtilList_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_(self, subWeights, searcher, needsScores ? OrgApacheLuceneSearchSpansSpanQuery_getTermContextsWithJavaUtilCollection_(subWeights) : nil) autorelease];
 }
@@ -122,7 +122,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchPayloadsPayloadNearQuery_PayloadNearSpa
 
 - (jboolean)isEqual:(id)obj {
   if (![super isEqual:obj]) {
-    return NO;
+    return false;
   }
   OrgApacheLuceneSearchPayloadsPayloadNearQuery *other = (OrgApacheLuceneSearchPayloadsPayloadNearQuery *) check_class_cast(obj, [OrgApacheLuceneSearchPayloadsPayloadNearQuery class]);
   return [((NSString *) nil_chk(fieldName_)) isEqual:((OrgApacheLuceneSearchPayloadsPayloadNearQuery *) nil_chk(other))->fieldName_] && [((OrgApacheLuceneSearchPayloadsPayloadFunction *) nil_chk(function_)) isEqual:other->function_];

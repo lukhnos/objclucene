@@ -78,10 +78,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilIntBlockPool)
 
 @implementation OrgApacheLuceneUtilIntBlockPool
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilIntBlockPool_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithOrgApacheLuceneUtilIntBlockPool_Allocator:(OrgApacheLuceneUtilIntBlockPool_Allocator *)allocator {
   OrgApacheLuceneUtilIntBlockPool_initWithOrgApacheLuceneUtilIntBlockPool_Allocator_(self, allocator);
@@ -89,7 +91,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilIntBlockPool)
 }
 
 - (void)reset {
-  [self resetWithBoolean:YES withBoolean:YES];
+  [self resetWithBoolean:true withBoolean:true];
 }
 
 - (void)resetWithBoolean:(jboolean)zeroFillBuffers
@@ -299,10 +301,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilIntBlockPool_Allocator)
 
 @implementation OrgApacheLuceneUtilIntBlockPool_DirectAllocator
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilIntBlockPool_DirectAllocator_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)recycleIntBlocksWithIntArray2:(IOSObjectArray *)blocks
                               withInt:(jint)start

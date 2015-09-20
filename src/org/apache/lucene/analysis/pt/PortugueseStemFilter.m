@@ -42,10 +42,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPtPortugueseStemFilter, keywordAttr_,
       jint newlen = [((OrgApacheLuceneAnalysisPtPortugueseStemmer *) nil_chk(stemmer_)) stemWithCharArray:[termAtt_ resizeBufferWithInt:len + 1] withInt:len];
       [termAtt_ setLengthWithInt:newlen];
     }
-    return YES;
+    return true;
   }
   else {
-    return NO;
+    return false;
   }
 }
 

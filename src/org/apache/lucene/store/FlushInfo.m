@@ -24,13 +24,13 @@
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return YES;
-  if (obj == nil) return NO;
-  if ([self getClass] != [nil_chk(obj) getClass]) return NO;
+  if (self == obj) return true;
+  if (obj == nil) return false;
+  if ([self getClass] != [nil_chk(obj) getClass]) return false;
   OrgApacheLuceneStoreFlushInfo *other = (OrgApacheLuceneStoreFlushInfo *) check_class_cast(obj, [OrgApacheLuceneStoreFlushInfo class]);
-  if (estimatedSegmentSize_ != other->estimatedSegmentSize_) return NO;
-  if (numDocs_ != other->numDocs_) return NO;
-  return YES;
+  if (estimatedSegmentSize_ != other->estimatedSegmentSize_) return false;
+  if (numDocs_ != other->numDocs_) return false;
+  return true;
 }
 
 - (NSString *)description {

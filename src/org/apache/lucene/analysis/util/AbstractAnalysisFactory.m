@@ -90,7 +90,7 @@ NSString *OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_LUCENE_MATCH_VERSIO
 - (NSString *)requireWithJavaUtilMap:(id<JavaUtilMap>)args
                         withNSString:(NSString *)name
               withJavaUtilCollection:(id<JavaUtilCollection>)allowedValues {
-  return [self requireWithJavaUtilMap:args withNSString:name withJavaUtilCollection:allowedValues withBoolean:YES];
+  return [self requireWithJavaUtilMap:args withNSString:name withJavaUtilCollection:allowedValues withBoolean:true];
 }
 
 - (NSString *)requireWithJavaUtilMap:(id<JavaUtilMap>)args
@@ -140,7 +140,7 @@ NSString *OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_LUCENE_MATCH_VERSIO
                     withNSString:(NSString *)name
           withJavaUtilCollection:(id<JavaUtilCollection>)allowedValues
                     withNSString:(NSString *)defaultVal {
-  return [self getWithJavaUtilMap:args withNSString:name withJavaUtilCollection:allowedValues withNSString:defaultVal withBoolean:YES];
+  return [self getWithJavaUtilMap:args withNSString:name withJavaUtilCollection:allowedValues withNSString:defaultVal withBoolean:true];
 }
 
 - (NSString *)getWithJavaUtilMap:(id<JavaUtilMap>)args
@@ -383,7 +383,7 @@ NSString *OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_LUCENE_MATCH_VERSIO
 
 void OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory *self, id<JavaUtilMap> args) {
   NSObject_init(self);
-  self->isExplicitLuceneMatchVersion_ = NO;
+  self->isExplicitLuceneMatchVersion_ = false;
   JreStrongAssign(&self->originalArgs_, JavaUtilCollections_unmodifiableMapWithJavaUtilMap_([new_JavaUtilHashMap_initWithJavaUtilMap_(args) autorelease]));
   NSString *version_ = [self getWithJavaUtilMap:args withNSString:OrgApacheLuceneAnalysisUtilAbstractAnalysisFactory_LUCENE_MATCH_VERSION_PARAM_];
   if (version_ == nil) {

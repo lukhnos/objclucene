@@ -150,7 +150,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionBoostedQuery_CustomScor
 }
 
 - (jboolean)isEqual:(id)o {
-  if (![super isEqual:o]) return NO;
+  if (![super isEqual:o]) return false;
   OrgApacheLuceneQueriesFunctionBoostedQuery *other = (OrgApacheLuceneQueriesFunctionBoostedQuery *) check_class_cast(o, [OrgApacheLuceneQueriesFunctionBoostedQuery class]);
   return [((OrgApacheLuceneSearchQuery *) nil_chk(self->q_)) isEqual:((OrgApacheLuceneQueriesFunctionBoostedQuery *) nil_chk(other))->q_] && [((OrgApacheLuceneQueriesFunctionValueSource *) nil_chk(self->boostVal_)) isEqual:other->boostVal_];
 }

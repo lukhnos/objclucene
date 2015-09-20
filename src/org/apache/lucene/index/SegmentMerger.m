@@ -240,24 +240,26 @@ OrgApacheLuceneIndexSegmentMerger *new_OrgApacheLuceneIndexSegmentMerger_initWit
 
 void OrgApacheLuceneIndexSegmentMerger_mergeDocValuesWithOrgApacheLuceneIndexSegmentWriteState_(OrgApacheLuceneIndexSegmentMerger *self, OrgApacheLuceneIndexSegmentWriteState *segmentWriteState) {
   {
-    JavaLangThrowable *__mainException = nil;
     OrgApacheLuceneCodecsDocValuesConsumer *consumer = [((OrgApacheLuceneCodecsDocValuesFormat *) nil_chk([((OrgApacheLuceneCodecsCodec *) nil_chk(self->codec_)) docValuesFormat])) fieldsConsumerWithOrgApacheLuceneIndexSegmentWriteState:segmentWriteState];
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
       [((OrgApacheLuceneCodecsDocValuesConsumer *) nil_chk(consumer)) mergeWithOrgApacheLuceneIndexMergeState:self->mergeState_];
     }
+    @catch (JavaLangThrowable *e) {
+      __primaryException1 = e;
+      @throw e;
+    }
     @finally {
-      @try {
-        [consumer close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
+      if (consumer != nil) {
+        if (__primaryException1 != nil) {
+          @try {
+            [consumer close];
+          } @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
         } else {
-          __mainException = e;
+          [consumer close];
         }
-      }
-      if (__mainException) {
-        @throw __mainException;
       }
     }
   }
@@ -265,24 +267,26 @@ void OrgApacheLuceneIndexSegmentMerger_mergeDocValuesWithOrgApacheLuceneIndexSeg
 
 void OrgApacheLuceneIndexSegmentMerger_mergeNormsWithOrgApacheLuceneIndexSegmentWriteState_(OrgApacheLuceneIndexSegmentMerger *self, OrgApacheLuceneIndexSegmentWriteState *segmentWriteState) {
   {
-    JavaLangThrowable *__mainException = nil;
     OrgApacheLuceneCodecsNormsConsumer *consumer = [((OrgApacheLuceneCodecsNormsFormat *) nil_chk([((OrgApacheLuceneCodecsCodec *) nil_chk(self->codec_)) normsFormat])) normsConsumerWithOrgApacheLuceneIndexSegmentWriteState:segmentWriteState];
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
       [((OrgApacheLuceneCodecsNormsConsumer *) nil_chk(consumer)) mergeWithOrgApacheLuceneIndexMergeState:self->mergeState_];
     }
+    @catch (JavaLangThrowable *e) {
+      __primaryException1 = e;
+      @throw e;
+    }
     @finally {
-      @try {
-        [consumer close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
+      if (consumer != nil) {
+        if (__primaryException1 != nil) {
+          @try {
+            [consumer close];
+          } @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
         } else {
-          __mainException = e;
+          [consumer close];
         }
-      }
-      if (__mainException) {
-        @throw __mainException;
       }
     }
   }
@@ -290,24 +294,26 @@ void OrgApacheLuceneIndexSegmentMerger_mergeNormsWithOrgApacheLuceneIndexSegment
 
 jint OrgApacheLuceneIndexSegmentMerger_mergeFields(OrgApacheLuceneIndexSegmentMerger *self) {
   {
-    JavaLangThrowable *__mainException = nil;
     OrgApacheLuceneCodecsStoredFieldsWriter *fieldsWriter = [((OrgApacheLuceneCodecsStoredFieldsFormat *) nil_chk([((OrgApacheLuceneCodecsCodec *) nil_chk(self->codec_)) storedFieldsFormat])) fieldsWriterWithOrgApacheLuceneStoreDirectory:self->directory_ withOrgApacheLuceneIndexSegmentInfo:((OrgApacheLuceneIndexMergeState *) nil_chk(self->mergeState_))->segmentInfo_ withOrgApacheLuceneStoreIOContext:self->context_];
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
       return [((OrgApacheLuceneCodecsStoredFieldsWriter *) nil_chk(fieldsWriter)) mergeWithOrgApacheLuceneIndexMergeState:self->mergeState_];
     }
+    @catch (JavaLangThrowable *e) {
+      __primaryException1 = e;
+      @throw e;
+    }
     @finally {
-      @try {
-        [fieldsWriter close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
+      if (fieldsWriter != nil) {
+        if (__primaryException1 != nil) {
+          @try {
+            [fieldsWriter close];
+          } @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
         } else {
-          __mainException = e;
+          [fieldsWriter close];
         }
-      }
-      if (__mainException) {
-        @throw __mainException;
       }
     }
   }
@@ -315,24 +321,26 @@ jint OrgApacheLuceneIndexSegmentMerger_mergeFields(OrgApacheLuceneIndexSegmentMe
 
 jint OrgApacheLuceneIndexSegmentMerger_mergeVectors(OrgApacheLuceneIndexSegmentMerger *self) {
   {
-    JavaLangThrowable *__mainException = nil;
     OrgApacheLuceneCodecsTermVectorsWriter *termVectorsWriter = [((OrgApacheLuceneCodecsTermVectorsFormat *) nil_chk([((OrgApacheLuceneCodecsCodec *) nil_chk(self->codec_)) termVectorsFormat])) vectorsWriterWithOrgApacheLuceneStoreDirectory:self->directory_ withOrgApacheLuceneIndexSegmentInfo:((OrgApacheLuceneIndexMergeState *) nil_chk(self->mergeState_))->segmentInfo_ withOrgApacheLuceneStoreIOContext:self->context_];
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
       return [((OrgApacheLuceneCodecsTermVectorsWriter *) nil_chk(termVectorsWriter)) mergeWithOrgApacheLuceneIndexMergeState:self->mergeState_];
     }
+    @catch (JavaLangThrowable *e) {
+      __primaryException1 = e;
+      @throw e;
+    }
     @finally {
-      @try {
-        [termVectorsWriter close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
+      if (termVectorsWriter != nil) {
+        if (__primaryException1 != nil) {
+          @try {
+            [termVectorsWriter close];
+          } @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
         } else {
-          __mainException = e;
+          [termVectorsWriter close];
         }
-      }
-      if (__mainException) {
-        @throw __mainException;
       }
     }
   }
@@ -340,24 +348,26 @@ jint OrgApacheLuceneIndexSegmentMerger_mergeVectors(OrgApacheLuceneIndexSegmentM
 
 void OrgApacheLuceneIndexSegmentMerger_mergeTermsWithOrgApacheLuceneIndexSegmentWriteState_(OrgApacheLuceneIndexSegmentMerger *self, OrgApacheLuceneIndexSegmentWriteState *segmentWriteState) {
   {
-    JavaLangThrowable *__mainException = nil;
     OrgApacheLuceneCodecsFieldsConsumer *consumer = [((OrgApacheLuceneCodecsPostingsFormat *) nil_chk([((OrgApacheLuceneCodecsCodec *) nil_chk(self->codec_)) postingsFormat])) fieldsConsumerWithOrgApacheLuceneIndexSegmentWriteState:segmentWriteState];
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
       [((OrgApacheLuceneCodecsFieldsConsumer *) nil_chk(consumer)) mergeWithOrgApacheLuceneIndexMergeState:self->mergeState_];
     }
+    @catch (JavaLangThrowable *e) {
+      __primaryException1 = e;
+      @throw e;
+    }
     @finally {
-      @try {
-        [consumer close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
+      if (consumer != nil) {
+        if (__primaryException1 != nil) {
+          @try {
+            [consumer close];
+          } @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
         } else {
-          __mainException = e;
+          [consumer close];
         }
-      }
-      if (__mainException) {
-        @throw __mainException;
       }
     }
   }

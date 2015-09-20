@@ -162,7 +162,7 @@ __attribute__((unused)) static jint OrgApacheLuceneIndexAutomatonTermsEnum_backt
 void OrgApacheLuceneIndexAutomatonTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilAutomatonCompiledAutomaton_(OrgApacheLuceneIndexAutomatonTermsEnum *self, OrgApacheLuceneIndexTermsEnum *tenum, OrgApacheLuceneUtilAutomatonCompiledAutomaton *compiled) {
   OrgApacheLuceneIndexFilteredTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_(self, tenum);
   JreStrongAssignAndConsume(&self->seekBytesRef_, new_OrgApacheLuceneUtilBytesRefBuilder_init());
-  self->linear_ = NO;
+  self->linear_ = false;
   JreStrongAssignAndConsume(&self->linearUpperBound_, new_OrgApacheLuceneUtilBytesRef_initWithInt_(10));
   JreStrongAssignAndConsume(&self->transition_, new_OrgApacheLuceneUtilAutomatonTransition_init());
   JreStrongAssignAndConsume(&self->savedStates_, new_OrgApacheLuceneUtilIntsRefBuilder_init());
@@ -181,7 +181,7 @@ OrgApacheLuceneIndexAutomatonTermsEnum *new_OrgApacheLuceneIndexAutomatonTermsEn
 }
 
 void OrgApacheLuceneIndexAutomatonTermsEnum_setLinearWithInt_(OrgApacheLuceneIndexAutomatonTermsEnum *self, jint position) {
-  JreAssert((self->linear_ == NO), (@"org/apache/lucene/index/AutomatonTermsEnum.java:136 condition failed: assert linear == false;"));
+  JreAssert((self->linear_ == false), (@"org/apache/lucene/index/AutomatonTermsEnum.java:136 condition failed: assert linear == false;"));
   jint state = [((OrgApacheLuceneUtilAutomatonByteRunAutomaton *) nil_chk(self->runAutomaton_)) getInitialState];
   JreAssert((state == 0), (@"org/apache/lucene/index/AutomatonTermsEnum.java:139 condition failed: assert state == 0;"));
   jint maxInterval = (jint) 0xff;
@@ -204,7 +204,7 @@ void OrgApacheLuceneIndexAutomatonTermsEnum_setLinearWithInt_(OrgApacheLuceneInd
   JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_([((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(self->seekBytesRef_)) bytes], 0, self->linearUpperBound_->bytes_, 0, position);
   *IOSByteArray_GetRef(self->linearUpperBound_->bytes_, position) = (jbyte) maxInterval;
   self->linearUpperBound_->length_ = length;
-  self->linear_ = YES;
+  self->linear_ = true;
 }
 
 jboolean OrgApacheLuceneIndexAutomatonTermsEnum_nextString(OrgApacheLuceneIndexAutomatonTermsEnum *self) {
@@ -212,9 +212,9 @@ jboolean OrgApacheLuceneIndexAutomatonTermsEnum_nextString(OrgApacheLuceneIndexA
   jint pos = 0;
   [((OrgApacheLuceneUtilIntsRefBuilder *) nil_chk(self->savedStates_)) growWithInt:[((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(self->seekBytesRef_)) length] + 1];
   [self->savedStates_ setIntAtWithInt:0 withInt:[((OrgApacheLuceneUtilAutomatonByteRunAutomaton *) nil_chk(self->runAutomaton_)) getInitialState]];
-  while (YES) {
+  while (true) {
     self->curGen_++;
-    self->linear_ = NO;
+    self->linear_ = false;
     for (state = [self->savedStates_ intAtWithInt:pos]; pos < [self->seekBytesRef_ length]; pos++) {
       *IOSLongArray_GetRef(nil_chk(self->visited_), state) = self->curGen_;
       jint nextState = [self->runAutomaton_ stepWithInt:state withInt:[self->seekBytesRef_ byteAtWithInt:pos] & (jint) 0xff];
@@ -226,12 +226,12 @@ jboolean OrgApacheLuceneIndexAutomatonTermsEnum_nextString(OrgApacheLuceneIndexA
       state = nextState;
     }
     if (OrgApacheLuceneIndexAutomatonTermsEnum_nextStringWithInt_withInt_(self, state, pos)) {
-      return YES;
+      return true;
     }
     else {
-      if ((pos = OrgApacheLuceneIndexAutomatonTermsEnum_backtrackWithInt_(self, pos)) < 0) return NO;
+      if ((pos = OrgApacheLuceneIndexAutomatonTermsEnum_backtrackWithInt_(self, pos)) < 0) return false;
       jint newState = [self->runAutomaton_ stepWithInt:[self->savedStates_ intAtWithInt:pos] withInt:[self->seekBytesRef_ byteAtWithInt:pos] & (jint) 0xff];
-      if (newState >= 0 && [self->runAutomaton_ isAcceptWithInt:newState]) return YES;
+      if (newState >= 0 && [self->runAutomaton_ isAcceptWithInt:newState]) return true;
       if (!self->finite_) pos = 0;
     }
   }
@@ -241,7 +241,7 @@ jboolean OrgApacheLuceneIndexAutomatonTermsEnum_nextStringWithInt_withInt_(OrgAp
   jint c = 0;
   if (position < [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(self->seekBytesRef_)) length]) {
     c = [self->seekBytesRef_ byteAtWithInt:position] & (jint) 0xff;
-    if (c++ == (jint) 0xff) return NO;
+    if (c++ == (jint) 0xff) return false;
   }
   [self->seekBytesRef_ setLengthWithInt:position];
   *IOSLongArray_GetRef(nil_chk(self->visited_), state) = self->curGen_;
@@ -265,10 +265,10 @@ jboolean OrgApacheLuceneIndexAutomatonTermsEnum_nextStringWithInt_withInt_(OrgAp
           OrgApacheLuceneIndexAutomatonTermsEnum_setLinearWithInt_(self, [self->seekBytesRef_ length] - 1);
         }
       }
-      return YES;
+      return true;
     }
   }
-  return NO;
+  return false;
 }
 
 jint OrgApacheLuceneIndexAutomatonTermsEnum_backtrackWithInt_(OrgApacheLuceneIndexAutomatonTermsEnum *self, jint position) {

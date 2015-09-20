@@ -75,7 +75,7 @@ withOrgApacheLuceneQueriesFunctionFunctionValuesArray:(IOSObjectArray *)valsArr 
 - (NSString *)description__ {
   JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
   [((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:[self name]])) appendWithChar:'('];
-  jboolean firstTime = YES;
+  jboolean firstTime = true;
   {
     IOSObjectArray *a__ = sources_;
     OrgApacheLuceneQueriesFunctionValueSource * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
@@ -83,7 +83,7 @@ withOrgApacheLuceneQueriesFunctionFunctionValuesArray:(IOSObjectArray *)valsArr 
     while (b__ < e__) {
       OrgApacheLuceneQueriesFunctionValueSource *source = *b__++;
       if (firstTime) {
-        firstTime = NO;
+        firstTime = false;
       }
       else {
         [sb appendWithChar:','];
@@ -122,7 +122,7 @@ withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)sea
 }
 
 - (jboolean)isEqual:(id)o {
-  if ([self getClass] != [nil_chk(o) getClass]) return NO;
+  if ([self getClass] != [nil_chk(o) getClass]) return false;
   OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction *other = (OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction *) check_class_cast(o, [OrgApacheLuceneQueriesFunctionValuesourceMultiFloatFunction class]);
   return [((NSString *) nil_chk([self name])) isEqual:[other name]] && JavaUtilArrays_equalsWithNSObjectArray_withNSObjectArray_(self->sources_, other->sources_);
 }

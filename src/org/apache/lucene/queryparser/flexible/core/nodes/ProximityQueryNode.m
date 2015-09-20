@@ -213,9 +213,9 @@ void OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_initWithJavaU
   OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode_initWithJavaUtilList_(self, clauses);
   JreStrongAssign(&self->proximityType_, JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_TypeEnum, SENTENCE));
   self->distance_ = -1;
-  self->inorder_ = NO;
+  self->inorder_ = false;
   JreStrongAssign(&self->field_, nil);
-  [self setLeafWithBoolean:NO];
+  [self setLeafWithBoolean:false];
   JreStrongAssign(&self->proximityType_, type);
   self->inorder_ = inorder;
   JreStrongAssign(&self->field_, field);
@@ -251,7 +251,7 @@ void OrgApacheLuceneQueryparserFlexibleCoreNodesProximityQueryNode_clearFieldsWi
   if (nodes == nil || [nodes size] == 0) return;
   for (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> __strong clause in nil_chk(nodes)) {
     if ([clause isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode class]]) {
-      ((OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) nil_chk(((OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) check_class_cast(clause, [OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode class]))))->toQueryStringIgnoreFields_ = YES;
+      ((OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) nil_chk(((OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) check_class_cast(clause, [OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode class]))))->toQueryStringIgnoreFields_ = true;
       [((OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) nil_chk(((OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) check_class_cast(clause, [OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode class])))) setFieldWithJavaLangCharSequence:field];
     }
   }

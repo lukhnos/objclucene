@@ -200,10 +200,12 @@ jdouble OrgApacheLuceneBkdtreeBKDTreeWriter_MAX_LON_INCL_;
 
 @implementation OrgApacheLuceneBkdtreeBKDTreeWriter
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneBkdtreeBKDTreeWriter_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithInt:(jint)maxPointsInLeafNode
                     withInt:(jint)maxPointsSortInHeap {
@@ -219,10 +221,10 @@ jdouble OrgApacheLuceneBkdtreeBKDTreeWriter_MAX_LON_INCL_;
 - (void)addWithDouble:(jdouble)lat
            withDouble:(jdouble)lon
               withInt:(jint)docID {
-  if (OrgApacheLuceneBkdtreeBKDTreeWriter_validLatWithDouble_(lat) == NO) {
+  if (OrgApacheLuceneBkdtreeBKDTreeWriter_validLatWithDouble_(lat) == false) {
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D", @"invalid lat: ", lat)) autorelease];
   }
-  if (OrgApacheLuceneBkdtreeBKDTreeWriter_validLonWithDouble_(lon) == NO) {
+  if (OrgApacheLuceneBkdtreeBKDTreeWriter_validLonWithDouble_(lon) == false) {
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D", @"invalid lon: ", lon)) autorelease];
   }
   [self addWithInt:OrgApacheLuceneBkdtreeBKDTreeWriter_encodeLatWithDouble_(lat) withInt:OrgApacheLuceneBkdtreeBKDTreeWriter_encodeLonWithDouble_(lon) withInt:docID];
@@ -285,13 +287,13 @@ jdouble OrgApacheLuceneBkdtreeBKDTreeWriter_MAX_LON_INCL_;
   JreAssert((pointCount_ / splitValues->size_ <= maxPointsInLeafNode_), (JreStrcat("$J$I$I", @"pointCount=", pointCount_, @" splitValues.length=", splitValues->size_, @" maxPointsInLeafNode=", maxPointsInLeafNode_)));
   id<OrgApacheLuceneBkdtreeLatLonWriter> latSortedWriter = nil;
   id<OrgApacheLuceneBkdtreeLatLonWriter> lonSortedWriter = nil;
-  jboolean success = NO;
+  jboolean success = false;
   @try {
-    lonSortedWriter = OrgApacheLuceneBkdtreeBKDTreeWriter_sortWithBoolean_(self, YES);
-    latSortedWriter = OrgApacheLuceneBkdtreeBKDTreeWriter_sortWithBoolean_(self, NO);
+    lonSortedWriter = OrgApacheLuceneBkdtreeBKDTreeWriter_sortWithBoolean_(self, true);
+    latSortedWriter = OrgApacheLuceneBkdtreeBKDTreeWriter_sortWithBoolean_(self, false);
     JreStrongAssign(&heapWriter_, nil);
     OrgApacheLuceneBkdtreeBKDTreeWriter_buildWithInt_withInt_withOrgApacheLuceneBkdtreeBKDTreeWriter_PathSlice_withOrgApacheLuceneBkdtreeBKDTreeWriter_PathSlice_withOrgApacheLuceneUtilLongBitSet_withOrgApacheLuceneStoreIndexOutput_withInt_withInt_withInt_withInt_withIntArray_withLongArray_(self, 1, numLeaves, [new_OrgApacheLuceneBkdtreeBKDTreeWriter_PathSlice_initWithOrgApacheLuceneBkdtreeLatLonWriter_withLong_withLong_(latSortedWriter, 0, pointCount_) autorelease], [new_OrgApacheLuceneBkdtreeBKDTreeWriter_PathSlice_initWithOrgApacheLuceneBkdtreeLatLonWriter_withLong_withLong_(lonSortedWriter, 0, pointCount_) autorelease], bitSet, outArg, JavaLangInteger_MIN_VALUE, JavaLangInteger_MAX_VALUE, JavaLangInteger_MIN_VALUE, JavaLangInteger_MAX_VALUE, splitValues, leafBlockFPs);
-    success = YES;
+    success = true;
   }
   @finally {
     if (success) {
@@ -524,7 +526,7 @@ id<OrgApacheLuceneBkdtreeLatLonWriter> OrgApacheLuceneBkdtreeBKDTreeWriter_conve
   OrgApacheLuceneStoreByteArrayDataInput *dataReader = [new_OrgApacheLuceneStoreByteArrayDataInput_init() autorelease];
   OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader *reader = nil;
   id<OrgApacheLuceneBkdtreeLatLonWriter> sortedWriter = nil;
-  jboolean success = NO;
+  jboolean success = false;
   @try {
     reader = [new_OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader_initWithOrgLukhnosPortmobileFilePath_(inArg) autorelease];
     sortedWriter = [self getWriterWithLong:self->pointCount_];
@@ -543,7 +545,7 @@ id<OrgApacheLuceneBkdtreeLatLonWriter> OrgApacheLuceneBkdtreeBKDTreeWriter_conve
       JreAssert((lonEnc < JavaLangInteger_MAX_VALUE), (@"org/apache/lucene/bkdtree/BKDTreeWriter.java:215 condition failed: assert lonEnc < Integer.MAX_VALUE;"));
       [((id<OrgApacheLuceneBkdtreeLatLonWriter>) nil_chk(sortedWriter)) appendWithInt:latEnc withInt:lonEnc withLong:ord withInt:docID];
     }
-    success = YES;
+    success = true;
   }
   @finally {
     if (success) {
@@ -576,12 +578,12 @@ id<OrgApacheLuceneBkdtreeLatLonWriter> OrgApacheLuceneBkdtreeBKDTreeWriter_sortW
     OrgApacheLuceneStoreByteArrayDataInput *reader = [new_OrgApacheLuceneStoreByteArrayDataInput_init() autorelease];
     id<JavaUtilComparator> cmp = [new_OrgApacheLuceneBkdtreeBKDTreeWriter_$2_initWithOrgApacheLuceneStoreByteArrayDataInput_withBoolean_(reader, lon) autorelease];
     OrgLukhnosPortmobileFilePath *sorted = [((OrgLukhnosPortmobileFilePath *) nil_chk(self->tempDir_)) resolveWithNSString:@"sorted"];
-    jboolean success = NO;
+    jboolean success = false;
     @try {
       OrgApacheLuceneUtilOfflineSorter *latSorter = [new_OrgApacheLuceneUtilOfflineSorter_initWithJavaUtilComparator_withOrgApacheLuceneUtilOfflineSorter_BufferSize_withOrgLukhnosPortmobileFilePath_withInt_(cmp, OrgApacheLuceneUtilOfflineSorter_BufferSize_automatic(), self->tempDir_, OrgApacheLuceneUtilOfflineSorter_MAX_TEMPFILES) autorelease];
       [latSorter sortWithOrgLukhnosPortmobileFilePath:self->tempInput_ withOrgLukhnosPortmobileFilePath:sorted];
       id<OrgApacheLuceneBkdtreeLatLonWriter> writer = OrgApacheLuceneBkdtreeBKDTreeWriter_convertToFixedWidthWithOrgLukhnosPortmobileFilePath_(self, sorted);
-      success = YES;
+      success = true;
       return writer;
     }
     @finally {
@@ -596,41 +598,42 @@ id<OrgApacheLuceneBkdtreeLatLonWriter> OrgApacheLuceneBkdtreeBKDTreeWriter_sortW
 }
 
 jboolean OrgApacheLuceneBkdtreeBKDTreeWriter_directoryIsEmptyWithOrgLukhnosPortmobileFilePath_(OrgApacheLuceneBkdtreeBKDTreeWriter *self, OrgLukhnosPortmobileFilePath *inArg) {
-  {
-    JavaLangThrowable *__mainException = nil;
+  @try {
     id<OrgLukhnosPortmobileFileDirectoryStream> dir = OrgLukhnosPortmobileFileFiles_newDirectoryStreamWithOrgLukhnosPortmobileFilePath_(inArg);
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
       for (OrgLukhnosPortmobileFilePath * __strong path in nil_chk(dir)) {
-        JreAssert((NO), (JreStrcat("$@$@", @"dir=", inArg, @" still has file=", path)));
-        return NO;
+        JreAssert((false), (JreStrcat("$@$@", @"dir=", inArg, @" still has file=", path)));
+        return false;
       }
     }
-    @catch (JavaIoIOException *ioe) {
-      __mainException = ioe;
+    @catch (JavaLangThrowable *e) {
+      __primaryException1 = e;
+      @throw e;
     }
     @finally {
-      @try {
-        [dir close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
+      if (dir != nil) {
+        if (__primaryException1 != nil) {
+          @try {
+            [dir close];
+          } @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
         } else {
-          __mainException = e;
+          [dir close];
         }
-      }
-      if (__mainException) {
-        @throw __mainException;
       }
     }
   }
-  return YES;
+  @catch (JavaIoIOException *ioe) {
+  }
+  return true;
 }
 
 jlong OrgApacheLuceneBkdtreeBKDTreeWriter_markLeftTreeWithInt_withOrgApacheLuceneBkdtreeBKDTreeWriter_PathSlice_withOrgApacheLuceneUtilLongBitSet_withIntArray_withInt_withInt_withInt_withInt_(OrgApacheLuceneBkdtreeBKDTreeWriter *self, jint splitDim, OrgApacheLuceneBkdtreeBKDTreeWriter_PathSlice *source, OrgApacheLuceneUtilLongBitSet *bitSet, IOSIntArray *splitValueRet, jint minLatEnc, jint maxLatEnc, jint minLonEnc, jint maxLonEnc) {
   jlong leftCount = ((OrgApacheLuceneBkdtreeBKDTreeWriter_PathSlice *) nil_chk(source))->count_ / 2;
   id<OrgApacheLuceneBkdtreeLatLonReader> reader = [((id<OrgApacheLuceneBkdtreeLatLonWriter>) nil_chk(source->writer_)) getReaderWithLong:source->start_ + leftCount];
-  jboolean success = NO;
+  jboolean success = false;
   jint splitValue;
   @try {
     jboolean result = [((id<OrgApacheLuceneBkdtreeLatLonReader>) nil_chk(reader)) next];
@@ -645,7 +648,7 @@ jlong OrgApacheLuceneBkdtreeBKDTreeWriter_markLeftTreeWithInt_withOrgApacheLucen
     else {
       splitValue = lonSplitEnc;
     }
-    success = YES;
+    success = true;
   }
   @finally {
     if (success) {
@@ -657,7 +660,7 @@ jlong OrgApacheLuceneBkdtreeBKDTreeWriter_markLeftTreeWithInt_withOrgApacheLucen
   }
   *IOSIntArray_GetRef(nil_chk(splitValueRet), 0) = splitValue;
   JreAssert(([((OrgApacheLuceneUtilLongBitSet *) nil_chk(bitSet)) cardinality] == 0), (JreStrcat("$J", @"cardinality=", [bitSet cardinality])));
-  success = NO;
+  success = false;
   reader = [source->writer_ getReaderWithLong:source->start_];
   @try {
     jint lastValue = JavaLangInteger_MIN_VALUE;
@@ -683,10 +686,10 @@ jlong OrgApacheLuceneBkdtreeBKDTreeWriter_markLeftTreeWithInt_withOrgApacheLucen
       jlong ord = [reader ord];
       jint docID = [reader docID];
       JreAssert((docID >= 0), (JreStrcat("$I$@", @"docID=", docID, @" reader=", reader)));
-      JreAssert(([bitSet getWithLong:ord] == NO), (@"org/apache/lucene/bkdtree/BKDTreeWriter.java:561 condition failed: assert bitSet.get(ord) == false;"));
+      JreAssert(([bitSet getWithLong:ord] == false), (@"org/apache/lucene/bkdtree/BKDTreeWriter.java:561 condition failed: assert bitSet.get(ord) == false;"));
       [bitSet setWithLong:ord];
     }
-    success = YES;
+    success = true;
   }
   @finally {
     if (success) {
@@ -729,14 +732,14 @@ void OrgApacheLuceneBkdtreeBKDTreeWriter_buildWithInt_withInt_withOrgApacheLucen
     JreAssert((count == source->count_), (JreStrcat("$J$J", @"count=", count, @" vs source.count=", source->count_)));
     id<OrgApacheLuceneBkdtreeLatLonReader> reader = [((id<OrgApacheLuceneBkdtreeLatLonWriter>) nil_chk(source->writer_)) getReaderWithLong:source->start_];
     IOSIntArray *docIDs = [IOSIntArray arrayWithLength:(jint) count];
-    jboolean success = NO;
+    jboolean success = false;
     @try {
       for (jint i = 0; i < source->count_; i++) {
         jboolean result = [((id<OrgApacheLuceneBkdtreeLatLonReader>) nil_chk(reader)) next];
         JreAssert((result), (@"org/apache/lucene/bkdtree/BKDTreeWriter.java:650 condition failed: assert result;"));
         *IOSIntArray_GetRef(docIDs, i) = [reader docID];
       }
-      success = YES;
+      success = true;
     }
     @finally {
       if (success) {
@@ -778,7 +781,7 @@ void OrgApacheLuceneBkdtreeBKDTreeWriter_buildWithInt_withInt_withOrgApacheLucen
     id<OrgApacheLuceneBkdtreeLatLonWriter> leftWriter = nil;
     id<OrgApacheLuceneBkdtreeLatLonWriter> rightWriter = nil;
     id<OrgApacheLuceneBkdtreeLatLonReader> reader = nil;
-    jboolean success = NO;
+    jboolean success = false;
     jint nextLeftCount = 0;
     @try {
       leftWriter = [self getWriterWithLong:leftCount];
@@ -814,7 +817,7 @@ void OrgApacheLuceneBkdtreeBKDTreeWriter_buildWithInt_withInt_withOrgApacheLucen
         }
       }
       [((OrgApacheLuceneUtilLongBitSet *) nil_chk(bitSet)) clearWithLong:0 withLong:self->pointCount_];
-      success = YES;
+      success = true;
     }
     @finally {
       if (success) {
@@ -826,7 +829,7 @@ void OrgApacheLuceneBkdtreeBKDTreeWriter_buildWithInt_withInt_withOrgApacheLucen
     }
     JreAssert((leftCount == nextLeftCount), (JreStrcat("$J$I", @"leftCount=", leftCount, @" nextLeftCount=", nextLeftCount)));
     JreAssert((count == ((OrgApacheLuceneBkdtreeBKDTreeWriter_PathSlice *) nil_chk(nextSource))->count_), (JreStrcat("$J$J", @"count=", count, @" nextSource.count=", count)));
-    success = NO;
+    success = false;
     @try {
       if (splitDim == 0) {
         OrgApacheLuceneBkdtreeBKDTreeWriter_buildWithInt_withInt_withOrgApacheLuceneBkdtreeBKDTreeWriter_PathSlice_withOrgApacheLuceneBkdtreeBKDTreeWriter_PathSlice_withOrgApacheLuceneUtilLongBitSet_withOrgApacheLuceneStoreIndexOutput_withInt_withInt_withInt_withInt_withIntArray_withLongArray_(self, 2 * nodeID, leafNodeOffset, [new_OrgApacheLuceneBkdtreeBKDTreeWriter_PathSlice_initWithOrgApacheLuceneBkdtreeLatLonWriter_withLong_withLong_(source->writer_, source->start_, leftCount) autorelease], [new_OrgApacheLuceneBkdtreeBKDTreeWriter_PathSlice_initWithOrgApacheLuceneBkdtreeLatLonWriter_withLong_withLong_(leftWriter, 0, leftCount) autorelease], bitSet, outArg, minLatEnc, splitValue, minLonEnc, maxLonEnc, splitValues, leafBlockFPs);
@@ -840,10 +843,10 @@ void OrgApacheLuceneBkdtreeBKDTreeWriter_buildWithInt_withInt_withOrgApacheLucen
         OrgApacheLuceneBkdtreeBKDTreeWriter_buildWithInt_withInt_withOrgApacheLuceneBkdtreeBKDTreeWriter_PathSlice_withOrgApacheLuceneBkdtreeBKDTreeWriter_PathSlice_withOrgApacheLuceneUtilLongBitSet_withOrgApacheLuceneStoreIndexOutput_withInt_withInt_withInt_withInt_withIntArray_withLongArray_(self, 2 * nodeID + 1, leafNodeOffset, [new_OrgApacheLuceneBkdtreeBKDTreeWriter_PathSlice_initWithOrgApacheLuceneBkdtreeLatLonWriter_withLong_withLong_(rightWriter, 0, count - leftCount) autorelease], [new_OrgApacheLuceneBkdtreeBKDTreeWriter_PathSlice_initWithOrgApacheLuceneBkdtreeLatLonWriter_withLong_withLong_(source->writer_, source->start_ + leftCount, count - leftCount) autorelease], bitSet, outArg, minLatEnc, maxLatEnc, splitValue, maxLonEnc, splitValues, leafBlockFPs);
         [((id<OrgApacheLuceneBkdtreeLatLonWriter>) nil_chk(rightWriter)) destroy];
       }
-      success = YES;
+      success = true;
     }
     @finally {
-      if (success == NO) {
+      if (success == false) {
         @try {
           [((id<OrgApacheLuceneBkdtreeLatLonWriter>) nil_chk(leftWriter)) destroy];
         }
@@ -862,12 +865,12 @@ void OrgApacheLuceneBkdtreeBKDTreeWriter_buildWithInt_withInt_withOrgApacheLucen
 
 jboolean OrgApacheLuceneBkdtreeBKDTreeWriter_validLatWithDouble_(jdouble lat) {
   OrgApacheLuceneBkdtreeBKDTreeWriter_initialize();
-  return JavaLangDouble_isNaNWithDouble_(lat) == NO && lat >= OrgApacheLuceneBkdtreeBKDTreeWriter_MIN_LAT_INCL && lat <= OrgApacheLuceneBkdtreeBKDTreeWriter_MAX_LAT_INCL_;
+  return JavaLangDouble_isNaNWithDouble_(lat) == false && lat >= OrgApacheLuceneBkdtreeBKDTreeWriter_MIN_LAT_INCL && lat <= OrgApacheLuceneBkdtreeBKDTreeWriter_MAX_LAT_INCL_;
 }
 
 jboolean OrgApacheLuceneBkdtreeBKDTreeWriter_validLonWithDouble_(jdouble lon) {
   OrgApacheLuceneBkdtreeBKDTreeWriter_initialize();
-  return JavaLangDouble_isNaNWithDouble_(lon) == NO && lon >= OrgApacheLuceneBkdtreeBKDTreeWriter_MIN_LON_INCL && lon <= OrgApacheLuceneBkdtreeBKDTreeWriter_MAX_LON_INCL_;
+  return JavaLangDouble_isNaNWithDouble_(lon) == false && lon >= OrgApacheLuceneBkdtreeBKDTreeWriter_MIN_LON_INCL && lon <= OrgApacheLuceneBkdtreeBKDTreeWriter_MAX_LON_INCL_;
 }
 
 jint OrgApacheLuceneBkdtreeBKDTreeWriter_encodeLatWithDouble_(jdouble lat) {

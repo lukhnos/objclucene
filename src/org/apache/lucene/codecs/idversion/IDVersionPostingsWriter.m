@@ -74,7 +74,7 @@ OrgApacheLuceneCodecsIdversionIDVersionTermState *OrgApacheLuceneCodecsIdversion
 
 - (void)startDocWithInt:(jint)docID
                 withInt:(jint)termDocFreq {
-  if (liveDocs_ != nil && [liveDocs_ getWithInt:docID] == NO) {
+  if (liveDocs_ != nil && [liveDocs_ getWithInt:docID] == false) {
     return;
   }
   if (lastDocID_ != -1) {

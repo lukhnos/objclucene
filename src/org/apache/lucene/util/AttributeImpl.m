@@ -117,10 +117,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAttributeImpl_$2)
   return clone;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilAttributeImpl_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (id)copyWithZone:(NSZone *)zone {
   return [[self clone] retain];
@@ -206,7 +208,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAttributeImpl_$1)
 
 - (id)run {
   @try {
-    [((JavaLangReflectField *) nil_chk(val$f_)) setAccessibleWithBoolean:YES];
+    [((JavaLangReflectField *) nil_chk(val$f_)) setAccessibleWithBoolean:true];
     return [val$f_ getWithId:this$0_];
   }
   @catch (JavaLangIllegalAccessException *e) {

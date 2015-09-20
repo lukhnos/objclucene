@@ -41,10 +41,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisDeGermanStemFilter, keywordAttr_, id<
       NSString *s = [((OrgApacheLuceneAnalysisDeGermanStemmer *) nil_chk(stemmer_)) stemWithNSString:term];
       if ((s != nil) && ![s isEqual:term]) [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk([termAtt_ setEmpty])) appendWithNSString:s];
     }
-    return YES;
+    return true;
   }
   else {
-    return NO;
+    return false;
   }
 }
 

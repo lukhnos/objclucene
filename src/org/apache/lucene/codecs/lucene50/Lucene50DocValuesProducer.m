@@ -996,7 +996,7 @@ void OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_initWithOrgApacheLuc
   [self->addressInstances_ putAllWithJavaUtilMap:original->addressInstances_];
   [self->ordIndexInstances_ putAllWithJavaUtilMap:original->ordIndexInstances_];
   [self->reverseIndexInstances_ putAllWithJavaUtilMap:original->reverseIndexInstances_];
-  self->merging_ = YES;
+  self->merging_ = true;
 }
 
 OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer *new_OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_initWithOrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_(OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer *original) {
@@ -1018,13 +1018,13 @@ void OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_initWithOrgApacheLuc
   JreStrongAssignAndConsume(&self->reverseIndexInstances_, new_JavaUtilHashMap_init());
   NSString *metaName = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentReadState *) nil_chk(state))->segmentInfo_))->name_, state->segmentSuffix_, metaExtension);
   self->maxDoc_ = [state->segmentInfo_ maxDoc];
-  self->merging_ = NO;
+  self->merging_ = false;
   JreStrongAssignAndConsume(&self->ramBytesUsed_, new_JavaUtilConcurrentAtomicAtomicLong_initWithLong_(OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_([self getClass])));
   jint version_ = -1;
   jint numFields = -1;
   {
-    JavaLangThrowable *__mainException = nil;
     OrgApacheLuceneStoreChecksumIndexInput *in = [((OrgApacheLuceneStoreDirectory *) nil_chk(state->directory_)) openChecksumInputWithNSString:metaName withOrgApacheLuceneStoreIOContext:state->context_];
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
       JavaLangThrowable *priorE = nil;
       @try {
@@ -1038,33 +1038,35 @@ void OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_initWithOrgApacheLuc
         OrgApacheLuceneCodecsCodecUtil_checkFooterWithOrgApacheLuceneStoreChecksumIndexInput_withJavaLangThrowable_(in, priorE);
       }
     }
+    @catch (JavaLangThrowable *e) {
+      __primaryException1 = e;
+      @throw e;
+    }
     @finally {
-      @try {
-        [in close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
+      if (in != nil) {
+        if (__primaryException1 != nil) {
+          @try {
+            [in close];
+          } @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
         } else {
-          __mainException = e;
+          [in close];
         }
-      }
-      if (__mainException) {
-        @throw __mainException;
       }
     }
   }
   self->numFields_ = numFields;
   NSString *dataName = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(state->segmentInfo_->name_, state->segmentSuffix_, dataExtension);
   JreStrongAssign(&self->data_, [((OrgApacheLuceneStoreDirectory *) nil_chk(state->directory_)) openInputWithNSString:dataName withOrgApacheLuceneStoreIOContext:state->context_]);
-  jboolean success = NO;
+  jboolean success = false;
   @try {
     jint version2 = OrgApacheLuceneCodecsCodecUtil_checkIndexHeaderWithOrgApacheLuceneStoreDataInput_withNSString_withInt_withInt_withByteArray_withNSString_(self->data_, dataCodec, OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_VERSION_START, OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_VERSION_CURRENT, [state->segmentInfo_ getId], state->segmentSuffix_);
     if (version_ != version2) {
       @throw [new_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$I$I", @"Format versions mismatch: meta=", version_, @", data=", version2), self->data_) autorelease];
     }
     OrgApacheLuceneCodecsCodecUtil_retrieveChecksumWithOrgApacheLuceneStoreIndexInput_(self->data_);
-    success = YES;
+    success = true;
   }
   @finally {
     if (!success) {
@@ -1327,7 +1329,7 @@ OrgApacheLuceneUtilPackedMonotonicBlockPackedReader *OrgApacheLuceneCodecsLucene
     OrgApacheLuceneUtilPackedMonotonicBlockPackedReader *addresses = [((id<JavaUtilMap>) nil_chk(self->addressInstances_)) getWithId:((OrgApacheLuceneIndexFieldInfo *) nil_chk(field))->name_];
     if (addresses == nil) {
       [((OrgApacheLuceneStoreIndexInput *) nil_chk(self->data_)) seekWithLong:((OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_BinaryEntry *) nil_chk(bytes))->addressesOffset_];
-      addresses = OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_ofWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withLong_withBoolean_(self->data_, bytes->packedIntsVersion_, bytes->blockSize_, bytes->count_ + 1, NO);
+      addresses = OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_ofWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withLong_withBoolean_(self->data_, bytes->packedIntsVersion_, bytes->blockSize_, bytes->count_ + 1, false);
       if (!self->merging_) {
         [self->addressInstances_ putWithId:field->name_ withId:addresses];
         [((JavaUtilConcurrentAtomicAtomicLong *) nil_chk(self->ramBytesUsed_)) addAndGetWithLong:[((OrgApacheLuceneUtilPackedMonotonicBlockPackedReader *) nil_chk(addresses)) ramBytesUsed] + OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT];
@@ -1351,7 +1353,7 @@ OrgApacheLuceneUtilPackedMonotonicBlockPackedReader *OrgApacheLuceneCodecsLucene
     if (addresses == nil) {
       [((OrgApacheLuceneStoreIndexInput *) nil_chk(self->data_)) seekWithLong:((OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_BinaryEntry *) nil_chk(bytes))->addressesOffset_];
       jlong size = JreURShift64((bytes->count_ + OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_INTERVAL_MASK), OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_INTERVAL_SHIFT);
-      addresses = OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_ofWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withLong_withBoolean_(self->data_, bytes->packedIntsVersion_, bytes->blockSize_, size, NO);
+      addresses = OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_ofWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withLong_withBoolean_(self->data_, bytes->packedIntsVersion_, bytes->blockSize_, size, false);
       if (!self->merging_) {
         [self->addressInstances_ putWithId:field->name_ withId:addresses];
         [((JavaUtilConcurrentAtomicAtomicLong *) nil_chk(self->ramBytesUsed_)) addAndGetWithLong:[((OrgApacheLuceneUtilPackedMonotonicBlockPackedReader *) nil_chk(addresses)) ramBytesUsed] + OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT];
@@ -1368,11 +1370,11 @@ OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_ReverseTermsIndex *OrgApa
       index = [new_OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_ReverseTermsIndex_init() autorelease];
       [((OrgApacheLuceneStoreIndexInput *) nil_chk(self->data_)) seekWithLong:((OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_BinaryEntry *) nil_chk(bytes))->reverseIndexOffset_];
       jlong size = JreURShift64((bytes->count_ + OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_REVERSE_INTERVAL_MASK), OrgApacheLuceneCodecsLucene50Lucene50DocValuesFormat_REVERSE_INTERVAL_SHIFT);
-      JreStrongAssign(&index->termAddresses_, OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_ofWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withLong_withBoolean_(self->data_, bytes->packedIntsVersion_, bytes->blockSize_, size, NO));
+      JreStrongAssign(&index->termAddresses_, OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_ofWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withLong_withBoolean_(self->data_, bytes->packedIntsVersion_, bytes->blockSize_, size, false));
       jlong dataSize = [self->data_ readVLong];
       OrgApacheLuceneUtilPagedBytes *pagedBytes = [new_OrgApacheLuceneUtilPagedBytes_initWithInt_(15) autorelease];
       [pagedBytes copy__WithOrgApacheLuceneStoreIndexInput:self->data_ withLong:dataSize];
-      JreStrongAssign(&index->terms_, [pagedBytes freezeWithBoolean:YES]);
+      JreStrongAssign(&index->terms_, [pagedBytes freezeWithBoolean:true]);
       if (!self->merging_) {
         [self->reverseIndexInstances_ putWithId:field->name_ withId:index];
         [((JavaUtilConcurrentAtomicAtomicLong *) nil_chk(self->ramBytesUsed_)) addAndGetWithLong:[index ramBytesUsed]];
@@ -1395,7 +1397,7 @@ OrgApacheLuceneUtilPackedMonotonicBlockPackedReader *OrgApacheLuceneCodecsLucene
     OrgApacheLuceneUtilPackedMonotonicBlockPackedReader *instance = [((id<JavaUtilMap>) nil_chk(self->ordIndexInstances_)) getWithId:((OrgApacheLuceneIndexFieldInfo *) nil_chk(field))->name_];
     if (instance == nil) {
       [((OrgApacheLuceneStoreIndexInput *) nil_chk(self->data_)) seekWithLong:((OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_NumericEntry *) nil_chk(entry_))->offset_];
-      instance = OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_ofWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withLong_withBoolean_(self->data_, entry_->packedIntsVersion_, entry_->blockSize_, entry_->count_ + 1, NO);
+      instance = OrgApacheLuceneUtilPackedMonotonicBlockPackedReader_ofWithOrgApacheLuceneStoreIndexInput_withInt_withInt_withLong_withBoolean_(self->data_, entry_->packedIntsVersion_, entry_->blockSize_, entry_->count_ + 1, false);
       if (!self->merging_) {
         [self->ordIndexInstances_ putWithId:field->name_ withId:instance];
         [((JavaUtilConcurrentAtomicAtomicLong *) nil_chk(self->ramBytesUsed_)) addAndGetWithLong:[((OrgApacheLuceneUtilPackedMonotonicBlockPackedReader *) nil_chk(instance)) ramBytesUsed] + OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT];
@@ -1440,10 +1442,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50DocValuesP
 
 @implementation OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_NumericEntry
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_NumericEntry_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(table_);
@@ -1487,10 +1491,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50DocValuesP
 
 @implementation OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_BinaryEntry
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_BinaryEntry_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -1528,10 +1534,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50DocValuesP
 
 @implementation OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_SortedSetEntry
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_SortedSetEntry_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(table_);
@@ -1578,10 +1586,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50DocValuesP
   return 0;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_LongBinaryDocValues_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -1618,10 +1628,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50DocValuesP
   return JreStrcat("$$JC", [[self getClass] getSimpleName], @"(size=", [((OrgApacheLuceneUtilPackedMonotonicBlockPackedReader *) nil_chk(termAddresses_)) size], ')');
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsLucene50Lucene50DocValuesProducer_ReverseTermsIndex_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(termAddresses_);

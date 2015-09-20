@@ -44,7 +44,7 @@ __attribute__((unused)) static jint OrgApacheLuceneAnalysisUtilRollingCharBuffer
   nextPos_ = 0;
   nextWrite_ = 0;
   count_ = 0;
-  end_ = NO;
+  end_ = false;
 }
 
 - (jint)getWithInt:(jint)pos {
@@ -65,7 +65,7 @@ __attribute__((unused)) static jint OrgApacheLuceneAnalysisUtilRollingCharBuffer
     jint toRead = buffer_->size_ - JavaLangMath_maxWithInt_withInt_(count_, nextWrite_);
     jint readCount = [((JavaIoReader *) nil_chk(reader_)) readWithCharArray:buffer_ withInt:nextWrite_ withInt:toRead];
     if (readCount == -1) {
-      end_ = YES;
+      end_ = true;
       return -1;
     }
     jint ch = IOSCharArray_Get(buffer_, nextWrite_);
@@ -116,10 +116,12 @@ __attribute__((unused)) static jint OrgApacheLuceneAnalysisUtilRollingCharBuffer
   count_ = newCount;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisUtilRollingCharBuffer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(reader_);

@@ -44,10 +44,12 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsCodecUtil_validateFoote
 
 @implementation OrgApacheLuceneCodecsCodecUtil
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsCodecUtil_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)writeHeaderWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg
                                          withNSString:(NSString *)codec

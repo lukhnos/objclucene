@@ -75,10 +75,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexLogMergePolicy_SegmentInfoAndLeve
 
 @implementation OrgApacheLuceneIndexLogMergePolicy
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexLogMergePolicy_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jboolean)verboseWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer {
   return writer != nil && [((OrgApacheLuceneUtilInfoStream *) nil_chk(writer->infoStream_)) isEnabledWithNSString:@"LMP"];
@@ -135,7 +137,7 @@ withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer {
   jint numSegments = [((OrgApacheLuceneIndexSegmentInfos *) nil_chk(infos)) size];
   jint numToMerge = 0;
   OrgApacheLuceneIndexSegmentCommitInfo *mergeInfo = nil;
-  jboolean segmentIsOriginal = NO;
+  jboolean segmentIsOriginal = false;
   for (jint i = 0; i < numSegments && numToMerge <= maxNumSegments; i++) {
     OrgApacheLuceneIndexSegmentCommitInfo *info = [infos infoWithInt:i];
     JavaLangBoolean *isOriginal = [((id<JavaUtilMap>) nil_chk(segmentsToMerge)) getWithId:info];
@@ -196,11 +198,11 @@ withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer {
     }
     return nil;
   }
-  jboolean anyTooLarge = NO;
+  jboolean anyTooLarge = false;
   for (jint i = 0; i < last; i++) {
     OrgApacheLuceneIndexSegmentCommitInfo *info = [infos infoWithInt:i];
     if ([self sizeWithOrgApacheLuceneIndexSegmentCommitInfo:info withOrgApacheLuceneIndexIndexWriter:writer] > maxMergeSizeForForcedMerge_ || [self sizeDocsWithOrgApacheLuceneIndexSegmentCommitInfo:info withOrgApacheLuceneIndexIndexWriter:writer] > maxMergeDocs_) {
-      anyTooLarge = YES;
+      anyTooLarge = true;
       break;
     }
   }
@@ -318,13 +320,13 @@ withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer {
     }
     jint end = start + mergeFactor_;
     while (end <= 1 + upto) {
-      jboolean anyTooLarge = NO;
-      jboolean anyMerging = NO;
+      jboolean anyTooLarge = false;
+      jboolean anyMerging = false;
       for (jint i = start; i < end; i++) {
         OrgApacheLuceneIndexSegmentCommitInfo *info = ((OrgApacheLuceneIndexLogMergePolicy_SegmentInfoAndLevel *) nil_chk([levels getWithInt:i]))->info_;
         anyTooLarge |= ([self sizeWithOrgApacheLuceneIndexSegmentCommitInfo:info withOrgApacheLuceneIndexIndexWriter:writer] >= maxMergeSize_ || [self sizeDocsWithOrgApacheLuceneIndexSegmentCommitInfo:info withOrgApacheLuceneIndexIndexWriter:writer] >= maxMergeDocs_);
         if ([((id<JavaUtilCollection>) nil_chk(mergingSegments)) containsWithId:info]) {
-          anyMerging = YES;
+          anyMerging = true;
           break;
         }
       }
@@ -420,7 +422,7 @@ void OrgApacheLuceneIndexLogMergePolicy_init(OrgApacheLuceneIndexLogMergePolicy 
   self->mergeFactor_ = OrgApacheLuceneIndexLogMergePolicy_DEFAULT_MERGE_FACTOR;
   self->maxMergeSizeForForcedMerge_ = JavaLangLong_MAX_VALUE;
   self->maxMergeDocs_ = OrgApacheLuceneIndexLogMergePolicy_DEFAULT_MAX_MERGE_DOCS;
-  self->calibrateSizeByDeletes_ = YES;
+  self->calibrateSizeByDeletes_ = true;
 }
 
 OrgApacheLuceneIndexMergePolicy_MergeSpecification *OrgApacheLuceneIndexLogMergePolicy_findForcedMergesSizeLimitWithOrgApacheLuceneIndexSegmentInfos_withInt_withInt_withOrgApacheLuceneIndexIndexWriter_(OrgApacheLuceneIndexLogMergePolicy *self, OrgApacheLuceneIndexSegmentInfos *infos, jint maxNumSegments, jint last, OrgApacheLuceneIndexIndexWriter *writer) {

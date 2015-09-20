@@ -455,17 +455,17 @@ jfloat OrgApacheLuceneSearchSloppyPhraseScorer_phraseFreq(OrgApacheLuceneSearchS
 
 jboolean OrgApacheLuceneSearchSloppyPhraseScorer_advancePPWithOrgApacheLuceneSearchPhrasePositions_(OrgApacheLuceneSearchSloppyPhraseScorer *self, OrgApacheLuceneSearchPhrasePositions *pp) {
   if (![((OrgApacheLuceneSearchPhrasePositions *) nil_chk(pp)) nextPosition]) {
-    return NO;
+    return false;
   }
   if (pp->position_ > self->end_) {
     self->end_ = pp->position_;
   }
-  return YES;
+  return true;
 }
 
 jboolean OrgApacheLuceneSearchSloppyPhraseScorer_advanceRptsWithOrgApacheLuceneSearchPhrasePositions_(OrgApacheLuceneSearchSloppyPhraseScorer *self, OrgApacheLuceneSearchPhrasePositions *pp) {
   if (((OrgApacheLuceneSearchPhrasePositions *) nil_chk(pp))->rptGroup_ < 0) {
-    return YES;
+    return true;
   }
   IOSObjectArray *rg = IOSObjectArray_Get(nil_chk(self->rptGroups_), pp->rptGroup_);
   OrgApacheLuceneUtilFixedBitSet *bits = [new_OrgApacheLuceneUtilFixedBitSet_initWithInt_(((IOSObjectArray *) nil_chk(rg))->size_) autorelease];
@@ -474,7 +474,7 @@ jboolean OrgApacheLuceneSearchSloppyPhraseScorer_advanceRptsWithOrgApacheLuceneS
   while ((k = OrgApacheLuceneSearchSloppyPhraseScorer_collideWithOrgApacheLuceneSearchPhrasePositions_(self, pp)) >= 0) {
     pp = OrgApacheLuceneSearchSloppyPhraseScorer_lesserWithOrgApacheLuceneSearchPhrasePositions_withOrgApacheLuceneSearchPhrasePositions_(self, pp, IOSObjectArray_Get(rg, k));
     if (!OrgApacheLuceneSearchSloppyPhraseScorer_advancePPWithOrgApacheLuceneSearchPhrasePositions_(self, pp)) {
-      return NO;
+      return false;
     }
     if (k != k0) {
       bits = OrgApacheLuceneUtilFixedBitSet_ensureCapacityWithOrgApacheLuceneUtilFixedBitSet_withInt_(bits, k);
@@ -493,7 +493,7 @@ jboolean OrgApacheLuceneSearchSloppyPhraseScorer_advanceRptsWithOrgApacheLuceneS
   for (jint i = n - 1; i >= 0; i--) {
     [((OrgApacheLuceneSearchPhraseQueue *) nil_chk(self->pq_)) addWithId:IOSObjectArray_Get(nil_chk(self->rptStack_), i)];
   }
-  return YES;
+  return true;
 }
 
 OrgApacheLuceneSearchPhrasePositions *OrgApacheLuceneSearchSloppyPhraseScorer_lesserWithOrgApacheLuceneSearchPhrasePositions_withOrgApacheLuceneSearchPhrasePositions_(OrgApacheLuceneSearchSloppyPhraseScorer *self, OrgApacheLuceneSearchPhrasePositions *pp, OrgApacheLuceneSearchPhrasePositions *pp2) {
@@ -522,7 +522,7 @@ jboolean OrgApacheLuceneSearchSloppyPhraseScorer_initPhrasePositions(OrgApacheLu
   }
   if (!self->hasRpts_) {
     OrgApacheLuceneSearchSloppyPhraseScorer_initSimple(self);
-    return YES;
+    return true;
   }
   return OrgApacheLuceneSearchSloppyPhraseScorer_initComplex(self);
 }
@@ -547,10 +547,10 @@ void OrgApacheLuceneSearchSloppyPhraseScorer_initSimple(OrgApacheLuceneSearchSlo
 jboolean OrgApacheLuceneSearchSloppyPhraseScorer_initComplex(OrgApacheLuceneSearchSloppyPhraseScorer *self) {
   OrgApacheLuceneSearchSloppyPhraseScorer_placeFirstPositions(self);
   if (!OrgApacheLuceneSearchSloppyPhraseScorer_advanceRepeatGroups(self)) {
-    return NO;
+    return false;
   }
   OrgApacheLuceneSearchSloppyPhraseScorer_fillQueue(self);
-  return YES;
+  return true;
 }
 
 void OrgApacheLuceneSearchSloppyPhraseScorer_placeFirstPositions(OrgApacheLuceneSearchSloppyPhraseScorer *self) {
@@ -597,7 +597,7 @@ jboolean OrgApacheLuceneSearchSloppyPhraseScorer_advanceRepeatGroups(OrgApacheLu
           while ((k = OrgApacheLuceneSearchSloppyPhraseScorer_collideWithOrgApacheLuceneSearchPhrasePositions_(self, pp)) >= 0) {
             OrgApacheLuceneSearchPhrasePositions *pp2 = OrgApacheLuceneSearchSloppyPhraseScorer_lesserWithOrgApacheLuceneSearchPhrasePositions_withOrgApacheLuceneSearchPhrasePositions_(self, pp, IOSObjectArray_Get(rg, k));
             if (!OrgApacheLuceneSearchSloppyPhraseScorer_advancePPWithOrgApacheLuceneSearchPhrasePositions_(self, pp2)) {
-              return NO;
+              return false;
             }
             if (((OrgApacheLuceneSearchPhrasePositions *) nil_chk(pp2))->rptInd_ < i) {
               incr = 0;
@@ -610,18 +610,18 @@ jboolean OrgApacheLuceneSearchSloppyPhraseScorer_advanceRepeatGroups(OrgApacheLu
         for (jint j = 1; j < ((IOSObjectArray *) nil_chk(rg))->size_; j++) {
           for (jint k = 0; k < j; k++) {
             if (![((OrgApacheLuceneSearchPhrasePositions *) nil_chk(IOSObjectArray_Get(rg, j))) nextPosition]) {
-              return NO;
+              return false;
             }
           }
         }
       }
     }
   }
-  return YES;
+  return true;
 }
 
 jboolean OrgApacheLuceneSearchSloppyPhraseScorer_initFirstTime(OrgApacheLuceneSearchSloppyPhraseScorer *self) {
-  self->checkedRpts_ = YES;
+  self->checkedRpts_ = true;
   OrgApacheLuceneSearchSloppyPhraseScorer_placeFirstPositions(self);
   JavaUtilLinkedHashMap *rptTerms = OrgApacheLuceneSearchSloppyPhraseScorer_repeatingTerms(self);
   self->hasRpts_ = ![((JavaUtilLinkedHashMap *) nil_chk(rptTerms)) isEmpty];
@@ -630,11 +630,11 @@ jboolean OrgApacheLuceneSearchSloppyPhraseScorer_initFirstTime(OrgApacheLuceneSe
     JavaUtilArrayList *rgs = OrgApacheLuceneSearchSloppyPhraseScorer_gatherRptGroupsWithJavaUtilLinkedHashMap_(self, rptTerms);
     OrgApacheLuceneSearchSloppyPhraseScorer_sortRptGroupsWithJavaUtilArrayList_(self, rgs);
     if (!OrgApacheLuceneSearchSloppyPhraseScorer_advanceRepeatGroups(self)) {
-      return NO;
+      return false;
     }
   }
   OrgApacheLuceneSearchSloppyPhraseScorer_fillQueue(self);
-  return YES;
+  return true;
 }
 
 void OrgApacheLuceneSearchSloppyPhraseScorer_sortRptGroupsWithJavaUtilArrayList_(OrgApacheLuceneSearchSloppyPhraseScorer *self, JavaUtilArrayList *rgs) {
@@ -838,10 +838,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSloppyPhraseScorer)
   return ((OrgApacheLuceneSearchPhrasePositions *) nil_chk(pp1))->offset_ - ((OrgApacheLuceneSearchPhrasePositions *) nil_chk(pp2))->offset_;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSloppyPhraseScorer_$1_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

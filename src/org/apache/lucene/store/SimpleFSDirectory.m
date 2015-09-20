@@ -122,7 +122,7 @@ withJavaNioChannelsSeekableByteChannel:(id<JavaNioChannelsSeekableByteChannel>)c
 
 - (OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput *)clone {
   OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput *clone = (OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput *) check_class_cast([super clone], [OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput class]);
-  ((OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput *) nil_chk(clone))->isClone_ = YES;
+  ((OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput *) nil_chk(clone))->isClone_ = true;
   return clone;
 }
 
@@ -221,7 +221,7 @@ withJavaNioChannelsSeekableByteChannel:(id<JavaNioChannelsSeekableByteChannel>)c
 
 void OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput_initWithNSString_withJavaNioChannelsSeekableByteChannel_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput *self, NSString *resourceDesc, id<JavaNioChannelsSeekableByteChannel> channel, OrgApacheLuceneStoreIOContext *context) {
   OrgApacheLuceneStoreBufferedIndexInput_initWithNSString_withOrgApacheLuceneStoreIOContext_(self, resourceDesc, context);
-  self->isClone_ = NO;
+  self->isClone_ = false;
   JreStrongAssign(&self->channel_, channel);
   self->off_ = 0LL;
   self->end_ = [((id<JavaNioChannelsSeekableByteChannel>) nil_chk(channel)) size];
@@ -235,11 +235,11 @@ OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput *new_OrgApacheLuceneSto
 
 void OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput_initWithNSString_withJavaNioChannelsSeekableByteChannel_withLong_withLong_withInt_(OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput *self, NSString *resourceDesc, id<JavaNioChannelsSeekableByteChannel> channel, jlong off, jlong length, jint bufferSize) {
   OrgApacheLuceneStoreBufferedIndexInput_initWithNSString_withInt_(self, resourceDesc, bufferSize);
-  self->isClone_ = NO;
+  self->isClone_ = false;
   JreStrongAssign(&self->channel_, channel);
   self->off_ = off;
   self->end_ = off + length;
-  self->isClone_ = YES;
+  self->isClone_ = true;
 }
 
 OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput *new_OrgApacheLuceneStoreSimpleFSDirectory_SimpleFSIndexInput_initWithNSString_withJavaNioChannelsSeekableByteChannel_withLong_withLong_withInt_(NSString *resourceDesc, id<JavaNioChannelsSeekableByteChannel> channel, jlong off, jlong length, jint bufferSize) {

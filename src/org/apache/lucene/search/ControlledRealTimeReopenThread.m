@@ -84,7 +84,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchControlledRealTimeReopenThread_H
 
 - (void)close {
   @synchronized(self) {
-    JreAssignVolatileBoolean(&finish_, YES);
+    JreAssignVolatileBoolean(&finish_, true);
     [((JavaUtilConcurrentLocksReentrantLock *) nil_chk(reopenLock_)) lock];
     @try {
       [((id<JavaUtilConcurrentLocksCondition>) nil_chk(reopenCond_)) signal];
@@ -131,7 +131,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchControlledRealTimeReopenThread_H
         else {
           jlong msLeft = (startMS + maxMS) - (JavaLangSystem_nanoTime()) / 1000000;
           if (msLeft <= 0) {
-            return NO;
+            return false;
           }
           else {
             [self waitWithLong:msLeft];
@@ -139,7 +139,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchControlledRealTimeReopenThread_H
         }
       }
     }
-    return YES;
+    return true;
   }
 }
 

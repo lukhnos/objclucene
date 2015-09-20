@@ -116,10 +116,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightWeightedSpanTermExtract
 
 @implementation OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithNSString:(NSString *)defaultField {
   OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor_initWithNSString_(self, defaultField);
@@ -160,9 +162,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightWeightedSpanTermExtract
         slop += largestInc;
       }
     }
-    jboolean inorder = NO;
+    jboolean inorder = false;
     if (slop == 0) {
-      inorder = YES;
+      inorder = true;
     }
     OrgApacheLuceneSearchSpansSpanNearQuery *sp = [new_OrgApacheLuceneSearchSpansSpanNearQuery_initWithOrgApacheLuceneSearchSpansSpanQueryArray_withInt_withBoolean_(clauses, slop, inorder) autorelease];
     [sp setBoostWithFloat:[((OrgApacheLuceneSearchQuery *) nil_chk(query)) getBoost]];
@@ -291,11 +293,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightWeightedSpanTermExtract
     for (NSString * __strong field in nil_chk(fieldNames)) {
       OrgApacheLuceneSearchSpansSpanQuery *rewrittenQuery = (OrgApacheLuceneSearchSpansSpanQuery *) check_class_cast([((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(spanQuery)) rewriteWithOrgApacheLuceneIndexIndexReader:[((OrgApacheLuceneIndexLeafReaderContext *) nil_chk([self getLeafContext])) reader]], [OrgApacheLuceneSearchSpansSpanQuery class]);
       [queries putWithId:field withId:rewrittenQuery];
-      [((OrgApacheLuceneSearchSpansSpanWeight *) nil_chk([((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(rewrittenQuery)) createWeightWithOrgApacheLuceneSearchIndexSearcher:searcher withBoolean:NO])) extractTermsWithJavaUtilSet:nonWeightedTerms];
+      [((OrgApacheLuceneSearchSpansSpanWeight *) nil_chk([((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(rewrittenQuery)) createWeightWithOrgApacheLuceneSearchIndexSearcher:searcher withBoolean:false])) extractTermsWithJavaUtilSet:nonWeightedTerms];
     }
   }
   else {
-    [((OrgApacheLuceneSearchSpansSpanWeight *) nil_chk([((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(spanQuery)) createWeightWithOrgApacheLuceneSearchIndexSearcher:searcher withBoolean:NO])) extractTermsWithJavaUtilSet:nonWeightedTerms];
+    [((OrgApacheLuceneSearchSpansSpanWeight *) nil_chk([((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(spanQuery)) createWeightWithOrgApacheLuceneSearchIndexSearcher:searcher withBoolean:false])) extractTermsWithJavaUtilSet:nonWeightedTerms];
   }
   id<JavaUtilList> spanPositions = [new_JavaUtilArrayList_init() autorelease];
   for (NSString * __strong field in nil_chk(fieldNames)) {
@@ -307,14 +309,14 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightWeightedSpanTermExtract
       q = spanQuery;
     }
     OrgApacheLuceneIndexLeafReaderContext *context = [self getLeafContext];
-    OrgApacheLuceneSearchSpansSpanWeight *w = (OrgApacheLuceneSearchSpansSpanWeight *) check_class_cast([searcher createNormalizedWeightWithOrgApacheLuceneSearchQuery:q withBoolean:NO], [OrgApacheLuceneSearchSpansSpanWeight class]);
+    OrgApacheLuceneSearchSpansSpanWeight *w = (OrgApacheLuceneSearchSpansSpanWeight *) check_class_cast([searcher createNormalizedWeightWithOrgApacheLuceneSearchQuery:q withBoolean:false], [OrgApacheLuceneSearchSpansSpanWeight class]);
     id<OrgApacheLuceneUtilBits> acceptDocs = [((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader])) getLiveDocs];
     OrgApacheLuceneSearchSpansSpans *spans = [((OrgApacheLuceneSearchSpansSpanWeight *) nil_chk(w)) getSpansWithOrgApacheLuceneIndexLeafReaderContext:context withOrgApacheLuceneSearchSpansSpanWeight_PostingsEnum:JreLoadStatic(OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum, POSITIONS)];
     if (spans == nil) {
       return;
     }
     while ([((OrgApacheLuceneSearchSpansSpans *) nil_chk(spans)) nextDoc] != OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS) {
-      if (acceptDocs != nil && [acceptDocs getWithInt:[spans docID]] == NO) {
+      if (acceptDocs != nil && [acceptDocs getWithInt:[spans docID]] == false) {
         continue;
       }
       while ([spans nextStartPosition] != OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS) {
@@ -331,7 +333,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightWeightedSpanTermExtract
       if (weightedSpanTerm == nil) {
         weightedSpanTerm = [new_OrgApacheLuceneSearchHighlightWeightedSpanTerm_initWithFloat_withNSString_([((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(spanQuery)) getBoost], [queryTerm text]) autorelease];
         [weightedSpanTerm addPositionSpansWithJavaUtilList:spanPositions];
-        weightedSpanTerm->positionSensitive_ = YES;
+        weightedSpanTerm->positionSensitive_ = true;
         [terms putWithId:[queryTerm text] withId:weightedSpanTerm];
       }
       else {
@@ -347,7 +349,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightWeightedSpanTermExtract
              withOrgApacheLuceneSearchQuery:(OrgApacheLuceneSearchQuery *)query {
   id<JavaUtilSet> nonWeightedTerms = [new_JavaUtilHashSet_init() autorelease];
   OrgApacheLuceneSearchIndexSearcher *searcher = [new_OrgApacheLuceneSearchIndexSearcher_initWithOrgApacheLuceneIndexIndexReaderContext_([self getLeafContext]) autorelease];
-  [((OrgApacheLuceneSearchWeight *) nil_chk([searcher createNormalizedWeightWithOrgApacheLuceneSearchQuery:query withBoolean:NO])) extractTermsWithJavaUtilSet:nonWeightedTerms];
+  [((OrgApacheLuceneSearchWeight *) nil_chk([searcher createNormalizedWeightWithOrgApacheLuceneSearchQuery:query withBoolean:false])) extractTermsWithJavaUtilSet:nonWeightedTerms];
   for (OrgApacheLuceneIndexTerm * __strong queryTerm in nonWeightedTerms) {
     if ([self fieldNameComparatorWithNSString:[((OrgApacheLuceneIndexTerm *) nil_chk(queryTerm)) field]]) {
       OrgApacheLuceneSearchHighlightWeightedSpanTerm *weightedSpanTerm = [new_OrgApacheLuceneSearchHighlightWeightedSpanTerm_initWithFloat_withNSString_([((OrgApacheLuceneSearchQuery *) nil_chk(query)) getBoost], [queryTerm text]) autorelease];
@@ -365,18 +367,18 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightWeightedSpanTermExtract
   if (internalReader_ == nil) {
     jboolean cacheIt = wrapToCaching_ && !([tokenStream_ isKindOfClass:[OrgApacheLuceneAnalysisCachingTokenFilter class]]);
     if ([tokenStream_ isKindOfClass:[OrgApacheLuceneSearchHighlightTokenStreamFromTermVector class]]) {
-      cacheIt = NO;
+      cacheIt = false;
       OrgApacheLuceneIndexTerms *termVectorTerms = [((OrgApacheLuceneSearchHighlightTokenStreamFromTermVector *) nil_chk(((OrgApacheLuceneSearchHighlightTokenStreamFromTermVector *) check_class_cast(tokenStream_, [OrgApacheLuceneSearchHighlightTokenStreamFromTermVector class])))) getTermVectorTerms];
       if ([((OrgApacheLuceneIndexTerms *) nil_chk(termVectorTerms)) hasPositions] && [termVectorTerms hasOffsets]) {
         JreStrongAssignAndConsume(&internalReader_, new_OrgApacheLuceneSearchHighlightTermVectorLeafReader_initWithNSString_withOrgApacheLuceneIndexTerms_(OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor_DelegatingLeafReader_FIELD_NAME_, termVectorTerms));
       }
     }
     if (internalReader_ == nil) {
-      OrgApacheLuceneIndexMemoryMemoryIndex *indexer = [new_OrgApacheLuceneIndexMemoryMemoryIndex_initWithBoolean_withBoolean_(YES, usePayloads_) autorelease];
+      OrgApacheLuceneIndexMemoryMemoryIndex *indexer = [new_OrgApacheLuceneIndexMemoryMemoryIndex_initWithBoolean_withBoolean_(true, usePayloads_) autorelease];
       if (cacheIt) {
         JreAssert((!cachedTokenStream_), (@"org/apache/lucene/search/highlight/WeightedSpanTermExtractor.java:393 condition failed: assert !cachedTokenStream;"));
         JreStrongAssignAndConsume(&tokenStream_, new_OrgApacheLuceneAnalysisCachingTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_([new_OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(tokenStream_, maxDocCharsToAnalyze_) autorelease]));
-        cachedTokenStream_ = YES;
+        cachedTokenStream_ = true;
         [indexer addFieldWithNSString:OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor_DelegatingLeafReader_FIELD_NAME_ withOrgApacheLuceneAnalysisTokenStream:tokenStream_];
       }
       else {
@@ -485,7 +487,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightWeightedSpanTermExtract
 
 - (jboolean)mustRewriteQueryWithOrgApacheLuceneSearchSpansSpanQuery:(OrgApacheLuceneSearchSpansSpanQuery *)spanQuery {
   if (!expandMultiTermQuery_) {
-    return NO;
+    return false;
   }
   else if ([spanQuery isKindOfClass:[OrgApacheLuceneSearchSpansFieldMaskingSpanQuery class]]) {
     return [self mustRewriteQueryWithOrgApacheLuceneSearchSpansSpanQuery:[((OrgApacheLuceneSearchSpansFieldMaskingSpanQuery *) nil_chk(((OrgApacheLuceneSearchSpansFieldMaskingSpanQuery *) check_class_cast(spanQuery, [OrgApacheLuceneSearchSpansFieldMaskingSpanQuery class])))) getMaskedQuery]];
@@ -501,11 +503,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightWeightedSpanTermExtract
       while (b__ < e__) {
         OrgApacheLuceneSearchSpansSpanQuery *clause = *b__++;
         if ([self mustRewriteQueryWithOrgApacheLuceneSearchSpansSpanQuery:clause]) {
-          return YES;
+          return true;
         }
       }
     }
-    return NO;
+    return false;
   }
   else if ([spanQuery isKindOfClass:[OrgApacheLuceneSearchSpansSpanNotQuery class]]) {
     OrgApacheLuceneSearchSpansSpanNotQuery *spanNotQuery = (OrgApacheLuceneSearchSpansSpanNotQuery *) check_class_cast(spanQuery, [OrgApacheLuceneSearchSpansSpanNotQuery class]);
@@ -519,17 +521,17 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightWeightedSpanTermExtract
       while (b__ < e__) {
         OrgApacheLuceneSearchSpansSpanQuery *clause = *b__++;
         if ([self mustRewriteQueryWithOrgApacheLuceneSearchSpansSpanQuery:clause]) {
-          return YES;
+          return true;
         }
       }
     }
-    return NO;
+    return false;
   }
   else if ([spanQuery isKindOfClass:[OrgApacheLuceneSearchSpansSpanTermQuery class]]) {
-    return NO;
+    return false;
   }
   else {
-    return YES;
+    return true;
   }
 }
 
@@ -618,8 +620,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightWeightedSpanTermExtract
 
 void OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor_init(OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor *self) {
   NSObject_init(self);
-  self->wrapToCaching_ = YES;
-  self->usePayloads_ = NO;
+  self->wrapToCaching_ = true;
+  self->usePayloads_ = false;
   JreStrongAssign(&self->internalReader_, nil);
 }
 
@@ -631,8 +633,8 @@ OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor *new_OrgApacheLuceneSear
 
 void OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor_initWithNSString_(OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor *self, NSString *defaultField) {
   NSObject_init(self);
-  self->wrapToCaching_ = YES;
-  self->usePayloads_ = NO;
+  self->wrapToCaching_ = true;
+  self->usePayloads_ = false;
   JreStrongAssign(&self->internalReader_, nil);
   if (defaultField != nil) {
     JreStrongAssign(&self->defaultField_, defaultField);
@@ -776,15 +778,17 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchHighlightWeightedSpanTermE
   OrgApacheLuceneSearchHighlightWeightedSpanTerm *prevTerm = prev;
   OrgApacheLuceneSearchHighlightWeightedSpanTerm *newTerm = value;
   if (!((OrgApacheLuceneSearchHighlightWeightedSpanTerm *) nil_chk(prevTerm))->positionSensitive_) {
-    ((OrgApacheLuceneSearchHighlightWeightedSpanTerm *) nil_chk(newTerm))->positionSensitive_ = NO;
+    ((OrgApacheLuceneSearchHighlightWeightedSpanTerm *) nil_chk(newTerm))->positionSensitive_ = false;
   }
   return prev;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchHighlightWeightedSpanTermExtractor_PositionCheckingMap_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

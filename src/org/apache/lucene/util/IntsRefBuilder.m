@@ -24,10 +24,12 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilIntsRefBuilder, ref_, OrgApacheLuceneUtil
 
 @implementation OrgApacheLuceneUtilIntsRefBuilder
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilIntsRefBuilder_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (IOSIntArray *)ints {
   return ((OrgApacheLuceneUtilIntsRef *) nil_chk(ref_))->ints_;

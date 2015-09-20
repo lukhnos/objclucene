@@ -41,7 +41,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter, pr
   [super reset];
   JreStrongAssign(&previous_, nil);
   JreStrongAssign(&previousType_, nil);
-  exhausted_ = NO;
+  exhausted_ = false;
 }
 
 - (jboolean)incrementToken {
@@ -54,20 +54,20 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCommongramsCommonGramsQueryFilter, pr
       if ([self isGramType]) {
         [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posIncAttribute_)) setPositionIncrementWithInt:1];
       }
-      return YES;
+      return true;
     }
     JreStrongAssign(&previous_, current);
   }
-  exhausted_ = YES;
+  exhausted_ = true;
   if (previous_ == nil || [((NSString *) nil_chk(OrgApacheLuceneAnalysisCommongramsCommonGramsFilter_GRAM_TYPE_)) isEqual:previousType_]) {
-    return NO;
+    return false;
   }
   [self restoreStateWithOrgApacheLuceneUtilAttributeSource_State:previous_];
   JreStrongAssign(&previous_, nil);
   if ([self isGramType]) {
     [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posIncAttribute_)) setPositionIncrementWithInt:1];
   }
-  return YES;
+  return true;
 }
 
 - (jboolean)isGramType {

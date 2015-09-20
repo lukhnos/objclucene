@@ -90,13 +90,13 @@ __attribute__((unused)) static OrgApacheLuceneUtilFstFST_Arc *OrgApacheLuceneUti
   OrgApacheLuceneUtilFstFSTEnum_rewindPrefix(self);
   OrgApacheLuceneUtilFstFST_Arc *arc = OrgApacheLuceneUtilFstFSTEnum_getArcWithInt_(self, upto_);
   jint targetLabel = [self getTargetLabel];
-  while (YES) {
+  while (true) {
     if (((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc))->bytesPerArc_ != 0 && arc->label_ != -1) {
       OrgApacheLuceneUtilFstFST_BytesReader *in = [((OrgApacheLuceneUtilFstFST *) nil_chk(fst_)) getBytesReader];
       jint low = arc->arcIdx_;
       jint high = arc->numArcs_ - 1;
       jint mid = 0;
-      jboolean found = NO;
+      jboolean found = false;
       while (low <= high) {
         mid = JreURShift32((low + high), 1);
         [((OrgApacheLuceneUtilFstFST_BytesReader *) nil_chk(in)) setPositionWithLong:arc->posArcsStart_];
@@ -106,7 +106,7 @@ __attribute__((unused)) static OrgApacheLuceneUtilFstFST_Arc *OrgApacheLuceneUti
         if (cmp < 0) low = mid + 1;
         else if (cmp > 0) high = mid - 1;
         else {
-          found = YES;
+          found = true;
           break;
         }
       }
@@ -130,7 +130,7 @@ __attribute__((unused)) static OrgApacheLuceneUtilFstFST_Arc *OrgApacheLuceneUti
         [fst_ readNextRealArcWithOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilFstFST_BytesReader:in];
         JreAssert(([arc isLast]), (@"org/apache/lucene/util/fst/FSTEnum.java:192 condition failed: assert arc.isLast();"));
         upto_--;
-        while (YES) {
+        while (true) {
           if (upto_ == 0) {
             return;
           }
@@ -168,7 +168,7 @@ __attribute__((unused)) static OrgApacheLuceneUtilFstFST_Arc *OrgApacheLuceneUti
       }
       else if ([arc isLast]) {
         upto_--;
-        while (YES) {
+        while (true) {
           if (upto_ == 0) {
             return;
           }
@@ -192,13 +192,13 @@ __attribute__((unused)) static OrgApacheLuceneUtilFstFST_Arc *OrgApacheLuceneUti
   OrgApacheLuceneUtilFstFSTEnum_rewindPrefix(self);
   OrgApacheLuceneUtilFstFST_Arc *arc = OrgApacheLuceneUtilFstFSTEnum_getArcWithInt_(self, upto_);
   jint targetLabel = [self getTargetLabel];
-  while (YES) {
+  while (true) {
     if (((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc))->bytesPerArc_ != 0 && arc->label_ != OrgApacheLuceneUtilFstFST_END_LABEL) {
       OrgApacheLuceneUtilFstFST_BytesReader *in = [((OrgApacheLuceneUtilFstFST *) nil_chk(fst_)) getBytesReader];
       jint low = arc->arcIdx_;
       jint high = arc->numArcs_ - 1;
       jint mid = 0;
-      jboolean found = NO;
+      jboolean found = false;
       while (low <= high) {
         mid = JreURShift32((low + high), 1);
         [((OrgApacheLuceneUtilFstFST_BytesReader *) nil_chk(in)) setPositionWithLong:arc->posArcsStart_];
@@ -212,7 +212,7 @@ __attribute__((unused)) static OrgApacheLuceneUtilFstFST_Arc *OrgApacheLuceneUti
           high = mid - 1;
         }
         else {
-          found = YES;
+          found = true;
           break;
         }
       }
@@ -232,7 +232,7 @@ __attribute__((unused)) static OrgApacheLuceneUtilFstFST_Arc *OrgApacheLuceneUti
         continue;
       }
       else if (high == -1) {
-        while (YES) {
+        while (true) {
           [fst_ readFirstTargetArcWithOrgApacheLuceneUtilFstFST_Arc:OrgApacheLuceneUtilFstFSTEnum_getArcWithInt_(self, upto_ - 1) withOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilFstFST_BytesReader:fstReader_];
           if (arc->label_ < targetLabel) {
             while (![arc isLast] && [fst_ readNextArcLabelWithOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilFstFST_BytesReader:in] < targetLabel) {
@@ -270,7 +270,7 @@ __attribute__((unused)) static OrgApacheLuceneUtilFstFST_Arc *OrgApacheLuceneUti
         targetLabel = [self getTargetLabel];
       }
       else if (arc->label_ > targetLabel) {
-        while (YES) {
+        while (true) {
           [((OrgApacheLuceneUtilFstFST *) nil_chk(fst_)) readFirstTargetArcWithOrgApacheLuceneUtilFstFST_Arc:OrgApacheLuceneUtilFstFSTEnum_getArcWithInt_(self, upto_ - 1) withOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilFstFST_BytesReader:fstReader_];
           if (arc->label_ < targetLabel) {
             while (![arc isLast] && [fst_ readNextArcLabelWithOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilFstFST_BytesReader:fstReader_] < targetLabel) {
@@ -309,15 +309,15 @@ __attribute__((unused)) static OrgApacheLuceneUtilFstFST_Arc *OrgApacheLuceneUti
   OrgApacheLuceneUtilFstFST_Arc *arc = OrgApacheLuceneUtilFstFSTEnum_getArcWithInt_(self, upto_ - 1);
   jint targetLabel = [self getTargetLabel];
   OrgApacheLuceneUtilFstFST_BytesReader *fstReader = [((OrgApacheLuceneUtilFstFST *) nil_chk(fst_)) getBytesReader];
-  while (YES) {
+  while (true) {
     OrgApacheLuceneUtilFstFST_Arc *nextArc = [fst_ findTargetArcWithInt:targetLabel withOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilFstFST_Arc:OrgApacheLuceneUtilFstFSTEnum_getArcWithInt_(self, upto_) withOrgApacheLuceneUtilFstFST_BytesReader:fstReader];
     if (nextArc == nil) {
       [fst_ readFirstTargetArcWithOrgApacheLuceneUtilFstFST_Arc:arc withOrgApacheLuceneUtilFstFST_Arc:OrgApacheLuceneUtilFstFSTEnum_getArcWithInt_(self, upto_) withOrgApacheLuceneUtilFstFST_BytesReader:fstReader];
-      return NO;
+      return false;
     }
     IOSObjectArray_Set(nil_chk(output_), upto_, [((OrgApacheLuceneUtilFstOutputs *) nil_chk(fst_->outputs_)) addWithId:IOSObjectArray_Get(output_, upto_ - 1) withId:((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(nextArc))->output_]);
     if (targetLabel == OrgApacheLuceneUtilFstFST_END_LABEL) {
-      return YES;
+      return true;
     }
     [self setCurrentLabelWithInt:targetLabel];
     OrgApacheLuceneUtilFstFSTEnum_incr(self);
@@ -437,7 +437,7 @@ void OrgApacheLuceneUtilFstFSTEnum_incr(OrgApacheLuceneUtilFstFSTEnum *self) {
 void OrgApacheLuceneUtilFstFSTEnum_pushFirst(OrgApacheLuceneUtilFstFSTEnum *self) {
   OrgApacheLuceneUtilFstFST_Arc *arc = IOSObjectArray_Get(nil_chk(self->arcs_), self->upto_);
   JreAssert((arc != nil), (@"org/apache/lucene/util/fst/FSTEnum.java:485 condition failed: assert arc != null;"));
-  while (YES) {
+  while (true) {
     IOSObjectArray_Set(nil_chk(self->output_), self->upto_, [((OrgApacheLuceneUtilFstOutputs *) nil_chk(((OrgApacheLuceneUtilFstFST *) nil_chk(self->fst_))->outputs_)) addWithId:IOSObjectArray_Get(self->output_, self->upto_ - 1) withId:((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc))->output_]);
     if (arc->label_ == OrgApacheLuceneUtilFstFST_END_LABEL) {
       break;
@@ -453,7 +453,7 @@ void OrgApacheLuceneUtilFstFSTEnum_pushFirst(OrgApacheLuceneUtilFstFSTEnum *self
 void OrgApacheLuceneUtilFstFSTEnum_pushLast(OrgApacheLuceneUtilFstFSTEnum *self) {
   OrgApacheLuceneUtilFstFST_Arc *arc = IOSObjectArray_Get(nil_chk(self->arcs_), self->upto_);
   JreAssert((arc != nil), (@"org/apache/lucene/util/fst/FSTEnum.java:508 condition failed: assert arc != null;"));
-  while (YES) {
+  while (true) {
     [self setCurrentLabelWithInt:((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(arc))->label_];
     IOSObjectArray_Set(nil_chk(self->output_), self->upto_, [((OrgApacheLuceneUtilFstOutputs *) nil_chk(((OrgApacheLuceneUtilFstFST *) nil_chk(self->fst_))->outputs_)) addWithId:IOSObjectArray_Get(self->output_, self->upto_ - 1) withId:arc->output_]);
     if (arc->label_ == OrgApacheLuceneUtilFstFST_END_LABEL) {

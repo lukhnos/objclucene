@@ -89,12 +89,12 @@ withOrgApacheLuceneSearchGeoBoundingBox:(OrgApacheLuceneSearchGeoBoundingBox *)b
 }
 
 - (jboolean)isEqual:(id)o {
-  if (self == o) return YES;
-  if (!([o isKindOfClass:[OrgApacheLuceneSearchGeoPointDistanceQueryImpl class]])) return NO;
-  if (![super isEqual:o]) return NO;
+  if (self == o) return true;
+  if (!([o isKindOfClass:[OrgApacheLuceneSearchGeoPointDistanceQueryImpl class]])) return false;
+  if (![super isEqual:o]) return false;
   OrgApacheLuceneSearchGeoPointDistanceQueryImpl *that = (OrgApacheLuceneSearchGeoPointDistanceQueryImpl *) check_class_cast(o, [OrgApacheLuceneSearchGeoPointDistanceQueryImpl class]);
-  if (![((OrgApacheLuceneSearchGeoPointDistanceQuery *) nil_chk(query_)) isEqual:((OrgApacheLuceneSearchGeoPointDistanceQueryImpl *) nil_chk(that))->query_]) return NO;
-  return YES;
+  if (![((OrgApacheLuceneSearchGeoPointDistanceQuery *) nil_chk(query_)) isEqual:((OrgApacheLuceneSearchGeoPointDistanceQueryImpl *) nil_chk(that))->query_]) return false;
+  return true;
 }
 
 - (NSUInteger)hash {

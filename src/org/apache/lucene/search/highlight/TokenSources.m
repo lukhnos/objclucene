@@ -31,10 +31,12 @@ __attribute__((unused)) static OrgApacheLuceneSearchHighlightTokenSources *new_O
 
 @implementation OrgApacheLuceneSearchHighlightTokenSources
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchHighlightTokenSources_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (OrgApacheLuceneAnalysisTokenStream *)getTokenStreamWithNSString:(NSString *)field
                                     withOrgApacheLuceneIndexFields:(OrgApacheLuceneIndexFields *)tvFields

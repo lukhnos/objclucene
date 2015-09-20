@@ -64,10 +64,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreLockVerifyServer_$1)
   OrgApacheLuceneStoreLockVerifyServer_mainWithNSStringArray_(args);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneStoreLockVerifyServer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -90,10 +92,10 @@ void OrgApacheLuceneStoreLockVerifyServer_mainWithNSStringArray_(IOSObjectArray 
   NSString *hostname = IOSObjectArray_Get(args, arg++);
   jint maxClients = JavaLangInteger_parseIntWithNSString_(IOSObjectArray_Get(args, arg++));
   {
-    JavaLangThrowable *__mainException = nil;
     JavaNetServerSocket *s = [new_JavaNetServerSocket_init() autorelease];
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
-      [s setReuseAddressWithBoolean:YES];
+      [s setReuseAddressWithBoolean:true];
       [s setSoTimeoutWithInt:30000];
       [s bindWithJavaNetSocketAddress:[new_JavaNetInetSocketAddress_initWithNSString_withInt_(hostname, 0) autorelease]];
       JavaNetInetSocketAddress *localAddr = (JavaNetInetSocketAddress *) check_class_cast([s getLocalSocketAddress], [JavaNetInetSocketAddress class]);
@@ -123,19 +125,21 @@ void OrgApacheLuceneStoreLockVerifyServer_mainWithNSStringArray_(IOSObjectArray 
       JavaLangSystem_clearPropertyWithNSString_(@"lockverifyserver.port");
       [JreLoadStatic(JavaLangSystem, out_) printlnWithNSString:@"Server terminated."];
     }
+    @catch (JavaLangThrowable *e) {
+      __primaryException1 = e;
+      @throw e;
+    }
     @finally {
-      @try {
-        [s close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
+      if (s != nil) {
+        if (__primaryException1 != nil) {
+          @try {
+            [s close];
+          } @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
         } else {
-          __mainException = e;
+          [s close];
         }
-      }
-      if (__mainException) {
-        @throw __mainException;
       }
     }
   }
@@ -156,93 +160,103 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreLockVerifyServer)
 @implementation OrgApacheLuceneStoreLockVerifyServer_$1
 
 - (void)run {
-  {
-    JavaLangThrowable *__mainException = nil;
+  @try {
     JavaIoInputStream *in = [((JavaNetSocket *) nil_chk(val$cs_)) getInputStream];
-    JavaIoOutputStream *os = [val$cs_ getOutputStream];
+    JavaLangThrowable *__primaryException2 = nil;
     @try {
-      jint id_ = [((JavaIoInputStream *) nil_chk(in)) read];
-      if (id_ < 0) {
-        @throw [new_JavaIoIOException_initWithNSString_(@"Client closed connection before communication started.") autorelease];
-      }
-      [((JavaUtilConcurrentCountDownLatch *) nil_chk(val$startingGun_)) await];
-      [((JavaIoOutputStream *) nil_chk(os)) writeWithInt:43];
-      [os flush];
-      while (YES) {
-        jint command = [in read];
-        if (command < 0) {
-          return;
+      JavaIoOutputStream *os = [val$cs_ getOutputStream];
+      JavaLangThrowable *__primaryException1 = nil;
+      @try {
+        jint id_ = [((JavaIoInputStream *) nil_chk(in)) read];
+        if (id_ < 0) {
+          @throw [new_JavaIoIOException_initWithNSString_(@"Client closed connection before communication started.") autorelease];
         }
-        @synchronized(val$localLock_) {
-          jint currentLock = IOSIntArray_Get(nil_chk(val$lockedID_), 0);
-          if (currentLock == -2) {
+        [((JavaUtilConcurrentCountDownLatch *) nil_chk(val$startingGun_)) await];
+        [((JavaIoOutputStream *) nil_chk(os)) writeWithInt:43];
+        [os flush];
+        while (true) {
+          jint command = [in read];
+          if (command < 0) {
             return;
           }
-          switch (command) {
-            case 1:
-            if (currentLock != -1) {
-              *IOSIntArray_GetRef(val$lockedID_, 0) = -2;
-              @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$I$", @"id ", id_, @" got lock, but ", currentLock, @" already holds the lock")) autorelease];
+          @synchronized(val$localLock_) {
+            jint currentLock = IOSIntArray_Get(nil_chk(val$lockedID_), 0);
+            if (currentLock == -2) {
+              return;
             }
-            *IOSIntArray_GetRef(val$lockedID_, 0) = id_;
-            break;
-            case 0:
-            if (currentLock != id_) {
-              *IOSIntArray_GetRef(val$lockedID_, 0) = -2;
-              @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$I$", @"id ", id_, @" released the lock, but ", currentLock, @" is the one holding the lock")) autorelease];
+            switch (command) {
+              case 1:
+              if (currentLock != -1) {
+                *IOSIntArray_GetRef(val$lockedID_, 0) = -2;
+                @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$I$", @"id ", id_, @" got lock, but ", currentLock, @" already holds the lock")) autorelease];
+              }
+              *IOSIntArray_GetRef(val$lockedID_, 0) = id_;
+              break;
+              case 0:
+              if (currentLock != id_) {
+                *IOSIntArray_GetRef(val$lockedID_, 0) = -2;
+                @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$I$", @"id ", id_, @" released the lock, but ", currentLock, @" is the one holding the lock")) autorelease];
+              }
+              *IOSIntArray_GetRef(val$lockedID_, 0) = -1;
+              break;
+              default:
+              @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I", @"Unrecognized command: ", command)) autorelease];
             }
-            *IOSIntArray_GetRef(val$lockedID_, 0) = -1;
-            break;
-            default:
-            @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$I", @"Unrecognized command: ", command)) autorelease];
+            [os writeWithInt:command];
+            [os flush];
           }
-          [os writeWithInt:command];
-          [os flush];
         }
       }
-    }
-    @catch (JavaLangRuntimeException *e) {
-      __mainException = e;
-      @throw e;
-    }
-    @catch (JavaLangError *e) {
-      __mainException = e;
-      @throw e;
+      @catch (JavaLangThrowable *e) {
+        __primaryException1 = e;
+        @throw e;
+      }
+      @finally {
+        if (os != nil) {
+          if (__primaryException1 != nil) {
+            @try {
+              [os close];
+            } @catch (JavaLangThrowable *e) {
+              [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+            }
+          } else {
+            [os close];
+          }
+        }
+      }
     }
     @catch (JavaLangThrowable *e) {
-      __mainException = e;
+      __primaryException2 = e;
       @throw e;
     }
-    @catch (JavaLangException *ioe) {
-      __mainException = ioe;
-      @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(ioe) autorelease];
-    }
     @finally {
-      OrgApacheLuceneUtilIOUtils_closeWhileHandlingExceptionWithJavaIoCloseableArray_([IOSObjectArray arrayWithObjects:(id[]){ val$cs_ } count:1 type:JavaIoCloseable_class_()]);
-      @try {
-        [os close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
+      if (in != nil) {
+        if (__primaryException2 != nil) {
+          @try {
+            [in close];
+          } @catch (JavaLangThrowable *e) {
+            [__primaryException2 addSuppressedWithJavaLangThrowable:e];
+          }
         } else {
-          __mainException = e;
+          [in close];
         }
-      }
-      @try {
-        [in close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
-        } else {
-          __mainException = e;
-        }
-      }
-      if (__mainException) {
-        @throw __mainException;
       }
     }
+  }
+  @catch (JavaLangRuntimeException *e) {
+    @throw e;
+  }
+  @catch (JavaLangError *e) {
+    @throw e;
+  }
+  @catch (JavaLangThrowable *e) {
+    @throw e;
+  }
+  @catch (JavaLangException *ioe) {
+    @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(ioe) autorelease];
+  }
+  @finally {
+    OrgApacheLuceneUtilIOUtils_closeWhileHandlingExceptionWithJavaIoCloseableArray_([IOSObjectArray arrayWithObjects:(id[]){ val$cs_ } count:1 type:JavaIoCloseable_class_()]);
   }
 }
 

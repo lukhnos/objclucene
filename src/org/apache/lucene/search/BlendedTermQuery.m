@@ -144,8 +144,8 @@ withOrgApacheLuceneSearchBlendedTermQuery_RewriteMethod:(OrgApacheLuceneSearchBl
 }
 
 - (jboolean)isEqual:(id)obj {
-  if ([super isEqual:obj] == NO) {
-    return NO;
+  if ([super isEqual:obj] == false) {
+    return false;
   }
   OrgApacheLuceneSearchBlendedTermQuery *that = (OrgApacheLuceneSearchBlendedTermQuery *) check_class_cast(obj, [OrgApacheLuceneSearchBlendedTermQuery class]);
   return JavaUtilArrays_equalsWithNSObjectArray_withNSObjectArray_(terms_, ((OrgApacheLuceneSearchBlendedTermQuery *) nil_chk(that))->terms_) && JavaUtilArrays_equalsWithNSObjectArray_withNSObjectArray_(contexts_, that->contexts_) && JavaUtilArrays_equalsWithFloatArray_withFloatArray_(boosts_, that->boosts_) && [((OrgApacheLuceneSearchBlendedTermQuery_RewriteMethod *) nil_chk(rewriteMethod_)) isEqual:that->rewriteMethod_];
@@ -300,10 +300,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchBlendedTermQuery)
 
 @implementation OrgApacheLuceneSearchBlendedTermQuery_Builder
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchBlendedTermQuery_Builder_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneSearchBlendedTermQuery_Builder *)setRewriteMethodWithOrgApacheLuceneSearchBlendedTermQuery_RewriteMethod:(OrgApacheLuceneSearchBlendedTermQuery_RewriteMethod *)rewiteMethod {
   JreStrongAssign(&self->rewriteMethod_, rewiteMethod);
@@ -388,10 +390,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchBlendedTermQuery_Builder)
 
 @implementation OrgApacheLuceneSearchBlendedTermQuery_RewriteMethod
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchBlendedTermQuery_RewriteMethod_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneSearchQueryArray:(IOSObjectArray *)subQueries {
   // can't call an abstract method
@@ -429,7 +433,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchBlendedTermQuery_RewriteMe
 
 - (jboolean)isEqual:(id)obj {
   if (obj == nil || [self getClass] != [obj getClass]) {
-    return NO;
+    return false;
   }
   OrgApacheLuceneSearchBlendedTermQuery_DisjunctionMaxRewrite *that = (OrgApacheLuceneSearchBlendedTermQuery_DisjunctionMaxRewrite *) check_class_cast(obj, [OrgApacheLuceneSearchBlendedTermQuery_DisjunctionMaxRewrite class]);
   return tieBreakerMultiplier_ == ((OrgApacheLuceneSearchBlendedTermQuery_DisjunctionMaxRewrite *) nil_chk(that))->tieBreakerMultiplier_;
@@ -472,7 +476,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchBlendedTermQuery_Disjuncti
 
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneSearchQueryArray:(IOSObjectArray *)subQueries {
   OrgApacheLuceneSearchBooleanQuery_Builder *merged = [new_OrgApacheLuceneSearchBooleanQuery_Builder_init() autorelease];
-  [merged setDisableCoordWithBoolean:YES];
+  [merged setDisableCoordWithBoolean:true];
   {
     IOSObjectArray *a__ = subQueries;
     OrgApacheLuceneSearchQuery * const *b__ = ((IOSObjectArray *) nil_chk(a__))->buffer_;
@@ -485,10 +489,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchBlendedTermQuery_Disjuncti
   return [merged build];
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchBlendedTermQuery_$1_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

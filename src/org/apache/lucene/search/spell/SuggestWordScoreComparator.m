@@ -9,10 +9,12 @@
 
 @implementation OrgApacheLuceneSearchSpellSuggestWordScoreComparator
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSpellSuggestWordScoreComparator_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)compareWithId:(OrgApacheLuceneSearchSpellSuggestWord *)first
                withId:(OrgApacheLuceneSearchSpellSuggestWord *)second {

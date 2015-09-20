@@ -113,7 +113,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneSearchTermQuery_TermWeigh
 }
 
 - (jboolean)isEqual:(id)o {
-  if (!([o isKindOfClass:[OrgApacheLuceneSearchTermQuery class]])) return NO;
+  if (!([o isKindOfClass:[OrgApacheLuceneSearchTermQuery class]])) return false;
   OrgApacheLuceneSearchTermQuery *other = (OrgApacheLuceneSearchTermQuery *) check_class_cast(o, [OrgApacheLuceneSearchTermQuery class]);
   return [super isEqual:o] && [((OrgApacheLuceneIndexTerm *) nil_chk(self->term_)) isEqual:((OrgApacheLuceneSearchTermQuery *) nil_chk(other))->term_];
 }
@@ -165,7 +165,7 @@ void OrgApacheLuceneSearchTermQuery_initWithOrgApacheLuceneIndexTerm_withOrgApac
   OrgApacheLuceneSearchQuery_init(self);
   JreAssert((states != nil), (@"org/apache/lucene/search/TermQuery.java:168 condition failed: assert states != null;"));
   JreStrongAssign(&self->term_, OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_(t));
-  if ([((OrgApacheLuceneIndexTermContext *) nil_chk(states)) hasOnlyRealTerms] == NO) {
+  if ([((OrgApacheLuceneIndexTermContext *) nil_chk(states)) hasOnlyRealTerms] == false) {
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"Term queries must be created on real terms") autorelease];
   }
   JreStrongAssign(&self->perReaderTermState_, OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_(states));

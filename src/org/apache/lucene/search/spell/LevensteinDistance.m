@@ -11,10 +11,12 @@
 
 @implementation OrgApacheLuceneSearchSpellLevensteinDistance
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSpellLevensteinDistance_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jfloat)getDistanceWithNSString:(NSString *)target
                      withNSString:(NSString *)other {
@@ -62,8 +64,8 @@
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return YES;
-  if (nil == obj) return NO;
+  if (self == obj) return true;
+  if (nil == obj) return false;
   return [self getClass] == [nil_chk(obj) getClass];
 }
 

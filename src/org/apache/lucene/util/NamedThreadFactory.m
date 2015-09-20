@@ -53,7 +53,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilNamedThreadFactory)
 
 - (JavaLangThread *)newThreadWithJavaLangRunnable:(id<JavaLangRunnable>)r {
   JavaLangThread *t = [new_JavaLangThread_initWithJavaLangThreadGroup_withJavaLangRunnable_withNSString_withLong_(group_, r, NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT_), @"%s-%d", [IOSObjectArray arrayWithObjects:(id[]){ self->threadNamePrefix_, JavaLangInteger_valueOfWithInt_([((JavaUtilConcurrentAtomicAtomicInteger *) nil_chk(threadNumber_)) getAndIncrement]) } count:2 type:NSObject_class_()]), 0) autorelease];
-  [t setDaemonWithBoolean:NO];
+  [t setDaemonWithBoolean:false];
   [t setPriorityWithInt:JavaLangThread_NORM_PRIORITY];
   return t;
 }

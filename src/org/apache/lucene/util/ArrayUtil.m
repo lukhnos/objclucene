@@ -66,10 +66,12 @@ jint OrgApacheLuceneUtilArrayUtil_MAX_ARRAY_LENGTH_;
 
 @implementation OrgApacheLuceneUtilArrayUtil
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilArrayUtil_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (jint)parseIntWithCharArray:(IOSCharArray *)chars {
   return OrgApacheLuceneUtilArrayUtil_parseIntWithCharArray_(chars);
@@ -443,7 +445,7 @@ jint OrgApacheLuceneUtilArrayUtil_parseIntWithCharArray_withInt_withInt_withInt_
   if (negative && ++i == len) {
     @throw [new_JavaLangNumberFormatException_initWithNSString_(@"can't convert to an int") autorelease];
   }
-  if (negative == YES) {
+  if (negative == true) {
     offset++;
     len--;
   }
@@ -822,12 +824,12 @@ jboolean OrgApacheLuceneUtilArrayUtil_equalsWithCharArray_withInt_withCharArray_
   if ((offsetLeft + length <= ((IOSCharArray *) nil_chk(left))->size_) && (offsetRight + length <= ((IOSCharArray *) nil_chk(right))->size_)) {
     for (jint i = 0; i < length; i++) {
       if (IOSCharArray_Get(left, offsetLeft + i) != IOSCharArray_Get(right, offsetRight + i)) {
-        return NO;
+        return false;
       }
     }
-    return YES;
+    return true;
   }
-  return NO;
+  return false;
 }
 
 jboolean OrgApacheLuceneUtilArrayUtil_equalsWithByteArray_withInt_withByteArray_withInt_withInt_(IOSByteArray *left, jint offsetLeft, IOSByteArray *right, jint offsetRight, jint length) {
@@ -835,12 +837,12 @@ jboolean OrgApacheLuceneUtilArrayUtil_equalsWithByteArray_withInt_withByteArray_
   if ((offsetLeft + length <= ((IOSByteArray *) nil_chk(left))->size_) && (offsetRight + length <= ((IOSByteArray *) nil_chk(right))->size_)) {
     for (jint i = 0; i < length; i++) {
       if (IOSByteArray_Get(left, offsetLeft + i) != IOSByteArray_Get(right, offsetRight + i)) {
-        return NO;
+        return false;
       }
     }
-    return YES;
+    return true;
   }
-  return NO;
+  return false;
 }
 
 jboolean OrgApacheLuceneUtilArrayUtil_equalsWithIntArray_withInt_withIntArray_withInt_withInt_(IOSIntArray *left, jint offsetLeft, IOSIntArray *right, jint offsetRight, jint length) {
@@ -848,12 +850,12 @@ jboolean OrgApacheLuceneUtilArrayUtil_equalsWithIntArray_withInt_withIntArray_wi
   if ((offsetLeft + length <= ((IOSIntArray *) nil_chk(left))->size_) && (offsetRight + length <= ((IOSIntArray *) nil_chk(right))->size_)) {
     for (jint i = 0; i < length; i++) {
       if (IOSIntArray_Get(left, offsetLeft + i) != IOSIntArray_Get(right, offsetRight + i)) {
-        return NO;
+        return false;
       }
     }
-    return YES;
+    return true;
   }
-  return NO;
+  return false;
 }
 
 IOSIntArray *OrgApacheLuceneUtilArrayUtil_toIntArrayWithJavaUtilCollection_(id<JavaUtilCollection> ints) {
@@ -928,10 +930,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilArrayUtil)
 
 @implementation OrgApacheLuceneUtilArrayUtil_NaturalComparator
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilArrayUtil_NaturalComparator_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)compareWithId:(id<JavaLangComparable>)o1
                withId:(id<JavaLangComparable>)o2 {

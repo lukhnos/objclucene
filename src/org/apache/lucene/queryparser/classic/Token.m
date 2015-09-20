@@ -17,10 +17,12 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserClassicToken, serialVersion
   return nil;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueryparserClassicToken_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithInt:(jint)kind {
   OrgApacheLuceneQueryparserClassicToken_initWithInt_(self, kind);

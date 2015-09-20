@@ -104,10 +104,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocIdSetIterator_$2)
   return 0;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchDocIdSetIterator_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -150,7 +152,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocIdSetIterator)
 - (jint)advanceWithInt:(jint)target {
   JreAssert((!exhausted_), (@"org/apache/lucene/search/DocIdSetIterator.java:40 condition failed: assert !exhausted;"));
   JreAssert((target >= 0), (@"org/apache/lucene/search/DocIdSetIterator.java:41 condition failed: assert target >= 0;"));
-  exhausted_ = YES;
+  exhausted_ = true;
   return OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS;
 }
 
@@ -160,7 +162,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocIdSetIterator)
 
 - (jint)nextDoc {
   JreAssert((!exhausted_), (@"org/apache/lucene/search/DocIdSetIterator.java:52 condition failed: assert !exhausted;"));
-  exhausted_ = YES;
+  exhausted_ = true;
   return OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS;
 }
 
@@ -168,10 +170,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocIdSetIterator)
   return 0;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchDocIdSetIterator_$1_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -193,7 +197,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocIdSetIterator)
 
 void OrgApacheLuceneSearchDocIdSetIterator_$1_init(OrgApacheLuceneSearchDocIdSetIterator_$1 *self) {
   OrgApacheLuceneSearchDocIdSetIterator_init(self);
-  self->exhausted_ = NO;
+  self->exhausted_ = false;
 }
 
 OrgApacheLuceneSearchDocIdSetIterator_$1 *new_OrgApacheLuceneSearchDocIdSetIterator_$1_init() {

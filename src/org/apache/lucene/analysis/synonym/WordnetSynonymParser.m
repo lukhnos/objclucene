@@ -131,13 +131,13 @@ void OrgApacheLuceneAnalysisSynonymWordnetSynonymParser_addInternalWithOrgApache
   if (self->expand_) {
     for (jint i = 0; i < size; i++) {
       for (jint j = 0; j < size; j++) {
-        [self addWithOrgApacheLuceneUtilCharsRef:IOSObjectArray_Get(nil_chk(synset), i) withOrgApacheLuceneUtilCharsRef:IOSObjectArray_Get(synset, j) withBoolean:NO];
+        [self addWithOrgApacheLuceneUtilCharsRef:IOSObjectArray_Get(nil_chk(synset), i) withOrgApacheLuceneUtilCharsRef:IOSObjectArray_Get(synset, j) withBoolean:false];
       }
     }
   }
   else {
     for (jint i = 0; i < size; i++) {
-      [self addWithOrgApacheLuceneUtilCharsRef:IOSObjectArray_Get(nil_chk(synset), i) withOrgApacheLuceneUtilCharsRef:IOSObjectArray_Get(synset, 0) withBoolean:NO];
+      [self addWithOrgApacheLuceneUtilCharsRef:IOSObjectArray_Get(nil_chk(synset), i) withOrgApacheLuceneUtilCharsRef:IOSObjectArray_Get(synset, 0) withBoolean:false];
     }
   }
 }

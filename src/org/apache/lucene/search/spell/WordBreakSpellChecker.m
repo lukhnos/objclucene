@@ -171,10 +171,12 @@ OrgApacheLuceneIndexTerm *OrgApacheLuceneSearchSpellWordBreakSpellChecker_SEPARA
 
 @implementation OrgApacheLuceneSearchSpellWordBreakSpellChecker
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSpellWordBreakSpellChecker_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (IOSObjectArray *)suggestWordBreaksWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term
                                                           withInt:(jint)maxSuggestions

@@ -77,12 +77,12 @@ withOrgApacheLuceneSearchSortedSetSelector_TypeEnum:(OrgApacheLuceneSearchSorted
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return YES;
-  if (![super isEqual:obj]) return NO;
-  if ([self getClass] != [nil_chk(obj) getClass]) return NO;
+  if (self == obj) return true;
+  if (![super isEqual:obj]) return false;
+  if ([self getClass] != [nil_chk(obj) getClass]) return false;
   OrgApacheLuceneSearchSortedSetSortField *other = (OrgApacheLuceneSearchSortedSetSortField *) check_class_cast(obj, [OrgApacheLuceneSearchSortedSetSortField class]);
-  if (selector_ != other->selector_) return NO;
-  return YES;
+  if (selector_ != other->selector_) return false;
+  return true;
 }
 
 - (NSString *)description {

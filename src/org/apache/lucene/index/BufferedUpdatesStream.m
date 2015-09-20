@@ -196,12 +196,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexBufferedUpdatesStream)
     jlong t0 = JavaLangSystem_currentTimeMillis();
     jlong gen = nextGen_++;
     if ([((id<JavaUtilList>) nil_chk(infos)) size] == 0) {
-      return [new_OrgApacheLuceneIndexBufferedUpdatesStream_ApplyDeletesResult_initWithBoolean_withLong_withJavaUtilList_(NO, gen, nil) autorelease];
+      return [new_OrgApacheLuceneIndexBufferedUpdatesStream_ApplyDeletesResult_initWithBoolean_withLong_withJavaUtilList_(false, gen, nil) autorelease];
     }
     IOSObjectArray *segStates = nil;
     jlong totDelCount = 0;
     jlong totTermVisitedCount = 0;
-    jboolean success = NO;
+    jboolean success = false;
     OrgApacheLuceneIndexBufferedUpdatesStream_ApplyDeletesResult *result = nil;
     @try {
       if ([((OrgApacheLuceneUtilInfoStream *) nil_chk(infoStream_)) isEnabledWithNSString:@"BD"]) {
@@ -212,7 +212,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexBufferedUpdatesStream)
         if ([infoStream_ isEnabledWithNSString:@"BD"]) {
           [infoStream_ messageWithNSString:@"BD" withNSString:@"applyDeletes: no segments; skipping"];
         }
-        return [new_OrgApacheLuceneIndexBufferedUpdatesStream_ApplyDeletesResult_initWithBoolean_withLong_withJavaUtilList_(NO, gen, nil) autorelease];
+        return [new_OrgApacheLuceneIndexBufferedUpdatesStream_ApplyDeletesResult_initWithBoolean_withLong_withJavaUtilList_(false, gen, nil) autorelease];
       }
       if ([infoStream_ isEnabledWithNSString:@"BD"]) {
         [infoStream_ messageWithNSString:@"BD" withNSString:JreStrcat("$@$I", @"applyDeletes: infos=", infos, @" packetCount=", [((id<JavaUtilList>) nil_chk(updates_)) size])];
@@ -285,7 +285,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexBufferedUpdatesStream)
         totTermVisitedCount += OrgApacheLuceneIndexBufferedUpdatesStream_applyTermDeletesWithOrgApacheLuceneIndexCoalescedUpdates_withOrgApacheLuceneIndexBufferedUpdatesStream_SegmentStateArray_(self, coalescedUpdates, segStates);
       }
       JreAssert((OrgApacheLuceneIndexBufferedUpdatesStream_checkDeleteStats(self)), (@"org/apache/lucene/index/BufferedUpdatesStream.java:290 condition failed: assert checkDeleteStats();"));
-      success = YES;
+      success = true;
     }
     @finally {
       if (segStates != nil) {
@@ -293,7 +293,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexBufferedUpdatesStream)
       }
     }
     if (result == nil) {
-      result = [new_OrgApacheLuceneIndexBufferedUpdatesStream_ApplyDeletesResult_initWithBoolean_withLong_withJavaUtilList_(NO, gen, nil) autorelease];
+      result = [new_OrgApacheLuceneIndexBufferedUpdatesStream_ApplyDeletesResult_initWithBoolean_withLong_withJavaUtilList_(false, gen, nil) autorelease];
     }
     if ([((OrgApacheLuceneUtilInfoStream *) nil_chk(infoStream_)) isEnabledWithNSString:@"BD"]) {
       [infoStream_ messageWithNSString:@"BD" withNSString:NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT_), @"applyDeletes took %d msec for %d segments, %d newly deleted docs (query deletes), %d visited terms, allDeleted=%s", [IOSObjectArray arrayWithObjects:(id[]){ JavaLangLong_valueOfWithLong_(JavaLangSystem_currentTimeMillis() - t0), JavaLangInteger_valueOfWithInt_([((id<JavaUtilList>) nil_chk(infos)) size]), JavaLangLong_valueOfWithLong_(totDelCount), JavaLangLong_valueOfWithLong_(totTermVisitedCount), ((OrgApacheLuceneIndexBufferedUpdatesStream_ApplyDeletesResult *) nil_chk(result))->allDeleted_ } count:5 type:NSObject_class_()])];
@@ -472,15 +472,15 @@ void OrgApacheLuceneIndexBufferedUpdatesStream_pruneWithInt_(OrgApacheLuceneInde
 IOSObjectArray *OrgApacheLuceneIndexBufferedUpdatesStream_openSegmentStatesWithOrgApacheLuceneIndexIndexWriter_ReaderPool_withJavaUtilList_(OrgApacheLuceneIndexBufferedUpdatesStream *self, OrgApacheLuceneIndexIndexWriter_ReaderPool *pool, id<JavaUtilList> infos) {
   jint numReaders = [((id<JavaUtilList>) nil_chk(infos)) size];
   IOSObjectArray *segStates = [IOSObjectArray arrayWithLength:numReaders type:OrgApacheLuceneIndexBufferedUpdatesStream_SegmentState_class_()];
-  jboolean success = NO;
+  jboolean success = false;
   @try {
     for (jint i = 0; i < numReaders; i++) {
       IOSObjectArray_SetAndConsume(segStates, i, new_OrgApacheLuceneIndexBufferedUpdatesStream_SegmentState_initWithOrgApacheLuceneIndexIndexWriter_ReaderPool_withOrgApacheLuceneIndexSegmentCommitInfo_(pool, [infos getWithInt:i]));
     }
-    success = YES;
+    success = true;
   }
   @finally {
-    if (success == NO) {
+    if (success == false) {
       for (jint j = 0; j < numReaders; j++) {
         if (IOSObjectArray_Get(segStates, j) != nil) {
           @try {
@@ -593,17 +593,17 @@ jlong OrgApacheLuceneIndexBufferedUpdatesStream_applyTermDeletesWithOrgApacheLuc
           id<OrgApacheLuceneUtilBits> acceptDocs = [((OrgApacheLuceneIndexReadersAndUpdates *) nil_chk(state->rld_)) getLiveDocs];
           JreStrongAssign(&state->postingsEnum_, [((OrgApacheLuceneIndexTermsEnum *) nil_chk(state->termsEnum_)) postingsWithOrgApacheLuceneIndexPostingsEnum:state->postingsEnum_ withInt:OrgApacheLuceneIndexPostingsEnum_NONE]);
           JreAssert((state->postingsEnum_ != nil), (@"org/apache/lucene/index/BufferedUpdatesStream.java:562 condition failed: assert state.postingsEnum != null;"));
-          while (YES) {
+          while (true) {
             jint docID = [((OrgApacheLuceneIndexPostingsEnum *) nil_chk(state->postingsEnum_)) nextDoc];
             if (docID == OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS) {
               break;
             }
-            if (acceptDocs != nil && [acceptDocs getWithInt:docID] == NO) {
+            if (acceptDocs != nil && [acceptDocs getWithInt:docID] == false) {
               continue;
             }
             if (!state->any_) {
               [state->rld_ initWritableLiveDocs];
-              state->any_ = YES;
+              state->any_ = true;
             }
             [state->rld_ delete__WithInt:docID];
           }
@@ -658,7 +658,7 @@ void OrgApacheLuceneIndexBufferedUpdatesStream_applyDocValuesUpdatesWithJavaLang
           if (doc >= limit) {
             break;
           }
-          if (acceptDocs != nil && [acceptDocs getWithInt:doc] == NO) {
+          if (acceptDocs != nil && [acceptDocs getWithInt:doc] == false) {
             continue;
           }
           [((OrgApacheLuceneIndexDocValuesFieldUpdates *) nil_chk(dvUpdates)) addWithInt:doc withId:update->value_];
@@ -677,21 +677,21 @@ jlong OrgApacheLuceneIndexBufferedUpdatesStream_applyQueryDeletesWithJavaLangIte
     jint limit = ent->limit_;
     OrgApacheLuceneSearchIndexSearcher *searcher = [new_OrgApacheLuceneSearchIndexSearcher_initWithOrgApacheLuceneIndexIndexReader_([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(readerContext)) reader]) autorelease];
     [searcher setQueryCacheWithOrgApacheLuceneSearchQueryCache:nil];
-    OrgApacheLuceneSearchWeight *weight = [searcher createNormalizedWeightWithOrgApacheLuceneSearchQuery:query withBoolean:NO];
+    OrgApacheLuceneSearchWeight *weight = [searcher createNormalizedWeightWithOrgApacheLuceneSearchQuery:query withBoolean:false];
     OrgApacheLuceneSearchDocIdSetIterator *it = [((OrgApacheLuceneSearchWeight *) nil_chk(weight)) scorerWithOrgApacheLuceneIndexLeafReaderContext:readerContext];
     if (it != nil) {
       id<OrgApacheLuceneUtilBits> liveDocs = [((OrgApacheLuceneIndexLeafReader *) nil_chk([readerContext reader])) getLiveDocs];
-      while (YES) {
+      while (true) {
         jint doc = [it nextDoc];
         if (doc >= limit) {
           break;
         }
-        if (liveDocs != nil && [liveDocs getWithInt:doc] == NO) {
+        if (liveDocs != nil && [liveDocs getWithInt:doc] == false) {
           continue;
         }
         if (!segState->any_) {
           [((OrgApacheLuceneIndexReadersAndUpdates *) nil_chk(segState->rld_)) initWritableLiveDocs];
-          segState->any_ = YES;
+          segState->any_ = true;
         }
         if ([((OrgApacheLuceneIndexReadersAndUpdates *) nil_chk(segState->rld_)) delete__WithInt:doc]) {
           delCount++;
@@ -707,7 +707,7 @@ jboolean OrgApacheLuceneIndexBufferedUpdatesStream_checkDeleteTermWithOrgApacheL
     JreAssert((self->lastDeleteTerm_ == nil || [term compareToWithId:self->lastDeleteTerm_] >= 0), (JreStrcat("$@$@", @"lastTerm=", self->lastDeleteTerm_, @" vs term=", term)));
   }
   JreStrongAssign(&self->lastDeleteTerm_, term == nil ? nil : OrgApacheLuceneUtilBytesRef_deepCopyOfWithOrgApacheLuceneUtilBytesRef_(term));
-  return YES;
+  return true;
 }
 
 jboolean OrgApacheLuceneIndexBufferedUpdatesStream_checkDeleteStats(OrgApacheLuceneIndexBufferedUpdatesStream *self) {
@@ -719,7 +719,7 @@ jboolean OrgApacheLuceneIndexBufferedUpdatesStream_checkDeleteStats(OrgApacheLuc
   }
   JreAssert((numTerms2 == [((JavaUtilConcurrentAtomicAtomicInteger *) nil_chk(self->numTerms_)) get]), (JreStrcat("$I$I", @"numTerms2=", numTerms2, @" vs ", [self->numTerms_ get])));
   JreAssert((bytesUsed2 == [((JavaUtilConcurrentAtomicAtomicLong *) nil_chk(self->bytesUsed_)) get]), (JreStrcat("$J$@", @"bytesUsed2=", bytesUsed2, @" vs ", self->bytesUsed_)));
-  return YES;
+  return true;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexBufferedUpdatesStream)
@@ -817,7 +817,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexBufferedUpdatesStream_Apply
 
 void OrgApacheLuceneIndexBufferedUpdatesStream_SegmentState_initWithOrgApacheLuceneIndexIndexWriter_ReaderPool_withOrgApacheLuceneIndexSegmentCommitInfo_(OrgApacheLuceneIndexBufferedUpdatesStream_SegmentState *self, OrgApacheLuceneIndexIndexWriter_ReaderPool *pool, OrgApacheLuceneIndexSegmentCommitInfo *info) {
   NSObject_init(self);
-  JreStrongAssign(&self->rld_, [((OrgApacheLuceneIndexIndexWriter_ReaderPool *) nil_chk(pool)) getWithOrgApacheLuceneIndexSegmentCommitInfo:info withBoolean:YES]);
+  JreStrongAssign(&self->rld_, [((OrgApacheLuceneIndexIndexWriter_ReaderPool *) nil_chk(pool)) getWithOrgApacheLuceneIndexSegmentCommitInfo:info withBoolean:true]);
   self->startDelCount_ = [((OrgApacheLuceneIndexReadersAndUpdates *) nil_chk(self->rld_)) getPendingDeleteCount];
   JreStrongAssign(&self->reader_, [self->rld_ getReaderWithOrgApacheLuceneStoreIOContext:JreLoadStatic(OrgApacheLuceneStoreIOContext, READ_)]);
   self->delGen_ = [((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(info)) getBufferedDeletesGen];
@@ -915,10 +915,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexBufferedUpdatesStream_Query
   return JavaLangLong_compareWithLong_withLong_([((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(si1)) getBufferedDeletesGen], [((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(si2)) getBufferedDeletesGen]);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexBufferedUpdatesStream_$1_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

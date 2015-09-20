@@ -38,7 +38,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPrintStreamInfoStream)
 }
 
 - (jboolean)isEnabledWithNSString:(NSString *)component {
-  return YES;
+  return true;
 }
 
 - (void)close {

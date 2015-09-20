@@ -9,10 +9,12 @@
 
 @implementation OrgApacheLuceneSearchHighlightSimpleHTMLEncoder
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchHighlightSimpleHTMLEncoder_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (NSString *)encodeTextWithNSString:(NSString *)originalText {
   return OrgApacheLuceneSearchHighlightSimpleHTMLEncoder_htmlEncodeWithNSString_(originalText);

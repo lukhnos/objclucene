@@ -61,8 +61,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansConjunctionSpans_$1)
 }
 
 - (jint)toMatchDoc {
-  oneExhaustedInCurrentDoc_ = NO;
-  while (YES) {
+  oneExhaustedInCurrentDoc_ = false;
+  while (true) {
     if ([self twoPhaseCurrentDocMatches]) {
       return [self docID];
     }
@@ -124,7 +124,7 @@ void OrgApacheLuceneSearchSpansConjunctionSpans_initWithJavaUtilList_(OrgApacheL
   }
   JreStrongAssign(&self->subSpans_, [subSpans toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:[subSpans size] type:OrgApacheLuceneSearchSpansSpans_class_()]]);
   JreStrongAssign(&self->conjunction_, OrgApacheLuceneSearchConjunctionDISI_intersectWithJavaUtilList_(subSpans));
-  self->atFirstInCurrentDoc_ = YES;
+  self->atFirstInCurrentDoc_ = true;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansConjunctionSpans)

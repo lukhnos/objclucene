@@ -67,7 +67,7 @@ withOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState
       OrgApacheLuceneUtilIOUtils_closeWithJavaIoCloseableArray_([IOSObjectArray arrayWithObjects:(id[]){ writer_ } count:1 type:JavaIoCloseable_class_()]);
       JreStrongAssign(&writer_, nil);
       lastDocID_ = 0;
-      hasVectors_ = NO;
+      hasVectors_ = false;
     }
   }
 }
@@ -103,7 +103,7 @@ withOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState
 }
 
 - (void)abort {
-  hasVectors_ = NO;
+  hasVectors_ = false;
   @try {
     [super abort];
   }
@@ -183,7 +183,7 @@ withOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState
 @end
 
 void OrgApacheLuceneIndexTermVectorsConsumer_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_(OrgApacheLuceneIndexTermVectorsConsumer *self, OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter) {
-  OrgApacheLuceneIndexTermsHash_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_withBoolean_withOrgApacheLuceneIndexTermsHash_(self, docWriter, NO, nil);
+  OrgApacheLuceneIndexTermsHash_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_withBoolean_withOrgApacheLuceneIndexTermsHash_(self, docWriter, false, nil);
   JreStrongAssignAndConsume(&self->flushTerm_, new_OrgApacheLuceneUtilBytesRef_init());
   JreStrongAssignAndConsume(&self->vectorSliceReaderPos_, new_OrgApacheLuceneIndexByteSliceReader_init());
   JreStrongAssignAndConsume(&self->vectorSliceReaderOff_, new_OrgApacheLuceneIndexByteSliceReader_init());

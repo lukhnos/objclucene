@@ -26,10 +26,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilToStringUtils)
 
 @implementation OrgApacheLuceneUtilToStringUtils
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilToStringUtils_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (NSString *)boostWithFloat:(jfloat)boost {
   return OrgApacheLuceneUtilToStringUtils_boostWithFloat_(boost);

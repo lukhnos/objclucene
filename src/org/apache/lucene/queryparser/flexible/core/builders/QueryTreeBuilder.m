@@ -52,10 +52,12 @@ NSString *OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_QUERY_T
 
 @implementation OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryTreeBuilder_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)setBuilderWithJavaLangCharSequence:(id<JavaLangCharSequence>)fieldName
 withOrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder:(id<OrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder>)builder {

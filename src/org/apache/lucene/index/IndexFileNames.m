@@ -34,10 +34,12 @@ JavaUtilRegexPattern *OrgApacheLuceneIndexIndexFileNames_CODEC_FILE_PATTERN_;
 
 @implementation OrgApacheLuceneIndexIndexFileNames
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexIndexFileNames_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (NSString *)fileNameFromGenerationWithNSString:(NSString *)base
                                     withNSString:(NSString *)ext

@@ -45,10 +45,12 @@ __attribute__((unused)) static OrgApacheLuceneUtilFstFST *OrgApacheLuceneSearchS
 
 @implementation OrgApacheLuceneSearchSuggestFstFSTCompletionBuilder
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSuggestFstFSTCompletionBuilder_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithInt:(jint)buckets
 withOrgApacheLuceneSearchSuggestFstBytesRefSorter:(id<OrgApacheLuceneSearchSuggestFstBytesRefSorter>)sorter
@@ -141,7 +143,7 @@ OrgApacheLuceneSearchSuggestFstFSTCompletionBuilder *new_OrgApacheLuceneSearchSu
 OrgApacheLuceneUtilFstFST *OrgApacheLuceneSearchSuggestFstFSTCompletionBuilder_buildAutomatonWithOrgApacheLuceneSearchSuggestFstBytesRefSorter_(OrgApacheLuceneSearchSuggestFstFSTCompletionBuilder *self, id<OrgApacheLuceneSearchSuggestFstBytesRefSorter> sorter) {
   OrgApacheLuceneUtilFstOutputs *outputs = OrgApacheLuceneUtilFstNoOutputs_getSingleton();
   id empty = [((OrgApacheLuceneUtilFstOutputs *) nil_chk(outputs)) getNoOutput];
-  OrgApacheLuceneUtilFstBuilder *builder = [new_OrgApacheLuceneUtilFstBuilder_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_withInt_withInt_withBoolean_withBoolean_withInt_withOrgApacheLuceneUtilFstOutputs_withBoolean_withFloat_withBoolean_withInt_(JreLoadStatic(OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum, BYTE1), 0, 0, YES, YES, self->shareMaxTailLength_, outputs, NO, OrgApacheLuceneUtilPackedPackedInts_DEFAULT, YES, 15) autorelease];
+  OrgApacheLuceneUtilFstBuilder *builder = [new_OrgApacheLuceneUtilFstBuilder_initWithOrgApacheLuceneUtilFstFST_INPUT_TYPEEnum_withInt_withInt_withBoolean_withBoolean_withInt_withOrgApacheLuceneUtilFstOutputs_withBoolean_withFloat_withBoolean_withInt_(JreLoadStatic(OrgApacheLuceneUtilFstFST_INPUT_TYPEEnum, BYTE1), 0, 0, true, true, self->shareMaxTailLength_, outputs, false, OrgApacheLuceneUtilPackedPackedInts_DEFAULT, true, 15) autorelease];
   OrgApacheLuceneUtilBytesRefBuilder *scratch = [new_OrgApacheLuceneUtilBytesRefBuilder_init() autorelease];
   OrgApacheLuceneUtilBytesRef *entry_;
   OrgApacheLuceneUtilIntsRefBuilder *scratchIntsRef = [new_OrgApacheLuceneUtilIntsRefBuilder_init() autorelease];

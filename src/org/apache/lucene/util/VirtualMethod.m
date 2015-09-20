@@ -77,13 +77,13 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilVirtualMethod)
 
 - (jint)reflectImplementationDistanceWithIOSClass:(IOSClass *)subclazz {
   if (![((IOSClass *) nil_chk(baseClass_)) isAssignableFrom:subclazz]) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", [((IOSClass *) nil_chk(subclazz)) getName], @" is not a subclass of ", [baseClass_ getName])) autorelease];
-  jboolean overridden = NO;
+  jboolean overridden = false;
   jint distance = 0;
   for (IOSClass *clazz = subclazz; clazz != baseClass_ && clazz != nil; clazz = [((IOSClass *) nil_chk(clazz)) getSuperclass]) {
     if (!overridden) {
       @try {
         [((IOSClass *) nil_chk(clazz)) getDeclaredMethod:method_ parameterTypes:parameters_];
-        overridden = YES;
+        overridden = true;
       }
       @catch (JavaLangNoSuchMethodException *nsme) {
       }

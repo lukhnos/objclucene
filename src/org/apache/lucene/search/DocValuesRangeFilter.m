@@ -398,15 +398,15 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocValuesRangeFilter_$6_$1)
 }
 
 - (jboolean)isEqual:(id)o {
-  if (self == o) return YES;
-  if ([super isEqual:o] == NO) return NO;
+  if (self == o) return true;
+  if ([super isEqual:o] == false) return false;
   OrgApacheLuceneSearchDocValuesRangeFilter *other = (OrgApacheLuceneSearchDocValuesRangeFilter *) check_class_cast(o, [OrgApacheLuceneSearchDocValuesRangeFilter class]);
   if (![((NSString *) nil_chk(self->field_)) isEqual:((OrgApacheLuceneSearchDocValuesRangeFilter *) nil_chk(other))->field_] || self->includeLower_ != other->includeLower_ || self->includeUpper_ != other->includeUpper_) {
-    return NO;
+    return false;
   }
-  if (self->lowerVal_ != nil ? ![self->lowerVal_ isEqual:other->lowerVal_] : other->lowerVal_ != nil) return NO;
-  if (self->upperVal_ != nil ? ![self->upperVal_ isEqual:other->upperVal_] : other->upperVal_ != nil) return NO;
-  return YES;
+  if (self->lowerVal_ != nil ? ![self->lowerVal_ isEqual:other->lowerVal_] : other->lowerVal_ != nil) return false;
+  if (self->upperVal_ != nil ? ![self->upperVal_ isEqual:other->upperVal_] : other->upperVal_ != nil) return false;
+  return true;
 }
 
 - (NSUInteger)hash {

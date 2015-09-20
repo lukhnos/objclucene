@@ -121,21 +121,21 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores {
-  return [new_OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_W_initWithOrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchWeight_(self, self, [((OrgApacheLuceneSearchQuery *) nil_chk(toQuery_)) createWeightWithOrgApacheLuceneSearchIndexSearcher:searcher withBoolean:NO]) autorelease];
+  return [new_OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_W_initWithOrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_withOrgApacheLuceneSearchQuery_withOrgApacheLuceneSearchWeight_(self, self, [((OrgApacheLuceneSearchQuery *) nil_chk(toQuery_)) createWeightWithOrgApacheLuceneSearchIndexSearcher:searcher withBoolean:false]) autorelease];
 }
 
 - (jboolean)isEqual:(id)o {
-  if (self == o) return YES;
-  if (o == nil || [self getClass] != [o getClass]) return NO;
-  if (![super isEqual:o]) return NO;
+  if (self == o) return true;
+  if (o == nil || [self getClass] != [o getClass]) return false;
+  if (![super isEqual:o]) return false;
   OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery *that = (OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery *) check_class_cast(o, [OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery class]);
-  if (min_ != ((OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery *) nil_chk(that))->min_) return NO;
-  if (max_ != that->max_) return NO;
-  if (![((NSString *) nil_chk(joinField_)) isEqual:that->joinField_]) return NO;
-  if (![((OrgApacheLuceneSearchQuery *) nil_chk(fromQuery_)) isEqual:that->fromQuery_]) return NO;
-  if (![((OrgApacheLuceneSearchQuery *) nil_chk(toQuery_)) isEqual:that->toQuery_]) return NO;
-  if (![((OrgApacheLuceneIndexIndexReader *) nil_chk(indexReader_)) isEqual:that->indexReader_]) return NO;
-  return YES;
+  if (min_ != ((OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery *) nil_chk(that))->min_) return false;
+  if (max_ != that->max_) return false;
+  if (![((NSString *) nil_chk(joinField_)) isEqual:that->joinField_]) return false;
+  if (![((OrgApacheLuceneSearchQuery *) nil_chk(fromQuery_)) isEqual:that->fromQuery_]) return false;
+  if (![((OrgApacheLuceneSearchQuery *) nil_chk(toQuery_)) isEqual:that->toQuery_]) return false;
+  if (![((OrgApacheLuceneIndexIndexReader *) nil_chk(indexReader_)) isEqual:that->indexReader_]) return false;
+  return true;
 }
 
 - (NSUInteger)hash {
@@ -383,10 +383,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScor
     jint globalOrd = (jint) [((OrgApacheLuceneUtilLongValues *) nil_chk(this$0_->segmentOrdToGlobalOrdLookup_)) getWithLong:segmentOrd];
     if ([((OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector *) nil_chk(this$0_->collector_)) matchWithInt:globalOrd]) {
       this$0_->score_ = [this$0_->collector_ scoreWithInt:globalOrd];
-      return YES;
+      return true;
     }
   }
-  return NO;
+  return false;
 }
 
 - (instancetype)initWithOrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_OrdinalMapScorer:(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_OrdinalMapScorer *)outer$
@@ -495,10 +495,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScor
   if (segmentOrd != -1) {
     if ([((OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreCollector *) nil_chk(this$0_->collector_)) matchWithInt:segmentOrd]) {
       this$0_->score_ = [this$0_->collector_ scoreWithInt:segmentOrd];
-      return YES;
+      return true;
     }
   }
-  return NO;
+  return false;
 }
 
 - (instancetype)initWithOrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_SegmentOrdinalScorer:(OrgApacheLuceneSearchJoinGlobalOrdinalsWithScoreQuery_SegmentOrdinalScorer *)outer$

@@ -35,9 +35,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCoreLowerCaseFilter, termAtt_, id<Org
 - (jboolean)incrementToken {
   if ([((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
     [((OrgApacheLuceneAnalysisUtilCharacterUtils *) nil_chk(charUtils_)) toLowerCaseWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer] withInt:0 withInt:[termAtt_ length]];
-    return YES;
+    return true;
   }
-  else return NO;
+  else return false;
 }
 
 - (void)dealloc {

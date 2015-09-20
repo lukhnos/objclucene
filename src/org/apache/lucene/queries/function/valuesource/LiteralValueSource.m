@@ -67,8 +67,8 @@ jint OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource_hash__;
 }
 
 - (jboolean)isEqual:(id)o {
-  if (self == o) return YES;
-  if (!([o isKindOfClass:[OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource class]])) return NO;
+  if (self == o) return true;
+  if (!([o isKindOfClass:[OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource class]])) return false;
   OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource *that = (OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource *) check_class_cast(o, [OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource class]);
   return [((NSString *) nil_chk(string_)) isEqual:((OrgApacheLuceneQueriesFunctionValuesourceLiteralValueSource *) nil_chk(that))->string_];
 }
@@ -133,7 +133,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceLitera
 - (jboolean)bytesValWithInt:(jint)doc
 withOrgApacheLuceneUtilBytesRefBuilder:(OrgApacheLuceneUtilBytesRefBuilder *)target {
   [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(target)) copyBytesWithOrgApacheLuceneUtilBytesRef:this$0_->bytesRef_];
-  return YES;
+  return true;
 }
 
 - (NSString *)toStringWithInt:(jint)doc {

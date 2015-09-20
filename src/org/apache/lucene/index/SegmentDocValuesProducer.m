@@ -174,7 +174,7 @@ void OrgApacheLuceneIndexSegmentDocValuesProducer_initWithOrgApacheLuceneIndexSe
   JreStrongAssignAndConsume(&self->dvProducersByField_, new_JavaUtilHashMap_init());
   JreStrongAssign(&self->dvProducers_, JavaUtilCollections_newSetFromMapWithJavaUtilMap_([new_JavaUtilIdentityHashMap_init() autorelease]));
   JreStrongAssignAndConsume(&self->dvGens_, new_JavaUtilArrayList_init());
-  jboolean success = NO;
+  jboolean success = false;
   @try {
     OrgApacheLuceneUtilVersion *ver = [((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(si))->info_)) getVersion];
     if (ver != nil && [ver onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_9_0_)]) {
@@ -231,10 +231,10 @@ void OrgApacheLuceneIndexSegmentDocValuesProducer_initWithOrgApacheLuceneIndexSe
         }
       }
     }
-    success = YES;
+    success = true;
   }
   @finally {
-    if (success == NO) {
+    if (success == false) {
       @try {
         [((OrgApacheLuceneIndexSegmentDocValues *) nil_chk(segDocValues)) decRefWithJavaUtilList:self->dvGens_];
       }

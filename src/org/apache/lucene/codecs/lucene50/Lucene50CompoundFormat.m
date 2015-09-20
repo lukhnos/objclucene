@@ -27,10 +27,12 @@ NSString *OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_ENTRY_CODEC_ = @"L
 
 @implementation OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneStoreDirectory *)getCompoundReaderWithOrgApacheLuceneStoreDirectory:(OrgApacheLuceneStoreDirectory *)dir
                                                   withOrgApacheLuceneIndexSegmentInfo:(OrgApacheLuceneIndexSegmentInfo *)si
@@ -44,69 +46,83 @@ NSString *OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_ENTRY_CODEC_ = @"L
   NSString *dataFile = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(((OrgApacheLuceneIndexSegmentInfo *) nil_chk(si))->name_, @"", OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_DATA_EXTENSION_);
   NSString *entriesFile = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(si->name_, @"", OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_ENTRIES_EXTENSION_);
   {
-    JavaLangThrowable *__mainException = nil;
     OrgApacheLuceneStoreIndexOutput *data = [((OrgApacheLuceneStoreDirectory *) nil_chk(dir)) createOutputWithNSString:dataFile withOrgApacheLuceneStoreIOContext:context];
-    OrgApacheLuceneStoreIndexOutput *entries = [dir createOutputWithNSString:entriesFile withOrgApacheLuceneStoreIOContext:context];
+    JavaLangThrowable *__primaryException2 = nil;
     @try {
-      OrgApacheLuceneCodecsCodecUtil_writeIndexHeaderWithOrgApacheLuceneStoreDataOutput_withNSString_withInt_withByteArray_withNSString_(data, OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_DATA_CODEC_, OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_VERSION_CURRENT, [si getId], @"");
-      OrgApacheLuceneCodecsCodecUtil_writeIndexHeaderWithOrgApacheLuceneStoreDataOutput_withNSString_withInt_withByteArray_withNSString_(entries, OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_ENTRY_CODEC_, OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_VERSION_CURRENT, [si getId], @"");
-      [((OrgApacheLuceneStoreIndexOutput *) nil_chk(entries)) writeVIntWithInt:[((id<JavaUtilSet>) nil_chk([si files])) size]];
-      for (NSString * __strong file in nil_chk([si files])) {
-        jlong startOffset = [((OrgApacheLuceneStoreIndexOutput *) nil_chk(data)) getFilePointer];
-        {
-          JavaLangThrowable *__mainException = nil;
-          OrgApacheLuceneStoreIndexInput *in = [dir openInputWithNSString:file withOrgApacheLuceneStoreIOContext:JreLoadStatic(OrgApacheLuceneStoreIOContext, READONCE_)];
-          @try {
-            [data copyBytesWithOrgApacheLuceneStoreDataInput:in withLong:[((OrgApacheLuceneStoreIndexInput *) nil_chk(in)) length]];
-          }
-          @finally {
+      OrgApacheLuceneStoreIndexOutput *entries = [dir createOutputWithNSString:entriesFile withOrgApacheLuceneStoreIOContext:context];
+      JavaLangThrowable *__primaryException1 = nil;
+      @try {
+        OrgApacheLuceneCodecsCodecUtil_writeIndexHeaderWithOrgApacheLuceneStoreDataOutput_withNSString_withInt_withByteArray_withNSString_(data, OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_DATA_CODEC_, OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_VERSION_CURRENT, [si getId], @"");
+        OrgApacheLuceneCodecsCodecUtil_writeIndexHeaderWithOrgApacheLuceneStoreDataOutput_withNSString_withInt_withByteArray_withNSString_(entries, OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_ENTRY_CODEC_, OrgApacheLuceneCodecsLucene50Lucene50CompoundFormat_VERSION_CURRENT, [si getId], @"");
+        [((OrgApacheLuceneStoreIndexOutput *) nil_chk(entries)) writeVIntWithInt:[((id<JavaUtilSet>) nil_chk([si files])) size]];
+        for (NSString * __strong file in nil_chk([si files])) {
+          jlong startOffset = [((OrgApacheLuceneStoreIndexOutput *) nil_chk(data)) getFilePointer];
+          {
+            OrgApacheLuceneStoreIndexInput *in = [dir openInputWithNSString:file withOrgApacheLuceneStoreIOContext:JreLoadStatic(OrgApacheLuceneStoreIOContext, READONCE_)];
+            JavaLangThrowable *__primaryException1 = nil;
             @try {
-              [in close];
+              [data copyBytesWithOrgApacheLuceneStoreDataInput:in withLong:[((OrgApacheLuceneStoreIndexInput *) nil_chk(in)) length]];
             }
             @catch (JavaLangThrowable *e) {
-              if (__mainException) {
-                [__mainException addSuppressedWithJavaLangThrowable:e];
-              } else {
-                __mainException = e;
+              __primaryException1 = e;
+              @throw e;
+            }
+            @finally {
+              if (in != nil) {
+                if (__primaryException1 != nil) {
+                  @try {
+                    [in close];
+                  } @catch (JavaLangThrowable *e) {
+                    [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+                  }
+                } else {
+                  [in close];
+                }
               }
             }
-            if (__mainException) {
-              @throw __mainException;
+          }
+          jlong endOffset = [data getFilePointer];
+          jlong length = endOffset - startOffset;
+          [entries writeStringWithNSString:OrgApacheLuceneIndexIndexFileNames_stripSegmentNameWithNSString_(file)];
+          [entries writeLongWithLong:startOffset];
+          [entries writeLongWithLong:length];
+        }
+        OrgApacheLuceneCodecsCodecUtil_writeFooterWithOrgApacheLuceneStoreIndexOutput_(data);
+        OrgApacheLuceneCodecsCodecUtil_writeFooterWithOrgApacheLuceneStoreIndexOutput_(entries);
+      }
+      @catch (JavaLangThrowable *e) {
+        __primaryException1 = e;
+        @throw e;
+      }
+      @finally {
+        if (entries != nil) {
+          if (__primaryException1 != nil) {
+            @try {
+              [entries close];
+            } @catch (JavaLangThrowable *e) {
+              [__primaryException1 addSuppressedWithJavaLangThrowable:e];
             }
+          } else {
+            [entries close];
           }
         }
-        jlong endOffset = [data getFilePointer];
-        jlong length = endOffset - startOffset;
-        [entries writeStringWithNSString:OrgApacheLuceneIndexIndexFileNames_stripSegmentNameWithNSString_(file)];
-        [entries writeLongWithLong:startOffset];
-        [entries writeLongWithLong:length];
       }
-      OrgApacheLuceneCodecsCodecUtil_writeFooterWithOrgApacheLuceneStoreIndexOutput_(data);
-      OrgApacheLuceneCodecsCodecUtil_writeFooterWithOrgApacheLuceneStoreIndexOutput_(entries);
+    }
+    @catch (JavaLangThrowable *e) {
+      __primaryException2 = e;
+      @throw e;
     }
     @finally {
-      @try {
-        [entries close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
+      if (data != nil) {
+        if (__primaryException2 != nil) {
+          @try {
+            [data close];
+          } @catch (JavaLangThrowable *e) {
+            [__primaryException2 addSuppressedWithJavaLangThrowable:e];
+          }
         } else {
-          __mainException = e;
+          [data close];
         }
-      }
-      @try {
-        [data close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
-        } else {
-          __mainException = e;
-        }
-      }
-      if (__mainException) {
-        @throw __mainException;
       }
     }
   }

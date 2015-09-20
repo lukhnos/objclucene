@@ -42,11 +42,11 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisUtilFilteringTokenFilter, posIncrAtt_
       if (skippedPositions_ != 0) {
         [posIncrAtt_ setPositionIncrementWithInt:[((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posIncrAtt_)) getPositionIncrement] + skippedPositions_];
       }
-      return YES;
+      return true;
     }
     skippedPositions_ += [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posIncrAtt_)) getPositionIncrement];
   }
-  return NO;
+  return false;
 }
 
 - (void)reset {

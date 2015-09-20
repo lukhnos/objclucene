@@ -94,7 +94,7 @@ void OrgApacheLuceneQueryparserFlexibleCoreNodesBoostQueryNode_initWithOrgApache
     @throw [new_OrgApacheLuceneQueryparserFlexibleCoreQueryNodeError_initWithOrgApacheLuceneQueryparserFlexibleMessagesMessage_([new_OrgApacheLuceneQueryparserFlexibleMessagesMessageImpl_initWithNSString_withNSObjectArray_(JreLoadStatic(OrgApacheLuceneQueryparserFlexibleCoreMessagesQueryParserMessages, NODE_ACTION_NOT_SUPPORTED_), [IOSObjectArray arrayWithObjects:(id[]){ @"query", @"null" } count:2 type:NSObject_class_()]) autorelease]) autorelease];
   }
   self->value_ = value;
-  [self setLeafWithBoolean:NO];
+  [self setLeafWithBoolean:false];
   [self allocate];
   [self addWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:query];
 }

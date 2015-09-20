@@ -44,10 +44,12 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchPayloadsPayloadSpanCollector, payloads_
   return payloads_;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchPayloadsPayloadSpanCollector_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(payloads_);

@@ -296,7 +296,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCustomCustomAnalyzer)
                                                                    withJavaUtilMap:(id<JavaUtilMap>)params {
   OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_withNSString_(name, @"Tokenizer name may not be null");
   [((OrgApacheLuceneUtilSetOnce *) nil_chk(tokenizer_)) setWithId:OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder_applyResourceLoaderWithId_(self, OrgApacheLuceneAnalysisUtilTokenizerFactory_forNameWithNSString_withJavaUtilMap_(name, OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder_applyDefaultParamsWithJavaUtilMap_(self, params)))];
-  componentsAdded_ = YES;
+  componentsAdded_ = true;
   return self;
 }
 
@@ -309,7 +309,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCustomCustomAnalyzer)
                                                                     withJavaUtilMap:(id<JavaUtilMap>)params {
   OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_withNSString_(name, @"TokenFilter name may not be null");
   [((id<JavaUtilList>) nil_chk(tokenFilters_)) addWithId:OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder_applyResourceLoaderWithId_(self, OrgApacheLuceneAnalysisUtilTokenFilterFactory_forNameWithNSString_withJavaUtilMap_(name, OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder_applyDefaultParamsWithJavaUtilMap_(self, params)))];
-  componentsAdded_ = YES;
+  componentsAdded_ = true;
   return self;
 }
 
@@ -322,7 +322,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCustomCustomAnalyzer)
                                                                    withJavaUtilMap:(id<JavaUtilMap>)params {
   OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_withNSString_(name, @"CharFilter name may not be null");
   [((id<JavaUtilList>) nil_chk(charFilters_)) addWithId:OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder_applyResourceLoaderWithId_(self, OrgApacheLuceneAnalysisUtilCharFilterFactory_forNameWithNSString_withJavaUtilMap_(name, OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder_applyDefaultParamsWithJavaUtilMap_(self, params)))];
-  componentsAdded_ = YES;
+  componentsAdded_ = true;
   return self;
 }
 
@@ -397,7 +397,7 @@ void OrgApacheLuceneAnalysisCustomCustomAnalyzer_Builder_initWithOrgApacheLucene
   JreStrongAssignAndConsume(&self->tokenFilters_, new_JavaUtilArrayList_init());
   JreStrongAssignAndConsume(&self->posIncGap_, new_OrgApacheLuceneUtilSetOnce_init());
   JreStrongAssignAndConsume(&self->offsetGap_, new_OrgApacheLuceneUtilSetOnce_init());
-  self->componentsAdded_ = NO;
+  self->componentsAdded_ = false;
   JreStrongAssign(&self->loader_, loader);
 }
 

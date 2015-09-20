@@ -27,10 +27,12 @@ __attribute__((unused)) static jint OrgApacheLuceneIndexDocsAndPositionsEnum_Doc
 
 @implementation OrgApacheLuceneIndexDocsAndPositionsEnum
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexDocsAndPositionsEnum_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)nextPosition {
   // can't call an abstract method
@@ -233,7 +235,7 @@ OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper *new_OrgApa
 }
 
 jint OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper_doNextWithInt_(OrgApacheLuceneIndexDocsAndPositionsEnum_DocsAndPositionsEnumWrapper *self, jint doc) {
-  while (doc != OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS && self->liveDocs_ != nil && [self->liveDocs_ getWithInt:doc] == NO) {
+  while (doc != OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS && self->liveDocs_ != nil && [self->liveDocs_ getWithInt:doc] == false) {
     doc = [((OrgApacheLuceneIndexPostingsEnum *) nil_chk(self->in_)) nextDoc];
   }
   return doc;

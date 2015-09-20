@@ -28,15 +28,15 @@
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return YES;
-  if (obj == nil) return NO;
-  if ([self getClass] != [nil_chk(obj) getClass]) return NO;
+  if (self == obj) return true;
+  if (obj == nil) return false;
+  if ([self getClass] != [nil_chk(obj) getClass]) return false;
   OrgApacheLuceneStoreMergeInfo *other = (OrgApacheLuceneStoreMergeInfo *) check_class_cast(obj, [OrgApacheLuceneStoreMergeInfo class]);
-  if (estimatedMergeBytes_ != other->estimatedMergeBytes_) return NO;
-  if (isExternal_ != other->isExternal_) return NO;
-  if (mergeMaxNumSegments_ != other->mergeMaxNumSegments_) return NO;
-  if (totalMaxDoc_ != other->totalMaxDoc_) return NO;
-  return YES;
+  if (estimatedMergeBytes_ != other->estimatedMergeBytes_) return false;
+  if (isExternal_ != other->isExternal_) return false;
+  if (mergeMaxNumSegments_ != other->mergeMaxNumSegments_) return false;
+  if (totalMaxDoc_ != other->totalMaxDoc_) return false;
+  return true;
 }
 
 - (NSString *)description {

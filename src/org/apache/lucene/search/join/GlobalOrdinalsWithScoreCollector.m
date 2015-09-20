@@ -148,10 +148,10 @@ withOrgApacheLuceneSearchJoinScoreModeEnum:(OrgApacheLuceneSearchJoinScoreModeEn
       return occurrence >= min_ && occurrence <= max_;
     }
     else {
-      return YES;
+      return true;
     }
   }
-  return NO;
+  return false;
 }
 
 - (jfloat)scoreWithInt:(jint)globalOrdinal {
@@ -183,7 +183,7 @@ withOrgApacheLuceneSearchJoinScoreModeEnum:(OrgApacheLuceneSearchJoinScoreModeEn
 }
 
 - (jboolean)needsScores {
-  return YES;
+  return true;
 }
 
 - (void)dealloc {
@@ -603,7 +603,7 @@ withOrgApacheLuceneIndexMultiDocValues_OrdinalMap:(OrgApacheLuceneIndexMultiDocV
 }
 
 - (jboolean)needsScores {
-  return NO;
+  return false;
 }
 
 + (const J2ObjcClassInfo *)__metadata {

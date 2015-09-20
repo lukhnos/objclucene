@@ -128,7 +128,7 @@ void OrgApacheLuceneQueryparserFlexibleCoreNodesAnyQueryNode_initWithJavaUtilLis
     for (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode> __strong clause in clauses) {
       if ([clause isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode class]]) {
         if ([clause isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl class]]) {
-          ((OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl *) nil_chk(((OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl *) check_class_cast(clause, [OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl class]))))->toQueryStringIgnoreFields_ = YES;
+          ((OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl *) nil_chk(((OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl *) check_class_cast(clause, [OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl class]))))->toQueryStringIgnoreFields_ = true;
         }
         if ([OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_class_() isInstance:clause]) {
           [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) nil_chk(((id<OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode>) check_protocol_cast(clause, OrgApacheLuceneQueryparserFlexibleCoreNodesFieldableNode_class_())))) setFieldWithJavaLangCharSequence:field];

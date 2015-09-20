@@ -32,10 +32,12 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree, i
 
 @implementation OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)packValuesWithNSString:(NSString *)values {
   jint i, n = ((jint) [((NSString *) nil_chk(values)) length]);
@@ -200,7 +202,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree, i
   IOSCharArray *c = [IOSCharArray arrayWithLength:2];
   jint iIgnoreAtBeginning = 0;
   jint iLength = len;
-  jboolean bEndOfLetters = NO;
+  jboolean bEndOfLetters = false;
   for (i = 1; i <= len; i++) {
     *IOSCharArray_GetRef(c, 0) = IOSCharArray_Get(nil_chk(w), offset + i - 1);
     jint nc = [((OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree *) nil_chk(classmap_)) findWithCharArray:c withInt:0];
@@ -209,7 +211,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundHyphenationHyphenationTree, i
         iIgnoreAtBeginning++;
       }
       else {
-        bEndOfLetters = YES;
+        bEndOfLetters = true;
       }
       iLength--;
     }

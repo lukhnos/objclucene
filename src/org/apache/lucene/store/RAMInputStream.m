@@ -91,7 +91,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreRAMInputStream_$1)
 - (jbyte)readByte {
   if (bufferPosition_ >= bufferLength_) {
     currentBufferIndex_++;
-    OrgApacheLuceneStoreRAMInputStream_switchCurrentBufferWithBoolean_(self, YES);
+    OrgApacheLuceneStoreRAMInputStream_switchCurrentBufferWithBoolean_(self, true);
   }
   return IOSByteArray_Get(nil_chk(currentBuffer_), bufferPosition_++);
 }
@@ -102,7 +102,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreRAMInputStream_$1)
   while (len > 0) {
     if (bufferPosition_ >= bufferLength_) {
       currentBufferIndex_++;
-      OrgApacheLuceneStoreRAMInputStream_switchCurrentBufferWithBoolean_(self, YES);
+      OrgApacheLuceneStoreRAMInputStream_switchCurrentBufferWithBoolean_(self, true);
     }
     jint remainInBuffer = bufferLength_ - bufferPosition_;
     jint bytesToCopy = len < remainInBuffer ? len : remainInBuffer;
@@ -124,7 +124,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreRAMInputStream_$1)
 - (void)seekWithLong:(jlong)pos {
   if (currentBuffer_ == nil || pos < bufferStart_ || pos >= bufferStart_ + OrgApacheLuceneStoreRAMInputStream_BUFFER_SIZE) {
     currentBufferIndex_ = (jint) (pos / OrgApacheLuceneStoreRAMInputStream_BUFFER_SIZE);
-    OrgApacheLuceneStoreRAMInputStream_switchCurrentBufferWithBoolean_(self, NO);
+    OrgApacheLuceneStoreRAMInputStream_switchCurrentBufferWithBoolean_(self, false);
   }
   bufferPosition_ = (jint) (pos % OrgApacheLuceneStoreRAMInputStream_BUFFER_SIZE);
 }

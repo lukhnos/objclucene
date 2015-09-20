@@ -138,7 +138,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSearcherLifetimeManager_Searcher
 
 - (void)close {
   @synchronized(self) {
-    JreAssignVolatileBoolean(&closed_, YES);
+    JreAssignVolatileBoolean(&closed_, true);
     id<JavaUtilList> toClose = [new_JavaUtilArrayList_initWithJavaUtilCollection_([((JavaUtilConcurrentConcurrentHashMap *) nil_chk(searchers_)) values]) autorelease];
     for (OrgApacheLuceneSearchSearcherLifetimeManager_SearcherTracker * __strong tracker in toClose) {
       [searchers_ removeWithId:JavaLangLong_valueOfWithLong_(((OrgApacheLuceneSearchSearcherLifetimeManager_SearcherTracker *) nil_chk(tracker))->version__)];
@@ -150,10 +150,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSearcherLifetimeManager_Searcher
   }
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSearcherLifetimeManager_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(searchers_);

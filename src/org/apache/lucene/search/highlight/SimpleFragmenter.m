@@ -25,10 +25,12 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneSearchHighlightSimpleFragmenter, DEFAU
 
 @implementation OrgApacheLuceneSearchHighlightSimpleFragmenter
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchHighlightSimpleFragmenter_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithInt:(jint)fragmentSize {
   OrgApacheLuceneSearchHighlightSimpleFragmenter_initWithInt_(self, fragmentSize);

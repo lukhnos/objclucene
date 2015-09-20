@@ -170,13 +170,13 @@ withOrgApacheLuceneSearchSortedNumericSelector_TypeEnum:(OrgApacheLuceneSearchSo
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return YES;
-  if (![super isEqual:obj]) return NO;
-  if ([self getClass] != [nil_chk(obj) getClass]) return NO;
+  if (self == obj) return true;
+  if (![super isEqual:obj]) return false;
+  if ([self getClass] != [nil_chk(obj) getClass]) return false;
   OrgApacheLuceneSearchSortedNumericSortField *other = (OrgApacheLuceneSearchSortedNumericSortField *) check_class_cast(obj, [OrgApacheLuceneSearchSortedNumericSortField class]);
-  if (selector_ != other->selector_) return NO;
-  if (type_SortedNumericSortField_ != other->type_SortedNumericSortField_) return NO;
-  return YES;
+  if (selector_ != other->selector_) return false;
+  if (type_SortedNumericSortField_ != other->type_SortedNumericSortField_) return false;
+  return true;
 }
 
 - (NSString *)description {
@@ -243,7 +243,7 @@ withOrgApacheLuceneSearchSortedNumericSelector_TypeEnum:(OrgApacheLuceneSearchSo
 @end
 
 void OrgApacheLuceneSearchSortedNumericSortField_initWithNSString_withOrgApacheLuceneSearchSortField_TypeEnum_(OrgApacheLuceneSearchSortedNumericSortField *self, NSString *field, OrgApacheLuceneSearchSortField_TypeEnum *type) {
-  OrgApacheLuceneSearchSortedNumericSortField_initWithNSString_withOrgApacheLuceneSearchSortField_TypeEnum_withBoolean_(self, field, type, NO);
+  OrgApacheLuceneSearchSortedNumericSortField_initWithNSString_withOrgApacheLuceneSearchSortField_TypeEnum_withBoolean_(self, field, type, false);
 }
 
 OrgApacheLuceneSearchSortedNumericSortField *new_OrgApacheLuceneSearchSortedNumericSortField_initWithNSString_withOrgApacheLuceneSearchSortField_TypeEnum_(NSString *field, OrgApacheLuceneSearchSortField_TypeEnum *type) {

@@ -93,17 +93,17 @@ id<JavaUtilComparator> OrgApacheLuceneAnalysisHunspellHunspellStemFilter_lengthC
     [self restoreStateWithOrgApacheLuceneUtilAttributeSource_State:savedState_];
     [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posIncAtt_)) setPositionIncrementWithInt:0];
     [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk([((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) setEmpty])) appendWithJavaLangCharSequence:nextStem];
-    return YES;
+    return true;
   }
   if (![((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
-    return NO;
+    return false;
   }
   if ([((id<OrgApacheLuceneAnalysisTokenattributesKeywordAttribute>) nil_chk(keywordAtt_)) isKeyword]) {
-    return YES;
+    return true;
   }
   JreStrongAssign(&buffer_, dedup_ ? [((OrgApacheLuceneAnalysisHunspellStemmer *) nil_chk(stemmer_)) uniqueStemsWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer] withInt:[termAtt_ length]] : [((OrgApacheLuceneAnalysisHunspellStemmer *) nil_chk(stemmer_)) stemWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer] withInt:[termAtt_ length]]);
   if ([buffer_ isEmpty]) {
-    return YES;
+    return true;
   }
   if (longestOnly_ && [buffer_ size] > 1) {
     JavaUtilCollections_sortWithJavaUtilList_withJavaUtilComparator_(buffer_, OrgApacheLuceneAnalysisHunspellHunspellStemFilter_lengthComparator_);
@@ -118,7 +118,7 @@ id<JavaUtilComparator> OrgApacheLuceneAnalysisHunspellHunspellStemFilter_lengthC
       JreStrongAssign(&savedState_, [self captureState]);
     }
   }
-  return YES;
+  return true;
 }
 
 - (void)reset {
@@ -169,7 +169,7 @@ id<JavaUtilComparator> OrgApacheLuceneAnalysisHunspellHunspellStemFilter_lengthC
 @end
 
 void OrgApacheLuceneAnalysisHunspellHunspellStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisHunspellDictionary_(OrgApacheLuceneAnalysisHunspellHunspellStemFilter *self, OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisHunspellDictionary *dictionary) {
-  OrgApacheLuceneAnalysisHunspellHunspellStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisHunspellDictionary_withBoolean_(self, input, dictionary, YES);
+  OrgApacheLuceneAnalysisHunspellHunspellStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisHunspellDictionary_withBoolean_(self, input, dictionary, true);
 }
 
 OrgApacheLuceneAnalysisHunspellHunspellStemFilter *new_OrgApacheLuceneAnalysisHunspellHunspellStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisHunspellDictionary_(OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisHunspellDictionary *dictionary) {
@@ -179,7 +179,7 @@ OrgApacheLuceneAnalysisHunspellHunspellStemFilter *new_OrgApacheLuceneAnalysisHu
 }
 
 void OrgApacheLuceneAnalysisHunspellHunspellStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisHunspellDictionary_withBoolean_(OrgApacheLuceneAnalysisHunspellHunspellStemFilter *self, OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisHunspellDictionary *dictionary, jboolean dedup) {
-  OrgApacheLuceneAnalysisHunspellHunspellStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisHunspellDictionary_withBoolean_withBoolean_(self, input, dictionary, dedup, NO);
+  OrgApacheLuceneAnalysisHunspellHunspellStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisHunspellDictionary_withBoolean_withBoolean_(self, input, dictionary, dedup, false);
 }
 
 OrgApacheLuceneAnalysisHunspellHunspellStemFilter *new_OrgApacheLuceneAnalysisHunspellHunspellStemFilter_initWithOrgApacheLuceneAnalysisTokenStream_withOrgApacheLuceneAnalysisHunspellDictionary_withBoolean_(OrgApacheLuceneAnalysisTokenStream *input, OrgApacheLuceneAnalysisHunspellDictionary *dictionary, jboolean dedup) {
@@ -193,7 +193,7 @@ void OrgApacheLuceneAnalysisHunspellHunspellStemFilter_initWithOrgApacheLuceneAn
   JreStrongAssign(&self->termAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()]);
   JreStrongAssign(&self->posIncAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_class_()]);
   JreStrongAssign(&self->keywordAtt_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesKeywordAttribute_class_()]);
-  self->dedup_ = (dedup && longestOnly == NO);
+  self->dedup_ = (dedup && longestOnly == false);
   JreStrongAssignAndConsume(&self->stemmer_, new_OrgApacheLuceneAnalysisHunspellStemmer_initWithOrgApacheLuceneAnalysisHunspellDictionary_(dictionary));
   self->longestOnly_ = longestOnly;
 }
@@ -219,10 +219,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisHunspellHunspellStemFilt
   }
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisHunspellHunspellStemFilter_$1_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

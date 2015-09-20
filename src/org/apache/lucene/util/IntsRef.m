@@ -18,10 +18,12 @@ IOSIntArray *OrgApacheLuceneUtilIntsRef_EMPTY_INTS_;
 
 @implementation OrgApacheLuceneUtilIntsRef
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilIntsRef_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithInt:(jint)capacity {
   OrgApacheLuceneUtilIntsRef_initWithInt_(self, capacity);
@@ -51,12 +53,12 @@ IOSIntArray *OrgApacheLuceneUtilIntsRef_EMPTY_INTS_;
 
 - (jboolean)isEqual:(id)other {
   if (other == nil) {
-    return NO;
+    return false;
   }
   if ([other isKindOfClass:[OrgApacheLuceneUtilIntsRef class]]) {
     return [self intsEqualsWithOrgApacheLuceneUtilIntsRef:(OrgApacheLuceneUtilIntsRef *) check_class_cast(other, [OrgApacheLuceneUtilIntsRef class])];
   }
-  return NO;
+  return false;
 }
 
 - (jboolean)intsEqualsWithOrgApacheLuceneUtilIntsRef:(OrgApacheLuceneUtilIntsRef *)other {
@@ -66,13 +68,13 @@ IOSIntArray *OrgApacheLuceneUtilIntsRef_EMPTY_INTS_;
     jint end = offset_ + length_;
     for (jint upto = offset_; upto < end; upto++, otherUpto++) {
       if (IOSIntArray_Get(nil_chk(ints_), upto) != IOSIntArray_Get(nil_chk(otherInts), otherUpto)) {
-        return NO;
+        return false;
       }
     }
-    return YES;
+    return true;
   }
   else {
-    return NO;
+    return false;
   }
 }
 
@@ -137,7 +139,7 @@ IOSIntArray *OrgApacheLuceneUtilIntsRef_EMPTY_INTS_;
   if (offset_ + length_ > ints_->size_) {
     @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$I$I", @"offset+length out of bounds: offset=", offset_, @",length=", length_, @",ints.length=", ints_->size_)) autorelease];
   }
-  return YES;
+  return true;
 }
 
 - (void)dealloc {

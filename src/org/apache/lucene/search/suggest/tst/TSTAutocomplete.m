@@ -13,10 +13,12 @@
 
 @implementation OrgApacheLuceneSearchSuggestTstTSTAutocomplete
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSuggestTstTSTAutocomplete_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)balancedTreeWithNSObjectArray:(IOSObjectArray *)tokens
                     withNSObjectArray:(IOSObjectArray *)vals

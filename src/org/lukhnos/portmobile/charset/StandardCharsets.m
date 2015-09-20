@@ -14,10 +14,12 @@ JavaNioCharsetCharset *OrgLukhnosPortmobileCharsetStandardCharsets_UTF_8_;
 
 @implementation OrgLukhnosPortmobileCharsetStandardCharsets
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgLukhnosPortmobileCharsetStandardCharsets_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgLukhnosPortmobileCharsetStandardCharsets class]) {

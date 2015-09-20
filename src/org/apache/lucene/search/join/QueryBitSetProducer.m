@@ -53,7 +53,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinQueryBitSetProducer, cache_, id<Jav
     OrgApacheLuceneIndexIndexReaderContext *topLevelContext = OrgApacheLuceneIndexReaderUtil_getTopLevelContextWithOrgApacheLuceneIndexIndexReaderContext_(context);
     OrgApacheLuceneSearchIndexSearcher *searcher = [new_OrgApacheLuceneSearchIndexSearcher_initWithOrgApacheLuceneIndexIndexReaderContext_(topLevelContext) autorelease];
     [searcher setQueryCacheWithOrgApacheLuceneSearchQueryCache:nil];
-    OrgApacheLuceneSearchWeight *weight = [searcher createNormalizedWeightWithOrgApacheLuceneSearchQuery:query_ withBoolean:NO];
+    OrgApacheLuceneSearchWeight *weight = [searcher createNormalizedWeightWithOrgApacheLuceneSearchQuery:query_ withBoolean:false];
     OrgApacheLuceneSearchDocIdSetIterator *it = [((OrgApacheLuceneSearchWeight *) nil_chk(weight)) scorerWithOrgApacheLuceneIndexLeafReaderContext:context];
     if (it == nil) {
       docIdSet = JreLoadStatic(OrgApacheLuceneSearchDocIdSet, EMPTY_);
@@ -72,7 +72,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinQueryBitSetProducer, cache_, id<Jav
 
 - (jboolean)isEqual:(id)o {
   if (o == nil || [self getClass] != [o getClass]) {
-    return NO;
+    return false;
   }
   OrgApacheLuceneSearchJoinQueryBitSetProducer *other = (OrgApacheLuceneSearchJoinQueryBitSetProducer *) check_class_cast(o, [OrgApacheLuceneSearchJoinQueryBitSetProducer class]);
   return [((OrgApacheLuceneSearchQuery *) nil_chk(self->query_)) isEqual:((OrgApacheLuceneSearchJoinQueryBitSetProducer *) nil_chk(other))->query_];

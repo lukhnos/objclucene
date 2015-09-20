@@ -49,10 +49,12 @@
 
 @implementation OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardQueryTreeBuilder
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardQueryTreeBuilder_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneSearchQuery *)buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryNode {
   return (OrgApacheLuceneSearchQuery *) check_class_cast([super buildWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:queryNode], [OrgApacheLuceneSearchQuery class]);

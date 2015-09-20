@@ -56,7 +56,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilter, stat
     [self restoreStateWithOrgApacheLuceneUtilAttributeSource_State:state_];
     [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posIncAttr_)) setPositionIncrementWithInt:0];
     JreStrongAssign(&state_, nil);
-    return YES;
+    return true;
   }
   if ([((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
     IOSCharArray *buffer = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer];
@@ -69,10 +69,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilter, stat
         break;
       }
     }
-    return YES;
+    return true;
   }
   else {
-    return NO;
+    return false;
   }
 }
 
@@ -134,7 +134,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilter, stat
 @end
 
 void OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilter *self, OrgApacheLuceneAnalysisTokenStream *input) {
-  OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilter_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_(self, input, NO);
+  OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilter_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_(self, input, false);
 }
 
 OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilter *new_OrgApacheLuceneAnalysisMiscellaneousASCIIFoldingFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *input) {

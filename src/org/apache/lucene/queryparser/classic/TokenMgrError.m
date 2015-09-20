@@ -32,10 +32,12 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserClassicTokenMgrError, seria
   return [super getMessage];
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueryparserClassicTokenMgrError_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithNSString:(NSString *)message
                          withInt:(jint)reason {

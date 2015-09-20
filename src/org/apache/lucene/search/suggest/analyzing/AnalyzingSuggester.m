@@ -266,7 +266,7 @@ id<JavaUtilComparator> OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester_w
   OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader *reader = nil;
   OrgApacheLuceneUtilBytesRefBuilder *scratch = [new_OrgApacheLuceneUtilBytesRefBuilder_init() autorelease];
   OrgApacheLuceneAnalysisTokenStreamToAutomaton *ts2a = [self getTokenStreamToAutomaton];
-  jboolean success = NO;
+  jboolean success = false;
   count_ = 0;
   IOSByteArray *buffer = [IOSByteArray arrayWithLength:8];
   @try {
@@ -382,7 +382,7 @@ id<JavaUtilComparator> OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester_w
       }
     }
     JreStrongAssign(&fst_, [builder finish]);
-    success = YES;
+    success = true;
   }
   @finally {
     OrgApacheLuceneUtilIOUtils_closeWhileHandlingExceptionWithJavaIoCloseableArray_([IOSObjectArray arrayWithObjects:(id[]){ reader, writer } count:2 type:JavaIoCloseable_class_()]);
@@ -398,12 +398,12 @@ id<JavaUtilComparator> OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester_w
 - (jboolean)storeWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)output {
   [((OrgApacheLuceneStoreDataOutput *) nil_chk(output)) writeVLongWithLong:count_];
   if (fst_ == nil) {
-    return NO;
+    return false;
   }
   [((OrgApacheLuceneUtilFstFST *) nil_chk(fst_)) saveWithOrgApacheLuceneStoreDataOutput:output];
   [output writeVIntWithInt:maxAnalyzedPathsForOneInput_];
   [output writeByteWithByte:(jbyte) (hasPayloads_ ? 1 : 0)];
-  return YES;
+  return true;
 }
 
 - (jboolean)load__WithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)input {
@@ -411,7 +411,7 @@ id<JavaUtilComparator> OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester_w
   JreStrongAssignAndConsume(&self->fst_, new_OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneStoreDataInput_withOrgApacheLuceneUtilFstOutputs_(input, [new_OrgApacheLuceneUtilFstPairOutputs_initWithOrgApacheLuceneUtilFstOutputs_withOrgApacheLuceneUtilFstOutputs_(OrgApacheLuceneUtilFstPositiveIntOutputs_getSingleton(), OrgApacheLuceneUtilFstByteSequenceOutputs_getSingleton()) autorelease]));
   maxAnalyzedPathsForOneInput_ = [input readVInt];
   hasPayloads_ = ([input readByte] == 1);
-  return YES;
+  return true;
 }
 
 - (OrgApacheLuceneSearchSuggestLookup_LookupResult *)getLookupResultWithJavaLangLong:(JavaLangLong *)output1
@@ -466,7 +466,7 @@ id<JavaUtilComparator> OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester_w
       searcher = [new_OrgApacheLuceneUtilFstUtil_TopNSearcher_initWithOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_(fst_, count * maxSurfaceFormsPerAnalyzedForm_, count * maxSurfaceFormsPerAnalyzedForm_, OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester_weightComparator_) autorelease];
       for (OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path * __strong path in prefixPaths) {
         if ([fst_ findTargetArcWithInt:OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester_END_BYTE withOrgApacheLuceneUtilFstFST_Arc:((OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path *) nil_chk(path))->fstNode_ withOrgApacheLuceneUtilFstFST_Arc:scratchArc withOrgApacheLuceneUtilFstFST_BytesReader:bytesReader] != nil) {
-          [searcher addStartPathsWithOrgApacheLuceneUtilFstFST_Arc:scratchArc withId:[((OrgApacheLuceneUtilFstOutputs *) nil_chk(fst_->outputs_)) addWithId:path->output_ withId:scratchArc->output_] withBoolean:NO withOrgApacheLuceneUtilIntsRefBuilder:path->input_];
+          [searcher addStartPathsWithOrgApacheLuceneUtilFstFST_Arc:scratchArc withId:[((OrgApacheLuceneUtilFstOutputs *) nil_chk(fst_->outputs_)) addWithId:path->output_ withId:scratchArc->output_] withBoolean:false withOrgApacheLuceneUtilIntsRefBuilder:path->input_];
         }
       }
       OrgApacheLuceneUtilFstUtil_TopResults *completions = [searcher search];
@@ -486,7 +486,7 @@ id<JavaUtilComparator> OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester_w
     searcher = [new_OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester_$2_initWithOrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester_withOrgApacheLuceneUtilBytesRef_withJavaUtilList_withOrgApacheLuceneUtilFstFST_withInt_withInt_withJavaUtilComparator_(self, utf8Key, results, fst_, num - [results size], num * maxAnalyzedPathsForOneInput_, OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester_weightComparator_) autorelease];
     prefixPaths = [self getFullPrefixPathsWithJavaUtilList:prefixPaths withOrgApacheLuceneUtilAutomatonAutomaton:lookupAutomaton withOrgApacheLuceneUtilFstFST:fst_];
     for (OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path * __strong path in nil_chk(prefixPaths)) {
-      [searcher addStartPathsWithOrgApacheLuceneUtilFstFST_Arc:((OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path *) nil_chk(path))->fstNode_ withId:path->output_ withBoolean:YES withOrgApacheLuceneUtilIntsRefBuilder:path->input_];
+      [searcher addStartPathsWithOrgApacheLuceneUtilFstFST_Arc:((OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_Path *) nil_chk(path))->fstNode_ withId:path->output_ withBoolean:true withOrgApacheLuceneUtilIntsRefBuilder:path->input_];
     }
     OrgApacheLuceneUtilFstUtil_TopResults *completions = [searcher search];
     JreAssert((((OrgApacheLuceneUtilFstUtil_TopResults *) nil_chk(completions))->isComplete_), (@"org/apache/lucene/search/suggest/analyzing/AnalyzingSuggester.java:796 condition failed: assert completions.isComplete;"));
@@ -600,7 +600,7 @@ id<JavaUtilComparator> OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester_w
 @end
 
 void OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester_initWithOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester *self, OrgApacheLuceneAnalysisAnalyzer *analyzer) {
-  OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withInt_withInt_withBoolean_(self, analyzer, analyzer, OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester_EXACT_FIRST | OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester_PRESERVE_SEP, 256, -1, YES);
+  OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withInt_withInt_withBoolean_(self, analyzer, analyzer, OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester_EXACT_FIRST | OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester_PRESERVE_SEP, 256, -1, true);
 }
 
 OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester *new_OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester_initWithOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneAnalysisAnalyzer *analyzer) {
@@ -610,7 +610,7 @@ OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester *new_OrgApacheLuceneSear
 }
 
 void OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester *self, OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer) {
-  OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withInt_withInt_withBoolean_(self, indexAnalyzer, queryAnalyzer, OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester_EXACT_FIRST | OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester_PRESERVE_SEP, 256, -1, YES);
+  OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withInt_withInt_withBoolean_(self, indexAnalyzer, queryAnalyzer, OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester_EXACT_FIRST | OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester_PRESERVE_SEP, 256, -1, true);
 }
 
 OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester *new_OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester_initWithOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneAnalysisAnalyzer *indexAnalyzer, OrgApacheLuceneAnalysisAnalyzer *queryAnalyzer) {
@@ -709,11 +709,11 @@ OrgApacheLuceneSearchSuggestLookup_LookupResult *OrgApacheLuceneSearchSuggestAna
 jboolean OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester_sameSurfaceFormWithOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester *self, OrgApacheLuceneUtilBytesRef *key, OrgApacheLuceneUtilBytesRef *output2) {
   if (self->hasPayloads_) {
     if (((OrgApacheLuceneUtilBytesRef *) nil_chk(key))->length_ >= ((OrgApacheLuceneUtilBytesRef *) nil_chk(output2))->length_) {
-      return NO;
+      return false;
     }
     for (jint i = 0; i < key->length_; i++) {
       if (IOSByteArray_Get(nil_chk(key->bytes_), key->offset_ + i) != IOSByteArray_Get(output2->bytes_, output2->offset_ + i)) {
-        return NO;
+        return false;
       }
     }
     return IOSByteArray_Get(nil_chk(output2->bytes_), output2->offset_ + key->length_) == OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester_PAYLOAD_SEP;
@@ -726,24 +726,26 @@ jboolean OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester_sameSurfaceForm
 OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester_toAutomatonWithOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneAnalysisTokenStreamToAutomaton_(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester *self, OrgApacheLuceneUtilBytesRef *surfaceForm, OrgApacheLuceneAnalysisTokenStreamToAutomaton *ts2a) {
   OrgApacheLuceneUtilAutomatonAutomaton *automaton;
   {
-    JavaLangThrowable *__mainException = nil;
     OrgApacheLuceneAnalysisTokenStream *ts = [((OrgApacheLuceneAnalysisAnalyzer *) nil_chk(self->indexAnalyzer_)) tokenStreamWithNSString:@"" withNSString:[((OrgApacheLuceneUtilBytesRef *) nil_chk(surfaceForm)) utf8ToString]];
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
       automaton = [((OrgApacheLuceneAnalysisTokenStreamToAutomaton *) nil_chk(ts2a)) toAutomatonWithOrgApacheLuceneAnalysisTokenStream:ts];
     }
+    @catch (JavaLangThrowable *e) {
+      __primaryException1 = e;
+      @throw e;
+    }
     @finally {
-      @try {
-        [ts close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
+      if (ts != nil) {
+        if (__primaryException1 != nil) {
+          @try {
+            [ts close];
+          } @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
         } else {
-          __mainException = e;
+          [ts close];
         }
-      }
-      if (__mainException) {
-        @throw __mainException;
       }
     }
   }
@@ -755,24 +757,26 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneSearchSuggestAnalyzingAnal
 OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester_toLookupAutomatonWithJavaLangCharSequence_(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester *self, id<JavaLangCharSequence> key) {
   OrgApacheLuceneUtilAutomatonAutomaton *automaton = nil;
   {
-    JavaLangThrowable *__mainException = nil;
     OrgApacheLuceneAnalysisTokenStream *ts = [((OrgApacheLuceneAnalysisAnalyzer *) nil_chk(self->queryAnalyzer_)) tokenStreamWithNSString:@"" withNSString:[((id<JavaLangCharSequence>) nil_chk(key)) description]];
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
       automaton = [((OrgApacheLuceneAnalysisTokenStreamToAutomaton *) nil_chk([self getTokenStreamToAutomaton])) toAutomatonWithOrgApacheLuceneAnalysisTokenStream:ts];
     }
+    @catch (JavaLangThrowable *e) {
+      __primaryException1 = e;
+      @throw e;
+    }
     @finally {
-      @try {
-        [ts close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
+      if (ts != nil) {
+        if (__primaryException1 != nil) {
+          @try {
+            [ts close];
+          } @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
         } else {
-          __mainException = e;
+          [ts close];
         }
-      }
-      if (__mainException) {
-        @throw __mainException;
       }
     }
   }
@@ -892,19 +896,19 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingS
 - (jboolean)acceptResultWithOrgApacheLuceneUtilIntsRef:(OrgApacheLuceneUtilIntsRef *)input
                                                 withId:(OrgApacheLuceneUtilFstPairOutputs_Pair *)output {
   if ([((id<JavaUtilSet>) nil_chk(seen_)) containsWithId:((OrgApacheLuceneUtilFstPairOutputs_Pair *) nil_chk(output))->output2_]) {
-    return NO;
+    return false;
   }
   [seen_ addWithId:output->output2_];
   if (!this$0_->exactFirst_) {
-    return YES;
+    return true;
   }
   else {
     if (OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester_sameSurfaceFormWithOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneUtilBytesRef_(this$0_, val$utf8Key_, output->output2_)) {
       JreAssert(([((id<JavaUtilList>) nil_chk(val$results_)) size] == 1), (@"org/apache/lucene/search/suggest/analyzing/AnalyzingSuggester.java:780 condition failed: assert results.size() == 1;"));
-      return NO;
+      return false;
     }
     else {
-      return YES;
+      return true;
     }
   }
 }
@@ -970,10 +974,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingS
   return [((JavaLangLong *) nil_chk(((OrgApacheLuceneUtilFstPairOutputs_Pair *) nil_chk(left))->output1_)) compareToWithId:((OrgApacheLuceneUtilFstPairOutputs_Pair *) nil_chk(right))->output1_];
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSuggestAnalyzingAnalyzingSuggester_$1_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

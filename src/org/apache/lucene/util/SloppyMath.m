@@ -154,10 +154,12 @@ jdouble OrgApacheLuceneUtilSloppyMath_SIN_COS_MAX_VALUE_FOR_INT_MODULO_;
   return OrgApacheLuceneUtilSloppyMath_earthDiameterWithDouble_(latitude);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilSloppyMath_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilSloppyMath class]) {
@@ -338,10 +340,10 @@ jdouble OrgApacheLuceneUtilSloppyMath_asinWithDouble_(jdouble a) {
   jboolean negateResult;
   if (a < 0.0) {
     a = -a;
-    negateResult = YES;
+    negateResult = true;
   }
   else {
-    negateResult = NO;
+    negateResult = false;
   }
   if (a <= OrgApacheLuceneUtilSloppyMath_ASIN_MAX_VALUE_FOR_TABS_) {
     jint index = JreFpToInt((a * OrgApacheLuceneUtilSloppyMath_ASIN_INDEXER_ + 0.5));

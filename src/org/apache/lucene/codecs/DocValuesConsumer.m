@@ -676,10 +676,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneCodecsDocValuesConsumer_$10_$1)
 
 @implementation OrgApacheLuceneCodecsDocValuesConsumer
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsDocValuesConsumer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)addNumericFieldWithOrgApacheLuceneIndexFieldInfo:(OrgApacheLuceneIndexFieldInfo *)field
                                     withJavaLangIterable:(id<JavaLangIterable>)values {
@@ -968,10 +970,10 @@ jboolean OrgApacheLuceneCodecsDocValuesConsumer_isSingleValuedWithJavaLangIterab
   OrgApacheLuceneCodecsDocValuesConsumer_initialize();
   for (NSNumber * __strong count in nil_chk(docToValueCount)) {
     if ([((NSNumber *) nil_chk(count)) longLongValue] > 1) {
-      return NO;
+      return false;
     }
   }
-  return YES;
+  return true;
 }
 
 id<JavaLangIterable> OrgApacheLuceneCodecsDocValuesConsumer_singletonViewWithJavaLangIterable_withJavaLangIterable_withNSNumber_(id<JavaLangIterable> docToValueCount, id<JavaLangIterable> values, NSNumber *missingValue) {
@@ -1019,7 +1021,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsDocValuesConsumer)
 @end
 
 void OrgApacheLuceneCodecsDocValuesConsumer_BitsFilteredTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withOrgApacheLuceneUtilLongBitSet_(OrgApacheLuceneCodecsDocValuesConsumer_BitsFilteredTermsEnum *self, OrgApacheLuceneIndexTermsEnum *inArg, OrgApacheLuceneUtilLongBitSet *liveTerms) {
-  OrgApacheLuceneIndexFilteredTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withBoolean_(self, inArg, NO);
+  OrgApacheLuceneIndexFilteredTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withBoolean_(self, inArg, false);
   JreAssert((liveTerms != nil), (@"org/apache/lucene/codecs/DocValuesConsumer.java:928 condition failed: assert liveTerms != null;"));
   JreStrongAssign(&self->liveTerms_, liveTerms);
 }
@@ -1103,7 +1105,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsDocValuesConsumer_$1)
     @throw [new_JavaUtilNoSuchElementException_init() autorelease];
   }
   JreAssert((nextIsSet_), (@"org/apache/lucene/codecs/DocValuesConsumer.java:282 condition failed: assert nextIsSet;"));
-  nextIsSet_ = NO;
+  nextIsSet_ = false;
   return nextHasValue_ ? JavaLangLong_valueOfWithLong_(nextValue_) : nil;
 }
 
@@ -1152,9 +1154,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsDocValuesConsumer_$1)
 @end
 
 jboolean OrgApacheLuceneCodecsDocValuesConsumer_$1_$1_setNext(OrgApacheLuceneCodecsDocValuesConsumer_$1_$1 *self) {
-  while (YES) {
+  while (true) {
     if (self->readerUpto_ == [((id<JavaUtilList>) nil_chk(self->this$0_->val$toMerge_)) size]) {
-      return NO;
+      return false;
     }
     if (self->docIDUpto_ == self->currentMaxDoc_) {
       self->readerUpto_++;
@@ -1168,16 +1170,16 @@ jboolean OrgApacheLuceneCodecsDocValuesConsumer_$1_$1_setNext(OrgApacheLuceneCod
       continue;
     }
     if (self->currentLiveDocs_ == nil || [self->currentLiveDocs_ getWithInt:self->docIDUpto_]) {
-      self->nextIsSet_ = YES;
+      self->nextIsSet_ = true;
       self->nextValue_ = [((OrgApacheLuceneIndexNumericDocValues *) nil_chk(self->currentValues_)) getWithInt:self->docIDUpto_];
-      if (self->nextValue_ == 0 && [((id<OrgApacheLuceneUtilBits>) nil_chk(self->currentDocsWithField_)) getWithInt:self->docIDUpto_] == NO) {
-        self->nextHasValue_ = NO;
+      if (self->nextValue_ == 0 && [((id<OrgApacheLuceneUtilBits>) nil_chk(self->currentDocsWithField_)) getWithInt:self->docIDUpto_] == false) {
+        self->nextHasValue_ = false;
       }
       else {
-        self->nextHasValue_ = YES;
+        self->nextHasValue_ = true;
       }
       self->docIDUpto_++;
-      return YES;
+      return true;
     }
     self->docIDUpto_++;
   }
@@ -1268,7 +1270,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsDocValuesConsumer_$2)
     @throw [new_JavaUtilNoSuchElementException_init() autorelease];
   }
   JreAssert((nextIsSet_), (@"org/apache/lucene/codecs/DocValuesConsumer.java:363 condition failed: assert nextIsSet;"));
-  nextIsSet_ = NO;
+  nextIsSet_ = false;
   return nextPointer_;
 }
 
@@ -1319,9 +1321,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsDocValuesConsumer_$2)
 @end
 
 jboolean OrgApacheLuceneCodecsDocValuesConsumer_$2_$1_setNext(OrgApacheLuceneCodecsDocValuesConsumer_$2_$1 *self) {
-  while (YES) {
+  while (true) {
     if (self->readerUpto_ == [((id<JavaUtilList>) nil_chk(self->this$0_->val$toMerge_)) size]) {
-      return NO;
+      return false;
     }
     if (self->docIDUpto_ == self->currentMaxDoc_) {
       self->readerUpto_++;
@@ -1335,7 +1337,7 @@ jboolean OrgApacheLuceneCodecsDocValuesConsumer_$2_$1_setNext(OrgApacheLuceneCod
       continue;
     }
     if (self->currentLiveDocs_ == nil || [self->currentLiveDocs_ getWithInt:self->docIDUpto_]) {
-      self->nextIsSet_ = YES;
+      self->nextIsSet_ = true;
       if ([((id<OrgApacheLuceneUtilBits>) nil_chk(self->currentDocsWithField_)) getWithInt:self->docIDUpto_]) {
         JreStrongAssign(&self->nextValue_, [((OrgApacheLuceneIndexBinaryDocValues *) nil_chk(self->currentValues_)) getWithInt:self->docIDUpto_]);
         JreStrongAssign(&self->nextPointer_, self->nextValue_);
@@ -1344,7 +1346,7 @@ jboolean OrgApacheLuceneCodecsDocValuesConsumer_$2_$1_setNext(OrgApacheLuceneCod
         JreStrongAssign(&self->nextPointer_, nil);
       }
       self->docIDUpto_++;
-      return YES;
+      return true;
     }
     self->docIDUpto_++;
   }
@@ -1434,7 +1436,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsDocValuesConsumer_$3)
     @throw [new_JavaUtilNoSuchElementException_init() autorelease];
   }
   JreAssert((nextIsSet_), (@"org/apache/lucene/codecs/DocValuesConsumer.java:445 condition failed: assert nextIsSet;"));
-  nextIsSet_ = NO;
+  nextIsSet_ = false;
   return JavaLangInteger_valueOfWithInt_(nextValue_);
 }
 
@@ -1478,9 +1480,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsDocValuesConsumer_$3)
 @end
 
 jboolean OrgApacheLuceneCodecsDocValuesConsumer_$3_$1_setNext(OrgApacheLuceneCodecsDocValuesConsumer_$3_$1 *self) {
-  while (YES) {
+  while (true) {
     if (self->readerUpto_ == self->this$0_->val$numReaders_) {
-      return NO;
+      return false;
     }
     if (self->docIDUpto_ == self->currentMaxDoc_) {
       self->readerUpto_++;
@@ -1492,12 +1494,12 @@ jboolean OrgApacheLuceneCodecsDocValuesConsumer_$3_$1_setNext(OrgApacheLuceneCod
       continue;
     }
     if (self->currentLiveDocs_ == nil || [self->currentLiveDocs_ getWithInt:self->docIDUpto_]) {
-      self->nextIsSet_ = YES;
+      self->nextIsSet_ = true;
       OrgApacheLuceneIndexSortedNumericDocValues *dv = IOSObjectArray_Get(nil_chk(self->this$0_->val$dvs_), self->readerUpto_);
       [((OrgApacheLuceneIndexSortedNumericDocValues *) nil_chk(dv)) setDocumentWithInt:self->docIDUpto_];
       self->nextValue_ = [dv count];
       self->docIDUpto_++;
-      return YES;
+      return true;
     }
     self->docIDUpto_++;
   }
@@ -1587,7 +1589,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsDocValuesConsumer_$4)
     @throw [new_JavaUtilNoSuchElementException_init() autorelease];
   }
   JreAssert((nextIsSet_), (@"org/apache/lucene/codecs/DocValuesConsumer.java:510 condition failed: assert nextIsSet;"));
-  nextIsSet_ = NO;
+  nextIsSet_ = false;
   return JavaLangLong_valueOfWithLong_(nextValue_);
 }
 
@@ -1633,15 +1635,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsDocValuesConsumer_$4)
 @end
 
 jboolean OrgApacheLuceneCodecsDocValuesConsumer_$4_$1_setNext(OrgApacheLuceneCodecsDocValuesConsumer_$4_$1 *self) {
-  while (YES) {
+  while (true) {
     if (self->readerUpto_ == self->this$0_->val$numReaders_) {
-      return NO;
+      return false;
     }
     if (self->valueUpto_ < self->valueLength_) {
       self->nextValue_ = [((OrgApacheLuceneIndexSortedNumericDocValues *) nil_chk(IOSObjectArray_Get(nil_chk(self->this$0_->val$dvs_), self->readerUpto_))) valueAtWithInt:self->valueUpto_];
       self->valueUpto_++;
-      self->nextIsSet_ = YES;
-      return YES;
+      self->nextIsSet_ = true;
+      return true;
     }
     if (self->docIDUpto_ == self->currentMaxDoc_) {
       self->readerUpto_++;
@@ -1867,7 +1869,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsDocValuesConsumer_$6)
     @throw [new_JavaUtilNoSuchElementException_init() autorelease];
   }
   JreAssert((nextIsSet_), (@"org/apache/lucene/codecs/DocValuesConsumer.java:656 condition failed: assert nextIsSet;"));
-  nextIsSet_ = NO;
+  nextIsSet_ = false;
   return JavaLangInteger_valueOfWithInt_(nextValue_);
 }
 
@@ -1913,9 +1915,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsDocValuesConsumer_$6)
 @end
 
 jboolean OrgApacheLuceneCodecsDocValuesConsumer_$6_$1_setNext(OrgApacheLuceneCodecsDocValuesConsumer_$6_$1 *self) {
-  while (YES) {
+  while (true) {
     if (self->readerUpto_ == self->this$0_->val$numReaders_) {
-      return NO;
+      return false;
     }
     if (self->docIDUpto_ == self->currentMaxDoc_) {
       self->readerUpto_++;
@@ -1928,11 +1930,11 @@ jboolean OrgApacheLuceneCodecsDocValuesConsumer_$6_$1_setNext(OrgApacheLuceneCod
       continue;
     }
     if (self->currentLiveDocs_ == nil || [self->currentLiveDocs_ getWithInt:self->docIDUpto_]) {
-      self->nextIsSet_ = YES;
+      self->nextIsSet_ = true;
       jint segOrd = [((OrgApacheLuceneIndexSortedDocValues *) nil_chk(IOSObjectArray_Get(nil_chk(self->this$0_->val$dvs_), self->readerUpto_))) getOrdWithInt:self->docIDUpto_];
       self->nextValue_ = segOrd == -1 ? -1 : (jint) [((OrgApacheLuceneUtilLongValues *) nil_chk(self->currentMap_)) getWithInt:segOrd];
       self->docIDUpto_++;
-      return YES;
+      return true;
     }
     self->docIDUpto_++;
   }
@@ -2136,7 +2138,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsDocValuesConsumer_$8)
     @throw [new_JavaUtilNoSuchElementException_init() autorelease];
   }
   JreAssert((nextIsSet_), (@"org/apache/lucene/codecs/DocValuesConsumer.java:795 condition failed: assert nextIsSet;"));
-  nextIsSet_ = NO;
+  nextIsSet_ = false;
   return JavaLangInteger_valueOfWithInt_(nextValue_);
 }
 
@@ -2180,9 +2182,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsDocValuesConsumer_$8)
 @end
 
 jboolean OrgApacheLuceneCodecsDocValuesConsumer_$8_$1_setNext(OrgApacheLuceneCodecsDocValuesConsumer_$8_$1 *self) {
-  while (YES) {
+  while (true) {
     if (self->readerUpto_ == self->this$0_->val$numReaders_) {
-      return NO;
+      return false;
     }
     if (self->docIDUpto_ == self->currentMaxDoc_) {
       self->readerUpto_++;
@@ -2194,7 +2196,7 @@ jboolean OrgApacheLuceneCodecsDocValuesConsumer_$8_$1_setNext(OrgApacheLuceneCod
       continue;
     }
     if (self->currentLiveDocs_ == nil || [self->currentLiveDocs_ getWithInt:self->docIDUpto_]) {
-      self->nextIsSet_ = YES;
+      self->nextIsSet_ = true;
       OrgApacheLuceneIndexSortedSetDocValues *dv = IOSObjectArray_Get(nil_chk(self->this$0_->val$dvs_), self->readerUpto_);
       [((OrgApacheLuceneIndexSortedSetDocValues *) nil_chk(dv)) setDocumentWithInt:self->docIDUpto_];
       self->nextValue_ = 0;
@@ -2202,7 +2204,7 @@ jboolean OrgApacheLuceneCodecsDocValuesConsumer_$8_$1_setNext(OrgApacheLuceneCod
         self->nextValue_++;
       }
       self->docIDUpto_++;
-      return YES;
+      return true;
     }
     self->docIDUpto_++;
   }
@@ -2296,7 +2298,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsDocValuesConsumer_$9)
     @throw [new_JavaUtilNoSuchElementException_init() autorelease];
   }
   JreAssert((nextIsSet_), (@"org/apache/lucene/codecs/DocValuesConsumer.java:866 condition failed: assert nextIsSet;"));
-  nextIsSet_ = NO;
+  nextIsSet_ = false;
   return JavaLangLong_valueOfWithLong_(nextValue_);
 }
 
@@ -2346,15 +2348,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsDocValuesConsumer_$9)
 @end
 
 jboolean OrgApacheLuceneCodecsDocValuesConsumer_$9_$1_setNext(OrgApacheLuceneCodecsDocValuesConsumer_$9_$1 *self) {
-  while (YES) {
+  while (true) {
     if (self->readerUpto_ == self->this$0_->val$numReaders_) {
-      return NO;
+      return false;
     }
     if (self->ordUpto_ < self->ordLength_) {
       self->nextValue_ = IOSLongArray_Get(nil_chk(self->ords_), self->ordUpto_);
       self->ordUpto_++;
-      self->nextIsSet_ = YES;
-      return YES;
+      self->nextIsSet_ = true;
+      return true;
     }
     if (self->docIDUpto_ == self->currentMaxDoc_) {
       self->readerUpto_++;

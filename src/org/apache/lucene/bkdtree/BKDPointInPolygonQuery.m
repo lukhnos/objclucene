@@ -143,17 +143,17 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$2)
 }
 
 - (jboolean)isEqual:(id)o {
-  if (self == o) return YES;
-  if (o == nil || [self getClass] != [o getClass]) return NO;
-  if (![super isEqual:o]) return NO;
+  if (self == o) return true;
+  if (o == nil || [self getClass] != [o getClass]) return false;
+  if (![super isEqual:o]) return false;
   OrgApacheLuceneBkdtreeBKDPointInPolygonQuery *that = (OrgApacheLuceneBkdtreeBKDPointInPolygonQuery *) check_class_cast(o, [OrgApacheLuceneBkdtreeBKDPointInPolygonQuery class]);
-  if (JavaUtilArrays_equalsWithDoubleArray_withDoubleArray_(polyLons_, ((OrgApacheLuceneBkdtreeBKDPointInPolygonQuery *) nil_chk(that))->polyLons_) == NO) {
-    return NO;
+  if (JavaUtilArrays_equalsWithDoubleArray_withDoubleArray_(polyLons_, ((OrgApacheLuceneBkdtreeBKDPointInPolygonQuery *) nil_chk(that))->polyLons_) == false) {
+    return false;
   }
-  if (JavaUtilArrays_equalsWithDoubleArray_withDoubleArray_(polyLats_, that->polyLats_) == NO) {
-    return NO;
+  if (JavaUtilArrays_equalsWithDoubleArray_withDoubleArray_(polyLats_, that->polyLats_) == false) {
+    return false;
   }
-  return YES;
+  return true;
 }
 
 - (NSUInteger)hash {
@@ -167,7 +167,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_$1_$2)
   JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
   [sb appendWithNSString:[[self getClass] getSimpleName]];
   [sb appendWithChar:':'];
-  if ([((NSString *) nil_chk(self->field_)) isEqual:field] == NO) {
+  if ([((NSString *) nil_chk(self->field_)) isEqual:field] == false) {
     [sb appendWithNSString:@" field="];
     [sb appendWithNSString:self->field_];
     [sb appendWithChar:':'];
@@ -233,13 +233,13 @@ void OrgApacheLuceneBkdtreeBKDPointInPolygonQuery_initWithNSString_withDoubleArr
   jdouble maxLat = JavaLangDouble_NEGATIVE_INFINITY;
   for (jint i = 0; i < polyLats->size_; i++) {
     jdouble lat = IOSDoubleArray_Get(polyLats, i);
-    if (OrgApacheLuceneBkdtreeBKDTreeWriter_validLatWithDouble_(lat) == NO) {
+    if (OrgApacheLuceneBkdtreeBKDTreeWriter_validLatWithDouble_(lat) == false) {
       @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$D$", @"polyLats[", i, @"]=", lat, @" is not a valid latitude")) autorelease];
     }
     minLat = JavaLangMath_minWithDouble_withDouble_(minLat, lat);
     maxLat = JavaLangMath_maxWithDouble_withDouble_(maxLat, lat);
     jdouble lon = IOSDoubleArray_Get(polyLons, i);
-    if (OrgApacheLuceneBkdtreeBKDTreeWriter_validLonWithDouble_(lon) == NO) {
+    if (OrgApacheLuceneBkdtreeBKDTreeWriter_validLonWithDouble_(lon) == false) {
       @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$D$", @"polyLons[", i, @"]=", lat, @" is not a valid longitude")) autorelease];
     }
     minLon = JavaLangMath_minWithDouble_withDouble_(minLon, lon);
@@ -293,7 +293,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneBkdtreeBKDPointInPolygonQuery)
   if (sdv == nil) {
     return nil;
   }
-  if ([sdv isKindOfClass:[OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues class]] == NO) {
+  if ([sdv isKindOfClass:[OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues class]] == false) {
     @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$@", @"field \"", this$0_->field_, @"\" was not indexed with BKDTreeDocValuesFormat: got: ", sdv)) autorelease];
   }
   OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues *treeDV = (OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues *) check_class_cast(sdv, [OrgApacheLuceneBkdtreeBKDTreeSortedNumericDocValues class]);

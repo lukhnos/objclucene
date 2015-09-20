@@ -45,10 +45,12 @@ __attribute__((unused)) static OrgApacheLuceneSearchJoinJoinUtil *new_OrgApacheL
 
 @implementation OrgApacheLuceneSearchJoinJoinUtil
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchJoinJoinUtil_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (OrgApacheLuceneSearchQuery *)createJoinQueryWithNSString:(NSString *)fromField
                                                 withBoolean:(jboolean)multipleValuesPerDocument

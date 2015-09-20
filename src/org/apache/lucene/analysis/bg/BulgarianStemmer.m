@@ -55,10 +55,12 @@ __attribute__((unused)) static jint OrgApacheLuceneAnalysisBgBulgarianStemmer_re
   return OrgApacheLuceneAnalysisBgBulgarianStemmer_removePluralWithCharArray_withInt_(self, s, len);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisBgBulgarianStemmer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

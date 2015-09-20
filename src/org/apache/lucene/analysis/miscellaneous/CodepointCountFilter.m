@@ -37,10 +37,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousCodepointCountFilter, te
   jint max32 = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) length];
   jint min32 = JreRShift32(max32, 1);
   if (min32 >= min_ && max32 <= max_) {
-    return YES;
+    return true;
   }
   else if (min32 > max_ || max32 < min_) {
-    return NO;
+    return false;
   }
   else {
     jint len = JavaLangCharacter_codePointCountWithCharArray_withInt_withInt_([termAtt_ buffer], 0, [termAtt_ length]);

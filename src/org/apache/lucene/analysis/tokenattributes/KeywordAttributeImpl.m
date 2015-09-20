@@ -20,13 +20,15 @@
 
 @implementation OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)clear {
-  keyword_ = NO;
+  keyword_ = false;
 }
 
 - (void)copyToWithOrgApacheLuceneUtilAttributeImpl:(OrgApacheLuceneUtilAttributeImpl *)target {
@@ -39,8 +41,8 @@
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return YES;
-  if ([self getClass] != [nil_chk(obj) getClass]) return NO;
+  if (self == obj) return true;
+  if ([self getClass] != [nil_chk(obj) getClass]) return false;
   OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl *other = (OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl *) check_class_cast(obj, [OrgApacheLuceneAnalysisTokenattributesKeywordAttributeImpl class]);
   return keyword_ == other->keyword_;
 }

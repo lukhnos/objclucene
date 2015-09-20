@@ -41,25 +41,27 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestDocumentCompletionsTermsReader, 
   @synchronized(self) {
     if (suggester_ == nil) {
       {
-        JavaLangThrowable *__mainException = nil;
         OrgApacheLuceneStoreIndexInput *dictClone = [((OrgApacheLuceneStoreIndexInput *) nil_chk(dictIn_)) clone];
+        JavaLangThrowable *__primaryException1 = nil;
         @try {
           [((OrgApacheLuceneStoreIndexInput *) nil_chk(dictClone)) seekWithLong:offset_];
           JreStrongAssign(&suggester_, OrgApacheLuceneSearchSuggestDocumentNRTSuggester_load__WithOrgApacheLuceneStoreIndexInput_(dictClone));
         }
+        @catch (JavaLangThrowable *e) {
+          __primaryException1 = e;
+          @throw e;
+        }
         @finally {
-          @try {
-            [dictClone close];
-          }
-          @catch (JavaLangThrowable *e) {
-            if (__mainException) {
-              [__mainException addSuppressedWithJavaLangThrowable:e];
+          if (dictClone != nil) {
+            if (__primaryException1 != nil) {
+              @try {
+                [dictClone close];
+              } @catch (JavaLangThrowable *e) {
+                [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+              }
             } else {
-              __mainException = e;
+              [dictClone close];
             }
-          }
-          if (__mainException) {
-            @throw __mainException;
           }
         }
       }

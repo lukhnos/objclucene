@@ -148,7 +148,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchTopScoreDocCollector_PagingTopSc
 }
 
 - (jboolean)needsScores {
-  return YES;
+  return true;
 }
 
 - (void)dealloc {
@@ -194,7 +194,7 @@ OrgApacheLuceneSearchTopScoreDocCollector *OrgApacheLuceneSearchTopScoreDocColle
 }
 
 void OrgApacheLuceneSearchTopScoreDocCollector_initWithInt_(OrgApacheLuceneSearchTopScoreDocCollector *self, jint numHits) {
-  OrgApacheLuceneSearchTopDocsCollector_initWithOrgApacheLuceneUtilPriorityQueue_(self, [new_OrgApacheLuceneSearchHitQueue_initWithInt_withBoolean_(numHits, YES) autorelease]);
+  OrgApacheLuceneSearchTopDocsCollector_initWithOrgApacheLuceneUtilPriorityQueue_(self, [new_OrgApacheLuceneSearchHitQueue_initWithInt_withBoolean_(numHits, true) autorelease]);
   JreStrongAssign(&self->pqTop_, [((OrgApacheLuceneUtilPriorityQueue *) nil_chk(self->pq_)) top]);
 }
 
@@ -206,10 +206,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchTopScoreDocCollector)
   JreStrongAssign(&self->scorer_, scorer);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchTopScoreDocCollector_ScorerLeafCollector_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(scorer_);

@@ -123,7 +123,7 @@ withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
 
 - (OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput *)clone {
   OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput *clone = (OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput *) check_class_cast([super clone], [OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput class]);
-  ((OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput *) nil_chk(clone))->isClone_ = YES;
+  ((OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput *) nil_chk(clone))->isClone_ = true;
   return clone;
 }
 
@@ -219,7 +219,7 @@ withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
 
 void OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput_initWithNSString_withJavaNioChannelsFileChannel_withOrgApacheLuceneStoreIOContext_(OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput *self, NSString *resourceDesc, JavaNioChannelsFileChannel *fc, OrgApacheLuceneStoreIOContext *context) {
   OrgApacheLuceneStoreBufferedIndexInput_initWithNSString_withOrgApacheLuceneStoreIOContext_(self, resourceDesc, context);
-  self->isClone_ = NO;
+  self->isClone_ = false;
   JreStrongAssign(&self->channel_, fc);
   self->off_ = 0LL;
   self->end_ = [((JavaNioChannelsFileChannel *) nil_chk(fc)) size];
@@ -233,11 +233,11 @@ OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput *new_OrgApacheLuceneStoreNIOF
 
 void OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput_initWithNSString_withJavaNioChannelsFileChannel_withLong_withLong_withInt_(OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput *self, NSString *resourceDesc, JavaNioChannelsFileChannel *fc, jlong off, jlong length, jint bufferSize) {
   OrgApacheLuceneStoreBufferedIndexInput_initWithNSString_withInt_(self, resourceDesc, bufferSize);
-  self->isClone_ = NO;
+  self->isClone_ = false;
   JreStrongAssign(&self->channel_, fc);
   self->off_ = off;
   self->end_ = off + length;
-  self->isClone_ = YES;
+  self->isClone_ = true;
 }
 
 OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput *new_OrgApacheLuceneStoreNIOFSDirectory_NIOFSIndexInput_initWithNSString_withJavaNioChannelsFileChannel_withLong_withLong_withInt_(NSString *resourceDesc, JavaNioChannelsFileChannel *fc, jlong off, jlong length, jint bufferSize) {

@@ -28,10 +28,12 @@ __attribute__((unused)) static OrgApacheLuceneSearchSortedSetSelector_TypeEnum *
   return OrgApacheLuceneSearchSortedSetSelector_wrapWithOrgApacheLuceneIndexSortedSetDocValues_withOrgApacheLuceneSearchSortedSetSelector_TypeEnum_(sortedSet, selector);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSortedSetSelector_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -58,7 +60,7 @@ OrgApacheLuceneIndexSortedDocValues *OrgApacheLuceneSearchSortedSetSelector_wrap
     return [new_OrgApacheLuceneSearchSortedSetSelector_MinValue_initWithOrgApacheLuceneIndexSortedSetDocValues_(sortedSet) autorelease];
   }
   else {
-    if ([sortedSet isKindOfClass:[OrgApacheLuceneIndexRandomAccessOrds class]] == NO) {
+    if ([sortedSet isKindOfClass:[OrgApacheLuceneIndexRandomAccessOrds class]] == false) {
       @throw [new_JavaLangUnsupportedOperationException_initWithNSString_(JreStrcat("$@$$", @"codec does not support random access ordinals, cannot use selector: ", selector, @" docValsImpl: ", [sortedSet description])) autorelease];
     }
     OrgApacheLuceneIndexRandomAccessOrds *randomOrds = (OrgApacheLuceneIndexRandomAccessOrds *) check_class_cast(sortedSet, [OrgApacheLuceneIndexRandomAccessOrds class]);

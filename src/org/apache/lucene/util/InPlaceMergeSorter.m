@@ -9,10 +9,12 @@
 
 @implementation OrgApacheLuceneUtilInPlaceMergeSorter
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilInPlaceMergeSorter_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)sortWithInt:(jint)from
             withInt:(jint)to {

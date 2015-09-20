@@ -208,10 +208,10 @@ withOrgApacheLuceneUtilBytesRefArray:(IOSObjectArray *)terms {
 
 - (jboolean)isEqual:(id)obj {
   if (self == obj) {
-    return YES;
+    return true;
   }
   if (![super isEqual:obj]) {
-    return NO;
+    return false;
   }
   OrgApacheLuceneQueriesTermsQuery *that = (OrgApacheLuceneQueriesTermsQuery *) check_class_cast(obj, [OrgApacheLuceneQueriesTermsQuery class]);
   return termDataHashCode_ == ((OrgApacheLuceneQueriesTermsQuery *) nil_chk(that))->termDataHashCode_ && [((OrgApacheLuceneIndexPrefixCodedTerms *) nil_chk(termData_)) isEqual:that->termData_];
@@ -223,13 +223,13 @@ withOrgApacheLuceneUtilBytesRefArray:(IOSObjectArray *)terms {
 
 - (NSString *)toStringWithNSString:(NSString *)defaultField {
   JavaLangStringBuilder *builder = [new_JavaLangStringBuilder_init() autorelease];
-  jboolean first = YES;
+  jboolean first = true;
   OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *iterator = [((OrgApacheLuceneIndexPrefixCodedTerms *) nil_chk(termData_)) iterator];
   for (OrgApacheLuceneUtilBytesRef *term = [((OrgApacheLuceneIndexPrefixCodedTerms_TermIterator *) nil_chk(iterator)) next]; term != nil; term = [iterator next]) {
     if (!first) {
       [builder appendWithChar:' '];
     }
-    first = NO;
+    first = false;
     [((JavaLangStringBuilder *) nil_chk([builder appendWithNSString:[iterator field]])) appendWithChar:':'];
     [builder appendWithNSString:[((OrgApacheLuceneUtilBytesRef *) nil_chk(term)) utf8ToString]];
   }
@@ -312,7 +312,7 @@ void OrgApacheLuceneQueriesTermsQuery_initWithJavaUtilList_(OrgApacheLuceneQueri
     OrgApacheLuceneIndexTerm * const *e__ = b__ + a__->size_;
     while (b__ < e__) {
       OrgApacheLuceneIndexTerm *term = *b__++;
-      if ([((OrgApacheLuceneIndexTerm *) nil_chk(term)) isEqual:previous] == NO) {
+      if ([((OrgApacheLuceneIndexTerm *) nil_chk(term)) isEqual:previous] == false) {
         [builder addWithOrgApacheLuceneIndexTerm:term];
       }
       previous = term;

@@ -77,7 +77,7 @@ withOrgApacheLuceneQueriesFunctionFunctionValues:(OrgApacheLuceneQueriesFunction
 }
 
 - (jboolean)isEqual:(id)o {
-  if ([self getClass] != [nil_chk(o) getClass]) return NO;
+  if ([self getClass] != [nil_chk(o) getClass]) return false;
   OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction *other = (OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction *) check_class_cast(o, [OrgApacheLuceneQueriesFunctionValuesourceSimpleBoolFunction class]);
   return [((OrgApacheLuceneQueriesFunctionValueSource *) nil_chk(self->source_)) isEqual:other->source_];
 }

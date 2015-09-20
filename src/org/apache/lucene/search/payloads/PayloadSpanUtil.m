@@ -124,9 +124,9 @@ void OrgApacheLuceneSearchPayloadsPayloadSpanUtil_queryToSpanQueryWithOrgApacheL
       IOSObjectArray_SetAndConsume(clauses, i, new_OrgApacheLuceneSearchSpansSpanTermQuery_initWithOrgApacheLuceneIndexTerm_(IOSObjectArray_Get(phraseQueryTerms, i)));
     }
     jint slop = [((OrgApacheLuceneSearchPhraseQuery *) nil_chk(((OrgApacheLuceneSearchPhraseQuery *) check_class_cast(query, [OrgApacheLuceneSearchPhraseQuery class])))) getSlop];
-    jboolean inorder = NO;
+    jboolean inorder = false;
     if (slop == 0) {
-      inorder = YES;
+      inorder = true;
     }
     OrgApacheLuceneSearchSpansSpanNearQuery *sp = [new_OrgApacheLuceneSearchSpansSpanNearQuery_initWithOrgApacheLuceneSearchSpansSpanQueryArray_withInt_withBoolean_(clauses, slop, inorder) autorelease];
     [sp setBoostWithFloat:[((OrgApacheLuceneSearchQuery *) nil_chk(query)) getBoost]];
@@ -202,7 +202,7 @@ void OrgApacheLuceneSearchPayloadsPayloadSpanUtil_queryToSpanQueryWithOrgApacheL
 void OrgApacheLuceneSearchPayloadsPayloadSpanUtil_getPayloadsWithJavaUtilCollection_withOrgApacheLuceneSearchSpansSpanQuery_(OrgApacheLuceneSearchPayloadsPayloadSpanUtil *self, id<JavaUtilCollection> payloads, OrgApacheLuceneSearchSpansSpanQuery *query) {
   OrgApacheLuceneSearchIndexSearcher *searcher = [new_OrgApacheLuceneSearchIndexSearcher_initWithOrgApacheLuceneIndexIndexReaderContext_(self->context_) autorelease];
   [searcher setQueryCacheWithOrgApacheLuceneSearchQueryCache:nil];
-  OrgApacheLuceneSearchSpansSpanWeight *w = (OrgApacheLuceneSearchSpansSpanWeight *) check_class_cast([searcher createNormalizedWeightWithOrgApacheLuceneSearchQuery:query withBoolean:NO], [OrgApacheLuceneSearchSpansSpanWeight class]);
+  OrgApacheLuceneSearchSpansSpanWeight *w = (OrgApacheLuceneSearchSpansSpanWeight *) check_class_cast([searcher createNormalizedWeightWithOrgApacheLuceneSearchQuery:query withBoolean:false], [OrgApacheLuceneSearchSpansSpanWeight class]);
   OrgApacheLuceneSearchPayloadsPayloadSpanCollector *collector = [new_OrgApacheLuceneSearchPayloadsPayloadSpanCollector_init() autorelease];
   for (OrgApacheLuceneIndexLeafReaderContext * __strong leafReaderContext in nil_chk([((OrgApacheLuceneIndexIndexReaderContext *) nil_chk(self->context_)) leaves])) {
     OrgApacheLuceneSearchSpansSpans *spans = [((OrgApacheLuceneSearchSpansSpanWeight *) nil_chk(w)) getSpansWithOrgApacheLuceneIndexLeafReaderContext:leafReaderContext withOrgApacheLuceneSearchSpansSpanWeight_PostingsEnum:JreLoadStatic(OrgApacheLuceneSearchSpansSpanWeight_PostingsEnum, PAYLOADS)];

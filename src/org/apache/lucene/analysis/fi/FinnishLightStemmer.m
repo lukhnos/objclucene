@@ -92,10 +92,12 @@ __attribute__((unused)) static jboolean OrgApacheLuceneAnalysisFiFinnishLightSte
   return OrgApacheLuceneAnalysisFiFinnishLightStemmer_isVowelWithChar_(self, ch);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisFiFinnishLightStemmer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -220,9 +222,9 @@ jboolean OrgApacheLuceneAnalysisFiFinnishLightStemmer_isVowelWithChar_(OrgApache
     case 'o':
     case 'u':
     case 'y':
-    return YES;
+    return true;
     default:
-    return NO;
+    return false;
   }
 }
 

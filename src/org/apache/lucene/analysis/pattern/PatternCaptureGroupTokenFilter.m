@@ -70,10 +70,10 @@ __attribute__((unused)) static jboolean OrgApacheLuceneAnalysisPatternPatternCap
     [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posAttr_)) setPositionIncrementWithInt:0];
     [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(charTermAttr_)) copyBufferWithCharArray:[((OrgApacheLuceneUtilCharsRefBuilder *) nil_chk(spare_)) chars] withInt:start withInt:end - start];
     (*IOSIntArray_GetRef(currentGroup_, currentMatcher_))++;
-    return YES;
+    return true;
   }
   if (![((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
-    return NO;
+    return false;
   }
   IOSCharArray *buffer = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(charTermAttr_)) buffer];
   jint length = [charTermAttr_ length];
@@ -97,7 +97,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneAnalysisPatternPatternCap
     }
     (*IOSIntArray_GetRef(currentGroup_, currentMatcher_))++;
   }
-  return YES;
+  return true;
 }
 
 - (void)reset {

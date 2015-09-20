@@ -23,7 +23,7 @@
 }
 
 - (jboolean)isEqual:(id)obj {
-  return ([obj isKindOfClass:[OrgLukhnosPortmobileFileAttributeFileTime class]]) ? [self compareToWithId:(OrgLukhnosPortmobileFileAttributeFileTime *) check_class_cast(obj, [OrgLukhnosPortmobileFileAttributeFileTime class])] == 0 : NO;
+  return ([obj isKindOfClass:[OrgLukhnosPortmobileFileAttributeFileTime class]]) ? [self compareToWithId:(OrgLukhnosPortmobileFileAttributeFileTime *) check_class_cast(obj, [OrgLukhnosPortmobileFileAttributeFileTime class])] == 0 : false;
 }
 
 - (jint)compareToWithId:(OrgLukhnosPortmobileFileAttributeFileTime *)o {

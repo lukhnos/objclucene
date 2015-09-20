@@ -34,10 +34,12 @@ J2OBJC_INITIALIZED_DEFN(OrgTartarusSnowballSnowballProgram)
 
 @implementation OrgTartarusSnowballSnowballProgram
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgTartarusSnowballSnowballProgram_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jboolean)stem {
   // can't call an abstract method
@@ -88,117 +90,117 @@ J2OBJC_INITIALIZED_DEFN(OrgTartarusSnowballSnowballProgram)
 - (jboolean)in_groupingWithCharArray:(IOSCharArray *)s
                              withInt:(jint)min
                              withInt:(jint)max {
-  if (cursor_ >= limit_) return NO;
+  if (cursor_ >= limit_) return false;
   jchar ch = IOSCharArray_Get(nil_chk(current_), cursor_);
-  if (ch > max || ch < min) return NO;
+  if (ch > max || ch < min) return false;
   ch -= min;
-  if ((IOSCharArray_Get(nil_chk(s), JreRShift32(ch, 3)) & (JreLShift32(0X1, (ch & 0X7)))) == 0) return NO;
+  if ((IOSCharArray_Get(nil_chk(s), JreRShift32(ch, 3)) & (JreLShift32(0X1, (ch & 0X7)))) == 0) return false;
   cursor_++;
-  return YES;
+  return true;
 }
 
 - (jboolean)in_grouping_bWithCharArray:(IOSCharArray *)s
                                withInt:(jint)min
                                withInt:(jint)max {
-  if (cursor_ <= limit_backward_) return NO;
+  if (cursor_ <= limit_backward_) return false;
   jchar ch = IOSCharArray_Get(nil_chk(current_), cursor_ - 1);
-  if (ch > max || ch < min) return NO;
+  if (ch > max || ch < min) return false;
   ch -= min;
-  if ((IOSCharArray_Get(nil_chk(s), JreRShift32(ch, 3)) & (JreLShift32(0X1, (ch & 0X7)))) == 0) return NO;
+  if ((IOSCharArray_Get(nil_chk(s), JreRShift32(ch, 3)) & (JreLShift32(0X1, (ch & 0X7)))) == 0) return false;
   cursor_--;
-  return YES;
+  return true;
 }
 
 - (jboolean)out_groupingWithCharArray:(IOSCharArray *)s
                               withInt:(jint)min
                               withInt:(jint)max {
-  if (cursor_ >= limit_) return NO;
+  if (cursor_ >= limit_) return false;
   jchar ch = IOSCharArray_Get(nil_chk(current_), cursor_);
   if (ch > max || ch < min) {
     cursor_++;
-    return YES;
+    return true;
   }
   ch -= min;
   if ((IOSCharArray_Get(nil_chk(s), JreRShift32(ch, 3)) & (JreLShift32(0X1, (ch & 0X7)))) == 0) {
     cursor_++;
-    return YES;
+    return true;
   }
-  return NO;
+  return false;
 }
 
 - (jboolean)out_grouping_bWithCharArray:(IOSCharArray *)s
                                 withInt:(jint)min
                                 withInt:(jint)max {
-  if (cursor_ <= limit_backward_) return NO;
+  if (cursor_ <= limit_backward_) return false;
   jchar ch = IOSCharArray_Get(nil_chk(current_), cursor_ - 1);
   if (ch > max || ch < min) {
     cursor_--;
-    return YES;
+    return true;
   }
   ch -= min;
   if ((IOSCharArray_Get(nil_chk(s), JreRShift32(ch, 3)) & (JreLShift32(0X1, (ch & 0X7)))) == 0) {
     cursor_--;
-    return YES;
+    return true;
   }
-  return NO;
+  return false;
 }
 
 - (jboolean)in_rangeWithInt:(jint)min
                     withInt:(jint)max {
-  if (cursor_ >= limit_) return NO;
+  if (cursor_ >= limit_) return false;
   jchar ch = IOSCharArray_Get(nil_chk(current_), cursor_);
-  if (ch > max || ch < min) return NO;
+  if (ch > max || ch < min) return false;
   cursor_++;
-  return YES;
+  return true;
 }
 
 - (jboolean)in_range_bWithInt:(jint)min
                       withInt:(jint)max {
-  if (cursor_ <= limit_backward_) return NO;
+  if (cursor_ <= limit_backward_) return false;
   jchar ch = IOSCharArray_Get(nil_chk(current_), cursor_ - 1);
-  if (ch > max || ch < min) return NO;
+  if (ch > max || ch < min) return false;
   cursor_--;
-  return YES;
+  return true;
 }
 
 - (jboolean)out_rangeWithInt:(jint)min
                      withInt:(jint)max {
-  if (cursor_ >= limit_) return NO;
+  if (cursor_ >= limit_) return false;
   jchar ch = IOSCharArray_Get(nil_chk(current_), cursor_);
-  if (!(ch > max || ch < min)) return NO;
+  if (!(ch > max || ch < min)) return false;
   cursor_++;
-  return YES;
+  return true;
 }
 
 - (jboolean)out_range_bWithInt:(jint)min
                        withInt:(jint)max {
-  if (cursor_ <= limit_backward_) return NO;
+  if (cursor_ <= limit_backward_) return false;
   jchar ch = IOSCharArray_Get(nil_chk(current_), cursor_ - 1);
-  if (!(ch > max || ch < min)) return NO;
+  if (!(ch > max || ch < min)) return false;
   cursor_--;
-  return YES;
+  return true;
 }
 
 - (jboolean)eq_sWithInt:(jint)s_size
 withJavaLangCharSequence:(id<JavaLangCharSequence>)s {
-  if (limit_ - cursor_ < s_size) return NO;
+  if (limit_ - cursor_ < s_size) return false;
   jint i;
   for (i = 0; i != s_size; i++) {
-    if (IOSCharArray_Get(nil_chk(current_), cursor_ + i) != [((id<JavaLangCharSequence>) nil_chk(s)) charAtWithInt:i]) return NO;
+    if (IOSCharArray_Get(nil_chk(current_), cursor_ + i) != [((id<JavaLangCharSequence>) nil_chk(s)) charAtWithInt:i]) return false;
   }
   cursor_ += s_size;
-  return YES;
+  return true;
 }
 
 - (jboolean)eq_s_bWithInt:(jint)s_size
  withJavaLangCharSequence:(id<JavaLangCharSequence>)s {
-  if (cursor_ - limit_backward_ < s_size) return NO;
+  if (cursor_ - limit_backward_ < s_size) return false;
   jint i;
   for (i = 0; i != s_size; i++) {
-    if (IOSCharArray_Get(nil_chk(current_), cursor_ - s_size + i) != [((id<JavaLangCharSequence>) nil_chk(s)) charAtWithInt:i]) return NO;
+    if (IOSCharArray_Get(nil_chk(current_), cursor_ - s_size + i) != [((id<JavaLangCharSequence>) nil_chk(s)) charAtWithInt:i]) return false;
   }
   cursor_ -= s_size;
-  return YES;
+  return true;
 }
 
 - (jboolean)eq_vWithJavaLangCharSequence:(id<JavaLangCharSequence>)s {
@@ -217,8 +219,8 @@ withJavaLangCharSequence:(id<JavaLangCharSequence>)s {
   jint l = limit_;
   jint common_i = 0;
   jint common_j = 0;
-  jboolean first_key_inspected = NO;
-  while (YES) {
+  jboolean first_key_inspected = false;
+  while (true) {
     jint k = i + (JreRShift32((j - i), 1));
     jint diff = 0;
     jint common = common_i < common_j ? common_i : common_j;
@@ -245,10 +247,10 @@ withJavaLangCharSequence:(id<JavaLangCharSequence>)s {
       if (i > 0) break;
       if (j == i) break;
       if (first_key_inspected) break;
-      first_key_inspected = YES;
+      first_key_inspected = true;
     }
   }
-  while (YES) {
+  while (true) {
     OrgTartarusSnowballAmong *w = IOSObjectArray_Get(nil_chk(v), i);
     if (common_i >= ((OrgTartarusSnowballAmong *) nil_chk(w))->s_size_) {
       cursor_ = c + w->s_size_;
@@ -259,10 +261,10 @@ withJavaLangCharSequence:(id<JavaLangCharSequence>)s {
         res = [((NSString *) nil_chk([nil_chk(resobj) description])) isEqual:@"true"];
       }
       @catch (JavaLangReflectInvocationTargetException *e) {
-        res = NO;
+        res = false;
       }
       @catch (JavaLangIllegalAccessException *e) {
-        res = NO;
+        res = false;
       }
       cursor_ = c + w->s_size_;
       if (res) return w->result_;
@@ -280,8 +282,8 @@ withJavaLangCharSequence:(id<JavaLangCharSequence>)s {
   jint lb = limit_backward_;
   jint common_i = 0;
   jint common_j = 0;
-  jboolean first_key_inspected = NO;
-  while (YES) {
+  jboolean first_key_inspected = false;
+  while (true) {
     jint k = i + (JreRShift32((j - i), 1));
     jint diff = 0;
     jint common = common_i < common_j ? common_i : common_j;
@@ -308,10 +310,10 @@ withJavaLangCharSequence:(id<JavaLangCharSequence>)s {
       if (i > 0) break;
       if (j == i) break;
       if (first_key_inspected) break;
-      first_key_inspected = YES;
+      first_key_inspected = true;
     }
   }
-  while (YES) {
+  while (true) {
     OrgTartarusSnowballAmong *w = IOSObjectArray_Get(nil_chk(v), i);
     if (common_i >= ((OrgTartarusSnowballAmong *) nil_chk(w))->s_size_) {
       cursor_ = c - w->s_size_;
@@ -322,10 +324,10 @@ withJavaLangCharSequence:(id<JavaLangCharSequence>)s {
         res = [((NSString *) nil_chk([nil_chk(resobj) description])) isEqual:@"true"];
       }
       @catch (JavaLangReflectInvocationTargetException *e) {
-        res = NO;
+        res = false;
       }
       @catch (JavaLangIllegalAccessException *e) {
-        res = NO;
+        res = false;
       }
       cursor_ = c - w->s_size_;
       if (res) return w->result_;

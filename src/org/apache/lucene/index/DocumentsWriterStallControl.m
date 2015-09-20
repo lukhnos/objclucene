@@ -48,7 +48,7 @@ __attribute__((unused)) static void OrgApacheLuceneIndexDocumentsWriterStallCont
   @synchronized(self) {
     JreAssignVolatileBoolean(&self->stalled_, stalled);
     if (stalled) {
-      wasStalled_ = YES;
+      wasStalled_ = true;
     }
     [self notifyAll];
   }

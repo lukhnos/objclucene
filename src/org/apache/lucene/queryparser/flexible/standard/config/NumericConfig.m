@@ -61,14 +61,14 @@ withOrgApacheLuceneDocumentFieldType_NumericTypeEnum:(OrgApacheLuceneDocumentFie
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (obj == self) return YES;
+  if (obj == self) return true;
   if ([obj isKindOfClass:[OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig class]]) {
     OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *other = (OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *) check_class_cast(obj, [OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig class]);
     if (self->precisionStep_ == ((OrgApacheLuceneQueryparserFlexibleStandardConfigNumericConfig *) nil_chk(other))->precisionStep_ && self->type_ == other->type_ && (self->format_ == other->format_ || ([((JavaTextNumberFormat *) nil_chk(self->format_)) isEqual:other->format_]))) {
-      return YES;
+      return true;
     }
   }
-  return NO;
+  return false;
 }
 
 - (void)dealloc {

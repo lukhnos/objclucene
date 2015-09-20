@@ -61,10 +61,12 @@ NSString *OrgApacheLuceneAnalysisTrTurkishAnalyzer_DEFAULT_STOPWORD_FILE_ = @"st
   return OrgApacheLuceneAnalysisTrTurkishAnalyzer_getDefaultStopSet();
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisTrTurkishAnalyzer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords {
   OrgApacheLuceneAnalysisTrTurkishAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(self, stopwords);
@@ -165,16 +167,18 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisTrTurkishAnalyzer_DefaultSetHolde
 
 @implementation OrgApacheLuceneAnalysisTrTurkishAnalyzer_DefaultSetHolder
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisTrTurkishAnalyzer_DefaultSetHolder_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisTrTurkishAnalyzer_DefaultSetHolder class]) {
     {
       @try {
-        JreStrongAssign(&OrgApacheLuceneAnalysisTrTurkishAnalyzer_DefaultSetHolder_DEFAULT_STOP_SET_, OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_loadStopwordSetWithBoolean_withIOSClass_withNSString_withNSString_(NO, OrgApacheLuceneAnalysisTrTurkishAnalyzer_class_(), OrgApacheLuceneAnalysisTrTurkishAnalyzer_DEFAULT_STOPWORD_FILE_, OrgApacheLuceneAnalysisTrTurkishAnalyzer_STOPWORDS_COMMENT_));
+        JreStrongAssign(&OrgApacheLuceneAnalysisTrTurkishAnalyzer_DefaultSetHolder_DEFAULT_STOP_SET_, OrgApacheLuceneAnalysisUtilStopwordAnalyzerBase_loadStopwordSetWithBoolean_withIOSClass_withNSString_withNSString_(false, OrgApacheLuceneAnalysisTrTurkishAnalyzer_class_(), OrgApacheLuceneAnalysisTrTurkishAnalyzer_DEFAULT_STOPWORD_FILE_, OrgApacheLuceneAnalysisTrTurkishAnalyzer_STOPWORDS_COMMENT_));
       }
       @catch (JavaIoIOException *ex) {
         @throw [new_JavaLangRuntimeException_initWithNSString_(@"Unable to load default stopword set") autorelease];

@@ -30,10 +30,12 @@ OrgApacheLuceneUtilAttributeFactory *OrgApacheLuceneAnalysisTokenStream_DEFAULT_
 
 @implementation OrgApacheLuceneAnalysisTokenStream
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisTokenStream_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithOrgApacheLuceneUtilAttributeSource:(OrgApacheLuceneUtilAttributeSource *)input {
   OrgApacheLuceneAnalysisTokenStream_initWithOrgApacheLuceneUtilAttributeSource_(self, input);
@@ -114,12 +116,12 @@ void OrgApacheLuceneAnalysisTokenStream_initWithOrgApacheLuceneUtilAttributeFact
 jboolean OrgApacheLuceneAnalysisTokenStream_assertFinal(OrgApacheLuceneAnalysisTokenStream *self) {
   @try {
     IOSClass *clazz = [self getClass];
-    if (![clazz desiredAssertionStatus]) return YES;
+    if (![clazz desiredAssertionStatus]) return true;
     JreAssert(([clazz isAnonymousClass] || ([clazz getModifiers] & (JavaLangReflectModifier_FINAL | JavaLangReflectModifier_PRIVATE)) != 0 || JavaLangReflectModifier_isFinalWithInt_([((JavaLangReflectMethod *) nil_chk([clazz getMethod:@"incrementToken" parameterTypes:[IOSObjectArray arrayWithLength:0 type:IOSClass_class_()]])) getModifiers])), (@"TokenStream implementation classes or at least their incrementToken() implementation must be final"));
-    return YES;
+    return true;
   }
   @catch (JavaLangNoSuchMethodException *nsme) {
-    return NO;
+    return false;
   }
 }
 

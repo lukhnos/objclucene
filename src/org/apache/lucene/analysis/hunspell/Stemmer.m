@@ -147,19 +147,19 @@ __attribute__((unused)) static jboolean OrgApacheLuceneAnalysisHunspellStemmer_h
   if (caseType == OrgApacheLuceneAnalysisHunspellStemmer_UPPER_CASE) {
     OrgApacheLuceneAnalysisHunspellStemmer_caseFoldTitleWithCharArray_withInt_(self, word, length);
     OrgApacheLuceneAnalysisHunspellStemmer_caseFoldLowerWithCharArray_withInt_(self, titleBuffer_, length);
-    id<JavaUtilList> list = OrgApacheLuceneAnalysisHunspellStemmer_doStemWithCharArray_withInt_withBoolean_(self, word, length, NO);
-    [((id<JavaUtilList>) nil_chk(list)) addAllWithJavaUtilCollection:OrgApacheLuceneAnalysisHunspellStemmer_doStemWithCharArray_withInt_withBoolean_(self, titleBuffer_, length, YES)];
-    [list addAllWithJavaUtilCollection:OrgApacheLuceneAnalysisHunspellStemmer_doStemWithCharArray_withInt_withBoolean_(self, lowerBuffer_, length, YES)];
+    id<JavaUtilList> list = OrgApacheLuceneAnalysisHunspellStemmer_doStemWithCharArray_withInt_withBoolean_(self, word, length, false);
+    [((id<JavaUtilList>) nil_chk(list)) addAllWithJavaUtilCollection:OrgApacheLuceneAnalysisHunspellStemmer_doStemWithCharArray_withInt_withBoolean_(self, titleBuffer_, length, true)];
+    [list addAllWithJavaUtilCollection:OrgApacheLuceneAnalysisHunspellStemmer_doStemWithCharArray_withInt_withBoolean_(self, lowerBuffer_, length, true)];
     return list;
   }
   else if (caseType == OrgApacheLuceneAnalysisHunspellStemmer_TITLE_CASE) {
     OrgApacheLuceneAnalysisHunspellStemmer_caseFoldLowerWithCharArray_withInt_(self, word, length);
-    id<JavaUtilList> list = OrgApacheLuceneAnalysisHunspellStemmer_doStemWithCharArray_withInt_withBoolean_(self, word, length, NO);
-    [((id<JavaUtilList>) nil_chk(list)) addAllWithJavaUtilCollection:OrgApacheLuceneAnalysisHunspellStemmer_doStemWithCharArray_withInt_withBoolean_(self, lowerBuffer_, length, YES)];
+    id<JavaUtilList> list = OrgApacheLuceneAnalysisHunspellStemmer_doStemWithCharArray_withInt_withBoolean_(self, word, length, false);
+    [((id<JavaUtilList>) nil_chk(list)) addAllWithJavaUtilCollection:OrgApacheLuceneAnalysisHunspellStemmer_doStemWithCharArray_withInt_withBoolean_(self, lowerBuffer_, length, true)];
     return list;
   }
   else {
-    return OrgApacheLuceneAnalysisHunspellStemmer_doStemWithCharArray_withInt_withBoolean_(self, word, length, NO);
+    return OrgApacheLuceneAnalysisHunspellStemmer_doStemWithCharArray_withInt_withBoolean_(self, word, length, false);
   }
 }
 
@@ -255,10 +255,10 @@ __attribute__((unused)) static jboolean OrgApacheLuceneAnalysisHunspellStemmer_h
       IOSCharArray *wordFlags = OrgApacheLuceneAnalysisHunspellDictionary_decodeFlagsWithOrgApacheLuceneUtilBytesRef_(scratch_);
       if (OrgApacheLuceneAnalysisHunspellDictionary_hasFlagWithCharArray_withChar_(wordFlags, flag)) {
         jboolean chainedPrefix = dictionary_->complexPrefixes_ && recursionDepth == 1 && prefix;
-        if (chainedPrefix == NO && prefixFlag >= 0 && !OrgApacheLuceneAnalysisHunspellDictionary_hasFlagWithCharArray_withChar_(wordFlags, (jchar) prefixFlag)) {
+        if (chainedPrefix == false && prefixFlag >= 0 && !OrgApacheLuceneAnalysisHunspellDictionary_hasFlagWithCharArray_withChar_(wordFlags, (jchar) prefixFlag)) {
           [dictionary_->flagLookup_ getWithInt:append withOrgApacheLuceneUtilBytesRef:scratch_];
           IOSCharArray *appendFlags = OrgApacheLuceneAnalysisHunspellDictionary_decodeFlagsWithOrgApacheLuceneUtilBytesRef_(scratch_);
-          if (!OrgApacheLuceneAnalysisHunspellStemmer_hasCrossCheckedFlagWithChar_withCharArray_withBoolean_(self, (jchar) prefixFlag, appendFlags, NO)) {
+          if (!OrgApacheLuceneAnalysisHunspellStemmer_hasCrossCheckedFlagWithChar_withCharArray_withBoolean_(self, (jchar) prefixFlag, appendFlags, false)) {
             continue;
           }
         }
@@ -288,18 +288,18 @@ __attribute__((unused)) static jboolean OrgApacheLuceneAnalysisHunspellStemmer_h
   if (crossProduct) {
     if (recursionDepth == 0) {
       if (prefix) {
-        [stems addAllWithJavaUtilCollection:OrgApacheLuceneAnalysisHunspellStemmer_stemWithCharArray_withInt_withInt_withInt_withInt_withInt_withBoolean_withBoolean_withBoolean_withBoolean_withBoolean_(self, strippedWord, length, affix, flag, flag, ++recursionDepth, dictionary_->complexPrefixes_ && dictionary_->twoStageAffix_, YES, YES, circumfix, caseVariant)];
+        [stems addAllWithJavaUtilCollection:OrgApacheLuceneAnalysisHunspellStemmer_stemWithCharArray_withInt_withInt_withInt_withInt_withInt_withBoolean_withBoolean_withBoolean_withBoolean_withBoolean_(self, strippedWord, length, affix, flag, flag, ++recursionDepth, dictionary_->complexPrefixes_ && dictionary_->twoStageAffix_, true, true, circumfix, caseVariant)];
       }
-      else if (dictionary_->complexPrefixes_ == NO && dictionary_->twoStageAffix_) {
-        [stems addAllWithJavaUtilCollection:OrgApacheLuceneAnalysisHunspellStemmer_stemWithCharArray_withInt_withInt_withInt_withInt_withInt_withBoolean_withBoolean_withBoolean_withBoolean_withBoolean_(self, strippedWord, length, affix, flag, prefixFlag, ++recursionDepth, NO, YES, NO, circumfix, caseVariant)];
+      else if (dictionary_->complexPrefixes_ == false && dictionary_->twoStageAffix_) {
+        [stems addAllWithJavaUtilCollection:OrgApacheLuceneAnalysisHunspellStemmer_stemWithCharArray_withInt_withInt_withInt_withInt_withInt_withBoolean_withBoolean_withBoolean_withBoolean_withBoolean_(self, strippedWord, length, affix, flag, prefixFlag, ++recursionDepth, false, true, false, circumfix, caseVariant)];
       }
     }
     else if (recursionDepth == 1) {
       if (prefix && dictionary_->complexPrefixes_) {
-        [stems addAllWithJavaUtilCollection:OrgApacheLuceneAnalysisHunspellStemmer_stemWithCharArray_withInt_withInt_withInt_withInt_withInt_withBoolean_withBoolean_withBoolean_withBoolean_withBoolean_(self, strippedWord, length, affix, flag, flag, ++recursionDepth, NO, YES, YES, circumfix, caseVariant)];
+        [stems addAllWithJavaUtilCollection:OrgApacheLuceneAnalysisHunspellStemmer_stemWithCharArray_withInt_withInt_withInt_withInt_withInt_withBoolean_withBoolean_withBoolean_withBoolean_withBoolean_(self, strippedWord, length, affix, flag, flag, ++recursionDepth, false, true, true, circumfix, caseVariant)];
       }
-      else if (prefix == NO && dictionary_->complexPrefixes_ == NO && dictionary_->twoStageAffix_) {
-        [stems addAllWithJavaUtilCollection:OrgApacheLuceneAnalysisHunspellStemmer_stemWithCharArray_withInt_withInt_withInt_withInt_withInt_withBoolean_withBoolean_withBoolean_withBoolean_withBoolean_(self, strippedWord, length, affix, flag, prefixFlag, ++recursionDepth, NO, YES, NO, circumfix, caseVariant)];
+      else if (prefix == false && dictionary_->complexPrefixes_ == false && dictionary_->twoStageAffix_) {
+        [stems addAllWithJavaUtilCollection:OrgApacheLuceneAnalysisHunspellStemmer_stemWithCharArray_withInt_withInt_withInt_withInt_withInt_withBoolean_withBoolean_withBoolean_withBoolean_withBoolean_(self, strippedWord, length, affix, flag, prefixFlag, ++recursionDepth, false, true, false, circumfix, caseVariant)];
       }
     }
   }
@@ -405,8 +405,8 @@ jint OrgApacheLuceneAnalysisHunspellStemmer_caseOfWithCharArray_withInt_(OrgApac
   if (((OrgApacheLuceneAnalysisHunspellDictionary *) nil_chk(self->dictionary_))->ignoreCase_ || length == 0 || !JavaLangCharacter_isUpperCaseWithChar_(IOSCharArray_Get(nil_chk(word), 0))) {
     return OrgApacheLuceneAnalysisHunspellStemmer_EXACT_CASE;
   }
-  jboolean seenUpper = NO;
-  jboolean seenLower = NO;
+  jboolean seenUpper = false;
+  jboolean seenLower = false;
   for (jint i = 1; i < length; i++) {
     jboolean v = JavaLangCharacter_isUpperCaseWithChar_(IOSCharArray_Get(nil_chk(word), i));
     seenUpper |= v;
@@ -462,7 +462,7 @@ id<JavaUtilList> OrgApacheLuceneAnalysisHunspellStemmer_doStemWithCharArray_with
     }
   }
   @try {
-    jboolean v = [stems addAllWithJavaUtilCollection:OrgApacheLuceneAnalysisHunspellStemmer_stemWithCharArray_withInt_withInt_withInt_withInt_withInt_withBoolean_withBoolean_withBoolean_withBoolean_withBoolean_(self, word, length, -1, -1, -1, 0, YES, YES, NO, NO, caseVariant)];
+    jboolean v = [stems addAllWithJavaUtilCollection:OrgApacheLuceneAnalysisHunspellStemmer_stemWithCharArray_withInt_withInt_withInt_withInt_withInt_withBoolean_withBoolean_withBoolean_withBoolean_withBoolean_(self, word, length, -1, -1, -1, 0, true, true, false, false, caseVariant)];
   }
   @catch (JavaIoIOException *bogus) {
     @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(bogus) autorelease];
@@ -555,7 +555,7 @@ id<JavaUtilList> OrgApacheLuceneAnalysisHunspellStemmer_stemWithCharArray_withIn
         jboolean compatible;
         if (recursionDepth == 0) {
           if (self->dictionary_->onlyincompound_ == -1) {
-            compatible = YES;
+            compatible = true;
           }
           else {
             [((OrgApacheLuceneUtilBytesRefHash *) nil_chk(self->dictionary_->flagLookup_)) getWithInt:append withOrgApacheLuceneUtilBytesRef:self->scratch_];
@@ -568,10 +568,10 @@ id<JavaUtilList> OrgApacheLuceneAnalysisHunspellStemmer_stemWithCharArray_withIn
           IOSCharArray *appendFlags = OrgApacheLuceneAnalysisHunspellDictionary_decodeFlagsWithOrgApacheLuceneUtilBytesRef_(self->scratch_);
           JreAssert((prevFlag >= 0), (@"org/apache/lucene/analysis/hunspell/Stemmer.java:352 condition failed: assert prevFlag >= 0;"));
           jboolean allowed = self->dictionary_->onlyincompound_ == -1 || !OrgApacheLuceneAnalysisHunspellDictionary_hasFlagWithCharArray_withChar_(appendFlags, (jchar) self->dictionary_->onlyincompound_);
-          compatible = (allowed && OrgApacheLuceneAnalysisHunspellStemmer_hasCrossCheckedFlagWithChar_withCharArray_withBoolean_(self, (jchar) prevFlag, appendFlags, NO));
+          compatible = (allowed && OrgApacheLuceneAnalysisHunspellStemmer_hasCrossCheckedFlagWithChar_withCharArray_withBoolean_(self, (jchar) prevFlag, appendFlags, false));
         }
         else {
-          compatible = NO;
+          compatible = false;
         }
         if (compatible) {
           jint deAffixedStart = i;
@@ -585,7 +585,7 @@ id<JavaUtilList> OrgApacheLuceneAnalysisHunspellStemmer_stemWithCharArray_withIn
           IOSCharArray *strippedWord = [IOSCharArray arrayWithLength:stripLength + deAffixedLength];
           JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(self->dictionary_->stripData_, stripStart, strippedWord, 0, stripLength);
           JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(word, deAffixedStart, strippedWord, stripLength, deAffixedLength);
-          id<JavaUtilList> stemList = [self applyAffixWithCharArray:strippedWord withInt:strippedWord->size_ withInt:prefix withInt:-1 withInt:recursionDepth withBoolean:YES withBoolean:circumfix withBoolean:caseVariant];
+          id<JavaUtilList> stemList = [self applyAffixWithCharArray:strippedWord withInt:strippedWord->size_ withInt:prefix withInt:-1 withInt:recursionDepth withBoolean:true withBoolean:circumfix withBoolean:caseVariant];
           [stems addAllWithJavaUtilCollection:stemList];
         }
       }
@@ -632,7 +632,7 @@ id<JavaUtilList> OrgApacheLuceneAnalysisHunspellStemmer_stemWithCharArray_withIn
         jboolean compatible;
         if (recursionDepth == 0) {
           if (self->dictionary_->onlyincompound_ == -1) {
-            compatible = YES;
+            compatible = true;
           }
           else {
             [((OrgApacheLuceneUtilBytesRefHash *) nil_chk(self->dictionary_->flagLookup_)) getWithInt:append withOrgApacheLuceneUtilBytesRef:self->scratch_];
@@ -648,7 +648,7 @@ id<JavaUtilList> OrgApacheLuceneAnalysisHunspellStemmer_stemWithCharArray_withIn
           compatible = (allowed && OrgApacheLuceneAnalysisHunspellStemmer_hasCrossCheckedFlagWithChar_withCharArray_withBoolean_(self, (jchar) prevFlag, appendFlags, previousWasPrefix));
         }
         else {
-          compatible = NO;
+          compatible = false;
         }
         if (compatible) {
           jint appendLength = length - i;
@@ -662,7 +662,7 @@ id<JavaUtilList> OrgApacheLuceneAnalysisHunspellStemmer_stemWithCharArray_withIn
           IOSCharArray *strippedWord = [IOSCharArray arrayWithLength:stripLength + deAffixedLength];
           JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(word, 0, strippedWord, 0, deAffixedLength);
           JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(self->dictionary_->stripData_, stripStart, strippedWord, deAffixedLength, stripLength);
-          id<JavaUtilList> stemList = [self applyAffixWithCharArray:strippedWord withInt:strippedWord->size_ withInt:suffix withInt:prefixFlag withInt:recursionDepth withBoolean:NO withBoolean:circumfix withBoolean:caseVariant];
+          id<JavaUtilList> stemList = [self applyAffixWithCharArray:strippedWord withInt:strippedWord->size_ withInt:suffix withInt:prefixFlag withInt:recursionDepth withBoolean:false withBoolean:circumfix withBoolean:caseVariant];
           [stems addAllWithJavaUtilCollection:stemList];
         }
       }
@@ -678,18 +678,18 @@ jboolean OrgApacheLuceneAnalysisHunspellStemmer_checkConditionWithInt_withCharAr
     for (jint i = c1off; i < c1off + c1len; i++) {
       state = [pattern stepWithInt:state withInt:IOSCharArray_Get(nil_chk(c1), i)];
       if (state == -1) {
-        return NO;
+        return false;
       }
     }
     for (jint i = c2off; i < c2off + c2len; i++) {
       state = [pattern stepWithInt:state withInt:IOSCharArray_Get(nil_chk(c2), i)];
       if (state == -1) {
-        return NO;
+        return false;
       }
     }
     return [pattern isAcceptWithInt:state];
   }
-  return YES;
+  return true;
 }
 
 jboolean OrgApacheLuceneAnalysisHunspellStemmer_hasCrossCheckedFlagWithChar_withCharArray_withBoolean_(OrgApacheLuceneAnalysisHunspellStemmer *self, jchar flag, IOSCharArray *flags, jboolean matchEmpty) {

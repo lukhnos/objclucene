@@ -12,10 +12,12 @@
 
 @implementation OrgApacheLuceneCodecsCompressingDecompressor
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsCompressingDecompressor_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)decompressWithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)inArg
                                             withInt:(jint)originalLength

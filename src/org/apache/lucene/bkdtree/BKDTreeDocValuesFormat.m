@@ -35,10 +35,12 @@ NSString *OrgApacheLuceneBkdtreeBKDTreeDocValuesFormat_META_EXTENSION_ = @"kdm";
 
 @implementation OrgApacheLuceneBkdtreeBKDTreeDocValuesFormat
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneBkdtreeBKDTreeDocValuesFormat_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithInt:(jint)maxPointsInLeafNode
                     withInt:(jint)maxPointsSortInHeap {

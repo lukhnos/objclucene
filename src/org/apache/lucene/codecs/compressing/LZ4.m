@@ -160,10 +160,12 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsCompressingLZ4_HCHashTa
 
 @implementation OrgApacheLuceneCodecsCompressingLZ4
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsCompressingLZ4_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (jint)hash__WithInt:(jint)i
               withInt:(jint)hashBits {
@@ -438,7 +440,7 @@ void OrgApacheLuceneCodecsCompressingLZ4_compressWithByteArray_withInt_withInt_w
     OrgApacheLuceneUtilPackedPackedInts_Mutable *hashTable = ht->hashTable_;
     while (off <= limit) {
       jint ref;
-      while (YES) {
+      while (true) {
         if (off >= matchLimit) {
           goto break_main;
         }
@@ -490,7 +492,7 @@ void OrgApacheLuceneCodecsCompressingLZ4_compressHCWithByteArray_withInt_withInt
         continue;
       }
       OrgApacheLuceneCodecsCompressingLZ4_copyToWithOrgApacheLuceneCodecsCompressingLZ4_Match_withOrgApacheLuceneCodecsCompressingLZ4_Match_(match1, match0);
-      while (YES) {
+      while (true) {
         {
           JreAssert((match1->start_ >= anchor), (@"org/apache/lucene/codecs/compressing/LZ4.java:440 condition failed: assert match1.start >= anchor;"));
           if ([match1 end] >= mfLimit || ![ht insertAndFindWiderMatchWithByteArray:src withInt:[match1 end] - 2 withInt:match1->start_ + 1 withInt:matchLimit withInt:match1->len_ withOrgApacheLuceneCodecsCompressingLZ4_Match:match2]) {
@@ -508,7 +510,7 @@ void OrgApacheLuceneCodecsCompressingLZ4_compressHCWithByteArray_withInt_withInt
             OrgApacheLuceneCodecsCompressingLZ4_copyToWithOrgApacheLuceneCodecsCompressingLZ4_Match_withOrgApacheLuceneCodecsCompressingLZ4_Match_(match2, match1);
             goto continue_search2;
           }
-          while (YES) {
+          while (true) {
             {
               if (match2->start_ - match1->start_ < OrgApacheLuceneCodecsCompressingLZ4_OPTIMAL_ML) {
                 jint newMatchLen = match1->len_;
@@ -599,10 +601,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsCompressingLZ4)
   }
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsCompressingLZ4_HashTable_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(hashTable_);
@@ -648,10 +652,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsCompressingLZ4_HashTable)
   return start_ + len_;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsCompressingLZ4_Match_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -684,10 +690,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsCompressingLZ4_Match)
 
 @implementation OrgApacheLuceneCodecsCompressingLZ4_HCHashTable
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsCompressingLZ4_HCHashTable_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)resetWithInt:(jint)base {
   OrgApacheLuceneCodecsCompressingLZ4_HCHashTable_resetWithInt_(self, base);

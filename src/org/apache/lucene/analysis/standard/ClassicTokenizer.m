@@ -60,10 +60,12 @@ IOSObjectArray *OrgApacheLuceneAnalysisStandardClassicTokenizer_TOKEN_TYPES_;
   return maxTokenLength_;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisStandardClassicTokenizer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory {
   OrgApacheLuceneAnalysisStandardClassicTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(self, factory);
@@ -77,10 +79,10 @@ IOSObjectArray *OrgApacheLuceneAnalysisStandardClassicTokenizer_TOKEN_TYPES_;
 - (jboolean)incrementToken {
   [self clearAttributes];
   skippedPositions_ = 0;
-  while (YES) {
+  while (true) {
     jint tokenType = [((OrgApacheLuceneAnalysisStandardClassicTokenizerImpl *) nil_chk(scanner_)) getNextToken];
     if (tokenType == OrgApacheLuceneAnalysisStandardClassicTokenizerImpl_YYEOF) {
-      return NO;
+      return false;
     }
     if ([scanner_ yylength] <= maxTokenLength_) {
       [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posIncrAtt_)) setPositionIncrementWithInt:skippedPositions_ + 1];
@@ -94,7 +96,7 @@ IOSObjectArray *OrgApacheLuceneAnalysisStandardClassicTokenizer_TOKEN_TYPES_;
       else {
         [((id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>) nil_chk(typeAtt_)) setTypeWithNSString:IOSObjectArray_Get(nil_chk(OrgApacheLuceneAnalysisStandardClassicTokenizer_TOKEN_TYPES_), tokenType)];
       }
-      return YES;
+      return true;
     }
     else skippedPositions_++;
   }

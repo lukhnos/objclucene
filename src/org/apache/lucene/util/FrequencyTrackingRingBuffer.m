@@ -225,14 +225,14 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag)
 - (jboolean)removeWithInt:(jint)key {
   for (jint slot = key & mask_; ; slot = (slot + 1) & mask_) {
     if (IOSIntArray_Get(nil_chk(freqs_), slot) == 0) {
-      return NO;
+      return false;
     }
     else if (IOSIntArray_Get(nil_chk(keys_), slot) == key) {
       jint newFreq = --(*IOSIntArray_GetRef(freqs_, slot));
       if (newFreq == 0) {
         OrgApacheLuceneUtilFrequencyTrackingRingBuffer_IntBag_relocateAdjacentKeysWithInt_(self, slot);
       }
-      return YES;
+      return true;
     }
   }
 }

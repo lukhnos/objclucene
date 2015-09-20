@@ -233,13 +233,13 @@ IOSLongArray *OrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager_jj
       jint error_line = [((id<OrgApacheLuceneQueryparserSurroundParserCharStream>) nil_chk(input_stream_)) getEndLine];
       jint error_column = [input_stream_ getEndColumn];
       NSString *error_after = nil;
-      jboolean EOFSeen = NO;
+      jboolean EOFSeen = false;
       @try {
         [input_stream_ readChar];
         [input_stream_ backupWithInt:1];
       }
       @catch (JavaIoIOException *e1) {
-        EOFSeen = YES;
+        EOFSeen = true;
         error_after = curPos <= 1 ? @"" : [input_stream_ GetImage];
         if (curChar_ == 0x000a || curChar_ == 0x000d) {
           error_line++;
@@ -723,8 +723,8 @@ jboolean OrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager_jjCanMo
     case 0:
     return ((IOSLongArray_Get(nil_chk(OrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager_jjbitVec2_), i2) & l2) != 0LL);
     default:
-    if ((IOSLongArray_Get(nil_chk(OrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager_jjbitVec0_), i1) & l1) != 0LL) return YES;
-    return NO;
+    if ((IOSLongArray_Get(nil_chk(OrgApacheLuceneQueryparserSurroundParserQueryParserTokenManager_jjbitVec0_), i1) & l1) != 0LL) return true;
+    return false;
   }
 }
 

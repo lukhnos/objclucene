@@ -47,7 +47,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserSurroundQueryFieldsQuery, OrOperat
 }
 
 - (jboolean)isFieldsSubQueryAcceptable {
-  return NO;
+  return false;
 }
 
 - (OrgApacheLuceneSearchQuery *)makeLuceneQueryNoBoostWithOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *)qf {
@@ -62,7 +62,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserSurroundQueryFieldsQuery, OrOperat
       qc = [((OrgApacheLuceneQueryparserSurroundQuerySrndQuery *) nil_chk(q_)) clone];
       [queries addWithId:[new_OrgApacheLuceneQueryparserSurroundQueryFieldsQuery_initWithOrgApacheLuceneQueryparserSurroundQuerySrndQuery_withNSString_withChar_(qc, [fni next], fieldOp_) autorelease]];
     }
-    OrgApacheLuceneQueryparserSurroundQueryOrQuery *oq = [new_OrgApacheLuceneQueryparserSurroundQueryOrQuery_initWithJavaUtilList_withBoolean_withNSString_(queries, YES, OrOperatorName_) autorelease];
+    OrgApacheLuceneQueryparserSurroundQueryOrQuery *oq = [new_OrgApacheLuceneQueryparserSurroundQueryOrQuery_initWithJavaUtilList_withBoolean_withNSString_(queries, true, OrOperatorName_) autorelease];
     return [oq makeLuceneQueryFieldWithNSString:nil withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:qf];
   }
 }

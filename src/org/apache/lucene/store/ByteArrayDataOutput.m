@@ -35,10 +35,12 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneStoreByteArrayDataOutput, bytes_, IOSByteArra
   return self;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneStoreByteArrayDataOutput_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)resetWithByteArray:(IOSByteArray *)bytes {
   [self resetWithByteArray:bytes withInt:0 withInt:((IOSByteArray *) nil_chk(bytes))->size_];

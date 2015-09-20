@@ -115,10 +115,12 @@ id<JavaUtilComparator> OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_weigh
 
 @implementation OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithBoolean:(jboolean)exactFirst {
   OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_initWithBoolean_(self, exactFirst);
@@ -158,16 +160,16 @@ id<JavaUtilComparator> OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_weigh
 - (jboolean)storeWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)output {
   [((OrgApacheLuceneStoreDataOutput *) nil_chk(output)) writeVLongWithLong:count_];
   if (fst_ == nil) {
-    return NO;
+    return false;
   }
   [((OrgApacheLuceneUtilFstFST *) nil_chk(fst_)) saveWithOrgApacheLuceneStoreDataOutput:output];
-  return YES;
+  return true;
 }
 
 - (jboolean)load__WithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)input {
   count_ = [((OrgApacheLuceneStoreDataInput *) nil_chk(input)) readVLong];
   JreStrongAssignAndConsume(&self->fst_, new_OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneStoreDataInput_withOrgApacheLuceneUtilFstOutputs_(input, OrgApacheLuceneUtilFstPositiveIntOutputs_getSingleton()));
-  return YES;
+  return true;
 }
 
 - (id<JavaUtilList>)lookupWithJavaLangCharSequence:(id<JavaLangCharSequence>)key
@@ -318,7 +320,7 @@ id<JavaUtilComparator> OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_weigh
 @end
 
 void OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_init(OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup *self) {
-  OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_initWithBoolean_(self, YES);
+  OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_initWithBoolean_(self, true);
 }
 
 OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup *new_OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_init() {
@@ -419,7 +421,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestFstWFSTCompletionLo
 
 void OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_WFSTInputIterator_initWithOrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_withOrgApacheLuceneSearchSuggestInputIterator_(OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_WFSTInputIterator *self, OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup *outer$, id<OrgApacheLuceneSearchSuggestInputIterator> source) {
   OrgApacheLuceneSearchSuggestSortedInputIterator_initWithOrgApacheLuceneSearchSuggestInputIterator_(self, source);
-  JreAssert(([((id<OrgApacheLuceneSearchSuggestInputIterator>) nil_chk(source)) hasPayloads] == NO), (@"org/apache/lucene/search/suggest/fst/WFSTCompletionLookup.java:268 condition failed: assert source.hasPayloads() == false;"));
+  JreAssert(([((id<OrgApacheLuceneSearchSuggestInputIterator>) nil_chk(source)) hasPayloads] == false), (@"org/apache/lucene/search/suggest/fst/WFSTCompletionLookup.java:268 condition failed: assert source.hasPayloads() == false;"));
 }
 
 OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_WFSTInputIterator *new_OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_WFSTInputIterator_initWithOrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_withOrgApacheLuceneSearchSuggestInputIterator_(OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup *outer$, id<OrgApacheLuceneSearchSuggestInputIterator> source) {
@@ -437,10 +439,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestFstWFSTCompletionLo
   return [((JavaLangLong *) nil_chk(left)) compareToWithId:right];
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSuggestFstWFSTCompletionLookup_$1_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

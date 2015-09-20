@@ -57,7 +57,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundHyphenationCompoundWordTokenF
 - (void)informWithOrgApacheLuceneAnalysisUtilResourceLoader:(id<OrgApacheLuceneAnalysisUtilResourceLoader>)loader {
   JavaIoInputStream *stream = nil;
   @try {
-    if (dictFile_ != nil) JreStrongAssign(&dictionary_, [self getWordSetWithOrgApacheLuceneAnalysisUtilResourceLoader:loader withNSString:dictFile_ withBoolean:NO]);
+    if (dictFile_ != nil) JreStrongAssign(&dictionary_, [self getWordSetWithOrgApacheLuceneAnalysisUtilResourceLoader:loader withNSString:dictFile_ withBoolean:false]);
     stream = [((id<OrgApacheLuceneAnalysisUtilResourceLoader>) nil_chk(loader)) openResourceWithNSString:hypFile_];
     OrgXmlSaxInputSource *is = [new_OrgXmlSaxInputSource_initWithJavaIoInputStream_(stream) autorelease];
     [is setEncodingWithNSString:encoding_];
@@ -121,7 +121,7 @@ void OrgApacheLuceneAnalysisCompoundHyphenationCompoundWordTokenFilterFactory_in
   self->minWordSize_ = [self getIntWithJavaUtilMap:args withNSString:@"minWordSize" withInt:OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_DEFAULT_MIN_WORD_SIZE];
   self->minSubwordSize_ = [self getIntWithJavaUtilMap:args withNSString:@"minSubwordSize" withInt:OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_DEFAULT_MIN_SUBWORD_SIZE];
   self->maxSubwordSize_ = [self getIntWithJavaUtilMap:args withNSString:@"maxSubwordSize" withInt:OrgApacheLuceneAnalysisCompoundCompoundWordTokenFilterBase_DEFAULT_MAX_SUBWORD_SIZE];
-  self->onlyLongestMatch_ = [self getBooleanWithJavaUtilMap:args withNSString:@"onlyLongestMatch" withBoolean:NO];
+  self->onlyLongestMatch_ = [self getBooleanWithJavaUtilMap:args withNSString:@"onlyLongestMatch" withBoolean:false];
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];
   }

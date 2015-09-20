@@ -78,7 +78,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilAutomatonFiniteStringsIterator)
 
 - (OrgApacheLuceneUtilIntsRef *)next {
   if (emitEmptyString_) {
-    emitEmptyString_ = NO;
+    emitEmptyString_ = false;
     return OrgApacheLuceneUtilAutomatonFiniteStringsIterator_EMPTY_;
   }
   for (jint depth = [((OrgApacheLuceneUtilIntsRefBuilder *) nil_chk(string_)) length]; depth > 0; ) {
@@ -219,10 +219,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonFiniteStringsIterat
   return label_++;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilAutomatonFiniteStringsIterator_PathNode_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(t_);

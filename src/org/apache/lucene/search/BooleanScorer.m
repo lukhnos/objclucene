@@ -310,7 +310,7 @@ void OrgApacheLuceneSearchBooleanScorer_initWithOrgApacheLuceneSearchBooleanWeig
   JreStrongAssignAndConsume(&self->tail_, new_OrgApacheLuceneSearchBooleanScorer_TailPriorityQueue_initWithInt_(minShouldMatch - 1));
   self->minShouldMatch_ = minShouldMatch;
   for (OrgApacheLuceneSearchBulkScorer * __strong scorer in scorers) {
-    if (needsScores == NO) {
+    if (needsScores == false) {
       scorer = OrgApacheLuceneSearchBooleanScorer_disableScoringWithOrgApacheLuceneSearchBulkScorer_(scorer);
     }
     OrgApacheLuceneSearchBooleanScorer_BulkScorerAndDoc *evicted = [self->tail_ insertWithOverflowWithId:[new_OrgApacheLuceneSearchBooleanScorer_BulkScorerAndDoc_initWithOrgApacheLuceneSearchBooleanScorer_withOrgApacheLuceneSearchBulkScorer_(self, scorer) autorelease]];
@@ -424,10 +424,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchBooleanScorer)
 
 @implementation OrgApacheLuceneSearchBooleanScorer_Bucket
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchBooleanScorer_Bucket_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

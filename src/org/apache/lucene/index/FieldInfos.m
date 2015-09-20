@@ -191,13 +191,13 @@ __attribute__((unused)) static OrgApacheLuceneIndexFieldInfo *OrgApacheLuceneInd
 void OrgApacheLuceneIndexFieldInfos_initWithOrgApacheLuceneIndexFieldInfoArray_(OrgApacheLuceneIndexFieldInfos *self, IOSObjectArray *infos) {
   NSObject_init(self);
   JreStrongAssignAndConsume(&self->byName_, new_JavaUtilHashMap_init());
-  jboolean hasVectors = NO;
-  jboolean hasProx = NO;
-  jboolean hasPayloads = NO;
-  jboolean hasOffsets = NO;
-  jboolean hasFreq = NO;
-  jboolean hasNorms = NO;
-  jboolean hasDocValues = NO;
+  jboolean hasVectors = false;
+  jboolean hasProx = false;
+  jboolean hasPayloads = false;
+  jboolean hasOffsets = false;
+  jboolean hasFreq = false;
+  jboolean hasNorms = false;
+  jboolean hasDocValues = false;
   JavaUtilTreeMap *byNumber = [new_JavaUtilTreeMap_init() autorelease];
   {
     IOSObjectArray *a__ = infos;
@@ -257,10 +257,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexFieldInfos)
 
 @implementation OrgApacheLuceneIndexFieldInfos_FieldNumbers
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexFieldInfos_FieldNumbers_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)addOrGetWithNSString:(NSString *)fieldName
                      withInt:(jint)preferredFieldNumber
@@ -298,10 +300,10 @@ withOrgApacheLuceneIndexDocValuesTypeEnum:(OrgApacheLuceneIndexDocValuesTypeEnum
                                withNSString:(NSString *)name
   withOrgApacheLuceneIndexDocValuesTypeEnum:(OrgApacheLuceneIndexDocValuesTypeEnum *)dvType {
   @synchronized(self) {
-    if ([((NSString *) nil_chk(name)) isEqual:[((id<JavaUtilMap>) nil_chk(numberToName_)) getWithId:number]] == NO) {
+    if ([((NSString *) nil_chk(name)) isEqual:[((id<JavaUtilMap>) nil_chk(numberToName_)) getWithId:number]] == false) {
       @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@$$$$C", @"field number ", number, @" is already mapped to field name \"", [numberToName_ getWithId:number], @"\", not \"", name, '"')) autorelease];
     }
-    if ([((JavaLangInteger *) nil_chk(number)) isEqual:[((id<JavaUtilMap>) nil_chk(nameToNumber_)) getWithId:name]] == NO) {
+    if ([((JavaLangInteger *) nil_chk(number)) isEqual:[((id<JavaUtilMap>) nil_chk(nameToNumber_)) getWithId:name]] == false) {
       @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$@$@C", @"field name \"", name, @"\" is already mapped to field number \"", [nameToNumber_ getWithId:name], @"\", not \"", number, '"')) autorelease];
     }
     OrgApacheLuceneIndexDocValuesTypeEnum *currentDVType = [((id<JavaUtilMap>) nil_chk(docValuesType_)) getWithId:name];
@@ -315,7 +317,7 @@ withOrgApacheLuceneIndexDocValuesTypeEnum:(OrgApacheLuceneIndexDocValuesTypeEnum
 withOrgApacheLuceneIndexDocValuesTypeEnum:(OrgApacheLuceneIndexDocValuesTypeEnum *)dvType {
   @synchronized(self) {
     if (![((id<JavaUtilMap>) nil_chk(nameToNumber_)) containsKeyWithId:fieldName]) {
-      return NO;
+      return false;
     }
     else {
       return dvType == [((id<JavaUtilMap>) nil_chk(docValuesType_)) getWithId:fieldName];
@@ -386,10 +388,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexFieldInfos_FieldNumbers)
 
 @implementation OrgApacheLuceneIndexFieldInfos_Builder
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexFieldInfos_Builder_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithOrgApacheLuceneIndexFieldInfos_FieldNumbers:(OrgApacheLuceneIndexFieldInfos_FieldNumbers *)globalFieldNumbers {
   OrgApacheLuceneIndexFieldInfos_Builder_initWithOrgApacheLuceneIndexFieldInfos_FieldNumbers_(self, globalFieldNumbers);
@@ -406,7 +410,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexFieldInfos_FieldNumbers)
   OrgApacheLuceneIndexFieldInfo *fi = [self fieldInfoWithNSString:name];
   if (fi == nil) {
     jint fieldNumber = [((OrgApacheLuceneIndexFieldInfos_FieldNumbers *) nil_chk(globalFieldNumbers_)) addOrGetWithNSString:name withInt:-1 withOrgApacheLuceneIndexDocValuesTypeEnum:JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, NONE)];
-    fi = [new_OrgApacheLuceneIndexFieldInfo_initWithNSString_withInt_withBoolean_withBoolean_withBoolean_withOrgApacheLuceneIndexIndexOptionsEnum_withOrgApacheLuceneIndexDocValuesTypeEnum_withLong_withJavaUtilMap_(name, fieldNumber, NO, NO, NO, JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, NONE), JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, NONE), -1, [new_JavaUtilHashMap_init() autorelease]) autorelease];
+    fi = [new_OrgApacheLuceneIndexFieldInfo_initWithNSString_withInt_withBoolean_withBoolean_withBoolean_withOrgApacheLuceneIndexIndexOptionsEnum_withOrgApacheLuceneIndexDocValuesTypeEnum_withLong_withJavaUtilMap_(name, fieldNumber, false, false, false, JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, NONE), JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, NONE), -1, [new_JavaUtilHashMap_init() autorelease]) autorelease];
     JreAssert((![((JavaUtilHashMap *) nil_chk(byName_)) containsKeyWithId:fi->name_]), (@"org/apache/lucene/index/FieldInfos.java:319 condition failed: assert !byName.containsKey(fi.name);"));
     [globalFieldNumbers_ verifyConsistentWithJavaLangInteger:JavaLangInteger_valueOfWithInt_(fi->number_) withNSString:fi->name_ withOrgApacheLuceneIndexDocValuesTypeEnum:JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, NONE)];
     [byName_ putWithId:fi->name_ withId:fi];

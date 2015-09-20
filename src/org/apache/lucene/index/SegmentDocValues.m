@@ -114,10 +114,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSegmentDocValues_$1)
   }
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexSegmentDocValues_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(genDVProducers_);

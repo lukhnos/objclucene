@@ -90,10 +90,12 @@ IOSObjectArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_TOKEN_TYPES_;
 
 @implementation OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithInt:(jint)tokenOutput
             withJavaUtilSet:(id<JavaUtilSet>)untokenizedTypes {
@@ -117,18 +119,18 @@ IOSObjectArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_TOKEN_TYPES_;
   if (tokens_ != nil && [tokens_ hasNext]) {
     OrgApacheLuceneUtilAttributeSource_State *state = [tokens_ next];
     [self restoreStateWithOrgApacheLuceneUtilAttributeSource_State:state];
-    return YES;
+    return true;
   }
   [self clearAttributes];
   jint tokenType = [((OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl *) nil_chk(scanner_)) getNextToken];
   if (tokenType == OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl_YYEOF) {
-    return NO;
+    return false;
   }
   NSString *type = IOSObjectArray_Get(nil_chk(JreLoadStatic(OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl, TOKEN_TYPES_)), tokenType);
-  if (tokenOutput_ == OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_TOKENS_ONLY || [((id<JavaUtilSet>) nil_chk(untokenizedTypes_)) containsWithId:type] == NO) {
+  if (tokenOutput_ == OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_TOKENS_ONLY || [((id<JavaUtilSet>) nil_chk(untokenizedTypes_)) containsWithId:type] == false) {
     OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_setupToken(self);
   }
-  else if (tokenOutput_ == OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_UNTOKENIZED_ONLY && [untokenizedTypes_ containsWithId:type] == YES) {
+  else if (tokenOutput_ == OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_UNTOKENIZED_ONLY && [untokenizedTypes_ containsWithId:type] == true) {
     OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_collapseTokensWithInt_(self, tokenType);
   }
   else if (tokenOutput_ == OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_BOTH) {
@@ -140,8 +142,8 @@ IOSObjectArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_TOKEN_TYPES_;
   }
   [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posIncrAtt_)) setPositionIncrementWithInt:posinc];
   [((id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>) nil_chk(typeAtt_)) setTypeWithNSString:type];
-  first_ = NO;
-  return YES;
+  first_ = false;
+  return true;
 }
 
 - (void)collapseAndSaveTokensWithInt:(jint)tokenType
@@ -172,7 +174,7 @@ IOSObjectArray *OrgApacheLuceneAnalysisWikipediaWikipediaTokenizer_TOKEN_TYPES_;
   [((OrgApacheLuceneAnalysisWikipediaWikipediaTokenizerImpl *) nil_chk(scanner_)) yyresetWithJavaIoReader:input_];
   JreStrongAssign(&tokens_, nil);
   [scanner_ reset];
-  first_ = YES;
+  first_ = true;
 }
 
 - (void)end {

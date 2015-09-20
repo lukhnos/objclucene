@@ -100,24 +100,24 @@ OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity *OrgApacheLuceneSandboxQueriesF
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return YES;
-  if (obj == nil) return NO;
-  if ([self getClass] != [nil_chk(obj) getClass]) return NO;
+  if (self == obj) return true;
+  if (obj == nil) return false;
+  if ([self getClass] != [nil_chk(obj) getClass]) return false;
   if (![super isEqual:obj]) {
-    return NO;
+    return false;
   }
   OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery *other = (OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery *) check_class_cast(obj, [OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery class]);
   if (analyzer_ == nil) {
-    if (other->analyzer_ != nil) return NO;
+    if (other->analyzer_ != nil) return false;
   }
-  else if (![analyzer_ isEqual:other->analyzer_]) return NO;
+  else if (![analyzer_ isEqual:other->analyzer_]) return false;
   if (fieldVals_ == nil) {
-    if (other->fieldVals_ != nil) return NO;
+    if (other->fieldVals_ != nil) return false;
   }
-  else if (![fieldVals_ isEqual:other->fieldVals_]) return NO;
-  if (ignoreTF_ != other->ignoreTF_) return NO;
-  if (maxNumTerms_ != other->maxNumTerms_) return NO;
-  return YES;
+  else if (![fieldVals_ isEqual:other->fieldVals_]) return false;
+  if (ignoreTF_ != other->ignoreTF_) return false;
+  if (maxNumTerms_ != other->maxNumTerms_) return false;
+  return true;
 }
 
 - (instancetype)initWithInt:(jint)maxNumTerms
@@ -174,7 +174,7 @@ withOrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_FieldVals:(OrgApacheLuceneSa
     }
     else {
       OrgApacheLuceneSearchBooleanQuery_Builder *termVariants = [new_OrgApacheLuceneSearchBooleanQuery_Builder_init() autorelease];
-      [termVariants setDisableCoordWithBoolean:YES];
+      [termVariants setDisableCoordWithBoolean:true];
       for (id<JavaUtilIterator> iterator2 = [variants iterator]; [((id<JavaUtilIterator>) nil_chk(iterator2)) hasNext]; ) {
         OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm *st = [iterator2 next];
         OrgApacheLuceneSearchQuery *tq = OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_newTermQueryWithOrgApacheLuceneIndexIndexReader_withOrgApacheLuceneIndexTerm_(self, reader, ((OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTerm *) nil_chk(st))->term_);
@@ -252,7 +252,7 @@ void OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_initWithInt_withOrgApacheLu
   JreStrongAssign(&self->rewrittenQuery_, nil);
   JreStrongAssignAndConsume(&self->fieldVals_, new_JavaUtilArrayList_init());
   self->MAX_VARIANTS_PER_TERM_ = 50;
-  self->ignoreTF_ = NO;
+  self->ignoreTF_ = false;
   JreStrongAssignAndConsume(&self->q_, new_OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_ScoreTermQueue_initWithInt_(maxNumTerms));
   JreStrongAssign(&self->analyzer_, analyzer);
   self->maxNumTerms_ = maxNumTerms;
@@ -271,8 +271,8 @@ void OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_addTermsWithOrgApacheLucene
     return;
   }
   {
-    JavaLangThrowable *__mainException = nil;
     OrgApacheLuceneAnalysisTokenStream *ts = [((OrgApacheLuceneAnalysisAnalyzer *) nil_chk(self->analyzer_)) tokenStreamWithNSString:f->fieldName_ withNSString:f->queryString_];
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
       id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute> termAtt = [((OrgApacheLuceneAnalysisTokenStream *) nil_chk(ts)) addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()];
       jint corpusNumDocs = [((OrgApacheLuceneIndexIndexReader *) nil_chk(reader)) numDocs];
@@ -320,19 +320,21 @@ void OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_addTermsWithOrgApacheLucene
       }
       [ts end];
     }
+    @catch (JavaLangThrowable *e) {
+      __primaryException1 = e;
+      @throw e;
+    }
     @finally {
-      @try {
-        [ts close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
+      if (ts != nil) {
+        if (__primaryException1 != nil) {
+          @try {
+            [ts close];
+          } @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
         } else {
-          __mainException = e;
+          [ts close];
         }
-      }
-      if (__mainException) {
-        @throw __mainException;
       }
     }
   }
@@ -382,21 +384,21 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return YES;
-  if (obj == nil) return NO;
-  if ([self getClass] != [nil_chk(obj) getClass]) return NO;
+  if (self == obj) return true;
+  if (obj == nil) return false;
+  if ([self getClass] != [nil_chk(obj) getClass]) return false;
   OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_FieldVals *other = (OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_FieldVals *) check_class_cast(obj, [OrgApacheLuceneSandboxQueriesFuzzyLikeThisQuery_FieldVals class]);
   if (fieldName_ == nil) {
-    if (other->fieldName_ != nil) return NO;
+    if (other->fieldName_ != nil) return false;
   }
-  else if (![fieldName_ isEqual:other->fieldName_]) return NO;
-  if (JavaLangFloat_floatToIntBitsWithFloat_(minSimilarity_) != JavaLangFloat_floatToIntBitsWithFloat_(other->minSimilarity_)) return NO;
-  if (prefixLength_ != other->prefixLength_) return NO;
+  else if (![fieldName_ isEqual:other->fieldName_]) return false;
+  if (JavaLangFloat_floatToIntBitsWithFloat_(minSimilarity_) != JavaLangFloat_floatToIntBitsWithFloat_(other->minSimilarity_)) return false;
+  if (prefixLength_ != other->prefixLength_) return false;
   if (queryString_ == nil) {
-    if (other->queryString_ != nil) return NO;
+    if (other->queryString_ != nil) return false;
   }
-  else if (![queryString_ isEqual:other->queryString_]) return NO;
-  return YES;
+  else if (![queryString_ isEqual:other->queryString_]) return false;
+  return true;
 }
 
 - (void)dealloc {

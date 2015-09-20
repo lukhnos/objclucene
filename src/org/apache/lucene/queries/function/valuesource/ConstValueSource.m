@@ -77,7 +77,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceConstValueSo
 }
 
 - (jboolean)isEqual:(id)o {
-  if (!([o isKindOfClass:[OrgApacheLuceneQueriesFunctionValuesourceConstValueSource class]])) return NO;
+  if (!([o isKindOfClass:[OrgApacheLuceneQueriesFunctionValuesourceConstValueSource class]])) return false;
   OrgApacheLuceneQueriesFunctionValuesourceConstValueSource *other = (OrgApacheLuceneQueriesFunctionValuesourceConstValueSource *) check_class_cast(o, [OrgApacheLuceneQueriesFunctionValuesourceConstValueSource class]);
   return self->constant_ == ((OrgApacheLuceneQueriesFunctionValuesourceConstValueSource *) nil_chk(other))->constant_;
 }

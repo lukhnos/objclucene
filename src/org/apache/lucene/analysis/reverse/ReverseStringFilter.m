@@ -51,10 +51,10 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisReverseReverseStringFilter, NO
     }
     OrgApacheLuceneAnalysisReverseReverseStringFilter_reverseWithCharArray_withInt_withInt_([termAtt_ buffer], 0, len);
     [termAtt_ setLengthWithInt:len];
-    return YES;
+    return true;
   }
   else {
-    return NO;
+    return false;
   }
 }
 
@@ -152,7 +152,7 @@ void OrgApacheLuceneAnalysisReverseReverseStringFilter_reverseWithCharArray_with
   jint end = (start + len) - 1;
   jchar frontHigh = IOSCharArray_Get(nil_chk(buffer), start);
   jchar endLow = IOSCharArray_Get(buffer, end);
-  jboolean allowFrontSur = YES, allowEndSur = YES;
+  jboolean allowFrontSur = true, allowEndSur = true;
   jint mid = start + (JreRShift32(len, 1));
   for (jint i = start; i < mid; ++i, --end) {
     jchar frontLow = IOSCharArray_Get(buffer, i + 1);
@@ -162,7 +162,7 @@ void OrgApacheLuceneAnalysisReverseReverseStringFilter_reverseWithCharArray_with
       return;
     }
     jboolean surAtEnd = allowEndSur && JavaLangCharacter_isSurrogatePairWithChar_withChar_(endHigh, endLow);
-    allowFrontSur = allowEndSur = YES;
+    allowFrontSur = allowEndSur = true;
     if (surAtFront == surAtEnd) {
       if (surAtFront) {
         *IOSCharArray_GetRef(buffer, end) = frontLow;
@@ -184,13 +184,13 @@ void OrgApacheLuceneAnalysisReverseReverseStringFilter_reverseWithCharArray_with
         *IOSCharArray_GetRef(buffer, end) = frontLow;
         *IOSCharArray_GetRef(buffer, i) = endLow;
         endLow = endHigh;
-        allowFrontSur = NO;
+        allowFrontSur = false;
       }
       else {
         *IOSCharArray_GetRef(buffer, end) = frontHigh;
         *IOSCharArray_GetRef(buffer, i) = endHigh;
         frontHigh = frontLow;
-        allowEndSur = NO;
+        allowEndSur = false;
       }
     }
   }

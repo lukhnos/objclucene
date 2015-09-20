@@ -20,10 +20,12 @@ __attribute__((unused)) static OrgApacheLuceneAnalysisUtilStemmerUtil *new_OrgAp
 
 @implementation OrgApacheLuceneAnalysisUtilStemmerUtil
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisUtilStemmerUtil_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (jboolean)startsWithWithCharArray:(IOSCharArray *)s
                             withInt:(jint)len
@@ -84,25 +86,25 @@ OrgApacheLuceneAnalysisUtilStemmerUtil *new_OrgApacheLuceneAnalysisUtilStemmerUt
 jboolean OrgApacheLuceneAnalysisUtilStemmerUtil_startsWithWithCharArray_withInt_withNSString_(IOSCharArray *s, jint len, NSString *prefix) {
   OrgApacheLuceneAnalysisUtilStemmerUtil_initialize();
   jint prefixLen = ((jint) [((NSString *) nil_chk(prefix)) length]);
-  if (prefixLen > len) return NO;
-  for (jint i = 0; i < prefixLen; i++) if (IOSCharArray_Get(nil_chk(s), i) != [prefix charAtWithInt:i]) return NO;
-  return YES;
+  if (prefixLen > len) return false;
+  for (jint i = 0; i < prefixLen; i++) if (IOSCharArray_Get(nil_chk(s), i) != [prefix charAtWithInt:i]) return false;
+  return true;
 }
 
 jboolean OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withNSString_(IOSCharArray *s, jint len, NSString *suffix) {
   OrgApacheLuceneAnalysisUtilStemmerUtil_initialize();
   jint suffixLen = ((jint) [((NSString *) nil_chk(suffix)) length]);
-  if (suffixLen > len) return NO;
-  for (jint i = suffixLen - 1; i >= 0; i--) if (IOSCharArray_Get(nil_chk(s), len - (suffixLen - i)) != [suffix charAtWithInt:i]) return NO;
-  return YES;
+  if (suffixLen > len) return false;
+  for (jint i = suffixLen - 1; i >= 0; i--) if (IOSCharArray_Get(nil_chk(s), len - (suffixLen - i)) != [suffix charAtWithInt:i]) return false;
+  return true;
 }
 
 jboolean OrgApacheLuceneAnalysisUtilStemmerUtil_endsWithWithCharArray_withInt_withCharArray_(IOSCharArray *s, jint len, IOSCharArray *suffix) {
   OrgApacheLuceneAnalysisUtilStemmerUtil_initialize();
   jint suffixLen = ((IOSCharArray *) nil_chk(suffix))->size_;
-  if (suffixLen > len) return NO;
-  for (jint i = suffixLen - 1; i >= 0; i--) if (IOSCharArray_Get(nil_chk(s), len - (suffixLen - i)) != IOSCharArray_Get(suffix, i)) return NO;
-  return YES;
+  if (suffixLen > len) return false;
+  for (jint i = suffixLen - 1; i >= 0; i--) if (IOSCharArray_Get(nil_chk(s), len - (suffixLen - i)) != IOSCharArray_Get(suffix, i)) return false;
+  return true;
 }
 
 jint OrgApacheLuceneAnalysisUtilStemmerUtil_delete__WithCharArray_withInt_withInt_(IOSCharArray *s, jint pos, jint len) {

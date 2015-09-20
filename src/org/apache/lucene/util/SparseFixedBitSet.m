@@ -170,7 +170,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilSparseFixedBitSet)
   jlong index = IOSLongArray_Get(nil_chk(indices_), i4096);
   jint i64 = JreURShift32(i, 6);
   if ((index & (JreLShift64(1LL, i64))) == 0) {
-    return NO;
+    return false;
   }
   jlong bits = IOSLongArray_Get(nil_chk(IOSObjectArray_Get(nil_chk(self->bits_), i4096)), JavaLangLong_bitCountWithLong_(index & ((JreLShift64(1LL, i64)) - 1)));
   return (bits & (JreLShift64(1LL, i))) != 0;
@@ -469,7 +469,7 @@ OrgApacheLuceneUtilSparseFixedBitSet *new_OrgApacheLuceneUtilSparseFixedBitSet_i
 
 jboolean OrgApacheLuceneUtilSparseFixedBitSet_consistentWithInt_(OrgApacheLuceneUtilSparseFixedBitSet *self, jint index) {
   JreAssert((index >= 0 && index < self->length_), (JreStrcat("$I$I", @"index=", index, @",length=", self->length_)));
-  return YES;
+  return true;
 }
 
 jint OrgApacheLuceneUtilSparseFixedBitSet_oversizeWithInt_(jint s) {

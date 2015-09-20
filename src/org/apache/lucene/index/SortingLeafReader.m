@@ -1247,7 +1247,7 @@ withOrgApacheLuceneIndexSorter_DocMap:(OrgApacheLuceneIndexSorter_DocMap *)docMa
 
 - (jboolean)reusedWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)other {
   if (other == nil || !([other isKindOfClass:[OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum class]])) {
-    return NO;
+    return false;
   }
   return docs_ == ((OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum *) nil_chk(((OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum *) check_class_cast(other, [OrgApacheLuceneIndexSortingLeafReader_SortingDocsEnum class]))))->docs_;
 }
@@ -1503,7 +1503,7 @@ withOrgApacheLuceneIndexSorter_DocMap:(OrgApacheLuceneIndexSorter_DocMap *)docMa
 
 - (jboolean)reusedWithOrgApacheLuceneIndexPostingsEnum:(OrgApacheLuceneIndexPostingsEnum *)other {
   if (other == nil || !([other isKindOfClass:[OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum class]])) {
-    return NO;
+    return false;
   }
   return docs_ == ((OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum *) nil_chk(((OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum *) check_class_cast(other, [OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum class]))))->docs_;
 }
@@ -1645,7 +1645,7 @@ void OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum_initWithInt_withO
     JreStrongAssignAndConsume(&self->file_, new_OrgApacheLuceneStoreRAMFile_init());
     JreStrongAssignAndConsume(&self->sorter_, new_OrgApacheLuceneIndexSortingLeafReader_SortingPostingsEnum_DocOffsetSorter_initWithInt_(maxDoc));
   }
-  OrgApacheLuceneStoreIndexOutput *out = [new_OrgApacheLuceneStoreRAMOutputStream_initWithOrgApacheLuceneStoreRAMFile_withBoolean_(self->file_, NO) autorelease];
+  OrgApacheLuceneStoreIndexOutput *out = [new_OrgApacheLuceneStoreRAMOutputStream_initWithOrgApacheLuceneStoreRAMFile_withBoolean_(self->file_, false) autorelease];
   jint doc;
   jint i = 0;
   while ((doc = [((OrgApacheLuceneIndexPostingsEnum *) nil_chk(inArg)) nextDoc]) != OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS) {

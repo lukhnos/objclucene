@@ -106,10 +106,12 @@ __attribute__((unused)) static OrgApacheLuceneUtilAutomatonRegExp_KindEnum *new_
 
 @implementation OrgApacheLuceneUtilAutomatonRegExp
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilAutomatonRegExp_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithNSString:(NSString *)s {
   OrgApacheLuceneUtilAutomatonRegExp_initWithNSString_(self, s);
@@ -930,12 +932,12 @@ jboolean OrgApacheLuceneUtilAutomatonRegExp_peekWithNSString_(OrgApacheLuceneUti
 }
 
 jboolean OrgApacheLuceneUtilAutomatonRegExp_matchWithInt_(OrgApacheLuceneUtilAutomatonRegExp *self, jint c) {
-  if (self->pos_ >= ((jint) [((NSString *) nil_chk(self->originalString_)) length])) return NO;
+  if (self->pos_ >= ((jint) [((NSString *) nil_chk(self->originalString_)) length])) return false;
   if ([self->originalString_ codePointAt:self->pos_] == c) {
     self->pos_ += JavaLangCharacter_charCountWithInt_(c);
-    return YES;
+    return true;
   }
-  return NO;
+  return false;
 }
 
 jboolean OrgApacheLuceneUtilAutomatonRegExp_more(OrgApacheLuceneUtilAutomatonRegExp *self) {
@@ -1004,8 +1006,8 @@ OrgApacheLuceneUtilAutomatonRegExp *OrgApacheLuceneUtilAutomatonRegExp_parseComp
 
 OrgApacheLuceneUtilAutomatonRegExp *OrgApacheLuceneUtilAutomatonRegExp_parseCharClassExp(OrgApacheLuceneUtilAutomatonRegExp *self) {
   if (OrgApacheLuceneUtilAutomatonRegExp_matchWithInt_(self, '[')) {
-    jboolean negate = NO;
-    if (OrgApacheLuceneUtilAutomatonRegExp_matchWithInt_(self, '^')) negate = YES;
+    jboolean negate = false;
+    if (OrgApacheLuceneUtilAutomatonRegExp_matchWithInt_(self, '^')) negate = true;
     OrgApacheLuceneUtilAutomatonRegExp *e = OrgApacheLuceneUtilAutomatonRegExp_parseCharClasses(self);
     if (negate) e = OrgApacheLuceneUtilAutomatonRegExp_makeIntersectionWithOrgApacheLuceneUtilAutomatonRegExp_withOrgApacheLuceneUtilAutomatonRegExp_(OrgApacheLuceneUtilAutomatonRegExp_makeAnyChar(), OrgApacheLuceneUtilAutomatonRegExp_makeComplementWithOrgApacheLuceneUtilAutomatonRegExp_(e));
     if (!OrgApacheLuceneUtilAutomatonRegExp_matchWithInt_(self, ']')) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"expected ']' at position ", self->pos_)) autorelease];

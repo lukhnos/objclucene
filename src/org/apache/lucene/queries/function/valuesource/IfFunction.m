@@ -109,7 +109,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceIfFunction_$
 }
 
 - (jboolean)isEqual:(id)o {
-  if (!([o isKindOfClass:[OrgApacheLuceneQueriesFunctionValuesourceIfFunction class]])) return NO;
+  if (!([o isKindOfClass:[OrgApacheLuceneQueriesFunctionValuesourceIfFunction class]])) return false;
   OrgApacheLuceneQueriesFunctionValuesourceIfFunction *other = (OrgApacheLuceneQueriesFunctionValuesourceIfFunction *) check_class_cast(o, [OrgApacheLuceneQueriesFunctionValuesourceIfFunction class]);
   return [((OrgApacheLuceneQueriesFunctionValueSource *) nil_chk(ifSource_)) isEqual:((OrgApacheLuceneQueriesFunctionValuesourceIfFunction *) nil_chk(other))->ifSource_] && [((OrgApacheLuceneQueriesFunctionValueSource *) nil_chk(trueSource_)) isEqual:other->trueSource_] && [((OrgApacheLuceneQueriesFunctionValueSource *) nil_chk(falseSource_)) isEqual:other->falseSource_];
 }

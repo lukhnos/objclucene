@@ -13,10 +13,12 @@
 
 @implementation OrgApacheLuceneQueryparserFlexiblePrecedencePrecedenceQueryParser
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueryparserFlexiblePrecedencePrecedenceQueryParser_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyer {
   OrgApacheLuceneQueryparserFlexiblePrecedencePrecedenceQueryParser_initWithOrgApacheLuceneAnalysisAnalyzer_(self, analyer);

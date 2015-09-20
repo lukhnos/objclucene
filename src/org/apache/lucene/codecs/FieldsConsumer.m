@@ -20,10 +20,12 @@
 
 @implementation OrgApacheLuceneCodecsFieldsConsumer
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsFieldsConsumer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)writeWithOrgApacheLuceneIndexFields:(OrgApacheLuceneIndexFields *)fields {
   // can't call an abstract method

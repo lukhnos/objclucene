@@ -33,7 +33,7 @@
 }
 
 - (jboolean)isEqual:(id)o {
-  if ([self getClass] != [nil_chk(o) getClass]) return NO;
+  if ([self getClass] != [nil_chk(o) getClass]) return false;
   OrgApacheLuceneQueriesFunctionValuesourceSingleFunction *other = (OrgApacheLuceneQueriesFunctionValuesourceSingleFunction *) check_class_cast(o, [OrgApacheLuceneQueriesFunctionValuesourceSingleFunction class]);
   return [((NSString *) nil_chk([self name])) isEqual:[other name]] && [((OrgApacheLuceneQueriesFunctionValueSource *) nil_chk(self->source_)) isEqual:other->source_];
 }

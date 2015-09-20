@@ -33,9 +33,9 @@
 }
 
 - (jboolean)isEqual:(id)o {
-  if (o == self) return YES;
-  if ([super isEqual:o] == NO) {
-    return NO;
+  if (o == self) return true;
+  if ([super isEqual:o] == false) {
+    return false;
   }
   return [((OrgApacheLuceneSearchMultiTermQuery *) nil_chk(self->query_)) isEqual:((OrgApacheLuceneSearchMultiTermQueryWrapperFilter *) nil_chk(((OrgApacheLuceneSearchMultiTermQueryWrapperFilter *) check_class_cast(o, [OrgApacheLuceneSearchMultiTermQueryWrapperFilter class]))))->query_];
 }

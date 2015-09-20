@@ -130,10 +130,12 @@ withOrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State:(OrgApacheLuce
   OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_addSuffixWithOrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State_withJavaLangCharSequence_withInt_(self, state, current, fromIndex);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(stateRegistry_);
@@ -215,7 +217,7 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneUtilAutomatonDaciukMihovAu
 
 jboolean OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_setPreviousWithOrgApacheLuceneUtilCharsRef_(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder *self, OrgApacheLuceneUtilCharsRef *current) {
   JreStrongAssign(&self->previous_, OrgApacheLuceneUtilCharsRef_deepCopyOfWithOrgApacheLuceneUtilCharsRef_(current));
-  return YES;
+  return true;
 }
 
 void OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_replaceOrRegisterWithOrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State_(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder *self, OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State *state) {
@@ -237,7 +239,7 @@ void OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_addSuffixWithOrgApa
     state = [((OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State *) nil_chk(state)) newStateWithInt:cp];
     fromIndex += JavaLangCharacter_charCountWithInt_(cp);
   }
-  ((OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State *) nil_chk(state))->is_final_ = YES;
+  ((OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State *) nil_chk(state))->is_final_ = true;
 }
 
 void OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_init(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder *self) {
@@ -329,10 +331,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_
   return OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State_referenceEqualsWithNSObjectArray_withNSObjectArray_(a1, a2);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(labels_);
@@ -377,14 +381,14 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_
 jboolean OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State_referenceEqualsWithNSObjectArray_withNSObjectArray_(IOSObjectArray *a1, IOSObjectArray *a2) {
   OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State_initialize();
   if (((IOSObjectArray *) nil_chk(a1))->size_ != ((IOSObjectArray *) nil_chk(a2))->size_) {
-    return NO;
+    return false;
   }
   for (jint i = 0; i < a1->size_; i++) {
     if (IOSObjectArray_Get(a1, i) != IOSObjectArray_Get(a2, i)) {
-      return NO;
+      return false;
     }
   }
-  return YES;
+  return true;
 }
 
 void OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State_init(OrgApacheLuceneUtilAutomatonDaciukMihovAutomatonBuilder_State *self) {

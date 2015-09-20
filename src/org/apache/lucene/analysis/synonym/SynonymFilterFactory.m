@@ -118,9 +118,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_$1
   else {
     analyzer = [new_OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_$1_initWithOrgApacheLuceneAnalysisSynonymSynonymFilterFactory_withOrgApacheLuceneAnalysisUtilTokenizerFactory_(self, factory) autorelease];
   }
-  {
-    JavaLangThrowable *__mainException = nil;
+  @try {
     OrgApacheLuceneAnalysisAnalyzer *a = analyzer;
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
       NSString *formatClass = format_;
       if (format_ == nil || [format_ isEqual:@"solr"]) {
@@ -129,27 +129,28 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_$1
       else if ([format_ isEqual:@"wordnet"]) {
         formatClass = [OrgApacheLuceneAnalysisSynonymWordnetSynonymParser_class_() getName];
       }
-      JreStrongAssign(&map_, [self loadSynonymsWithOrgApacheLuceneAnalysisUtilResourceLoader:loader withNSString:formatClass withBoolean:YES withOrgApacheLuceneAnalysisAnalyzer:a]);
+      JreStrongAssign(&map_, [self loadSynonymsWithOrgApacheLuceneAnalysisUtilResourceLoader:loader withNSString:formatClass withBoolean:true withOrgApacheLuceneAnalysisAnalyzer:a]);
     }
-    @catch (JavaTextParseException *e) {
-      __mainException = e;
-      @throw [new_JavaIoIOException_initWithNSString_withJavaLangThrowable_(@"Error parsing synonyms file:", e) autorelease];
+    @catch (JavaLangThrowable *e) {
+      __primaryException1 = e;
+      @throw e;
     }
     @finally {
-      @try {
-        [a close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
+      if (a != nil) {
+        if (__primaryException1 != nil) {
+          @try {
+            [a close];
+          } @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
         } else {
-          __mainException = e;
+          [a close];
         }
       }
-      if (__mainException) {
-        @throw __mainException;
-      }
     }
+  }
+  @catch (JavaTextParseException *e) {
+    @throw [new_JavaIoIOException_initWithNSString_withJavaLangThrowable_(@"Error parsing synonyms file:", e) autorelease];
   }
 }
 
@@ -222,10 +223,10 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_$1
 void OrgApacheLuceneAnalysisSynonymSynonymFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisSynonymSynonymFilterFactory *self, id<JavaUtilMap> args) {
   OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
   JreStrongAssignAndConsume(&self->tokArgs_, new_JavaUtilHashMap_init());
-  self->ignoreCase_ = [self getBooleanWithJavaUtilMap:args withNSString:@"ignoreCase" withBoolean:NO];
+  self->ignoreCase_ = [self getBooleanWithJavaUtilMap:args withNSString:@"ignoreCase" withBoolean:false];
   JreStrongAssign(&self->synonyms_, [self requireWithJavaUtilMap:args withNSString:@"synonyms"]);
   JreStrongAssign(&self->format_, [self getWithJavaUtilMap:args withNSString:@"format"]);
-  self->expand_ = [self getBooleanWithJavaUtilMap:args withNSString:@"expand" withBoolean:YES];
+  self->expand_ = [self getBooleanWithJavaUtilMap:args withNSString:@"expand" withBoolean:true];
   JreStrongAssign(&self->analyzerName_, [self getWithJavaUtilMap:args withNSString:@"analyzer"]);
   JreStrongAssign(&self->tokenizerFactory_, [self getWithJavaUtilMap:args withNSString:@"tokenizerFactory"]);
   if (self->analyzerName_ != nil && self->tokenizerFactory_ != nil) {

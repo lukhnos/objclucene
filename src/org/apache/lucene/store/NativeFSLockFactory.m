@@ -51,10 +51,12 @@ OrgApacheLuceneStoreNativeFSLockFactory *OrgApacheLuceneStoreNativeFSLockFactory
 
 @implementation OrgApacheLuceneStoreNativeFSLockFactory
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneStoreNativeFSLockFactory_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneStoreLock *)obtainFSLockWithOrgApacheLuceneStoreFSDirectory:(OrgApacheLuceneStoreFSDirectory *)dir
                                                                  withNSString:(NSString *)lockName {
@@ -135,7 +137,7 @@ OrgApacheLuceneStoreNativeFSLockFactory *new_OrgApacheLuceneStoreNativeFSLockFac
 void OrgApacheLuceneStoreNativeFSLockFactory_clearLockHeldWithOrgLukhnosPortmobileFilePath_(OrgLukhnosPortmobileFilePath *path) {
   OrgApacheLuceneStoreNativeFSLockFactory_initialize();
   jboolean remove = [((id<JavaUtilSet>) nil_chk(OrgApacheLuceneStoreNativeFSLockFactory_LOCK_HELD_)) removeWithId:[((OrgLukhnosPortmobileFilePath *) nil_chk(path)) description]];
-  if (remove == NO) {
+  if (remove == false) {
     @throw [new_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(JreStrcat("$@", @"Lock path was cleared but never marked as held: ", path)) autorelease];
   }
 }
@@ -177,31 +179,35 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreNativeFSLockFactory)
     if (JreLoadVolatileBoolean(&closed_)) {
       return;
     }
-    {
-      JavaLangThrowable *__mainException = nil;
+    @try {
       JavaNioChannelsFileChannel *channel = self->channel_;
+      JavaLangThrowable *__primaryException1 = nil;
       @try {
         JreAssert((self->lock_ != nil), (@"org/apache/lucene/store/NativeFSLockFactory.java:194 condition failed: assert this.lock != null;"));
         JreAssert((channel != nil), (@"org/apache/lucene/store/NativeFSLockFactory.java:195 condition failed: assert channel != null;"));
         [((JavaNioChannelsFileLock *) nil_chk(self->lock_)) release__];
       }
+      @catch (JavaLangThrowable *e) {
+        __primaryException1 = e;
+        @throw e;
+      }
       @finally {
-        JreAssignVolatileBoolean(&closed_, YES);
-        OrgApacheLuceneStoreNativeFSLockFactory_clearLockHeldWithOrgLukhnosPortmobileFilePath_(path_);
-        @try {
-          [channel close];
-        }
-        @catch (JavaLangThrowable *e) {
-          if (__mainException) {
-            [__mainException addSuppressedWithJavaLangThrowable:e];
+        if (channel != nil) {
+          if (__primaryException1 != nil) {
+            @try {
+              [channel close];
+            } @catch (JavaLangThrowable *e) {
+              [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+            }
           } else {
-            __mainException = e;
+            [channel close];
           }
         }
-        if (__mainException) {
-          @throw __mainException;
-        }
       }
+    }
+    @finally {
+      JreAssignVolatileBoolean(&closed_, true);
+      OrgApacheLuceneStoreNativeFSLockFactory_clearLockHeldWithOrgLukhnosPortmobileFilePath_(path_);
     }
   }
 }

@@ -129,10 +129,12 @@ withOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum:(OrgA
   return OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_hexToIntWithChar_(c);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQuerySyntaxImpl class]) {
@@ -227,12 +229,12 @@ id<JavaLangCharSequence> OrgApacheLuceneQueryparserFlexibleStandardParserEscapeQ
   jint start = 0, copyStart = 0, firstIndex;
   while (start < count) {
     if ((firstIndex = [((NSString *) nil_chk([((NSString *) nil_chk([string description])) lowercaseStringWithJRELocale:locale])) indexOf:first fromIndex:start]) == -1) break;
-    jboolean found = YES;
+    jboolean found = true;
     if ([sequence1 length] > 1) {
       if (firstIndex + sequence1Length > count) break;
       for (jint i = 1; i < sequence1Length; i++) {
         if ([((NSString *) nil_chk([((NSString *) nil_chk([string description])) lowercaseStringWithJRELocale:locale])) charAtWithInt:firstIndex + i] != [sequence1 charAtWithInt:i]) {
-          found = NO;
+          found = false;
           break;
         }
       }
@@ -267,7 +269,7 @@ OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *OrgApacheLucene
   IOSCharArray *output = [IOSCharArray arrayWithLength:[((id<JavaLangCharSequence>) nil_chk(input)) length]];
   IOSBooleanArray *wasEscaped = [IOSBooleanArray arrayWithLength:[input length]];
   jint length = 0;
-  jboolean lastCharWasEscapeChar = NO;
+  jboolean lastCharWasEscapeChar = false;
   jint codePointMultiplier = 0;
   jint codePoint = 0;
   for (jint i = 0; i < [input length]; i++) {
@@ -286,14 +288,14 @@ OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *OrgApacheLucene
       }
       else {
         *IOSCharArray_GetRef(output, length) = curChar;
-        *IOSBooleanArray_GetRef(wasEscaped, length) = YES;
+        *IOSBooleanArray_GetRef(wasEscaped, length) = true;
         length++;
       }
-      lastCharWasEscapeChar = NO;
+      lastCharWasEscapeChar = false;
     }
     else {
       if (curChar == '\\') {
-        lastCharWasEscapeChar = YES;
+        lastCharWasEscapeChar = true;
       }
       else {
         *IOSCharArray_GetRef(output, length) = curChar;

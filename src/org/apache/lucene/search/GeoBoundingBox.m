@@ -36,16 +36,16 @@
 
 void OrgApacheLuceneSearchGeoBoundingBox_initWithDouble_withDouble_withDouble_withDouble_(OrgApacheLuceneSearchGeoBoundingBox *self, jdouble minLon, jdouble maxLon, jdouble minLat, jdouble maxLat) {
   NSObject_init(self);
-  if (OrgApacheLuceneUtilGeoUtils_isValidLonWithDouble_(minLon) == NO) {
+  if (OrgApacheLuceneUtilGeoUtils_isValidLonWithDouble_(minLon) == false) {
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D", @"invalid minLon ", minLon)) autorelease];
   }
-  if (OrgApacheLuceneUtilGeoUtils_isValidLonWithDouble_(maxLon) == NO) {
+  if (OrgApacheLuceneUtilGeoUtils_isValidLonWithDouble_(maxLon) == false) {
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D", @"invalid maxLon ", minLon)) autorelease];
   }
-  if (OrgApacheLuceneUtilGeoUtils_isValidLatWithDouble_(minLat) == NO) {
+  if (OrgApacheLuceneUtilGeoUtils_isValidLatWithDouble_(minLat) == false) {
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D", @"invalid minLat ", minLat)) autorelease];
   }
-  if (OrgApacheLuceneUtilGeoUtils_isValidLatWithDouble_(maxLat) == NO) {
+  if (OrgApacheLuceneUtilGeoUtils_isValidLatWithDouble_(maxLat) == false) {
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D", @"invalid maxLat ", minLat)) autorelease];
   }
   self->minLon_ = minLon;

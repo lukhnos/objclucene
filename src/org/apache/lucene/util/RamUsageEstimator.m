@@ -58,10 +58,12 @@ NSString *OrgApacheLuceneUtilRamUsageEstimator_HOTSPOT_BEAN_CLASS_ = @"com.sun.m
 
 @implementation OrgApacheLuceneUtilRamUsageEstimator
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilRamUsageEstimator_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (jlong)alignObjectSizeWithLong:(jlong)size {
   return OrgApacheLuceneUtilRamUsageEstimator_alignObjectSizeWithLong_(size);
@@ -152,33 +154,33 @@ NSString *OrgApacheLuceneUtilRamUsageEstimator_HOTSPOT_BEAN_CLASS_ = @"com.sun.m
     }
     {
       if (JreLoadStatic(OrgApacheLuceneUtilConstants, JRE_IS_64BIT_)) {
-        jboolean compressedOops = NO;
+        jboolean compressedOops = false;
         jint objectAlignment = 8;
-        jboolean isHotspot = NO;
+        jboolean isHotspot = false;
         @try {
           IOSClass *beanClazz = IOSClass_forName_(OrgApacheLuceneUtilRamUsageEstimator_HOTSPOT_BEAN_CLASS_);
           id hotSpotBean = [((JavaLangReflectMethod *) nil_chk([((IOSClass *) nil_chk(IOSClass_forName_(OrgApacheLuceneUtilRamUsageEstimator_MANAGEMENT_FACTORY_CLASS_))) getMethod:@"getPlatformMXBean" parameterTypes:[IOSObjectArray arrayWithObjects:(id[]){ IOSClass_class_() } count:1 type:IOSClass_class_()]])) invokeWithId:nil withNSObjectArray:[IOSObjectArray arrayWithObjects:(id[]){ beanClazz } count:1 type:NSObject_class_()]];
           if (hotSpotBean != nil) {
-            isHotspot = YES;
+            isHotspot = true;
             JavaLangReflectMethod *getVMOptionMethod = [((IOSClass *) nil_chk(beanClazz)) getMethod:@"getVMOption" parameterTypes:[IOSObjectArray arrayWithObjects:(id[]){ NSString_class_() } count:1 type:IOSClass_class_()]];
             @try {
               id vmOption = [((JavaLangReflectMethod *) nil_chk(getVMOptionMethod)) invokeWithId:hotSpotBean withNSObjectArray:[IOSObjectArray arrayWithObjects:(id[]){ @"UseCompressedOops" } count:1 type:NSObject_class_()]];
               compressedOops = JavaLangBoolean_parseBooleanWithNSString_([nil_chk([((JavaLangReflectMethod *) nil_chk([[nil_chk(vmOption) getClass] getMethod:@"getValue" parameterTypes:[IOSObjectArray arrayWithLength:0 type:IOSClass_class_()]])) invokeWithId:vmOption withNSObjectArray:[IOSObjectArray arrayWithLength:0 type:NSObject_class_()]]) description]);
             }
             @catch (JavaLangException *e) {
-              isHotspot = NO;
+              isHotspot = false;
             }
             @try {
               id vmOption = [((JavaLangReflectMethod *) nil_chk(getVMOptionMethod)) invokeWithId:hotSpotBean withNSObjectArray:[IOSObjectArray arrayWithObjects:(id[]){ @"ObjectAlignmentInBytes" } count:1 type:NSObject_class_()]];
               objectAlignment = JavaLangInteger_parseIntWithNSString_([nil_chk([((JavaLangReflectMethod *) nil_chk([[nil_chk(vmOption) getClass] getMethod:@"getValue" parameterTypes:[IOSObjectArray arrayWithLength:0 type:IOSClass_class_()]])) invokeWithId:vmOption withNSObjectArray:[IOSObjectArray arrayWithLength:0 type:NSObject_class_()]]) description]);
             }
             @catch (JavaLangException *e) {
-              isHotspot = NO;
+              isHotspot = false;
             }
           }
         }
         @catch (JavaLangException *e) {
-          isHotspot = NO;
+          isHotspot = false;
         }
         OrgApacheLuceneUtilRamUsageEstimator_JVM_IS_HOTSPOT_64BIT_ = isHotspot;
         OrgApacheLuceneUtilRamUsageEstimator_COMPRESSED_REFS_ENABLED_ = compressedOops;
@@ -188,8 +190,8 @@ NSString *OrgApacheLuceneUtilRamUsageEstimator_HOTSPOT_BEAN_CLASS_ = @"com.sun.m
         OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_ARRAY_HEADER_ = (jint) OrgApacheLuceneUtilRamUsageEstimator_alignObjectSizeWithLong_(OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_OBJECT_HEADER_ + OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_INT);
       }
       else {
-        OrgApacheLuceneUtilRamUsageEstimator_JVM_IS_HOTSPOT_64BIT_ = NO;
-        OrgApacheLuceneUtilRamUsageEstimator_COMPRESSED_REFS_ENABLED_ = NO;
+        OrgApacheLuceneUtilRamUsageEstimator_JVM_IS_HOTSPOT_64BIT_ = false;
+        OrgApacheLuceneUtilRamUsageEstimator_COMPRESSED_REFS_ENABLED_ = false;
         OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_OBJECT_ALIGNMENT_ = 8;
         OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_OBJECT_REF_ = 4;
         OrgApacheLuceneUtilRamUsageEstimator_NUM_BYTES_OBJECT_HEADER_ = 8;

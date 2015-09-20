@@ -52,10 +52,12 @@ NSString *OrgApacheLuceneUtilConstants_LUCENE_VERSION_;
 
 @implementation OrgApacheLuceneUtilConstants
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilConstants_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilConstants class]) {
@@ -82,17 +84,17 @@ NSString *OrgApacheLuceneUtilConstants_LUCENE_VERSION_;
       else {
         OrgApacheLuceneUtilConstants_JVM_MINOR_VERSION_ = 0;
       }
-      jboolean is64Bit = NO;
+      jboolean is64Bit = false;
       NSString *x = JavaLangSystem_getPropertyWithNSString_(@"sun.arch.data.model");
       if (x != nil) {
         is64Bit = [x contains:@"64"];
       }
       else {
         if (OrgApacheLuceneUtilConstants_OS_ARCH_ != nil && [OrgApacheLuceneUtilConstants_OS_ARCH_ contains:@"64"]) {
-          is64Bit = YES;
+          is64Bit = true;
         }
         else {
-          is64Bit = NO;
+          is64Bit = false;
         }
       }
       OrgApacheLuceneUtilConstants_JRE_IS_64BIT_ = is64Bit;

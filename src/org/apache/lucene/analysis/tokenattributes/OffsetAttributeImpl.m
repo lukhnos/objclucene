@@ -22,10 +22,12 @@
 
 @implementation OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)startOffset {
   return startOffset_;
@@ -51,13 +53,13 @@
 
 - (jboolean)isEqual:(id)other {
   if (other == self) {
-    return YES;
+    return true;
   }
   if ([other isKindOfClass:[OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl class]]) {
     OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl *o = (OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl *) check_class_cast(other, [OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl class]);
     return ((OrgApacheLuceneAnalysisTokenattributesOffsetAttributeImpl *) nil_chk(o))->startOffset_ == startOffset_ && o->endOffset_ == endOffset_;
   }
-  return NO;
+  return false;
 }
 
 - (NSUInteger)hash {

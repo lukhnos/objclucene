@@ -85,9 +85,9 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer 
                                 withNSString:(NSString *)termStr
                                 withNSString:(NSString *)chunk {
   NSString *analyzed = nil;
-  {
-    JavaLangThrowable *__mainException = nil;
+  @try {
     OrgApacheLuceneAnalysisTokenStream *stream = [((OrgApacheLuceneAnalysisAnalyzer *) nil_chk([self getAnalyzer])) tokenStreamWithNSString:field withNSString:chunk];
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
       [((OrgApacheLuceneAnalysisTokenStream *) nil_chk(stream)) reset];
       id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute> termAtt = [stream getAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()];
@@ -116,25 +116,26 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer 
         @throw [new_OrgApacheLuceneQueryparserClassicParseException_initWithNSString_(NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_([self getLocale], @"Analyzer returned nothing for \"%s\"", [IOSObjectArray arrayWithObjects:(id[]){ chunk } count:1 type:NSObject_class_()])) autorelease];
       }
     }
-    @catch (JavaIoIOException *e) {
-      __mainException = e;
-      @throw [new_OrgApacheLuceneQueryparserClassicParseException_initWithNSString_(NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_([self getLocale], @"IO error while trying to analyze single term: \"%s\"", [IOSObjectArray arrayWithObjects:(id[]){ termStr } count:1 type:NSObject_class_()])) autorelease];
+    @catch (JavaLangThrowable *e) {
+      __primaryException1 = e;
+      @throw e;
     }
     @finally {
-      @try {
-        [stream close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
+      if (stream != nil) {
+        if (__primaryException1 != nil) {
+          @try {
+            [stream close];
+          } @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
         } else {
-          __mainException = e;
+          [stream close];
         }
       }
-      if (__mainException) {
-        @throw __mainException;
-      }
     }
+  }
+  @catch (JavaIoIOException *e) {
+    @throw [new_OrgApacheLuceneQueryparserClassicParseException_initWithNSString_(NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_([self getLocale], @"IO error while trying to analyze single term: \"%s\"", [IOSObjectArray arrayWithObjects:(id[]){ termStr } count:1 type:NSObject_class_()])) autorelease];
   }
   return analyzed;
 }
@@ -164,7 +165,7 @@ withOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer 
 void OrgApacheLuceneQueryparserAnalyzingAnalyzingQueryParser_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneQueryparserAnalyzingAnalyzingQueryParser *self, NSString *field, OrgApacheLuceneAnalysisAnalyzer *analyzer) {
   OrgApacheLuceneQueryparserClassicQueryParser_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_(self, field, analyzer);
   JreStrongAssign(&self->wildcardPattern_, JavaUtilRegexPattern_compileWithNSString_(@"(\\.)|([?*]+)"));
-  [self setAnalyzeRangeTermsWithBoolean:YES];
+  [self setAnalyzeRangeTermsWithBoolean:true];
 }
 
 OrgApacheLuceneQueryparserAnalyzingAnalyzingQueryParser *new_OrgApacheLuceneQueryparserAnalyzingAnalyzingQueryParser_initWithNSString_withOrgApacheLuceneAnalysisAnalyzer_(NSString *field, OrgApacheLuceneAnalysisAnalyzer *analyzer) {

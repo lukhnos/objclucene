@@ -74,10 +74,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisGlGalicianStemmer)
   return len;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisGlGalicianStemmer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisGlGalicianStemmer class]) {

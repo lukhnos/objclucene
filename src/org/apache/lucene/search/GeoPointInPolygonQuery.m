@@ -127,13 +127,13 @@ withOrgApacheLuceneSearchGeoBoundingBox:(OrgApacheLuceneSearchGeoBoundingBox *)b
 }
 
 - (jboolean)isEqual:(id)o {
-  if (self == o) return YES;
-  if (o == nil || [self getClass] != [o getClass]) return NO;
-  if (![super isEqual:o]) return NO;
+  if (self == o) return true;
+  if (o == nil || [self getClass] != [o getClass]) return false;
+  if (![super isEqual:o]) return false;
   OrgApacheLuceneSearchGeoPointInPolygonQuery *that = (OrgApacheLuceneSearchGeoPointInPolygonQuery *) check_class_cast(o, [OrgApacheLuceneSearchGeoPointInPolygonQuery class]);
-  if (!JavaUtilArrays_equalsWithDoubleArray_withDoubleArray_(x_, ((OrgApacheLuceneSearchGeoPointInPolygonQuery *) nil_chk(that))->x_)) return NO;
-  if (!JavaUtilArrays_equalsWithDoubleArray_withDoubleArray_(y_, that->y_)) return NO;
-  return YES;
+  if (!JavaUtilArrays_equalsWithDoubleArray_withDoubleArray_(x_, ((OrgApacheLuceneSearchGeoPointInPolygonQuery *) nil_chk(that))->x_)) return false;
+  if (!JavaUtilArrays_equalsWithDoubleArray_withDoubleArray_(y_, that->y_)) return false;
+  return true;
 }
 
 - (NSUInteger)hash {
@@ -256,10 +256,10 @@ OrgApacheLuceneSearchGeoBoundingBox *OrgApacheLuceneSearchGeoPointInPolygonQuery
   jdouble minLat = JavaLangDouble_POSITIVE_INFINITY;
   jdouble maxLat = JavaLangDouble_NEGATIVE_INFINITY;
   for (jint i = 0; i < polyLats->size_; i++) {
-    if (OrgApacheLuceneUtilGeoUtils_isValidLonWithDouble_(IOSDoubleArray_Get(polyLons, i)) == NO) {
+    if (OrgApacheLuceneUtilGeoUtils_isValidLonWithDouble_(IOSDoubleArray_Get(polyLons, i)) == false) {
       @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$D", @"invalid polyLons[", i, @"]=", IOSDoubleArray_Get(polyLons, i))) autorelease];
     }
-    if (OrgApacheLuceneUtilGeoUtils_isValidLatWithDouble_(IOSDoubleArray_Get(polyLats, i)) == NO) {
+    if (OrgApacheLuceneUtilGeoUtils_isValidLatWithDouble_(IOSDoubleArray_Get(polyLats, i)) == false) {
       @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$D", @"invalid polyLats[", i, @"]=", IOSDoubleArray_Get(polyLats, i))) autorelease];
     }
     minLon = JavaLangMath_minWithDouble_withDouble_(IOSDoubleArray_Get(polyLons, i), minLon);

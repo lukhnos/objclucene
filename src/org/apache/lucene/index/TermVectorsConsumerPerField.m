@@ -53,10 +53,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexTermVectorsConsumerPerField, termVectors
 }
 
 - (void)finishDocument {
-  if (doVectors_ == NO) {
+  if (doVectors_ == false) {
     return;
   }
-  doVectors_ = NO;
+  doVectors_ = false;
   jint numPostings = [((OrgApacheLuceneUtilBytesRefHash *) nil_chk(bytesHash_)) size];
   OrgApacheLuceneUtilBytesRef *flushTerm = ((OrgApacheLuceneIndexTermVectorsConsumer *) nil_chk(termsWriter_))->flushTerm_;
   JreAssert((numPostings >= 0), (@"org/apache/lucene/index/TermVectorsConsumerPerField.java:70 condition failed: assert numPostings >= 0;"));
@@ -95,17 +95,17 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexTermVectorsConsumerPerField, termVectors
       [self reset];
     }
     [bytesHash_ reinit];
-    hasPayloads_ = NO;
+    hasPayloads_ = false;
     doVectors_ = [((id<OrgApacheLuceneIndexIndexableFieldType>) nil_chk([field fieldType])) storeTermVectors];
     if (doVectors_) {
-      ((OrgApacheLuceneIndexTermVectorsConsumer *) nil_chk(termsWriter_))->hasVectors_ = YES;
+      ((OrgApacheLuceneIndexTermVectorsConsumer *) nil_chk(termsWriter_))->hasVectors_ = true;
       doVectorPositions_ = [((id<OrgApacheLuceneIndexIndexableFieldType>) nil_chk([field fieldType])) storeTermVectorPositions];
       doVectorOffsets_ = [((id<OrgApacheLuceneIndexIndexableFieldType>) nil_chk([field fieldType])) storeTermVectorOffsets];
       if (doVectorPositions_) {
         doVectorPayloads_ = [((id<OrgApacheLuceneIndexIndexableFieldType>) nil_chk([field fieldType])) storeTermVectorPayloads];
       }
       else {
-        doVectorPayloads_ = NO;
+        doVectorPayloads_ = false;
         if ([((id<OrgApacheLuceneIndexIndexableFieldType>) nil_chk([field fieldType])) storeTermVectorPayloads]) {
           @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$", @"cannot index term vector payloads without term vector positions (field=\"", [field name], @"\")")) autorelease];
         }
@@ -174,7 +174,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexTermVectorsConsumerPerField, termVectors
       [self writeVIntWithInt:0 withInt:(JreLShift32(pos, 1)) | 1];
       [self writeVIntWithInt:0 withInt:payload->length_];
       [self writeBytesWithInt:0 withByteArray:payload->bytes_ withInt:payload->offset_ withInt:payload->length_];
-      hasPayloads_ = YES;
+      hasPayloads_ = true;
     }
     else {
       [self writeVIntWithInt:0 withInt:JreLShift32(pos, 1)];

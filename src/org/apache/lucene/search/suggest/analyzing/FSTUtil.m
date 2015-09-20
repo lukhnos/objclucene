@@ -29,10 +29,12 @@ __attribute__((unused)) static OrgApacheLuceneSearchSuggestAnalyzingFSTUtil *new
 
 @implementation OrgApacheLuceneSearchSuggestAnalyzingFSTUtil
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSuggestAnalyzingFSTUtil_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (id<JavaUtilList>)intersectPrefixPathsWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)a
                                                     withOrgApacheLuceneUtilFstFST:(OrgApacheLuceneUtilFstFST *)fst {

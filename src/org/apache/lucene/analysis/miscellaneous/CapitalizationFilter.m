@@ -64,7 +64,7 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisMiscellaneousCapitali
 }
 
 - (jboolean)incrementToken {
-  if (![((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) return NO;
+  if (![((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) return false;
   IOSCharArray *termBuffer = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer];
   jint termBufferLength = [termAtt_ length];
   IOSCharArray *backup = nil;
@@ -93,7 +93,7 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisMiscellaneousCapitali
       [termAtt_ copyBufferWithCharArray:backup withInt:0 withInt:termBufferLength];
     }
   }
-  return YES;
+  return true;
 }
 
 - (void)processWordWithCharArray:(IOSCharArray *)buffer
@@ -136,7 +136,7 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisMiscellaneousCapitali
 @end
 
 void OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter *self, OrgApacheLuceneAnalysisTokenStream *inArg) {
-  OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_withOrgApacheLuceneAnalysisUtilCharArraySet_withBoolean_withJavaUtilCollection_withInt_withInt_withInt_(self, inArg, YES, nil, YES, nil, 0, OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_DEFAULT_MAX_WORD_COUNT, OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_DEFAULT_MAX_TOKEN_LENGTH);
+  OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_withBoolean_withOrgApacheLuceneAnalysisUtilCharArraySet_withBoolean_withJavaUtilCollection_withInt_withInt_withInt_(self, inArg, true, nil, true, nil, 0, OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_DEFAULT_MAX_WORD_COUNT, OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_DEFAULT_MAX_TOKEN_LENGTH);
 }
 
 OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter *new_OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg) {
@@ -194,14 +194,14 @@ void OrgApacheLuceneAnalysisMiscellaneousCapitalizationFilter_processWordWithCha
   if (self->okPrefix_ != nil) {
     for (IOSCharArray * __strong prefix in self->okPrefix_) {
       if (length >= ((IOSCharArray *) nil_chk(prefix))->size_) {
-        jboolean match = YES;
+        jboolean match = true;
         for (jint i = 0; i < prefix->size_; i++) {
           if (IOSCharArray_Get(prefix, i) != IOSCharArray_Get(nil_chk(buffer), offset + i)) {
-            match = NO;
+            match = false;
             break;
           }
         }
-        if (match == YES) {
+        if (match == true) {
           return;
         }
       }

@@ -90,7 +90,7 @@
 void OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_withFloat_withInt_withInt_(OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode *self, id<JavaLangCharSequence> field, id<JavaLangCharSequence> term, jfloat minSimilarity, jint begin, jint end) {
   OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_withInt_withInt_(self, field, term, begin, end);
   self->similarity_ = minSimilarity;
-  [self setLeafWithBoolean:YES];
+  [self setLeafWithBoolean:true];
 }
 
 OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode *new_OrgApacheLuceneQueryparserFlexibleCoreNodesFuzzyQueryNode_initWithJavaLangCharSequence_withJavaLangCharSequence_withFloat_withInt_withInt_(id<JavaLangCharSequence> field, id<JavaLangCharSequence> term, jfloat minSimilarity, jint begin, jint end) {

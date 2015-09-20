@@ -66,10 +66,12 @@
   return [((OrgApacheLuceneIndexLiveIndexWriterConfig *) nil_chk(indexWriterConfig_)) getRAMBufferSizeMB] != OrgApacheLuceneIndexIndexWriterConfig_DISABLE_AUTO_FLUSH;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexFlushByRamOrCountsPolicy_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

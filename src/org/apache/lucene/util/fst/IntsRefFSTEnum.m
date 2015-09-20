@@ -161,10 +161,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstIntsRefFSTEnum)
 
 @implementation OrgApacheLuceneUtilFstIntsRefFSTEnum_InputOutput
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilFstIntsRefFSTEnum_InputOutput_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(input_);

@@ -313,12 +313,12 @@ OrgApacheLuceneIndexDirectoryReader *OrgApacheLuceneIndexStandardDirectoryReader
   OrgApacheLuceneStoreDirectory *dir = [((OrgApacheLuceneIndexIndexWriter *) nil_chk(writer)) getDirectory];
   OrgApacheLuceneIndexSegmentInfos *segmentInfos = [infos clone];
   jint infosUpto = 0;
-  jboolean success = NO;
+  jboolean success = false;
   @try {
     for (jint i = 0; i < numSegments; i++) {
       OrgApacheLuceneIndexSegmentCommitInfo *info = [infos infoWithInt:i];
       JreAssert((((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk(info))->info_))->dir_ == dir), (@"org/apache/lucene/index/StandardDirectoryReader.java:96 condition failed: assert info.info.dir == dir;"));
-      OrgApacheLuceneIndexReadersAndUpdates *rld = [((OrgApacheLuceneIndexIndexWriter_ReaderPool *) nil_chk(writer->readerPool_)) getWithOrgApacheLuceneIndexSegmentCommitInfo:info withBoolean:YES];
+      OrgApacheLuceneIndexReadersAndUpdates *rld = [((OrgApacheLuceneIndexIndexWriter_ReaderPool *) nil_chk(writer->readerPool_)) getWithOrgApacheLuceneIndexSegmentCommitInfo:info withBoolean:true];
       @try {
         OrgApacheLuceneIndexSegmentReader *reader = [((OrgApacheLuceneIndexReadersAndUpdates *) nil_chk(rld)) getReadOnlyCloneWithOrgApacheLuceneStoreIOContext:JreLoadStatic(OrgApacheLuceneStoreIOContext, READ_)];
         if ([((OrgApacheLuceneIndexSegmentReader *) nil_chk(reader)) numDocs] > 0 || [writer getKeepFullyDeletedSegments]) {
@@ -336,7 +336,7 @@ OrgApacheLuceneIndexDirectoryReader *OrgApacheLuceneIndexStandardDirectoryReader
     }
     [writer incRefDeleterWithOrgApacheLuceneIndexSegmentInfos:segmentInfos];
     OrgApacheLuceneIndexStandardDirectoryReader *result = [new_OrgApacheLuceneIndexStandardDirectoryReader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentInfos_withBoolean_(dir, [readers toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:[readers size] type:OrgApacheLuceneIndexSegmentReader_class_()]], writer, segmentInfos, applyAllDeletes) autorelease];
-    success = YES;
+    success = true;
     return result;
   }
   @finally {
@@ -372,7 +372,7 @@ OrgApacheLuceneIndexDirectoryReader *OrgApacheLuceneIndexStandardDirectoryReader
     else {
       oldReader = (OrgApacheLuceneIndexSegmentReader *) check_class_cast([((id<JavaUtilList>) nil_chk(oldReaders)) getWithInt:[oldReaderIndex intValue]], [OrgApacheLuceneIndexSegmentReader class]);
     }
-    jboolean success = NO;
+    jboolean success = false;
     @try {
       OrgApacheLuceneIndexSegmentReader *newReader;
       if (oldReader == nil || [commitInfo->info_ getUseCompoundFile] != [((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk([oldReader getSegmentInfo]))->info_ getUseCompoundFile]) {
@@ -387,7 +387,7 @@ OrgApacheLuceneIndexDirectoryReader *OrgApacheLuceneIndexStandardDirectoryReader
         else {
           JreAssert((commitInfo->info_->dir_ == ((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk([oldReader getSegmentInfo]))->info_->dir_), (@"org/apache/lucene/index/StandardDirectoryReader.java:183 condition failed: assert commitInfo.info.dir == oldReader.getSegmentInfo().info.dir;"));
           jboolean illegalDocCountChange = [commitInfo->info_ maxDoc] != [((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk([oldReader getSegmentInfo]))->info_ maxDoc];
-          jboolean hasNeitherDeletionsNorUpdates = [commitInfo hasDeletions] == NO && [commitInfo hasFieldUpdates] == NO;
+          jboolean hasNeitherDeletionsNorUpdates = [commitInfo hasDeletions] == false && [commitInfo hasFieldUpdates] == false;
           jboolean deletesWereLost = [commitInfo getDelGen] == -1 && [((OrgApacheLuceneIndexSegmentCommitInfo *) nil_chk([oldReader getSegmentInfo])) getDelGen] != -1;
           if (illegalDocCountChange || hasNeitherDeletionsNorUpdates || deletesWereLost) {
             @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$", @"same segment ", commitInfo->info_->name_, @" has invalid changes; likely you are re-opening a reader after illegally removing index files yourself and building a new index in their place.  Use IndexWriter.deleteAll or OpenMode.CREATE instead")) autorelease];
@@ -400,7 +400,7 @@ OrgApacheLuceneIndexDirectoryReader *OrgApacheLuceneIndexStandardDirectoryReader
           }
         }
       }
-      success = YES;
+      success = true;
     }
     @finally {
       if (!success) {
@@ -408,7 +408,7 @@ OrgApacheLuceneIndexDirectoryReader *OrgApacheLuceneIndexStandardDirectoryReader
       }
     }
   }
-  return [new_OrgApacheLuceneIndexStandardDirectoryReader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentInfos_withBoolean_(directory, newReaders, nil, infos, NO) autorelease];
+  return [new_OrgApacheLuceneIndexStandardDirectoryReader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentInfos_withBoolean_(directory, newReaders, nil, infos, false) autorelease];
 }
 
 void OrgApacheLuceneIndexStandardDirectoryReader_decRefWhileHandlingExceptionWithOrgApacheLuceneIndexSegmentReaderArray_(IOSObjectArray *readers) {
@@ -502,7 +502,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexStandardDirectoryReader)
 }
 
 - (jboolean)isDeleted {
-  return NO;
+  return false;
 }
 
 - (id<JavaUtilMap>)getUserData {
@@ -560,7 +560,7 @@ void OrgApacheLuceneIndexStandardDirectoryReader_ReaderCommit_initWithOrgApacheL
   JreStrongAssign(&self->segmentsFileName_, [((OrgApacheLuceneIndexSegmentInfos *) nil_chk(infos)) getSegmentsFileName]);
   JreStrongAssign(&self->dir_, dir);
   JreStrongAssign(&self->userData_, [infos getUserData]);
-  JreStrongAssign(&self->files_, JavaUtilCollections_unmodifiableCollectionWithJavaUtilCollection_([infos filesWithBoolean:YES]));
+  JreStrongAssign(&self->files_, JavaUtilCollections_unmodifiableCollectionWithJavaUtilCollection_([infos filesWithBoolean:true]));
   self->generation_ = [infos getGeneration];
   self->segmentCount_ = [infos size];
   JreStrongAssign(&self->reader_, reader);
@@ -579,17 +579,17 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexStandardDirectoryReader_Rea
 - (OrgApacheLuceneIndexDirectoryReader *)doBodyWithNSString:(NSString *)segmentFileName {
   OrgApacheLuceneIndexSegmentInfos *sis = OrgApacheLuceneIndexSegmentInfos_readCommitWithOrgApacheLuceneStoreDirectory_withNSString_(directory_, segmentFileName);
   IOSObjectArray *readers = [IOSObjectArray arrayWithLength:[((OrgApacheLuceneIndexSegmentInfos *) nil_chk(sis)) size] type:OrgApacheLuceneIndexSegmentReader_class_()];
-  jboolean success = NO;
+  jboolean success = false;
   @try {
     for (jint i = [sis size] - 1; i >= 0; i--) {
       IOSObjectArray_SetAndConsume(readers, i, new_OrgApacheLuceneIndexSegmentReader_initWithOrgApacheLuceneIndexSegmentCommitInfo_withOrgApacheLuceneStoreIOContext_([sis infoWithInt:i], JreLoadStatic(OrgApacheLuceneStoreIOContext, READ_)));
     }
-    OrgApacheLuceneIndexDirectoryReader *reader = [new_OrgApacheLuceneIndexStandardDirectoryReader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentInfos_withBoolean_(directory_, readers, nil, sis, NO) autorelease];
-    success = YES;
+    OrgApacheLuceneIndexDirectoryReader *reader = [new_OrgApacheLuceneIndexStandardDirectoryReader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexLeafReaderArray_withOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexSegmentInfos_withBoolean_(directory_, readers, nil, sis, false) autorelease];
+    success = true;
     return reader;
   }
   @finally {
-    if (success == NO) {
+    if (success == false) {
       OrgApacheLuceneUtilIOUtils_closeWhileHandlingExceptionWithJavaIoCloseableArray_(readers);
     }
   }

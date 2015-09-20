@@ -17,10 +17,12 @@
 
 @implementation OrgApacheLuceneSearchSimilaritiesNormalizationH3
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSimilaritiesNormalizationH3_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithFloat:(jfloat)mu {
   OrgApacheLuceneSearchSimilaritiesNormalizationH3_initWithFloat_(self, mu);

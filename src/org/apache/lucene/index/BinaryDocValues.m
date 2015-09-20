@@ -9,10 +9,12 @@
 
 @implementation OrgApacheLuceneIndexBinaryDocValues
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexBinaryDocValues_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneUtilBytesRef *)getWithInt:(jint)docID {
   // can't call an abstract method

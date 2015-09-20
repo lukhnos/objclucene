@@ -136,15 +136,15 @@ withOrgApacheLuceneUtilBytesRefArray:(IOSObjectArray *)terms {
 }
 
 - (jboolean)isEqual:(id)obj {
-  if ([obj isKindOfClass:[OrgApacheLuceneSearchDocValuesTermsQuery class]] == NO) {
-    return NO;
+  if ([obj isKindOfClass:[OrgApacheLuceneSearchDocValuesTermsQuery class]] == false) {
+    return false;
   }
   OrgApacheLuceneSearchDocValuesTermsQuery *that = (OrgApacheLuceneSearchDocValuesTermsQuery *) check_class_cast(obj, [OrgApacheLuceneSearchDocValuesTermsQuery class]);
   if (![super isEqual:obj]) {
-    return NO;
+    return false;
   }
   if (![((NSString *) nil_chk(field_)) isEqual:((OrgApacheLuceneSearchDocValuesTermsQuery *) nil_chk(that))->field_]) {
-    return NO;
+    return false;
   }
   return JavaUtilArrays_equalsWithNSObjectArray_withNSObjectArray_(terms_, that->terms_);
 }
@@ -357,10 +357,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocValuesTermsQuery_$2)
   [((OrgApacheLuceneIndexSortedSetDocValues *) nil_chk(val$values_)) setDocumentWithInt:doc];
   for (jlong ord = [val$values_ nextOrd]; ord != OrgApacheLuceneIndexSortedSetDocValues_NO_MORE_ORDS; ord = [val$values_ nextOrd]) {
     if ([((OrgApacheLuceneUtilLongBitSet *) nil_chk(val$bits_)) getWithLong:ord]) {
-      return YES;
+      return true;
     }
   }
-  return NO;
+  return false;
 }
 
 - (jint)length {

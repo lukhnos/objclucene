@@ -9,10 +9,12 @@
 
 @implementation OrgApacheLuceneQueryparserFlexibleCoreNodesMatchNoDocsQueryNode
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueryparserFlexibleCoreNodesMatchNoDocsQueryNode_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (NSString *)description {
   return @"<matchNoDocsQueryNode/>";

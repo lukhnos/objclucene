@@ -11,10 +11,12 @@
 
 @implementation OrgApacheLuceneIndexIndexDeletionPolicy
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexIndexDeletionPolicy_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)onInitWithJavaUtilList:(id<JavaUtilList>)commits {
   // can't call an abstract method

@@ -66,10 +66,12 @@ OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisStandardUAX29URL
   return self;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithJavaIoReader:(JavaIoReader *)stopwords {
   OrgApacheLuceneAnalysisStandardUAX29URLEmailAnalyzer_initWithJavaIoReader_(self, stopwords);

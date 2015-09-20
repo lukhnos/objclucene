@@ -154,10 +154,12 @@ __attribute__((unused)) static void OrgApacheLuceneStoreDataOutput_writeSignedVL
   }
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneStoreDataOutput_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(copyBuffer_);

@@ -59,7 +59,7 @@ void OrgApacheLuceneAnalysisPathPathHierarchyTokenizerFactory_initWithJavaUtilMa
   OrgApacheLuceneAnalysisUtilTokenizerFactory_initWithJavaUtilMap_(self, args);
   self->delimiter_ = [self getCharWithJavaUtilMap:args withNSString:@"delimiter" withChar:OrgApacheLuceneAnalysisPathPathHierarchyTokenizer_DEFAULT_DELIMITER];
   self->replacement_ = [self getCharWithJavaUtilMap:args withNSString:@"replace" withChar:self->delimiter_];
-  self->reverse_ = [self getBooleanWithJavaUtilMap:args withNSString:@"reverse" withBoolean:NO];
+  self->reverse_ = [self getBooleanWithJavaUtilMap:args withNSString:@"reverse" withBoolean:false];
   self->skip_ = [self getIntWithJavaUtilMap:args withNSString:@"skip" withInt:OrgApacheLuceneAnalysisPathPathHierarchyTokenizer_DEFAULT_SKIP];
   if (![((id<JavaUtilMap>) nil_chk(args)) isEmpty]) {
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$@", @"Unknown parameters: ", args)) autorelease];

@@ -11,10 +11,12 @@
 
 @implementation OrgLukhnosPortmobileLangClassValue
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgLukhnosPortmobileLangClassValue_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (id)computeValueWithIOSClass:(IOSClass *)type {
   // can't call an abstract method
@@ -61,7 +63,7 @@
 
 void OrgLukhnosPortmobileLangClassValue_init(OrgLukhnosPortmobileLangClassValue *self) {
   NSObject_init(self);
-  self->defaultCached_ = NO;
+  self->defaultCached_ = false;
   JreStrongAssign(&self->defaultCachedMember_, nil);
   JreStrongAssignAndConsume(&self->cache_, new_JavaUtilHashMap_init());
 }

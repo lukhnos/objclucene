@@ -170,7 +170,7 @@ __attribute__((unused)) static OrgApacheLuceneIndexIndexFileDeleter_CommitPoint 
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexIndexFileDeleter_CommitPoint)
 
-jboolean OrgApacheLuceneIndexIndexFileDeleter_VERBOSE_REF_COUNTS_ = NO;
+jboolean OrgApacheLuceneIndexIndexFileDeleter_VERBOSE_REF_COUNTS_ = false;
 
 @implementation OrgApacheLuceneIndexIndexFileDeleter
 
@@ -198,7 +198,7 @@ withOrgApacheLuceneIndexIndexDeletionPolicy:(OrgApacheLuceneIndexIndexDeletionPo
 }
 
 - (void)ensureOpen {
-  [((OrgApacheLuceneIndexIndexWriter *) nil_chk(writer_)) ensureOpenWithBoolean:NO];
+  [((OrgApacheLuceneIndexIndexWriter *) nil_chk(writer_)) ensureOpenWithBoolean:false];
   if (JreLoadVolatileId(&writer_->tragedy_) != nil) {
     @throw [new_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_withJavaLangThrowable_(@"refusing to delete any files: this IndexWriter hit an unrecoverable exception", JreLoadVolatileId(&writer_->tragedy_)) autorelease];
   }
@@ -207,10 +207,10 @@ withOrgApacheLuceneIndexIndexDeletionPolicy:(OrgApacheLuceneIndexIndexDeletionPo
 - (jboolean)isClosed {
   @try {
     [self ensureOpen];
-    return NO;
+    return false;
   }
   @catch (OrgApacheLuceneStoreAlreadyClosedException *ace) {
-    return YES;
+    return true;
   }
 }
 
@@ -288,7 +288,7 @@ withOrgApacheLuceneIndexIndexDeletionPolicy:(OrgApacheLuceneIndexIndexDeletionPo
       @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$I", @"file \"", fileName, @"\" is in pending delete set but has non-zero refCount=", rc->count_)) autorelease];
     }
     else if ([((NSString *) nil_chk(fileName)) hasPrefix:OrgApacheLuceneIndexIndexFileNames_SEGMENTS_]) {
-      if (OrgApacheLuceneIndexIndexFileDeleter_deleteFileWithNSString_(self, fileName) == NO) {
+      if (OrgApacheLuceneIndexIndexFileDeleter_deleteFileWithNSString_(self, fileName) == false) {
         if ([((OrgApacheLuceneUtilInfoStream *) nil_chk(infoStream_)) isEnabledWithNSString:@"IFD"]) {
           [infoStream_ messageWithNSString:@"IFD" withNSString:JreStrcat("$$$", @"failed to remove commit point \"", fileName, @"\"; skipping deletion of all other pending files")];
         }
@@ -297,7 +297,7 @@ withOrgApacheLuceneIndexIndexDeletionPolicy:(OrgApacheLuceneIndexIndexDeletionPo
     }
   }
   for (NSString * __strong fileName in toDelete) {
-    if ([((NSString *) nil_chk(fileName)) hasPrefix:OrgApacheLuceneIndexIndexFileNames_SEGMENTS_] == NO) {
+    if ([((NSString *) nil_chk(fileName)) hasPrefix:OrgApacheLuceneIndexIndexFileNames_SEGMENTS_] == false) {
       OrgApacheLuceneIndexIndexFileDeleter_deleteFileWithNSString_(self, fileName);
     }
   }
@@ -325,7 +325,7 @@ withOrgApacheLuceneIndexIndexDeletionPolicy:(OrgApacheLuceneIndexIndexDeletionPo
     @finally {
       [((id<JavaUtilList>) nil_chk(lastFiles_)) clear];
     }
-    [lastFiles_ addAllWithJavaUtilCollection:[((OrgApacheLuceneIndexSegmentInfos *) nil_chk(segmentInfos)) filesWithBoolean:NO]];
+    [lastFiles_ addAllWithJavaUtilCollection:[((OrgApacheLuceneIndexSegmentInfos *) nil_chk(segmentInfos)) filesWithBoolean:false]];
   }
   if ([infoStream_ isEnabledWithNSString:@"IFD"]) {
     jlong t1 = JavaLangSystem_nanoTime();
@@ -405,13 +405,13 @@ withOrgApacheLuceneIndexIndexDeletionPolicy:(OrgApacheLuceneIndexIndexDeletionPo
 
 - (void)decRefWithOrgApacheLuceneIndexSegmentInfos:(OrgApacheLuceneIndexSegmentInfos *)segmentInfos {
   JreAssert((OrgApacheLuceneIndexIndexFileDeleter_locked(self)), (@"org/apache/lucene/index/IndexFileDeleter.java:687 condition failed: assert locked();"));
-  [self decRefWithJavaUtilCollection:[((OrgApacheLuceneIndexSegmentInfos *) nil_chk(segmentInfos)) filesWithBoolean:NO]];
+  [self decRefWithJavaUtilCollection:[((OrgApacheLuceneIndexSegmentInfos *) nil_chk(segmentInfos)) filesWithBoolean:false]];
 }
 
 - (jboolean)existsWithNSString:(NSString *)fileName {
   JreAssert((OrgApacheLuceneIndexIndexFileDeleter_locked(self)), (@"org/apache/lucene/index/IndexFileDeleter.java:692 condition failed: assert locked();"));
   if (![((id<JavaUtilMap>) nil_chk(refCounts_)) containsKeyWithId:fileName]) {
-    return NO;
+    return false;
   }
   else {
     return ((OrgApacheLuceneIndexIndexFileDeleter_RefCount *) nil_chk(OrgApacheLuceneIndexIndexFileDeleter_getRefCountWithNSString_(self, fileName)))->count_ > 0;
@@ -547,7 +547,7 @@ void OrgApacheLuceneIndexIndexFileDeleter_initWithNSStringArray_withOrgApacheLuc
               currentCommitPoint = commitPoint;
             }
             [self->commits_ addWithId:commitPoint];
-            [self incRefWithOrgApacheLuceneIndexSegmentInfos:sis withBoolean:YES];
+            [self incRefWithOrgApacheLuceneIndexSegmentInfos:sis withBoolean:true];
             if (self->lastSegmentInfos_ == nil || [sis getGeneration] > [self->lastSegmentInfos_ getGeneration]) {
               JreStrongAssign(&self->lastSegmentInfos_, sis);
             }
@@ -569,10 +569,10 @@ void OrgApacheLuceneIndexIndexFileDeleter_initWithNSStringArray_withOrgApacheLuc
     }
     currentCommitPoint = [new_OrgApacheLuceneIndexIndexFileDeleter_CommitPoint_initWithJavaUtilCollection_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexSegmentInfos_(self->commitsToDelete_, directoryOrig, sis) autorelease];
     [self->commits_ addWithId:currentCommitPoint];
-    [self incRefWithOrgApacheLuceneIndexSegmentInfos:sis withBoolean:YES];
+    [self incRefWithOrgApacheLuceneIndexSegmentInfos:sis withBoolean:true];
   }
   if (isReaderInit) {
-    [self checkpointWithOrgApacheLuceneIndexSegmentInfos:segmentInfos withBoolean:NO];
+    [self checkpointWithOrgApacheLuceneIndexSegmentInfos:segmentInfos withBoolean:false];
   }
   OrgApacheLuceneUtilCollectionUtil_timSortWithJavaUtilList_(self->commits_);
   OrgApacheLuceneIndexIndexFileDeleter_inflateGensWithOrgApacheLuceneIndexSegmentInfos_withJavaUtilCollection_withOrgApacheLuceneUtilInfoStream_(segmentInfos, [self->refCounts_ keySet], infoStream);
@@ -580,7 +580,7 @@ void OrgApacheLuceneIndexIndexFileDeleter_initWithNSStringArray_withOrgApacheLuc
     OrgApacheLuceneIndexIndexFileDeleter_RefCount *rc = [((id<JavaUtilMap_Entry>) nil_chk(entry_)) getValue];
     NSString *fileName = [entry_ getKey];
     if (0 == ((OrgApacheLuceneIndexIndexFileDeleter_RefCount *) nil_chk(rc))->count_) {
-      if ([((NSString *) nil_chk(fileName)) hasPrefix:OrgApacheLuceneIndexIndexFileNames_SEGMENTS_] && [fileName isEqual:OrgApacheLuceneIndexIndexFileNames_OLD_SEGMENTS_GEN_] == NO) {
+      if ([((NSString *) nil_chk(fileName)) hasPrefix:OrgApacheLuceneIndexIndexFileNames_SEGMENTS_] && [fileName isEqual:OrgApacheLuceneIndexIndexFileNames_OLD_SEGMENTS_GEN_] == false) {
         @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$", @"file \"", fileName, @"\" has refCount=0, which should never happen on init")) autorelease];
       }
       if ([infoStream isEnabledWithNSString:@"IFD"]) {
@@ -590,9 +590,9 @@ void OrgApacheLuceneIndexIndexFileDeleter_initWithNSStringArray_withOrgApacheLuc
     }
   }
   [((OrgApacheLuceneIndexIndexDeletionPolicy *) nil_chk(policy)) onInitWithJavaUtilList:self->commits_];
-  [self checkpointWithOrgApacheLuceneIndexSegmentInfos:segmentInfos withBoolean:NO];
+  [self checkpointWithOrgApacheLuceneIndexSegmentInfos:segmentInfos withBoolean:false];
   if (currentCommitPoint == nil) {
-    self->startingCommitDeleted_ = NO;
+    self->startingCommitDeleted_ = false;
   }
   else {
     self->startingCommitDeleted_ = [currentCommitPoint isDeleted];
@@ -739,7 +739,7 @@ OrgApacheLuceneIndexIndexFileDeleter_RefCount *OrgApacheLuceneIndexIndexFileDele
   OrgApacheLuceneIndexIndexFileDeleter_RefCount *rc;
   if (![((id<JavaUtilMap>) nil_chk(self->refCounts_)) containsKeyWithId:fileName]) {
     rc = [new_OrgApacheLuceneIndexIndexFileDeleter_RefCount_initWithNSString_(fileName) autorelease];
-    JreAssert((self->deletable_ == nil || [self->deletable_ containsWithId:fileName] == NO), (JreStrcat("$$$", @"file \"", fileName, @"\" cannot be incRef'd: it's already pending delete")));
+    JreAssert((self->deletable_ == nil || [self->deletable_ containsWithId:fileName] == false), (JreStrcat("$$$", @"file \"", fileName, @"\" cannot be incRef'd: it's already pending delete")));
     [self->refCounts_ putWithId:fileName withId:rc];
   }
   else {
@@ -757,16 +757,16 @@ jboolean OrgApacheLuceneIndexIndexFileDeleter_deleteFileWithNSString_(OrgApacheL
     }
     [((OrgApacheLuceneStoreDirectory *) nil_chk(self->directory_)) deleteFileWithNSString:fileName];
     [((id<JavaUtilSet>) nil_chk(self->deletable_)) removeWithId:fileName];
-    return YES;
+    return true;
   }
   @catch (JavaIoIOException *e) {
-    JreAssert(([e isKindOfClass:[OrgLukhnosPortmobileFileNoSuchFileException class]] == NO), (JreStrcat("$$", @"hit unexpected NoSuchFileException: file=", fileName)));
-    JreAssert(([e isKindOfClass:[JavaIoFileNotFoundException class]] == NO), (JreStrcat("$$", @"hit unexpected FileNotFoundException: file=", fileName)));
+    JreAssert(([e isKindOfClass:[OrgLukhnosPortmobileFileNoSuchFileException class]] == false), (JreStrcat("$$", @"hit unexpected NoSuchFileException: file=", fileName)));
+    JreAssert(([e isKindOfClass:[JavaIoFileNotFoundException class]] == false), (JreStrcat("$$", @"hit unexpected FileNotFoundException: file=", fileName)));
     if ([((OrgApacheLuceneUtilInfoStream *) nil_chk(self->infoStream_)) isEnabledWithNSString:@"IFD"]) {
       [self->infoStream_ messageWithNSString:@"IFD" withNSString:JreStrcat("$$$$$", @"unable to remove file \"", fileName, @"\": ", [((JavaIoIOException *) nil_chk(e)) description], @"; Will re-try later.")];
     }
     [((id<JavaUtilSet>) nil_chk(self->deletable_)) addWithId:fileName];
-    return NO;
+    return false;
   }
 }
 
@@ -781,7 +781,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexIndexFileDeleter)
 
 - (jint)IncRef {
   if (!initDone_) {
-    initDone_ = YES;
+    initDone_ = true;
   }
   else {
     JreAssert((count_ > 0), (JreStrcat("$$$C", [((JavaLangThread *) nil_chk(JavaLangThread_currentThread())) getName], @": RefCount is 0 pre-increment for file \"", fileName_, '"')));
@@ -868,7 +868,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexIndexFileDeleter_RefCount)
 
 - (void)delete__ {
   if (!deleted_) {
-    deleted_ = YES;
+    deleted_ = true;
     [((id<JavaUtilCollection>) nil_chk(commitsToDelete_)) addWithId:self];
   }
 }
@@ -922,7 +922,7 @@ void OrgApacheLuceneIndexIndexFileDeleter_CommitPoint_initWithJavaUtilCollection
   JreStrongAssign(&self->userData_, [((OrgApacheLuceneIndexSegmentInfos *) nil_chk(segmentInfos)) getUserData]);
   JreStrongAssign(&self->segmentsFileName_, [segmentInfos getSegmentsFileName]);
   self->generation_ = [segmentInfos getGeneration];
-  JreStrongAssign(&self->files_, JavaUtilCollections_unmodifiableCollectionWithJavaUtilCollection_([segmentInfos filesWithBoolean:YES]));
+  JreStrongAssign(&self->files_, JavaUtilCollections_unmodifiableCollectionWithJavaUtilCollection_([segmentInfos filesWithBoolean:true]));
   self->segmentCount_ = [segmentInfos size];
 }
 

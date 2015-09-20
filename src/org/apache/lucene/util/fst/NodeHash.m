@@ -78,7 +78,7 @@ withOrgApacheLuceneUtilFstBuilder_UnCompiledNode:(OrgApacheLuceneUtilFstBuilder_
   jlong h = OrgApacheLuceneUtilFstNodeHash_hash__WithOrgApacheLuceneUtilFstBuilder_UnCompiledNode_(self, nodeIn);
   jlong pos = h & mask_;
   jint c = 0;
-  while (YES) {
+  while (true) {
     jlong v = [((OrgApacheLuceneUtilPackedPagedGrowableWriter *) nil_chk(table_)) getWithLong:pos];
     if (v == 0) {
       jlong node = [((OrgApacheLuceneUtilFstFST *) nil_chk(fst_)) addNodeWithOrgApacheLuceneUtilFstBuilder:builder withOrgApacheLuceneUtilFstBuilder_UnCompiledNode:nodeIn];
@@ -155,24 +155,24 @@ OrgApacheLuceneUtilFstNodeHash *new_OrgApacheLuceneUtilFstNodeHash_initWithOrgAp
 jboolean OrgApacheLuceneUtilFstNodeHash_nodesEqualWithOrgApacheLuceneUtilFstBuilder_UnCompiledNode_withLong_(OrgApacheLuceneUtilFstNodeHash *self, OrgApacheLuceneUtilFstBuilder_UnCompiledNode *node, jlong address) {
   [((OrgApacheLuceneUtilFstFST *) nil_chk(self->fst_)) readFirstRealTargetArcWithLong:address withOrgApacheLuceneUtilFstFST_Arc:self->scratchArc_ withOrgApacheLuceneUtilFstFST_BytesReader:self->in_];
   if (((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(self->scratchArc_))->bytesPerArc_ != 0 && ((OrgApacheLuceneUtilFstBuilder_UnCompiledNode *) nil_chk(node))->numArcs_ != self->scratchArc_->numArcs_) {
-    return NO;
+    return false;
   }
   for (jint arcUpto = 0; arcUpto < ((OrgApacheLuceneUtilFstBuilder_UnCompiledNode *) nil_chk(node))->numArcs_; arcUpto++) {
     OrgApacheLuceneUtilFstBuilder_Arc *arc = IOSObjectArray_Get(nil_chk(node->arcs_), arcUpto);
     if (((OrgApacheLuceneUtilFstBuilder_Arc *) nil_chk(arc))->label_ != self->scratchArc_->label_ || ![nil_chk(arc->output_) isEqual:self->scratchArc_->output_] || ((OrgApacheLuceneUtilFstBuilder_CompiledNode *) nil_chk(((OrgApacheLuceneUtilFstBuilder_CompiledNode *) check_class_cast(arc->target_, [OrgApacheLuceneUtilFstBuilder_CompiledNode class]))))->node_ != self->scratchArc_->target_ || ![nil_chk(arc->nextFinalOutput_) isEqual:self->scratchArc_->nextFinalOutput_] || arc->isFinal_ != [self->scratchArc_ isFinal]) {
-      return NO;
+      return false;
     }
     if ([self->scratchArc_ isLast]) {
       if (arcUpto == node->numArcs_ - 1) {
-        return YES;
+        return true;
       }
       else {
-        return NO;
+        return false;
       }
     }
     [self->fst_ readNextRealArcWithOrgApacheLuceneUtilFstFST_Arc:self->scratchArc_ withOrgApacheLuceneUtilFstFST_BytesReader:self->in_];
   }
-  return NO;
+  return false;
 }
 
 jlong OrgApacheLuceneUtilFstNodeHash_hash__WithOrgApacheLuceneUtilFstBuilder_UnCompiledNode_(OrgApacheLuceneUtilFstNodeHash *self, OrgApacheLuceneUtilFstBuilder_UnCompiledNode *node) {
@@ -196,7 +196,7 @@ jlong OrgApacheLuceneUtilFstNodeHash_hash__WithLong_(OrgApacheLuceneUtilFstNodeH
   jint PRIME = 31;
   jlong h = 0;
   [((OrgApacheLuceneUtilFstFST *) nil_chk(self->fst_)) readFirstRealTargetArcWithLong:node withOrgApacheLuceneUtilFstFST_Arc:self->scratchArc_ withOrgApacheLuceneUtilFstFST_BytesReader:self->in_];
-  while (YES) {
+  while (true) {
     h = PRIME * h + ((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(self->scratchArc_))->label_;
     h = PRIME * h + (jint) (self->scratchArc_->target_ ^ (JreRShift64(self->scratchArc_->target_, 32)));
     h = PRIME * h + ((jint) [nil_chk(self->scratchArc_->output_) hash]);
@@ -215,7 +215,7 @@ jlong OrgApacheLuceneUtilFstNodeHash_hash__WithLong_(OrgApacheLuceneUtilFstNodeH
 void OrgApacheLuceneUtilFstNodeHash_addNewWithLong_(OrgApacheLuceneUtilFstNodeHash *self, jlong address) {
   jlong pos = OrgApacheLuceneUtilFstNodeHash_hash__WithLong_(self, address) & self->mask_;
   jint c = 0;
-  while (YES) {
+  while (true) {
     if ([((OrgApacheLuceneUtilPackedPagedGrowableWriter *) nil_chk(self->table_)) getWithLong:pos] == 0) {
       [self->table_ setWithLong:pos withLong:address];
       break;

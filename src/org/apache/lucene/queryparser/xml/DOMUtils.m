@@ -118,10 +118,12 @@ __attribute__((unused)) static void OrgApacheLuceneQueryparserXmlDOMUtils_getTex
   return OrgApacheLuceneQueryparserXmlDOMUtils_loadXMLWithJavaIoReader_(is);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueryparserXmlDOMUtils_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

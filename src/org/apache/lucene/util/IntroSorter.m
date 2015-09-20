@@ -14,10 +14,12 @@
   return OrgApacheLuceneUtilIntroSorter_ceilLog2WithInt_(n);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilIntroSorter_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)sortWithInt:(jint)from
             withInt:(jint)to {

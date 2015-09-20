@@ -73,10 +73,12 @@ NSString *OrgApacheLuceneAnalysisNlDutchAnalyzer_DEFAULT_STOPWORD_FILE_ = @"dutc
   return OrgApacheLuceneAnalysisNlDutchAnalyzer_getDefaultStopSet();
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisNlDutchAnalyzer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords {
   OrgApacheLuceneAnalysisNlDutchAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(self, stopwords);
@@ -186,7 +188,7 @@ void OrgApacheLuceneAnalysisNlDutchAnalyzer_initWithOrgApacheLuceneAnalysisUtilC
     JreStrongAssign(&self->stemdict_, nil);
   }
   else {
-    OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder *builder = [new_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder_initWithBoolean_(NO) autorelease];
+    OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder *builder = [new_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder_initWithBoolean_(false) autorelease];
     OrgApacheLuceneAnalysisUtilCharArrayMap_EntryIterator *iter = [((OrgApacheLuceneAnalysisUtilCharArrayMap_EntrySet *) nil_chk([stemOverrideDict entrySet])) iterator];
     OrgApacheLuceneUtilCharsRefBuilder *spare = [new_OrgApacheLuceneUtilCharsRefBuilder_init() autorelease];
     while ([((OrgApacheLuceneAnalysisUtilCharArrayMap_EntryIterator *) nil_chk(iter)) hasNext]) {
@@ -215,10 +217,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisNlDutchAnalyzer_DefaultSetHolder)
 
 @implementation OrgApacheLuceneAnalysisNlDutchAnalyzer_DefaultSetHolder
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisNlDutchAnalyzer_DefaultSetHolder_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisNlDutchAnalyzer_DefaultSetHolder class]) {
@@ -229,7 +233,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisNlDutchAnalyzer_DefaultSetHolder)
       @catch (JavaIoIOException *ex) {
         @throw [new_JavaLangRuntimeException_initWithNSString_(@"Unable to load default stopword set") autorelease];
       }
-      JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisNlDutchAnalyzer_DefaultSetHolder_DEFAULT_STEM_DICT_, new_OrgApacheLuceneAnalysisUtilCharArrayMap_initWithInt_withBoolean_(4, NO));
+      JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisNlDutchAnalyzer_DefaultSetHolder_DEFAULT_STEM_DICT_, new_OrgApacheLuceneAnalysisUtilCharArrayMap_initWithInt_withBoolean_(4, false));
       [OrgApacheLuceneAnalysisNlDutchAnalyzer_DefaultSetHolder_DEFAULT_STEM_DICT_ putWithNSString:@"fiets" withId:@"fiets"];
       [OrgApacheLuceneAnalysisNlDutchAnalyzer_DefaultSetHolder_DEFAULT_STEM_DICT_ putWithNSString:@"bromfiets" withId:@"bromfiets"];
       [OrgApacheLuceneAnalysisNlDutchAnalyzer_DefaultSetHolder_DEFAULT_STEM_DICT_ putWithNSString:@"ei" withId:@"eier"];

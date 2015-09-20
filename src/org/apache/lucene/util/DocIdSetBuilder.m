@@ -69,7 +69,7 @@ __attribute__((unused)) static jint OrgApacheLuceneUtilDocIdSetBuilder_dedupWith
     [bitSet_ or__WithOrgApacheLuceneSearchDocIdSetIterator:iter];
   }
   else {
-    while (YES) {
+    while (true) {
       JreAssert((((IOSIntArray *) nil_chk(buffer_))->size_ <= threshold_), (@"org/apache/lucene/util/DocIdSetBuilder.java:90 condition failed: assert buffer.length <= threshold;"));
       jint end = buffer_->size_;
       for (jint i = bufferSize_; i < end; ++i) {

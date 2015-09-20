@@ -105,8 +105,8 @@ withOrgApacheLuceneUtilBytesRefArray:(IOSObjectArray *)terms {
 }
 
 - (jboolean)isEqual:(id)obj {
-  if ([super isEqual:obj] == NO) {
-    return NO;
+  if ([super isEqual:obj] == false) {
+    return false;
   }
   OrgApacheLuceneSearchDocValuesTermsFilter *other = (OrgApacheLuceneSearchDocValuesTermsFilter *) check_class_cast(obj, [OrgApacheLuceneSearchDocValuesTermsFilter class]);
   return [((NSString *) nil_chk(field_)) isEqual:((OrgApacheLuceneSearchDocValuesTermsFilter *) nil_chk(other))->field_] && JavaUtilArrays_equalsWithNSObjectArray_withNSObjectArray_(terms_, other->terms_);
@@ -180,7 +180,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocValuesTermsFilter)
 - (jboolean)matchDocWithInt:(jint)doc {
   jint ord = [((OrgApacheLuceneIndexSortedDocValues *) nil_chk(val$fcsi_)) getOrdWithInt:doc];
   if (ord == -1) {
-    return NO;
+    return false;
   }
   else {
     return [((OrgApacheLuceneUtilFixedBitSet *) nil_chk(val$bits_)) getWithInt:ord];

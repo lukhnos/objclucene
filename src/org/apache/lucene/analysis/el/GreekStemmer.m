@@ -358,29 +358,31 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisElGreekStemmer)
   return OrgApacheLuceneAnalysisElGreekStemmer_endsWithVowelNoYWithCharArray_withInt_(self, s, len);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisElGreekStemmer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisElGreekStemmer class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisElGreekStemmer_exc4_, new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ @"\u03b8", @"\u03b4", @"\u03b5\u03bb", @"\u03b3\u03b1\u03bb", @"\u03bd", @"\u03c0", @"\u03b9\u03b4", @"\u03c0\u03b1\u03c1" } count:8 type:NSString_class_()]), NO));
-    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisElGreekStemmer_exc6_, new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ @"\u03b1\u03bb", @"\u03b1\u03b4", @"\u03b5\u03bd\u03b4", @"\u03b1\u03bc\u03b1\u03bd", @"\u03b1\u03bc\u03bc\u03bf\u03c7\u03b1\u03bb", @"\u03b7\u03b8", @"\u03b1\u03bd\u03b7\u03b8", @"\u03b1\u03bd\u03c4\u03b9\u03b4", @"\u03c6\u03c5\u03c3", @"\u03b2\u03c1\u03c9\u03bc", @"\u03b3\u03b5\u03c1", @"\u03b5\u03be\u03c9\u03b4", @"\u03ba\u03b1\u03bb\u03c0", @"\u03ba\u03b1\u03bb\u03bb\u03b9\u03bd", @"\u03ba\u03b1\u03c4\u03b1\u03b4", @"\u03bc\u03bf\u03c5\u03bb", @"\u03bc\u03c0\u03b1\u03bd", @"\u03bc\u03c0\u03b1\u03b3\u03b9\u03b1\u03c4", @"\u03bc\u03c0\u03bf\u03bb", @"\u03bc\u03c0\u03bf\u03c3", @"\u03bd\u03b9\u03c4", @"\u03be\u03b9\u03ba", @"\u03c3\u03c5\u03bd\u03bf\u03bc\u03b7\u03bb", @"\u03c0\u03b5\u03c4\u03c3", @"\u03c0\u03b9\u03c4\u03c3", @"\u03c0\u03b9\u03ba\u03b1\u03bd\u03c4", @"\u03c0\u03bb\u03b9\u03b1\u03c4\u03c3", @"\u03c0\u03bf\u03c3\u03c4\u03b5\u03bb\u03bd", @"\u03c0\u03c1\u03c9\u03c4\u03bf\u03b4", @"\u03c3\u03b5\u03c1\u03c4", @"\u03c3\u03c5\u03bd\u03b1\u03b4", @"\u03c4\u03c3\u03b1\u03bc", @"\u03c5\u03c0\u03bf\u03b4", @"\u03c6\u03b9\u03bb\u03bf\u03bd", @"\u03c6\u03c5\u03bb\u03bf\u03b4", @"\u03c7\u03b1\u03c3" } count:36 type:NSString_class_()]), NO));
-    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisElGreekStemmer_exc7_, new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ @"\u03b1\u03bd\u03b1\u03c0", @"\u03b1\u03c0\u03bf\u03b8", @"\u03b1\u03c0\u03bf\u03ba", @"\u03b1\u03c0\u03bf\u03c3\u03c4", @"\u03b2\u03bf\u03c5\u03b2", @"\u03be\u03b5\u03b8", @"\u03bf\u03c5\u03bb", @"\u03c0\u03b5\u03b8", @"\u03c0\u03b9\u03ba\u03c1", @"\u03c0\u03bf\u03c4", @"\u03c3\u03b9\u03c7", @"\u03c7" } count:12 type:NSString_class_()]), NO));
-    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisElGreekStemmer_exc8a_, new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ @"\u03c4\u03c1", @"\u03c4\u03c3" } count:2 type:NSString_class_()]), NO));
-    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisElGreekStemmer_exc8b_, new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ @"\u03b2\u03b5\u03c4\u03b5\u03c1", @"\u03b2\u03bf\u03c5\u03bb\u03ba", @"\u03b2\u03c1\u03b1\u03c7\u03bc", @"\u03b3", @"\u03b4\u03c1\u03b1\u03b4\u03bf\u03c5\u03bc", @"\u03b8", @"\u03ba\u03b1\u03bb\u03c0\u03bf\u03c5\u03b6", @"\u03ba\u03b1\u03c3\u03c4\u03b5\u03bb", @"\u03ba\u03bf\u03c1\u03bc\u03bf\u03c1", @"\u03bb\u03b1\u03bf\u03c0\u03bb", @"\u03bc\u03c9\u03b1\u03bc\u03b5\u03b8", @"\u03bc", @"\u03bc\u03bf\u03c5\u03c3\u03bf\u03c5\u03bb\u03bc", @"\u03bd", @"\u03bf\u03c5\u03bb", @"\u03c0", @"\u03c0\u03b5\u03bb\u03b5\u03ba", @"\u03c0\u03bb", @"\u03c0\u03bf\u03bb\u03b9\u03c3", @"\u03c0\u03bf\u03c1\u03c4\u03bf\u03bb", @"\u03c3\u03b1\u03c1\u03b1\u03ba\u03b1\u03c4\u03c3", @"\u03c3\u03bf\u03c5\u03bb\u03c4", @"\u03c4\u03c3\u03b1\u03c1\u03bb\u03b1\u03c4", @"\u03bf\u03c1\u03c6", @"\u03c4\u03c3\u03b9\u03b3\u03b3", @"\u03c4\u03c3\u03bf\u03c0", @"\u03c6\u03c9\u03c4\u03bf\u03c3\u03c4\u03b5\u03c6", @"\u03c7", @"\u03c8\u03c5\u03c7\u03bf\u03c0\u03bb", @"\u03b1\u03b3", @"\u03bf\u03c1\u03c6", @"\u03b3\u03b1\u03bb", @"\u03b3\u03b5\u03c1", @"\u03b4\u03b5\u03ba", @"\u03b4\u03b9\u03c0\u03bb", @"\u03b1\u03bc\u03b5\u03c1\u03b9\u03ba\u03b1\u03bd", @"\u03bf\u03c5\u03c1", @"\u03c0\u03b9\u03b8", @"\u03c0\u03bf\u03c5\u03c1\u03b9\u03c4", @"\u03c3", @"\u03b6\u03c9\u03bd\u03c4", @"\u03b9\u03ba", @"\u03ba\u03b1\u03c3\u03c4", @"\u03ba\u03bf\u03c0", @"\u03bb\u03b9\u03c7", @"\u03bb\u03bf\u03c5\u03b8\u03b7\u03c1", @"\u03bc\u03b1\u03b9\u03bd\u03c4", @"\u03bc\u03b5\u03bb", @"\u03c3\u03b9\u03b3", @"\u03c3\u03c0", @"\u03c3\u03c4\u03b5\u03b3", @"\u03c4\u03c1\u03b1\u03b3", @"\u03c4\u03c3\u03b1\u03b3", @"\u03c6", @"\u03b5\u03c1", @"\u03b1\u03b4\u03b1\u03c0", @"\u03b1\u03b8\u03b9\u03b3\u03b3", @"\u03b1\u03bc\u03b7\u03c7", @"\u03b1\u03bd\u03b9\u03ba", @"\u03b1\u03bd\u03bf\u03c1\u03b3", @"\u03b1\u03c0\u03b7\u03b3", @"\u03b1\u03c0\u03b9\u03b8", @"\u03b1\u03c4\u03c3\u03b9\u03b3\u03b3", @"\u03b2\u03b1\u03c3", @"\u03b2\u03b1\u03c3\u03ba", @"\u03b2\u03b1\u03b8\u03c5\u03b3\u03b1\u03bb", @"\u03b2\u03b9\u03bf\u03bc\u03b7\u03c7", @"\u03b2\u03c1\u03b1\u03c7\u03c5\u03ba", @"\u03b4\u03b9\u03b1\u03c4", @"\u03b4\u03b9\u03b1\u03c6", @"\u03b5\u03bd\u03bf\u03c1\u03b3", @"\u03b8\u03c5\u03c3", @"\u03ba\u03b1\u03c0\u03bd\u03bf\u03b2\u03b9\u03bf\u03bc\u03b7\u03c7", @"\u03ba\u03b1\u03c4\u03b1\u03b3\u03b1\u03bb", @"\u03ba\u03bb\u03b9\u03b2", @"\u03ba\u03bf\u03b9\u03bb\u03b1\u03c1\u03c6", @"\u03bb\u03b9\u03b2", @"\u03bc\u03b5\u03b3\u03bb\u03bf\u03b2\u03b9\u03bf\u03bc\u03b7\u03c7", @"\u03bc\u03b9\u03ba\u03c1\u03bf\u03b2\u03b9\u03bf\u03bc\u03b7\u03c7", @"\u03bd\u03c4\u03b1\u03b2", @"\u03be\u03b7\u03c1\u03bf\u03ba\u03bb\u03b9\u03b2", @"\u03bf\u03bb\u03b9\u03b3\u03bf\u03b4\u03b1\u03bc", @"\u03bf\u03bb\u03bf\u03b3\u03b1\u03bb", @"\u03c0\u03b5\u03bd\u03c4\u03b1\u03c1\u03c6", @"\u03c0\u03b5\u03c1\u03b7\u03c6", @"\u03c0\u03b5\u03c1\u03b9\u03c4\u03c1", @"\u03c0\u03bb\u03b1\u03c4", @"\u03c0\u03bf\u03bb\u03c5\u03b4\u03b1\u03c0", @"\u03c0\u03bf\u03bb\u03c5\u03bc\u03b7\u03c7", @"\u03c3\u03c4\u03b5\u03c6", @"\u03c4\u03b1\u03b2", @"\u03c4\u03b5\u03c4", @"\u03c5\u03c0\u03b5\u03c1\u03b7\u03c6", @"\u03c5\u03c0\u03bf\u03ba\u03bf\u03c0", @"\u03c7\u03b1\u03bc\u03b7\u03bb\u03bf\u03b4\u03b1\u03c0", @"\u03c8\u03b7\u03bb\u03bf\u03c4\u03b1\u03b2" } count:96 type:NSString_class_()]), NO));
-    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisElGreekStemmer_exc9_, new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ @"\u03b1\u03b2\u03b1\u03c1", @"\u03b2\u03b5\u03bd", @"\u03b5\u03bd\u03b1\u03c1", @"\u03b1\u03b2\u03c1", @"\u03b1\u03b4", @"\u03b1\u03b8", @"\u03b1\u03bd", @"\u03b1\u03c0\u03bb", @"\u03b2\u03b1\u03c1\u03bf\u03bd", @"\u03bd\u03c4\u03c1", @"\u03c3\u03ba", @"\u03ba\u03bf\u03c0", @"\u03bc\u03c0\u03bf\u03c1", @"\u03bd\u03b9\u03c6", @"\u03c0\u03b1\u03b3", @"\u03c0\u03b1\u03c1\u03b1\u03ba\u03b1\u03bb", @"\u03c3\u03b5\u03c1\u03c0", @"\u03c3\u03ba\u03b5\u03bb", @"\u03c3\u03c5\u03c1\u03c6", @"\u03c4\u03bf\u03ba", @"\u03c5", @"\u03b4", @"\u03b5\u03bc", @"\u03b8\u03b1\u03c1\u03c1", @"\u03b8" } count:25 type:NSString_class_()]), NO));
-    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisElGreekStemmer_exc12a_, new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ @"\u03c0", @"\u03b1\u03c0", @"\u03c3\u03c5\u03bc\u03c0", @"\u03b1\u03c3\u03c5\u03bc\u03c0", @"\u03b1\u03ba\u03b1\u03c4\u03b1\u03c0", @"\u03b1\u03bc\u03b5\u03c4\u03b1\u03bc\u03c6" } count:6 type:NSString_class_()]), NO));
-    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisElGreekStemmer_exc12b_, new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ @"\u03b1\u03bb", @"\u03b1\u03c1", @"\u03b5\u03ba\u03c4\u03b5\u03bb", @"\u03b6", @"\u03bc", @"\u03be", @"\u03c0\u03b1\u03c1\u03b1\u03ba\u03b1\u03bb", @"\u03b1\u03c1", @"\u03c0\u03c1\u03bf", @"\u03bd\u03b9\u03c3" } count:10 type:NSString_class_()]), NO));
-    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisElGreekStemmer_exc13_, new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ @"\u03b4\u03b9\u03b1\u03b8", @"\u03b8", @"\u03c0\u03b1\u03c1\u03b1\u03ba\u03b1\u03c4\u03b1\u03b8", @"\u03c0\u03c1\u03bf\u03c3\u03b8", @"\u03c3\u03c5\u03bd\u03b8" } count:5 type:NSString_class_()]), NO));
-    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisElGreekStemmer_exc14_, new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ @"\u03c6\u03b1\u03c1\u03bc\u03b1\u03ba", @"\u03c7\u03b1\u03b4", @"\u03b1\u03b3\u03ba", @"\u03b1\u03bd\u03b1\u03c1\u03c1", @"\u03b2\u03c1\u03bf\u03bc", @"\u03b5\u03ba\u03bb\u03b9\u03c0", @"\u03bb\u03b1\u03bc\u03c0\u03b9\u03b4", @"\u03bb\u03b5\u03c7", @"\u03bc", @"\u03c0\u03b1\u03c4", @"\u03c1", @"\u03bb", @"\u03bc\u03b5\u03b4", @"\u03bc\u03b5\u03c3\u03b1\u03b6", @"\u03c5\u03c0\u03bf\u03c4\u03b5\u03b9\u03bd", @"\u03b1\u03bc", @"\u03b1\u03b9\u03b8", @"\u03b1\u03bd\u03b7\u03ba", @"\u03b4\u03b5\u03c3\u03c0\u03bf\u03b6", @"\u03b5\u03bd\u03b4\u03b9\u03b1\u03c6\u03b5\u03c1", @"\u03b4\u03b5", @"\u03b4\u03b5\u03c5\u03c4\u03b5\u03c1\u03b5\u03c5", @"\u03ba\u03b1\u03b8\u03b1\u03c1\u03b5\u03c5", @"\u03c0\u03bb\u03b5", @"\u03c4\u03c3\u03b1" } count:25 type:NSString_class_()]), NO));
-    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisElGreekStemmer_exc15a_, new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ @"\u03b1\u03b2\u03b1\u03c3\u03c4", @"\u03c0\u03bf\u03bb\u03c5\u03c6", @"\u03b1\u03b4\u03b7\u03c6", @"\u03c0\u03b1\u03bc\u03c6", @"\u03c1", @"\u03b1\u03c3\u03c0", @"\u03b1\u03c6", @"\u03b1\u03bc\u03b1\u03bb", @"\u03b1\u03bc\u03b1\u03bb\u03bb\u03b9", @"\u03b1\u03bd\u03c5\u03c3\u03c4", @"\u03b1\u03c0\u03b5\u03c1", @"\u03b1\u03c3\u03c0\u03b1\u03c1", @"\u03b1\u03c7\u03b1\u03c1", @"\u03b4\u03b5\u03c1\u03b2\u03b5\u03bd", @"\u03b4\u03c1\u03bf\u03c3\u03bf\u03c0", @"\u03be\u03b5\u03c6", @"\u03bd\u03b5\u03bf\u03c0", @"\u03bd\u03bf\u03bc\u03bf\u03c4", @"\u03bf\u03bb\u03bf\u03c0", @"\u03bf\u03bc\u03bf\u03c4", @"\u03c0\u03c1\u03bf\u03c3\u03c4", @"\u03c0\u03c1\u03bf\u03c3\u03c9\u03c0\u03bf\u03c0", @"\u03c3\u03c5\u03bc\u03c0", @"\u03c3\u03c5\u03bd\u03c4", @"\u03c4", @"\u03c5\u03c0\u03bf\u03c4", @"\u03c7\u03b1\u03c1", @"\u03b1\u03b5\u03b9\u03c0", @"\u03b1\u03b9\u03bc\u03bf\u03c3\u03c4", @"\u03b1\u03bd\u03c5\u03c0", @"\u03b1\u03c0\u03bf\u03c4", @"\u03b1\u03c1\u03c4\u03b9\u03c0", @"\u03b4\u03b9\u03b1\u03c4", @"\u03b5\u03bd", @"\u03b5\u03c0\u03b9\u03c4", @"\u03ba\u03c1\u03bf\u03ba\u03b1\u03bb\u03bf\u03c0", @"\u03c3\u03b9\u03b4\u03b7\u03c1\u03bf\u03c0", @"\u03bb", @"\u03bd\u03b1\u03c5", @"\u03bf\u03c5\u03bb\u03b1\u03bc", @"\u03bf\u03c5\u03c1", @"\u03c0", @"\u03c4\u03c1", @"\u03bc" } count:44 type:NSString_class_()]), NO));
-    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisElGreekStemmer_exc15b_, new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ @"\u03c8\u03bf\u03c6", @"\u03bd\u03b1\u03c5\u03bb\u03bf\u03c7" } count:2 type:NSString_class_()]), NO));
-    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisElGreekStemmer_exc16_, new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ @"\u03bd", @"\u03c7\u03b5\u03c1\u03c3\u03bf\u03bd", @"\u03b4\u03c9\u03b4\u03b5\u03ba\u03b1\u03bd", @"\u03b5\u03c1\u03b7\u03bc\u03bf\u03bd", @"\u03bc\u03b5\u03b3\u03b1\u03bb\u03bf\u03bd", @"\u03b5\u03c0\u03c4\u03b1\u03bd" } count:6 type:NSString_class_()]), NO));
-    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisElGreekStemmer_exc17_, new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ @"\u03b1\u03c3\u03b2", @"\u03c3\u03b2", @"\u03b1\u03c7\u03c1", @"\u03c7\u03c1", @"\u03b1\u03c0\u03bb", @"\u03b1\u03b5\u03b9\u03bc\u03bd", @"\u03b4\u03c5\u03c3\u03c7\u03c1", @"\u03b5\u03c5\u03c7\u03c1", @"\u03ba\u03bf\u03b9\u03bd\u03bf\u03c7\u03c1", @"\u03c0\u03b1\u03bb\u03b9\u03bc\u03c8" } count:10 type:NSString_class_()]), NO));
-    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisElGreekStemmer_exc18_, new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ @"\u03bd", @"\u03c1", @"\u03c3\u03c0\u03b9", @"\u03c3\u03c4\u03c1\u03b1\u03b2\u03bf\u03bc\u03bf\u03c5\u03c4\u03c3", @"\u03ba\u03b1\u03ba\u03bf\u03bc\u03bf\u03c5\u03c4\u03c3", @"\u03b5\u03be\u03c9\u03bd" } count:6 type:NSString_class_()]), NO));
-    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisElGreekStemmer_exc19_, new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ @"\u03c0\u03b1\u03c1\u03b1\u03c3\u03bf\u03c5\u03c3", @"\u03c6", @"\u03c7", @"\u03c9\u03c1\u03b9\u03bf\u03c0\u03bb", @"\u03b1\u03b6", @"\u03b1\u03bb\u03bb\u03bf\u03c3\u03bf\u03c5\u03c3", @"\u03b1\u03c3\u03bf\u03c5\u03c3" } count:7 type:NSString_class_()]), NO));
+    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisElGreekStemmer_exc4_, new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ @"\u03b8", @"\u03b4", @"\u03b5\u03bb", @"\u03b3\u03b1\u03bb", @"\u03bd", @"\u03c0", @"\u03b9\u03b4", @"\u03c0\u03b1\u03c1" } count:8 type:NSString_class_()]), false));
+    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisElGreekStemmer_exc6_, new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ @"\u03b1\u03bb", @"\u03b1\u03b4", @"\u03b5\u03bd\u03b4", @"\u03b1\u03bc\u03b1\u03bd", @"\u03b1\u03bc\u03bc\u03bf\u03c7\u03b1\u03bb", @"\u03b7\u03b8", @"\u03b1\u03bd\u03b7\u03b8", @"\u03b1\u03bd\u03c4\u03b9\u03b4", @"\u03c6\u03c5\u03c3", @"\u03b2\u03c1\u03c9\u03bc", @"\u03b3\u03b5\u03c1", @"\u03b5\u03be\u03c9\u03b4", @"\u03ba\u03b1\u03bb\u03c0", @"\u03ba\u03b1\u03bb\u03bb\u03b9\u03bd", @"\u03ba\u03b1\u03c4\u03b1\u03b4", @"\u03bc\u03bf\u03c5\u03bb", @"\u03bc\u03c0\u03b1\u03bd", @"\u03bc\u03c0\u03b1\u03b3\u03b9\u03b1\u03c4", @"\u03bc\u03c0\u03bf\u03bb", @"\u03bc\u03c0\u03bf\u03c3", @"\u03bd\u03b9\u03c4", @"\u03be\u03b9\u03ba", @"\u03c3\u03c5\u03bd\u03bf\u03bc\u03b7\u03bb", @"\u03c0\u03b5\u03c4\u03c3", @"\u03c0\u03b9\u03c4\u03c3", @"\u03c0\u03b9\u03ba\u03b1\u03bd\u03c4", @"\u03c0\u03bb\u03b9\u03b1\u03c4\u03c3", @"\u03c0\u03bf\u03c3\u03c4\u03b5\u03bb\u03bd", @"\u03c0\u03c1\u03c9\u03c4\u03bf\u03b4", @"\u03c3\u03b5\u03c1\u03c4", @"\u03c3\u03c5\u03bd\u03b1\u03b4", @"\u03c4\u03c3\u03b1\u03bc", @"\u03c5\u03c0\u03bf\u03b4", @"\u03c6\u03b9\u03bb\u03bf\u03bd", @"\u03c6\u03c5\u03bb\u03bf\u03b4", @"\u03c7\u03b1\u03c3" } count:36 type:NSString_class_()]), false));
+    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisElGreekStemmer_exc7_, new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ @"\u03b1\u03bd\u03b1\u03c0", @"\u03b1\u03c0\u03bf\u03b8", @"\u03b1\u03c0\u03bf\u03ba", @"\u03b1\u03c0\u03bf\u03c3\u03c4", @"\u03b2\u03bf\u03c5\u03b2", @"\u03be\u03b5\u03b8", @"\u03bf\u03c5\u03bb", @"\u03c0\u03b5\u03b8", @"\u03c0\u03b9\u03ba\u03c1", @"\u03c0\u03bf\u03c4", @"\u03c3\u03b9\u03c7", @"\u03c7" } count:12 type:NSString_class_()]), false));
+    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisElGreekStemmer_exc8a_, new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ @"\u03c4\u03c1", @"\u03c4\u03c3" } count:2 type:NSString_class_()]), false));
+    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisElGreekStemmer_exc8b_, new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ @"\u03b2\u03b5\u03c4\u03b5\u03c1", @"\u03b2\u03bf\u03c5\u03bb\u03ba", @"\u03b2\u03c1\u03b1\u03c7\u03bc", @"\u03b3", @"\u03b4\u03c1\u03b1\u03b4\u03bf\u03c5\u03bc", @"\u03b8", @"\u03ba\u03b1\u03bb\u03c0\u03bf\u03c5\u03b6", @"\u03ba\u03b1\u03c3\u03c4\u03b5\u03bb", @"\u03ba\u03bf\u03c1\u03bc\u03bf\u03c1", @"\u03bb\u03b1\u03bf\u03c0\u03bb", @"\u03bc\u03c9\u03b1\u03bc\u03b5\u03b8", @"\u03bc", @"\u03bc\u03bf\u03c5\u03c3\u03bf\u03c5\u03bb\u03bc", @"\u03bd", @"\u03bf\u03c5\u03bb", @"\u03c0", @"\u03c0\u03b5\u03bb\u03b5\u03ba", @"\u03c0\u03bb", @"\u03c0\u03bf\u03bb\u03b9\u03c3", @"\u03c0\u03bf\u03c1\u03c4\u03bf\u03bb", @"\u03c3\u03b1\u03c1\u03b1\u03ba\u03b1\u03c4\u03c3", @"\u03c3\u03bf\u03c5\u03bb\u03c4", @"\u03c4\u03c3\u03b1\u03c1\u03bb\u03b1\u03c4", @"\u03bf\u03c1\u03c6", @"\u03c4\u03c3\u03b9\u03b3\u03b3", @"\u03c4\u03c3\u03bf\u03c0", @"\u03c6\u03c9\u03c4\u03bf\u03c3\u03c4\u03b5\u03c6", @"\u03c7", @"\u03c8\u03c5\u03c7\u03bf\u03c0\u03bb", @"\u03b1\u03b3", @"\u03bf\u03c1\u03c6", @"\u03b3\u03b1\u03bb", @"\u03b3\u03b5\u03c1", @"\u03b4\u03b5\u03ba", @"\u03b4\u03b9\u03c0\u03bb", @"\u03b1\u03bc\u03b5\u03c1\u03b9\u03ba\u03b1\u03bd", @"\u03bf\u03c5\u03c1", @"\u03c0\u03b9\u03b8", @"\u03c0\u03bf\u03c5\u03c1\u03b9\u03c4", @"\u03c3", @"\u03b6\u03c9\u03bd\u03c4", @"\u03b9\u03ba", @"\u03ba\u03b1\u03c3\u03c4", @"\u03ba\u03bf\u03c0", @"\u03bb\u03b9\u03c7", @"\u03bb\u03bf\u03c5\u03b8\u03b7\u03c1", @"\u03bc\u03b1\u03b9\u03bd\u03c4", @"\u03bc\u03b5\u03bb", @"\u03c3\u03b9\u03b3", @"\u03c3\u03c0", @"\u03c3\u03c4\u03b5\u03b3", @"\u03c4\u03c1\u03b1\u03b3", @"\u03c4\u03c3\u03b1\u03b3", @"\u03c6", @"\u03b5\u03c1", @"\u03b1\u03b4\u03b1\u03c0", @"\u03b1\u03b8\u03b9\u03b3\u03b3", @"\u03b1\u03bc\u03b7\u03c7", @"\u03b1\u03bd\u03b9\u03ba", @"\u03b1\u03bd\u03bf\u03c1\u03b3", @"\u03b1\u03c0\u03b7\u03b3", @"\u03b1\u03c0\u03b9\u03b8", @"\u03b1\u03c4\u03c3\u03b9\u03b3\u03b3", @"\u03b2\u03b1\u03c3", @"\u03b2\u03b1\u03c3\u03ba", @"\u03b2\u03b1\u03b8\u03c5\u03b3\u03b1\u03bb", @"\u03b2\u03b9\u03bf\u03bc\u03b7\u03c7", @"\u03b2\u03c1\u03b1\u03c7\u03c5\u03ba", @"\u03b4\u03b9\u03b1\u03c4", @"\u03b4\u03b9\u03b1\u03c6", @"\u03b5\u03bd\u03bf\u03c1\u03b3", @"\u03b8\u03c5\u03c3", @"\u03ba\u03b1\u03c0\u03bd\u03bf\u03b2\u03b9\u03bf\u03bc\u03b7\u03c7", @"\u03ba\u03b1\u03c4\u03b1\u03b3\u03b1\u03bb", @"\u03ba\u03bb\u03b9\u03b2", @"\u03ba\u03bf\u03b9\u03bb\u03b1\u03c1\u03c6", @"\u03bb\u03b9\u03b2", @"\u03bc\u03b5\u03b3\u03bb\u03bf\u03b2\u03b9\u03bf\u03bc\u03b7\u03c7", @"\u03bc\u03b9\u03ba\u03c1\u03bf\u03b2\u03b9\u03bf\u03bc\u03b7\u03c7", @"\u03bd\u03c4\u03b1\u03b2", @"\u03be\u03b7\u03c1\u03bf\u03ba\u03bb\u03b9\u03b2", @"\u03bf\u03bb\u03b9\u03b3\u03bf\u03b4\u03b1\u03bc", @"\u03bf\u03bb\u03bf\u03b3\u03b1\u03bb", @"\u03c0\u03b5\u03bd\u03c4\u03b1\u03c1\u03c6", @"\u03c0\u03b5\u03c1\u03b7\u03c6", @"\u03c0\u03b5\u03c1\u03b9\u03c4\u03c1", @"\u03c0\u03bb\u03b1\u03c4", @"\u03c0\u03bf\u03bb\u03c5\u03b4\u03b1\u03c0", @"\u03c0\u03bf\u03bb\u03c5\u03bc\u03b7\u03c7", @"\u03c3\u03c4\u03b5\u03c6", @"\u03c4\u03b1\u03b2", @"\u03c4\u03b5\u03c4", @"\u03c5\u03c0\u03b5\u03c1\u03b7\u03c6", @"\u03c5\u03c0\u03bf\u03ba\u03bf\u03c0", @"\u03c7\u03b1\u03bc\u03b7\u03bb\u03bf\u03b4\u03b1\u03c0", @"\u03c8\u03b7\u03bb\u03bf\u03c4\u03b1\u03b2" } count:96 type:NSString_class_()]), false));
+    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisElGreekStemmer_exc9_, new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ @"\u03b1\u03b2\u03b1\u03c1", @"\u03b2\u03b5\u03bd", @"\u03b5\u03bd\u03b1\u03c1", @"\u03b1\u03b2\u03c1", @"\u03b1\u03b4", @"\u03b1\u03b8", @"\u03b1\u03bd", @"\u03b1\u03c0\u03bb", @"\u03b2\u03b1\u03c1\u03bf\u03bd", @"\u03bd\u03c4\u03c1", @"\u03c3\u03ba", @"\u03ba\u03bf\u03c0", @"\u03bc\u03c0\u03bf\u03c1", @"\u03bd\u03b9\u03c6", @"\u03c0\u03b1\u03b3", @"\u03c0\u03b1\u03c1\u03b1\u03ba\u03b1\u03bb", @"\u03c3\u03b5\u03c1\u03c0", @"\u03c3\u03ba\u03b5\u03bb", @"\u03c3\u03c5\u03c1\u03c6", @"\u03c4\u03bf\u03ba", @"\u03c5", @"\u03b4", @"\u03b5\u03bc", @"\u03b8\u03b1\u03c1\u03c1", @"\u03b8" } count:25 type:NSString_class_()]), false));
+    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisElGreekStemmer_exc12a_, new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ @"\u03c0", @"\u03b1\u03c0", @"\u03c3\u03c5\u03bc\u03c0", @"\u03b1\u03c3\u03c5\u03bc\u03c0", @"\u03b1\u03ba\u03b1\u03c4\u03b1\u03c0", @"\u03b1\u03bc\u03b5\u03c4\u03b1\u03bc\u03c6" } count:6 type:NSString_class_()]), false));
+    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisElGreekStemmer_exc12b_, new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ @"\u03b1\u03bb", @"\u03b1\u03c1", @"\u03b5\u03ba\u03c4\u03b5\u03bb", @"\u03b6", @"\u03bc", @"\u03be", @"\u03c0\u03b1\u03c1\u03b1\u03ba\u03b1\u03bb", @"\u03b1\u03c1", @"\u03c0\u03c1\u03bf", @"\u03bd\u03b9\u03c3" } count:10 type:NSString_class_()]), false));
+    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisElGreekStemmer_exc13_, new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ @"\u03b4\u03b9\u03b1\u03b8", @"\u03b8", @"\u03c0\u03b1\u03c1\u03b1\u03ba\u03b1\u03c4\u03b1\u03b8", @"\u03c0\u03c1\u03bf\u03c3\u03b8", @"\u03c3\u03c5\u03bd\u03b8" } count:5 type:NSString_class_()]), false));
+    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisElGreekStemmer_exc14_, new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ @"\u03c6\u03b1\u03c1\u03bc\u03b1\u03ba", @"\u03c7\u03b1\u03b4", @"\u03b1\u03b3\u03ba", @"\u03b1\u03bd\u03b1\u03c1\u03c1", @"\u03b2\u03c1\u03bf\u03bc", @"\u03b5\u03ba\u03bb\u03b9\u03c0", @"\u03bb\u03b1\u03bc\u03c0\u03b9\u03b4", @"\u03bb\u03b5\u03c7", @"\u03bc", @"\u03c0\u03b1\u03c4", @"\u03c1", @"\u03bb", @"\u03bc\u03b5\u03b4", @"\u03bc\u03b5\u03c3\u03b1\u03b6", @"\u03c5\u03c0\u03bf\u03c4\u03b5\u03b9\u03bd", @"\u03b1\u03bc", @"\u03b1\u03b9\u03b8", @"\u03b1\u03bd\u03b7\u03ba", @"\u03b4\u03b5\u03c3\u03c0\u03bf\u03b6", @"\u03b5\u03bd\u03b4\u03b9\u03b1\u03c6\u03b5\u03c1", @"\u03b4\u03b5", @"\u03b4\u03b5\u03c5\u03c4\u03b5\u03c1\u03b5\u03c5", @"\u03ba\u03b1\u03b8\u03b1\u03c1\u03b5\u03c5", @"\u03c0\u03bb\u03b5", @"\u03c4\u03c3\u03b1" } count:25 type:NSString_class_()]), false));
+    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisElGreekStemmer_exc15a_, new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ @"\u03b1\u03b2\u03b1\u03c3\u03c4", @"\u03c0\u03bf\u03bb\u03c5\u03c6", @"\u03b1\u03b4\u03b7\u03c6", @"\u03c0\u03b1\u03bc\u03c6", @"\u03c1", @"\u03b1\u03c3\u03c0", @"\u03b1\u03c6", @"\u03b1\u03bc\u03b1\u03bb", @"\u03b1\u03bc\u03b1\u03bb\u03bb\u03b9", @"\u03b1\u03bd\u03c5\u03c3\u03c4", @"\u03b1\u03c0\u03b5\u03c1", @"\u03b1\u03c3\u03c0\u03b1\u03c1", @"\u03b1\u03c7\u03b1\u03c1", @"\u03b4\u03b5\u03c1\u03b2\u03b5\u03bd", @"\u03b4\u03c1\u03bf\u03c3\u03bf\u03c0", @"\u03be\u03b5\u03c6", @"\u03bd\u03b5\u03bf\u03c0", @"\u03bd\u03bf\u03bc\u03bf\u03c4", @"\u03bf\u03bb\u03bf\u03c0", @"\u03bf\u03bc\u03bf\u03c4", @"\u03c0\u03c1\u03bf\u03c3\u03c4", @"\u03c0\u03c1\u03bf\u03c3\u03c9\u03c0\u03bf\u03c0", @"\u03c3\u03c5\u03bc\u03c0", @"\u03c3\u03c5\u03bd\u03c4", @"\u03c4", @"\u03c5\u03c0\u03bf\u03c4", @"\u03c7\u03b1\u03c1", @"\u03b1\u03b5\u03b9\u03c0", @"\u03b1\u03b9\u03bc\u03bf\u03c3\u03c4", @"\u03b1\u03bd\u03c5\u03c0", @"\u03b1\u03c0\u03bf\u03c4", @"\u03b1\u03c1\u03c4\u03b9\u03c0", @"\u03b4\u03b9\u03b1\u03c4", @"\u03b5\u03bd", @"\u03b5\u03c0\u03b9\u03c4", @"\u03ba\u03c1\u03bf\u03ba\u03b1\u03bb\u03bf\u03c0", @"\u03c3\u03b9\u03b4\u03b7\u03c1\u03bf\u03c0", @"\u03bb", @"\u03bd\u03b1\u03c5", @"\u03bf\u03c5\u03bb\u03b1\u03bc", @"\u03bf\u03c5\u03c1", @"\u03c0", @"\u03c4\u03c1", @"\u03bc" } count:44 type:NSString_class_()]), false));
+    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisElGreekStemmer_exc15b_, new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ @"\u03c8\u03bf\u03c6", @"\u03bd\u03b1\u03c5\u03bb\u03bf\u03c7" } count:2 type:NSString_class_()]), false));
+    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisElGreekStemmer_exc16_, new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ @"\u03bd", @"\u03c7\u03b5\u03c1\u03c3\u03bf\u03bd", @"\u03b4\u03c9\u03b4\u03b5\u03ba\u03b1\u03bd", @"\u03b5\u03c1\u03b7\u03bc\u03bf\u03bd", @"\u03bc\u03b5\u03b3\u03b1\u03bb\u03bf\u03bd", @"\u03b5\u03c0\u03c4\u03b1\u03bd" } count:6 type:NSString_class_()]), false));
+    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisElGreekStemmer_exc17_, new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ @"\u03b1\u03c3\u03b2", @"\u03c3\u03b2", @"\u03b1\u03c7\u03c1", @"\u03c7\u03c1", @"\u03b1\u03c0\u03bb", @"\u03b1\u03b5\u03b9\u03bc\u03bd", @"\u03b4\u03c5\u03c3\u03c7\u03c1", @"\u03b5\u03c5\u03c7\u03c1", @"\u03ba\u03bf\u03b9\u03bd\u03bf\u03c7\u03c1", @"\u03c0\u03b1\u03bb\u03b9\u03bc\u03c8" } count:10 type:NSString_class_()]), false));
+    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisElGreekStemmer_exc18_, new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ @"\u03bd", @"\u03c1", @"\u03c3\u03c0\u03b9", @"\u03c3\u03c4\u03c1\u03b1\u03b2\u03bf\u03bc\u03bf\u03c5\u03c4\u03c3", @"\u03ba\u03b1\u03ba\u03bf\u03bc\u03bf\u03c5\u03c4\u03c3", @"\u03b5\u03be\u03c9\u03bd" } count:6 type:NSString_class_()]), false));
+    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisElGreekStemmer_exc19_, new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ @"\u03c0\u03b1\u03c1\u03b1\u03c3\u03bf\u03c5\u03c3", @"\u03c6", @"\u03c7", @"\u03c9\u03c1\u03b9\u03bf\u03c0\u03bb", @"\u03b1\u03b6", @"\u03b1\u03bb\u03bb\u03bf\u03c3\u03bf\u03c5\u03c3", @"\u03b1\u03c3\u03bf\u03c5\u03c3" } count:7 type:NSString_class_()]), false));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisElGreekStemmer)
   }
 }
@@ -504,14 +506,14 @@ jint OrgApacheLuceneAnalysisElGreekStemmer_rule5WithCharArray_withInt_(OrgApache
 }
 
 jint OrgApacheLuceneAnalysisElGreekStemmer_rule6WithCharArray_withInt_(OrgApacheLuceneAnalysisElGreekStemmer *self, IOSCharArray *s, jint len) {
-  jboolean removed = NO;
+  jboolean removed = false;
   if (len > 3 && (OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03b9\u03ba\u03b1") || OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03b9\u03ba\u03bf"))) {
     len -= 3;
-    removed = YES;
+    removed = true;
   }
   else if (len > 4 && (OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03b9\u03ba\u03bf\u03c5") || OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03b9\u03ba\u03c9\u03bd"))) {
     len -= 4;
-    removed = YES;
+    removed = true;
   }
   if (removed) {
     if (OrgApacheLuceneAnalysisElGreekStemmer_endsWithVowelWithCharArray_withInt_(self, s, len) || [((OrgApacheLuceneAnalysisUtilCharArraySet *) nil_chk(OrgApacheLuceneAnalysisElGreekStemmer_exc6_)) containsWithCharArray:s withInt:0 withInt:len]) len += 2;
@@ -532,22 +534,22 @@ jint OrgApacheLuceneAnalysisElGreekStemmer_rule7WithCharArray_withInt_(OrgApache
 }
 
 jint OrgApacheLuceneAnalysisElGreekStemmer_rule8WithCharArray_withInt_(OrgApacheLuceneAnalysisElGreekStemmer *self, IOSCharArray *s, jint len) {
-  jboolean removed = NO;
+  jboolean removed = false;
   if (len > 8 && OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03b9\u03bf\u03c5\u03bd\u03c4\u03b1\u03bd\u03b5")) {
     len -= 8;
-    removed = YES;
+    removed = true;
   }
   else if ((len > 7 && OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03b9\u03bf\u03bd\u03c4\u03b1\u03bd\u03b5")) || OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03bf\u03c5\u03bd\u03c4\u03b1\u03bd\u03b5") || OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03b7\u03b8\u03b7\u03ba\u03b1\u03bd\u03b5")) {
     len -= 7;
-    removed = YES;
+    removed = true;
   }
   else if ((len > 6 && OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03b9\u03bf\u03c4\u03b1\u03bd\u03b5")) || OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03bf\u03bd\u03c4\u03b1\u03bd\u03b5") || OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03bf\u03c5\u03c3\u03b1\u03bd\u03b5")) {
     len -= 6;
-    removed = YES;
+    removed = true;
   }
   else if ((len > 5 && OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03b1\u03b3\u03b1\u03bd\u03b5")) || OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03b7\u03c3\u03b1\u03bd\u03b5") || OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03bf\u03c4\u03b1\u03bd\u03b5") || OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03b7\u03ba\u03b1\u03bd\u03b5")) {
     len -= 5;
-    removed = YES;
+    removed = true;
   }
   if (removed && [((OrgApacheLuceneAnalysisUtilCharArraySet *) nil_chk(OrgApacheLuceneAnalysisElGreekStemmer_exc8a_)) containsWithCharArray:s withInt:0 withInt:len]) {
     len += 4;
@@ -631,14 +633,14 @@ jint OrgApacheLuceneAnalysisElGreekStemmer_rule13WithCharArray_withInt_(OrgApach
   else if (len > 5 && (OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03b7\u03b8\u03b7\u03ba\u03b1") || OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03b7\u03b8\u03b7\u03ba\u03b5"))) {
     len -= 5;
   }
-  jboolean removed = NO;
+  jboolean removed = false;
   if (len > 4 && OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03b7\u03ba\u03b5\u03c3")) {
     len -= 4;
-    removed = YES;
+    removed = true;
   }
   else if (len > 3 && (OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03b7\u03ba\u03b1") || OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03b7\u03ba\u03b5"))) {
     len -= 3;
-    removed = YES;
+    removed = true;
   }
   if (removed && ([((OrgApacheLuceneAnalysisUtilCharArraySet *) nil_chk(OrgApacheLuceneAnalysisElGreekStemmer_exc13_)) containsWithCharArray:s withInt:0 withInt:len] || OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03c3\u03ba\u03c9\u03bb") || OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03c3\u03ba\u03bf\u03c5\u03bb") || OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03bd\u03b1\u03c1\u03b8") || OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03c3\u03c6") || OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03bf\u03b8") || OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03c0\u03b9\u03b8"))) {
     len += 2;
@@ -647,14 +649,14 @@ jint OrgApacheLuceneAnalysisElGreekStemmer_rule13WithCharArray_withInt_(OrgApach
 }
 
 jint OrgApacheLuceneAnalysisElGreekStemmer_rule14WithCharArray_withInt_(OrgApacheLuceneAnalysisElGreekStemmer *self, IOSCharArray *s, jint len) {
-  jboolean removed = NO;
+  jboolean removed = false;
   if (len > 5 && OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03bf\u03c5\u03c3\u03b5\u03c3")) {
     len -= 5;
-    removed = YES;
+    removed = true;
   }
   else if (len > 4 && (OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03bf\u03c5\u03c3\u03b1") || OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03bf\u03c5\u03c3\u03b5"))) {
     len -= 4;
-    removed = YES;
+    removed = true;
   }
   if (removed && ([((OrgApacheLuceneAnalysisUtilCharArraySet *) nil_chk(OrgApacheLuceneAnalysisElGreekStemmer_exc14_)) containsWithCharArray:s withInt:0 withInt:len] || OrgApacheLuceneAnalysisElGreekStemmer_endsWithVowelWithCharArray_withInt_(self, s, len) || OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03c0\u03bf\u03b4\u03b1\u03c1") || OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03b2\u03bb\u03b5\u03c0") || OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03c0\u03b1\u03bd\u03c4\u03b1\u03c7") || OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03c6\u03c1\u03c5\u03b4") || OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03bc\u03b1\u03bd\u03c4\u03b9\u03bb") || OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03bc\u03b1\u03bb\u03bb") || OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03ba\u03c5\u03bc\u03b1\u03c4") || OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03bb\u03b1\u03c7") || OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03bb\u03b7\u03b3") || OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03c6\u03b1\u03b3") || OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03bf\u03bc") || OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03c0\u03c1\u03c9\u03c4"))) {
     len += 3;
@@ -663,14 +665,14 @@ jint OrgApacheLuceneAnalysisElGreekStemmer_rule14WithCharArray_withInt_(OrgApach
 }
 
 jint OrgApacheLuceneAnalysisElGreekStemmer_rule15WithCharArray_withInt_(OrgApacheLuceneAnalysisElGreekStemmer *self, IOSCharArray *s, jint len) {
-  jboolean removed = NO;
+  jboolean removed = false;
   if (len > 4 && OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03b1\u03b3\u03b5\u03c3")) {
     len -= 4;
-    removed = YES;
+    removed = true;
   }
   else if (len > 3 && (OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03b1\u03b3\u03b1") || OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03b1\u03b3\u03b5"))) {
     len -= 3;
-    removed = YES;
+    removed = true;
   }
   if (removed) {
     jboolean cond1 = [((OrgApacheLuceneAnalysisUtilCharArraySet *) nil_chk(OrgApacheLuceneAnalysisElGreekStemmer_exc15a_)) containsWithCharArray:s withInt:0 withInt:len] || OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03bf\u03c6") || OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03c0\u03b5\u03bb") || OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03c7\u03bf\u03c1\u03c4") || OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03bb\u03bb") || OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03c3\u03c6") || OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03c1\u03c0") || OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03c6\u03c1") || OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03c0\u03c1") || OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03bb\u03bf\u03c7") || OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03c3\u03bc\u03b7\u03bd");
@@ -681,14 +683,14 @@ jint OrgApacheLuceneAnalysisElGreekStemmer_rule15WithCharArray_withInt_(OrgApach
 }
 
 jint OrgApacheLuceneAnalysisElGreekStemmer_rule16WithCharArray_withInt_(OrgApacheLuceneAnalysisElGreekStemmer *self, IOSCharArray *s, jint len) {
-  jboolean removed = NO;
+  jboolean removed = false;
   if (len > 4 && OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03b7\u03c3\u03bf\u03c5")) {
     len -= 4;
-    removed = YES;
+    removed = true;
   }
   else if (len > 3 && (OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03b7\u03c3\u03b5") || OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03b7\u03c3\u03b1"))) {
     len -= 3;
-    removed = YES;
+    removed = true;
   }
   if (removed && [((OrgApacheLuceneAnalysisUtilCharArraySet *) nil_chk(OrgApacheLuceneAnalysisElGreekStemmer_exc16_)) containsWithCharArray:s withInt:0 withInt:len]) len += 2;
   return len;
@@ -703,14 +705,14 @@ jint OrgApacheLuceneAnalysisElGreekStemmer_rule17WithCharArray_withInt_(OrgApach
 }
 
 jint OrgApacheLuceneAnalysisElGreekStemmer_rule18WithCharArray_withInt_(OrgApacheLuceneAnalysisElGreekStemmer *self, IOSCharArray *s, jint len) {
-  jboolean removed = NO;
+  jboolean removed = false;
   if (len > 6 && (OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03b7\u03c3\u03bf\u03c5\u03bd\u03b5") || OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03b7\u03b8\u03bf\u03c5\u03bd\u03b5"))) {
     len -= 6;
-    removed = YES;
+    removed = true;
   }
   else if (len > 4 && OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03bf\u03c5\u03bd\u03b5")) {
     len -= 4;
-    removed = YES;
+    removed = true;
   }
   if (removed && [((OrgApacheLuceneAnalysisUtilCharArraySet *) nil_chk(OrgApacheLuceneAnalysisElGreekStemmer_exc18_)) containsWithCharArray:s withInt:0 withInt:len]) {
     len += 3;
@@ -722,14 +724,14 @@ jint OrgApacheLuceneAnalysisElGreekStemmer_rule18WithCharArray_withInt_(OrgApach
 }
 
 jint OrgApacheLuceneAnalysisElGreekStemmer_rule19WithCharArray_withInt_(OrgApacheLuceneAnalysisElGreekStemmer *self, IOSCharArray *s, jint len) {
-  jboolean removed = NO;
+  jboolean removed = false;
   if (len > 6 && (OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03b7\u03c3\u03bf\u03c5\u03bc\u03b5") || OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03b7\u03b8\u03bf\u03c5\u03bc\u03b5"))) {
     len -= 6;
-    removed = YES;
+    removed = true;
   }
   else if (len > 4 && OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(self, s, len, @"\u03bf\u03c5\u03bc\u03b5")) {
     len -= 4;
-    removed = YES;
+    removed = true;
   }
   if (removed && [((OrgApacheLuceneAnalysisUtilCharArraySet *) nil_chk(OrgApacheLuceneAnalysisElGreekStemmer_exc19_)) containsWithCharArray:s withInt:0 withInt:len]) {
     len += 3;
@@ -767,13 +769,13 @@ jint OrgApacheLuceneAnalysisElGreekStemmer_rule22WithCharArray_withInt_(OrgApach
 
 jboolean OrgApacheLuceneAnalysisElGreekStemmer_endsWithWithCharArray_withInt_withNSString_(OrgApacheLuceneAnalysisElGreekStemmer *self, IOSCharArray *s, jint len, NSString *suffix) {
   jint suffixLen = ((jint) [((NSString *) nil_chk(suffix)) length]);
-  if (suffixLen > len) return NO;
-  for (jint i = suffixLen - 1; i >= 0; i--) if (IOSCharArray_Get(nil_chk(s), len - (suffixLen - i)) != [suffix charAtWithInt:i]) return NO;
-  return YES;
+  if (suffixLen > len) return false;
+  for (jint i = suffixLen - 1; i >= 0; i--) if (IOSCharArray_Get(nil_chk(s), len - (suffixLen - i)) != [suffix charAtWithInt:i]) return false;
+  return true;
 }
 
 jboolean OrgApacheLuceneAnalysisElGreekStemmer_endsWithVowelWithCharArray_withInt_(OrgApacheLuceneAnalysisElGreekStemmer *self, IOSCharArray *s, jint len) {
-  if (len == 0) return NO;
+  if (len == 0) return false;
   switch (IOSCharArray_Get(nil_chk(s), len - 1)) {
     case 0x03b1:
     case 0x03b5:
@@ -782,14 +784,14 @@ jboolean OrgApacheLuceneAnalysisElGreekStemmer_endsWithVowelWithCharArray_withIn
     case 0x03bf:
     case 0x03c5:
     case 0x03c9:
-    return YES;
+    return true;
     default:
-    return NO;
+    return false;
   }
 }
 
 jboolean OrgApacheLuceneAnalysisElGreekStemmer_endsWithVowelNoYWithCharArray_withInt_(OrgApacheLuceneAnalysisElGreekStemmer *self, IOSCharArray *s, jint len) {
-  if (len == 0) return NO;
+  if (len == 0) return false;
   switch (IOSCharArray_Get(nil_chk(s), len - 1)) {
     case 0x03b1:
     case 0x03b5:
@@ -797,9 +799,9 @@ jboolean OrgApacheLuceneAnalysisElGreekStemmer_endsWithVowelNoYWithCharArray_wit
     case 0x03b9:
     case 0x03bf:
     case 0x03c9:
-    return YES;
+    return true;
     default:
-    return NO;
+    return false;
   }
 }
 

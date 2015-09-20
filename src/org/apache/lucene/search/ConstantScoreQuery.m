@@ -165,7 +165,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchConstantScoreQuery_$1_$1)
 
 - (OrgApacheLuceneSearchWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                         withBoolean:(jboolean)needsScores {
-  OrgApacheLuceneSearchWeight *innerWeight = [((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) createWeightWithOrgApacheLuceneSearchQuery:query_ withBoolean:NO];
+  OrgApacheLuceneSearchWeight *innerWeight = [((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) createWeightWithOrgApacheLuceneSearchQuery:query_ withBoolean:false];
   if (needsScores) {
     return [new_OrgApacheLuceneSearchConstantScoreQuery_$1_initWithOrgApacheLuceneSearchConstantScoreQuery_withOrgApacheLuceneSearchWeight_withOrgApacheLuceneSearchQuery_(self, innerWeight, self) autorelease];
   }
@@ -179,13 +179,13 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchConstantScoreQuery_$1_$1)
 }
 
 - (jboolean)isEqual:(id)o {
-  if (self == o) return YES;
-  if (![super isEqual:o]) return NO;
+  if (self == o) return true;
+  if (![super isEqual:o]) return false;
   if ([o isKindOfClass:[OrgApacheLuceneSearchConstantScoreQuery class]]) {
     OrgApacheLuceneSearchConstantScoreQuery *other = (OrgApacheLuceneSearchConstantScoreQuery *) check_class_cast(o, [OrgApacheLuceneSearchConstantScoreQuery class]);
     return [((OrgApacheLuceneSearchQuery *) nil_chk(self->query_)) isEqual:((OrgApacheLuceneSearchConstantScoreQuery *) nil_chk(other))->query_];
   }
-  return NO;
+  return false;
 }
 
 - (NSUInteger)hash {

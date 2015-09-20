@@ -56,10 +56,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisSnowballSnowballFilter, keywordAttr_,
       if (finalTerm != termBuffer) [termAtt_ copyBufferWithCharArray:finalTerm withInt:0 withInt:newLength];
       else [termAtt_ setLengthWithInt:newLength];
     }
-    return YES;
+    return true;
   }
   else {
-    return NO;
+    return false;
   }
 }
 

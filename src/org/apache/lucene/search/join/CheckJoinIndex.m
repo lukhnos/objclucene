@@ -30,10 +30,12 @@ __attribute__((unused)) static OrgApacheLuceneSearchJoinCheckJoinIndex *new_OrgA
 
 @implementation OrgApacheLuceneSearchJoinCheckJoinIndex
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchJoinCheckJoinIndex_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)checkWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader
      withOrgApacheLuceneSearchJoinBitSetProducer:(id<OrgApacheLuceneSearchJoinBitSetProducer>)parentsFilter {
@@ -71,7 +73,7 @@ void OrgApacheLuceneSearchJoinCheckJoinIndex_checkWithOrgApacheLuceneIndexIndexR
     if (parents == nil || [parents cardinality] == 0) {
       @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$@$", @"Every segment should have at least one parent, but ", [context reader], @" does not have any")) autorelease];
     }
-    if ([((OrgApacheLuceneUtilBitSet *) nil_chk(parents)) getWithInt:[((OrgApacheLuceneIndexLeafReader *) nil_chk([context reader])) maxDoc] - 1] == NO) {
+    if ([((OrgApacheLuceneUtilBitSet *) nil_chk(parents)) getWithInt:[((OrgApacheLuceneIndexLeafReader *) nil_chk([context reader])) maxDoc] - 1] == false) {
       @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$@$", @"The last document of a segment must always be a parent, but ", [context reader], @" has a child as a last doc")) autorelease];
     }
     id<OrgApacheLuceneUtilBits> liveDocs = [((OrgApacheLuceneIndexLeafReader *) nil_chk([context reader])) getLiveDocs];

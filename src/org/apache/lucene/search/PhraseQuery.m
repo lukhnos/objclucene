@@ -295,8 +295,8 @@ withOrgApacheLuceneUtilBytesRefArray:(IOSObjectArray *)terms {
 }
 
 - (jboolean)isEqual:(id)o {
-  if ([super isEqual:o] == NO) {
-    return NO;
+  if ([super isEqual:o] == false) {
+    return false;
   }
   OrgApacheLuceneSearchPhraseQuery *that = (OrgApacheLuceneSearchPhraseQuery *) check_class_cast(o, [OrgApacheLuceneSearchPhraseQuery class]);
   return slop_ == ((OrgApacheLuceneSearchPhraseQuery *) nil_chk(that))->slop_ && [((id<JavaUtilList>) nil_chk(terms_)) isEqual:that->terms_] && [((id<JavaUtilList>) nil_chk(positions_)) isEqual:that->positions_];
@@ -310,10 +310,12 @@ withOrgApacheLuceneUtilBytesRefArray:(IOSObjectArray *)terms {
   return h;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchPhraseQuery_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)ensureMutableWithNSString:(NSString *)method {
   OrgApacheLuceneSearchPhraseQuery_ensureMutableWithNSString_(self, method);
@@ -428,7 +430,7 @@ void OrgApacheLuceneSearchPhraseQuery_initWithInt_withOrgApacheLuceneIndexTermAr
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"Slop must be >= 0, got ", slop)) autorelease];
   }
   for (jint i = 1; i < terms->size_; ++i) {
-    if ([((NSString *) nil_chk([((OrgApacheLuceneIndexTerm *) nil_chk(IOSObjectArray_Get(terms, i - 1))) field])) isEqual:[((OrgApacheLuceneIndexTerm *) nil_chk(IOSObjectArray_Get(terms, i))) field]] == NO) {
+    if ([((NSString *) nil_chk([((OrgApacheLuceneIndexTerm *) nil_chk(IOSObjectArray_Get(terms, i - 1))) field])) isEqual:[((OrgApacheLuceneIndexTerm *) nil_chk(IOSObjectArray_Get(terms, i))) field]] == false) {
       @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"All terms should have the same field") autorelease];
     }
   }
@@ -461,7 +463,7 @@ void OrgApacheLuceneSearchPhraseQuery_initWithInt_withOrgApacheLuceneIndexTermAr
     }
   }
   JreStrongAssign(&self->field_, terms->size_ == 0 ? nil : [((OrgApacheLuceneIndexTerm *) nil_chk(IOSObjectArray_Get(terms, 0))) field]);
-  self->mutable__ = NO;
+  self->mutable__ = false;
 }
 
 OrgApacheLuceneSearchPhraseQuery *new_OrgApacheLuceneSearchPhraseQuery_initWithInt_withOrgApacheLuceneIndexTermArray_withIntArray_(jint slop, IOSObjectArray *terms, IOSIntArray *positions) {
@@ -541,7 +543,7 @@ void OrgApacheLuceneSearchPhraseQuery_init(OrgApacheLuceneSearchPhraseQuery *sel
   OrgApacheLuceneSearchQuery_init(self);
   JreStrongAssignAndConsume(&self->terms_, new_JavaUtilArrayList_init());
   JreStrongAssignAndConsume(&self->positions_, new_JavaUtilArrayList_init());
-  self->mutable__ = YES;
+  self->mutable__ = true;
 }
 
 OrgApacheLuceneSearchPhraseQuery *new_OrgApacheLuceneSearchPhraseQuery_init() {
@@ -551,7 +553,7 @@ OrgApacheLuceneSearchPhraseQuery *new_OrgApacheLuceneSearchPhraseQuery_init() {
 }
 
 void OrgApacheLuceneSearchPhraseQuery_ensureMutableWithNSString_(OrgApacheLuceneSearchPhraseQuery *self, NSString *method) {
-  if (self->mutable__ == NO) {
+  if (self->mutable__ == false) {
     @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$", @"This PhraseQuery has been created with the new PhraseQuery.Builder API. It must not be modified afterwards. The ", method, @" method only exists for backward compatibility")) autorelease];
   }
 }
@@ -560,10 +562,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchPhraseQuery)
 
 @implementation OrgApacheLuceneSearchPhraseQuery_Builder
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchPhraseQuery_Builder_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneSearchPhraseQuery_Builder *)setSlopWithInt:(jint)slop {
   self->slop_ = slop;
@@ -580,13 +584,13 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchPhraseQuery)
   if (position < 0) {
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"Positions must be >= 0, got ", position)) autorelease];
   }
-  if ([((id<JavaUtilList>) nil_chk(positions_)) isEmpty] == NO) {
+  if ([((id<JavaUtilList>) nil_chk(positions_)) isEmpty] == false) {
     jint lastPosition = [((JavaLangInteger *) nil_chk([positions_ getWithInt:[positions_ size] - 1])) intValue];
     if (position < lastPosition) {
       @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$I", @"Positions must be added in order, got ", position, @" after ", lastPosition)) autorelease];
     }
   }
-  if ([((id<JavaUtilList>) nil_chk(terms_)) isEmpty] == NO && [((NSString *) nil_chk([term field])) isEqual:[((OrgApacheLuceneIndexTerm *) nil_chk([terms_ getWithInt:0])) field]] == NO) {
+  if ([((id<JavaUtilList>) nil_chk(terms_)) isEmpty] == false && [((NSString *) nil_chk([term field])) isEqual:[((OrgApacheLuceneIndexTerm *) nil_chk([terms_ getWithInt:0])) field]] == false) {
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$$$", @"All terms must be on the same field, got ", [term field], @" and ", [((OrgApacheLuceneIndexTerm *) nil_chk([terms_ getWithInt:0])) field])) autorelease];
   }
   [terms_ addWithId:term];
@@ -681,11 +685,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchPhraseQuery_Builder)
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return YES;
-  if (obj == nil) return NO;
-  if ([self getClass] != [nil_chk(obj) getClass]) return NO;
+  if (self == obj) return true;
+  if (obj == nil) return false;
+  if ([self getClass] != [nil_chk(obj) getClass]) return false;
   OrgApacheLuceneSearchPhraseQuery_PostingsAndFreq *other = (OrgApacheLuceneSearchPhraseQuery_PostingsAndFreq *) check_class_cast(obj, [OrgApacheLuceneSearchPhraseQuery_PostingsAndFreq class]);
-  if (position_ != other->position_) return NO;
+  if (position_ != other->position_) return false;
   if (terms_ == nil) return other->terms_ == nil;
   return JavaUtilArrays_equalsWithNSObjectArray_withNSObjectArray_(terms_, other->terms_);
 }
@@ -778,7 +782,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchPhraseQuery_PostingsAndFre
   if (fieldTerms == nil) {
     return nil;
   }
-  if ([((OrgApacheLuceneIndexTerms *) nil_chk(fieldTerms)) hasPositions] == NO) {
+  if ([((OrgApacheLuceneIndexTerms *) nil_chk(fieldTerms)) hasPositions] == false) {
     @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$@C", @"field \"", this$0_->field_, @"\" was indexed without position data; cannot run PhraseQuery (phrase=", [self getQuery], ')')) autorelease];
   }
   OrgApacheLuceneIndexTermsEnum *te = [fieldTerms iterator];

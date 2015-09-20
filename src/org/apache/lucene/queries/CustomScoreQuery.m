@@ -184,14 +184,14 @@ withOrgApacheLuceneQueriesFunctionFunctionQueryArray:(IOSObjectArray *)scoringQu
 }
 
 - (jboolean)isEqual:(id)o {
-  if (self == o) return YES;
-  if (![super isEqual:o]) return NO;
+  if (self == o) return true;
+  if (![super isEqual:o]) return false;
   if ([self getClass] != [nil_chk(o) getClass]) {
-    return NO;
+    return false;
   }
   OrgApacheLuceneQueriesCustomScoreQuery *other = (OrgApacheLuceneQueriesCustomScoreQuery *) check_class_cast(o, [OrgApacheLuceneQueriesCustomScoreQuery class]);
   if ([self getBoost] != [other getBoost] || ![((OrgApacheLuceneSearchQuery *) nil_chk(self->subQuery_)) isEqual:other->subQuery_] || self->strict_ != other->strict_ || ((IOSObjectArray *) nil_chk(self->scoringQueries_))->size_ != other->scoringQueries_->size_) {
-    return NO;
+    return false;
   }
   return JavaUtilArrays_equalsWithNSObjectArray_withNSObjectArray_(scoringQueries_, other->scoringQueries_);
 }
@@ -287,7 +287,7 @@ OrgApacheLuceneQueriesCustomScoreQuery *new_OrgApacheLuceneQueriesCustomScoreQue
 
 void OrgApacheLuceneQueriesCustomScoreQuery_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneQueriesFunctionFunctionQueryArray_(OrgApacheLuceneQueriesCustomScoreQuery *self, OrgApacheLuceneSearchQuery *subQuery, IOSObjectArray *scoringQueries) {
   OrgApacheLuceneSearchQuery_init(self);
-  self->strict_ = NO;
+  self->strict_ = false;
   JreStrongAssign(&self->subQuery_, subQuery);
   JreStrongAssign(&self->scoringQueries_, scoringQueries != nil ? scoringQueries : [IOSObjectArray arrayWithLength:0 type:OrgApacheLuceneSearchQuery_class_()]);
   if (subQuery == nil) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"<subquery> must not be null!") autorelease];

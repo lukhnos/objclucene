@@ -254,10 +254,10 @@ __attribute__((unused)) static OrgApacheLuceneAnalysisTokenStream *OrgApacheLuce
 void OrgApacheLuceneSearchHighlightQueryScorer_initWithOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchHighlightQueryScorer *self, OrgApacheLuceneSearchQuery *query) {
   NSObject_init(self);
   self->position_ = -1;
-  self->expandMultiTermQuery_ = YES;
-  self->wrapToCaching_ = YES;
-  self->usePayloads_ = NO;
-  OrgApacheLuceneSearchHighlightQueryScorer_init__WithOrgApacheLuceneSearchQuery_withNSString_withOrgApacheLuceneIndexIndexReader_withBoolean_(self, query, nil, nil, YES);
+  self->expandMultiTermQuery_ = true;
+  self->wrapToCaching_ = true;
+  self->usePayloads_ = false;
+  OrgApacheLuceneSearchHighlightQueryScorer_init__WithOrgApacheLuceneSearchQuery_withNSString_withOrgApacheLuceneIndexIndexReader_withBoolean_(self, query, nil, nil, true);
 }
 
 OrgApacheLuceneSearchHighlightQueryScorer *new_OrgApacheLuceneSearchHighlightQueryScorer_initWithOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchQuery *query) {
@@ -269,10 +269,10 @@ OrgApacheLuceneSearchHighlightQueryScorer *new_OrgApacheLuceneSearchHighlightQue
 void OrgApacheLuceneSearchHighlightQueryScorer_initWithOrgApacheLuceneSearchQuery_withNSString_(OrgApacheLuceneSearchHighlightQueryScorer *self, OrgApacheLuceneSearchQuery *query, NSString *field) {
   NSObject_init(self);
   self->position_ = -1;
-  self->expandMultiTermQuery_ = YES;
-  self->wrapToCaching_ = YES;
-  self->usePayloads_ = NO;
-  OrgApacheLuceneSearchHighlightQueryScorer_init__WithOrgApacheLuceneSearchQuery_withNSString_withOrgApacheLuceneIndexIndexReader_withBoolean_(self, query, field, nil, YES);
+  self->expandMultiTermQuery_ = true;
+  self->wrapToCaching_ = true;
+  self->usePayloads_ = false;
+  OrgApacheLuceneSearchHighlightQueryScorer_init__WithOrgApacheLuceneSearchQuery_withNSString_withOrgApacheLuceneIndexIndexReader_withBoolean_(self, query, field, nil, true);
 }
 
 OrgApacheLuceneSearchHighlightQueryScorer *new_OrgApacheLuceneSearchHighlightQueryScorer_initWithOrgApacheLuceneSearchQuery_withNSString_(OrgApacheLuceneSearchQuery *query, NSString *field) {
@@ -284,10 +284,10 @@ OrgApacheLuceneSearchHighlightQueryScorer *new_OrgApacheLuceneSearchHighlightQue
 void OrgApacheLuceneSearchHighlightQueryScorer_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexReader_withNSString_(OrgApacheLuceneSearchHighlightQueryScorer *self, OrgApacheLuceneSearchQuery *query, OrgApacheLuceneIndexIndexReader *reader, NSString *field) {
   NSObject_init(self);
   self->position_ = -1;
-  self->expandMultiTermQuery_ = YES;
-  self->wrapToCaching_ = YES;
-  self->usePayloads_ = NO;
-  OrgApacheLuceneSearchHighlightQueryScorer_init__WithOrgApacheLuceneSearchQuery_withNSString_withOrgApacheLuceneIndexIndexReader_withBoolean_(self, query, field, reader, YES);
+  self->expandMultiTermQuery_ = true;
+  self->wrapToCaching_ = true;
+  self->usePayloads_ = false;
+  OrgApacheLuceneSearchHighlightQueryScorer_init__WithOrgApacheLuceneSearchQuery_withNSString_withOrgApacheLuceneIndexIndexReader_withBoolean_(self, query, field, reader, true);
 }
 
 OrgApacheLuceneSearchHighlightQueryScorer *new_OrgApacheLuceneSearchHighlightQueryScorer_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexReader_withNSString_(OrgApacheLuceneSearchQuery *query, OrgApacheLuceneIndexIndexReader *reader, NSString *field) {
@@ -299,11 +299,11 @@ OrgApacheLuceneSearchHighlightQueryScorer *new_OrgApacheLuceneSearchHighlightQue
 void OrgApacheLuceneSearchHighlightQueryScorer_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexReader_withNSString_withNSString_(OrgApacheLuceneSearchHighlightQueryScorer *self, OrgApacheLuceneSearchQuery *query, OrgApacheLuceneIndexIndexReader *reader, NSString *field, NSString *defaultField) {
   NSObject_init(self);
   self->position_ = -1;
-  self->expandMultiTermQuery_ = YES;
-  self->wrapToCaching_ = YES;
-  self->usePayloads_ = NO;
+  self->expandMultiTermQuery_ = true;
+  self->wrapToCaching_ = true;
+  self->usePayloads_ = false;
   JreStrongAssign(&self->defaultField_, defaultField);
-  OrgApacheLuceneSearchHighlightQueryScorer_init__WithOrgApacheLuceneSearchQuery_withNSString_withOrgApacheLuceneIndexIndexReader_withBoolean_(self, query, field, reader, YES);
+  OrgApacheLuceneSearchHighlightQueryScorer_init__WithOrgApacheLuceneSearchQuery_withNSString_withOrgApacheLuceneIndexIndexReader_withBoolean_(self, query, field, reader, true);
 }
 
 OrgApacheLuceneSearchHighlightQueryScorer *new_OrgApacheLuceneSearchHighlightQueryScorer_initWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexReader_withNSString_withNSString_(OrgApacheLuceneSearchQuery *query, OrgApacheLuceneIndexIndexReader *reader, NSString *field, NSString *defaultField) {
@@ -315,11 +315,11 @@ OrgApacheLuceneSearchHighlightQueryScorer *new_OrgApacheLuceneSearchHighlightQue
 void OrgApacheLuceneSearchHighlightQueryScorer_initWithOrgApacheLuceneSearchQuery_withNSString_withNSString_(OrgApacheLuceneSearchHighlightQueryScorer *self, OrgApacheLuceneSearchQuery *query, NSString *field, NSString *defaultField) {
   NSObject_init(self);
   self->position_ = -1;
-  self->expandMultiTermQuery_ = YES;
-  self->wrapToCaching_ = YES;
-  self->usePayloads_ = NO;
+  self->expandMultiTermQuery_ = true;
+  self->wrapToCaching_ = true;
+  self->usePayloads_ = false;
   JreStrongAssign(&self->defaultField_, defaultField);
-  OrgApacheLuceneSearchHighlightQueryScorer_init__WithOrgApacheLuceneSearchQuery_withNSString_withOrgApacheLuceneIndexIndexReader_withBoolean_(self, query, field, nil, YES);
+  OrgApacheLuceneSearchHighlightQueryScorer_init__WithOrgApacheLuceneSearchQuery_withNSString_withOrgApacheLuceneIndexIndexReader_withBoolean_(self, query, field, nil, true);
 }
 
 OrgApacheLuceneSearchHighlightQueryScorer *new_OrgApacheLuceneSearchHighlightQueryScorer_initWithOrgApacheLuceneSearchQuery_withNSString_withNSString_(OrgApacheLuceneSearchQuery *query, NSString *field, NSString *defaultField) {
@@ -331,9 +331,9 @@ OrgApacheLuceneSearchHighlightQueryScorer *new_OrgApacheLuceneSearchHighlightQue
 void OrgApacheLuceneSearchHighlightQueryScorer_initWithOrgApacheLuceneSearchHighlightWeightedSpanTermArray_(OrgApacheLuceneSearchHighlightQueryScorer *self, IOSObjectArray *weightedTerms) {
   NSObject_init(self);
   self->position_ = -1;
-  self->expandMultiTermQuery_ = YES;
-  self->wrapToCaching_ = YES;
-  self->usePayloads_ = NO;
+  self->expandMultiTermQuery_ = true;
+  self->wrapToCaching_ = true;
+  self->usePayloads_ = false;
   JreStrongAssignAndConsume(&self->fieldWeightedSpanTerms_, new_JavaUtilHashMap_initWithInt_(((IOSObjectArray *) nil_chk(weightedTerms))->size_));
   for (jint i = 0; i < weightedTerms->size_; i++) {
     OrgApacheLuceneSearchHighlightWeightedSpanTerm *existingTerm = [self->fieldWeightedSpanTerms_ getWithId:((OrgApacheLuceneSearchHighlightWeightedSpanTerm *) nil_chk(IOSObjectArray_Get(weightedTerms, i)))->term_];
@@ -342,7 +342,7 @@ void OrgApacheLuceneSearchHighlightQueryScorer_initWithOrgApacheLuceneSearchHigh
       self->maxTermWeight_ = JavaLangMath_maxWithFloat_withFloat_(self->maxTermWeight_, [((OrgApacheLuceneSearchHighlightWeightedSpanTerm *) nil_chk(IOSObjectArray_Get(weightedTerms, i))) getWeight]);
     }
   }
-  self->skipInitExtractor_ = YES;
+  self->skipInitExtractor_ = true;
 }
 
 OrgApacheLuceneSearchHighlightQueryScorer *new_OrgApacheLuceneSearchHighlightQueryScorer_initWithOrgApacheLuceneSearchHighlightWeightedSpanTermArray_(IOSObjectArray *weightedTerms) {

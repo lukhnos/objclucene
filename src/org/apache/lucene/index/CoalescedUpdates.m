@@ -124,10 +124,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexCoalescedUpdates_$1_$1)
   return [new_OrgApacheLuceneIndexCoalescedUpdates_$1_initWithOrgApacheLuceneIndexCoalescedUpdates_(self) autorelease];
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexCoalescedUpdates_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(queries_);

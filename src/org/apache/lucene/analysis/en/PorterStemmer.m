@@ -75,14 +75,16 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisEnPorterStemmer_step6
 
 @implementation OrgApacheLuceneAnalysisEnPorterStemmer
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisEnPorterStemmer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)reset {
   i_ = 0;
-  dirty_ = NO;
+  dirty_ = false;
 }
 
 - (void)addWithChar:(jchar)ch {
@@ -133,7 +135,7 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisEnPorterStemmer_step6
   jint o = j_ + 1;
   for (jint i = 0; i < l; i++) *IOSCharArray_GetRef(nil_chk(b_), o + i) = [s charAtWithInt:i];
   k_ = j_ + l;
-  dirty_ = YES;
+  dirty_ = true;
 }
 
 - (void)rWithNSString:(NSString *)s {
@@ -205,7 +207,7 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisEnPorterStemmer_step6
     OrgApacheLuceneAnalysisEnPorterStemmer_step5(self);
     OrgApacheLuceneAnalysisEnPorterStemmer_step6(self);
   }
-  if (i_ != k_ + 1) dirty_ = YES;
+  if (i_ != k_ + 1) dirty_ = true;
   i_ = k_ + 1;
   return dirty_;
 }
@@ -261,7 +263,7 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisEnPorterStemmer_step6
 
 void OrgApacheLuceneAnalysisEnPorterStemmer_init(OrgApacheLuceneAnalysisEnPorterStemmer *self) {
   NSObject_init(self);
-  self->dirty_ = NO;
+  self->dirty_ = false;
   JreStrongAssignAndConsume(&self->b_, [IOSCharArray newArrayWithLength:OrgApacheLuceneAnalysisEnPorterStemmer_INITIAL_SIZE]);
   self->i_ = 0;
 }
@@ -279,32 +281,32 @@ jboolean OrgApacheLuceneAnalysisEnPorterStemmer_consWithInt_(OrgApacheLuceneAnal
     case 'i':
     case 'o':
     case 'u':
-    return NO;
+    return false;
     case 'y':
-    return (i == self->k0_) ? YES : !OrgApacheLuceneAnalysisEnPorterStemmer_consWithInt_(self, i - 1);
+    return (i == self->k0_) ? true : !OrgApacheLuceneAnalysisEnPorterStemmer_consWithInt_(self, i - 1);
     default:
-    return YES;
+    return true;
   }
 }
 
 jint OrgApacheLuceneAnalysisEnPorterStemmer_m(OrgApacheLuceneAnalysisEnPorterStemmer *self) {
   jint n = 0;
   jint i = self->k0_;
-  while (YES) {
+  while (true) {
     if (i > self->j_) return n;
     if (!OrgApacheLuceneAnalysisEnPorterStemmer_consWithInt_(self, i)) break;
     i++;
   }
   i++;
-  while (YES) {
-    while (YES) {
+  while (true) {
+    while (true) {
       if (i > self->j_) return n;
       if (OrgApacheLuceneAnalysisEnPorterStemmer_consWithInt_(self, i)) break;
       i++;
     }
     i++;
     n++;
-    while (YES) {
+    while (true) {
       if (i > self->j_) return n;
       if (!OrgApacheLuceneAnalysisEnPorterStemmer_consWithInt_(self, i)) break;
       i++;
@@ -315,32 +317,32 @@ jint OrgApacheLuceneAnalysisEnPorterStemmer_m(OrgApacheLuceneAnalysisEnPorterSte
 
 jboolean OrgApacheLuceneAnalysisEnPorterStemmer_vowelinstem(OrgApacheLuceneAnalysisEnPorterStemmer *self) {
   jint i;
-  for (i = self->k0_; i <= self->j_; i++) if (!OrgApacheLuceneAnalysisEnPorterStemmer_consWithInt_(self, i)) return YES;
-  return NO;
+  for (i = self->k0_; i <= self->j_; i++) if (!OrgApacheLuceneAnalysisEnPorterStemmer_consWithInt_(self, i)) return true;
+  return false;
 }
 
 jboolean OrgApacheLuceneAnalysisEnPorterStemmer_doublecWithInt_(OrgApacheLuceneAnalysisEnPorterStemmer *self, jint j) {
-  if (j < self->k0_ + 1) return NO;
-  if (IOSCharArray_Get(nil_chk(self->b_), j) != IOSCharArray_Get(self->b_, j - 1)) return NO;
+  if (j < self->k0_ + 1) return false;
+  if (IOSCharArray_Get(nil_chk(self->b_), j) != IOSCharArray_Get(self->b_, j - 1)) return false;
   return OrgApacheLuceneAnalysisEnPorterStemmer_consWithInt_(self, j);
 }
 
 jboolean OrgApacheLuceneAnalysisEnPorterStemmer_cvcWithInt_(OrgApacheLuceneAnalysisEnPorterStemmer *self, jint i) {
-  if (i < self->k0_ + 2 || !OrgApacheLuceneAnalysisEnPorterStemmer_consWithInt_(self, i) || OrgApacheLuceneAnalysisEnPorterStemmer_consWithInt_(self, i - 1) || !OrgApacheLuceneAnalysisEnPorterStemmer_consWithInt_(self, i - 2)) return NO;
+  if (i < self->k0_ + 2 || !OrgApacheLuceneAnalysisEnPorterStemmer_consWithInt_(self, i) || OrgApacheLuceneAnalysisEnPorterStemmer_consWithInt_(self, i - 1) || !OrgApacheLuceneAnalysisEnPorterStemmer_consWithInt_(self, i - 2)) return false;
   else {
     jint ch = IOSCharArray_Get(nil_chk(self->b_), i);
-    if (ch == 'w' || ch == 'x' || ch == 'y') return NO;
+    if (ch == 'w' || ch == 'x' || ch == 'y') return false;
   }
-  return YES;
+  return true;
 }
 
 jboolean OrgApacheLuceneAnalysisEnPorterStemmer_endsWithNSString_(OrgApacheLuceneAnalysisEnPorterStemmer *self, NSString *s) {
   jint l = ((jint) [((NSString *) nil_chk(s)) length]);
   jint o = self->k_ - l + 1;
-  if (o < self->k0_) return NO;
-  for (jint i = 0; i < l; i++) if (IOSCharArray_Get(nil_chk(self->b_), o + i) != [s charAtWithInt:i]) return NO;
+  if (o < self->k0_) return false;
+  for (jint i = 0; i < l; i++) if (IOSCharArray_Get(nil_chk(self->b_), o + i) != [s charAtWithInt:i]) return false;
   self->j_ = self->k_ - l;
-  return YES;
+  return true;
 }
 
 void OrgApacheLuceneAnalysisEnPorterStemmer_step1(OrgApacheLuceneAnalysisEnPorterStemmer *self) {
@@ -368,7 +370,7 @@ void OrgApacheLuceneAnalysisEnPorterStemmer_step1(OrgApacheLuceneAnalysisEnPorte
 void OrgApacheLuceneAnalysisEnPorterStemmer_step2(OrgApacheLuceneAnalysisEnPorterStemmer *self) {
   if (OrgApacheLuceneAnalysisEnPorterStemmer_endsWithNSString_(self, @"y") && OrgApacheLuceneAnalysisEnPorterStemmer_vowelinstem(self)) {
     *IOSCharArray_GetRef(nil_chk(self->b_), self->k_) = 'i';
-    self->dirty_ = YES;
+    self->dirty_ = true;
   }
 }
 

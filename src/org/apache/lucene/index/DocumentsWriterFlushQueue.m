@@ -63,10 +63,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTi
 - (void)addDeletesWithOrgApacheLuceneIndexDocumentsWriterDeleteQueue:(OrgApacheLuceneIndexDocumentsWriterDeleteQueue *)deleteQueue {
   @synchronized(self) {
     OrgApacheLuceneIndexDocumentsWriterFlushQueue_incTickets(self);
-    jboolean success = NO;
+    jboolean success = false;
     @try {
       [((id<JavaUtilQueue>) nil_chk(queue_)) addWithId:[new_OrgApacheLuceneIndexDocumentsWriterFlushQueue_GlobalDeletesTicket_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_([((OrgApacheLuceneIndexDocumentsWriterDeleteQueue *) nil_chk(deleteQueue)) freezeGlobalBufferWithOrgApacheLuceneIndexDocumentsWriterDeleteQueue_DeleteSlice:nil]) autorelease]];
-      success = YES;
+      success = true;
     }
     @finally {
       if (!success) {
@@ -87,11 +87,11 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTi
 - (OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket *)addFlushTicketWithOrgApacheLuceneIndexDocumentsWriterPerThread:(OrgApacheLuceneIndexDocumentsWriterPerThread *)dwpt {
   @synchronized(self) {
     OrgApacheLuceneIndexDocumentsWriterFlushQueue_incTickets(self);
-    jboolean success = NO;
+    jboolean success = false;
     @try {
       OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket *ticket = [new_OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_([((OrgApacheLuceneIndexDocumentsWriterPerThread *) nil_chk(dwpt)) prepareFlush]) autorelease];
       [((id<JavaUtilQueue>) nil_chk(queue_)) addWithId:ticket];
-      success = YES;
+      success = true;
       return ticket;
     }
     @finally {
@@ -161,10 +161,12 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTi
   }
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexDocumentsWriterFlushQueue_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(queue_);
@@ -214,7 +216,7 @@ void OrgApacheLuceneIndexDocumentsWriterFlushQueue_decTickets(OrgApacheLuceneInd
 jint OrgApacheLuceneIndexDocumentsWriterFlushQueue_innerPurgeWithOrgApacheLuceneIndexIndexWriter_(OrgApacheLuceneIndexDocumentsWriterFlushQueue *self, OrgApacheLuceneIndexIndexWriter *writer) {
   JreAssert(([((JavaUtilConcurrentLocksReentrantLock *) nil_chk(self->purgeLock_)) isHeldByCurrentThread]), (@"org/apache/lucene/index/DocumentsWriterFlushQueue.java:98 condition failed: assert purgeLock.isHeldByCurrentThread();"));
   jint numPurged = 0;
-  while (YES) {
+  while (true) {
     OrgApacheLuceneIndexDocumentsWriterFlushQueue_FlushTicket *head;
     jboolean canPublish;
     @synchronized(self) {
@@ -311,7 +313,7 @@ withOrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment:(OrgApacheLucene
 
 void OrgApacheLuceneIndexDocumentsWriterFlushQueue_FlushTicket_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_(OrgApacheLuceneIndexDocumentsWriterFlushQueue_FlushTicket *self, OrgApacheLuceneIndexFrozenBufferedUpdates *frozenUpdates) {
   NSObject_init(self);
-  self->published_ = NO;
+  self->published_ = false;
   JreAssert((frozenUpdates != nil), (@"org/apache/lucene/index/DocumentsWriterFlushQueue.java:171 condition failed: assert frozenUpdates != null;"));
   JreStrongAssign(&self->frozenUpdates_, frozenUpdates);
 }
@@ -355,12 +357,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocumentsWriterFlushQueue_F
 
 - (void)publishWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer {
   JreAssert((!published_), (@"ticket was already publised - can not publish twice"));
-  published_ = YES;
+  published_ = true;
   OrgApacheLuceneIndexDocumentsWriterFlushQueue_FlushTicket_finishFlushWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment_withOrgApacheLuceneIndexFrozenBufferedUpdates_(self, writer, nil, frozenUpdates_);
 }
 
 - (jboolean)canPublish {
-  return YES;
+  return true;
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -396,7 +398,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocumentsWriterFlushQueue_G
 
 - (void)publishWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer {
   JreAssert((!published_), (@"ticket was already publised - can not publish twice"));
-  published_ = YES;
+  published_ = true;
   OrgApacheLuceneIndexDocumentsWriterFlushQueue_FlushTicket_finishFlushWithOrgApacheLuceneIndexIndexWriter_withOrgApacheLuceneIndexDocumentsWriterPerThread_FlushedSegment_withOrgApacheLuceneIndexFrozenBufferedUpdates_(self, writer, segment_, frozenUpdates_);
 }
 
@@ -407,7 +409,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocumentsWriterFlushQueue_G
 
 - (void)setFailed {
   JreAssert((segment_ == nil), (@"org/apache/lucene/index/DocumentsWriterFlushQueue.java:258 condition failed: assert segment == null;"));
-  failed_ = YES;
+  failed_ = true;
 }
 
 - (jboolean)canPublish {
@@ -439,7 +441,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocumentsWriterFlushQueue_G
 
 void OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_(OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket *self, OrgApacheLuceneIndexFrozenBufferedUpdates *frozenDeletes) {
   OrgApacheLuceneIndexDocumentsWriterFlushQueue_FlushTicket_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_(self, frozenDeletes);
-  self->failed_ = NO;
+  self->failed_ = false;
 }
 
 OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket *new_OrgApacheLuceneIndexDocumentsWriterFlushQueue_SegmentFlushTicket_initWithOrgApacheLuceneIndexFrozenBufferedUpdates_(OrgApacheLuceneIndexFrozenBufferedUpdates *frozenDeletes) {

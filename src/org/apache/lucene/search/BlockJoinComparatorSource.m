@@ -239,7 +239,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchBlockJoinComparatorSource)
   if (parents == nil) {
     @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$@$", @"LeafReader ", [((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader], @" contains no parents!")) autorelease];
   }
-  if ([parents isKindOfClass:[OrgApacheLuceneUtilBitDocIdSet class]] == NO) {
+  if ([parents isKindOfClass:[OrgApacheLuceneUtilBitDocIdSet class]] == false) {
     @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$@", @"parentFilter must return BitSet; got ", parents)) autorelease];
   }
   JreStrongAssign(&parentBits_, (OrgApacheLuceneUtilBitSet *) check_class_cast([((OrgApacheLuceneSearchDocIdSet *) nil_chk(parents)) bits], [OrgApacheLuceneUtilBitSet class]));

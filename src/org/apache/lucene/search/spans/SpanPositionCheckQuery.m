@@ -74,7 +74,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanPositionCheckQuery_Span
 
 - (OrgApacheLuceneSearchSpansSpanWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                                  withBoolean:(jboolean)needsScores {
-  OrgApacheLuceneSearchSpansSpanWeight *matchWeight = [((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(match_)) createWeightWithOrgApacheLuceneSearchIndexSearcher:searcher withBoolean:NO];
+  OrgApacheLuceneSearchSpansSpanWeight *matchWeight = [((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(match_)) createWeightWithOrgApacheLuceneSearchIndexSearcher:searcher withBoolean:false];
   return [new_OrgApacheLuceneSearchSpansSpanPositionCheckQuery_SpanPositionCheckWeight_initWithOrgApacheLuceneSearchSpansSpanPositionCheckQuery_withOrgApacheLuceneSearchSpansSpanWeight_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_(self, matchWeight, searcher, needsScores ? OrgApacheLuceneSearchSpansSpanQuery_getTermContextsWithOrgApacheLuceneSearchSpansSpanWeightArray_([IOSObjectArray arrayWithObjects:(id[]){ matchWeight } count:1 type:OrgApacheLuceneSearchSpansSpanWeight_class_()]) : nil) autorelease];
 }
 
@@ -95,7 +95,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanPositionCheckQuery_Span
 
 - (jboolean)isEqual:(id)o {
   if (![super isEqual:o]) {
-    return NO;
+    return false;
   }
   OrgApacheLuceneSearchSpansSpanPositionCheckQuery *spcq = (OrgApacheLuceneSearchSpansSpanPositionCheckQuery *) check_class_cast(o, [OrgApacheLuceneSearchSpansSpanPositionCheckQuery class]);
   return [((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(match_)) isEqual:((OrgApacheLuceneSearchSpansSpanPositionCheckQuery *) nil_chk(spcq))->match_];

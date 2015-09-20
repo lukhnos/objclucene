@@ -67,7 +67,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilBitDocIdSet)
 }
 
 - (jboolean)isCacheable {
-  return YES;
+  return true;
 }
 
 - (jlong)ramBytesUsed {
@@ -271,7 +271,7 @@ OrgApacheLuceneUtilBitDocIdSet_Builder *new_OrgApacheLuceneUtilBitDocIdSet_Build
 }
 
 void OrgApacheLuceneUtilBitDocIdSet_Builder_initWithInt_(OrgApacheLuceneUtilBitDocIdSet_Builder *self, jint maxDoc) {
-  OrgApacheLuceneUtilBitDocIdSet_Builder_initWithInt_withBoolean_(self, maxDoc, NO);
+  OrgApacheLuceneUtilBitDocIdSet_Builder_initWithInt_withBoolean_(self, maxDoc, false);
 }
 
 OrgApacheLuceneUtilBitDocIdSet_Builder *new_OrgApacheLuceneUtilBitDocIdSet_Builder_initWithInt_(jint maxDoc) {

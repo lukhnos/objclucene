@@ -77,7 +77,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchQueryWrapperFilter_$1)
 - (OrgApacheLuceneSearchDocIdSet *)getDocIdSetWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                             withOrgApacheLuceneUtilBits:(id<OrgApacheLuceneUtilBits>)acceptDocs {
   OrgApacheLuceneIndexLeafReaderContext *privateContext = [((OrgApacheLuceneIndexLeafReader *) nil_chk([((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader])) getContext];
-  OrgApacheLuceneSearchWeight *weight = [((OrgApacheLuceneSearchIndexSearcher *) [new_OrgApacheLuceneSearchIndexSearcher_initWithOrgApacheLuceneIndexIndexReaderContext_(privateContext) autorelease]) createNormalizedWeightWithOrgApacheLuceneSearchQuery:query_ withBoolean:NO];
+  OrgApacheLuceneSearchWeight *weight = [((OrgApacheLuceneSearchIndexSearcher *) [new_OrgApacheLuceneSearchIndexSearcher_initWithOrgApacheLuceneIndexIndexReaderContext_(privateContext) autorelease]) createNormalizedWeightWithOrgApacheLuceneSearchQuery:query_ withBoolean:false];
   OrgApacheLuceneSearchDocIdSet *set = [new_OrgApacheLuceneSearchQueryWrapperFilter_$1_initWithOrgApacheLuceneSearchWeight_withOrgApacheLuceneIndexLeafReaderContext_(weight, privateContext) autorelease];
   return OrgApacheLuceneSearchBitsFilteredDocIdSet_wrapWithOrgApacheLuceneSearchDocIdSet_withOrgApacheLuceneUtilBits_(set, acceptDocs);
 }
@@ -87,8 +87,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchQueryWrapperFilter_$1)
 }
 
 - (jboolean)isEqual:(id)o {
-  if ([super isEqual:o] == NO) {
-    return NO;
+  if ([super isEqual:o] == false) {
+    return false;
   }
   return [((OrgApacheLuceneSearchQuery *) nil_chk(self->query_)) isEqual:((OrgApacheLuceneSearchQueryWrapperFilter *) nil_chk(((OrgApacheLuceneSearchQueryWrapperFilter *) check_class_cast(o, [OrgApacheLuceneSearchQueryWrapperFilter class]))))->query_];
 }

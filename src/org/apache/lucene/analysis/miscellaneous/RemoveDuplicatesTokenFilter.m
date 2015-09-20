@@ -49,10 +49,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFil
     JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(term, 0, saved, 0, length);
     [((OrgApacheLuceneAnalysisUtilCharArraySet *) nil_chk(previous_)) addWithCharArray:saved];
     if (!duplicate) {
-      return YES;
+      return true;
     }
   }
-  return NO;
+  return false;
 }
 
 - (void)reset {
@@ -88,7 +88,7 @@ void OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter_initWithOrg
   OrgApacheLuceneAnalysisTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(self, inArg);
   JreStrongAssign(&self->termAttribute_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()]);
   JreStrongAssign(&self->posIncAttribute_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute_class_()]);
-  JreStrongAssignAndConsume(&self->previous_, new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithInt_withBoolean_(8, NO));
+  JreStrongAssignAndConsume(&self->previous_, new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithInt_withBoolean_(8, false));
 }
 
 OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter *new_OrgApacheLuceneAnalysisMiscellaneousRemoveDuplicatesTokenFilter_initWithOrgApacheLuceneAnalysisTokenStream_(OrgApacheLuceneAnalysisTokenStream *inArg) {

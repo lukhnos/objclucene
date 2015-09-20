@@ -35,18 +35,18 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousSingleTokenTokenStream, 
 
 - (jboolean)incrementToken {
   if (exhausted_) {
-    return NO;
+    return false;
   }
   else {
     [self clearAttributes];
     [((OrgApacheLuceneAnalysisToken *) nil_chk(singleToken_)) copyToWithOrgApacheLuceneUtilAttributeImpl:tokenAtt_];
-    exhausted_ = YES;
-    return YES;
+    exhausted_ = true;
+    return true;
   }
 }
 
 - (void)reset {
-  exhausted_ = NO;
+  exhausted_ = false;
 }
 
 - (OrgApacheLuceneAnalysisToken *)getToken {
@@ -88,7 +88,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousSingleTokenTokenStream, 
 
 void OrgApacheLuceneAnalysisMiscellaneousSingleTokenTokenStream_initWithOrgApacheLuceneAnalysisToken_(OrgApacheLuceneAnalysisMiscellaneousSingleTokenTokenStream *self, OrgApacheLuceneAnalysisToken *token) {
   OrgApacheLuceneAnalysisTokenStream_initWithOrgApacheLuceneUtilAttributeFactory_(self, JreLoadStatic(OrgApacheLuceneAnalysisToken, TOKEN_ATTRIBUTE_FACTORY_));
-  self->exhausted_ = NO;
+  self->exhausted_ = false;
   JreAssert((token != nil), (@"org/apache/lucene/analysis/miscellaneous/SingleTokenTokenStream.java:41 condition failed: assert token != null;"));
   JreStrongAssign(&self->singleToken_, [((OrgApacheLuceneAnalysisToken *) nil_chk(token)) clone]);
   JreStrongAssign(&self->tokenAtt_, (OrgApacheLuceneUtilAttributeImpl *) check_class_cast([self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()], [OrgApacheLuceneUtilAttributeImpl class]));

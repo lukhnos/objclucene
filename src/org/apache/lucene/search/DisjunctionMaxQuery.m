@@ -142,7 +142,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchDisjunctionMaxQuery_DisjunctionMaxWeigh
 }
 
 - (jboolean)isEqual:(id)o {
-  if (!([o isKindOfClass:[OrgApacheLuceneSearchDisjunctionMaxQuery class]])) return NO;
+  if (!([o isKindOfClass:[OrgApacheLuceneSearchDisjunctionMaxQuery class]])) return false;
   OrgApacheLuceneSearchDisjunctionMaxQuery *other = (OrgApacheLuceneSearchDisjunctionMaxQuery *) check_class_cast(o, [OrgApacheLuceneSearchDisjunctionMaxQuery class]);
   return [super isEqual:o] && self->tieBreakerMultiplier_ == ((OrgApacheLuceneSearchDisjunctionMaxQuery *) nil_chk(other))->tieBreakerMultiplier_ && [((JavaUtilArrayList *) nil_chk(self->disjuncts_)) isEqual:other->disjuncts_];
 }
@@ -272,13 +272,13 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDisjunctionMaxQuery)
 
 - (OrgApacheLuceneSearchExplanation *)explainWithOrgApacheLuceneIndexLeafReaderContext:(OrgApacheLuceneIndexLeafReaderContext *)context
                                                                                withInt:(jint)doc {
-  jboolean match = NO;
+  jboolean match = false;
   jfloat max = 0.0f, sum = 0.0f;
   id<JavaUtilList> subs = [new_JavaUtilArrayList_init() autorelease];
   for (OrgApacheLuceneSearchWeight * __strong wt in nil_chk(weights_)) {
     OrgApacheLuceneSearchExplanation *e = [((OrgApacheLuceneSearchWeight *) nil_chk(wt)) explainWithOrgApacheLuceneIndexLeafReaderContext:context withInt:doc];
     if ([((OrgApacheLuceneSearchExplanation *) nil_chk(e)) isMatch]) {
-      match = YES;
+      match = true;
       [subs addWithId:e];
       JrePlusAssignFloatF(&sum, [e getValue]);
       max = JavaLangMath_maxWithFloat_withFloat_(max, [e getValue]);

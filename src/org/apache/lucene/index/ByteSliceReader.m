@@ -50,7 +50,7 @@
 
 - (jlong)writeToWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg {
   jlong size = 0;
-  while (YES) {
+  while (true) {
     if (limit_ + bufferOffset_ == endIndex_) {
       JreAssert((endIndex_ - bufferOffset_ >= upto_), (@"org/apache/lucene/index/ByteSliceReader.java:84 condition failed: assert endIndex - bufferOffset >= upto;"));
       [((OrgApacheLuceneStoreDataOutput *) nil_chk(outArg)) writeBytesWithByteArray:buffer_ withInt:upto_ withInt:limit_ - upto_];
@@ -102,10 +102,12 @@
   }
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexByteSliceReader_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(pool_);

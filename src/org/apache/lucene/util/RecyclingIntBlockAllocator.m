@@ -43,10 +43,12 @@ withOrgApacheLuceneUtilCounter:(OrgApacheLuceneUtilCounter *)bytesUsed {
   return self;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilRecyclingIntBlockAllocator_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (IOSIntArray *)getIntBlock {
   if (freeBlocks_ == 0) {
@@ -158,7 +160,7 @@ OrgApacheLuceneUtilRecyclingIntBlockAllocator *new_OrgApacheLuceneUtilRecyclingI
 }
 
 void OrgApacheLuceneUtilRecyclingIntBlockAllocator_initWithInt_withInt_(OrgApacheLuceneUtilRecyclingIntBlockAllocator *self, jint blockSize, jint maxBufferedBlocks) {
-  OrgApacheLuceneUtilRecyclingIntBlockAllocator_initWithInt_withInt_withOrgApacheLuceneUtilCounter_(self, blockSize, maxBufferedBlocks, OrgApacheLuceneUtilCounter_newCounterWithBoolean_(NO));
+  OrgApacheLuceneUtilRecyclingIntBlockAllocator_initWithInt_withInt_withOrgApacheLuceneUtilCounter_(self, blockSize, maxBufferedBlocks, OrgApacheLuceneUtilCounter_newCounterWithBoolean_(false));
 }
 
 OrgApacheLuceneUtilRecyclingIntBlockAllocator *new_OrgApacheLuceneUtilRecyclingIntBlockAllocator_initWithInt_withInt_(jint blockSize, jint maxBufferedBlocks) {
@@ -168,7 +170,7 @@ OrgApacheLuceneUtilRecyclingIntBlockAllocator *new_OrgApacheLuceneUtilRecyclingI
 }
 
 void OrgApacheLuceneUtilRecyclingIntBlockAllocator_init(OrgApacheLuceneUtilRecyclingIntBlockAllocator *self) {
-  OrgApacheLuceneUtilRecyclingIntBlockAllocator_initWithInt_withInt_withOrgApacheLuceneUtilCounter_(self, OrgApacheLuceneUtilIntBlockPool_INT_BLOCK_SIZE, 64, OrgApacheLuceneUtilCounter_newCounterWithBoolean_(NO));
+  OrgApacheLuceneUtilRecyclingIntBlockAllocator_initWithInt_withInt_withOrgApacheLuceneUtilCounter_(self, OrgApacheLuceneUtilIntBlockPool_INT_BLOCK_SIZE, 64, OrgApacheLuceneUtilCounter_newCounterWithBoolean_(false));
 }
 
 OrgApacheLuceneUtilRecyclingIntBlockAllocator *new_OrgApacheLuceneUtilRecyclingIntBlockAllocator_init() {

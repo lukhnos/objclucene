@@ -77,9 +77,9 @@ NSString *OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_NAME_ 
 }
 
 - (jboolean)isEqual:(id)o {
-  if ([nil_chk(o) getClass] != OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_class_()) return NO;
+  if ([nil_chk(o) getClass] != OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource_class_()) return false;
   OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource *other = (OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource *) check_class_cast(o, [OrgApacheLuceneQueriesFunctionValuesourceJoinDocFreqValueSource class]);
-  if (![((NSString *) nil_chk(qfield_)) isEqual:other->qfield_]) return NO;
+  if (![((NSString *) nil_chk(qfield_)) isEqual:other->qfield_]) return false;
   return [super isEqual:other];
 }
 

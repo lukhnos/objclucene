@@ -57,8 +57,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanContainingQuery_SpanCon
 
 - (OrgApacheLuceneSearchSpansSpanWeight *)createWeightWithOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher
                                                                                  withBoolean:(jboolean)needsScores {
-  OrgApacheLuceneSearchSpansSpanWeight *bigWeight = [((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(big_)) createWeightWithOrgApacheLuceneSearchIndexSearcher:searcher withBoolean:NO];
-  OrgApacheLuceneSearchSpansSpanWeight *littleWeight = [((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(little_)) createWeightWithOrgApacheLuceneSearchIndexSearcher:searcher withBoolean:NO];
+  OrgApacheLuceneSearchSpansSpanWeight *bigWeight = [((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(big_)) createWeightWithOrgApacheLuceneSearchIndexSearcher:searcher withBoolean:false];
+  OrgApacheLuceneSearchSpansSpanWeight *littleWeight = [((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(little_)) createWeightWithOrgApacheLuceneSearchIndexSearcher:searcher withBoolean:false];
   return [new_OrgApacheLuceneSearchSpansSpanContainingQuery_SpanContainingWeight_initWithOrgApacheLuceneSearchSpansSpanContainingQuery_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_withOrgApacheLuceneSearchSpansSpanWeight_withOrgApacheLuceneSearchSpansSpanWeight_(self, searcher, needsScores ? OrgApacheLuceneSearchSpansSpanQuery_getTermContextsWithOrgApacheLuceneSearchSpansSpanWeightArray_([IOSObjectArray arrayWithObjects:(id[]){ bigWeight, littleWeight } count:2 type:OrgApacheLuceneSearchSpansSpanWeight_class_()]) : nil, bigWeight, littleWeight) autorelease];
 }
 
@@ -136,33 +136,33 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansSpanContainingQuery_S
 @implementation OrgApacheLuceneSearchSpansSpanContainingQuery_SpanContainingWeight_$1
 
 - (jboolean)twoPhaseCurrentDocMatches {
-  oneExhaustedInCurrentDoc_ = NO;
+  oneExhaustedInCurrentDoc_ = false;
   JreAssert(([((OrgApacheLuceneSearchSpansSpans *) nil_chk(littleSpans_)) startPosition] == -1), (@"org/apache/lucene/search/spans/SpanContainingQuery.java:87 condition failed: assert littleSpans.startPosition() == -1;"));
   while ([((OrgApacheLuceneSearchSpansSpans *) nil_chk(bigSpans_)) nextStartPosition] != OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS) {
     while ([littleSpans_ startPosition] < [bigSpans_ startPosition]) {
       if ([littleSpans_ nextStartPosition] == OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS) {
-        oneExhaustedInCurrentDoc_ = YES;
-        return NO;
+        oneExhaustedInCurrentDoc_ = true;
+        return false;
       }
     }
     if ([bigSpans_ endPosition] >= [littleSpans_ endPosition]) {
-      atFirstInCurrentDoc_ = YES;
-      return YES;
+      atFirstInCurrentDoc_ = true;
+      return true;
     }
   }
-  oneExhaustedInCurrentDoc_ = YES;
-  return NO;
+  oneExhaustedInCurrentDoc_ = true;
+  return false;
 }
 
 - (jint)nextStartPosition {
   if (atFirstInCurrentDoc_) {
-    atFirstInCurrentDoc_ = NO;
+    atFirstInCurrentDoc_ = false;
     return [((OrgApacheLuceneSearchSpansSpans *) nil_chk(bigSpans_)) startPosition];
   }
   while ([((OrgApacheLuceneSearchSpansSpans *) nil_chk(bigSpans_)) nextStartPosition] != OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS) {
     while ([((OrgApacheLuceneSearchSpansSpans *) nil_chk(littleSpans_)) startPosition] < [bigSpans_ startPosition]) {
       if ([littleSpans_ nextStartPosition] == OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS) {
-        oneExhaustedInCurrentDoc_ = YES;
+        oneExhaustedInCurrentDoc_ = true;
         return OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS;
       }
     }
@@ -170,7 +170,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansSpanContainingQuery_S
       return [bigSpans_ startPosition];
     }
   }
-  oneExhaustedInCurrentDoc_ = YES;
+  oneExhaustedInCurrentDoc_ = true;
   return OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS;
 }
 

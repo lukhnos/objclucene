@@ -38,10 +38,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisHiHindiStemFilter, stemmer_, OrgApach
 - (jboolean)incrementToken {
   if ([((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
     if (![((id<OrgApacheLuceneAnalysisTokenattributesKeywordAttribute>) nil_chk(keywordAtt_)) isKeyword]) [termAtt_ setLengthWithInt:[((OrgApacheLuceneAnalysisHiHindiStemmer *) nil_chk(stemmer_)) stemWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer] withInt:[termAtt_ length]]];
-    return YES;
+    return true;
   }
   else {
-    return NO;
+    return false;
   }
 }
 

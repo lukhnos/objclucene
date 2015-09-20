@@ -72,7 +72,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSimpleMergedSegmentWarmer, infoStream_, 
         [reader getSortedSetDocValuesWithNSString:info->name_];
         break;
         default:
-        JreAssert((NO), (@"org/apache/lucene/index/SimpleMergedSegmentWarmer.java:75 condition failed: assert false;"));
+        JreAssert((false), (@"org/apache/lucene/index/SimpleMergedSegmentWarmer.java:75 condition failed: assert false;"));
       }
       docValuesCount++;
     }

@@ -41,10 +41,12 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisUtilCharTokenizer, IO_BUFFER_S
 
 @implementation OrgApacheLuceneAnalysisUtilCharTokenizer
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisUtilCharTokenizer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory {
   OrgApacheLuceneAnalysisUtilCharTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(self, factory);
@@ -67,7 +69,7 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisUtilCharTokenizer, IO_BUFFER_S
   jint start = -1;
   jint end = -1;
   IOSCharArray *buffer = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer];
-  while (YES) {
+  while (true) {
     if (bufferIndex_ >= dataLen_) {
       offset_ += dataLen_;
       [((OrgApacheLuceneAnalysisUtilCharacterUtils *) nil_chk(charUtils_)) fillWithOrgApacheLuceneAnalysisUtilCharacterUtils_CharacterBuffer:ioBuffer_ withJavaIoReader:input_];
@@ -78,7 +80,7 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisUtilCharTokenizer, IO_BUFFER_S
         }
         else {
           finalOffset_ = [self correctOffsetWithInt:offset_];
-          return NO;
+          return false;
         }
       }
       dataLen_ = [ioBuffer_ getLength];
@@ -105,7 +107,7 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisUtilCharTokenizer, IO_BUFFER_S
   [termAtt_ setLengthWithInt:length];
   JreAssert((start != -1), (@"org/apache/lucene/analysis/util/CharTokenizer.java:122 condition failed: assert start != -1;"));
   [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAtt_)) setOffsetWithInt:[self correctOffsetWithInt:start] withInt:finalOffset_ = [self correctOffsetWithInt:end]];
-  return YES;
+  return true;
 }
 
 - (void)end {

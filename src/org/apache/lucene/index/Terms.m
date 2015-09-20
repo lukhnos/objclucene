@@ -46,10 +46,12 @@ IOSObjectArray *OrgApacheLuceneIndexTerms_EMPTY_ARRAY_;
 
 @implementation OrgApacheLuceneIndexTerms
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexTerms_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneIndexTermsEnum *)iterator {
   // can't call an abstract method
@@ -144,7 +146,7 @@ IOSObjectArray *OrgApacheLuceneIndexTerms_EMPTY_ARRAY_;
   }
   OrgApacheLuceneUtilBytesRefBuilder *scratch = [new_OrgApacheLuceneUtilBytesRefBuilder_init() autorelease];
   [scratch appendWithByte:(jbyte) 0];
-  while (YES) {
+  while (true) {
     jint low = 0;
     jint high = 256;
     while (low != high) {

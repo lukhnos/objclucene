@@ -77,10 +77,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPackedBulkOperation)
   }
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilPackedBulkOperation_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilPackedBulkOperation class]) {

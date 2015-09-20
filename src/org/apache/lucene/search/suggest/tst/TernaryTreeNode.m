@@ -9,10 +9,12 @@
 
 @implementation OrgApacheLuceneSearchSuggestTstTernaryTreeNode
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSuggestTstTernaryTreeNode_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jlong)sizeInBytes {
   jlong mem = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfWithId_(self);

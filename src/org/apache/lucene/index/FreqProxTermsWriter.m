@@ -82,10 +82,10 @@ withOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState
   OrgApacheLuceneIndexFields *fields = [new_OrgApacheLuceneIndexFreqProxFields_initWithJavaUtilList_(allFields) autorelease];
   OrgApacheLuceneIndexFreqProxTermsWriter_applyDeletesWithOrgApacheLuceneIndexSegmentWriteState_withOrgApacheLuceneIndexFields_(self, state, fields);
   OrgApacheLuceneCodecsFieldsConsumer *consumer = [((OrgApacheLuceneCodecsPostingsFormat *) nil_chk([((OrgApacheLuceneCodecsCodec *) nil_chk([((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentWriteState *) nil_chk(state))->segmentInfo_)) getCodec])) postingsFormat])) fieldsConsumerWithOrgApacheLuceneIndexSegmentWriteState:state];
-  jboolean success = NO;
+  jboolean success = false;
   @try {
     [((OrgApacheLuceneCodecsFieldsConsumer *) nil_chk(consumer)) writeWithOrgApacheLuceneIndexFields:fields];
-    success = YES;
+    success = true;
   }
   @finally {
     if (success) {
@@ -116,7 +116,7 @@ withOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState
 @end
 
 void OrgApacheLuceneIndexFreqProxTermsWriter_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_withOrgApacheLuceneIndexTermsHash_(OrgApacheLuceneIndexFreqProxTermsWriter *self, OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter, OrgApacheLuceneIndexTermsHash *termVectors) {
-  OrgApacheLuceneIndexTermsHash_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_withBoolean_withOrgApacheLuceneIndexTermsHash_(self, docWriter, YES, termVectors);
+  OrgApacheLuceneIndexTermsHash_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_withBoolean_withOrgApacheLuceneIndexTermsHash_(self, docWriter, true, termVectors);
 }
 
 OrgApacheLuceneIndexFreqProxTermsWriter *new_OrgApacheLuceneIndexFreqProxTermsWriter_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_withOrgApacheLuceneIndexTermsHash_(OrgApacheLuceneIndexDocumentsWriterPerThread *docWriter, OrgApacheLuceneIndexTermsHash *termVectors) {
@@ -134,7 +134,7 @@ void OrgApacheLuceneIndexFreqProxTermsWriter_applyDeletesWithOrgApacheLuceneInde
     OrgApacheLuceneIndexTermsEnum *termsEnum = nil;
     OrgApacheLuceneIndexPostingsEnum *postingsEnum = nil;
     for (OrgApacheLuceneIndexTerm * __strong deleteTerm in deleteTerms) {
-      if ([((NSString *) nil_chk([((OrgApacheLuceneIndexTerm *) nil_chk(deleteTerm)) field])) isEqual:lastField] == NO) {
+      if ([((NSString *) nil_chk([((OrgApacheLuceneIndexTerm *) nil_chk(deleteTerm)) field])) isEqual:lastField] == false) {
         lastField = [deleteTerm field];
         OrgApacheLuceneIndexTerms *terms = [((OrgApacheLuceneIndexFields *) nil_chk(fields)) termsWithNSString:lastField];
         if (terms != nil) {
@@ -148,7 +148,7 @@ void OrgApacheLuceneIndexFreqProxTermsWriter_applyDeletesWithOrgApacheLuceneInde
         postingsEnum = [termsEnum postingsWithOrgApacheLuceneIndexPostingsEnum:postingsEnum withInt:0];
         jint delDocLimit = [((JavaLangInteger *) nil_chk([segDeletes getWithId:deleteTerm])) intValue];
         JreAssert((delDocLimit < OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS), (@"org/apache/lucene/index/FreqProxTermsWriter.java:61 condition failed: assert delDocLimit < PostingsEnum.NO_MORE_DOCS;"));
-        while (YES) {
+        while (true) {
           jint doc = [((OrgApacheLuceneIndexPostingsEnum *) nil_chk(postingsEnum)) nextDoc];
           if (doc < delDocLimit) {
             if (state->liveDocs_ == nil) {

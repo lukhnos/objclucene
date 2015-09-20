@@ -34,10 +34,12 @@ __attribute__((unused)) static void OrgApacheLuceneSearchSimilaritiesLMSimilarit
   return self;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSimilaritiesLMSimilarity_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneSearchSimilaritiesBasicStats *)newStatsWithNSString:(NSString *)field
                                                             withFloat:(jfloat)queryBoost {
@@ -176,10 +178,12 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSimilaritiesLMSimilari
 
 @implementation OrgApacheLuceneSearchSimilaritiesLMSimilarity_DefaultCollectionModel
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSimilaritiesLMSimilarity_DefaultCollectionModel_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jfloat)computeProbabilityWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats {
   return ([((OrgApacheLuceneSearchSimilaritiesBasicStats *) nil_chk(stats)) getTotalTermFreq] + 1.0f) / ([stats getNumberOfFieldTokens] + 1.0f);

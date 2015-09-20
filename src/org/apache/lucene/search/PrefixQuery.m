@@ -53,16 +53,16 @@
 
 - (jboolean)isEqual:(id)obj {
   if (self == obj) {
-    return YES;
+    return true;
   }
   if (![super isEqual:obj]) {
-    return NO;
+    return false;
   }
   OrgApacheLuceneSearchPrefixQuery *other = (OrgApacheLuceneSearchPrefixQuery *) check_class_cast(obj, [OrgApacheLuceneSearchPrefixQuery class]);
   if (![((OrgApacheLuceneIndexTerm *) nil_chk(term_)) isEqual:((OrgApacheLuceneSearchPrefixQuery *) nil_chk(other))->term_]) {
-    return NO;
+    return false;
   }
-  return YES;
+  return true;
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -81,7 +81,7 @@
 @end
 
 void OrgApacheLuceneSearchPrefixQuery_initWithOrgApacheLuceneIndexTerm_(OrgApacheLuceneSearchPrefixQuery *self, OrgApacheLuceneIndexTerm *prefix) {
-  OrgApacheLuceneSearchAutomatonQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneUtilAutomatonAutomaton_withInt_withBoolean_(self, prefix, OrgApacheLuceneSearchPrefixQuery_toAutomatonWithOrgApacheLuceneUtilBytesRef_([((OrgApacheLuceneIndexTerm *) nil_chk(prefix)) bytes]), JavaLangInteger_MAX_VALUE, YES);
+  OrgApacheLuceneSearchAutomatonQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneUtilAutomatonAutomaton_withInt_withBoolean_(self, prefix, OrgApacheLuceneSearchPrefixQuery_toAutomatonWithOrgApacheLuceneUtilBytesRef_([((OrgApacheLuceneIndexTerm *) nil_chk(prefix)) bytes]), JavaLangInteger_MAX_VALUE, true);
   if (prefix == nil) {
     @throw [new_JavaLangNullPointerException_initWithNSString_(@"prefix cannot be null") autorelease];
   }
@@ -102,7 +102,7 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneSearchPrefixQuery_toAutoma
     [automaton addTransitionWithInt:lastState withInt:state withInt:IOSByteArray_Get(nil_chk(prefix->bytes_), prefix->offset_ + i) & (jint) 0xff];
     lastState = state;
   }
-  [automaton setAcceptWithInt:lastState withBoolean:YES];
+  [automaton setAcceptWithInt:lastState withBoolean:true];
   [automaton addTransitionWithInt:lastState withInt:lastState withInt:0 withInt:255];
   [automaton finishState];
   JreAssert(([automaton isDeterministic]), (@"org/apache/lucene/search/PrefixQuery.java:55 condition failed: assert automaton.isDeterministic();"));

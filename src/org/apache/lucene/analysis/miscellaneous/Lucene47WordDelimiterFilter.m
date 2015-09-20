@@ -117,10 +117,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFil
 }
 
 - (jboolean)incrementToken {
-  while (YES) {
+  while (true) {
     if (!hasSavedState_) {
       if (![((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
-        return NO;
+        return false;
       }
       jint termLength = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAttribute_)) length];
       IOSCharArray *termBuffer = [termAttribute_ buffer];
@@ -130,7 +130,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFil
       if ((iterator_->current_ == 0 && iterator_->end_ == termLength) || (protWords_ != nil && [protWords_ containsWithCharArray:termBuffer withInt:0 withInt:termLength])) {
         [posIncAttribute_ setPositionIncrementWithInt:accumPosInc_];
         accumPosInc_ = 0;
-        return YES;
+        return true;
       }
       if (iterator_->end_ == OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_DONE && !OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_hasWithInt_(self, OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_PRESERVE_ORIGINAL)) {
         if ([posIncAttribute_ getPositionIncrement] == 1) {
@@ -139,43 +139,43 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFil
         continue;
       }
       OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_saveState(self);
-      hasOutputToken_ = NO;
+      hasOutputToken_ = false;
       hasOutputFollowingOriginal_ = !OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_hasWithInt_(self, OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_PRESERVE_ORIGINAL);
       lastConcatCount_ = 0;
       if (OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_hasWithInt_(self, OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_PRESERVE_ORIGINAL)) {
         [posIncAttribute_ setPositionIncrementWithInt:accumPosInc_];
         accumPosInc_ = 0;
-        return YES;
+        return true;
       }
     }
     if (((OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator *) nil_chk(iterator_))->end_ == OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_DONE) {
       if (![((OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_WordDelimiterConcatenation *) nil_chk(concat_)) isEmpty]) {
         if (OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_flushConcatenationWithOrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_WordDelimiterConcatenation_(self, concat_)) {
-          return YES;
+          return true;
         }
       }
       if (![((OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_WordDelimiterConcatenation *) nil_chk(concatAll_)) isEmpty]) {
         if (concatAll_->subwordCount_ > lastConcatCount_) {
           [concatAll_ writeAndClear];
-          return YES;
+          return true;
         }
         [concatAll_ clear];
       }
-      hasSavedState_ = NO;
+      hasSavedState_ = false;
       continue;
     }
     if ([iterator_ isSingleWord]) {
-      OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_generatePartWithBoolean_(self, YES);
+      OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_generatePartWithBoolean_(self, true);
       [iterator_ next];
-      return YES;
+      return true;
     }
     jint wordType = [iterator_ type];
     if (![((OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_WordDelimiterConcatenation *) nil_chk(concat_)) isEmpty] && (concat_->type_ & wordType) == 0) {
       if (OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_flushConcatenationWithOrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_WordDelimiterConcatenation_(self, concat_)) {
-        hasOutputToken_ = NO;
-        return YES;
+        hasOutputToken_ = false;
+        return true;
       }
-      hasOutputToken_ = NO;
+      hasOutputToken_ = false;
     }
     if (OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_shouldConcatenateWithInt_(self, wordType)) {
       if ([concat_ isEmpty]) {
@@ -187,9 +187,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFil
       OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_concatenateWithOrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_WordDelimiterConcatenation_(self, concatAll_);
     }
     if (OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_shouldGeneratePartsWithInt_(self, wordType)) {
-      OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_generatePartWithBoolean_(self, NO);
+      OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_generatePartWithBoolean_(self, false);
       [iterator_ next];
-      return YES;
+      return true;
     }
     [iterator_ next];
   }
@@ -197,7 +197,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFil
 
 - (void)reset {
   [super reset];
-  hasSavedState_ = NO;
+  hasSavedState_ = false;
   [((OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_WordDelimiterConcatenation *) nil_chk(concat_)) clear];
   [((OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_WordDelimiterConcatenation *) nil_chk(concatAll_)) clear];
   accumPosInc_ = 0;
@@ -342,10 +342,10 @@ void OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_initWithOrg
   JreStrongAssignAndConsume(&self->concatAll_, new_OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_WordDelimiterConcatenation_initWithOrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_(self));
   self->accumPosInc_ = 0;
   JreStrongAssignAndConsume(&self->savedBuffer_, [IOSCharArray newArrayWithLength:1024]);
-  self->hasSavedState_ = NO;
-  self->hasIllegalOffsets_ = NO;
-  self->hasOutputToken_ = NO;
-  self->hasOutputFollowingOriginal_ = NO;
+  self->hasSavedState_ = false;
+  self->hasIllegalOffsets_ = false;
+  self->hasOutputToken_ = false;
+  self->hasOutputFollowingOriginal_ = false;
   self->flags_ = configurationFlags;
   JreStrongAssign(&self->protWords_, protWords);
   JreStrongAssignAndConsume(&self->iterator_, new_OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_initWithByteArray_withBoolean_withBoolean_withBoolean_(charTypeTable, OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_hasWithInt_(self, OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_SPLIT_ON_CASE_CHANGE), OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_hasWithInt_(self, OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_SPLIT_ON_NUMERICS), OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_hasWithInt_(self, OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_STEM_ENGLISH_POSSESSIVE)));
@@ -377,17 +377,17 @@ void OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_saveState(O
   }
   JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_([self->termAttribute_ buffer], 0, self->savedBuffer_, 0, [self->termAttribute_ length]);
   JreStrongAssign(&((OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator *) nil_chk(self->iterator_))->text_, self->savedBuffer_);
-  self->hasSavedState_ = YES;
+  self->hasSavedState_ = true;
 }
 
 jboolean OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_flushConcatenationWithOrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_WordDelimiterConcatenation_(OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter *self, OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_WordDelimiterConcatenation *concatenation) {
   self->lastConcatCount_ = ((OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_WordDelimiterConcatenation *) nil_chk(concatenation))->subwordCount_;
   if (concatenation->subwordCount_ != 1 || !OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_shouldGeneratePartsWithInt_(self, concatenation->type_)) {
     [concatenation writeAndClear];
-    return YES;
+    return true;
   }
   [concatenation clear];
-  return NO;
+  return false;
 }
 
 jboolean OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_shouldConcatenateWithInt_(OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter *self, jint wordType) {
@@ -422,7 +422,7 @@ void OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_generatePar
   else {
     [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(self->offsetAttribute_)) setOffsetWithInt:startOffset withInt:endOffset];
   }
-  [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(self->posIncAttribute_)) setPositionIncrementWithInt:OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_positionWithBoolean_(self, NO)];
+  [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(self->posIncAttribute_)) setPositionIncrementWithInt:OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_positionWithBoolean_(self, false)];
   [((id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>) nil_chk(self->typeAttribute_)) setTypeWithNSString:self->savedType_];
 }
 
@@ -432,9 +432,9 @@ jint OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_positionWit
     self->accumPosInc_ = 0;
     return inject ? 0 : JavaLangMath_maxWithInt_withInt_(1, posInc);
   }
-  self->hasOutputToken_ = YES;
+  self->hasOutputToken_ = true;
   if (!self->hasOutputFollowingOriginal_) {
-    self->hasOutputFollowingOriginal_ = YES;
+    self->hasOutputFollowingOriginal_ = true;
     return 0;
   }
   self->accumPosInc_ = 0;
@@ -490,7 +490,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisMiscellaneousLucene47Wor
   else {
     [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(this$0_->offsetAttribute_)) setOffsetWithInt:startOffset_ withInt:endOffset_];
   }
-  [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(this$0_->posIncAttribute_)) setPositionIncrementWithInt:OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_positionWithBoolean_(this$0_, YES)];
+  [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(this$0_->posIncAttribute_)) setPositionIncrementWithInt:OrgApacheLuceneAnalysisMiscellaneousLucene47WordDelimiterFilter_positionWithBoolean_(this$0_, true)];
   [((id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>) nil_chk(this$0_->typeAttribute_)) setTypeWithNSString:this$0_->savedType_];
   this$0_->accumPosInc_ = 0;
 }

@@ -199,7 +199,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanOrQuery_SpanOrWeight_$1
 
 - (jboolean)isEqual:(id)o {
   if (![super isEqual:o]) {
-    return NO;
+    return false;
   }
   OrgApacheLuceneSearchSpansSpanOrQuery *that = (OrgApacheLuceneSearchSpansSpanOrQuery *) check_class_cast(o, [OrgApacheLuceneSearchSpansSpanOrQuery class]);
   return [((id<JavaUtilList>) nil_chk(clauses_)) isEqual:((OrgApacheLuceneSearchSpansSpanOrQuery *) nil_chk(that))->clauses_];
@@ -215,7 +215,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSpansSpanOrQuery_SpanOrWeight_$1
                                                                                  withBoolean:(jboolean)needsScores {
   id<JavaUtilList> subWeights = [new_JavaUtilArrayList_initWithInt_([((id<JavaUtilList>) nil_chk(clauses_)) size]) autorelease];
   for (OrgApacheLuceneSearchSpansSpanQuery * __strong q in clauses_) {
-    [subWeights addWithId:[((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(q)) createWeightWithOrgApacheLuceneSearchIndexSearcher:searcher withBoolean:NO]];
+    [subWeights addWithId:[((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(q)) createWeightWithOrgApacheLuceneSearchIndexSearcher:searcher withBoolean:false]];
   }
   return [new_OrgApacheLuceneSearchSpansSpanOrQuery_SpanOrWeight_initWithOrgApacheLuceneSearchSpansSpanOrQuery_withOrgApacheLuceneSearchIndexSearcher_withJavaUtilMap_withJavaUtilList_(self, searcher, needsScores ? OrgApacheLuceneSearchSpansSpanQuery_getTermContextsWithJavaUtilCollection_(subWeights) : nil, subWeights) autorelease];
 }
@@ -395,10 +395,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansSpanOrQuery_SpanOrWei
 }
 
 - (OrgApacheLuceneSearchTwoPhaseIterator *)asTwoPhaseIterator {
-  jboolean hasApproximation = NO;
+  jboolean hasApproximation = false;
   for (OrgApacheLuceneSearchDisiWrapper * __strong w in nil_chk(val$byDocQueue_)) {
     if (((OrgApacheLuceneSearchDisiWrapper *) nil_chk(w))->twoPhaseView_ != nil) {
-      hasApproximation = YES;
+      hasApproximation = true;
       break;
     }
   }
@@ -419,12 +419,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpansSpanOrQuery_SpanOrWei
     listAtCurrentDoc->lastApproxNonMatchDoc_ = currentDoc;
     listAtCurrentDoc = listAtCurrentDoc->next_;
     if (listAtCurrentDoc == nil) {
-      return NO;
+      return false;
     }
   }
   lastDocTwoPhaseMatched_ = currentDoc;
   JreStrongAssign(&topPositionSpans_, nil);
-  return YES;
+  return true;
 }
 
 - (void)fillPositionQueue {

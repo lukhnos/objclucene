@@ -147,10 +147,12 @@ OrgApacheLuceneUtilAttributeFactory *OrgApacheLuceneUtilAttributeFactory_DEFAULT
   OrgApacheLuceneUtilAttributeFactory_rethrow0WithJavaLangThrowable_(t);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilAttributeFactory_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilAttributeFactory class]) {
@@ -224,10 +226,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAttributeFactory)
 
 @implementation OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneUtilAttributeImpl *)createAttributeInstanceWithIOSClass:(IOSClass *)attClass {
   @try {
@@ -276,7 +280,7 @@ OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory *new_OrgApacheLucene
 
 IOSClass *OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory_findImplClassWithIOSClass_(OrgApacheLuceneUtilAttributeFactory_DefaultAttributeFactory *self, IOSClass *attClass) {
   @try {
-    return [((IOSClass *) nil_chk(IOSClass_forName_initialize_classLoader_(JreStrcat("$$", [((IOSClass *) nil_chk(attClass)) getName], @"Impl"), YES, [attClass getClassLoader]))) asSubclass:OrgApacheLuceneUtilAttributeImpl_class_()];
+    return [((IOSClass *) nil_chk(IOSClass_forName_initialize_classLoader_(JreStrcat("$$", [((IOSClass *) nil_chk(attClass)) getName], @"Impl"), true, [attClass getClassLoader]))) asSubclass:OrgApacheLuceneUtilAttributeImpl_class_()];
   }
   @catch (JavaLangClassNotFoundException *cnfe) {
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$", @"Cannot find implementing class for: ", [((IOSClass *) nil_chk(attClass)) getName])) autorelease];
@@ -348,8 +352,8 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAttributeFactory_DefaultAttr
 }
 
 - (jboolean)isEqual:(id)other {
-  if (self == other) return YES;
-  if (other == nil || [other getClass] != [self getClass]) return NO;
+  if (self == other) return true;
+  if (other == nil || [other getClass] != [self getClass]) return false;
   OrgApacheLuceneUtilAttributeFactory_StaticImplementationAttributeFactory *af = (OrgApacheLuceneUtilAttributeFactory_StaticImplementationAttributeFactory *) check_class_cast(other, [OrgApacheLuceneUtilAttributeFactory_StaticImplementationAttributeFactory class]);
   return [((OrgApacheLuceneUtilAttributeFactory *) nil_chk(self->delegate_)) isEqual:((OrgApacheLuceneUtilAttributeFactory_StaticImplementationAttributeFactory *) nil_chk(af))->delegate_] && self->clazz_ == af->clazz_;
 }

@@ -36,9 +36,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisEnPorterStemFilter, keywordAttr_, id<
 }
 
 - (jboolean)incrementToken {
-  if (![((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) return NO;
+  if (![((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) return false;
   if ((![((id<OrgApacheLuceneAnalysisTokenattributesKeywordAttribute>) nil_chk(keywordAttr_)) isKeyword]) && [((OrgApacheLuceneAnalysisEnPorterStemmer *) nil_chk(stemmer_)) stemWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer] withInt:0 withInt:[termAtt_ length]]) [termAtt_ copyBufferWithCharArray:[stemmer_ getResultBuffer] withInt:0 withInt:[stemmer_ getResultLength]];
-  return YES;
+  return true;
 }
 
 - (void)dealloc {

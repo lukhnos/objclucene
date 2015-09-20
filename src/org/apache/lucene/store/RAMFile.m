@@ -17,10 +17,12 @@
 
 @implementation OrgApacheLuceneStoreRAMFile
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneStoreRAMFile_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithOrgApacheLuceneStoreRAMDirectory:(OrgApacheLuceneStoreRAMDirectory *)directory {
   OrgApacheLuceneStoreRAMFile_initWithOrgApacheLuceneStoreRAMDirectory_(self, directory);
@@ -90,20 +92,20 @@
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return YES;
-  if (obj == nil) return NO;
-  if ([self getClass] != [nil_chk(obj) getClass]) return NO;
+  if (self == obj) return true;
+  if (obj == nil) return false;
+  if ([self getClass] != [nil_chk(obj) getClass]) return false;
   OrgApacheLuceneStoreRAMFile *other = (OrgApacheLuceneStoreRAMFile *) check_class_cast(obj, [OrgApacheLuceneStoreRAMFile class]);
-  if (length_ != other->length_) return NO;
+  if (length_ != other->length_) return false;
   if ([((JavaUtilArrayList *) nil_chk(buffers_)) size] != [other->buffers_ size]) {
-    return NO;
+    return false;
   }
   for (jint i = 0; i < [buffers_ size]; i++) {
     if (!JavaUtilArrays_equalsWithByteArray_withByteArray_([buffers_ getWithInt:i], [other->buffers_ getWithInt:i])) {
-      return NO;
+      return false;
     }
   }
-  return YES;
+  return true;
 }
 
 - (void)dealloc {

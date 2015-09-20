@@ -51,10 +51,12 @@ NSString *OrgApacheLuceneStoreLockStressTest_LOCK_FILE_NAME_ = @"test.lock";
   return OrgApacheLuceneStoreLockStressTest_getNewLockFactoryWithNSString_(lockFactoryClassName);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneStoreLockStressTest_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -94,10 +96,10 @@ void OrgApacheLuceneStoreLockStressTest_mainWithNSStringArray_(IOSObjectArray *a
   JavaNetInetSocketAddress *addr = [new_JavaNetInetSocketAddress_initWithNSString_withInt_(verifierHost, verifierPort) autorelease];
   [((JavaIoPrintStream *) nil_chk(JreLoadStatic(JavaLangSystem, out_))) printlnWithNSString:JreStrcat("$@$I$", @"Connecting to server ", addr, @" and registering as client ", myID, @"...")];
   {
-    JavaLangThrowable *__mainException = nil;
     JavaNetSocket *socket = [new_JavaNetSocket_init() autorelease];
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
-      [socket setReuseAddressWithBoolean:YES];
+      [socket setReuseAddressWithBoolean:true];
       [socket connectWithJavaNetSocketAddress:addr withInt:500];
       JavaIoOutputStream *out = [socket getOutputStream];
       JavaIoInputStream *in = [socket getInputStream];
@@ -109,60 +111,62 @@ void OrgApacheLuceneStoreLockStressTest_mainWithNSStringArray_(IOSObjectArray *a
         @throw [new_JavaIoIOException_initWithNSString_(@"Protocol violation") autorelease];
       }
       for (jint i = 0; i < count; i++) {
-        {
-          JavaLangThrowable *__mainException = nil;
+        @try {
           OrgApacheLuceneStoreLock *l = [verifyLF obtainLockWithOrgApacheLuceneStoreDirectory:lockDir withNSString:OrgApacheLuceneStoreLockStressTest_LOCK_FILE_NAME_];
+          JavaLangThrowable *__primaryException1 = nil;
           @try {
             if ([rnd nextIntWithInt:10] == 0) {
               if ([rnd nextBoolean]) {
                 verifyLF = [new_OrgApacheLuceneStoreVerifyingLockFactory_initWithOrgApacheLuceneStoreLockFactory_withJavaIoInputStream_withJavaIoOutputStream_(OrgApacheLuceneStoreLockStressTest_getNewLockFactoryWithNSString_(lockFactoryClassName), in, out) autorelease];
               }
-              {
-                JavaLangThrowable *__mainException = nil;
+              @try {
                 OrgApacheLuceneStoreLock *secondLock = [verifyLF obtainLockWithOrgApacheLuceneStoreDirectory:lockDir withNSString:OrgApacheLuceneStoreLockStressTest_LOCK_FILE_NAME_];
+                JavaLangThrowable *__primaryException1 = nil;
                 @try {
                   @throw [new_JavaIoIOException_initWithNSString_(@"Double obtain") autorelease];
                 }
-                @catch (OrgApacheLuceneStoreLockObtainFailedException *loe) {
-                  __mainException = loe;
+                @catch (JavaLangThrowable *e) {
+                  __primaryException1 = e;
+                  @throw e;
                 }
                 @finally {
-                  @try {
-                    [secondLock close];
-                  }
-                  @catch (JavaLangThrowable *e) {
-                    if (__mainException) {
-                      [__mainException addSuppressedWithJavaLangThrowable:e];
+                  if (secondLock != nil) {
+                    if (__primaryException1 != nil) {
+                      @try {
+                        [secondLock close];
+                      } @catch (JavaLangThrowable *e) {
+                        [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+                      }
                     } else {
-                      __mainException = e;
+                      [secondLock close];
                     }
                   }
-                  if (__mainException) {
-                    @throw __mainException;
-                  }
                 }
+              }
+              @catch (OrgApacheLuceneStoreLockObtainFailedException *loe) {
               }
             }
             JavaLangThread_sleepWithLong_(sleepTimeMS);
           }
-          @catch (OrgApacheLuceneStoreLockObtainFailedException *loe) {
-            __mainException = loe;
+          @catch (JavaLangThrowable *e) {
+            __primaryException1 = e;
+            @throw e;
           }
           @finally {
-            @try {
-              [l close];
-            }
-            @catch (JavaLangThrowable *e) {
-              if (__mainException) {
-                [__mainException addSuppressedWithJavaLangThrowable:e];
+            if (l != nil) {
+              if (__primaryException1 != nil) {
+                @try {
+                  [l close];
+                } @catch (JavaLangThrowable *e) {
+                  [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+                }
               } else {
-                __mainException = e;
+                [l close];
               }
             }
-            if (__mainException) {
-              @throw __mainException;
-            }
           }
+        }
+        @catch (OrgApacheLuceneStoreLockObtainFailedException *loe) {
         }
         if (i % 500 == 0) {
           [JreLoadStatic(JavaLangSystem, out_) printlnWithNSString:JreStrcat("D$", (i * 100. / count), @"% done.")];
@@ -170,19 +174,21 @@ void OrgApacheLuceneStoreLockStressTest_mainWithNSStringArray_(IOSObjectArray *a
         JavaLangThread_sleepWithLong_(sleepTimeMS);
       }
     }
+    @catch (JavaLangThrowable *e) {
+      __primaryException1 = e;
+      @throw e;
+    }
     @finally {
-      @try {
-        [socket close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
+      if (socket != nil) {
+        if (__primaryException1 != nil) {
+          @try {
+            [socket close];
+          } @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
         } else {
-          __mainException = e;
+          [socket close];
         }
-      }
-      if (__mainException) {
-        @throw __mainException;
       }
     }
   }

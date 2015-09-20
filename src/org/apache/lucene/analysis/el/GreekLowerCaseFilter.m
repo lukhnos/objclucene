@@ -44,10 +44,10 @@ __attribute__((unused)) static jint OrgApacheLuceneAnalysisElGreekLowerCaseFilte
     for (jint i = 0; i < chLen; ) {
       i += JavaLangCharacter_toCharsWithInt_withCharArray_withInt_(OrgApacheLuceneAnalysisElGreekLowerCaseFilter_lowerCaseWithInt_(self, [((OrgApacheLuceneAnalysisUtilCharacterUtils *) nil_chk(charUtils_)) codePointAtWithCharArray:chArray withInt:i withInt:chLen]), chArray, i);
     }
-    return YES;
+    return true;
   }
   else {
-    return NO;
+    return false;
   }
 }
 

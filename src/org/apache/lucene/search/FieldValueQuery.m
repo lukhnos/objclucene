@@ -58,8 +58,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchFieldValueQuery_$1)
 }
 
 - (jboolean)isEqual:(id)obj {
-  if ([obj isKindOfClass:[OrgApacheLuceneSearchFieldValueQuery class]] == NO) {
-    return NO;
+  if ([obj isKindOfClass:[OrgApacheLuceneSearchFieldValueQuery class]] == false) {
+    return false;
   }
   OrgApacheLuceneSearchFieldValueQuery *that = (OrgApacheLuceneSearchFieldValueQuery *) check_class_cast(obj, [OrgApacheLuceneSearchFieldValueQuery class]);
   return [super isEqual:obj] && [((NSString *) nil_chk(field_)) isEqual:((OrgApacheLuceneSearchFieldValueQuery *) nil_chk(that))->field_];

@@ -81,10 +81,12 @@ OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *OrgApacheLuceneAnalysisAnalyzer_P
 
 @implementation OrgApacheLuceneAnalysisAnalyzer
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisAnalyzer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy:(OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy *)reuseStrategy {
   OrgApacheLuceneAnalysisAnalyzer_initWithOrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_(self, reuseStrategy);
@@ -292,10 +294,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisAnalyzer_TokenStreamComp
 
 @implementation OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneAnalysisAnalyzer_TokenStreamComponents *)getReusableComponentsWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer
                                                                                                        withNSString:(NSString *)fieldName {
@@ -367,10 +371,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy)
   OrgApacheLuceneAnalysisAnalyzer_ReuseStrategy_setStoredValueWithOrgApacheLuceneAnalysisAnalyzer_withId_(self, analyzer, components);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisAnalyzer_$1_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -415,10 +421,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisAnalyzer_$1)
   [((id<JavaUtilMap>) nil_chk(componentsPerField)) putWithId:fieldName withId:components];
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisAnalyzer_$2_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

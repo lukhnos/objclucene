@@ -295,7 +295,7 @@ withOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)_
       return nil;
     }
   }
-  if (indexHasPositions == NO || OrgApacheLuceneIndexPostingsEnum_featureRequestedWithInt_withShort_(flags, OrgApacheLuceneIndexPostingsEnum_POSITIONS) == NO) {
+  if (indexHasPositions == false || OrgApacheLuceneIndexPostingsEnum_featureRequestedWithInt_withShort_(flags, OrgApacheLuceneIndexPostingsEnum_POSITIONS) == false) {
     OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockDocsEnum *docsEnum;
     if ([reuse isKindOfClass:[OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockDocsEnum class]]) {
       docsEnum = (OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockDocsEnum *) check_class_cast(reuse, [OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockDocsEnum class]);
@@ -308,7 +308,7 @@ withOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)_
     }
     return [((OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockDocsEnum *) nil_chk(docsEnum)) resetWithOrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState:(OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState *) check_class_cast(termState, [OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_IntBlockTermState class]) withInt:flags];
   }
-  else if ((indexHasOffsets == NO || OrgApacheLuceneIndexPostingsEnum_featureRequestedWithInt_withShort_(flags, OrgApacheLuceneIndexPostingsEnum_OFFSETS) == NO) && (indexHasPayloads == NO || OrgApacheLuceneIndexPostingsEnum_featureRequestedWithInt_withShort_(flags, OrgApacheLuceneIndexPostingsEnum_PAYLOADS) == NO)) {
+  else if ((indexHasOffsets == false || OrgApacheLuceneIndexPostingsEnum_featureRequestedWithInt_withShort_(flags, OrgApacheLuceneIndexPostingsEnum_OFFSETS) == false) && (indexHasPayloads == false || OrgApacheLuceneIndexPostingsEnum_featureRequestedWithInt_withShort_(flags, OrgApacheLuceneIndexPostingsEnum_PAYLOADS) == false)) {
     OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockPostingsEnum *docsAndPositionsEnum;
     if ([reuse isKindOfClass:[OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockPostingsEnum class]]) {
       docsAndPositionsEnum = (OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockPostingsEnum *) check_class_cast(reuse, [OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockPostingsEnum class]);
@@ -406,7 +406,7 @@ withOrgApacheLuceneCodecsBlockTermState:(OrgApacheLuceneCodecsBlockTermState *)_
 
 void OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_initWithOrgApacheLuceneIndexSegmentReadState_(OrgApacheLuceneCodecsLucene50Lucene50PostingsReader *self, OrgApacheLuceneIndexSegmentReadState *state) {
   OrgApacheLuceneCodecsPostingsReaderBase_init(self);
-  jboolean success = NO;
+  jboolean success = false;
   OrgApacheLuceneStoreIndexInput *docIn = nil;
   OrgApacheLuceneStoreIndexInput *posIn = nil;
   OrgApacheLuceneStoreIndexInput *payIn = nil;
@@ -431,7 +431,7 @@ void OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_initWithOrgApacheLucene
     JreStrongAssign(&self->docIn_, docIn);
     JreStrongAssign(&self->posIn_, posIn);
     JreStrongAssign(&self->payIn_, payIn);
-    success = YES;
+    success = true;
   }
   @finally {
     if (!success) {
@@ -497,14 +497,14 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50PostingsRe
   }
   doc_ = -1;
   self->needsFreq_ = OrgApacheLuceneIndexPostingsEnum_featureRequestedWithInt_withShort_(flags, OrgApacheLuceneIndexPostingsEnum_FREQS);
-  if (indexHasFreq_ == NO || needsFreq_ == NO) {
+  if (indexHasFreq_ == false || needsFreq_ == false) {
     JavaUtilArrays_fillWithIntArray_withInt_(freqBuffer_, 1);
   }
   accum_ = 0;
   docUpto_ = 0;
   nextSkipDoc_ = OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_BLOCK_SIZE - 1;
   docBufferUpto_ = OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_BLOCK_SIZE;
-  skipped_ = NO;
+  skipped_ = false;
   return self;
 }
 
@@ -559,7 +559,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50PostingsRe
     if (!skipped_) {
       JreAssert((skipOffset_ != -1), (@"org/apache/lucene/codecs/lucene50/Lucene50PostingsReader.java:423 condition failed: assert skipOffset != -1;"));
       [((OrgApacheLuceneCodecsLucene50Lucene50SkipReader *) nil_chk(skipper_)) init__WithLong:docTermStartFP_ + skipOffset_ withLong:docTermStartFP_ withLong:0 withLong:0 withInt:docFreq_];
-      skipped_ = YES;
+      skipped_ = true;
     }
     jint newDocUpto = [((OrgApacheLuceneCodecsLucene50Lucene50SkipReader *) nil_chk(skipper_)) skipToWithInt:target] + 1;
     if (newDocUpto > docUpto_) {
@@ -577,7 +577,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50PostingsRe
   if (docBufferUpto_ == OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_BLOCK_SIZE) {
     OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockDocsEnum_refillDocs(self);
   }
-  while (YES) {
+  while (true) {
     accum_ += IOSIntArray_Get(nil_chk(docDeltaBuffer_), docBufferUpto_);
     docUpto_++;
     if (accum_ >= target) {
@@ -750,7 +750,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50PostingsRe
     nextSkipDoc_ = OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS;
   }
   docBufferUpto_ = OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_BLOCK_SIZE;
-  skipped_ = NO;
+  skipped_ = false;
   return self;
 }
 
@@ -790,12 +790,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50PostingsRe
 - (jint)advanceWithInt:(jint)target {
   if (target > nextSkipDoc_) {
     if (skipper_ == nil) {
-      JreStrongAssignAndConsume(&skipper_, new_OrgApacheLuceneCodecsLucene50Lucene50SkipReader_initWithOrgApacheLuceneStoreIndexInput_withInt_withBoolean_withBoolean_withBoolean_([((OrgApacheLuceneStoreIndexInput *) nil_chk(docIn_)) clone], OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_MAX_SKIP_LEVELS, YES, indexHasOffsets_, indexHasPayloads_));
+      JreStrongAssignAndConsume(&skipper_, new_OrgApacheLuceneCodecsLucene50Lucene50SkipReader_initWithOrgApacheLuceneStoreIndexInput_withInt_withBoolean_withBoolean_withBoolean_([((OrgApacheLuceneStoreIndexInput *) nil_chk(docIn_)) clone], OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_MAX_SKIP_LEVELS, true, indexHasOffsets_, indexHasPayloads_));
     }
     if (!skipped_) {
       JreAssert((skipOffset_ != -1), (@"org/apache/lucene/codecs/lucene50/Lucene50PostingsReader.java:688 condition failed: assert skipOffset != -1;"));
       [((OrgApacheLuceneCodecsLucene50Lucene50SkipReader *) nil_chk(skipper_)) init__WithLong:docTermStartFP_ + skipOffset_ withLong:docTermStartFP_ withLong:posTermStartFP_ withLong:payTermStartFP_ withInt:docFreq_];
-      skipped_ = YES;
+      skipped_ = true;
     }
     jint newDocUpto = [((OrgApacheLuceneCodecsLucene50Lucene50SkipReader *) nil_chk(skipper_)) skipToWithInt:target] + 1;
     if (newDocUpto > docUpto_) {
@@ -815,7 +815,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50PostingsRe
   if (docBufferUpto_ == OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_BLOCK_SIZE) {
     OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockPostingsEnum_refillDocs(self);
   }
-  while (YES) {
+  while (true) {
     accum_ += IOSIntArray_Get(nil_chk(docDeltaBuffer_), docBufferUpto_);
     freq_ = IOSIntArray_Get(nil_chk(freqBuffer_), docBufferUpto_);
     posPendingCount_ += freq_;
@@ -973,7 +973,7 @@ void OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_BlockPostingsEnum_refil
     *IOSIntArray_GetRef(nil_chk(self->freqBuffer_), 0) = (jint) self->totalTermFreq_;
   }
   else {
-    OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_readVIntBlockWithOrgApacheLuceneStoreIndexInput_withIntArray_withIntArray_withInt_withBoolean_(self->docIn_, self->docDeltaBuffer_, self->freqBuffer_, left, YES);
+    OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_readVIntBlockWithOrgApacheLuceneStoreIndexInput_withIntArray_withIntArray_withInt_withBoolean_(self->docIn_, self->docDeltaBuffer_, self->freqBuffer_, left, true);
   }
   self->docBufferUpto_ = 0;
 }
@@ -1081,7 +1081,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50PostingsRe
     nextSkipDoc_ = OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS;
   }
   docBufferUpto_ = OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_BLOCK_SIZE;
-  skipped_ = NO;
+  skipped_ = false;
   return self;
 }
 
@@ -1122,12 +1122,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50PostingsRe
 - (jint)advanceWithInt:(jint)target {
   if (target > nextSkipDoc_) {
     if (skipper_ == nil) {
-      JreStrongAssignAndConsume(&skipper_, new_OrgApacheLuceneCodecsLucene50Lucene50SkipReader_initWithOrgApacheLuceneStoreIndexInput_withInt_withBoolean_withBoolean_withBoolean_([((OrgApacheLuceneStoreIndexInput *) nil_chk(docIn_)) clone], OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_MAX_SKIP_LEVELS, YES, indexHasOffsets_, indexHasPayloads_));
+      JreStrongAssignAndConsume(&skipper_, new_OrgApacheLuceneCodecsLucene50Lucene50SkipReader_initWithOrgApacheLuceneStoreIndexInput_withInt_withBoolean_withBoolean_withBoolean_([((OrgApacheLuceneStoreIndexInput *) nil_chk(docIn_)) clone], OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_MAX_SKIP_LEVELS, true, indexHasOffsets_, indexHasPayloads_));
     }
     if (!skipped_) {
       JreAssert((skipOffset_ != -1), (@"org/apache/lucene/codecs/lucene50/Lucene50PostingsReader.java:1104 condition failed: assert skipOffset != -1;"));
       [((OrgApacheLuceneCodecsLucene50Lucene50SkipReader *) nil_chk(skipper_)) init__WithLong:docTermStartFP_ + skipOffset_ withLong:docTermStartFP_ withLong:posTermStartFP_ withLong:payTermStartFP_ withInt:docFreq_];
-      skipped_ = YES;
+      skipped_ = true;
     }
     jint newDocUpto = [((OrgApacheLuceneCodecsLucene50Lucene50SkipReader *) nil_chk(skipper_)) skipToWithInt:target] + 1;
     if (newDocUpto > docUpto_) {
@@ -1150,7 +1150,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneCodecsLucene50Lucene50PostingsRe
   if (docBufferUpto_ == OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_BLOCK_SIZE) {
     OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_EverythingEnum_refillDocs(self);
   }
-  while (YES) {
+  while (true) {
     accum_ += IOSIntArray_Get(nil_chk(docDeltaBuffer_), docBufferUpto_);
     freq_ = IOSIntArray_Get(nil_chk(freqBuffer_), docBufferUpto_);
     posPendingCount_ += freq_;
@@ -1372,7 +1372,7 @@ void OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_EverythingEnum_refillDo
     *IOSIntArray_GetRef(nil_chk(self->freqBuffer_), 0) = (jint) self->totalTermFreq_;
   }
   else {
-    OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_readVIntBlockWithOrgApacheLuceneStoreIndexInput_withIntArray_withIntArray_withInt_withBoolean_(self->docIn_, self->docDeltaBuffer_, self->freqBuffer_, left, YES);
+    OrgApacheLuceneCodecsLucene50Lucene50PostingsReader_readVIntBlockWithOrgApacheLuceneStoreIndexInput_withIntArray_withIntArray_withInt_withBoolean_(self->docIn_, self->docDeltaBuffer_, self->freqBuffer_, left, true);
   }
   self->docBufferUpto_ = 0;
 }

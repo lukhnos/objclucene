@@ -210,7 +210,7 @@ OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisUtilCharArraySet
     OrgApacheLuceneAnalysisUtilCharArraySet *source = (OrgApacheLuceneAnalysisUtilCharArraySet *) check_class_cast(set, [OrgApacheLuceneAnalysisUtilCharArraySet class]);
     return [new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithOrgApacheLuceneAnalysisUtilCharArrayMap_(OrgApacheLuceneAnalysisUtilCharArrayMap_copy__WithJavaUtilMap_(((OrgApacheLuceneAnalysisUtilCharArraySet *) nil_chk(source))->map_)) autorelease];
   }
-  return [new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(set, NO) autorelease];
+  return [new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(set, false) autorelease];
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisUtilCharArraySet)

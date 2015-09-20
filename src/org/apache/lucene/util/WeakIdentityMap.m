@@ -220,7 +220,7 @@ id OrgApacheLuceneUtilWeakIdentityMap_NULL__;
 
 OrgApacheLuceneUtilWeakIdentityMap *OrgApacheLuceneUtilWeakIdentityMap_newHashMap() {
   OrgApacheLuceneUtilWeakIdentityMap_initialize();
-  return OrgApacheLuceneUtilWeakIdentityMap_newHashMapWithBoolean_(YES);
+  return OrgApacheLuceneUtilWeakIdentityMap_newHashMapWithBoolean_(true);
 }
 
 OrgApacheLuceneUtilWeakIdentityMap *OrgApacheLuceneUtilWeakIdentityMap_newHashMapWithBoolean_(jboolean reapOnRead) {
@@ -230,7 +230,7 @@ OrgApacheLuceneUtilWeakIdentityMap *OrgApacheLuceneUtilWeakIdentityMap_newHashMa
 
 OrgApacheLuceneUtilWeakIdentityMap *OrgApacheLuceneUtilWeakIdentityMap_newConcurrentHashMap() {
   OrgApacheLuceneUtilWeakIdentityMap_initialize();
-  return OrgApacheLuceneUtilWeakIdentityMap_newConcurrentHashMapWithBoolean_(YES);
+  return OrgApacheLuceneUtilWeakIdentityMap_newConcurrentHashMapWithBoolean_(true);
 }
 
 OrgApacheLuceneUtilWeakIdentityMap *OrgApacheLuceneUtilWeakIdentityMap_newConcurrentHashMapWithBoolean_(jboolean reapOnRead) {
@@ -267,15 +267,15 @@ withJavaLangRefReferenceQueue:(JavaLangRefReferenceQueue *)queue {
 
 - (jboolean)isEqual:(id)o {
   if (self == o) {
-    return YES;
+    return true;
   }
   if ([o isKindOfClass:[OrgApacheLuceneUtilWeakIdentityMap_IdentityWeakReference class]]) {
     OrgApacheLuceneUtilWeakIdentityMap_IdentityWeakReference *ref = (OrgApacheLuceneUtilWeakIdentityMap_IdentityWeakReference *) check_class_cast(o, [OrgApacheLuceneUtilWeakIdentityMap_IdentityWeakReference class]);
     if ([self get] == [((OrgApacheLuceneUtilWeakIdentityMap_IdentityWeakReference *) nil_chk(ref)) get]) {
-      return YES;
+      return true;
     }
   }
-  return NO;
+  return false;
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -322,7 +322,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilWeakIdentityMap_IdentityWeak
     return (id) next_;
   }
   @finally {
-    nextIsSet_ = NO;
+    nextIsSet_ = false;
     JreStrongAssign(&next_, nil);
   }
 }
@@ -377,17 +377,17 @@ jboolean OrgApacheLuceneUtilWeakIdentityMap_$1_setNext(OrgApacheLuceneUtilWeakId
       if (self->next_ == JreLoadStatic(OrgApacheLuceneUtilWeakIdentityMap, NULL__)) {
         JreStrongAssign(&self->next_, nil);
       }
-      return self->nextIsSet_ = YES;
+      return self->nextIsSet_ = true;
     }
   }
-  return NO;
+  return false;
 }
 
 void OrgApacheLuceneUtilWeakIdentityMap_$1_initWithJavaUtilIterator_(OrgApacheLuceneUtilWeakIdentityMap_$1 *self, id<JavaUtilIterator> capture$0) {
   JreStrongAssign(&self->val$iterator_, capture$0);
   NSObject_init(self);
   JreStrongAssign(&self->next_, nil);
-  self->nextIsSet_ = NO;
+  self->nextIsSet_ = false;
 }
 
 OrgApacheLuceneUtilWeakIdentityMap_$1 *new_OrgApacheLuceneUtilWeakIdentityMap_$1_initWithJavaUtilIterator_(id<JavaUtilIterator> capture$0) {

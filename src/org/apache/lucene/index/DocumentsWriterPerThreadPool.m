@@ -49,13 +49,13 @@ __attribute__((unused)) static void OrgApacheLuceneIndexDocumentsWriterPerThread
 
 - (void)setAbort {
   @synchronized(self) {
-    aborted_ = YES;
+    aborted_ = true;
   }
 }
 
 - (void)clearAbort {
   @synchronized(self) {
-    aborted_ = NO;
+    aborted_ = false;
     [self notifyAll];
   }
 }
@@ -129,10 +129,12 @@ __attribute__((unused)) static void OrgApacheLuceneIndexDocumentsWriterPerThread
   return minThreadState;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexDocumentsWriterPerThreadPool_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(threadStates_);
@@ -255,7 +257,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocumentsWriterPerThreadPoo
 
 void OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState_initWithOrgApacheLuceneIndexDocumentsWriterPerThread_(OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState *self, OrgApacheLuceneIndexDocumentsWriterPerThread *dpwt) {
   JavaUtilConcurrentLocksReentrantLock_init(self);
-  JreAssignVolatileBoolean(&self->flushPending_, NO);
+  JreAssignVolatileBoolean(&self->flushPending_, false);
   self->bytesUsed_ = 0;
   JreStrongAssign(&self->dwpt_, dpwt);
 }
@@ -270,7 +272,7 @@ void OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState_reset(OrgApach
   JreAssert(([self isHeldByCurrentThread]), (@"org/apache/lucene/index/DocumentsWriterPerThreadPool.java:69 condition failed: assert this.isHeldByCurrentThread();"));
   JreStrongAssign(&self->dwpt_, nil);
   self->bytesUsed_ = 0;
-  JreAssignVolatileBoolean(&self->flushPending_, NO);
+  JreAssignVolatileBoolean(&self->flushPending_, false);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocumentsWriterPerThreadPool_ThreadState)

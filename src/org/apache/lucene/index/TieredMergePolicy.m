@@ -109,10 +109,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexTieredMergePolicy_$1)
 
 @implementation OrgApacheLuceneIndexTieredMergePolicy
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexTieredMergePolicy_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneIndexTieredMergePolicy *)setMaxMergeAtOnceWithInt:(jint)v {
   if (v < 2) {
@@ -243,7 +245,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexTieredMergePolicy_$1)
   jlong levelSize = minSegmentBytes;
   jlong bytesLeft = totIndexBytes;
   jdouble allowedSegCount = 0;
-  while (YES) {
+  while (true) {
     jdouble segCountLevel = bytesLeft / (jdouble) levelSize;
     if (segCountLevel < segsPerTier_) {
       JrePlusAssignDoubleD(&allowedSegCount, JavaLangMath_ceilWithDouble_(segCountLevel));
@@ -255,7 +257,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexTieredMergePolicy_$1)
   }
   jint allowedSegCountInt = JreFpToInt(allowedSegCount);
   OrgApacheLuceneIndexMergePolicy_MergeSpecification *spec = nil;
-  while (YES) {
+  while (true) {
     jlong mergingBytes = 0;
     id<JavaUtilList> eligible = [new_JavaUtilArrayList_init() autorelease];
     for (jint idx = tooBigCount; idx < [infosSorted size]; idx++) {
@@ -277,17 +279,17 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexTieredMergePolicy_$1)
     if ([eligible size] > allowedSegCountInt) {
       OrgApacheLuceneIndexTieredMergePolicy_MergeScore *bestScore = nil;
       id<JavaUtilList> best = nil;
-      jboolean bestTooLarge = NO;
+      jboolean bestTooLarge = false;
       jlong bestMergeBytes = 0;
       for (jint startIdx = 0; startIdx <= [eligible size] - maxMergeAtOnce_; startIdx++) {
         jlong totAfterMergeBytes = 0;
         id<JavaUtilList> candidate = [new_JavaUtilArrayList_init() autorelease];
-        jboolean hitTooLarge = NO;
+        jboolean hitTooLarge = false;
         for (jint idx = startIdx; idx < [eligible size] && [candidate size] < maxMergeAtOnce_; idx++) {
           OrgApacheLuceneIndexSegmentCommitInfo *info = [eligible getWithInt:idx];
           jlong segBytes = [self sizeWithOrgApacheLuceneIndexSegmentCommitInfo:info withOrgApacheLuceneIndexIndexWriter:writer];
           if (totAfterMergeBytes + segBytes > maxMergedSegmentBytes_) {
-            hitTooLarge = YES;
+            hitTooLarge = true;
             continue;
           }
           [candidate addWithId:info];
@@ -364,9 +366,9 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexTieredMergePolicy_$1)
     OrgApacheLuceneIndexTieredMergePolicy_messageWithNSString_withOrgApacheLuceneIndexIndexWriter_(self, JreStrcat("$I$$$@", @"findForcedMerges maxSegmentCount=", maxSegmentCount, @" infos=", [((OrgApacheLuceneIndexIndexWriter *) nil_chk(writer)) segStringWithJavaLangIterable:infos], @" segmentsToMerge=", segmentsToMerge), writer);
   }
   id<JavaUtilList> eligible = [new_JavaUtilArrayList_init() autorelease];
-  jboolean forceMergeRunning = NO;
+  jboolean forceMergeRunning = false;
   id<JavaUtilCollection> merging = [((OrgApacheLuceneIndexIndexWriter *) nil_chk(writer)) getMergingSegments];
-  jboolean segmentIsOriginal = NO;
+  jboolean segmentIsOriginal = false;
   for (OrgApacheLuceneIndexSegmentCommitInfo * __strong info in nil_chk(infos)) {
     JavaLangBoolean *isOriginal = [((id<JavaUtilMap>) nil_chk(segmentsToMerge)) getWithId:info];
     if (isOriginal != nil) {
@@ -375,7 +377,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexTieredMergePolicy_$1)
         [eligible addWithId:info];
       }
       else {
-        forceMergeRunning = YES;
+        forceMergeRunning = true;
       }
     }
   }
@@ -620,10 +622,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexTieredMergePolicy_SegmentBy
 
 @implementation OrgApacheLuceneIndexTieredMergePolicy_MergeScore
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexTieredMergePolicy_MergeScore_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jdouble)getScore {
   // can't call an abstract method

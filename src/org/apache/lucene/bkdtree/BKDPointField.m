@@ -51,10 +51,10 @@ OrgApacheLuceneDocumentFieldType *OrgApacheLuceneBkdtreeBKDPointField_TYPE_;
 
 void OrgApacheLuceneBkdtreeBKDPointField_initWithNSString_withDouble_withDouble_(OrgApacheLuceneBkdtreeBKDPointField *self, NSString *name, jdouble lat, jdouble lon) {
   OrgApacheLuceneDocumentField_initWithNSString_withOrgApacheLuceneDocumentFieldType_(self, name, OrgApacheLuceneBkdtreeBKDPointField_TYPE_);
-  if (OrgApacheLuceneBkdtreeBKDTreeWriter_validLatWithDouble_(lat) == NO) {
+  if (OrgApacheLuceneBkdtreeBKDTreeWriter_validLatWithDouble_(lat) == false) {
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D$", @"invalid lat (", lat, @"): must be -90 to 90")) autorelease];
   }
-  if (OrgApacheLuceneBkdtreeBKDTreeWriter_validLonWithDouble_(lon) == NO) {
+  if (OrgApacheLuceneBkdtreeBKDTreeWriter_validLonWithDouble_(lon) == false) {
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D$", @"invalid lon (", lon, @"): must be -180 to 180")) autorelease];
   }
   JreStrongAssign(&self->fieldsData_, JavaLangLong_valueOfWithLong_((JreLShift64((jlong) OrgApacheLuceneBkdtreeBKDTreeWriter_encodeLatWithDouble_(lat), 32)) | (OrgApacheLuceneBkdtreeBKDTreeWriter_encodeLonWithDouble_(lon) & (jlong) 0xffffffffLL)));

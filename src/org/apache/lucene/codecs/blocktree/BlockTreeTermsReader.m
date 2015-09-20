@@ -214,7 +214,7 @@ NSString *OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_TERMS_INDEX_CODEC_N
 void OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_initWithOrgApacheLuceneCodecsPostingsReaderBase_withOrgApacheLuceneIndexSegmentReadState_(OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader *self, OrgApacheLuceneCodecsPostingsReaderBase *postingsReader, OrgApacheLuceneIndexSegmentReadState *state) {
   OrgApacheLuceneCodecsFieldsProducer_init(self);
   JreStrongAssignAndConsume(&self->fields_, new_JavaUtilTreeMap_init());
-  jboolean success = NO;
+  jboolean success = false;
   OrgApacheLuceneStoreIndexInput *indexIn = nil;
   JreStrongAssign(&self->postingsReader_, postingsReader);
   JreStrongAssign(&self->segment_, ((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentReadState *) nil_chk(state))->segmentInfo_))->name_);
@@ -223,19 +223,19 @@ void OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_initWithOrgApacheLuceneC
     JreStrongAssign(&self->termsIn_, [((OrgApacheLuceneStoreDirectory *) nil_chk(state->directory_)) openInputWithNSString:termsName withOrgApacheLuceneStoreIOContext:state->context_]);
     self->version__ = OrgApacheLuceneCodecsCodecUtil_checkIndexHeaderWithOrgApacheLuceneStoreDataInput_withNSString_withInt_withInt_withByteArray_withNSString_(self->termsIn_, OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_TERMS_CODEC_NAME_, OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_VERSION_START, OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_VERSION_CURRENT, [state->segmentInfo_ getId], state->segmentSuffix_);
     if (self->version__ < OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_VERSION_AUTO_PREFIX_TERMS) {
-      self->anyAutoPrefixTerms_ = NO;
+      self->anyAutoPrefixTerms_ = false;
     }
     else if (self->version__ == OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_VERSION_AUTO_PREFIX_TERMS) {
-      self->anyAutoPrefixTerms_ = YES;
+      self->anyAutoPrefixTerms_ = true;
     }
     else {
       JreAssert((self->version__ >= OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_VERSION_AUTO_PREFIX_TERMS_COND), (@"org/apache/lucene/codecs/blocktree/BlockTreeTermsReader.java:161 condition failed: assert version >= VERSION_AUTO_PREFIX_TERMS_COND;"));
       jbyte b = [((OrgApacheLuceneStoreIndexInput *) nil_chk(self->termsIn_)) readByte];
       if (b == 0) {
-        self->anyAutoPrefixTerms_ = NO;
+        self->anyAutoPrefixTerms_ = false;
       }
       else if (b == 1) {
-        self->anyAutoPrefixTerms_ = YES;
+        self->anyAutoPrefixTerms_ = true;
       }
       else {
         @throw [new_OrgApacheLuceneIndexCorruptIndexException_initWithNSString_withOrgApacheLuceneStoreDataInput_(JreStrcat("$B", @"invalid anyAutoPrefixTerms: expected 0 or 1 but got ", b), self->termsIn_) autorelease];
@@ -295,7 +295,7 @@ void OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader_initWithOrgApacheLuceneC
       }
     }
     [((OrgApacheLuceneStoreIndexInput *) nil_chk(indexIn)) close];
-    success = YES;
+    success = true;
   }
   @finally {
     if (!success) {

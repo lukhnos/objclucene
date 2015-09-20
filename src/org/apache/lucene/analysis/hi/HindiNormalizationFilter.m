@@ -38,9 +38,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisHiHindiNormalizationFilter, keywordAt
 - (jboolean)incrementToken {
   if ([((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
     if (![((id<OrgApacheLuceneAnalysisTokenattributesKeywordAttribute>) nil_chk(keywordAtt_)) isKeyword]) [termAtt_ setLengthWithInt:[((OrgApacheLuceneAnalysisHiHindiNormalizer *) nil_chk(normalizer_)) normalizeWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer] withInt:[termAtt_ length]]];
-    return YES;
+    return true;
   }
-  return NO;
+  return false;
 }
 
 - (void)dealloc {

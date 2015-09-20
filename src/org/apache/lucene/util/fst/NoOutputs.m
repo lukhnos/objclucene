@@ -46,10 +46,12 @@ id OrgApacheLuceneUtilFstNoOutputs_NO_OUTPUT_;
 
 @implementation OrgApacheLuceneUtilFstNoOutputs
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilFstNoOutputs_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (OrgApacheLuceneUtilFstNoOutputs *)getSingleton {
   return OrgApacheLuceneUtilFstNoOutputs_getSingleton();
@@ -168,10 +170,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstNoOutputs)
   return other == self;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilFstNoOutputs_$1_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

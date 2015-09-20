@@ -41,15 +41,15 @@
 }
 
 - (jboolean)isEqual:(id)o {
-  if (self == o) return YES;
-  if (o == nil || [self getClass] != [o getClass]) return NO;
-  if (![super isEqual:o]) return NO;
+  if (self == o) return true;
+  if (o == nil || [self getClass] != [o getClass]) return false;
+  if (![super isEqual:o]) return false;
   OrgApacheLuceneSearchGeoPointInBBoxQueryImpl *that = (OrgApacheLuceneSearchGeoPointInBBoxQueryImpl *) check_class_cast(o, [OrgApacheLuceneSearchGeoPointInBBoxQueryImpl class]);
-  if (JavaLangDouble_compareWithDouble_withDouble_(((OrgApacheLuceneSearchGeoPointInBBoxQueryImpl *) nil_chk(that))->maxLat_, maxLat_) != 0) return NO;
-  if (JavaLangDouble_compareWithDouble_withDouble_(that->maxLon_, maxLon_) != 0) return NO;
-  if (JavaLangDouble_compareWithDouble_withDouble_(that->minLat_, minLat_) != 0) return NO;
-  if (JavaLangDouble_compareWithDouble_withDouble_(that->minLon_, minLon_) != 0) return NO;
-  return YES;
+  if (JavaLangDouble_compareWithDouble_withDouble_(((OrgApacheLuceneSearchGeoPointInBBoxQueryImpl *) nil_chk(that))->maxLat_, maxLat_) != 0) return false;
+  if (JavaLangDouble_compareWithDouble_withDouble_(that->maxLon_, maxLon_) != 0) return false;
+  if (JavaLangDouble_compareWithDouble_withDouble_(that->minLat_, minLat_) != 0) return false;
+  if (JavaLangDouble_compareWithDouble_withDouble_(that->minLon_, minLon_) != 0) return false;
+  return true;
 }
 
 - (NSUInteger)hash {

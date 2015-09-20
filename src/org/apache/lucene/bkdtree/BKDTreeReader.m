@@ -122,16 +122,16 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneBkdtreeBKDTreeReader_QueryState)
                                             withDouble:(jdouble)lonMax
   withOrgApacheLuceneBkdtreeBKDTreeReader_LatLonFilter:(id<OrgApacheLuceneBkdtreeBKDTreeReader_LatLonFilter>)filter
         withOrgApacheLuceneIndexSortedNumericDocValues:(OrgApacheLuceneIndexSortedNumericDocValues *)sndv {
-  if (OrgApacheLuceneBkdtreeBKDTreeWriter_validLatWithDouble_(latMin) == NO) {
+  if (OrgApacheLuceneBkdtreeBKDTreeWriter_validLatWithDouble_(latMin) == false) {
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D", @"invalid latMin: ", latMin)) autorelease];
   }
-  if (OrgApacheLuceneBkdtreeBKDTreeWriter_validLatWithDouble_(latMax) == NO) {
+  if (OrgApacheLuceneBkdtreeBKDTreeWriter_validLatWithDouble_(latMax) == false) {
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D", @"invalid latMax: ", latMax)) autorelease];
   }
-  if (OrgApacheLuceneBkdtreeBKDTreeWriter_validLonWithDouble_(lonMin) == NO) {
+  if (OrgApacheLuceneBkdtreeBKDTreeWriter_validLonWithDouble_(lonMin) == false) {
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D", @"invalid lonMin: ", lonMin)) autorelease];
   }
-  if (OrgApacheLuceneBkdtreeBKDTreeWriter_validLonWithDouble_(lonMax) == NO) {
+  if (OrgApacheLuceneBkdtreeBKDTreeWriter_validLonWithDouble_(lonMax) == false) {
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D", @"invalid lonMax: ", lonMax)) autorelease];
   }
   jint latMinEnc = OrgApacheLuceneBkdtreeBKDTreeWriter_encodeLatWithDouble_(latMin);

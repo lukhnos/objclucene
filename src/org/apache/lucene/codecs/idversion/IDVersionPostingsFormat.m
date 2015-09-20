@@ -37,10 +37,12 @@
 
 @implementation OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsIdversionIDVersionPostingsFormat_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithInt:(jint)minTermsInBlock
                     withInt:(jint)maxTermsInBlock {
@@ -50,10 +52,10 @@
 
 - (OrgApacheLuceneCodecsFieldsConsumer *)fieldsConsumerWithOrgApacheLuceneIndexSegmentWriteState:(OrgApacheLuceneIndexSegmentWriteState *)state {
   OrgApacheLuceneCodecsPostingsWriterBase *postingsWriter = [new_OrgApacheLuceneCodecsIdversionIDVersionPostingsWriter_initWithOrgApacheLuceneUtilBits_(((OrgApacheLuceneIndexSegmentWriteState *) nil_chk(state))->liveDocs_) autorelease];
-  jboolean success = NO;
+  jboolean success = false;
   @try {
     OrgApacheLuceneCodecsFieldsConsumer *ret = [new_OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_initWithOrgApacheLuceneIndexSegmentWriteState_withOrgApacheLuceneCodecsPostingsWriterBase_withInt_withInt_(state, postingsWriter, minTermsInBlock_, maxTermsInBlock_) autorelease];
-    success = YES;
+    success = true;
     return ret;
   }
   @finally {
@@ -65,10 +67,10 @@
 
 - (OrgApacheLuceneCodecsFieldsProducer *)fieldsProducerWithOrgApacheLuceneIndexSegmentReadState:(OrgApacheLuceneIndexSegmentReadState *)state {
   OrgApacheLuceneCodecsPostingsReaderBase *postingsReader = [new_OrgApacheLuceneCodecsIdversionIDVersionPostingsReader_init() autorelease];
-  jboolean success = NO;
+  jboolean success = false;
   @try {
     OrgApacheLuceneCodecsFieldsProducer *ret = [new_OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_initWithOrgApacheLuceneCodecsPostingsReaderBase_withOrgApacheLuceneIndexSegmentReadState_(postingsReader, state) autorelease];
-    success = YES;
+    success = true;
     return ret;
   }
   @finally {

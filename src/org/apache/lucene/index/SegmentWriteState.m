@@ -145,15 +145,15 @@ jboolean OrgApacheLuceneIndexSegmentWriteState_assertSegmentSuffixWithNSString_(
   if (![((NSString *) nil_chk(segmentSuffix)) isEmpty]) {
     jint numParts = ((IOSObjectArray *) nil_chk([segmentSuffix split:@"_"]))->size_;
     if (numParts == 2) {
-      return YES;
+      return true;
     }
     else if (numParts == 1) {
       JavaLangLong_parseLongWithNSString_withInt_(segmentSuffix, JavaLangCharacter_MAX_RADIX);
-      return YES;
+      return true;
     }
-    return NO;
+    return false;
   }
-  return YES;
+  return true;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSegmentWriteState)

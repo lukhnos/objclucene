@@ -46,7 +46,7 @@
 
 - (jboolean)isEqual:(id)o {
   if (![super isEqual:o]) {
-    return NO;
+    return false;
   }
   OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery *other = (OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery *) check_class_cast(o, [OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery class]);
   return [((id<JavaUtilCollection>) nil_chk(self->payloadToMatch_)) isEqual:((OrgApacheLuceneSearchPayloadsSpanNearPayloadCheckQuery *) nil_chk(other))->payloadToMatch_];

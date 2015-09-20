@@ -37,7 +37,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestInMemorySorter, comparator_, id<
 }
 
 - (id<OrgApacheLuceneUtilBytesRefIterator>)iterator {
-  closed_ = YES;
+  closed_ = true;
   return [((OrgApacheLuceneUtilBytesRefArray *) nil_chk(buffer_)) iteratorWithJavaUtilComparator:comparator_];
 }
 
@@ -72,7 +72,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSuggestInMemorySorter, comparator_, id<
 void OrgApacheLuceneSearchSuggestInMemorySorter_initWithJavaUtilComparator_(OrgApacheLuceneSearchSuggestInMemorySorter *self, id<JavaUtilComparator> comparator) {
   NSObject_init(self);
   JreStrongAssignAndConsume(&self->buffer_, new_OrgApacheLuceneUtilBytesRefArray_initWithOrgApacheLuceneUtilCounter_(OrgApacheLuceneUtilCounter_newCounter()));
-  self->closed_ = NO;
+  self->closed_ = false;
   JreStrongAssign(&self->comparator_, comparator);
 }
 

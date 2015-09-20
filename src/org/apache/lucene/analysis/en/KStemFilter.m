@@ -37,13 +37,13 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisEnKStemFilter, keywordAtt_, id<OrgApa
 }
 
 - (jboolean)incrementToken {
-  if (![((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) return NO;
+  if (![((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) return false;
   IOSCharArray *term = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAttribute_)) buffer];
   jint len = [termAttribute_ length];
   if ((![((id<OrgApacheLuceneAnalysisTokenattributesKeywordAttribute>) nil_chk(keywordAtt_)) isKeyword]) && [((OrgApacheLuceneAnalysisEnKStemmer *) nil_chk(stemmer_)) stemWithCharArray:term withInt:len]) {
     [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk([termAttribute_ setEmpty])) appendWithJavaLangCharSequence:[stemmer_ asCharSequence]];
   }
-  return YES;
+  return true;
 }
 
 - (void)dealloc {

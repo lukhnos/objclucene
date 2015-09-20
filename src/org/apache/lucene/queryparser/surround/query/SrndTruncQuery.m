@@ -152,7 +152,7 @@ withOrgApacheLuceneQueryparserSurroundQuerySimpleTerm_MatchingTermVisitor:(id<Or
 @end
 
 void OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery_initWithNSString_withChar_withChar_(OrgApacheLuceneQueryparserSurroundQuerySrndTruncQuery *self, NSString *truncated, jchar unlimited, jchar mask) {
-  OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_initWithBoolean_(self, NO);
+  OrgApacheLuceneQueryparserSurroundQuerySimpleTerm_initWithBoolean_(self, false);
   JreStrongAssign(&self->truncated_, truncated);
   self->unlimited_ = unlimited;
   self->mask_ = mask;

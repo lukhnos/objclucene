@@ -49,10 +49,12 @@ __attribute__((unused)) static void OrgApacheLuceneStoreRAMOutputStream_setFileL
 
 @implementation OrgApacheLuceneStoreRAMOutputStream
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneStoreRAMOutputStream_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithOrgApacheLuceneStoreRAMFile:(OrgApacheLuceneStoreRAMFile *)f
                                         withBoolean:(jboolean)checksum {
@@ -226,7 +228,7 @@ __attribute__((unused)) static void OrgApacheLuceneStoreRAMOutputStream_setFileL
 @end
 
 void OrgApacheLuceneStoreRAMOutputStream_init(OrgApacheLuceneStoreRAMOutputStream *self) {
-  OrgApacheLuceneStoreRAMOutputStream_initWithNSString_withOrgApacheLuceneStoreRAMFile_withBoolean_(self, @"noname", [new_OrgApacheLuceneStoreRAMFile_init() autorelease], NO);
+  OrgApacheLuceneStoreRAMOutputStream_initWithNSString_withOrgApacheLuceneStoreRAMFile_withBoolean_(self, @"noname", [new_OrgApacheLuceneStoreRAMFile_init() autorelease], false);
 }
 
 OrgApacheLuceneStoreRAMOutputStream *new_OrgApacheLuceneStoreRAMOutputStream_init() {

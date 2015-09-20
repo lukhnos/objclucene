@@ -56,16 +56,16 @@
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return YES;
-  if (![super isEqual:obj]) return NO;
-  if ([self getClass] != [nil_chk(obj) getClass]) return NO;
+  if (self == obj) return true;
+  if (![super isEqual:obj]) return false;
+  if ([self getClass] != [nil_chk(obj) getClass]) return false;
   OrgApacheLuceneSearchAutomatonQuery *other = (OrgApacheLuceneSearchAutomatonQuery *) check_class_cast(obj, [OrgApacheLuceneSearchAutomatonQuery class]);
-  if (![((OrgApacheLuceneUtilAutomatonCompiledAutomaton *) nil_chk(compiled_)) isEqual:other->compiled_]) return NO;
+  if (![((OrgApacheLuceneUtilAutomatonCompiledAutomaton *) nil_chk(compiled_)) isEqual:other->compiled_]) return false;
   if (term_ == nil) {
-    if (other->term_ != nil) return NO;
+    if (other->term_ != nil) return false;
   }
-  else if (![term_ isEqual:other->term_]) return NO;
-  return YES;
+  else if (![term_ isEqual:other->term_]) return false;
+  return true;
 }
 
 - (NSString *)toStringWithNSString:(NSString *)field {
@@ -127,7 +127,7 @@ OrgApacheLuceneSearchAutomatonQuery *new_OrgApacheLuceneSearchAutomatonQuery_ini
 }
 
 void OrgApacheLuceneSearchAutomatonQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneUtilAutomatonAutomaton_withInt_(OrgApacheLuceneSearchAutomatonQuery *self, OrgApacheLuceneIndexTerm *term, OrgApacheLuceneUtilAutomatonAutomaton *automaton, jint maxDeterminizedStates) {
-  OrgApacheLuceneSearchAutomatonQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneUtilAutomatonAutomaton_withInt_withBoolean_(self, term, automaton, maxDeterminizedStates, NO);
+  OrgApacheLuceneSearchAutomatonQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneUtilAutomatonAutomaton_withInt_withBoolean_(self, term, automaton, maxDeterminizedStates, false);
 }
 
 OrgApacheLuceneSearchAutomatonQuery *new_OrgApacheLuceneSearchAutomatonQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneUtilAutomatonAutomaton_withInt_(OrgApacheLuceneIndexTerm *term, OrgApacheLuceneUtilAutomatonAutomaton *automaton, jint maxDeterminizedStates) {
@@ -140,7 +140,7 @@ void OrgApacheLuceneSearchAutomatonQuery_initWithOrgApacheLuceneIndexTerm_withOr
   OrgApacheLuceneSearchMultiTermQuery_initWithNSString_(self, [((OrgApacheLuceneIndexTerm *) nil_chk(term)) field]);
   JreStrongAssign(&self->term_, term);
   JreStrongAssign(&self->automaton_, automaton);
-  JreStrongAssignAndConsume(&self->compiled_, new_OrgApacheLuceneUtilAutomatonCompiledAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withJavaLangBoolean_withBoolean_withInt_withBoolean_(automaton, nil, YES, maxDeterminizedStates, isBinary));
+  JreStrongAssignAndConsume(&self->compiled_, new_OrgApacheLuceneUtilAutomatonCompiledAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withJavaLangBoolean_withBoolean_withInt_withBoolean_(automaton, nil, true, maxDeterminizedStates, isBinary));
 }
 
 OrgApacheLuceneSearchAutomatonQuery *new_OrgApacheLuceneSearchAutomatonQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneUtilAutomatonAutomaton_withInt_withBoolean_(OrgApacheLuceneIndexTerm *term, OrgApacheLuceneUtilAutomatonAutomaton *automaton, jint maxDeterminizedStates, jboolean isBinary) {

@@ -76,7 +76,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchSpansFieldMaskingSpanQuery, field_, NSS
 
 - (jboolean)isEqual:(id)o {
   if (![super isEqual:o]) {
-    return NO;
+    return false;
   }
   OrgApacheLuceneSearchSpansFieldMaskingSpanQuery *other = (OrgApacheLuceneSearchSpansFieldMaskingSpanQuery *) check_class_cast(o, [OrgApacheLuceneSearchSpansFieldMaskingSpanQuery class]);
   return ([((NSString *) nil_chk([self getField])) isEqual:[((OrgApacheLuceneSearchSpansFieldMaskingSpanQuery *) nil_chk(other)) getField]] && [((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk([self getMaskedQuery])) isEqual:[other getMaskedQuery]]);

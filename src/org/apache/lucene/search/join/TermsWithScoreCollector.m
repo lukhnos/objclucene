@@ -54,7 +54,7 @@ withOrgApacheLuceneSearchJoinScoreModeEnum:(OrgApacheLuceneSearchJoinScoreModeEn
 }
 
 - (jboolean)needsScores {
-  return YES;
+  return true;
 }
 
 - (void)dealloc {

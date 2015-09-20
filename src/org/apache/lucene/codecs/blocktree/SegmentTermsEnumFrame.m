@@ -126,7 +126,7 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsBlocktreeSegmentTermsEn
 - (jboolean)next {
   if (isLeafBlock_) {
     [self nextLeaf];
-    return NO;
+    return false;
   }
   else {
     return [self nextNonLeaf];
@@ -141,17 +141,17 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsBlocktreeSegmentTermsEn
   [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(((OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum *) nil_chk(ste_))->term_)) setLengthWithInt:prefix_ + suffix_];
   [ste_->term_ growWithInt:[ste_->term_ length]];
   [suffixesReader_ readBytesWithByteArray:[ste_->term_ bytes] withInt:prefix_ withInt:suffix_];
-  ste_->termExists_ = YES;
+  ste_->termExists_ = true;
 }
 
 - (jboolean)nextNonLeaf {
-  while (YES) {
+  while (true) {
     if (nextEnt_ == entCount_) {
-      JreAssert((arc_ == nil || (isFloor_ && isLastInFloor_ == NO)), (JreStrcat("$Z$Z", @"isFloor=", isFloor_, @" isLastInFloor=", isLastInFloor_)));
+      JreAssert((arc_ == nil || (isFloor_ && isLastInFloor_ == false)), (JreStrcat("$Z$Z", @"isFloor=", isFloor_, @" isLastInFloor=", isLastInFloor_)));
       [self loadNextFloorBlock];
       if (isLeafBlock_) {
         [self nextLeaf];
-        return NO;
+        return false;
       }
       else {
         continue;
@@ -160,23 +160,23 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsBlocktreeSegmentTermsEn
     JreAssert((nextEnt_ != -1 && nextEnt_ < entCount_), (JreStrcat("$I$I$J", @"nextEnt=", nextEnt_, @" entCount=", entCount_, @" fp=", fp_)));
     nextEnt_++;
     jint code = [((OrgApacheLuceneStoreByteArrayDataInput *) nil_chk(suffixesReader_)) readVInt];
-    if (versionAutoPrefix_ == NO) {
+    if (versionAutoPrefix_ == false) {
       suffix_ = JreURShift32(code, 1);
       startBytePos_ = [suffixesReader_ getPosition];
       [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(((OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum *) nil_chk(ste_))->term_)) setLengthWithInt:prefix_ + suffix_];
       [ste_->term_ growWithInt:[ste_->term_ length]];
       [suffixesReader_ readBytesWithByteArray:[ste_->term_ bytes] withInt:prefix_ withInt:suffix_];
       if ((code & 1) == 0) {
-        ste_->termExists_ = YES;
+        ste_->termExists_ = true;
         subCode_ = 0;
         ((OrgApacheLuceneCodecsBlockTermState *) nil_chk(state_))->termBlockOrd_++;
-        return NO;
+        return false;
       }
       else {
-        ste_->termExists_ = NO;
+        ste_->termExists_ = false;
         subCode_ = [suffixesReader_ readVLong];
         lastSubFP_ = fp_ - subCode_;
-        return YES;
+        return true;
       }
     }
     else {
@@ -187,15 +187,15 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsBlocktreeSegmentTermsEn
       [suffixesReader_ readBytesWithByteArray:[ste_->term_ bytes] withInt:prefix_ withInt:suffix_];
       switch (code & 3) {
         case 0:
-        ste_->termExists_ = YES;
+        ste_->termExists_ = true;
         subCode_ = 0;
         ((OrgApacheLuceneCodecsBlockTermState *) nil_chk(state_))->termBlockOrd_++;
-        return NO;
+        return false;
         case 1:
-        ste_->termExists_ = NO;
+        ste_->termExists_ = false;
         subCode_ = [suffixesReader_ readVLong];
         lastSubFP_ = fp_ - subCode_;
-        return YES;
+        return true;
         case 2:
         case 3:
         ((OrgApacheLuceneCodecsBlockTermState *) nil_chk(state_))->termBlockOrd_++;
@@ -216,7 +216,7 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsBlocktreeSegmentTermsEn
   }
   JreAssert((numFollowFloorBlocks_ != 0), (@"org/apache/lucene/codecs/blocktree/SegmentTermsEnumFrame.java:390 condition failed: assert numFollowFloorBlocks != 0;"));
   jlong newFP = fpOrig_;
-  while (YES) {
+  while (true) {
     jlong code = [((OrgApacheLuceneStoreByteArrayDataInput *) nil_chk(floorDataReader_)) readVLong];
     newFP = fpOrig_ + (JreURShift64(code, 1));
     hasTerms_ = ((code & 1) != 0);
@@ -255,7 +255,7 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsBlocktreeSegmentTermsEn
     }
     [((OrgApacheLuceneCodecsPostingsReaderBase *) nil_chk(((OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader *) nil_chk(ste_->fr_->parent_))->postingsReader_)) decodeTermWithLongArray:longs_ withOrgApacheLuceneStoreDataInput:bytesReader_ withOrgApacheLuceneIndexFieldInfo:ste_->fr_->fieldInfo_ withOrgApacheLuceneCodecsBlockTermState:state_ withBoolean:absolute];
     metaDataUpto_++;
-    absolute = NO;
+    absolute = false;
   }
   ((OrgApacheLuceneCodecsBlockTermState *) nil_chk(state_))->termBlockOrd_ = metaDataUpto_;
 }
@@ -271,11 +271,11 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsBlocktreeSegmentTermsEn
   }
   JreAssert((subFP < fp_), (JreStrcat("$J$J", @"fp=", fp_, @" subFP=", subFP)));
   jlong targetSubCode = fp_ - subFP;
-  while (YES) {
+  while (true) {
     JreAssert((nextEnt_ < entCount_), (@"org/apache/lucene/codecs/blocktree/SegmentTermsEnumFrame.java:501 condition failed: assert nextEnt < entCount;"));
     nextEnt_++;
     jint code = [((OrgApacheLuceneStoreByteArrayDataInput *) nil_chk(suffixesReader_)) readVInt];
-    if (versionAutoPrefix_ == NO) {
+    if (versionAutoPrefix_ == false) {
       [suffixesReader_ skipBytesWithLong:JreURShift32(code, 1)];
       if ((code & 1) != 0) {
         jlong subCode = [suffixesReader_ readVLong];
@@ -316,7 +316,7 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsBlocktreeSegmentTermsEn
 - (OrgApacheLuceneIndexTermsEnum_SeekStatusEnum *)scanToTermLeafWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)target
                                                                                     withBoolean:(jboolean)exactOnly {
   JreAssert((nextEnt_ != -1), (@"org/apache/lucene/codecs/blocktree/SegmentTermsEnumFrame.java:570 condition failed: assert nextEnt != -1;"));
-  ((OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum *) nil_chk(ste_))->termExists_ = YES;
+  ((OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum *) nil_chk(ste_))->termExists_ = true;
   subCode_ = 0;
   if (nextEnt_ == entCount_) {
     if (exactOnly) {
@@ -325,7 +325,7 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsBlocktreeSegmentTermsEn
     return JreLoadStatic(OrgApacheLuceneIndexTermsEnum_SeekStatusEnum, END);
   }
   JreAssert((OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame_prefixMatchesWithOrgApacheLuceneUtilBytesRef_(self, target)), (@"org/apache/lucene/codecs/blocktree/SegmentTermsEnumFrame.java:582 condition failed: assert prefixMatches(target);"));
-  while (YES) {
+  while (true) {
     {
       nextEnt_++;
       suffix_ = [((OrgApacheLuceneStoreByteArrayDataInput *) nil_chk(suffixesReader_)) readVInt];
@@ -335,17 +335,17 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsBlocktreeSegmentTermsEn
       jint targetLimit = ((OrgApacheLuceneUtilBytesRef *) nil_chk(target))->offset_ + (target->length_ < termLen ? target->length_ : termLen);
       jint targetPos = target->offset_ + prefix_;
       jint bytePos = startBytePos_;
-      while (YES) {
+      while (true) {
         jint cmp;
         jboolean stop;
         if (targetPos < targetLimit) {
           cmp = (IOSByteArray_Get(nil_chk(suffixBytes_), bytePos++) & (jint) 0xFF) - (IOSByteArray_Get(nil_chk(target->bytes_), targetPos++) & (jint) 0xFF);
-          stop = NO;
+          stop = false;
         }
         else {
           JreAssert((targetPos == targetLimit), (@"org/apache/lucene/codecs/blocktree/SegmentTermsEnumFrame.java:616 condition failed: assert targetPos == targetLimit;"));
           cmp = termLen - target->length_;
-          stop = YES;
+          stop = true;
         }
         if (cmp < 0) {
           if (nextEnt_ == entCount_) {
@@ -390,7 +390,7 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsBlocktreeSegmentTermsEn
     {
       nextEnt_++;
       jint code = [((OrgApacheLuceneStoreByteArrayDataInput *) nil_chk(suffixesReader_)) readVInt];
-      if (versionAutoPrefix_ == NO) {
+      if (versionAutoPrefix_ == false) {
         suffix_ = JreURShift32(code, 1);
       }
       else {
@@ -399,7 +399,7 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsBlocktreeSegmentTermsEn
       jint termLen = prefix_ + suffix_;
       startBytePos_ = [suffixesReader_ getPosition];
       [suffixesReader_ skipBytesWithLong:suffix_];
-      if (versionAutoPrefix_ == NO) {
+      if (versionAutoPrefix_ == false) {
         ((OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum *) nil_chk(ste_))->termExists_ = ((code & 1) == 0);
         if (ste_->termExists_) {
           ((OrgApacheLuceneCodecsBlockTermState *) nil_chk(state_))->termBlockOrd_++;
@@ -413,19 +413,19 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsBlocktreeSegmentTermsEn
       else {
         switch (code & 3) {
           case 0:
-          ((OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum *) nil_chk(ste_))->termExists_ = YES;
+          ((OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum *) nil_chk(ste_))->termExists_ = true;
           ((OrgApacheLuceneCodecsBlockTermState *) nil_chk(state_))->termBlockOrd_++;
           subCode_ = 0;
           break;
           case 1:
-          ((OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum *) nil_chk(ste_))->termExists_ = NO;
+          ((OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum *) nil_chk(ste_))->termExists_ = false;
           subCode_ = [suffixesReader_ readVLong];
           lastSubFP_ = fp_ - subCode_;
           break;
           case 2:
           case 3:
           [suffixesReader_ readByte];
-          ((OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum *) nil_chk(ste_))->termExists_ = NO;
+          ((OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum *) nil_chk(ste_))->termExists_ = false;
           ((OrgApacheLuceneCodecsBlockTermState *) nil_chk(state_))->termBlockOrd_++;
           continue;
         }
@@ -433,17 +433,17 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsBlocktreeSegmentTermsEn
       jint targetLimit = ((OrgApacheLuceneUtilBytesRef *) nil_chk(target))->offset_ + (target->length_ < termLen ? target->length_ : termLen);
       jint targetPos = target->offset_ + prefix_;
       jint bytePos = startBytePos_;
-      while (YES) {
+      while (true) {
         jint cmp;
         jboolean stop;
         if (targetPos < targetLimit) {
           cmp = (IOSByteArray_Get(nil_chk(suffixBytes_), bytePos++) & (jint) 0xFF) - (IOSByteArray_Get(nil_chk(target->bytes_), targetPos++) & (jint) 0xFF);
-          stop = NO;
+          stop = false;
         }
         else {
           JreAssert((targetPos == targetLimit), (@"org/apache/lucene/codecs/blocktree/SegmentTermsEnumFrame.java:762 condition failed: assert targetPos == targetLimit;"));
           cmp = termLen - target->length_;
-          stop = YES;
+          stop = true;
         }
         if (cmp < 0) {
           goto continue_nextTerm;
@@ -586,10 +586,10 @@ OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *new_OrgApacheLuceneCodecsBl
 jboolean OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame_prefixMatchesWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *self, OrgApacheLuceneUtilBytesRef *target) {
   for (jint bytePos = 0; bytePos < self->prefix_; bytePos++) {
     if (IOSByteArray_Get(nil_chk(((OrgApacheLuceneUtilBytesRef *) nil_chk(target))->bytes_), target->offset_ + bytePos) != [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(((OrgApacheLuceneCodecsBlocktreeSegmentTermsEnum *) nil_chk(self->ste_))->term_)) byteAtWithInt:bytePos]) {
-      return NO;
+      return false;
     }
   }
-  return YES;
+  return true;
 }
 
 void OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame_fillTerm(OrgApacheLuceneCodecsBlocktreeSegmentTermsEnumFrame *self) {

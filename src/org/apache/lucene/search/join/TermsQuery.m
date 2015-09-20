@@ -75,19 +75,19 @@ withOrgApacheLuceneUtilBytesRefHash:(OrgApacheLuceneUtilBytesRefHash *)terms {
 
 - (jboolean)isEqual:(id)obj {
   if (self == obj) {
-    return YES;
+    return true;
   }
   if (![super isEqual:obj]) {
-    return NO;
+    return false;
   }
   if ([self getClass] != [nil_chk(obj) getClass]) {
-    return NO;
+    return false;
   }
   OrgApacheLuceneSearchJoinTermsQuery *other = (OrgApacheLuceneSearchJoinTermsQuery *) check_class_cast(obj, [OrgApacheLuceneSearchJoinTermsQuery class]);
   if (![((OrgApacheLuceneSearchQuery *) nil_chk(fromQuery_)) isEqual:other->fromQuery_]) {
-    return NO;
+    return false;
   }
-  return YES;
+  return true;
 }
 
 - (NSUInteger)hash {

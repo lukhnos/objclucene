@@ -55,28 +55,28 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisMiscellaneousHyphenat
       [((JavaLangStringBuilder *) nil_chk(hyphenated_)) appendWithCharArray:term withInt:0 withInt:termLength - 1];
     }
     else if (savedState_ == nil) {
-      return YES;
+      return true;
     }
     else {
       [((JavaLangStringBuilder *) nil_chk(hyphenated_)) appendWithCharArray:term withInt:0 withInt:termLength];
       OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter_unhyphenate(self);
-      return YES;
+      return true;
     }
   }
-  exhausted_ = YES;
+  exhausted_ = true;
   if (savedState_ != nil) {
     [((JavaLangStringBuilder *) nil_chk(hyphenated_)) appendWithChar:'-'];
     OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter_unhyphenate(self);
-    return YES;
+    return true;
   }
-  return NO;
+  return false;
 }
 
 - (void)reset {
   [super reset];
   [((JavaLangStringBuilder *) nil_chk(hyphenated_)) setLengthWithInt:0];
   JreStrongAssign(&savedState_, nil);
-  exhausted_ = NO;
+  exhausted_ = false;
   lastEndOffset_ = 0;
 }
 
@@ -118,7 +118,7 @@ void OrgApacheLuceneAnalysisMiscellaneousHyphenatedWordsFilter_initWithOrgApache
   JreStrongAssign(&self->termAttribute_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()]);
   JreStrongAssign(&self->offsetAttribute_, [self addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_class_()]);
   JreStrongAssignAndConsume(&self->hyphenated_, new_JavaLangStringBuilder_init());
-  self->exhausted_ = NO;
+  self->exhausted_ = false;
   self->lastEndOffset_ = 0;
 }
 

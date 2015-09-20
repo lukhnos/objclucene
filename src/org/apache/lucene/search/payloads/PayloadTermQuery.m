@@ -162,7 +162,7 @@ withOrgApacheLuceneSearchPayloadsPayloadFunction:(OrgApacheLuceneSearchPayloadsP
 
 - (jboolean)isEqual:(id)obj {
   if (![super isEqual:obj]) {
-    return NO;
+    return false;
   }
   OrgApacheLuceneSearchPayloadsPayloadTermQuery *other = (OrgApacheLuceneSearchPayloadsPayloadTermQuery *) check_class_cast(obj, [OrgApacheLuceneSearchPayloadsPayloadTermQuery class]);
   return (includeSpanScore_ == ((OrgApacheLuceneSearchPayloadsPayloadTermQuery *) nil_chk(other))->includeSpanScore_) && [((OrgApacheLuceneSearchPayloadsPayloadFunction *) nil_chk(function_)) isEqual:other->function_];
@@ -193,7 +193,7 @@ withOrgApacheLuceneSearchPayloadsPayloadFunction:(OrgApacheLuceneSearchPayloadsP
 @end
 
 void OrgApacheLuceneSearchPayloadsPayloadTermQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneSearchPayloadsPayloadFunction_(OrgApacheLuceneSearchPayloadsPayloadTermQuery *self, OrgApacheLuceneIndexTerm *term, OrgApacheLuceneSearchPayloadsPayloadFunction *function) {
-  OrgApacheLuceneSearchPayloadsPayloadTermQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneSearchPayloadsPayloadFunction_withBoolean_(self, term, function, YES);
+  OrgApacheLuceneSearchPayloadsPayloadTermQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneSearchPayloadsPayloadFunction_withBoolean_(self, term, function, true);
 }
 
 OrgApacheLuceneSearchPayloadsPayloadTermQuery *new_OrgApacheLuceneSearchPayloadsPayloadTermQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneSearchPayloadsPayloadFunction_(OrgApacheLuceneIndexTerm *term, OrgApacheLuceneSearchPayloadsPayloadFunction *function) {
@@ -228,10 +228,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchPayloadsPayloadTermQuery)
   JreStrongAssign(&payload_, nil);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchPayloadsPayloadTermQuery_PayloadTermCollector_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(payload_);

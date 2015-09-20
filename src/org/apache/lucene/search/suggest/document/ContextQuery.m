@@ -123,12 +123,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentContextQuery_Cont
 }
 
 - (void)addContextWithJavaLangCharSequence:(id<JavaLangCharSequence>)context {
-  [self addContextWithJavaLangCharSequence:context withFloat:1.0f withBoolean:YES];
+  [self addContextWithJavaLangCharSequence:context withFloat:1.0f withBoolean:true];
 }
 
 - (void)addContextWithJavaLangCharSequence:(id<JavaLangCharSequence>)context
                                  withFloat:(jfloat)boost {
-  [self addContextWithJavaLangCharSequence:context withFloat:boost withBoolean:YES];
+  [self addContextWithJavaLangCharSequence:context withFloat:boost withBoolean:true];
 }
 
 - (void)addContextWithJavaLangCharSequence:(id<JavaLangCharSequence>)context
@@ -146,7 +146,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentContextQuery_Cont
 }
 
 - (void)addAllContexts {
-  matchAllContexts_ = YES;
+  matchAllContexts_ = true;
 }
 
 - (NSString *)toStringWithNSString:(NSString *)field {
@@ -162,7 +162,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentContextQuery_Cont
     }
     [buffer appendWithNSString:[((OrgApacheLuceneUtilBytesRef *) nil_chk(OrgApacheLuceneUtilFstUtil_toBytesRefWithOrgApacheLuceneUtilIntsRef_withOrgApacheLuceneUtilBytesRefBuilder_(context, scratch))) utf8ToString]];
     OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextMetaData *metaData = [contexts_ getWithId:context];
-    if (((OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextMetaData *) nil_chk(metaData))->exact_ == NO) {
+    if (((OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextMetaData *) nil_chk(metaData))->exact_ == false) {
       [buffer appendWithNSString:@"*"];
     }
     if (metaData->boost_ != 0) {
@@ -238,7 +238,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSuggestDocumentContextQuery_Cont
 void OrgApacheLuceneSearchSuggestDocumentContextQuery_initWithOrgApacheLuceneSearchSuggestDocumentCompletionQuery_(OrgApacheLuceneSearchSuggestDocumentContextQuery *self, OrgApacheLuceneSearchSuggestDocumentCompletionQuery *query) {
   OrgApacheLuceneSearchSuggestDocumentCompletionQuery_initWithOrgApacheLuceneIndexTerm_withOrgApacheLuceneSearchSuggestBitsProducer_(self, [((OrgApacheLuceneSearchSuggestDocumentCompletionQuery *) nil_chk(query)) getTerm], [query getFilter]);
   JreStrongAssignAndConsume(&self->scratch_, new_OrgApacheLuceneUtilIntsRefBuilder_init());
-  self->matchAllContexts_ = NO;
+  self->matchAllContexts_ = false;
   if ([query isKindOfClass:[OrgApacheLuceneSearchSuggestDocumentContextQuery class]]) {
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$$", @"'query' parameter must not be of type ", [[self getClass] getSimpleName])) autorelease];
   }
@@ -265,7 +265,7 @@ OrgApacheLuceneUtilAutomatonAutomaton *OrgApacheLuceneSearchSuggestDocumentConte
       OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextMetaData *contextMetaData = [((id<JavaUtilMap_Entry>) nil_chk(entry_)) getValue];
       OrgApacheLuceneUtilIntsRef *ref = [entry_ getKey];
       OrgApacheLuceneUtilAutomatonAutomaton *contextAutomaton = OrgApacheLuceneUtilAutomatonAutomata_makeStringWithIntArray_withInt_withInt_(((OrgApacheLuceneUtilIntsRef *) nil_chk(ref))->ints_, ref->offset_, ref->length_);
-      if (((OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextMetaData *) nil_chk(contextMetaData))->exact_ == NO) {
+      if (((OrgApacheLuceneSearchSuggestDocumentContextQuery_ContextMetaData *) nil_chk(contextMetaData))->exact_ == false) {
         contextAutomaton = OrgApacheLuceneUtilAutomatonOperations_concatenateWithOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneUtilAutomatonAutomaton_(contextAutomaton, matchAllAutomaton);
       }
       contextAutomaton = OrgApacheLuceneUtilAutomatonOperations_concatenateWithOrgApacheLuceneUtilAutomatonAutomaton_withOrgApacheLuceneUtilAutomatonAutomaton_(contextAutomaton, sep);

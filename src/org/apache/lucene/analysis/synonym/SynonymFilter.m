@@ -198,7 +198,7 @@ NSString *OrgApacheLuceneAnalysisSynonymSynonymFilter_TYPE_SYNONYM_ = @"SYNONYM"
 }
 
 - (jboolean)incrementToken {
-  while (YES) {
+  while (true) {
     while (inputSkipCount_ != 0) {
       OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingInput *input = IOSObjectArray_Get(nil_chk(futureInputs_), nextRead_);
       OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingOutputs *outputs = IOSObjectArray_Get(nil_chk(futureOutputs_), nextRead_);
@@ -217,7 +217,7 @@ NSString *OrgApacheLuceneAnalysisSynonymSynonymFilter_TYPE_SYNONYM_ = @"SYNONYM"
           nextRead_ = OrgApacheLuceneAnalysisSynonymSynonymFilter_rollIncrWithInt_(self, nextRead_);
           inputSkipCount_--;
         }
-        return YES;
+        return true;
       }
       else if (((OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingOutputs *) nil_chk(outputs))->upto_ < outputs->count_) {
         [input reset];
@@ -237,7 +237,7 @@ NSString *OrgApacheLuceneAnalysisSynonymSynonymFilter_TYPE_SYNONYM_ = @"SYNONYM"
           nextRead_ = OrgApacheLuceneAnalysisSynonymSynonymFilter_rollIncrWithInt_(self, nextRead_);
           inputSkipCount_--;
         }
-        return YES;
+        return true;
       }
       else {
         [input reset];
@@ -259,10 +259,10 @@ NSString *OrgApacheLuceneAnalysisSynonymSynonymFilter_TYPE_SYNONYM_ = @"SYNONYM"
         [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) copyBufferWithCharArray:((OrgApacheLuceneUtilCharsRef *) nil_chk(output))->chars_ withInt:output->offset_ withInt:output->length_];
         [((id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>) nil_chk(typeAtt_)) setTypeWithNSString:OrgApacheLuceneAnalysisSynonymSynonymFilter_TYPE_SYNONYM_];
         [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posIncrAtt_)) setPositionIncrementWithInt:posIncr];
-        return YES;
+        return true;
       }
       else {
-        return NO;
+        return false;
       }
     }
     OrgApacheLuceneAnalysisSynonymSynonymFilter_parse(self);
@@ -272,7 +272,7 @@ NSString *OrgApacheLuceneAnalysisSynonymSynonymFilter_TYPE_SYNONYM_ = @"SYNONYM"
 - (void)reset {
   [super reset];
   captureCount_ = 0;
-  finished_ = NO;
+  finished_ = false;
   inputSkipCount_ = 0;
   nextRead_ = nextWrite_ = 0;
   {
@@ -394,7 +394,7 @@ void OrgApacheLuceneAnalysisSynonymSynonymFilter_capture(OrgApacheLuceneAnalysis
   self->captureCount_++;
   OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingInput *input = IOSObjectArray_Get(nil_chk(self->futureInputs_), self->nextWrite_);
   JreStrongAssign(&((OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingInput *) nil_chk(input))->state_, [self captureState]);
-  input->consumed_ = NO;
+  input->consumed_ = false;
   [((OrgApacheLuceneUtilCharsRefBuilder *) nil_chk(input->term_)) copyCharsWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(self->termAtt_)) buffer] withInt:0 withInt:[self->termAtt_ length]];
   self->nextWrite_ = OrgApacheLuceneAnalysisSynonymSynonymFilter_rollIncrWithInt_(self, self->nextWrite_);
   JreAssert((self->nextWrite_ != self->nextRead_), (@"org/apache/lucene/analysis/synonym/SynonymFilter.java:303 condition failed: assert nextWrite != nextRead;"));
@@ -410,7 +410,7 @@ void OrgApacheLuceneAnalysisSynonymSynonymFilter_parse(OrgApacheLuceneAnalysisSy
   [self->fst_ getFirstArcWithOrgApacheLuceneUtilFstFST_Arc:self->scratchArc_];
   JreAssert((((OrgApacheLuceneUtilFstFST_Arc *) nil_chk(self->scratchArc_))->output_ == [self->fst_->outputs_ getNoOutput]), (@"org/apache/lucene/analysis/synonym/SynonymFilter.java:333 condition failed: assert scratchArc.output == fst.outputs.getNoOutput();"));
   jint tokenCount = 0;
-  while (YES) {
+  while (true) {
     IOSCharArray *buffer;
     jint bufferLen;
     jint inputEndOffset = 0;
@@ -431,11 +431,11 @@ void OrgApacheLuceneAnalysisSynonymSynonymFilter_parse(OrgApacheLuceneAnalysisSy
             OrgApacheLuceneAnalysisSynonymSynonymFilter_capture(self);
           }
           else {
-            input->consumed_ = NO;
+            input->consumed_ = false;
           }
         }
         else {
-          self->finished_ = YES;
+          self->finished_ = true;
           break;
         }
       }
@@ -522,7 +522,7 @@ void OrgApacheLuceneAnalysisSynonymSynonymFilter_addOutputWithOrgApacheLuceneUti
   jint upto = self->nextRead_;
   for (jint idx = 0; idx < matchInputLength; idx++) {
     ((OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingInput *) nil_chk(IOSObjectArray_Get(nil_chk(self->futureInputs_), upto)))->keepOrig_ |= keepOrig;
-    ((OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingInput *) nil_chk(IOSObjectArray_Get(self->futureInputs_, upto)))->matched_ = YES;
+    ((OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingInput *) nil_chk(IOSObjectArray_Get(self->futureInputs_, upto)))->matched_ = true;
     upto = OrgApacheLuceneAnalysisSynonymSynonymFilter_rollIncrWithInt_(self, upto);
   }
 }
@@ -543,15 +543,17 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisSynonymSynonymFilter)
 
 - (void)reset {
   JreStrongAssign(&state_, nil);
-  consumed_ = YES;
-  keepOrig_ = NO;
-  matched_ = NO;
+  consumed_ = true;
+  keepOrig_ = false;
+  matched_ = false;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingInput_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(term_);
@@ -582,7 +584,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisSynonymSynonymFilter)
 void OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingInput_init(OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingInput *self) {
   NSObject_init(self);
   JreStrongAssignAndConsume(&self->term_, new_OrgApacheLuceneUtilCharsRefBuilder_init());
-  self->consumed_ = YES;
+  self->consumed_ = true;
 }
 
 OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingInput *new_OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingInput_init() {
@@ -595,10 +597,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisSynonymSynonymFilter_Pen
 
 @implementation OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingOutputs
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisSynonymSynonymFilter_PendingOutputs_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)reset {
   upto_ = count_ = 0;

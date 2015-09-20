@@ -70,7 +70,7 @@
 
 - (jboolean)isEqual:(id)o {
   if (![super isEqual:o]) {
-    return NO;
+    return false;
   }
   OrgApacheLuceneSearchSpansSpanContainQuery *other = (OrgApacheLuceneSearchSpansSpanContainQuery *) check_class_cast(o, [OrgApacheLuceneSearchSpansSpanContainQuery class]);
   return [((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(big_)) isEqual:((OrgApacheLuceneSearchSpansSpanContainQuery *) nil_chk(other))->big_] && [((OrgApacheLuceneSearchSpansSpanQuery *) nil_chk(little_)) isEqual:other->little_];

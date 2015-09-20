@@ -54,17 +54,19 @@ OrgApacheLuceneSearchDocIdSet *OrgApacheLuceneSearchDocIdSet_EMPTY_;
 }
 
 - (jboolean)isCacheable {
-  return NO;
+  return false;
 }
 
 - (id<JavaUtilCollection>)getChildResources {
   return JavaUtilCollections_emptyList();
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchDocIdSet_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneSearchDocIdSet class]) {
@@ -103,7 +105,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocIdSet)
 }
 
 - (jboolean)isCacheable {
-  return YES;
+  return true;
 }
 
 - (id<OrgApacheLuceneUtilBits>)bits {
@@ -114,10 +116,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocIdSet)
   return 0LL;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchDocIdSet_$1_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

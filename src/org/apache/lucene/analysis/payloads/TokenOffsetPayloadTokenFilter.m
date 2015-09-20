@@ -41,10 +41,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPayloadsTokenOffsetPayloadTokenFilter
     OrgApacheLuceneAnalysisPayloadsPayloadHelper_encodeIntWithInt_withByteArray_withInt_([offsetAtt_ endOffset], data, 4);
     OrgApacheLuceneUtilBytesRef *payload = [new_OrgApacheLuceneUtilBytesRef_initWithByteArray_(data) autorelease];
     [((id<OrgApacheLuceneAnalysisTokenattributesPayloadAttribute>) nil_chk(payAtt_)) setPayloadWithOrgApacheLuceneUtilBytesRef:payload];
-    return YES;
+    return true;
   }
   else {
-    return NO;
+    return false;
   }
 }
 

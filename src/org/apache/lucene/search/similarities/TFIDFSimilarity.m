@@ -117,10 +117,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_IDFS
 
 @implementation OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSimilaritiesTFIDFSimilarity_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jfloat)coordWithInt:(jint)overlap
                withInt:(jint)maxOverlap {

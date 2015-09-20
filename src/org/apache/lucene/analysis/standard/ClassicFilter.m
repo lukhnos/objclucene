@@ -44,7 +44,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisStandardClassicFilter)
 
 - (jboolean)incrementToken {
   if (![((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
-    return NO;
+    return false;
   }
   IOSCharArray *buffer = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer];
   jint bufferLength = [termAtt_ length];
@@ -60,7 +60,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisStandardClassicFilter)
     }
     [termAtt_ setLengthWithInt:upto];
   }
-  return YES;
+  return true;
 }
 
 - (void)dealloc {

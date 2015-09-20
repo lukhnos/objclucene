@@ -58,10 +58,12 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMergePolicy_MergeException, dir_, OrgApa
 
 @implementation OrgApacheLuceneIndexMergePolicy
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexMergePolicy_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithDouble:(jdouble)defaultNoCFSRatio
                       withLong:(jlong)defaultMaxCFSSegmentSize {
@@ -97,14 +99,14 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMergePolicy_MergeException, dir_, OrgApa
                       withOrgApacheLuceneIndexSegmentCommitInfo:(OrgApacheLuceneIndexSegmentCommitInfo *)mergedInfo
                             withOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer {
   if (OrgApacheLuceneIndexMergePolicy_getNoCFSRatio(self) == 0.0) {
-    return NO;
+    return false;
   }
   jlong mergedInfoSize = [self sizeWithOrgApacheLuceneIndexSegmentCommitInfo:mergedInfo withOrgApacheLuceneIndexIndexWriter:writer];
   if (mergedInfoSize > maxCFSSegmentSize_) {
-    return NO;
+    return false;
   }
   if (OrgApacheLuceneIndexMergePolicy_getNoCFSRatio(self) >= 1.0) {
-    return YES;
+    return true;
   }
   jlong totalSize = 0;
   for (OrgApacheLuceneIndexSegmentCommitInfo * __strong info in nil_chk(infos)) {
@@ -201,10 +203,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMergePolicy)
 
 @implementation OrgApacheLuceneIndexMergePolicy_DocMap
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexMergePolicy_DocMap_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)mapWithInt:(jint)old {
   // can't call an abstract method
@@ -217,15 +221,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMergePolicy)
   for (jint i = 0; i < maxDoc; ++i) {
     jint target = [self mapWithInt:i];
     if (target < 0 || target >= maxDoc) {
-      JreAssert((NO), (JreStrcat("$I$IC", @"out of range: ", target, @" not in [0-", maxDoc, '[')));
-      return NO;
+      JreAssert((false), (JreStrcat("$I$IC", @"out of range: ", target, @" not in [0-", maxDoc, '[')));
+      return false;
     }
     else if ([targets getWithInt:target]) {
-      JreAssert((NO), (JreStrcat("I$IC", target, @" is already taken (", i, ')')));
-      return NO;
+      JreAssert((false), (JreStrcat("I$IC", target, @" is already taken (", i, ')')));
+      return false;
     }
   }
-  return YES;
+  return true;
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -405,10 +409,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMergePolicy_OneMerge)
   return docID;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexMergePolicy_OneMerge_$1_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -436,10 +442,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMergePolicy_OneMerge_$1)
 
 @implementation OrgApacheLuceneIndexMergePolicy_MergeSpecification
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexMergePolicy_MergeSpecification_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)addWithOrgApacheLuceneIndexMergePolicy_OneMerge:(OrgApacheLuceneIndexMergePolicy_OneMerge *)merge {
   [((id<JavaUtilList>) nil_chk(merges_)) addWithId:merge];
@@ -552,10 +560,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMergePolicy_MergeException)
 
 @implementation OrgApacheLuceneIndexMergePolicy_MergeAbortedException
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexMergePolicy_MergeAbortedException_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithNSString:(NSString *)message {
   OrgApacheLuceneIndexMergePolicy_MergeAbortedException_initWithNSString_(self, message);

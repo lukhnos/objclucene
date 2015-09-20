@@ -308,7 +308,7 @@ OrgApacheLuceneSearchCachingCollector *OrgApacheLuceneSearchCachingCollector_cre
 
 void OrgApacheLuceneSearchCachingCollector_initWithOrgApacheLuceneSearchCollector_(OrgApacheLuceneSearchCachingCollector *self, id<OrgApacheLuceneSearchCollector> inArg) {
   OrgApacheLuceneSearchFilterCollector_initWithOrgApacheLuceneSearchCollector_(self, inArg);
-  self->cached_ = YES;
+  self->cached_ = true;
 }
 
 jboolean OrgApacheLuceneSearchCachingCollector_isCached(OrgApacheLuceneSearchCachingCollector *self) {
@@ -319,10 +319,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchCachingCollector)
 
 @implementation OrgApacheLuceneSearchCachingCollector_CachedScorer
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchCachingCollector_CachedScorer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jfloat)score {
   return score_;
@@ -590,7 +592,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchCachingCollector_ScoreCach
 - (void)invalidate {
   JreStrongAssign(&docs_, nil);
   docCount_ = -1;
-  this$0_->cached_ = NO;
+  this$0_->cached_ = false;
 }
 
 - (void)bufferWithInt:(jint)doc {
@@ -745,13 +747,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchCachingCollector_ScoreCach
 }
 
 - (jboolean)needsScores {
-  return YES;
+  return true;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchCachingCollector_$1_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

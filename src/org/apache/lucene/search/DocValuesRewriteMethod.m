@@ -125,20 +125,22 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTerm
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return YES;
-  if (obj == nil) return NO;
-  if ([self getClass] != [nil_chk(obj) getClass]) return NO;
-  return YES;
+  if (self == obj) return true;
+  if (obj == nil) return false;
+  if ([self getClass] != [nil_chk(obj) getClass]) return false;
+  return true;
 }
 
 - (NSUInteger)hash {
   return 641;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchDocValuesRewriteMethod_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -178,13 +180,13 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocValuesRewriteMethod)
 }
 
 - (jboolean)isEqual:(id)o {
-  if (o == self) return YES;
-  if (o == nil) return NO;
+  if (o == self) return true;
+  if (o == nil) return false;
   if ([[self getClass] isEqual:[nil_chk(o) getClass]]) {
     OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper *that = (OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper *) check_class_cast(o, [OrgApacheLuceneSearchDocValuesRewriteMethod_MultiTermQueryDocValuesWrapper class]);
     return [((OrgApacheLuceneSearchMultiTermQuery *) nil_chk(self->query_)) isEqual:that->query_] && [self getBoost] == [that getBoost];
   }
-  return NO;
+  return false;
 }
 
 - (NSUInteger)hash {
@@ -318,19 +320,19 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocValuesRewriteMethod_Mul
 }
 
 - (jboolean)hasFreqs {
-  return NO;
+  return false;
 }
 
 - (jboolean)hasOffsets {
-  return NO;
+  return false;
 }
 
 - (jboolean)hasPositions {
-  return NO;
+  return false;
 }
 
 - (jboolean)hasPayloads {
-  return NO;
+  return false;
 }
 
 - (instancetype)initWithOrgApacheLuceneIndexSortedSetDocValues:(OrgApacheLuceneIndexSortedSetDocValues *)capture$0 {
@@ -385,10 +387,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocValuesRewriteMethod_Mul
   [((OrgApacheLuceneIndexSortedSetDocValues *) nil_chk(val$fcsi_)) setDocumentWithInt:doc];
   for (jlong ord = [val$fcsi_ nextOrd]; ord != OrgApacheLuceneIndexSortedSetDocValues_NO_MORE_ORDS; ord = [val$fcsi_ nextOrd]) {
     if ([((OrgApacheLuceneUtilLongBitSet *) nil_chk(val$termSet_)) getWithLong:ord]) {
-      return YES;
+      return true;
     }
   }
-  return NO;
+  return false;
 }
 
 - (jint)length {

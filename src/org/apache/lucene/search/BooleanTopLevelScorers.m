@@ -55,10 +55,12 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchBooleanTopLevelScorers_ReqMultiOptScore
 
 @implementation OrgApacheLuceneSearchBooleanTopLevelScorers
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchBooleanTopLevelScorers_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

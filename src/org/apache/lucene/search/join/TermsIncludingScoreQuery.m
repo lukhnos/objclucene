@@ -138,22 +138,22 @@ withOrgApacheLuceneUtilBytesRefHash:(OrgApacheLuceneUtilBytesRefHash *)terms
 
 - (jboolean)isEqual:(id)obj {
   if (self == obj) {
-    return YES;
+    return true;
   }
   if (![super isEqual:obj]) {
-    return NO;
+    return false;
   }
   if ([self getClass] != [nil_chk(obj) getClass]) {
-    return NO;
+    return false;
   }
   OrgApacheLuceneSearchJoinTermsIncludingScoreQuery *other = (OrgApacheLuceneSearchJoinTermsIncludingScoreQuery *) check_class_cast(obj, [OrgApacheLuceneSearchJoinTermsIncludingScoreQuery class]);
   if (![((NSString *) nil_chk(field_)) isEqual:other->field_]) {
-    return NO;
+    return false;
   }
   if (![((OrgApacheLuceneSearchQuery *) nil_chk(unwrittenOriginalQuery_)) isEqual:other->unwrittenOriginalQuery_]) {
-    return NO;
+    return false;
   }
-  return YES;
+  return true;
 }
 
 - (NSUInteger)hash {

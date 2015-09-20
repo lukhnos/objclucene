@@ -65,7 +65,7 @@ withOrgApacheLuceneIndexDocValuesTypeEnum:(OrgApacheLuceneIndexDocValuesTypeEnum
   if (dvGen_ != -1 && docValuesType_ == JreLoadStatic(OrgApacheLuceneIndexDocValuesTypeEnum, NONE)) {
     @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$", @"field '", name_, @"' cannot have a docvalues update generation without having docvalues")) autorelease];
   }
-  return YES;
+  return true;
 }
 
 - (void)updateWithBoolean:(jboolean)storeTermVector
@@ -87,11 +87,11 @@ withOrgApacheLuceneIndexIndexOptionsEnum:(OrgApacheLuceneIndexIndexOptionsEnum *
     self->storeTermVector_ |= storeTermVector;
     self->storePayloads_ |= storePayloads;
     if (indexOptions != JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, NONE) && self->omitNorms_ != omitNorms) {
-      self->omitNorms_ = YES;
+      self->omitNorms_ = true;
     }
   }
   if (self->indexOptions_ == JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, NONE) || [((OrgApacheLuceneIndexIndexOptionsEnum *) nil_chk(self->indexOptions_)) compareToWithId:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS_AND_POSITIONS)] < 0) {
-    self->storePayloads_ = NO;
+    self->storePayloads_ = false;
   }
   JreAssert(([self checkConsistency]), (@"org/apache/lucene/index/FieldInfo.java:133 condition failed: assert checkConsistency();"));
 }
@@ -121,7 +121,7 @@ withOrgApacheLuceneIndexIndexOptionsEnum:(OrgApacheLuceneIndexIndexOptionsEnum *
     }
   }
   if (indexOptions_ == JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, NONE) || [((OrgApacheLuceneIndexIndexOptionsEnum *) nil_chk(indexOptions_)) compareToWithId:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS_AND_POSITIONS)] < 0) {
-    storePayloads_ = NO;
+    storePayloads_ = false;
   }
 }
 
@@ -139,13 +139,13 @@ withOrgApacheLuceneIndexIndexOptionsEnum:(OrgApacheLuceneIndexIndexOptionsEnum *
 }
 
 - (void)setStoreTermVectors {
-  storeTermVector_ = YES;
+  storeTermVector_ = true;
   JreAssert(([self checkConsistency]), (@"org/apache/lucene/index/FieldInfo.java:193 condition failed: assert checkConsistency();"));
 }
 
 - (void)setStorePayloads {
   if (indexOptions_ != JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, NONE) && [((OrgApacheLuceneIndexIndexOptionsEnum *) nil_chk(indexOptions_)) compareToWithId:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS_AND_POSITIONS)] >= 0) {
-    storePayloads_ = YES;
+    storePayloads_ = true;
   }
   JreAssert(([self checkConsistency]), (@"org/apache/lucene/index/FieldInfo.java:200 condition failed: assert checkConsistency();"));
 }
@@ -158,11 +158,11 @@ withOrgApacheLuceneIndexIndexOptionsEnum:(OrgApacheLuceneIndexIndexOptionsEnum *
   if (indexOptions_ == JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, NONE)) {
     @throw [new_JavaLangIllegalStateException_initWithNSString_(@"cannot omit norms: this field is not indexed") autorelease];
   }
-  omitNorms_ = YES;
+  omitNorms_ = true;
 }
 
 - (jboolean)hasNorms {
-  return indexOptions_ != JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, NONE) && omitNorms_ == NO;
+  return indexOptions_ != JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, NONE) && omitNorms_ == false;
 }
 
 - (jboolean)hasPayloads {
@@ -247,9 +247,9 @@ void OrgApacheLuceneIndexFieldInfo_initWithNSString_withInt_withBoolean_withBool
     self->omitNorms_ = omitNorms;
   }
   else {
-    self->storeTermVector_ = NO;
-    self->storePayloads_ = NO;
-    self->omitNorms_ = NO;
+    self->storeTermVector_ = false;
+    self->storePayloads_ = false;
+    self->omitNorms_ = false;
   }
   self->dvGen_ = dvGen;
   JreStrongAssign(&self->attributes_, OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_(attributes));

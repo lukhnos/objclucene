@@ -56,10 +56,12 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchMaxNonCompetitiveBoostAttributeImpl, co
   [reflector reflectWithIOSClass:OrgApacheLuceneSearchMaxNonCompetitiveBoostAttribute_class_() withNSString:@"competitiveTerm" withId:competitiveTerm_];
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchMaxNonCompetitiveBoostAttributeImpl_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(competitiveTerm_);

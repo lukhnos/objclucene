@@ -15,10 +15,12 @@ __attribute__((unused)) static jfloat OrgApacheLuceneSearchSimilaritiesLambdaDF_
 
 @implementation OrgApacheLuceneSearchSimilaritiesLambdaDF
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSimilaritiesLambdaDF_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jfloat)lambdaWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats {
   return OrgApacheLuceneSearchSimilaritiesLambdaDF_lambdaWithOrgApacheLuceneSearchSimilaritiesBasicStats_(self, stats);

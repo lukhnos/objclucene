@@ -37,8 +37,8 @@ withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type {
   if (self == [OrgApacheLuceneDocumentFloatField class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneDocumentFloatField_TYPE_NOT_STORED_, new_OrgApacheLuceneDocumentFieldType_init());
     {
-      [OrgApacheLuceneDocumentFloatField_TYPE_NOT_STORED_ setTokenizedWithBoolean:YES];
-      [OrgApacheLuceneDocumentFloatField_TYPE_NOT_STORED_ setOmitNormsWithBoolean:YES];
+      [OrgApacheLuceneDocumentFloatField_TYPE_NOT_STORED_ setTokenizedWithBoolean:true];
+      [OrgApacheLuceneDocumentFloatField_TYPE_NOT_STORED_ setOmitNormsWithBoolean:true];
       [OrgApacheLuceneDocumentFloatField_TYPE_NOT_STORED_ setIndexOptionsWithOrgApacheLuceneIndexIndexOptionsEnum:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS)];
       [OrgApacheLuceneDocumentFloatField_TYPE_NOT_STORED_ setNumericTypeWithOrgApacheLuceneDocumentFieldType_NumericTypeEnum:JreLoadStatic(OrgApacheLuceneDocumentFieldType_NumericTypeEnum, FLOAT)];
       [OrgApacheLuceneDocumentFloatField_TYPE_NOT_STORED_ setNumericPrecisionStepWithInt:OrgApacheLuceneUtilNumericUtils_PRECISION_STEP_DEFAULT_32];
@@ -46,12 +46,12 @@ withOrgApacheLuceneDocumentFieldType:(OrgApacheLuceneDocumentFieldType *)type {
     }
     JreStrongAssignAndConsume(&OrgApacheLuceneDocumentFloatField_TYPE_STORED_, new_OrgApacheLuceneDocumentFieldType_init());
     {
-      [OrgApacheLuceneDocumentFloatField_TYPE_STORED_ setTokenizedWithBoolean:YES];
-      [OrgApacheLuceneDocumentFloatField_TYPE_STORED_ setOmitNormsWithBoolean:YES];
+      [OrgApacheLuceneDocumentFloatField_TYPE_STORED_ setTokenizedWithBoolean:true];
+      [OrgApacheLuceneDocumentFloatField_TYPE_STORED_ setOmitNormsWithBoolean:true];
       [OrgApacheLuceneDocumentFloatField_TYPE_STORED_ setIndexOptionsWithOrgApacheLuceneIndexIndexOptionsEnum:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS)];
       [OrgApacheLuceneDocumentFloatField_TYPE_STORED_ setNumericTypeWithOrgApacheLuceneDocumentFieldType_NumericTypeEnum:JreLoadStatic(OrgApacheLuceneDocumentFieldType_NumericTypeEnum, FLOAT)];
       [OrgApacheLuceneDocumentFloatField_TYPE_STORED_ setNumericPrecisionStepWithInt:OrgApacheLuceneUtilNumericUtils_PRECISION_STEP_DEFAULT_32];
-      [OrgApacheLuceneDocumentFloatField_TYPE_STORED_ setStoredWithBoolean:YES];
+      [OrgApacheLuceneDocumentFloatField_TYPE_STORED_ setStoredWithBoolean:true];
       [OrgApacheLuceneDocumentFloatField_TYPE_STORED_ freeze];
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneDocumentFloatField)

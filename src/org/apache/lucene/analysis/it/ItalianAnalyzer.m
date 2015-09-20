@@ -71,10 +71,12 @@ NSString *OrgApacheLuceneAnalysisItItalianAnalyzer_DEFAULT_STOPWORD_FILE_ = @"it
   return OrgApacheLuceneAnalysisItItalianAnalyzer_getDefaultStopSet();
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisItItalianAnalyzer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords {
   OrgApacheLuceneAnalysisItItalianAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(self, stopwords);
@@ -111,7 +113,7 @@ NSString *OrgApacheLuceneAnalysisItItalianAnalyzer_DEFAULT_STOPWORD_FILE_ = @"it
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisItItalianAnalyzer class]) {
-    JreStrongAssign(&OrgApacheLuceneAnalysisItItalianAnalyzer_DEFAULT_ARTICLES_, OrgApacheLuceneAnalysisUtilCharArraySet_unmodifiableSetWithOrgApacheLuceneAnalysisUtilCharArraySet_([new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ @"c", @"l", @"all", @"dall", @"dell", @"nell", @"sull", @"coll", @"pell", @"gl", @"agl", @"dagl", @"degl", @"negl", @"sugl", @"un", @"m", @"t", @"s", @"v", @"d" } count:21 type:NSString_class_()]), YES) autorelease]));
+    JreStrongAssign(&OrgApacheLuceneAnalysisItItalianAnalyzer_DEFAULT_ARTICLES_, OrgApacheLuceneAnalysisUtilCharArraySet_unmodifiableSetWithOrgApacheLuceneAnalysisUtilCharArraySet_([new_OrgApacheLuceneAnalysisUtilCharArraySet_initWithJavaUtilCollection_withBoolean_(JavaUtilArrays_asListWithNSObjectArray_([IOSObjectArray arrayWithObjects:(id[]){ @"c", @"l", @"all", @"dall", @"dell", @"nell", @"sull", @"coll", @"pell", @"gl", @"agl", @"dagl", @"degl", @"negl", @"sugl", @"un", @"m", @"t", @"s", @"v", @"d" } count:21 type:NSString_class_()]), true) autorelease]));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisItItalianAnalyzer)
   }
 }
@@ -178,10 +180,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisItItalianAnalyzer_DefaultSetHolde
 
 @implementation OrgApacheLuceneAnalysisItItalianAnalyzer_DefaultSetHolder
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisItItalianAnalyzer_DefaultSetHolder_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisItItalianAnalyzer_DefaultSetHolder class]) {

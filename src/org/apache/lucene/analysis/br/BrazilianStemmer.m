@@ -102,13 +102,15 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisBrBrazilianStemmer)
 
 @implementation OrgApacheLuceneAnalysisBrBrazilianStemmer
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisBrBrazilianStemmer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (NSString *)stemWithNSString:(NSString *)term {
-  jboolean altered = NO;
+  jboolean altered = false;
   OrgApacheLuceneAnalysisBrBrazilianStemmer_createCTWithNSString_(self, term);
   if (!OrgApacheLuceneAnalysisBrBrazilianStemmer_isIndexableWithNSString_(self, CT_)) {
     return nil;
@@ -273,10 +275,10 @@ OrgApacheLuceneAnalysisBrBrazilianStemmer *new_OrgApacheLuceneAnalysisBrBrazilia
 jboolean OrgApacheLuceneAnalysisBrBrazilianStemmer_isStemmableWithNSString_(OrgApacheLuceneAnalysisBrBrazilianStemmer *self, NSString *term) {
   for (jint c = 0; c < ((jint) [((NSString *) nil_chk(term)) length]); c++) {
     if (!JavaLangCharacter_isLetterWithChar_([term charAtWithInt:c])) {
-      return NO;
+      return false;
     }
   }
-  return YES;
+  return true;
 }
 
 jboolean OrgApacheLuceneAnalysisBrBrazilianStemmer_isIndexableWithNSString_(OrgApacheLuceneAnalysisBrBrazilianStemmer *self, NSString *term) {
@@ -389,10 +391,10 @@ NSString *OrgApacheLuceneAnalysisBrBrazilianStemmer_changeTermWithNSString_(OrgA
 
 jboolean OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(OrgApacheLuceneAnalysisBrBrazilianStemmer *self, NSString *value, NSString *suffix) {
   if ((value == nil) || (suffix == nil)) {
-    return NO;
+    return false;
   }
   if (((jint) [((NSString *) nil_chk(suffix)) length]) > ((jint) [((NSString *) nil_chk(value)) length])) {
-    return NO;
+    return false;
   }
   return [((NSString *) nil_chk([value substring:((jint) [value length]) - ((jint) [suffix length])])) isEqual:suffix];
 }
@@ -420,7 +422,7 @@ NSString *OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_wit
 
 jboolean OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixPrecededWithNSString_withNSString_withNSString_(OrgApacheLuceneAnalysisBrBrazilianStemmer *self, NSString *value, NSString *suffix, NSString *preceded) {
   if ((value == nil) || (suffix == nil) || (preceded == nil) || !OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, value, suffix)) {
-    return NO;
+    return false;
   }
   return OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, value, suffix), preceded);
 }
@@ -438,657 +440,657 @@ void OrgApacheLuceneAnalysisBrBrazilianStemmer_createCTWithNSString_(OrgApacheLu
 }
 
 jboolean OrgApacheLuceneAnalysisBrBrazilianStemmer_step1(OrgApacheLuceneAnalysisBrBrazilianStemmer *self) {
-  if (self->CT_ == nil) return NO;
+  if (self->CT_ == nil) return false;
   if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->CT_, @"uciones") && OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->R2_, @"uciones")) {
     JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_replaceSuffixWithNSString_withNSString_withNSString_(self, self->CT_, @"uciones", @"u"));
-    return YES;
+    return true;
   }
   if (((jint) [((NSString *) nil_chk(self->CT_)) length]) >= 6) {
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->CT_, @"imentos") && OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->R2_, @"imentos")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"imentos"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->CT_, @"amentos") && OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->R2_, @"amentos")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"amentos"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->CT_, @"adores") && OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->R2_, @"adores")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"adores"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->CT_, @"adoras") && OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->R2_, @"adoras")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"adoras"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->CT_, @"logias") && OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->R2_, @"logias")) {
       OrgApacheLuceneAnalysisBrBrazilianStemmer_replaceSuffixWithNSString_withNSString_withNSString_(self, self->CT_, @"logias", @"log");
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->CT_, @"encias") && OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->R2_, @"encias")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_replaceSuffixWithNSString_withNSString_withNSString_(self, self->CT_, @"encias", @"ente"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->CT_, @"amente") && OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->R1_, @"amente")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"amente"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->CT_, @"idades") && OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->R2_, @"idades")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"idades"));
-      return YES;
+      return true;
     }
   }
   if (((jint) [((NSString *) nil_chk(self->CT_)) length]) >= 5) {
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->CT_, @"acoes") && OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->R2_, @"acoes")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"acoes"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->CT_, @"imento") && OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->R2_, @"imento")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"imento"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->CT_, @"amento") && OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->R2_, @"amento")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"amento"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->CT_, @"adora") && OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->R2_, @"adora")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"adora"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->CT_, @"ismos") && OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->R2_, @"ismos")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"ismos"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->CT_, @"istas") && OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->R2_, @"istas")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"istas"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->CT_, @"logia") && OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->R2_, @"logia")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_replaceSuffixWithNSString_withNSString_withNSString_(self, self->CT_, @"logia", @"log"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->CT_, @"ucion") && OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->R2_, @"ucion")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_replaceSuffixWithNSString_withNSString_withNSString_(self, self->CT_, @"ucion", @"u"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->CT_, @"encia") && OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->R2_, @"encia")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_replaceSuffixWithNSString_withNSString_withNSString_(self, self->CT_, @"encia", @"ente"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->CT_, @"mente") && OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->R2_, @"mente")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"mente"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->CT_, @"idade") && OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->R2_, @"idade")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"idade"));
-      return YES;
+      return true;
     }
   }
   if (((jint) [((NSString *) nil_chk(self->CT_)) length]) >= 4) {
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->CT_, @"acao") && OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->R2_, @"acao")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"acao"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->CT_, @"ezas") && OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->R2_, @"ezas")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"ezas"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->CT_, @"icos") && OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->R2_, @"icos")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"icos"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->CT_, @"icas") && OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->R2_, @"icas")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"icas"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->CT_, @"ismo") && OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->R2_, @"ismo")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"ismo"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->CT_, @"avel") && OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->R2_, @"avel")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"avel"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->CT_, @"ivel") && OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->R2_, @"ivel")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"ivel"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->CT_, @"ista") && OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->R2_, @"ista")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"ista"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->CT_, @"osos") && OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->R2_, @"osos")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"osos"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->CT_, @"osas") && OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->R2_, @"osas")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"osas"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->CT_, @"ador") && OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->R2_, @"ador")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"ador"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->CT_, @"ivas") && OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->R2_, @"ivas")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"ivas"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->CT_, @"ivos") && OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->R2_, @"ivos")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"ivos"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->CT_, @"iras") && OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"iras") && OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixPrecededWithNSString_withNSString_withNSString_(self, self->CT_, @"iras", @"e")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_replaceSuffixWithNSString_withNSString_withNSString_(self, self->CT_, @"iras", @"ir"));
-      return YES;
+      return true;
     }
   }
   if (((jint) [((NSString *) nil_chk(self->CT_)) length]) >= 3) {
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->CT_, @"eza") && OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->R2_, @"eza")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"eza"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->CT_, @"ico") && OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->R2_, @"ico")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"ico"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->CT_, @"ica") && OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->R2_, @"ica")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"ica"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->CT_, @"oso") && OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->R2_, @"oso")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"oso"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->CT_, @"osa") && OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->R2_, @"osa")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"osa"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->CT_, @"iva") && OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->R2_, @"iva")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"iva"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->CT_, @"ivo") && OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->R2_, @"ivo")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"ivo"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->CT_, @"ira") && OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"ira") && OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixPrecededWithNSString_withNSString_withNSString_(self, self->CT_, @"ira", @"e")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_replaceSuffixWithNSString_withNSString_withNSString_(self, self->CT_, @"ira", @"ir"));
-      return YES;
+      return true;
     }
   }
-  return NO;
+  return false;
 }
 
 jboolean OrgApacheLuceneAnalysisBrBrazilianStemmer_step2(OrgApacheLuceneAnalysisBrBrazilianStemmer *self) {
-  if (self->RV_ == nil) return NO;
+  if (self->RV_ == nil) return false;
   if (((jint) [((NSString *) nil_chk(self->RV_)) length]) >= 7) {
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"issemos")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"issemos"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"essemos")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"essemos"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"assemos")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"assemos"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"ariamos")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"ariamos"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"eriamos")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"eriamos"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"iriamos")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"iriamos"));
-      return YES;
+      return true;
     }
   }
   if (((jint) [self->RV_ length]) >= 6) {
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"iremos")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"iremos"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"eremos")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"eremos"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"aremos")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"aremos"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"avamos")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"avamos"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"iramos")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"iramos"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"eramos")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"eramos"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"aramos")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"aramos"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"asseis")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"asseis"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"esseis")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"esseis"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"isseis")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"isseis"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"arieis")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"arieis"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"erieis")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"erieis"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"irieis")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"irieis"));
-      return YES;
+      return true;
     }
   }
   if (((jint) [self->RV_ length]) >= 5) {
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"irmos")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"irmos"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"iamos")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"iamos"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"armos")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"armos"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"ermos")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"ermos"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"areis")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"areis"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"ereis")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"ereis"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"ireis")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"ireis"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"asses")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"asses"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"esses")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"esses"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"isses")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"isses"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"astes")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"astes"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"assem")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"assem"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"essem")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"essem"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"issem")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"issem"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"ardes")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"ardes"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"erdes")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"erdes"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"irdes")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"irdes"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"ariam")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"ariam"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"eriam")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"eriam"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"iriam")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"iriam"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"arias")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"arias"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"erias")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"erias"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"irias")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"irias"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"estes")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"estes"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"istes")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"istes"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"areis")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"areis"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"aveis")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"aveis"));
-      return YES;
+      return true;
     }
   }
   if (((jint) [self->RV_ length]) >= 4) {
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"aria")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"aria"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"eria")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"eria"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"iria")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"iria"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"asse")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"asse"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"esse")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"esse"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"isse")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"isse"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"aste")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"aste"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"este")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"este"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"iste")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"iste"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"arei")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"arei"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"erei")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"erei"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"irei")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"irei"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"aram")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"aram"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"eram")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"eram"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"iram")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"iram"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"avam")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"avam"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"arem")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"arem"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"erem")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"erem"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"irem")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"irem"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"ando")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"ando"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"endo")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"endo"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"indo")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"indo"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"arao")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"arao"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"erao")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"erao"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"irao")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"irao"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"adas")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"adas"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"idas")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"idas"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"aras")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"aras"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"eras")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"eras"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"iras")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"iras"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"avas")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"avas"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"ares")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"ares"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"eres")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"eres"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"ires")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"ires"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"ados")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"ados"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"idos")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"idos"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"amos")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"amos"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"emos")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"emos"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"imos")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"imos"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"iras")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"iras"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"ieis")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"ieis"));
-      return YES;
+      return true;
     }
   }
   if (((jint) [self->RV_ length]) >= 3) {
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"ada")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"ada"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"ida")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"ida"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"ara")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"ara"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"era")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"era"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"ira")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"ava"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"iam")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"iam"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"ado")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"ado"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"ido")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"ido"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"ias")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"ias"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"ais")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"ais"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"eis")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"eis"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"ira")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"ira"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"ear")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"ear"));
-      return YES;
+      return true;
     }
   }
   if (((jint) [self->RV_ length]) >= 2) {
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"ia")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"ia"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"ei")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"ei"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"am")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"am"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"em")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"em"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"ar")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"ar"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"er")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"er"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"ir")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"ir"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"as")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"as"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"es")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"es"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"is")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"is"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"eu")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"eu"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"iu")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"iu"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"iu")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"iu"));
-      return YES;
+      return true;
     }
     if (OrgApacheLuceneAnalysisBrBrazilianStemmer_suffixWithNSString_withNSString_(self, self->RV_, @"ou")) {
       JreStrongAssign(&self->CT_, OrgApacheLuceneAnalysisBrBrazilianStemmer_removeSuffixWithNSString_withNSString_(self, self->CT_, @"ou"));
-      return YES;
+      return true;
     }
   }
-  return NO;
+  return false;
 }
 
 void OrgApacheLuceneAnalysisBrBrazilianStemmer_step3(OrgApacheLuceneAnalysisBrBrazilianStemmer *self) {

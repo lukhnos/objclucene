@@ -363,10 +363,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisEnKStemmer)
   OrgApacheLuceneAnalysisEnKStemmer_iveEndings(self);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisEnKStemmer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (NSString *)stemWithNSString:(NSString *)term {
   jboolean changed = [self stemWithCharArray:[((NSString *) nil_chk(term)) toCharArray] withInt:((jint) [term length])];
@@ -405,25 +407,25 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisEnKStemmer)
   JreStrongAssign(&result_, nil);
   k_ = len - 1;
   if ((k_ <= 1) || (k_ >= OrgApacheLuceneAnalysisEnKStemmer_MaxWordLen - 1)) {
-    return NO;
+    return false;
   }
   OrgApacheLuceneAnalysisEnKStemmer_DictEntry *entry_ = [((OrgApacheLuceneAnalysisUtilCharArrayMap *) nil_chk(OrgApacheLuceneAnalysisEnKStemmer_dict_ht_)) getWithCharArray:term withInt:0 withInt:len];
   if (entry_ != nil) {
     if (entry_->root_ != nil) {
       JreStrongAssign(&result_, entry_->root_);
-      return YES;
+      return true;
     }
-    return NO;
+    return false;
   }
   [((OrgApacheLuceneAnalysisUtilOpenStringBuilder *) nil_chk(word_)) reset];
   [word_ reserveWithInt:len + 10];
   for (jint i = 0; i < len; i++) {
     jchar ch = IOSCharArray_Get(nil_chk(term), i);
-    if (!OrgApacheLuceneAnalysisEnKStemmer_isAlphaWithChar_(self, ch)) return NO;
+    if (!OrgApacheLuceneAnalysisEnKStemmer_isAlphaWithChar_(self, ch)) return false;
     [word_ unsafeWriteWithChar:ch];
   }
   JreStrongAssign(&matchedEntry_, nil);
-  while (YES) {
+  while (true) {
     OrgApacheLuceneAnalysisEnKStemmer_plural(self);
     if (OrgApacheLuceneAnalysisEnKStemmer_matched(self)) break;
     OrgApacheLuceneAnalysisEnKStemmer_pastTense(self);
@@ -465,7 +467,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisEnKStemmer)
   if (entry_ != nil) {
     JreStrongAssign(&result_, entry_->root_);
   }
-  return YES;
+  return true;
 }
 
 - (void)dealloc {
@@ -573,8 +575,8 @@ jboolean OrgApacheLuceneAnalysisEnKStemmer_isVowelWithInt_(OrgApacheLuceneAnalys
 jboolean OrgApacheLuceneAnalysisEnKStemmer_isConsWithInt_(OrgApacheLuceneAnalysisEnKStemmer *self, jint index) {
   jchar ch;
   ch = [((OrgApacheLuceneAnalysisUtilOpenStringBuilder *) nil_chk(self->word_)) charAtWithInt:index];
-  if ((ch == 'a') || (ch == 'e') || (ch == 'i') || (ch == 'o') || (ch == 'u')) return NO;
-  if ((ch != 'y') || (index == 0)) return YES;
+  if ((ch == 'a') || (ch == 'e') || (ch == 'i') || (ch == 'o') || (ch == 'u')) return false;
+  if ((ch != 'y') || (index == 0)) return true;
   else return (!OrgApacheLuceneAnalysisEnKStemmer_isConsWithInt_(self, index - 1));
 }
 
@@ -582,10 +584,10 @@ OrgApacheLuceneAnalysisUtilCharArrayMap *OrgApacheLuceneAnalysisEnKStemmer_initi
   OrgApacheLuceneAnalysisEnKStemmer_initialize();
   OrgApacheLuceneAnalysisEnKStemmer_DictEntry *defaultEntry;
   OrgApacheLuceneAnalysisEnKStemmer_DictEntry *entry_;
-  OrgApacheLuceneAnalysisUtilCharArrayMap *d = [new_OrgApacheLuceneAnalysisUtilCharArrayMap_initWithInt_withBoolean_(1000, NO) autorelease];
+  OrgApacheLuceneAnalysisUtilCharArrayMap *d = [new_OrgApacheLuceneAnalysisUtilCharArrayMap_initWithInt_withBoolean_(1000, false) autorelease];
   for (jint i = 0; i < ((IOSObjectArray *) nil_chk(OrgApacheLuceneAnalysisEnKStemmer_exceptionWords_))->size_; i++) {
     if (![d containsKeyWithJavaLangCharSequence:IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_exceptionWords_, i)]) {
-      entry_ = [new_OrgApacheLuceneAnalysisEnKStemmer_DictEntry_initWithNSString_withBoolean_(IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_exceptionWords_, i), YES) autorelease];
+      entry_ = [new_OrgApacheLuceneAnalysisEnKStemmer_DictEntry_initWithNSString_withBoolean_(IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_exceptionWords_, i), true) autorelease];
       [d putWithNSString:IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_exceptionWords_, i) withId:entry_];
     }
     else {
@@ -594,7 +596,7 @@ OrgApacheLuceneAnalysisUtilCharArrayMap *OrgApacheLuceneAnalysisEnKStemmer_initi
   }
   for (jint i = 0; i < ((IOSObjectArray *) nil_chk(OrgApacheLuceneAnalysisEnKStemmer_directConflations_))->size_; i++) {
     if (![d containsKeyWithJavaLangCharSequence:IOSObjectArray_Get(nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_directConflations_, i)), 0)]) {
-      entry_ = [new_OrgApacheLuceneAnalysisEnKStemmer_DictEntry_initWithNSString_withBoolean_(IOSObjectArray_Get(nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_directConflations_, i)), 1), NO) autorelease];
+      entry_ = [new_OrgApacheLuceneAnalysisEnKStemmer_DictEntry_initWithNSString_withBoolean_(IOSObjectArray_Get(nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_directConflations_, i)), 1), false) autorelease];
       [d putWithNSString:IOSObjectArray_Get(nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_directConflations_, i)), 0) withId:entry_];
     }
     else {
@@ -603,14 +605,14 @@ OrgApacheLuceneAnalysisUtilCharArrayMap *OrgApacheLuceneAnalysisEnKStemmer_initi
   }
   for (jint i = 0; i < ((IOSObjectArray *) nil_chk(OrgApacheLuceneAnalysisEnKStemmer_countryNationality_))->size_; i++) {
     if (![d containsKeyWithJavaLangCharSequence:IOSObjectArray_Get(nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_countryNationality_, i)), 0)]) {
-      entry_ = [new_OrgApacheLuceneAnalysisEnKStemmer_DictEntry_initWithNSString_withBoolean_(IOSObjectArray_Get(nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_countryNationality_, i)), 1), NO) autorelease];
+      entry_ = [new_OrgApacheLuceneAnalysisEnKStemmer_DictEntry_initWithNSString_withBoolean_(IOSObjectArray_Get(nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_countryNationality_, i)), 1), false) autorelease];
       [d putWithNSString:IOSObjectArray_Get(nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_countryNationality_, i)), 0) withId:entry_];
     }
     else {
       @throw [new_JavaLangRuntimeException_initWithNSString_(JreStrcat("$$$", @"Warning: Entry [", IOSObjectArray_Get(nil_chk(IOSObjectArray_Get(OrgApacheLuceneAnalysisEnKStemmer_countryNationality_, i)), 0), @"] already in dictionary 3")) autorelease];
     }
   }
-  defaultEntry = [new_OrgApacheLuceneAnalysisEnKStemmer_DictEntry_initWithNSString_withBoolean_(nil, NO) autorelease];
+  defaultEntry = [new_OrgApacheLuceneAnalysisEnKStemmer_DictEntry_initWithNSString_withBoolean_(nil, false) autorelease];
   IOSObjectArray *array;
   array = JreLoadStatic(OrgApacheLuceneAnalysisEnKStemData1, data_);
   for (jint i = 0; i < ((IOSObjectArray *) nil_chk(array))->size_; i++) {
@@ -711,41 +713,41 @@ jint OrgApacheLuceneAnalysisEnKStemmer_stemLength(OrgApacheLuceneAnalysisEnKStem
 }
 
 jboolean OrgApacheLuceneAnalysisEnKStemmer_endsInWithCharArray_(OrgApacheLuceneAnalysisEnKStemmer *self, IOSCharArray *s) {
-  if (((IOSCharArray *) nil_chk(s))->size_ > self->k_) return NO;
+  if (((IOSCharArray *) nil_chk(s))->size_ > self->k_) return false;
   jint r = [((OrgApacheLuceneAnalysisUtilOpenStringBuilder *) nil_chk(self->word_)) length] - s->size_;
   self->j_ = self->k_;
   for (jint r1 = r, i = 0; i < s->size_; i++, r1++) {
-    if (IOSCharArray_Get(s, i) != [self->word_ charAtWithInt:r1]) return NO;
+    if (IOSCharArray_Get(s, i) != [self->word_ charAtWithInt:r1]) return false;
   }
   self->j_ = r - 1;
-  return YES;
+  return true;
 }
 
 jboolean OrgApacheLuceneAnalysisEnKStemmer_endsInWithChar_withChar_(OrgApacheLuceneAnalysisEnKStemmer *self, jchar a, jchar b) {
-  if (2 > self->k_) return NO;
+  if (2 > self->k_) return false;
   if ([((OrgApacheLuceneAnalysisUtilOpenStringBuilder *) nil_chk(self->word_)) charAtWithInt:self->k_ - 1] == a && [self->word_ charAtWithInt:self->k_] == b) {
     self->j_ = self->k_ - 2;
-    return YES;
+    return true;
   }
-  return NO;
+  return false;
 }
 
 jboolean OrgApacheLuceneAnalysisEnKStemmer_endsInWithChar_withChar_withChar_(OrgApacheLuceneAnalysisEnKStemmer *self, jchar a, jchar b, jchar c) {
-  if (3 > self->k_) return NO;
+  if (3 > self->k_) return false;
   if ([((OrgApacheLuceneAnalysisUtilOpenStringBuilder *) nil_chk(self->word_)) charAtWithInt:self->k_ - 2] == a && [self->word_ charAtWithInt:self->k_ - 1] == b && [self->word_ charAtWithInt:self->k_] == c) {
     self->j_ = self->k_ - 3;
-    return YES;
+    return true;
   }
-  return NO;
+  return false;
 }
 
 jboolean OrgApacheLuceneAnalysisEnKStemmer_endsInWithChar_withChar_withChar_withChar_(OrgApacheLuceneAnalysisEnKStemmer *self, jchar a, jchar b, jchar c, jchar d) {
-  if (4 > self->k_) return NO;
+  if (4 > self->k_) return false;
   if ([((OrgApacheLuceneAnalysisUtilOpenStringBuilder *) nil_chk(self->word_)) charAtWithInt:self->k_ - 3] == a && [self->word_ charAtWithInt:self->k_ - 2] == b && [self->word_ charAtWithInt:self->k_ - 1] == c && [self->word_ charAtWithInt:self->k_] == d) {
     self->j_ = self->k_ - 4;
-    return YES;
+    return true;
   }
-  return NO;
+  return false;
 }
 
 OrgApacheLuceneAnalysisEnKStemmer_DictEntry *OrgApacheLuceneAnalysisEnKStemmer_wordInDict(OrgApacheLuceneAnalysisEnKStemmer *self) {
@@ -851,16 +853,16 @@ void OrgApacheLuceneAnalysisEnKStemmer_pastTense(OrgApacheLuceneAnalysisEnKStemm
 }
 
 jboolean OrgApacheLuceneAnalysisEnKStemmer_doubleCWithInt_(OrgApacheLuceneAnalysisEnKStemmer *self, jint i) {
-  if (i < 1) return NO;
-  if ([((OrgApacheLuceneAnalysisUtilOpenStringBuilder *) nil_chk(self->word_)) charAtWithInt:i] != [self->word_ charAtWithInt:i - 1]) return NO;
+  if (i < 1) return false;
+  if ([((OrgApacheLuceneAnalysisUtilOpenStringBuilder *) nil_chk(self->word_)) charAtWithInt:i] != [self->word_ charAtWithInt:i - 1]) return false;
   return (OrgApacheLuceneAnalysisEnKStemmer_isConsWithInt_(self, i));
 }
 
 jboolean OrgApacheLuceneAnalysisEnKStemmer_vowelInStem(OrgApacheLuceneAnalysisEnKStemmer *self) {
   for (jint i = 0; i < OrgApacheLuceneAnalysisEnKStemmer_stemLength(self); i++) {
-    if (OrgApacheLuceneAnalysisEnKStemmer_isVowelWithInt_(self, i)) return YES;
+    if (OrgApacheLuceneAnalysisEnKStemmer_isVowelWithInt_(self, i)) return true;
   }
-  return NO;
+  return false;
 }
 
 void OrgApacheLuceneAnalysisEnKStemmer_aspect(OrgApacheLuceneAnalysisEnKStemmer *self) {

@@ -120,7 +120,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilBytesRefArray_$2)
   lastElement_ = 0;
   currentOffset_ = 0;
   JavaUtilArrays_fillWithIntArray_withInt_(offsets_, 0);
-  [((OrgApacheLuceneUtilByteBlockPool *) nil_chk(pool_)) resetWithBoolean:NO withBoolean:YES];
+  [((OrgApacheLuceneUtilByteBlockPool *) nil_chk(pool_)) resetWithBoolean:false withBoolean:true];
 }
 
 - (jint)appendWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)bytes {

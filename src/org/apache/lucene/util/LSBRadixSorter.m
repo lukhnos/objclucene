@@ -133,10 +133,12 @@ __attribute__((unused)) static void OrgApacheLuceneUtilLSBRadixSorter_insertionS
   }
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilLSBRadixSorter_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(histogram_);
@@ -198,11 +200,11 @@ jboolean OrgApacheLuceneUtilLSBRadixSorter_sortWithIntArray_withInt_withInt_with
   JavaUtilArrays_fillWithIntArray_withInt_(histogram, 0);
   OrgApacheLuceneUtilLSBRadixSorter_buildHistogramWithIntArray_withInt_withInt_withIntArray_withInt_(array, off, len, histogram, shift);
   if (IOSIntArray_Get(nil_chk(histogram), 0) == len) {
-    return NO;
+    return false;
   }
   OrgApacheLuceneUtilLSBRadixSorter_sumHistogramWithIntArray_(histogram);
   OrgApacheLuceneUtilLSBRadixSorter_reorderWithIntArray_withInt_withInt_withIntArray_withInt_withIntArray_withInt_(array, off, len, histogram, shift, dest, destOff);
-  return YES;
+  return true;
 }
 
 void OrgApacheLuceneUtilLSBRadixSorter_insertionSortWithIntArray_withInt_withInt_(IOSIntArray *array, jint off, jint len) {

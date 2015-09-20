@@ -77,8 +77,8 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs)
 
 - (JavaLangLong *)commonWithId:(id)_output1
                         withId:(id)_output2 {
-  JreAssert((OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_validWithId_withBoolean_(self, _output1, NO)), (@"org/apache/lucene/util/fst/UpToTwoPositiveIntOutputs.java:114 condition failed: assert valid(_output1, false);"));
-  JreAssert((OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_validWithId_withBoolean_(self, _output2, NO)), (@"org/apache/lucene/util/fst/UpToTwoPositiveIntOutputs.java:115 condition failed: assert valid(_output2, false);"));
+  JreAssert((OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_validWithId_withBoolean_(self, _output1, false)), (@"org/apache/lucene/util/fst/UpToTwoPositiveIntOutputs.java:114 condition failed: assert valid(_output1, false);"));
+  JreAssert((OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_validWithId_withBoolean_(self, _output2, false)), (@"org/apache/lucene/util/fst/UpToTwoPositiveIntOutputs.java:115 condition failed: assert valid(_output2, false);"));
   JavaLangLong *output1 = (JavaLangLong *) check_class_cast(_output1, [JavaLangLong class]);
   JavaLangLong *output2 = (JavaLangLong *) check_class_cast(_output2, [JavaLangLong class]);
   if (output1 == OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_NO_OUTPUT_ || output2 == OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_NO_OUTPUT_) {
@@ -99,8 +99,8 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs)
 
 - (JavaLangLong *)subtractWithId:(id)_output
                           withId:(id)_inc {
-  JreAssert((OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_validWithId_withBoolean_(self, _output, NO)), (@"org/apache/lucene/util/fst/UpToTwoPositiveIntOutputs.java:133 condition failed: assert valid(_output, false);"));
-  JreAssert((OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_validWithId_withBoolean_(self, _inc, NO)), (@"org/apache/lucene/util/fst/UpToTwoPositiveIntOutputs.java:134 condition failed: assert valid(_inc, false);"));
+  JreAssert((OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_validWithId_withBoolean_(self, _output, false)), (@"org/apache/lucene/util/fst/UpToTwoPositiveIntOutputs.java:133 condition failed: assert valid(_output, false);"));
+  JreAssert((OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_validWithId_withBoolean_(self, _inc, false)), (@"org/apache/lucene/util/fst/UpToTwoPositiveIntOutputs.java:134 condition failed: assert valid(_inc, false);"));
   JavaLangLong *output = (JavaLangLong *) check_class_cast(_output, [JavaLangLong class]);
   JavaLangLong *inc = (JavaLangLong *) check_class_cast(_inc, [JavaLangLong class]);
   JreAssert(([((JavaLangLong *) nil_chk(output)) longLongValue] >= [((JavaLangLong *) nil_chk(inc)) longLongValue]), (@"org/apache/lucene/util/fst/UpToTwoPositiveIntOutputs.java:137 condition failed: assert output >= inc;"));
@@ -117,8 +117,8 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs)
 
 - (id)addWithId:(id)_prefix
          withId:(id)_output {
-  JreAssert((OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_validWithId_withBoolean_(self, _prefix, NO)), (@"org/apache/lucene/util/fst/UpToTwoPositiveIntOutputs.java:150 condition failed: assert valid(_prefix, false);"));
-  JreAssert((OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_validWithId_withBoolean_(self, _output, YES)), (@"org/apache/lucene/util/fst/UpToTwoPositiveIntOutputs.java:151 condition failed: assert valid(_output, true);"));
+  JreAssert((OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_validWithId_withBoolean_(self, _prefix, false)), (@"org/apache/lucene/util/fst/UpToTwoPositiveIntOutputs.java:150 condition failed: assert valid(_prefix, false);"));
+  JreAssert((OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_validWithId_withBoolean_(self, _output, true)), (@"org/apache/lucene/util/fst/UpToTwoPositiveIntOutputs.java:151 condition failed: assert valid(_output, true);"));
   JavaLangLong *prefix = (JavaLangLong *) check_class_cast(_prefix, [JavaLangLong class]);
   if ([_output isKindOfClass:[JavaLangLong class]]) {
     JavaLangLong *output = (JavaLangLong *) check_class_cast(_output, [JavaLangLong class]);
@@ -141,7 +141,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs)
 
 - (void)writeWithId:(id)_output
 withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg {
-  JreAssert((OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_validWithId_withBoolean_(self, _output, YES)), (@"org/apache/lucene/util/fst/UpToTwoPositiveIntOutputs.java:171 condition failed: assert valid(_output, true);"));
+  JreAssert((OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_validWithId_withBoolean_(self, _output, true)), (@"org/apache/lucene/util/fst/UpToTwoPositiveIntOutputs.java:171 condition failed: assert valid(_output, true);"));
   if ([_output isKindOfClass:[JavaLangLong class]]) {
     JavaLangLong *output = (JavaLangLong *) check_class_cast(_output, [JavaLangLong class]);
     [((OrgApacheLuceneStoreDataOutput *) nil_chk(outArg)) writeVLongWithLong:JreLShift64([((JavaLangLong *) nil_chk(output)) longLongValue], 1)];
@@ -190,8 +190,8 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg {
 
 - (id)mergeWithId:(id)first
            withId:(id)second {
-  JreAssert((OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_validWithId_withBoolean_(self, first, NO)), (@"org/apache/lucene/util/fst/UpToTwoPositiveIntOutputs.java:232 condition failed: assert valid(first, false);"));
-  JreAssert((OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_validWithId_withBoolean_(self, second, NO)), (@"org/apache/lucene/util/fst/UpToTwoPositiveIntOutputs.java:233 condition failed: assert valid(second, false);"));
+  JreAssert((OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_validWithId_withBoolean_(self, first, false)), (@"org/apache/lucene/util/fst/UpToTwoPositiveIntOutputs.java:232 condition failed: assert valid(first, false);"));
+  JreAssert((OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_validWithId_withBoolean_(self, second, false)), (@"org/apache/lucene/util/fst/UpToTwoPositiveIntOutputs.java:233 condition failed: assert valid(second, false);"));
   return [new_OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs_initWithLong_withLong_([((JavaLangLong *) nil_chk((JavaLangLong *) check_class_cast(first, [JavaLangLong class]))) longLongValue], [((JavaLangLong *) nil_chk((JavaLangLong *) check_class_cast(second, [JavaLangLong class]))) longLongValue]) autorelease];
 }
 
@@ -208,8 +208,8 @@ withOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)outArg {
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs class]) {
     JreStrongAssignAndConsume(&OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_NO_OUTPUT_, new_JavaLangLong_initWithLong_(0));
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_singletonShare_, new_OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_initWithBoolean_(YES));
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_singletonNoShare_, new_OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_initWithBoolean_(NO));
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_singletonShare_, new_OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_initWithBoolean_(true));
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_singletonNoShare_, new_OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_initWithBoolean_(false));
     OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TWO_LONGS_NUM_BYTES_ = OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfWithId_([new_OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs_initWithLong_withLong_(0, 0) autorelease]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs)
   }
@@ -268,7 +268,7 @@ jboolean OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_validWithJavaLangLong_(
   JreAssert((o != nil), (@"org/apache/lucene/util/fst/UpToTwoPositiveIntOutputs.java:202 condition failed: assert o != null;"));
   JreAssert(([o isKindOfClass:[JavaLangLong class]]), (@"org/apache/lucene/util/fst/UpToTwoPositiveIntOutputs.java:203 condition failed: assert o instanceof Long;"));
   JreAssert((o == OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_NO_OUTPUT_ || [((JavaLangLong *) nil_chk(o)) longLongValue] > 0), (@"org/apache/lucene/util/fst/UpToTwoPositiveIntOutputs.java:204 condition failed: assert o == NO_OUTPUT || o > 0;"));
-  return YES;
+  return true;
 }
 
 jboolean OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_validWithId_withBoolean_(OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs *self, id _o, jboolean allowDouble) {
@@ -277,7 +277,7 @@ jboolean OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_validWithId_withBoolean
     return OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_validWithJavaLangLong_(self, (JavaLangLong *) check_class_cast(_o, [JavaLangLong class]));
   }
   else if ([_o isKindOfClass:[OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs class]]) {
-    return YES;
+    return true;
   }
   else {
     return OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_validWithJavaLangLong_(self, (JavaLangLong *) check_class_cast(_o, [JavaLangLong class]));
@@ -304,7 +304,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs
     return first_ == ((OrgApacheLuceneUtilFstUpToTwoPositiveIntOutputs_TwoLongs *) nil_chk(other))->first_ && second_ == other->second_;
   }
   else {
-    return NO;
+    return false;
   }
 }
 

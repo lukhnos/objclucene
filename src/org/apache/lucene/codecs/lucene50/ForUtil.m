@@ -273,10 +273,10 @@ jboolean OrgApacheLuceneCodecsLucene50ForUtil_isAllEqualWithIntArray_(IOSIntArra
   jint v = IOSIntArray_Get(nil_chk(data), 0);
   for (jint i = 1; i < OrgApacheLuceneCodecsLucene50Lucene50PostingsFormat_BLOCK_SIZE; ++i) {
     if (IOSIntArray_Get(data, i) != v) {
-      return NO;
+      return false;
     }
   }
-  return YES;
+  return true;
 }
 
 jint OrgApacheLuceneCodecsLucene50ForUtil_bitsRequiredWithIntArray_(IOSIntArray *data) {

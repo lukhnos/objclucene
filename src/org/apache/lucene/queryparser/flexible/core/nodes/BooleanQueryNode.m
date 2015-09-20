@@ -66,7 +66,7 @@
 
 void OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode_initWithJavaUtilList_(OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode *self, id<JavaUtilList> clauses) {
   OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_init(self);
-  [self setLeafWithBoolean:NO];
+  [self setLeafWithBoolean:false];
   [self allocate];
   [self setWithJavaUtilList:clauses];
 }

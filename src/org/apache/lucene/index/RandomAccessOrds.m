@@ -9,10 +9,12 @@
 
 @implementation OrgApacheLuceneIndexRandomAccessOrds
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexRandomAccessOrds_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jlong)ordAtWithInt:(jint)index {
   // can't call an abstract method

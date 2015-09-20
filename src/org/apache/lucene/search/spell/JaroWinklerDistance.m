@@ -25,10 +25,12 @@ __attribute__((unused)) static IOSIntArray *OrgApacheLuceneSearchSpellJaroWinkle
 
 @implementation OrgApacheLuceneSearchSpellJaroWinklerDistance
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSpellJaroWinklerDistance_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (IOSIntArray *)matchesWithNSString:(NSString *)s1
                         withNSString:(NSString *)s2 {
@@ -60,8 +62,8 @@ __attribute__((unused)) static IOSIntArray *OrgApacheLuceneSearchSpellJaroWinkle
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return YES;
-  if (nil == obj || [self getClass] != [obj getClass]) return NO;
+  if (self == obj) return true;
+  if (nil == obj || [self getClass] != [obj getClass]) return false;
   OrgApacheLuceneSearchSpellJaroWinklerDistance *o = (OrgApacheLuceneSearchSpellJaroWinklerDistance *) check_class_cast(obj, [OrgApacheLuceneSearchSpellJaroWinklerDistance class]);
   return JavaLangFloat_floatToIntBitsWithFloat_(((OrgApacheLuceneSearchSpellJaroWinklerDistance *) nil_chk(o))->threshold_) == JavaLangFloat_floatToIntBitsWithFloat_(self->threshold_);
 }
@@ -121,7 +123,7 @@ IOSIntArray *OrgApacheLuceneSearchSpellJaroWinklerDistance_matchesWithNSString_w
     for (jint xi = JavaLangMath_maxWithInt_withInt_(mi - range, 0), xn = JavaLangMath_minWithInt_withInt_(mi + range + 1, ((jint) [max length])); xi < xn; xi++) {
       if (!IOSBooleanArray_Get(matchFlags, xi) && c1 == [max charAtWithInt:xi]) {
         *IOSIntArray_GetRef(matchIndexes, mi) = xi;
-        *IOSBooleanArray_GetRef(matchFlags, xi) = YES;
+        *IOSBooleanArray_GetRef(matchFlags, xi) = true;
         matches++;
         break;
       }

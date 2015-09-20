@@ -79,14 +79,14 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueriesFunctionValuesourceQueryDocValu
 }
 
 - (jboolean)isEqual:(id)o {
-  if (OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource_class_() != [nil_chk(o) getClass]) return NO;
+  if (OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource_class_() != [nil_chk(o) getClass]) return false;
   OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource *other = (OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource *) check_class_cast(o, [OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource class]);
   return [((OrgApacheLuceneSearchQuery *) nil_chk(self->q_)) isEqual:other->q_] && self->defVal_ == other->defVal_;
 }
 
 - (void)createWeightWithJavaUtilMap:(id<JavaUtilMap>)context
 withOrgApacheLuceneSearchIndexSearcher:(OrgApacheLuceneSearchIndexSearcher *)searcher {
-  OrgApacheLuceneSearchWeight *w = [((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) createNormalizedWeightWithOrgApacheLuceneSearchQuery:q_ withBoolean:YES];
+  OrgApacheLuceneSearchWeight *w = [((OrgApacheLuceneSearchIndexSearcher *) nil_chk(searcher)) createNormalizedWeightWithOrgApacheLuceneSearchQuery:q_ withBoolean:true];
   [((id<JavaUtilMap>) nil_chk(context)) putWithId:self withId:w];
 }
 
@@ -145,7 +145,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceQueryV
       if (noMatches_) return defVal_;
       JreStrongAssign(&scorer_, [((OrgApacheLuceneSearchWeight *) nil_chk(weight_)) scorerWithOrgApacheLuceneIndexLeafReaderContext:readerContext_]);
       if (scorer_ == nil) {
-        noMatches_ = YES;
+        noMatches_ = true;
         return defVal_;
       }
       scorerDoc_ = -1;
@@ -167,12 +167,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceQueryV
 - (jboolean)existsWithInt:(jint)doc {
   @try {
     if (doc < lastDocRequested_) {
-      if (noMatches_) return NO;
+      if (noMatches_) return false;
       JreStrongAssign(&scorer_, [((OrgApacheLuceneSearchWeight *) nil_chk(weight_)) scorerWithOrgApacheLuceneIndexLeafReaderContext:readerContext_]);
       scorerDoc_ = -1;
       if (scorer_ == nil) {
-        noMatches_ = YES;
-        return NO;
+        noMatches_ = true;
+        return false;
       }
     }
     lastDocRequested_ = doc;
@@ -180,9 +180,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceQueryV
       scorerDoc_ = [((OrgApacheLuceneSearchScorer *) nil_chk(scorer_)) advanceWithInt:doc];
     }
     if (scorerDoc_ > doc) {
-      return NO;
+      return false;
     }
-    return YES;
+    return true;
   }
   @catch (JavaIoIOException *e) {
     @throw [new_JavaLangRuntimeException_initWithNSString_withJavaLangThrowable_(JreStrcat("$@$I", @"caught exception in QueryDocVals(", q_, @") doc=", doc), e) autorelease];
@@ -243,7 +243,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceQueryV
 
 void OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues_initWithOrgApacheLuceneQueriesFunctionValuesourceQueryValueSource_withOrgApacheLuceneIndexLeafReaderContext_withJavaUtilMap_(OrgApacheLuceneQueriesFunctionValuesourceQueryDocValues *self, OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource *vs, OrgApacheLuceneIndexLeafReaderContext *readerContext, id<JavaUtilMap> fcontext) {
   OrgApacheLuceneQueriesFunctionDocvaluesFloatDocValues_initWithOrgApacheLuceneQueriesFunctionValueSource_(self, vs);
-  self->noMatches_ = NO;
+  self->noMatches_ = false;
   self->lastDocRequested_ = JavaLangInteger_MAX_VALUE;
   JreStrongAssign(&self->readerContext_, readerContext);
   self->defVal_ = ((OrgApacheLuceneQueriesFunctionValuesourceQueryValueSource *) nil_chk(vs))->defVal_;
@@ -285,15 +285,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceQueryD
   @try {
     if (this$0_->noMatches_) {
       ((OrgApacheLuceneUtilMutableMutableValueFloat *) nil_chk(mval_))->value_ = this$0_->defVal_;
-      mval_->exists_ = NO;
+      mval_->exists_ = false;
       return;
     }
     JreStrongAssign(&this$0_->scorer_, [((OrgApacheLuceneSearchWeight *) nil_chk(this$0_->weight_)) scorerWithOrgApacheLuceneIndexLeafReaderContext:this$0_->readerContext_]);
     this$0_->scorerDoc_ = -1;
     if (this$0_->scorer_ == nil) {
-      this$0_->noMatches_ = YES;
+      this$0_->noMatches_ = true;
       ((OrgApacheLuceneUtilMutableMutableValueFloat *) nil_chk(mval_))->value_ = this$0_->defVal_;
-      mval_->exists_ = NO;
+      mval_->exists_ = false;
       return;
     }
     this$0_->lastDocRequested_ = doc;
@@ -302,11 +302,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueriesFunctionValuesourceQueryD
     }
     if (this$0_->scorerDoc_ > doc) {
       ((OrgApacheLuceneUtilMutableMutableValueFloat *) nil_chk(mval_))->value_ = this$0_->defVal_;
-      mval_->exists_ = NO;
+      mval_->exists_ = false;
       return;
     }
     ((OrgApacheLuceneUtilMutableMutableValueFloat *) nil_chk(mval_))->value_ = [((OrgApacheLuceneSearchScorer *) nil_chk(this$0_->scorer_)) score];
-    mval_->exists_ = YES;
+    mval_->exists_ = true;
   }
   @catch (JavaIoIOException *e) {
     @throw [new_JavaLangRuntimeException_initWithNSString_withJavaLangThrowable_(JreStrcat("$@$I", @"caught exception in QueryDocVals(", this$0_->q_, @") doc=", doc), e) autorelease];

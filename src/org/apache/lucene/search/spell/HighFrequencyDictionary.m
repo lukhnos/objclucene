@@ -130,7 +130,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpellHighFrequencyDictiona
 }
 
 - (jboolean)hasPayloads {
-  return NO;
+  return false;
 }
 
 - (id<JavaUtilSet>)contexts {
@@ -138,7 +138,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpellHighFrequencyDictiona
 }
 
 - (jboolean)hasContexts {
-  return NO;
+  return false;
 }
 
 - (void)dealloc {

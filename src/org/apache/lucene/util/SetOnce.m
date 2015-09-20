@@ -22,10 +22,12 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilSetOnce, set_, JavaUtilConcurrentAtomicAt
 
 @implementation OrgApacheLuceneUtilSetOnce
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilSetOnce_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithId:(id)obj {
   OrgApacheLuceneUtilSetOnce_initWithId_(self, obj);
@@ -33,7 +35,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilSetOnce, set_, JavaUtilConcurrentAtomicAt
 }
 
 - (void)setWithId:(id)obj {
-  if ([((JavaUtilConcurrentAtomicAtomicBoolean *) nil_chk(set_)) compareAndSetWithBoolean:NO withBoolean:YES]) {
+  if ([((JavaUtilConcurrentAtomicAtomicBoolean *) nil_chk(set_)) compareAndSetWithBoolean:false withBoolean:true]) {
     JreVolatileStrongAssign(&self->obj_, obj);
   }
   else {
@@ -81,7 +83,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilSetOnce, set_, JavaUtilConcurrentAtomicAt
 void OrgApacheLuceneUtilSetOnce_init(OrgApacheLuceneUtilSetOnce *self) {
   NSObject_init(self);
   JreVolatileStrongAssign(&self->obj_, nil);
-  JreStrongAssignAndConsume(&self->set_, new_JavaUtilConcurrentAtomicAtomicBoolean_initWithBoolean_(NO));
+  JreStrongAssignAndConsume(&self->set_, new_JavaUtilConcurrentAtomicAtomicBoolean_initWithBoolean_(false));
 }
 
 OrgApacheLuceneUtilSetOnce *new_OrgApacheLuceneUtilSetOnce_init() {
@@ -94,7 +96,7 @@ void OrgApacheLuceneUtilSetOnce_initWithId_(OrgApacheLuceneUtilSetOnce *self, id
   NSObject_init(self);
   JreVolatileStrongAssign(&self->obj_, nil);
   JreVolatileStrongAssign(&self->obj_, obj);
-  JreStrongAssignAndConsume(&self->set_, new_JavaUtilConcurrentAtomicAtomicBoolean_initWithBoolean_(YES));
+  JreStrongAssignAndConsume(&self->set_, new_JavaUtilConcurrentAtomicAtomicBoolean_initWithBoolean_(true));
 }
 
 OrgApacheLuceneUtilSetOnce *new_OrgApacheLuceneUtilSetOnce_initWithId_(id obj) {
@@ -107,10 +109,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilSetOnce)
 
 @implementation OrgApacheLuceneUtilSetOnce_AlreadySetException
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilSetOnce_AlreadySetException_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

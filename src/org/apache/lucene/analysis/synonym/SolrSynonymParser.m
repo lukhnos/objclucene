@@ -129,7 +129,7 @@ void OrgApacheLuceneAnalysisSynonymSolrSynonymParser_addInternalWithJavaIoBuffer
       }
       for (jint i = 0; i < inputs->size_; i++) {
         for (jint j = 0; j < outputs->size_; j++) {
-          [self addWithOrgApacheLuceneUtilCharsRef:IOSObjectArray_Get(inputs, i) withOrgApacheLuceneUtilCharsRef:IOSObjectArray_Get(outputs, j) withBoolean:NO];
+          [self addWithOrgApacheLuceneUtilCharsRef:IOSObjectArray_Get(inputs, i) withOrgApacheLuceneUtilCharsRef:IOSObjectArray_Get(outputs, j) withBoolean:false];
         }
       }
     }
@@ -143,14 +143,14 @@ void OrgApacheLuceneAnalysisSynonymSolrSynonymParser_addInternalWithJavaIoBuffer
         for (jint i = 0; i < inputs->size_; i++) {
           for (jint j = 0; j < inputs->size_; j++) {
             if (i != j) {
-              [self addWithOrgApacheLuceneUtilCharsRef:IOSObjectArray_Get(inputs, i) withOrgApacheLuceneUtilCharsRef:IOSObjectArray_Get(inputs, j) withBoolean:YES];
+              [self addWithOrgApacheLuceneUtilCharsRef:IOSObjectArray_Get(inputs, i) withOrgApacheLuceneUtilCharsRef:IOSObjectArray_Get(inputs, j) withBoolean:true];
             }
           }
         }
       }
       else {
         for (jint i = 0; i < inputs->size_; i++) {
-          [self addWithOrgApacheLuceneUtilCharsRef:IOSObjectArray_Get(inputs, i) withOrgApacheLuceneUtilCharsRef:IOSObjectArray_Get(inputs, 0) withBoolean:NO];
+          [self addWithOrgApacheLuceneUtilCharsRef:IOSObjectArray_Get(inputs, i) withOrgApacheLuceneUtilCharsRef:IOSObjectArray_Get(inputs, 0) withBoolean:false];
         }
       }
     }

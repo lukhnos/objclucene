@@ -43,11 +43,11 @@ withOrgApacheLuceneAnalysisTokenStream:(OrgApacheLuceneAnalysisTokenStream *)str
     JreStrongAssignAndConsume(&OrgApacheLuceneDocumentTextField_TYPE_STORED_, new_OrgApacheLuceneDocumentFieldType_init());
     {
       [OrgApacheLuceneDocumentTextField_TYPE_NOT_STORED_ setIndexOptionsWithOrgApacheLuceneIndexIndexOptionsEnum:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS_AND_POSITIONS)];
-      [OrgApacheLuceneDocumentTextField_TYPE_NOT_STORED_ setTokenizedWithBoolean:YES];
+      [OrgApacheLuceneDocumentTextField_TYPE_NOT_STORED_ setTokenizedWithBoolean:true];
       [OrgApacheLuceneDocumentTextField_TYPE_NOT_STORED_ freeze];
       [OrgApacheLuceneDocumentTextField_TYPE_STORED_ setIndexOptionsWithOrgApacheLuceneIndexIndexOptionsEnum:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS_AND_POSITIONS)];
-      [OrgApacheLuceneDocumentTextField_TYPE_STORED_ setTokenizedWithBoolean:YES];
-      [OrgApacheLuceneDocumentTextField_TYPE_STORED_ setStoredWithBoolean:YES];
+      [OrgApacheLuceneDocumentTextField_TYPE_STORED_ setTokenizedWithBoolean:true];
+      [OrgApacheLuceneDocumentTextField_TYPE_STORED_ setStoredWithBoolean:true];
       [OrgApacheLuceneDocumentTextField_TYPE_STORED_ freeze];
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneDocumentTextField)

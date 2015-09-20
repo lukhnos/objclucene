@@ -30,10 +30,12 @@
 
 @implementation OrgApacheLuceneQueryparserFlexibleStandardStandardQueryParser
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueryparserFlexibleStandardStandardQueryParser_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithOrgApacheLuceneAnalysisAnalyzer:(OrgApacheLuceneAnalysisAnalyzer *)analyzer {
   OrgApacheLuceneQueryparserFlexibleStandardStandardQueryParser_initWithOrgApacheLuceneAnalysisAnalyzer_(self, analyzer);
@@ -64,7 +66,7 @@
 - (jboolean)getLowercaseExpandedTerms {
   JavaLangBoolean *lowercaseExpandedTerms = [((OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *) nil_chk([self getQueryConfigHandler])) getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, LOWERCASE_EXPANDED_TERMS_)];
   if (lowercaseExpandedTerms == nil) {
-    return YES;
+    return true;
   }
   else {
     return [lowercaseExpandedTerms booleanValue];
@@ -82,7 +84,7 @@
 - (jboolean)getEnablePositionIncrements {
   JavaLangBoolean *enablePositionsIncrements = [((OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *) nil_chk([self getQueryConfigHandler])) getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, ENABLE_POSITION_INCREMENTS_)];
   if (enablePositionsIncrements == nil) {
-    return NO;
+    return false;
   }
   else {
     return [enablePositionsIncrements booleanValue];
@@ -161,7 +163,7 @@
 - (jboolean)getAllowLeadingWildcard {
   JavaLangBoolean *allowLeadingWildcard = [((OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *) nil_chk([self getQueryConfigHandler])) getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, ALLOW_LEADING_WILDCARD_)];
   if (allowLeadingWildcard == nil) {
-    return NO;
+    return false;
   }
   else {
     return [allowLeadingWildcard booleanValue];
@@ -293,7 +295,7 @@
 
 void OrgApacheLuceneQueryparserFlexibleStandardStandardQueryParser_init(OrgApacheLuceneQueryparserFlexibleStandardStandardQueryParser *self) {
   OrgApacheLuceneQueryparserFlexibleCoreQueryParserHelper_initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler_withOrgApacheLuceneQueryparserFlexibleCoreParserSyntaxParser_withOrgApacheLuceneQueryparserFlexibleCoreProcessorsQueryNodeProcessor_withOrgApacheLuceneQueryparserFlexibleCoreBuildersQueryBuilder_(self, [new_OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_init() autorelease], [new_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParser_init() autorelease], [new_OrgApacheLuceneQueryparserFlexibleStandardProcessorsStandardQueryNodeProcessorPipeline_initWithOrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler_(nil) autorelease], [new_OrgApacheLuceneQueryparserFlexibleStandardBuildersStandardQueryTreeBuilder_init() autorelease]);
-  [self setEnablePositionIncrementsWithBoolean:YES];
+  [self setEnablePositionIncrementsWithBoolean:true];
 }
 
 OrgApacheLuceneQueryparserFlexibleStandardStandardQueryParser *new_OrgApacheLuceneQueryparserFlexibleStandardStandardQueryParser_init() {

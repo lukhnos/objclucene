@@ -70,16 +70,16 @@ OrgApacheLuceneSearchMultiTermQuery_RewriteMethod *OrgApacheLuceneSearchGeoPoint
 
 void OrgApacheLuceneSearchGeoPointTermQuery_initWithNSString_withDouble_withDouble_withDouble_withDouble_(OrgApacheLuceneSearchGeoPointTermQuery *self, NSString *field, jdouble minLon, jdouble minLat, jdouble maxLon, jdouble maxLat) {
   OrgApacheLuceneSearchMultiTermQuery_initWithNSString_(self, field);
-  if (OrgApacheLuceneUtilGeoUtils_isValidLonWithDouble_(minLon) == NO) {
+  if (OrgApacheLuceneUtilGeoUtils_isValidLonWithDouble_(minLon) == false) {
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D", @"invalid minLon ", minLon)) autorelease];
   }
-  if (OrgApacheLuceneUtilGeoUtils_isValidLonWithDouble_(maxLon) == NO) {
+  if (OrgApacheLuceneUtilGeoUtils_isValidLonWithDouble_(maxLon) == false) {
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D", @"invalid maxLon ", maxLon)) autorelease];
   }
-  if (OrgApacheLuceneUtilGeoUtils_isValidLatWithDouble_(minLat) == NO) {
+  if (OrgApacheLuceneUtilGeoUtils_isValidLatWithDouble_(minLat) == false) {
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D", @"invalid minLat ", minLat)) autorelease];
   }
-  if (OrgApacheLuceneUtilGeoUtils_isValidLatWithDouble_(maxLat) == NO) {
+  if (OrgApacheLuceneUtilGeoUtils_isValidLatWithDouble_(maxLat) == false) {
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D", @"invalid maxLat ", maxLat)) autorelease];
   }
   self->minLon_ = minLon;
@@ -100,10 +100,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchGeoPointTermQuery)
   return result;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchGeoPointTermQuery_$1_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

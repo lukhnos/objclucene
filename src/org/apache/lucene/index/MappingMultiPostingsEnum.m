@@ -70,7 +70,7 @@ withOrgApacheLuceneIndexMergeState:(OrgApacheLuceneIndexMergeState *)mergeState 
 }
 
 - (jint)nextDoc {
-  while (YES) {
+  while (true) {
     if (current_ == nil) {
       if (upto_ == numSubs_ - 1) {
         return self->doc_ = OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS;

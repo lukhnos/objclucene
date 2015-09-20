@@ -23,14 +23,16 @@
 
 @implementation OrgApacheLuceneQueryparserSurroundQuerySrndQuery
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueryparserSurroundQuerySrndQuery_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)setWeightWithFloat:(jfloat)w {
   weight_ = w;
-  weighted_ = YES;
+  weighted_ = true;
 }
 
 - (jboolean)isWeighted {
@@ -79,7 +81,7 @@
 }
 
 - (jboolean)isFieldsSubQueryAcceptable {
-  return YES;
+  return true;
 }
 
 - (OrgApacheLuceneQueryparserSurroundQuerySrndQuery *)clone {
@@ -96,8 +98,8 @@
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (obj == nil) return NO;
-  if (![[self getClass] isEqual:[nil_chk(obj) getClass]]) return NO;
+  if (obj == nil) return false;
+  if (![[self getClass] isEqual:[nil_chk(obj) getClass]]) return false;
   return [((NSString *) nil_chk([self description])) isEqual:[obj description]];
 }
 
@@ -135,7 +137,7 @@
 void OrgApacheLuceneQueryparserSurroundQuerySrndQuery_init(OrgApacheLuceneQueryparserSurroundQuerySrndQuery *self) {
   NSObject_init(self);
   self->weight_ = (jfloat) 1.0;
-  self->weighted_ = NO;
+  self->weighted_ = false;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserSurroundQuerySrndQuery)

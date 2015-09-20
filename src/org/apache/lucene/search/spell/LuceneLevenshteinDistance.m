@@ -21,10 +21,12 @@ __attribute__((unused)) static OrgApacheLuceneUtilIntsRef *OrgApacheLuceneSearch
 
 @implementation OrgApacheLuceneSearchSpellLuceneLevenshteinDistance
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSpellLuceneLevenshteinDistance_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jfloat)getDistanceWithNSString:(NSString *)target
                      withNSString:(NSString *)other {

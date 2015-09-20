@@ -63,10 +63,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisNgramNGramTokenFilter, offsetAtt_, id
 }
 
 - (jboolean)incrementToken {
-  while (YES) {
+  while (true) {
     if (curTermBuffer_ == nil) {
       if (![((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
-        return NO;
+        return false;
       }
       else {
         JreStrongAssign(&curTermBuffer_, [((IOSCharArray *) nil_chk([((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer])) clone]);
@@ -95,7 +95,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisNgramNGramTokenFilter, offsetAtt_, id
       [((id<OrgApacheLuceneAnalysisTokenattributesPositionLengthAttribute>) nil_chk(posLenAtt_)) setPositionLengthWithInt:curPosLen_];
       [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAtt_)) setOffsetWithInt:tokStart_ withInt:tokEnd_];
       curGramSize_++;
-      return YES;
+      return true;
     }
     JreStrongAssign(&curTermBuffer_, nil);
   }

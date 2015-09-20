@@ -141,10 +141,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexFilterDirectoryReader)
   return OrgApacheLuceneIndexFilterDirectoryReader_SubReaderWrapper_wrapWithJavaUtilList_(self, readers);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexFilterDirectoryReader_SubReaderWrapper_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneIndexLeafReader *)wrapWithOrgApacheLuceneIndexLeafReader:(OrgApacheLuceneIndexLeafReader *)reader {
   // can't call an abstract method

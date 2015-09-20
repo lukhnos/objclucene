@@ -155,7 +155,7 @@ NSString *OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ILLEGAL_ADVANCE_ON_PARE
     return [((OrgApacheLuceneSearchQuery *) nil_chk(origParentQuery_)) isEqual:((OrgApacheLuceneSearchJoinToChildBlockJoinQuery *) nil_chk(other))->origParentQuery_] && [((id<OrgApacheLuceneSearchJoinBitSetProducer>) nil_chk(parentsFilter_)) isEqual:other->parentsFilter_] && [super isEqual:other];
   }
   else {
-    return NO;
+    return false;
   }
 }
 
@@ -335,9 +335,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinToChildBlockJoinQuery_
 }
 
 - (jint)nextDoc {
-  while (YES) {
+  while (true) {
     if (childDoc_ + 1 == parentDoc_) {
-      while (YES) {
+      while (true) {
         parentDoc_ = [((OrgApacheLuceneSearchScorer *) nil_chk(parentScorer_)) nextDoc];
         OrgApacheLuceneSearchJoinToChildBlockJoinQuery_ToChildBlockJoinScorer_validateParentDoc(self);
         if (parentDoc_ == 0) {
@@ -397,7 +397,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinToChildBlockJoinQuery_
     if (parentDoc_ == OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS) {
       return childDoc_ = OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS;
     }
-    while (YES) {
+    while (true) {
       jint firstChild = [((OrgApacheLuceneUtilBitSet *) nil_chk(parentBits_)) prevSetBitWithInt:parentDoc_ - 1] + 1;
       if (firstChild != parentDoc_) {
         childTarget = JavaLangMath_maxWithInt_withInt_(childTarget, firstChild);

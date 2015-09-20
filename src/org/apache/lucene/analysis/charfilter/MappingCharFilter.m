@@ -58,7 +58,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCharfilterMappingCharFilter, replacem
 }
 
 - (jint)read {
-  while (YES) {
+  while (true) {
     if (replacement_ != nil && replacementPointer_ < replacement_->length_) {
       return IOSCharArray_Get(nil_chk(replacement_->chars_), replacement_->offset_ + replacementPointer_++);
     }
@@ -76,7 +76,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCharfilterMappingCharFilter, replacem
         else {
           jint lookahead = 0;
           OrgApacheLuceneUtilCharsRef *output = ((OrgApacheLuceneUtilCharsRef *) arc->output_);
-          while (YES) {
+          while (true) {
             lookahead++;
             if ([arc isFinal]) {
               lastMatchLen = lookahead;

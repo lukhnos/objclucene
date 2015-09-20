@@ -171,8 +171,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocValuesRangeQuery_$1_$2)
 }
 
 - (jboolean)isEqual:(id)obj {
-  if ([obj isKindOfClass:[OrgApacheLuceneSearchDocValuesRangeQuery class]] == NO) {
-    return NO;
+  if ([obj isKindOfClass:[OrgApacheLuceneSearchDocValuesRangeQuery class]] == false) {
+    return false;
   }
   OrgApacheLuceneSearchDocValuesRangeQuery *that = (OrgApacheLuceneSearchDocValuesRangeQuery *) check_class_cast(obj, [OrgApacheLuceneSearchDocValuesRangeQuery class]);
   return [((NSString *) nil_chk(field_)) isEqual:((OrgApacheLuceneSearchDocValuesRangeQuery *) nil_chk(that))->field_] && OrgLukhnosPortmobileUtilObjects_equalsWithId_withId_(lowerVal_, that->lowerVal_) && OrgLukhnosPortmobileUtilObjects_equalsWithId_withId_(upperVal_, that->upperVal_) && includeLower_ == that->includeLower_ && includeUpper_ == that->includeUpper_ && [super isEqual:obj];
@@ -184,7 +184,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocValuesRangeQuery_$1_$2)
 
 - (NSString *)toStringWithNSString:(NSString *)field {
   JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
-  if ([((NSString *) nil_chk(self->field_)) isEqual:field] == NO) {
+  if ([((NSString *) nil_chk(self->field_)) isEqual:field] == false) {
     [((JavaLangStringBuilder *) nil_chk([sb appendWithNSString:self->field_])) appendWithChar:':'];
   }
   [sb appendWithChar:includeLower_ ? '[' : '{'];
@@ -403,10 +403,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocValuesRangeQuery_$1)
   for (jint i = 0; i < count; ++i) {
     jlong value = [val$values_ valueAtWithInt:i];
     if (value >= val$min_ && value <= val$max_) {
-      return YES;
+      return true;
     }
   }
-  return NO;
+  return false;
 }
 
 - (jint)length {
@@ -468,10 +468,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocValuesRangeQuery_$1_$1)
   [((OrgApacheLuceneIndexSortedSetDocValues *) nil_chk(val$values_)) setDocumentWithInt:doc];
   for (jlong ord = [val$values_ nextOrd]; ord != OrgApacheLuceneIndexSortedSetDocValues_NO_MORE_ORDS; ord = [val$values_ nextOrd]) {
     if (ord >= val$minOrd_ && ord <= val$maxOrd_) {
-      return YES;
+      return true;
     }
   }
-  return NO;
+  return false;
 }
 
 - (jint)length {

@@ -83,7 +83,7 @@ void OrgApacheLuceneQueryparserFlexibleCoreNodesOpaqueQueryNode_initWithJavaLang
   OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNodeImpl_init(self);
   JreStrongAssign(&self->schema_, nil);
   JreStrongAssign(&self->value_, nil);
-  [self setLeafWithBoolean:YES];
+  [self setLeafWithBoolean:true];
   JreStrongAssign(&self->schema_, schema);
   JreStrongAssign(&self->value_, value);
 }

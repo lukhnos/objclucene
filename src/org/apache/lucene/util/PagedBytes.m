@@ -127,12 +127,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPagedBytes)
       left = blockSize_;
     }
     if (left < byteCount) {
-      [((OrgApacheLuceneStoreIndexInput *) nil_chk(inArg)) readBytesWithByteArray:currentBlock_ withInt:upto_ withInt:left withBoolean:NO];
+      [((OrgApacheLuceneStoreIndexInput *) nil_chk(inArg)) readBytesWithByteArray:currentBlock_ withInt:upto_ withInt:left withBoolean:false];
       upto_ = blockSize_;
       byteCount -= left;
     }
     else {
-      [((OrgApacheLuceneStoreIndexInput *) nil_chk(inArg)) readBytesWithByteArray:currentBlock_ withInt:upto_ withInt:(jint) byteCount withBoolean:NO];
+      [((OrgApacheLuceneStoreIndexInput *) nil_chk(inArg)) readBytesWithByteArray:currentBlock_ withInt:upto_ withInt:(jint) byteCount withBoolean:false];
       upto_ += byteCount;
       break;
     }
@@ -145,7 +145,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPagedBytes)
   if (((OrgApacheLuceneUtilBytesRef *) nil_chk(bytes))->length_ > left || currentBlock_ == nil) {
     if (currentBlock_ != nil) {
       OrgApacheLuceneUtilPagedBytes_addBlockWithByteArray_(self, currentBlock_);
-      didSkipBytes_ = YES;
+      didSkipBytes_ = true;
     }
     JreStrongAssignAndConsume(&currentBlock_, [IOSByteArray newArrayWithLength:blockSize_]);
     upto_ = 0;
@@ -175,7 +175,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilPagedBytes)
     JreStrongAssign(&currentBlock_, OrgApacheLuceneUtilPagedBytes_EMPTY_BYTES_);
   }
   OrgApacheLuceneUtilPagedBytes_addBlockWithByteArray_(self, currentBlock_);
-  frozen_ = YES;
+  frozen_ = true;
   JreStrongAssign(&currentBlock_, nil);
   return [new_OrgApacheLuceneUtilPagedBytes_Reader_initWithOrgApacheLuceneUtilPagedBytes_(self) autorelease];
 }
@@ -475,7 +475,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPagedBytes_Reader)
                        withInt:(jint)len {
   JreAssert((((IOSByteArray *) nil_chk(b))->size_ >= offset + len), (@"org/apache/lucene/util/PagedBytes.java:339 condition failed: assert b.length >= offset + len;"));
   jint offsetEnd = offset + len;
-  while (YES) {
+  while (true) {
     jint blockLeft = this$0_->blockSize_ - currentBlockUpto_;
     jint left = offsetEnd - offset;
     if (blockLeft < left) {
@@ -571,7 +571,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilPagedBytes_PagedBytesDataInp
     this$0_->upto_ = 0;
   }
   jint offsetEnd = offset + length;
-  while (YES) {
+  while (true) {
     jint left = offsetEnd - offset;
     jint blockLeft = this$0_->blockSize_ - this$0_->upto_;
     if (blockLeft < left) {

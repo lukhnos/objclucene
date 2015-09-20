@@ -95,12 +95,12 @@ OrgApacheLuceneAnalysisCoreStopFilter *new_OrgApacheLuceneAnalysisCoreStopFilter
 
 OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisCoreStopFilter_makeStopSetWithNSStringArray_(IOSObjectArray *stopWords) {
   OrgApacheLuceneAnalysisCoreStopFilter_initialize();
-  return OrgApacheLuceneAnalysisCoreStopFilter_makeStopSetWithNSStringArray_withBoolean_(stopWords, NO);
+  return OrgApacheLuceneAnalysisCoreStopFilter_makeStopSetWithNSStringArray_withBoolean_(stopWords, false);
 }
 
 OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisCoreStopFilter_makeStopSetWithJavaUtilList_(id<JavaUtilList> stopWords) {
   OrgApacheLuceneAnalysisCoreStopFilter_initialize();
-  return OrgApacheLuceneAnalysisCoreStopFilter_makeStopSetWithJavaUtilList_withBoolean_(stopWords, NO);
+  return OrgApacheLuceneAnalysisCoreStopFilter_makeStopSetWithJavaUtilList_withBoolean_(stopWords, false);
 }
 
 OrgApacheLuceneAnalysisUtilCharArraySet *OrgApacheLuceneAnalysisCoreStopFilter_makeStopSetWithNSStringArray_withBoolean_(IOSObjectArray *stopWords, jboolean ignoreCase) {

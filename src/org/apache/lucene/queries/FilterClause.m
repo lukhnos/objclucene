@@ -36,8 +36,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueriesFilterClause, filter_, OrgApacheLucene
 }
 
 - (jboolean)isEqual:(id)o {
-  if (o == self) return YES;
-  if (o == nil || !([o isKindOfClass:[OrgApacheLuceneQueriesFilterClause class]])) return NO;
+  if (o == self) return true;
+  if (o == nil || !([o isKindOfClass:[OrgApacheLuceneQueriesFilterClause class]])) return false;
   OrgApacheLuceneQueriesFilterClause *other = (OrgApacheLuceneQueriesFilterClause *) check_class_cast(o, [OrgApacheLuceneQueriesFilterClause class]);
   return [((OrgApacheLuceneSearchFilter *) nil_chk(self->filter_)) isEqual:((OrgApacheLuceneQueriesFilterClause *) nil_chk(other))->filter_] && self->occur_ == other->occur_;
 }

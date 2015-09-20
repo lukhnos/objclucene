@@ -21,10 +21,12 @@ __attribute__((unused)) static jdouble OrgApacheLuceneSearchSimilaritiesBasicMod
 
 @implementation OrgApacheLuceneSearchSimilaritiesBasicModelBE
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSimilaritiesBasicModelBE_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jfloat)scoreWithOrgApacheLuceneSearchSimilaritiesBasicStats:(OrgApacheLuceneSearchSimilaritiesBasicStats *)stats
                                                      withFloat:(jfloat)tfn {

@@ -88,42 +88,56 @@
                                      withNSString:(NSString *)src
                                      withNSString:(NSString *)dest
                 withOrgApacheLuceneStoreIOContext:(OrgApacheLuceneStoreIOContext *)context {
-  jboolean success = NO;
-  {
-    JavaLangThrowable *__mainException = nil;
+  jboolean success = false;
+  @try {
     OrgApacheLuceneStoreIndexInput *is = [((OrgApacheLuceneStoreDirectory *) nil_chk(from)) openInputWithNSString:src withOrgApacheLuceneStoreIOContext:context];
-    OrgApacheLuceneStoreIndexOutput *os = [self createOutputWithNSString:dest withOrgApacheLuceneStoreIOContext:context];
+    JavaLangThrowable *__primaryException2 = nil;
     @try {
-      [((OrgApacheLuceneStoreIndexOutput *) nil_chk(os)) copyBytesWithOrgApacheLuceneStoreDataInput:is withLong:[((OrgApacheLuceneStoreIndexInput *) nil_chk(is)) length]];
-      success = YES;
+      OrgApacheLuceneStoreIndexOutput *os = [self createOutputWithNSString:dest withOrgApacheLuceneStoreIOContext:context];
+      JavaLangThrowable *__primaryException1 = nil;
+      @try {
+        [((OrgApacheLuceneStoreIndexOutput *) nil_chk(os)) copyBytesWithOrgApacheLuceneStoreDataInput:is withLong:[((OrgApacheLuceneStoreIndexInput *) nil_chk(is)) length]];
+        success = true;
+      }
+      @catch (JavaLangThrowable *e) {
+        __primaryException1 = e;
+        @throw e;
+      }
+      @finally {
+        if (os != nil) {
+          if (__primaryException1 != nil) {
+            @try {
+              [os close];
+            } @catch (JavaLangThrowable *e) {
+              [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+            }
+          } else {
+            [os close];
+          }
+        }
+      }
+    }
+    @catch (JavaLangThrowable *e) {
+      __primaryException2 = e;
+      @throw e;
     }
     @finally {
-      if (!success) {
-        OrgApacheLuceneUtilIOUtils_deleteFilesIgnoringExceptionsWithOrgApacheLuceneStoreDirectory_withNSStringArray_(self, [IOSObjectArray arrayWithObjects:(id[]){ dest } count:1 type:NSString_class_()]);
-      }
-      @try {
-        [os close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
+      if (is != nil) {
+        if (__primaryException2 != nil) {
+          @try {
+            [is close];
+          } @catch (JavaLangThrowable *e) {
+            [__primaryException2 addSuppressedWithJavaLangThrowable:e];
+          }
         } else {
-          __mainException = e;
+          [is close];
         }
       }
-      @try {
-        [is close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
-        } else {
-          __mainException = e;
-        }
-      }
-      if (__mainException) {
-        @throw __mainException;
-      }
+    }
+  }
+  @finally {
+    if (!success) {
+      OrgApacheLuceneUtilIOUtils_deleteFilesIgnoringExceptionsWithOrgApacheLuceneStoreDirectory_withNSStringArray_(self, [IOSObjectArray arrayWithObjects:(id[]){ dest } count:1 type:NSString_class_()]);
     }
   }
 }
@@ -131,10 +145,12 @@
 - (void)ensureOpen {
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneStoreDirectory_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

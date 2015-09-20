@@ -133,8 +133,8 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsIdversionIDVersionSegme
   [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(((OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum *) nil_chk(ste_))->term_)) setLengthWithInt:prefix_ + suffix_];
   [ste_->term_ growWithInt:[ste_->term_ length]];
   [suffixesReader_ readBytesWithByteArray:[ste_->term_ bytes] withInt:prefix_ withInt:suffix_];
-  ste_->termExists_ = YES;
-  return NO;
+  ste_->termExists_ = true;
+  return false;
 }
 
 - (jboolean)nextNonLeaf {
@@ -147,16 +147,16 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsIdversionIDVersionSegme
   [ste_->term_ growWithInt:[ste_->term_ length]];
   [suffixesReader_ readBytesWithByteArray:[ste_->term_ bytes] withInt:prefix_ withInt:suffix_];
   if ((code & 1) == 0) {
-    ste_->termExists_ = YES;
+    ste_->termExists_ = true;
     subCode_ = 0;
     ((OrgApacheLuceneCodecsBlockTermState *) nil_chk(state_))->termBlockOrd_++;
-    return NO;
+    return false;
   }
   else {
-    ste_->termExists_ = NO;
+    ste_->termExists_ = false;
     subCode_ = [suffixesReader_ readVLong];
     lastSubFP_ = fp_ - subCode_;
-    return YES;
+    return true;
   }
 }
 
@@ -170,7 +170,7 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsIdversionIDVersionSegme
   }
   JreAssert((numFollowFloorBlocks_ != 0), (@"org/apache/lucene/codecs/idversion/IDVersionSegmentTermsEnumFrame.java:329 condition failed: assert numFollowFloorBlocks != 0;"));
   jlong newFP = fpOrig_;
-  while (YES) {
+  while (true) {
     jlong code = [((OrgApacheLuceneStoreByteArrayDataInput *) nil_chk(floorDataReader_)) readVLong];
     newFP = fpOrig_ + (JreURShift64(code, 1));
     hasTerms_ = ((code & 1) != 0);
@@ -207,7 +207,7 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsIdversionIDVersionSegme
     }
     [((OrgApacheLuceneCodecsPostingsReaderBase *) nil_chk(((OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader *) nil_chk(ste_->fr_->parent_))->postingsReader_)) decodeTermWithLongArray:longs_ withOrgApacheLuceneStoreDataInput:bytesReader_ withOrgApacheLuceneIndexFieldInfo:ste_->fr_->fieldInfo_ withOrgApacheLuceneCodecsBlockTermState:state_ withBoolean:absolute];
     metaDataUpto_++;
-    absolute = NO;
+    absolute = false;
   }
   ((OrgApacheLuceneCodecsBlockTermState *) nil_chk(state_))->termBlockOrd_ = metaDataUpto_;
 }
@@ -223,7 +223,7 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsIdversionIDVersionSegme
   }
   JreAssert((subFP < fp_), (JreStrcat("$J$J", @"fp=", fp_, @" subFP=", subFP)));
   jlong targetSubCode = fp_ - subFP;
-  while (YES) {
+  while (true) {
     JreAssert((nextEnt_ < entCount_), (@"org/apache/lucene/codecs/idversion/IDVersionSegmentTermsEnumFrame.java:438 condition failed: assert nextEnt < entCount;"));
     nextEnt_++;
     jint code = [((OrgApacheLuceneStoreByteArrayDataInput *) nil_chk(suffixesReader_)) readVInt];
@@ -249,7 +249,7 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsIdversionIDVersionSegme
 - (OrgApacheLuceneIndexTermsEnum_SeekStatusEnum *)scanToTermLeafWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)target
                                                                                     withBoolean:(jboolean)exactOnly {
   JreAssert((nextEnt_ != -1), (@"org/apache/lucene/codecs/idversion/IDVersionSegmentTermsEnumFrame.java:472 condition failed: assert nextEnt != -1;"));
-  ((OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum *) nil_chk(ste_))->termExists_ = YES;
+  ((OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum *) nil_chk(ste_))->termExists_ = true;
   subCode_ = 0;
   if (nextEnt_ == entCount_) {
     if (exactOnly) {
@@ -258,7 +258,7 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsIdversionIDVersionSegme
     return JreLoadStatic(OrgApacheLuceneIndexTermsEnum_SeekStatusEnum, END);
   }
   JreAssert((OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnumFrame_prefixMatchesWithOrgApacheLuceneUtilBytesRef_(self, target)), (@"org/apache/lucene/codecs/idversion/IDVersionSegmentTermsEnumFrame.java:484 condition failed: assert prefixMatches(target);"));
-  while (YES) {
+  while (true) {
     {
       nextEnt_++;
       suffix_ = [((OrgApacheLuceneStoreByteArrayDataInput *) nil_chk(suffixesReader_)) readVInt];
@@ -268,17 +268,17 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsIdversionIDVersionSegme
       jint targetLimit = ((OrgApacheLuceneUtilBytesRef *) nil_chk(target))->offset_ + (target->length_ < termLen ? target->length_ : termLen);
       jint targetPos = target->offset_ + prefix_;
       jint bytePos = startBytePos_;
-      while (YES) {
+      while (true) {
         jint cmp;
         jboolean stop;
         if (targetPos < targetLimit) {
           cmp = (IOSByteArray_Get(nil_chk(suffixBytes_), bytePos++) & (jint) 0xFF) - (IOSByteArray_Get(nil_chk(target->bytes_), targetPos++) & (jint) 0xFF);
-          stop = NO;
+          stop = false;
         }
         else {
           JreAssert((targetPos == targetLimit), (@"org/apache/lucene/codecs/idversion/IDVersionSegmentTermsEnumFrame.java:518 condition failed: assert targetPos == targetLimit;"));
           cmp = termLen - target->length_;
-          stop = YES;
+          stop = true;
         }
         if (cmp < 0) {
           if (nextEnt_ == entCount_) {
@@ -330,7 +330,7 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsIdversionIDVersionSegme
     return JreLoadStatic(OrgApacheLuceneIndexTermsEnum_SeekStatusEnum, END);
   }
   JreAssert((OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnumFrame_prefixMatchesWithOrgApacheLuceneUtilBytesRef_(self, target)), (@"org/apache/lucene/codecs/idversion/IDVersionSegmentTermsEnumFrame.java:608 condition failed: assert prefixMatches(target);"));
-  while (YES) {
+  while (true) {
     {
       nextEnt_++;
       jint code = [((OrgApacheLuceneStoreByteArrayDataInput *) nil_chk(suffixesReader_)) readVInt];
@@ -350,17 +350,17 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsIdversionIDVersionSegme
       jint targetLimit = ((OrgApacheLuceneUtilBytesRef *) nil_chk(target))->offset_ + (target->length_ < termLen ? target->length_ : termLen);
       jint targetPos = target->offset_ + prefix_;
       jint bytePos = startBytePos_;
-      while (YES) {
+      while (true) {
         jint cmp;
         jboolean stop;
         if (targetPos < targetLimit) {
           cmp = (IOSByteArray_Get(nil_chk(suffixBytes_), bytePos++) & (jint) 0xFF) - (IOSByteArray_Get(nil_chk(target->bytes_), targetPos++) & (jint) 0xFF);
-          stop = NO;
+          stop = false;
         }
         else {
           JreAssert((targetPos == targetLimit), (@"org/apache/lucene/codecs/idversion/IDVersionSegmentTermsEnumFrame.java:650 condition failed: assert targetPos == targetLimit;"));
           cmp = termLen - target->length_;
-          stop = YES;
+          stop = true;
         }
         if (cmp < 0) {
           if (nextEnt_ == entCount_) {
@@ -499,10 +499,10 @@ OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnumFrame *new_OrgApacheLucen
 jboolean OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnumFrame_prefixMatchesWithOrgApacheLuceneUtilBytesRef_(OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnumFrame *self, OrgApacheLuceneUtilBytesRef *target) {
   for (jint bytePos = 0; bytePos < self->prefix_; bytePos++) {
     if (IOSByteArray_Get(nil_chk(((OrgApacheLuceneUtilBytesRef *) nil_chk(target))->bytes_), target->offset_ + bytePos) != [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(((OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnum *) nil_chk(self->ste_))->term_)) byteAtWithInt:bytePos]) {
-      return NO;
+      return false;
     }
   }
-  return YES;
+  return true;
 }
 
 void OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnumFrame_fillTerm(OrgApacheLuceneCodecsIdversionIDVersionSegmentTermsEnumFrame *self) {

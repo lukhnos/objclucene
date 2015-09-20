@@ -30,10 +30,12 @@ __attribute__((unused)) static jboolean OrgApacheLuceneQueryparserSurroundQueryB
   return self;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)getNrQueriesMade {
   return queriesMade_;
@@ -73,7 +75,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneQueryparserSurroundQueryB
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (!([obj isKindOfClass:[OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory class]])) return NO;
+  if (!([obj isKindOfClass:[OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory class]])) return false;
   OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *other = (OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory *) check_class_cast(obj, [OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory class]);
   return OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_atMax(self) == OrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory_atMax(nil_chk(other));
 }

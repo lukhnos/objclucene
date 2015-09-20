@@ -36,9 +36,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisFaPersianNormalizationFilter, termAtt
   if ([((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
     jint newlen = [((OrgApacheLuceneAnalysisFaPersianNormalizer *) nil_chk(normalizer_)) normalizeWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer] withInt:[termAtt_ length]];
     [termAtt_ setLengthWithInt:newlen];
-    return YES;
+    return true;
   }
-  return NO;
+  return false;
 }
 
 - (void)dealloc {

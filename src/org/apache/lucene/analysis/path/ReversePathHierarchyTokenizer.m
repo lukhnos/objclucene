@@ -54,10 +54,12 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisPathReversePathHierarchyTokeni
 
 @implementation OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithInt:(jint)skip {
   OrgApacheLuceneAnalysisPathReversePathHierarchyTokenizer_initWithInt_(self, skip);
@@ -126,7 +128,7 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisPathReversePathHierarchyTokeni
   if (delimitersCount_ == -1) {
     jint length = 0;
     [((id<JavaUtilList>) nil_chk(delimiterPositions_)) addWithId:JavaLangInteger_valueOfWithInt_(0)];
-    while (YES) {
+    while (true) {
       jint c = [((JavaIoReader *) nil_chk(input_)) read];
       if (c < 0) {
         break;
@@ -165,9 +167,9 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisPathReversePathHierarchyTokeni
     [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) copyBufferWithCharArray:resultTokenBuffer_ withInt:start withInt:endPosition_ - start];
     [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAtt_)) setOffsetWithInt:[self correctOffsetWithInt:start] withInt:[self correctOffsetWithInt:endPosition_]];
     skipped_++;
-    return YES;
+    return true;
   }
-  return NO;
+  return false;
 }
 
 - (void)end {

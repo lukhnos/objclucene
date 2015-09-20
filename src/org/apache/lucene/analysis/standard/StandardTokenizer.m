@@ -67,10 +67,12 @@ IOSObjectArray *OrgApacheLuceneAnalysisStandardStandardTokenizer_TOKEN_TYPES_;
   return maxTokenLength_;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisStandardStandardTokenizer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory {
   OrgApacheLuceneAnalysisStandardStandardTokenizer_initWithOrgApacheLuceneUtilAttributeFactory_(self, factory);
@@ -84,10 +86,10 @@ IOSObjectArray *OrgApacheLuceneAnalysisStandardStandardTokenizer_TOKEN_TYPES_;
 - (jboolean)incrementToken {
   [self clearAttributes];
   skippedPositions_ = 0;
-  while (YES) {
+  while (true) {
     jint tokenType = [((OrgApacheLuceneAnalysisStandardStandardTokenizerImpl *) nil_chk(scanner_)) getNextToken];
     if (tokenType == OrgApacheLuceneAnalysisStandardStandardTokenizerImpl_YYEOF) {
-      return NO;
+      return false;
     }
     if ([scanner_ yylength] <= maxTokenLength_) {
       [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posIncrAtt_)) setPositionIncrementWithInt:skippedPositions_ + 1];
@@ -95,7 +97,7 @@ IOSObjectArray *OrgApacheLuceneAnalysisStandardStandardTokenizer_TOKEN_TYPES_;
       jint start = [scanner_ yychar];
       [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAtt_)) setOffsetWithInt:[self correctOffsetWithInt:start] withInt:[self correctOffsetWithInt:start + [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) length]]];
       [((id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>) nil_chk(typeAtt_)) setTypeWithNSString:IOSObjectArray_Get(nil_chk(OrgApacheLuceneAnalysisStandardStandardTokenizer_TOKEN_TYPES_), tokenType)];
-      return YES;
+      return true;
     }
     else skippedPositions_++;
   }

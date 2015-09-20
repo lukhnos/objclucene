@@ -171,10 +171,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonAutomaton_$2)
 
 @implementation OrgApacheLuceneUtilAutomatonAutomaton
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilAutomatonAutomaton_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithInt:(jint)numStates
                     withInt:(jint)numTransitions {
@@ -270,7 +272,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonAutomaton_$2)
     [self addTransitionWithInt:source withInt:t->dest_ withInt:t->min_ withInt:t->max_];
   }
   if ([self isAcceptWithInt:dest]) {
-    [self setAcceptWithInt:source withBoolean:YES];
+    [self setAcceptWithInt:source withBoolean:true];
   }
 }
 
@@ -288,7 +290,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonAutomaton_$2)
   JavaUtilBitSet *otherAcceptStates = [other getAcceptStates];
   jint state = 0;
   while (state < otherNumStates && (state = [((JavaUtilBitSet *) nil_chk(otherAcceptStates)) nextSetBitWithInt:state]) != -1) {
-    [self setAcceptWithInt:stateOffset + state withBoolean:YES];
+    [self setAcceptWithInt:stateOffset + state withBoolean:true];
     state++;
   }
   JreStrongAssign(&transitions_, OrgApacheLuceneUtilArrayUtil_growWithIntArray_withInt_(transitions_, nextTransition_ + other->nextTransition_));
@@ -297,8 +299,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonAutomaton_$2)
     *IOSIntArray_GetRef(nil_chk(transitions_), nextTransition_ + i) += stateOffset;
   }
   nextTransition_ += other->nextTransition_;
-  if (other->deterministic_ == NO) {
-    deterministic_ = NO;
+  if (other->deterministic_ == false) {
+    deterministic_ = false;
   }
 }
 
@@ -542,7 +544,7 @@ OrgApacheLuceneUtilAutomatonAutomaton *new_OrgApacheLuceneUtilAutomatonAutomaton
 void OrgApacheLuceneUtilAutomatonAutomaton_initWithInt_withInt_(OrgApacheLuceneUtilAutomatonAutomaton *self, jint numStates, jint numTransitions) {
   NSObject_init(self);
   self->curState_ = -1;
-  self->deterministic_ = YES;
+  self->deterministic_ = true;
   JreStrongAssignAndConsume(&self->destMinMaxSorter_, new_OrgApacheLuceneUtilAutomatonAutomaton_$1_initWithOrgApacheLuceneUtilAutomatonAutomaton_(self));
   JreStrongAssignAndConsume(&self->minMaxDestSorter_, new_OrgApacheLuceneUtilAutomatonAutomaton_$2_initWithOrgApacheLuceneUtilAutomatonAutomaton_(self));
   JreStrongAssignAndConsume(&self->states_, [IOSIntArray newArrayWithLength:numStates * 2]);
@@ -613,7 +615,7 @@ void OrgApacheLuceneUtilAutomatonAutomaton_finishCurrentState(OrgApacheLuceneUti
     for (jint i = 1; i < upto; i++) {
       min = IOSIntArray_Get(self->transitions_, offset + 3 * i + 1);
       if (min <= lastMax) {
-        self->deterministic_ = NO;
+        self->deterministic_ = false;
         break;
       }
       lastMax = IOSIntArray_Get(self->transitions_, offset + 3 * i + 2);
@@ -636,30 +638,30 @@ void OrgApacheLuceneUtilAutomatonAutomaton_growTransitions(OrgApacheLuceneUtilAu
 jboolean OrgApacheLuceneUtilAutomatonAutomaton_transitionSortedWithOrgApacheLuceneUtilAutomatonTransition_(OrgApacheLuceneUtilAutomatonAutomaton *self, OrgApacheLuceneUtilAutomatonTransition *t) {
   jint upto = ((OrgApacheLuceneUtilAutomatonTransition *) nil_chk(t))->transitionUpto_;
   if (upto == IOSIntArray_Get(nil_chk(self->states_), 2 * t->source_)) {
-    return YES;
+    return true;
   }
   jint nextDest = IOSIntArray_Get(nil_chk(self->transitions_), upto);
   jint nextMin = IOSIntArray_Get(self->transitions_, upto + 1);
   jint nextMax = IOSIntArray_Get(self->transitions_, upto + 2);
   if (nextMin > t->min_) {
-    return YES;
+    return true;
   }
   else if (nextMin < t->min_) {
-    return NO;
+    return false;
   }
   if (nextMax > t->max_) {
-    return YES;
+    return true;
   }
   else if (nextMax < t->max_) {
-    return NO;
+    return false;
   }
   if (nextDest > t->dest_) {
-    return YES;
+    return true;
   }
   else if (nextDest < t->dest_) {
-    return NO;
+    return false;
   }
-  return NO;
+  return false;
 }
 
 void OrgApacheLuceneUtilAutomatonAutomaton_appendCharStringWithInt_withJavaLangStringBuilder_(jint c, JavaLangStringBuilder *b) {
@@ -683,10 +685,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonAutomaton)
 
 @implementation OrgApacheLuceneUtilAutomatonAutomaton_Builder
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilAutomatonAutomaton_Builder_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithInt:(jint)numStates
                     withInt:(jint)numTransitions {
@@ -721,7 +725,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonAutomaton)
     }
   }
   if ([self isAcceptWithInt:dest]) {
-    [self setAcceptWithInt:source withBoolean:YES];
+    [self setAcceptWithInt:source withBoolean:true];
   }
 }
 

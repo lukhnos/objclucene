@@ -216,7 +216,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilNotDocIdSet_$1)
   if (doc_ > nextSkippedDoc_) {
     nextSkippedDoc_ = [((OrgApacheLuceneSearchDocIdSetIterator *) nil_chk(val$inIterator_)) advanceWithInt:doc_];
   }
-  while (YES) {
+  while (true) {
     if (doc_ >= this$0_->maxDoc_) {
       return doc_ = OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS;
     }

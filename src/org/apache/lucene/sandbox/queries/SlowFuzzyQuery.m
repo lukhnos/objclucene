@@ -103,17 +103,17 @@
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return YES;
-  if (![super isEqual:obj]) return NO;
-  if ([self getClass] != [nil_chk(obj) getClass]) return NO;
+  if (self == obj) return true;
+  if (![super isEqual:obj]) return false;
+  if ([self getClass] != [nil_chk(obj) getClass]) return false;
   OrgApacheLuceneSandboxQueriesSlowFuzzyQuery *other = (OrgApacheLuceneSandboxQueriesSlowFuzzyQuery *) check_class_cast(obj, [OrgApacheLuceneSandboxQueriesSlowFuzzyQuery class]);
-  if (JavaLangFloat_floatToIntBitsWithFloat_(minimumSimilarity_) != JavaLangFloat_floatToIntBitsWithFloat_(other->minimumSimilarity_)) return NO;
-  if (prefixLength_ != other->prefixLength_) return NO;
+  if (JavaLangFloat_floatToIntBitsWithFloat_(minimumSimilarity_) != JavaLangFloat_floatToIntBitsWithFloat_(other->minimumSimilarity_)) return false;
+  if (prefixLength_ != other->prefixLength_) return false;
   if (term_ == nil) {
-    if (other->term_ != nil) return NO;
+    if (other->term_ != nil) return false;
   }
-  else if (![term_ isEqual:other->term_]) return NO;
-  return YES;
+  else if (![term_ isEqual:other->term_]) return false;
+  return true;
 }
 
 - (void)dealloc {
@@ -156,7 +156,7 @@
 
 void OrgApacheLuceneSandboxQueriesSlowFuzzyQuery_initWithOrgApacheLuceneIndexTerm_withFloat_withInt_withInt_(OrgApacheLuceneSandboxQueriesSlowFuzzyQuery *self, OrgApacheLuceneIndexTerm *term, jfloat minimumSimilarity, jint prefixLength, jint maxExpansions) {
   OrgApacheLuceneSearchMultiTermQuery_initWithNSString_(self, [((OrgApacheLuceneIndexTerm *) nil_chk(term)) field]);
-  self->termLongEnough_ = NO;
+  self->termLongEnough_ = false;
   JreStrongAssign(&self->term_, term);
   if (minimumSimilarity >= 1.0f && minimumSimilarity != JreFpToInt(minimumSimilarity)) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"fractional edit distances are not allowed") autorelease];
   if (minimumSimilarity < 0.0f) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"minimumSimilarity < 0") autorelease];
@@ -166,7 +166,7 @@ void OrgApacheLuceneSandboxQueriesSlowFuzzyQuery_initWithOrgApacheLuceneIndexTer
   NSString *text = [term text];
   jint len = [text codePointCount:0 endIndex:((jint) [((NSString *) nil_chk(text)) length])];
   if (len > 0 && (minimumSimilarity >= 1.0f || len > 1.0f / (1.0f - minimumSimilarity))) {
-    self->termLongEnough_ = YES;
+    self->termLongEnough_ = true;
   }
   self->minimumSimilarity_ = minimumSimilarity;
   self->prefixLength_ = prefixLength;

@@ -33,10 +33,12 @@ __attribute__((unused)) static OrgApacheLuceneAnalysisUtilClasspathResourceLoade
 
 @implementation OrgApacheLuceneAnalysisUtilClasspathResourceLoader
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisUtilClasspathResourceLoader_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithJavaLangClassLoader:(JavaLangClassLoader *)loader {
   OrgApacheLuceneAnalysisUtilClasspathResourceLoader_initWithJavaLangClassLoader_(self, loader);
@@ -63,7 +65,7 @@ __attribute__((unused)) static OrgApacheLuceneAnalysisUtilClasspathResourceLoade
 - (IOSClass *)findClassWithNSString:(NSString *)cname
                        withIOSClass:(IOSClass *)expectedType {
   @try {
-    return [((IOSClass *) nil_chk(IOSClass_forName_initialize_classLoader_(cname, YES, loader_))) asSubclass:expectedType];
+    return [((IOSClass *) nil_chk(IOSClass_forName_initialize_classLoader_(cname, true, loader_))) asSubclass:expectedType];
   }
   @catch (JavaLangException *e) {
     @throw [new_JavaLangRuntimeException_initWithNSString_withJavaLangThrowable_(JreStrcat("$$", @"Cannot load class: ", cname), e) autorelease];

@@ -53,10 +53,12 @@ IOSObjectArray *OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_TOK
   return maxTokenLength_;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithOrgApacheLuceneUtilAttributeFactory:(OrgApacheLuceneUtilAttributeFactory *)factory {
   OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_initWithOrgApacheLuceneUtilAttributeFactory_(self, factory);
@@ -66,10 +68,10 @@ IOSObjectArray *OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_TOK
 - (jboolean)incrementToken {
   [self clearAttributes];
   jint posIncr = 1;
-  while (YES) {
+  while (true) {
     jint tokenType = [((OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40 *) nil_chk(scanner_)) getNextToken];
     if (tokenType == OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizerImpl40_YYEOF) {
-      return NO;
+      return false;
     }
     if ([scanner_ yylength] <= maxTokenLength_) {
       [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posIncrAtt_)) setPositionIncrementWithInt:posIncr];
@@ -77,7 +79,7 @@ IOSObjectArray *OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_TOK
       jint start = [scanner_ yychar];
       [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAtt_)) setOffsetWithInt:[self correctOffsetWithInt:start] withInt:[self correctOffsetWithInt:start + [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) length]]];
       [((id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>) nil_chk(typeAtt_)) setTypeWithNSString:IOSObjectArray_Get(nil_chk(OrgApacheLuceneAnalysisStandardStd40UAX29URLEmailTokenizer40_TOKEN_TYPES_), tokenType)];
-      return YES;
+      return true;
     }
     else posIncr++;
   }

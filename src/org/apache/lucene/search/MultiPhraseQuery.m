@@ -189,7 +189,7 @@ __attribute__((unused)) static void OrgApacheLuceneSearchMultiPhraseQuery_UnionP
   else if ([termArrays_ size] == 1) {
     IOSObjectArray *terms = [termArrays_ getWithInt:0];
     OrgApacheLuceneSearchBooleanQuery_Builder *builder = [new_OrgApacheLuceneSearchBooleanQuery_Builder_init() autorelease];
-    [builder setDisableCoordWithBoolean:YES];
+    [builder setDisableCoordWithBoolean:true];
     for (jint i = 0; i < ((IOSObjectArray *) nil_chk(terms))->size_; i++) {
       [builder addWithOrgApacheLuceneSearchQuery:[new_OrgApacheLuceneSearchTermQuery_initWithOrgApacheLuceneIndexTerm_(IOSObjectArray_Get(terms, i)) autorelease] withOrgApacheLuceneSearchBooleanClause_OccurEnum:JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, SHOULD)];
     }
@@ -217,12 +217,12 @@ __attribute__((unused)) static void OrgApacheLuceneSearchMultiPhraseQuery_UnionP
   jint k = 0;
   id<JavaUtilIterator> i = [((JavaUtilArrayList *) nil_chk(termArrays_)) iterator];
   jint lastPos = -1;
-  jboolean first = YES;
+  jboolean first = true;
   while ([((id<JavaUtilIterator>) nil_chk(i)) hasNext]) {
     IOSObjectArray *terms = [i next];
     jint position = [((JavaLangInteger *) nil_chk([((JavaUtilArrayList *) nil_chk(positions_)) getWithInt:k])) intValue];
     if (first) {
-      first = NO;
+      first = false;
     }
     else {
       [buffer appendWithNSString:@" "];
@@ -254,7 +254,7 @@ __attribute__((unused)) static void OrgApacheLuceneSearchMultiPhraseQuery_UnionP
 }
 
 - (jboolean)isEqual:(id)o {
-  if (!([o isKindOfClass:[OrgApacheLuceneSearchMultiPhraseQuery class]])) return NO;
+  if (!([o isKindOfClass:[OrgApacheLuceneSearchMultiPhraseQuery class]])) return false;
   OrgApacheLuceneSearchMultiPhraseQuery *other = (OrgApacheLuceneSearchMultiPhraseQuery *) check_class_cast(o, [OrgApacheLuceneSearchMultiPhraseQuery class]);
   return [super isEqual:o] && self->slop_ == ((OrgApacheLuceneSearchMultiPhraseQuery *) nil_chk(other))->slop_ && OrgApacheLuceneSearchMultiPhraseQuery_termArraysEqualsWithJavaUtilList_withJavaUtilList_(self, self->termArrays_, other->termArrays_) && [((JavaUtilArrayList *) nil_chk(self->positions_)) isEqual:other->positions_];
 }
@@ -272,10 +272,12 @@ __attribute__((unused)) static void OrgApacheLuceneSearchMultiPhraseQuery_UnionP
   return OrgApacheLuceneSearchMultiPhraseQuery_termArraysEqualsWithJavaUtilList_withJavaUtilList_(self, termArrays1, termArrays2);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchMultiPhraseQuery_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(field_);
@@ -325,7 +327,7 @@ jint OrgApacheLuceneSearchMultiPhraseQuery_termArraysHashCode(OrgApacheLuceneSea
 
 jboolean OrgApacheLuceneSearchMultiPhraseQuery_termArraysEqualsWithJavaUtilList_withJavaUtilList_(OrgApacheLuceneSearchMultiPhraseQuery *self, id<JavaUtilList> termArrays1, id<JavaUtilList> termArrays2) {
   if ([((id<JavaUtilList>) nil_chk(termArrays1)) size] != [((id<JavaUtilList>) nil_chk(termArrays2)) size]) {
-    return NO;
+    return false;
   }
   id<JavaUtilListIterator> iterator1 = [termArrays1 listIterator];
   id<JavaUtilListIterator> iterator2 = [termArrays2 listIterator];
@@ -333,10 +335,10 @@ jboolean OrgApacheLuceneSearchMultiPhraseQuery_termArraysEqualsWithJavaUtilList_
     IOSObjectArray *termArray1 = [iterator1 next];
     IOSObjectArray *termArray2 = [((id<JavaUtilListIterator>) nil_chk(iterator2)) next];
     if (!(termArray1 == nil ? termArray2 == nil : JavaUtilArrays_equalsWithNSObjectArray_withNSObjectArray_(termArray1, termArray2))) {
-      return NO;
+      return false;
     }
   }
-  return YES;
+  return true;
 }
 
 void OrgApacheLuceneSearchMultiPhraseQuery_init(OrgApacheLuceneSearchMultiPhraseQuery *self) {
@@ -394,7 +396,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchMultiPhraseQuery)
   if (fieldTerms == nil) {
     return nil;
   }
-  if ([((OrgApacheLuceneIndexTerms *) nil_chk(fieldTerms)) hasPositions] == NO) {
+  if ([((OrgApacheLuceneIndexTerms *) nil_chk(fieldTerms)) hasPositions] == false) {
     @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$@C", @"field \"", this$0_->field_, @"\" was indexed without position data; cannot run MultiPhraseQuery (phrase=", [self getQuery], ')')) autorelease];
   }
   OrgApacheLuceneIndexTermsEnum *termsEnum = [fieldTerms iterator];
@@ -714,10 +716,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchMultiPhraseQuery_UnionPost
   OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_PositionsQueue_growArray(self);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchMultiPhraseQuery_UnionPostingsEnum_PositionsQueue_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(array_);

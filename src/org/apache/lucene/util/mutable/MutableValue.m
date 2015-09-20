@@ -70,10 +70,12 @@
   return [self exists] ? [nil_chk([self toObject]) description] : @"(null)";
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilMutableMutableValue_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -100,7 +102,7 @@
 
 void OrgApacheLuceneUtilMutableMutableValue_init(OrgApacheLuceneUtilMutableMutableValue *self) {
   NSObject_init(self);
-  self->exists_ = YES;
+  self->exists_ = true;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilMutableMutableValue)

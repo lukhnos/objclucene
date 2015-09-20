@@ -165,12 +165,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexMultiTermsEnum)
 - (jboolean)seekExactWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term {
   [((OrgApacheLuceneIndexMultiTermsEnum_TermMergeQueue *) nil_chk(queue_)) clear];
   numTop_ = 0;
-  jboolean seekOpt = NO;
+  jboolean seekOpt = false;
   if (lastSeek_ != nil && [lastSeek_ compareToWithId:term] <= 0) {
-    seekOpt = YES;
+    seekOpt = true;
   }
   JreStrongAssign(&lastSeek_, nil);
-  lastSeekExact_ = YES;
+  lastSeekExact_ = true;
   for (jint i = 0; i < numSubs_; i++) {
     jboolean status;
     if (seekOpt) {
@@ -178,17 +178,17 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexMultiTermsEnum)
       if (curTerm != nil) {
         jint cmp = [((OrgApacheLuceneUtilBytesRef *) nil_chk(term)) compareToWithId:curTerm];
         if (cmp == 0) {
-          status = YES;
+          status = true;
         }
         else if (cmp < 0) {
-          status = NO;
+          status = false;
         }
         else {
           status = [((OrgApacheLuceneIndexTermsEnum *) nil_chk(((OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice *) nil_chk(IOSObjectArray_Get(currentSubs_, i)))->terms_)) seekExactWithOrgApacheLuceneUtilBytesRef:term];
         }
       }
       else {
-        status = NO;
+        status = false;
       }
     }
     else {
@@ -206,10 +206,10 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexMultiTermsEnum)
 - (OrgApacheLuceneIndexTermsEnum_SeekStatusEnum *)seekCeilWithOrgApacheLuceneUtilBytesRef:(OrgApacheLuceneUtilBytesRef *)term {
   [((OrgApacheLuceneIndexMultiTermsEnum_TermMergeQueue *) nil_chk(queue_)) clear];
   numTop_ = 0;
-  lastSeekExact_ = NO;
-  jboolean seekOpt = NO;
+  lastSeekExact_ = false;
+  jboolean seekOpt = false;
   if (lastSeek_ != nil && [lastSeek_ compareToWithId:term] <= 0) {
-    seekOpt = YES;
+    seekOpt = true;
   }
   [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(lastSeekScratch_)) copyBytesWithOrgApacheLuceneUtilBytesRef:term];
   JreStrongAssign(&lastSeek_, [lastSeekScratch_ get]);
@@ -285,7 +285,7 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexMultiTermsEnum)
   if (lastSeekExact_) {
     OrgApacheLuceneIndexTermsEnum_SeekStatusEnum *status = [self seekCeilWithOrgApacheLuceneUtilBytesRef:current_];
     JreAssert((status == JreLoadStatic(OrgApacheLuceneIndexTermsEnum_SeekStatusEnum, FOUND)), (@"org/apache/lucene/index/MultiTermsEnum.java:295 condition failed: assert status == SeekStatus.FOUND;"));
-    lastSeekExact_ = NO;
+    lastSeekExact_ = false;
   }
   JreStrongAssign(&lastSeek_, nil);
   OrgApacheLuceneIndexMultiTermsEnum_pushTop(self);
@@ -647,10 +647,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMultiTermsEnum_TermMergeQue
   return ((OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice *) nil_chk(o1))->index_ - ((OrgApacheLuceneIndexMultiTermsEnum_TermsEnumWithSlice *) nil_chk(o2))->index_;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexMultiTermsEnum_$1_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

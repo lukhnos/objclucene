@@ -35,10 +35,12 @@ NSString *OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_META_EXTENSION_ = @"n
 
 @implementation OrgApacheLuceneRangetreeRangeTreeDocValuesFormat
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneRangetreeRangeTreeDocValuesFormat_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithInt:(jint)maxPointsInLeafNode
                     withInt:(jint)maxPointsSortInHeap {

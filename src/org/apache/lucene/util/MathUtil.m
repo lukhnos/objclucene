@@ -22,10 +22,12 @@ __attribute__((unused)) static OrgApacheLuceneUtilMathUtil *new_OrgApacheLuceneU
 
 @implementation OrgApacheLuceneUtilMathUtil
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilMathUtil_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (jint)logWithLong:(jlong)x
             withInt:(jint)base {
@@ -110,7 +112,7 @@ jlong OrgApacheLuceneUtilMathUtil_gcdWithLong_withLong_(jlong a, jlong b) {
   }
   jint commonTrailingZeros = JavaLangLong_numberOfTrailingZerosWithLong_(a | b);
   JreURShiftAssignLong(&a, JavaLangLong_numberOfTrailingZerosWithLong_(a));
-  while (YES) {
+  while (true) {
     JreURShiftAssignLong(&b, JavaLangLong_numberOfTrailingZerosWithLong_(b));
     if (a == b) {
       break;

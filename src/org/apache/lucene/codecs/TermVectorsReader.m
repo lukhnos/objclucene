@@ -13,10 +13,12 @@
 
 @implementation OrgApacheLuceneCodecsTermVectorsReader
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsTermVectorsReader_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneIndexFields *)getWithInt:(jint)doc {
   // can't call an abstract method

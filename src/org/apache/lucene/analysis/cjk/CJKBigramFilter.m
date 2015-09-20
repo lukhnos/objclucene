@@ -116,7 +116,7 @@ NSString *OrgApacheLuceneAnalysisCjkCJKBigramFilter_SINGLE_TYPE_ = @"<SINGLE>";
 }
 
 - (jboolean)incrementToken {
-  while (YES) {
+  while (true) {
     if (OrgApacheLuceneAnalysisCjkCJKBigramFilter_hasBufferedBigram(self)) {
       if (outputUnigrams_) {
         if (ngramState_) {
@@ -131,7 +131,7 @@ NSString *OrgApacheLuceneAnalysisCjkCJKBigramFilter_SINGLE_TYPE_ = @"<SINGLE>";
       else {
         OrgApacheLuceneAnalysisCjkCJKBigramFilter_flushBigram(self);
       }
-      return YES;
+      return true;
     }
     else if (OrgApacheLuceneAnalysisCjkCJKBigramFilter_doNext(self)) {
       NSString *type = [((id<OrgApacheLuceneAnalysisTokenattributesTypeAttribute>) nil_chk(typeAtt_)) type];
@@ -140,7 +140,7 @@ NSString *OrgApacheLuceneAnalysisCjkCJKBigramFilter_SINGLE_TYPE_ = @"<SINGLE>";
           if (OrgApacheLuceneAnalysisCjkCJKBigramFilter_hasBufferedUnigram(self)) {
             JreStrongAssign(&loneState_, [self captureState]);
             OrgApacheLuceneAnalysisCjkCJKBigramFilter_flushUnigram(self);
-            return YES;
+            return true;
           }
           index_ = 0;
           bufferLen_ = 0;
@@ -151,17 +151,17 @@ NSString *OrgApacheLuceneAnalysisCjkCJKBigramFilter_SINGLE_TYPE_ = @"<SINGLE>";
         if (OrgApacheLuceneAnalysisCjkCJKBigramFilter_hasBufferedUnigram(self)) {
           JreStrongAssign(&loneState_, [self captureState]);
           OrgApacheLuceneAnalysisCjkCJKBigramFilter_flushUnigram(self);
-          return YES;
+          return true;
         }
-        return YES;
+        return true;
       }
     }
     else {
       if (OrgApacheLuceneAnalysisCjkCJKBigramFilter_hasBufferedUnigram(self)) {
         OrgApacheLuceneAnalysisCjkCJKBigramFilter_flushUnigram(self);
-        return YES;
+        return true;
       }
-      return NO;
+      return false;
     }
   }
 }
@@ -196,8 +196,8 @@ NSString *OrgApacheLuceneAnalysisCjkCJKBigramFilter_SINGLE_TYPE_ = @"<SINGLE>";
   index_ = 0;
   lastEndOffset_ = 0;
   JreStrongAssign(&loneState_, nil);
-  exhausted_ = NO;
-  ngramState_ = NO;
+  exhausted_ = false;
+  ngramState_ = false;
 }
 
 - (void)dealloc {
@@ -291,7 +291,7 @@ OrgApacheLuceneAnalysisCjkCJKBigramFilter *new_OrgApacheLuceneAnalysisCjkCJKBigr
 }
 
 void OrgApacheLuceneAnalysisCjkCJKBigramFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(OrgApacheLuceneAnalysisCjkCJKBigramFilter *self, OrgApacheLuceneAnalysisTokenStream *inArg, jint flags) {
-  OrgApacheLuceneAnalysisCjkCJKBigramFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withBoolean_(self, inArg, flags, NO);
+  OrgApacheLuceneAnalysisCjkCJKBigramFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_withBoolean_(self, inArg, flags, false);
 }
 
 OrgApacheLuceneAnalysisCjkCJKBigramFilter *new_OrgApacheLuceneAnalysisCjkCJKBigramFilter_initWithOrgApacheLuceneAnalysisTokenStream_withInt_(OrgApacheLuceneAnalysisTokenStream *inArg, jint flags) {
@@ -327,18 +327,18 @@ jboolean OrgApacheLuceneAnalysisCjkCJKBigramFilter_doNext(OrgApacheLuceneAnalysi
   if (self->loneState_ != nil) {
     [self restoreStateWithOrgApacheLuceneUtilAttributeSource_State:self->loneState_];
     JreStrongAssign(&self->loneState_, nil);
-    return YES;
+    return true;
   }
   else {
     if (self->exhausted_) {
-      return NO;
+      return false;
     }
     else if ([((OrgApacheLuceneAnalysisTokenStream *) nil_chk(self->input_)) incrementToken]) {
-      return YES;
+      return true;
     }
     else {
-      self->exhausted_ = YES;
-      return NO;
+      self->exhausted_ = true;
+      return false;
     }
   }
 }

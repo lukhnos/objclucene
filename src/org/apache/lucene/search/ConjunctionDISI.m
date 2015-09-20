@@ -113,7 +113,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchConjunctionDISI_$1)
 }
 
 - (jboolean)matches {
-  return YES;
+  return true;
 }
 
 - (OrgApacheLuceneSearchTwoPhaseIterator *)asTwoPhaseIterator {
@@ -275,12 +275,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchConjunctionDISI)
     OrgApacheLuceneSearchTwoPhaseIterator * const *e__ = b__ + a__->size_;
     while (b__ < e__) {
       OrgApacheLuceneSearchTwoPhaseIterator *twoPhaseIterator = *b__++;
-      if ([((OrgApacheLuceneSearchTwoPhaseIterator *) nil_chk(twoPhaseIterator)) matches] == NO) {
-        return NO;
+      if ([((OrgApacheLuceneSearchTwoPhaseIterator *) nil_chk(twoPhaseIterator)) matches] == false) {
+        return false;
       }
     }
   }
-  return YES;
+  return true;
 }
 
 - (void)dealloc {
@@ -372,10 +372,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchConjunctionDISI_TwoPhase)
   return JavaLangLong_compareWithLong_withLong_([((OrgApacheLuceneSearchDocIdSetIterator *) nil_chk(o1)) cost], [((OrgApacheLuceneSearchDocIdSetIterator *) nil_chk(o2)) cost]);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchConjunctionDISI_$1_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

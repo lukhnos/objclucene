@@ -29,10 +29,12 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsPushPostingsWriterBase, postingsEnum_, 
 
 @implementation OrgApacheLuceneCodecsPushPostingsWriterBase
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsPushPostingsWriterBase_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneCodecsBlockTermState *)newTermState {
   // can't call an abstract method
@@ -57,13 +59,13 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsPushPostingsWriterBase, postingsEnum_, 
   writePositions_ = ([indexOptions_ compareToWithId:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS_AND_POSITIONS)] >= 0);
   writeOffsets_ = ([indexOptions_ compareToWithId:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS)] >= 0);
   writePayloads_ = [fieldInfo hasPayloads];
-  if (writeFreqs_ == NO) {
+  if (writeFreqs_ == false) {
     enumFlags_ = 0;
   }
-  else if (writePositions_ == NO) {
+  else if (writePositions_ == false) {
     enumFlags_ = OrgApacheLuceneIndexPostingsEnum_FREQS;
   }
-  else if (writeOffsets_ == NO) {
+  else if (writeOffsets_ == false) {
     if (writePayloads_) {
       enumFlags_ = OrgApacheLuceneIndexPostingsEnum_PAYLOADS;
     }
@@ -90,7 +92,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsPushPostingsWriterBase, postingsEnum_, 
   JreAssert((postingsEnum_ != nil), (@"org/apache/lucene/codecs/PushPostingsWriterBase.java:123 condition failed: assert postingsEnum != null;"));
   jint docFreq = 0;
   jlong totalTermFreq = 0;
-  while (YES) {
+  while (true) {
     jint docID = [((OrgApacheLuceneIndexPostingsEnum *) nil_chk(postingsEnum_)) nextDoc];
     if (docID == OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS) {
       break;

@@ -36,10 +36,12 @@ __attribute__((unused)) static jint OrgApacheLuceneUtilRollingBuffer_getIndexWit
 
 @implementation OrgApacheLuceneUtilRollingBuffer
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilRollingBuffer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (id)newInstance {
   // can't call an abstract method

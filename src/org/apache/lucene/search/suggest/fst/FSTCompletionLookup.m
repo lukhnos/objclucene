@@ -70,10 +70,12 @@ __attribute__((unused)) static jint OrgApacheLuceneSearchSuggestFstFSTCompletion
 
 @implementation OrgApacheLuceneSearchSuggestFstFSTCompletionLookup
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSuggestFstFSTCompletionLookup_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithInt:(jint)buckets
                 withBoolean:(jboolean)exactMatchFirst {
@@ -99,7 +101,7 @@ __attribute__((unused)) static jint OrgApacheLuceneSearchSuggestFstFSTCompletion
   OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter *writer = [new_OrgApacheLuceneUtilOfflineSorter_ByteSequencesWriter_initWithOrgLukhnosPortmobileFilePath_(tempInput) autorelease];
   OrgApacheLuceneUtilOfflineSorter_ByteSequencesReader *reader = nil;
   OrgApacheLuceneSearchSuggestFstExternalRefSorter *sorter = nil;
-  jboolean success = NO;
+  jboolean success = false;
   count_ = 0;
   @try {
     IOSByteArray *buffer = [IOSByteArray arrayWithLength:0];
@@ -146,8 +148,8 @@ __attribute__((unused)) static jint OrgApacheLuceneSearchSuggestFstFSTCompletion
       count_++;
     }
     JreStrongAssign(&self->higherWeightsCompletion_, [builder build]);
-    JreStrongAssignAndConsume(&self->normalCompletion_, new_OrgApacheLuceneSearchSuggestFstFSTCompletion_initWithOrgApacheLuceneUtilFstFST_withBoolean_withBoolean_([((OrgApacheLuceneSearchSuggestFstFSTCompletion *) nil_chk(higherWeightsCompletion_)) getFST], NO, exactMatchFirst_));
-    success = YES;
+    JreStrongAssignAndConsume(&self->normalCompletion_, new_OrgApacheLuceneSearchSuggestFstFSTCompletion_initWithOrgApacheLuceneUtilFstFST_withBoolean_withBoolean_([((OrgApacheLuceneSearchSuggestFstFSTCompletion *) nil_chk(higherWeightsCompletion_)) getFST], false, exactMatchFirst_));
+    success = true;
   }
   @finally {
     OrgApacheLuceneUtilIOUtils_closeWhileHandlingExceptionWithJavaIoCloseableArray_([IOSObjectArray arrayWithObjects:(id[]){ reader, writer, sorter } count:3 type:JavaIoCloseable_class_()]);
@@ -195,9 +197,9 @@ __attribute__((unused)) static jint OrgApacheLuceneSearchSuggestFstFSTCompletion
 - (jboolean)storeWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)output {
   @synchronized(self) {
     [((OrgApacheLuceneStoreDataOutput *) nil_chk(output)) writeVLongWithLong:count_];
-    if (self->normalCompletion_ == nil || [normalCompletion_ getFST] == nil) return NO;
+    if (self->normalCompletion_ == nil || [normalCompletion_ getFST] == nil) return false;
     [((OrgApacheLuceneUtilFstFST *) nil_chk([((OrgApacheLuceneSearchSuggestFstFSTCompletion *) nil_chk(normalCompletion_)) getFST])) saveWithOrgApacheLuceneStoreDataOutput:output];
-    return YES;
+    return true;
   }
 }
 
@@ -205,8 +207,8 @@ __attribute__((unused)) static jint OrgApacheLuceneSearchSuggestFstFSTCompletion
   @synchronized(self) {
     count_ = [((OrgApacheLuceneStoreDataInput *) nil_chk(input)) readVLong];
     JreStrongAssignAndConsume(&self->higherWeightsCompletion_, new_OrgApacheLuceneSearchSuggestFstFSTCompletion_initWithOrgApacheLuceneUtilFstFST_([new_OrgApacheLuceneUtilFstFST_initWithOrgApacheLuceneStoreDataInput_withOrgApacheLuceneUtilFstOutputs_(input, OrgApacheLuceneUtilFstNoOutputs_getSingleton()) autorelease]));
-    JreStrongAssignAndConsume(&self->normalCompletion_, new_OrgApacheLuceneSearchSuggestFstFSTCompletion_initWithOrgApacheLuceneUtilFstFST_withBoolean_withBoolean_([higherWeightsCompletion_ getFST], NO, exactMatchFirst_));
-    return YES;
+    JreStrongAssignAndConsume(&self->normalCompletion_, new_OrgApacheLuceneSearchSuggestFstFSTCompletion_initWithOrgApacheLuceneUtilFstFST_withBoolean_withBoolean_([higherWeightsCompletion_ getFST], false, exactMatchFirst_));
+    return true;
   }
 }
 
@@ -273,7 +275,7 @@ __attribute__((unused)) static jint OrgApacheLuceneSearchSuggestFstFSTCompletion
 @end
 
 void OrgApacheLuceneSearchSuggestFstFSTCompletionLookup_init(OrgApacheLuceneSearchSuggestFstFSTCompletionLookup *self) {
-  OrgApacheLuceneSearchSuggestFstFSTCompletionLookup_initWithInt_withBoolean_(self, OrgApacheLuceneSearchSuggestFstFSTCompletion_DEFAULT_BUCKETS, YES);
+  OrgApacheLuceneSearchSuggestFstFSTCompletionLookup_initWithInt_withBoolean_(self, OrgApacheLuceneSearchSuggestFstFSTCompletion_DEFAULT_BUCKETS, true);
 }
 
 OrgApacheLuceneSearchSuggestFstFSTCompletionLookup *new_OrgApacheLuceneSearchSuggestFstFSTCompletionLookup_init() {
@@ -297,8 +299,8 @@ OrgApacheLuceneSearchSuggestFstFSTCompletionLookup *new_OrgApacheLuceneSearchSug
 
 void OrgApacheLuceneSearchSuggestFstFSTCompletionLookup_initWithOrgApacheLuceneSearchSuggestFstFSTCompletion_withBoolean_(OrgApacheLuceneSearchSuggestFstFSTCompletionLookup *self, OrgApacheLuceneSearchSuggestFstFSTCompletion *completion, jboolean exactMatchFirst) {
   OrgApacheLuceneSearchSuggestFstFSTCompletionLookup_initWithInt_withBoolean_(self, OrgApacheLuceneSearchSuggestFstFSTCompletionLookup_INVALID_BUCKETS_COUNT_, exactMatchFirst);
-  JreStrongAssignAndConsume(&self->normalCompletion_, new_OrgApacheLuceneSearchSuggestFstFSTCompletion_initWithOrgApacheLuceneUtilFstFST_withBoolean_withBoolean_([((OrgApacheLuceneSearchSuggestFstFSTCompletion *) nil_chk(completion)) getFST], NO, exactMatchFirst));
-  JreStrongAssignAndConsume(&self->higherWeightsCompletion_, new_OrgApacheLuceneSearchSuggestFstFSTCompletion_initWithOrgApacheLuceneUtilFstFST_withBoolean_withBoolean_([completion getFST], YES, exactMatchFirst));
+  JreStrongAssignAndConsume(&self->normalCompletion_, new_OrgApacheLuceneSearchSuggestFstFSTCompletion_initWithOrgApacheLuceneUtilFstFST_withBoolean_withBoolean_([((OrgApacheLuceneSearchSuggestFstFSTCompletion *) nil_chk(completion)) getFST], false, exactMatchFirst));
+  JreStrongAssignAndConsume(&self->higherWeightsCompletion_, new_OrgApacheLuceneSearchSuggestFstFSTCompletion_initWithOrgApacheLuceneUtilFstFST_withBoolean_withBoolean_([completion getFST], true, exactMatchFirst));
 }
 
 OrgApacheLuceneSearchSuggestFstFSTCompletionLookup *new_OrgApacheLuceneSearchSuggestFstFSTCompletionLookup_initWithOrgApacheLuceneSearchSuggestFstFSTCompletion_withBoolean_(OrgApacheLuceneSearchSuggestFstFSTCompletion *completion, jboolean exactMatchFirst) {

@@ -42,7 +42,7 @@
 @end
 
 void OrgApacheLuceneQueryparserSurroundQueryNotQuery_initWithJavaUtilList_withNSString_(OrgApacheLuceneQueryparserSurroundQueryNotQuery *self, id<JavaUtilList> queries, NSString *opName) {
-  OrgApacheLuceneQueryparserSurroundQueryComposedQuery_initWithJavaUtilList_withBoolean_withNSString_(self, queries, YES, opName);
+  OrgApacheLuceneQueryparserSurroundQueryComposedQuery_initWithJavaUtilList_withBoolean_withNSString_(self, queries, true, opName);
 }
 
 OrgApacheLuceneQueryparserSurroundQueryNotQuery *new_OrgApacheLuceneQueryparserSurroundQueryNotQuery_initWithJavaUtilList_withNSString_(id<JavaUtilList> queries, NSString *opName) {

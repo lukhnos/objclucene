@@ -138,16 +138,16 @@ withOrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_SideEnum:(OrgApacheLu
 - (jboolean)incrementToken {
   [self clearAttributes];
   if (!started_) {
-    started_ = YES;
+    started_ = true;
     gramSize_ = minGram_;
     jint limit = side_ == JreLoadStatic(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_SideEnum, FRONT) ? maxGram_ : 1024;
     IOSCharArray *chars = [IOSCharArray arrayWithLength:JavaLangMath_minWithInt_withInt_(1024, limit)];
     charsRead_ = 0;
-    jboolean exhausted = NO;
+    jboolean exhausted = false;
     while (charsRead_ < limit) {
       jint inc = [((JavaIoReader *) nil_chk(input_)) readWithCharArray:chars withInt:charsRead_ withInt:chars->size_ - charsRead_];
       if (inc == -1) {
-        exhausted = YES;
+        exhausted = true;
         break;
       }
       charsRead_ += inc;
@@ -159,7 +159,7 @@ withOrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_SideEnum:(OrgApacheLu
     JreStrongAssign(&inStr_, [inStr_ trim]);
     if (!exhausted) {
       IOSCharArray *throwaway = [IOSCharArray arrayWithLength:1024];
-      while (YES) {
+      while (true) {
         jint inc = [((JavaIoReader *) nil_chk(input_)) readWithCharArray:throwaway withInt:0 withInt:throwaway->size_];
         if (inc == -1) {
           break;
@@ -169,7 +169,7 @@ withOrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_SideEnum:(OrgApacheLu
     }
     inLen_ = ((jint) [((NSString *) nil_chk(inStr_)) length]);
     if (inLen_ == 0) {
-      return NO;
+      return false;
     }
     [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posIncrAtt_)) setPositionIncrementWithInt:1];
   }
@@ -177,17 +177,17 @@ withOrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_SideEnum:(OrgApacheLu
     [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posIncrAtt_)) setPositionIncrementWithInt:0];
   }
   if (gramSize_ > inLen_) {
-    return NO;
+    return false;
   }
   if (gramSize_ > maxGram_ || gramSize_ > inLen_) {
-    return NO;
+    return false;
   }
   jint start = side_ == JreLoadStatic(OrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_SideEnum, FRONT) ? 0 : inLen_ - gramSize_;
   jint end = start + gramSize_;
   [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk([((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) setEmpty])) appendWithJavaLangCharSequence:inStr_ withInt:start withInt:end];
   [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAtt_)) setOffsetWithInt:[self correctOffsetWithInt:start] withInt:[self correctOffsetWithInt:end]];
   gramSize_++;
-  return YES;
+  return true;
 }
 
 - (void)end {
@@ -198,7 +198,7 @@ withOrgApacheLuceneAnalysisNgramLucene43EdgeNGramTokenizer_SideEnum:(OrgApacheLu
 
 - (void)reset {
   [super reset];
-  started_ = NO;
+  started_ = false;
 }
 
 - (void)dealloc {

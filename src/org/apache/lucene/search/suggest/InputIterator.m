@@ -73,7 +73,7 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestInputIterator)
 }
 
 - (jboolean)hasPayloads {
-  return NO;
+  return false;
 }
 
 - (id<JavaUtilSet>)contexts {
@@ -81,7 +81,7 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestInputIterator)
 }
 
 - (jboolean)hasContexts {
-  return NO;
+  return false;
 }
 
 - (void)dealloc {

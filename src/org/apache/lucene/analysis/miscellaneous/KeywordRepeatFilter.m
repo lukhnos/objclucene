@@ -37,16 +37,16 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisMiscellaneousKeywordRepeatFilter, sta
   if (state_ != nil) {
     [self restoreStateWithOrgApacheLuceneUtilAttributeSource_State:state_];
     [((id<OrgApacheLuceneAnalysisTokenattributesPositionIncrementAttribute>) nil_chk(posIncAttr_)) setPositionIncrementWithInt:0];
-    [((id<OrgApacheLuceneAnalysisTokenattributesKeywordAttribute>) nil_chk(keywordAttribute_)) setKeywordWithBoolean:NO];
+    [((id<OrgApacheLuceneAnalysisTokenattributesKeywordAttribute>) nil_chk(keywordAttribute_)) setKeywordWithBoolean:false];
     JreStrongAssign(&state_, nil);
-    return YES;
+    return true;
   }
   if ([((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
     JreStrongAssign(&state_, [self captureState]);
-    [((id<OrgApacheLuceneAnalysisTokenattributesKeywordAttribute>) nil_chk(keywordAttribute_)) setKeywordWithBoolean:YES];
-    return YES;
+    [((id<OrgApacheLuceneAnalysisTokenattributesKeywordAttribute>) nil_chk(keywordAttribute_)) setKeywordWithBoolean:true];
+    return true;
   }
-  return NO;
+  return false;
 }
 
 - (void)reset {

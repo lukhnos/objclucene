@@ -41,10 +41,12 @@ IOSCharArray *OrgApacheLuceneUtilCharsRef_EMPTY_CHARS_;
 
 @implementation OrgApacheLuceneUtilCharsRef
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilCharsRef_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithInt:(jint)capacity {
   OrgApacheLuceneUtilCharsRef_initWithInt_(self, capacity);
@@ -79,12 +81,12 @@ IOSCharArray *OrgApacheLuceneUtilCharsRef_EMPTY_CHARS_;
 
 - (jboolean)isEqual:(id)other {
   if (other == nil) {
-    return NO;
+    return false;
   }
   if ([other isKindOfClass:[OrgApacheLuceneUtilCharsRef class]]) {
     return [self charsEqualsWithOrgApacheLuceneUtilCharsRef:(OrgApacheLuceneUtilCharsRef *) check_class_cast(other, [OrgApacheLuceneUtilCharsRef class])];
   }
-  return NO;
+  return false;
 }
 
 - (jboolean)charsEqualsWithOrgApacheLuceneUtilCharsRef:(OrgApacheLuceneUtilCharsRef *)other {
@@ -94,13 +96,13 @@ IOSCharArray *OrgApacheLuceneUtilCharsRef_EMPTY_CHARS_;
     jint end = offset_ + length_;
     for (jint upto = offset_; upto < end; upto++, otherUpto++) {
       if (IOSCharArray_Get(nil_chk(chars_), upto) != IOSCharArray_Get(nil_chk(otherChars), otherUpto)) {
-        return NO;
+        return false;
       }
     }
-    return YES;
+    return true;
   }
   else {
-    return NO;
+    return false;
   }
 }
 
@@ -178,7 +180,7 @@ IOSCharArray *OrgApacheLuceneUtilCharsRef_EMPTY_CHARS_;
   if (offset_ + length_ > chars_->size_) {
     @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$I$I", @"offset+length out of bounds: offset=", offset_, @",length=", length_, @",chars.length=", chars_->size_)) autorelease];
   }
-  return YES;
+  return true;
 }
 
 - (void)dealloc {
@@ -301,10 +303,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilCharsRef)
 
 @implementation OrgApacheLuceneUtilCharsRef_UTF16SortedAsUTF8Comparator
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilCharsRef_UTF16SortedAsUTF8Comparator_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)compareWithId:(OrgApacheLuceneUtilCharsRef *)a
                withId:(OrgApacheLuceneUtilCharsRef *)b {

@@ -48,10 +48,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisUtilElisionFilter, termAtt_, id<OrgAp
     if (index >= 0 && [((OrgApacheLuceneAnalysisUtilCharArraySet *) nil_chk(articles_)) containsWithCharArray:termBuffer withInt:0 withInt:index]) {
       [termAtt_ copyBufferWithCharArray:termBuffer withInt:index + 1 withInt:termLength - (index + 1)];
     }
-    return YES;
+    return true;
   }
   else {
-    return NO;
+    return false;
   }
 }
 

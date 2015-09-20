@@ -59,7 +59,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexFreqProxTermsWriterPerField, freqProxPos
   [super startWithOrgApacheLuceneIndexIndexableField:f withBoolean:first];
   JreStrongAssign(&payloadAttribute_, ((OrgApacheLuceneIndexFieldInvertState *) nil_chk(fieldState_))->payloadAttribute_);
   JreStrongAssign(&offsetAttribute_, fieldState_->offsetAttribute_);
-  return YES;
+  return true;
 }
 
 - (void)writeProxWithInt:(jint)termID
@@ -73,7 +73,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexFreqProxTermsWriterPerField, freqProxPos
       [self writeVIntWithInt:1 withInt:(JreLShift32(proxCode, 1)) | 1];
       [self writeVIntWithInt:1 withInt:payload->length_];
       [self writeBytesWithInt:1 withByteArray:payload->bytes_ withInt:payload->offset_ withInt:payload->length_];
-      sawPayloads_ = YES;
+      sawPayloads_ = true;
     }
     else {
       [self writeVIntWithInt:1 withInt:JreLShift32(proxCode, 1)];

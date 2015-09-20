@@ -50,10 +50,12 @@ __attribute__((unused)) static void OrgApacheLuceneQueryparserFlexibleStandardPr
 
 @implementation OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)processWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryTree {
   OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_OperatorEnum *defaultOperator = [((OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *) nil_chk([self getQueryConfigHandler])) getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, DEFAULT_OPERATOR_)];
@@ -65,7 +67,7 @@ __attribute__((unused)) static void OrgApacheLuceneQueryparserFlexibleStandardPr
     queryTree = [((OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode *) nil_chk(((OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode *) check_class_cast(queryTree, [OrgApacheLuceneQueryparserFlexibleCoreNodesGroupQueryNode class])))) getChild];
   }
   JreStrongAssignAndConsume(&self->queryNodeList_, new_JavaUtilArrayList_init());
-  self->latestNodeVerified_ = NO;
+  self->latestNodeVerified_ = false;
   OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor_readTreeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_(self, queryTree);
   id<JavaUtilList> actualQueryNodeList = self->queryNodeList_;
   for (jint i = 0; i < [actualQueryNodeList size]; i++) {
@@ -74,7 +76,7 @@ __attribute__((unused)) static void OrgApacheLuceneQueryparserFlexibleStandardPr
       [actualQueryNodeList setWithInt:i withId:[self processWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:node]];
     }
   }
-  JreStrongAssign(&self->usingAnd_, JavaLangBoolean_valueOfWithBoolean_(NO));
+  JreStrongAssign(&self->usingAnd_, JavaLangBoolean_valueOfWithBoolean_(false));
   if ([queryTree isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode class]]) {
     [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(queryTree)) setWithJavaUtilList:actualQueryNodeList];
     return queryTree;
@@ -136,7 +138,7 @@ __attribute__((unused)) static void OrgApacheLuceneQueryparserFlexibleStandardPr
 
 void OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor_init(OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor *self) {
   NSObject_init(self);
-  JreStrongAssign(&self->usingAnd_, JavaLangBoolean_valueOfWithBoolean_(NO));
+  JreStrongAssign(&self->usingAnd_, JavaLangBoolean_valueOfWithBoolean_(false));
 }
 
 OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor *new_OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor_init() {
@@ -206,12 +208,12 @@ void OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor
   if ([node isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreNodesAndQueryNode class]] || [node isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreNodesOrQueryNode class]]) {
     if (!self->latestNodeVerified_ && ![((JavaUtilArrayList *) nil_chk(self->queryNodeList_)) isEmpty]) {
       [self->queryNodeList_ addWithId:OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor_applyModifierWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_withOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_(self, [self->queryNodeList_ removeWithInt:[self->queryNodeList_ size] - 1], node)];
-      self->latestNodeVerified_ = YES;
+      self->latestNodeVerified_ = true;
     }
   }
   else if (!([node isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreNodesBooleanQueryNode class]])) {
     [((JavaUtilArrayList *) nil_chk(self->queryNodeList_)) addWithId:OrgApacheLuceneQueryparserFlexibleStandardProcessorsGroupQueryNodeProcessor_applyModifierWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_withOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode_(self, node, [((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(node)) getParent])];
-    self->latestNodeVerified_ = NO;
+    self->latestNodeVerified_ = false;
   }
 }
 

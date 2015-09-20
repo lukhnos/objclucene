@@ -199,9 +199,9 @@ jboolean OrgApacheLuceneIndexSortingMergePolicy_isSortedWithOrgApacheLuceneIndex
   OrgApacheLuceneIndexSortingMergePolicy_initialize();
   NSString *description_ = OrgApacheLuceneIndexSortingMergePolicy_getSortDescriptionWithOrgApacheLuceneIndexLeafReader_(reader);
   if (description_ != nil && [description_ isEqual:[((OrgApacheLuceneSearchSort *) nil_chk(sort)) description]]) {
-    return YES;
+    return true;
   }
-  return NO;
+  return false;
 }
 
 NSString *OrgApacheLuceneIndexSortingMergePolicy_getSortDescriptionWithOrgApacheLuceneIndexLeafReader_(OrgApacheLuceneIndexLeafReader *reader) {
@@ -280,7 +280,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexSortingMergePolicy)
     }
     else {
       OrgApacheLuceneIndexCompositeReader *multiReader = [new_OrgApacheLuceneIndexMultiReader_initWithOrgApacheLuceneIndexIndexReaderArray_([wrapped toArrayWithNSObjectArray:[IOSObjectArray arrayWithLength:[wrapped size] type:OrgApacheLuceneIndexLeafReader_class_()]]) autorelease];
-      atomicView = [new_OrgApacheLuceneIndexSlowCompositeReaderWrapper_initWithOrgApacheLuceneIndexCompositeReader_withBoolean_(multiReader, YES) autorelease];
+      atomicView = [new_OrgApacheLuceneIndexSlowCompositeReaderWrapper_initWithOrgApacheLuceneIndexCompositeReader_withBoolean_(multiReader, true) autorelease];
     }
     JreStrongAssign(&docMap_, [((OrgApacheLuceneIndexSorter *) nil_chk(this$0_->sorter_)) sortWithOrgApacheLuceneIndexLeafReader:atomicView]);
     JreStrongAssign(&sortedView_, OrgApacheLuceneIndexSortingLeafReader_wrapWithOrgApacheLuceneIndexLeafReader_withOrgApacheLuceneIndexSorter_DocMap_(atomicView, docMap_));

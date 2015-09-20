@@ -185,7 +185,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSuggestDocumentContextSugg
     [termAttr_ appendWithJavaLangCharSequence:[currentPrefix_ next]];
   }
   [termAttr_ appendWithChar:separator_];
-  return YES;
+  return true;
 }
 
 - (void)reset {

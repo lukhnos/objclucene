@@ -116,18 +116,18 @@ jboolean OrgApacheLuceneSearchEarlyTerminatingSortingCollector_canEarlyTerminate
   IOSObjectArray *fields1 = [((OrgApacheLuceneSearchSort *) nil_chk(searchSort)) getSort];
   IOSObjectArray *fields2 = [((OrgApacheLuceneSearchSort *) nil_chk(mergePolicySort)) getSort];
   if (((IOSObjectArray *) nil_chk(fields1))->size_ > ((IOSObjectArray *) nil_chk(fields2))->size_) {
-    return NO;
+    return false;
   }
   return [((id<JavaUtilList>) nil_chk(JavaUtilArrays_asListWithNSObjectArray_(fields1))) isEqual:[((id<JavaUtilList>) nil_chk(JavaUtilArrays_asListWithNSObjectArray_(fields2))) subListWithInt:0 withInt:fields1->size_]];
 }
 
 void OrgApacheLuceneSearchEarlyTerminatingSortingCollector_initWithOrgApacheLuceneSearchCollector_withOrgApacheLuceneSearchSort_withInt_withOrgApacheLuceneSearchSort_(OrgApacheLuceneSearchEarlyTerminatingSortingCollector *self, id<OrgApacheLuceneSearchCollector> inArg, OrgApacheLuceneSearchSort *sort, jint numDocsToCollect, OrgApacheLuceneSearchSort *mergePolicySort) {
   OrgApacheLuceneSearchFilterCollector_initWithOrgApacheLuceneSearchCollector_(self, inArg);
-  JreStrongAssignAndConsume(&self->terminatedEarly_, new_JavaUtilConcurrentAtomicAtomicBoolean_initWithBoolean_(NO));
+  JreStrongAssignAndConsume(&self->terminatedEarly_, new_JavaUtilConcurrentAtomicAtomicBoolean_initWithBoolean_(false));
   if (numDocsToCollect <= 0) {
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"numDocsToCollect must always be > 0, got ", numDocsToCollect)) autorelease];
   }
-  if (OrgApacheLuceneSearchEarlyTerminatingSortingCollector_canEarlyTerminateWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchSort_(sort, mergePolicySort) == NO) {
+  if (OrgApacheLuceneSearchEarlyTerminatingSortingCollector_canEarlyTerminateWithOrgApacheLuceneSearchSort_withOrgApacheLuceneSearchSort_(sort, mergePolicySort) == false) {
     @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$@$@", @"Cannot early terminate with sort order ", sort, @" if segments are sorted with ", mergePolicySort)) autorelease];
   }
   JreStrongAssign(&self->sort_, sort);
@@ -148,7 +148,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchEarlyTerminatingSortingCol
 - (void)collectWithInt:(jint)doc {
   [super collectWithInt:doc];
   if (++numCollected_ >= this$0_->numDocsToCollect_) {
-    [((JavaUtilConcurrentAtomicAtomicBoolean *) nil_chk(this$0_->terminatedEarly_)) setWithBoolean:YES];
+    [((JavaUtilConcurrentAtomicAtomicBoolean *) nil_chk(this$0_->terminatedEarly_)) setWithBoolean:true];
     @throw [new_OrgApacheLuceneSearchCollectionTerminatedException_init() autorelease];
   }
 }

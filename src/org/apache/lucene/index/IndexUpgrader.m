@@ -97,8 +97,8 @@ __attribute__((unused)) static void OrgApacheLuceneIndexIndexUpgrader_printUsage
   [iwc_ setMergePolicyWithOrgApacheLuceneIndexMergePolicy:[new_OrgApacheLuceneIndexUpgradeIndexMergePolicy_initWithOrgApacheLuceneIndexMergePolicy_([((OrgApacheLuceneIndexIndexWriterConfig *) nil_chk(iwc_)) getMergePolicy]) autorelease]];
   [iwc_ setIndexDeletionPolicyWithOrgApacheLuceneIndexIndexDeletionPolicy:[new_OrgApacheLuceneIndexKeepOnlyLastCommitDeletionPolicy_init() autorelease]];
   {
-    JavaLangThrowable *__mainException = nil;
     OrgApacheLuceneIndexIndexWriter *w = [new_OrgApacheLuceneIndexIndexWriter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_(dir_, iwc_) autorelease];
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
       OrgApacheLuceneUtilInfoStream *infoStream = [iwc_ getInfoStream];
       if ([((OrgApacheLuceneUtilInfoStream *) nil_chk(infoStream)) isEnabledWithNSString:OrgApacheLuceneIndexIndexUpgrader_LOG_PREFIX_]) {
@@ -116,19 +116,21 @@ __attribute__((unused)) static void OrgApacheLuceneIndexIndexUpgrader_printUsage
         [infoStream messageWithNSString:OrgApacheLuceneIndexIndexUpgrader_LOG_PREFIX_ withNSString:@"Committed upgraded metadata to index."];
       }
     }
+    @catch (JavaLangThrowable *e) {
+      __primaryException1 = e;
+      @throw e;
+    }
     @finally {
-      @try {
-        [w close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
+      if (w != nil) {
+        if (__primaryException1 != nil) {
+          @try {
+            [w close];
+          } @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
         } else {
-          __mainException = e;
+          [w close];
         }
-      }
-      if (__mainException) {
-        @throw __mainException;
       }
     }
   }
@@ -184,14 +186,14 @@ void OrgApacheLuceneIndexIndexUpgrader_mainWithNSStringArray_(IOSObjectArray *ar
 OrgApacheLuceneIndexIndexUpgrader *OrgApacheLuceneIndexIndexUpgrader_parseArgsWithNSStringArray_(IOSObjectArray *args) {
   OrgApacheLuceneIndexIndexUpgrader_initialize();
   NSString *path = nil;
-  jboolean deletePriorCommits = NO;
+  jboolean deletePriorCommits = false;
   OrgApacheLuceneUtilInfoStream *out = nil;
   NSString *dirImpl = nil;
   jint i = 0;
   while (i < ((IOSObjectArray *) nil_chk(args))->size_) {
     NSString *arg = IOSObjectArray_Get(args, i);
     if ([@"-delete-prior-commits" isEqual:arg]) {
-      deletePriorCommits = YES;
+      deletePriorCommits = true;
     }
     else if ([@"-verbose" isEqual:arg]) {
       out = [new_OrgApacheLuceneUtilPrintStreamInfoStream_initWithJavaIoPrintStream_(JreLoadStatic(JavaLangSystem, out_)) autorelease];
@@ -227,7 +229,7 @@ OrgApacheLuceneIndexIndexUpgrader *OrgApacheLuceneIndexIndexUpgrader_parseArgsWi
 }
 
 void OrgApacheLuceneIndexIndexUpgrader_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneIndexIndexUpgrader *self, OrgApacheLuceneStoreDirectory *dir) {
-  OrgApacheLuceneIndexIndexUpgrader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_withBoolean_(self, dir, [new_OrgApacheLuceneIndexIndexWriterConfig_initWithOrgApacheLuceneAnalysisAnalyzer_(nil) autorelease], NO);
+  OrgApacheLuceneIndexIndexUpgrader_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_withBoolean_(self, dir, [new_OrgApacheLuceneIndexIndexWriterConfig_initWithOrgApacheLuceneAnalysisAnalyzer_(nil) autorelease], false);
 }
 
 OrgApacheLuceneIndexIndexUpgrader *new_OrgApacheLuceneIndexIndexUpgrader_initWithOrgApacheLuceneStoreDirectory_(OrgApacheLuceneStoreDirectory *dir) {

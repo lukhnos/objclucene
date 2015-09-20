@@ -14,16 +14,18 @@
 
 @implementation OrgApacheLuceneIndexSerialMergeScheduler
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexSerialMergeScheduler_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)mergeWithOrgApacheLuceneIndexIndexWriter:(OrgApacheLuceneIndexIndexWriter *)writer
         withOrgApacheLuceneIndexMergeTriggerEnum:(OrgApacheLuceneIndexMergeTriggerEnum *)trigger
                                      withBoolean:(jboolean)newMergesFound {
   @synchronized(self) {
-    while (YES) {
+    while (true) {
       OrgApacheLuceneIndexMergePolicy_OneMerge *merge = [((OrgApacheLuceneIndexIndexWriter *) nil_chk(writer)) getNextMerge];
       if (merge == nil) break;
       [writer mergeWithOrgApacheLuceneIndexMergePolicy_OneMerge:merge];

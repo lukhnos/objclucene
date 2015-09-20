@@ -40,10 +40,12 @@ __attribute__((unused)) static jint OrgApacheLuceneAnalysisRuRussianLightStemmer
   return OrgApacheLuceneAnalysisRuRussianLightStemmer_removeCaseWithCharArray_withInt_(self, s, len);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisRuRussianLightStemmer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

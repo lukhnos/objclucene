@@ -35,9 +35,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchHighlightOffsetLimitTokenFilter, offset
   if (offsetCount_ < offsetLimit_ && [((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
     jint offsetLength = [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAttrib_)) endOffset] - [offsetAttrib_ startOffset];
     offsetCount_ += offsetLength;
-    return YES;
+    return true;
   }
-  return NO;
+  return false;
 }
 
 - (void)reset {

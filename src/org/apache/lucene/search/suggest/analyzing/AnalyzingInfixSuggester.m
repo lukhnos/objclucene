@@ -236,7 +236,7 @@ NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_
     [writer_ close];
     JreStrongAssign(&writer_, nil);
   }
-  jboolean success = NO;
+  jboolean success = false;
   @try {
     JreStrongAssignAndConsume(&writer_, new_OrgApacheLuceneIndexIndexWriter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_(dir_, [self getIndexWriterConfigWithOrgApacheLuceneAnalysisAnalyzer:OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_getGramAnalyzer(self) withOrgApacheLuceneIndexIndexWriterConfig_OpenModeEnum:JreLoadStatic(OrgApacheLuceneIndexIndexWriterConfig_OpenModeEnum, CREATE)]));
     OrgApacheLuceneUtilBytesRef *text;
@@ -253,11 +253,11 @@ NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_
     if (commitOnBuild_) {
       [self commit];
     }
-    JreStrongAssignAndConsume(&searcherMgr_, new_OrgApacheLuceneSearchSearcherManager_initWithOrgApacheLuceneIndexIndexWriter_withBoolean_withOrgApacheLuceneSearchSearcherFactory_(writer_, YES, nil));
-    success = YES;
+    JreStrongAssignAndConsume(&searcherMgr_, new_OrgApacheLuceneSearchSearcherManager_initWithOrgApacheLuceneIndexIndexWriter_withBoolean_withOrgApacheLuceneSearchSearcherFactory_(writer_, true, nil));
+    success = true;
   }
   @finally {
-    if (success == NO && writer_ != nil) {
+    if (success == false && writer_ != nil) {
       [writer_ rollback];
       JreStrongAssign(&writer_, nil);
     }
@@ -312,7 +312,7 @@ NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_
 - (OrgApacheLuceneDocumentFieldType *)getTextFieldType {
   OrgApacheLuceneDocumentFieldType *ft = [new_OrgApacheLuceneDocumentFieldType_initWithOrgApacheLuceneDocumentFieldType_(JreLoadStatic(OrgApacheLuceneDocumentTextField, TYPE_NOT_STORED_)) autorelease];
   [ft setIndexOptionsWithOrgApacheLuceneIndexIndexOptionsEnum:JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS)];
-  [ft setOmitNormsWithBoolean:YES];
+  [ft setOmitNormsWithBoolean:true];
   return ft;
 }
 
@@ -386,8 +386,8 @@ NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_
   id<JavaUtilSet> matchedTokens;
   NSString *prefixToken = nil;
   {
-    JavaLangThrowable *__mainException = nil;
     OrgApacheLuceneAnalysisTokenStream *ts = [((OrgApacheLuceneAnalysisAnalyzer *) nil_chk(queryAnalyzer_)) tokenStreamWithNSString:@"" withJavaIoReader:[new_JavaIoStringReader_initWithNSString_([((id<JavaLangCharSequence>) nil_chk(key)) description]) autorelease]];
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
       [((OrgApacheLuceneAnalysisTokenStream *) nil_chk(ts)) reset];
       id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute> termAtt = [ts addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()];
@@ -422,10 +422,10 @@ NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_
         }
       }
       if (contextQuery != nil) {
-        jboolean allMustNot = YES;
+        jboolean allMustNot = true;
         for (OrgApacheLuceneSearchBooleanClause * __strong clause in nil_chk([contextQuery clauses])) {
           if ([((OrgApacheLuceneSearchBooleanClause *) nil_chk(clause)) getOccur] != JreLoadStatic(OrgApacheLuceneSearchBooleanClause_OccurEnum, MUST_NOT)) {
-            allMustNot = NO;
+            allMustNot = false;
             break;
           }
         }
@@ -439,24 +439,26 @@ NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_
         }
       }
     }
+    @catch (JavaLangThrowable *e) {
+      __primaryException1 = e;
+      @throw e;
+    }
     @finally {
-      @try {
-        [ts close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
+      if (ts != nil) {
+        if (__primaryException1 != nil) {
+          @try {
+            [ts close];
+          } @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
         } else {
-          __mainException = e;
+          [ts close];
         }
-      }
-      if (__mainException) {
-        @throw __mainException;
       }
     }
   }
   OrgApacheLuceneSearchQuery *finalQuery = [self finishQueryWithOrgApacheLuceneSearchBooleanQuery_Builder:query withBoolean:allTermsRequired];
-  OrgApacheLuceneSearchTopFieldCollector *c = OrgApacheLuceneSearchTopFieldCollector_createWithOrgApacheLuceneSearchSort_withInt_withBoolean_withBoolean_withBoolean_(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_SORT_, num, YES, NO, NO);
+  OrgApacheLuceneSearchTopFieldCollector *c = OrgApacheLuceneSearchTopFieldCollector_createWithOrgApacheLuceneSearchSort_withInt_withBoolean_withBoolean_withBoolean_(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_SORT_, num, true, false, false);
   OrgApacheLuceneIndexSortingMergePolicy *sortingMergePolicy = (OrgApacheLuceneIndexSortingMergePolicy *) check_class_cast([((OrgApacheLuceneIndexLiveIndexWriterConfig *) nil_chk([((OrgApacheLuceneIndexIndexWriter *) nil_chk(writer_)) getConfig])) getMergePolicy], [OrgApacheLuceneIndexSortingMergePolicy class]);
   id<OrgApacheLuceneSearchCollector> c2 = [new_OrgApacheLuceneSearchEarlyTerminatingSortingCollector_initWithOrgApacheLuceneSearchCollector_withOrgApacheLuceneSearchSort_withInt_withOrgApacheLuceneSearchSort_(c, OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_SORT_, num, [((OrgApacheLuceneIndexSortingMergePolicy *) nil_chk(sortingMergePolicy)) getSort]) autorelease];
   OrgApacheLuceneSearchIndexSearcher *searcher = [((OrgApacheLuceneSearchSearcherManager *) nil_chk(searcherMgr_)) acquire];
@@ -531,8 +533,8 @@ NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_
             withJavaUtilSet:(id<JavaUtilSet>)matchedTokens
                withNSString:(NSString *)prefixToken {
   {
-    JavaLangThrowable *__mainException = nil;
     OrgApacheLuceneAnalysisTokenStream *ts = [((OrgApacheLuceneAnalysisAnalyzer *) nil_chk(queryAnalyzer_)) tokenStreamWithNSString:@"text" withJavaIoReader:[new_JavaIoStringReader_initWithNSString_(text) autorelease]];
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
       id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute> termAtt = [((OrgApacheLuceneAnalysisTokenStream *) nil_chk(ts)) addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesCharTermAttribute_class_()];
       id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute> offsetAtt = [ts addAttributeWithIOSClass:OrgApacheLuceneAnalysisTokenattributesOffsetAttribute_class_()];
@@ -566,19 +568,21 @@ NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_
       }
       return [sb description];
     }
+    @catch (JavaLangThrowable *e) {
+      __primaryException1 = e;
+      @throw e;
+    }
     @finally {
-      @try {
-        [ts close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
+      if (ts != nil) {
+        if (__primaryException1 != nil) {
+          @try {
+            [ts close];
+          } @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
         } else {
-          __mainException = e;
+          [ts close];
         }
-      }
-      if (__mainException) {
-        @throw __mainException;
       }
     }
   }
@@ -612,11 +616,11 @@ NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_
 }
 
 - (jboolean)storeWithOrgApacheLuceneStoreDataOutput:(OrgApacheLuceneStoreDataOutput *)inArg {
-  return NO;
+  return false;
 }
 
 - (jboolean)load__WithOrgApacheLuceneStoreDataInput:(OrgApacheLuceneStoreDataInput *)outArg {
-  return NO;
+  return false;
 }
 
 - (void)close {
@@ -704,7 +708,7 @@ NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_
 
 + (void)initialize {
   if (self == [OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_SORT_, new_OrgApacheLuceneSearchSort_initWithOrgApacheLuceneSearchSortField_([new_OrgApacheLuceneSearchSortField_initWithNSString_withOrgApacheLuceneSearchSortField_TypeEnum_withBoolean_(@"weight", JreLoadStatic(OrgApacheLuceneSearchSortField_TypeEnum, LONG), YES) autorelease]));
+    JreStrongAssignAndConsume(&OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_SORT_, new_OrgApacheLuceneSearchSort_initWithOrgApacheLuceneSearchSortField_([new_OrgApacheLuceneSearchSortField_initWithNSString_withOrgApacheLuceneSearchSortField_TypeEnum_withBoolean_(@"weight", JreLoadStatic(OrgApacheLuceneSearchSortField_TypeEnum, LONG), true) autorelease]));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester)
   }
 }
@@ -788,7 +792,7 @@ NSString *OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_CONTEXTS_
 @end
 
 void OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester *self, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *analyzer) {
-  OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withBoolean_withBoolean_withBoolean_(self, [((OrgApacheLuceneAnalysisAnalyzer *) nil_chk(analyzer)) getVersion], dir, analyzer, analyzer, OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_DEFAULT_MIN_PREFIX_CHARS, NO, OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_DEFAULT_ALL_TERMS_REQUIRED, OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_DEFAULT_HIGHLIGHT);
+  OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withBoolean_withBoolean_withBoolean_(self, [((OrgApacheLuceneAnalysisAnalyzer *) nil_chk(analyzer)) getVersion], dir, analyzer, analyzer, OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_DEFAULT_MIN_PREFIX_CHARS, false, OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_DEFAULT_ALL_TERMS_REQUIRED, OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_DEFAULT_HIGHLIGHT);
 }
 
 OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester *new_OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *analyzer) {
@@ -798,7 +802,7 @@ OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester *new_OrgApacheLucen
 }
 
 void OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester *self, OrgApacheLuceneUtilVersion *matchVersion, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *analyzer) {
-  OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withBoolean_(self, matchVersion, dir, analyzer, analyzer, OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_DEFAULT_MIN_PREFIX_CHARS, NO);
+  OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_withOrgApacheLuceneAnalysisAnalyzer_withInt_withBoolean_(self, matchVersion, dir, analyzer, analyzer, OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_DEFAULT_MIN_PREFIX_CHARS, false);
 }
 
 OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester *new_OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApacheLuceneUtilVersion_withOrgApacheLuceneStoreDirectory_withOrgApacheLuceneAnalysisAnalyzer_(OrgApacheLuceneUtilVersion *matchVersion, OrgApacheLuceneStoreDirectory *dir, OrgApacheLuceneAnalysisAnalyzer *analyzer) {
@@ -852,7 +856,7 @@ void OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_initWithOrgApa
   self->highlight_ = highlight;
   if (OrgApacheLuceneIndexDirectoryReader_indexExistsWithOrgApacheLuceneStoreDirectory_(dir)) {
     JreStrongAssignAndConsume(&self->writer_, new_OrgApacheLuceneIndexIndexWriter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_(dir, [self getIndexWriterConfigWithOrgApacheLuceneAnalysisAnalyzer:OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_getGramAnalyzer(self) withOrgApacheLuceneIndexIndexWriterConfig_OpenModeEnum:JreLoadStatic(OrgApacheLuceneIndexIndexWriterConfig_OpenModeEnum, APPEND)]));
-    JreStrongAssignAndConsume(&self->searcherMgr_, new_OrgApacheLuceneSearchSearcherManager_initWithOrgApacheLuceneIndexIndexWriter_withBoolean_withOrgApacheLuceneSearchSearcherFactory_(self->writer_, YES, nil));
+    JreStrongAssignAndConsume(&self->searcherMgr_, new_OrgApacheLuceneSearchSearcherManager_initWithOrgApacheLuceneIndexIndexWriter_withBoolean_withOrgApacheLuceneSearchSearcherFactory_(self->writer_, true, nil));
   }
 }
 
@@ -874,7 +878,7 @@ void OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_ensureOpen(Org
         JreStrongAssign(&self->searcherMgr_, nil);
       }
       JreStrongAssignAndConsume(&self->writer_, new_OrgApacheLuceneIndexIndexWriter_initWithOrgApacheLuceneStoreDirectory_withOrgApacheLuceneIndexIndexWriterConfig_(self->dir_, [self getIndexWriterConfigWithOrgApacheLuceneAnalysisAnalyzer:OrgApacheLuceneSearchSuggestAnalyzingAnalyzingInfixSuggester_getGramAnalyzer(self) withOrgApacheLuceneIndexIndexWriterConfig_OpenModeEnum:JreLoadStatic(OrgApacheLuceneIndexIndexWriterConfig_OpenModeEnum, CREATE)]));
-      JreStrongAssignAndConsume(&self->searcherMgr_, new_OrgApacheLuceneSearchSearcherManager_initWithOrgApacheLuceneIndexIndexWriter_withBoolean_withOrgApacheLuceneSearchSearcherFactory_(self->writer_, YES, nil));
+      JreStrongAssignAndConsume(&self->searcherMgr_, new_OrgApacheLuceneSearchSearcherManager_initWithOrgApacheLuceneIndexIndexWriter_withBoolean_withOrgApacheLuceneSearchSearcherFactory_(self->writer_, true, nil));
     }
   }
 }

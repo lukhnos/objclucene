@@ -104,11 +104,11 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchDocValuesNumbersQuery_$1_$1)
 
 - (jboolean)isEqual:(id)obj {
   if (![super isEqual:obj]) {
-    return NO;
+    return false;
   }
   OrgApacheLuceneSearchDocValuesNumbersQuery *that = (OrgApacheLuceneSearchDocValuesNumbersQuery *) check_class_cast(obj, [OrgApacheLuceneSearchDocValuesNumbersQuery class]);
   if (![((NSString *) nil_chk(field_)) isEqual:((OrgApacheLuceneSearchDocValuesNumbersQuery *) nil_chk(that))->field_]) {
-    return NO;
+    return false;
   }
   return [((id<JavaUtilSet>) nil_chk(numbers_)) isEqual:that->numbers_];
 }
@@ -236,10 +236,10 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchDocValuesNumbersQuery_$1)
   jint count = [val$values_ count];
   for (jint i = 0; i < count; i++) {
     if ([((id<JavaUtilSet>) nil_chk(this$0_->this$0_->numbers_)) containsWithId:JavaLangLong_valueOfWithLong_([val$values_ valueAtWithInt:i])]) {
-      return YES;
+      return true;
     }
   }
-  return NO;
+  return false;
 }
 
 - (jint)length {

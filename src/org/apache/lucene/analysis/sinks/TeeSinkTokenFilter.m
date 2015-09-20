@@ -129,9 +129,9 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter)
         }
       }
     }
-    return YES;
+    return true;
   }
-  return NO;
+  return false;
 }
 
 - (void)end {
@@ -202,10 +202,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter)
 - (void)reset {
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -250,11 +252,11 @@ withOrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_SinkFilter:(OrgApacheLuceneAn
     JreStrongAssign(&it_, [((id<JavaUtilList>) nil_chk(cachedStates_)) iterator]);
   }
   if (![((id<JavaUtilIterator>) nil_chk(it_)) hasNext]) {
-    return NO;
+    return false;
   }
   OrgApacheLuceneUtilAttributeSource_State *state = [it_ next];
   [self restoreStateWithOrgApacheLuceneUtilAttributeSource_State:state];
-  return YES;
+  return true;
 }
 
 - (void)end {
@@ -330,13 +332,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_
 @implementation OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_$1
 
 - (jboolean)acceptWithOrgApacheLuceneUtilAttributeSource:(OrgApacheLuceneUtilAttributeSource *)source {
-  return YES;
+  return true;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisSinksTeeSinkTokenFilter_$1_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

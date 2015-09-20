@@ -16,10 +16,12 @@
 
 @implementation OrgApacheLuceneQueryparserFlexibleCoreProcessorsRemoveDeletedQueryNodesProcessor
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueryparserFlexibleCoreProcessorsRemoveDeletedQueryNodesProcessor_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)processWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)queryTree {
   queryTree = [super processWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:queryTree];
@@ -32,15 +34,15 @@
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)postProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)node {
   if (![((id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>) nil_chk(node)) isLeaf]) {
     id<JavaUtilList> children = [node getChildren];
-    jboolean removeBoolean = NO;
+    jboolean removeBoolean = false;
     if (children == nil || [children size] == 0) {
-      removeBoolean = YES;
+      removeBoolean = true;
     }
     else {
-      removeBoolean = YES;
+      removeBoolean = true;
       for (id<JavaUtilIterator> it = [children iterator]; [((id<JavaUtilIterator>) nil_chk(it)) hasNext]; ) {
         if (!([[it next] isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreNodesDeletedQueryNode class]])) {
-          removeBoolean = NO;
+          removeBoolean = false;
           break;
         }
       }

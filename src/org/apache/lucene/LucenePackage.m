@@ -20,10 +20,12 @@ __attribute__((unused)) static OrgApacheLuceneLucenePackage *new_OrgApacheLucene
 
 @implementation OrgApacheLuceneLucenePackage
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneLucenePackage_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (JavaLangPackage *)get {
   return OrgApacheLuceneLucenePackage_get();

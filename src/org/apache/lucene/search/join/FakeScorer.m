@@ -12,10 +12,12 @@
 
 @implementation OrgApacheLuceneSearchJoinFakeScorer
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchJoinFakeScorer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)docID {
   return doc_;

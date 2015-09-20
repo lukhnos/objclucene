@@ -116,7 +116,7 @@ __attribute__((unused)) static OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUT
   }
   id<JavaUtilList> stack = [new_JavaUtilArrayList_init() autorelease];
   jint idx = 0;
-  while (YES) {
+  while (true) {
     jint label = IOSByteArray_Get(nil_chk(input->bytes_), input->offset_ + idx) & (jint) 0xff;
     jint nextState = [runAutomaton_ stepWithInt:state withInt:label];
     if (idx == input->length_ - 1) {
@@ -131,7 +131,7 @@ __attribute__((unused)) static OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUT
       }
     }
     if (nextState == -1) {
-      while (YES) {
+      while (true) {
         jint numTransitions = [((OrgApacheLuceneUtilAutomatonAutomaton *) nil_chk(automaton_)) getNumTransitionsWithInt:state];
         if (numTransitions == 0) {
           JreAssert(([runAutomaton_ isAcceptWithInt:state]), (@"org/apache/lucene/util/automaton/CompiledAutomaton.java:394 condition failed: assert runAutomaton.isAccept(state);"));
@@ -181,18 +181,18 @@ __attribute__((unused)) static OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUT
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return YES;
-  if (obj == nil) return NO;
-  if ([self getClass] != [nil_chk(obj) getClass]) return NO;
+  if (self == obj) return true;
+  if (obj == nil) return false;
+  if ([self getClass] != [nil_chk(obj) getClass]) return false;
   OrgApacheLuceneUtilAutomatonCompiledAutomaton *other = (OrgApacheLuceneUtilAutomatonCompiledAutomaton *) check_class_cast(obj, [OrgApacheLuceneUtilAutomatonCompiledAutomaton class]);
-  if (type_ != other->type_) return NO;
+  if (type_ != other->type_) return false;
   if (type_ == JreLoadStatic(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum, SINGLE)) {
-    if (![((OrgApacheLuceneUtilBytesRef *) nil_chk(term_)) isEqual:other->term_]) return NO;
+    if (![((OrgApacheLuceneUtilBytesRef *) nil_chk(term_)) isEqual:other->term_]) return false;
   }
   else if (type_ == JreLoadStatic(OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUTOMATON_TYPEEnum, NORMAL)) {
-    if (![((OrgApacheLuceneUtilAutomatonByteRunAutomaton *) nil_chk(runAutomaton_)) isEqual:other->runAutomaton_]) return NO;
+    if (![((OrgApacheLuceneUtilAutomatonByteRunAutomaton *) nil_chk(runAutomaton_)) isEqual:other->runAutomaton_]) return false;
   }
-  return YES;
+  return true;
 }
 
 - (void)dealloc {
@@ -236,7 +236,7 @@ __attribute__((unused)) static OrgApacheLuceneUtilAutomatonCompiledAutomaton_AUT
 @end
 
 void OrgApacheLuceneUtilAutomatonCompiledAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneUtilAutomatonCompiledAutomaton *self, OrgApacheLuceneUtilAutomatonAutomaton *automaton) {
-  OrgApacheLuceneUtilAutomatonCompiledAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withJavaLangBoolean_withBoolean_(self, automaton, nil, YES);
+  OrgApacheLuceneUtilAutomatonCompiledAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withJavaLangBoolean_withBoolean_(self, automaton, nil, true);
 }
 
 OrgApacheLuceneUtilAutomatonCompiledAutomaton *new_OrgApacheLuceneUtilAutomatonCompiledAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneUtilAutomatonAutomaton *automaton) {
@@ -253,11 +253,11 @@ jint OrgApacheLuceneUtilAutomatonCompiledAutomaton_findSinkStateWithOrgApacheLuc
   for (jint s = 0; s < numStates; s++) {
     if ([automaton isAcceptWithInt:s]) {
       jint count = [automaton initTransitionWithInt:s withOrgApacheLuceneUtilAutomatonTransition:t];
-      jboolean isSinkState = NO;
+      jboolean isSinkState = false;
       for (jint i = 0; i < count; i++) {
         [automaton getNextTransitionWithOrgApacheLuceneUtilAutomatonTransition:t];
         if (t->dest_ == s && t->min_ == 0 && t->max_ == (jint) 0xff) {
-          isSinkState = YES;
+          isSinkState = true;
           break;
         }
       }
@@ -271,7 +271,7 @@ jint OrgApacheLuceneUtilAutomatonCompiledAutomaton_findSinkStateWithOrgApacheLuc
 }
 
 void OrgApacheLuceneUtilAutomatonCompiledAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withJavaLangBoolean_withBoolean_(OrgApacheLuceneUtilAutomatonCompiledAutomaton *self, OrgApacheLuceneUtilAutomatonAutomaton *automaton, JavaLangBoolean *finite, jboolean simplify) {
-  OrgApacheLuceneUtilAutomatonCompiledAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withJavaLangBoolean_withBoolean_withInt_withBoolean_(self, automaton, finite, simplify, OrgApacheLuceneUtilAutomatonOperations_DEFAULT_MAX_DETERMINIZED_STATES, NO);
+  OrgApacheLuceneUtilAutomatonCompiledAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withJavaLangBoolean_withBoolean_withInt_withBoolean_(self, automaton, finite, simplify, OrgApacheLuceneUtilAutomatonOperations_DEFAULT_MAX_DETERMINIZED_STATES, false);
 }
 
 OrgApacheLuceneUtilAutomatonCompiledAutomaton *new_OrgApacheLuceneUtilAutomatonCompiledAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withJavaLangBoolean_withBoolean_(OrgApacheLuceneUtilAutomatonAutomaton *automaton, JavaLangBoolean *finite, jboolean simplify) {
@@ -360,7 +360,7 @@ void OrgApacheLuceneUtilAutomatonCompiledAutomaton_initWithOrgApacheLuceneUtilAu
       JreStrongAssign(&self->commonSuffixRef_, suffix);
     }
   }
-  JreStrongAssignAndConsume(&self->runAutomaton_, new_OrgApacheLuceneUtilAutomatonByteRunAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withBoolean_withInt_(binary, YES, maxDeterminizedStates));
+  JreStrongAssignAndConsume(&self->runAutomaton_, new_OrgApacheLuceneUtilAutomatonByteRunAutomaton_initWithOrgApacheLuceneUtilAutomatonAutomaton_withBoolean_withInt_(binary, true, maxDeterminizedStates));
   JreStrongAssign(&self->automaton_, self->runAutomaton_->automaton_);
   self->sinkState_ = OrgApacheLuceneUtilAutomatonCompiledAutomaton_findSinkStateWithOrgApacheLuceneUtilAutomatonAutomaton_(self->automaton_);
 }
@@ -396,7 +396,7 @@ OrgApacheLuceneUtilBytesRef *OrgApacheLuceneUtilAutomatonCompiledAutomaton_addTa
   [term setByteAtWithInt:idx withByte:(jbyte) floorLabel];
   state = self->transition_->dest_;
   idx++;
-  while (YES) {
+  while (true) {
     numTransitions = [self->automaton_ getNumTransitionsWithInt:state];
     if (numTransitions == 0) {
       JreAssert(([((OrgApacheLuceneUtilAutomatonByteRunAutomaton *) nil_chk(self->runAutomaton_)) isAcceptWithInt:state]), (@"org/apache/lucene/util/automaton/CompiledAutomaton.java:303 condition failed: assert runAutomaton.isAccept(state);"));

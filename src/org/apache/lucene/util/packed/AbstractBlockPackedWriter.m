@@ -39,7 +39,7 @@ __attribute__((unused)) static void OrgApacheLuceneUtilPackedAbstractBlockPacked
   JreStrongAssign(&self->out_, outArg);
   off_ = 0;
   ord_ = 0LL;
-  finished_ = NO;
+  finished_ = false;
 }
 
 - (void)checkNotFinished {
@@ -73,7 +73,7 @@ __attribute__((unused)) static void OrgApacheLuceneUtilPackedAbstractBlockPacked
   if (off_ > 0) {
     [self flush];
   }
-  finished_ = YES;
+  finished_ = true;
 }
 
 - (jlong)ord {

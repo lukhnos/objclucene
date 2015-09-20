@@ -51,7 +51,7 @@ void OrgApacheLuceneCodecsCompressingMatchingReaders_initWithOrgApacheLuceneInde
           goto continue_nextReader;
         }
       }
-      *IOSBooleanArray_GetRef(self->matchingReaders_, i) = YES;
+      *IOSBooleanArray_GetRef(self->matchingReaders_, i) = true;
       matchedCount++;
     }
     continue_nextReader: ;

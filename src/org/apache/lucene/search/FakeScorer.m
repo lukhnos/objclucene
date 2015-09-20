@@ -13,10 +13,12 @@
 
 @implementation OrgApacheLuceneSearchFakeScorer
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchFakeScorer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)advanceWithInt:(jint)target {
   @throw [new_JavaLangUnsupportedOperationException_initWithNSString_(@"FakeScorer doesn't support advance(int)") autorelease];

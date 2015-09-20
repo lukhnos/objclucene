@@ -11,10 +11,12 @@
 
 @implementation OrgApacheLuceneSearchSimilaritiesNormalizationZ
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchSimilaritiesNormalizationZ_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithFloat:(jfloat)z {
   OrgApacheLuceneSearchSimilaritiesNormalizationZ_initWithFloat_(self, z);

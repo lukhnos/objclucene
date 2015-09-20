@@ -28,7 +28,7 @@
 #define OrgApacheLuceneSearchFuzzyQuery_defaultMaxEdits 2
 #define OrgApacheLuceneSearchFuzzyQuery_defaultPrefixLength 0
 #define OrgApacheLuceneSearchFuzzyQuery_defaultMaxExpansions 50
-#define OrgApacheLuceneSearchFuzzyQuery_defaultTranspositions YES
+#define OrgApacheLuceneSearchFuzzyQuery_defaultTranspositions true
 #define OrgApacheLuceneSearchFuzzyQuery_defaultMinSimilarity 2.0f
 
 @interface OrgApacheLuceneSearchFuzzyQuery : OrgApacheLuceneSearchMultiTermQuery

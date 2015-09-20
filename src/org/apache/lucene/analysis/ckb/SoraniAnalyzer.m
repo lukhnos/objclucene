@@ -62,10 +62,12 @@ NSString *OrgApacheLuceneAnalysisCkbSoraniAnalyzer_DEFAULT_STOPWORD_FILE_ = @"st
   return OrgApacheLuceneAnalysisCkbSoraniAnalyzer_getDefaultStopSet();
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisCkbSoraniAnalyzer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithOrgApacheLuceneAnalysisUtilCharArraySet:(OrgApacheLuceneAnalysisUtilCharArraySet *)stopwords {
   OrgApacheLuceneAnalysisCkbSoraniAnalyzer_initWithOrgApacheLuceneAnalysisUtilCharArraySet_(self, stopwords);
@@ -161,10 +163,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisCkbSoraniAnalyzer_DefaultSetHolde
 
 @implementation OrgApacheLuceneAnalysisCkbSoraniAnalyzer_DefaultSetHolder
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisCkbSoraniAnalyzer_DefaultSetHolder_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisCkbSoraniAnalyzer_DefaultSetHolder class]) {

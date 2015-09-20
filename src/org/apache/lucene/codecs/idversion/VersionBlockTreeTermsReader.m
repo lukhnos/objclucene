@@ -177,7 +177,7 @@ void OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_initWithOrgApache
   JreStrongAssign(&self->postingsReader_, postingsReader);
   NSString *termsFile = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentReadState *) nil_chk(state))->segmentInfo_))->name_, state->segmentSuffix_, OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_TERMS_EXTENSION_);
   JreStrongAssign(&self->in_, [((OrgApacheLuceneStoreDirectory *) nil_chk(state->directory_)) openInputWithNSString:termsFile withOrgApacheLuceneStoreIOContext:state->context_]);
-  jboolean success = NO;
+  jboolean success = false;
   OrgApacheLuceneStoreIndexInput *indexIn = nil;
   @try {
     jint termsVersion = OrgApacheLuceneCodecsCodecUtil_checkIndexHeaderWithOrgApacheLuceneStoreDataInput_withNSString_withInt_withInt_withByteArray_withNSString_(self->in_, OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_TERMS_CODEC_NAME_, OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_VERSION_START, OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsWriter_VERSION_CURRENT, [state->segmentInfo_ getId], state->segmentSuffix_);
@@ -231,7 +231,7 @@ void OrgApacheLuceneCodecsIdversionVersionBlockTreeTermsReader_initWithOrgApache
       }
     }
     [((OrgApacheLuceneStoreIndexInput *) nil_chk(indexIn)) close];
-    success = YES;
+    success = true;
   }
   @finally {
     if (!success) {

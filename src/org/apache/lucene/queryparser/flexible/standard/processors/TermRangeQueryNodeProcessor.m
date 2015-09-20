@@ -26,10 +26,12 @@
 
 @implementation OrgApacheLuceneQueryparserFlexibleStandardProcessorsTermRangeQueryNodeProcessor
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueryparserFlexibleStandardProcessorsTermRangeQueryNodeProcessor_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)postProcessNodeWithOrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode:(id<OrgApacheLuceneQueryparserFlexibleCoreNodesQueryNode>)node {
   if ([node isKindOfClass:[OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode class]]) {
@@ -37,7 +39,7 @@
     OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *upper = [((OrgApacheLuceneQueryparserFlexibleStandardNodesTermRangeQueryNode *) nil_chk(termRangeNode)) getUpperBound];
     OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *lower = [termRangeNode getLowerBound];
     OrgApacheLuceneDocumentDateTools_ResolutionEnum *dateRes = nil;
-    jboolean inclusive = NO;
+    jboolean inclusive = false;
     JavaUtilLocale *locale = [((OrgApacheLuceneQueryparserFlexibleCoreConfigQueryConfigHandler *) nil_chk([self getQueryConfigHandler])) getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, LOCALE_)];
     if (locale == nil) {
       locale = JavaUtilLocale_getDefault();
@@ -56,13 +58,13 @@
       dateRes = [fieldConfig getWithOrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey:JreLoadStatic(OrgApacheLuceneQueryparserFlexibleStandardConfigStandardQueryConfigHandler_ConfigurationKeys, DATE_RESOLUTION_)];
     }
     if ([termRangeNode isUpperInclusive]) {
-      inclusive = YES;
+      inclusive = true;
     }
     NSString *part1 = [((OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) nil_chk(lower)) getTextAsString];
     NSString *part2 = [((OrgApacheLuceneQueryparserFlexibleCoreNodesFieldQueryNode *) nil_chk(upper)) getTextAsString];
     @try {
       JavaTextDateFormat *df = JavaTextDateFormat_getDateInstanceWithInt_withJavaUtilLocale_(JavaTextDateFormat_SHORT, locale);
-      [((JavaTextDateFormat *) nil_chk(df)) setLenientWithBoolean:YES];
+      [((JavaTextDateFormat *) nil_chk(df)) setLenientWithBoolean:true];
       if (((jint) [((NSString *) nil_chk(part1)) length]) > 0) {
         JavaUtilDate *d1 = [df parseWithNSString:part1];
         part1 = OrgApacheLuceneDocumentDateTools_dateToStringWithJavaUtilDate_withOrgApacheLuceneDocumentDateTools_ResolutionEnum_(d1, dateRes);

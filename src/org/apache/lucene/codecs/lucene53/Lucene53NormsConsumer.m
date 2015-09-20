@@ -120,7 +120,7 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsLucene53Lucene53NormsCo
 }
 
 - (void)close {
-  jboolean success = NO;
+  jboolean success = false;
   @try {
     if (meta_ != nil) {
       [meta_ writeVIntWithInt:-1];
@@ -129,7 +129,7 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsLucene53Lucene53NormsCo
     if (data_ != nil) {
       OrgApacheLuceneCodecsCodecUtil_writeFooterWithOrgApacheLuceneStoreIndexOutput_(data_);
     }
-    success = YES;
+    success = true;
   }
   @finally {
     if (success) {
@@ -172,7 +172,7 @@ __attribute__((unused)) static void OrgApacheLuceneCodecsLucene53Lucene53NormsCo
 
 void OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer_initWithOrgApacheLuceneIndexSegmentWriteState_withNSString_withNSString_withNSString_withNSString_(OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer *self, OrgApacheLuceneIndexSegmentWriteState *state, NSString *dataCodec, NSString *dataExtension, NSString *metaCodec, NSString *metaExtension) {
   OrgApacheLuceneCodecsNormsConsumer_init(self);
-  jboolean success = NO;
+  jboolean success = false;
   @try {
     NSString *dataName = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentWriteState *) nil_chk(state))->segmentInfo_))->name_, state->segmentSuffix_, dataExtension);
     JreStrongAssign(&self->data_, [((OrgApacheLuceneStoreDirectory *) nil_chk(state->directory_)) createOutputWithNSString:dataName withOrgApacheLuceneStoreIOContext:state->context_]);
@@ -181,7 +181,7 @@ void OrgApacheLuceneCodecsLucene53Lucene53NormsConsumer_initWithOrgApacheLuceneI
     JreStrongAssign(&self->meta_, [state->directory_ createOutputWithNSString:metaName withOrgApacheLuceneStoreIOContext:state->context_]);
     OrgApacheLuceneCodecsCodecUtil_writeIndexHeaderWithOrgApacheLuceneStoreDataOutput_withNSString_withInt_withByteArray_withNSString_(self->meta_, metaCodec, OrgApacheLuceneCodecsLucene53Lucene53NormsFormat_VERSION_CURRENT, [state->segmentInfo_ getId], state->segmentSuffix_);
     self->maxDoc_ = [state->segmentInfo_ maxDoc];
-    success = YES;
+    success = true;
   }
   @finally {
     if (!success) {

@@ -61,7 +61,7 @@
   JreAssert((position_ >= prevPosition), (JreStrcat("$I$I", @"prevPosition=", prevPosition, @" > position=", position_)));
   JreAssert((position_ != OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS), (@"org/apache/lucene/search/spans/TermSpans.java:86 condition failed: assert position != NO_MORE_POSITIONS;"));
   count_++;
-  readPayload_ = NO;
+  readPayload_ = false;
   return position_;
 }
 

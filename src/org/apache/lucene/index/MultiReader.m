@@ -69,7 +69,7 @@
 @end
 
 void OrgApacheLuceneIndexMultiReader_initWithOrgApacheLuceneIndexIndexReaderArray_(OrgApacheLuceneIndexMultiReader *self, IOSObjectArray *subReaders) {
-  OrgApacheLuceneIndexMultiReader_initWithOrgApacheLuceneIndexIndexReaderArray_withBoolean_(self, subReaders, YES);
+  OrgApacheLuceneIndexMultiReader_initWithOrgApacheLuceneIndexIndexReaderArray_withBoolean_(self, subReaders, true);
 }
 
 OrgApacheLuceneIndexMultiReader *new_OrgApacheLuceneIndexMultiReader_initWithOrgApacheLuceneIndexIndexReaderArray_(IOSObjectArray *subReaders) {

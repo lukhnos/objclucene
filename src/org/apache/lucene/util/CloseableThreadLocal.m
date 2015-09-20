@@ -87,10 +87,12 @@ __attribute__((unused)) static void OrgApacheLuceneUtilCloseableThreadLocal_purg
   JreStrongAssign(&t_, nil);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilCloseableThreadLocal_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(t_);

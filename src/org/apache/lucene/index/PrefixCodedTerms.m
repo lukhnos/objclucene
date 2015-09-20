@@ -111,9 +111,9 @@ __attribute__((unused)) static void OrgApacheLuceneIndexPrefixCodedTerms_TermIte
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return YES;
-  if (obj == nil) return NO;
-  if ([self getClass] != [nil_chk(obj) getClass]) return NO;
+  if (self == obj) return true;
+  if (obj == nil) return false;
+  if ([self getClass] != [nil_chk(obj) getClass]) return false;
   OrgApacheLuceneIndexPrefixCodedTerms *other = (OrgApacheLuceneIndexPrefixCodedTerms *) check_class_cast(obj, [OrgApacheLuceneIndexPrefixCodedTerms class]);
   return [((OrgApacheLuceneStoreRAMFile *) nil_chk(buffer_)) isEqual:other->buffer_] && delGen_ == other->delGen_;
 }
@@ -162,10 +162,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexPrefixCodedTerms)
 
 @implementation OrgApacheLuceneIndexPrefixCodedTerms_Builder
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexPrefixCodedTerms_Builder_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)addWithOrgApacheLuceneIndexTerm:(OrgApacheLuceneIndexTerm *)term {
   JreAssert(([((OrgApacheLuceneIndexTerm *) nil_chk(lastTerm_)) isEqual:[new_OrgApacheLuceneIndexTerm_initWithNSString_(@"") autorelease]] || [((OrgApacheLuceneIndexTerm *) nil_chk(term)) compareToWithId:lastTerm_] > 0), (@"org/apache/lucene/index/PrefixCodedTerms.java:76 condition failed: assert lastTerm.equals(new Term(\"\")) || term.compareTo(lastTerm) > 0;"));
@@ -237,7 +239,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexPrefixCodedTerms)
 void OrgApacheLuceneIndexPrefixCodedTerms_Builder_init(OrgApacheLuceneIndexPrefixCodedTerms_Builder *self) {
   NSObject_init(self);
   JreStrongAssignAndConsume(&self->buffer_, new_OrgApacheLuceneStoreRAMFile_init());
-  JreStrongAssignAndConsume(&self->output_, new_OrgApacheLuceneStoreRAMOutputStream_initWithOrgApacheLuceneStoreRAMFile_withBoolean_(self->buffer_, NO));
+  JreStrongAssignAndConsume(&self->output_, new_OrgApacheLuceneStoreRAMOutputStream_initWithOrgApacheLuceneStoreRAMFile_withBoolean_(self->buffer_, false));
   JreStrongAssignAndConsume(&self->lastTerm_, new_OrgApacheLuceneIndexTerm_initWithNSString_(@""));
   JreStrongAssignAndConsume(&self->lastTermBytes_, new_OrgApacheLuceneUtilBytesRefBuilder_init());
 }

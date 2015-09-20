@@ -24,10 +24,12 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneQueryparserExtExtensions, extensions_, id<Jav
 
 @implementation OrgApacheLuceneQueryparserExtExtensions
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneQueryparserExtExtensions_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithChar:(jchar)extensionFieldDelimiter {
   OrgApacheLuceneQueryparserExtExtensions_initWithChar_(self, extensionFieldDelimiter);

@@ -22,10 +22,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisGlGalicianMinimalStemmer)
   return [((OrgApacheLuceneAnalysisPtRSLPStemmerBase_Step *) nil_chk(OrgApacheLuceneAnalysisGlGalicianMinimalStemmer_pluralStep_)) applyWithCharArray:s withInt:len];
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisGlGalicianMinimalStemmer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisGlGalicianMinimalStemmer class]) {

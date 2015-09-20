@@ -246,9 +246,9 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFixedBitSet)
 - (jboolean)intersectsWithOrgApacheLuceneUtilFixedBitSet:(OrgApacheLuceneUtilFixedBitSet *)other {
   jint pos = JavaLangMath_minWithInt_withInt_(numWords_, ((OrgApacheLuceneUtilFixedBitSet *) nil_chk(other))->numWords_);
   while (--pos >= 0) {
-    if ((IOSLongArray_Get(nil_chk(bits_), pos) & IOSLongArray_Get(other->bits_, pos)) != 0) return YES;
+    if ((IOSLongArray_Get(nil_chk(bits_), pos) & IOSLongArray_Get(other->bits_, pos)) != 0) return true;
   }
-  return NO;
+  return false;
 }
 
 - (void)and__WithOrgApacheLuceneUtilFixedBitSet:(OrgApacheLuceneUtilFixedBitSet *)other {
@@ -283,9 +283,9 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFixedBitSet)
 - (jboolean)scanIsEmpty {
   jint count = numWords_;
   for (jint i = 0; i < count; i++) {
-    if (IOSLongArray_Get(nil_chk(bits_), i) != 0) return NO;
+    if (IOSLongArray_Get(nil_chk(bits_), i) != 0) return false;
   }
-  return YES;
+  return true;
 }
 
 - (void)flipWithInt:(jint)startIndex
@@ -367,14 +367,14 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilFixedBitSet)
 
 - (jboolean)isEqual:(id)o {
   if (self == o) {
-    return YES;
+    return true;
   }
   if (!([o isKindOfClass:[OrgApacheLuceneUtilFixedBitSet class]])) {
-    return NO;
+    return false;
   }
   OrgApacheLuceneUtilFixedBitSet *other = (OrgApacheLuceneUtilFixedBitSet *) check_class_cast(o, [OrgApacheLuceneUtilFixedBitSet class]);
   if (numBits_ != ((OrgApacheLuceneUtilFixedBitSet *) nil_chk(other))->numBits_) {
-    return NO;
+    return false;
   }
   return JavaUtilArrays_equalsWithLongArray_withLongArray_(bits_, other->bits_);
 }
@@ -533,9 +533,9 @@ OrgApacheLuceneUtilFixedBitSet *new_OrgApacheLuceneUtilFixedBitSet_initWithLongA
 
 jboolean OrgApacheLuceneUtilFixedBitSet_verifyGhostBitsClear(OrgApacheLuceneUtilFixedBitSet *self) {
   for (jint i = self->numWords_; i < ((IOSLongArray *) nil_chk(self->bits_))->size_; i++) {
-    if (IOSLongArray_Get(self->bits_, i) != 0) return NO;
+    if (IOSLongArray_Get(self->bits_, i) != 0) return false;
   }
-  if ((self->numBits_ & (jint) 0x3f) == 0) return YES;
+  if ((self->numBits_ & (jint) 0x3f) == 0) return true;
   jlong mask = JreLShift64(-1LL, self->numBits_);
   return (IOSLongArray_Get(self->bits_, self->numWords_ - 1) & mask) == 0;
 }

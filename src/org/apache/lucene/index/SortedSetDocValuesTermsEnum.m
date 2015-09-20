@@ -59,10 +59,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSortedSetDocValuesTermsEnum, scratch_, O
   if (ord >= 0) {
     currentOrd_ = ord;
     [((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(scratch_)) copyBytesWithOrgApacheLuceneUtilBytesRef:text];
-    return YES;
+    return true;
   }
   else {
-    return NO;
+    return false;
   }
 }
 

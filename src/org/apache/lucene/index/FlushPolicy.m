@@ -82,10 +82,12 @@ __attribute__((unused)) static jboolean OrgApacheLuceneIndexFlushPolicy_assertMe
   return OrgApacheLuceneIndexFlushPolicy_assertMessageWithNSString_(self, s);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexFlushPolicy_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   RELEASE_(indexWriterConfig_);
@@ -117,7 +119,7 @@ jboolean OrgApacheLuceneIndexFlushPolicy_assertMessageWithNSString_(OrgApacheLuc
   if ([((OrgApacheLuceneUtilInfoStream *) nil_chk(self->infoStream_)) isEnabledWithNSString:@"FP"]) {
     [self->infoStream_ messageWithNSString:@"FP" withNSString:s];
   }
-  return YES;
+  return true;
 }
 
 void OrgApacheLuceneIndexFlushPolicy_init(OrgApacheLuceneIndexFlushPolicy *self) {

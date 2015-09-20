@@ -13,10 +13,12 @@
 
 @implementation OrgApacheLuceneIndexDocsEnum
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexDocsEnum_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (jint)nextPosition {
   return -1;

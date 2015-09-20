@@ -90,10 +90,10 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisDeGermanNormalizationFilter, U
       }
     }
     [termAtt_ setLengthWithInt:length];
-    return YES;
+    return true;
   }
   else {
-    return NO;
+    return false;
   }
 }
 

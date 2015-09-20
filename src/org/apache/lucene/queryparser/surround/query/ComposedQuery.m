@@ -123,10 +123,10 @@ withOrgApacheLuceneQueryparserSurroundQueryBasicQueryFactory:(OrgApacheLuceneQue
   id<JavaUtilIterator> sqi = [self getSubQueriesIterator];
   while ([((id<JavaUtilIterator>) nil_chk(sqi)) hasNext]) {
     if ([((OrgApacheLuceneQueryparserSurroundQuerySrndQuery *) nil_chk(([sqi next]))) isFieldsSubQueryAcceptable]) {
-      return YES;
+      return true;
     }
   }
-  return NO;
+  return false;
 }
 
 - (void)dealloc {

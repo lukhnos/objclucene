@@ -242,13 +242,13 @@ withOrgApacheLuceneDocumentFieldType_NumericTypeEnum:(OrgApacheLuceneDocumentFie
 }
 
 - (jboolean)isEqual:(id)o {
-  if (o == self) return YES;
-  if (![super isEqual:o]) return NO;
+  if (o == self) return true;
+  if (![super isEqual:o]) return false;
   if ([o isKindOfClass:[OrgApacheLuceneSearchNumericRangeQuery class]]) {
     OrgApacheLuceneSearchNumericRangeQuery *q = (OrgApacheLuceneSearchNumericRangeQuery *) check_class_cast(o, [OrgApacheLuceneSearchNumericRangeQuery class]);
     return ((((OrgApacheLuceneSearchNumericRangeQuery *) nil_chk(q))->min_ == nil ? min_ == nil : [((NSNumber *) q->min_) isEqual:min_]) && (q->max_ == nil ? max_ == nil : [((NSNumber *) q->max_) isEqual:max_]) && minInclusive_ == q->minInclusive_ && maxInclusive_ == q->maxInclusive_ && precisionStep_ == q->precisionStep_);
   }
-  return NO;
+  return false;
 }
 
 - (NSUInteger)hash {

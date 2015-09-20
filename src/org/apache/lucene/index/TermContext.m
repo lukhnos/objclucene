@@ -101,12 +101,12 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexTermContext, states_, IOSObjectArray *)
     OrgApacheLuceneIndexTermState * const *e__ = b__ + a__->size_;
     while (b__ < e__) {
       OrgApacheLuceneIndexTermState *termState = *b__++;
-      if (termState != nil && [termState isRealTerm] == NO) {
-        return NO;
+      if (termState != nil && [termState isRealTerm] == false) {
+        return false;
       }
     }
   }
-  return YES;
+  return true;
 }
 
 - (NSString *)description {

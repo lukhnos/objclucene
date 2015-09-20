@@ -231,10 +231,10 @@ void OrgApacheLuceneIndexMultiTerms_initWithOrgApacheLuceneIndexTermsArray_withO
   JreStrongAssign(&self->subs_, subs);
   JreStrongAssign(&self->subSlices_, subSlices);
   JreAssert((((IOSObjectArray *) nil_chk(subs))->size_ > 0), (@"inefficient: don't use MultiTerms over one sub"));
-  jboolean _hasFreqs = YES;
-  jboolean _hasOffsets = YES;
-  jboolean _hasPositions = YES;
-  jboolean _hasPayloads = NO;
+  jboolean _hasFreqs = true;
+  jboolean _hasOffsets = true;
+  jboolean _hasPositions = true;
+  jboolean _hasPayloads = false;
   for (jint i = 0; i < subs->size_; i++) {
     _hasFreqs &= [((OrgApacheLuceneIndexTerms *) nil_chk(IOSObjectArray_Get(subs, i))) hasFreqs];
     _hasOffsets &= [((OrgApacheLuceneIndexTerms *) nil_chk(IOSObjectArray_Get(subs, i))) hasOffsets];

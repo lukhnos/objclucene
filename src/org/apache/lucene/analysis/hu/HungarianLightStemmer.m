@@ -95,10 +95,12 @@ __attribute__((unused)) static jboolean OrgApacheLuceneAnalysisHuHungarianLightS
   return OrgApacheLuceneAnalysisHuHungarianLightStemmer_isVowelWithChar_(self, ch);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisHuHungarianLightStemmer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -200,9 +202,9 @@ jboolean OrgApacheLuceneAnalysisHuHungarianLightStemmer_isVowelWithChar_(OrgApac
     case 'o':
     case 'u':
     case 'y':
-    return YES;
+    return true;
     default:
-    return NO;
+    return false;
   }
 }
 

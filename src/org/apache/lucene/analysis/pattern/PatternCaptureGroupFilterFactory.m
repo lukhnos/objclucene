@@ -57,9 +57,9 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFacto
 
 void OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory *self, id<JavaUtilMap> args) {
   OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
-  self->preserveOriginal_ = YES;
+  self->preserveOriginal_ = true;
   JreStrongAssign(&self->pattern_, [self getPatternWithJavaUtilMap:args withNSString:@"pattern"]);
-  self->preserveOriginal_ = [((id<JavaUtilMap>) nil_chk(args)) containsKeyWithId:@"preserve_original"] ? JavaLangBoolean_parseBooleanWithNSString_([args getWithId:@"preserve_original"]) : YES;
+  self->preserveOriginal_ = [((id<JavaUtilMap>) nil_chk(args)) containsKeyWithId:@"preserve_original"] ? JavaLangBoolean_parseBooleanWithNSString_([args getWithId:@"preserve_original"]) : true;
 }
 
 OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory *new_OrgApacheLuceneAnalysisPatternPatternCaptureGroupFilterFactory_initWithJavaUtilMap_(id<JavaUtilMap> args) {

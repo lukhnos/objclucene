@@ -98,10 +98,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchHighlightQueryTermExtractor)
   OrgApacheLuceneSearchHighlightQueryTermExtractor_getTermsFromFilteredQueryWithOrgApacheLuceneSearchFilteredQuery_withJavaUtilHashSet_withBoolean_withNSString_(query, terms, prohibited, fieldName);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneSearchHighlightQueryTermExtractor_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneSearchHighlightQueryTermExtractor class]) {
@@ -141,12 +143,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchHighlightQueryTermExtractor)
 
 IOSObjectArray *OrgApacheLuceneSearchHighlightQueryTermExtractor_getTermsWithOrgApacheLuceneSearchQuery_(OrgApacheLuceneSearchQuery *query) {
   OrgApacheLuceneSearchHighlightQueryTermExtractor_initialize();
-  return OrgApacheLuceneSearchHighlightQueryTermExtractor_getTermsWithOrgApacheLuceneSearchQuery_withBoolean_(query, NO);
+  return OrgApacheLuceneSearchHighlightQueryTermExtractor_getTermsWithOrgApacheLuceneSearchQuery_withBoolean_(query, false);
 }
 
 IOSObjectArray *OrgApacheLuceneSearchHighlightQueryTermExtractor_getIdfWeightedTermsWithOrgApacheLuceneSearchQuery_withOrgApacheLuceneIndexIndexReader_withNSString_(OrgApacheLuceneSearchQuery *query, OrgApacheLuceneIndexIndexReader *reader, NSString *fieldName) {
   OrgApacheLuceneSearchHighlightQueryTermExtractor_initialize();
-  IOSObjectArray *terms = OrgApacheLuceneSearchHighlightQueryTermExtractor_getTermsWithOrgApacheLuceneSearchQuery_withBoolean_withNSString_(query, NO, fieldName);
+  IOSObjectArray *terms = OrgApacheLuceneSearchHighlightQueryTermExtractor_getTermsWithOrgApacheLuceneSearchQuery_withBoolean_withNSString_(query, false, fieldName);
   jint totalNumDocs = [((OrgApacheLuceneIndexIndexReader *) nil_chk(reader)) maxDoc];
   for (jint i = 0; i < ((IOSObjectArray *) nil_chk(terms))->size_; i++) {
     @try {
@@ -180,7 +182,7 @@ void OrgApacheLuceneSearchHighlightQueryTermExtractor_getTermsWithOrgApacheLucen
     else {
       JavaUtilHashSet *nonWeightedTerms = [new_JavaUtilHashSet_init() autorelease];
       @try {
-        [((OrgApacheLuceneSearchWeight *) nil_chk([((OrgApacheLuceneSearchIndexSearcher *) nil_chk(OrgApacheLuceneSearchHighlightQueryTermExtractor_EMPTY_INDEXSEARCHER_)) createNormalizedWeightWithOrgApacheLuceneSearchQuery:query withBoolean:NO])) extractTermsWithJavaUtilSet:nonWeightedTerms];
+        [((OrgApacheLuceneSearchWeight *) nil_chk([((OrgApacheLuceneSearchIndexSearcher *) nil_chk(OrgApacheLuceneSearchHighlightQueryTermExtractor_EMPTY_INDEXSEARCHER_)) createNormalizedWeightWithOrgApacheLuceneSearchQuery:query withBoolean:false])) extractTermsWithJavaUtilSet:nonWeightedTerms];
       }
       @catch (JavaIoIOException *bogus) {
         @throw [new_JavaLangRuntimeException_initWithNSString_withJavaLangThrowable_(@"Should not happen on an empty index", bogus) autorelease];

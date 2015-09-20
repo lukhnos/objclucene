@@ -109,7 +109,7 @@ __attribute__((unused)) static OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatu
 - (OrgApacheLuceneUtilBytesRef *)next {
   for (; ; ) {
     if (doSeek_) {
-      doSeek_ = NO;
+      doSeek_ = false;
       OrgApacheLuceneUtilBytesRef *t = [self nextSeekTermWithOrgApacheLuceneUtilBytesRef:actualTerm_];
       JreAssert((actualTerm_ == nil || t == nil || [t compareToWithId:actualTerm_] > 0), (JreStrcat("$@$@", @"curTerm=", actualTerm_, @" seekTerm=", t)));
       if (t == nil || [((OrgApacheLuceneIndexTermsEnum *) nil_chk(tenum_)) seekCeilWithOrgApacheLuceneUtilBytesRef:t] == JreLoadStatic(OrgApacheLuceneIndexTermsEnum_SeekStatusEnum, END)) {
@@ -125,11 +125,11 @@ __attribute__((unused)) static OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatu
     }
     switch ([[self acceptWithOrgApacheLuceneUtilBytesRef:actualTerm_] ordinal]) {
       case OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus_YES_AND_SEEK:
-      doSeek_ = YES;
+      doSeek_ = true;
       case OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus_YES:
       return actualTerm_;
       case OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus_NO_AND_SEEK:
-      doSeek_ = YES;
+      doSeek_ = true;
       break;
       case OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatus_END:
       return nil;
@@ -178,7 +178,7 @@ __attribute__((unused)) static OrgApacheLuceneIndexFilteredTermsEnum_AcceptStatu
 @end
 
 void OrgApacheLuceneIndexFilteredTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_(OrgApacheLuceneIndexFilteredTermsEnum *self, OrgApacheLuceneIndexTermsEnum *tenum) {
-  OrgApacheLuceneIndexFilteredTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withBoolean_(self, tenum, YES);
+  OrgApacheLuceneIndexFilteredTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withBoolean_(self, tenum, true);
 }
 
 void OrgApacheLuceneIndexFilteredTermsEnum_initWithOrgApacheLuceneIndexTermsEnum_withBoolean_(OrgApacheLuceneIndexFilteredTermsEnum *self, OrgApacheLuceneIndexTermsEnum *tenum, jboolean startWithSeek) {

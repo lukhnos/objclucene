@@ -125,10 +125,12 @@
   return OrgLukhnosPortmobileFileFiles_readAttributesWithOrgLukhnosPortmobileFilePath_withIOSClass_(path, clz);
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgLukhnosPortmobileFileFiles_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -256,10 +258,10 @@ jboolean OrgLukhnosPortmobileFileFiles_deleteIfExistsWithOrgLukhnosPortmobileFil
     if (![((JavaIoFile *) nil_chk([((OrgLukhnosPortmobileFilePath *) nil_chk(path)) toFile])) delete__]) {
       @throw [new_JavaIoIOException_initWithNSString_(JreStrcat("$@", @"Could not delete path: ", path)) autorelease];
     }
-    return YES;
+    return true;
   }
   else {
-    return NO;
+    return false;
   }
 }
 

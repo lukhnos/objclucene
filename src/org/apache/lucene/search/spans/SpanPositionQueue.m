@@ -19,7 +19,7 @@
                     withId:(OrgApacheLuceneSearchSpansSpans *)s2 {
   jint start1 = [((OrgApacheLuceneSearchSpansSpans *) nil_chk(s1)) startPosition];
   jint start2 = [((OrgApacheLuceneSearchSpansSpans *) nil_chk(s2)) startPosition];
-  return (start1 < start2) ? YES : (start1 == start2) ? [s1 endPosition] < [s2 endPosition] : NO;
+  return (start1 < start2) ? true : (start1 == start2) ? [s1 endPosition] < [s2 endPosition] : false;
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -35,7 +35,7 @@
 @end
 
 void OrgApacheLuceneSearchSpansSpanPositionQueue_initWithInt_(OrgApacheLuceneSearchSpansSpanPositionQueue *self, jint maxSize) {
-  OrgApacheLuceneUtilPriorityQueue_initWithInt_withBoolean_(self, maxSize, NO);
+  OrgApacheLuceneUtilPriorityQueue_initWithInt_withBoolean_(self, maxSize, false);
 }
 
 OrgApacheLuceneSearchSpansSpanPositionQueue *new_OrgApacheLuceneSearchSpansSpanPositionQueue_initWithInt_(jint maxSize) {

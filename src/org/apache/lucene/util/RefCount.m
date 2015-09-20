@@ -32,10 +32,10 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilRefCount, refCount_, JavaUtilConcurrentAt
 - (void)decRef {
   jint rc = [((JavaUtilConcurrentAtomicAtomicInteger *) nil_chk(refCount_)) decrementAndGet];
   if (rc == 0) {
-    jboolean success = NO;
+    jboolean success = false;
     @try {
       [self release__];
-      success = YES;
+      success = true;
     }
     @finally {
       if (!success) {

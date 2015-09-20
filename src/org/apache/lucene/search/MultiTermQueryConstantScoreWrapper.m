@@ -149,8 +149,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapp
 }
 
 - (jboolean)isEqual:(id)o {
-  if ([super isEqual:o] == NO) {
-    return NO;
+  if ([super isEqual:o] == false) {
+    return false;
   }
   OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper *that = (OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper *) check_class_cast(o, [OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper class]);
   return [((OrgApacheLuceneSearchMultiTermQuery *) nil_chk(self->query_)) isEqual:((OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper *) nil_chk(that))->query_] && [self getBoost] == [that getBoost];
@@ -394,11 +394,11 @@ jboolean OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_$1_collectTerms
   for (jint i = 0; i < threshold; ++i) {
     OrgApacheLuceneUtilBytesRef *term = [((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum)) next];
     if (term == nil) {
-      return YES;
+      return true;
     }
     OrgApacheLuceneIndexTermState *state = [termsEnum termState];
-    if ([((OrgApacheLuceneIndexTermState *) nil_chk(state)) isRealTerm] == NO) {
-      return NO;
+    if ([((OrgApacheLuceneIndexTermState *) nil_chk(state)) isRealTerm] == false) {
+      return false;
     }
     [((id<JavaUtilList>) nil_chk(terms)) addWithId:[new_OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_TermAndState_initWithOrgApacheLuceneUtilBytesRef_withOrgApacheLuceneIndexTermState_withInt_withLong_(OrgApacheLuceneUtilBytesRef_deepCopyOfWithOrgApacheLuceneUtilBytesRef_(term), state, [termsEnum docFreq], [termsEnum totalTermFreq]) autorelease]];
   }
@@ -426,7 +426,7 @@ OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_WeightOrDocIdSet *OrgApa
     return [new_OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_WeightOrDocIdSet_initWithOrgApacheLuceneSearchWeight_([((OrgApacheLuceneSearchQuery *) nil_chk([((OrgApacheLuceneSearchIndexSearcher *) nil_chk(self->val$searcher_)) rewriteWithOrgApacheLuceneSearchQuery:q])) createWeightWithOrgApacheLuceneSearchIndexSearcher:self->val$searcher_ withBoolean:self->val$needsScores_]) autorelease];
   }
   OrgApacheLuceneUtilDocIdSetBuilder *builder = [new_OrgApacheLuceneUtilDocIdSetBuilder_initWithInt_([((OrgApacheLuceneIndexLeafReader *) nil_chk([context reader])) maxDoc]) autorelease];
-  if ([collectedTerms isEmpty] == NO) {
+  if ([collectedTerms isEmpty] == false) {
     OrgApacheLuceneIndexTermsEnum *termsEnum2 = [((OrgApacheLuceneIndexTerms *) nil_chk(terms)) iterator];
     for (OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_TermAndState * __strong t in collectedTerms) {
       [((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum2)) seekExactWithOrgApacheLuceneUtilBytesRef:((OrgApacheLuceneSearchMultiTermQueryConstantScoreWrapper_TermAndState *) nil_chk(t))->term_ withOrgApacheLuceneIndexTermState:t->state_];

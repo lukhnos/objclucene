@@ -86,7 +86,7 @@ withOrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap
 - (jboolean)incrementToken {
   if ([((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
     if (fstReader_ == nil) {
-      return YES;
+      return true;
     }
     if (![((id<OrgApacheLuceneAnalysisTokenattributesKeywordAttribute>) nil_chk(keywordAtt_)) isKeyword]) {
       OrgApacheLuceneUtilBytesRef *stem = [((OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap *) nil_chk(stemmerOverrideMap_)) getWithCharArray:[((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer] withInt:[termAtt_ length] withOrgApacheLuceneUtilFstFST_Arc:scratchArc_ withOrgApacheLuceneUtilFstFST_BytesReader:fstReader_];
@@ -99,13 +99,13 @@ withOrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap
         else {
           [termAtt_ setLengthWithInt:length];
         }
-        [keywordAtt_ setKeywordWithBoolean:YES];
+        [keywordAtt_ setKeywordWithBoolean:true];
       }
     }
-    return YES;
+    return true;
   }
   else {
-    return NO;
+    return false;
   }
 }
 
@@ -233,10 +233,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisMiscellaneousStemmerOver
 
 @implementation OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithBoolean:(jboolean)ignoreCase {
   OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder_initWithBoolean_(self, ignoreCase);
@@ -259,9 +261,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisMiscellaneousStemmerOver
   }
   if ([((OrgApacheLuceneUtilBytesRefHash *) nil_chk(hash__)) addWithOrgApacheLuceneUtilBytesRef:[((OrgApacheLuceneUtilBytesRefBuilder *) nil_chk(spare_)) get]] >= 0) {
     [((JavaUtilArrayList *) nil_chk(outputValues_)) addWithId:output];
-    return YES;
+    return true;
   }
-  return NO;
+  return false;
 }
 
 - (OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_StemmerOverrideMap *)build {
@@ -309,7 +311,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisMiscellaneousStemmerOver
 @end
 
 void OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder_init(OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder *self) {
-  OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder_initWithBoolean_(self, NO);
+  OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder_initWithBoolean_(self, false);
 }
 
 OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder *new_OrgApacheLuceneAnalysisMiscellaneousStemmerOverrideFilter_Builder_init() {

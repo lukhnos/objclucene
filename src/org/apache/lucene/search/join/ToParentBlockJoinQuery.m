@@ -165,7 +165,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchJoinToParentBlockJoinQuery_BlockJoinSco
     return [((OrgApacheLuceneSearchQuery *) nil_chk(origChildQuery_)) isEqual:((OrgApacheLuceneSearchJoinToParentBlockJoinQuery *) nil_chk(other))->origChildQuery_] && [((id<OrgApacheLuceneSearchJoinBitSetProducer>) nil_chk(parentsFilter_)) isEqual:other->parentsFilter_] && scoreMode_ == other->scoreMode_ && [super isEqual:other];
   }
   else {
-    return NO;
+    return false;
   }
 }
 

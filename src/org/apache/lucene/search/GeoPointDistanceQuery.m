@@ -75,14 +75,14 @@ withOrgApacheLuceneSearchGeoBoundingBox:(OrgApacheLuceneSearchGeoBoundingBox *)b
 }
 
 - (jboolean)isEqual:(id)o {
-  if (self == o) return YES;
-  if (!([o isKindOfClass:[OrgApacheLuceneSearchGeoPointDistanceQuery class]])) return NO;
-  if (![super isEqual:o]) return NO;
+  if (self == o) return true;
+  if (!([o isKindOfClass:[OrgApacheLuceneSearchGeoPointDistanceQuery class]])) return false;
+  if (![super isEqual:o]) return false;
   OrgApacheLuceneSearchGeoPointDistanceQuery *that = (OrgApacheLuceneSearchGeoPointDistanceQuery *) check_class_cast(o, [OrgApacheLuceneSearchGeoPointDistanceQuery class]);
-  if (JavaLangDouble_compareWithDouble_withDouble_(((OrgApacheLuceneSearchGeoPointDistanceQuery *) nil_chk(that))->centerLat_, centerLat_) != 0) return NO;
-  if (JavaLangDouble_compareWithDouble_withDouble_(that->centerLon_, centerLon_) != 0) return NO;
-  if (JavaLangDouble_compareWithDouble_withDouble_(that->radius_, radius_) != 0) return NO;
-  return YES;
+  if (JavaLangDouble_compareWithDouble_withDouble_(((OrgApacheLuceneSearchGeoPointDistanceQuery *) nil_chk(that))->centerLat_, centerLat_) != 0) return false;
+  if (JavaLangDouble_compareWithDouble_withDouble_(that->centerLon_, centerLon_) != 0) return false;
+  if (JavaLangDouble_compareWithDouble_withDouble_(that->radius_, radius_) != 0) return false;
+  return true;
 }
 
 - (NSUInteger)hash {
@@ -157,10 +157,10 @@ OrgApacheLuceneSearchGeoPointDistanceQuery *new_OrgApacheLuceneSearchGeoPointDis
 
 void OrgApacheLuceneSearchGeoPointDistanceQuery_initWithNSString_withOrgApacheLuceneSearchGeoBoundingBox_withDouble_withDouble_withDouble_(OrgApacheLuceneSearchGeoPointDistanceQuery *self, NSString *field, OrgApacheLuceneSearchGeoBoundingBox *bbox, jdouble centerLon, jdouble centerLat, jdouble radius) {
   OrgApacheLuceneSearchGeoPointInBBoxQuery_initWithNSString_withDouble_withDouble_withDouble_withDouble_(self, field, ((OrgApacheLuceneSearchGeoBoundingBox *) nil_chk(bbox))->minLon_, bbox->minLat_, bbox->maxLon_, bbox->maxLat_);
-  if (OrgApacheLuceneUtilGeoUtils_isValidLonWithDouble_(centerLon) == NO) {
+  if (OrgApacheLuceneUtilGeoUtils_isValidLonWithDouble_(centerLon) == false) {
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D", @"invalid centerLon ", centerLon)) autorelease];
   }
-  if (OrgApacheLuceneUtilGeoUtils_isValidLatWithDouble_(centerLat) == NO) {
+  if (OrgApacheLuceneUtilGeoUtils_isValidLatWithDouble_(centerLat) == false) {
     @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$D", @"invalid centerLat ", centerLat)) autorelease];
   }
   self->centerLon_ = centerLon;

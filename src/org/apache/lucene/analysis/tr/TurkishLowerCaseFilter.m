@@ -57,7 +57,7 @@ __attribute__((unused)) static jint OrgApacheLuceneAnalysisTrTurkishLowerCaseFil
 }
 
 - (jboolean)incrementToken {
-  jboolean iOrAfter = NO;
+  jboolean iOrAfter = false;
   if ([((OrgApacheLuceneAnalysisTokenStream *) nil_chk(input_)) incrementToken]) {
     IOSCharArray *buffer = [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) buffer];
     jint length = [termAtt_ length];
@@ -75,7 +75,7 @@ __attribute__((unused)) static jint OrgApacheLuceneAnalysisTrTurkishLowerCaseFil
           }
           else {
             *IOSCharArray_GetRef(nil_chk(buffer), i) = OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_LATIN_SMALL_LETTER_DOTLESS_I;
-            iOrAfter = NO;
+            iOrAfter = false;
           }
           i++;
           continue;
@@ -84,9 +84,9 @@ __attribute__((unused)) static jint OrgApacheLuceneAnalysisTrTurkishLowerCaseFil
       i += JavaLangCharacter_toCharsWithInt_withCharArray_withInt_(JavaLangCharacter_toLowerCaseWithInt_(ch), buffer, i);
     }
     [termAtt_ setLengthWithInt:length];
-    return YES;
+    return true;
   }
-  else return NO;
+  else return false;
 }
 
 - (jboolean)isBeforeDotWithCharArray:(IOSCharArray *)s
@@ -140,11 +140,11 @@ OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter *new_OrgApacheLuceneAnalysisTrTu
 jboolean OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_isBeforeDotWithCharArray_withInt_withInt_(OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter *self, IOSCharArray *s, jint pos, jint len) {
   for (jint i = pos; i < len; ) {
     jint ch = JavaLangCharacter_codePointAtWithCharArray_withInt_withInt_(s, i, len);
-    if (JavaLangCharacter_getTypeWithInt_(ch) != JavaLangCharacter_NON_SPACING_MARK) return NO;
-    if (ch == OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_COMBINING_DOT_ABOVE) return YES;
+    if (JavaLangCharacter_getTypeWithInt_(ch) != JavaLangCharacter_NON_SPACING_MARK) return false;
+    if (ch == OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_COMBINING_DOT_ABOVE) return true;
     i += JavaLangCharacter_charCountWithInt_(ch);
   }
-  return NO;
+  return false;
 }
 
 jint OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter_delete__WithCharArray_withInt_withInt_(OrgApacheLuceneAnalysisTrTurkishLowerCaseFilter *self, IOSCharArray *s, jint pos, jint len) {

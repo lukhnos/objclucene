@@ -58,7 +58,7 @@ IOSByteArray *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_DEFAULT_
   }
   if (skipPossessive_) {
     current_ += 2;
-    skipPossessive_ = NO;
+    skipPossessive_ = false;
   }
   jint lastType = 0;
   while (current_ < endBounds_ && (OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_isSubwordDelimWithInt_(lastType = OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_charTypeWithInt_(self, IOSCharArray_Get(nil_chk(text_), current_))))) {
@@ -75,7 +75,7 @@ IOSByteArray *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_DEFAULT_
     lastType = type;
   }
   if (end_ < endBounds_ - 1 && OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_endsWithPossessiveWithInt_(self, end_ + 2)) {
-    skipPossessive_ = YES;
+    skipPossessive_ = true;
   }
   return end_;
 }
@@ -99,7 +99,7 @@ IOSByteArray *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_DEFAULT_
   JreStrongAssign(&self->text_, text);
   self->length_ = self->endBounds_ = length;
   current_ = startBounds_ = end_ = 0;
-  skipPossessive_ = hasFinalPossessive_ = NO;
+  skipPossessive_ = hasFinalPossessive_ = false;
   OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_setBounds(self);
 }
 
@@ -202,8 +202,8 @@ IOSByteArray *OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_DEFAULT_
 
 void OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_initWithByteArray_withBoolean_withBoolean_withBoolean_(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator *self, IOSByteArray *charTypeTable, jboolean splitOnCaseChange, jboolean splitOnNumerics, jboolean stemEnglishPossessive) {
   NSObject_init(self);
-  self->hasFinalPossessive_ = NO;
-  self->skipPossessive_ = NO;
+  self->hasFinalPossessive_ = false;
+  self->skipPossessive_ = false;
   JreStrongAssign(&self->charTypeTable_, charTypeTable);
   self->splitOnCaseChange_ = splitOnCaseChange;
   self->splitOnNumerics_ = splitOnNumerics;
@@ -218,18 +218,18 @@ OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator *new_OrgApacheLuceneAn
 
 jboolean OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_isBreakWithInt_withInt_(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator *self, jint lastType, jint type) {
   if ((type & lastType) != 0) {
-    return NO;
+    return false;
   }
   if (!self->splitOnCaseChange_ && OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_isAlphaWithInt_(lastType) && OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_isAlphaWithInt_(type)) {
-    return NO;
+    return false;
   }
   else if (OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_isUpperWithInt_(lastType) && OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_isAlphaWithInt_(type)) {
-    return NO;
+    return false;
   }
   else if (!self->splitOnNumerics_ && ((OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_isAlphaWithInt_(lastType) && OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_isDigitWithInt_(type)) || (OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_isDigitWithInt_(lastType) && OrgApacheLuceneAnalysisMiscellaneousWordDelimiterFilter_isAlphaWithInt_(type)))) {
-    return NO;
+    return false;
   }
-  return YES;
+  return true;
 }
 
 void OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_setBounds(OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator *self) {
@@ -240,7 +240,7 @@ void OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_setBounds(OrgApac
     self->endBounds_--;
   }
   if (OrgApacheLuceneAnalysisMiscellaneousWordDelimiterIterator_endsWithPossessiveWithInt_(self, self->endBounds_)) {
-    self->hasFinalPossessive_ = YES;
+    self->hasFinalPossessive_ = true;
   }
   self->current_ = self->startBounds_;
 }

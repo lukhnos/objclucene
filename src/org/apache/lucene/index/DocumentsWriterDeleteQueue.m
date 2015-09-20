@@ -129,10 +129,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexDocumentsWriterDeleteQueue)
 
 @implementation OrgApacheLuceneIndexDocumentsWriterDeleteQueue
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexDocumentsWriterDeleteQueue_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithLong:(jlong)generation {
   OrgApacheLuceneIndexDocumentsWriterDeleteQueue_initWithLong_(self, generation);
@@ -170,7 +172,7 @@ withOrgApacheLuceneIndexDocumentsWriterDeleteQueue_DeleteSlice:(OrgApacheLuceneI
 }
 
 - (void)addWithOrgApacheLuceneIndexDocumentsWriterDeleteQueue_Node:(OrgApacheLuceneIndexDocumentsWriterDeleteQueue_Node *)item {
-  while (YES) {
+  while (true) {
     OrgApacheLuceneIndexDocumentsWriterDeleteQueue_Node *currentTail = JreLoadVolatileId(&self->tail_);
     OrgApacheLuceneIndexDocumentsWriterDeleteQueue_Node *tailNext = JreLoadVolatileId(&((OrgApacheLuceneIndexDocumentsWriterDeleteQueue_Node *) nil_chk(currentTail))->next_);
     if (JreLoadVolatileId(&tail_) == currentTail) {
@@ -221,7 +223,7 @@ withOrgApacheLuceneIndexDocumentsWriterDeleteQueue_DeleteSlice:(OrgApacheLuceneI
       JreStrongAssign(&globalSlice_->sliceTail_, currentTail);
       [globalSlice_ applyWithOrgApacheLuceneIndexBufferedUpdates:globalBufferedUpdates_ withInt:[((JavaLangInteger *) nil_chk(JreLoadStatic(OrgApacheLuceneIndexBufferedUpdates, MAX_INT_))) intValue]];
     }
-    OrgApacheLuceneIndexFrozenBufferedUpdates *packet = [new_OrgApacheLuceneIndexFrozenBufferedUpdates_initWithOrgApacheLuceneIndexBufferedUpdates_withBoolean_(globalBufferedUpdates_, NO) autorelease];
+    OrgApacheLuceneIndexFrozenBufferedUpdates *packet = [new_OrgApacheLuceneIndexFrozenBufferedUpdates_initWithOrgApacheLuceneIndexBufferedUpdates_withBoolean_(globalBufferedUpdates_, false) autorelease];
     [((OrgApacheLuceneIndexBufferedUpdates *) nil_chk(globalBufferedUpdates_)) clear];
     return packet;
   }
@@ -237,9 +239,9 @@ withOrgApacheLuceneIndexDocumentsWriterDeleteQueue_DeleteSlice:(OrgApacheLuceneI
 - (jboolean)updateSliceWithOrgApacheLuceneIndexDocumentsWriterDeleteQueue_DeleteSlice:(OrgApacheLuceneIndexDocumentsWriterDeleteQueue_DeleteSlice *)slice {
   if (((OrgApacheLuceneIndexDocumentsWriterDeleteQueue_DeleteSlice *) nil_chk(slice))->sliceTail_ != JreLoadVolatileId(&tail_)) {
     JreStrongAssign(&slice->sliceTail_, JreLoadVolatileId(&tail_));
-    return YES;
+    return true;
   }
-  return NO;
+  return false;
 }
 
 - (jint)numGlobalTermDeletes {

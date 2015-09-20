@@ -18,10 +18,12 @@ IOSLongArray *OrgApacheLuceneUtilLongsRef_EMPTY_LONGS_;
 
 @implementation OrgApacheLuceneUtilLongsRef
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilLongsRef_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (instancetype)initWithInt:(jint)capacity {
   OrgApacheLuceneUtilLongsRef_initWithInt_(self, capacity);
@@ -51,12 +53,12 @@ IOSLongArray *OrgApacheLuceneUtilLongsRef_EMPTY_LONGS_;
 
 - (jboolean)isEqual:(id)other {
   if (other == nil) {
-    return NO;
+    return false;
   }
   if ([other isKindOfClass:[OrgApacheLuceneUtilLongsRef class]]) {
     return [self longsEqualsWithOrgApacheLuceneUtilLongsRef:(OrgApacheLuceneUtilLongsRef *) check_class_cast(other, [OrgApacheLuceneUtilLongsRef class])];
   }
-  return NO;
+  return false;
 }
 
 - (jboolean)longsEqualsWithOrgApacheLuceneUtilLongsRef:(OrgApacheLuceneUtilLongsRef *)other {
@@ -66,13 +68,13 @@ IOSLongArray *OrgApacheLuceneUtilLongsRef_EMPTY_LONGS_;
     jlong end = offset_ + length_;
     for (jint upto = offset_; upto < end; upto++, otherUpto++) {
       if (IOSLongArray_Get(nil_chk(longs_), upto) != IOSLongArray_Get(nil_chk(otherInts), otherUpto)) {
-        return NO;
+        return false;
       }
     }
-    return YES;
+    return true;
   }
   else {
-    return NO;
+    return false;
   }
 }
 
@@ -137,7 +139,7 @@ IOSLongArray *OrgApacheLuceneUtilLongsRef_EMPTY_LONGS_;
   if (offset_ + length_ > longs_->size_) {
     @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$I$I", @"offset+length out of bounds: offset=", offset_, @",length=", length_, @",longs.length=", longs_->size_)) autorelease];
   }
-  return YES;
+  return true;
 }
 
 - (void)dealloc {

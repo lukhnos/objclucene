@@ -198,7 +198,7 @@ jboolean OrgApacheLuceneSearchReqExclScorer_matchesWithInt_withInt_withOrgApache
   OrgApacheLuceneSearchReqExclScorer_initialize();
   JreAssert((exclDoc >= doc), (@"org/apache/lucene/search/ReqExclScorer.java:81 condition failed: assert exclDoc >= doc;"));
   if (doc == exclDoc && OrgApacheLuceneSearchReqExclScorer_matchesWithOrgApacheLuceneSearchTwoPhaseIterator_(exclTwoPhaseIterator)) {
-    return NO;
+    return false;
   }
   return OrgApacheLuceneSearchReqExclScorer_matchesWithOrgApacheLuceneSearchTwoPhaseIterator_(reqTwoPhaseIterator);
 }

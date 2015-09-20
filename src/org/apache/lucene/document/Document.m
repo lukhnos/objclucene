@@ -29,10 +29,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneDocumentDocument)
 
 @implementation OrgApacheLuceneDocumentDocument
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneDocumentDocument_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (id<JavaUtilIterator>)iterator {
   return [((id<JavaUtilList>) nil_chk(fields_)) iterator];

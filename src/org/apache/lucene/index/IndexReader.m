@@ -66,10 +66,12 @@ __attribute__((unused)) static jint OrgApacheLuceneIndexIndexReader_numDeletedDo
 
 @implementation OrgApacheLuceneIndexIndexReader
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexIndexReader_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)addReaderClosedListenerWithOrgApacheLuceneIndexIndexReader_ReaderClosedListener:(id<OrgApacheLuceneIndexIndexReader_ReaderClosedListener>)listener {
   OrgApacheLuceneIndexIndexReader_ensureOpen(self);
@@ -182,7 +184,7 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
   @synchronized(self) {
     if (!closed_) {
       OrgApacheLuceneIndexIndexReader_decRef(self);
-      closed_ = YES;
+      closed_ = true;
     }
   }
 }
@@ -299,8 +301,8 @@ withOrgApacheLuceneIndexStoredFieldVisitor:(OrgApacheLuceneIndexStoredFieldVisit
 
 void OrgApacheLuceneIndexIndexReader_init(OrgApacheLuceneIndexIndexReader *self) {
   NSObject_init(self);
-  self->closed_ = NO;
-  self->closedByChild_ = NO;
+  self->closed_ = false;
+  self->closedByChild_ = false;
   JreStrongAssignAndConsume(&self->refCount_, new_JavaUtilConcurrentAtomicAtomicInteger_initWithInt_(1));
   JreStrongAssign(&self->readerClosedListeners_, JavaUtilCollections_synchronizedSetWithJavaUtilSet_([new_JavaUtilLinkedHashSet_init() autorelease]));
   JreStrongAssign(&self->parentReaders_, JavaUtilCollections_synchronizedSetWithJavaUtilSet_(JavaUtilCollections_newSetFromMapWithJavaUtilMap_([new_JavaUtilWeakHashMap_init() autorelease])));
@@ -329,7 +331,7 @@ void OrgApacheLuceneIndexIndexReader_notifyReaderClosedListenersWithJavaLangThro
 void OrgApacheLuceneIndexIndexReader_reportCloseToParentReaders(OrgApacheLuceneIndexIndexReader *self) {
   @synchronized(self->parentReaders_) {
     for (OrgApacheLuceneIndexIndexReader * __strong parent in nil_chk(self->parentReaders_)) {
-      ((OrgApacheLuceneIndexIndexReader *) nil_chk(parent))->closedByChild_ = YES;
+      ((OrgApacheLuceneIndexIndexReader *) nil_chk(parent))->closedByChild_ = true;
       [((JavaUtilConcurrentAtomicAtomicInteger *) nil_chk(parent->refCount_)) addAndGetWithInt:0];
       OrgApacheLuceneIndexIndexReader_reportCloseToParentReaders(parent);
     }
@@ -340,10 +342,10 @@ jboolean OrgApacheLuceneIndexIndexReader_tryIncRef(OrgApacheLuceneIndexIndexRead
   jint count;
   while ((count = [((JavaUtilConcurrentAtomicAtomicInteger *) nil_chk(self->refCount_)) get]) > 0) {
     if ([self->refCount_ compareAndSetWithInt:count withInt:count + 1]) {
-      return YES;
+      return true;
     }
   }
-  return NO;
+  return false;
 }
 
 void OrgApacheLuceneIndexIndexReader_decRef(OrgApacheLuceneIndexIndexReader *self) {
@@ -352,7 +354,7 @@ void OrgApacheLuceneIndexIndexReader_decRef(OrgApacheLuceneIndexIndexReader *sel
   }
   jint rc = [self->refCount_ decrementAndGet];
   if (rc == 0) {
-    self->closed_ = YES;
+    self->closed_ = true;
     JavaLangThrowable *throwable = nil;
     @try {
       [self doClose];

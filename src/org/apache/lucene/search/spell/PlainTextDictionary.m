@@ -126,7 +126,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpellPlainTextDictionary)
   if (done_) {
     return nil;
   }
-  jboolean success = NO;
+  jboolean success = false;
   OrgApacheLuceneUtilBytesRef *result;
   @try {
     NSString *line;
@@ -135,11 +135,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpellPlainTextDictionary)
       result = [spare_ get];
     }
     else {
-      done_ = YES;
+      done_ = true;
       OrgApacheLuceneUtilIOUtils_closeWithJavaIoCloseableArray_([IOSObjectArray arrayWithObjects:(id[]){ this$0_->in_ } count:1 type:JavaIoCloseable_class_()]);
       result = nil;
     }
-    success = YES;
+    success = true;
   }
   @finally {
     if (!success) {
@@ -179,7 +179,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpellPlainTextDictionary)
 void OrgApacheLuceneSearchSpellPlainTextDictionary_FileIterator_initWithOrgApacheLuceneSearchSpellPlainTextDictionary_(OrgApacheLuceneSearchSpellPlainTextDictionary_FileIterator *self, OrgApacheLuceneSearchSpellPlainTextDictionary *outer$) {
   JreStrongAssign(&self->this$0_, outer$);
   NSObject_init(self);
-  self->done_ = NO;
+  self->done_ = false;
   JreStrongAssignAndConsume(&self->spare_, new_OrgApacheLuceneUtilBytesRefBuilder_init());
 }
 

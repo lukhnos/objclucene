@@ -31,9 +31,9 @@
 - (jboolean)acceptWithOrgApacheLuceneUtilAttributeSource:(OrgApacheLuceneUtilAttributeSource *)source {
   @try {
     if (count_ >= lower_ && count_ < upper_) {
-      return YES;
+      return true;
     }
-    return NO;
+    return false;
   }
   @finally {
     count_++;

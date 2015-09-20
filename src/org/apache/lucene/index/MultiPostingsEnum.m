@@ -70,7 +70,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiPostingsEnum, subs_, IOSObjectArray
 
 - (jint)advanceWithInt:(jint)target {
   JreAssert((target > doc_), (@"org/apache/lucene/index/MultiPostingsEnum.java:97 condition failed: assert target > doc;"));
-  while (YES) {
+  while (true) {
     if (current_ != nil) {
       jint doc;
       if (target < currentBase_) {
@@ -98,7 +98,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexMultiPostingsEnum, subs_, IOSObjectArray
 }
 
 - (jint)nextDoc {
-  while (YES) {
+  while (true) {
     if (current_ == nil) {
       if (upto_ == numSubs_ - 1) {
         return self->doc_ = OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS;
@@ -211,10 +211,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexMultiPostingsEnum)
 
 @implementation OrgApacheLuceneIndexMultiPostingsEnum_EnumWithSlice
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneIndexMultiPostingsEnum_EnumWithSlice_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (NSString *)description {
   return JreStrcat("$C@", [((OrgApacheLuceneIndexReaderSlice *) nil_chk(slice_)) description], ':', postingsEnum_);

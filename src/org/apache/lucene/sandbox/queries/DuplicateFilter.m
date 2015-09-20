@@ -109,10 +109,10 @@ withOrgApacheLuceneSandboxQueriesDuplicateFilter_ProcessingModeEnum:(OrgApacheLu
 
 - (jboolean)isEqual:(id)obj {
   if (self == obj) {
-    return YES;
+    return true;
   }
-  if ([super isEqual:obj] == NO) {
-    return NO;
+  if ([super isEqual:obj] == false) {
+    return false;
   }
   OrgApacheLuceneSandboxQueriesDuplicateFilter *other = (OrgApacheLuceneSandboxQueriesDuplicateFilter *) check_class_cast(obj, [OrgApacheLuceneSandboxQueriesDuplicateFilter class]);
   return keepMode_ == ((OrgApacheLuceneSandboxQueriesDuplicateFilter *) nil_chk(other))->keepMode_ && processingMode_ == other->processingMode_ && fieldName_ != nil && [fieldName_ isEqual:other->fieldName_];
@@ -207,7 +207,7 @@ OrgApacheLuceneSearchDocIdSet *OrgApacheLuceneSandboxQueriesDuplicateFilter_corr
   if (terms != nil) {
     OrgApacheLuceneIndexTermsEnum *termsEnum = [terms iterator];
     OrgApacheLuceneIndexPostingsEnum *docs = nil;
-    while (YES) {
+    while (true) {
       OrgApacheLuceneUtilBytesRef *currTerm = [((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum)) next];
       if (currTerm == nil) {
         break;
@@ -221,7 +221,7 @@ OrgApacheLuceneSearchDocIdSet *OrgApacheLuceneSandboxQueriesDuplicateFilter_corr
           }
           else {
             jint lastDoc = doc;
-            while (YES) {
+            while (true) {
               lastDoc = doc;
               doc = [docs nextDoc];
               if (doc == OrgApacheLuceneSearchDocIdSetIterator_NO_MORE_DOCS) {
@@ -244,7 +244,7 @@ OrgApacheLuceneSearchDocIdSet *OrgApacheLuceneSandboxQueriesDuplicateFilter_fast
   if (terms != nil) {
     OrgApacheLuceneIndexTermsEnum *termsEnum = [terms iterator];
     OrgApacheLuceneIndexPostingsEnum *docs = nil;
-    while (YES) {
+    while (true) {
       OrgApacheLuceneUtilBytesRef *currTerm = [((OrgApacheLuceneIndexTermsEnum *) nil_chk(termsEnum)) next];
       if (currTerm == nil) {
         break;
@@ -259,7 +259,7 @@ OrgApacheLuceneSearchDocIdSet *OrgApacheLuceneSandboxQueriesDuplicateFilter_fast
             }
           }
           jint lastDoc = -1;
-          while (YES) {
+          while (true) {
             lastDoc = doc;
             [bits clearWithInt:lastDoc];
             doc = [docs nextDoc];

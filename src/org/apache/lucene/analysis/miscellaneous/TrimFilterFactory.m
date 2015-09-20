@@ -55,8 +55,8 @@
 
 void OrgApacheLuceneAnalysisMiscellaneousTrimFilterFactory_initWithJavaUtilMap_(OrgApacheLuceneAnalysisMiscellaneousTrimFilterFactory *self, id<JavaUtilMap> args) {
   OrgApacheLuceneAnalysisUtilTokenFilterFactory_initWithJavaUtilMap_(self, args);
-  if ([((OrgApacheLuceneUtilVersion *) nil_chk(self->luceneMatchVersion_)) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_5_0_0_)] == NO) {
-    self->updateOffsets_ = [self getBooleanWithJavaUtilMap:args withNSString:@"updateOffsets" withBoolean:NO];
+  if ([((OrgApacheLuceneUtilVersion *) nil_chk(self->luceneMatchVersion_)) onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_5_0_0_)] == false) {
+    self->updateOffsets_ = [self getBooleanWithJavaUtilMap:args withNSString:@"updateOffsets" withBoolean:false];
     if (self->updateOffsets_ && [self->luceneMatchVersion_ onOrAfterWithOrgApacheLuceneUtilVersion:JreLoadStatic(OrgApacheLuceneUtilVersion, LUCENE_4_4_0_)]) {
       @throw [new_JavaLangIllegalArgumentException_initWithNSString_(@"updateOffsets=true is not supported anymore as of Lucene 4.4") autorelease];
     }

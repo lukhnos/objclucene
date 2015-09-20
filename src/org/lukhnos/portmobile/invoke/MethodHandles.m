@@ -21,10 +21,12 @@ OrgLukhnosPortmobileInvokeMethodHandles_Lookup *OrgLukhnosPortmobileInvokeMethod
   return OrgLukhnosPortmobileInvokeMethodHandles_publicLookup();
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgLukhnosPortmobileInvokeMethodHandles_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgLukhnosPortmobileInvokeMethodHandles class]) {
@@ -72,10 +74,12 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgLukhnosPortmobileInvokeMethodHandles)
   return [new_OrgLukhnosPortmobileInvokeMethodHandle_NoArgsConstructor_initWithIOSClass_(refc) autorelease];
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgLukhnosPortmobileInvokeMethodHandles_Lookup_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {

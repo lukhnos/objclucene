@@ -126,10 +126,10 @@ __attribute__((unused)) static void OrgApacheLuceneUtilPriorityQueue_downHeapWit
           OrgApacheLuceneUtilPriorityQueue_downHeapWithInt_(self, i);
         }
       }
-      return YES;
+      return true;
     }
   }
-  return NO;
+  return false;
 }
 
 - (jboolean)upHeapWithInt:(jint)origPos {
@@ -180,7 +180,7 @@ __attribute__((unused)) static void OrgApacheLuceneUtilPriorityQueue_downHeapWit
 @end
 
 void OrgApacheLuceneUtilPriorityQueue_initWithInt_(OrgApacheLuceneUtilPriorityQueue *self, jint maxSize) {
-  OrgApacheLuceneUtilPriorityQueue_initWithInt_withBoolean_(self, maxSize, YES);
+  OrgApacheLuceneUtilPriorityQueue_initWithInt_withBoolean_(self, maxSize, true);
 }
 
 void OrgApacheLuceneUtilPriorityQueue_initWithInt_withBoolean_(OrgApacheLuceneUtilPriorityQueue *self, jint maxSize, jboolean prepopulate) {

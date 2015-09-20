@@ -42,10 +42,12 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat, 
 
 @implementation OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (id<OrgApacheLuceneUtilMutableBits>)newLiveDocsWithInt:(jint)size {
   OrgApacheLuceneUtilFixedBitSet *bits = [new_OrgApacheLuceneUtilFixedBitSet_initWithInt_(size) autorelease];
@@ -65,8 +67,8 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat, 
   NSString *name = OrgApacheLuceneIndexIndexFileNames_fileNameFromGenerationWithNSString_withNSString_withLong_(((OrgApacheLuceneIndexSegmentInfo *) nil_chk(info->info_))->name_, OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_EXTENSION_, gen);
   jint length = [info->info_ maxDoc];
   {
-    JavaLangThrowable *__mainException = nil;
     OrgApacheLuceneStoreChecksumIndexInput *input = [((OrgApacheLuceneStoreDirectory *) nil_chk(dir)) openChecksumInputWithNSString:name withOrgApacheLuceneStoreIOContext:context];
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
       JavaLangThrowable *priorE = nil;
       @try {
@@ -88,19 +90,21 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat, 
         OrgApacheLuceneCodecsCodecUtil_checkFooterWithOrgApacheLuceneStoreChecksumIndexInput_withJavaLangThrowable_(input, priorE);
       }
     }
+    @catch (JavaLangThrowable *e) {
+      __primaryException1 = e;
+      @throw e;
+    }
     @finally {
-      @try {
-        [input close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
+      if (input != nil) {
+        if (__primaryException1 != nil) {
+          @try {
+            [input close];
+          } @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
         } else {
-          __mainException = e;
+          [input close];
         }
-      }
-      if (__mainException) {
-        @throw __mainException;
       }
     }
   }
@@ -120,8 +124,8 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat, 
   }
   IOSLongArray *data = [fbs getBits];
   {
-    JavaLangThrowable *__mainException = nil;
     OrgApacheLuceneStoreIndexOutput *output = [((OrgApacheLuceneStoreDirectory *) nil_chk(dir)) createOutputWithNSString:name withOrgApacheLuceneStoreIOContext:context];
+    JavaLangThrowable *__primaryException1 = nil;
     @try {
       OrgApacheLuceneCodecsCodecUtil_writeIndexHeaderWithOrgApacheLuceneStoreDataOutput_withNSString_withInt_withByteArray_withNSString_(output, OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_CODEC_NAME_, OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat_VERSION_CURRENT, [info->info_ getId], JavaLangLong_toStringWithLong_withInt_(gen, JavaLangCharacter_MAX_RADIX));
       for (jint i = 0; i < ((IOSLongArray *) nil_chk(data))->size_; i++) {
@@ -129,19 +133,21 @@ J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneCodecsLucene50Lucene50LiveDocsFormat, 
       }
       OrgApacheLuceneCodecsCodecUtil_writeFooterWithOrgApacheLuceneStoreIndexOutput_(output);
     }
+    @catch (JavaLangThrowable *e) {
+      __primaryException1 = e;
+      @throw e;
+    }
     @finally {
-      @try {
-        [output close];
-      }
-      @catch (JavaLangThrowable *e) {
-        if (__mainException) {
-          [__mainException addSuppressedWithJavaLangThrowable:e];
+      if (output != nil) {
+        if (__primaryException1 != nil) {
+          @try {
+            [output close];
+          } @catch (JavaLangThrowable *e) {
+            [__primaryException1 addSuppressedWithJavaLangThrowable:e];
+          }
         } else {
-          __mainException = e;
+          [output close];
         }
-      }
-      if (__mainException) {
-        @throw __mainException;
       }
     }
   }

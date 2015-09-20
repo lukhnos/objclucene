@@ -249,7 +249,7 @@ NSString *OrgApacheLuceneSearchHighlightHighlighter_getBestFragmentWithOrgApache
 
 IOSObjectArray *OrgApacheLuceneSearchHighlightHighlighter_getBestFragmentsWithOrgApacheLuceneAnalysisTokenStream_withNSString_withInt_(OrgApacheLuceneSearchHighlightHighlighter *self, OrgApacheLuceneAnalysisTokenStream *tokenStream, NSString *text, jint maxNumFragments) {
   maxNumFragments = JavaLangMath_maxWithInt_withInt_(1, maxNumFragments);
-  IOSObjectArray *frag = OrgApacheLuceneSearchHighlightHighlighter_getBestTextFragmentsWithOrgApacheLuceneAnalysisTokenStream_withNSString_withBoolean_withInt_(self, tokenStream, text, YES, maxNumFragments);
+  IOSObjectArray *frag = OrgApacheLuceneSearchHighlightHighlighter_getBestTextFragmentsWithOrgApacheLuceneAnalysisTokenStream_withNSString_withBoolean_withInt_(self, tokenStream, text, true, maxNumFragments);
   JavaUtilArrayList *fragTexts = [new_JavaUtilArrayList_init() autorelease];
   for (jint i = 0; i < ((IOSObjectArray *) nil_chk(frag))->size_; i++) {
     if ((IOSObjectArray_Get(frag, i) != nil) && ([((OrgApacheLuceneSearchHighlightTextFragment *) nil_chk(IOSObjectArray_Get(frag, i))) getScore] > 0)) {
@@ -355,7 +355,7 @@ IOSObjectArray *OrgApacheLuceneSearchHighlightHighlighter_getBestTextFragmentsWi
 void OrgApacheLuceneSearchHighlightHighlighter_mergeContiguousFragmentsWithOrgApacheLuceneSearchHighlightTextFragmentArray_(OrgApacheLuceneSearchHighlightHighlighter *self, IOSObjectArray *frag) {
   jboolean mergingStillBeingDone;
   if (((IOSObjectArray *) nil_chk(frag))->size_ > 1) do {
-    mergingStillBeingDone = NO;
+    mergingStillBeingDone = false;
     for (jint i = 0; i < frag->size_; i++) {
       if (IOSObjectArray_Get(frag, i) == nil) {
         continue;
@@ -396,7 +396,7 @@ void OrgApacheLuceneSearchHighlightHighlighter_mergeContiguousFragmentsWithOrgAp
           }
           [frag1 mergeWithOrgApacheLuceneSearchHighlightTextFragment:frag2];
           IOSObjectArray_Set(frag, worstScoringFragNum, nil);
-          mergingStillBeingDone = YES;
+          mergingStillBeingDone = true;
           IOSObjectArray_Set(frag, bestScoringFragNum, frag1);
         }
       }

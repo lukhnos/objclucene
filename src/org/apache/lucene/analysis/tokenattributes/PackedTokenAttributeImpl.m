@@ -31,10 +31,12 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeIm
 
 @implementation OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)setPositionIncrementWithInt:(jint)positionIncrement {
   if (positionIncrement < 0) @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I", @"Increment must be zero or greater: ", positionIncrement)) autorelease];
@@ -90,12 +92,12 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeIm
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (obj == self) return YES;
+  if (obj == self) return true;
   if ([obj isKindOfClass:[OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl class]]) {
     OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl *other = (OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl *) check_class_cast(obj, [OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl class]);
     return (startOffset_ == ((OrgApacheLuceneAnalysisTokenattributesPackedTokenAttributeImpl *) nil_chk(other))->startOffset_ && endOffset_ == other->endOffset_ && positionIncrement_ == other->positionIncrement_ && positionLength_ == other->positionLength_ && (type_ == nil ? other->type_ == nil : [type_ isEqual:other->type_]) && [super isEqual:obj]);
   }
-  else return NO;
+  else return false;
 }
 
 - (NSUInteger)hash {

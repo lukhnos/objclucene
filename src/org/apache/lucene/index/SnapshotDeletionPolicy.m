@@ -90,7 +90,7 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexSnapshotDeletionPolicy_SnapshotCo
 
 - (void)onInitWithJavaUtilList:(id<JavaUtilList>)commits {
   @synchronized(self) {
-    initCalled_ = YES;
+    initCalled_ = true;
     [((OrgApacheLuceneIndexIndexDeletionPolicy *) nil_chk(primary_)) onInitWithJavaUtilList:OrgApacheLuceneIndexSnapshotDeletionPolicy_wrapCommitsWithJavaUtilList_(self, commits)];
     for (OrgApacheLuceneIndexIndexCommit * __strong commit in nil_chk(commits)) {
       if ([((id<JavaUtilMap>) nil_chk(refCounts_)) containsKeyWithId:JavaLangLong_valueOfWithLong_([((OrgApacheLuceneIndexIndexCommit *) nil_chk(commit)) getGeneration])]) {

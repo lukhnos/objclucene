@@ -56,10 +56,12 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisNgramLucene43NGramTok
   return self;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisNgramLucene43NGramTokenizer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)init__WithInt:(jint)minGram
               withInt:(jint)maxGram {
@@ -69,7 +71,7 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisNgramLucene43NGramTok
 - (jboolean)incrementToken {
   [self clearAttributes];
   if (!started_) {
-    started_ = YES;
+    started_ = true;
     gramSize_ = minGram_;
     IOSCharArray *chars = [IOSCharArray arrayWithLength:1024];
     charsRead_ = 0;
@@ -83,7 +85,7 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisNgramLucene43NGramTok
     JreStrongAssign(&inStr_, [[NSString stringWithCharacters:chars offset:0 length:charsRead_] trim]);
     if (charsRead_ == chars->size_) {
       IOSCharArray *throwaway = [IOSCharArray arrayWithLength:1024];
-      while (YES) {
+      while (true) {
         jint inc = [((JavaIoReader *) nil_chk(input_)) readWithCharArray:throwaway withInt:0 withInt:throwaway->size_];
         if (inc == -1) {
           break;
@@ -93,20 +95,20 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisNgramLucene43NGramTok
     }
     inLen_ = ((jint) [((NSString *) nil_chk(inStr_)) length]);
     if (inLen_ == 0) {
-      return NO;
+      return false;
     }
   }
   if (pos_ + gramSize_ > inLen_) {
     pos_ = 0;
     gramSize_++;
-    if (gramSize_ > maxGram_) return NO;
-    if (pos_ + gramSize_ > inLen_) return NO;
+    if (gramSize_ > maxGram_) return false;
+    if (pos_ + gramSize_ > inLen_) return false;
   }
   jint oldPos = pos_;
   pos_++;
   [((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk([((id<OrgApacheLuceneAnalysisTokenattributesCharTermAttribute>) nil_chk(termAtt_)) setEmpty])) appendWithJavaLangCharSequence:inStr_ withInt:oldPos withInt:oldPos + gramSize_];
   [((id<OrgApacheLuceneAnalysisTokenattributesOffsetAttribute>) nil_chk(offsetAtt_)) setOffsetWithInt:[self correctOffsetWithInt:oldPos] withInt:[self correctOffsetWithInt:oldPos + gramSize_]];
-  return YES;
+  return true;
 }
 
 - (void)end {
@@ -117,7 +119,7 @@ __attribute__((unused)) static void OrgApacheLuceneAnalysisNgramLucene43NGramTok
 
 - (void)reset {
   [super reset];
-  started_ = NO;
+  started_ = false;
   pos_ = 0;
 }
 

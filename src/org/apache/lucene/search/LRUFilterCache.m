@@ -218,7 +218,7 @@ withOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter {
 - (jboolean)requiresEviction {
   jint size = [((id<JavaUtilSet>) nil_chk(mostRecentlyUsedFilters_)) size];
   if (size == 0) {
-    return NO;
+    return false;
   }
   else {
     return size > maxSize_ || [self ramBytesUsed] > maxRamBytesUsed_;
@@ -512,7 +512,7 @@ void OrgApacheLuceneSearchLRUFilterCache_initWithInt_withLong_(OrgApacheLuceneSe
   NSObject_init(self);
   self->maxSize_ = maxSize;
   self->maxRamBytesUsed_ = maxRamBytesUsed;
-  JreStrongAssignAndConsume(&self->uniqueFilters_, new_JavaUtilLinkedHashMap_initWithInt_withFloat_withBoolean_(16, 0.75f, YES));
+  JreStrongAssignAndConsume(&self->uniqueFilters_, new_JavaUtilLinkedHashMap_initWithInt_withFloat_withBoolean_(16, 0.75f, true));
   JreStrongAssign(&self->mostRecentlyUsedFilters_, [self->uniqueFilters_ keySet]);
   JreStrongAssignAndConsume(&self->cache_, new_JavaUtilIdentityHashMap_init());
   JreAssignVolatileLong(&self->ramBytesUsed_, 0);
@@ -571,7 +571,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchLRUFilterCache)
 
 - (void)putIfAbsentWithOrgApacheLuceneSearchFilter:(OrgApacheLuceneSearchFilter *)filter
                  withOrgApacheLuceneSearchDocIdSet:(OrgApacheLuceneSearchDocIdSet *)set {
-  if ([((id<JavaUtilMap>) nil_chk(cache_)) containsKeyWithId:filter] == NO) {
+  if ([((id<JavaUtilMap>) nil_chk(cache_)) containsKeyWithId:filter] == false) {
     [cache_ putWithId:filter withId:set];
     OrgApacheLuceneSearchLRUFilterCache_LeafCache_onDocIdSetCacheWithLong_(self, JreLoadStatic(OrgApacheLuceneSearchLRUFilterCache, HASHTABLE_RAM_BYTES_PER_ENTRY_) + [((OrgApacheLuceneSearchDocIdSet *) nil_chk(set)) ramBytesUsed]);
   }

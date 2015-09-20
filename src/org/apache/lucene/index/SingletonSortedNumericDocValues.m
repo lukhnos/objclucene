@@ -40,7 +40,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneIndexSingletonSortedNumericDocValues, docsWit
 
 - (void)setDocumentWithInt:(jint)doc {
   value_ = [((OrgApacheLuceneIndexNumericDocValues *) nil_chk(in_)) getWithInt:doc];
-  if (docsWithField_ != nil && value_ == 0 && [docsWithField_ getWithInt:doc] == NO) {
+  if (docsWithField_ != nil && value_ == 0 && [docsWithField_ getWithInt:doc] == false) {
     count_ = 0;
   }
   else {

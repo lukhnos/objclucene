@@ -86,10 +86,12 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree
 
 @implementation OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)init__ {
   root_ = 0;
@@ -598,7 +600,7 @@ jint OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_up(OrgApache
   if (self->cur_ != 0 && IOSCharArray_Get(nil_chk(self->this$0_->sc_), self->cur_) == 0) {
     return IOSCharArray_Get(nil_chk(self->this$0_->lo_), self->cur_);
   }
-  jboolean climb = YES;
+  jboolean climb = true;
   while (climb) {
     i = [self->ns_ pop];
     ((OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item *) nil_chk(i))->child_++;
@@ -614,7 +616,7 @@ jint OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_up(OrgApache
         [self->ns_ pushWithId:[i clone]];
         res = IOSCharArray_Get(nil_chk(self->this$0_->hi_), i->parent_);
       }
-      climb = NO;
+      climb = false;
       break;
       case 2:
       res = IOSCharArray_Get(nil_chk(self->this$0_->hi_), i->parent_);
@@ -622,13 +624,13 @@ jint OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_up(OrgApache
       if ([((JavaLangStringBuilder *) nil_chk(self->ks_)) length] > 0) {
         [self->ks_ setLengthWithInt:[self->ks_ length] - 1];
       }
-      climb = NO;
+      climb = false;
       break;
       default:
       if ([self->ns_ empty]) {
         return -1;
       }
-      climb = YES;
+      climb = true;
       break;
     }
   }
@@ -639,16 +641,16 @@ jint OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_run(OrgApach
   if (self->cur_ == -1) {
     return -1;
   }
-  jboolean leaf = NO;
-  while (YES) {
+  jboolean leaf = false;
+  while (true) {
     while (self->cur_ != 0) {
       if (IOSCharArray_Get(nil_chk(self->this$0_->sc_), self->cur_) == (jint) 0xFFFF) {
-        leaf = YES;
+        leaf = true;
         break;
       }
       [((JavaUtilStack *) nil_chk(self->ns_)) pushWithId:[new_OrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_Item_initWithOrgApacheLuceneAnalysisCompoundHyphenationTernaryTree_Iterator_withChar_withChar_(self, (jchar) self->cur_, 0x0000) autorelease]];
       if (IOSCharArray_Get(self->this$0_->sc_, self->cur_) == 0) {
-        leaf = YES;
+        leaf = true;
         break;
       }
       self->cur_ = IOSCharArray_Get(nil_chk(self->this$0_->lo_), self->cur_);

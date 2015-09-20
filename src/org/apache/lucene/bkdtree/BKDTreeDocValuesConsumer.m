@@ -42,10 +42,10 @@
 }
 
 - (void)close {
-  jboolean success = NO;
+  jboolean success = false;
   @try {
     OrgApacheLuceneCodecsCodecUtil_writeFooterWithOrgApacheLuceneStoreIndexOutput_(out_);
-    success = YES;
+    success = true;
   }
   @finally {
     if (success) {
@@ -57,7 +57,7 @@
   }
   NSString *metaFileName = OrgApacheLuceneIndexIndexFileNames_segmentFileNameWithNSString_withNSString_withNSString_(((OrgApacheLuceneIndexSegmentInfo *) nil_chk(((OrgApacheLuceneIndexSegmentWriteState *) nil_chk(state_))->segmentInfo_))->name_, state_->segmentSuffix_, OrgApacheLuceneBkdtreeBKDTreeDocValuesFormat_META_EXTENSION_);
   OrgApacheLuceneStoreIndexOutput *metaOut = [((OrgApacheLuceneStoreDirectory *) nil_chk(state_->directory_)) createOutputWithNSString:metaFileName withOrgApacheLuceneStoreIOContext:state_->context_];
-  success = NO;
+  success = false;
   @try {
     OrgApacheLuceneCodecsCodecUtil_writeIndexHeaderWithOrgApacheLuceneStoreDataOutput_withNSString_withInt_withByteArray_withNSString_(metaOut, OrgApacheLuceneBkdtreeBKDTreeDocValuesFormat_META_CODEC_NAME_, OrgApacheLuceneBkdtreeBKDTreeDocValuesFormat_META_VERSION_CURRENT, [state_->segmentInfo_ getId], state_->segmentSuffix_);
     [((OrgApacheLuceneStoreIndexOutput *) nil_chk(metaOut)) writeVIntWithInt:[((id<JavaUtilMap>) nil_chk(fieldIndexFPs_)) size]];
@@ -66,7 +66,7 @@
       [metaOut writeVLongWithLong:[((JavaLangLong *) nil_chk([ent getValue])) longLongValue]];
     }
     OrgApacheLuceneCodecsCodecUtil_writeFooterWithOrgApacheLuceneStoreIndexOutput_(metaOut);
-    success = YES;
+    success = true;
   }
   @finally {
     if (success) {

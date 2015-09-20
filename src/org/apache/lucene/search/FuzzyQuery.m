@@ -115,19 +115,19 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneSearchFuzzyQuery, term_, OrgApacheLuceneIndex
 }
 
 - (jboolean)isEqual:(id)obj {
-  if (self == obj) return YES;
-  if (![super isEqual:obj]) return NO;
-  if ([self getClass] != [nil_chk(obj) getClass]) return NO;
+  if (self == obj) return true;
+  if (![super isEqual:obj]) return false;
+  if ([self getClass] != [nil_chk(obj) getClass]) return false;
   OrgApacheLuceneSearchFuzzyQuery *other = (OrgApacheLuceneSearchFuzzyQuery *) check_class_cast(obj, [OrgApacheLuceneSearchFuzzyQuery class]);
-  if (maxEdits_ != other->maxEdits_) return NO;
-  if (prefixLength_ != other->prefixLength_) return NO;
-  if (maxExpansions_ != other->maxExpansions_) return NO;
-  if (transpositions_ != other->transpositions_) return NO;
+  if (maxEdits_ != other->maxEdits_) return false;
+  if (prefixLength_ != other->prefixLength_) return false;
+  if (maxExpansions_ != other->maxExpansions_) return false;
+  if (transpositions_ != other->transpositions_) return false;
   if (term_ == nil) {
-    if (other->term_ != nil) return NO;
+    if (other->term_ != nil) return false;
   }
-  else if (![term_ isEqual:other->term_]) return NO;
-  return YES;
+  else if (![term_ isEqual:other->term_]) return false;
+  return true;
 }
 
 + (jint)floatToEditsWithFloat:(jfloat)minimumSimilarity

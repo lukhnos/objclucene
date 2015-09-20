@@ -72,8 +72,8 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWr
 }
 
 - (jboolean)isEqual:(id)o {
-  if ([super isEqual:o] == NO) {
-    return NO;
+  if ([super isEqual:o] == false) {
+    return false;
   }
   OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper *that = (OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper *) check_class_cast(o, [OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper class]);
   return [((OrgApacheLuceneSearchGeoPointTermQuery *) nil_chk(self->query_)) isEqual:((OrgApacheLuceneSearchGeoPointTermQueryConstantScoreWrapper *) nil_chk(that))->query_] && [self getBoost] == [that getBoost];

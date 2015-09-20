@@ -42,13 +42,13 @@ __attribute__((unused)) static jint OrgApacheLuceneSearchSpansNearSpansOrdered_a
 
 - (jboolean)twoPhaseCurrentDocMatches {
   JreAssert((OrgApacheLuceneSearchSpansNearSpansOrdered_unpositioned(self)), (@"org/apache/lucene/search/spans/NearSpansOrdered.java:58 condition failed: assert unpositioned();"));
-  oneExhaustedInCurrentDoc_ = NO;
+  oneExhaustedInCurrentDoc_ = false;
   while ([((OrgApacheLuceneSearchSpansSpans *) nil_chk(IOSObjectArray_Get(nil_chk(subSpans_), 0))) nextStartPosition] != OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS && !oneExhaustedInCurrentDoc_) {
     if (OrgApacheLuceneSearchSpansNearSpansOrdered_stretchToOrder(self) && matchWidth_ <= allowedSlop_) {
-      return atFirstInCurrentDoc_ = YES;
+      return atFirstInCurrentDoc_ = true;
     }
   }
-  return NO;
+  return false;
 }
 
 - (jboolean)unpositioned {
@@ -57,10 +57,10 @@ __attribute__((unused)) static jint OrgApacheLuceneSearchSpansNearSpansOrdered_a
 
 - (jint)nextStartPosition {
   if (atFirstInCurrentDoc_) {
-    atFirstInCurrentDoc_ = NO;
+    atFirstInCurrentDoc_ = false;
     return matchStart_;
   }
-  oneExhaustedInCurrentDoc_ = NO;
+  oneExhaustedInCurrentDoc_ = false;
   while ([((OrgApacheLuceneSearchSpansSpans *) nil_chk(IOSObjectArray_Get(nil_chk(subSpans_), 0))) nextStartPosition] != OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS && !oneExhaustedInCurrentDoc_) {
     if (OrgApacheLuceneSearchSpansNearSpansOrdered_stretchToOrder(self) && matchWidth_ <= allowedSlop_) {
       return matchStart_;
@@ -136,7 +136,7 @@ void OrgApacheLuceneSearchSpansNearSpansOrdered_initWithOrgApacheLuceneSearchSpa
   self->matchStart_ = -1;
   self->matchEnd_ = -1;
   self->matchWidth_ = -1;
-  self->atFirstInCurrentDoc_ = YES;
+  self->atFirstInCurrentDoc_ = true;
 }
 
 OrgApacheLuceneSearchSpansNearSpansOrdered *new_OrgApacheLuceneSearchSpansNearSpansOrdered_initWithOrgApacheLuceneSearchSpansSpanNearQuery_withJavaUtilList_(OrgApacheLuceneSearchSpansSpanNearQuery *query, id<JavaUtilList> subSpans) {
@@ -152,10 +152,10 @@ jboolean OrgApacheLuceneSearchSpansNearSpansOrdered_unpositioned(OrgApacheLucene
     OrgApacheLuceneSearchSpansSpans * const *e__ = b__ + a__->size_;
     while (b__ < e__) {
       OrgApacheLuceneSearchSpansSpans *span = *b__++;
-      if ([((OrgApacheLuceneSearchSpansSpans *) nil_chk(span)) startPosition] != -1) return NO;
+      if ([((OrgApacheLuceneSearchSpansSpans *) nil_chk(span)) startPosition] != -1) return false;
     }
   }
-  return YES;
+  return true;
 }
 
 jboolean OrgApacheLuceneSearchSpansNearSpansOrdered_stretchToOrder(OrgApacheLuceneSearchSpansNearSpansOrdered *self) {
@@ -169,14 +169,14 @@ jboolean OrgApacheLuceneSearchSpansNearSpansOrdered_stretchToOrder(OrgApacheLuce
     JreAssert(([((OrgApacheLuceneSearchSpansSpans *) nil_chk(spans)) startPosition] != OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS), (@"org/apache/lucene/search/spans/NearSpansOrdered.java:105 condition failed: assert spans.startPosition() != NO_MORE_POSITIONS;"));
     JreAssert(([spans endPosition] != OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS), (@"org/apache/lucene/search/spans/NearSpansOrdered.java:106 condition failed: assert spans.endPosition() != NO_MORE_POSITIONS;"));
     if (OrgApacheLuceneSearchSpansNearSpansOrdered_advancePositionWithOrgApacheLuceneSearchSpansSpans_withInt_(spans, [prevSpans endPosition]) == OrgApacheLuceneSearchSpansSpans_NO_MORE_POSITIONS) {
-      self->oneExhaustedInCurrentDoc_ = YES;
-      return NO;
+      self->oneExhaustedInCurrentDoc_ = true;
+      return false;
     }
     self->matchWidth_ += ([spans startPosition] - [prevSpans endPosition]);
     prevSpans = spans;
   }
   self->matchEnd_ = [((OrgApacheLuceneSearchSpansSpans *) nil_chk(IOSObjectArray_Get(self->subSpans_, self->subSpans_->size_ - 1))) endPosition];
-  return YES;
+  return true;
 }
 
 jint OrgApacheLuceneSearchSpansNearSpansOrdered_advancePositionWithOrgApacheLuceneSearchSpansSpans_withInt_(OrgApacheLuceneSearchSpansSpans *spans, jint position) {

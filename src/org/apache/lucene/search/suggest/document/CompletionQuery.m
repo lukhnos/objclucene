@@ -61,7 +61,7 @@ __attribute__((unused)) static void OrgApacheLuceneSearchSuggestDocumentCompleti
 
 - (OrgApacheLuceneSearchQuery *)rewriteWithOrgApacheLuceneIndexIndexReader:(OrgApacheLuceneIndexIndexReader *)reader {
   jbyte type = 0;
-  jboolean first = YES;
+  jboolean first = true;
   OrgApacheLuceneIndexTerms *terms;
   for (OrgApacheLuceneIndexLeafReaderContext * __strong context in nil_chk([((OrgApacheLuceneIndexIndexReader *) nil_chk(reader)) leaves])) {
     OrgApacheLuceneIndexLeafReader *leafReader = [((OrgApacheLuceneIndexLeafReaderContext *) nil_chk(context)) reader];
@@ -78,14 +78,14 @@ __attribute__((unused)) static void OrgApacheLuceneSearchSuggestDocumentCompleti
       jbyte t = [((OrgApacheLuceneSearchSuggestDocumentCompletionTerms *) nil_chk(completionTerms)) getType];
       if (first) {
         type = t;
-        first = NO;
+        first = false;
       }
       else if (type != t) {
         @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$", [self getField], @" has values of multiple types")) autorelease];
       }
     }
   }
-  if (first == NO) {
+  if (first == false) {
     if ([self isKindOfClass:[OrgApacheLuceneSearchSuggestDocumentContextQuery class]]) {
       if (type == OrgApacheLuceneSearchSuggestDocumentSuggestField_TYPE) {
         @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$$$", [[self getClass] getSimpleName], @" can not be executed against a non context-enabled SuggestField: ", [self getField])) autorelease];

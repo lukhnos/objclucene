@@ -88,7 +88,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneBkdtreeBKDTreeDocValuesProducer, delegate_, O
       }
       [((OrgApacheLuceneStoreIndexInput *) nil_chk(datIn_)) seekWithLong:[((JavaLangLong *) nil_chk(fp)) longLongValue]];
       treeReader = [new_OrgApacheLuceneBkdtreeBKDTreeReader_initWithOrgApacheLuceneStoreIndexInput_withInt_(datIn_, maxDoc_) autorelease];
-      if (merging_ == NO) {
+      if (merging_ == false) {
         [treeReaders_ putWithId:field->name_ withId:treeReader];
         [((JavaUtilConcurrentAtomicAtomicLong *) nil_chk(ramBytesUsed_)) addAndGetWithLong:[treeReader ramBytesUsed]];
       }
@@ -207,7 +207,7 @@ void OrgApacheLuceneBkdtreeBKDTreeDocValuesProducer_initWithOrgApacheLuceneCodec
   JreStrongAssignAndConsume(&self->ramBytesUsed_, new_JavaUtilConcurrentAtomicAtomicLong_initWithLong_(OrgApacheLuceneUtilRamUsageEstimator_shallowSizeOfInstanceWithIOSClass_([self getClass])));
   self->maxDoc_ = [state->segmentInfo_ maxDoc];
   JreStrongAssign(&self->delegate_, delegate);
-  self->merging_ = NO;
+  self->merging_ = false;
 }
 
 OrgApacheLuceneBkdtreeBKDTreeDocValuesProducer *new_OrgApacheLuceneBkdtreeBKDTreeDocValuesProducer_initWithOrgApacheLuceneCodecsDocValuesProducer_withOrgApacheLuceneIndexSegmentReadState_(OrgApacheLuceneCodecsDocValuesProducer *delegate, OrgApacheLuceneIndexSegmentReadState *state) {
@@ -226,7 +226,7 @@ void OrgApacheLuceneBkdtreeBKDTreeDocValuesProducer_initWithOrgApacheLuceneBkdtr
   JreStrongAssign(&self->delegate_, [((OrgApacheLuceneCodecsDocValuesProducer *) nil_chk(orig->delegate_)) getMergeInstance]);
   [self->fieldToIndexFPs_ putAllWithJavaUtilMap:orig->fieldToIndexFPs_];
   [self->treeReaders_ putAllWithJavaUtilMap:orig->treeReaders_];
-  self->merging_ = YES;
+  self->merging_ = true;
   self->maxDoc_ = orig->maxDoc_;
 }
 

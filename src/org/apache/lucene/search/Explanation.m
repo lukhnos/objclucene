@@ -155,22 +155,22 @@ __attribute__((unused)) static NSString *OrgApacheLuceneSearchExplanation_toStri
 
 OrgApacheLuceneSearchExplanation *OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withJavaUtilCollection_(jfloat value, NSString *description_, id<JavaUtilCollection> details) {
   OrgApacheLuceneSearchExplanation_initialize();
-  return [new_OrgApacheLuceneSearchExplanation_initWithBoolean_withFloat_withNSString_withJavaUtilCollection_(YES, value, description_, details) autorelease];
+  return [new_OrgApacheLuceneSearchExplanation_initWithBoolean_withFloat_withNSString_withJavaUtilCollection_(true, value, description_, details) autorelease];
 }
 
 OrgApacheLuceneSearchExplanation *OrgApacheLuceneSearchExplanation_matchWithFloat_withNSString_withOrgApacheLuceneSearchExplanationArray_(jfloat value, NSString *description_, IOSObjectArray *details) {
   OrgApacheLuceneSearchExplanation_initialize();
-  return [new_OrgApacheLuceneSearchExplanation_initWithBoolean_withFloat_withNSString_withJavaUtilCollection_(YES, value, description_, JavaUtilArrays_asListWithNSObjectArray_(details)) autorelease];
+  return [new_OrgApacheLuceneSearchExplanation_initWithBoolean_withFloat_withNSString_withJavaUtilCollection_(true, value, description_, JavaUtilArrays_asListWithNSObjectArray_(details)) autorelease];
 }
 
 OrgApacheLuceneSearchExplanation *OrgApacheLuceneSearchExplanation_noMatchWithNSString_withJavaUtilCollection_(NSString *description_, id<JavaUtilCollection> details) {
   OrgApacheLuceneSearchExplanation_initialize();
-  return [new_OrgApacheLuceneSearchExplanation_initWithBoolean_withFloat_withNSString_withJavaUtilCollection_(NO, 0.0f, description_, details) autorelease];
+  return [new_OrgApacheLuceneSearchExplanation_initWithBoolean_withFloat_withNSString_withJavaUtilCollection_(false, 0.0f, description_, details) autorelease];
 }
 
 OrgApacheLuceneSearchExplanation *OrgApacheLuceneSearchExplanation_noMatchWithNSString_withOrgApacheLuceneSearchExplanationArray_(NSString *description_, IOSObjectArray *details) {
   OrgApacheLuceneSearchExplanation_initialize();
-  return [new_OrgApacheLuceneSearchExplanation_initWithBoolean_withFloat_withNSString_withJavaUtilCollection_(NO, 0.0f, description_, JavaUtilArrays_asListWithNSObjectArray_(details)) autorelease];
+  return [new_OrgApacheLuceneSearchExplanation_initWithBoolean_withFloat_withNSString_withJavaUtilCollection_(false, 0.0f, description_, JavaUtilArrays_asListWithNSObjectArray_(details)) autorelease];
 }
 
 void OrgApacheLuceneSearchExplanation_initWithBoolean_withFloat_withNSString_withJavaUtilCollection_(OrgApacheLuceneSearchExplanation *self, jboolean match, jfloat value, NSString *description_, id<JavaUtilCollection> details) {

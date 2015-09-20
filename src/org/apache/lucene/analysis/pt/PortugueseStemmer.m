@@ -101,10 +101,12 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisPtPortugueseStemmer)
   return len;
 }
 
+J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneAnalysisPtPortugueseStemmer_init(self);
   return self;
 }
+J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisPtPortugueseStemmer class]) {
