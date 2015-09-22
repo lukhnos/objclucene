@@ -114,6 +114,76 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonAutomaton)
 
 #endif
 
+#if !defined (_OrgApacheLuceneUtilAutomatonAutomaton_DestMinMaxSorter_) && (OrgApacheLuceneUtilAutomatonAutomaton_INCLUDE_ALL || OrgApacheLuceneUtilAutomatonAutomaton_DestMinMaxSorter_INCLUDE)
+#define _OrgApacheLuceneUtilAutomatonAutomaton_DestMinMaxSorter_
+
+#define OrgApacheLuceneUtilInPlaceMergeSorter_RESTRICT 1
+#define OrgApacheLuceneUtilInPlaceMergeSorter_INCLUDE 1
+#include "org/apache/lucene/util/InPlaceMergeSorter.h"
+
+@class OrgApacheLuceneUtilAutomatonAutomaton;
+
+@interface OrgApacheLuceneUtilAutomatonAutomaton_DestMinMaxSorter : OrgApacheLuceneUtilInPlaceMergeSorter
+
+#pragma mark Protected
+
+- (jint)compareWithInt:(jint)i
+               withInt:(jint)j;
+
+- (void)swapWithInt:(jint)i
+            withInt:(jint)j;
+
+#pragma mark Package-Private
+
+- (instancetype)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)outer$;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilAutomatonAutomaton_DestMinMaxSorter)
+
+FOUNDATION_EXPORT void OrgApacheLuceneUtilAutomatonAutomaton_DestMinMaxSorter_initWithOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneUtilAutomatonAutomaton_DestMinMaxSorter *self, OrgApacheLuceneUtilAutomatonAutomaton *outer$);
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonAutomaton_DestMinMaxSorter *new_OrgApacheLuceneUtilAutomatonAutomaton_DestMinMaxSorter_initWithOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneUtilAutomatonAutomaton *outer$) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonAutomaton_DestMinMaxSorter)
+
+#endif
+
+#if !defined (_OrgApacheLuceneUtilAutomatonAutomaton_MinMaxDestSorter_) && (OrgApacheLuceneUtilAutomatonAutomaton_INCLUDE_ALL || OrgApacheLuceneUtilAutomatonAutomaton_MinMaxDestSorter_INCLUDE)
+#define _OrgApacheLuceneUtilAutomatonAutomaton_MinMaxDestSorter_
+
+#define OrgApacheLuceneUtilInPlaceMergeSorter_RESTRICT 1
+#define OrgApacheLuceneUtilInPlaceMergeSorter_INCLUDE 1
+#include "org/apache/lucene/util/InPlaceMergeSorter.h"
+
+@class OrgApacheLuceneUtilAutomatonAutomaton;
+
+@interface OrgApacheLuceneUtilAutomatonAutomaton_MinMaxDestSorter : OrgApacheLuceneUtilInPlaceMergeSorter
+
+#pragma mark Protected
+
+- (jint)compareWithInt:(jint)i
+               withInt:(jint)j;
+
+- (void)swapWithInt:(jint)i
+            withInt:(jint)j;
+
+#pragma mark Package-Private
+
+- (instancetype)initWithOrgApacheLuceneUtilAutomatonAutomaton:(OrgApacheLuceneUtilAutomatonAutomaton *)outer$;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilAutomatonAutomaton_MinMaxDestSorter)
+
+FOUNDATION_EXPORT void OrgApacheLuceneUtilAutomatonAutomaton_MinMaxDestSorter_initWithOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneUtilAutomatonAutomaton_MinMaxDestSorter *self, OrgApacheLuceneUtilAutomatonAutomaton *outer$);
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonAutomaton_MinMaxDestSorter *new_OrgApacheLuceneUtilAutomatonAutomaton_MinMaxDestSorter_initWithOrgApacheLuceneUtilAutomatonAutomaton_(OrgApacheLuceneUtilAutomatonAutomaton *outer$) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonAutomaton_MinMaxDestSorter)
+
+#endif
+
 #if !defined (_OrgApacheLuceneUtilAutomatonAutomaton_Builder_) && (OrgApacheLuceneUtilAutomatonAutomaton_INCLUDE_ALL || OrgApacheLuceneUtilAutomatonAutomaton_Builder_INCLUDE)
 #define _OrgApacheLuceneUtilAutomatonAutomaton_Builder_
 
@@ -168,6 +238,41 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilAutomatonAutomaton_Builder_initWithInt
 FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonAutomaton_Builder *new_OrgApacheLuceneUtilAutomatonAutomaton_Builder_initWithInt_withInt_(jint numStates, jint numTransitions) NS_RETURNS_RETAINED;
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonAutomaton_Builder)
+
+#endif
+
+#if !defined (_OrgApacheLuceneUtilAutomatonAutomaton_Builder_OurSorter_) && (OrgApacheLuceneUtilAutomatonAutomaton_INCLUDE_ALL || OrgApacheLuceneUtilAutomatonAutomaton_Builder_OurSorter_INCLUDE)
+#define _OrgApacheLuceneUtilAutomatonAutomaton_Builder_OurSorter_
+
+#define OrgApacheLuceneUtilInPlaceMergeSorter_RESTRICT 1
+#define OrgApacheLuceneUtilInPlaceMergeSorter_INCLUDE 1
+#include "org/apache/lucene/util/InPlaceMergeSorter.h"
+
+@class OrgApacheLuceneUtilAutomatonAutomaton_Builder;
+
+@interface OrgApacheLuceneUtilAutomatonAutomaton_Builder_OurSorter : OrgApacheLuceneUtilInPlaceMergeSorter
+
+#pragma mark Protected
+
+- (jint)compareWithInt:(jint)i
+               withInt:(jint)j;
+
+- (void)swapWithInt:(jint)i
+            withInt:(jint)j;
+
+#pragma mark Package-Private
+
+- (instancetype)initWithOrgApacheLuceneUtilAutomatonAutomaton_Builder:(OrgApacheLuceneUtilAutomatonAutomaton_Builder *)outer$;
+
+@end
+
+J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneUtilAutomatonAutomaton_Builder_OurSorter)
+
+FOUNDATION_EXPORT void OrgApacheLuceneUtilAutomatonAutomaton_Builder_OurSorter_initWithOrgApacheLuceneUtilAutomatonAutomaton_Builder_(OrgApacheLuceneUtilAutomatonAutomaton_Builder_OurSorter *self, OrgApacheLuceneUtilAutomatonAutomaton_Builder *outer$);
+
+FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonAutomaton_Builder_OurSorter *new_OrgApacheLuceneUtilAutomatonAutomaton_Builder_OurSorter_initWithOrgApacheLuceneUtilAutomatonAutomaton_Builder_(OrgApacheLuceneUtilAutomatonAutomaton_Builder *outer$) NS_RETURNS_RETAINED;
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonAutomaton_Builder_OurSorter)
 
 #endif
 

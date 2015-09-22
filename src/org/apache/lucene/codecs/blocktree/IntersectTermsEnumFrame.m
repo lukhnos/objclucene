@@ -27,12 +27,10 @@
 
 @interface OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame () {
  @public
-  OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum *ite_;
+  __weak OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum *ite_;
 }
 
 @end
-
-J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame, ite_, OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum *)
 
 @implementation OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame
 
@@ -97,7 +95,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame, ite_,
   [((OrgApacheLuceneStoreIndexInput *) nil_chk(((OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum *) nil_chk(ite_))->in_)) seekWithLong:fp_];
   jint code = [ite_->in_ readVInt];
   entCount_ = JreURShift32(code, 1);
-  JreAssert((entCount_ > 0), (@"org/apache/lucene/codecs/blocktree/IntersectTermsEnumFrame.java:187 condition failed: assert entCount > 0;"));
+  JreAssert((entCount_ > 0), (@"org/apache/lucene/codecs/blocktree/IntersectTermsEnumFrame.java:191 condition failed: assert entCount > 0;"));
   isLastInFloor_ = ((code & 1) != 0);
   code = [ite_->in_ readVInt];
   isLeafBlock_ = ((code & 1) != 0);
@@ -187,7 +185,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame, ite_,
       return false;
       case 3:
       if (suffix_ == 0) {
-        JreAssert((ord_ > 0), (@"org/apache/lucene/codecs/blocktree/IntersectTermsEnumFrame.java:298 condition failed: assert ord > 0;"));
+        JreAssert((ord_ > 0), (@"org/apache/lucene/codecs/blocktree/IntersectTermsEnumFrame.java:302 condition failed: assert ord > 0;"));
         OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame *parent = IOSObjectArray_Get(nil_chk(((OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum *) nil_chk(ite_))->stack_), ord_ - 1);
         floorSuffixLeadStart_ = IOSByteArray_Get(nil_chk(((OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame *) nil_chk(parent))->suffixBytes_), parent->startBytePos_ + parent->suffix_ - 1) & (jint) 0xff;
       }
@@ -199,7 +197,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame, ite_,
       floorSuffixLeadEnd_ = [suffixesReader_ readByte] & (jint) 0xff;
       return false;
       default:
-      JreAssert((false), (@"org/apache/lucene/codecs/blocktree/IntersectTermsEnumFrame.java:310 condition failed: assert false;"));
+      JreAssert((false), (@"org/apache/lucene/codecs/blocktree/IntersectTermsEnumFrame.java:314 condition failed: assert false;"));
       return false;
     }
   }
@@ -212,7 +210,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame, ite_,
 - (void)decodeMetaData {
   jint limit = [self getTermBlockOrd];
   jboolean absolute = metaDataUpto_ == 0;
-  JreAssert((limit > 0), (@"org/apache/lucene/codecs/blocktree/IntersectTermsEnumFrame.java:325 condition failed: assert limit > 0;"));
+  JreAssert((limit > 0), (@"org/apache/lucene/codecs/blocktree/IntersectTermsEnumFrame.java:329 condition failed: assert limit > 0;"));
   while (metaDataUpto_ < limit) {
     ((OrgApacheLuceneCodecsBlockTermState *) nil_chk(termState_))->docFreq_ = [((OrgApacheLuceneStoreByteArrayDataInput *) nil_chk(statsReader_)) readVInt];
     if ([((OrgApacheLuceneIndexFieldInfo *) nil_chk(((OrgApacheLuceneCodecsBlocktreeFieldReader *) nil_chk(((OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum *) nil_chk(ite_))->fr_))->fieldInfo_)) getIndexOptions] != JreLoadStatic(OrgApacheLuceneIndexIndexOptionsEnum, DOCS)) {
@@ -242,8 +240,12 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame, ite_,
   RELEASE_(bytes_);
   RELEASE_(bytesReader_);
   RELEASE_(outputPrefix_);
-  RELEASE_(ite_);
   [super dealloc];
+}
+
+- (void)__javaClone {
+  [super __javaClone];
+  [ite_ release];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -314,7 +316,7 @@ void OrgApacheLuceneCodecsBlocktreeIntersectTermsEnumFrame_initWithOrgApacheLuce
   JreStrongAssignAndConsume(&self->transition_, new_OrgApacheLuceneUtilAutomatonTransition_init());
   JreStrongAssignAndConsume(&self->bytes_, [IOSByteArray newArrayWithLength:32]);
   JreStrongAssignAndConsume(&self->bytesReader_, new_OrgApacheLuceneStoreByteArrayDataInput_init());
-  JreStrongAssign(&self->ite_, ite);
+  self->ite_ = ite;
   self->ord_ = ord;
   JreStrongAssign(&self->termState_, [((OrgApacheLuceneCodecsPostingsReaderBase *) nil_chk(((OrgApacheLuceneCodecsBlocktreeBlockTreeTermsReader *) nil_chk(((OrgApacheLuceneCodecsBlocktreeFieldReader *) nil_chk(((OrgApacheLuceneCodecsBlocktreeIntersectTermsEnum *) nil_chk(ite))->fr_))->parent_))->postingsReader_)) newTermState]);
   ((OrgApacheLuceneCodecsBlockTermState *) nil_chk(self->termState_))->totalTermFreq_ = -1;
