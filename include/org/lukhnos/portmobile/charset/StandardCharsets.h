@@ -5,20 +5,28 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgLukhnosPortmobileCharsetStandardCharsets_INCLUDE_ALL")
-#if OrgLukhnosPortmobileCharsetStandardCharsets_RESTRICT
-#define OrgLukhnosPortmobileCharsetStandardCharsets_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgLukhnosPortmobileCharsetStandardCharsets")
+#ifdef RESTRICT_OrgLukhnosPortmobileCharsetStandardCharsets
+#define INCLUDE_ALL_OrgLukhnosPortmobileCharsetStandardCharsets 0
 #else
-#define OrgLukhnosPortmobileCharsetStandardCharsets_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgLukhnosPortmobileCharsetStandardCharsets 1
 #endif
-#undef OrgLukhnosPortmobileCharsetStandardCharsets_RESTRICT
+#undef RESTRICT_OrgLukhnosPortmobileCharsetStandardCharsets
 
-#if !defined (_OrgLukhnosPortmobileCharsetStandardCharsets_) && (OrgLukhnosPortmobileCharsetStandardCharsets_INCLUDE_ALL || OrgLukhnosPortmobileCharsetStandardCharsets_INCLUDE)
-#define _OrgLukhnosPortmobileCharsetStandardCharsets_
+#if !defined (OrgLukhnosPortmobileCharsetStandardCharsets_) && (INCLUDE_ALL_OrgLukhnosPortmobileCharsetStandardCharsets || defined(INCLUDE_OrgLukhnosPortmobileCharsetStandardCharsets))
+#define OrgLukhnosPortmobileCharsetStandardCharsets_
 
 @class JavaNioCharsetCharset;
 
+/*!
+ @brief This is for Android compatibility because java.nio.charset.Charset is not available until API
+ level 19.
+ */
 @interface OrgLukhnosPortmobileCharsetStandardCharsets : NSObject
+
++ (JavaNioCharsetCharset *)ISO_8859_1;
+
++ (JavaNioCharsetCharset *)UTF_8;
 
 #pragma mark Public
 
@@ -28,18 +36,24 @@
 
 J2OBJC_STATIC_INIT(OrgLukhnosPortmobileCharsetStandardCharsets)
 
-FOUNDATION_EXPORT JavaNioCharsetCharset *OrgLukhnosPortmobileCharsetStandardCharsets_ISO_8859_1_;
-J2OBJC_STATIC_FIELD_GETTER(OrgLukhnosPortmobileCharsetStandardCharsets, ISO_8859_1_, JavaNioCharsetCharset *)
+inline JavaNioCharsetCharset *OrgLukhnosPortmobileCharsetStandardCharsets_get_ISO_8859_1();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT JavaNioCharsetCharset *OrgLukhnosPortmobileCharsetStandardCharsets_ISO_8859_1;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgLukhnosPortmobileCharsetStandardCharsets, ISO_8859_1, JavaNioCharsetCharset *)
 
-FOUNDATION_EXPORT JavaNioCharsetCharset *OrgLukhnosPortmobileCharsetStandardCharsets_UTF_8_;
-J2OBJC_STATIC_FIELD_GETTER(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8_, JavaNioCharsetCharset *)
+inline JavaNioCharsetCharset *OrgLukhnosPortmobileCharsetStandardCharsets_get_UTF_8();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT JavaNioCharsetCharset *OrgLukhnosPortmobileCharsetStandardCharsets_UTF_8;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgLukhnosPortmobileCharsetStandardCharsets, UTF_8, JavaNioCharsetCharset *)
 
 FOUNDATION_EXPORT void OrgLukhnosPortmobileCharsetStandardCharsets_init(OrgLukhnosPortmobileCharsetStandardCharsets *self);
 
 FOUNDATION_EXPORT OrgLukhnosPortmobileCharsetStandardCharsets *new_OrgLukhnosPortmobileCharsetStandardCharsets_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgLukhnosPortmobileCharsetStandardCharsets *create_OrgLukhnosPortmobileCharsetStandardCharsets_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileCharsetStandardCharsets)
 
 #endif
 
-#pragma pop_macro("OrgLukhnosPortmobileCharsetStandardCharsets_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgLukhnosPortmobileCharsetStandardCharsets")

@@ -3,14 +3,17 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/ga/package-info.java
 //
 
+/*!
+ @brief Analyzer for Irish.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisGaPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisGaPackage_info_RESTRICT
-#define OrgApacheLuceneAnalysisGaPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisGaPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisGaPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisGaPackage_info 0
 #else
-#define OrgApacheLuceneAnalysisGaPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisGaPackage_info 1
 #endif
-#undef OrgApacheLuceneAnalysisGaPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisGaPackage_info
 
-#pragma pop_macro("OrgApacheLuceneAnalysisGaPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisGaPackage_info")

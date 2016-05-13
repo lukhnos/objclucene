@@ -5,56 +5,68 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgLukhnosPortmobileFileStandardOpenOption_INCLUDE_ALL")
-#if OrgLukhnosPortmobileFileStandardOpenOption_RESTRICT
-#define OrgLukhnosPortmobileFileStandardOpenOption_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgLukhnosPortmobileFileStandardOpenOption")
+#ifdef RESTRICT_OrgLukhnosPortmobileFileStandardOpenOption
+#define INCLUDE_ALL_OrgLukhnosPortmobileFileStandardOpenOption 0
 #else
-#define OrgLukhnosPortmobileFileStandardOpenOption_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgLukhnosPortmobileFileStandardOpenOption 1
 #endif
-#undef OrgLukhnosPortmobileFileStandardOpenOption_RESTRICT
+#undef RESTRICT_OrgLukhnosPortmobileFileStandardOpenOption
 
-#if !defined (_OrgLukhnosPortmobileFileStandardOpenOptionEnum_) && (OrgLukhnosPortmobileFileStandardOpenOption_INCLUDE_ALL || OrgLukhnosPortmobileFileStandardOpenOptionEnum_INCLUDE)
-#define _OrgLukhnosPortmobileFileStandardOpenOptionEnum_
+#if !defined (OrgLukhnosPortmobileFileStandardOpenOption_) && (INCLUDE_ALL_OrgLukhnosPortmobileFileStandardOpenOption || defined(INCLUDE_OrgLukhnosPortmobileFileStandardOpenOption))
+#define OrgLukhnosPortmobileFileStandardOpenOption_
 
-#define JavaLangEnum_RESTRICT 1
-#define JavaLangEnum_INCLUDE 1
+#define RESTRICT_JavaLangEnum 1
+#define INCLUDE_JavaLangEnum 1
 #include "java/lang/Enum.h"
 
-typedef NS_ENUM(NSUInteger, OrgLukhnosPortmobileFileStandardOpenOption) {
-  OrgLukhnosPortmobileFileStandardOpenOption_READ = 0,
-  OrgLukhnosPortmobileFileStandardOpenOption_WRITE = 1,
-  OrgLukhnosPortmobileFileStandardOpenOption_CREATE = 2,
+typedef NS_ENUM(NSUInteger, OrgLukhnosPortmobileFileStandardOpenOption_Enum) {
+  OrgLukhnosPortmobileFileStandardOpenOption_Enum_READ = 0,
+  OrgLukhnosPortmobileFileStandardOpenOption_Enum_WRITE = 1,
+  OrgLukhnosPortmobileFileStandardOpenOption_Enum_CREATE = 2,
 };
 
-@interface OrgLukhnosPortmobileFileStandardOpenOptionEnum : JavaLangEnum < NSCopying >
+@interface OrgLukhnosPortmobileFileStandardOpenOption : JavaLangEnum < NSCopying >
+
++ (OrgLukhnosPortmobileFileStandardOpenOption *)READ;
+
++ (OrgLukhnosPortmobileFileStandardOpenOption *)WRITE;
+
++ (OrgLukhnosPortmobileFileStandardOpenOption *)CREATE;
 
 #pragma mark Package-Private
 
 + (IOSObjectArray *)values;
-FOUNDATION_EXPORT IOSObjectArray *OrgLukhnosPortmobileFileStandardOpenOptionEnum_values();
 
-+ (OrgLukhnosPortmobileFileStandardOpenOptionEnum *)valueOfWithNSString:(NSString *)name;
-FOUNDATION_EXPORT OrgLukhnosPortmobileFileStandardOpenOptionEnum *OrgLukhnosPortmobileFileStandardOpenOptionEnum_valueOfWithNSString_(NSString *name);
++ (OrgLukhnosPortmobileFileStandardOpenOption *)valueOfWithNSString:(NSString *)name;
 
 - (id)copyWithZone:(NSZone *)zone;
+- (OrgLukhnosPortmobileFileStandardOpenOption_Enum)toNSEnum;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgLukhnosPortmobileFileStandardOpenOptionEnum)
+J2OBJC_STATIC_INIT(OrgLukhnosPortmobileFileStandardOpenOption)
 
-FOUNDATION_EXPORT OrgLukhnosPortmobileFileStandardOpenOptionEnum *OrgLukhnosPortmobileFileStandardOpenOptionEnum_values_[];
+/*! INTERNAL ONLY - Use enum accessors declared below. */
+FOUNDATION_EXPORT OrgLukhnosPortmobileFileStandardOpenOption *OrgLukhnosPortmobileFileStandardOpenOption_values_[];
 
-#define OrgLukhnosPortmobileFileStandardOpenOptionEnum_READ OrgLukhnosPortmobileFileStandardOpenOptionEnum_values_[OrgLukhnosPortmobileFileStandardOpenOption_READ]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgLukhnosPortmobileFileStandardOpenOptionEnum, READ)
+inline OrgLukhnosPortmobileFileStandardOpenOption *OrgLukhnosPortmobileFileStandardOpenOption_get_READ();
+J2OBJC_ENUM_CONSTANT(OrgLukhnosPortmobileFileStandardOpenOption, READ)
 
-#define OrgLukhnosPortmobileFileStandardOpenOptionEnum_WRITE OrgLukhnosPortmobileFileStandardOpenOptionEnum_values_[OrgLukhnosPortmobileFileStandardOpenOption_WRITE]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgLukhnosPortmobileFileStandardOpenOptionEnum, WRITE)
+inline OrgLukhnosPortmobileFileStandardOpenOption *OrgLukhnosPortmobileFileStandardOpenOption_get_WRITE();
+J2OBJC_ENUM_CONSTANT(OrgLukhnosPortmobileFileStandardOpenOption, WRITE)
 
-#define OrgLukhnosPortmobileFileStandardOpenOptionEnum_CREATE OrgLukhnosPortmobileFileStandardOpenOptionEnum_values_[OrgLukhnosPortmobileFileStandardOpenOption_CREATE]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgLukhnosPortmobileFileStandardOpenOptionEnum, CREATE)
+inline OrgLukhnosPortmobileFileStandardOpenOption *OrgLukhnosPortmobileFileStandardOpenOption_get_CREATE();
+J2OBJC_ENUM_CONSTANT(OrgLukhnosPortmobileFileStandardOpenOption, CREATE)
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileFileStandardOpenOptionEnum)
+FOUNDATION_EXPORT IOSObjectArray *OrgLukhnosPortmobileFileStandardOpenOption_values();
+
+FOUNDATION_EXPORT OrgLukhnosPortmobileFileStandardOpenOption *OrgLukhnosPortmobileFileStandardOpenOption_valueOfWithNSString_(NSString *name);
+
+FOUNDATION_EXPORT OrgLukhnosPortmobileFileStandardOpenOption *OrgLukhnosPortmobileFileStandardOpenOption_fromOrdinal(NSUInteger ordinal);
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileFileStandardOpenOption)
 
 #endif
 
-#pragma pop_macro("OrgLukhnosPortmobileFileStandardOpenOption_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgLukhnosPortmobileFileStandardOpenOption")

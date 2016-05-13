@@ -32,11 +32,6 @@ __attribute__((unused)) static jint OrgApacheLuceneAnalysisCharFilter_correctOff
   return OrgApacheLuceneAnalysisCharFilter_correctOffsetWithInt_(self, currentOff);
 }
 
-- (void)dealloc {
-  RELEASE_(input_);
-  [super dealloc];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithJavaIoReader:", "CharFilter", NULL, 0x1, NULL, NULL },
@@ -55,12 +50,12 @@ __attribute__((unused)) static jint OrgApacheLuceneAnalysisCharFilter_correctOff
 
 void OrgApacheLuceneAnalysisCharFilter_initWithJavaIoReader_(OrgApacheLuceneAnalysisCharFilter *self, JavaIoReader *input) {
   JavaIoReader_initWithId_(self, input);
-  JreStrongAssign(&self->input_, input);
+  self->input_ = input;
 }
 
 jint OrgApacheLuceneAnalysisCharFilter_correctOffsetWithInt_(OrgApacheLuceneAnalysisCharFilter *self, jint currentOff) {
   jint corrected = [self correctWithInt:currentOff];
-  return ([self->input_ isKindOfClass:[OrgApacheLuceneAnalysisCharFilter class]]) ? OrgApacheLuceneAnalysisCharFilter_correctOffsetWithInt_(nil_chk(((OrgApacheLuceneAnalysisCharFilter *) check_class_cast(self->input_, [OrgApacheLuceneAnalysisCharFilter class]))), corrected) : corrected;
+  return ([self->input_ isKindOfClass:[OrgApacheLuceneAnalysisCharFilter class]]) ? OrgApacheLuceneAnalysisCharFilter_correctOffsetWithInt_(nil_chk(((OrgApacheLuceneAnalysisCharFilter *) cast_chk(self->input_, [OrgApacheLuceneAnalysisCharFilter class]))), corrected) : corrected;
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCharFilter)

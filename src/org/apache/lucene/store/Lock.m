@@ -31,7 +31,7 @@ J2OBJC_IGNORE_DESIGNATED_END
   static const J2ObjcMethodInfo methods[] = {
     { "close", NULL, "V", 0x401, "Ljava.io.IOException;", NULL },
     { "ensureValid", NULL, "V", 0x401, "Ljava.io.IOException;", NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "Lock", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneStoreLock = { 2, "Lock", "org.apache.lucene.store", NULL, 0x401, 3, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneStoreLock;

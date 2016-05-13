@@ -5,19 +5,26 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisEnEnglishMinimalStemmer_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisEnEnglishMinimalStemmer_RESTRICT
-#define OrgApacheLuceneAnalysisEnEnglishMinimalStemmer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisEnEnglishMinimalStemmer")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisEnEnglishMinimalStemmer
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisEnEnglishMinimalStemmer 0
 #else
-#define OrgApacheLuceneAnalysisEnEnglishMinimalStemmer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisEnEnglishMinimalStemmer 1
 #endif
-#undef OrgApacheLuceneAnalysisEnEnglishMinimalStemmer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisEnEnglishMinimalStemmer
 
-#if !defined (_OrgApacheLuceneAnalysisEnEnglishMinimalStemmer_) && (OrgApacheLuceneAnalysisEnEnglishMinimalStemmer_INCLUDE_ALL || OrgApacheLuceneAnalysisEnEnglishMinimalStemmer_INCLUDE)
-#define _OrgApacheLuceneAnalysisEnEnglishMinimalStemmer_
+#if !defined (OrgApacheLuceneAnalysisEnEnglishMinimalStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisEnEnglishMinimalStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisEnEnglishMinimalStemmer))
+#define OrgApacheLuceneAnalysisEnEnglishMinimalStemmer_
 
 @class IOSCharArray;
 
+/*!
+ @brief Minimal plural stemmer for English.
+ <p>
+ This stemmer implements the "S-Stemmer" from
+ <i>How Effective Is Suffixing?</i>
+ Donna Harman.
+ */
 @interface OrgApacheLuceneAnalysisEnEnglishMinimalStemmer : NSObject
 
 #pragma mark Public
@@ -35,8 +42,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisEnEnglishMinimalStemmer_init(OrgAp
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisEnEnglishMinimalStemmer *new_OrgApacheLuceneAnalysisEnEnglishMinimalStemmer_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisEnEnglishMinimalStemmer *create_OrgApacheLuceneAnalysisEnEnglishMinimalStemmer_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisEnEnglishMinimalStemmer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisEnEnglishMinimalStemmer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisEnEnglishMinimalStemmer")

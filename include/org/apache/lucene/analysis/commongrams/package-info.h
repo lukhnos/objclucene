@@ -3,14 +3,17 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/commongrams/package-info.java
 //
 
+/*!
+ @brief Construct n-grams for frequently occurring terms and phrases.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisCommongramsPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisCommongramsPackage_info_RESTRICT
-#define OrgApacheLuceneAnalysisCommongramsPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCommongramsPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisCommongramsPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCommongramsPackage_info 0
 #else
-#define OrgApacheLuceneAnalysisCommongramsPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCommongramsPackage_info 1
 #endif
-#undef OrgApacheLuceneAnalysisCommongramsPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisCommongramsPackage_info
 
-#pragma pop_macro("OrgApacheLuceneAnalysisCommongramsPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCommongramsPackage_info")

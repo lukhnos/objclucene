@@ -5,16 +5,16 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgLukhnosPortmobileFileFileStore_INCLUDE_ALL")
-#if OrgLukhnosPortmobileFileFileStore_RESTRICT
-#define OrgLukhnosPortmobileFileFileStore_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgLukhnosPortmobileFileFileStore")
+#ifdef RESTRICT_OrgLukhnosPortmobileFileFileStore
+#define INCLUDE_ALL_OrgLukhnosPortmobileFileFileStore 0
 #else
-#define OrgLukhnosPortmobileFileFileStore_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgLukhnosPortmobileFileFileStore 1
 #endif
-#undef OrgLukhnosPortmobileFileFileStore_RESTRICT
+#undef RESTRICT_OrgLukhnosPortmobileFileFileStore
 
-#if !defined (_OrgLukhnosPortmobileFileFileStore_) && (OrgLukhnosPortmobileFileFileStore_INCLUDE_ALL || OrgLukhnosPortmobileFileFileStore_INCLUDE)
-#define _OrgLukhnosPortmobileFileFileStore_
+#if !defined (OrgLukhnosPortmobileFileFileStore_) && (INCLUDE_ALL_OrgLukhnosPortmobileFileFileStore || defined(INCLUDE_OrgLukhnosPortmobileFileFileStore))
+#define OrgLukhnosPortmobileFileFileStore_
 
 @interface OrgLukhnosPortmobileFileFileStore : NSObject
 
@@ -30,8 +30,10 @@ FOUNDATION_EXPORT void OrgLukhnosPortmobileFileFileStore_init(OrgLukhnosPortmobi
 
 FOUNDATION_EXPORT OrgLukhnosPortmobileFileFileStore *new_OrgLukhnosPortmobileFileFileStore_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgLukhnosPortmobileFileFileStore *create_OrgLukhnosPortmobileFileFileStore_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileFileFileStore)
 
 #endif
 
-#pragma pop_macro("OrgLukhnosPortmobileFileFileStore_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgLukhnosPortmobileFileFileStore")

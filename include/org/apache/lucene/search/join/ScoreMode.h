@@ -5,64 +5,98 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchJoinScoreMode_INCLUDE_ALL")
-#if OrgApacheLuceneSearchJoinScoreMode_RESTRICT
-#define OrgApacheLuceneSearchJoinScoreMode_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchJoinScoreMode")
+#ifdef RESTRICT_OrgApacheLuceneSearchJoinScoreMode
+#define INCLUDE_ALL_OrgApacheLuceneSearchJoinScoreMode 0
 #else
-#define OrgApacheLuceneSearchJoinScoreMode_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchJoinScoreMode 1
 #endif
-#undef OrgApacheLuceneSearchJoinScoreMode_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchJoinScoreMode
 
-#if !defined (_OrgApacheLuceneSearchJoinScoreModeEnum_) && (OrgApacheLuceneSearchJoinScoreMode_INCLUDE_ALL || OrgApacheLuceneSearchJoinScoreModeEnum_INCLUDE)
-#define _OrgApacheLuceneSearchJoinScoreModeEnum_
+#if !defined (OrgApacheLuceneSearchJoinScoreMode_) && (INCLUDE_ALL_OrgApacheLuceneSearchJoinScoreMode || defined(INCLUDE_OrgApacheLuceneSearchJoinScoreMode))
+#define OrgApacheLuceneSearchJoinScoreMode_
 
-#define JavaLangEnum_RESTRICT 1
-#define JavaLangEnum_INCLUDE 1
+#define RESTRICT_JavaLangEnum 1
+#define INCLUDE_JavaLangEnum 1
 #include "java/lang/Enum.h"
 
-typedef NS_ENUM(NSUInteger, OrgApacheLuceneSearchJoinScoreMode) {
-  OrgApacheLuceneSearchJoinScoreMode_None = 0,
-  OrgApacheLuceneSearchJoinScoreMode_Avg = 1,
-  OrgApacheLuceneSearchJoinScoreMode_Max = 2,
-  OrgApacheLuceneSearchJoinScoreMode_Total = 3,
-  OrgApacheLuceneSearchJoinScoreMode_Min = 4,
+typedef NS_ENUM(NSUInteger, OrgApacheLuceneSearchJoinScoreMode_Enum) {
+  OrgApacheLuceneSearchJoinScoreMode_Enum_None = 0,
+  OrgApacheLuceneSearchJoinScoreMode_Enum_Avg = 1,
+  OrgApacheLuceneSearchJoinScoreMode_Enum_Max = 2,
+  OrgApacheLuceneSearchJoinScoreMode_Enum_Total = 3,
+  OrgApacheLuceneSearchJoinScoreMode_Enum_Min = 4,
 };
 
-@interface OrgApacheLuceneSearchJoinScoreModeEnum : JavaLangEnum < NSCopying >
+/*!
+ @brief How to aggregate multiple child hit scores into a single parent score.
+ */
+@interface OrgApacheLuceneSearchJoinScoreMode : JavaLangEnum < NSCopying >
+
++ (OrgApacheLuceneSearchJoinScoreMode *)None;
+
++ (OrgApacheLuceneSearchJoinScoreMode *)Avg;
+
++ (OrgApacheLuceneSearchJoinScoreMode *)Max;
+
++ (OrgApacheLuceneSearchJoinScoreMode *)Total;
+
++ (OrgApacheLuceneSearchJoinScoreMode *)Min;
 
 #pragma mark Package-Private
 
 + (IOSObjectArray *)values;
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneSearchJoinScoreModeEnum_values();
 
-+ (OrgApacheLuceneSearchJoinScoreModeEnum *)valueOfWithNSString:(NSString *)name;
-FOUNDATION_EXPORT OrgApacheLuceneSearchJoinScoreModeEnum *OrgApacheLuceneSearchJoinScoreModeEnum_valueOfWithNSString_(NSString *name);
++ (OrgApacheLuceneSearchJoinScoreMode *)valueOfWithNSString:(NSString *)name;
 
 - (id)copyWithZone:(NSZone *)zone;
+- (OrgApacheLuceneSearchJoinScoreMode_Enum)toNSEnum;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgApacheLuceneSearchJoinScoreModeEnum)
+J2OBJC_STATIC_INIT(OrgApacheLuceneSearchJoinScoreMode)
 
-FOUNDATION_EXPORT OrgApacheLuceneSearchJoinScoreModeEnum *OrgApacheLuceneSearchJoinScoreModeEnum_values_[];
+/*! INTERNAL ONLY - Use enum accessors declared below. */
+FOUNDATION_EXPORT OrgApacheLuceneSearchJoinScoreMode *OrgApacheLuceneSearchJoinScoreMode_values_[];
 
-#define OrgApacheLuceneSearchJoinScoreModeEnum_None OrgApacheLuceneSearchJoinScoreModeEnum_values_[OrgApacheLuceneSearchJoinScoreMode_None]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneSearchJoinScoreModeEnum, None)
+/*!
+ @brief Do no scoring.
+ */
+inline OrgApacheLuceneSearchJoinScoreMode *OrgApacheLuceneSearchJoinScoreMode_get_None();
+J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchJoinScoreMode, None)
 
-#define OrgApacheLuceneSearchJoinScoreModeEnum_Avg OrgApacheLuceneSearchJoinScoreModeEnum_values_[OrgApacheLuceneSearchJoinScoreMode_Avg]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneSearchJoinScoreModeEnum, Avg)
+/*!
+ @brief Parent hit's score is the average of all child scores.
+ */
+inline OrgApacheLuceneSearchJoinScoreMode *OrgApacheLuceneSearchJoinScoreMode_get_Avg();
+J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchJoinScoreMode, Avg)
 
-#define OrgApacheLuceneSearchJoinScoreModeEnum_Max OrgApacheLuceneSearchJoinScoreModeEnum_values_[OrgApacheLuceneSearchJoinScoreMode_Max]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneSearchJoinScoreModeEnum, Max)
+/*!
+ @brief Parent hit's score is the max of all child scores.
+ */
+inline OrgApacheLuceneSearchJoinScoreMode *OrgApacheLuceneSearchJoinScoreMode_get_Max();
+J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchJoinScoreMode, Max)
 
-#define OrgApacheLuceneSearchJoinScoreModeEnum_Total OrgApacheLuceneSearchJoinScoreModeEnum_values_[OrgApacheLuceneSearchJoinScoreMode_Total]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneSearchJoinScoreModeEnum, Total)
+/*!
+ @brief Parent hit's score is the sum of all child scores.
+ */
+inline OrgApacheLuceneSearchJoinScoreMode *OrgApacheLuceneSearchJoinScoreMode_get_Total();
+J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchJoinScoreMode, Total)
 
-#define OrgApacheLuceneSearchJoinScoreModeEnum_Min OrgApacheLuceneSearchJoinScoreModeEnum_values_[OrgApacheLuceneSearchJoinScoreMode_Min]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgApacheLuceneSearchJoinScoreModeEnum, Min)
+/*!
+ @brief Parent hit's score is the min of all child scores.
+ */
+inline OrgApacheLuceneSearchJoinScoreMode *OrgApacheLuceneSearchJoinScoreMode_get_Min();
+J2OBJC_ENUM_CONSTANT(OrgApacheLuceneSearchJoinScoreMode, Min)
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinScoreModeEnum)
+FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneSearchJoinScoreMode_values();
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchJoinScoreMode *OrgApacheLuceneSearchJoinScoreMode_valueOfWithNSString_(NSString *name);
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchJoinScoreMode *OrgApacheLuceneSearchJoinScoreMode_fromOrdinal(NSUInteger ordinal);
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchJoinScoreMode)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchJoinScoreMode_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchJoinScoreMode")

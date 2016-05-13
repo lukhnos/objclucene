@@ -4,7 +4,6 @@
 //
 
 #include "J2ObjC_source.h"
-#include "java/util/Collection.h"
 #include "org/apache/lucene/util/Accountable.h"
 
 @interface OrgApacheLuceneUtilAccountable : NSObject
@@ -16,7 +15,7 @@
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "ramBytesUsed", NULL, "J", 0x401, NULL, NULL },
-    { "getChildResources", NULL, "Ljava.util.Collection;", 0x401, NULL, NULL },
+    { "getChildResources", NULL, "Ljava.util.Collection;", 0x401, NULL, "()Ljava/util/Collection<Lorg/apache/lucene/util/Accountable;>;" },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneUtilAccountable = { 2, "Accountable", "org.apache.lucene.util", NULL, 0x609, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilAccountable;

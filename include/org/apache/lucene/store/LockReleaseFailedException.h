@@ -5,23 +5,26 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneStoreLockReleaseFailedException_INCLUDE_ALL")
-#if OrgApacheLuceneStoreLockReleaseFailedException_RESTRICT
-#define OrgApacheLuceneStoreLockReleaseFailedException_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneStoreLockReleaseFailedException")
+#ifdef RESTRICT_OrgApacheLuceneStoreLockReleaseFailedException
+#define INCLUDE_ALL_OrgApacheLuceneStoreLockReleaseFailedException 0
 #else
-#define OrgApacheLuceneStoreLockReleaseFailedException_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneStoreLockReleaseFailedException 1
 #endif
-#undef OrgApacheLuceneStoreLockReleaseFailedException_RESTRICT
+#undef RESTRICT_OrgApacheLuceneStoreLockReleaseFailedException
 
-#if !defined (_OrgApacheLuceneStoreLockReleaseFailedException_) && (OrgApacheLuceneStoreLockReleaseFailedException_INCLUDE_ALL || OrgApacheLuceneStoreLockReleaseFailedException_INCLUDE)
-#define _OrgApacheLuceneStoreLockReleaseFailedException_
+#if !defined (OrgApacheLuceneStoreLockReleaseFailedException_) && (INCLUDE_ALL_OrgApacheLuceneStoreLockReleaseFailedException || defined(INCLUDE_OrgApacheLuceneStoreLockReleaseFailedException))
+#define OrgApacheLuceneStoreLockReleaseFailedException_
 
-#define JavaIoIOException_RESTRICT 1
-#define JavaIoIOException_INCLUDE 1
+#define RESTRICT_JavaIoIOException 1
+#define INCLUDE_JavaIoIOException 1
 #include "java/io/IOException.h"
 
-@class JavaLangThrowable;
-
+/*!
+ @brief This exception is thrown when the <code>write.lock</code>
+ could not be released.
+ - seealso: Lock#close()
+ */
 @interface OrgApacheLuceneStoreLockReleaseFailedException : JavaIoIOException
 
 #pragma mark Public
@@ -29,7 +32,7 @@
 - (instancetype)initWithNSString:(NSString *)message;
 
 - (instancetype)initWithNSString:(NSString *)message
-           withJavaLangThrowable:(JavaLangThrowable *)cause;
+                 withNSException:(NSException *)cause;
 
 @end
 
@@ -39,12 +42,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneStoreLockReleaseFailedException_initWithNS
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreLockReleaseFailedException *new_OrgApacheLuceneStoreLockReleaseFailedException_initWithNSString_(NSString *message) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT void OrgApacheLuceneStoreLockReleaseFailedException_initWithNSString_withJavaLangThrowable_(OrgApacheLuceneStoreLockReleaseFailedException *self, NSString *message, JavaLangThrowable *cause);
+FOUNDATION_EXPORT OrgApacheLuceneStoreLockReleaseFailedException *create_OrgApacheLuceneStoreLockReleaseFailedException_initWithNSString_(NSString *message);
 
-FOUNDATION_EXPORT OrgApacheLuceneStoreLockReleaseFailedException *new_OrgApacheLuceneStoreLockReleaseFailedException_initWithNSString_withJavaLangThrowable_(NSString *message, JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT void OrgApacheLuceneStoreLockReleaseFailedException_initWithNSString_withNSException_(OrgApacheLuceneStoreLockReleaseFailedException *self, NSString *message, NSException *cause);
+
+FOUNDATION_EXPORT OrgApacheLuceneStoreLockReleaseFailedException *new_OrgApacheLuceneStoreLockReleaseFailedException_initWithNSString_withNSException_(NSString *message, NSException *cause) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneStoreLockReleaseFailedException *create_OrgApacheLuceneStoreLockReleaseFailedException_initWithNSString_withNSException_(NSString *message, NSException *cause);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreLockReleaseFailedException)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneStoreLockReleaseFailedException_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreLockReleaseFailedException")

@@ -3,14 +3,17 @@
 //  source: ./suggest/src/java/org/apache/lucene/search/suggest/fst/package-info.java
 //
 
+/*!
+ @brief Finite-state based autosuggest.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSuggestFstPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSuggestFstPackage_info_RESTRICT
-#define OrgApacheLuceneSearchSuggestFstPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestFstPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneSearchSuggestFstPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestFstPackage_info 0
 #else
-#define OrgApacheLuceneSearchSuggestFstPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestFstPackage_info 1
 #endif
-#undef OrgApacheLuceneSearchSuggestFstPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSuggestFstPackage_info
 
-#pragma pop_macro("OrgApacheLuceneSearchSuggestFstPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestFstPackage_info")

@@ -5,29 +5,48 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchScoreDoc_INCLUDE_ALL")
-#if OrgApacheLuceneSearchScoreDoc_RESTRICT
-#define OrgApacheLuceneSearchScoreDoc_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchScoreDoc")
+#ifdef RESTRICT_OrgApacheLuceneSearchScoreDoc
+#define INCLUDE_ALL_OrgApacheLuceneSearchScoreDoc 0
 #else
-#define OrgApacheLuceneSearchScoreDoc_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchScoreDoc 1
 #endif
-#undef OrgApacheLuceneSearchScoreDoc_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchScoreDoc
 
-#if !defined (_OrgApacheLuceneSearchScoreDoc_) && (OrgApacheLuceneSearchScoreDoc_INCLUDE_ALL || OrgApacheLuceneSearchScoreDoc_INCLUDE)
-#define _OrgApacheLuceneSearchScoreDoc_
+#if !defined (OrgApacheLuceneSearchScoreDoc_) && (INCLUDE_ALL_OrgApacheLuceneSearchScoreDoc || defined(INCLUDE_OrgApacheLuceneSearchScoreDoc))
+#define OrgApacheLuceneSearchScoreDoc_
 
+/*!
+ @brief Holds one hit in <code>TopDocs</code>.
+ */
 @interface OrgApacheLuceneSearchScoreDoc : NSObject {
  @public
+  /*!
+   @brief The score of this document for the query.
+   */
   jfloat score_;
+  /*!
+   @brief A hit document's number.
+   - seealso: IndexSearcher#doc(int)
+   */
   jint doc_;
+  /*!
+   @brief Only set by <code>TopDocs.merge</code>
+   */
   jint shardIndex_;
 }
 
 #pragma mark Public
 
+/*!
+ @brief Constructs a ScoreDoc.
+ */
 - (instancetype)initWithInt:(jint)doc
                   withFloat:(jfloat)score;
 
+/*!
+ @brief Constructs a ScoreDoc.
+ */
 - (instancetype)initWithInt:(jint)doc
                   withFloat:(jfloat)score
                     withInt:(jint)shardIndex;
@@ -42,12 +61,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchScoreDoc_initWithInt_withFloat_(OrgA
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchScoreDoc *new_OrgApacheLuceneSearchScoreDoc_initWithInt_withFloat_(jint doc, jfloat score) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchScoreDoc *create_OrgApacheLuceneSearchScoreDoc_initWithInt_withFloat_(jint doc, jfloat score);
+
 FOUNDATION_EXPORT void OrgApacheLuceneSearchScoreDoc_initWithInt_withFloat_withInt_(OrgApacheLuceneSearchScoreDoc *self, jint doc, jfloat score, jint shardIndex);
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchScoreDoc *new_OrgApacheLuceneSearchScoreDoc_initWithInt_withFloat_withInt_(jint doc, jfloat score, jint shardIndex) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneSearchScoreDoc *create_OrgApacheLuceneSearchScoreDoc_initWithInt_withFloat_withInt_(jint doc, jfloat score, jint shardIndex);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchScoreDoc)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchScoreDoc_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchScoreDoc")

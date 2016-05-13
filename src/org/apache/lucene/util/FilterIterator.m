@@ -47,7 +47,7 @@ __attribute__((unused)) static jboolean OrgApacheLuceneUtilFilterIterator_setNex
 
 - (id)next {
   if (!OrgApacheLuceneUtilFilterIterator_hasNext(self)) {
-    @throw [new_JavaUtilNoSuchElementException_init() autorelease];
+    @throw new_JavaUtilNoSuchElementException_init();
   }
   JreAssert((nextIsSet_), (@"org/apache/lucene/util/FilterIterator.java:54 condition failed: assert nextIsSet;"));
   @try {
@@ -55,28 +55,22 @@ __attribute__((unused)) static jboolean OrgApacheLuceneUtilFilterIterator_setNex
   }
   @finally {
     nextIsSet_ = false;
-    JreStrongAssign(&next_, nil);
+    next_ = nil;
   }
 }
 
 - (void)remove {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw new_JavaLangUnsupportedOperationException_init();
 }
 
 - (jboolean)setNext {
   return OrgApacheLuceneUtilFilterIterator_setNext(self);
 }
 
-- (void)dealloc {
-  RELEASE_(iterator_);
-  RELEASE_(next_);
-  [super dealloc];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "predicateFunctionWithId:", "predicateFunction", "Z", 0x404, NULL, "(TInnerT;)Z" },
-    { "initWithJavaUtilIterator:", "FilterIterator", NULL, 0x1, NULL, NULL },
+    { "initWithJavaUtilIterator:", "FilterIterator", NULL, 0x1, NULL, "(Ljava/util/Iterator<TInnerT;>;)V" },
     { "hasNext", NULL, "Z", 0x11, NULL, NULL },
     { "next", NULL, "TT;", 0x11, NULL, "()TT;" },
     { "remove", NULL, "V", 0x11, NULL, NULL },
@@ -95,9 +89,9 @@ __attribute__((unused)) static jboolean OrgApacheLuceneUtilFilterIterator_setNex
 
 void OrgApacheLuceneUtilFilterIterator_initWithJavaUtilIterator_(OrgApacheLuceneUtilFilterIterator *self, id<JavaUtilIterator> baseIterator) {
   NSObject_init(self);
-  JreStrongAssign(&self->next_, nil);
+  self->next_ = nil;
   self->nextIsSet_ = false;
-  JreStrongAssign(&self->iterator_, baseIterator);
+  self->iterator_ = baseIterator;
 }
 
 jboolean OrgApacheLuceneUtilFilterIterator_hasNext(OrgApacheLuceneUtilFilterIterator *self) {
@@ -108,7 +102,7 @@ jboolean OrgApacheLuceneUtilFilterIterator_setNext(OrgApacheLuceneUtilFilterIter
   while ([((id<JavaUtilIterator>) nil_chk(self->iterator_)) hasNext]) {
     id object = [self->iterator_ next];
     if ([self predicateFunctionWithId:object]) {
-      JreStrongAssign(&self->next_, object);
+      self->next_ = object;
       self->nextIsSet_ = true;
       return true;
     }

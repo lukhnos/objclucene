@@ -3,14 +3,17 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/xml/package-info.java
 //
 
+/*!
+ @brief Parser that produces Lucene Query objects from XML streams.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserXmlPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserXmlPackage_info_RESTRICT
-#define OrgApacheLuceneQueryparserXmlPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserXmlPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserXmlPackage_info 0
 #else
-#define OrgApacheLuceneQueryparserXmlPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserXmlPackage_info 1
 #endif
-#undef OrgApacheLuceneQueryparserXmlPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserXmlPackage_info
 
-#pragma pop_macro("OrgApacheLuceneQueryparserXmlPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlPackage_info")

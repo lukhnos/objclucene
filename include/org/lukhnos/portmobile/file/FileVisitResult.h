@@ -5,48 +5,56 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgLukhnosPortmobileFileFileVisitResult_INCLUDE_ALL")
-#if OrgLukhnosPortmobileFileFileVisitResult_RESTRICT
-#define OrgLukhnosPortmobileFileFileVisitResult_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgLukhnosPortmobileFileFileVisitResult")
+#ifdef RESTRICT_OrgLukhnosPortmobileFileFileVisitResult
+#define INCLUDE_ALL_OrgLukhnosPortmobileFileFileVisitResult 0
 #else
-#define OrgLukhnosPortmobileFileFileVisitResult_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgLukhnosPortmobileFileFileVisitResult 1
 #endif
-#undef OrgLukhnosPortmobileFileFileVisitResult_RESTRICT
+#undef RESTRICT_OrgLukhnosPortmobileFileFileVisitResult
 
-#if !defined (_OrgLukhnosPortmobileFileFileVisitResultEnum_) && (OrgLukhnosPortmobileFileFileVisitResult_INCLUDE_ALL || OrgLukhnosPortmobileFileFileVisitResultEnum_INCLUDE)
-#define _OrgLukhnosPortmobileFileFileVisitResultEnum_
+#if !defined (OrgLukhnosPortmobileFileFileVisitResult_) && (INCLUDE_ALL_OrgLukhnosPortmobileFileFileVisitResult || defined(INCLUDE_OrgLukhnosPortmobileFileFileVisitResult))
+#define OrgLukhnosPortmobileFileFileVisitResult_
 
-#define JavaLangEnum_RESTRICT 1
-#define JavaLangEnum_INCLUDE 1
+#define RESTRICT_JavaLangEnum 1
+#define INCLUDE_JavaLangEnum 1
 #include "java/lang/Enum.h"
 
-typedef NS_ENUM(NSUInteger, OrgLukhnosPortmobileFileFileVisitResult) {
-  OrgLukhnosPortmobileFileFileVisitResult_CONTINUE = 0,
+typedef NS_ENUM(NSUInteger, OrgLukhnosPortmobileFileFileVisitResult_Enum) {
+  OrgLukhnosPortmobileFileFileVisitResult_Enum_CONTINUE = 0,
 };
 
-@interface OrgLukhnosPortmobileFileFileVisitResultEnum : JavaLangEnum < NSCopying >
+@interface OrgLukhnosPortmobileFileFileVisitResult : JavaLangEnum < NSCopying >
+
++ (OrgLukhnosPortmobileFileFileVisitResult *)CONTINUE;
 
 #pragma mark Package-Private
 
 + (IOSObjectArray *)values;
-FOUNDATION_EXPORT IOSObjectArray *OrgLukhnosPortmobileFileFileVisitResultEnum_values();
 
-+ (OrgLukhnosPortmobileFileFileVisitResultEnum *)valueOfWithNSString:(NSString *)name;
-FOUNDATION_EXPORT OrgLukhnosPortmobileFileFileVisitResultEnum *OrgLukhnosPortmobileFileFileVisitResultEnum_valueOfWithNSString_(NSString *name);
++ (OrgLukhnosPortmobileFileFileVisitResult *)valueOfWithNSString:(NSString *)name;
 
 - (id)copyWithZone:(NSZone *)zone;
+- (OrgLukhnosPortmobileFileFileVisitResult_Enum)toNSEnum;
 
 @end
 
-J2OBJC_STATIC_INIT(OrgLukhnosPortmobileFileFileVisitResultEnum)
+J2OBJC_STATIC_INIT(OrgLukhnosPortmobileFileFileVisitResult)
 
-FOUNDATION_EXPORT OrgLukhnosPortmobileFileFileVisitResultEnum *OrgLukhnosPortmobileFileFileVisitResultEnum_values_[];
+/*! INTERNAL ONLY - Use enum accessors declared below. */
+FOUNDATION_EXPORT OrgLukhnosPortmobileFileFileVisitResult *OrgLukhnosPortmobileFileFileVisitResult_values_[];
 
-#define OrgLukhnosPortmobileFileFileVisitResultEnum_CONTINUE OrgLukhnosPortmobileFileFileVisitResultEnum_values_[OrgLukhnosPortmobileFileFileVisitResult_CONTINUE]
-J2OBJC_ENUM_CONSTANT_GETTER(OrgLukhnosPortmobileFileFileVisitResultEnum, CONTINUE)
+inline OrgLukhnosPortmobileFileFileVisitResult *OrgLukhnosPortmobileFileFileVisitResult_get_CONTINUE();
+J2OBJC_ENUM_CONSTANT(OrgLukhnosPortmobileFileFileVisitResult, CONTINUE)
 
-J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileFileFileVisitResultEnum)
+FOUNDATION_EXPORT IOSObjectArray *OrgLukhnosPortmobileFileFileVisitResult_values();
+
+FOUNDATION_EXPORT OrgLukhnosPortmobileFileFileVisitResult *OrgLukhnosPortmobileFileFileVisitResult_valueOfWithNSString_(NSString *name);
+
+FOUNDATION_EXPORT OrgLukhnosPortmobileFileFileVisitResult *OrgLukhnosPortmobileFileFileVisitResult_fromOrdinal(NSUInteger ordinal);
+
+J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileFileFileVisitResult)
 
 #endif
 
-#pragma pop_macro("OrgLukhnosPortmobileFileFileVisitResult_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgLukhnosPortmobileFileFileVisitResult")

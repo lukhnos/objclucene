@@ -3,14 +3,28 @@
 //  source: ./core/src/java/org/apache/lucene/codecs/blocktree/package-info.java
 //
 
+/*!
+ @brief BlockTree terms dictionary.
+ <p>
+ This terms dictionary organizes all terms into blocks according to
+ shared prefix, such that each block has enough terms, and then stores
+ the prefix trie in memory as an FST as the index structure.  It allows
+ you to plug in your own <code>org.apache.lucene.codecs.PostingsWriterBase</code>
+  to implement the
+ postings.
+ </p>
+ <p>See <code>org.apache.lucene.codecs.blocktree.BlockTreeTermsWriter</code>
+ for the file format.
+ </p>
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsBlocktreePackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsBlocktreePackage_info_RESTRICT
-#define OrgApacheLuceneCodecsBlocktreePackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreePackage_info")
+#ifdef RESTRICT_OrgApacheLuceneCodecsBlocktreePackage_info
+#define INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreePackage_info 0
 #else
-#define OrgApacheLuceneCodecsBlocktreePackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreePackage_info 1
 #endif
-#undef OrgApacheLuceneCodecsBlocktreePackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsBlocktreePackage_info
 
-#pragma pop_macro("OrgApacheLuceneCodecsBlocktreePackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsBlocktreePackage_info")

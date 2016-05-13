@@ -5,17 +5,20 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils
 
-#if !defined (_OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_) && (OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_INCLUDE)
-#define _OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_
+#if !defined (OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils))
+#define OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_
 
+/*!
+ @brief String manipulation routines
+ */
 @interface OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils : NSObject
 
 #pragma mark Public
@@ -34,8 +37,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_ini
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils *new_OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils *create_OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreUtilStringUtils")

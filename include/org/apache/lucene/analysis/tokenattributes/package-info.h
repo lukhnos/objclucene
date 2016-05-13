@@ -3,14 +3,17 @@
 //  source: ./core/src/java/org/apache/lucene/analysis/tokenattributes/package-info.java
 //
 
+/*!
+ @brief General-purpose attributes for text analysis.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisTokenattributesPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisTokenattributesPackage_info_RESTRICT
-#define OrgApacheLuceneAnalysisTokenattributesPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisTokenattributesPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesPackage_info 0
 #else
-#define OrgApacheLuceneAnalysisTokenattributesPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesPackage_info 1
 #endif
-#undef OrgApacheLuceneAnalysisTokenattributesPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisTokenattributesPackage_info
 
-#pragma pop_macro("OrgApacheLuceneAnalysisTokenattributesPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisTokenattributesPackage_info")

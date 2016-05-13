@@ -17,7 +17,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "FileStore", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgLukhnosPortmobileFileFileStore = { 2, "FileStore", "org.lukhnos.portmobile.file", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgLukhnosPortmobileFileFileStore;
@@ -30,9 +30,11 @@ void OrgLukhnosPortmobileFileFileStore_init(OrgLukhnosPortmobileFileFileStore *s
 }
 
 OrgLukhnosPortmobileFileFileStore *new_OrgLukhnosPortmobileFileFileStore_init() {
-  OrgLukhnosPortmobileFileFileStore *self = [OrgLukhnosPortmobileFileFileStore alloc];
-  OrgLukhnosPortmobileFileFileStore_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgLukhnosPortmobileFileFileStore, init)
+}
+
+OrgLukhnosPortmobileFileFileStore *create_OrgLukhnosPortmobileFileFileStore_init() {
+  J2OBJC_CREATE_IMPL(OrgLukhnosPortmobileFileFileStore, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgLukhnosPortmobileFileFileStore)

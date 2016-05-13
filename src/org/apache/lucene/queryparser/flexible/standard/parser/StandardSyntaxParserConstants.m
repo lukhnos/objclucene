@@ -9,13 +9,161 @@
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants)
 
-IOSObjectArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_tokenImage_;
+IOSObjectArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_tokenImage;
 
 @implementation OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants
 
++ (jint)EOF_ {
+  return OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_EOF;
+}
+
++ (jint)_NUM_CHAR {
+  return OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants__NUM_CHAR;
+}
+
++ (jint)_ESCAPED_CHAR {
+  return OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants__ESCAPED_CHAR;
+}
+
++ (jint)_TERM_START_CHAR {
+  return OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants__TERM_START_CHAR;
+}
+
++ (jint)_TERM_CHAR {
+  return OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants__TERM_CHAR;
+}
+
++ (jint)_WHITESPACE {
+  return OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants__WHITESPACE;
+}
+
++ (jint)_QUOTED_CHAR {
+  return OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants__QUOTED_CHAR;
+}
+
++ (jint)AND {
+  return OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_AND;
+}
+
++ (jint)OR {
+  return OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_OR;
+}
+
++ (jint)NOT {
+  return OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_NOT;
+}
+
++ (jint)PLUS {
+  return OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_PLUS;
+}
+
++ (jint)MINUS {
+  return OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_MINUS;
+}
+
++ (jint)LPAREN {
+  return OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_LPAREN;
+}
+
++ (jint)RPAREN {
+  return OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_RPAREN;
+}
+
++ (jint)OP_COLON {
+  return OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_OP_COLON;
+}
+
++ (jint)OP_EQUAL {
+  return OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_OP_EQUAL;
+}
+
++ (jint)OP_LESSTHAN {
+  return OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_OP_LESSTHAN;
+}
+
++ (jint)OP_LESSTHANEQ {
+  return OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_OP_LESSTHANEQ;
+}
+
++ (jint)OP_MORETHAN {
+  return OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_OP_MORETHAN;
+}
+
++ (jint)OP_MORETHANEQ {
+  return OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_OP_MORETHANEQ;
+}
+
++ (jint)CARAT {
+  return OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_CARAT;
+}
+
++ (jint)QUOTED {
+  return OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_QUOTED;
+}
+
++ (jint)TERM {
+  return OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_TERM;
+}
+
++ (jint)FUZZY_SLOP {
+  return OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_FUZZY_SLOP;
+}
+
++ (jint)REGEXPTERM {
+  return OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_REGEXPTERM;
+}
+
++ (jint)RANGEIN_START {
+  return OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_RANGEIN_START;
+}
+
++ (jint)RANGEEX_START {
+  return OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_RANGEEX_START;
+}
+
++ (jint)NUMBER {
+  return OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_NUMBER;
+}
+
++ (jint)RANGE_TO {
+  return OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_RANGE_TO;
+}
+
++ (jint)RANGEIN_END {
+  return OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_RANGEIN_END;
+}
+
++ (jint)RANGEEX_END {
+  return OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_RANGEEX_END;
+}
+
++ (jint)RANGE_QUOTED {
+  return OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_RANGE_QUOTED;
+}
+
++ (jint)RANGE_GOOP {
+  return OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_RANGE_GOOP;
+}
+
++ (jint)Boost {
+  return OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_Boost;
+}
+
++ (jint)Range {
+  return OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_Range;
+}
+
++ (jint)DEFAULT {
+  return OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_DEFAULT;
+}
+
++ (IOSObjectArray *)tokenImage {
+  return OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_tokenImage;
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_tokenImage_, [IOSObjectArray newArrayWithObjects:(id[]){ @"<EOF>", @"<_NUM_CHAR>", @"<_ESCAPED_CHAR>", @"<_TERM_START_CHAR>", @"<_TERM_CHAR>", @"<_WHITESPACE>", @"<_QUOTED_CHAR>", @"<token of kind 7>", @"<AND>", @"<OR>", @"<NOT>", @"\"+\"", @"\"-\"", @"\"(\"", @"\")\"", @"\":\"", @"\"=\"", @"\"<\"", @"\"<=\"", @"\">\"", @"\">=\"", @"\"^\"", @"<QUOTED>", @"<TERM>", @"<FUZZY_SLOP>", @"<REGEXPTERM>", @"\"[\"", @"\"{\"", @"<NUMBER>", @"\"TO\"", @"\"]\"", @"\"}\"", @"<RANGE_QUOTED>", @"<RANGE_GOOP>" } count:34 type:NSString_class_()]);
+    OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_tokenImage = [IOSObjectArray newArrayWithObjects:(id[]){ @"<EOF>", @"<_NUM_CHAR>", @"<_ESCAPED_CHAR>", @"<_TERM_START_CHAR>", @"<_TERM_CHAR>", @"<_WHITESPACE>", @"<_QUOTED_CHAR>", @"<token of kind 7>", @"<AND>", @"<OR>", @"<NOT>", @"\"+\"", @"\"-\"", @"\"(\"", @"\")\"", @"\":\"", @"\"=\"", @"\"<\"", @"\"<=\"", @"\">\"", @"\">=\"", @"\"^\"", @"<QUOTED>", @"<TERM>", @"<FUZZY_SLOP>", @"<REGEXPTERM>", @"\"[\"", @"\"{\"", @"<NUMBER>", @"\"TO\"", @"\"]\"", @"\"}\"", @"<RANGE_QUOTED>", @"<RANGE_GOOP>" } count:34 type:NSString_class_()];
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants)
   }
 }
@@ -58,7 +206,7 @@ IOSObjectArray *OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxPa
     { "Boost", "Boost", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_Boost },
     { "Range", "Range", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_Range },
     { "DEFAULT", "DEFAULT", 0x19, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_DEFAULT },
-    { "tokenImage_", NULL, 0x19, "[Ljava.lang.String;", &OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_tokenImage_, NULL, .constantValue.asLong = 0 },
+    { "tokenImage", "tokenImage", 0x19, "[Ljava.lang.String;", &OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants_tokenImage, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants = { 2, "StandardSyntaxParserConstants", "org.apache.lucene.queryparser.flexible.standard.parser", NULL, 0x609, 0, NULL, 37, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneQueryparserFlexibleStandardParserStandardSyntaxParserConstants;

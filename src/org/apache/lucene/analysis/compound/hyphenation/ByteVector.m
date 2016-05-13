@@ -8,12 +8,16 @@
 #include "java/lang/System.h"
 #include "org/apache/lucene/analysis/compound/hyphenation/ByteVector.h"
 
-#define OrgApacheLuceneAnalysisCompoundHyphenationByteVector_DEFAULT_BLOCK_SIZE 2048
-
 @interface OrgApacheLuceneAnalysisCompoundHyphenationByteVector () {
  @public
   jint blockSize_;
+  /*!
+   @brief The encapsulated array
+   */
   IOSByteArray *array_;
+  /*!
+   @brief Points to next free item
+   */
   jint n_;
 }
 
@@ -21,7 +25,12 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundHyphenationByteVector, array_, IOSByteArray *)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisCompoundHyphenationByteVector, DEFAULT_BLOCK_SIZE, jint)
+/*!
+ @brief Capacity increment size
+ */
+inline jint OrgApacheLuceneAnalysisCompoundHyphenationByteVector_get_DEFAULT_BLOCK_SIZE();
+#define OrgApacheLuceneAnalysisCompoundHyphenationByteVector_DEFAULT_BLOCK_SIZE 2048
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneAnalysisCompoundHyphenationByteVector, DEFAULT_BLOCK_SIZE, jint)
 
 @implementation OrgApacheLuceneAnalysisCompoundHyphenationByteVector
 
@@ -73,9 +82,9 @@ J2OBJC_IGNORE_DESIGNATED_END
   jint index = n_;
   jint len = ((IOSByteArray *) nil_chk(array_))->size_;
   if (n_ + size >= len) {
-    IOSByteArray *aux = [IOSByteArray arrayWithLength:len + blockSize_];
+    IOSByteArray *aux = [IOSByteArray newArrayWithLength:len + blockSize_];
     JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(array_, 0, aux, 0, len);
-    JreStrongAssign(&array_, aux);
+    array_ = aux;
   }
   n_ += size;
   return index;
@@ -83,15 +92,10 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)trimToSize {
   if (n_ < ((IOSByteArray *) nil_chk(array_))->size_) {
-    IOSByteArray *aux = [IOSByteArray arrayWithLength:n_];
+    IOSByteArray *aux = [IOSByteArray newArrayWithLength:n_];
     JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(array_, 0, aux, 0, n_);
-    JreStrongAssign(&array_, aux);
+    array_ = aux;
   }
-}
-
-- (void)dealloc {
-  RELEASE_(array_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -125,9 +129,11 @@ void OrgApacheLuceneAnalysisCompoundHyphenationByteVector_init(OrgApacheLuceneAn
 }
 
 OrgApacheLuceneAnalysisCompoundHyphenationByteVector *new_OrgApacheLuceneAnalysisCompoundHyphenationByteVector_init() {
-  OrgApacheLuceneAnalysisCompoundHyphenationByteVector *self = [OrgApacheLuceneAnalysisCompoundHyphenationByteVector alloc];
-  OrgApacheLuceneAnalysisCompoundHyphenationByteVector_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCompoundHyphenationByteVector, init)
+}
+
+OrgApacheLuceneAnalysisCompoundHyphenationByteVector *create_OrgApacheLuceneAnalysisCompoundHyphenationByteVector_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCompoundHyphenationByteVector, init)
 }
 
 void OrgApacheLuceneAnalysisCompoundHyphenationByteVector_initWithInt_(OrgApacheLuceneAnalysisCompoundHyphenationByteVector *self, jint capacity) {
@@ -138,27 +144,31 @@ void OrgApacheLuceneAnalysisCompoundHyphenationByteVector_initWithInt_(OrgApache
   else {
     self->blockSize_ = OrgApacheLuceneAnalysisCompoundHyphenationByteVector_DEFAULT_BLOCK_SIZE;
   }
-  JreStrongAssignAndConsume(&self->array_, [IOSByteArray newArrayWithLength:self->blockSize_]);
+  self->array_ = [IOSByteArray newArrayWithLength:self->blockSize_];
   self->n_ = 0;
 }
 
 OrgApacheLuceneAnalysisCompoundHyphenationByteVector *new_OrgApacheLuceneAnalysisCompoundHyphenationByteVector_initWithInt_(jint capacity) {
-  OrgApacheLuceneAnalysisCompoundHyphenationByteVector *self = [OrgApacheLuceneAnalysisCompoundHyphenationByteVector alloc];
-  OrgApacheLuceneAnalysisCompoundHyphenationByteVector_initWithInt_(self, capacity);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCompoundHyphenationByteVector, initWithInt_, capacity)
+}
+
+OrgApacheLuceneAnalysisCompoundHyphenationByteVector *create_OrgApacheLuceneAnalysisCompoundHyphenationByteVector_initWithInt_(jint capacity) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCompoundHyphenationByteVector, initWithInt_, capacity)
 }
 
 void OrgApacheLuceneAnalysisCompoundHyphenationByteVector_initWithByteArray_(OrgApacheLuceneAnalysisCompoundHyphenationByteVector *self, IOSByteArray *a) {
   NSObject_init(self);
   self->blockSize_ = OrgApacheLuceneAnalysisCompoundHyphenationByteVector_DEFAULT_BLOCK_SIZE;
-  JreStrongAssign(&self->array_, a);
+  self->array_ = a;
   self->n_ = 0;
 }
 
 OrgApacheLuceneAnalysisCompoundHyphenationByteVector *new_OrgApacheLuceneAnalysisCompoundHyphenationByteVector_initWithByteArray_(IOSByteArray *a) {
-  OrgApacheLuceneAnalysisCompoundHyphenationByteVector *self = [OrgApacheLuceneAnalysisCompoundHyphenationByteVector alloc];
-  OrgApacheLuceneAnalysisCompoundHyphenationByteVector_initWithByteArray_(self, a);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCompoundHyphenationByteVector, initWithByteArray_, a)
+}
+
+OrgApacheLuceneAnalysisCompoundHyphenationByteVector *create_OrgApacheLuceneAnalysisCompoundHyphenationByteVector_initWithByteArray_(IOSByteArray *a) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCompoundHyphenationByteVector, initWithByteArray_, a)
 }
 
 void OrgApacheLuceneAnalysisCompoundHyphenationByteVector_initWithByteArray_withInt_(OrgApacheLuceneAnalysisCompoundHyphenationByteVector *self, IOSByteArray *a, jint capacity) {
@@ -169,14 +179,16 @@ void OrgApacheLuceneAnalysisCompoundHyphenationByteVector_initWithByteArray_with
   else {
     self->blockSize_ = OrgApacheLuceneAnalysisCompoundHyphenationByteVector_DEFAULT_BLOCK_SIZE;
   }
-  JreStrongAssign(&self->array_, a);
+  self->array_ = a;
   self->n_ = 0;
 }
 
 OrgApacheLuceneAnalysisCompoundHyphenationByteVector *new_OrgApacheLuceneAnalysisCompoundHyphenationByteVector_initWithByteArray_withInt_(IOSByteArray *a, jint capacity) {
-  OrgApacheLuceneAnalysisCompoundHyphenationByteVector *self = [OrgApacheLuceneAnalysisCompoundHyphenationByteVector alloc];
-  OrgApacheLuceneAnalysisCompoundHyphenationByteVector_initWithByteArray_withInt_(self, a, capacity);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCompoundHyphenationByteVector, initWithByteArray_withInt_, a, capacity)
+}
+
+OrgApacheLuceneAnalysisCompoundHyphenationByteVector *create_OrgApacheLuceneAnalysisCompoundHyphenationByteVector_initWithByteArray_withInt_(IOSByteArray *a, jint capacity) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCompoundHyphenationByteVector, initWithByteArray_withInt_, a, capacity)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCompoundHyphenationByteVector)

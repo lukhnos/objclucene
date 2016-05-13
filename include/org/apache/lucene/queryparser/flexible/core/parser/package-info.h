@@ -3,14 +3,27 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/core/parser/package-info.java
 //
 
+/*!
+ @brief Necessary interfaces to implement text parsers.
+ <h2>Parser</h2>
+ <p>
+ The package <tt>org.apache.lucene.queryparser.flexible.parser</tt> contains interfaces
+ that should be implemented by the parsers.
+ Parsers produce QueryNode Trees from a string object.
+ These package still needs some work to add support to for multiple parsers.
+ Features that should be supported for the future, related with the parser:
+ - QueryNode tree should be able convertible to any parser syntax.
+ - The query syntax should support calling other parsers.
+ - QueryNode tree created by multiple parsers.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleCoreParserPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleCoreParserPackage_info_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleCoreParserPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreParserPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreParserPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreParserPackage_info 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleCoreParserPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreParserPackage_info 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleCoreParserPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreParserPackage_info
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleCoreParserPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreParserPackage_info")

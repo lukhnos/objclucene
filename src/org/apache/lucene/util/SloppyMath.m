@@ -11,129 +11,171 @@
 #include "java/lang/StrictMath.h"
 #include "org/apache/lucene/util/SloppyMath.h"
 
+inline jdouble OrgApacheLuceneUtilSloppyMath_get_TO_RADIANS();
 #define OrgApacheLuceneUtilSloppyMath_TO_RADIANS 0.017453292519943295
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilSloppyMath, TO_RADIANS, jdouble)
+
+inline jdouble OrgApacheLuceneUtilSloppyMath_get_ONE_DIV_F2();
 #define OrgApacheLuceneUtilSloppyMath_ONE_DIV_F2 0.5
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilSloppyMath, ONE_DIV_F2, jdouble)
+
+inline jdouble OrgApacheLuceneUtilSloppyMath_get_ONE_DIV_F3();
 #define OrgApacheLuceneUtilSloppyMath_ONE_DIV_F3 0.16666666666666666
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilSloppyMath, ONE_DIV_F3, jdouble)
+
+inline jdouble OrgApacheLuceneUtilSloppyMath_get_ONE_DIV_F4();
 #define OrgApacheLuceneUtilSloppyMath_ONE_DIV_F4 0.041666666666666664
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilSloppyMath, ONE_DIV_F4, jdouble)
+
+inline jdouble OrgApacheLuceneUtilSloppyMath_get_PIO2_HI();
+static jdouble OrgApacheLuceneUtilSloppyMath_PIO2_HI;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilSloppyMath, PIO2_HI, jdouble)
+
+inline jdouble OrgApacheLuceneUtilSloppyMath_get_PIO2_LO();
+static jdouble OrgApacheLuceneUtilSloppyMath_PIO2_LO;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilSloppyMath, PIO2_LO, jdouble)
+
+inline jdouble OrgApacheLuceneUtilSloppyMath_get_TWOPI_HI();
+static jdouble OrgApacheLuceneUtilSloppyMath_TWOPI_HI;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilSloppyMath, TWOPI_HI, jdouble)
+
+inline jdouble OrgApacheLuceneUtilSloppyMath_get_TWOPI_LO();
+static jdouble OrgApacheLuceneUtilSloppyMath_TWOPI_LO;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilSloppyMath, TWOPI_LO, jdouble)
+
+inline jint OrgApacheLuceneUtilSloppyMath_get_SIN_COS_TABS_SIZE();
 #define OrgApacheLuceneUtilSloppyMath_SIN_COS_TABS_SIZE 2049
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilSloppyMath, SIN_COS_TABS_SIZE, jint)
+
+inline jdouble OrgApacheLuceneUtilSloppyMath_get_SIN_COS_DELTA_HI();
+static jdouble OrgApacheLuceneUtilSloppyMath_SIN_COS_DELTA_HI;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilSloppyMath, SIN_COS_DELTA_HI, jdouble)
+
+inline jdouble OrgApacheLuceneUtilSloppyMath_get_SIN_COS_DELTA_LO();
+static jdouble OrgApacheLuceneUtilSloppyMath_SIN_COS_DELTA_LO;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilSloppyMath, SIN_COS_DELTA_LO, jdouble)
+
+inline jdouble OrgApacheLuceneUtilSloppyMath_get_SIN_COS_INDEXER();
+static jdouble OrgApacheLuceneUtilSloppyMath_SIN_COS_INDEXER;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilSloppyMath, SIN_COS_INDEXER, jdouble)
+
+inline IOSDoubleArray *OrgApacheLuceneUtilSloppyMath_get_sinTab();
+static IOSDoubleArray *OrgApacheLuceneUtilSloppyMath_sinTab;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilSloppyMath, sinTab, IOSDoubleArray *)
+
+inline IOSDoubleArray *OrgApacheLuceneUtilSloppyMath_get_cosTab();
+static IOSDoubleArray *OrgApacheLuceneUtilSloppyMath_cosTab;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilSloppyMath, cosTab, IOSDoubleArray *)
+
+inline jdouble OrgApacheLuceneUtilSloppyMath_get_ASIN_MAX_VALUE_FOR_TABS();
+static jdouble OrgApacheLuceneUtilSloppyMath_ASIN_MAX_VALUE_FOR_TABS;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilSloppyMath, ASIN_MAX_VALUE_FOR_TABS, jdouble)
+
+inline jint OrgApacheLuceneUtilSloppyMath_get_ASIN_TABS_SIZE();
 #define OrgApacheLuceneUtilSloppyMath_ASIN_TABS_SIZE 8193
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilSloppyMath, ASIN_TABS_SIZE, jint)
+
+inline jdouble OrgApacheLuceneUtilSloppyMath_get_ASIN_DELTA();
+static jdouble OrgApacheLuceneUtilSloppyMath_ASIN_DELTA;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilSloppyMath, ASIN_DELTA, jdouble)
+
+inline jdouble OrgApacheLuceneUtilSloppyMath_get_ASIN_INDEXER();
+static jdouble OrgApacheLuceneUtilSloppyMath_ASIN_INDEXER;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilSloppyMath, ASIN_INDEXER, jdouble)
+
+inline IOSDoubleArray *OrgApacheLuceneUtilSloppyMath_get_asinTab();
+static IOSDoubleArray *OrgApacheLuceneUtilSloppyMath_asinTab;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilSloppyMath, asinTab, IOSDoubleArray *)
+
+inline IOSDoubleArray *OrgApacheLuceneUtilSloppyMath_get_asinDer1DivF1Tab();
+static IOSDoubleArray *OrgApacheLuceneUtilSloppyMath_asinDer1DivF1Tab;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilSloppyMath, asinDer1DivF1Tab, IOSDoubleArray *)
+
+inline IOSDoubleArray *OrgApacheLuceneUtilSloppyMath_get_asinDer2DivF2Tab();
+static IOSDoubleArray *OrgApacheLuceneUtilSloppyMath_asinDer2DivF2Tab;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilSloppyMath, asinDer2DivF2Tab, IOSDoubleArray *)
+
+inline IOSDoubleArray *OrgApacheLuceneUtilSloppyMath_get_asinDer3DivF3Tab();
+static IOSDoubleArray *OrgApacheLuceneUtilSloppyMath_asinDer3DivF3Tab;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilSloppyMath, asinDer3DivF3Tab, IOSDoubleArray *)
+
+inline IOSDoubleArray *OrgApacheLuceneUtilSloppyMath_get_asinDer4DivF4Tab();
+static IOSDoubleArray *OrgApacheLuceneUtilSloppyMath_asinDer4DivF4Tab;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilSloppyMath, asinDer4DivF4Tab, IOSDoubleArray *)
+
+inline jdouble OrgApacheLuceneUtilSloppyMath_get_ASIN_PIO2_HI();
+static jdouble OrgApacheLuceneUtilSloppyMath_ASIN_PIO2_HI;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilSloppyMath, ASIN_PIO2_HI, jdouble)
+
+inline jdouble OrgApacheLuceneUtilSloppyMath_get_ASIN_PIO2_LO();
+static jdouble OrgApacheLuceneUtilSloppyMath_ASIN_PIO2_LO;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilSloppyMath, ASIN_PIO2_LO, jdouble)
+
+inline jdouble OrgApacheLuceneUtilSloppyMath_get_ASIN_PS0();
+static jdouble OrgApacheLuceneUtilSloppyMath_ASIN_PS0;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilSloppyMath, ASIN_PS0, jdouble)
+
+inline jdouble OrgApacheLuceneUtilSloppyMath_get_ASIN_PS1();
+static jdouble OrgApacheLuceneUtilSloppyMath_ASIN_PS1;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilSloppyMath, ASIN_PS1, jdouble)
+
+inline jdouble OrgApacheLuceneUtilSloppyMath_get_ASIN_PS2();
+static jdouble OrgApacheLuceneUtilSloppyMath_ASIN_PS2;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilSloppyMath, ASIN_PS2, jdouble)
+
+inline jdouble OrgApacheLuceneUtilSloppyMath_get_ASIN_PS3();
+static jdouble OrgApacheLuceneUtilSloppyMath_ASIN_PS3;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilSloppyMath, ASIN_PS3, jdouble)
+
+inline jdouble OrgApacheLuceneUtilSloppyMath_get_ASIN_PS4();
+static jdouble OrgApacheLuceneUtilSloppyMath_ASIN_PS4;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilSloppyMath, ASIN_PS4, jdouble)
+
+inline jdouble OrgApacheLuceneUtilSloppyMath_get_ASIN_PS5();
+static jdouble OrgApacheLuceneUtilSloppyMath_ASIN_PS5;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilSloppyMath, ASIN_PS5, jdouble)
+
+inline jdouble OrgApacheLuceneUtilSloppyMath_get_ASIN_QS1();
+static jdouble OrgApacheLuceneUtilSloppyMath_ASIN_QS1;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilSloppyMath, ASIN_QS1, jdouble)
+
+inline jdouble OrgApacheLuceneUtilSloppyMath_get_ASIN_QS2();
+static jdouble OrgApacheLuceneUtilSloppyMath_ASIN_QS2;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilSloppyMath, ASIN_QS2, jdouble)
+
+inline jdouble OrgApacheLuceneUtilSloppyMath_get_ASIN_QS3();
+static jdouble OrgApacheLuceneUtilSloppyMath_ASIN_QS3;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilSloppyMath, ASIN_QS3, jdouble)
+
+inline jdouble OrgApacheLuceneUtilSloppyMath_get_ASIN_QS4();
+static jdouble OrgApacheLuceneUtilSloppyMath_ASIN_QS4;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilSloppyMath, ASIN_QS4, jdouble)
+
+inline jint OrgApacheLuceneUtilSloppyMath_get_RADIUS_TABS_SIZE();
 #define OrgApacheLuceneUtilSloppyMath_RADIUS_TABS_SIZE 1025
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilSloppyMath, RADIUS_TABS_SIZE, jint)
+
+inline jdouble OrgApacheLuceneUtilSloppyMath_get_RADIUS_DELTA();
 #define OrgApacheLuceneUtilSloppyMath_RADIUS_DELTA 0.0015339807878856412
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilSloppyMath, RADIUS_DELTA, jdouble)
+
+inline jdouble OrgApacheLuceneUtilSloppyMath_get_RADIUS_INDEXER();
 #define OrgApacheLuceneUtilSloppyMath_RADIUS_INDEXER 651.8986469044033
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneUtilSloppyMath, RADIUS_INDEXER, jdouble)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilSloppyMath, TO_RADIANS, jdouble)
-
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilSloppyMath, ONE_DIV_F2, jdouble)
-
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilSloppyMath, ONE_DIV_F3, jdouble)
-
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilSloppyMath, ONE_DIV_F4, jdouble)
-
-static jdouble OrgApacheLuceneUtilSloppyMath_PIO2_HI_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilSloppyMath, PIO2_HI_, jdouble)
-
-static jdouble OrgApacheLuceneUtilSloppyMath_PIO2_LO_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilSloppyMath, PIO2_LO_, jdouble)
-
-static jdouble OrgApacheLuceneUtilSloppyMath_TWOPI_HI_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilSloppyMath, TWOPI_HI_, jdouble)
-
-static jdouble OrgApacheLuceneUtilSloppyMath_TWOPI_LO_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilSloppyMath, TWOPI_LO_, jdouble)
-
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilSloppyMath, SIN_COS_TABS_SIZE, jint)
-
-static jdouble OrgApacheLuceneUtilSloppyMath_SIN_COS_DELTA_HI_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilSloppyMath, SIN_COS_DELTA_HI_, jdouble)
-
-static jdouble OrgApacheLuceneUtilSloppyMath_SIN_COS_DELTA_LO_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilSloppyMath, SIN_COS_DELTA_LO_, jdouble)
-
-static jdouble OrgApacheLuceneUtilSloppyMath_SIN_COS_INDEXER_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilSloppyMath, SIN_COS_INDEXER_, jdouble)
-
-static IOSDoubleArray *OrgApacheLuceneUtilSloppyMath_sinTab_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilSloppyMath, sinTab_, IOSDoubleArray *)
-
-static IOSDoubleArray *OrgApacheLuceneUtilSloppyMath_cosTab_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilSloppyMath, cosTab_, IOSDoubleArray *)
-
-static jdouble OrgApacheLuceneUtilSloppyMath_ASIN_MAX_VALUE_FOR_TABS_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilSloppyMath, ASIN_MAX_VALUE_FOR_TABS_, jdouble)
-
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilSloppyMath, ASIN_TABS_SIZE, jint)
-
-static jdouble OrgApacheLuceneUtilSloppyMath_ASIN_DELTA_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilSloppyMath, ASIN_DELTA_, jdouble)
-
-static jdouble OrgApacheLuceneUtilSloppyMath_ASIN_INDEXER_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilSloppyMath, ASIN_INDEXER_, jdouble)
-
-static IOSDoubleArray *OrgApacheLuceneUtilSloppyMath_asinTab_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilSloppyMath, asinTab_, IOSDoubleArray *)
-
-static IOSDoubleArray *OrgApacheLuceneUtilSloppyMath_asinDer1DivF1Tab_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilSloppyMath, asinDer1DivF1Tab_, IOSDoubleArray *)
-
-static IOSDoubleArray *OrgApacheLuceneUtilSloppyMath_asinDer2DivF2Tab_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilSloppyMath, asinDer2DivF2Tab_, IOSDoubleArray *)
-
-static IOSDoubleArray *OrgApacheLuceneUtilSloppyMath_asinDer3DivF3Tab_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilSloppyMath, asinDer3DivF3Tab_, IOSDoubleArray *)
-
-static IOSDoubleArray *OrgApacheLuceneUtilSloppyMath_asinDer4DivF4Tab_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilSloppyMath, asinDer4DivF4Tab_, IOSDoubleArray *)
-
-static jdouble OrgApacheLuceneUtilSloppyMath_ASIN_PIO2_HI_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilSloppyMath, ASIN_PIO2_HI_, jdouble)
-
-static jdouble OrgApacheLuceneUtilSloppyMath_ASIN_PIO2_LO_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilSloppyMath, ASIN_PIO2_LO_, jdouble)
-
-static jdouble OrgApacheLuceneUtilSloppyMath_ASIN_PS0_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilSloppyMath, ASIN_PS0_, jdouble)
-
-static jdouble OrgApacheLuceneUtilSloppyMath_ASIN_PS1_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilSloppyMath, ASIN_PS1_, jdouble)
-
-static jdouble OrgApacheLuceneUtilSloppyMath_ASIN_PS2_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilSloppyMath, ASIN_PS2_, jdouble)
-
-static jdouble OrgApacheLuceneUtilSloppyMath_ASIN_PS3_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilSloppyMath, ASIN_PS3_, jdouble)
-
-static jdouble OrgApacheLuceneUtilSloppyMath_ASIN_PS4_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilSloppyMath, ASIN_PS4_, jdouble)
-
-static jdouble OrgApacheLuceneUtilSloppyMath_ASIN_PS5_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilSloppyMath, ASIN_PS5_, jdouble)
-
-static jdouble OrgApacheLuceneUtilSloppyMath_ASIN_QS1_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilSloppyMath, ASIN_QS1_, jdouble)
-
-static jdouble OrgApacheLuceneUtilSloppyMath_ASIN_QS2_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilSloppyMath, ASIN_QS2_, jdouble)
-
-static jdouble OrgApacheLuceneUtilSloppyMath_ASIN_QS3_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilSloppyMath, ASIN_QS3_, jdouble)
-
-static jdouble OrgApacheLuceneUtilSloppyMath_ASIN_QS4_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilSloppyMath, ASIN_QS4_, jdouble)
-
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilSloppyMath, RADIUS_TABS_SIZE, jint)
-
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilSloppyMath, RADIUS_DELTA, jdouble)
-
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilSloppyMath, RADIUS_INDEXER, jdouble)
-
-static IOSDoubleArray *OrgApacheLuceneUtilSloppyMath_earthDiameterPerLatitude_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilSloppyMath, earthDiameterPerLatitude_, IOSDoubleArray *)
+inline IOSDoubleArray *OrgApacheLuceneUtilSloppyMath_get_earthDiameterPerLatitude();
+static IOSDoubleArray *OrgApacheLuceneUtilSloppyMath_earthDiameterPerLatitude;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilSloppyMath, earthDiameterPerLatitude, IOSDoubleArray *)
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilSloppyMath)
 
-jdouble OrgApacheLuceneUtilSloppyMath_SIN_COS_MAX_VALUE_FOR_INT_MODULO_;
+jdouble OrgApacheLuceneUtilSloppyMath_SIN_COS_MAX_VALUE_FOR_INT_MODULO;
 
 @implementation OrgApacheLuceneUtilSloppyMath
+
++ (jdouble)SIN_COS_MAX_VALUE_FOR_INT_MODULO {
+  return OrgApacheLuceneUtilSloppyMath_SIN_COS_MAX_VALUE_FOR_INT_MODULO;
+}
 
 + (jdouble)haversinWithDouble:(jdouble)lat1
                    withDouble:(jdouble)lon1
@@ -163,44 +205,44 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilSloppyMath class]) {
-    OrgApacheLuceneUtilSloppyMath_PIO2_HI_ = JavaLangDouble_longBitsToDoubleWithLong_((jlong) 0x3FF921FB54400000LL);
-    OrgApacheLuceneUtilSloppyMath_PIO2_LO_ = JavaLangDouble_longBitsToDoubleWithLong_((jlong) 0x3DD0B4611A626331LL);
-    OrgApacheLuceneUtilSloppyMath_TWOPI_HI_ = 4 * OrgApacheLuceneUtilSloppyMath_PIO2_HI_;
-    OrgApacheLuceneUtilSloppyMath_TWOPI_LO_ = 4 * OrgApacheLuceneUtilSloppyMath_PIO2_LO_;
-    OrgApacheLuceneUtilSloppyMath_SIN_COS_DELTA_HI_ = OrgApacheLuceneUtilSloppyMath_TWOPI_HI_ / (OrgApacheLuceneUtilSloppyMath_SIN_COS_TABS_SIZE - 1);
-    OrgApacheLuceneUtilSloppyMath_SIN_COS_DELTA_LO_ = OrgApacheLuceneUtilSloppyMath_TWOPI_LO_ / (OrgApacheLuceneUtilSloppyMath_SIN_COS_TABS_SIZE - 1);
-    OrgApacheLuceneUtilSloppyMath_SIN_COS_INDEXER_ = 1 / (OrgApacheLuceneUtilSloppyMath_SIN_COS_DELTA_HI_ + OrgApacheLuceneUtilSloppyMath_SIN_COS_DELTA_LO_);
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilSloppyMath_sinTab_, [IOSDoubleArray newArrayWithLength:OrgApacheLuceneUtilSloppyMath_SIN_COS_TABS_SIZE]);
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilSloppyMath_cosTab_, [IOSDoubleArray newArrayWithLength:OrgApacheLuceneUtilSloppyMath_SIN_COS_TABS_SIZE]);
-    OrgApacheLuceneUtilSloppyMath_SIN_COS_MAX_VALUE_FOR_INT_MODULO_ = ((JreRShift32(JavaLangInteger_MAX_VALUE, 9)) / OrgApacheLuceneUtilSloppyMath_SIN_COS_INDEXER_) * 0.99;
-    OrgApacheLuceneUtilSloppyMath_ASIN_MAX_VALUE_FOR_TABS_ = JavaLangStrictMath_sinWithDouble_(JavaLangMath_toRadiansWithDouble_(73.0));
-    OrgApacheLuceneUtilSloppyMath_ASIN_DELTA_ = OrgApacheLuceneUtilSloppyMath_ASIN_MAX_VALUE_FOR_TABS_ / (OrgApacheLuceneUtilSloppyMath_ASIN_TABS_SIZE - 1);
-    OrgApacheLuceneUtilSloppyMath_ASIN_INDEXER_ = 1 / OrgApacheLuceneUtilSloppyMath_ASIN_DELTA_;
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilSloppyMath_asinTab_, [IOSDoubleArray newArrayWithLength:OrgApacheLuceneUtilSloppyMath_ASIN_TABS_SIZE]);
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilSloppyMath_asinDer1DivF1Tab_, [IOSDoubleArray newArrayWithLength:OrgApacheLuceneUtilSloppyMath_ASIN_TABS_SIZE]);
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilSloppyMath_asinDer2DivF2Tab_, [IOSDoubleArray newArrayWithLength:OrgApacheLuceneUtilSloppyMath_ASIN_TABS_SIZE]);
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilSloppyMath_asinDer3DivF3Tab_, [IOSDoubleArray newArrayWithLength:OrgApacheLuceneUtilSloppyMath_ASIN_TABS_SIZE]);
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilSloppyMath_asinDer4DivF4Tab_, [IOSDoubleArray newArrayWithLength:OrgApacheLuceneUtilSloppyMath_ASIN_TABS_SIZE]);
-    OrgApacheLuceneUtilSloppyMath_ASIN_PIO2_HI_ = JavaLangDouble_longBitsToDoubleWithLong_((jlong) 0x3FF921FB54442D18LL);
-    OrgApacheLuceneUtilSloppyMath_ASIN_PIO2_LO_ = JavaLangDouble_longBitsToDoubleWithLong_((jlong) 0x3C91A62633145C07LL);
-    OrgApacheLuceneUtilSloppyMath_ASIN_PS0_ = JavaLangDouble_longBitsToDoubleWithLong_((jlong) 0x3fc5555555555555LL);
-    OrgApacheLuceneUtilSloppyMath_ASIN_PS1_ = JavaLangDouble_longBitsToDoubleWithLong_((jlong) 0xbfd4d61203eb6f7dLL);
-    OrgApacheLuceneUtilSloppyMath_ASIN_PS2_ = JavaLangDouble_longBitsToDoubleWithLong_((jlong) 0x3fc9c1550e884455LL);
-    OrgApacheLuceneUtilSloppyMath_ASIN_PS3_ = JavaLangDouble_longBitsToDoubleWithLong_((jlong) 0xbfa48228b5688f3bLL);
-    OrgApacheLuceneUtilSloppyMath_ASIN_PS4_ = JavaLangDouble_longBitsToDoubleWithLong_((jlong) 0x3f49efe07501b288LL);
-    OrgApacheLuceneUtilSloppyMath_ASIN_PS5_ = JavaLangDouble_longBitsToDoubleWithLong_((jlong) 0x3f023de10dfdf709LL);
-    OrgApacheLuceneUtilSloppyMath_ASIN_QS1_ = JavaLangDouble_longBitsToDoubleWithLong_((jlong) 0xc0033a271c8a2d4bLL);
-    OrgApacheLuceneUtilSloppyMath_ASIN_QS2_ = JavaLangDouble_longBitsToDoubleWithLong_((jlong) 0x40002ae59c598ac8LL);
-    OrgApacheLuceneUtilSloppyMath_ASIN_QS3_ = JavaLangDouble_longBitsToDoubleWithLong_((jlong) 0xbfe6066c1b8d0159LL);
-    OrgApacheLuceneUtilSloppyMath_ASIN_QS4_ = JavaLangDouble_longBitsToDoubleWithLong_((jlong) 0x3fb3b8c5b12e9282LL);
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilSloppyMath_earthDiameterPerLatitude_, [IOSDoubleArray newArrayWithLength:OrgApacheLuceneUtilSloppyMath_RADIUS_TABS_SIZE]);
+    OrgApacheLuceneUtilSloppyMath_PIO2_HI = JavaLangDouble_longBitsToDoubleWithLong_((jlong) 0x3FF921FB54400000LL);
+    OrgApacheLuceneUtilSloppyMath_PIO2_LO = JavaLangDouble_longBitsToDoubleWithLong_((jlong) 0x3DD0B4611A626331LL);
+    OrgApacheLuceneUtilSloppyMath_TWOPI_HI = 4 * OrgApacheLuceneUtilSloppyMath_PIO2_HI;
+    OrgApacheLuceneUtilSloppyMath_TWOPI_LO = 4 * OrgApacheLuceneUtilSloppyMath_PIO2_LO;
+    OrgApacheLuceneUtilSloppyMath_SIN_COS_DELTA_HI = OrgApacheLuceneUtilSloppyMath_TWOPI_HI / (OrgApacheLuceneUtilSloppyMath_SIN_COS_TABS_SIZE - 1);
+    OrgApacheLuceneUtilSloppyMath_SIN_COS_DELTA_LO = OrgApacheLuceneUtilSloppyMath_TWOPI_LO / (OrgApacheLuceneUtilSloppyMath_SIN_COS_TABS_SIZE - 1);
+    OrgApacheLuceneUtilSloppyMath_SIN_COS_INDEXER = 1 / (OrgApacheLuceneUtilSloppyMath_SIN_COS_DELTA_HI + OrgApacheLuceneUtilSloppyMath_SIN_COS_DELTA_LO);
+    OrgApacheLuceneUtilSloppyMath_sinTab = [IOSDoubleArray newArrayWithLength:OrgApacheLuceneUtilSloppyMath_SIN_COS_TABS_SIZE];
+    OrgApacheLuceneUtilSloppyMath_cosTab = [IOSDoubleArray newArrayWithLength:OrgApacheLuceneUtilSloppyMath_SIN_COS_TABS_SIZE];
+    OrgApacheLuceneUtilSloppyMath_SIN_COS_MAX_VALUE_FOR_INT_MODULO = ((JreRShift32(JavaLangInteger_MAX_VALUE, 9)) / OrgApacheLuceneUtilSloppyMath_SIN_COS_INDEXER) * 0.99;
+    OrgApacheLuceneUtilSloppyMath_ASIN_MAX_VALUE_FOR_TABS = JavaLangStrictMath_sinWithDouble_(JavaLangMath_toRadiansWithDouble_(73.0));
+    OrgApacheLuceneUtilSloppyMath_ASIN_DELTA = OrgApacheLuceneUtilSloppyMath_ASIN_MAX_VALUE_FOR_TABS / (OrgApacheLuceneUtilSloppyMath_ASIN_TABS_SIZE - 1);
+    OrgApacheLuceneUtilSloppyMath_ASIN_INDEXER = 1 / OrgApacheLuceneUtilSloppyMath_ASIN_DELTA;
+    OrgApacheLuceneUtilSloppyMath_asinTab = [IOSDoubleArray newArrayWithLength:OrgApacheLuceneUtilSloppyMath_ASIN_TABS_SIZE];
+    OrgApacheLuceneUtilSloppyMath_asinDer1DivF1Tab = [IOSDoubleArray newArrayWithLength:OrgApacheLuceneUtilSloppyMath_ASIN_TABS_SIZE];
+    OrgApacheLuceneUtilSloppyMath_asinDer2DivF2Tab = [IOSDoubleArray newArrayWithLength:OrgApacheLuceneUtilSloppyMath_ASIN_TABS_SIZE];
+    OrgApacheLuceneUtilSloppyMath_asinDer3DivF3Tab = [IOSDoubleArray newArrayWithLength:OrgApacheLuceneUtilSloppyMath_ASIN_TABS_SIZE];
+    OrgApacheLuceneUtilSloppyMath_asinDer4DivF4Tab = [IOSDoubleArray newArrayWithLength:OrgApacheLuceneUtilSloppyMath_ASIN_TABS_SIZE];
+    OrgApacheLuceneUtilSloppyMath_ASIN_PIO2_HI = JavaLangDouble_longBitsToDoubleWithLong_((jlong) 0x3FF921FB54442D18LL);
+    OrgApacheLuceneUtilSloppyMath_ASIN_PIO2_LO = JavaLangDouble_longBitsToDoubleWithLong_((jlong) 0x3C91A62633145C07LL);
+    OrgApacheLuceneUtilSloppyMath_ASIN_PS0 = JavaLangDouble_longBitsToDoubleWithLong_((jlong) 0x3fc5555555555555LL);
+    OrgApacheLuceneUtilSloppyMath_ASIN_PS1 = JavaLangDouble_longBitsToDoubleWithLong_((jlong) 0xbfd4d61203eb6f7dLL);
+    OrgApacheLuceneUtilSloppyMath_ASIN_PS2 = JavaLangDouble_longBitsToDoubleWithLong_((jlong) 0x3fc9c1550e884455LL);
+    OrgApacheLuceneUtilSloppyMath_ASIN_PS3 = JavaLangDouble_longBitsToDoubleWithLong_((jlong) 0xbfa48228b5688f3bLL);
+    OrgApacheLuceneUtilSloppyMath_ASIN_PS4 = JavaLangDouble_longBitsToDoubleWithLong_((jlong) 0x3f49efe07501b288LL);
+    OrgApacheLuceneUtilSloppyMath_ASIN_PS5 = JavaLangDouble_longBitsToDoubleWithLong_((jlong) 0x3f023de10dfdf709LL);
+    OrgApacheLuceneUtilSloppyMath_ASIN_QS1 = JavaLangDouble_longBitsToDoubleWithLong_((jlong) 0xc0033a271c8a2d4bLL);
+    OrgApacheLuceneUtilSloppyMath_ASIN_QS2 = JavaLangDouble_longBitsToDoubleWithLong_((jlong) 0x40002ae59c598ac8LL);
+    OrgApacheLuceneUtilSloppyMath_ASIN_QS3 = JavaLangDouble_longBitsToDoubleWithLong_((jlong) 0xbfe6066c1b8d0159LL);
+    OrgApacheLuceneUtilSloppyMath_ASIN_QS4 = JavaLangDouble_longBitsToDoubleWithLong_((jlong) 0x3fb3b8c5b12e9282LL);
+    OrgApacheLuceneUtilSloppyMath_earthDiameterPerLatitude = [IOSDoubleArray newArrayWithLength:OrgApacheLuceneUtilSloppyMath_RADIUS_TABS_SIZE];
     {
       jint SIN_COS_PI_INDEX = (OrgApacheLuceneUtilSloppyMath_SIN_COS_TABS_SIZE - 1) / 2;
       jint SIN_COS_PI_MUL_2_INDEX = 2 * SIN_COS_PI_INDEX;
       jint SIN_COS_PI_MUL_0_5_INDEX = SIN_COS_PI_INDEX / 2;
       jint SIN_COS_PI_MUL_1_5_INDEX = 3 * SIN_COS_PI_INDEX / 2;
       for (jint i = 0; i < OrgApacheLuceneUtilSloppyMath_SIN_COS_TABS_SIZE; i++) {
-        jdouble angle = i * OrgApacheLuceneUtilSloppyMath_SIN_COS_DELTA_HI_ + i * OrgApacheLuceneUtilSloppyMath_SIN_COS_DELTA_LO_;
+        jdouble angle = i * OrgApacheLuceneUtilSloppyMath_SIN_COS_DELTA_HI + i * OrgApacheLuceneUtilSloppyMath_SIN_COS_DELTA_LO;
         jdouble sinAngle = JavaLangStrictMath_sinWithDouble_(angle);
         jdouble cosAngle = JavaLangStrictMath_cosWithDouble_(angle);
         if (i == SIN_COS_PI_INDEX) {
@@ -215,28 +257,28 @@ J2OBJC_IGNORE_DESIGNATED_END
         else if (i == SIN_COS_PI_MUL_1_5_INDEX) {
           cosAngle = 0.0;
         }
-        *IOSDoubleArray_GetRef(OrgApacheLuceneUtilSloppyMath_sinTab_, i) = sinAngle;
-        *IOSDoubleArray_GetRef(OrgApacheLuceneUtilSloppyMath_cosTab_, i) = cosAngle;
+        *IOSDoubleArray_GetRef(OrgApacheLuceneUtilSloppyMath_sinTab, i) = sinAngle;
+        *IOSDoubleArray_GetRef(OrgApacheLuceneUtilSloppyMath_cosTab, i) = cosAngle;
       }
       for (jint i = 0; i < OrgApacheLuceneUtilSloppyMath_ASIN_TABS_SIZE; i++) {
-        jdouble x = i * OrgApacheLuceneUtilSloppyMath_ASIN_DELTA_;
-        *IOSDoubleArray_GetRef(OrgApacheLuceneUtilSloppyMath_asinTab_, i) = JavaLangStrictMath_asinWithDouble_(x);
+        jdouble x = i * OrgApacheLuceneUtilSloppyMath_ASIN_DELTA;
+        *IOSDoubleArray_GetRef(OrgApacheLuceneUtilSloppyMath_asinTab, i) = JavaLangStrictMath_asinWithDouble_(x);
         jdouble oneMinusXSqInv = 1.0 / (1 - x * x);
         jdouble oneMinusXSqInv0_5 = JavaLangStrictMath_sqrtWithDouble_(oneMinusXSqInv);
         jdouble oneMinusXSqInv1_5 = oneMinusXSqInv0_5 * oneMinusXSqInv;
         jdouble oneMinusXSqInv2_5 = oneMinusXSqInv1_5 * oneMinusXSqInv;
         jdouble oneMinusXSqInv3_5 = oneMinusXSqInv2_5 * oneMinusXSqInv;
-        *IOSDoubleArray_GetRef(OrgApacheLuceneUtilSloppyMath_asinDer1DivF1Tab_, i) = oneMinusXSqInv0_5;
-        *IOSDoubleArray_GetRef(OrgApacheLuceneUtilSloppyMath_asinDer2DivF2Tab_, i) = (x * oneMinusXSqInv1_5) * OrgApacheLuceneUtilSloppyMath_ONE_DIV_F2;
-        *IOSDoubleArray_GetRef(OrgApacheLuceneUtilSloppyMath_asinDer3DivF3Tab_, i) = ((1 + 2 * x * x) * oneMinusXSqInv2_5) * OrgApacheLuceneUtilSloppyMath_ONE_DIV_F3;
-        *IOSDoubleArray_GetRef(OrgApacheLuceneUtilSloppyMath_asinDer4DivF4Tab_, i) = ((5 + 2 * x * (2 + x * (5 - 2 * x))) * oneMinusXSqInv3_5) * OrgApacheLuceneUtilSloppyMath_ONE_DIV_F4;
+        *IOSDoubleArray_GetRef(OrgApacheLuceneUtilSloppyMath_asinDer1DivF1Tab, i) = oneMinusXSqInv0_5;
+        *IOSDoubleArray_GetRef(OrgApacheLuceneUtilSloppyMath_asinDer2DivF2Tab, i) = (x * oneMinusXSqInv1_5) * OrgApacheLuceneUtilSloppyMath_ONE_DIV_F2;
+        *IOSDoubleArray_GetRef(OrgApacheLuceneUtilSloppyMath_asinDer3DivF3Tab, i) = ((1 + 2 * x * x) * oneMinusXSqInv2_5) * OrgApacheLuceneUtilSloppyMath_ONE_DIV_F3;
+        *IOSDoubleArray_GetRef(OrgApacheLuceneUtilSloppyMath_asinDer4DivF4Tab, i) = ((5 + 2 * x * (2 + x * (5 - 2 * x))) * oneMinusXSqInv3_5) * OrgApacheLuceneUtilSloppyMath_ONE_DIV_F4;
       }
       jdouble a = 6378137;
       jdouble b = 6356752.31420;
       jdouble a2 = a * a;
       jdouble b2 = b * b;
-      *IOSDoubleArray_GetRef(OrgApacheLuceneUtilSloppyMath_earthDiameterPerLatitude_, 0) = 2 * a / 1000.0;
-      *IOSDoubleArray_GetRef(OrgApacheLuceneUtilSloppyMath_earthDiameterPerLatitude_, OrgApacheLuceneUtilSloppyMath_RADIUS_TABS_SIZE - 1) = 2 * b / 1000.0;
+      *IOSDoubleArray_GetRef(OrgApacheLuceneUtilSloppyMath_earthDiameterPerLatitude, 0) = 2 * a / 1000.0;
+      *IOSDoubleArray_GetRef(OrgApacheLuceneUtilSloppyMath_earthDiameterPerLatitude, OrgApacheLuceneUtilSloppyMath_RADIUS_TABS_SIZE - 1) = 2 * b / 1000.0;
       for (jint i = 1; i < OrgApacheLuceneUtilSloppyMath_RADIUS_TABS_SIZE - 1; i++) {
         jdouble lat = JavaLangMath_PI * i / (2.0 * OrgApacheLuceneUtilSloppyMath_RADIUS_TABS_SIZE - 1);
         jdouble one = JavaLangStrictMath_powWithDouble_withDouble_(a2 * JavaLangStrictMath_cosWithDouble_(lat), 2);
@@ -244,7 +286,7 @@ J2OBJC_IGNORE_DESIGNATED_END
         jdouble three = JavaLangStrictMath_powWithDouble_withDouble_(a * JavaLangStrictMath_cosWithDouble_(lat), 2);
         jdouble four = JavaLangStrictMath_powWithDouble_withDouble_(b * JavaLangStrictMath_sinWithDouble_(lat), 2);
         jdouble radius = JavaLangStrictMath_sqrtWithDouble_((one + two) / (three + four));
-        *IOSDoubleArray_GetRef(OrgApacheLuceneUtilSloppyMath_earthDiameterPerLatitude_, i) = 2 * radius / 1000.0;
+        *IOSDoubleArray_GetRef(OrgApacheLuceneUtilSloppyMath_earthDiameterPerLatitude, i) = 2 * radius / 1000.0;
       }
     }
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilSloppyMath)
@@ -257,49 +299,49 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "cosWithDouble:", "cos", "D", 0x9, NULL, NULL },
     { "asinWithDouble:", "asin", "D", 0x9, NULL, NULL },
     { "earthDiameterWithDouble:", "earthDiameter", "D", 0x9, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "SloppyMath", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "TO_RADIANS", "TO_RADIANS", 0x1a, "D", NULL, NULL, .constantValue.asDouble = OrgApacheLuceneUtilSloppyMath_TO_RADIANS },
     { "ONE_DIV_F2", "ONE_DIV_F2", 0x1a, "D", NULL, NULL, .constantValue.asDouble = OrgApacheLuceneUtilSloppyMath_ONE_DIV_F2 },
     { "ONE_DIV_F3", "ONE_DIV_F3", 0x1a, "D", NULL, NULL, .constantValue.asDouble = OrgApacheLuceneUtilSloppyMath_ONE_DIV_F3 },
     { "ONE_DIV_F4", "ONE_DIV_F4", 0x1a, "D", NULL, NULL, .constantValue.asDouble = OrgApacheLuceneUtilSloppyMath_ONE_DIV_F4 },
-    { "PIO2_HI_", NULL, 0x1a, "D", &OrgApacheLuceneUtilSloppyMath_PIO2_HI_, NULL, .constantValue.asLong = 0 },
-    { "PIO2_LO_", NULL, 0x1a, "D", &OrgApacheLuceneUtilSloppyMath_PIO2_LO_, NULL, .constantValue.asLong = 0 },
-    { "TWOPI_HI_", NULL, 0x1a, "D", &OrgApacheLuceneUtilSloppyMath_TWOPI_HI_, NULL, .constantValue.asLong = 0 },
-    { "TWOPI_LO_", NULL, 0x1a, "D", &OrgApacheLuceneUtilSloppyMath_TWOPI_LO_, NULL, .constantValue.asLong = 0 },
+    { "PIO2_HI", "PIO2_HI", 0x1a, "D", &OrgApacheLuceneUtilSloppyMath_PIO2_HI, NULL, .constantValue.asLong = 0 },
+    { "PIO2_LO", "PIO2_LO", 0x1a, "D", &OrgApacheLuceneUtilSloppyMath_PIO2_LO, NULL, .constantValue.asLong = 0 },
+    { "TWOPI_HI", "TWOPI_HI", 0x1a, "D", &OrgApacheLuceneUtilSloppyMath_TWOPI_HI, NULL, .constantValue.asLong = 0 },
+    { "TWOPI_LO", "TWOPI_LO", 0x1a, "D", &OrgApacheLuceneUtilSloppyMath_TWOPI_LO, NULL, .constantValue.asLong = 0 },
     { "SIN_COS_TABS_SIZE", "SIN_COS_TABS_SIZE", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilSloppyMath_SIN_COS_TABS_SIZE },
-    { "SIN_COS_DELTA_HI_", NULL, 0x1a, "D", &OrgApacheLuceneUtilSloppyMath_SIN_COS_DELTA_HI_, NULL, .constantValue.asLong = 0 },
-    { "SIN_COS_DELTA_LO_", NULL, 0x1a, "D", &OrgApacheLuceneUtilSloppyMath_SIN_COS_DELTA_LO_, NULL, .constantValue.asLong = 0 },
-    { "SIN_COS_INDEXER_", NULL, 0x1a, "D", &OrgApacheLuceneUtilSloppyMath_SIN_COS_INDEXER_, NULL, .constantValue.asLong = 0 },
-    { "sinTab_", NULL, 0x1a, "[D", &OrgApacheLuceneUtilSloppyMath_sinTab_, NULL, .constantValue.asLong = 0 },
-    { "cosTab_", NULL, 0x1a, "[D", &OrgApacheLuceneUtilSloppyMath_cosTab_, NULL, .constantValue.asLong = 0 },
-    { "SIN_COS_MAX_VALUE_FOR_INT_MODULO_", NULL, 0x18, "D", &OrgApacheLuceneUtilSloppyMath_SIN_COS_MAX_VALUE_FOR_INT_MODULO_, NULL, .constantValue.asLong = 0 },
-    { "ASIN_MAX_VALUE_FOR_TABS_", NULL, 0x1a, "D", &OrgApacheLuceneUtilSloppyMath_ASIN_MAX_VALUE_FOR_TABS_, NULL, .constantValue.asLong = 0 },
+    { "SIN_COS_DELTA_HI", "SIN_COS_DELTA_HI", 0x1a, "D", &OrgApacheLuceneUtilSloppyMath_SIN_COS_DELTA_HI, NULL, .constantValue.asLong = 0 },
+    { "SIN_COS_DELTA_LO", "SIN_COS_DELTA_LO", 0x1a, "D", &OrgApacheLuceneUtilSloppyMath_SIN_COS_DELTA_LO, NULL, .constantValue.asLong = 0 },
+    { "SIN_COS_INDEXER", "SIN_COS_INDEXER", 0x1a, "D", &OrgApacheLuceneUtilSloppyMath_SIN_COS_INDEXER, NULL, .constantValue.asLong = 0 },
+    { "sinTab", "sinTab", 0x1a, "[D", &OrgApacheLuceneUtilSloppyMath_sinTab, NULL, .constantValue.asLong = 0 },
+    { "cosTab", "cosTab", 0x1a, "[D", &OrgApacheLuceneUtilSloppyMath_cosTab, NULL, .constantValue.asLong = 0 },
+    { "SIN_COS_MAX_VALUE_FOR_INT_MODULO", "SIN_COS_MAX_VALUE_FOR_INT_MODULO", 0x18, "D", &OrgApacheLuceneUtilSloppyMath_SIN_COS_MAX_VALUE_FOR_INT_MODULO, NULL, .constantValue.asLong = 0 },
+    { "ASIN_MAX_VALUE_FOR_TABS", "ASIN_MAX_VALUE_FOR_TABS", 0x1a, "D", &OrgApacheLuceneUtilSloppyMath_ASIN_MAX_VALUE_FOR_TABS, NULL, .constantValue.asLong = 0 },
     { "ASIN_TABS_SIZE", "ASIN_TABS_SIZE", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilSloppyMath_ASIN_TABS_SIZE },
-    { "ASIN_DELTA_", NULL, 0x1a, "D", &OrgApacheLuceneUtilSloppyMath_ASIN_DELTA_, NULL, .constantValue.asLong = 0 },
-    { "ASIN_INDEXER_", NULL, 0x1a, "D", &OrgApacheLuceneUtilSloppyMath_ASIN_INDEXER_, NULL, .constantValue.asLong = 0 },
-    { "asinTab_", NULL, 0x1a, "[D", &OrgApacheLuceneUtilSloppyMath_asinTab_, NULL, .constantValue.asLong = 0 },
-    { "asinDer1DivF1Tab_", NULL, 0x1a, "[D", &OrgApacheLuceneUtilSloppyMath_asinDer1DivF1Tab_, NULL, .constantValue.asLong = 0 },
-    { "asinDer2DivF2Tab_", NULL, 0x1a, "[D", &OrgApacheLuceneUtilSloppyMath_asinDer2DivF2Tab_, NULL, .constantValue.asLong = 0 },
-    { "asinDer3DivF3Tab_", NULL, 0x1a, "[D", &OrgApacheLuceneUtilSloppyMath_asinDer3DivF3Tab_, NULL, .constantValue.asLong = 0 },
-    { "asinDer4DivF4Tab_", NULL, 0x1a, "[D", &OrgApacheLuceneUtilSloppyMath_asinDer4DivF4Tab_, NULL, .constantValue.asLong = 0 },
-    { "ASIN_PIO2_HI_", NULL, 0x1a, "D", &OrgApacheLuceneUtilSloppyMath_ASIN_PIO2_HI_, NULL, .constantValue.asLong = 0 },
-    { "ASIN_PIO2_LO_", NULL, 0x1a, "D", &OrgApacheLuceneUtilSloppyMath_ASIN_PIO2_LO_, NULL, .constantValue.asLong = 0 },
-    { "ASIN_PS0_", NULL, 0x1a, "D", &OrgApacheLuceneUtilSloppyMath_ASIN_PS0_, NULL, .constantValue.asLong = 0 },
-    { "ASIN_PS1_", NULL, 0x1a, "D", &OrgApacheLuceneUtilSloppyMath_ASIN_PS1_, NULL, .constantValue.asLong = 0 },
-    { "ASIN_PS2_", NULL, 0x1a, "D", &OrgApacheLuceneUtilSloppyMath_ASIN_PS2_, NULL, .constantValue.asLong = 0 },
-    { "ASIN_PS3_", NULL, 0x1a, "D", &OrgApacheLuceneUtilSloppyMath_ASIN_PS3_, NULL, .constantValue.asLong = 0 },
-    { "ASIN_PS4_", NULL, 0x1a, "D", &OrgApacheLuceneUtilSloppyMath_ASIN_PS4_, NULL, .constantValue.asLong = 0 },
-    { "ASIN_PS5_", NULL, 0x1a, "D", &OrgApacheLuceneUtilSloppyMath_ASIN_PS5_, NULL, .constantValue.asLong = 0 },
-    { "ASIN_QS1_", NULL, 0x1a, "D", &OrgApacheLuceneUtilSloppyMath_ASIN_QS1_, NULL, .constantValue.asLong = 0 },
-    { "ASIN_QS2_", NULL, 0x1a, "D", &OrgApacheLuceneUtilSloppyMath_ASIN_QS2_, NULL, .constantValue.asLong = 0 },
-    { "ASIN_QS3_", NULL, 0x1a, "D", &OrgApacheLuceneUtilSloppyMath_ASIN_QS3_, NULL, .constantValue.asLong = 0 },
-    { "ASIN_QS4_", NULL, 0x1a, "D", &OrgApacheLuceneUtilSloppyMath_ASIN_QS4_, NULL, .constantValue.asLong = 0 },
+    { "ASIN_DELTA", "ASIN_DELTA", 0x1a, "D", &OrgApacheLuceneUtilSloppyMath_ASIN_DELTA, NULL, .constantValue.asLong = 0 },
+    { "ASIN_INDEXER", "ASIN_INDEXER", 0x1a, "D", &OrgApacheLuceneUtilSloppyMath_ASIN_INDEXER, NULL, .constantValue.asLong = 0 },
+    { "asinTab", "asinTab", 0x1a, "[D", &OrgApacheLuceneUtilSloppyMath_asinTab, NULL, .constantValue.asLong = 0 },
+    { "asinDer1DivF1Tab", "asinDer1DivF1Tab", 0x1a, "[D", &OrgApacheLuceneUtilSloppyMath_asinDer1DivF1Tab, NULL, .constantValue.asLong = 0 },
+    { "asinDer2DivF2Tab", "asinDer2DivF2Tab", 0x1a, "[D", &OrgApacheLuceneUtilSloppyMath_asinDer2DivF2Tab, NULL, .constantValue.asLong = 0 },
+    { "asinDer3DivF3Tab", "asinDer3DivF3Tab", 0x1a, "[D", &OrgApacheLuceneUtilSloppyMath_asinDer3DivF3Tab, NULL, .constantValue.asLong = 0 },
+    { "asinDer4DivF4Tab", "asinDer4DivF4Tab", 0x1a, "[D", &OrgApacheLuceneUtilSloppyMath_asinDer4DivF4Tab, NULL, .constantValue.asLong = 0 },
+    { "ASIN_PIO2_HI", "ASIN_PIO2_HI", 0x1a, "D", &OrgApacheLuceneUtilSloppyMath_ASIN_PIO2_HI, NULL, .constantValue.asLong = 0 },
+    { "ASIN_PIO2_LO", "ASIN_PIO2_LO", 0x1a, "D", &OrgApacheLuceneUtilSloppyMath_ASIN_PIO2_LO, NULL, .constantValue.asLong = 0 },
+    { "ASIN_PS0", "ASIN_PS0", 0x1a, "D", &OrgApacheLuceneUtilSloppyMath_ASIN_PS0, NULL, .constantValue.asLong = 0 },
+    { "ASIN_PS1", "ASIN_PS1", 0x1a, "D", &OrgApacheLuceneUtilSloppyMath_ASIN_PS1, NULL, .constantValue.asLong = 0 },
+    { "ASIN_PS2", "ASIN_PS2", 0x1a, "D", &OrgApacheLuceneUtilSloppyMath_ASIN_PS2, NULL, .constantValue.asLong = 0 },
+    { "ASIN_PS3", "ASIN_PS3", 0x1a, "D", &OrgApacheLuceneUtilSloppyMath_ASIN_PS3, NULL, .constantValue.asLong = 0 },
+    { "ASIN_PS4", "ASIN_PS4", 0x1a, "D", &OrgApacheLuceneUtilSloppyMath_ASIN_PS4, NULL, .constantValue.asLong = 0 },
+    { "ASIN_PS5", "ASIN_PS5", 0x1a, "D", &OrgApacheLuceneUtilSloppyMath_ASIN_PS5, NULL, .constantValue.asLong = 0 },
+    { "ASIN_QS1", "ASIN_QS1", 0x1a, "D", &OrgApacheLuceneUtilSloppyMath_ASIN_QS1, NULL, .constantValue.asLong = 0 },
+    { "ASIN_QS2", "ASIN_QS2", 0x1a, "D", &OrgApacheLuceneUtilSloppyMath_ASIN_QS2, NULL, .constantValue.asLong = 0 },
+    { "ASIN_QS3", "ASIN_QS3", 0x1a, "D", &OrgApacheLuceneUtilSloppyMath_ASIN_QS3, NULL, .constantValue.asLong = 0 },
+    { "ASIN_QS4", "ASIN_QS4", 0x1a, "D", &OrgApacheLuceneUtilSloppyMath_ASIN_QS4, NULL, .constantValue.asLong = 0 },
     { "RADIUS_TABS_SIZE", "RADIUS_TABS_SIZE", 0x1a, "I", NULL, NULL, .constantValue.asInt = OrgApacheLuceneUtilSloppyMath_RADIUS_TABS_SIZE },
     { "RADIUS_DELTA", "RADIUS_DELTA", 0x1a, "D", NULL, NULL, .constantValue.asDouble = OrgApacheLuceneUtilSloppyMath_RADIUS_DELTA },
     { "RADIUS_INDEXER", "RADIUS_INDEXER", 0x1a, "D", NULL, NULL, .constantValue.asDouble = OrgApacheLuceneUtilSloppyMath_RADIUS_INDEXER },
-    { "earthDiameterPerLatitude_", NULL, 0x1a, "[D", &OrgApacheLuceneUtilSloppyMath_earthDiameterPerLatitude_, NULL, .constantValue.asLong = 0 },
+    { "earthDiameterPerLatitude", "earthDiameterPerLatitude", 0x1a, "[D", &OrgApacheLuceneUtilSloppyMath_earthDiameterPerLatitude, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneUtilSloppyMath = { 2, "SloppyMath", "org.apache.lucene.util", NULL, 0x1, 5, methods, 40, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneUtilSloppyMath;
@@ -324,14 +366,14 @@ jdouble OrgApacheLuceneUtilSloppyMath_cosWithDouble_(jdouble a) {
   if (a < 0.0) {
     a = -a;
   }
-  if (a > OrgApacheLuceneUtilSloppyMath_SIN_COS_MAX_VALUE_FOR_INT_MODULO_) {
+  if (a > OrgApacheLuceneUtilSloppyMath_SIN_COS_MAX_VALUE_FOR_INT_MODULO) {
     return JavaLangMath_cosWithDouble_(a);
   }
-  jint index = JreFpToInt((a * OrgApacheLuceneUtilSloppyMath_SIN_COS_INDEXER_ + 0.5));
-  jdouble delta = (a - index * OrgApacheLuceneUtilSloppyMath_SIN_COS_DELTA_HI_) - index * OrgApacheLuceneUtilSloppyMath_SIN_COS_DELTA_LO_;
+  jint index = JreFpToInt((a * OrgApacheLuceneUtilSloppyMath_SIN_COS_INDEXER + 0.5));
+  jdouble delta = (a - index * OrgApacheLuceneUtilSloppyMath_SIN_COS_DELTA_HI) - index * OrgApacheLuceneUtilSloppyMath_SIN_COS_DELTA_LO;
   index &= (OrgApacheLuceneUtilSloppyMath_SIN_COS_TABS_SIZE - 2);
-  jdouble indexCos = IOSDoubleArray_Get(nil_chk(OrgApacheLuceneUtilSloppyMath_cosTab_), index);
-  jdouble indexSin = IOSDoubleArray_Get(nil_chk(OrgApacheLuceneUtilSloppyMath_sinTab_), index);
+  jdouble indexCos = IOSDoubleArray_Get(nil_chk(OrgApacheLuceneUtilSloppyMath_cosTab), index);
+  jdouble indexSin = IOSDoubleArray_Get(nil_chk(OrgApacheLuceneUtilSloppyMath_sinTab), index);
   return indexCos + delta * (-indexSin + delta * (-indexCos * OrgApacheLuceneUtilSloppyMath_ONE_DIV_F2 + delta * (indexSin * OrgApacheLuceneUtilSloppyMath_ONE_DIV_F3 + delta * indexCos * OrgApacheLuceneUtilSloppyMath_ONE_DIV_F4)));
 }
 
@@ -345,20 +387,20 @@ jdouble OrgApacheLuceneUtilSloppyMath_asinWithDouble_(jdouble a) {
   else {
     negateResult = false;
   }
-  if (a <= OrgApacheLuceneUtilSloppyMath_ASIN_MAX_VALUE_FOR_TABS_) {
-    jint index = JreFpToInt((a * OrgApacheLuceneUtilSloppyMath_ASIN_INDEXER_ + 0.5));
-    jdouble delta = a - index * OrgApacheLuceneUtilSloppyMath_ASIN_DELTA_;
-    jdouble result = IOSDoubleArray_Get(nil_chk(OrgApacheLuceneUtilSloppyMath_asinTab_), index) + delta * (IOSDoubleArray_Get(nil_chk(OrgApacheLuceneUtilSloppyMath_asinDer1DivF1Tab_), index) + delta * (IOSDoubleArray_Get(nil_chk(OrgApacheLuceneUtilSloppyMath_asinDer2DivF2Tab_), index) + delta * (IOSDoubleArray_Get(nil_chk(OrgApacheLuceneUtilSloppyMath_asinDer3DivF3Tab_), index) + delta * IOSDoubleArray_Get(nil_chk(OrgApacheLuceneUtilSloppyMath_asinDer4DivF4Tab_), index))));
+  if (a <= OrgApacheLuceneUtilSloppyMath_ASIN_MAX_VALUE_FOR_TABS) {
+    jint index = JreFpToInt((a * OrgApacheLuceneUtilSloppyMath_ASIN_INDEXER + 0.5));
+    jdouble delta = a - index * OrgApacheLuceneUtilSloppyMath_ASIN_DELTA;
+    jdouble result = IOSDoubleArray_Get(nil_chk(OrgApacheLuceneUtilSloppyMath_asinTab), index) + delta * (IOSDoubleArray_Get(nil_chk(OrgApacheLuceneUtilSloppyMath_asinDer1DivF1Tab), index) + delta * (IOSDoubleArray_Get(nil_chk(OrgApacheLuceneUtilSloppyMath_asinDer2DivF2Tab), index) + delta * (IOSDoubleArray_Get(nil_chk(OrgApacheLuceneUtilSloppyMath_asinDer3DivF3Tab), index) + delta * IOSDoubleArray_Get(nil_chk(OrgApacheLuceneUtilSloppyMath_asinDer4DivF4Tab), index))));
     return negateResult ? -result : result;
   }
   else {
     if (a < 1.0) {
       jdouble t = (1.0 - a) * 0.5;
-      jdouble p = t * (OrgApacheLuceneUtilSloppyMath_ASIN_PS0_ + t * (OrgApacheLuceneUtilSloppyMath_ASIN_PS1_ + t * (OrgApacheLuceneUtilSloppyMath_ASIN_PS2_ + t * (OrgApacheLuceneUtilSloppyMath_ASIN_PS3_ + t * (OrgApacheLuceneUtilSloppyMath_ASIN_PS4_ + t * OrgApacheLuceneUtilSloppyMath_ASIN_PS5_)))));
-      jdouble q = 1.0 + t * (OrgApacheLuceneUtilSloppyMath_ASIN_QS1_ + t * (OrgApacheLuceneUtilSloppyMath_ASIN_QS2_ + t * (OrgApacheLuceneUtilSloppyMath_ASIN_QS3_ + t * OrgApacheLuceneUtilSloppyMath_ASIN_QS4_)));
+      jdouble p = t * (OrgApacheLuceneUtilSloppyMath_ASIN_PS0 + t * (OrgApacheLuceneUtilSloppyMath_ASIN_PS1 + t * (OrgApacheLuceneUtilSloppyMath_ASIN_PS2 + t * (OrgApacheLuceneUtilSloppyMath_ASIN_PS3 + t * (OrgApacheLuceneUtilSloppyMath_ASIN_PS4 + t * OrgApacheLuceneUtilSloppyMath_ASIN_PS5)))));
+      jdouble q = 1.0 + t * (OrgApacheLuceneUtilSloppyMath_ASIN_QS1 + t * (OrgApacheLuceneUtilSloppyMath_ASIN_QS2 + t * (OrgApacheLuceneUtilSloppyMath_ASIN_QS3 + t * OrgApacheLuceneUtilSloppyMath_ASIN_QS4)));
       jdouble s = JavaLangMath_sqrtWithDouble_(t);
       jdouble z = s + s * (p / q);
-      jdouble result = OrgApacheLuceneUtilSloppyMath_ASIN_PIO2_HI_ - ((z + z) - OrgApacheLuceneUtilSloppyMath_ASIN_PIO2_LO_);
+      jdouble result = OrgApacheLuceneUtilSloppyMath_ASIN_PIO2_HI - ((z + z) - OrgApacheLuceneUtilSloppyMath_ASIN_PIO2_LO);
       return negateResult ? -result : result;
     }
     else {
@@ -374,8 +416,8 @@ jdouble OrgApacheLuceneUtilSloppyMath_asinWithDouble_(jdouble a) {
 
 jdouble OrgApacheLuceneUtilSloppyMath_earthDiameterWithDouble_(jdouble latitude) {
   OrgApacheLuceneUtilSloppyMath_initialize();
-  jint index = JreFpToInt((JavaLangMath_absWithDouble_(latitude) * OrgApacheLuceneUtilSloppyMath_RADIUS_INDEXER + 0.5)) % ((IOSDoubleArray *) nil_chk(OrgApacheLuceneUtilSloppyMath_earthDiameterPerLatitude_))->size_;
-  return IOSDoubleArray_Get(OrgApacheLuceneUtilSloppyMath_earthDiameterPerLatitude_, index);
+  jint index = JreFpToInt((JavaLangMath_absWithDouble_(latitude) * OrgApacheLuceneUtilSloppyMath_RADIUS_INDEXER + 0.5)) % ((IOSDoubleArray *) nil_chk(OrgApacheLuceneUtilSloppyMath_earthDiameterPerLatitude))->size_;
+  return IOSDoubleArray_Get(OrgApacheLuceneUtilSloppyMath_earthDiameterPerLatitude, index);
 }
 
 void OrgApacheLuceneUtilSloppyMath_init(OrgApacheLuceneUtilSloppyMath *self) {
@@ -383,9 +425,11 @@ void OrgApacheLuceneUtilSloppyMath_init(OrgApacheLuceneUtilSloppyMath *self) {
 }
 
 OrgApacheLuceneUtilSloppyMath *new_OrgApacheLuceneUtilSloppyMath_init() {
-  OrgApacheLuceneUtilSloppyMath *self = [OrgApacheLuceneUtilSloppyMath alloc];
-  OrgApacheLuceneUtilSloppyMath_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilSloppyMath, init)
+}
+
+OrgApacheLuceneUtilSloppyMath *create_OrgApacheLuceneUtilSloppyMath_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilSloppyMath, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilSloppyMath)

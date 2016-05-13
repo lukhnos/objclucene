@@ -5,35 +5,70 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilSmallFloat_INCLUDE_ALL")
-#if OrgApacheLuceneUtilSmallFloat_RESTRICT
-#define OrgApacheLuceneUtilSmallFloat_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilSmallFloat")
+#ifdef RESTRICT_OrgApacheLuceneUtilSmallFloat
+#define INCLUDE_ALL_OrgApacheLuceneUtilSmallFloat 0
 #else
-#define OrgApacheLuceneUtilSmallFloat_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilSmallFloat 1
 #endif
-#undef OrgApacheLuceneUtilSmallFloat_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilSmallFloat
 
-#if !defined (_OrgApacheLuceneUtilSmallFloat_) && (OrgApacheLuceneUtilSmallFloat_INCLUDE_ALL || OrgApacheLuceneUtilSmallFloat_INCLUDE)
-#define _OrgApacheLuceneUtilSmallFloat_
+#if !defined (OrgApacheLuceneUtilSmallFloat_) && (INCLUDE_ALL_OrgApacheLuceneUtilSmallFloat || defined(INCLUDE_OrgApacheLuceneUtilSmallFloat))
+#define OrgApacheLuceneUtilSmallFloat_
 
+/*!
+ @brief Floating point numbers smaller than 32 bits.
+ */
 @interface OrgApacheLuceneUtilSmallFloat : NSObject
 
 #pragma mark Public
 
+/*!
+ @brief byteToFloat(b, mantissaBits=3, zeroExponent=15)
+ */
 + (jfloat)byte315ToFloatWithByte:(jbyte)b;
 
+/*!
+ @brief byteToFloat(b, mantissaBits=5, zeroExponent=2)
+ */
 + (jfloat)byte52ToFloatWithByte:(jbyte)b;
 
+/*!
+ @brief Converts an 8 bit float to a 32 bit float.
+ */
 + (jfloat)byteToFloatWithByte:(jbyte)b
                       withInt:(jint)numMantissaBits
                       withInt:(jint)zeroExp;
 
+/*!
+ @brief Converts a 32 bit float to an 8 bit float.
+ <br>Values less than zero are all mapped to zero.
+ <br>Values are truncated (rounded down) to the nearest 8 bit value.
+ <br>Values between zero and the smallest representable value
+ are rounded up.
+ @param f the 32 bit float to be converted to an 8 bit float (byte)
+ @param numMantissaBits the number of mantissa bits to use in the byte, with the remainder to be used in the exponent
+ @param zeroExp the zero-point in the range of exponent values
+ @return the 8 bit float representation
+ */
 + (jbyte)floatToByteWithFloat:(jfloat)f
                       withInt:(jint)numMantissaBits
                       withInt:(jint)zeroExp;
 
+/*!
+ @brief floatToByte(b, mantissaBits=3, zeroExponent=15)
+ <br>smallest non-zero value = 5.820766E-10
+ <br>largest value = 7.5161928E9
+ <br>epsilon = 0.125
+ */
 + (jbyte)floatToByte315WithFloat:(jfloat)f;
 
+/*!
+ @brief floatToByte(b, mantissaBits=5, zeroExponent=2)
+ <br>smallest nonzero value = 0.033203125
+ <br>largest value = 1984.0
+ <br>epsilon = 0.03125
+ */
 + (jbyte)floatToByte52WithFloat:(jfloat)f;
 
 @end
@@ -56,4 +91,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilSmallFloat)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilSmallFloat_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilSmallFloat")

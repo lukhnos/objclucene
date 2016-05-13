@@ -3,14 +3,28 @@
 //  source: ./core/src/java/org/apache/lucene/search/payloads/package-info.java
 //
 
+/*!
+ @brief The payloads package provides Query mechanisms for finding and using payloads.
+ <p>
+ The following Query implementations are provided:
+ <ol>
+ <li>
+ <code>PayloadScoreQuery</code> --
+ Boost a document's score from a SpanQuery based on the values of the payloads located at the matching terms
+ </li>
+ <li><code>PayloadTermQuery</code> -- Boost a term's score based on the value of the payload located at that term.</li>
+ <li><code>PayloadNearQuery</code> -- A <code>SpanNearQuery</code> that factors in the value of the payloads located 
+ at each of the positions where the spans occur.</li>
+ </ol>
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchPayloadsPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneSearchPayloadsPackage_info_RESTRICT
-#define OrgApacheLuceneSearchPayloadsPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchPayloadsPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneSearchPayloadsPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneSearchPayloadsPackage_info 0
 #else
-#define OrgApacheLuceneSearchPayloadsPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchPayloadsPackage_info 1
 #endif
-#undef OrgApacheLuceneSearchPayloadsPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchPayloadsPackage_info
 
-#pragma pop_macro("OrgApacheLuceneSearchPayloadsPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchPayloadsPackage_info")

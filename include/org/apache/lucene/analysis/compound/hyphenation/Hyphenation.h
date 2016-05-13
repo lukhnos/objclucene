@@ -5,29 +5,42 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisCompoundHyphenationHyphenation_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisCompoundHyphenationHyphenation_RESTRICT
-#define OrgApacheLuceneAnalysisCompoundHyphenationHyphenation_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundHyphenationHyphenation")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisCompoundHyphenationHyphenation
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundHyphenationHyphenation 0
 #else
-#define OrgApacheLuceneAnalysisCompoundHyphenationHyphenation_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundHyphenationHyphenation 1
 #endif
-#undef OrgApacheLuceneAnalysisCompoundHyphenationHyphenation_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisCompoundHyphenationHyphenation
 
-#if !defined (_OrgApacheLuceneAnalysisCompoundHyphenationHyphenation_) && (OrgApacheLuceneAnalysisCompoundHyphenationHyphenation_INCLUDE_ALL || OrgApacheLuceneAnalysisCompoundHyphenationHyphenation_INCLUDE)
-#define _OrgApacheLuceneAnalysisCompoundHyphenationHyphenation_
+#if !defined (OrgApacheLuceneAnalysisCompoundHyphenationHyphenation_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundHyphenationHyphenation || defined(INCLUDE_OrgApacheLuceneAnalysisCompoundHyphenationHyphenation))
+#define OrgApacheLuceneAnalysisCompoundHyphenationHyphenation_
 
 @class IOSIntArray;
 
+/*!
+ @brief This class represents a hyphenated word.
+ This class has been taken from the Apache FOP project (http://xmlgraphics.apache.org/fop/). They have been slightly modified.
+ */
 @interface OrgApacheLuceneAnalysisCompoundHyphenationHyphenation : NSObject
 
 #pragma mark Public
 
+/*!
+ @return the hyphenation points
+ */
 - (IOSIntArray *)getHyphenationPoints;
 
+/*!
+ @return the number of hyphenation points in the word
+ */
 - (jint)length;
 
 #pragma mark Package-Private
 
+/*!
+ @brief rawWord as made of alternating strings and <code>Hyphen</code> instances
+ */
 - (instancetype)initWithIntArray:(IOSIntArray *)points;
 
 @end
@@ -38,8 +51,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCompoundHyphenationHyphenation_ini
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundHyphenationHyphenation *new_OrgApacheLuceneAnalysisCompoundHyphenationHyphenation_initWithIntArray_(IOSIntArray *points) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundHyphenationHyphenation *create_OrgApacheLuceneAnalysisCompoundHyphenationHyphenation_initWithIntArray_(IOSIntArray *points);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCompoundHyphenationHyphenation)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisCompoundHyphenationHyphenation_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundHyphenationHyphenation")

@@ -5,19 +5,26 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchHighlightEncoder_INCLUDE_ALL")
-#if OrgApacheLuceneSearchHighlightEncoder_RESTRICT
-#define OrgApacheLuceneSearchHighlightEncoder_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightEncoder")
+#ifdef RESTRICT_OrgApacheLuceneSearchHighlightEncoder
+#define INCLUDE_ALL_OrgApacheLuceneSearchHighlightEncoder 0
 #else
-#define OrgApacheLuceneSearchHighlightEncoder_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchHighlightEncoder 1
 #endif
-#undef OrgApacheLuceneSearchHighlightEncoder_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchHighlightEncoder
 
-#if !defined (_OrgApacheLuceneSearchHighlightEncoder_) && (OrgApacheLuceneSearchHighlightEncoder_INCLUDE_ALL || OrgApacheLuceneSearchHighlightEncoder_INCLUDE)
-#define _OrgApacheLuceneSearchHighlightEncoder_
+#if !defined (OrgApacheLuceneSearchHighlightEncoder_) && (INCLUDE_ALL_OrgApacheLuceneSearchHighlightEncoder || defined(INCLUDE_OrgApacheLuceneSearchHighlightEncoder))
+#define OrgApacheLuceneSearchHighlightEncoder_
 
+/*!
+ @brief Encodes original text.
+ The Encoder works with the <code>Formatter</code> to generate output.
+ */
 @protocol OrgApacheLuceneSearchHighlightEncoder < NSObject, JavaObject >
 
+/*!
+ @param originalText The section of text being output
+ */
 - (NSString *)encodeTextWithNSString:(NSString *)originalText;
 
 @end
@@ -28,4 +35,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightEncoder)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchHighlightEncoder_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightEncoder")

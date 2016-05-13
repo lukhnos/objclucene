@@ -3,14 +3,26 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/precedence/package-info.java
 //
 
+/*!
+ @brief Precedence Query Parser Implementation
+ <h2>Lucene Precedence Query Parser</h2>
+ <p>
+ The Precedence Query Parser extends the Standard Query Parser and enables 
+ the boolean precedence.
+ So, the query &lt;a AND b OR c AND d&gt; is parsed to 
+ &lt;(+a +b) (+c +d)&gt; instead of &lt;+a +b +c +d&gt;.
+ <p>
+ Check <code>org.apache.lucene.queryparser.flexible.standard.StandardQueryParser</code> for more details about the
+ supported syntax and query parser functionalities. 
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexiblePrecedencePackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexiblePrecedencePackage_info_RESTRICT
-#define OrgApacheLuceneQueryparserFlexiblePrecedencePackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexiblePrecedencePackage_info")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexiblePrecedencePackage_info
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexiblePrecedencePackage_info 0
 #else
-#define OrgApacheLuceneQueryparserFlexiblePrecedencePackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexiblePrecedencePackage_info 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexiblePrecedencePackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexiblePrecedencePackage_info
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexiblePrecedencePackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexiblePrecedencePackage_info")

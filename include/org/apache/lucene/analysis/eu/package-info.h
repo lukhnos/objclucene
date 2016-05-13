@@ -3,14 +3,17 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/eu/package-info.java
 //
 
+/*!
+ @brief Analyzer for Basque.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisEuPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisEuPackage_info_RESTRICT
-#define OrgApacheLuceneAnalysisEuPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisEuPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisEuPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisEuPackage_info 0
 #else
-#define OrgApacheLuceneAnalysisEuPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisEuPackage_info 1
 #endif
-#undef OrgApacheLuceneAnalysisEuPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisEuPackage_info
 
-#pragma pop_macro("OrgApacheLuceneAnalysisEuPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisEuPackage_info")

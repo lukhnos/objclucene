@@ -31,9 +31,11 @@ void OrgApacheLuceneSearchCollectionTerminatedException_init(OrgApacheLuceneSear
 }
 
 OrgApacheLuceneSearchCollectionTerminatedException *new_OrgApacheLuceneSearchCollectionTerminatedException_init() {
-  OrgApacheLuceneSearchCollectionTerminatedException *self = [OrgApacheLuceneSearchCollectionTerminatedException alloc];
-  OrgApacheLuceneSearchCollectionTerminatedException_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchCollectionTerminatedException, init)
+}
+
+OrgApacheLuceneSearchCollectionTerminatedException *create_OrgApacheLuceneSearchCollectionTerminatedException_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchCollectionTerminatedException, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchCollectionTerminatedException)

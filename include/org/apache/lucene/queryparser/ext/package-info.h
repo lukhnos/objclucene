@@ -3,14 +3,17 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/ext/package-info.java
 //
 
+/*!
+ @brief Extendable QueryParser provides a simple and flexible extension mechanism by overloading query field names.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserExtPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserExtPackage_info_RESTRICT
-#define OrgApacheLuceneQueryparserExtPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserExtPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserExtPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserExtPackage_info 0
 #else
-#define OrgApacheLuceneQueryparserExtPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserExtPackage_info 1
 #endif
-#undef OrgApacheLuceneQueryparserExtPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserExtPackage_info
 
-#pragma pop_macro("OrgApacheLuceneQueryparserExtPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserExtPackage_info")

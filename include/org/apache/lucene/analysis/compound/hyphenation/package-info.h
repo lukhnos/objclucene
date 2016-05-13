@@ -3,14 +3,20 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/compound/hyphenation/package-info.java
 //
 
+/*!
+ @brief Hyphenation code for the CompoundWordTokenFilter.
+ The code for the compound word hyphenation is taken from the 
+ <a href="http://xmlgraphics.apache.org/fop/">Apache FOP project</a>. 
+ All credits for the hyphenation code belongs to them.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisCompoundHyphenationPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisCompoundHyphenationPackage_info_RESTRICT
-#define OrgApacheLuceneAnalysisCompoundHyphenationPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundHyphenationPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisCompoundHyphenationPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundHyphenationPackage_info 0
 #else
-#define OrgApacheLuceneAnalysisCompoundHyphenationPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundHyphenationPackage_info 1
 #endif
-#undef OrgApacheLuceneAnalysisCompoundHyphenationPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisCompoundHyphenationPackage_info
 
-#pragma pop_macro("OrgApacheLuceneAnalysisCompoundHyphenationPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundHyphenationPackage_info")

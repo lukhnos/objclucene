@@ -5,28 +5,53 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilAutomatonTransition_INCLUDE_ALL")
-#if OrgApacheLuceneUtilAutomatonTransition_RESTRICT
-#define OrgApacheLuceneUtilAutomatonTransition_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilAutomatonTransition")
+#ifdef RESTRICT_OrgApacheLuceneUtilAutomatonTransition
+#define INCLUDE_ALL_OrgApacheLuceneUtilAutomatonTransition 0
 #else
-#define OrgApacheLuceneUtilAutomatonTransition_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilAutomatonTransition 1
 #endif
-#undef OrgApacheLuceneUtilAutomatonTransition_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilAutomatonTransition
 
-#if !defined (_OrgApacheLuceneUtilAutomatonTransition_) && (OrgApacheLuceneUtilAutomatonTransition_INCLUDE_ALL || OrgApacheLuceneUtilAutomatonTransition_INCLUDE)
-#define _OrgApacheLuceneUtilAutomatonTransition_
+#if !defined (OrgApacheLuceneUtilAutomatonTransition_) && (INCLUDE_ALL_OrgApacheLuceneUtilAutomatonTransition || defined(INCLUDE_OrgApacheLuceneUtilAutomatonTransition))
+#define OrgApacheLuceneUtilAutomatonTransition_
 
+/*!
+ @brief Holds one transition from an <code>Automaton</code>.
+ This is typically
+ used temporarily when iterating through transitions by invoking
+ <code>Automaton.initTransition</code> and <code>Automaton.getNextTransition</code>. 
+ */
 @interface OrgApacheLuceneUtilAutomatonTransition : NSObject {
  @public
+  /*!
+   @brief Source state.
+   */
   jint source_;
+  /*!
+   @brief Destination state.
+   */
   jint dest_;
+  /*!
+   @brief Minimum accepted label (inclusive).
+   */
   jint min_;
+  /*!
+   @brief Maximum accepted label (inclusive).
+   */
   jint max_;
+  /*!
+   @brief Remembers where we are in the iteration; init to -1 to provoke
+ exception if nextTransition is called without first initTransition.
+   */
   jint transitionUpto_;
 }
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor.
+ */
 - (instancetype)init;
 
 - (NSString *)description;
@@ -39,8 +64,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilAutomatonTransition_init(OrgApacheLuce
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonTransition *new_OrgApacheLuceneUtilAutomatonTransition_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilAutomatonTransition *create_OrgApacheLuceneUtilAutomatonTransition_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAutomatonTransition)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilAutomatonTransition_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilAutomatonTransition")

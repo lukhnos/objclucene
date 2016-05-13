@@ -3,14 +3,17 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/shingle/package-info.java
 //
 
+/*!
+ @brief Word n-gram filters.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisShinglePackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisShinglePackage_info_RESTRICT
-#define OrgApacheLuceneAnalysisShinglePackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisShinglePackage_info")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisShinglePackage_info
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisShinglePackage_info 0
 #else
-#define OrgApacheLuceneAnalysisShinglePackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisShinglePackage_info 1
 #endif
-#undef OrgApacheLuceneAnalysisShinglePackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisShinglePackage_info
 
-#pragma pop_macro("OrgApacheLuceneAnalysisShinglePackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisShinglePackage_info")

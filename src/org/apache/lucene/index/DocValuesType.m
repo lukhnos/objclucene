@@ -9,87 +9,115 @@
 #include "java/lang/IllegalArgumentException.h"
 #include "org/apache/lucene/index/DocValuesType.h"
 
-__attribute__((unused)) static void OrgApacheLuceneIndexDocValuesTypeEnum_initWithNSString_withInt_(OrgApacheLuceneIndexDocValuesTypeEnum *self, NSString *__name, jint __ordinal);
+__attribute__((unused)) static void OrgApacheLuceneIndexDocValuesType_initWithNSString_withInt_(OrgApacheLuceneIndexDocValuesType *self, NSString *__name, jint __ordinal);
 
-__attribute__((unused)) static OrgApacheLuceneIndexDocValuesTypeEnum *new_OrgApacheLuceneIndexDocValuesTypeEnum_initWithNSString_withInt_(NSString *__name, jint __ordinal) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneIndexDocValuesType *new_OrgApacheLuceneIndexDocValuesType_initWithNSString_withInt_(NSString *__name, jint __ordinal) NS_RETURNS_RETAINED;
 
-J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexDocValuesTypeEnum)
+J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexDocValuesType)
 
-OrgApacheLuceneIndexDocValuesTypeEnum *OrgApacheLuceneIndexDocValuesTypeEnum_values_[6];
+OrgApacheLuceneIndexDocValuesType *OrgApacheLuceneIndexDocValuesType_values_[6];
 
-@implementation OrgApacheLuceneIndexDocValuesTypeEnum
+@implementation OrgApacheLuceneIndexDocValuesType
 
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal {
-  OrgApacheLuceneIndexDocValuesTypeEnum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
++ (OrgApacheLuceneIndexDocValuesType *)NONE {
+  return JreEnum(OrgApacheLuceneIndexDocValuesType, NONE);
 }
 
-IOSObjectArray *OrgApacheLuceneIndexDocValuesTypeEnum_values() {
-  OrgApacheLuceneIndexDocValuesTypeEnum_initialize();
-  return [IOSObjectArray arrayWithObjects:OrgApacheLuceneIndexDocValuesTypeEnum_values_ count:6 type:OrgApacheLuceneIndexDocValuesTypeEnum_class_()];
++ (OrgApacheLuceneIndexDocValuesType *)NUMERIC {
+  return JreEnum(OrgApacheLuceneIndexDocValuesType, NUMERIC);
+}
+
++ (OrgApacheLuceneIndexDocValuesType *)BINARY {
+  return JreEnum(OrgApacheLuceneIndexDocValuesType, BINARY);
+}
+
++ (OrgApacheLuceneIndexDocValuesType *)SORTED {
+  return JreEnum(OrgApacheLuceneIndexDocValuesType, SORTED);
+}
+
++ (OrgApacheLuceneIndexDocValuesType *)SORTED_NUMERIC {
+  return JreEnum(OrgApacheLuceneIndexDocValuesType, SORTED_NUMERIC);
+}
+
++ (OrgApacheLuceneIndexDocValuesType *)SORTED_SET {
+  return JreEnum(OrgApacheLuceneIndexDocValuesType, SORTED_SET);
 }
 
 + (IOSObjectArray *)values {
-  return OrgApacheLuceneIndexDocValuesTypeEnum_values();
+  return OrgApacheLuceneIndexDocValuesType_values();
 }
 
-+ (OrgApacheLuceneIndexDocValuesTypeEnum *)valueOfWithNSString:(NSString *)name {
-  return OrgApacheLuceneIndexDocValuesTypeEnum_valueOfWithNSString_(name);
++ (OrgApacheLuceneIndexDocValuesType *)valueOfWithNSString:(NSString *)name {
+  return OrgApacheLuceneIndexDocValuesType_valueOfWithNSString_(name);
 }
 
-OrgApacheLuceneIndexDocValuesTypeEnum *OrgApacheLuceneIndexDocValuesTypeEnum_valueOfWithNSString_(NSString *name) {
-  OrgApacheLuceneIndexDocValuesTypeEnum_initialize();
-  for (int i = 0; i < 6; i++) {
-    OrgApacheLuceneIndexDocValuesTypeEnum *e = OrgApacheLuceneIndexDocValuesTypeEnum_values_[i];
-    if ([name isEqual:[e name]]) {
-      return e;
-    }
-  }
-  @throw [[[JavaLangIllegalArgumentException alloc] initWithNSString:name] autorelease];
-  return nil;
+- (OrgApacheLuceneIndexDocValuesType_Enum)toNSEnum {
+  return (OrgApacheLuceneIndexDocValuesType_Enum)[self ordinal];
 }
 
 - (id)copyWithZone:(NSZone *)zone {
-  return [self retain];
+  return self;
 }
 
 + (void)initialize {
-  if (self == [OrgApacheLuceneIndexDocValuesTypeEnum class]) {
-    OrgApacheLuceneIndexDocValuesTypeEnum_NONE = new_OrgApacheLuceneIndexDocValuesTypeEnum_initWithNSString_withInt_(@"NONE", 0);
-    OrgApacheLuceneIndexDocValuesTypeEnum_NUMERIC = new_OrgApacheLuceneIndexDocValuesTypeEnum_initWithNSString_withInt_(@"NUMERIC", 1);
-    OrgApacheLuceneIndexDocValuesTypeEnum_BINARY = new_OrgApacheLuceneIndexDocValuesTypeEnum_initWithNSString_withInt_(@"BINARY", 2);
-    OrgApacheLuceneIndexDocValuesTypeEnum_SORTED = new_OrgApacheLuceneIndexDocValuesTypeEnum_initWithNSString_withInt_(@"SORTED", 3);
-    OrgApacheLuceneIndexDocValuesTypeEnum_SORTED_NUMERIC = new_OrgApacheLuceneIndexDocValuesTypeEnum_initWithNSString_withInt_(@"SORTED_NUMERIC", 4);
-    OrgApacheLuceneIndexDocValuesTypeEnum_SORTED_SET = new_OrgApacheLuceneIndexDocValuesTypeEnum_initWithNSString_withInt_(@"SORTED_SET", 5);
-    J2OBJC_SET_INITIALIZED(OrgApacheLuceneIndexDocValuesTypeEnum)
+  if (self == [OrgApacheLuceneIndexDocValuesType class]) {
+    JreEnum(OrgApacheLuceneIndexDocValuesType, NONE) = new_OrgApacheLuceneIndexDocValuesType_initWithNSString_withInt_(@"NONE", 0);
+    JreEnum(OrgApacheLuceneIndexDocValuesType, NUMERIC) = new_OrgApacheLuceneIndexDocValuesType_initWithNSString_withInt_(@"NUMERIC", 1);
+    JreEnum(OrgApacheLuceneIndexDocValuesType, BINARY) = new_OrgApacheLuceneIndexDocValuesType_initWithNSString_withInt_(@"BINARY", 2);
+    JreEnum(OrgApacheLuceneIndexDocValuesType, SORTED) = new_OrgApacheLuceneIndexDocValuesType_initWithNSString_withInt_(@"SORTED", 3);
+    JreEnum(OrgApacheLuceneIndexDocValuesType, SORTED_NUMERIC) = new_OrgApacheLuceneIndexDocValuesType_initWithNSString_withInt_(@"SORTED_NUMERIC", 4);
+    JreEnum(OrgApacheLuceneIndexDocValuesType, SORTED_SET) = new_OrgApacheLuceneIndexDocValuesType_initWithNSString_withInt_(@"SORTED_SET", 5);
+    J2OBJC_SET_INITIALIZED(OrgApacheLuceneIndexDocValuesType)
   }
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcFieldInfo fields[] = {
-    { "NONE", "NONE", 0x4019, "Lorg.apache.lucene.index.DocValuesType;", &OrgApacheLuceneIndexDocValuesTypeEnum_NONE, NULL, .constantValue.asLong = 0 },
-    { "NUMERIC", "NUMERIC", 0x4019, "Lorg.apache.lucene.index.DocValuesType;", &OrgApacheLuceneIndexDocValuesTypeEnum_NUMERIC, NULL, .constantValue.asLong = 0 },
-    { "BINARY", "BINARY", 0x4019, "Lorg.apache.lucene.index.DocValuesType;", &OrgApacheLuceneIndexDocValuesTypeEnum_BINARY, NULL, .constantValue.asLong = 0 },
-    { "SORTED", "SORTED", 0x4019, "Lorg.apache.lucene.index.DocValuesType;", &OrgApacheLuceneIndexDocValuesTypeEnum_SORTED, NULL, .constantValue.asLong = 0 },
-    { "SORTED_NUMERIC", "SORTED_NUMERIC", 0x4019, "Lorg.apache.lucene.index.DocValuesType;", &OrgApacheLuceneIndexDocValuesTypeEnum_SORTED_NUMERIC, NULL, .constantValue.asLong = 0 },
-    { "SORTED_SET", "SORTED_SET", 0x4019, "Lorg.apache.lucene.index.DocValuesType;", &OrgApacheLuceneIndexDocValuesTypeEnum_SORTED_SET, NULL, .constantValue.asLong = 0 },
+    { "NONE", "NONE", 0x4019, "Lorg.apache.lucene.index.DocValuesType;", &JreEnum(OrgApacheLuceneIndexDocValuesType, NONE), NULL, .constantValue.asLong = 0 },
+    { "NUMERIC", "NUMERIC", 0x4019, "Lorg.apache.lucene.index.DocValuesType;", &JreEnum(OrgApacheLuceneIndexDocValuesType, NUMERIC), NULL, .constantValue.asLong = 0 },
+    { "BINARY", "BINARY", 0x4019, "Lorg.apache.lucene.index.DocValuesType;", &JreEnum(OrgApacheLuceneIndexDocValuesType, BINARY), NULL, .constantValue.asLong = 0 },
+    { "SORTED", "SORTED", 0x4019, "Lorg.apache.lucene.index.DocValuesType;", &JreEnum(OrgApacheLuceneIndexDocValuesType, SORTED), NULL, .constantValue.asLong = 0 },
+    { "SORTED_NUMERIC", "SORTED_NUMERIC", 0x4019, "Lorg.apache.lucene.index.DocValuesType;", &JreEnum(OrgApacheLuceneIndexDocValuesType, SORTED_NUMERIC), NULL, .constantValue.asLong = 0 },
+    { "SORTED_SET", "SORTED_SET", 0x4019, "Lorg.apache.lucene.index.DocValuesType;", &JreEnum(OrgApacheLuceneIndexDocValuesType, SORTED_SET), NULL, .constantValue.asLong = 0 },
   };
   static const char *superclass_type_args[] = {"Lorg.apache.lucene.index.DocValuesType;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocValuesTypeEnum = { 2, "DocValuesType", "org.apache.lucene.index", NULL, 0x4011, 0, NULL, 6, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/index/DocValuesType;>;" };
-  return &_OrgApacheLuceneIndexDocValuesTypeEnum;
+  static const J2ObjcClassInfo _OrgApacheLuceneIndexDocValuesType = { 2, "DocValuesType", "org.apache.lucene.index", NULL, 0x4011, 0, NULL, 6, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/index/DocValuesType;>;" };
+  return &_OrgApacheLuceneIndexDocValuesType;
 }
 
 @end
 
-void OrgApacheLuceneIndexDocValuesTypeEnum_initWithNSString_withInt_(OrgApacheLuceneIndexDocValuesTypeEnum *self, NSString *__name, jint __ordinal) {
+void OrgApacheLuceneIndexDocValuesType_initWithNSString_withInt_(OrgApacheLuceneIndexDocValuesType *self, NSString *__name, jint __ordinal) {
   JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
 }
 
-OrgApacheLuceneIndexDocValuesTypeEnum *new_OrgApacheLuceneIndexDocValuesTypeEnum_initWithNSString_withInt_(NSString *__name, jint __ordinal) {
-  OrgApacheLuceneIndexDocValuesTypeEnum *self = [OrgApacheLuceneIndexDocValuesTypeEnum alloc];
-  OrgApacheLuceneIndexDocValuesTypeEnum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
+OrgApacheLuceneIndexDocValuesType *new_OrgApacheLuceneIndexDocValuesType_initWithNSString_withInt_(NSString *__name, jint __ordinal) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexDocValuesType, initWithNSString_withInt_, __name, __ordinal)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocValuesTypeEnum)
+IOSObjectArray *OrgApacheLuceneIndexDocValuesType_values() {
+  OrgApacheLuceneIndexDocValuesType_initialize();
+  return [IOSObjectArray arrayWithObjects:OrgApacheLuceneIndexDocValuesType_values_ count:6 type:OrgApacheLuceneIndexDocValuesType_class_()];
+}
+
+OrgApacheLuceneIndexDocValuesType *OrgApacheLuceneIndexDocValuesType_valueOfWithNSString_(NSString *name) {
+  OrgApacheLuceneIndexDocValuesType_initialize();
+  for (int i = 0; i < 6; i++) {
+    OrgApacheLuceneIndexDocValuesType *e = OrgApacheLuceneIndexDocValuesType_values_[i];
+    if ([name isEqual:[e name]]) {
+      return e;
+    }
+  }
+  @throw [[JavaLangIllegalArgumentException alloc] initWithNSString:name];
+  return nil;
+}
+
+OrgApacheLuceneIndexDocValuesType *OrgApacheLuceneIndexDocValuesType_fromOrdinal(NSUInteger ordinal) {
+  OrgApacheLuceneIndexDocValuesType_initialize();
+  if (ordinal >= 6) {
+    return nil;
+  }
+  return OrgApacheLuceneIndexDocValuesType_values_[ordinal];
+}
+
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexDocValuesType)

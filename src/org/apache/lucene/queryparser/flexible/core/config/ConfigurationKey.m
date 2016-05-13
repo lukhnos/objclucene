@@ -16,6 +16,8 @@ __attribute__((unused)) static void OrgApacheLuceneQueryparserFlexibleCoreConfig
 
 __attribute__((unused)) static OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey *new_OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey *create_OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey_init();
+
 @implementation OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -45,14 +47,16 @@ void OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey_init(OrgApache
 }
 
 OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey *new_OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey_init() {
-  OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey *self = [OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey alloc];
-  OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey, init)
+}
+
+OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey *create_OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey, init)
 }
 
 OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey *OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey_newInstance() {
   OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey_initialize();
-  return [new_OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey_init() autorelease];
+  return new_OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey_init();
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleCoreConfigConfigurationKey)

@@ -3,14 +3,58 @@
 //  source: ./core/src/java/org/apache/lucene/codecs/package-info.java
 //
 
+/*!
+ @brief Codecs API: API for customization of the encoding and structure of the index.
+ <p>
+ The Codec API allows you to customise the way the following pieces of index information are stored:
+ <ul>
+ <li>Postings lists - see <code>org.apache.lucene.codecs.PostingsFormat</code></li>
+ <li>DocValues - see <code>org.apache.lucene.codecs.DocValuesFormat</code></li>
+ <li>Stored fields - see <code>org.apache.lucene.codecs.StoredFieldsFormat</code></li>
+ <li>Term vectors - see <code>org.apache.lucene.codecs.TermVectorsFormat</code></li>
+ <li>FieldInfos - see <code>org.apache.lucene.codecs.FieldInfosFormat</code></li>
+ <li>SegmentInfo - see <code>org.apache.lucene.codecs.SegmentInfoFormat</code></li>
+ <li>Norms - see <code>org.apache.lucene.codecs.NormsFormat</code></li>
+ <li>Live documents - see <code>org.apache.lucene.codecs.LiveDocsFormat</code></li>
+ </ul>
+ For some concrete implementations beyond Lucene's official index format, see
+ the <a href="/../codecs/overview-summary.html">Codecs module</a>.
+ <p>
+ Codecs are identified by name through the Java Service Provider Interface.  To create your own codec, extend
+ <code>org.apache.lucene.codecs.Codec</code> and pass the new codec's name to the super() constructor:
+ <pre class="prettyprint">
+ public class MyCodec extends Codec {
+ public MyCodec() {
+ super("MyCodecName");
+ }
+ ...
+ }
+ 
+@endcode
+ You will need to register the Codec class so that the <code>ServiceLoader</code> can find it, by including a
+ META-INF/services/org.apache.lucene.codecs.Codec file on your classpath that contains the package-qualified
+ name of your codec.
+ <p>
+ If you just want to customise the <code>org.apache.lucene.codecs.PostingsFormat</code>, or use different postings
+ formats for different fields, then you can register your custom postings format in the same way (in
+ META-INF/services/org.apache.lucene.codecs.PostingsFormat), and then extend the default
+ codec and override
+ <code>org.apache.lucene.codecs.luceneMN.LuceneMNCodec#getPostingsFormatForField(String)</code> to return your custom
+ postings format.
+ </p>
+ <p>
+ Similarly, if you just want to customise the <code>org.apache.lucene.codecs.DocValuesFormat</code> per-field, have 
+ a look at <code>LuceneMNCodec.getDocValuesFormatForField(String)</code>.
+ </p>
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsPackage_info_RESTRICT
-#define OrgApacheLuceneCodecsPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneCodecsPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneCodecsPackage_info 0
 #else
-#define OrgApacheLuceneCodecsPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsPackage_info 1
 #endif
-#undef OrgApacheLuceneCodecsPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsPackage_info
 
-#pragma pop_macro("OrgApacheLuceneCodecsPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsPackage_info")

@@ -5,23 +5,35 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilAccountable_INCLUDE_ALL")
-#if OrgApacheLuceneUtilAccountable_RESTRICT
-#define OrgApacheLuceneUtilAccountable_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilAccountable")
+#ifdef RESTRICT_OrgApacheLuceneUtilAccountable
+#define INCLUDE_ALL_OrgApacheLuceneUtilAccountable 0
 #else
-#define OrgApacheLuceneUtilAccountable_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilAccountable 1
 #endif
-#undef OrgApacheLuceneUtilAccountable_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilAccountable
 
-#if !defined (_OrgApacheLuceneUtilAccountable_) && (OrgApacheLuceneUtilAccountable_INCLUDE_ALL || OrgApacheLuceneUtilAccountable_INCLUDE)
-#define _OrgApacheLuceneUtilAccountable_
+#if !defined (OrgApacheLuceneUtilAccountable_) && (INCLUDE_ALL_OrgApacheLuceneUtilAccountable || defined(INCLUDE_OrgApacheLuceneUtilAccountable))
+#define OrgApacheLuceneUtilAccountable_
 
 @protocol JavaUtilCollection;
 
+/*!
+ @brief An object whose RAM usage can be computed.
+ */
 @protocol OrgApacheLuceneUtilAccountable < NSObject, JavaObject >
 
+/*!
+ @brief Return the memory usage of this object in bytes.
+ Negative values are illegal.
+ */
 - (jlong)ramBytesUsed;
 
+/*!
+ @brief Returns nested resources of this class.
+ The result should be a point-in-time snapshot (to avoid race conditions).
+ - seealso: Accountables
+ */
 - (id<JavaUtilCollection>)getChildResources;
 
 @end
@@ -32,4 +44,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilAccountable)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilAccountable_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilAccountable")

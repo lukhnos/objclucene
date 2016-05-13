@@ -5,29 +5,59 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneStoreLock_INCLUDE_ALL")
-#if OrgApacheLuceneStoreLock_RESTRICT
-#define OrgApacheLuceneStoreLock_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneStoreLock")
+#ifdef RESTRICT_OrgApacheLuceneStoreLock
+#define INCLUDE_ALL_OrgApacheLuceneStoreLock 0
 #else
-#define OrgApacheLuceneStoreLock_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneStoreLock 1
 #endif
-#undef OrgApacheLuceneStoreLock_RESTRICT
+#undef RESTRICT_OrgApacheLuceneStoreLock
 
-#if !defined (_OrgApacheLuceneStoreLock_) && (OrgApacheLuceneStoreLock_INCLUDE_ALL || OrgApacheLuceneStoreLock_INCLUDE)
-#define _OrgApacheLuceneStoreLock_
+#if !defined (OrgApacheLuceneStoreLock_) && (INCLUDE_ALL_OrgApacheLuceneStoreLock || defined(INCLUDE_OrgApacheLuceneStoreLock))
+#define OrgApacheLuceneStoreLock_
 
-#define JavaIoCloseable_RESTRICT 1
-#define JavaIoCloseable_INCLUDE 1
+#define RESTRICT_JavaIoCloseable 1
+#define INCLUDE_JavaIoCloseable 1
 #include "java/io/Closeable.h"
 
+/*!
+ @brief An interprocess mutex lock.
+ <p>Typical use might look like:<pre class="prettyprint">
+ try (final Lock lock = directory.obtainLock("my.lock")) {
+ // ... code to execute while locked ...
+ }
+ 
+@endcode
+ - seealso: Directory#obtainLock(String)
+ */
 @interface OrgApacheLuceneStoreLock : NSObject < JavaIoCloseable >
 
 #pragma mark Public
 
 - (instancetype)init;
 
+/*!
+ @brief Releases exclusive access.
+ <p>
+ Note that exceptions thrown from close may require
+ human intervention, as it may mean the lock was no
+ longer valid, or that fs permissions prevent removal
+ of the lock file, or other reasons.
+ <p>
+  
+ @throws LockReleaseFailedException optional specific exception) if 
+ the lock could not be properly released.
+ */
 - (void)close;
 
+/*!
+ @brief Best effort check that this lock is still valid.
+ Locks
+ could become invalidated externally for a number of reasons,
+ for example if a user deletes the lock file manually or
+ when a network filesystem is in use. 
+ @throws IOException if the lock is no longer valid.
+ */
 - (void)ensureValid;
 
 @end
@@ -40,4 +70,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreLock)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneStoreLock_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreLock")

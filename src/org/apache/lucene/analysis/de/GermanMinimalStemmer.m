@@ -58,7 +58,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "stemWithCharArray:withInt:", "stem", "I", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "GermanMinimalStemmer", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisDeGermanMinimalStemmer = { 2, "GermanMinimalStemmer", "org.apache.lucene.analysis.de", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisDeGermanMinimalStemmer;
@@ -71,9 +71,11 @@ void OrgApacheLuceneAnalysisDeGermanMinimalStemmer_init(OrgApacheLuceneAnalysisD
 }
 
 OrgApacheLuceneAnalysisDeGermanMinimalStemmer *new_OrgApacheLuceneAnalysisDeGermanMinimalStemmer_init() {
-  OrgApacheLuceneAnalysisDeGermanMinimalStemmer *self = [OrgApacheLuceneAnalysisDeGermanMinimalStemmer alloc];
-  OrgApacheLuceneAnalysisDeGermanMinimalStemmer_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisDeGermanMinimalStemmer, init)
+}
+
+OrgApacheLuceneAnalysisDeGermanMinimalStemmer *create_OrgApacheLuceneAnalysisDeGermanMinimalStemmer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisDeGermanMinimalStemmer, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisDeGermanMinimalStemmer)

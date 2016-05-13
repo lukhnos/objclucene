@@ -3,14 +3,17 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/pattern/package-info.java
 //
 
+/*!
+ @brief Set of components for pattern-based (regex) analysis.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisPatternPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisPatternPackage_info_RESTRICT
-#define OrgApacheLuceneAnalysisPatternPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPatternPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisPatternPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPatternPackage_info 0
 #else
-#define OrgApacheLuceneAnalysisPatternPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisPatternPackage_info 1
 #endif
-#undef OrgApacheLuceneAnalysisPatternPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisPatternPackage_info
 
-#pragma pop_macro("OrgApacheLuceneAnalysisPatternPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisPatternPackage_info")

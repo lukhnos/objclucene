@@ -9,81 +9,97 @@
 #include "java/lang/IllegalArgumentException.h"
 #include "org/lukhnos/portmobile/file/StandardOpenOption.h"
 
-__attribute__((unused)) static void OrgLukhnosPortmobileFileStandardOpenOptionEnum_initWithNSString_withInt_(OrgLukhnosPortmobileFileStandardOpenOptionEnum *self, NSString *__name, jint __ordinal);
+__attribute__((unused)) static void OrgLukhnosPortmobileFileStandardOpenOption_initWithNSString_withInt_(OrgLukhnosPortmobileFileStandardOpenOption *self, NSString *__name, jint __ordinal);
 
-__attribute__((unused)) static OrgLukhnosPortmobileFileStandardOpenOptionEnum *new_OrgLukhnosPortmobileFileStandardOpenOptionEnum_initWithNSString_withInt_(NSString *__name, jint __ordinal) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgLukhnosPortmobileFileStandardOpenOption *new_OrgLukhnosPortmobileFileStandardOpenOption_initWithNSString_withInt_(NSString *__name, jint __ordinal) NS_RETURNS_RETAINED;
 
-J2OBJC_INITIALIZED_DEFN(OrgLukhnosPortmobileFileStandardOpenOptionEnum)
+J2OBJC_INITIALIZED_DEFN(OrgLukhnosPortmobileFileStandardOpenOption)
 
-OrgLukhnosPortmobileFileStandardOpenOptionEnum *OrgLukhnosPortmobileFileStandardOpenOptionEnum_values_[3];
+OrgLukhnosPortmobileFileStandardOpenOption *OrgLukhnosPortmobileFileStandardOpenOption_values_[3];
 
-@implementation OrgLukhnosPortmobileFileStandardOpenOptionEnum
+@implementation OrgLukhnosPortmobileFileStandardOpenOption
 
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal {
-  OrgLukhnosPortmobileFileStandardOpenOptionEnum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
++ (OrgLukhnosPortmobileFileStandardOpenOption *)READ {
+  return JreEnum(OrgLukhnosPortmobileFileStandardOpenOption, READ);
 }
 
-IOSObjectArray *OrgLukhnosPortmobileFileStandardOpenOptionEnum_values() {
-  OrgLukhnosPortmobileFileStandardOpenOptionEnum_initialize();
-  return [IOSObjectArray arrayWithObjects:OrgLukhnosPortmobileFileStandardOpenOptionEnum_values_ count:3 type:OrgLukhnosPortmobileFileStandardOpenOptionEnum_class_()];
++ (OrgLukhnosPortmobileFileStandardOpenOption *)WRITE {
+  return JreEnum(OrgLukhnosPortmobileFileStandardOpenOption, WRITE);
+}
+
++ (OrgLukhnosPortmobileFileStandardOpenOption *)CREATE {
+  return JreEnum(OrgLukhnosPortmobileFileStandardOpenOption, CREATE);
 }
 
 + (IOSObjectArray *)values {
-  return OrgLukhnosPortmobileFileStandardOpenOptionEnum_values();
+  return OrgLukhnosPortmobileFileStandardOpenOption_values();
 }
 
-+ (OrgLukhnosPortmobileFileStandardOpenOptionEnum *)valueOfWithNSString:(NSString *)name {
-  return OrgLukhnosPortmobileFileStandardOpenOptionEnum_valueOfWithNSString_(name);
++ (OrgLukhnosPortmobileFileStandardOpenOption *)valueOfWithNSString:(NSString *)name {
+  return OrgLukhnosPortmobileFileStandardOpenOption_valueOfWithNSString_(name);
 }
 
-OrgLukhnosPortmobileFileStandardOpenOptionEnum *OrgLukhnosPortmobileFileStandardOpenOptionEnum_valueOfWithNSString_(NSString *name) {
-  OrgLukhnosPortmobileFileStandardOpenOptionEnum_initialize();
-  for (int i = 0; i < 3; i++) {
-    OrgLukhnosPortmobileFileStandardOpenOptionEnum *e = OrgLukhnosPortmobileFileStandardOpenOptionEnum_values_[i];
-    if ([name isEqual:[e name]]) {
-      return e;
-    }
-  }
-  @throw [[[JavaLangIllegalArgumentException alloc] initWithNSString:name] autorelease];
-  return nil;
+- (OrgLukhnosPortmobileFileStandardOpenOption_Enum)toNSEnum {
+  return (OrgLukhnosPortmobileFileStandardOpenOption_Enum)[self ordinal];
 }
 
 - (id)copyWithZone:(NSZone *)zone {
-  return [self retain];
+  return self;
 }
 
 + (void)initialize {
-  if (self == [OrgLukhnosPortmobileFileStandardOpenOptionEnum class]) {
-    OrgLukhnosPortmobileFileStandardOpenOptionEnum_READ = new_OrgLukhnosPortmobileFileStandardOpenOptionEnum_initWithNSString_withInt_(@"READ", 0);
-    OrgLukhnosPortmobileFileStandardOpenOptionEnum_WRITE = new_OrgLukhnosPortmobileFileStandardOpenOptionEnum_initWithNSString_withInt_(@"WRITE", 1);
-    OrgLukhnosPortmobileFileStandardOpenOptionEnum_CREATE = new_OrgLukhnosPortmobileFileStandardOpenOptionEnum_initWithNSString_withInt_(@"CREATE", 2);
-    J2OBJC_SET_INITIALIZED(OrgLukhnosPortmobileFileStandardOpenOptionEnum)
+  if (self == [OrgLukhnosPortmobileFileStandardOpenOption class]) {
+    JreEnum(OrgLukhnosPortmobileFileStandardOpenOption, READ) = new_OrgLukhnosPortmobileFileStandardOpenOption_initWithNSString_withInt_(@"READ", 0);
+    JreEnum(OrgLukhnosPortmobileFileStandardOpenOption, WRITE) = new_OrgLukhnosPortmobileFileStandardOpenOption_initWithNSString_withInt_(@"WRITE", 1);
+    JreEnum(OrgLukhnosPortmobileFileStandardOpenOption, CREATE) = new_OrgLukhnosPortmobileFileStandardOpenOption_initWithNSString_withInt_(@"CREATE", 2);
+    J2OBJC_SET_INITIALIZED(OrgLukhnosPortmobileFileStandardOpenOption)
   }
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcFieldInfo fields[] = {
-    { "READ", "READ", 0x4019, "Lorg.lukhnos.portmobile.file.StandardOpenOption;", &OrgLukhnosPortmobileFileStandardOpenOptionEnum_READ, NULL, .constantValue.asLong = 0 },
-    { "WRITE", "WRITE", 0x4019, "Lorg.lukhnos.portmobile.file.StandardOpenOption;", &OrgLukhnosPortmobileFileStandardOpenOptionEnum_WRITE, NULL, .constantValue.asLong = 0 },
-    { "CREATE", "CREATE", 0x4019, "Lorg.lukhnos.portmobile.file.StandardOpenOption;", &OrgLukhnosPortmobileFileStandardOpenOptionEnum_CREATE, NULL, .constantValue.asLong = 0 },
+    { "READ", "READ", 0x4019, "Lorg.lukhnos.portmobile.file.StandardOpenOption;", &JreEnum(OrgLukhnosPortmobileFileStandardOpenOption, READ), NULL, .constantValue.asLong = 0 },
+    { "WRITE", "WRITE", 0x4019, "Lorg.lukhnos.portmobile.file.StandardOpenOption;", &JreEnum(OrgLukhnosPortmobileFileStandardOpenOption, WRITE), NULL, .constantValue.asLong = 0 },
+    { "CREATE", "CREATE", 0x4019, "Lorg.lukhnos.portmobile.file.StandardOpenOption;", &JreEnum(OrgLukhnosPortmobileFileStandardOpenOption, CREATE), NULL, .constantValue.asLong = 0 },
   };
   static const char *superclass_type_args[] = {"Lorg.lukhnos.portmobile.file.StandardOpenOption;"};
-  static const J2ObjcClassInfo _OrgLukhnosPortmobileFileStandardOpenOptionEnum = { 2, "StandardOpenOption", "org.lukhnos.portmobile.file", NULL, 0x4011, 0, NULL, 3, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/lukhnos/portmobile/file/StandardOpenOption;>;" };
-  return &_OrgLukhnosPortmobileFileStandardOpenOptionEnum;
+  static const J2ObjcClassInfo _OrgLukhnosPortmobileFileStandardOpenOption = { 2, "StandardOpenOption", "org.lukhnos.portmobile.file", NULL, 0x4011, 0, NULL, 3, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/lukhnos/portmobile/file/StandardOpenOption;>;" };
+  return &_OrgLukhnosPortmobileFileStandardOpenOption;
 }
 
 @end
 
-void OrgLukhnosPortmobileFileStandardOpenOptionEnum_initWithNSString_withInt_(OrgLukhnosPortmobileFileStandardOpenOptionEnum *self, NSString *__name, jint __ordinal) {
+void OrgLukhnosPortmobileFileStandardOpenOption_initWithNSString_withInt_(OrgLukhnosPortmobileFileStandardOpenOption *self, NSString *__name, jint __ordinal) {
   JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
 }
 
-OrgLukhnosPortmobileFileStandardOpenOptionEnum *new_OrgLukhnosPortmobileFileStandardOpenOptionEnum_initWithNSString_withInt_(NSString *__name, jint __ordinal) {
-  OrgLukhnosPortmobileFileStandardOpenOptionEnum *self = [OrgLukhnosPortmobileFileStandardOpenOptionEnum alloc];
-  OrgLukhnosPortmobileFileStandardOpenOptionEnum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
+OrgLukhnosPortmobileFileStandardOpenOption *new_OrgLukhnosPortmobileFileStandardOpenOption_initWithNSString_withInt_(NSString *__name, jint __ordinal) {
+  J2OBJC_NEW_IMPL(OrgLukhnosPortmobileFileStandardOpenOption, initWithNSString_withInt_, __name, __ordinal)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgLukhnosPortmobileFileStandardOpenOptionEnum)
+IOSObjectArray *OrgLukhnosPortmobileFileStandardOpenOption_values() {
+  OrgLukhnosPortmobileFileStandardOpenOption_initialize();
+  return [IOSObjectArray arrayWithObjects:OrgLukhnosPortmobileFileStandardOpenOption_values_ count:3 type:OrgLukhnosPortmobileFileStandardOpenOption_class_()];
+}
+
+OrgLukhnosPortmobileFileStandardOpenOption *OrgLukhnosPortmobileFileStandardOpenOption_valueOfWithNSString_(NSString *name) {
+  OrgLukhnosPortmobileFileStandardOpenOption_initialize();
+  for (int i = 0; i < 3; i++) {
+    OrgLukhnosPortmobileFileStandardOpenOption *e = OrgLukhnosPortmobileFileStandardOpenOption_values_[i];
+    if ([name isEqual:[e name]]) {
+      return e;
+    }
+  }
+  @throw [[JavaLangIllegalArgumentException alloc] initWithNSString:name];
+  return nil;
+}
+
+OrgLukhnosPortmobileFileStandardOpenOption *OrgLukhnosPortmobileFileStandardOpenOption_fromOrdinal(NSUInteger ordinal) {
+  OrgLukhnosPortmobileFileStandardOpenOption_initialize();
+  if (ordinal >= 3) {
+    return nil;
+  }
+  return OrgLukhnosPortmobileFileStandardOpenOption_values_[ordinal];
+}
+
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgLukhnosPortmobileFileStandardOpenOption)

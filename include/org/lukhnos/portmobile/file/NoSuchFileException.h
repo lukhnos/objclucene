@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgLukhnosPortmobileFileNoSuchFileException_INCLUDE_ALL")
-#if OrgLukhnosPortmobileFileNoSuchFileException_RESTRICT
-#define OrgLukhnosPortmobileFileNoSuchFileException_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgLukhnosPortmobileFileNoSuchFileException")
+#ifdef RESTRICT_OrgLukhnosPortmobileFileNoSuchFileException
+#define INCLUDE_ALL_OrgLukhnosPortmobileFileNoSuchFileException 0
 #else
-#define OrgLukhnosPortmobileFileNoSuchFileException_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgLukhnosPortmobileFileNoSuchFileException 1
 #endif
-#undef OrgLukhnosPortmobileFileNoSuchFileException_RESTRICT
+#undef RESTRICT_OrgLukhnosPortmobileFileNoSuchFileException
 
-#if !defined (_OrgLukhnosPortmobileFileNoSuchFileException_) && (OrgLukhnosPortmobileFileNoSuchFileException_INCLUDE_ALL || OrgLukhnosPortmobileFileNoSuchFileException_INCLUDE)
-#define _OrgLukhnosPortmobileFileNoSuchFileException_
+#if !defined (OrgLukhnosPortmobileFileNoSuchFileException_) && (INCLUDE_ALL_OrgLukhnosPortmobileFileNoSuchFileException || defined(INCLUDE_OrgLukhnosPortmobileFileNoSuchFileException))
+#define OrgLukhnosPortmobileFileNoSuchFileException_
 
-#define JavaIoIOException_RESTRICT 1
-#define JavaIoIOException_INCLUDE 1
+#define RESTRICT_JavaIoIOException 1
+#define INCLUDE_JavaIoIOException 1
 #include "java/io/IOException.h"
 
 @interface OrgLukhnosPortmobileFileNoSuchFileException : JavaIoIOException
@@ -34,8 +34,10 @@ FOUNDATION_EXPORT void OrgLukhnosPortmobileFileNoSuchFileException_init(OrgLukhn
 
 FOUNDATION_EXPORT OrgLukhnosPortmobileFileNoSuchFileException *new_OrgLukhnosPortmobileFileNoSuchFileException_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgLukhnosPortmobileFileNoSuchFileException *create_OrgLukhnosPortmobileFileNoSuchFileException_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgLukhnosPortmobileFileNoSuchFileException)
 
 #endif
 
-#pragma pop_macro("OrgLukhnosPortmobileFileNoSuchFileException_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgLukhnosPortmobileFileNoSuchFileException")

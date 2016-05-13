@@ -5,21 +5,32 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleMessagesNLS_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleMessagesNLS_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleMessagesNLS_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleMessagesNLS")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleMessagesNLS
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleMessagesNLS 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleMessagesNLS_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleMessagesNLS 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleMessagesNLS_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleMessagesNLS
 
-#if !defined (_OrgApacheLuceneQueryparserFlexibleMessagesNLS_) && (OrgApacheLuceneQueryparserFlexibleMessagesNLS_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleMessagesNLS_INCLUDE)
-#define _OrgApacheLuceneQueryparserFlexibleMessagesNLS_
+#if !defined (OrgApacheLuceneQueryparserFlexibleMessagesNLS_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleMessagesNLS || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleMessagesNLS))
+#define OrgApacheLuceneQueryparserFlexibleMessagesNLS_
 
 @class IOSClass;
 @class IOSObjectArray;
 @class JavaUtilLocale;
 
+/*!
+ @brief MessageBundles classes extend this class, to implement a bundle.
+ For Native Language Support (NLS), system of software internationalization.
+ This interface is similar to the NLS class in eclipse.osgi.util.NLS class -
+ initializeMessages() method resets the values of all static strings, should
+ only be called by classes that extend from NLS (see TestMessages.java for
+ reference) - performs validation of all message in a bundle, at class load
+ time - performs per message validation at runtime - see NLSTest.java for
+ usage reference
+ MessageBundle classes may subclass this type.
+ */
 @interface OrgApacheLuceneQueryparserFlexibleMessagesNLS : NSObject
 
 #pragma mark Public
@@ -40,6 +51,14 @@
 
 - (instancetype)init;
 
+/*!
+ @brief Initialize a given class with the message bundle Keys Should be called from
+ a class that extends NLS in a static block at class load time.
+ @param bundleName
+ Property file with that contains the message bundle
+ @param clazz
+ where constants will reside
+ */
 + (void)initializeMessagesWithNSString:(NSString *)bundleName
                           withIOSClass:(IOSClass *)clazz OBJC_METHOD_FAMILY_NONE;
 
@@ -50,6 +69,8 @@ J2OBJC_STATIC_INIT(OrgApacheLuceneQueryparserFlexibleMessagesNLS)
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleMessagesNLS_init(OrgApacheLuceneQueryparserFlexibleMessagesNLS *self);
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleMessagesNLS *new_OrgApacheLuceneQueryparserFlexibleMessagesNLS_init() NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleMessagesNLS *create_OrgApacheLuceneQueryparserFlexibleMessagesNLS_init();
 
 FOUNDATION_EXPORT NSString *OrgApacheLuceneQueryparserFlexibleMessagesNLS_getLocalizedMessageWithNSString_(NSString *key);
 
@@ -65,4 +86,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleMessagesNLS)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleMessagesNLS_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleMessagesNLS")

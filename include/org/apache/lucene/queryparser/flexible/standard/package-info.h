@@ -3,14 +3,29 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/standard/package-info.java
 //
 
+/*!
+ @brief Implementation of the Lucene classic query parser using the flexible query parser frameworks
+ <h2>Lucene Flexible Query Parser Implementation</h2>
+ <p>
+ The old Lucene query parser used to have only one class that performed 
+ all the parsing operations.
+ In the new query parser structure, the 
+ parsing was divided in 3 steps: parsing (syntax), processing (semantic)
+ and building.
+ <p>
+ The classes contained in the package org.apache.lucene.queryParser.standard
+ are used to reproduce the same behavior as the old query parser.
+ <p>
+ Check <code>org.apache.lucene.queryparser.flexible.standard.StandardQueryParser</code> to quick start using the Lucene query parser.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleStandardPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleStandardPackage_info_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleStandardPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardPackage_info 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleStandardPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardPackage_info 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleStandardPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardPackage_info
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleStandardPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardPackage_info")

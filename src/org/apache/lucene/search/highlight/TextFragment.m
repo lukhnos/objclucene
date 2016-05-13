@@ -42,11 +42,6 @@
   return [((id<JavaLangCharSequence>) nil_chk([((id<JavaLangCharSequence>) nil_chk(markedUpText_)) subSequenceFrom:textStartPos_ to:textEndPos_])) description];
 }
 
-- (void)dealloc {
-  RELEASE_(markedUpText_);
-  [super dealloc];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithJavaLangCharSequence:withInt:withInt:", "TextFragment", NULL, 0x1, NULL, NULL },
@@ -72,15 +67,17 @@
 
 void OrgApacheLuceneSearchHighlightTextFragment_initWithJavaLangCharSequence_withInt_withInt_(OrgApacheLuceneSearchHighlightTextFragment *self, id<JavaLangCharSequence> markedUpText, jint textStartPos, jint fragNum) {
   NSObject_init(self);
-  JreStrongAssign(&self->markedUpText_, markedUpText);
+  self->markedUpText_ = markedUpText;
   self->textStartPos_ = textStartPos;
   self->fragNum_ = fragNum;
 }
 
 OrgApacheLuceneSearchHighlightTextFragment *new_OrgApacheLuceneSearchHighlightTextFragment_initWithJavaLangCharSequence_withInt_withInt_(id<JavaLangCharSequence> markedUpText, jint textStartPos, jint fragNum) {
-  OrgApacheLuceneSearchHighlightTextFragment *self = [OrgApacheLuceneSearchHighlightTextFragment alloc];
-  OrgApacheLuceneSearchHighlightTextFragment_initWithJavaLangCharSequence_withInt_withInt_(self, markedUpText, textStartPos, fragNum);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchHighlightTextFragment, initWithJavaLangCharSequence_withInt_withInt_, markedUpText, textStartPos, fragNum)
+}
+
+OrgApacheLuceneSearchHighlightTextFragment *create_OrgApacheLuceneSearchHighlightTextFragment_initWithJavaLangCharSequence_withInt_withInt_(id<JavaLangCharSequence> markedUpText, jint textStartPos, jint fragNum) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchHighlightTextFragment, initWithJavaLangCharSequence_withInt_withInt_, markedUpText, textStartPos, fragNum)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchHighlightTextFragment)

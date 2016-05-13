@@ -3,14 +3,17 @@
 //  source: ./misc/src/java/org/apache/lucene/misc/package-info.java
 //
 
+/*!
+ @brief Miscellaneous index tools.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneMiscPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneMiscPackage_info_RESTRICT
-#define OrgApacheLuceneMiscPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneMiscPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneMiscPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneMiscPackage_info 0
 #else
-#define OrgApacheLuceneMiscPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneMiscPackage_info 1
 #endif
-#undef OrgApacheLuceneMiscPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneMiscPackage_info
 
-#pragma pop_macro("OrgApacheLuceneMiscPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneMiscPackage_info")

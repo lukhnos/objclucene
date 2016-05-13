@@ -5,49 +5,69 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilBits_INCLUDE_ALL")
-#if OrgApacheLuceneUtilBits_RESTRICT
-#define OrgApacheLuceneUtilBits_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilBits")
+#ifdef RESTRICT_OrgApacheLuceneUtilBits
+#define INCLUDE_ALL_OrgApacheLuceneUtilBits 0
 #else
-#define OrgApacheLuceneUtilBits_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilBits 1
 #endif
-#undef OrgApacheLuceneUtilBits_RESTRICT
-#if OrgApacheLuceneUtilBits_MatchNoBits_INCLUDE
-#define OrgApacheLuceneUtilBits_INCLUDE 1
+#undef RESTRICT_OrgApacheLuceneUtilBits
+#ifdef INCLUDE_OrgApacheLuceneUtilBits_MatchNoBits
+#define INCLUDE_OrgApacheLuceneUtilBits 1
 #endif
-#if OrgApacheLuceneUtilBits_MatchAllBits_INCLUDE
-#define OrgApacheLuceneUtilBits_INCLUDE 1
+#ifdef INCLUDE_OrgApacheLuceneUtilBits_MatchAllBits
+#define INCLUDE_OrgApacheLuceneUtilBits 1
 #endif
 
-#if !defined (_OrgApacheLuceneUtilBits_) && (OrgApacheLuceneUtilBits_INCLUDE_ALL || OrgApacheLuceneUtilBits_INCLUDE)
-#define _OrgApacheLuceneUtilBits_
+#if !defined (OrgApacheLuceneUtilBits_) && (INCLUDE_ALL_OrgApacheLuceneUtilBits || defined(INCLUDE_OrgApacheLuceneUtilBits))
+#define OrgApacheLuceneUtilBits_
 
 @class IOSObjectArray;
 
+/*!
+ @brief Interface for Bitset-like structures.
+ */
 @protocol OrgApacheLuceneUtilBits < NSObject, JavaObject >
 
+/*!
+ @brief Returns the value of the bit with the specified <code>index</code>.
+ @param index index, should be non-negative and &lt; <code>length()</code>.
+ The result of passing negative or out of bounds values is undefined
+ by this interface, <b>just don't do it!</b>
+ @return <code>true</code> if the bit is set, <code>false</code> otherwise.
+ */
 - (jboolean)getWithInt:(jint)index;
 
+/*!
+ @brief Returns the number of bits in this set
+ */
 - (jint)length;
 
 @end
 
 @interface OrgApacheLuceneUtilBits : NSObject
 
++ (IOSObjectArray *)EMPTY_ARRAY;
+
 @end
 
 J2OBJC_STATIC_INIT(OrgApacheLuceneUtilBits)
 
-FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneUtilBits_EMPTY_ARRAY_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilBits, EMPTY_ARRAY_, IOSObjectArray *)
+inline IOSObjectArray *OrgApacheLuceneUtilBits_get_EMPTY_ARRAY();
+/*! INTERNAL ONLY - Use accessor function from above. */
+FOUNDATION_EXPORT IOSObjectArray *OrgApacheLuceneUtilBits_EMPTY_ARRAY;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilBits, EMPTY_ARRAY, IOSObjectArray *)
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilBits)
 
 #endif
 
-#if !defined (_OrgApacheLuceneUtilBits_MatchAllBits_) && (OrgApacheLuceneUtilBits_INCLUDE_ALL || OrgApacheLuceneUtilBits_MatchAllBits_INCLUDE)
-#define _OrgApacheLuceneUtilBits_MatchAllBits_
+#if !defined (OrgApacheLuceneUtilBits_MatchAllBits_) && (INCLUDE_ALL_OrgApacheLuceneUtilBits || defined(INCLUDE_OrgApacheLuceneUtilBits_MatchAllBits))
+#define OrgApacheLuceneUtilBits_MatchAllBits_
 
+/*!
+ @brief Bits impl of the specified length with all bits set.
+ */
 @interface OrgApacheLuceneUtilBits_MatchAllBits : NSObject < OrgApacheLuceneUtilBits > {
  @public
   jint len_;
@@ -69,13 +89,18 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilBits_MatchAllBits_initWithInt_(OrgApac
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilBits_MatchAllBits *new_OrgApacheLuceneUtilBits_MatchAllBits_initWithInt_(jint len) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilBits_MatchAllBits *create_OrgApacheLuceneUtilBits_MatchAllBits_initWithInt_(jint len);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilBits_MatchAllBits)
 
 #endif
 
-#if !defined (_OrgApacheLuceneUtilBits_MatchNoBits_) && (OrgApacheLuceneUtilBits_INCLUDE_ALL || OrgApacheLuceneUtilBits_MatchNoBits_INCLUDE)
-#define _OrgApacheLuceneUtilBits_MatchNoBits_
+#if !defined (OrgApacheLuceneUtilBits_MatchNoBits_) && (INCLUDE_ALL_OrgApacheLuceneUtilBits || defined(INCLUDE_OrgApacheLuceneUtilBits_MatchNoBits))
+#define OrgApacheLuceneUtilBits_MatchNoBits_
 
+/*!
+ @brief Bits impl of the specified length with no bits set.
+ */
 @interface OrgApacheLuceneUtilBits_MatchNoBits : NSObject < OrgApacheLuceneUtilBits > {
  @public
   jint len_;
@@ -97,8 +122,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilBits_MatchNoBits_initWithInt_(OrgApach
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilBits_MatchNoBits *new_OrgApacheLuceneUtilBits_MatchNoBits_initWithInt_(jint len) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilBits_MatchNoBits *create_OrgApacheLuceneUtilBits_MatchNoBits_initWithInt_(jint len);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilBits_MatchNoBits)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilBits_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilBits")

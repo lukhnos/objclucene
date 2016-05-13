@@ -3,14 +3,17 @@
 //  source: ./queries/src/java/org/apache/lucene/queries/function/package-info.java
 //
 
+/*!
+ @brief Queries that compute score based upon a function.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueriesFunctionPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneQueriesFunctionPackage_info_RESTRICT
-#define OrgApacheLuceneQueriesFunctionPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneQueriesFunctionPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionPackage_info 0
 #else
-#define OrgApacheLuceneQueriesFunctionPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueriesFunctionPackage_info 1
 #endif
-#undef OrgApacheLuceneQueriesFunctionPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueriesFunctionPackage_info
 
-#pragma pop_macro("OrgApacheLuceneQueriesFunctionPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueriesFunctionPackage_info")

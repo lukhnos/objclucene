@@ -5,40 +5,79 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisUtilStemmerUtil_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisUtilStemmerUtil_RESTRICT
-#define OrgApacheLuceneAnalysisUtilStemmerUtil_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilStemmerUtil")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisUtilStemmerUtil
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisUtilStemmerUtil 0
 #else
-#define OrgApacheLuceneAnalysisUtilStemmerUtil_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisUtilStemmerUtil 1
 #endif
-#undef OrgApacheLuceneAnalysisUtilStemmerUtil_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisUtilStemmerUtil
 
-#if !defined (_OrgApacheLuceneAnalysisUtilStemmerUtil_) && (OrgApacheLuceneAnalysisUtilStemmerUtil_INCLUDE_ALL || OrgApacheLuceneAnalysisUtilStemmerUtil_INCLUDE)
-#define _OrgApacheLuceneAnalysisUtilStemmerUtil_
+#if !defined (OrgApacheLuceneAnalysisUtilStemmerUtil_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisUtilStemmerUtil || defined(INCLUDE_OrgApacheLuceneAnalysisUtilStemmerUtil))
+#define OrgApacheLuceneAnalysisUtilStemmerUtil_
 
 @class IOSCharArray;
 
+/*!
+ @brief Some commonly-used stemming functions
+ */
 @interface OrgApacheLuceneAnalysisUtilStemmerUtil : NSObject
 
 #pragma mark Public
 
+/*!
+ @brief Delete a character in-place
+ @param s Input Buffer
+ @param pos Position of character to delete
+ @param len length of input buffer
+ @return length of input buffer after deletion
+ */
 + (jint)delete__WithCharArray:(IOSCharArray *)s
                       withInt:(jint)pos
                       withInt:(jint)len;
 
+/*!
+ @brief Delete n characters in-place
+ @param s Input Buffer
+ @param pos Position of character to delete
+ @param len Length of input buffer
+ @param nChars number of characters to delete
+ @return length of input buffer after deletion
+ */
 + (jint)deleteNWithCharArray:(IOSCharArray *)s
                      withInt:(jint)pos
                      withInt:(jint)len
                      withInt:(jint)nChars;
 
+/*!
+ @brief Returns true if the character array ends with the suffix.
+ @param s Input Buffer
+ @param len length of input buffer
+ @param suffix Suffix string to test
+ @return true if <code>s</code> ends with <code>suffix</code>
+ */
 + (jboolean)endsWithWithCharArray:(IOSCharArray *)s
                           withInt:(jint)len
                     withCharArray:(IOSCharArray *)suffix;
 
+/*!
+ @brief Returns true if the character array ends with the suffix.
+ @param s Input Buffer
+ @param len length of input buffer
+ @param suffix Suffix string to test
+ @return true if <code>s</code> ends with <code>suffix</code>
+ */
 + (jboolean)endsWithWithCharArray:(IOSCharArray *)s
                           withInt:(jint)len
                      withNSString:(NSString *)suffix;
 
+/*!
+ @brief Returns true if the character array starts with the suffix.
+ @param s Input Buffer
+ @param len length of input buffer
+ @param prefix Prefix string to test
+ @return true if <code>s</code> starts with <code>prefix</code>
+ */
 + (jboolean)startsWithWithCharArray:(IOSCharArray *)s
                             withInt:(jint)len
                        withNSString:(NSString *)prefix;
@@ -61,4 +100,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisUtilStemmerUtil)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisUtilStemmerUtil_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisUtilStemmerUtil")

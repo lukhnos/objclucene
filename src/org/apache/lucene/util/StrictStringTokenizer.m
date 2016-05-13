@@ -28,7 +28,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilStrictStringTokenizer, s_, NSString *)
 
 - (NSString *)nextToken {
   if (pos_ < 0) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(@"no more tokens") autorelease];
+    @throw new_JavaLangIllegalStateException_initWithNSString_(@"no more tokens");
   }
   jint pos1 = [((NSString *) nil_chk(s_)) indexOf:delimiter_ fromIndex:pos_];
   NSString *s1;
@@ -45,11 +45,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilStrictStringTokenizer, s_, NSString *)
 
 - (jboolean)hasMoreTokens {
   return pos_ >= 0;
-}
-
-- (void)dealloc {
-  RELEASE_(s_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -71,14 +66,16 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilStrictStringTokenizer, s_, NSString *)
 
 void OrgApacheLuceneUtilStrictStringTokenizer_initWithNSString_withChar_(OrgApacheLuceneUtilStrictStringTokenizer *self, NSString *s, jchar delimiter) {
   NSObject_init(self);
-  JreStrongAssign(&self->s_, s);
+  self->s_ = s;
   self->delimiter_ = delimiter;
 }
 
 OrgApacheLuceneUtilStrictStringTokenizer *new_OrgApacheLuceneUtilStrictStringTokenizer_initWithNSString_withChar_(NSString *s, jchar delimiter) {
-  OrgApacheLuceneUtilStrictStringTokenizer *self = [OrgApacheLuceneUtilStrictStringTokenizer alloc];
-  OrgApacheLuceneUtilStrictStringTokenizer_initWithNSString_withChar_(self, s, delimiter);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilStrictStringTokenizer, initWithNSString_withChar_, s, delimiter)
+}
+
+OrgApacheLuceneUtilStrictStringTokenizer *create_OrgApacheLuceneUtilStrictStringTokenizer_initWithNSString_withChar_(NSString *s, jchar delimiter) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilStrictStringTokenizer, initWithNSString_withChar_, s, delimiter)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilStrictStringTokenizer)

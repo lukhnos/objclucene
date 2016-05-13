@@ -3,14 +3,18 @@
 //  source: ./sandbox/src/java/org/apache/lucene/codecs/idversion/package-info.java
 //
 
+/*!
+ @brief A primary-key postings format that associates a version (long) with each term and
+ can provide fail-fast lookups by ID and version.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneCodecsIdversionPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneCodecsIdversionPackage_info_RESTRICT
-#define OrgApacheLuceneCodecsIdversionPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneCodecsIdversionPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneCodecsIdversionPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneCodecsIdversionPackage_info 0
 #else
-#define OrgApacheLuceneCodecsIdversionPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneCodecsIdversionPackage_info 1
 #endif
-#undef OrgApacheLuceneCodecsIdversionPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneCodecsIdversionPackage_info
 
-#pragma pop_macro("OrgApacheLuceneCodecsIdversionPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneCodecsIdversionPackage_info")

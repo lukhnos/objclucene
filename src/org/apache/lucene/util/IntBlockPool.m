@@ -13,14 +13,24 @@
 
 @interface OrgApacheLuceneUtilIntBlockPool () {
  @public
+  /*!
+   @brief index into the buffers array pointing to the current buffer used as the head
+   */
   jint bufferUpto_;
   OrgApacheLuceneUtilIntBlockPool_Allocator *allocator_;
 }
 
+/*!
+ @brief Creates a new int slice with the given starting size and returns the slices offset in the pool.
+ - seealso: SliceReader
+ */
 - (jint)newSliceWithInt:(jint)size OBJC_METHOD_FAMILY_NONE;
 
 + (jboolean)assertSliceBufferWithIntArray:(IOSIntArray *)buffer;
 
+/*!
+ @brief Allocates a new slice from the given offset
+ */
 - (jint)allocSliceWithIntArray:(IOSIntArray *)slice
                        withInt:(jint)sliceOffset OBJC_METHOD_FAMILY_NONE;
 
@@ -28,14 +38,27 @@
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilIntBlockPool, allocator_, OrgApacheLuceneUtilIntBlockPool_Allocator *)
 
-static IOSIntArray *OrgApacheLuceneUtilIntBlockPool_NEXT_LEVEL_ARRAY_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilIntBlockPool, NEXT_LEVEL_ARRAY_, IOSIntArray *)
+/*!
+ @brief An array holding the offset into the <code>IntBlockPool.LEVEL_SIZE_ARRAY</code>
+ to quickly navigate to the next slice level.
+ */
+inline IOSIntArray *OrgApacheLuceneUtilIntBlockPool_get_NEXT_LEVEL_ARRAY();
+static IOSIntArray *OrgApacheLuceneUtilIntBlockPool_NEXT_LEVEL_ARRAY;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilIntBlockPool, NEXT_LEVEL_ARRAY, IOSIntArray *)
 
-static IOSIntArray *OrgApacheLuceneUtilIntBlockPool_LEVEL_SIZE_ARRAY_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilIntBlockPool, LEVEL_SIZE_ARRAY_, IOSIntArray *)
+/*!
+ @brief An array holding the level sizes for int slices.
+ */
+inline IOSIntArray *OrgApacheLuceneUtilIntBlockPool_get_LEVEL_SIZE_ARRAY();
+static IOSIntArray *OrgApacheLuceneUtilIntBlockPool_LEVEL_SIZE_ARRAY;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneUtilIntBlockPool, LEVEL_SIZE_ARRAY, IOSIntArray *)
 
-static jint OrgApacheLuceneUtilIntBlockPool_FIRST_LEVEL_SIZE_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilIntBlockPool, FIRST_LEVEL_SIZE_, jint)
+/*!
+ @brief The first level size for new slices
+ */
+inline jint OrgApacheLuceneUtilIntBlockPool_get_FIRST_LEVEL_SIZE();
+static jint OrgApacheLuceneUtilIntBlockPool_FIRST_LEVEL_SIZE;
+J2OBJC_STATIC_FIELD_PRIMITIVE_FINAL(OrgApacheLuceneUtilIntBlockPool, FIRST_LEVEL_SIZE, jint)
 
 __attribute__((unused)) static jint OrgApacheLuceneUtilIntBlockPool_newSliceWithInt_(OrgApacheLuceneUtilIntBlockPool *self, jint size);
 
@@ -78,6 +101,18 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilIntBlockPool)
 
 @implementation OrgApacheLuceneUtilIntBlockPool
 
++ (jint)INT_BLOCK_SHIFT {
+  return OrgApacheLuceneUtilIntBlockPool_INT_BLOCK_SHIFT;
+}
+
++ (jint)INT_BLOCK_SIZE {
+  return OrgApacheLuceneUtilIntBlockPool_INT_BLOCK_SIZE;
+}
+
++ (jint)INT_BLOCK_MASK {
+  return OrgApacheLuceneUtilIntBlockPool_INT_BLOCK_MASK;
+}
+
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilIntBlockPool_init(self);
@@ -112,24 +147,24 @@ J2OBJC_IGNORE_DESIGNATED_END
       bufferUpto_ = 0;
       intUpto_ = 0;
       intOffset_ = 0;
-      JreStrongAssign(&buffer_, IOSObjectArray_Get(nil_chk(buffers_), 0));
+      buffer_ = IOSObjectArray_Get(nil_chk(buffers_), 0);
     }
     else {
       bufferUpto_ = -1;
       intUpto_ = OrgApacheLuceneUtilIntBlockPool_INT_BLOCK_SIZE;
       intOffset_ = -OrgApacheLuceneUtilIntBlockPool_INT_BLOCK_SIZE;
-      JreStrongAssign(&buffer_, nil);
+      buffer_ = nil;
     }
   }
 }
 
 - (void)nextBuffer {
   if (1 + bufferUpto_ == ((IOSObjectArray *) nil_chk(buffers_))->size_) {
-    IOSObjectArray *newBuffers = [IOSObjectArray arrayWithLength:JreFpToInt((buffers_->size_ * 1.5)) type:IOSClass_intArray(1)];
+    IOSObjectArray *newBuffers = [IOSObjectArray newArrayWithLength:JreFpToInt((buffers_->size_ * 1.5)) type:IOSClass_intArray(1)];
     JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(buffers_, 0, newBuffers, 0, buffers_->size_);
-    JreStrongAssign(&buffers_, newBuffers);
+    buffers_ = newBuffers;
   }
-  JreStrongAssign(&buffer_, IOSObjectArray_Set(buffers_, 1 + bufferUpto_, [((OrgApacheLuceneUtilIntBlockPool_Allocator *) nil_chk(allocator_)) getIntBlock]));
+  buffer_ = IOSObjectArray_Set(buffers_, 1 + bufferUpto_, [((OrgApacheLuceneUtilIntBlockPool_Allocator *) nil_chk(allocator_)) getIntBlock]);
   bufferUpto_++;
   intUpto_ = 0;
   intOffset_ += OrgApacheLuceneUtilIntBlockPool_INT_BLOCK_SIZE;
@@ -148,18 +183,11 @@ J2OBJC_IGNORE_DESIGNATED_END
   return OrgApacheLuceneUtilIntBlockPool_allocSliceWithIntArray_withInt_(self, slice, sliceOffset);
 }
 
-- (void)dealloc {
-  RELEASE_(buffers_);
-  RELEASE_(buffer_);
-  RELEASE_(allocator_);
-  [super dealloc];
-}
-
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilIntBlockPool class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilIntBlockPool_NEXT_LEVEL_ARRAY_, [IOSIntArray newArrayWithInts:(jint[]){ 1, 2, 3, 4, 5, 6, 7, 8, 9, 9 } count:10]);
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilIntBlockPool_LEVEL_SIZE_ARRAY_, [IOSIntArray newArrayWithInts:(jint[]){ 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024 } count:10]);
-    OrgApacheLuceneUtilIntBlockPool_FIRST_LEVEL_SIZE_ = IOSIntArray_Get(OrgApacheLuceneUtilIntBlockPool_LEVEL_SIZE_ARRAY_, 0);
+    OrgApacheLuceneUtilIntBlockPool_NEXT_LEVEL_ARRAY = [IOSIntArray newArrayWithInts:(jint[]){ 1, 2, 3, 4, 5, 6, 7, 8, 9, 9 } count:10];
+    OrgApacheLuceneUtilIntBlockPool_LEVEL_SIZE_ARRAY = [IOSIntArray newArrayWithInts:(jint[]){ 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024 } count:10];
+    OrgApacheLuceneUtilIntBlockPool_FIRST_LEVEL_SIZE = IOSIntArray_Get(OrgApacheLuceneUtilIntBlockPool_LEVEL_SIZE_ARRAY, 0);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilIntBlockPool)
   }
 }
@@ -185,9 +213,9 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "buffer_", NULL, 0x1, "[I", NULL, NULL, .constantValue.asLong = 0 },
     { "intOffset_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "allocator_", NULL, 0x12, "Lorg.apache.lucene.util.IntBlockPool$Allocator;", NULL, NULL, .constantValue.asLong = 0 },
-    { "NEXT_LEVEL_ARRAY_", NULL, 0x1a, "[I", &OrgApacheLuceneUtilIntBlockPool_NEXT_LEVEL_ARRAY_, NULL, .constantValue.asLong = 0 },
-    { "LEVEL_SIZE_ARRAY_", NULL, 0x1a, "[I", &OrgApacheLuceneUtilIntBlockPool_LEVEL_SIZE_ARRAY_, NULL, .constantValue.asLong = 0 },
-    { "FIRST_LEVEL_SIZE_", NULL, 0x1a, "I", &OrgApacheLuceneUtilIntBlockPool_FIRST_LEVEL_SIZE_, NULL, .constantValue.asLong = 0 },
+    { "NEXT_LEVEL_ARRAY", "NEXT_LEVEL_ARRAY", 0x1a, "[I", &OrgApacheLuceneUtilIntBlockPool_NEXT_LEVEL_ARRAY, NULL, .constantValue.asLong = 0 },
+    { "LEVEL_SIZE_ARRAY", "LEVEL_SIZE_ARRAY", 0x1a, "[I", &OrgApacheLuceneUtilIntBlockPool_LEVEL_SIZE_ARRAY, NULL, .constantValue.asLong = 0 },
+    { "FIRST_LEVEL_SIZE", "FIRST_LEVEL_SIZE", 0x1a, "I", &OrgApacheLuceneUtilIntBlockPool_FIRST_LEVEL_SIZE, NULL, .constantValue.asLong = 0 },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.util.IntBlockPool$Allocator;", "Lorg.apache.lucene.util.IntBlockPool$DirectAllocator;", "Lorg.apache.lucene.util.IntBlockPool$SliceWriter;", "Lorg.apache.lucene.util.IntBlockPool$SliceReader;"};
   static const J2ObjcClassInfo _OrgApacheLuceneUtilIntBlockPool = { 2, "IntBlockPool", "org.apache.lucene.util", NULL, 0x11, 8, methods, 12, fields, 0, NULL, 4, inner_classes, NULL, NULL };
@@ -197,28 +225,32 @@ J2OBJC_IGNORE_DESIGNATED_END
 @end
 
 void OrgApacheLuceneUtilIntBlockPool_init(OrgApacheLuceneUtilIntBlockPool *self) {
-  OrgApacheLuceneUtilIntBlockPool_initWithOrgApacheLuceneUtilIntBlockPool_Allocator_(self, [new_OrgApacheLuceneUtilIntBlockPool_DirectAllocator_init() autorelease]);
+  OrgApacheLuceneUtilIntBlockPool_initWithOrgApacheLuceneUtilIntBlockPool_Allocator_(self, new_OrgApacheLuceneUtilIntBlockPool_DirectAllocator_init());
 }
 
 OrgApacheLuceneUtilIntBlockPool *new_OrgApacheLuceneUtilIntBlockPool_init() {
-  OrgApacheLuceneUtilIntBlockPool *self = [OrgApacheLuceneUtilIntBlockPool alloc];
-  OrgApacheLuceneUtilIntBlockPool_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilIntBlockPool, init)
+}
+
+OrgApacheLuceneUtilIntBlockPool *create_OrgApacheLuceneUtilIntBlockPool_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilIntBlockPool, init)
 }
 
 void OrgApacheLuceneUtilIntBlockPool_initWithOrgApacheLuceneUtilIntBlockPool_Allocator_(OrgApacheLuceneUtilIntBlockPool *self, OrgApacheLuceneUtilIntBlockPool_Allocator *allocator) {
   NSObject_init(self);
-  JreStrongAssignAndConsume(&self->buffers_, [IOSObjectArray newArrayWithLength:10 type:IOSClass_intArray(1)]);
+  self->buffers_ = [IOSObjectArray newArrayWithLength:10 type:IOSClass_intArray(1)];
   self->bufferUpto_ = -1;
   self->intUpto_ = OrgApacheLuceneUtilIntBlockPool_INT_BLOCK_SIZE;
   self->intOffset_ = -OrgApacheLuceneUtilIntBlockPool_INT_BLOCK_SIZE;
-  JreStrongAssign(&self->allocator_, allocator);
+  self->allocator_ = allocator;
 }
 
 OrgApacheLuceneUtilIntBlockPool *new_OrgApacheLuceneUtilIntBlockPool_initWithOrgApacheLuceneUtilIntBlockPool_Allocator_(OrgApacheLuceneUtilIntBlockPool_Allocator *allocator) {
-  OrgApacheLuceneUtilIntBlockPool *self = [OrgApacheLuceneUtilIntBlockPool alloc];
-  OrgApacheLuceneUtilIntBlockPool_initWithOrgApacheLuceneUtilIntBlockPool_Allocator_(self, allocator);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilIntBlockPool, initWithOrgApacheLuceneUtilIntBlockPool_Allocator_, allocator)
+}
+
+OrgApacheLuceneUtilIntBlockPool *create_OrgApacheLuceneUtilIntBlockPool_initWithOrgApacheLuceneUtilIntBlockPool_Allocator_(OrgApacheLuceneUtilIntBlockPool_Allocator *allocator) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilIntBlockPool, initWithOrgApacheLuceneUtilIntBlockPool_Allocator_, allocator)
 }
 
 jint OrgApacheLuceneUtilIntBlockPool_newSliceWithInt_(OrgApacheLuceneUtilIntBlockPool *self, jint size) {
@@ -243,8 +275,8 @@ jboolean OrgApacheLuceneUtilIntBlockPool_assertSliceBufferWithIntArray_(IOSIntAr
 
 jint OrgApacheLuceneUtilIntBlockPool_allocSliceWithIntArray_withInt_(OrgApacheLuceneUtilIntBlockPool *self, IOSIntArray *slice, jint sliceOffset) {
   jint level = IOSIntArray_Get(nil_chk(slice), sliceOffset);
-  jint newLevel = IOSIntArray_Get(nil_chk(OrgApacheLuceneUtilIntBlockPool_NEXT_LEVEL_ARRAY_), level - 1);
-  jint newSize = IOSIntArray_Get(nil_chk(OrgApacheLuceneUtilIntBlockPool_LEVEL_SIZE_ARRAY_), newLevel);
+  jint newLevel = IOSIntArray_Get(nil_chk(OrgApacheLuceneUtilIntBlockPool_NEXT_LEVEL_ARRAY), level - 1);
+  jint newSize = IOSIntArray_Get(nil_chk(OrgApacheLuceneUtilIntBlockPool_LEVEL_SIZE_ARRAY), newLevel);
   if (self->intUpto_ > OrgApacheLuceneUtilIntBlockPool_INT_BLOCK_SIZE - newSize) {
     [self nextBuffer];
     JreAssert((OrgApacheLuceneUtilIntBlockPool_assertSliceBufferWithIntArray_(self->buffer_)), (@"org/apache/lucene/util/IntBlockPool.java:215 condition failed: assert assertSliceBuffer(buffer);"));
@@ -274,7 +306,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilIntBlockPool)
 }
 
 - (IOSIntArray *)getIntBlock {
-  return [IOSIntArray arrayWithLength:blockSize_];
+  return [IOSIntArray newArrayWithLength:blockSize_];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -329,9 +361,11 @@ void OrgApacheLuceneUtilIntBlockPool_DirectAllocator_init(OrgApacheLuceneUtilInt
 }
 
 OrgApacheLuceneUtilIntBlockPool_DirectAllocator *new_OrgApacheLuceneUtilIntBlockPool_DirectAllocator_init() {
-  OrgApacheLuceneUtilIntBlockPool_DirectAllocator *self = [OrgApacheLuceneUtilIntBlockPool_DirectAllocator alloc];
-  OrgApacheLuceneUtilIntBlockPool_DirectAllocator_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilIntBlockPool_DirectAllocator, init)
+}
+
+OrgApacheLuceneUtilIntBlockPool_DirectAllocator *create_OrgApacheLuceneUtilIntBlockPool_DirectAllocator_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilIntBlockPool_DirectAllocator, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilIntBlockPool_DirectAllocator)
@@ -361,16 +395,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilIntBlockPool_DirectAllocator
 }
 
 - (jint)startNewSlice {
-  return offset_ = OrgApacheLuceneUtilIntBlockPool_newSliceWithInt_(nil_chk(pool_), JreLoadStatic(OrgApacheLuceneUtilIntBlockPool, FIRST_LEVEL_SIZE_)) + pool_->intOffset_;
+  return offset_ = OrgApacheLuceneUtilIntBlockPool_newSliceWithInt_(nil_chk(pool_), JreLoadStatic(OrgApacheLuceneUtilIntBlockPool, FIRST_LEVEL_SIZE)) + pool_->intOffset_;
 }
 
 - (jint)getCurrentOffset {
   return offset_;
-}
-
-- (void)dealloc {
-  RELEASE_(pool_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -393,13 +422,15 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilIntBlockPool_DirectAllocator
 
 void OrgApacheLuceneUtilIntBlockPool_SliceWriter_initWithOrgApacheLuceneUtilIntBlockPool_(OrgApacheLuceneUtilIntBlockPool_SliceWriter *self, OrgApacheLuceneUtilIntBlockPool *pool) {
   NSObject_init(self);
-  JreStrongAssign(&self->pool_, pool);
+  self->pool_ = pool;
 }
 
 OrgApacheLuceneUtilIntBlockPool_SliceWriter *new_OrgApacheLuceneUtilIntBlockPool_SliceWriter_initWithOrgApacheLuceneUtilIntBlockPool_(OrgApacheLuceneUtilIntBlockPool *pool) {
-  OrgApacheLuceneUtilIntBlockPool_SliceWriter *self = [OrgApacheLuceneUtilIntBlockPool_SliceWriter alloc];
-  OrgApacheLuceneUtilIntBlockPool_SliceWriter_initWithOrgApacheLuceneUtilIntBlockPool_(self, pool);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilIntBlockPool_SliceWriter, initWithOrgApacheLuceneUtilIntBlockPool_, pool)
+}
+
+OrgApacheLuceneUtilIntBlockPool_SliceWriter *create_OrgApacheLuceneUtilIntBlockPool_SliceWriter_initWithOrgApacheLuceneUtilIntBlockPool_(OrgApacheLuceneUtilIntBlockPool *pool) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilIntBlockPool_SliceWriter, initWithOrgApacheLuceneUtilIntBlockPool_, pool)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilIntBlockPool_SliceWriter)
@@ -418,9 +449,9 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilIntBlockPool_SliceWriter)
   self->end_ = endOffset;
   upto_ = startOffset;
   level_ = 1;
-  JreStrongAssign(&buffer_, IOSObjectArray_Get(nil_chk(((OrgApacheLuceneUtilIntBlockPool *) nil_chk(pool_))->buffers_), bufferUpto_));
+  buffer_ = IOSObjectArray_Get(nil_chk(((OrgApacheLuceneUtilIntBlockPool *) nil_chk(pool_))->buffers_), bufferUpto_);
   upto_ = startOffset & OrgApacheLuceneUtilIntBlockPool_INT_BLOCK_MASK;
-  jint firstSize = IOSIntArray_Get(nil_chk(JreLoadStatic(OrgApacheLuceneUtilIntBlockPool, LEVEL_SIZE_ARRAY_)), 0);
+  jint firstSize = IOSIntArray_Get(nil_chk(JreLoadStatic(OrgApacheLuceneUtilIntBlockPool, LEVEL_SIZE_ARRAY)), 0);
   if (startOffset + firstSize >= endOffset) {
     limit_ = endOffset & OrgApacheLuceneUtilIntBlockPool_INT_BLOCK_MASK;
   }
@@ -443,12 +474,6 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilIntBlockPool_SliceWriter)
 
 - (void)nextSlice {
   OrgApacheLuceneUtilIntBlockPool_SliceReader_nextSlice(self);
-}
-
-- (void)dealloc {
-  RELEASE_(pool_);
-  RELEASE_(buffer_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -477,22 +502,24 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilIntBlockPool_SliceWriter)
 
 void OrgApacheLuceneUtilIntBlockPool_SliceReader_initWithOrgApacheLuceneUtilIntBlockPool_(OrgApacheLuceneUtilIntBlockPool_SliceReader *self, OrgApacheLuceneUtilIntBlockPool *pool) {
   NSObject_init(self);
-  JreStrongAssign(&self->pool_, pool);
+  self->pool_ = pool;
 }
 
 OrgApacheLuceneUtilIntBlockPool_SliceReader *new_OrgApacheLuceneUtilIntBlockPool_SliceReader_initWithOrgApacheLuceneUtilIntBlockPool_(OrgApacheLuceneUtilIntBlockPool *pool) {
-  OrgApacheLuceneUtilIntBlockPool_SliceReader *self = [OrgApacheLuceneUtilIntBlockPool_SliceReader alloc];
-  OrgApacheLuceneUtilIntBlockPool_SliceReader_initWithOrgApacheLuceneUtilIntBlockPool_(self, pool);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilIntBlockPool_SliceReader, initWithOrgApacheLuceneUtilIntBlockPool_, pool)
+}
+
+OrgApacheLuceneUtilIntBlockPool_SliceReader *create_OrgApacheLuceneUtilIntBlockPool_SliceReader_initWithOrgApacheLuceneUtilIntBlockPool_(OrgApacheLuceneUtilIntBlockPool *pool) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilIntBlockPool_SliceReader, initWithOrgApacheLuceneUtilIntBlockPool_, pool)
 }
 
 void OrgApacheLuceneUtilIntBlockPool_SliceReader_nextSlice(OrgApacheLuceneUtilIntBlockPool_SliceReader *self) {
   jint nextIndex = IOSIntArray_Get(nil_chk(self->buffer_), self->limit_);
-  self->level_ = IOSIntArray_Get(nil_chk(JreLoadStatic(OrgApacheLuceneUtilIntBlockPool, NEXT_LEVEL_ARRAY_)), self->level_ - 1);
-  jint newSize = IOSIntArray_Get(nil_chk(JreLoadStatic(OrgApacheLuceneUtilIntBlockPool, LEVEL_SIZE_ARRAY_)), self->level_);
+  self->level_ = IOSIntArray_Get(nil_chk(JreLoadStatic(OrgApacheLuceneUtilIntBlockPool, NEXT_LEVEL_ARRAY)), self->level_ - 1);
+  jint newSize = IOSIntArray_Get(nil_chk(JreLoadStatic(OrgApacheLuceneUtilIntBlockPool, LEVEL_SIZE_ARRAY)), self->level_);
   self->bufferUpto_ = nextIndex / OrgApacheLuceneUtilIntBlockPool_INT_BLOCK_SIZE;
   self->bufferOffset_ = self->bufferUpto_ * OrgApacheLuceneUtilIntBlockPool_INT_BLOCK_SIZE;
-  JreStrongAssign(&self->buffer_, IOSObjectArray_Get(nil_chk(((OrgApacheLuceneUtilIntBlockPool *) nil_chk(self->pool_))->buffers_), self->bufferUpto_));
+  self->buffer_ = IOSObjectArray_Get(nil_chk(((OrgApacheLuceneUtilIntBlockPool *) nil_chk(self->pool_))->buffers_), self->bufferUpto_);
   self->upto_ = nextIndex & OrgApacheLuceneUtilIntBlockPool_INT_BLOCK_MASK;
   if (nextIndex + newSize >= self->end_) {
     JreAssert((self->end_ - nextIndex > 0), (@"org/apache/lucene/util/IntBlockPool.java:370 condition failed: assert end - nextIndex > 0;"));

@@ -18,7 +18,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "FileAlreadyExistsException", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgLukhnosPortmobileFileFileAlreadyExistsException = { 2, "FileAlreadyExistsException", "org.lukhnos.portmobile.file", NULL, 0x1, 1, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgLukhnosPortmobileFileFileAlreadyExistsException;
@@ -31,9 +31,11 @@ void OrgLukhnosPortmobileFileFileAlreadyExistsException_init(OrgLukhnosPortmobil
 }
 
 OrgLukhnosPortmobileFileFileAlreadyExistsException *new_OrgLukhnosPortmobileFileFileAlreadyExistsException_init() {
-  OrgLukhnosPortmobileFileFileAlreadyExistsException *self = [OrgLukhnosPortmobileFileFileAlreadyExistsException alloc];
-  OrgLukhnosPortmobileFileFileAlreadyExistsException_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgLukhnosPortmobileFileFileAlreadyExistsException, init)
+}
+
+OrgLukhnosPortmobileFileFileAlreadyExistsException *create_OrgLukhnosPortmobileFileFileAlreadyExistsException_init() {
+  J2OBJC_CREATE_IMPL(OrgLukhnosPortmobileFileFileAlreadyExistsException, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgLukhnosPortmobileFileFileAlreadyExistsException)

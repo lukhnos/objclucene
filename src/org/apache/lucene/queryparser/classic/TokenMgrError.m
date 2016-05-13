@@ -9,11 +9,32 @@
 #include "java/lang/StringBuilder.h"
 #include "org/apache/lucene/queryparser/classic/TokenMgrError.h"
 
+/*!
+ @brief The version identifier for this Serializable class.
+ Increment only if the <i>serialized</i> form of the
+ class changes.
+ */
+inline jlong OrgApacheLuceneQueryparserClassicTokenMgrError_get_serialVersionUID();
 #define OrgApacheLuceneQueryparserClassicTokenMgrError_serialVersionUID 1LL
-
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserClassicTokenMgrError, serialVersionUID, jlong)
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueryparserClassicTokenMgrError, serialVersionUID, jlong)
 
 @implementation OrgApacheLuceneQueryparserClassicTokenMgrError
+
++ (jint)LEXICAL_ERROR {
+  return OrgApacheLuceneQueryparserClassicTokenMgrError_LEXICAL_ERROR;
+}
+
++ (jint)STATIC_LEXER_ERROR {
+  return OrgApacheLuceneQueryparserClassicTokenMgrError_STATIC_LEXER_ERROR;
+}
+
++ (jint)INVALID_LEXICAL_STATE {
+  return OrgApacheLuceneQueryparserClassicTokenMgrError_INVALID_LEXICAL_STATE;
+}
+
++ (jint)LOOP_DETECTED {
+  return OrgApacheLuceneQueryparserClassicTokenMgrError_LOOP_DETECTED;
+}
 
 + (NSString *)addEscapesWithNSString:(NSString *)str {
   return OrgApacheLuceneQueryparserClassicTokenMgrError_addEscapesWithNSString_(str);
@@ -81,43 +102,43 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 NSString *OrgApacheLuceneQueryparserClassicTokenMgrError_addEscapesWithNSString_(NSString *str) {
   OrgApacheLuceneQueryparserClassicTokenMgrError_initialize();
-  JavaLangStringBuilder *retval = [new_JavaLangStringBuilder_init() autorelease];
+  JavaLangStringBuilder *retval = new_JavaLangStringBuilder_init();
   jchar ch;
   for (jint i = 0; i < ((jint) [((NSString *) nil_chk(str)) length]); i++) {
     switch ([str charAtWithInt:i]) {
       case 0:
       continue;
       case 0x0008:
-      [retval appendWithNSString:@"\\b"];
+      (void) [retval appendWithNSString:@"\\b"];
       continue;
       case 0x0009:
-      [retval appendWithNSString:@"\\t"];
+      (void) [retval appendWithNSString:@"\\t"];
       continue;
       case 0x000a:
-      [retval appendWithNSString:@"\\n"];
+      (void) [retval appendWithNSString:@"\\n"];
       continue;
       case 0x000c:
-      [retval appendWithNSString:@"\\f"];
+      (void) [retval appendWithNSString:@"\\f"];
       continue;
       case 0x000d:
-      [retval appendWithNSString:@"\\r"];
+      (void) [retval appendWithNSString:@"\\r"];
       continue;
       case '"':
-      [retval appendWithNSString:@"\\\""];
+      (void) [retval appendWithNSString:@"\\\""];
       continue;
       case '\'':
-      [retval appendWithNSString:@"\\'"];
+      (void) [retval appendWithNSString:@"\\'"];
       continue;
       case '\\':
-      [retval appendWithNSString:@"\\\\"];
+      (void) [retval appendWithNSString:@"\\\\"];
       continue;
       default:
       if ((ch = [str charAtWithInt:i]) < (jint) 0x20 || ch > (jint) 0x7e) {
         NSString *s = JreStrcat("$$", @"0000", JavaLangInteger_toStringWithInt_withInt_(ch, 16));
-        [retval appendWithNSString:JreStrcat("$$", @"\\u", [s substring:((jint) [s length]) - 4 endIndex:((jint) [s length])])];
+        (void) [retval appendWithNSString:JreStrcat("$$", @"\\u", [s substring:((jint) [s length]) - 4 endIndex:((jint) [s length])])];
       }
       else {
-        [retval appendWithChar:ch];
+        (void) [retval appendWithChar:ch];
       }
       continue;
     }
@@ -135,9 +156,11 @@ void OrgApacheLuceneQueryparserClassicTokenMgrError_init(OrgApacheLuceneQuerypar
 }
 
 OrgApacheLuceneQueryparserClassicTokenMgrError *new_OrgApacheLuceneQueryparserClassicTokenMgrError_init() {
-  OrgApacheLuceneQueryparserClassicTokenMgrError *self = [OrgApacheLuceneQueryparserClassicTokenMgrError alloc];
-  OrgApacheLuceneQueryparserClassicTokenMgrError_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserClassicTokenMgrError, init)
+}
+
+OrgApacheLuceneQueryparserClassicTokenMgrError *create_OrgApacheLuceneQueryparserClassicTokenMgrError_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserClassicTokenMgrError, init)
 }
 
 void OrgApacheLuceneQueryparserClassicTokenMgrError_initWithNSString_withInt_(OrgApacheLuceneQueryparserClassicTokenMgrError *self, NSString *message, jint reason) {
@@ -146,9 +169,11 @@ void OrgApacheLuceneQueryparserClassicTokenMgrError_initWithNSString_withInt_(Or
 }
 
 OrgApacheLuceneQueryparserClassicTokenMgrError *new_OrgApacheLuceneQueryparserClassicTokenMgrError_initWithNSString_withInt_(NSString *message, jint reason) {
-  OrgApacheLuceneQueryparserClassicTokenMgrError *self = [OrgApacheLuceneQueryparserClassicTokenMgrError alloc];
-  OrgApacheLuceneQueryparserClassicTokenMgrError_initWithNSString_withInt_(self, message, reason);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserClassicTokenMgrError, initWithNSString_withInt_, message, reason)
+}
+
+OrgApacheLuceneQueryparserClassicTokenMgrError *create_OrgApacheLuceneQueryparserClassicTokenMgrError_initWithNSString_withInt_(NSString *message, jint reason) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserClassicTokenMgrError, initWithNSString_withInt_, message, reason)
 }
 
 void OrgApacheLuceneQueryparserClassicTokenMgrError_initWithBoolean_withInt_withInt_withInt_withNSString_withChar_withInt_(OrgApacheLuceneQueryparserClassicTokenMgrError *self, jboolean EOFSeen, jint lexState, jint errorLine, jint errorColumn, NSString *errorAfter, jchar curChar, jint reason) {
@@ -156,9 +181,11 @@ void OrgApacheLuceneQueryparserClassicTokenMgrError_initWithBoolean_withInt_with
 }
 
 OrgApacheLuceneQueryparserClassicTokenMgrError *new_OrgApacheLuceneQueryparserClassicTokenMgrError_initWithBoolean_withInt_withInt_withInt_withNSString_withChar_withInt_(jboolean EOFSeen, jint lexState, jint errorLine, jint errorColumn, NSString *errorAfter, jchar curChar, jint reason) {
-  OrgApacheLuceneQueryparserClassicTokenMgrError *self = [OrgApacheLuceneQueryparserClassicTokenMgrError alloc];
-  OrgApacheLuceneQueryparserClassicTokenMgrError_initWithBoolean_withInt_withInt_withInt_withNSString_withChar_withInt_(self, EOFSeen, lexState, errorLine, errorColumn, errorAfter, curChar, reason);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserClassicTokenMgrError, initWithBoolean_withInt_withInt_withInt_withNSString_withChar_withInt_, EOFSeen, lexState, errorLine, errorColumn, errorAfter, curChar, reason)
+}
+
+OrgApacheLuceneQueryparserClassicTokenMgrError *create_OrgApacheLuceneQueryparserClassicTokenMgrError_initWithBoolean_withInt_withInt_withInt_withNSString_withChar_withInt_(jboolean EOFSeen, jint lexState, jint errorLine, jint errorColumn, NSString *errorAfter, jchar curChar, jint reason) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserClassicTokenMgrError, initWithBoolean_withInt_withInt_withInt_withNSString_withChar_withInt_, EOFSeen, lexState, errorLine, errorColumn, errorAfter, curChar, reason)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserClassicTokenMgrError)

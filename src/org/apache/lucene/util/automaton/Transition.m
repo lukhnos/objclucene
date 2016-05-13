@@ -43,9 +43,11 @@ void OrgApacheLuceneUtilAutomatonTransition_init(OrgApacheLuceneUtilAutomatonTra
 }
 
 OrgApacheLuceneUtilAutomatonTransition *new_OrgApacheLuceneUtilAutomatonTransition_init() {
-  OrgApacheLuceneUtilAutomatonTransition *self = [OrgApacheLuceneUtilAutomatonTransition alloc];
-  OrgApacheLuceneUtilAutomatonTransition_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilAutomatonTransition, init)
+}
+
+OrgApacheLuceneUtilAutomatonTransition *create_OrgApacheLuceneUtilAutomatonTransition_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilAutomatonTransition, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonTransition)

@@ -5,25 +5,36 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchCollectionTerminatedException_INCLUDE_ALL")
-#if OrgApacheLuceneSearchCollectionTerminatedException_RESTRICT
-#define OrgApacheLuceneSearchCollectionTerminatedException_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchCollectionTerminatedException")
+#ifdef RESTRICT_OrgApacheLuceneSearchCollectionTerminatedException
+#define INCLUDE_ALL_OrgApacheLuceneSearchCollectionTerminatedException 0
 #else
-#define OrgApacheLuceneSearchCollectionTerminatedException_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchCollectionTerminatedException 1
 #endif
-#undef OrgApacheLuceneSearchCollectionTerminatedException_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchCollectionTerminatedException
 
-#if !defined (_OrgApacheLuceneSearchCollectionTerminatedException_) && (OrgApacheLuceneSearchCollectionTerminatedException_INCLUDE_ALL || OrgApacheLuceneSearchCollectionTerminatedException_INCLUDE)
-#define _OrgApacheLuceneSearchCollectionTerminatedException_
+#if !defined (OrgApacheLuceneSearchCollectionTerminatedException_) && (INCLUDE_ALL_OrgApacheLuceneSearchCollectionTerminatedException || defined(INCLUDE_OrgApacheLuceneSearchCollectionTerminatedException))
+#define OrgApacheLuceneSearchCollectionTerminatedException_
 
-#define JavaLangRuntimeException_RESTRICT 1
-#define JavaLangRuntimeException_INCLUDE 1
+#define RESTRICT_JavaLangRuntimeException 1
+#define INCLUDE_JavaLangRuntimeException 1
 #include "java/lang/RuntimeException.h"
 
+/*!
+ @brief Throw this exception in <code>LeafCollector.collect(int)</code> to prematurely
+ terminate collection of the current leaf.
+ <p>Note: IndexSearcher swallows this exception and never re-throws it.
+ As a consequence, you should not catch it when calling
+ <code>IndexSearcher.search</code> as it is unnecessary and might hide misuse
+ of this exception. 
+ */
 @interface OrgApacheLuceneSearchCollectionTerminatedException : JavaLangRuntimeException
 
 #pragma mark Public
 
+/*!
+ @brief Sole constructor.
+ */
 - (instancetype)init;
 
 @end
@@ -34,8 +45,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchCollectionTerminatedException_init(O
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchCollectionTerminatedException *new_OrgApacheLuceneSearchCollectionTerminatedException_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchCollectionTerminatedException *create_OrgApacheLuceneSearchCollectionTerminatedException_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchCollectionTerminatedException)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchCollectionTerminatedException_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchCollectionTerminatedException")

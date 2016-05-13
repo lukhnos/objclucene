@@ -5,23 +5,29 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilThreadInterruptedException_INCLUDE_ALL")
-#if OrgApacheLuceneUtilThreadInterruptedException_RESTRICT
-#define OrgApacheLuceneUtilThreadInterruptedException_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilThreadInterruptedException")
+#ifdef RESTRICT_OrgApacheLuceneUtilThreadInterruptedException
+#define INCLUDE_ALL_OrgApacheLuceneUtilThreadInterruptedException 0
 #else
-#define OrgApacheLuceneUtilThreadInterruptedException_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilThreadInterruptedException 1
 #endif
-#undef OrgApacheLuceneUtilThreadInterruptedException_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilThreadInterruptedException
 
-#if !defined (_OrgApacheLuceneUtilThreadInterruptedException_) && (OrgApacheLuceneUtilThreadInterruptedException_INCLUDE_ALL || OrgApacheLuceneUtilThreadInterruptedException_INCLUDE)
-#define _OrgApacheLuceneUtilThreadInterruptedException_
+#if !defined (OrgApacheLuceneUtilThreadInterruptedException_) && (INCLUDE_ALL_OrgApacheLuceneUtilThreadInterruptedException || defined(INCLUDE_OrgApacheLuceneUtilThreadInterruptedException))
+#define OrgApacheLuceneUtilThreadInterruptedException_
 
-#define JavaLangRuntimeException_RESTRICT 1
-#define JavaLangRuntimeException_INCLUDE 1
+#define RESTRICT_JavaLangRuntimeException 1
+#define INCLUDE_JavaLangRuntimeException 1
 #include "java/lang/RuntimeException.h"
 
 @class JavaLangInterruptedException;
 
+/*!
+ @brief Thrown by lucene on detecting that Thread.interrupt() had
+ been called.
+ Unlike Java's InterruptedException, this
+ exception is not checked..
+ */
 @interface OrgApacheLuceneUtilThreadInterruptedException : JavaLangRuntimeException
 
 #pragma mark Public
@@ -36,8 +42,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilThreadInterruptedException_initWithJav
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilThreadInterruptedException *new_OrgApacheLuceneUtilThreadInterruptedException_initWithJavaLangInterruptedException_(JavaLangInterruptedException *ie) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilThreadInterruptedException *create_OrgApacheLuceneUtilThreadInterruptedException_initWithJavaLangInterruptedException_(JavaLangInterruptedException *ie);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilThreadInterruptedException)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilThreadInterruptedException_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilThreadInterruptedException")

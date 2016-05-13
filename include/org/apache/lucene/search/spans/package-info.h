@@ -3,14 +3,77 @@
 //  source: ./core/src/java/org/apache/lucene/search/spans/package-info.java
 //
 
+/*!
+ @brief The calculus of spans.
+ <p>A span is a <code>&lt;doc,startPosition,endPosition&gt;</code> tuple  that is enumerated by
+ class <code>Spans</code>.
+ </p>
+ <p>The following span query operators are implemented:
+ <ul>
+ <li>A <code>SpanTermQuery</code> matches all spans
+ containing a particular <code>Term</code>.
+ This should not be used for terms that are indexed at position Integer.MAX_VALUE.
+ </li>
+ <li> A <code>SpanNearQuery</code> matches spans
+ which occur near one another, and can be used to implement things like
+ phrase search (when constructed from <code>org.apache.lucene.search.spans.SpanTermQuery</code>s)
+ and inter-phrase proximity (when constructed from other <code>org.apache.lucene.search.spans.SpanNearQuery</code>s).</li>
+ <li> A <code>SpanWithinQuery</code> matches spans
+ which occur inside of another spans. </li>
+ <li> A <code>SpanContainingQuery</code> matches spans
+ which contain another spans. </li>
+ <li>A <code>SpanOrQuery</code> merges spans from a
+ number of other <code>org.apache.lucene.search.spans.SpanQuery</code>s.</li>
+ <li>A <code>SpanNotQuery</code> removes spans
+ matching one <code>SpanQuery</code> which overlap (or comes
+ near) another.  This can be used, e.g., to implement within-paragraph
+ search.</li>
+ <li>A <code>SpanFirstQuery</code> matches spans
+ matching <code>q</code> whose end position is less than
+ <code>n</code>.  This can be used to constrain matches to the first
+ part of the document.</li>
+ <li>A <code>SpanPositionRangeQuery</code> is
+ a more general form of SpanFirstQuery that can constrain matches to arbitrary portions of the document.</li>
+ </ul>
+ In all cases, output spans are minimally inclusive.  In other words, a
+ span formed by matching a span in x and y starts at the lesser of the
+ two starts and ends at the greater of the two ends.
+ <p>For example, a span query which matches "John Kerry" within ten
+ words of "George Bush" within the first 100 words of the document
+ could be constructed with:
+ <pre class="prettyprint">
+ SpanQuery john   = new SpanTermQuery(new Term("content", "john"));
+ SpanQuery kerry  = new SpanTermQuery(new Term("content", "kerry"));
+ SpanQuery george = new SpanTermQuery(new Term("content", "george"));
+ SpanQuery bush   = new SpanTermQuery(new Term("content", "bush"));
+ SpanQuery johnKerry =
+ new SpanNearQuery(new SpanQuery[] {john, kerry}, 0, true);
+ SpanQuery georgeBush =
+ new SpanNearQuery(new SpanQuery[] {george, bush}, 0, true);
+ SpanQuery johnKerryNearGeorgeBush =
+ new SpanNearQuery(new SpanQuery[] {johnKerry, georgeBush}, 10, false);
+ SpanQuery johnKerryNearGeorgeBushAtStart =
+ new SpanFirstQuery(johnKerryNearGeorgeBush, 100);
+ 
+@endcode
+ <p>Span queries may be freely intermixed with other Lucene queries.
+ So, for example, the above query can be restricted to documents which
+ also use the word "iraq" with:
+ <pre class="prettyprint">
+ Query query = new BooleanQuery();
+ query.add(johnKerryNearGeorgeBushAtStart, true, false);
+ query.add(new TermQuery("content", "iraq"), true, false);
+ 
+@endcode
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSpansPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSpansPackage_info_RESTRICT
-#define OrgApacheLuceneSearchSpansPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneSearchSpansPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpansPackage_info 0
 #else
-#define OrgApacheLuceneSearchSpansPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSpansPackage_info 1
 #endif
-#undef OrgApacheLuceneSearchSpansPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSpansPackage_info
 
-#pragma pop_macro("OrgApacheLuceneSearchSpansPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSpansPackage_info")

@@ -13,6 +13,10 @@ __attribute__((unused)) static void OrgApacheLuceneUtilSorter_rotateWithInt_with
 
 @implementation OrgApacheLuceneUtilSorter
 
++ (jint)THRESHOLD {
+  return OrgApacheLuceneUtilSorter_THRESHOLD;
+}
+
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
   OrgApacheLuceneUtilSorter_init(self);
@@ -42,7 +46,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (void)checkRangeWithInt:(jint)from
                   withInt:(jint)to {
   if (to < from) {
-    @throw [new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$I", @"'to' must be >= 'from', got from=", from, @" and to=", to)) autorelease];
+    @throw new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$I", @"'to' must be >= 'from', got from=", from, @" and to=", to));
   }
 }
 

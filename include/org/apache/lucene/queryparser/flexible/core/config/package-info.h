@@ -3,14 +3,29 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/core/config/package-info.java
 //
 
+/*!
+ @brief Base classes used to configure the query processing.
+ <h2>Query Configuration Interfaces</h2>
+ <p>
+ The package <tt>org.apache.lucene.queryparser.flexible.config</tt> contains query configuration handler
+ abstract class that all config handlers should extend.
+ <p>
+ See <code>org.apache.lucene.queryparser.flexible.standard.config.StandardQueryConfigHandler</code> for a reference
+ implementation.
+ <p>
+ The <code>org.apache.lucene.queryparser.flexible.core.config.QueryConfigHandler</code> and <code>org.apache.lucene.queryparser.flexible.core.config.FieldConfig</code> are used in the processors to access config
+ information in a flexible and independent way.
+ See <code>org.apache.lucene.queryparser.flexible.standard.processors.TermRangeQueryNodeProcessor</code> for a 
+ reference implementation.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleCoreConfigPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleCoreConfigPackage_info_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleCoreConfigPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreConfigPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreConfigPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreConfigPackage_info 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleCoreConfigPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreConfigPackage_info 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleCoreConfigPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleCoreConfigPackage_info
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleCoreConfigPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleCoreConfigPackage_info")

@@ -3,14 +3,59 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/standard/package-info.java
 //
 
+/*!
+ @brief Fast, general-purpose grammar-based tokenizers.
+ <p>The <code>org.apache.lucene.analysis.standard</code> package contains three
+ fast grammar-based tokenizers constructed with JFlex:</p>
+ <ul>
+ <li><code>org.apache.lucene.analysis.standard.StandardTokenizer</code>:
+ as of Lucene 3.1, implements the Word Break rules from the Unicode Text 
+ Segmentation algorithm, as specified in 
+ <a href="http://unicode.org/reports/tr29/">Unicode Standard Annex #29</a>.
+ Unlike <code>UAX29URLEmailTokenizer</code>, URLs and email addresses are
+ <b>not</b> tokenized as single tokens, but are instead split up into 
+ tokens according to the UAX#29 word break rules.
+ <br>
+ <code>StandardAnalyzer</code> includes
+ <code>StandardTokenizer</code>,
+ <code>StandardFilter</code>, 
+ <code>LowerCaseFilter</code>
+ and <code>StopFilter</code>.
+ When the <code>Version</code> specified in the constructor is lower than 
+ 3.1, the <code>ClassicTokenizer</code>
+ implementation is invoked.</li>
+ <li><code>ClassicTokenizer</code>:
+ this class was formerly (prior to Lucene 3.1) named 
+ <code>StandardTokenizer</code>.  (Its tokenization rules are not
+ based on the Unicode Text Segmentation algorithm.)
+ <code>ClassicAnalyzer</code> includes
+ <code>ClassicTokenizer</code>,
+ <code>StandardFilter</code>, 
+ <code>LowerCaseFilter</code>
+ and <code>StopFilter</code>.
+ </li>
+ <li><code>UAX29URLEmailTokenizer</code>:
+ implements the Word Break rules from the Unicode Text Segmentation
+ algorithm, as specified in 
+ <a href="http://unicode.org/reports/tr29/">Unicode Standard Annex #29</a>.
+ URLs and email addresses are also tokenized according to the relevant RFCs.
+ <br>
+ <code>UAX29URLEmailAnalyzer</code> includes
+ <code>UAX29URLEmailTokenizer</code>,
+ <code>StandardFilter</code>,
+ <code>LowerCaseFilter</code>
+ and <code>StopFilter</code>.
+ </li>
+ </ul>
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisStandardPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisStandardPackage_info_RESTRICT
-#define OrgApacheLuceneAnalysisStandardPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisStandardPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisStandardPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisStandardPackage_info 0
 #else
-#define OrgApacheLuceneAnalysisStandardPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisStandardPackage_info 1
 #endif
-#undef OrgApacheLuceneAnalysisStandardPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisStandardPackage_info
 
-#pragma pop_macro("OrgApacheLuceneAnalysisStandardPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisStandardPackage_info")

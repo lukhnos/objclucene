@@ -12,10 +12,24 @@
 
 @interface OrgApacheLuceneUtilGeoProjectionUtils ()
 
+/*!
+ @brief Create the rotation matrix for converting Earth Centered Fixed to Easting Northing Up
+ @param originLon ENU origin longitude (in degrees)
+ @param originLat ENU origin latitude (in degrees)
+ @param phiMatrix reusable phi matrix result
+ @return phi rotation matrix
+ */
 + (IOSObjectArray *)createPhiTransformWithDouble:(jdouble)originLon
                                       withDouble:(jdouble)originLat
                                 withDoubleArray2:(IOSObjectArray *)phiMatrix;
 
+/*!
+ @brief Create the transposed rotation matrix for converting Easting Northing Up coordinates to Earth Centered Fixed
+ @param originLon ENU origin longitude (in degrees)
+ @param originLat ENU origin latitude (in degrees)
+ @param phiMatrix reusable phi rotation matrix result
+ @return transposed phi rotation matrix
+ */
 + (IOSObjectArray *)createTransposedPhiTransformWithDouble:(jdouble)originLon
                                                 withDouble:(jdouble)originLat
                                           withDoubleArray2:(IOSObjectArray *)phiMatrix;
@@ -28,9 +42,37 @@ __attribute__((unused)) static IOSObjectArray *OrgApacheLuceneUtilGeoProjectionU
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilGeoProjectionUtils)
 
-jdouble OrgApacheLuceneUtilGeoProjectionUtils_ECCENTRICITY_;
+jdouble OrgApacheLuceneUtilGeoProjectionUtils_ECCENTRICITY;
 
 @implementation OrgApacheLuceneUtilGeoProjectionUtils
+
++ (jdouble)SEMIMAJOR_AXIS {
+  return OrgApacheLuceneUtilGeoProjectionUtils_SEMIMAJOR_AXIS;
+}
+
++ (jdouble)FLATTENING {
+  return OrgApacheLuceneUtilGeoProjectionUtils_FLATTENING;
+}
+
++ (jdouble)SEMIMINOR_AXIS {
+  return OrgApacheLuceneUtilGeoProjectionUtils_SEMIMINOR_AXIS;
+}
+
++ (jdouble)ECCENTRICITY {
+  return OrgApacheLuceneUtilGeoProjectionUtils_ECCENTRICITY;
+}
+
++ (jdouble)PI_OVER_2 {
+  return OrgApacheLuceneUtilGeoProjectionUtils_PI_OVER_2;
+}
+
++ (jdouble)SEMIMAJOR_AXIS2 {
+  return OrgApacheLuceneUtilGeoProjectionUtils_SEMIMAJOR_AXIS2;
+}
+
++ (jdouble)SEMIMINOR_AXIS2 {
+  return OrgApacheLuceneUtilGeoProjectionUtils_SEMIMINOR_AXIS2;
+}
 
 + (IOSDoubleArray *)ecfToLLAWithDouble:(jdouble)x
                             withDouble:(jdouble)y
@@ -115,7 +157,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilGeoProjectionUtils class]) {
-    OrgApacheLuceneUtilGeoProjectionUtils_ECCENTRICITY_ = JavaLangStrictMath_sqrtWithDouble_((2.0 - OrgApacheLuceneUtilGeoProjectionUtils_FLATTENING) * OrgApacheLuceneUtilGeoProjectionUtils_FLATTENING);
+    OrgApacheLuceneUtilGeoProjectionUtils_ECCENTRICITY = JavaLangStrictMath_sqrtWithDouble_((2.0 - OrgApacheLuceneUtilGeoProjectionUtils_FLATTENING) * OrgApacheLuceneUtilGeoProjectionUtils_FLATTENING);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilGeoProjectionUtils)
   }
 }
@@ -131,13 +173,13 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "createPhiTransformWithDouble:withDouble:withDoubleArray2:", "createPhiTransform", "[[D", 0xa, NULL, NULL },
     { "createTransposedPhiTransformWithDouble:withDouble:withDoubleArray2:", "createTransposedPhiTransform", "[[D", 0xa, NULL, NULL },
     { "pointFromLonLatBearingWithDouble:withDouble:withDouble:withDouble:withDoubleArray:", "pointFromLonLatBearing", "[D", 0x19, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "GeoProjectionUtils", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "SEMIMAJOR_AXIS", "SEMIMAJOR_AXIS", 0x18, "D", NULL, NULL, .constantValue.asDouble = OrgApacheLuceneUtilGeoProjectionUtils_SEMIMAJOR_AXIS },
     { "FLATTENING", "FLATTENING", 0x18, "D", NULL, NULL, .constantValue.asDouble = OrgApacheLuceneUtilGeoProjectionUtils_FLATTENING },
     { "SEMIMINOR_AXIS", "SEMIMINOR_AXIS", 0x18, "D", NULL, NULL, .constantValue.asDouble = OrgApacheLuceneUtilGeoProjectionUtils_SEMIMINOR_AXIS },
-    { "ECCENTRICITY_", NULL, 0x18, "D", &OrgApacheLuceneUtilGeoProjectionUtils_ECCENTRICITY_, NULL, .constantValue.asLong = 0 },
+    { "ECCENTRICITY", "ECCENTRICITY", 0x18, "D", &OrgApacheLuceneUtilGeoProjectionUtils_ECCENTRICITY, NULL, .constantValue.asLong = 0 },
     { "PI_OVER_2", "PI_OVER_2", 0x18, "D", NULL, NULL, .constantValue.asDouble = OrgApacheLuceneUtilGeoProjectionUtils_PI_OVER_2 },
     { "SEMIMAJOR_AXIS2", "SEMIMAJOR_AXIS2", 0x18, "D", NULL, NULL, .constantValue.asDouble = OrgApacheLuceneUtilGeoProjectionUtils_SEMIMAJOR_AXIS2 },
     { "SEMIMINOR_AXIS2", "SEMIMINOR_AXIS2", 0x18, "D", NULL, NULL, .constantValue.asDouble = OrgApacheLuceneUtilGeoProjectionUtils_SEMIMINOR_AXIS2 },
@@ -156,21 +198,21 @@ IOSDoubleArray *OrgApacheLuceneUtilGeoProjectionUtils_ecfToLLAWithDouble_withDou
   jdouble ep2 = (OrgApacheLuceneUtilGeoProjectionUtils_SEMIMAJOR_AXIS2 - OrgApacheLuceneUtilGeoProjectionUtils_SEMIMINOR_AXIS2) / (OrgApacheLuceneUtilGeoProjectionUtils_SEMIMINOR_AXIS2);
   jdouble cos67P5 = 0.38268343236508977;
   if (lla == nil) {
-    lla = [IOSDoubleArray arrayWithLength:3];
+    lla = [IOSDoubleArray newArrayWithLength:3];
   }
   if (x != 0.0) {
-    *IOSDoubleArray_GetRef(nil_chk(lla), 0) = JavaLangStrictMath_atan2WithDouble_withDouble_(y, x);
+    *IOSDoubleArray_GetRef(lla, 0) = JavaLangStrictMath_atan2WithDouble_withDouble_(y, x);
   }
   else {
     if (y > 0) {
-      *IOSDoubleArray_GetRef(nil_chk(lla), 0) = OrgApacheLuceneUtilGeoProjectionUtils_PI_OVER_2;
+      *IOSDoubleArray_GetRef(lla, 0) = OrgApacheLuceneUtilGeoProjectionUtils_PI_OVER_2;
     }
     else if (y < 0) {
-      *IOSDoubleArray_GetRef(nil_chk(lla), 0) = -OrgApacheLuceneUtilGeoProjectionUtils_PI_OVER_2;
+      *IOSDoubleArray_GetRef(lla, 0) = -OrgApacheLuceneUtilGeoProjectionUtils_PI_OVER_2;
     }
     else {
       atPole = true;
-      *IOSDoubleArray_GetRef(nil_chk(lla), 0) = 0.0;
+      *IOSDoubleArray_GetRef(lla, 0) = 0.0;
       if (z > 0.0) {
         *IOSDoubleArray_GetRef(lla, 1) = OrgApacheLuceneUtilGeoProjectionUtils_PI_OVER_2;
       }
@@ -198,18 +240,18 @@ IOSDoubleArray *OrgApacheLuceneUtilGeoProjectionUtils_ecfToLLAWithDouble_withDou
   jdouble cosP1 = sum / s1;
   jdouble rn = OrgApacheLuceneUtilGeoProjectionUtils_SEMIMAJOR_AXIS / JavaLangStrictMath_sqrtWithDouble_(1.0 - e2 * sinP1 * sinP1);
   if (cosP1 >= cos67P5) {
-    *IOSDoubleArray_GetRef(nil_chk(lla), 2) = w / cosP1 - rn;
+    *IOSDoubleArray_GetRef(lla, 2) = w / cosP1 - rn;
   }
   else if (cosP1 <= -cos67P5) {
-    *IOSDoubleArray_GetRef(nil_chk(lla), 2) = w / -cosP1 - rn;
+    *IOSDoubleArray_GetRef(lla, 2) = w / -cosP1 - rn;
   }
   else {
-    *IOSDoubleArray_GetRef(nil_chk(lla), 2) = z / sinP1 + rn * (e2 - 1.0);
+    *IOSDoubleArray_GetRef(lla, 2) = z / sinP1 + rn * (e2 - 1.0);
   }
   if (!atPole) {
-    *IOSDoubleArray_GetRef(nil_chk(lla), 1) = JavaLangStrictMath_atanWithDouble_(sinP1 / cosP1);
+    *IOSDoubleArray_GetRef(lla, 1) = JavaLangStrictMath_atanWithDouble_(sinP1 / cosP1);
   }
-  *IOSDoubleArray_GetRef(nil_chk(lla), 0) = JavaLangStrictMath_toDegreesWithDouble_(IOSDoubleArray_Get(lla, 0));
+  *IOSDoubleArray_GetRef(lla, 0) = JavaLangStrictMath_toDegreesWithDouble_(IOSDoubleArray_Get(lla, 0));
   *IOSDoubleArray_GetRef(lla, 1) = JavaLangStrictMath_toDegreesWithDouble_(IOSDoubleArray_Get(lla, 1));
   return lla;
 }
@@ -223,7 +265,7 @@ IOSDoubleArray *OrgApacheLuceneUtilGeoProjectionUtils_llaToECFWithDouble_withDou
   jdouble cl = JavaLangStrictMath_cosWithDouble_(lat);
   jdouble ge2 = (OrgApacheLuceneUtilGeoProjectionUtils_SEMIMAJOR_AXIS2 - OrgApacheLuceneUtilGeoProjectionUtils_SEMIMINOR_AXIS2) / (OrgApacheLuceneUtilGeoProjectionUtils_SEMIMAJOR_AXIS2);
   if (ecf == nil) {
-    ecf = [IOSDoubleArray arrayWithLength:3];
+    ecf = [IOSDoubleArray newArrayWithLength:3];
   }
   if (lat < -OrgApacheLuceneUtilGeoProjectionUtils_PI_OVER_2 && lat > -1.001 * OrgApacheLuceneUtilGeoProjectionUtils_PI_OVER_2) {
     lat = -OrgApacheLuceneUtilGeoProjectionUtils_PI_OVER_2;
@@ -236,7 +278,7 @@ IOSDoubleArray *OrgApacheLuceneUtilGeoProjectionUtils_llaToECFWithDouble_withDou
     JreMinusAssignDoubleD(&lon, (2 * JavaLangStrictMath_PI));
   }
   jdouble rn = OrgApacheLuceneUtilGeoProjectionUtils_SEMIMAJOR_AXIS / JavaLangStrictMath_sqrtWithDouble_(1.0 - ge2 * s2);
-  *IOSDoubleArray_GetRef(nil_chk(ecf), 0) = (rn + alt) * cl * JavaLangStrictMath_cosWithDouble_(lon);
+  *IOSDoubleArray_GetRef(ecf, 0) = (rn + alt) * cl * JavaLangStrictMath_cosWithDouble_(lon);
   *IOSDoubleArray_GetRef(ecf, 1) = (rn + alt) * cl * JavaLangStrictMath_sinWithDouble_(lon);
   *IOSDoubleArray_GetRef(ecf, 2) = ((rn * (1.0 - ge2)) + alt) * sl;
   return ecf;
@@ -245,7 +287,7 @@ IOSDoubleArray *OrgApacheLuceneUtilGeoProjectionUtils_llaToECFWithDouble_withDou
 IOSDoubleArray *OrgApacheLuceneUtilGeoProjectionUtils_llaToENUWithDouble_withDouble_withDouble_withDouble_withDouble_withDouble_withDoubleArray_(jdouble lon, jdouble lat, jdouble alt, jdouble centerLon, jdouble centerLat, jdouble centerAlt, IOSDoubleArray *enu) {
   OrgApacheLuceneUtilGeoProjectionUtils_initialize();
   if (enu == nil) {
-    enu = [IOSDoubleArray arrayWithLength:3];
+    enu = [IOSDoubleArray newArrayWithLength:3];
   }
   IOSDoubleArray *ecf = OrgApacheLuceneUtilGeoProjectionUtils_llaToECFWithDouble_withDouble_withDouble_withDoubleArray_(lon, lat, alt, nil);
   return OrgApacheLuceneUtilGeoProjectionUtils_ecfToENUWithDouble_withDouble_withDouble_withDouble_withDouble_withDouble_withDoubleArray_(IOSDoubleArray_Get(nil_chk(ecf), 0), IOSDoubleArray_Get(ecf, 1), IOSDoubleArray_Get(ecf, 2), centerLon, centerLat, centerAlt, enu);
@@ -254,7 +296,7 @@ IOSDoubleArray *OrgApacheLuceneUtilGeoProjectionUtils_llaToENUWithDouble_withDou
 IOSDoubleArray *OrgApacheLuceneUtilGeoProjectionUtils_enuToLLAWithDouble_withDouble_withDouble_withDouble_withDouble_withDouble_withDoubleArray_(jdouble x, jdouble y, jdouble z, jdouble centerLon, jdouble centerLat, jdouble centerAlt, IOSDoubleArray *lla) {
   OrgApacheLuceneUtilGeoProjectionUtils_initialize();
   if (lla == nil) {
-    lla = [IOSDoubleArray arrayWithLength:3];
+    lla = [IOSDoubleArray newArrayWithLength:3];
   }
   lla = OrgApacheLuceneUtilGeoProjectionUtils_enuToECFWithDouble_withDouble_withDouble_withDouble_withDouble_withDouble_withDoubleArray_(x, y, z, centerLon, centerLat, centerAlt, lla);
   return OrgApacheLuceneUtilGeoProjectionUtils_ecfToLLAWithDouble_withDouble_withDouble_withDoubleArray_(IOSDoubleArray_Get(nil_chk(lla), 0), IOSDoubleArray_Get(lla, 1), IOSDoubleArray_Get(lla, 2), lla);
@@ -263,15 +305,15 @@ IOSDoubleArray *OrgApacheLuceneUtilGeoProjectionUtils_enuToLLAWithDouble_withDou
 IOSDoubleArray *OrgApacheLuceneUtilGeoProjectionUtils_ecfToENUWithDouble_withDouble_withDouble_withDouble_withDouble_withDouble_withDoubleArray_(jdouble x, jdouble y, jdouble z, jdouble centerLon, jdouble centerLat, jdouble centerAlt, IOSDoubleArray *enu) {
   OrgApacheLuceneUtilGeoProjectionUtils_initialize();
   if (enu == nil) {
-    enu = [IOSDoubleArray arrayWithLength:3];
+    enu = [IOSDoubleArray newArrayWithLength:3];
   }
   IOSObjectArray *phi = OrgApacheLuceneUtilGeoProjectionUtils_createPhiTransformWithDouble_withDouble_withDoubleArray2_(centerLon, centerLat, nil);
   IOSDoubleArray *originECF = OrgApacheLuceneUtilGeoProjectionUtils_llaToECFWithDouble_withDouble_withDouble_withDoubleArray_(centerLon, centerLat, centerAlt, nil);
-  IOSDoubleArray *originENU = [IOSDoubleArray arrayWithLength:3];
+  IOSDoubleArray *originENU = [IOSDoubleArray newArrayWithLength:3];
   *IOSDoubleArray_GetRef(originENU, 0) = ((IOSDoubleArray_Get(nil_chk(IOSObjectArray_Get(nil_chk(phi), 0)), 0) * IOSDoubleArray_Get(nil_chk(originECF), 0)) + (IOSDoubleArray_Get(nil_chk(IOSObjectArray_Get(phi, 0)), 1) * IOSDoubleArray_Get(originECF, 1)) + (IOSDoubleArray_Get(nil_chk(IOSObjectArray_Get(phi, 0)), 2) * IOSDoubleArray_Get(originECF, 2)));
   *IOSDoubleArray_GetRef(originENU, 1) = ((IOSDoubleArray_Get(nil_chk(IOSObjectArray_Get(phi, 1)), 0) * IOSDoubleArray_Get(originECF, 0)) + (IOSDoubleArray_Get(nil_chk(IOSObjectArray_Get(phi, 1)), 1) * IOSDoubleArray_Get(originECF, 1)) + (IOSDoubleArray_Get(nil_chk(IOSObjectArray_Get(phi, 1)), 2) * IOSDoubleArray_Get(originECF, 2)));
   *IOSDoubleArray_GetRef(originENU, 2) = ((IOSDoubleArray_Get(nil_chk(IOSObjectArray_Get(phi, 2)), 0) * IOSDoubleArray_Get(originECF, 0)) + (IOSDoubleArray_Get(nil_chk(IOSObjectArray_Get(phi, 2)), 1) * IOSDoubleArray_Get(originECF, 1)) + (IOSDoubleArray_Get(nil_chk(IOSObjectArray_Get(phi, 2)), 2) * IOSDoubleArray_Get(originECF, 2)));
-  *IOSDoubleArray_GetRef(nil_chk(enu), 0) = ((IOSDoubleArray_Get(nil_chk(IOSObjectArray_Get(phi, 0)), 0) * x) + (IOSDoubleArray_Get(nil_chk(IOSObjectArray_Get(phi, 0)), 1) * y) + (IOSDoubleArray_Get(nil_chk(IOSObjectArray_Get(phi, 0)), 2) * z)) - IOSDoubleArray_Get(originENU, 0);
+  *IOSDoubleArray_GetRef(enu, 0) = ((IOSDoubleArray_Get(nil_chk(IOSObjectArray_Get(phi, 0)), 0) * x) + (IOSDoubleArray_Get(nil_chk(IOSObjectArray_Get(phi, 0)), 1) * y) + (IOSDoubleArray_Get(nil_chk(IOSObjectArray_Get(phi, 0)), 2) * z)) - IOSDoubleArray_Get(originENU, 0);
   *IOSDoubleArray_GetRef(enu, 1) = ((IOSDoubleArray_Get(nil_chk(IOSObjectArray_Get(phi, 1)), 0) * x) + (IOSDoubleArray_Get(nil_chk(IOSObjectArray_Get(phi, 1)), 1) * y) + (IOSDoubleArray_Get(nil_chk(IOSObjectArray_Get(phi, 1)), 2) * z)) - IOSDoubleArray_Get(originENU, 1);
   *IOSDoubleArray_GetRef(enu, 2) = ((IOSDoubleArray_Get(nil_chk(IOSObjectArray_Get(phi, 2)), 0) * x) + (IOSDoubleArray_Get(nil_chk(IOSObjectArray_Get(phi, 2)), 1) * y) + (IOSDoubleArray_Get(nil_chk(IOSObjectArray_Get(phi, 2)), 2) * z)) - IOSDoubleArray_Get(originENU, 2);
   return enu;
@@ -280,11 +322,11 @@ IOSDoubleArray *OrgApacheLuceneUtilGeoProjectionUtils_ecfToENUWithDouble_withDou
 IOSDoubleArray *OrgApacheLuceneUtilGeoProjectionUtils_enuToECFWithDouble_withDouble_withDouble_withDouble_withDouble_withDouble_withDoubleArray_(jdouble x, jdouble y, jdouble z, jdouble centerLon, jdouble centerLat, jdouble centerAlt, IOSDoubleArray *ecf) {
   OrgApacheLuceneUtilGeoProjectionUtils_initialize();
   if (ecf == nil) {
-    ecf = [IOSDoubleArray arrayWithLength:3];
+    ecf = [IOSDoubleArray newArrayWithLength:3];
   }
   IOSObjectArray *phi = OrgApacheLuceneUtilGeoProjectionUtils_createTransposedPhiTransformWithDouble_withDouble_withDoubleArray2_(centerLon, centerLat, nil);
   IOSDoubleArray *ecfOrigin = OrgApacheLuceneUtilGeoProjectionUtils_llaToECFWithDouble_withDouble_withDouble_withDoubleArray_(centerLon, centerLat, centerAlt, nil);
-  *IOSDoubleArray_GetRef(nil_chk(ecf), 0) = (IOSDoubleArray_Get(nil_chk(IOSObjectArray_Get(nil_chk(phi), 0)), 0) * x + IOSDoubleArray_Get(nil_chk(IOSObjectArray_Get(phi, 0)), 1) * y + IOSDoubleArray_Get(nil_chk(IOSObjectArray_Get(phi, 0)), 2) * z) + IOSDoubleArray_Get(nil_chk(ecfOrigin), 0);
+  *IOSDoubleArray_GetRef(ecf, 0) = (IOSDoubleArray_Get(nil_chk(IOSObjectArray_Get(nil_chk(phi), 0)), 0) * x + IOSDoubleArray_Get(nil_chk(IOSObjectArray_Get(phi, 0)), 1) * y + IOSDoubleArray_Get(nil_chk(IOSObjectArray_Get(phi, 0)), 2) * z) + IOSDoubleArray_Get(nil_chk(ecfOrigin), 0);
   *IOSDoubleArray_GetRef(ecf, 1) = (IOSDoubleArray_Get(nil_chk(IOSObjectArray_Get(phi, 1)), 0) * x + IOSDoubleArray_Get(nil_chk(IOSObjectArray_Get(phi, 1)), 1) * y + IOSDoubleArray_Get(nil_chk(IOSObjectArray_Get(phi, 1)), 2) * z) + IOSDoubleArray_Get(ecfOrigin, 1);
   *IOSDoubleArray_GetRef(ecf, 2) = (IOSDoubleArray_Get(nil_chk(IOSObjectArray_Get(phi, 2)), 0) * x + IOSDoubleArray_Get(nil_chk(IOSObjectArray_Get(phi, 2)), 1) * y + IOSDoubleArray_Get(nil_chk(IOSObjectArray_Get(phi, 2)), 2) * z) + IOSDoubleArray_Get(ecfOrigin, 2);
   return ecf;
@@ -293,7 +335,7 @@ IOSDoubleArray *OrgApacheLuceneUtilGeoProjectionUtils_enuToECFWithDouble_withDou
 IOSObjectArray *OrgApacheLuceneUtilGeoProjectionUtils_createPhiTransformWithDouble_withDouble_withDoubleArray2_(jdouble originLon, jdouble originLat, IOSObjectArray *phiMatrix) {
   OrgApacheLuceneUtilGeoProjectionUtils_initialize();
   if (phiMatrix == nil) {
-    phiMatrix = [IOSDoubleArray arrayWithDimensions:2 lengths:(jint[]){ 3, 3 }];
+    phiMatrix = [IOSDoubleArray newArrayWithDimensions:2 lengths:(jint[]){ 3, 3 }];
   }
   originLon = JavaLangStrictMath_toRadiansWithDouble_(originLon);
   originLat = JavaLangStrictMath_toRadiansWithDouble_(originLat);
@@ -301,7 +343,7 @@ IOSObjectArray *OrgApacheLuceneUtilGeoProjectionUtils_createPhiTransformWithDoub
   jdouble cLon = JavaLangStrictMath_cosWithDouble_(originLon);
   jdouble sLat = JavaLangStrictMath_sinWithDouble_(originLat);
   jdouble cLat = JavaLangStrictMath_cosWithDouble_(originLat);
-  *IOSDoubleArray_GetRef(nil_chk(IOSObjectArray_Get(nil_chk(phiMatrix), 0)), 0) = -sLon;
+  *IOSDoubleArray_GetRef(nil_chk(IOSObjectArray_Get(phiMatrix, 0)), 0) = -sLon;
   *IOSDoubleArray_GetRef(nil_chk(IOSObjectArray_Get(phiMatrix, 0)), 1) = cLon;
   *IOSDoubleArray_GetRef(nil_chk(IOSObjectArray_Get(phiMatrix, 0)), 2) = 0.0;
   *IOSDoubleArray_GetRef(nil_chk(IOSObjectArray_Get(phiMatrix, 1)), 0) = -sLat * cLon;
@@ -316,7 +358,7 @@ IOSObjectArray *OrgApacheLuceneUtilGeoProjectionUtils_createPhiTransformWithDoub
 IOSObjectArray *OrgApacheLuceneUtilGeoProjectionUtils_createTransposedPhiTransformWithDouble_withDouble_withDoubleArray2_(jdouble originLon, jdouble originLat, IOSObjectArray *phiMatrix) {
   OrgApacheLuceneUtilGeoProjectionUtils_initialize();
   if (phiMatrix == nil) {
-    phiMatrix = [IOSDoubleArray arrayWithDimensions:2 lengths:(jint[]){ 3, 3 }];
+    phiMatrix = [IOSDoubleArray newArrayWithDimensions:2 lengths:(jint[]){ 3, 3 }];
   }
   originLon = JavaLangStrictMath_toRadiansWithDouble_(originLon);
   originLat = JavaLangStrictMath_toRadiansWithDouble_(originLat);
@@ -324,7 +366,7 @@ IOSObjectArray *OrgApacheLuceneUtilGeoProjectionUtils_createTransposedPhiTransfo
   jdouble cLat = JavaLangStrictMath_cosWithDouble_(originLat);
   jdouble sLon = JavaLangStrictMath_sinWithDouble_(originLon);
   jdouble cLon = JavaLangStrictMath_cosWithDouble_(originLon);
-  *IOSDoubleArray_GetRef(nil_chk(IOSObjectArray_Get(nil_chk(phiMatrix), 0)), 0) = -sLon;
+  *IOSDoubleArray_GetRef(nil_chk(IOSObjectArray_Get(phiMatrix, 0)), 0) = -sLon;
   *IOSDoubleArray_GetRef(nil_chk(IOSObjectArray_Get(phiMatrix, 1)), 0) = cLon;
   *IOSDoubleArray_GetRef(nil_chk(IOSObjectArray_Get(phiMatrix, 2)), 0) = 0.0;
   *IOSDoubleArray_GetRef(nil_chk(IOSObjectArray_Get(phiMatrix, 0)), 1) = -sLat * cLon;
@@ -339,7 +381,7 @@ IOSObjectArray *OrgApacheLuceneUtilGeoProjectionUtils_createTransposedPhiTransfo
 IOSDoubleArray *OrgApacheLuceneUtilGeoProjectionUtils_pointFromLonLatBearingWithDouble_withDouble_withDouble_withDouble_withDoubleArray_(jdouble lon, jdouble lat, jdouble bearing, jdouble dist, IOSDoubleArray *pt) {
   OrgApacheLuceneUtilGeoProjectionUtils_initialize();
   if (pt == nil) {
-    pt = [IOSDoubleArray arrayWithLength:2];
+    pt = [IOSDoubleArray newArrayWithLength:2];
   }
   jdouble alpha1 = JavaLangStrictMath_toRadiansWithDouble_(bearing);
   jdouble cosA1 = JavaLangStrictMath_cosWithDouble_(alpha1);
@@ -370,7 +412,7 @@ IOSDoubleArray *OrgApacheLuceneUtilGeoProjectionUtils_pointFromLonLatBearingWith
   jdouble lambda = JavaLangStrictMath_atan2WithDouble_withDouble_(sinSigma * sinA1, cosU1 * cosSigma - sinU1 * sinSigma * cosA1);
   jdouble c = OrgApacheLuceneUtilGeoProjectionUtils_FLATTENING / 16 * cosSqAlpha * (4 + OrgApacheLuceneUtilGeoProjectionUtils_FLATTENING * (4 - 3 * cosSqAlpha));
   jdouble lam = lambda - (1 - c) * OrgApacheLuceneUtilGeoProjectionUtils_FLATTENING * sinAlpha * (sigma + c * sinSigma * (cos2SigmaM + c * cosSigma * (-1 + 2 * cos2SigmaM * cos2SigmaM)));
-  *IOSDoubleArray_GetRef(nil_chk(pt), 0) = lon + JavaLangStrictMath_toDegreesWithDouble_(lam);
+  *IOSDoubleArray_GetRef(pt, 0) = lon + JavaLangStrictMath_toDegreesWithDouble_(lam);
   *IOSDoubleArray_GetRef(pt, 1) = JavaLangStrictMath_toDegreesWithDouble_(lat2);
   return pt;
 }
@@ -380,9 +422,11 @@ void OrgApacheLuceneUtilGeoProjectionUtils_init(OrgApacheLuceneUtilGeoProjection
 }
 
 OrgApacheLuceneUtilGeoProjectionUtils *new_OrgApacheLuceneUtilGeoProjectionUtils_init() {
-  OrgApacheLuceneUtilGeoProjectionUtils *self = [OrgApacheLuceneUtilGeoProjectionUtils alloc];
-  OrgApacheLuceneUtilGeoProjectionUtils_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilGeoProjectionUtils, init)
+}
+
+OrgApacheLuceneUtilGeoProjectionUtils *create_OrgApacheLuceneUtilGeoProjectionUtils_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilGeoProjectionUtils, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilGeoProjectionUtils)

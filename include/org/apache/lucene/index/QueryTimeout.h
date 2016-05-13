@@ -5,19 +5,27 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexQueryTimeout_INCLUDE_ALL")
-#if OrgApacheLuceneIndexQueryTimeout_RESTRICT
-#define OrgApacheLuceneIndexQueryTimeout_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexQueryTimeout")
+#ifdef RESTRICT_OrgApacheLuceneIndexQueryTimeout
+#define INCLUDE_ALL_OrgApacheLuceneIndexQueryTimeout 0
 #else
-#define OrgApacheLuceneIndexQueryTimeout_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexQueryTimeout 1
 #endif
-#undef OrgApacheLuceneIndexQueryTimeout_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexQueryTimeout
 
-#if !defined (_OrgApacheLuceneIndexQueryTimeout_) && (OrgApacheLuceneIndexQueryTimeout_INCLUDE_ALL || OrgApacheLuceneIndexQueryTimeout_INCLUDE)
-#define _OrgApacheLuceneIndexQueryTimeout_
+#if !defined (OrgApacheLuceneIndexQueryTimeout_) && (INCLUDE_ALL_OrgApacheLuceneIndexQueryTimeout || defined(INCLUDE_OrgApacheLuceneIndexQueryTimeout))
+#define OrgApacheLuceneIndexQueryTimeout_
 
+/*!
+ @brief Base for query timeout implementations, which will provide a <code>shouldExit()</code> method,
+ used with <code>ExitableDirectoryReader</code>.
+ */
 @protocol OrgApacheLuceneIndexQueryTimeout < NSObject, JavaObject >
 
+/*!
+ @brief Called from <code>ExitableDirectoryReader.ExitableTermsEnum.next()</code> 
+ to determine whether to stop processing a query.
+ */
 - (jboolean)shouldExit;
 
 @end
@@ -28,4 +36,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexQueryTimeout)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexQueryTimeout_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexQueryTimeout")

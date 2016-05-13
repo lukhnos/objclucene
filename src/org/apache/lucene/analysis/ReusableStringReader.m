@@ -23,7 +23,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisReusableStringReader, s_, NSString *)
 @implementation OrgApacheLuceneAnalysisReusableStringReader
 
 - (void)setValueWithNSString:(NSString *)s {
-  JreStrongAssign(&self->s_, s);
+  self->s_ = s;
   self->size_ = ((jint) [((NSString *) nil_chk(s)) length]);
   self->pos_ = 0;
 }
@@ -33,7 +33,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisReusableStringReader, s_, NSString *)
     return [((NSString *) nil_chk(s_)) charAtWithInt:pos_++];
   }
   else {
-    JreStrongAssign(&s_, nil);
+    s_ = nil;
     return -1;
   }
 }
@@ -48,14 +48,14 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisReusableStringReader, s_, NSString *)
     return len;
   }
   else {
-    JreStrongAssign(&s_, nil);
+    s_ = nil;
     return -1;
   }
 }
 
 - (void)close {
   pos_ = size_;
-  JreStrongAssign(&s_, nil);
+  s_ = nil;
 }
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -65,18 +65,13 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (void)dealloc {
-  RELEASE_(s_);
-  [super dealloc];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "setValueWithNSString:", "setValue", "V", 0x0, NULL, NULL },
     { "read", NULL, "I", 0x1, NULL, NULL },
     { "readWithCharArray:withInt:withInt:", "read", "I", 0x1, NULL, NULL },
     { "close", NULL, "V", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x0, NULL, NULL },
+    { "init", "ReusableStringReader", NULL, 0x0, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "pos_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
@@ -93,13 +88,15 @@ void OrgApacheLuceneAnalysisReusableStringReader_init(OrgApacheLuceneAnalysisReu
   JavaIoReader_init(self);
   self->pos_ = 0;
   self->size_ = 0;
-  JreStrongAssign(&self->s_, nil);
+  self->s_ = nil;
 }
 
 OrgApacheLuceneAnalysisReusableStringReader *new_OrgApacheLuceneAnalysisReusableStringReader_init() {
-  OrgApacheLuceneAnalysisReusableStringReader *self = [OrgApacheLuceneAnalysisReusableStringReader alloc];
-  OrgApacheLuceneAnalysisReusableStringReader_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisReusableStringReader, init)
+}
+
+OrgApacheLuceneAnalysisReusableStringReader *create_OrgApacheLuceneAnalysisReusableStringReader_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisReusableStringReader, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisReusableStringReader)

@@ -3,14 +3,17 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/synonym/package-info.java
 //
 
+/*!
+ @brief Analysis components for Synonyms.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisSynonymPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisSynonymPackage_info_RESTRICT
-#define OrgApacheLuceneAnalysisSynonymPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisSynonymPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisSynonymPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisSynonymPackage_info 0
 #else
-#define OrgApacheLuceneAnalysisSynonymPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisSynonymPackage_info 1
 #endif
-#undef OrgApacheLuceneAnalysisSynonymPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisSynonymPackage_info
 
-#pragma pop_macro("OrgApacheLuceneAnalysisSynonymPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisSynonymPackage_info")

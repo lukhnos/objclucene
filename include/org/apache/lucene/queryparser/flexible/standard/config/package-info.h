@@ -3,14 +3,24 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/standard/config/package-info.java
 //
 
+/*!
+ @brief Standard Lucene Query Configuration.
+ <h2>Standard Lucene Query Configuration</h2>
+ <p>
+ The package org.apache.lucene.queryparser.flexible.standard.config contains the Lucene
+ query configuration handler (StandardQueryConfigHandler). This configuration
+ handler reproduces almost everything that could be set on the old query parser.
+ <p>
+ StandardQueryConfigHandler is the class that should be used to configure the StandardQueryNodeProcessorPipeline.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleStandardConfigPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleStandardConfigPackage_info_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleStandardConfigPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardConfigPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardConfigPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardConfigPackage_info 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleStandardConfigPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardConfigPackage_info 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleStandardConfigPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardConfigPackage_info
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleStandardConfigPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardConfigPackage_info")

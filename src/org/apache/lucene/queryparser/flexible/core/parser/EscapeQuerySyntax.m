@@ -5,25 +5,23 @@
 
 #include "IOSClass.h"
 #include "J2ObjC_source.h"
-#include "java/lang/CharSequence.h"
 #include "java/lang/Enum.h"
 #include "java/lang/IllegalArgumentException.h"
-#include "java/util/Locale.h"
 #include "org/apache/lucene/queryparser/flexible/core/parser/EscapeQuerySyntax.h"
 
 @interface OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax : NSObject
 
 @end
 
-__attribute__((unused)) static void OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum_initWithNSString_withInt_(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum *self, NSString *__name, jint __ordinal);
+__attribute__((unused)) static void OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_initWithNSString_withInt_(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type *self, NSString *__name, jint __ordinal);
 
-__attribute__((unused)) static OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum *new_OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum_initWithNSString_withInt_(NSString *__name, jint __ordinal) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type *new_OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_initWithNSString_withInt_(NSString *__name, jint __ordinal) NS_RETURNS_RETAINED;
 
 @implementation OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "escapeWithJavaLangCharSequence:withJavaUtilLocale:withOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum:", "escape", "Ljava.lang.CharSequence;", 0x401, NULL, NULL },
+    { "escapeWithJavaLangCharSequence:withJavaUtilLocale:withOrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type:", "escape", "Ljava.lang.CharSequence;", 0x401, NULL, NULL },
   };
   static const char *inner_classes[] = {"Lorg.apache.lucene.queryparser.flexible.core.parser.EscapeQuerySyntax$Type;"};
   static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax = { 2, "EscapeQuerySyntax", "org.apache.lucene.queryparser.flexible.core.parser", NULL, 0x609, 1, methods, 0, NULL, 0, NULL, 1, inner_classes, NULL, NULL };
@@ -34,75 +32,87 @@ __attribute__((unused)) static OrgApacheLuceneQueryparserFlexibleCoreParserEscap
 
 J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax)
 
-J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum)
+J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type)
 
-OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum *OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum_values_[2];
+OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type *OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_values_[2];
 
-@implementation OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum
+@implementation OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type
 
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal {
-  OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
++ (OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type *)STRING {
+  return JreEnum(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type, STRING);
 }
 
-IOSObjectArray *OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum_values() {
-  OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum_initialize();
-  return [IOSObjectArray arrayWithObjects:OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum_values_ count:2 type:OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum_class_()];
++ (OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type *)NORMAL {
+  return JreEnum(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type, NORMAL);
 }
 
 + (IOSObjectArray *)values {
-  return OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum_values();
+  return OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_values();
 }
 
-+ (OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum *)valueOfWithNSString:(NSString *)name {
-  return OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum_valueOfWithNSString_(name);
++ (OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type *)valueOfWithNSString:(NSString *)name {
+  return OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_valueOfWithNSString_(name);
 }
 
-OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum *OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum_valueOfWithNSString_(NSString *name) {
-  OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum_initialize();
-  for (int i = 0; i < 2; i++) {
-    OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum *e = OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum_values_[i];
-    if ([name isEqual:[e name]]) {
-      return e;
-    }
-  }
-  @throw [[[JavaLangIllegalArgumentException alloc] initWithNSString:name] autorelease];
-  return nil;
+- (OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_Enum)toNSEnum {
+  return (OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_Enum)[self ordinal];
 }
 
 - (id)copyWithZone:(NSZone *)zone {
-  return [self retain];
+  return self;
 }
 
 + (void)initialize {
-  if (self == [OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum class]) {
-    OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum_STRING = new_OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum_initWithNSString_withInt_(@"STRING", 0);
-    OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum_NORMAL = new_OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum_initWithNSString_withInt_(@"NORMAL", 1);
-    J2OBJC_SET_INITIALIZED(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum)
+  if (self == [OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type class]) {
+    JreEnum(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type, STRING) = new_OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_initWithNSString_withInt_(@"STRING", 0);
+    JreEnum(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type, NORMAL) = new_OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_initWithNSString_withInt_(@"NORMAL", 1);
+    J2OBJC_SET_INITIALIZED(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type)
   }
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcFieldInfo fields[] = {
-    { "STRING", "STRING", 0x4019, "Lorg.apache.lucene.queryparser.flexible.core.parser.EscapeQuerySyntax$Type;", &OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum_STRING, NULL, .constantValue.asLong = 0 },
-    { "NORMAL", "NORMAL", 0x4019, "Lorg.apache.lucene.queryparser.flexible.core.parser.EscapeQuerySyntax$Type;", &OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum_NORMAL, NULL, .constantValue.asLong = 0 },
+    { "STRING", "STRING", 0x4019, "Lorg.apache.lucene.queryparser.flexible.core.parser.EscapeQuerySyntax$Type;", &JreEnum(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type, STRING), NULL, .constantValue.asLong = 0 },
+    { "NORMAL", "NORMAL", 0x4019, "Lorg.apache.lucene.queryparser.flexible.core.parser.EscapeQuerySyntax$Type;", &JreEnum(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type, NORMAL), NULL, .constantValue.asLong = 0 },
   };
   static const char *superclass_type_args[] = {"Lorg.apache.lucene.queryparser.flexible.core.parser.EscapeQuerySyntax$Type;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum = { 2, "Type", "org.apache.lucene.queryparser.flexible.core.parser", "EscapeQuerySyntax", 0x4019, 0, NULL, 2, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/queryparser/flexible/core/parser/EscapeQuerySyntax$Type;>;" };
-  return &_OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum;
+  static const J2ObjcClassInfo _OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type = { 2, "Type", "org.apache.lucene.queryparser.flexible.core.parser", "EscapeQuerySyntax", 0x4019, 0, NULL, 2, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/queryparser/flexible/core/parser/EscapeQuerySyntax$Type;>;" };
+  return &_OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type;
 }
 
 @end
 
-void OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum_initWithNSString_withInt_(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum *self, NSString *__name, jint __ordinal) {
+void OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_initWithNSString_withInt_(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type *self, NSString *__name, jint __ordinal) {
   JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
 }
 
-OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum *new_OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum_initWithNSString_withInt_(NSString *__name, jint __ordinal) {
-  OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum *self = [OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum alloc];
-  OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
+OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type *new_OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_initWithNSString_withInt_(NSString *__name, jint __ordinal) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type, initWithNSString_withInt_, __name, __ordinal)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_TypeEnum)
+IOSObjectArray *OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_values() {
+  OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_initialize();
+  return [IOSObjectArray arrayWithObjects:OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_values_ count:2 type:OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_class_()];
+}
+
+OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type *OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_valueOfWithNSString_(NSString *name) {
+  OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_initialize();
+  for (int i = 0; i < 2; i++) {
+    OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type *e = OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_values_[i];
+    if ([name isEqual:[e name]]) {
+      return e;
+    }
+  }
+  @throw [[JavaLangIllegalArgumentException alloc] initWithNSString:name];
+  return nil;
+}
+
+OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type *OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_fromOrdinal(NSUInteger ordinal) {
+  OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_initialize();
+  if (ordinal >= 2) {
+    return nil;
+  }
+  return OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_values_[ordinal];
+}
+
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type)

@@ -60,7 +60,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "decodeFloatWithByteArray:", "decodeFloat", "F", 0x9, NULL, NULL },
     { "decodeFloatWithByteArray:withInt:", "decodeFloat", "F", 0x19, NULL, NULL },
     { "decodeIntWithByteArray:withInt:", "decodeInt", "I", 0x19, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "PayloadHelper", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisPayloadsPayloadHelper = { 2, "PayloadHelper", "org.apache.lucene.analysis.payloads", NULL, 0x1, 8, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisPayloadsPayloadHelper;
@@ -70,7 +70,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 IOSByteArray *OrgApacheLuceneAnalysisPayloadsPayloadHelper_encodeFloatWithFloat_(jfloat payload) {
   OrgApacheLuceneAnalysisPayloadsPayloadHelper_initialize();
-  return OrgApacheLuceneAnalysisPayloadsPayloadHelper_encodeFloatWithFloat_withByteArray_withInt_(payload, [IOSByteArray arrayWithLength:4], 0);
+  return OrgApacheLuceneAnalysisPayloadsPayloadHelper_encodeFloatWithFloat_withByteArray_withInt_(payload, [IOSByteArray newArrayWithLength:4], 0);
 }
 
 IOSByteArray *OrgApacheLuceneAnalysisPayloadsPayloadHelper_encodeFloatWithFloat_withByteArray_withInt_(jfloat payload, IOSByteArray *data, jint offset) {
@@ -80,7 +80,7 @@ IOSByteArray *OrgApacheLuceneAnalysisPayloadsPayloadHelper_encodeFloatWithFloat_
 
 IOSByteArray *OrgApacheLuceneAnalysisPayloadsPayloadHelper_encodeIntWithInt_(jint payload) {
   OrgApacheLuceneAnalysisPayloadsPayloadHelper_initialize();
-  return OrgApacheLuceneAnalysisPayloadsPayloadHelper_encodeIntWithInt_withByteArray_withInt_(payload, [IOSByteArray arrayWithLength:4], 0);
+  return OrgApacheLuceneAnalysisPayloadsPayloadHelper_encodeIntWithInt_withByteArray_withInt_(payload, [IOSByteArray newArrayWithLength:4], 0);
 }
 
 IOSByteArray *OrgApacheLuceneAnalysisPayloadsPayloadHelper_encodeIntWithInt_withByteArray_withInt_(jint payload, IOSByteArray *data, jint offset) {
@@ -112,9 +112,11 @@ void OrgApacheLuceneAnalysisPayloadsPayloadHelper_init(OrgApacheLuceneAnalysisPa
 }
 
 OrgApacheLuceneAnalysisPayloadsPayloadHelper *new_OrgApacheLuceneAnalysisPayloadsPayloadHelper_init() {
-  OrgApacheLuceneAnalysisPayloadsPayloadHelper *self = [OrgApacheLuceneAnalysisPayloadsPayloadHelper alloc];
-  OrgApacheLuceneAnalysisPayloadsPayloadHelper_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisPayloadsPayloadHelper, init)
+}
+
+OrgApacheLuceneAnalysisPayloadsPayloadHelper *create_OrgApacheLuceneAnalysisPayloadsPayloadHelper_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisPayloadsPayloadHelper, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisPayloadsPayloadHelper)

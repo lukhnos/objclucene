@@ -4,7 +4,6 @@
 //
 
 #include "J2ObjC_source.h"
-#include "java/lang/CharSequence.h"
 #include "org/apache/lucene/queryparser/flexible/core/nodes/TextableQueryNode.h"
 
 @interface OrgApacheLuceneQueryparserFlexibleCoreNodesTextableQueryNode : NSObject

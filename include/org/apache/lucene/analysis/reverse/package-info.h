@@ -3,14 +3,17 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/reverse/package-info.java
 //
 
+/*!
+ @brief Filter to reverse token text.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisReversePackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisReversePackage_info_RESTRICT
-#define OrgApacheLuceneAnalysisReversePackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisReversePackage_info")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisReversePackage_info
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisReversePackage_info 0
 #else
-#define OrgApacheLuceneAnalysisReversePackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisReversePackage_info 1
 #endif
-#undef OrgApacheLuceneAnalysisReversePackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisReversePackage_info
 
-#pragma pop_macro("OrgApacheLuceneAnalysisReversePackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisReversePackage_info")

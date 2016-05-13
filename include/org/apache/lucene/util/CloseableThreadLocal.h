@@ -5,21 +5,45 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilCloseableThreadLocal_INCLUDE_ALL")
-#if OrgApacheLuceneUtilCloseableThreadLocal_RESTRICT
-#define OrgApacheLuceneUtilCloseableThreadLocal_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilCloseableThreadLocal")
+#ifdef RESTRICT_OrgApacheLuceneUtilCloseableThreadLocal
+#define INCLUDE_ALL_OrgApacheLuceneUtilCloseableThreadLocal 0
 #else
-#define OrgApacheLuceneUtilCloseableThreadLocal_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilCloseableThreadLocal 1
 #endif
-#undef OrgApacheLuceneUtilCloseableThreadLocal_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilCloseableThreadLocal
 
-#if !defined (_OrgApacheLuceneUtilCloseableThreadLocal_) && (OrgApacheLuceneUtilCloseableThreadLocal_INCLUDE_ALL || OrgApacheLuceneUtilCloseableThreadLocal_INCLUDE)
-#define _OrgApacheLuceneUtilCloseableThreadLocal_
+#if !defined (OrgApacheLuceneUtilCloseableThreadLocal_) && (INCLUDE_ALL_OrgApacheLuceneUtilCloseableThreadLocal || defined(INCLUDE_OrgApacheLuceneUtilCloseableThreadLocal))
+#define OrgApacheLuceneUtilCloseableThreadLocal_
 
-#define JavaIoCloseable_RESTRICT 1
-#define JavaIoCloseable_INCLUDE 1
+#define RESTRICT_JavaIoCloseable 1
+#define INCLUDE_JavaIoCloseable 1
 #include "java/io/Closeable.h"
 
+/*!
+ @brief Java's builtin ThreadLocal has a serious flaw:
+ it can take an arbitrarily long amount of time to
+ dereference the things you had stored in it, even once the
+ ThreadLocal instance itself is no longer referenced.
+ This is because there is single, master map stored for
+ each thread, which all ThreadLocals share, and that
+ master map only periodically purges "stale" entries.
+ While not technically a memory leak, because eventually
+ the memory will be reclaimed, it can take a long time
+ and you can easily hit OutOfMemoryError because from the
+ GC's standpoint the stale entries are not reclaimable.
+ This class works around that, by only enrolling
+ WeakReference values into the ThreadLocal, and
+ separately holding a hard reference to each stored
+ value.  When you call <code>close</code>, these hard
+ references are cleared and then GC is freely able to
+ reclaim space by objects stored in it.
+ We can not rely on <code>ThreadLocal.remove()</code> as it
+ only removes the value for the caller thread, whereas
+ <code>close</code> takes care of all
+ threads.  You should not call <code>close</code> until all
+ threads are done using the instance.
+ */
 @interface OrgApacheLuceneUtilCloseableThreadLocal : NSObject < JavaIoCloseable >
 
 #pragma mark Public
@@ -44,8 +68,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilCloseableThreadLocal_init(OrgApacheLuc
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilCloseableThreadLocal *new_OrgApacheLuceneUtilCloseableThreadLocal_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilCloseableThreadLocal *create_OrgApacheLuceneUtilCloseableThreadLocal_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilCloseableThreadLocal)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilCloseableThreadLocal_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilCloseableThreadLocal")

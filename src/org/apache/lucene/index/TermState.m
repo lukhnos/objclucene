@@ -24,10 +24,10 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (OrgApacheLuceneIndexTermState *)clone {
   @try {
-    return (OrgApacheLuceneIndexTermState *) check_class_cast([super clone], [OrgApacheLuceneIndexTermState class]);
+    return (OrgApacheLuceneIndexTermState *) cast_chk([super clone], [OrgApacheLuceneIndexTermState class]);
   }
   @catch (JavaLangCloneNotSupportedException *cnse) {
-    @throw [new_JavaLangRuntimeException_initWithJavaLangThrowable_(cnse) autorelease];
+    @throw new_JavaLangRuntimeException_initWithNSException_(cnse);
   }
 }
 
@@ -40,7 +40,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (id)copyWithZone:(NSZone *)zone {
-  return [[self clone] retain];
+  return [self clone];
 }
 
 + (const J2ObjcClassInfo *)__metadata {

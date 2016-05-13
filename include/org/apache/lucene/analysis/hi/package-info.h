@@ -3,14 +3,17 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/hi/package-info.java
 //
 
+/*!
+ @brief Analyzer for Hindi.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisHiPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisHiPackage_info_RESTRICT
-#define OrgApacheLuceneAnalysisHiPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisHiPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisHiPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisHiPackage_info 0
 #else
-#define OrgApacheLuceneAnalysisHiPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisHiPackage_info 1
 #endif
-#undef OrgApacheLuceneAnalysisHiPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisHiPackage_info
 
-#pragma pop_macro("OrgApacheLuceneAnalysisHiPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisHiPackage_info")

@@ -9,6 +9,9 @@
 
 @interface OrgApacheLuceneUtilSmallFloat ()
 
+/*!
+ @brief No instance
+ */
 - (instancetype)init;
 
 @end
@@ -16,6 +19,8 @@
 __attribute__((unused)) static void OrgApacheLuceneUtilSmallFloat_init(OrgApacheLuceneUtilSmallFloat *self);
 
 __attribute__((unused)) static OrgApacheLuceneUtilSmallFloat *new_OrgApacheLuceneUtilSmallFloat_init() NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneUtilSmallFloat *create_OrgApacheLuceneUtilSmallFloat_init();
 
 @implementation OrgApacheLuceneUtilSmallFloat
 
@@ -75,9 +80,11 @@ void OrgApacheLuceneUtilSmallFloat_init(OrgApacheLuceneUtilSmallFloat *self) {
 }
 
 OrgApacheLuceneUtilSmallFloat *new_OrgApacheLuceneUtilSmallFloat_init() {
-  OrgApacheLuceneUtilSmallFloat *self = [OrgApacheLuceneUtilSmallFloat alloc];
-  OrgApacheLuceneUtilSmallFloat_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilSmallFloat, init)
+}
+
+OrgApacheLuceneUtilSmallFloat *create_OrgApacheLuceneUtilSmallFloat_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilSmallFloat, init)
 }
 
 jbyte OrgApacheLuceneUtilSmallFloat_floatToByteWithFloat_withInt_withInt_(jfloat f, jint numMantissaBits, jint zeroExp) {

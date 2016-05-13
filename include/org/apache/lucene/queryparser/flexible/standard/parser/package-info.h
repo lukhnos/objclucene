@@ -3,14 +3,22 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/standard/parser/package-info.java
 //
 
+/*!
+ @brief <h2>Lucene Query Parser</h2>
+ <p>
+ The package org.apache.lucene.queryparser.flexible.standard.parser contains the query parser.
+ <p>
+ This text parser only performs the syntax validation and creates an QueryNode tree
+ from a query string.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleStandardParserPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleStandardParserPackage_info_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleStandardParserPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardParserPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardParserPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardParserPackage_info 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleStandardParserPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardParserPackage_info 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleStandardParserPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardParserPackage_info
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleStandardParserPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardParserPackage_info")

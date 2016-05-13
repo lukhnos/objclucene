@@ -5,17 +5,25 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisDeGermanStemmer_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisDeGermanStemmer_RESTRICT
-#define OrgApacheLuceneAnalysisDeGermanStemmer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanStemmer")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisDeGermanStemmer
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanStemmer 0
 #else
-#define OrgApacheLuceneAnalysisDeGermanStemmer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanStemmer 1
 #endif
-#undef OrgApacheLuceneAnalysisDeGermanStemmer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisDeGermanStemmer
 
-#if !defined (_OrgApacheLuceneAnalysisDeGermanStemmer_) && (OrgApacheLuceneAnalysisDeGermanStemmer_INCLUDE_ALL || OrgApacheLuceneAnalysisDeGermanStemmer_INCLUDE)
-#define _OrgApacheLuceneAnalysisDeGermanStemmer_
+#if !defined (OrgApacheLuceneAnalysisDeGermanStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisDeGermanStemmer))
+#define OrgApacheLuceneAnalysisDeGermanStemmer_
 
+/*!
+ @brief A stemmer for German words.
+ <p>
+ The algorithm is based on the report
+ "A Fast and Simple Stemming Algorithm for German Words" by J&ouml;rg
+ Caumanns (joerg.caumanns at isst.fhg.de).
+ </p>
+ */
 @interface OrgApacheLuceneAnalysisDeGermanStemmer : NSObject
 
 #pragma mark Public
@@ -24,6 +32,11 @@
 
 #pragma mark Protected
 
+/*!
+ @brief Stemms the given term to an unique <tt>discriminator</tt>.
+ @param term  The term that should be stemmed.
+ @return Discriminator for <tt>term</tt>
+ */
 - (NSString *)stemWithNSString:(NSString *)term;
 
 @end
@@ -34,8 +47,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisDeGermanStemmer_init(OrgApacheLuce
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisDeGermanStemmer *new_OrgApacheLuceneAnalysisDeGermanStemmer_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisDeGermanStemmer *create_OrgApacheLuceneAnalysisDeGermanStemmer_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisDeGermanStemmer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisDeGermanStemmer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisDeGermanStemmer")

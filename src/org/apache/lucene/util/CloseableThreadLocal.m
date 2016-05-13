@@ -32,9 +32,12 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilCloseableThreadLocal, t_, JavaLangThreadL
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilCloseableThreadLocal, hardRefs_, id<JavaUtilMap>)
 J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilCloseableThreadLocal, countUntilPurge_, JavaUtilConcurrentAtomicAtomicInteger *)
 
-static jint OrgApacheLuceneUtilCloseableThreadLocal_PURGE_MULTIPLIER_ = 20;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneUtilCloseableThreadLocal, PURGE_MULTIPLIER_, jint)
-J2OBJC_STATIC_FIELD_REF_GETTER(OrgApacheLuceneUtilCloseableThreadLocal, PURGE_MULTIPLIER_, jint)
+inline jint OrgApacheLuceneUtilCloseableThreadLocal_get_PURGE_MULTIPLIER();
+inline jint OrgApacheLuceneUtilCloseableThreadLocal_set_PURGE_MULTIPLIER(jint value);
+inline jint *OrgApacheLuceneUtilCloseableThreadLocal_getRef_PURGE_MULTIPLIER();
+static jint OrgApacheLuceneUtilCloseableThreadLocal_PURGE_MULTIPLIER = 20;
+J2OBJC_STATIC_FIELD_PRIMITIVE(OrgApacheLuceneUtilCloseableThreadLocal, PURGE_MULTIPLIER, jint)
+
 __attribute__((unused)) static void OrgApacheLuceneUtilCloseableThreadLocal_maybePurge(OrgApacheLuceneUtilCloseableThreadLocal *self);
 
 __attribute__((unused)) static void OrgApacheLuceneUtilCloseableThreadLocal_purge(OrgApacheLuceneUtilCloseableThreadLocal *self);
@@ -64,9 +67,9 @@ __attribute__((unused)) static void OrgApacheLuceneUtilCloseableThreadLocal_purg
 }
 
 - (void)setWithId:(id)object {
-  [((JavaLangThreadLocal *) nil_chk(t_)) setWithId:[new_JavaLangRefWeakReference_initWithId_(object) autorelease]];
+  [((JavaLangThreadLocal *) nil_chk(t_)) setWithId:new_JavaLangRefWeakReference_initWithId_(object)];
   @synchronized(hardRefs_) {
-    [((id<JavaUtilMap>) nil_chk(hardRefs_)) putWithId:JavaLangThread_currentThread() withId:object];
+    (void) [((id<JavaUtilMap>) nil_chk(hardRefs_)) putWithId:JavaLangThread_currentThread() withId:object];
     OrgApacheLuceneUtilCloseableThreadLocal_maybePurge(self);
   }
 }
@@ -80,11 +83,11 @@ __attribute__((unused)) static void OrgApacheLuceneUtilCloseableThreadLocal_purg
 }
 
 - (void)close {
-  JreStrongAssign(&hardRefs_, nil);
+  hardRefs_ = nil;
   if (t_ != nil) {
     [t_ remove];
   }
-  JreStrongAssign(&t_, nil);
+  t_ = nil;
 }
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -94,13 +97,6 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (void)dealloc {
-  RELEASE_(t_);
-  RELEASE_(hardRefs_);
-  RELEASE_(countUntilPurge_);
-  [super dealloc];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initialValue", NULL, "TT;", 0x4, NULL, "()TT;" },
@@ -109,12 +105,12 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "maybePurge", NULL, "V", 0x2, NULL, NULL },
     { "purge", NULL, "V", 0x2, NULL, NULL },
     { "close", NULL, "V", 0x1, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "CloseableThreadLocal", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "t_", NULL, 0x2, "Ljava.lang.ThreadLocal;", NULL, "Ljava/lang/ThreadLocal<Ljava/lang/ref/WeakReference<TT;>;>;", .constantValue.asLong = 0 },
     { "hardRefs_", NULL, 0x2, "Ljava.util.Map;", NULL, "Ljava/util/Map<Ljava/lang/Thread;TT;>;", .constantValue.asLong = 0 },
-    { "PURGE_MULTIPLIER_", NULL, 0xa, "I", &OrgApacheLuceneUtilCloseableThreadLocal_PURGE_MULTIPLIER_, NULL, .constantValue.asLong = 0 },
+    { "PURGE_MULTIPLIER", "PURGE_MULTIPLIER", 0xa, "I", &OrgApacheLuceneUtilCloseableThreadLocal_PURGE_MULTIPLIER, NULL, .constantValue.asLong = 0 },
     { "countUntilPurge_", NULL, 0x12, "Ljava.util.concurrent.atomic.AtomicInteger;", NULL, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneUtilCloseableThreadLocal = { 2, "CloseableThreadLocal", "org.apache.lucene.util", NULL, 0x1, 7, methods, 4, fields, 0, NULL, 0, NULL, NULL, "<T:Ljava/lang/Object;>Ljava/lang/Object;Ljava/io/Closeable;" };
@@ -141,7 +137,7 @@ void OrgApacheLuceneUtilCloseableThreadLocal_purge(OrgApacheLuceneUtilCloseableT
         stillAliveCount++;
       }
     }
-    jint nextCount = (1 + stillAliveCount) * OrgApacheLuceneUtilCloseableThreadLocal_PURGE_MULTIPLIER_;
+    jint nextCount = (1 + stillAliveCount) * OrgApacheLuceneUtilCloseableThreadLocal_PURGE_MULTIPLIER;
     if (nextCount <= 0) {
       nextCount = 1000000;
     }
@@ -151,15 +147,17 @@ void OrgApacheLuceneUtilCloseableThreadLocal_purge(OrgApacheLuceneUtilCloseableT
 
 void OrgApacheLuceneUtilCloseableThreadLocal_init(OrgApacheLuceneUtilCloseableThreadLocal *self) {
   NSObject_init(self);
-  JreStrongAssignAndConsume(&self->t_, new_JavaLangThreadLocal_init());
-  JreStrongAssignAndConsume(&self->hardRefs_, new_JavaUtilWeakHashMap_init());
-  JreStrongAssignAndConsume(&self->countUntilPurge_, new_JavaUtilConcurrentAtomicAtomicInteger_initWithInt_(OrgApacheLuceneUtilCloseableThreadLocal_PURGE_MULTIPLIER_));
+  self->t_ = new_JavaLangThreadLocal_init();
+  self->hardRefs_ = new_JavaUtilWeakHashMap_init();
+  self->countUntilPurge_ = new_JavaUtilConcurrentAtomicAtomicInteger_initWithInt_(OrgApacheLuceneUtilCloseableThreadLocal_PURGE_MULTIPLIER);
 }
 
 OrgApacheLuceneUtilCloseableThreadLocal *new_OrgApacheLuceneUtilCloseableThreadLocal_init() {
-  OrgApacheLuceneUtilCloseableThreadLocal *self = [OrgApacheLuceneUtilCloseableThreadLocal alloc];
-  OrgApacheLuceneUtilCloseableThreadLocal_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilCloseableThreadLocal, init)
+}
+
+OrgApacheLuceneUtilCloseableThreadLocal *create_OrgApacheLuceneUtilCloseableThreadLocal_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilCloseableThreadLocal, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilCloseableThreadLocal)

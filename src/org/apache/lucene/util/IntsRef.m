@@ -14,9 +14,13 @@
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilIntsRef)
 
-IOSIntArray *OrgApacheLuceneUtilIntsRef_EMPTY_INTS_;
+IOSIntArray *OrgApacheLuceneUtilIntsRef_EMPTY_INTS;
 
 @implementation OrgApacheLuceneUtilIntsRef
+
++ (IOSIntArray *)EMPTY_INTS {
+  return OrgApacheLuceneUtilIntsRef_EMPTY_INTS;
+}
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -38,7 +42,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (OrgApacheLuceneUtilIntsRef *)clone {
-  return [new_OrgApacheLuceneUtilIntsRef_initWithIntArray_withInt_withInt_(ints_, offset_, length_) autorelease];
+  return new_OrgApacheLuceneUtilIntsRef_initWithIntArray_withInt_withInt_(ints_, offset_, length_);
 }
 
 - (NSUInteger)hash {
@@ -56,7 +60,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     return false;
   }
   if ([other isKindOfClass:[OrgApacheLuceneUtilIntsRef class]]) {
-    return [self intsEqualsWithOrgApacheLuceneUtilIntsRef:(OrgApacheLuceneUtilIntsRef *) check_class_cast(other, [OrgApacheLuceneUtilIntsRef class])];
+    return [self intsEqualsWithOrgApacheLuceneUtilIntsRef:(OrgApacheLuceneUtilIntsRef *) cast_chk(other, [OrgApacheLuceneUtilIntsRef class])];
   }
   return false;
 }
@@ -79,7 +83,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (jint)compareToWithId:(OrgApacheLuceneUtilIntsRef *)other {
-  check_class_cast(other, [OrgApacheLuceneUtilIntsRef class]);
+  (void) cast_chk(other, [OrgApacheLuceneUtilIntsRef class]);
   if (self == other) return 0;
   IOSIntArray *aInts = self->ints_;
   jint aUpto = self->offset_;
@@ -100,16 +104,16 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (NSString *)description {
-  JavaLangStringBuilder *sb = [new_JavaLangStringBuilder_init() autorelease];
-  [sb appendWithChar:'['];
+  JavaLangStringBuilder *sb = new_JavaLangStringBuilder_init();
+  (void) [sb appendWithChar:'['];
   jint end = offset_ + length_;
   for (jint i = offset_; i < end; i++) {
     if (i > offset_) {
-      [sb appendWithChar:' '];
+      (void) [sb appendWithChar:' '];
     }
-    [sb appendWithNSString:JavaLangInteger_toHexStringWithInt_(IOSIntArray_Get(nil_chk(ints_), i))];
+    (void) [sb appendWithNSString:JavaLangInteger_toHexStringWithInt_(IOSIntArray_Get(nil_chk(ints_), i))];
   }
-  [sb appendWithChar:']'];
+  (void) [sb appendWithChar:']'];
   return [sb description];
 }
 
@@ -119,41 +123,36 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (jboolean)isValid {
   if (ints_ == nil) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(@"ints is null") autorelease];
+    @throw new_JavaLangIllegalStateException_initWithNSString_(@"ints is null");
   }
   if (length_ < 0) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I", @"length is negative: ", length_)) autorelease];
+    @throw new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I", @"length is negative: ", length_));
   }
-  if (length_ > ((IOSIntArray *) nil_chk(ints_))->size_) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$I", @"length is out of bounds: ", length_, @",ints.length=", ints_->size_)) autorelease];
+  if (length_ > ints_->size_) {
+    @throw new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$I", @"length is out of bounds: ", length_, @",ints.length=", ints_->size_));
   }
   if (offset_ < 0) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I", @"offset is negative: ", offset_)) autorelease];
+    @throw new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I", @"offset is negative: ", offset_));
   }
   if (offset_ > ints_->size_) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$I", @"offset out of bounds: ", offset_, @",ints.length=", ints_->size_)) autorelease];
+    @throw new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$I", @"offset out of bounds: ", offset_, @",ints.length=", ints_->size_));
   }
   if (offset_ + length_ < 0) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$I", @"offset+length is negative: offset=", offset_, @",length=", length_)) autorelease];
+    @throw new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$I", @"offset+length is negative: offset=", offset_, @",length=", length_));
   }
   if (offset_ + length_ > ints_->size_) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$I$I", @"offset+length out of bounds: offset=", offset_, @",length=", length_, @",ints.length=", ints_->size_)) autorelease];
+    @throw new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$I$I", @"offset+length out of bounds: offset=", offset_, @",length=", length_, @",ints.length=", ints_->size_));
   }
   return true;
 }
 
-- (void)dealloc {
-  RELEASE_(ints_);
-  [super dealloc];
-}
-
 - (id)copyWithZone:(NSZone *)zone {
-  return [[self clone] retain];
+  return [self clone];
 }
 
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilIntsRef class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneUtilIntsRef_EMPTY_INTS_, [IOSIntArray newArrayWithLength:0]);
+    OrgApacheLuceneUtilIntsRef_EMPTY_INTS = [IOSIntArray newArrayWithLength:0];
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilIntsRef)
   }
 }
@@ -173,7 +172,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "isValid", NULL, "Z", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "EMPTY_INTS_", NULL, 0x19, "[I", &OrgApacheLuceneUtilIntsRef_EMPTY_INTS_, NULL, .constantValue.asLong = 0 },
+    { "EMPTY_INTS", "EMPTY_INTS", 0x19, "[I", &OrgApacheLuceneUtilIntsRef_EMPTY_INTS, NULL, .constantValue.asLong = 0 },
     { "ints_", NULL, 0x1, "[I", NULL, NULL, .constantValue.asLong = 0 },
     { "offset_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "length_", NULL, 0x1, "I", NULL, NULL, .constantValue.asLong = 0 },
@@ -186,43 +185,49 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 void OrgApacheLuceneUtilIntsRef_init(OrgApacheLuceneUtilIntsRef *self) {
   NSObject_init(self);
-  JreStrongAssign(&self->ints_, OrgApacheLuceneUtilIntsRef_EMPTY_INTS_);
+  self->ints_ = OrgApacheLuceneUtilIntsRef_EMPTY_INTS;
 }
 
 OrgApacheLuceneUtilIntsRef *new_OrgApacheLuceneUtilIntsRef_init() {
-  OrgApacheLuceneUtilIntsRef *self = [OrgApacheLuceneUtilIntsRef alloc];
-  OrgApacheLuceneUtilIntsRef_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilIntsRef, init)
+}
+
+OrgApacheLuceneUtilIntsRef *create_OrgApacheLuceneUtilIntsRef_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilIntsRef, init)
 }
 
 void OrgApacheLuceneUtilIntsRef_initWithInt_(OrgApacheLuceneUtilIntsRef *self, jint capacity) {
   NSObject_init(self);
-  JreStrongAssignAndConsume(&self->ints_, [IOSIntArray newArrayWithLength:capacity]);
+  self->ints_ = [IOSIntArray newArrayWithLength:capacity];
 }
 
 OrgApacheLuceneUtilIntsRef *new_OrgApacheLuceneUtilIntsRef_initWithInt_(jint capacity) {
-  OrgApacheLuceneUtilIntsRef *self = [OrgApacheLuceneUtilIntsRef alloc];
-  OrgApacheLuceneUtilIntsRef_initWithInt_(self, capacity);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilIntsRef, initWithInt_, capacity)
+}
+
+OrgApacheLuceneUtilIntsRef *create_OrgApacheLuceneUtilIntsRef_initWithInt_(jint capacity) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilIntsRef, initWithInt_, capacity)
 }
 
 void OrgApacheLuceneUtilIntsRef_initWithIntArray_withInt_withInt_(OrgApacheLuceneUtilIntsRef *self, IOSIntArray *ints, jint offset, jint length) {
   NSObject_init(self);
-  JreStrongAssign(&self->ints_, ints);
+  self->ints_ = ints;
   self->offset_ = offset;
   self->length_ = length;
   JreAssert(([self isValid]), (@"org/apache/lucene/util/IntsRef.java:58 condition failed: assert isValid();"));
 }
 
 OrgApacheLuceneUtilIntsRef *new_OrgApacheLuceneUtilIntsRef_initWithIntArray_withInt_withInt_(IOSIntArray *ints, jint offset, jint length) {
-  OrgApacheLuceneUtilIntsRef *self = [OrgApacheLuceneUtilIntsRef alloc];
-  OrgApacheLuceneUtilIntsRef_initWithIntArray_withInt_withInt_(self, ints, offset, length);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilIntsRef, initWithIntArray_withInt_withInt_, ints, offset, length)
+}
+
+OrgApacheLuceneUtilIntsRef *create_OrgApacheLuceneUtilIntsRef_initWithIntArray_withInt_withInt_(IOSIntArray *ints, jint offset, jint length) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilIntsRef, initWithIntArray_withInt_withInt_, ints, offset, length)
 }
 
 OrgApacheLuceneUtilIntsRef *OrgApacheLuceneUtilIntsRef_deepCopyOfWithOrgApacheLuceneUtilIntsRef_(OrgApacheLuceneUtilIntsRef *other) {
   OrgApacheLuceneUtilIntsRef_initialize();
-  return [new_OrgApacheLuceneUtilIntsRef_initWithIntArray_withInt_withInt_(JavaUtilArrays_copyOfRangeWithIntArray_withInt_withInt_(((OrgApacheLuceneUtilIntsRef *) nil_chk(other))->ints_, other->offset_, other->offset_ + other->length_), 0, other->length_) autorelease];
+  return new_OrgApacheLuceneUtilIntsRef_initWithIntArray_withInt_withInt_(JavaUtilArrays_copyOfRangeWithIntArray_withInt_withInt_(((OrgApacheLuceneUtilIntsRef *) nil_chk(other))->ints_, other->offset_, other->offset_ + other->length_), 0, other->length_);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilIntsRef)

@@ -23,11 +23,11 @@
 }
 
 - (jboolean)isEqual:(id)obj {
-  return ([obj isKindOfClass:[OrgLukhnosPortmobileFileAttributeFileTime class]]) ? [self compareToWithId:(OrgLukhnosPortmobileFileAttributeFileTime *) check_class_cast(obj, [OrgLukhnosPortmobileFileAttributeFileTime class])] == 0 : false;
+  return ([obj isKindOfClass:[OrgLukhnosPortmobileFileAttributeFileTime class]]) ? [self compareToWithId:(OrgLukhnosPortmobileFileAttributeFileTime *) cast_chk(obj, [OrgLukhnosPortmobileFileAttributeFileTime class])] == 0 : false;
 }
 
 - (jint)compareToWithId:(OrgLukhnosPortmobileFileAttributeFileTime *)o {
-  check_class_cast(o, [OrgLukhnosPortmobileFileAttributeFileTime class]);
+  (void) cast_chk(o, [OrgLukhnosPortmobileFileAttributeFileTime class]);
   if (((OrgLukhnosPortmobileFileAttributeFileTime *) nil_chk(o))->time_ < time_) {
     return -1;
   }
@@ -60,14 +60,16 @@ void OrgLukhnosPortmobileFileAttributeFileTime_initWithLong_(OrgLukhnosPortmobil
 }
 
 OrgLukhnosPortmobileFileAttributeFileTime *new_OrgLukhnosPortmobileFileAttributeFileTime_initWithLong_(jlong time) {
-  OrgLukhnosPortmobileFileAttributeFileTime *self = [OrgLukhnosPortmobileFileAttributeFileTime alloc];
-  OrgLukhnosPortmobileFileAttributeFileTime_initWithLong_(self, time);
-  return self;
+  J2OBJC_NEW_IMPL(OrgLukhnosPortmobileFileAttributeFileTime, initWithLong_, time)
+}
+
+OrgLukhnosPortmobileFileAttributeFileTime *create_OrgLukhnosPortmobileFileAttributeFileTime_initWithLong_(jlong time) {
+  J2OBJC_CREATE_IMPL(OrgLukhnosPortmobileFileAttributeFileTime, initWithLong_, time)
 }
 
 OrgLukhnosPortmobileFileAttributeFileTime *OrgLukhnosPortmobileFileAttributeFileTime_fromMillisWithLong_(jlong value) {
   OrgLukhnosPortmobileFileAttributeFileTime_initialize();
-  return [new_OrgLukhnosPortmobileFileAttributeFileTime_initWithLong_(value) autorelease];
+  return new_OrgLukhnosPortmobileFileAttributeFileTime_initWithLong_(value);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgLukhnosPortmobileFileAttributeFileTime)

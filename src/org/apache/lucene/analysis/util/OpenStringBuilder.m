@@ -38,7 +38,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)setWithCharArray:(IOSCharArray *)arr
                  withInt:(jint)end {
-  JreStrongAssign(&self->buf_, arr);
+  self->buf_ = arr;
   self->len_ = end;
 }
 
@@ -88,7 +88,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (id<JavaLangCharSequence>)subSequenceFrom:(jint)start
                                          to:(jint)end {
-  @throw [new_JavaLangUnsupportedOperationException_init() autorelease];
+  @throw new_JavaLangUnsupportedOperationException_init();
 }
 
 - (void)unsafeWriteWithChar:(jchar)b {
@@ -107,9 +107,9 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)resizeWithInt:(jint)len {
-  IOSCharArray *newbuf = [IOSCharArray arrayWithLength:JavaLangMath_maxWithInt_withInt_(JreLShift32(((IOSCharArray *) nil_chk(buf_))->size_, 1), len)];
+  IOSCharArray *newbuf = [IOSCharArray newArrayWithLength:JavaLangMath_maxWithInt_withInt_(JreLShift32(((IOSCharArray *) nil_chk(buf_))->size_, 1), len)];
   JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(buf_, 0, newbuf, 0, [self size]);
-  JreStrongAssign(&buf_, newbuf);
+  buf_ = newbuf;
 }
 
 - (void)reserveWithInt:(jint)num {
@@ -156,18 +156,13 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (IOSCharArray *)toCharArray {
-  IOSCharArray *newbuf = [IOSCharArray arrayWithLength:[self size]];
+  IOSCharArray *newbuf = [IOSCharArray newArrayWithLength:[self size]];
   JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(buf_, 0, newbuf, 0, [self size]);
   return newbuf;
 }
 
 - (NSString *)description {
   return [NSString stringWithCharacters:buf_ offset:0 length:[self size]];
-}
-
-- (void)dealloc {
-  RELEASE_(buf_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -218,20 +213,24 @@ void OrgApacheLuceneAnalysisUtilOpenStringBuilder_init(OrgApacheLuceneAnalysisUt
 }
 
 OrgApacheLuceneAnalysisUtilOpenStringBuilder *new_OrgApacheLuceneAnalysisUtilOpenStringBuilder_init() {
-  OrgApacheLuceneAnalysisUtilOpenStringBuilder *self = [OrgApacheLuceneAnalysisUtilOpenStringBuilder alloc];
-  OrgApacheLuceneAnalysisUtilOpenStringBuilder_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisUtilOpenStringBuilder, init)
+}
+
+OrgApacheLuceneAnalysisUtilOpenStringBuilder *create_OrgApacheLuceneAnalysisUtilOpenStringBuilder_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisUtilOpenStringBuilder, init)
 }
 
 void OrgApacheLuceneAnalysisUtilOpenStringBuilder_initWithInt_(OrgApacheLuceneAnalysisUtilOpenStringBuilder *self, jint size) {
   NSObject_init(self);
-  JreStrongAssignAndConsume(&self->buf_, [IOSCharArray newArrayWithLength:size]);
+  self->buf_ = [IOSCharArray newArrayWithLength:size];
 }
 
 OrgApacheLuceneAnalysisUtilOpenStringBuilder *new_OrgApacheLuceneAnalysisUtilOpenStringBuilder_initWithInt_(jint size) {
-  OrgApacheLuceneAnalysisUtilOpenStringBuilder *self = [OrgApacheLuceneAnalysisUtilOpenStringBuilder alloc];
-  OrgApacheLuceneAnalysisUtilOpenStringBuilder_initWithInt_(self, size);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisUtilOpenStringBuilder, initWithInt_, size)
+}
+
+OrgApacheLuceneAnalysisUtilOpenStringBuilder *create_OrgApacheLuceneAnalysisUtilOpenStringBuilder_initWithInt_(jint size) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisUtilOpenStringBuilder, initWithInt_, size)
 }
 
 void OrgApacheLuceneAnalysisUtilOpenStringBuilder_initWithCharArray_withInt_(OrgApacheLuceneAnalysisUtilOpenStringBuilder *self, IOSCharArray *arr, jint len) {
@@ -240,9 +239,11 @@ void OrgApacheLuceneAnalysisUtilOpenStringBuilder_initWithCharArray_withInt_(Org
 }
 
 OrgApacheLuceneAnalysisUtilOpenStringBuilder *new_OrgApacheLuceneAnalysisUtilOpenStringBuilder_initWithCharArray_withInt_(IOSCharArray *arr, jint len) {
-  OrgApacheLuceneAnalysisUtilOpenStringBuilder *self = [OrgApacheLuceneAnalysisUtilOpenStringBuilder alloc];
-  OrgApacheLuceneAnalysisUtilOpenStringBuilder_initWithCharArray_withInt_(self, arr, len);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisUtilOpenStringBuilder, initWithCharArray_withInt_, arr, len)
+}
+
+OrgApacheLuceneAnalysisUtilOpenStringBuilder *create_OrgApacheLuceneAnalysisUtilOpenStringBuilder_initWithCharArray_withInt_(IOSCharArray *arr, jint len) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisUtilOpenStringBuilder, initWithCharArray_withInt_, arr, len)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisUtilOpenStringBuilder)

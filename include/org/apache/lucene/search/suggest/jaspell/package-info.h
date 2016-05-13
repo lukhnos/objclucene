@@ -3,14 +3,17 @@
 //  source: ./suggest/src/java/org/apache/lucene/search/suggest/jaspell/package-info.java
 //
 
+/*!
+ @brief JaSpell-based autosuggest.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchSuggestJaspellPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneSearchSuggestJaspellPackage_info_RESTRICT
-#define OrgApacheLuceneSearchSuggestJaspellPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestJaspellPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneSearchSuggestJaspellPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestJaspellPackage_info 0
 #else
-#define OrgApacheLuceneSearchSuggestJaspellPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchSuggestJaspellPackage_info 1
 #endif
-#undef OrgApacheLuceneSearchSuggestJaspellPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchSuggestJaspellPackage_info
 
-#pragma pop_macro("OrgApacheLuceneSearchSuggestJaspellPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchSuggestJaspellPackage_info")

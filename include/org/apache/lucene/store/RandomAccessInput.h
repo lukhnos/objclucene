@@ -5,25 +5,46 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneStoreRandomAccessInput_INCLUDE_ALL")
-#if OrgApacheLuceneStoreRandomAccessInput_RESTRICT
-#define OrgApacheLuceneStoreRandomAccessInput_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneStoreRandomAccessInput")
+#ifdef RESTRICT_OrgApacheLuceneStoreRandomAccessInput
+#define INCLUDE_ALL_OrgApacheLuceneStoreRandomAccessInput 0
 #else
-#define OrgApacheLuceneStoreRandomAccessInput_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneStoreRandomAccessInput 1
 #endif
-#undef OrgApacheLuceneStoreRandomAccessInput_RESTRICT
+#undef RESTRICT_OrgApacheLuceneStoreRandomAccessInput
 
-#if !defined (_OrgApacheLuceneStoreRandomAccessInput_) && (OrgApacheLuceneStoreRandomAccessInput_INCLUDE_ALL || OrgApacheLuceneStoreRandomAccessInput_INCLUDE)
-#define _OrgApacheLuceneStoreRandomAccessInput_
+#if !defined (OrgApacheLuceneStoreRandomAccessInput_) && (INCLUDE_ALL_OrgApacheLuceneStoreRandomAccessInput || defined(INCLUDE_OrgApacheLuceneStoreRandomAccessInput))
+#define OrgApacheLuceneStoreRandomAccessInput_
 
+/*!
+ @brief Random Access Index API.
+ Unlike <code>IndexInput</code>, this has no concept of file position, all reads
+ are absolute. However, like IndexInput, it is only intended for use by a single thread.
+ */
 @protocol OrgApacheLuceneStoreRandomAccessInput < NSObject, JavaObject >
 
+/*!
+ @brief Reads a byte at the given position in the file
+ - seealso: DataInput#readByte
+ */
 - (jbyte)readByteWithLong:(jlong)pos;
 
+/*!
+ @brief Reads a short at the given position in the file
+ - seealso: DataInput#readShort
+ */
 - (jshort)readShortWithLong:(jlong)pos;
 
+/*!
+ @brief Reads an integer at the given position in the file
+ - seealso: DataInput#readInt
+ */
 - (jint)readIntWithLong:(jlong)pos;
 
+/*!
+ @brief Reads a long at the given position in the file
+ - seealso: DataInput#readLong
+ */
 - (jlong)readLongWithLong:(jlong)pos;
 
 @end
@@ -34,4 +55,4 @@ J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreRandomAccessInput)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneStoreRandomAccessInput_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreRandomAccessInput")

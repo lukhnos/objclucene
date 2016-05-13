@@ -3,14 +3,17 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/cz/package-info.java
 //
 
+/*!
+ @brief Analyzer for Czech.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisCzPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisCzPackage_info_RESTRICT
-#define OrgApacheLuceneAnalysisCzPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCzPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisCzPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCzPackage_info 0
 #else
-#define OrgApacheLuceneAnalysisCzPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCzPackage_info 1
 #endif
-#undef OrgApacheLuceneAnalysisCzPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisCzPackage_info
 
-#pragma pop_macro("OrgApacheLuceneAnalysisCzPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCzPackage_info")

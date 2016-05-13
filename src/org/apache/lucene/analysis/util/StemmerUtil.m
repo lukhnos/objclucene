@@ -10,6 +10,9 @@
 
 @interface OrgApacheLuceneAnalysisUtilStemmerUtil ()
 
+/*!
+ @brief no instance
+ */
 - (instancetype)init;
 
 @end
@@ -17,6 +20,8 @@
 __attribute__((unused)) static void OrgApacheLuceneAnalysisUtilStemmerUtil_init(OrgApacheLuceneAnalysisUtilStemmerUtil *self);
 
 __attribute__((unused)) static OrgApacheLuceneAnalysisUtilStemmerUtil *new_OrgApacheLuceneAnalysisUtilStemmerUtil_init() NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneAnalysisUtilStemmerUtil *create_OrgApacheLuceneAnalysisUtilStemmerUtil_init();
 
 @implementation OrgApacheLuceneAnalysisUtilStemmerUtil
 
@@ -78,9 +83,11 @@ void OrgApacheLuceneAnalysisUtilStemmerUtil_init(OrgApacheLuceneAnalysisUtilStem
 }
 
 OrgApacheLuceneAnalysisUtilStemmerUtil *new_OrgApacheLuceneAnalysisUtilStemmerUtil_init() {
-  OrgApacheLuceneAnalysisUtilStemmerUtil *self = [OrgApacheLuceneAnalysisUtilStemmerUtil alloc];
-  OrgApacheLuceneAnalysisUtilStemmerUtil_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisUtilStemmerUtil, init)
+}
+
+OrgApacheLuceneAnalysisUtilStemmerUtil *create_OrgApacheLuceneAnalysisUtilStemmerUtil_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisUtilStemmerUtil, init)
 }
 
 jboolean OrgApacheLuceneAnalysisUtilStemmerUtil_startsWithWithCharArray_withInt_withNSString_(IOSCharArray *s, jint len, NSString *prefix) {

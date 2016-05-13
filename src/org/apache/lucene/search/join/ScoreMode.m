@@ -9,85 +9,109 @@
 #include "java/lang/IllegalArgumentException.h"
 #include "org/apache/lucene/search/join/ScoreMode.h"
 
-__attribute__((unused)) static void OrgApacheLuceneSearchJoinScoreModeEnum_initWithNSString_withInt_(OrgApacheLuceneSearchJoinScoreModeEnum *self, NSString *__name, jint __ordinal);
+__attribute__((unused)) static void OrgApacheLuceneSearchJoinScoreMode_initWithNSString_withInt_(OrgApacheLuceneSearchJoinScoreMode *self, NSString *__name, jint __ordinal);
 
-__attribute__((unused)) static OrgApacheLuceneSearchJoinScoreModeEnum *new_OrgApacheLuceneSearchJoinScoreModeEnum_initWithNSString_withInt_(NSString *__name, jint __ordinal) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneSearchJoinScoreMode *new_OrgApacheLuceneSearchJoinScoreMode_initWithNSString_withInt_(NSString *__name, jint __ordinal) NS_RETURNS_RETAINED;
 
-J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchJoinScoreModeEnum)
+J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchJoinScoreMode)
 
-OrgApacheLuceneSearchJoinScoreModeEnum *OrgApacheLuceneSearchJoinScoreModeEnum_values_[5];
+OrgApacheLuceneSearchJoinScoreMode *OrgApacheLuceneSearchJoinScoreMode_values_[5];
 
-@implementation OrgApacheLuceneSearchJoinScoreModeEnum
+@implementation OrgApacheLuceneSearchJoinScoreMode
 
-- (instancetype)initWithNSString:(NSString *)__name
-                         withInt:(jint)__ordinal {
-  OrgApacheLuceneSearchJoinScoreModeEnum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
++ (OrgApacheLuceneSearchJoinScoreMode *)None {
+  return JreEnum(OrgApacheLuceneSearchJoinScoreMode, None);
 }
 
-IOSObjectArray *OrgApacheLuceneSearchJoinScoreModeEnum_values() {
-  OrgApacheLuceneSearchJoinScoreModeEnum_initialize();
-  return [IOSObjectArray arrayWithObjects:OrgApacheLuceneSearchJoinScoreModeEnum_values_ count:5 type:OrgApacheLuceneSearchJoinScoreModeEnum_class_()];
++ (OrgApacheLuceneSearchJoinScoreMode *)Avg {
+  return JreEnum(OrgApacheLuceneSearchJoinScoreMode, Avg);
+}
+
++ (OrgApacheLuceneSearchJoinScoreMode *)Max {
+  return JreEnum(OrgApacheLuceneSearchJoinScoreMode, Max);
+}
+
++ (OrgApacheLuceneSearchJoinScoreMode *)Total {
+  return JreEnum(OrgApacheLuceneSearchJoinScoreMode, Total);
+}
+
++ (OrgApacheLuceneSearchJoinScoreMode *)Min {
+  return JreEnum(OrgApacheLuceneSearchJoinScoreMode, Min);
 }
 
 + (IOSObjectArray *)values {
-  return OrgApacheLuceneSearchJoinScoreModeEnum_values();
+  return OrgApacheLuceneSearchJoinScoreMode_values();
 }
 
-+ (OrgApacheLuceneSearchJoinScoreModeEnum *)valueOfWithNSString:(NSString *)name {
-  return OrgApacheLuceneSearchJoinScoreModeEnum_valueOfWithNSString_(name);
++ (OrgApacheLuceneSearchJoinScoreMode *)valueOfWithNSString:(NSString *)name {
+  return OrgApacheLuceneSearchJoinScoreMode_valueOfWithNSString_(name);
 }
 
-OrgApacheLuceneSearchJoinScoreModeEnum *OrgApacheLuceneSearchJoinScoreModeEnum_valueOfWithNSString_(NSString *name) {
-  OrgApacheLuceneSearchJoinScoreModeEnum_initialize();
-  for (int i = 0; i < 5; i++) {
-    OrgApacheLuceneSearchJoinScoreModeEnum *e = OrgApacheLuceneSearchJoinScoreModeEnum_values_[i];
-    if ([name isEqual:[e name]]) {
-      return e;
-    }
-  }
-  @throw [[[JavaLangIllegalArgumentException alloc] initWithNSString:name] autorelease];
-  return nil;
+- (OrgApacheLuceneSearchJoinScoreMode_Enum)toNSEnum {
+  return (OrgApacheLuceneSearchJoinScoreMode_Enum)[self ordinal];
 }
 
 - (id)copyWithZone:(NSZone *)zone {
-  return [self retain];
+  return self;
 }
 
 + (void)initialize {
-  if (self == [OrgApacheLuceneSearchJoinScoreModeEnum class]) {
-    OrgApacheLuceneSearchJoinScoreModeEnum_None = new_OrgApacheLuceneSearchJoinScoreModeEnum_initWithNSString_withInt_(@"None", 0);
-    OrgApacheLuceneSearchJoinScoreModeEnum_Avg = new_OrgApacheLuceneSearchJoinScoreModeEnum_initWithNSString_withInt_(@"Avg", 1);
-    OrgApacheLuceneSearchJoinScoreModeEnum_Max = new_OrgApacheLuceneSearchJoinScoreModeEnum_initWithNSString_withInt_(@"Max", 2);
-    OrgApacheLuceneSearchJoinScoreModeEnum_Total = new_OrgApacheLuceneSearchJoinScoreModeEnum_initWithNSString_withInt_(@"Total", 3);
-    OrgApacheLuceneSearchJoinScoreModeEnum_Min = new_OrgApacheLuceneSearchJoinScoreModeEnum_initWithNSString_withInt_(@"Min", 4);
-    J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchJoinScoreModeEnum)
+  if (self == [OrgApacheLuceneSearchJoinScoreMode class]) {
+    JreEnum(OrgApacheLuceneSearchJoinScoreMode, None) = new_OrgApacheLuceneSearchJoinScoreMode_initWithNSString_withInt_(@"None", 0);
+    JreEnum(OrgApacheLuceneSearchJoinScoreMode, Avg) = new_OrgApacheLuceneSearchJoinScoreMode_initWithNSString_withInt_(@"Avg", 1);
+    JreEnum(OrgApacheLuceneSearchJoinScoreMode, Max) = new_OrgApacheLuceneSearchJoinScoreMode_initWithNSString_withInt_(@"Max", 2);
+    JreEnum(OrgApacheLuceneSearchJoinScoreMode, Total) = new_OrgApacheLuceneSearchJoinScoreMode_initWithNSString_withInt_(@"Total", 3);
+    JreEnum(OrgApacheLuceneSearchJoinScoreMode, Min) = new_OrgApacheLuceneSearchJoinScoreMode_initWithNSString_withInt_(@"Min", 4);
+    J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchJoinScoreMode)
   }
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcFieldInfo fields[] = {
-    { "None", "None", 0x4019, "Lorg.apache.lucene.search.join.ScoreMode;", &OrgApacheLuceneSearchJoinScoreModeEnum_None, NULL, .constantValue.asLong = 0 },
-    { "Avg", "Avg", 0x4019, "Lorg.apache.lucene.search.join.ScoreMode;", &OrgApacheLuceneSearchJoinScoreModeEnum_Avg, NULL, .constantValue.asLong = 0 },
-    { "Max", "Max", 0x4019, "Lorg.apache.lucene.search.join.ScoreMode;", &OrgApacheLuceneSearchJoinScoreModeEnum_Max, NULL, .constantValue.asLong = 0 },
-    { "Total", "Total", 0x4019, "Lorg.apache.lucene.search.join.ScoreMode;", &OrgApacheLuceneSearchJoinScoreModeEnum_Total, NULL, .constantValue.asLong = 0 },
-    { "Min", "Min", 0x4019, "Lorg.apache.lucene.search.join.ScoreMode;", &OrgApacheLuceneSearchJoinScoreModeEnum_Min, NULL, .constantValue.asLong = 0 },
+    { "None", "None", 0x4019, "Lorg.apache.lucene.search.join.ScoreMode;", &JreEnum(OrgApacheLuceneSearchJoinScoreMode, None), NULL, .constantValue.asLong = 0 },
+    { "Avg", "Avg", 0x4019, "Lorg.apache.lucene.search.join.ScoreMode;", &JreEnum(OrgApacheLuceneSearchJoinScoreMode, Avg), NULL, .constantValue.asLong = 0 },
+    { "Max", "Max", 0x4019, "Lorg.apache.lucene.search.join.ScoreMode;", &JreEnum(OrgApacheLuceneSearchJoinScoreMode, Max), NULL, .constantValue.asLong = 0 },
+    { "Total", "Total", 0x4019, "Lorg.apache.lucene.search.join.ScoreMode;", &JreEnum(OrgApacheLuceneSearchJoinScoreMode, Total), NULL, .constantValue.asLong = 0 },
+    { "Min", "Min", 0x4019, "Lorg.apache.lucene.search.join.ScoreMode;", &JreEnum(OrgApacheLuceneSearchJoinScoreMode, Min), NULL, .constantValue.asLong = 0 },
   };
   static const char *superclass_type_args[] = {"Lorg.apache.lucene.search.join.ScoreMode;"};
-  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinScoreModeEnum = { 2, "ScoreMode", "org.apache.lucene.search.join", NULL, 0x4011, 0, NULL, 5, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/search/join/ScoreMode;>;" };
-  return &_OrgApacheLuceneSearchJoinScoreModeEnum;
+  static const J2ObjcClassInfo _OrgApacheLuceneSearchJoinScoreMode = { 2, "ScoreMode", "org.apache.lucene.search.join", NULL, 0x4011, 0, NULL, 5, fields, 1, superclass_type_args, 0, NULL, NULL, "Ljava/lang/Enum<Lorg/apache/lucene/search/join/ScoreMode;>;" };
+  return &_OrgApacheLuceneSearchJoinScoreMode;
 }
 
 @end
 
-void OrgApacheLuceneSearchJoinScoreModeEnum_initWithNSString_withInt_(OrgApacheLuceneSearchJoinScoreModeEnum *self, NSString *__name, jint __ordinal) {
+void OrgApacheLuceneSearchJoinScoreMode_initWithNSString_withInt_(OrgApacheLuceneSearchJoinScoreMode *self, NSString *__name, jint __ordinal) {
   JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
 }
 
-OrgApacheLuceneSearchJoinScoreModeEnum *new_OrgApacheLuceneSearchJoinScoreModeEnum_initWithNSString_withInt_(NSString *__name, jint __ordinal) {
-  OrgApacheLuceneSearchJoinScoreModeEnum *self = [OrgApacheLuceneSearchJoinScoreModeEnum alloc];
-  OrgApacheLuceneSearchJoinScoreModeEnum_initWithNSString_withInt_(self, __name, __ordinal);
-  return self;
+OrgApacheLuceneSearchJoinScoreMode *new_OrgApacheLuceneSearchJoinScoreMode_initWithNSString_withInt_(NSString *__name, jint __ordinal) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinScoreMode, initWithNSString_withInt_, __name, __ordinal)
 }
 
-J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinScoreModeEnum)
+IOSObjectArray *OrgApacheLuceneSearchJoinScoreMode_values() {
+  OrgApacheLuceneSearchJoinScoreMode_initialize();
+  return [IOSObjectArray arrayWithObjects:OrgApacheLuceneSearchJoinScoreMode_values_ count:5 type:OrgApacheLuceneSearchJoinScoreMode_class_()];
+}
+
+OrgApacheLuceneSearchJoinScoreMode *OrgApacheLuceneSearchJoinScoreMode_valueOfWithNSString_(NSString *name) {
+  OrgApacheLuceneSearchJoinScoreMode_initialize();
+  for (int i = 0; i < 5; i++) {
+    OrgApacheLuceneSearchJoinScoreMode *e = OrgApacheLuceneSearchJoinScoreMode_values_[i];
+    if ([name isEqual:[e name]]) {
+      return e;
+    }
+  }
+  @throw [[JavaLangIllegalArgumentException alloc] initWithNSString:name];
+  return nil;
+}
+
+OrgApacheLuceneSearchJoinScoreMode *OrgApacheLuceneSearchJoinScoreMode_fromOrdinal(NSUInteger ordinal) {
+  OrgApacheLuceneSearchJoinScoreMode_initialize();
+  if (ordinal >= 5) {
+    return nil;
+  }
+  return OrgApacheLuceneSearchJoinScoreMode_values_[ordinal];
+}
+
+J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchJoinScoreMode)

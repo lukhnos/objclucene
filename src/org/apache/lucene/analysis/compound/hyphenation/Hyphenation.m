@@ -31,11 +31,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundHyphenationHyphenation, hyphe
   return hyphenPoints_;
 }
 
-- (void)dealloc {
-  RELEASE_(hyphenPoints_);
-  [super dealloc];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithIntArray:", "Hyphenation", NULL, 0x0, NULL, NULL },
@@ -53,13 +48,15 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisCompoundHyphenationHyphenation, hyphe
 
 void OrgApacheLuceneAnalysisCompoundHyphenationHyphenation_initWithIntArray_(OrgApacheLuceneAnalysisCompoundHyphenationHyphenation *self, IOSIntArray *points) {
   NSObject_init(self);
-  JreStrongAssign(&self->hyphenPoints_, points);
+  self->hyphenPoints_ = points;
 }
 
 OrgApacheLuceneAnalysisCompoundHyphenationHyphenation *new_OrgApacheLuceneAnalysisCompoundHyphenationHyphenation_initWithIntArray_(IOSIntArray *points) {
-  OrgApacheLuceneAnalysisCompoundHyphenationHyphenation *self = [OrgApacheLuceneAnalysisCompoundHyphenationHyphenation alloc];
-  OrgApacheLuceneAnalysisCompoundHyphenationHyphenation_initWithIntArray_(self, points);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisCompoundHyphenationHyphenation, initWithIntArray_, points)
+}
+
+OrgApacheLuceneAnalysisCompoundHyphenationHyphenation *create_OrgApacheLuceneAnalysisCompoundHyphenationHyphenation_initWithIntArray_(IOSIntArray *points) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisCompoundHyphenationHyphenation, initWithIntArray_, points)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisCompoundHyphenationHyphenation)

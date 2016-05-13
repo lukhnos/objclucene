@@ -5,17 +5,29 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisCompoundHyphenationHyphen_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisCompoundHyphenationHyphen_RESTRICT
-#define OrgApacheLuceneAnalysisCompoundHyphenationHyphen_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundHyphenationHyphen")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisCompoundHyphenationHyphen
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundHyphenationHyphen 0
 #else
-#define OrgApacheLuceneAnalysisCompoundHyphenationHyphen_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundHyphenationHyphen 1
 #endif
-#undef OrgApacheLuceneAnalysisCompoundHyphenationHyphen_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisCompoundHyphenationHyphen
 
-#if !defined (_OrgApacheLuceneAnalysisCompoundHyphenationHyphen_) && (OrgApacheLuceneAnalysisCompoundHyphenationHyphen_INCLUDE_ALL || OrgApacheLuceneAnalysisCompoundHyphenationHyphen_INCLUDE)
-#define _OrgApacheLuceneAnalysisCompoundHyphenationHyphen_
+#if !defined (OrgApacheLuceneAnalysisCompoundHyphenationHyphen_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundHyphenationHyphen || defined(INCLUDE_OrgApacheLuceneAnalysisCompoundHyphenationHyphen))
+#define OrgApacheLuceneAnalysisCompoundHyphenationHyphen_
 
+/*!
+ @brief This class represents a hyphen.
+ A 'full' hyphen is made of 3 parts: the
+ pre-break text, post-break text and no-break. If no line-break is generated
+ at this position, the no-break text is used, otherwise, pre-break and
+ post-break are used. Typically, pre-break is equal to the hyphen character
+ and the others are empty. However, this general scheme allows support for
+ cases in some languages where words change spelling if they're split across
+ lines, like german's 'backen' which hyphenates 'bak-ken'. BTW, this comes
+ from TeX.
+ This class has been taken from the Apache FOP project (http://xmlgraphics.apache.org/fop/). They have been slightly modified. 
+ */
 @interface OrgApacheLuceneAnalysisCompoundHyphenationHyphen : NSObject {
  @public
   NSString *preBreak_;
@@ -47,12 +59,16 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCompoundHyphenationHyphen_initWith
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundHyphenationHyphen *new_OrgApacheLuceneAnalysisCompoundHyphenationHyphen_initWithNSString_withNSString_withNSString_(NSString *pre, NSString *no, NSString *post) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundHyphenationHyphen *create_OrgApacheLuceneAnalysisCompoundHyphenationHyphen_initWithNSString_withNSString_withNSString_(NSString *pre, NSString *no, NSString *post);
+
 FOUNDATION_EXPORT void OrgApacheLuceneAnalysisCompoundHyphenationHyphen_initWithNSString_(OrgApacheLuceneAnalysisCompoundHyphenationHyphen *self, NSString *pre);
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundHyphenationHyphen *new_OrgApacheLuceneAnalysisCompoundHyphenationHyphen_initWithNSString_(NSString *pre) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisCompoundHyphenationHyphen *create_OrgApacheLuceneAnalysisCompoundHyphenationHyphen_initWithNSString_(NSString *pre);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisCompoundHyphenationHyphen)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisCompoundHyphenationHyphen_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisCompoundHyphenationHyphen")

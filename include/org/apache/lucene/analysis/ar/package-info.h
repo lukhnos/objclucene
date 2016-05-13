@@ -3,14 +3,17 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/ar/package-info.java
 //
 
+/*!
+ @brief Analyzer for Arabic.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisArPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisArPackage_info_RESTRICT
-#define OrgApacheLuceneAnalysisArPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisArPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisArPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisArPackage_info 0
 #else
-#define OrgApacheLuceneAnalysisArPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisArPackage_info 1
 #endif
-#undef OrgApacheLuceneAnalysisArPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisArPackage_info
 
-#pragma pop_macro("OrgApacheLuceneAnalysisArPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisArPackage_info")

@@ -5,17 +5,21 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneStoreMergeInfo_INCLUDE_ALL")
-#if OrgApacheLuceneStoreMergeInfo_RESTRICT
-#define OrgApacheLuceneStoreMergeInfo_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneStoreMergeInfo")
+#ifdef RESTRICT_OrgApacheLuceneStoreMergeInfo
+#define INCLUDE_ALL_OrgApacheLuceneStoreMergeInfo 0
 #else
-#define OrgApacheLuceneStoreMergeInfo_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneStoreMergeInfo 1
 #endif
-#undef OrgApacheLuceneStoreMergeInfo_RESTRICT
+#undef RESTRICT_OrgApacheLuceneStoreMergeInfo
 
-#if !defined (_OrgApacheLuceneStoreMergeInfo_) && (OrgApacheLuceneStoreMergeInfo_INCLUDE_ALL || OrgApacheLuceneStoreMergeInfo_INCLUDE)
-#define _OrgApacheLuceneStoreMergeInfo_
+#if !defined (OrgApacheLuceneStoreMergeInfo_) && (INCLUDE_ALL_OrgApacheLuceneStoreMergeInfo || defined(INCLUDE_OrgApacheLuceneStoreMergeInfo))
+#define OrgApacheLuceneStoreMergeInfo_
 
+/*!
+ @brief <p>A MergeInfo provides information required for a MERGE context.
+ It is used as part of an <code>IOContext</code> in case of MERGE context.</p>
+ */
 @interface OrgApacheLuceneStoreMergeInfo : NSObject {
  @public
   jint totalMaxDoc_;
@@ -26,6 +30,11 @@
 
 #pragma mark Public
 
+/*!
+ @brief <p>Creates a new <code>MergeInfo</code> instance from
+ the values required for a MERGE <code>IOContext</code> context.
+ These values are only estimates and are not the actual values.
+ */
 - (instancetype)initWithInt:(jint)totalMaxDoc
                    withLong:(jlong)estimatedMergeBytes
                 withBoolean:(jboolean)isExternal
@@ -45,8 +54,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneStoreMergeInfo_initWithInt_withLong_withBo
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreMergeInfo *new_OrgApacheLuceneStoreMergeInfo_initWithInt_withLong_withBoolean_withInt_(jint totalMaxDoc, jlong estimatedMergeBytes, jboolean isExternal, jint mergeMaxNumSegments) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneStoreMergeInfo *create_OrgApacheLuceneStoreMergeInfo_initWithInt_withLong_withBoolean_withInt_(jint totalMaxDoc, jlong estimatedMergeBytes, jboolean isExternal, jint mergeMaxNumSegments);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreMergeInfo)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneStoreMergeInfo_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreMergeInfo")

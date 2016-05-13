@@ -7,9 +7,14 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/queryparser/classic/Token.h"
 
+/*!
+ @brief The version identifier for this Serializable class.
+ Increment only if the <i>serialized</i> form of the
+ class changes.
+ */
+inline jlong OrgApacheLuceneQueryparserClassicToken_get_serialVersionUID();
 #define OrgApacheLuceneQueryparserClassicToken_serialVersionUID 1LL
-
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserClassicToken, serialVersionUID, jlong)
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueryparserClassicToken, serialVersionUID, jlong)
 
 @implementation OrgApacheLuceneQueryparserClassicToken
 
@@ -48,13 +53,6 @@ J2OBJC_IGNORE_DESIGNATED_END
   return OrgApacheLuceneQueryparserClassicToken_newTokenWithInt_(ofKind);
 }
 
-- (void)dealloc {
-  RELEASE_(image_);
-  RELEASE_(next_);
-  RELEASE_(specialToken_);
-  [super dealloc];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "getValue", NULL, "Ljava.lang.Object;", 0x1, NULL, NULL },
@@ -87,9 +85,11 @@ void OrgApacheLuceneQueryparserClassicToken_init(OrgApacheLuceneQueryparserClass
 }
 
 OrgApacheLuceneQueryparserClassicToken *new_OrgApacheLuceneQueryparserClassicToken_init() {
-  OrgApacheLuceneQueryparserClassicToken *self = [OrgApacheLuceneQueryparserClassicToken alloc];
-  OrgApacheLuceneQueryparserClassicToken_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserClassicToken, init)
+}
+
+OrgApacheLuceneQueryparserClassicToken *create_OrgApacheLuceneQueryparserClassicToken_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserClassicToken, init)
 }
 
 void OrgApacheLuceneQueryparserClassicToken_initWithInt_(OrgApacheLuceneQueryparserClassicToken *self, jint kind) {
@@ -97,28 +97,32 @@ void OrgApacheLuceneQueryparserClassicToken_initWithInt_(OrgApacheLuceneQuerypar
 }
 
 OrgApacheLuceneQueryparserClassicToken *new_OrgApacheLuceneQueryparserClassicToken_initWithInt_(jint kind) {
-  OrgApacheLuceneQueryparserClassicToken *self = [OrgApacheLuceneQueryparserClassicToken alloc];
-  OrgApacheLuceneQueryparserClassicToken_initWithInt_(self, kind);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserClassicToken, initWithInt_, kind)
+}
+
+OrgApacheLuceneQueryparserClassicToken *create_OrgApacheLuceneQueryparserClassicToken_initWithInt_(jint kind) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserClassicToken, initWithInt_, kind)
 }
 
 void OrgApacheLuceneQueryparserClassicToken_initWithInt_withNSString_(OrgApacheLuceneQueryparserClassicToken *self, jint kind, NSString *image) {
   NSObject_init(self);
   self->kind_ = kind;
-  JreStrongAssign(&self->image_, image);
+  self->image_ = image;
 }
 
 OrgApacheLuceneQueryparserClassicToken *new_OrgApacheLuceneQueryparserClassicToken_initWithInt_withNSString_(jint kind, NSString *image) {
-  OrgApacheLuceneQueryparserClassicToken *self = [OrgApacheLuceneQueryparserClassicToken alloc];
-  OrgApacheLuceneQueryparserClassicToken_initWithInt_withNSString_(self, kind, image);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserClassicToken, initWithInt_withNSString_, kind, image)
+}
+
+OrgApacheLuceneQueryparserClassicToken *create_OrgApacheLuceneQueryparserClassicToken_initWithInt_withNSString_(jint kind, NSString *image) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserClassicToken, initWithInt_withNSString_, kind, image)
 }
 
 OrgApacheLuceneQueryparserClassicToken *OrgApacheLuceneQueryparserClassicToken_newTokenWithInt_withNSString_(jint ofKind, NSString *image) {
   OrgApacheLuceneQueryparserClassicToken_initialize();
   switch (ofKind) {
     default:
-    return [new_OrgApacheLuceneQueryparserClassicToken_initWithInt_withNSString_(ofKind, image) autorelease];
+    return new_OrgApacheLuceneQueryparserClassicToken_initWithInt_withNSString_(ofKind, image);
   }
 }
 

@@ -18,6 +18,8 @@ __attribute__((unused)) static void OrgApacheLuceneLucenePackage_init(OrgApacheL
 
 __attribute__((unused)) static OrgApacheLuceneLucenePackage *new_OrgApacheLuceneLucenePackage_init() NS_RETURNS_RETAINED;
 
+__attribute__((unused)) static OrgApacheLuceneLucenePackage *create_OrgApacheLuceneLucenePackage_init();
+
 @implementation OrgApacheLuceneLucenePackage
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -47,9 +49,11 @@ void OrgApacheLuceneLucenePackage_init(OrgApacheLuceneLucenePackage *self) {
 }
 
 OrgApacheLuceneLucenePackage *new_OrgApacheLuceneLucenePackage_init() {
-  OrgApacheLuceneLucenePackage *self = [OrgApacheLuceneLucenePackage alloc];
-  OrgApacheLuceneLucenePackage_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneLucenePackage, init)
+}
+
+OrgApacheLuceneLucenePackage *create_OrgApacheLuceneLucenePackage_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneLucenePackage, init)
 }
 
 JavaLangPackage *OrgApacheLuceneLucenePackage_get() {

@@ -5,31 +5,41 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneStoreBufferedChecksum_INCLUDE_ALL")
-#if OrgApacheLuceneStoreBufferedChecksum_RESTRICT
-#define OrgApacheLuceneStoreBufferedChecksum_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneStoreBufferedChecksum")
+#ifdef RESTRICT_OrgApacheLuceneStoreBufferedChecksum
+#define INCLUDE_ALL_OrgApacheLuceneStoreBufferedChecksum 0
 #else
-#define OrgApacheLuceneStoreBufferedChecksum_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneStoreBufferedChecksum 1
 #endif
-#undef OrgApacheLuceneStoreBufferedChecksum_RESTRICT
+#undef RESTRICT_OrgApacheLuceneStoreBufferedChecksum
 
-#if !defined (_OrgApacheLuceneStoreBufferedChecksum_) && (OrgApacheLuceneStoreBufferedChecksum_INCLUDE_ALL || OrgApacheLuceneStoreBufferedChecksum_INCLUDE)
-#define _OrgApacheLuceneStoreBufferedChecksum_
+#if !defined (OrgApacheLuceneStoreBufferedChecksum_) && (INCLUDE_ALL_OrgApacheLuceneStoreBufferedChecksum || defined(INCLUDE_OrgApacheLuceneStoreBufferedChecksum))
+#define OrgApacheLuceneStoreBufferedChecksum_
 
-#define JavaUtilZipChecksum_RESTRICT 1
-#define JavaUtilZipChecksum_INCLUDE 1
+#define RESTRICT_JavaUtilZipChecksum 1
+#define INCLUDE_JavaUtilZipChecksum 1
 #include "java/util/zip/Checksum.h"
 
 @class IOSByteArray;
 
-#define OrgApacheLuceneStoreBufferedChecksum_DEFAULT_BUFFERSIZE 256
-
+/*!
+ @brief Wraps another <code>Checksum</code> with an internal buffer
+ to speed up checksum calculations.
+ */
 @interface OrgApacheLuceneStoreBufferedChecksum : NSObject < JavaUtilZipChecksum >
+
++ (jint)DEFAULT_BUFFERSIZE;
 
 #pragma mark Public
 
+/*!
+ @brief Create a new BufferedChecksum with <code>DEFAULT_BUFFERSIZE</code>
+ */
 - (instancetype)initWithJavaUtilZipChecksum:(id<JavaUtilZipChecksum>)inArg;
 
+/*!
+ @brief Create a new BufferedChecksum with the specified bufferSize
+ */
 - (instancetype)initWithJavaUtilZipChecksum:(id<JavaUtilZipChecksum>)inArg
                                     withInt:(jint)bufferSize;
 
@@ -47,18 +57,27 @@
 
 J2OBJC_EMPTY_STATIC_INIT(OrgApacheLuceneStoreBufferedChecksum)
 
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneStoreBufferedChecksum, DEFAULT_BUFFERSIZE, jint)
+/*!
+ @brief Default buffer size: 256
+ */
+inline jint OrgApacheLuceneStoreBufferedChecksum_get_DEFAULT_BUFFERSIZE();
+#define OrgApacheLuceneStoreBufferedChecksum_DEFAULT_BUFFERSIZE 256
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneStoreBufferedChecksum, DEFAULT_BUFFERSIZE, jint)
 
 FOUNDATION_EXPORT void OrgApacheLuceneStoreBufferedChecksum_initWithJavaUtilZipChecksum_(OrgApacheLuceneStoreBufferedChecksum *self, id<JavaUtilZipChecksum> inArg);
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreBufferedChecksum *new_OrgApacheLuceneStoreBufferedChecksum_initWithJavaUtilZipChecksum_(id<JavaUtilZipChecksum> inArg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneStoreBufferedChecksum *create_OrgApacheLuceneStoreBufferedChecksum_initWithJavaUtilZipChecksum_(id<JavaUtilZipChecksum> inArg);
+
 FOUNDATION_EXPORT void OrgApacheLuceneStoreBufferedChecksum_initWithJavaUtilZipChecksum_withInt_(OrgApacheLuceneStoreBufferedChecksum *self, id<JavaUtilZipChecksum> inArg, jint bufferSize);
 
 FOUNDATION_EXPORT OrgApacheLuceneStoreBufferedChecksum *new_OrgApacheLuceneStoreBufferedChecksum_initWithJavaUtilZipChecksum_withInt_(id<JavaUtilZipChecksum> inArg, jint bufferSize) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneStoreBufferedChecksum *create_OrgApacheLuceneStoreBufferedChecksum_initWithJavaUtilZipChecksum_withInt_(id<JavaUtilZipChecksum> inArg, jint bufferSize);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneStoreBufferedChecksum)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneStoreBufferedChecksum_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneStoreBufferedChecksum")

@@ -9,9 +9,13 @@
 
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexReaderSlice)
 
-IOSObjectArray *OrgApacheLuceneIndexReaderSlice_EMPTY_ARRAY_;
+IOSObjectArray *OrgApacheLuceneIndexReaderSlice_EMPTY_ARRAY;
 
 @implementation OrgApacheLuceneIndexReaderSlice
+
++ (IOSObjectArray *)EMPTY_ARRAY {
+  return OrgApacheLuceneIndexReaderSlice_EMPTY_ARRAY;
+}
 
 - (instancetype)initWithInt:(jint)start
                     withInt:(jint)length
@@ -26,7 +30,7 @@ IOSObjectArray *OrgApacheLuceneIndexReaderSlice_EMPTY_ARRAY_;
 
 + (void)initialize {
   if (self == [OrgApacheLuceneIndexReaderSlice class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneIndexReaderSlice_EMPTY_ARRAY_, [IOSObjectArray newArrayWithLength:0 type:OrgApacheLuceneIndexReaderSlice_class_()]);
+    OrgApacheLuceneIndexReaderSlice_EMPTY_ARRAY = [IOSObjectArray newArrayWithLength:0 type:OrgApacheLuceneIndexReaderSlice_class_()];
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneIndexReaderSlice)
   }
 }
@@ -37,7 +41,7 @@ IOSObjectArray *OrgApacheLuceneIndexReaderSlice_EMPTY_ARRAY_;
     { "description", "toString", "Ljava.lang.String;", 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "EMPTY_ARRAY_", NULL, 0x19, "[Lorg.apache.lucene.index.ReaderSlice;", &OrgApacheLuceneIndexReaderSlice_EMPTY_ARRAY_, NULL, .constantValue.asLong = 0 },
+    { "EMPTY_ARRAY", "EMPTY_ARRAY", 0x19, "[Lorg.apache.lucene.index.ReaderSlice;", &OrgApacheLuceneIndexReaderSlice_EMPTY_ARRAY, NULL, .constantValue.asLong = 0 },
     { "start_", NULL, 0x11, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "length_", NULL, 0x11, "I", NULL, NULL, .constantValue.asLong = 0 },
     { "readerIndex_", NULL, 0x11, "I", NULL, NULL, .constantValue.asLong = 0 },
@@ -56,9 +60,11 @@ void OrgApacheLuceneIndexReaderSlice_initWithInt_withInt_withInt_(OrgApacheLucen
 }
 
 OrgApacheLuceneIndexReaderSlice *new_OrgApacheLuceneIndexReaderSlice_initWithInt_withInt_withInt_(jint start, jint length, jint readerIndex) {
-  OrgApacheLuceneIndexReaderSlice *self = [OrgApacheLuceneIndexReaderSlice alloc];
-  OrgApacheLuceneIndexReaderSlice_initWithInt_withInt_withInt_(self, start, length, readerIndex);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexReaderSlice, initWithInt_withInt_withInt_, start, length, readerIndex)
+}
+
+OrgApacheLuceneIndexReaderSlice *create_OrgApacheLuceneIndexReaderSlice_initWithInt_withInt_withInt_(jint start, jint length, jint readerIndex) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexReaderSlice, initWithInt_withInt_withInt_, start, length, readerIndex)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexReaderSlice)

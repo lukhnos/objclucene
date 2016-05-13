@@ -3,14 +3,17 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/no/package-info.java
 //
 
+/*!
+ @brief Analyzer for Norwegian.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisNoPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisNoPackage_info_RESTRICT
-#define OrgApacheLuceneAnalysisNoPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisNoPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisNoPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisNoPackage_info 0
 #else
-#define OrgApacheLuceneAnalysisNoPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisNoPackage_info 1
 #endif
-#undef OrgApacheLuceneAnalysisNoPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisNoPackage_info
 
-#pragma pop_macro("OrgApacheLuceneAnalysisNoPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisNoPackage_info")

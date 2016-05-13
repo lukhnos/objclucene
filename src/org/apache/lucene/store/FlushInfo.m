@@ -26,8 +26,8 @@
 - (jboolean)isEqual:(id)obj {
   if (self == obj) return true;
   if (obj == nil) return false;
-  if ([self getClass] != [nil_chk(obj) getClass]) return false;
-  OrgApacheLuceneStoreFlushInfo *other = (OrgApacheLuceneStoreFlushInfo *) check_class_cast(obj, [OrgApacheLuceneStoreFlushInfo class]);
+  if ([self getClass] != (id) [obj getClass]) return false;
+  OrgApacheLuceneStoreFlushInfo *other = (OrgApacheLuceneStoreFlushInfo *) cast_chk(obj, [OrgApacheLuceneStoreFlushInfo class]);
   if (estimatedSegmentSize_ != other->estimatedSegmentSize_) return false;
   if (numDocs_ != other->numDocs_) return false;
   return true;
@@ -61,9 +61,11 @@ void OrgApacheLuceneStoreFlushInfo_initWithInt_withLong_(OrgApacheLuceneStoreFlu
 }
 
 OrgApacheLuceneStoreFlushInfo *new_OrgApacheLuceneStoreFlushInfo_initWithInt_withLong_(jint numDocs, jlong estimatedSegmentSize) {
-  OrgApacheLuceneStoreFlushInfo *self = [OrgApacheLuceneStoreFlushInfo alloc];
-  OrgApacheLuceneStoreFlushInfo_initWithInt_withLong_(self, numDocs, estimatedSegmentSize);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreFlushInfo, initWithInt_withLong_, numDocs, estimatedSegmentSize)
+}
+
+OrgApacheLuceneStoreFlushInfo *create_OrgApacheLuceneStoreFlushInfo_initWithInt_withLong_(jint numDocs, jlong estimatedSegmentSize) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreFlushInfo, initWithInt_withLong_, numDocs, estimatedSegmentSize)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreFlushInfo)

@@ -5,19 +5,19 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat
 
-#if !defined (_OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat_) && (OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat_INCLUDE_ALL || OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat_INCLUDE)
-#define _OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat_
+#if !defined (OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat || defined(INCLUDE_OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat))
+#define OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat_
 
-#define JavaTextNumberFormat_RESTRICT 1
-#define JavaTextNumberFormat_INCLUDE 1
+#define RESTRICT_JavaTextNumberFormat 1
+#define INCLUDE_JavaTextNumberFormat 1
 #include "java/text/NumberFormat.h"
 
 @class JavaLangStringBuffer;
@@ -25,10 +25,20 @@
 @class JavaTextFieldPosition;
 @class JavaTextParsePosition;
 
+/*!
+ @brief This <code>Format</code> parses <code>Long</code> into date strings and vice-versa.
+ It
+ uses the given <code>DateFormat</code> to parse and format dates, but before, it
+ converts <code>Long</code> to <code>Date</code> objects or vice-versa.
+ */
 @interface OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat : JavaTextNumberFormat
 
 #pragma mark Public
 
+/*!
+ @brief Constructs a <code>NumberDateFormat</code> object using the given <code>DateFormat</code>.
+ @param dateFormat <code>DateFormat</code> used to parse and format dates
+ */
 - (instancetype)initWithJavaTextDateFormat:(JavaTextDateFormat *)dateFormat;
 
 - (JavaLangStringBuffer *)formatWithDouble:(jdouble)number
@@ -54,8 +64,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDat
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat *new_OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat_initWithJavaTextDateFormat_(JavaTextDateFormat *dateFormat) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat *create_OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat_initWithJavaTextDateFormat_(JavaTextDateFormat *dateFormat);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardConfigNumberDateFormat")

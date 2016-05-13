@@ -5,34 +5,35 @@
 
 #include "J2ObjC_source.h"
 #include "java/lang/Exception.h"
-#include "java/lang/Throwable.h"
 #include "org/apache/lucene/index/AbortingException.h"
 
 @interface OrgApacheLuceneIndexAbortingException ()
 
-- (instancetype)initWithJavaLangThrowable:(JavaLangThrowable *)cause;
+- (instancetype)initWithNSException:(NSException *)cause;
 
 @end
 
-__attribute__((unused)) static void OrgApacheLuceneIndexAbortingException_initWithJavaLangThrowable_(OrgApacheLuceneIndexAbortingException *self, JavaLangThrowable *cause);
+__attribute__((unused)) static void OrgApacheLuceneIndexAbortingException_initWithNSException_(OrgApacheLuceneIndexAbortingException *self, NSException *cause);
 
-__attribute__((unused)) static OrgApacheLuceneIndexAbortingException *new_OrgApacheLuceneIndexAbortingException_initWithJavaLangThrowable_(JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+__attribute__((unused)) static OrgApacheLuceneIndexAbortingException *new_OrgApacheLuceneIndexAbortingException_initWithNSException_(NSException *cause) NS_RETURNS_RETAINED;
+
+__attribute__((unused)) static OrgApacheLuceneIndexAbortingException *create_OrgApacheLuceneIndexAbortingException_initWithNSException_(NSException *cause);
 
 @implementation OrgApacheLuceneIndexAbortingException
 
-- (instancetype)initWithJavaLangThrowable:(JavaLangThrowable *)cause {
-  OrgApacheLuceneIndexAbortingException_initWithJavaLangThrowable_(self, cause);
+- (instancetype)initWithNSException:(NSException *)cause {
+  OrgApacheLuceneIndexAbortingException_initWithNSException_(self, cause);
   return self;
 }
 
-+ (OrgApacheLuceneIndexAbortingException *)wrapWithJavaLangThrowable:(JavaLangThrowable *)t {
-  return OrgApacheLuceneIndexAbortingException_wrapWithJavaLangThrowable_(t);
++ (OrgApacheLuceneIndexAbortingException *)wrapWithNSException:(NSException *)t {
+  return OrgApacheLuceneIndexAbortingException_wrapWithNSException_(t);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "initWithJavaLangThrowable:", "AbortingException", NULL, 0x2, NULL, NULL },
-    { "wrapWithJavaLangThrowable:", "wrap", "Lorg.apache.lucene.index.AbortingException;", 0x9, NULL, NULL },
+    { "initWithNSException:", "AbortingException", NULL, 0x2, NULL, NULL },
+    { "wrapWithNSException:", "wrap", "Lorg.apache.lucene.index.AbortingException;", 0x9, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneIndexAbortingException = { 2, "AbortingException", "org.apache.lucene.index", NULL, 0x0, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneIndexAbortingException;
@@ -40,24 +41,26 @@ __attribute__((unused)) static OrgApacheLuceneIndexAbortingException *new_OrgApa
 
 @end
 
-void OrgApacheLuceneIndexAbortingException_initWithJavaLangThrowable_(OrgApacheLuceneIndexAbortingException *self, JavaLangThrowable *cause) {
-  JavaLangException_initWithJavaLangThrowable_(self, cause);
+void OrgApacheLuceneIndexAbortingException_initWithNSException_(OrgApacheLuceneIndexAbortingException *self, NSException *cause) {
+  JavaLangException_initWithNSException_(self, cause);
   JreAssert(([cause isKindOfClass:[OrgApacheLuceneIndexAbortingException class]] == false), (@"org/apache/lucene/index/AbortingException.java:26 condition failed: assert cause instanceof AbortingException == false;"));
 }
 
-OrgApacheLuceneIndexAbortingException *new_OrgApacheLuceneIndexAbortingException_initWithJavaLangThrowable_(JavaLangThrowable *cause) {
-  OrgApacheLuceneIndexAbortingException *self = [OrgApacheLuceneIndexAbortingException alloc];
-  OrgApacheLuceneIndexAbortingException_initWithJavaLangThrowable_(self, cause);
-  return self;
+OrgApacheLuceneIndexAbortingException *new_OrgApacheLuceneIndexAbortingException_initWithNSException_(NSException *cause) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexAbortingException, initWithNSException_, cause)
 }
 
-OrgApacheLuceneIndexAbortingException *OrgApacheLuceneIndexAbortingException_wrapWithJavaLangThrowable_(JavaLangThrowable *t) {
+OrgApacheLuceneIndexAbortingException *create_OrgApacheLuceneIndexAbortingException_initWithNSException_(NSException *cause) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexAbortingException, initWithNSException_, cause)
+}
+
+OrgApacheLuceneIndexAbortingException *OrgApacheLuceneIndexAbortingException_wrapWithNSException_(NSException *t) {
   OrgApacheLuceneIndexAbortingException_initialize();
   if ([t isKindOfClass:[OrgApacheLuceneIndexAbortingException class]]) {
-    return (OrgApacheLuceneIndexAbortingException *) check_class_cast(t, [OrgApacheLuceneIndexAbortingException class]);
+    return (OrgApacheLuceneIndexAbortingException *) cast_chk(t, [OrgApacheLuceneIndexAbortingException class]);
   }
   else {
-    return [new_OrgApacheLuceneIndexAbortingException_initWithJavaLangThrowable_(t) autorelease];
+    return new_OrgApacheLuceneIndexAbortingException_initWithNSException_(t);
   }
 }
 

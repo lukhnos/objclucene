@@ -27,6 +27,10 @@ __attribute__((unused)) static void OrgApacheLuceneStoreBufferedChecksum_flush(O
 
 @implementation OrgApacheLuceneStoreBufferedChecksum
 
++ (jint)DEFAULT_BUFFERSIZE {
+  return OrgApacheLuceneStoreBufferedChecksum_DEFAULT_BUFFERSIZE;
+}
+
 - (instancetype)initWithJavaUtilZipChecksum:(id<JavaUtilZipChecksum>)inArg {
   OrgApacheLuceneStoreBufferedChecksum_initWithJavaUtilZipChecksum_(self, inArg);
   return self;
@@ -75,12 +79,6 @@ __attribute__((unused)) static void OrgApacheLuceneStoreBufferedChecksum_flush(O
   OrgApacheLuceneStoreBufferedChecksum_flush(self);
 }
 
-- (void)dealloc {
-  RELEASE_(in_);
-  RELEASE_(buffer_);
-  [super dealloc];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithJavaUtilZipChecksum:", "BufferedChecksum", NULL, 0x1, NULL, NULL },
@@ -108,21 +106,25 @@ void OrgApacheLuceneStoreBufferedChecksum_initWithJavaUtilZipChecksum_(OrgApache
 }
 
 OrgApacheLuceneStoreBufferedChecksum *new_OrgApacheLuceneStoreBufferedChecksum_initWithJavaUtilZipChecksum_(id<JavaUtilZipChecksum> inArg) {
-  OrgApacheLuceneStoreBufferedChecksum *self = [OrgApacheLuceneStoreBufferedChecksum alloc];
-  OrgApacheLuceneStoreBufferedChecksum_initWithJavaUtilZipChecksum_(self, inArg);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreBufferedChecksum, initWithJavaUtilZipChecksum_, inArg)
+}
+
+OrgApacheLuceneStoreBufferedChecksum *create_OrgApacheLuceneStoreBufferedChecksum_initWithJavaUtilZipChecksum_(id<JavaUtilZipChecksum> inArg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreBufferedChecksum, initWithJavaUtilZipChecksum_, inArg)
 }
 
 void OrgApacheLuceneStoreBufferedChecksum_initWithJavaUtilZipChecksum_withInt_(OrgApacheLuceneStoreBufferedChecksum *self, id<JavaUtilZipChecksum> inArg, jint bufferSize) {
   NSObject_init(self);
-  JreStrongAssign(&self->in_, inArg);
-  JreStrongAssignAndConsume(&self->buffer_, [IOSByteArray newArrayWithLength:bufferSize]);
+  self->in_ = inArg;
+  self->buffer_ = [IOSByteArray newArrayWithLength:bufferSize];
 }
 
 OrgApacheLuceneStoreBufferedChecksum *new_OrgApacheLuceneStoreBufferedChecksum_initWithJavaUtilZipChecksum_withInt_(id<JavaUtilZipChecksum> inArg, jint bufferSize) {
-  OrgApacheLuceneStoreBufferedChecksum *self = [OrgApacheLuceneStoreBufferedChecksum alloc];
-  OrgApacheLuceneStoreBufferedChecksum_initWithJavaUtilZipChecksum_withInt_(self, inArg, bufferSize);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreBufferedChecksum, initWithJavaUtilZipChecksum_withInt_, inArg, bufferSize)
+}
+
+OrgApacheLuceneStoreBufferedChecksum *create_OrgApacheLuceneStoreBufferedChecksum_initWithJavaUtilZipChecksum_withInt_(id<JavaUtilZipChecksum> inArg, jint bufferSize) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreBufferedChecksum, initWithJavaUtilZipChecksum_withInt_, inArg, bufferSize)
 }
 
 void OrgApacheLuceneStoreBufferedChecksum_flush(OrgApacheLuceneStoreBufferedChecksum *self) {

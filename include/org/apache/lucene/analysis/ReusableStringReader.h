@@ -5,23 +5,26 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisReusableStringReader_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisReusableStringReader_RESTRICT
-#define OrgApacheLuceneAnalysisReusableStringReader_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisReusableStringReader")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisReusableStringReader
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisReusableStringReader 0
 #else
-#define OrgApacheLuceneAnalysisReusableStringReader_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisReusableStringReader 1
 #endif
-#undef OrgApacheLuceneAnalysisReusableStringReader_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisReusableStringReader
 
-#if !defined (_OrgApacheLuceneAnalysisReusableStringReader_) && (OrgApacheLuceneAnalysisReusableStringReader_INCLUDE_ALL || OrgApacheLuceneAnalysisReusableStringReader_INCLUDE)
-#define _OrgApacheLuceneAnalysisReusableStringReader_
+#if !defined (OrgApacheLuceneAnalysisReusableStringReader_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisReusableStringReader || defined(INCLUDE_OrgApacheLuceneAnalysisReusableStringReader))
+#define OrgApacheLuceneAnalysisReusableStringReader_
 
-#define JavaIoReader_RESTRICT 1
-#define JavaIoReader_INCLUDE 1
+#define RESTRICT_JavaIoReader 1
+#define INCLUDE_JavaIoReader 1
 #include "java/io/Reader.h"
 
 @class IOSCharArray;
 
+/*!
+ @brief Internal class to enable reuse of the string reader by <code>Analyzer.tokenStream(String,String)</code>
+ */
 @interface OrgApacheLuceneAnalysisReusableStringReader : JavaIoReader
 
 #pragma mark Public
@@ -48,8 +51,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisReusableStringReader_init(OrgApach
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisReusableStringReader *new_OrgApacheLuceneAnalysisReusableStringReader_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisReusableStringReader *create_OrgApacheLuceneAnalysisReusableStringReader_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisReusableStringReader)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisReusableStringReader_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisReusableStringReader")

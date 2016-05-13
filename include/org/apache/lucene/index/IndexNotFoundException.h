@@ -5,25 +5,34 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneIndexIndexNotFoundException_INCLUDE_ALL")
-#if OrgApacheLuceneIndexIndexNotFoundException_RESTRICT
-#define OrgApacheLuceneIndexIndexNotFoundException_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneIndexIndexNotFoundException")
+#ifdef RESTRICT_OrgApacheLuceneIndexIndexNotFoundException
+#define INCLUDE_ALL_OrgApacheLuceneIndexIndexNotFoundException 0
 #else
-#define OrgApacheLuceneIndexIndexNotFoundException_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneIndexIndexNotFoundException 1
 #endif
-#undef OrgApacheLuceneIndexIndexNotFoundException_RESTRICT
+#undef RESTRICT_OrgApacheLuceneIndexIndexNotFoundException
 
-#if !defined (_OrgApacheLuceneIndexIndexNotFoundException_) && (OrgApacheLuceneIndexIndexNotFoundException_INCLUDE_ALL || OrgApacheLuceneIndexIndexNotFoundException_INCLUDE)
-#define _OrgApacheLuceneIndexIndexNotFoundException_
+#if !defined (OrgApacheLuceneIndexIndexNotFoundException_) && (INCLUDE_ALL_OrgApacheLuceneIndexIndexNotFoundException || defined(INCLUDE_OrgApacheLuceneIndexIndexNotFoundException))
+#define OrgApacheLuceneIndexIndexNotFoundException_
 
-#define JavaIoFileNotFoundException_RESTRICT 1
-#define JavaIoFileNotFoundException_INCLUDE 1
+#define RESTRICT_JavaIoFileNotFoundException 1
+#define INCLUDE_JavaIoFileNotFoundException 1
 #include "java/io/FileNotFoundException.h"
 
+/*!
+ @brief Signals that no index was found in the Directory.
+ Possibly because the
+ directory is empty, however can also indicate an index corruption.
+ */
 @interface OrgApacheLuceneIndexIndexNotFoundException : JavaIoFileNotFoundException
 
 #pragma mark Public
 
+/*!
+ @brief Creates IndexFileNotFoundException with the
+ description message.
+ */
 - (instancetype)initWithNSString:(NSString *)msg;
 
 @end
@@ -34,8 +43,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneIndexIndexNotFoundException_initWithNSStri
 
 FOUNDATION_EXPORT OrgApacheLuceneIndexIndexNotFoundException *new_OrgApacheLuceneIndexIndexNotFoundException_initWithNSString_(NSString *msg) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneIndexIndexNotFoundException *create_OrgApacheLuceneIndexIndexNotFoundException_initWithNSString_(NSString *msg);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneIndexIndexNotFoundException)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneIndexIndexNotFoundException_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneIndexIndexNotFoundException")

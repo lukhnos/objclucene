@@ -15,11 +15,6 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (void)dealloc {
-  RELEASE_(string_);
-  [super dealloc];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "init", "SuggestWord", NULL, 0x1, NULL, NULL },
@@ -40,9 +35,11 @@ void OrgApacheLuceneSearchSpellSuggestWord_init(OrgApacheLuceneSearchSpellSugges
 }
 
 OrgApacheLuceneSearchSpellSuggestWord *new_OrgApacheLuceneSearchSpellSuggestWord_init() {
-  OrgApacheLuceneSearchSpellSuggestWord *self = [OrgApacheLuceneSearchSpellSuggestWord alloc];
-  OrgApacheLuceneSearchSpellSuggestWord_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSpellSuggestWord, init)
+}
+
+OrgApacheLuceneSearchSpellSuggestWord *create_OrgApacheLuceneSearchSpellSuggestWord_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneSearchSpellSuggestWord, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneSearchSpellSuggestWord)

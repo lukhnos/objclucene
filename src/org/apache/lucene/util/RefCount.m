@@ -44,7 +44,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilRefCount, refCount_, JavaUtilConcurrentAt
     }
   }
   else if (rc < 0) {
-    @throw [new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$", @"too many decRef calls: refCount is ", rc, @" after decrement")) autorelease];
+    @throw new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$", @"too many decRef calls: refCount is ", rc, @" after decrement"));
   }
 }
 
@@ -58,12 +58,6 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilRefCount, refCount_, JavaUtilConcurrentAt
 
 - (void)incRef {
   [((JavaUtilConcurrentAtomicAtomicInteger *) nil_chk(refCount_)) incrementAndGet];
-}
-
-- (void)dealloc {
-  RELEASE_(refCount_);
-  RELEASE_(object_);
-  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -87,14 +81,16 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilRefCount, refCount_, JavaUtilConcurrentAt
 
 void OrgApacheLuceneUtilRefCount_initWithId_(OrgApacheLuceneUtilRefCount *self, id object) {
   NSObject_init(self);
-  JreStrongAssignAndConsume(&self->refCount_, new_JavaUtilConcurrentAtomicAtomicInteger_initWithInt_(1));
-  JreStrongAssign(&self->object_, object);
+  self->refCount_ = new_JavaUtilConcurrentAtomicAtomicInteger_initWithInt_(1);
+  self->object_ = object;
 }
 
 OrgApacheLuceneUtilRefCount *new_OrgApacheLuceneUtilRefCount_initWithId_(id object) {
-  OrgApacheLuceneUtilRefCount *self = [OrgApacheLuceneUtilRefCount alloc];
-  OrgApacheLuceneUtilRefCount_initWithId_(self, object);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilRefCount, initWithId_, object)
+}
+
+OrgApacheLuceneUtilRefCount *create_OrgApacheLuceneUtilRefCount_initWithId_(id object) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilRefCount, initWithId_, object)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilRefCount)

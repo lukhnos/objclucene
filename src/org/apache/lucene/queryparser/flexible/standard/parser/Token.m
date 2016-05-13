@@ -7,9 +7,14 @@
 #include "J2ObjC_source.h"
 #include "org/apache/lucene/queryparser/flexible/standard/parser/Token.h"
 
+/*!
+ @brief The version identifier for this Serializable class.
+ Increment only if the <i>serialized</i> form of the
+ class changes.
+ */
+inline jlong OrgApacheLuceneQueryparserFlexibleStandardParserToken_get_serialVersionUID();
 #define OrgApacheLuceneQueryparserFlexibleStandardParserToken_serialVersionUID 1LL
-
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneQueryparserFlexibleStandardParserToken, serialVersionUID, jlong)
+J2OBJC_STATIC_FIELD_CONSTANT(OrgApacheLuceneQueryparserFlexibleStandardParserToken, serialVersionUID, jlong)
 
 @implementation OrgApacheLuceneQueryparserFlexibleStandardParserToken
 
@@ -48,13 +53,6 @@ J2OBJC_IGNORE_DESIGNATED_END
   return OrgApacheLuceneQueryparserFlexibleStandardParserToken_newTokenWithInt_(ofKind);
 }
 
-- (void)dealloc {
-  RELEASE_(image_);
-  RELEASE_(next_);
-  RELEASE_(specialToken_);
-  [super dealloc];
-}
-
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "getValue", NULL, "Ljava.lang.Object;", 0x1, NULL, NULL },
@@ -87,9 +85,11 @@ void OrgApacheLuceneQueryparserFlexibleStandardParserToken_init(OrgApacheLuceneQ
 }
 
 OrgApacheLuceneQueryparserFlexibleStandardParserToken *new_OrgApacheLuceneQueryparserFlexibleStandardParserToken_init() {
-  OrgApacheLuceneQueryparserFlexibleStandardParserToken *self = [OrgApacheLuceneQueryparserFlexibleStandardParserToken alloc];
-  OrgApacheLuceneQueryparserFlexibleStandardParserToken_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleStandardParserToken, init)
+}
+
+OrgApacheLuceneQueryparserFlexibleStandardParserToken *create_OrgApacheLuceneQueryparserFlexibleStandardParserToken_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleStandardParserToken, init)
 }
 
 void OrgApacheLuceneQueryparserFlexibleStandardParserToken_initWithInt_(OrgApacheLuceneQueryparserFlexibleStandardParserToken *self, jint kind) {
@@ -97,28 +97,32 @@ void OrgApacheLuceneQueryparserFlexibleStandardParserToken_initWithInt_(OrgApach
 }
 
 OrgApacheLuceneQueryparserFlexibleStandardParserToken *new_OrgApacheLuceneQueryparserFlexibleStandardParserToken_initWithInt_(jint kind) {
-  OrgApacheLuceneQueryparserFlexibleStandardParserToken *self = [OrgApacheLuceneQueryparserFlexibleStandardParserToken alloc];
-  OrgApacheLuceneQueryparserFlexibleStandardParserToken_initWithInt_(self, kind);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleStandardParserToken, initWithInt_, kind)
+}
+
+OrgApacheLuceneQueryparserFlexibleStandardParserToken *create_OrgApacheLuceneQueryparserFlexibleStandardParserToken_initWithInt_(jint kind) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleStandardParserToken, initWithInt_, kind)
 }
 
 void OrgApacheLuceneQueryparserFlexibleStandardParserToken_initWithInt_withNSString_(OrgApacheLuceneQueryparserFlexibleStandardParserToken *self, jint kind, NSString *image) {
   NSObject_init(self);
   self->kind_ = kind;
-  JreStrongAssign(&self->image_, image);
+  self->image_ = image;
 }
 
 OrgApacheLuceneQueryparserFlexibleStandardParserToken *new_OrgApacheLuceneQueryparserFlexibleStandardParserToken_initWithInt_withNSString_(jint kind, NSString *image) {
-  OrgApacheLuceneQueryparserFlexibleStandardParserToken *self = [OrgApacheLuceneQueryparserFlexibleStandardParserToken alloc];
-  OrgApacheLuceneQueryparserFlexibleStandardParserToken_initWithInt_withNSString_(self, kind, image);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleStandardParserToken, initWithInt_withNSString_, kind, image)
+}
+
+OrgApacheLuceneQueryparserFlexibleStandardParserToken *create_OrgApacheLuceneQueryparserFlexibleStandardParserToken_initWithInt_withNSString_(jint kind, NSString *image) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneQueryparserFlexibleStandardParserToken, initWithInt_withNSString_, kind, image)
 }
 
 OrgApacheLuceneQueryparserFlexibleStandardParserToken *OrgApacheLuceneQueryparserFlexibleStandardParserToken_newTokenWithInt_withNSString_(jint ofKind, NSString *image) {
   OrgApacheLuceneQueryparserFlexibleStandardParserToken_initialize();
   switch (ofKind) {
     default:
-    return [new_OrgApacheLuceneQueryparserFlexibleStandardParserToken_initWithInt_withNSString_(ofKind, image) autorelease];
+    return new_OrgApacheLuceneQueryparserFlexibleStandardParserToken_initWithInt_withNSString_(ofKind, image);
   }
 }
 

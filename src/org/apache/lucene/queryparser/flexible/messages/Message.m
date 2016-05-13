@@ -3,9 +3,7 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/messages/Message.java
 //
 
-#include "IOSObjectArray.h"
 #include "J2ObjC_source.h"
-#include "java/util/Locale.h"
 #include "org/apache/lucene/queryparser/flexible/messages/Message.h"
 
 @interface OrgApacheLuceneQueryparserFlexibleMessagesMessage : NSObject

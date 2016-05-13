@@ -8,9 +8,13 @@
 
 J2OBJC_INITIALIZED_DEFN(OrgLukhnosPortmobileFileStandardCopyOption)
 
-OrgLukhnosPortmobileFileStandardCopyOption *OrgLukhnosPortmobileFileStandardCopyOption_ATOMIC_MOVE_;
+OrgLukhnosPortmobileFileStandardCopyOption *OrgLukhnosPortmobileFileStandardCopyOption_ATOMIC_MOVE;
 
 @implementation OrgLukhnosPortmobileFileStandardCopyOption
+
++ (OrgLukhnosPortmobileFileStandardCopyOption *)ATOMIC_MOVE {
+  return OrgLukhnosPortmobileFileStandardCopyOption_ATOMIC_MOVE;
+}
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
 - (instancetype)init {
@@ -21,17 +25,17 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgLukhnosPortmobileFileStandardCopyOption class]) {
-    JreStrongAssignAndConsume(&OrgLukhnosPortmobileFileStandardCopyOption_ATOMIC_MOVE_, new_OrgLukhnosPortmobileFileStandardCopyOption_init());
+    OrgLukhnosPortmobileFileStandardCopyOption_ATOMIC_MOVE = new_OrgLukhnosPortmobileFileStandardCopyOption_init();
     J2OBJC_SET_INITIALIZED(OrgLukhnosPortmobileFileStandardCopyOption)
   }
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "StandardCopyOption", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
-    { "ATOMIC_MOVE_", NULL, 0x19, "Lorg.lukhnos.portmobile.file.StandardCopyOption;", &OrgLukhnosPortmobileFileStandardCopyOption_ATOMIC_MOVE_, NULL, .constantValue.asLong = 0 },
+    { "ATOMIC_MOVE", "ATOMIC_MOVE", 0x19, "Lorg.lukhnos.portmobile.file.StandardCopyOption;", &OrgLukhnosPortmobileFileStandardCopyOption_ATOMIC_MOVE, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgLukhnosPortmobileFileStandardCopyOption = { 2, "StandardCopyOption", "org.lukhnos.portmobile.file", NULL, 0x1, 1, methods, 1, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgLukhnosPortmobileFileStandardCopyOption;
@@ -44,9 +48,11 @@ void OrgLukhnosPortmobileFileStandardCopyOption_init(OrgLukhnosPortmobileFileSta
 }
 
 OrgLukhnosPortmobileFileStandardCopyOption *new_OrgLukhnosPortmobileFileStandardCopyOption_init() {
-  OrgLukhnosPortmobileFileStandardCopyOption *self = [OrgLukhnosPortmobileFileStandardCopyOption alloc];
-  OrgLukhnosPortmobileFileStandardCopyOption_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgLukhnosPortmobileFileStandardCopyOption, init)
+}
+
+OrgLukhnosPortmobileFileStandardCopyOption *create_OrgLukhnosPortmobileFileStandardCopyOption_init() {
+  J2OBJC_CREATE_IMPL(OrgLukhnosPortmobileFileStandardCopyOption, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgLukhnosPortmobileFileStandardCopyOption)

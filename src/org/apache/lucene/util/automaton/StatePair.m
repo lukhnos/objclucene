@@ -23,7 +23,7 @@
 
 - (jboolean)isEqual:(id)obj {
   if ([obj isKindOfClass:[OrgApacheLuceneUtilAutomatonStatePair class]]) {
-    OrgApacheLuceneUtilAutomatonStatePair *p = (OrgApacheLuceneUtilAutomatonStatePair *) check_class_cast(obj, [OrgApacheLuceneUtilAutomatonStatePair class]);
+    OrgApacheLuceneUtilAutomatonStatePair *p = (OrgApacheLuceneUtilAutomatonStatePair *) cast_chk(obj, [OrgApacheLuceneUtilAutomatonStatePair class]);
     return ((OrgApacheLuceneUtilAutomatonStatePair *) nil_chk(p))->s1_ == s1_ && p->s2_ == s2_;
   }
   else return false;
@@ -64,9 +64,11 @@ void OrgApacheLuceneUtilAutomatonStatePair_initWithInt_withInt_withInt_(OrgApach
 }
 
 OrgApacheLuceneUtilAutomatonStatePair *new_OrgApacheLuceneUtilAutomatonStatePair_initWithInt_withInt_withInt_(jint s, jint s1, jint s2) {
-  OrgApacheLuceneUtilAutomatonStatePair *self = [OrgApacheLuceneUtilAutomatonStatePair alloc];
-  OrgApacheLuceneUtilAutomatonStatePair_initWithInt_withInt_withInt_(self, s, s1, s2);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilAutomatonStatePair, initWithInt_withInt_withInt_, s, s1, s2)
+}
+
+OrgApacheLuceneUtilAutomatonStatePair *create_OrgApacheLuceneUtilAutomatonStatePair_initWithInt_withInt_withInt_(jint s, jint s1, jint s2) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilAutomatonStatePair, initWithInt_withInt_withInt_, s, s1, s2)
 }
 
 void OrgApacheLuceneUtilAutomatonStatePair_initWithInt_withInt_(OrgApacheLuceneUtilAutomatonStatePair *self, jint s1, jint s2) {
@@ -77,9 +79,11 @@ void OrgApacheLuceneUtilAutomatonStatePair_initWithInt_withInt_(OrgApacheLuceneU
 }
 
 OrgApacheLuceneUtilAutomatonStatePair *new_OrgApacheLuceneUtilAutomatonStatePair_initWithInt_withInt_(jint s1, jint s2) {
-  OrgApacheLuceneUtilAutomatonStatePair *self = [OrgApacheLuceneUtilAutomatonStatePair alloc];
-  OrgApacheLuceneUtilAutomatonStatePair_initWithInt_withInt_(self, s1, s2);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneUtilAutomatonStatePair, initWithInt_withInt_, s1, s2)
+}
+
+OrgApacheLuceneUtilAutomatonStatePair *create_OrgApacheLuceneUtilAutomatonStatePair_initWithInt_withInt_(jint s1, jint s2) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneUtilAutomatonStatePair, initWithInt_withInt_, s1, s2)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilAutomatonStatePair)

@@ -3,14 +3,17 @@
 //  source: ./core/src/java/org/apache/lucene/util/package-info.java
 //
 
+/*!
+ @brief Some utility classes.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneUtilPackage_info_RESTRICT
-#define OrgApacheLuceneUtilPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneUtilPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneUtilPackage_info 0
 #else
-#define OrgApacheLuceneUtilPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilPackage_info 1
 #endif
-#undef OrgApacheLuceneUtilPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilPackage_info
 
-#pragma pop_macro("OrgApacheLuceneUtilPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilPackage_info")

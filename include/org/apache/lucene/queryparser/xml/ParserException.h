@@ -5,23 +5,25 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserXmlParserException_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserXmlParserException_RESTRICT
-#define OrgApacheLuceneQueryparserXmlParserException_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlParserException")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserXmlParserException
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserXmlParserException 0
 #else
-#define OrgApacheLuceneQueryparserXmlParserException_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserXmlParserException 1
 #endif
-#undef OrgApacheLuceneQueryparserXmlParserException_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserXmlParserException
 
-#if !defined (_OrgApacheLuceneQueryparserXmlParserException_) && (OrgApacheLuceneQueryparserXmlParserException_INCLUDE_ALL || OrgApacheLuceneQueryparserXmlParserException_INCLUDE)
-#define _OrgApacheLuceneQueryparserXmlParserException_
+#if !defined (OrgApacheLuceneQueryparserXmlParserException_) && (INCLUDE_ALL_OrgApacheLuceneQueryparserXmlParserException || defined(INCLUDE_OrgApacheLuceneQueryparserXmlParserException))
+#define OrgApacheLuceneQueryparserXmlParserException_
 
-#define JavaLangException_RESTRICT 1
-#define JavaLangException_INCLUDE 1
+#define RESTRICT_JavaLangException 1
+#define INCLUDE_JavaLangException 1
 #include "java/lang/Exception.h"
 
-@class JavaLangThrowable;
-
+/*!
+ @brief Thrown when the xml queryparser encounters 
+ invalid syntax/configuration.
+ */
 @interface OrgApacheLuceneQueryparserXmlParserException : JavaLangException
 
 #pragma mark Public
@@ -31,9 +33,9 @@
 - (instancetype)initWithNSString:(NSString *)message;
 
 - (instancetype)initWithNSString:(NSString *)message
-           withJavaLangThrowable:(JavaLangThrowable *)cause;
+                 withNSException:(NSException *)cause;
 
-- (instancetype)initWithJavaLangThrowable:(JavaLangThrowable *)cause;
+- (instancetype)initWithNSException:(NSException *)cause;
 
 @end
 
@@ -43,20 +45,28 @@ FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlParserException_init(OrgApac
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlParserException *new_OrgApacheLuceneQueryparserXmlParserException_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlParserException *create_OrgApacheLuceneQueryparserXmlParserException_init();
+
 FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlParserException_initWithNSString_(OrgApacheLuceneQueryparserXmlParserException *self, NSString *message);
 
 FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlParserException *new_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_(NSString *message) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlParserException_initWithNSString_withJavaLangThrowable_(OrgApacheLuceneQueryparserXmlParserException *self, NSString *message, JavaLangThrowable *cause);
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlParserException *create_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_(NSString *message);
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlParserException *new_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_withJavaLangThrowable_(NSString *message, JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlParserException_initWithNSString_withNSException_(OrgApacheLuceneQueryparserXmlParserException *self, NSString *message, NSException *cause);
 
-FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlParserException_initWithJavaLangThrowable_(OrgApacheLuceneQueryparserXmlParserException *self, JavaLangThrowable *cause);
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlParserException *new_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_withNSException_(NSString *message, NSException *cause) NS_RETURNS_RETAINED;
 
-FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlParserException *new_OrgApacheLuceneQueryparserXmlParserException_initWithJavaLangThrowable_(JavaLangThrowable *cause) NS_RETURNS_RETAINED;
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlParserException *create_OrgApacheLuceneQueryparserXmlParserException_initWithNSString_withNSException_(NSString *message, NSException *cause);
+
+FOUNDATION_EXPORT void OrgApacheLuceneQueryparserXmlParserException_initWithNSException_(OrgApacheLuceneQueryparserXmlParserException *self, NSException *cause);
+
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlParserException *new_OrgApacheLuceneQueryparserXmlParserException_initWithNSException_(NSException *cause) NS_RETURNS_RETAINED;
+
+FOUNDATION_EXPORT OrgApacheLuceneQueryparserXmlParserException *create_OrgApacheLuceneQueryparserXmlParserException_initWithNSException_(NSException *cause);
 
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneQueryparserXmlParserException)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneQueryparserXmlParserException_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserXmlParserException")

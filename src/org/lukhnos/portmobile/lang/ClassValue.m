@@ -26,21 +26,15 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (id)getWithIOSClass:(IOSClass *)type {
   if ([((id<JavaUtilMap>) nil_chk(cache_)) containsKeyWithId:type]) {
-    return [cache_ getWithId:type];
+    return [((id<JavaUtilMap>) nil_chk(cache_)) getWithId:type];
   }
   id value = [self computeValueWithIOSClass:type];
-  [cache_ putWithId:type withId:value];
+  (void) [((id<JavaUtilMap>) nil_chk(cache_)) putWithId:type withId:value];
   return value;
 }
 
 - (void)removeWithIOSClass:(IOSClass *)type {
-  [((id<JavaUtilMap>) nil_chk(cache_)) removeWithId:type];
-}
-
-- (void)dealloc {
-  RELEASE_(defaultCachedMember_);
-  RELEASE_(cache_);
-  [super dealloc];
+  (void) [((id<JavaUtilMap>) nil_chk(cache_)) removeWithId:type];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -48,7 +42,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "init", "ClassValue", NULL, 0x4, NULL, NULL },
     { "computeValueWithIOSClass:", "computeValue", "TT;", 0x404, NULL, "(Ljava/lang/Class<*>;)TT;" },
     { "getWithIOSClass:", "get", "TT;", 0x1, NULL, "(Ljava/lang/Class<*>;)TT;" },
-    { "removeWithIOSClass:", "remove", "V", 0x1, NULL, NULL },
+    { "removeWithIOSClass:", "remove", "V", 0x1, NULL, "(Ljava/lang/Class<*>;)V" },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "defaultCached_", NULL, 0x0, "Z", NULL, NULL, .constantValue.asLong = 0 },
@@ -64,8 +58,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 void OrgLukhnosPortmobileLangClassValue_init(OrgLukhnosPortmobileLangClassValue *self) {
   NSObject_init(self);
   self->defaultCached_ = false;
-  JreStrongAssign(&self->defaultCachedMember_, nil);
-  JreStrongAssignAndConsume(&self->cache_, new_JavaUtilHashMap_init());
+  self->defaultCachedMember_ = nil;
+  self->cache_ = new_JavaUtilHashMap_init();
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgLukhnosPortmobileLangClassValue)

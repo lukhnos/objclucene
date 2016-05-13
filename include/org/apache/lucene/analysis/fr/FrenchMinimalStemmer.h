@@ -5,19 +5,26 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisFrFrenchMinimalStemmer_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisFrFrenchMinimalStemmer_RESTRICT
-#define OrgApacheLuceneAnalysisFrFrenchMinimalStemmer_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisFrFrenchMinimalStemmer")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisFrFrenchMinimalStemmer
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisFrFrenchMinimalStemmer 0
 #else
-#define OrgApacheLuceneAnalysisFrFrenchMinimalStemmer_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisFrFrenchMinimalStemmer 1
 #endif
-#undef OrgApacheLuceneAnalysisFrFrenchMinimalStemmer_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisFrFrenchMinimalStemmer
 
-#if !defined (_OrgApacheLuceneAnalysisFrFrenchMinimalStemmer_) && (OrgApacheLuceneAnalysisFrFrenchMinimalStemmer_INCLUDE_ALL || OrgApacheLuceneAnalysisFrFrenchMinimalStemmer_INCLUDE)
-#define _OrgApacheLuceneAnalysisFrFrenchMinimalStemmer_
+#if !defined (OrgApacheLuceneAnalysisFrFrenchMinimalStemmer_) && (INCLUDE_ALL_OrgApacheLuceneAnalysisFrFrenchMinimalStemmer || defined(INCLUDE_OrgApacheLuceneAnalysisFrFrenchMinimalStemmer))
+#define OrgApacheLuceneAnalysisFrFrenchMinimalStemmer_
 
 @class IOSCharArray;
 
+/*!
+ @brief Light Stemmer for French.
+ <p>
+ This stemmer implements the following algorithm:
+ <i>A Stemming procedure and stopword list for general French corpora.</i>
+ Jacques Savoy.
+ */
 @interface OrgApacheLuceneAnalysisFrFrenchMinimalStemmer : NSObject
 
 #pragma mark Public
@@ -35,8 +42,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneAnalysisFrFrenchMinimalStemmer_init(OrgApa
 
 FOUNDATION_EXPORT OrgApacheLuceneAnalysisFrFrenchMinimalStemmer *new_OrgApacheLuceneAnalysisFrFrenchMinimalStemmer_init() NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneAnalysisFrFrenchMinimalStemmer *create_OrgApacheLuceneAnalysisFrFrenchMinimalStemmer_init();
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneAnalysisFrFrenchMinimalStemmer)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneAnalysisFrFrenchMinimalStemmer_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisFrFrenchMinimalStemmer")

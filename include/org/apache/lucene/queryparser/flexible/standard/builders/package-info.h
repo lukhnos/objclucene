@@ -3,14 +3,25 @@
 //  source: ./queryparser/src/java/org/apache/lucene/queryparser/flexible/standard/builders/package-info.java
 //
 
+/*!
+ @brief Standard Lucene Query Node Builders.
+ <h2>Standard Lucene Query Node Builders</h2>
+ <p>
+ The package org.apache.lucene.queryparser.flexible.standard.builders contains all the builders needed
+ to build a Lucene Query object from a query node tree. These builders expect the query node tree was
+ already processed by the <code>org.apache.lucene.queryparser.flexible.standard.processors.StandardQueryNodeProcessorPipeline</code>.
+ <p>
+ <code>org.apache.lucene.queryparser.flexible.standard.builders.StandardQueryTreeBuilder</code> is a builder that already contains a defined map that maps each QueryNode object
+ with its respective builder.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneQueryparserFlexibleStandardBuildersPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneQueryparserFlexibleStandardBuildersPackage_info_RESTRICT
-#define OrgApacheLuceneQueryparserFlexibleStandardBuildersPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardBuildersPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardBuildersPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardBuildersPackage_info 0
 #else
-#define OrgApacheLuceneQueryparserFlexibleStandardBuildersPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardBuildersPackage_info 1
 #endif
-#undef OrgApacheLuceneQueryparserFlexibleStandardBuildersPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneQueryparserFlexibleStandardBuildersPackage_info
 
-#pragma pop_macro("OrgApacheLuceneQueryparserFlexibleStandardBuildersPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneQueryparserFlexibleStandardBuildersPackage_info")

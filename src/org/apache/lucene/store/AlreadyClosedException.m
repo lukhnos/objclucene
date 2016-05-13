@@ -5,7 +5,6 @@
 
 #include "J2ObjC_source.h"
 #include "java/lang/IllegalStateException.h"
-#include "java/lang/Throwable.h"
 #include "org/apache/lucene/store/AlreadyClosedException.h"
 
 @implementation OrgApacheLuceneStoreAlreadyClosedException
@@ -16,15 +15,15 @@
 }
 
 - (instancetype)initWithNSString:(NSString *)message
-           withJavaLangThrowable:(JavaLangThrowable *)cause {
-  OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_withJavaLangThrowable_(self, message, cause);
+                 withNSException:(NSException *)cause {
+  OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_withNSException_(self, message, cause);
   return self;
 }
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithNSString:", "AlreadyClosedException", NULL, 0x1, NULL, NULL },
-    { "initWithNSString:withJavaLangThrowable:", "AlreadyClosedException", NULL, 0x1, NULL, NULL },
+    { "initWithNSString:withNSException:", "AlreadyClosedException", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneStoreAlreadyClosedException = { 2, "AlreadyClosedException", "org.apache.lucene.store", NULL, 0x1, 2, methods, 0, NULL, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneStoreAlreadyClosedException;
@@ -37,19 +36,23 @@ void OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(OrgApacheLucen
 }
 
 OrgApacheLuceneStoreAlreadyClosedException *new_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(NSString *message) {
-  OrgApacheLuceneStoreAlreadyClosedException *self = [OrgApacheLuceneStoreAlreadyClosedException alloc];
-  OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(self, message);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreAlreadyClosedException, initWithNSString_, message)
 }
 
-void OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_withJavaLangThrowable_(OrgApacheLuceneStoreAlreadyClosedException *self, NSString *message, JavaLangThrowable *cause) {
-  JavaLangIllegalStateException_initWithNSString_withJavaLangThrowable_(self, message, cause);
+OrgApacheLuceneStoreAlreadyClosedException *create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_(NSString *message) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreAlreadyClosedException, initWithNSString_, message)
 }
 
-OrgApacheLuceneStoreAlreadyClosedException *new_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_withJavaLangThrowable_(NSString *message, JavaLangThrowable *cause) {
-  OrgApacheLuceneStoreAlreadyClosedException *self = [OrgApacheLuceneStoreAlreadyClosedException alloc];
-  OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_withJavaLangThrowable_(self, message, cause);
-  return self;
+void OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_withNSException_(OrgApacheLuceneStoreAlreadyClosedException *self, NSString *message, NSException *cause) {
+  JavaLangIllegalStateException_initWithNSString_withNSException_(self, message, cause);
+}
+
+OrgApacheLuceneStoreAlreadyClosedException *new_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_withNSException_(NSString *message, NSException *cause) {
+  J2OBJC_NEW_IMPL(OrgApacheLuceneStoreAlreadyClosedException, initWithNSString_withNSException_, message, cause)
+}
+
+OrgApacheLuceneStoreAlreadyClosedException *create_OrgApacheLuceneStoreAlreadyClosedException_initWithNSString_withNSException_(NSString *message, NSException *cause) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneStoreAlreadyClosedException, initWithNSString_withNSException_, message, cause)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneStoreAlreadyClosedException)

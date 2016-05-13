@@ -5,19 +5,23 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchHighlightTextFragment_INCLUDE_ALL")
-#if OrgApacheLuceneSearchHighlightTextFragment_RESTRICT
-#define OrgApacheLuceneSearchHighlightTextFragment_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightTextFragment")
+#ifdef RESTRICT_OrgApacheLuceneSearchHighlightTextFragment
+#define INCLUDE_ALL_OrgApacheLuceneSearchHighlightTextFragment 0
 #else
-#define OrgApacheLuceneSearchHighlightTextFragment_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchHighlightTextFragment 1
 #endif
-#undef OrgApacheLuceneSearchHighlightTextFragment_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchHighlightTextFragment
 
-#if !defined (_OrgApacheLuceneSearchHighlightTextFragment_) && (OrgApacheLuceneSearchHighlightTextFragment_INCLUDE_ALL || OrgApacheLuceneSearchHighlightTextFragment_INCLUDE)
-#define _OrgApacheLuceneSearchHighlightTextFragment_
+#if !defined (OrgApacheLuceneSearchHighlightTextFragment_) && (INCLUDE_ALL_OrgApacheLuceneSearchHighlightTextFragment || defined(INCLUDE_OrgApacheLuceneSearchHighlightTextFragment))
+#define OrgApacheLuceneSearchHighlightTextFragment_
 
 @protocol JavaLangCharSequence;
 
+/*!
+ @brief Low-level class used to record information about a section of a document 
+ with a score.
+ */
 @interface OrgApacheLuceneSearchHighlightTextFragment : NSObject {
  @public
   id<JavaLangCharSequence> markedUpText_;
@@ -33,12 +37,21 @@
                                      withInt:(jint)textStartPos
                                      withInt:(jint)fragNum;
 
+/*!
+ @return true if this fragment follows the one passed
+ */
 - (jboolean)followsWithOrgApacheLuceneSearchHighlightTextFragment:(OrgApacheLuceneSearchHighlightTextFragment *)fragment;
 
+/*!
+ @return the fragment sequence number
+ */
 - (jint)getFragNum;
 
 - (jfloat)getScore;
 
+/*!
+ @param frag2 Fragment to be merged into this one
+ */
 - (void)mergeWithOrgApacheLuceneSearchHighlightTextFragment:(OrgApacheLuceneSearchHighlightTextFragment *)frag2;
 
 - (NSString *)description;
@@ -57,8 +70,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightTextFragment_initWithJavaLa
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightTextFragment *new_OrgApacheLuceneSearchHighlightTextFragment_initWithJavaLangCharSequence_withInt_withInt_(id<JavaLangCharSequence> markedUpText, jint textStartPos, jint fragNum) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightTextFragment *create_OrgApacheLuceneSearchHighlightTextFragment_initWithJavaLangCharSequence_withInt_withInt_(id<JavaLangCharSequence> markedUpText, jint textStartPos, jint fragNum);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightTextFragment)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchHighlightTextFragment_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightTextFragment")

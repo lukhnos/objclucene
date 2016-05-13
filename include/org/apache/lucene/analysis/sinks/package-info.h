@@ -3,14 +3,19 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/sinks/package-info.java
 //
 
+/*!
+ @brief <code>org.apache.lucene.analysis.sinks.TeeSinkTokenFilter</code> and implementations
+ of <code>org.apache.lucene.analysis.sinks.TeeSinkTokenFilter.SinkFilter</code> that
+ might be useful.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisSinksPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisSinksPackage_info_RESTRICT
-#define OrgApacheLuceneAnalysisSinksPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisSinksPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisSinksPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisSinksPackage_info 0
 #else
-#define OrgApacheLuceneAnalysisSinksPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisSinksPackage_info 1
 #endif
-#undef OrgApacheLuceneAnalysisSinksPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisSinksPackage_info
 
-#pragma pop_macro("OrgApacheLuceneAnalysisSinksPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisSinksPackage_info")

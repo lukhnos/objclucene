@@ -3,14 +3,17 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/ngram/package-info.java
 //
 
+/*!
+ @brief Character n-gram tokenizers and filters.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisNgramPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisNgramPackage_info_RESTRICT
-#define OrgApacheLuceneAnalysisNgramPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisNgramPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisNgramPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisNgramPackage_info 0
 #else
-#define OrgApacheLuceneAnalysisNgramPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisNgramPackage_info 1
 #endif
-#undef OrgApacheLuceneAnalysisNgramPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisNgramPackage_info
 
-#pragma pop_macro("OrgApacheLuceneAnalysisNgramPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisNgramPackage_info")

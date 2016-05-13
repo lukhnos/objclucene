@@ -29,9 +29,11 @@ void OrgApacheLuceneIndexIndexNotFoundException_initWithNSString_(OrgApacheLucen
 }
 
 OrgApacheLuceneIndexIndexNotFoundException *new_OrgApacheLuceneIndexIndexNotFoundException_initWithNSString_(NSString *msg) {
-  OrgApacheLuceneIndexIndexNotFoundException *self = [OrgApacheLuceneIndexIndexNotFoundException alloc];
-  OrgApacheLuceneIndexIndexNotFoundException_initWithNSString_(self, msg);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexIndexNotFoundException, initWithNSString_, msg)
+}
+
+OrgApacheLuceneIndexIndexNotFoundException *create_OrgApacheLuceneIndexIndexNotFoundException_initWithNSString_(NSString *msg) {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneIndexIndexNotFoundException, initWithNSString_, msg)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneIndexIndexNotFoundException)

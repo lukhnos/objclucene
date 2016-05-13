@@ -3,14 +3,17 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/en/package-info.java
 //
 
+/*!
+ @brief Analyzer for English.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisEnPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisEnPackage_info_RESTRICT
-#define OrgApacheLuceneAnalysisEnPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisEnPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisEnPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisEnPackage_info 0
 #else
-#define OrgApacheLuceneAnalysisEnPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisEnPackage_info 1
 #endif
-#undef OrgApacheLuceneAnalysisEnPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisEnPackage_info
 
-#pragma pop_macro("OrgApacheLuceneAnalysisEnPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisEnPackage_info")

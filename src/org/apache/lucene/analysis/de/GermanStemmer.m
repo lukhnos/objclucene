@@ -12,28 +12,72 @@
 
 @interface OrgApacheLuceneAnalysisDeGermanStemmer () {
  @public
+  /*!
+   @brief Buffer for the terms while stemming them.
+   */
   JavaLangStringBuilder *sb_;
+  /*!
+   @brief Amount of characters that are removed with <tt>substitute()</tt> while stemming.
+   */
   jint substCount_;
 }
 
+/*!
+ @brief Checks if a term could be stemmed.
+ @return true if, and only if, the given term consists in letters.
+ */
 - (jboolean)isStemmableWithNSString:(NSString *)term;
 
+/*!
+ @brief suffix stripping (stemming) on the current term.
+ The stripping is reduced
+ to the seven "base" suffixes "e", "s", "n", "t", "em", "er" and * "nd",
+ from which all regular suffixes are build of. The simplification causes
+ some overstemming, and way more irregular stems, but still provides unique.
+ discriminators in the most of those cases.
+ The algorithm is context free, except of the length restrictions.
+ */
 - (void)stripWithJavaLangStringBuilder:(JavaLangStringBuilder *)buffer;
 
+/*!
+ @brief Does some optimizations on the term.
+ This optimisations are
+ contextual.
+ */
 - (void)optimizeWithJavaLangStringBuilder:(JavaLangStringBuilder *)buffer;
 
+/*!
+ @brief Removes a particle denotion ("ge") from a term.
+ */
 - (void)removeParticleDenotionWithJavaLangStringBuilder:(JavaLangStringBuilder *)buffer;
 
+/*!
+ @brief Do some substitutions for the term to reduce overstemming:
+ - Substitute Umlauts with their corresponding vowel:<code>äöü -> aou</code>,
+ "ß" is substituted by "ss"
+ - Substitute a second char of a pair of equal characters with
+ an asterisk: <code>??
+ -> ?*</code>
+ - Substitute some common character combinations with a token:
+ <code>sch/ch/ei/ie/ig/st -> $/§/%/&/#/!</code>
+ */
 - (void)substituteWithJavaLangStringBuilder:(JavaLangStringBuilder *)buffer;
 
+/*!
+ @brief Undoes the changes made by substitute().
+ That are character pairs and
+ character combinations. Umlauts will remain as their corresponding vowel,
+ as "ß" remains as "ss".
+ */
 - (void)resubstituteWithJavaLangStringBuilder:(JavaLangStringBuilder *)buffer;
 
 @end
 
 J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisDeGermanStemmer, sb_, JavaLangStringBuilder *)
 
-static JavaUtilLocale *OrgApacheLuceneAnalysisDeGermanStemmer_locale_;
-J2OBJC_STATIC_FIELD_GETTER(OrgApacheLuceneAnalysisDeGermanStemmer, locale_, JavaUtilLocale *)
+inline JavaUtilLocale *OrgApacheLuceneAnalysisDeGermanStemmer_get_locale();
+static JavaUtilLocale *OrgApacheLuceneAnalysisDeGermanStemmer_locale;
+J2OBJC_STATIC_FIELD_OBJ_FINAL(OrgApacheLuceneAnalysisDeGermanStemmer, locale, JavaUtilLocale *)
 
 __attribute__((unused)) static jboolean OrgApacheLuceneAnalysisDeGermanStemmer_isStemmableWithNSString_(OrgApacheLuceneAnalysisDeGermanStemmer *self, NSString *term);
 
@@ -52,16 +96,16 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneAnalysisDeGermanStemmer)
 @implementation OrgApacheLuceneAnalysisDeGermanStemmer
 
 - (NSString *)stemWithNSString:(NSString *)term {
-  term = [((NSString *) nil_chk(term)) lowercaseStringWithJRELocale:OrgApacheLuceneAnalysisDeGermanStemmer_locale_];
+  term = [((NSString *) nil_chk(term)) lowercaseStringWithJRELocale:OrgApacheLuceneAnalysisDeGermanStemmer_locale];
   if (!OrgApacheLuceneAnalysisDeGermanStemmer_isStemmableWithNSString_(self, term)) return term;
-  [sb_ delete__WithInt:0 withInt:[((JavaLangStringBuilder *) nil_chk(sb_)) length]];
-  [sb_ insertWithInt:0 withNSString:term];
+  (void) [((JavaLangStringBuilder *) nil_chk(sb_)) delete__WithInt:0 withInt:[sb_ length]];
+  (void) [((JavaLangStringBuilder *) nil_chk(sb_)) insertWithInt:0 withNSString:term];
   OrgApacheLuceneAnalysisDeGermanStemmer_substituteWithJavaLangStringBuilder_(self, sb_);
   OrgApacheLuceneAnalysisDeGermanStemmer_stripWithJavaLangStringBuilder_(self, sb_);
   OrgApacheLuceneAnalysisDeGermanStemmer_optimizeWithJavaLangStringBuilder_(self, sb_);
   OrgApacheLuceneAnalysisDeGermanStemmer_resubstituteWithJavaLangStringBuilder_(self, sb_);
   OrgApacheLuceneAnalysisDeGermanStemmer_removeParticleDenotionWithJavaLangStringBuilder_(self, sb_);
-  return [sb_ description];
+  return [((JavaLangStringBuilder *) nil_chk(sb_)) description];
 }
 
 - (jboolean)isStemmableWithNSString:(NSString *)term {
@@ -95,14 +139,9 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
-- (void)dealloc {
-  RELEASE_(sb_);
-  [super dealloc];
-}
-
 + (void)initialize {
   if (self == [OrgApacheLuceneAnalysisDeGermanStemmer class]) {
-    JreStrongAssignAndConsume(&OrgApacheLuceneAnalysisDeGermanStemmer_locale_, new_JavaUtilLocale_initWithNSString_withNSString_(@"de", @"DE"));
+    OrgApacheLuceneAnalysisDeGermanStemmer_locale = new_JavaUtilLocale_initWithNSString_withNSString_(@"de", @"DE");
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneAnalysisDeGermanStemmer)
   }
 }
@@ -116,12 +155,12 @@ J2OBJC_IGNORE_DESIGNATED_END
     { "removeParticleDenotionWithJavaLangStringBuilder:", "removeParticleDenotion", "V", 0x2, NULL, NULL },
     { "substituteWithJavaLangStringBuilder:", "substitute", "V", 0x2, NULL, NULL },
     { "resubstituteWithJavaLangStringBuilder:", "resubstitute", "V", 0x2, NULL, NULL },
-    { "init", NULL, NULL, 0x1, NULL, NULL },
+    { "init", "GermanStemmer", NULL, 0x1, NULL, NULL },
   };
   static const J2ObjcFieldInfo fields[] = {
     { "sb_", NULL, 0x2, "Ljava.lang.StringBuilder;", NULL, NULL, .constantValue.asLong = 0 },
     { "substCount_", NULL, 0x2, "I", NULL, NULL, .constantValue.asLong = 0 },
-    { "locale_", NULL, 0x1a, "Ljava.util.Locale;", &OrgApacheLuceneAnalysisDeGermanStemmer_locale_, NULL, .constantValue.asLong = 0 },
+    { "locale", "locale", 0x1a, "Ljava.util.Locale;", &OrgApacheLuceneAnalysisDeGermanStemmer_locale, NULL, .constantValue.asLong = 0 },
   };
   static const J2ObjcClassInfo _OrgApacheLuceneAnalysisDeGermanStemmer = { 2, "GermanStemmer", "org.apache.lucene.analysis.de", NULL, 0x1, 8, methods, 3, fields, 0, NULL, 0, NULL, NULL, NULL };
   return &_OrgApacheLuceneAnalysisDeGermanStemmer;
@@ -140,25 +179,25 @@ void OrgApacheLuceneAnalysisDeGermanStemmer_stripWithJavaLangStringBuilder_(OrgA
   jboolean doMore = true;
   while (doMore && [((JavaLangStringBuilder *) nil_chk(buffer)) length] > 3) {
     if (([((JavaLangStringBuilder *) nil_chk(buffer)) length] + self->substCount_ > 5) && [((NSString *) nil_chk([buffer substringWithInt:[buffer length] - 2 withInt:[buffer length]])) isEqual:@"nd"]) {
-      [buffer delete__WithInt:[buffer length] - 2 withInt:[buffer length]];
+      (void) [buffer delete__WithInt:[buffer length] - 2 withInt:[buffer length]];
     }
     else if (([buffer length] + self->substCount_ > 4) && [((NSString *) nil_chk([buffer substringWithInt:[buffer length] - 2 withInt:[buffer length]])) isEqual:@"em"]) {
-      [buffer delete__WithInt:[buffer length] - 2 withInt:[buffer length]];
+      (void) [buffer delete__WithInt:[buffer length] - 2 withInt:[buffer length]];
     }
     else if (([buffer length] + self->substCount_ > 4) && [((NSString *) nil_chk([buffer substringWithInt:[buffer length] - 2 withInt:[buffer length]])) isEqual:@"er"]) {
-      [buffer delete__WithInt:[buffer length] - 2 withInt:[buffer length]];
+      (void) [buffer delete__WithInt:[buffer length] - 2 withInt:[buffer length]];
     }
     else if ([buffer charAtWithInt:[buffer length] - 1] == 'e') {
-      [buffer deleteCharAtWithInt:[buffer length] - 1];
+      (void) [buffer deleteCharAtWithInt:[buffer length] - 1];
     }
     else if ([buffer charAtWithInt:[buffer length] - 1] == 's') {
-      [buffer deleteCharAtWithInt:[buffer length] - 1];
+      (void) [buffer deleteCharAtWithInt:[buffer length] - 1];
     }
     else if ([buffer charAtWithInt:[buffer length] - 1] == 'n') {
-      [buffer deleteCharAtWithInt:[buffer length] - 1];
+      (void) [buffer deleteCharAtWithInt:[buffer length] - 1];
     }
     else if ([buffer charAtWithInt:[buffer length] - 1] == 't') {
-      [buffer deleteCharAtWithInt:[buffer length] - 1];
+      (void) [buffer deleteCharAtWithInt:[buffer length] - 1];
     }
     else {
       doMore = false;
@@ -168,7 +207,7 @@ void OrgApacheLuceneAnalysisDeGermanStemmer_stripWithJavaLangStringBuilder_(OrgA
 
 void OrgApacheLuceneAnalysisDeGermanStemmer_optimizeWithJavaLangStringBuilder_(OrgApacheLuceneAnalysisDeGermanStemmer *self, JavaLangStringBuilder *buffer) {
   if ([((JavaLangStringBuilder *) nil_chk(buffer)) length] > 5 && [((NSString *) nil_chk([buffer substringWithInt:[buffer length] - 5 withInt:[buffer length]])) isEqual:@"erin*"]) {
-    [buffer deleteCharAtWithInt:[buffer length] - 1];
+    (void) [buffer deleteCharAtWithInt:[buffer length] - 1];
     OrgApacheLuceneAnalysisDeGermanStemmer_stripWithJavaLangStringBuilder_(self, buffer);
   }
   if ([buffer length] > 0 && [buffer charAtWithInt:[buffer length] - 1] == ('z')) {
@@ -180,7 +219,7 @@ void OrgApacheLuceneAnalysisDeGermanStemmer_removeParticleDenotionWithJavaLangSt
   if ([((JavaLangStringBuilder *) nil_chk(buffer)) length] > 4) {
     for (jint c = 0; c < [buffer length] - 3; c++) {
       if ([((NSString *) nil_chk([buffer substringWithInt:c withInt:c + 4])) isEqual:@"gege"]) {
-        [buffer delete__WithInt:c withInt:c + 2];
+        (void) [buffer delete__WithInt:c withInt:c + 2];
         return;
       }
     }
@@ -204,38 +243,38 @@ void OrgApacheLuceneAnalysisDeGermanStemmer_substituteWithJavaLangStringBuilder_
     }
     else if ([buffer charAtWithInt:c] == 0x00df) {
       [buffer setCharAtWithInt:c withChar:'s'];
-      [buffer insertWithInt:c + 1 withChar:'s'];
+      (void) [buffer insertWithInt:c + 1 withChar:'s'];
       self->substCount_++;
     }
     if (c < [buffer length] - 1) {
       if ((c < [buffer length] - 2) && [buffer charAtWithInt:c] == 's' && [buffer charAtWithInt:c + 1] == 'c' && [buffer charAtWithInt:c + 2] == 'h') {
         [buffer setCharAtWithInt:c withChar:'$'];
-        [buffer delete__WithInt:c + 1 withInt:c + 3];
+        (void) [buffer delete__WithInt:c + 1 withInt:c + 3];
         self->substCount_ += 2;
       }
       else if ([buffer charAtWithInt:c] == 'c' && [buffer charAtWithInt:c + 1] == 'h') {
         [buffer setCharAtWithInt:c withChar:0x00a7];
-        [buffer deleteCharAtWithInt:c + 1];
+        (void) [buffer deleteCharAtWithInt:c + 1];
         self->substCount_++;
       }
       else if ([buffer charAtWithInt:c] == 'e' && [buffer charAtWithInt:c + 1] == 'i') {
         [buffer setCharAtWithInt:c withChar:'%'];
-        [buffer deleteCharAtWithInt:c + 1];
+        (void) [buffer deleteCharAtWithInt:c + 1];
         self->substCount_++;
       }
       else if ([buffer charAtWithInt:c] == 'i' && [buffer charAtWithInt:c + 1] == 'e') {
         [buffer setCharAtWithInt:c withChar:'&'];
-        [buffer deleteCharAtWithInt:c + 1];
+        (void) [buffer deleteCharAtWithInt:c + 1];
         self->substCount_++;
       }
       else if ([buffer charAtWithInt:c] == 'i' && [buffer charAtWithInt:c + 1] == 'g') {
         [buffer setCharAtWithInt:c withChar:'#'];
-        [buffer deleteCharAtWithInt:c + 1];
+        (void) [buffer deleteCharAtWithInt:c + 1];
         self->substCount_++;
       }
       else if ([buffer charAtWithInt:c] == 's' && [buffer charAtWithInt:c + 1] == 't') {
         [buffer setCharAtWithInt:c withChar:'!'];
-        [buffer deleteCharAtWithInt:c + 1];
+        (void) [buffer deleteCharAtWithInt:c + 1];
         self->substCount_++;
       }
     }
@@ -250,41 +289,43 @@ void OrgApacheLuceneAnalysisDeGermanStemmer_resubstituteWithJavaLangStringBuilde
     }
     else if ([buffer charAtWithInt:c] == '$') {
       [buffer setCharAtWithInt:c withChar:'s'];
-      [buffer insertWithInt:c + 1 withCharArray:[IOSCharArray arrayWithChars:(jchar[]){ 'c', 'h' } count:2] withInt:0 withInt:2];
+      (void) [buffer insertWithInt:c + 1 withCharArray:[IOSCharArray newArrayWithChars:(jchar[]){ 'c', 'h' } count:2] withInt:0 withInt:2];
     }
     else if ([buffer charAtWithInt:c] == 0x00a7) {
       [buffer setCharAtWithInt:c withChar:'c'];
-      [buffer insertWithInt:c + 1 withChar:'h'];
+      (void) [buffer insertWithInt:c + 1 withChar:'h'];
     }
     else if ([buffer charAtWithInt:c] == '%') {
       [buffer setCharAtWithInt:c withChar:'e'];
-      [buffer insertWithInt:c + 1 withChar:'i'];
+      (void) [buffer insertWithInt:c + 1 withChar:'i'];
     }
     else if ([buffer charAtWithInt:c] == '&') {
       [buffer setCharAtWithInt:c withChar:'i'];
-      [buffer insertWithInt:c + 1 withChar:'e'];
+      (void) [buffer insertWithInt:c + 1 withChar:'e'];
     }
     else if ([buffer charAtWithInt:c] == '#') {
       [buffer setCharAtWithInt:c withChar:'i'];
-      [buffer insertWithInt:c + 1 withChar:'g'];
+      (void) [buffer insertWithInt:c + 1 withChar:'g'];
     }
     else if ([buffer charAtWithInt:c] == '!') {
       [buffer setCharAtWithInt:c withChar:'s'];
-      [buffer insertWithInt:c + 1 withChar:'t'];
+      (void) [buffer insertWithInt:c + 1 withChar:'t'];
     }
   }
 }
 
 void OrgApacheLuceneAnalysisDeGermanStemmer_init(OrgApacheLuceneAnalysisDeGermanStemmer *self) {
   NSObject_init(self);
-  JreStrongAssignAndConsume(&self->sb_, new_JavaLangStringBuilder_init());
+  self->sb_ = new_JavaLangStringBuilder_init();
   self->substCount_ = 0;
 }
 
 OrgApacheLuceneAnalysisDeGermanStemmer *new_OrgApacheLuceneAnalysisDeGermanStemmer_init() {
-  OrgApacheLuceneAnalysisDeGermanStemmer *self = [OrgApacheLuceneAnalysisDeGermanStemmer alloc];
-  OrgApacheLuceneAnalysisDeGermanStemmer_init(self);
-  return self;
+  J2OBJC_NEW_IMPL(OrgApacheLuceneAnalysisDeGermanStemmer, init)
+}
+
+OrgApacheLuceneAnalysisDeGermanStemmer *create_OrgApacheLuceneAnalysisDeGermanStemmer_init() {
+  J2OBJC_CREATE_IMPL(OrgApacheLuceneAnalysisDeGermanStemmer, init)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneAnalysisDeGermanStemmer)

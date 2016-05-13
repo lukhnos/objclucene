@@ -5,17 +5,20 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneSearchHighlightWeightedTerm_INCLUDE_ALL")
-#if OrgApacheLuceneSearchHighlightWeightedTerm_RESTRICT
-#define OrgApacheLuceneSearchHighlightWeightedTerm_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightWeightedTerm")
+#ifdef RESTRICT_OrgApacheLuceneSearchHighlightWeightedTerm
+#define INCLUDE_ALL_OrgApacheLuceneSearchHighlightWeightedTerm 0
 #else
-#define OrgApacheLuceneSearchHighlightWeightedTerm_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneSearchHighlightWeightedTerm 1
 #endif
-#undef OrgApacheLuceneSearchHighlightWeightedTerm_RESTRICT
+#undef RESTRICT_OrgApacheLuceneSearchHighlightWeightedTerm
 
-#if !defined (_OrgApacheLuceneSearchHighlightWeightedTerm_) && (OrgApacheLuceneSearchHighlightWeightedTerm_INCLUDE_ALL || OrgApacheLuceneSearchHighlightWeightedTerm_INCLUDE)
-#define _OrgApacheLuceneSearchHighlightWeightedTerm_
+#if !defined (OrgApacheLuceneSearchHighlightWeightedTerm_) && (INCLUDE_ALL_OrgApacheLuceneSearchHighlightWeightedTerm || defined(INCLUDE_OrgApacheLuceneSearchHighlightWeightedTerm))
+#define OrgApacheLuceneSearchHighlightWeightedTerm_
 
+/*!
+ @brief Lightweight class to hold term and a weight value used for scoring this term
+ */
 @interface OrgApacheLuceneSearchHighlightWeightedTerm : NSObject {
  @public
   jfloat weight_;
@@ -27,12 +30,24 @@
 - (instancetype)initWithFloat:(jfloat)weight
                  withNSString:(NSString *)term;
 
+/*!
+ @return the term value (stemmed)
+ */
 - (NSString *)getTerm;
 
+/*!
+ @return the weight associated with this term
+ */
 - (jfloat)getWeight;
 
+/*!
+ @param term the term value (stemmed)
+ */
 - (void)setTermWithNSString:(NSString *)term;
 
+/*!
+ @param weight the weight associated with this term
+ */
 - (void)setWeightWithFloat:(jfloat)weight;
 
 @end
@@ -45,8 +60,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneSearchHighlightWeightedTerm_initWithFloat_
 
 FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightWeightedTerm *new_OrgApacheLuceneSearchHighlightWeightedTerm_initWithFloat_withNSString_(jfloat weight, NSString *term) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneSearchHighlightWeightedTerm *create_OrgApacheLuceneSearchHighlightWeightedTerm_initWithFloat_withNSString_(jfloat weight, NSString *term);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneSearchHighlightWeightedTerm)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneSearchHighlightWeightedTerm_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneSearchHighlightWeightedTerm")

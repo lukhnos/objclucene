@@ -5,31 +5,53 @@
 
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneUtilMapOfSets_INCLUDE_ALL")
-#if OrgApacheLuceneUtilMapOfSets_RESTRICT
-#define OrgApacheLuceneUtilMapOfSets_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneUtilMapOfSets")
+#ifdef RESTRICT_OrgApacheLuceneUtilMapOfSets
+#define INCLUDE_ALL_OrgApacheLuceneUtilMapOfSets 0
 #else
-#define OrgApacheLuceneUtilMapOfSets_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneUtilMapOfSets 1
 #endif
-#undef OrgApacheLuceneUtilMapOfSets_RESTRICT
+#undef RESTRICT_OrgApacheLuceneUtilMapOfSets
 
-#if !defined (_OrgApacheLuceneUtilMapOfSets_) && (OrgApacheLuceneUtilMapOfSets_INCLUDE_ALL || OrgApacheLuceneUtilMapOfSets_INCLUDE)
-#define _OrgApacheLuceneUtilMapOfSets_
+#if !defined (OrgApacheLuceneUtilMapOfSets_) && (INCLUDE_ALL_OrgApacheLuceneUtilMapOfSets || defined(INCLUDE_OrgApacheLuceneUtilMapOfSets))
+#define OrgApacheLuceneUtilMapOfSets_
 
 @protocol JavaUtilCollection;
 @protocol JavaUtilMap;
 
+/*!
+ @brief Helper class for keeping Lists of Objects associated with keys.
+ <b>WARNING: THIS CLASS IS NOT THREAD SAFE</b>
+ */
 @interface OrgApacheLuceneUtilMapOfSets : NSObject
 
 #pragma mark Public
 
+/*!
+ @param m the backing store for this object
+ */
 - (instancetype)initWithJavaUtilMap:(id<JavaUtilMap>)m;
 
+/*!
+ @return direct access to the map backing this object.
+ */
 - (id<JavaUtilMap>)getMap;
 
+/*!
+ @brief Adds val to the Set associated with key in the Map.
+ If key is not 
+ already in the map, a new Set will first be created.
+ @return the size of the Set associated with key once val is added to it.
+ */
 - (jint)putWithId:(id)key
            withId:(id)val;
 
+/*!
+ @brief Adds multiple vals to the Set associated with key in the Map.
+ If key is not 
+ already in the map, a new Set will first be created.
+ @return the size of the Set associated with key once val is added to it.
+ */
 - (jint)putAllWithId:(id)key
 withJavaUtilCollection:(id<JavaUtilCollection>)vals;
 
@@ -41,8 +63,10 @@ FOUNDATION_EXPORT void OrgApacheLuceneUtilMapOfSets_initWithJavaUtilMap_(OrgApac
 
 FOUNDATION_EXPORT OrgApacheLuceneUtilMapOfSets *new_OrgApacheLuceneUtilMapOfSets_initWithJavaUtilMap_(id<JavaUtilMap> m) NS_RETURNS_RETAINED;
 
+FOUNDATION_EXPORT OrgApacheLuceneUtilMapOfSets *create_OrgApacheLuceneUtilMapOfSets_initWithJavaUtilMap_(id<JavaUtilMap> m);
+
 J2OBJC_TYPE_LITERAL_HEADER(OrgApacheLuceneUtilMapOfSets)
 
 #endif
 
-#pragma pop_macro("OrgApacheLuceneUtilMapOfSets_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneUtilMapOfSets")

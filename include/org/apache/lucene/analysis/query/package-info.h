@@ -3,14 +3,17 @@
 //  source: ./analysis/common/src/java/org/apache/lucene/analysis/query/package-info.java
 //
 
+/*!
+ @brief Automatically filter high-frequency stopwords.
+ */
 #include "J2ObjC_header.h"
 
-#pragma push_macro("OrgApacheLuceneAnalysisQueryPackage_info_INCLUDE_ALL")
-#if OrgApacheLuceneAnalysisQueryPackage_info_RESTRICT
-#define OrgApacheLuceneAnalysisQueryPackage_info_INCLUDE_ALL 0
+#pragma push_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisQueryPackage_info")
+#ifdef RESTRICT_OrgApacheLuceneAnalysisQueryPackage_info
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisQueryPackage_info 0
 #else
-#define OrgApacheLuceneAnalysisQueryPackage_info_INCLUDE_ALL 1
+#define INCLUDE_ALL_OrgApacheLuceneAnalysisQueryPackage_info 1
 #endif
-#undef OrgApacheLuceneAnalysisQueryPackage_info_RESTRICT
+#undef RESTRICT_OrgApacheLuceneAnalysisQueryPackage_info
 
-#pragma pop_macro("OrgApacheLuceneAnalysisQueryPackage_info_INCLUDE_ALL")
+#pragma pop_macro("INCLUDE_ALL_OrgApacheLuceneAnalysisQueryPackage_info")

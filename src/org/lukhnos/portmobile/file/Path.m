@@ -30,7 +30,7 @@
 }
 
 - (OrgLukhnosPortmobileFilePath *)getFileName {
-  return [new_OrgLukhnosPortmobileFilePath_initWithNSString_([((JavaIoFile *) nil_chk(file_)) getName]) autorelease];
+  return new_OrgLukhnosPortmobileFilePath_initWithNSString_([((JavaIoFile *) nil_chk(file_)) getName]);
 }
 
 - (NSString *)description {
@@ -41,11 +41,11 @@
   if ([((NSString *) nil_chk(other)) isEmpty]) {
     return self;
   }
-  JavaIoFile *otherFile = [new_JavaIoFile_initWithNSString_(other) autorelease];
+  JavaIoFile *otherFile = new_JavaIoFile_initWithNSString_(other);
   if ([otherFile isAbsolute]) {
-    return [new_OrgLukhnosPortmobileFilePath_initWithJavaIoFile_(otherFile) autorelease];
+    return new_OrgLukhnosPortmobileFilePath_initWithJavaIoFile_(otherFile);
   }
-  return [new_OrgLukhnosPortmobileFilePath_initWithJavaIoFile_([new_JavaIoFile_initWithJavaIoFile_withNSString_(self->file_, other) autorelease]) autorelease];
+  return new_OrgLukhnosPortmobileFilePath_initWithJavaIoFile_(new_JavaIoFile_initWithJavaIoFile_withNSString_(self->file_, other));
 }
 
 - (jboolean)isAbsolute {
@@ -53,16 +53,11 @@
 }
 
 - (OrgLukhnosPortmobileFilePath *)toAbsolutePath {
-  return [new_OrgLukhnosPortmobileFilePath_initWithJavaIoFile_([((JavaIoFile *) nil_chk(file_)) getAbsoluteFile]) autorelease];
+  return new_OrgLukhnosPortmobileFilePath_initWithJavaIoFile_([((JavaIoFile *) nil_chk(file_)) getAbsoluteFile]);
 }
 
 - (OrgLukhnosPortmobileFilePath *)getParent {
-  return [new_OrgLukhnosPortmobileFilePath_initWithNSString_([((JavaIoFile *) nil_chk(file_)) getParent]) autorelease];
-}
-
-- (void)dealloc {
-  RELEASE_(file_);
-  [super dealloc];
+  return new_OrgLukhnosPortmobileFilePath_initWithNSString_([((JavaIoFile *) nil_chk(file_)) getParent]);
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -89,24 +84,28 @@
 
 void OrgLukhnosPortmobileFilePath_initWithNSString_(OrgLukhnosPortmobileFilePath *self, NSString *path) {
   NSObject_init(self);
-  JreStrongAssignAndConsume(&self->file_, new_JavaIoFile_initWithNSString_(path));
+  self->file_ = new_JavaIoFile_initWithNSString_(path);
 }
 
 OrgLukhnosPortmobileFilePath *new_OrgLukhnosPortmobileFilePath_initWithNSString_(NSString *path) {
-  OrgLukhnosPortmobileFilePath *self = [OrgLukhnosPortmobileFilePath alloc];
-  OrgLukhnosPortmobileFilePath_initWithNSString_(self, path);
-  return self;
+  J2OBJC_NEW_IMPL(OrgLukhnosPortmobileFilePath, initWithNSString_, path)
+}
+
+OrgLukhnosPortmobileFilePath *create_OrgLukhnosPortmobileFilePath_initWithNSString_(NSString *path) {
+  J2OBJC_CREATE_IMPL(OrgLukhnosPortmobileFilePath, initWithNSString_, path)
 }
 
 void OrgLukhnosPortmobileFilePath_initWithJavaIoFile_(OrgLukhnosPortmobileFilePath *self, JavaIoFile *file) {
   NSObject_init(self);
-  JreStrongAssign(&self->file_, file);
+  self->file_ = file;
 }
 
 OrgLukhnosPortmobileFilePath *new_OrgLukhnosPortmobileFilePath_initWithJavaIoFile_(JavaIoFile *file) {
-  OrgLukhnosPortmobileFilePath *self = [OrgLukhnosPortmobileFilePath alloc];
-  OrgLukhnosPortmobileFilePath_initWithJavaIoFile_(self, file);
-  return self;
+  J2OBJC_NEW_IMPL(OrgLukhnosPortmobileFilePath, initWithJavaIoFile_, file)
+}
+
+OrgLukhnosPortmobileFilePath *create_OrgLukhnosPortmobileFilePath_initWithJavaIoFile_(JavaIoFile *file) {
+  J2OBJC_CREATE_IMPL(OrgLukhnosPortmobileFilePath, initWithJavaIoFile_, file)
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgLukhnosPortmobileFilePath)
