@@ -17,9 +17,9 @@
 
 @implementation OrgApacheLuceneIndexDocValuesFieldUpdates
 
-+ (jint)PAGE_SIZE {
-  return OrgApacheLuceneIndexDocValuesFieldUpdates_PAGE_SIZE;
-}
+//+ (jint)PAGE_SIZE {
+//  return OrgApacheLuceneIndexDocValuesFieldUpdates_PAGE_SIZE;
+//}
 
 - (instancetype)initWithNSString:(NSString *)field
 withOrgApacheLuceneIndexDocValuesType:(OrgApacheLuceneIndexDocValuesType *)type {
