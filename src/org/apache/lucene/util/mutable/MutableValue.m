@@ -43,7 +43,7 @@
 }
 
 - (jint)compareToWithId:(OrgApacheLuceneUtilMutableMutableValue *)other {
-  (void) cast_chk(other, [OrgApacheLuceneUtilMutableMutableValue class]);
+  cast_chk(other, [OrgApacheLuceneUtilMutableMutableValue class]);
   IOSClass *c1 = [self getClass];
   IOSClass *c2 = [((OrgApacheLuceneUtilMutableMutableValue *) nil_chk(other)) getClass];
   if (c1 != c2) {

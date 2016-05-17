@@ -30,7 +30,7 @@
 }
 
 - (OrgLukhnosPortmobileFilePath *)getFileName {
-  return new_OrgLukhnosPortmobileFilePath_initWithNSString_([((JavaIoFile *) nil_chk(file_)) getName]);
+  return create_OrgLukhnosPortmobileFilePath_initWithNSString_([((JavaIoFile *) nil_chk(file_)) getName]);
 }
 
 - (NSString *)description {
@@ -41,11 +41,11 @@
   if ([((NSString *) nil_chk(other)) isEmpty]) {
     return self;
   }
-  JavaIoFile *otherFile = new_JavaIoFile_initWithNSString_(other);
+  JavaIoFile *otherFile = create_JavaIoFile_initWithNSString_(other);
   if ([otherFile isAbsolute]) {
-    return new_OrgLukhnosPortmobileFilePath_initWithJavaIoFile_(otherFile);
+    return create_OrgLukhnosPortmobileFilePath_initWithJavaIoFile_(otherFile);
   }
-  return new_OrgLukhnosPortmobileFilePath_initWithJavaIoFile_(new_JavaIoFile_initWithJavaIoFile_withNSString_(self->file_, other));
+  return create_OrgLukhnosPortmobileFilePath_initWithJavaIoFile_(create_JavaIoFile_initWithJavaIoFile_withNSString_(self->file_, other));
 }
 
 - (jboolean)isAbsolute {
@@ -53,11 +53,16 @@
 }
 
 - (OrgLukhnosPortmobileFilePath *)toAbsolutePath {
-  return new_OrgLukhnosPortmobileFilePath_initWithJavaIoFile_([((JavaIoFile *) nil_chk(file_)) getAbsoluteFile]);
+  return create_OrgLukhnosPortmobileFilePath_initWithJavaIoFile_([((JavaIoFile *) nil_chk(file_)) getAbsoluteFile]);
 }
 
 - (OrgLukhnosPortmobileFilePath *)getParent {
-  return new_OrgLukhnosPortmobileFilePath_initWithNSString_([((JavaIoFile *) nil_chk(file_)) getParent]);
+  return create_OrgLukhnosPortmobileFilePath_initWithNSString_([((JavaIoFile *) nil_chk(file_)) getParent]);
+}
+
+- (void)dealloc {
+  RELEASE_(file_);
+  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -84,7 +89,7 @@
 
 void OrgLukhnosPortmobileFilePath_initWithNSString_(OrgLukhnosPortmobileFilePath *self, NSString *path) {
   NSObject_init(self);
-  self->file_ = new_JavaIoFile_initWithNSString_(path);
+  JreStrongAssignAndConsume(&self->file_, new_JavaIoFile_initWithNSString_(path));
 }
 
 OrgLukhnosPortmobileFilePath *new_OrgLukhnosPortmobileFilePath_initWithNSString_(NSString *path) {
@@ -97,7 +102,7 @@ OrgLukhnosPortmobileFilePath *create_OrgLukhnosPortmobileFilePath_initWithNSStri
 
 void OrgLukhnosPortmobileFilePath_initWithJavaIoFile_(OrgLukhnosPortmobileFilePath *self, JavaIoFile *file) {
   NSObject_init(self);
-  self->file_ = file;
+  JreStrongAssign(&self->file_, file);
 }
 
 OrgLukhnosPortmobileFilePath *new_OrgLukhnosPortmobileFilePath_initWithJavaIoFile_(JavaIoFile *file) {

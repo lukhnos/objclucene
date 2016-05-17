@@ -11,8 +11,6 @@
 
 __attribute__((unused)) static void OrgApacheLuceneIndexIndexOptions_initWithNSString_withInt_(OrgApacheLuceneIndexIndexOptions *self, NSString *__name, jint __ordinal);
 
-__attribute__((unused)) static OrgApacheLuceneIndexIndexOptions *new_OrgApacheLuceneIndexIndexOptions_initWithNSString_withInt_(NSString *__name, jint __ordinal) NS_RETURNS_RETAINED;
-
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexIndexOptions)
 
 OrgApacheLuceneIndexIndexOptions *OrgApacheLuceneIndexIndexOptions_values_[5];
@@ -57,11 +55,20 @@ OrgApacheLuceneIndexIndexOptions *OrgApacheLuceneIndexIndexOptions_values_[5];
 
 + (void)initialize {
   if (self == [OrgApacheLuceneIndexIndexOptions class]) {
-    JreEnum(OrgApacheLuceneIndexIndexOptions, NONE) = new_OrgApacheLuceneIndexIndexOptions_initWithNSString_withInt_(@"NONE", 0);
-    JreEnum(OrgApacheLuceneIndexIndexOptions, DOCS) = new_OrgApacheLuceneIndexIndexOptions_initWithNSString_withInt_(@"DOCS", 1);
-    JreEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS) = new_OrgApacheLuceneIndexIndexOptions_initWithNSString_withInt_(@"DOCS_AND_FREQS", 2);
-    JreEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS) = new_OrgApacheLuceneIndexIndexOptions_initWithNSString_withInt_(@"DOCS_AND_FREQS_AND_POSITIONS", 3);
-    JreEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS) = new_OrgApacheLuceneIndexIndexOptions_initWithNSString_withInt_(@"DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS", 4);
+    size_t objSize = class_getInstanceSize(self);
+    size_t allocSize = 5 * objSize;
+    uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
+    id e;
+    (JreEnum(OrgApacheLuceneIndexIndexOptions, NONE) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneIndexIndexOptions_initWithNSString_withInt_(e, @"NONE", 0);
+    (JreEnum(OrgApacheLuceneIndexIndexOptions, DOCS) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneIndexIndexOptions_initWithNSString_withInt_(e, @"DOCS", 1);
+    (JreEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneIndexIndexOptions_initWithNSString_withInt_(e, @"DOCS_AND_FREQS", 2);
+    (JreEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneIndexIndexOptions_initWithNSString_withInt_(e, @"DOCS_AND_FREQS_AND_POSITIONS", 3);
+    (JreEnum(OrgApacheLuceneIndexIndexOptions, DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneIndexIndexOptions_initWithNSString_withInt_(e, @"DOCS_AND_FREQS_AND_POSITIONS_AND_OFFSETS", 4);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneIndexIndexOptions)
   }
 }
@@ -85,10 +92,6 @@ void OrgApacheLuceneIndexIndexOptions_initWithNSString_withInt_(OrgApacheLuceneI
   JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
 }
 
-OrgApacheLuceneIndexIndexOptions *new_OrgApacheLuceneIndexIndexOptions_initWithNSString_withInt_(NSString *__name, jint __ordinal) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexIndexOptions, initWithNSString_withInt_, __name, __ordinal)
-}
-
 IOSObjectArray *OrgApacheLuceneIndexIndexOptions_values() {
   OrgApacheLuceneIndexIndexOptions_initialize();
   return [IOSObjectArray arrayWithObjects:OrgApacheLuceneIndexIndexOptions_values_ count:5 type:OrgApacheLuceneIndexIndexOptions_class_()];
@@ -102,7 +105,7 @@ OrgApacheLuceneIndexIndexOptions *OrgApacheLuceneIndexIndexOptions_valueOfWithNS
       return e;
     }
   }
-  @throw [[JavaLangIllegalArgumentException alloc] initWithNSString:name];
+  @throw [[[JavaLangIllegalArgumentException alloc] initWithNSString:name] autorelease];
   return nil;
 }
 

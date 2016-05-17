@@ -28,7 +28,7 @@
 @end
 
 void OrgLukhnosPortmobileFileAtomicMoveNotSupportedException_initWithNSString_withNSString_withNSString_(OrgLukhnosPortmobileFileAtomicMoveNotSupportedException *self, NSString *source, NSString *target, NSString *reason) {
-  JavaIoIOException_initWithNSString_(self, NSString_formatWithNSString_withNSObjectArray_(@"Atomic move not supported from %s to %s, reason: %s.", [IOSObjectArray newArrayWithObjects:(id[]){ source, target, reason } count:3 type:NSObject_class_()]));
+  JavaIoIOException_initWithNSString_(self, NSString_formatWithNSString_withNSObjectArray_(@"Atomic move not supported from %s to %s, reason: %s.", [IOSObjectArray arrayWithObjects:(id[]){ source, target, reason } count:3 type:NSObject_class_()]));
 }
 
 OrgLukhnosPortmobileFileAtomicMoveNotSupportedException *new_OrgLukhnosPortmobileFileAtomicMoveNotSupportedException_initWithNSString_withNSString_withNSString_(NSString *source, NSString *target, NSString *reason) {

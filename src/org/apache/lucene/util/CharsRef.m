@@ -78,7 +78,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (OrgApacheLuceneUtilCharsRef *)clone {
-  return new_OrgApacheLuceneUtilCharsRef_initWithCharArray_withInt_withInt_(chars_, offset_, length_);
+  return create_OrgApacheLuceneUtilCharsRef_initWithCharArray_withInt_withInt_(chars_, offset_, length_);
 }
 
 - (NSUInteger)hash {
@@ -119,7 +119,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (jint)compareToWithId:(OrgApacheLuceneUtilCharsRef *)other {
-  (void) cast_chk(other, [OrgApacheLuceneUtilCharsRef class]);
+  cast_chk(other, [OrgApacheLuceneUtilCharsRef class]);
   if (self == other) return 0;
   IOSCharArray *aChars = self->chars_;
   jint aUpto = self->offset_;
@@ -149,7 +149,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (jchar)charAtWithInt:(jint)index {
   if (index < 0 || index >= length_) {
-    @throw new_JavaLangIndexOutOfBoundsException_init();
+    @throw create_JavaLangIndexOutOfBoundsException_init();
   }
   return IOSCharArray_Get(nil_chk(chars_), offset_ + index);
 }
@@ -157,9 +157,9 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (id<JavaLangCharSequence>)subSequenceFrom:(jint)start
                                          to:(jint)end {
   if (start < 0 || end > length_ || start > end) {
-    @throw new_JavaLangIndexOutOfBoundsException_init();
+    @throw create_JavaLangIndexOutOfBoundsException_init();
   }
-  return new_OrgApacheLuceneUtilCharsRef_initWithCharArray_withInt_withInt_(chars_, offset_ + start, end - start);
+  return create_OrgApacheLuceneUtilCharsRef_initWithCharArray_withInt_withInt_(chars_, offset_ + start, end - start);
 }
 
 + (id<JavaUtilComparator>)getUTF16SortedAsUTF8Comparator {
@@ -172,45 +172,50 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (jboolean)isValid {
   if (chars_ == nil) {
-    @throw new_JavaLangIllegalStateException_initWithNSString_(@"chars is null");
+    @throw create_JavaLangIllegalStateException_initWithNSString_(@"chars is null");
   }
   if (length_ < 0) {
-    @throw new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I", @"length is negative: ", length_));
+    @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I", @"length is negative: ", length_));
   }
   if (length_ > chars_->size_) {
-    @throw new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$I", @"length is out of bounds: ", length_, @",chars.length=", chars_->size_));
+    @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$I", @"length is out of bounds: ", length_, @",chars.length=", chars_->size_));
   }
   if (offset_ < 0) {
-    @throw new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I", @"offset is negative: ", offset_));
+    @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I", @"offset is negative: ", offset_));
   }
   if (offset_ > chars_->size_) {
-    @throw new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$I", @"offset out of bounds: ", offset_, @",chars.length=", chars_->size_));
+    @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$I", @"offset out of bounds: ", offset_, @",chars.length=", chars_->size_));
   }
   if (offset_ + length_ < 0) {
-    @throw new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$I", @"offset+length is negative: offset=", offset_, @",length=", length_));
+    @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$I", @"offset+length is negative: offset=", offset_, @",length=", length_));
   }
   if (offset_ + length_ > chars_->size_) {
-    @throw new_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$I$I", @"offset+length out of bounds: offset=", offset_, @",length=", length_, @",chars.length=", chars_->size_));
+    @throw create_JavaLangIllegalStateException_initWithNSString_(JreStrcat("$I$I$I", @"offset+length out of bounds: offset=", offset_, @",length=", length_, @",chars.length=", chars_->size_));
   }
   return true;
 }
 
 + (IOSObjectArray *)__annotations_utf16SortedAsUTF8SortOrder_ {
-  return [IOSObjectArray newArrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (IOSObjectArray *)__annotations_getUTF16SortedAsUTF8Comparator {
-  return [IOSObjectArray newArrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+}
+
+- (void)dealloc {
+  RELEASE_(chars_);
+  [super dealloc];
 }
 
 - (id)copyWithZone:(NSZone *)zone {
-  return [self clone];
+  return [[self clone] retain];
 }
 
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilCharsRef class]) {
-    OrgApacheLuceneUtilCharsRef_EMPTY_CHARS = [IOSCharArray newArrayWithLength:0];
-    OrgApacheLuceneUtilCharsRef_utf16SortedAsUTF8SortOrder = new_OrgApacheLuceneUtilCharsRef_UTF16SortedAsUTF8Comparator_init();
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilCharsRef_EMPTY_CHARS, [IOSCharArray newArrayWithLength:0]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilCharsRef_utf16SortedAsUTF8SortOrder, new_OrgApacheLuceneUtilCharsRef_UTF16SortedAsUTF8Comparator_init());
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilCharsRef)
   }
 }
@@ -262,7 +267,7 @@ OrgApacheLuceneUtilCharsRef *create_OrgApacheLuceneUtilCharsRef_init() {
 
 void OrgApacheLuceneUtilCharsRef_initWithInt_(OrgApacheLuceneUtilCharsRef *self, jint capacity) {
   NSObject_init(self);
-  self->chars_ = [IOSCharArray newArrayWithLength:capacity];
+  JreStrongAssignAndConsume(&self->chars_, [IOSCharArray newArrayWithLength:capacity]);
 }
 
 OrgApacheLuceneUtilCharsRef *new_OrgApacheLuceneUtilCharsRef_initWithInt_(jint capacity) {
@@ -275,7 +280,7 @@ OrgApacheLuceneUtilCharsRef *create_OrgApacheLuceneUtilCharsRef_initWithInt_(jin
 
 void OrgApacheLuceneUtilCharsRef_initWithCharArray_withInt_withInt_(OrgApacheLuceneUtilCharsRef *self, IOSCharArray *chars, jint offset, jint length) {
   NSObject_init(self);
-  self->chars_ = chars;
+  JreStrongAssign(&self->chars_, chars);
   self->offset_ = offset;
   self->length_ = length;
   JreAssert(([self isValid]), (@"org/apache/lucene/util/CharsRef.java:62 condition failed: assert isValid();"));
@@ -291,7 +296,7 @@ OrgApacheLuceneUtilCharsRef *create_OrgApacheLuceneUtilCharsRef_initWithCharArra
 
 void OrgApacheLuceneUtilCharsRef_initWithNSString_(OrgApacheLuceneUtilCharsRef *self, NSString *string) {
   NSObject_init(self);
-  self->chars_ = [((NSString *) nil_chk(string)) toCharArray];
+  JreStrongAssign(&self->chars_, [((NSString *) nil_chk(string)) toCharArray]);
   self->offset_ = 0;
   self->length_ = ((IOSCharArray *) nil_chk(self->chars_))->size_;
 }
@@ -311,7 +316,7 @@ id<JavaUtilComparator> OrgApacheLuceneUtilCharsRef_getUTF16SortedAsUTF8Comparato
 
 OrgApacheLuceneUtilCharsRef *OrgApacheLuceneUtilCharsRef_deepCopyOfWithOrgApacheLuceneUtilCharsRef_(OrgApacheLuceneUtilCharsRef *other) {
   OrgApacheLuceneUtilCharsRef_initialize();
-  return new_OrgApacheLuceneUtilCharsRef_initWithCharArray_withInt_withInt_(JavaUtilArrays_copyOfRangeWithCharArray_withInt_withInt_(((OrgApacheLuceneUtilCharsRef *) nil_chk(other))->chars_, other->offset_, other->offset_ + other->length_), 0, other->length_);
+  return create_OrgApacheLuceneUtilCharsRef_initWithCharArray_withInt_withInt_(JavaUtilArrays_copyOfRangeWithCharArray_withInt_withInt_(((OrgApacheLuceneUtilCharsRef *) nil_chk(other))->chars_, other->offset_, other->offset_ + other->length_), 0, other->length_);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneUtilCharsRef)
@@ -358,7 +363,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 + (IOSObjectArray *)__annotations {
-  return [IOSObjectArray newArrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
+  return [IOSObjectArray arrayWithObjects:(id[]){ create_JavaLangDeprecated() } count:1 type:JavaLangAnnotationAnnotation_class_()];
 }
 
 + (const J2ObjcClassInfo *)__metadata {

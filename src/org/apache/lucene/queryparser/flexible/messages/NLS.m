@@ -148,7 +148,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneQueryparserFlexibleMessagesNLS class]) {
-    OrgApacheLuceneQueryparserFlexibleMessagesNLS_bundles = new_JavaUtilHashMap_initWithInt_(0);
+    JreStrongAssignAndConsume(&OrgApacheLuceneQueryparserFlexibleMessagesNLS_bundles, new_JavaUtilHashMap_initWithInt_(0));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneQueryparserFlexibleMessagesNLS)
   }
 }
@@ -206,7 +206,7 @@ NSString *OrgApacheLuceneQueryparserFlexibleMessagesNLS_getLocalizedMessageWithN
   OrgApacheLuceneQueryparserFlexibleMessagesNLS_initialize();
   NSString *str = OrgApacheLuceneQueryparserFlexibleMessagesNLS_getLocalizedMessageWithNSString_withJavaUtilLocale_(key, locale);
   if (((IOSObjectArray *) nil_chk(args))->size_ > 0) {
-    str = [new_JavaTextMessageFormat_initWithNSString_withJavaUtilLocale_(str, JreLoadStatic(JavaUtilLocale, ROOT)) formatWithId:args];
+    str = [create_JavaTextMessageFormat_initWithNSString_withJavaUtilLocale_(str, JreLoadStatic(JavaUtilLocale, ROOT)) formatWithId:args];
   }
   return str;
 }
@@ -220,7 +220,7 @@ void OrgApacheLuceneQueryparserFlexibleMessagesNLS_initializeMessagesWithNSStrin
   OrgApacheLuceneQueryparserFlexibleMessagesNLS_initialize();
   @try {
     OrgApacheLuceneQueryparserFlexibleMessagesNLS_load__WithIOSClass_(clazz);
-    if (![((id<JavaUtilMap>) nil_chk(OrgApacheLuceneQueryparserFlexibleMessagesNLS_bundles)) containsKeyWithId:bundleName]) (void) [((id<JavaUtilMap>) nil_chk(OrgApacheLuceneQueryparserFlexibleMessagesNLS_bundles)) putWithId:bundleName withId:clazz];
+    if (![((id<JavaUtilMap>) nil_chk(OrgApacheLuceneQueryparserFlexibleMessagesNLS_bundles)) containsKeyWithId:bundleName]) [((id<JavaUtilMap>) nil_chk(OrgApacheLuceneQueryparserFlexibleMessagesNLS_bundles)) putWithId:bundleName withId:clazz];
   }
   @catch (NSException *e) {
   }
@@ -248,9 +248,9 @@ void OrgApacheLuceneQueryparserFlexibleMessagesNLS_load__WithIOSClass_(IOSClass 
   IOSObjectArray *fieldArray = [((IOSClass *) nil_chk(clazz)) getDeclaredFields];
   jboolean isFieldAccessible = ([clazz getModifiers] & JavaLangReflectModifier_PUBLIC) != 0;
   jint len = ((IOSObjectArray *) nil_chk(fieldArray))->size_;
-  id<JavaUtilMap> fields = new_JavaUtilHashMap_initWithInt_(len * 2);
+  id<JavaUtilMap> fields = create_JavaUtilHashMap_initWithInt_(len * 2);
   for (jint i = 0; i < len; i++) {
-    (void) [fields putWithId:[((JavaLangReflectField *) nil_chk(IOSObjectArray_Get(fieldArray, i))) getName] withId:IOSObjectArray_Get(fieldArray, i)];
+    [fields putWithId:[((JavaLangReflectField *) nil_chk(IOSObjectArray_Get(fieldArray, i))) getName] withId:IOSObjectArray_Get(fieldArray, i)];
     OrgApacheLuceneQueryparserFlexibleMessagesNLS_loadfieldValueWithJavaLangReflectField_withBoolean_withIOSClass_(IOSObjectArray_Get(fieldArray, i), isFieldAccessible, clazz);
   }
 }
@@ -293,7 +293,7 @@ void OrgApacheLuceneQueryparserFlexibleMessagesNLS_makeAccessibleWithJavaLangRef
     [((JavaLangReflectField *) nil_chk(field)) setAccessibleWithBoolean:true];
   }
   else {
-    (void) JavaSecurityAccessController_doPrivilegedWithJavaSecurityPrivilegedAction_(new_OrgApacheLuceneQueryparserFlexibleMessagesNLS_$1_initWithJavaLangReflectField_(field));
+    JavaSecurityAccessController_doPrivilegedWithJavaSecurityPrivilegedAction_(create_OrgApacheLuceneQueryparserFlexibleMessagesNLS_$1_initWithJavaLangReflectField_(field));
   }
 }
 
@@ -309,6 +309,11 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleMessagesNLS)
 - (instancetype)initWithJavaLangReflectField:(JavaLangReflectField *)capture$0 {
   OrgApacheLuceneQueryparserFlexibleMessagesNLS_$1_initWithJavaLangReflectField_(self, capture$0);
   return self;
+}
+
+- (void)dealloc {
+  RELEASE_(val$field_);
+  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -327,7 +332,7 @@ J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleMessagesNLS)
 @end
 
 void OrgApacheLuceneQueryparserFlexibleMessagesNLS_$1_initWithJavaLangReflectField_(OrgApacheLuceneQueryparserFlexibleMessagesNLS_$1 *self, JavaLangReflectField *capture$0) {
-  self->val$field_ = capture$0;
+  JreStrongAssign(&self->val$field_, capture$0);
   NSObject_init(self);
 }
 

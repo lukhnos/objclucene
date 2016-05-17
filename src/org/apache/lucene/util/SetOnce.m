@@ -36,10 +36,10 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)setWithId:(id)obj {
   if ([((JavaUtilConcurrentAtomicAtomicBoolean *) nil_chk(set_)) compareAndSetWithBoolean:false withBoolean:true]) {
-    (void) JreVolatileStrongAssign(&self->obj_, obj);
+    JreVolatileStrongAssign(&self->obj_, obj);
   }
   else {
-    @throw new_OrgApacheLuceneUtilSetOnce_AlreadySetException_init();
+    @throw create_OrgApacheLuceneUtilSetOnce_AlreadySetException_init();
   }
 }
 
@@ -54,10 +54,12 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)dealloc {
   JreReleaseVolatile(&obj_);
+  RELEASE_(set_);
+  [super dealloc];
 }
 
 - (id)copyWithZone:(NSZone *)zone {
-  return [self clone];
+  return [[self clone] retain];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -80,8 +82,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 void OrgApacheLuceneUtilSetOnce_init(OrgApacheLuceneUtilSetOnce *self) {
   NSObject_init(self);
-  (void) JreVolatileStrongAssign(&self->obj_, nil);
-  self->set_ = new_JavaUtilConcurrentAtomicAtomicBoolean_initWithBoolean_(false);
+  JreVolatileStrongAssign(&self->obj_, nil);
+  JreStrongAssignAndConsume(&self->set_, new_JavaUtilConcurrentAtomicAtomicBoolean_initWithBoolean_(false));
 }
 
 OrgApacheLuceneUtilSetOnce *new_OrgApacheLuceneUtilSetOnce_init() {
@@ -94,9 +96,9 @@ OrgApacheLuceneUtilSetOnce *create_OrgApacheLuceneUtilSetOnce_init() {
 
 void OrgApacheLuceneUtilSetOnce_initWithId_(OrgApacheLuceneUtilSetOnce *self, id obj) {
   NSObject_init(self);
-  (void) JreVolatileStrongAssign(&self->obj_, nil);
-  (void) JreVolatileStrongAssign(&self->obj_, obj);
-  self->set_ = new_JavaUtilConcurrentAtomicAtomicBoolean_initWithBoolean_(true);
+  JreVolatileStrongAssign(&self->obj_, nil);
+  JreVolatileStrongAssign(&self->obj_, obj);
+  JreStrongAssignAndConsume(&self->set_, new_JavaUtilConcurrentAtomicAtomicBoolean_initWithBoolean_(true));
 }
 
 OrgApacheLuceneUtilSetOnce *new_OrgApacheLuceneUtilSetOnce_initWithId_(id obj) {

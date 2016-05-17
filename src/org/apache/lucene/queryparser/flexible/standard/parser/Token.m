@@ -53,6 +53,13 @@ J2OBJC_IGNORE_DESIGNATED_END
   return OrgApacheLuceneQueryparserFlexibleStandardParserToken_newTokenWithInt_(ofKind);
 }
 
+- (void)dealloc {
+  RELEASE_(image_);
+  RELEASE_(next_);
+  RELEASE_(specialToken_);
+  [super dealloc];
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "getValue", NULL, "Ljava.lang.Object;", 0x1, NULL, NULL },
@@ -107,7 +114,7 @@ OrgApacheLuceneQueryparserFlexibleStandardParserToken *create_OrgApacheLuceneQue
 void OrgApacheLuceneQueryparserFlexibleStandardParserToken_initWithInt_withNSString_(OrgApacheLuceneQueryparserFlexibleStandardParserToken *self, jint kind, NSString *image) {
   NSObject_init(self);
   self->kind_ = kind;
-  self->image_ = image;
+  JreStrongAssign(&self->image_, image);
 }
 
 OrgApacheLuceneQueryparserFlexibleStandardParserToken *new_OrgApacheLuceneQueryparserFlexibleStandardParserToken_initWithInt_withNSString_(jint kind, NSString *image) {
@@ -122,7 +129,7 @@ OrgApacheLuceneQueryparserFlexibleStandardParserToken *OrgApacheLuceneQueryparse
   OrgApacheLuceneQueryparserFlexibleStandardParserToken_initialize();
   switch (ofKind) {
     default:
-    return new_OrgApacheLuceneQueryparserFlexibleStandardParserToken_initWithInt_withNSString_(ofKind, image);
+    return create_OrgApacheLuceneQueryparserFlexibleStandardParserToken_initWithInt_withNSString_(ofKind, image);
   }
 }
 

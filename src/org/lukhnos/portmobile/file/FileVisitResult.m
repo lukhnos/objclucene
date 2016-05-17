@@ -11,8 +11,6 @@
 
 __attribute__((unused)) static void OrgLukhnosPortmobileFileFileVisitResult_initWithNSString_withInt_(OrgLukhnosPortmobileFileFileVisitResult *self, NSString *__name, jint __ordinal);
 
-__attribute__((unused)) static OrgLukhnosPortmobileFileFileVisitResult *new_OrgLukhnosPortmobileFileFileVisitResult_initWithNSString_withInt_(NSString *__name, jint __ordinal) NS_RETURNS_RETAINED;
-
 J2OBJC_INITIALIZED_DEFN(OrgLukhnosPortmobileFileFileVisitResult)
 
 OrgLukhnosPortmobileFileFileVisitResult *OrgLukhnosPortmobileFileFileVisitResult_values_[1];
@@ -41,7 +39,12 @@ OrgLukhnosPortmobileFileFileVisitResult *OrgLukhnosPortmobileFileFileVisitResult
 
 + (void)initialize {
   if (self == [OrgLukhnosPortmobileFileFileVisitResult class]) {
-    JreEnum(OrgLukhnosPortmobileFileFileVisitResult, CONTINUE) = new_OrgLukhnosPortmobileFileFileVisitResult_initWithNSString_withInt_(@"CONTINUE", 0);
+    size_t objSize = class_getInstanceSize(self);
+    size_t allocSize = 1 * objSize;
+    uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
+    id e;
+    (JreEnum(OrgLukhnosPortmobileFileFileVisitResult, CONTINUE) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgLukhnosPortmobileFileFileVisitResult_initWithNSString_withInt_(e, @"CONTINUE", 0);
     J2OBJC_SET_INITIALIZED(OrgLukhnosPortmobileFileFileVisitResult)
   }
 }
@@ -61,10 +64,6 @@ void OrgLukhnosPortmobileFileFileVisitResult_initWithNSString_withInt_(OrgLukhno
   JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
 }
 
-OrgLukhnosPortmobileFileFileVisitResult *new_OrgLukhnosPortmobileFileFileVisitResult_initWithNSString_withInt_(NSString *__name, jint __ordinal) {
-  J2OBJC_NEW_IMPL(OrgLukhnosPortmobileFileFileVisitResult, initWithNSString_withInt_, __name, __ordinal)
-}
-
 IOSObjectArray *OrgLukhnosPortmobileFileFileVisitResult_values() {
   OrgLukhnosPortmobileFileFileVisitResult_initialize();
   return [IOSObjectArray arrayWithObjects:OrgLukhnosPortmobileFileFileVisitResult_values_ count:1 type:OrgLukhnosPortmobileFileFileVisitResult_class_()];
@@ -78,7 +77,7 @@ OrgLukhnosPortmobileFileFileVisitResult *OrgLukhnosPortmobileFileFileVisitResult
       return e;
     }
   }
-  @throw [[JavaLangIllegalArgumentException alloc] initWithNSString:name];
+  @throw [[[JavaLangIllegalArgumentException alloc] initWithNSString:name] autorelease];
   return nil;
 }
 

@@ -23,7 +23,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisReusableStringReader, s_, NSString *)
 @implementation OrgApacheLuceneAnalysisReusableStringReader
 
 - (void)setValueWithNSString:(NSString *)s {
-  self->s_ = s;
+  JreStrongAssign(&self->s_, s);
   self->size_ = ((jint) [((NSString *) nil_chk(s)) length]);
   self->pos_ = 0;
 }
@@ -33,7 +33,7 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisReusableStringReader, s_, NSString *)
     return [((NSString *) nil_chk(s_)) charAtWithInt:pos_++];
   }
   else {
-    s_ = nil;
+    JreStrongAssign(&s_, nil);
     return -1;
   }
 }
@@ -48,14 +48,14 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneAnalysisReusableStringReader, s_, NSString *)
     return len;
   }
   else {
-    s_ = nil;
+    JreStrongAssign(&s_, nil);
     return -1;
   }
 }
 
 - (void)close {
   pos_ = size_;
-  s_ = nil;
+  JreStrongAssign(&s_, nil);
 }
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -64,6 +64,11 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
   return self;
 }
 J2OBJC_IGNORE_DESIGNATED_END
+
+- (void)dealloc {
+  RELEASE_(s_);
+  [super dealloc];
+}
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -88,7 +93,7 @@ void OrgApacheLuceneAnalysisReusableStringReader_init(OrgApacheLuceneAnalysisReu
   JavaIoReader_init(self);
   self->pos_ = 0;
   self->size_ = 0;
-  self->s_ = nil;
+  JreStrongAssign(&self->s_, nil);
 }
 
 OrgApacheLuceneAnalysisReusableStringReader *new_OrgApacheLuceneAnalysisReusableStringReader_init() {

@@ -212,17 +212,17 @@ J2OBJC_IGNORE_DESIGNATED_END
     OrgApacheLuceneUtilSloppyMath_SIN_COS_DELTA_HI = OrgApacheLuceneUtilSloppyMath_TWOPI_HI / (OrgApacheLuceneUtilSloppyMath_SIN_COS_TABS_SIZE - 1);
     OrgApacheLuceneUtilSloppyMath_SIN_COS_DELTA_LO = OrgApacheLuceneUtilSloppyMath_TWOPI_LO / (OrgApacheLuceneUtilSloppyMath_SIN_COS_TABS_SIZE - 1);
     OrgApacheLuceneUtilSloppyMath_SIN_COS_INDEXER = 1 / (OrgApacheLuceneUtilSloppyMath_SIN_COS_DELTA_HI + OrgApacheLuceneUtilSloppyMath_SIN_COS_DELTA_LO);
-    OrgApacheLuceneUtilSloppyMath_sinTab = [IOSDoubleArray newArrayWithLength:OrgApacheLuceneUtilSloppyMath_SIN_COS_TABS_SIZE];
-    OrgApacheLuceneUtilSloppyMath_cosTab = [IOSDoubleArray newArrayWithLength:OrgApacheLuceneUtilSloppyMath_SIN_COS_TABS_SIZE];
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilSloppyMath_sinTab, [IOSDoubleArray newArrayWithLength:OrgApacheLuceneUtilSloppyMath_SIN_COS_TABS_SIZE]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilSloppyMath_cosTab, [IOSDoubleArray newArrayWithLength:OrgApacheLuceneUtilSloppyMath_SIN_COS_TABS_SIZE]);
     OrgApacheLuceneUtilSloppyMath_SIN_COS_MAX_VALUE_FOR_INT_MODULO = ((JreRShift32(JavaLangInteger_MAX_VALUE, 9)) / OrgApacheLuceneUtilSloppyMath_SIN_COS_INDEXER) * 0.99;
     OrgApacheLuceneUtilSloppyMath_ASIN_MAX_VALUE_FOR_TABS = JavaLangStrictMath_sinWithDouble_(JavaLangMath_toRadiansWithDouble_(73.0));
     OrgApacheLuceneUtilSloppyMath_ASIN_DELTA = OrgApacheLuceneUtilSloppyMath_ASIN_MAX_VALUE_FOR_TABS / (OrgApacheLuceneUtilSloppyMath_ASIN_TABS_SIZE - 1);
     OrgApacheLuceneUtilSloppyMath_ASIN_INDEXER = 1 / OrgApacheLuceneUtilSloppyMath_ASIN_DELTA;
-    OrgApacheLuceneUtilSloppyMath_asinTab = [IOSDoubleArray newArrayWithLength:OrgApacheLuceneUtilSloppyMath_ASIN_TABS_SIZE];
-    OrgApacheLuceneUtilSloppyMath_asinDer1DivF1Tab = [IOSDoubleArray newArrayWithLength:OrgApacheLuceneUtilSloppyMath_ASIN_TABS_SIZE];
-    OrgApacheLuceneUtilSloppyMath_asinDer2DivF2Tab = [IOSDoubleArray newArrayWithLength:OrgApacheLuceneUtilSloppyMath_ASIN_TABS_SIZE];
-    OrgApacheLuceneUtilSloppyMath_asinDer3DivF3Tab = [IOSDoubleArray newArrayWithLength:OrgApacheLuceneUtilSloppyMath_ASIN_TABS_SIZE];
-    OrgApacheLuceneUtilSloppyMath_asinDer4DivF4Tab = [IOSDoubleArray newArrayWithLength:OrgApacheLuceneUtilSloppyMath_ASIN_TABS_SIZE];
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilSloppyMath_asinTab, [IOSDoubleArray newArrayWithLength:OrgApacheLuceneUtilSloppyMath_ASIN_TABS_SIZE]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilSloppyMath_asinDer1DivF1Tab, [IOSDoubleArray newArrayWithLength:OrgApacheLuceneUtilSloppyMath_ASIN_TABS_SIZE]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilSloppyMath_asinDer2DivF2Tab, [IOSDoubleArray newArrayWithLength:OrgApacheLuceneUtilSloppyMath_ASIN_TABS_SIZE]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilSloppyMath_asinDer3DivF3Tab, [IOSDoubleArray newArrayWithLength:OrgApacheLuceneUtilSloppyMath_ASIN_TABS_SIZE]);
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilSloppyMath_asinDer4DivF4Tab, [IOSDoubleArray newArrayWithLength:OrgApacheLuceneUtilSloppyMath_ASIN_TABS_SIZE]);
     OrgApacheLuceneUtilSloppyMath_ASIN_PIO2_HI = JavaLangDouble_longBitsToDoubleWithLong_((jlong) 0x3FF921FB54442D18LL);
     OrgApacheLuceneUtilSloppyMath_ASIN_PIO2_LO = JavaLangDouble_longBitsToDoubleWithLong_((jlong) 0x3C91A62633145C07LL);
     OrgApacheLuceneUtilSloppyMath_ASIN_PS0 = JavaLangDouble_longBitsToDoubleWithLong_((jlong) 0x3fc5555555555555LL);
@@ -235,7 +235,7 @@ J2OBJC_IGNORE_DESIGNATED_END
     OrgApacheLuceneUtilSloppyMath_ASIN_QS2 = JavaLangDouble_longBitsToDoubleWithLong_((jlong) 0x40002ae59c598ac8LL);
     OrgApacheLuceneUtilSloppyMath_ASIN_QS3 = JavaLangDouble_longBitsToDoubleWithLong_((jlong) 0xbfe6066c1b8d0159LL);
     OrgApacheLuceneUtilSloppyMath_ASIN_QS4 = JavaLangDouble_longBitsToDoubleWithLong_((jlong) 0x3fb3b8c5b12e9282LL);
-    OrgApacheLuceneUtilSloppyMath_earthDiameterPerLatitude = [IOSDoubleArray newArrayWithLength:OrgApacheLuceneUtilSloppyMath_RADIUS_TABS_SIZE];
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilSloppyMath_earthDiameterPerLatitude, [IOSDoubleArray newArrayWithLength:OrgApacheLuceneUtilSloppyMath_RADIUS_TABS_SIZE]);
     {
       jint SIN_COS_PI_INDEX = (OrgApacheLuceneUtilSloppyMath_SIN_COS_TABS_SIZE - 1) / 2;
       jint SIN_COS_PI_MUL_2_INDEX = 2 * SIN_COS_PI_INDEX;

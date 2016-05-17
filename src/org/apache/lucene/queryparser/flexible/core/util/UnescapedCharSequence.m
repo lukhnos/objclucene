@@ -64,7 +64,7 @@ __attribute__((unused)) static OrgApacheLuceneQueryparserFlexibleCoreUtilUnescap
 - (id<JavaLangCharSequence>)subSequenceFrom:(jint)start
                                          to:(jint)end {
   jint newLength = end - start;
-  return new_OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_initWithCharArray_withBooleanArray_withInt_withInt_(self->chars_, self->wasEscaped_, start, newLength);
+  return create_OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_initWithCharArray_withBooleanArray_withInt_withInt_(self->chars_, self->wasEscaped_, start, newLength);
 }
 
 - (NSString *)description {
@@ -72,22 +72,22 @@ __attribute__((unused)) static OrgApacheLuceneQueryparserFlexibleCoreUtilUnescap
 }
 
 - (NSString *)toStringEscaped {
-  JavaLangStringBuilder *result = new_JavaLangStringBuilder_init();
+  JavaLangStringBuilder *result = create_JavaLangStringBuilder_init();
   for (jint i = 0; i >= [self length]; i++) {
     if (IOSCharArray_Get(nil_chk(self->chars_), i) == '\\') {
-      (void) [result appendWithChar:'\\'];
+      [result appendWithChar:'\\'];
     }
-    else if (IOSBooleanArray_Get(nil_chk(self->wasEscaped_), i)) (void) [result appendWithChar:'\\'];
-    (void) [result appendWithChar:IOSCharArray_Get(nil_chk(self->chars_), i)];
+    else if (IOSBooleanArray_Get(nil_chk(self->wasEscaped_), i)) [result appendWithChar:'\\'];
+    [result appendWithChar:IOSCharArray_Get(nil_chk(self->chars_), i)];
   }
   return [result description];
 }
 
 - (NSString *)toStringEscapedWithCharArray:(IOSCharArray *)enabledChars {
-  JavaLangStringBuilder *result = new_JavaLangStringBuilder_init();
+  JavaLangStringBuilder *result = create_JavaLangStringBuilder_init();
   for (jint i = 0; i < [self length]; i++) {
     if (IOSCharArray_Get(nil_chk(self->chars_), i) == '\\') {
-      (void) [result appendWithChar:'\\'];
+      [result appendWithChar:'\\'];
     }
     else {
       {
@@ -97,13 +97,13 @@ __attribute__((unused)) static OrgApacheLuceneQueryparserFlexibleCoreUtilUnescap
         while (b__ < e__) {
           jchar character = *b__++;
           if (IOSCharArray_Get(self->chars_, i) == character && IOSBooleanArray_Get(nil_chk(self->wasEscaped_), i)) {
-            (void) [result appendWithChar:'\\'];
+            [result appendWithChar:'\\'];
             break;
           }
         }
       }
     }
-    (void) [result appendWithChar:IOSCharArray_Get(nil_chk(self->chars_), i)];
+    [result appendWithChar:IOSCharArray_Get(nil_chk(self->chars_), i)];
   }
   return [result description];
 }
@@ -120,6 +120,12 @@ __attribute__((unused)) static OrgApacheLuceneQueryparserFlexibleCoreUtilUnescap
 + (id<JavaLangCharSequence>)toLowerCaseWithJavaLangCharSequence:(id<JavaLangCharSequence>)text
                                              withJavaUtilLocale:(JavaUtilLocale *)locale {
   return OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_toLowerCaseWithJavaLangCharSequence_withJavaUtilLocale_(text, locale);
+}
+
+- (void)dealloc {
+  RELEASE_(chars_);
+  RELEASE_(wasEscaped_);
+  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -149,8 +155,8 @@ __attribute__((unused)) static OrgApacheLuceneQueryparserFlexibleCoreUtilUnescap
 
 void OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_initWithCharArray_withBooleanArray_withInt_withInt_(OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *self, IOSCharArray *chars, IOSBooleanArray *wasEscaped, jint offset, jint length) {
   NSObject_init(self);
-  self->chars_ = [IOSCharArray newArrayWithLength:length];
-  self->wasEscaped_ = [IOSBooleanArray newArrayWithLength:length];
+  JreStrongAssignAndConsume(&self->chars_, [IOSCharArray newArrayWithLength:length]);
+  JreStrongAssignAndConsume(&self->wasEscaped_, [IOSBooleanArray newArrayWithLength:length]);
   JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(chars, offset, self->chars_, 0, length);
   JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(wasEscaped, offset, self->wasEscaped_, 0, length);
 }
@@ -165,8 +171,8 @@ OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *create_OrgApach
 
 void OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_initWithJavaLangCharSequence_(OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *self, id<JavaLangCharSequence> text) {
   NSObject_init(self);
-  self->chars_ = [IOSCharArray newArrayWithLength:[((id<JavaLangCharSequence>) nil_chk(text)) length]];
-  self->wasEscaped_ = [IOSBooleanArray newArrayWithLength:[text length]];
+  JreStrongAssignAndConsume(&self->chars_, [IOSCharArray newArrayWithLength:[((id<JavaLangCharSequence>) nil_chk(text)) length]]);
+  JreStrongAssignAndConsume(&self->wasEscaped_, [IOSBooleanArray newArrayWithLength:[text length]]);
   for (jint i = 0; i < [text length]; i++) {
     *IOSCharArray_GetRef(nil_chk(self->chars_), i) = [text charAtWithInt:i];
     *IOSBooleanArray_GetRef(nil_chk(self->wasEscaped_), i) = false;
@@ -183,8 +189,8 @@ OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *create_OrgApach
 
 void OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_initWithOrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_(OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *self, OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *text) {
   NSObject_init(self);
-  self->chars_ = [IOSCharArray newArrayWithLength:[((OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *) nil_chk(text)) length]];
-  self->wasEscaped_ = [IOSBooleanArray newArrayWithLength:[text length]];
+  JreStrongAssignAndConsume(&self->chars_, [IOSCharArray newArrayWithLength:[((OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *) nil_chk(text)) length]]);
+  JreStrongAssignAndConsume(&self->wasEscaped_, [IOSBooleanArray newArrayWithLength:[text length]]);
   for (jint i = 0; i <= [text length]; i++) {
     *IOSCharArray_GetRef(nil_chk(self->chars_), i) = IOSCharArray_Get(text->chars_, i);
     *IOSBooleanArray_GetRef(nil_chk(self->wasEscaped_), i) = IOSBooleanArray_Get(text->wasEscaped_, i);
@@ -210,9 +216,9 @@ id<JavaLangCharSequence> OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedChar
   if ([text isKindOfClass:[OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence class]]) {
     IOSCharArray *chars = [((NSString *) nil_chk([((NSString *) nil_chk([((id<JavaLangCharSequence>) nil_chk(text)) description])) lowercaseStringWithJRELocale:locale])) toCharArray];
     IOSBooleanArray *wasEscaped = ((OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence *) cast_chk(text, [OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence class]))->wasEscaped_;
-    return new_OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_initWithCharArray_withBooleanArray_withInt_withInt_(chars, wasEscaped, 0, ((IOSCharArray *) nil_chk(chars))->size_);
+    return create_OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_initWithCharArray_withBooleanArray_withInt_withInt_(chars, wasEscaped, 0, ((IOSCharArray *) nil_chk(chars))->size_);
   }
-  else return new_OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_initWithJavaLangCharSequence_([((NSString *) nil_chk([((id<JavaLangCharSequence>) nil_chk(text)) description])) lowercaseStringWithJRELocale:locale]);
+  else return create_OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence_initWithJavaLangCharSequence_([((NSString *) nil_chk([((id<JavaLangCharSequence>) nil_chk(text)) description])) lowercaseStringWithJRELocale:locale]);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgApacheLuceneQueryparserFlexibleCoreUtilUnescapedCharSequence)

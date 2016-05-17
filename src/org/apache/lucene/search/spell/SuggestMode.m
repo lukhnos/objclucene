@@ -11,8 +11,6 @@
 
 __attribute__((unused)) static void OrgApacheLuceneSearchSpellSuggestMode_initWithNSString_withInt_(OrgApacheLuceneSearchSpellSuggestMode *self, NSString *__name, jint __ordinal);
 
-__attribute__((unused)) static OrgApacheLuceneSearchSpellSuggestMode *new_OrgApacheLuceneSearchSpellSuggestMode_initWithNSString_withInt_(NSString *__name, jint __ordinal) NS_RETURNS_RETAINED;
-
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchSpellSuggestMode)
 
 OrgApacheLuceneSearchSpellSuggestMode *OrgApacheLuceneSearchSpellSuggestMode_values_[3];
@@ -49,9 +47,16 @@ OrgApacheLuceneSearchSpellSuggestMode *OrgApacheLuceneSearchSpellSuggestMode_val
 
 + (void)initialize {
   if (self == [OrgApacheLuceneSearchSpellSuggestMode class]) {
-    JreEnum(OrgApacheLuceneSearchSpellSuggestMode, SUGGEST_WHEN_NOT_IN_INDEX) = new_OrgApacheLuceneSearchSpellSuggestMode_initWithNSString_withInt_(@"SUGGEST_WHEN_NOT_IN_INDEX", 0);
-    JreEnum(OrgApacheLuceneSearchSpellSuggestMode, SUGGEST_MORE_POPULAR) = new_OrgApacheLuceneSearchSpellSuggestMode_initWithNSString_withInt_(@"SUGGEST_MORE_POPULAR", 1);
-    JreEnum(OrgApacheLuceneSearchSpellSuggestMode, SUGGEST_ALWAYS) = new_OrgApacheLuceneSearchSpellSuggestMode_initWithNSString_withInt_(@"SUGGEST_ALWAYS", 2);
+    size_t objSize = class_getInstanceSize(self);
+    size_t allocSize = 3 * objSize;
+    uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
+    id e;
+    (JreEnum(OrgApacheLuceneSearchSpellSuggestMode, SUGGEST_WHEN_NOT_IN_INDEX) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneSearchSpellSuggestMode_initWithNSString_withInt_(e, @"SUGGEST_WHEN_NOT_IN_INDEX", 0);
+    (JreEnum(OrgApacheLuceneSearchSpellSuggestMode, SUGGEST_MORE_POPULAR) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneSearchSpellSuggestMode_initWithNSString_withInt_(e, @"SUGGEST_MORE_POPULAR", 1);
+    (JreEnum(OrgApacheLuceneSearchSpellSuggestMode, SUGGEST_ALWAYS) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneSearchSpellSuggestMode_initWithNSString_withInt_(e, @"SUGGEST_ALWAYS", 2);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchSpellSuggestMode)
   }
 }
@@ -73,10 +78,6 @@ void OrgApacheLuceneSearchSpellSuggestMode_initWithNSString_withInt_(OrgApacheLu
   JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
 }
 
-OrgApacheLuceneSearchSpellSuggestMode *new_OrgApacheLuceneSearchSpellSuggestMode_initWithNSString_withInt_(NSString *__name, jint __ordinal) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchSpellSuggestMode, initWithNSString_withInt_, __name, __ordinal)
-}
-
 IOSObjectArray *OrgApacheLuceneSearchSpellSuggestMode_values() {
   OrgApacheLuceneSearchSpellSuggestMode_initialize();
   return [IOSObjectArray arrayWithObjects:OrgApacheLuceneSearchSpellSuggestMode_values_ count:3 type:OrgApacheLuceneSearchSpellSuggestMode_class_()];
@@ -90,7 +91,7 @@ OrgApacheLuceneSearchSpellSuggestMode *OrgApacheLuceneSearchSpellSuggestMode_val
       return e;
     }
   }
-  @throw [[JavaLangIllegalArgumentException alloc] initWithNSString:name];
+  @throw [[[JavaLangIllegalArgumentException alloc] initWithNSString:name] autorelease];
   return nil;
 }
 

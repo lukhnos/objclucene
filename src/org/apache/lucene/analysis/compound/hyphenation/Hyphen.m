@@ -26,14 +26,21 @@
   if (noBreak_ == nil && postBreak_ == nil && preBreak_ != nil && [preBreak_ isEqual:@"-"]) {
     return @"-";
   }
-  JavaLangStringBuilder *res = new_JavaLangStringBuilder_initWithNSString_(@"{");
-  (void) [res appendWithNSString:preBreak_];
-  (void) [res appendWithNSString:@"}{"];
-  (void) [res appendWithNSString:postBreak_];
-  (void) [res appendWithNSString:@"}{"];
-  (void) [res appendWithNSString:noBreak_];
-  (void) [res appendWithChar:'}'];
+  JavaLangStringBuilder *res = create_JavaLangStringBuilder_initWithNSString_(@"{");
+  [res appendWithNSString:preBreak_];
+  [res appendWithNSString:@"}{"];
+  [res appendWithNSString:postBreak_];
+  [res appendWithNSString:@"}{"];
+  [res appendWithNSString:noBreak_];
+  [res appendWithChar:'}'];
   return [res description];
+}
+
+- (void)dealloc {
+  RELEASE_(preBreak_);
+  RELEASE_(noBreak_);
+  RELEASE_(postBreak_);
+  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -55,9 +62,9 @@
 
 void OrgApacheLuceneAnalysisCompoundHyphenationHyphen_initWithNSString_withNSString_withNSString_(OrgApacheLuceneAnalysisCompoundHyphenationHyphen *self, NSString *pre, NSString *no, NSString *post) {
   NSObject_init(self);
-  self->preBreak_ = pre;
-  self->noBreak_ = no;
-  self->postBreak_ = post;
+  JreStrongAssign(&self->preBreak_, pre);
+  JreStrongAssign(&self->noBreak_, no);
+  JreStrongAssign(&self->postBreak_, post);
 }
 
 OrgApacheLuceneAnalysisCompoundHyphenationHyphen *new_OrgApacheLuceneAnalysisCompoundHyphenationHyphen_initWithNSString_withNSString_withNSString_(NSString *pre, NSString *no, NSString *post) {
@@ -70,9 +77,9 @@ OrgApacheLuceneAnalysisCompoundHyphenationHyphen *create_OrgApacheLuceneAnalysis
 
 void OrgApacheLuceneAnalysisCompoundHyphenationHyphen_initWithNSString_(OrgApacheLuceneAnalysisCompoundHyphenationHyphen *self, NSString *pre) {
   NSObject_init(self);
-  self->preBreak_ = pre;
-  self->noBreak_ = nil;
-  self->postBreak_ = nil;
+  JreStrongAssign(&self->preBreak_, pre);
+  JreStrongAssign(&self->noBreak_, nil);
+  JreStrongAssign(&self->postBreak_, nil);
 }
 
 OrgApacheLuceneAnalysisCompoundHyphenationHyphen *new_OrgApacheLuceneAnalysisCompoundHyphenationHyphen_initWithNSString_(NSString *pre) {

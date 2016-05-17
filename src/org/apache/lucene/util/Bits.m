@@ -19,7 +19,7 @@ IOSObjectArray *OrgApacheLuceneUtilBits_EMPTY_ARRAY;
 
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilBits class]) {
-    OrgApacheLuceneUtilBits_EMPTY_ARRAY = [IOSObjectArray newArrayWithLength:0 type:OrgApacheLuceneUtilBits_class_()];
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilBits_EMPTY_ARRAY, [IOSObjectArray newArrayWithLength:0 type:OrgApacheLuceneUtilBits_class_()]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilBits)
   }
 }

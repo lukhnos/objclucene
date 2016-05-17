@@ -11,8 +11,6 @@
 
 __attribute__((unused)) static void OrgApacheLuceneIndexDocValuesType_initWithNSString_withInt_(OrgApacheLuceneIndexDocValuesType *self, NSString *__name, jint __ordinal);
 
-__attribute__((unused)) static OrgApacheLuceneIndexDocValuesType *new_OrgApacheLuceneIndexDocValuesType_initWithNSString_withInt_(NSString *__name, jint __ordinal) NS_RETURNS_RETAINED;
-
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexDocValuesType)
 
 OrgApacheLuceneIndexDocValuesType *OrgApacheLuceneIndexDocValuesType_values_[6];
@@ -61,12 +59,22 @@ OrgApacheLuceneIndexDocValuesType *OrgApacheLuceneIndexDocValuesType_values_[6];
 
 + (void)initialize {
   if (self == [OrgApacheLuceneIndexDocValuesType class]) {
-    JreEnum(OrgApacheLuceneIndexDocValuesType, NONE) = new_OrgApacheLuceneIndexDocValuesType_initWithNSString_withInt_(@"NONE", 0);
-    JreEnum(OrgApacheLuceneIndexDocValuesType, NUMERIC) = new_OrgApacheLuceneIndexDocValuesType_initWithNSString_withInt_(@"NUMERIC", 1);
-    JreEnum(OrgApacheLuceneIndexDocValuesType, BINARY) = new_OrgApacheLuceneIndexDocValuesType_initWithNSString_withInt_(@"BINARY", 2);
-    JreEnum(OrgApacheLuceneIndexDocValuesType, SORTED) = new_OrgApacheLuceneIndexDocValuesType_initWithNSString_withInt_(@"SORTED", 3);
-    JreEnum(OrgApacheLuceneIndexDocValuesType, SORTED_NUMERIC) = new_OrgApacheLuceneIndexDocValuesType_initWithNSString_withInt_(@"SORTED_NUMERIC", 4);
-    JreEnum(OrgApacheLuceneIndexDocValuesType, SORTED_SET) = new_OrgApacheLuceneIndexDocValuesType_initWithNSString_withInt_(@"SORTED_SET", 5);
+    size_t objSize = class_getInstanceSize(self);
+    size_t allocSize = 6 * objSize;
+    uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
+    id e;
+    (JreEnum(OrgApacheLuceneIndexDocValuesType, NONE) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneIndexDocValuesType_initWithNSString_withInt_(e, @"NONE", 0);
+    (JreEnum(OrgApacheLuceneIndexDocValuesType, NUMERIC) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneIndexDocValuesType_initWithNSString_withInt_(e, @"NUMERIC", 1);
+    (JreEnum(OrgApacheLuceneIndexDocValuesType, BINARY) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneIndexDocValuesType_initWithNSString_withInt_(e, @"BINARY", 2);
+    (JreEnum(OrgApacheLuceneIndexDocValuesType, SORTED) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneIndexDocValuesType_initWithNSString_withInt_(e, @"SORTED", 3);
+    (JreEnum(OrgApacheLuceneIndexDocValuesType, SORTED_NUMERIC) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneIndexDocValuesType_initWithNSString_withInt_(e, @"SORTED_NUMERIC", 4);
+    (JreEnum(OrgApacheLuceneIndexDocValuesType, SORTED_SET) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneIndexDocValuesType_initWithNSString_withInt_(e, @"SORTED_SET", 5);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneIndexDocValuesType)
   }
 }
@@ -91,10 +99,6 @@ void OrgApacheLuceneIndexDocValuesType_initWithNSString_withInt_(OrgApacheLucene
   JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
 }
 
-OrgApacheLuceneIndexDocValuesType *new_OrgApacheLuceneIndexDocValuesType_initWithNSString_withInt_(NSString *__name, jint __ordinal) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexDocValuesType, initWithNSString_withInt_, __name, __ordinal)
-}
-
 IOSObjectArray *OrgApacheLuceneIndexDocValuesType_values() {
   OrgApacheLuceneIndexDocValuesType_initialize();
   return [IOSObjectArray arrayWithObjects:OrgApacheLuceneIndexDocValuesType_values_ count:6 type:OrgApacheLuceneIndexDocValuesType_class_()];
@@ -108,7 +112,7 @@ OrgApacheLuceneIndexDocValuesType *OrgApacheLuceneIndexDocValuesType_valueOfWith
       return e;
     }
   }
-  @throw [[JavaLangIllegalArgumentException alloc] initWithNSString:name];
+  @throw [[[JavaLangIllegalArgumentException alloc] initWithNSString:name] autorelease];
   return nil;
 }
 

@@ -159,7 +159,7 @@ IOSObjectArray *OrgApacheLuceneQueryparserClassicQueryParserConstants_tokenImage
 
 + (void)initialize {
   if (self == [OrgApacheLuceneQueryparserClassicQueryParserConstants class]) {
-    OrgApacheLuceneQueryparserClassicQueryParserConstants_tokenImage = [IOSObjectArray newArrayWithObjects:(id[]){ @"<EOF>", @"<_NUM_CHAR>", @"<_ESCAPED_CHAR>", @"<_TERM_START_CHAR>", @"<_TERM_CHAR>", @"<_WHITESPACE>", @"<_QUOTED_CHAR>", @"<token of kind 7>", @"<AND>", @"<OR>", @"<NOT>", @"\"+\"", @"\"-\"", @"<BAREOPER>", @"\"(\"", @"\")\"", @"\":\"", @"\"*\"", @"\"^\"", @"<QUOTED>", @"<TERM>", @"<FUZZY_SLOP>", @"<PREFIXTERM>", @"<WILDTERM>", @"<REGEXPTERM>", @"\"[\"", @"\"{\"", @"<NUMBER>", @"\"TO\"", @"\"]\"", @"\"}\"", @"<RANGE_QUOTED>", @"<RANGE_GOOP>" } count:33 type:NSString_class_()];
+    JreStrongAssignAndConsume(&OrgApacheLuceneQueryparserClassicQueryParserConstants_tokenImage, [IOSObjectArray newArrayWithObjects:(id[]){ @"<EOF>", @"<_NUM_CHAR>", @"<_ESCAPED_CHAR>", @"<_TERM_START_CHAR>", @"<_TERM_CHAR>", @"<_WHITESPACE>", @"<_QUOTED_CHAR>", @"<token of kind 7>", @"<AND>", @"<OR>", @"<NOT>", @"\"+\"", @"\"-\"", @"<BAREOPER>", @"\"(\"", @"\")\"", @"\":\"", @"\"*\"", @"\"^\"", @"<QUOTED>", @"<TERM>", @"<FUZZY_SLOP>", @"<PREFIXTERM>", @"<WILDTERM>", @"<REGEXPTERM>", @"\"[\"", @"\"{\"", @"<NUMBER>", @"\"TO\"", @"\"]\"", @"\"}\"", @"<RANGE_QUOTED>", @"<RANGE_GOOP>" } count:33 type:NSString_class_()]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneQueryparserClassicQueryParserConstants)
   }
 }

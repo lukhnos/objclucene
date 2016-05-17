@@ -102,43 +102,43 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 NSString *OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_addEscapesWithNSString_(NSString *str) {
   OrgApacheLuceneQueryparserFlexibleStandardParserTokenMgrError_initialize();
-  JavaLangStringBuilder *retval = new_JavaLangStringBuilder_init();
+  JavaLangStringBuilder *retval = create_JavaLangStringBuilder_init();
   jchar ch;
   for (jint i = 0; i < ((jint) [((NSString *) nil_chk(str)) length]); i++) {
     switch ([str charAtWithInt:i]) {
       case 0:
       continue;
       case 0x0008:
-      (void) [retval appendWithNSString:@"\\b"];
+      [retval appendWithNSString:@"\\b"];
       continue;
       case 0x0009:
-      (void) [retval appendWithNSString:@"\\t"];
+      [retval appendWithNSString:@"\\t"];
       continue;
       case 0x000a:
-      (void) [retval appendWithNSString:@"\\n"];
+      [retval appendWithNSString:@"\\n"];
       continue;
       case 0x000c:
-      (void) [retval appendWithNSString:@"\\f"];
+      [retval appendWithNSString:@"\\f"];
       continue;
       case 0x000d:
-      (void) [retval appendWithNSString:@"\\r"];
+      [retval appendWithNSString:@"\\r"];
       continue;
       case '"':
-      (void) [retval appendWithNSString:@"\\\""];
+      [retval appendWithNSString:@"\\\""];
       continue;
       case '\'':
-      (void) [retval appendWithNSString:@"\\'"];
+      [retval appendWithNSString:@"\\'"];
       continue;
       case '\\':
-      (void) [retval appendWithNSString:@"\\\\"];
+      [retval appendWithNSString:@"\\\\"];
       continue;
       default:
       if ((ch = [str charAtWithInt:i]) < (jint) 0x20 || ch > (jint) 0x7e) {
         NSString *s = JreStrcat("$$", @"0000", JavaLangInteger_toStringWithInt_withInt_(ch, 16));
-        (void) [retval appendWithNSString:JreStrcat("$$", @"\\u", [s substring:((jint) [s length]) - 4 endIndex:((jint) [s length])])];
+        [retval appendWithNSString:JreStrcat("$$", @"\\u", [s substring:((jint) [s length]) - 4 endIndex:((jint) [s length])])];
       }
       else {
-        (void) [retval appendWithChar:ch];
+        [retval appendWithChar:ch];
       }
       continue;
     }

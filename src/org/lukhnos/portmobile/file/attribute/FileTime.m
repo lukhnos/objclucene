@@ -27,7 +27,7 @@
 }
 
 - (jint)compareToWithId:(OrgLukhnosPortmobileFileAttributeFileTime *)o {
-  (void) cast_chk(o, [OrgLukhnosPortmobileFileAttributeFileTime class]);
+  cast_chk(o, [OrgLukhnosPortmobileFileAttributeFileTime class]);
   if (((OrgLukhnosPortmobileFileAttributeFileTime *) nil_chk(o))->time_ < time_) {
     return -1;
   }
@@ -69,7 +69,7 @@ OrgLukhnosPortmobileFileAttributeFileTime *create_OrgLukhnosPortmobileFileAttrib
 
 OrgLukhnosPortmobileFileAttributeFileTime *OrgLukhnosPortmobileFileAttributeFileTime_fromMillisWithLong_(jlong value) {
   OrgLukhnosPortmobileFileAttributeFileTime_initialize();
-  return new_OrgLukhnosPortmobileFileAttributeFileTime_initWithLong_(value);
+  return create_OrgLukhnosPortmobileFileAttributeFileTime_initWithLong_(value);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgLukhnosPortmobileFileAttributeFileTime)

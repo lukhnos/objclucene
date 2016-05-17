@@ -22,6 +22,11 @@
   return clazz_;
 }
 
+- (void)dealloc {
+  RELEASE_(clazz_);
+  [super dealloc];
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithIOSClass:", "MethodType", NULL, 0x0, NULL, "(Ljava/lang/Class<*>;)V" },
@@ -39,7 +44,7 @@
 
 void OrgLukhnosPortmobileInvokeMethodType_initWithIOSClass_(OrgLukhnosPortmobileInvokeMethodType *self, IOSClass *clazz) {
   NSObject_init(self);
-  self->clazz_ = clazz;
+  JreStrongAssign(&self->clazz_, clazz);
 }
 
 OrgLukhnosPortmobileInvokeMethodType *new_OrgLukhnosPortmobileInvokeMethodType_initWithIOSClass_(IOSClass *clazz) {
@@ -52,7 +57,7 @@ OrgLukhnosPortmobileInvokeMethodType *create_OrgLukhnosPortmobileInvokeMethodTyp
 
 OrgLukhnosPortmobileInvokeMethodType *OrgLukhnosPortmobileInvokeMethodType_methodTypeWithIOSClass_(IOSClass *clazz) {
   OrgLukhnosPortmobileInvokeMethodType_initialize();
-  return new_OrgLukhnosPortmobileInvokeMethodType_initWithIOSClass_(clazz);
+  return create_OrgLukhnosPortmobileInvokeMethodType_initWithIOSClass_(clazz);
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgLukhnosPortmobileInvokeMethodType)

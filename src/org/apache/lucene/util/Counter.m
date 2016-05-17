@@ -106,7 +106,7 @@ OrgApacheLuceneUtilCounter *OrgApacheLuceneUtilCounter_newCounter() {
 
 OrgApacheLuceneUtilCounter *OrgApacheLuceneUtilCounter_newCounterWithBoolean_(jboolean threadSafe) {
   OrgApacheLuceneUtilCounter_initialize();
-  return threadSafe ? new_OrgApacheLuceneUtilCounter_AtomicCounter_init() : new_OrgApacheLuceneUtilCounter_SerialCounter_init();
+  return threadSafe ? create_OrgApacheLuceneUtilCounter_AtomicCounter_init() : create_OrgApacheLuceneUtilCounter_SerialCounter_init();
 }
 
 void OrgApacheLuceneUtilCounter_init(OrgApacheLuceneUtilCounter *self) {
@@ -179,6 +179,11 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
 }
 J2OBJC_IGNORE_DESIGNATED_END
 
+- (void)dealloc {
+  RELEASE_(count_);
+  [super dealloc];
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "addAndGetWithLong:", "addAndGet", "J", 0x1, NULL, NULL },
@@ -196,7 +201,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 void OrgApacheLuceneUtilCounter_AtomicCounter_init(OrgApacheLuceneUtilCounter_AtomicCounter *self) {
   OrgApacheLuceneUtilCounter_init(self);
-  self->count_ = new_JavaUtilConcurrentAtomicAtomicLong_init();
+  JreStrongAssignAndConsume(&self->count_, new_JavaUtilConcurrentAtomicAtomicLong_init());
 }
 
 OrgApacheLuceneUtilCounter_AtomicCounter *new_OrgApacheLuceneUtilCounter_AtomicCounter_init() {

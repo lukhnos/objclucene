@@ -37,8 +37,8 @@ J2OBJC_FIELD_SETTER(OrgApacheLuceneUtilMapOfSets, theMap_, id<JavaUtilMap>)
     theSet = [theMap_ getWithId:key];
   }
   else {
-    theSet = new_JavaUtilHashSet_initWithInt_(23);
-    (void) [theMap_ putWithId:key withId:theSet];
+    theSet = create_JavaUtilHashSet_initWithInt_(23);
+    [theMap_ putWithId:key withId:theSet];
   }
   [((id<JavaUtilSet>) nil_chk(theSet)) addWithId:val];
   return [theSet size];
@@ -51,11 +51,16 @@ withJavaUtilCollection:(id<JavaUtilCollection>)vals {
     theSet = [theMap_ getWithId:key];
   }
   else {
-    theSet = new_JavaUtilHashSet_initWithInt_(23);
-    (void) [theMap_ putWithId:key withId:theSet];
+    theSet = create_JavaUtilHashSet_initWithInt_(23);
+    [theMap_ putWithId:key withId:theSet];
   }
   [((id<JavaUtilSet>) nil_chk(theSet)) addAllWithJavaUtilCollection:vals];
   return [theSet size];
+}
+
+- (void)dealloc {
+  RELEASE_(theMap_);
+  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -76,7 +81,7 @@ withJavaUtilCollection:(id<JavaUtilCollection>)vals {
 
 void OrgApacheLuceneUtilMapOfSets_initWithJavaUtilMap_(OrgApacheLuceneUtilMapOfSets *self, id<JavaUtilMap> m) {
   NSObject_init(self);
-  self->theMap_ = m;
+  JreStrongAssign(&self->theMap_, m);
 }
 
 OrgApacheLuceneUtilMapOfSets *new_OrgApacheLuceneUtilMapOfSets_initWithJavaUtilMap_(id<JavaUtilMap> m) {

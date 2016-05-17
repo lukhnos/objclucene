@@ -51,7 +51,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilToStringUtils class]) {
-    OrgApacheLuceneUtilToStringUtils_HEX = [@"0123456789abcdef" toCharArray];
+    JreStrongAssign(&OrgApacheLuceneUtilToStringUtils_HEX, [@"0123456789abcdef" toCharArray]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilToStringUtils)
   }
 }
@@ -95,16 +95,16 @@ NSString *OrgApacheLuceneUtilToStringUtils_boostWithFloat_(jfloat boost) {
 void OrgApacheLuceneUtilToStringUtils_byteArrayWithJavaLangStringBuilder_withByteArray_(JavaLangStringBuilder *buffer, IOSByteArray *bytes) {
   OrgApacheLuceneUtilToStringUtils_initialize();
   for (jint i = 0; i < ((IOSByteArray *) nil_chk(bytes))->size_; i++) {
-    (void) [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk(buffer)) appendWithNSString:@"b["])) appendWithInt:i])) appendWithNSString:@"]="])) appendWithInt:IOSByteArray_Get(bytes, i)];
+    [((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk([((JavaLangStringBuilder *) nil_chk(buffer)) appendWithNSString:@"b["])) appendWithInt:i])) appendWithNSString:@"]="])) appendWithInt:IOSByteArray_Get(bytes, i)];
     if (i < bytes->size_ - 1) {
-      (void) [buffer appendWithChar:','];
+      [buffer appendWithChar:','];
     }
   }
 }
 
 NSString *OrgApacheLuceneUtilToStringUtils_longHexWithLong_(jlong x) {
   OrgApacheLuceneUtilToStringUtils_initialize();
-  IOSCharArray *asHex = [IOSCharArray newArrayWithLength:16];
+  IOSCharArray *asHex = [IOSCharArray arrayWithLength:16];
   for (jint i = 16; --i >= 0; JreURShiftAssignLong(&x, 4)) {
     *IOSCharArray_GetRef(asHex, i) = IOSCharArray_Get(nil_chk(OrgApacheLuceneUtilToStringUtils_HEX), (jint) x & (jint) 0x0F);
   }

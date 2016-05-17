@@ -32,6 +32,11 @@ __attribute__((unused)) static jint OrgApacheLuceneAnalysisCharFilter_correctOff
   return OrgApacheLuceneAnalysisCharFilter_correctOffsetWithInt_(self, currentOff);
 }
 
+- (void)dealloc {
+  RELEASE_(input_);
+  [super dealloc];
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithJavaIoReader:", "CharFilter", NULL, 0x1, NULL, NULL },
@@ -50,7 +55,7 @@ __attribute__((unused)) static jint OrgApacheLuceneAnalysisCharFilter_correctOff
 
 void OrgApacheLuceneAnalysisCharFilter_initWithJavaIoReader_(OrgApacheLuceneAnalysisCharFilter *self, JavaIoReader *input) {
   JavaIoReader_initWithId_(self, input);
-  self->input_ = input;
+  JreStrongAssign(&self->input_, input);
 }
 
 jint OrgApacheLuceneAnalysisCharFilter_correctOffsetWithInt_(OrgApacheLuceneAnalysisCharFilter *self, jint currentOff) {

@@ -11,8 +11,6 @@
 
 __attribute__((unused)) static void OrgApacheLuceneIndexMergeTrigger_initWithNSString_withInt_(OrgApacheLuceneIndexMergeTrigger *self, NSString *__name, jint __ordinal);
 
-__attribute__((unused)) static OrgApacheLuceneIndexMergeTrigger *new_OrgApacheLuceneIndexMergeTrigger_initWithNSString_withInt_(NSString *__name, jint __ordinal) NS_RETURNS_RETAINED;
-
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneIndexMergeTrigger)
 
 OrgApacheLuceneIndexMergeTrigger *OrgApacheLuceneIndexMergeTrigger_values_[5];
@@ -57,11 +55,20 @@ OrgApacheLuceneIndexMergeTrigger *OrgApacheLuceneIndexMergeTrigger_values_[5];
 
 + (void)initialize {
   if (self == [OrgApacheLuceneIndexMergeTrigger class]) {
-    JreEnum(OrgApacheLuceneIndexMergeTrigger, SEGMENT_FLUSH) = new_OrgApacheLuceneIndexMergeTrigger_initWithNSString_withInt_(@"SEGMENT_FLUSH", 0);
-    JreEnum(OrgApacheLuceneIndexMergeTrigger, FULL_FLUSH) = new_OrgApacheLuceneIndexMergeTrigger_initWithNSString_withInt_(@"FULL_FLUSH", 1);
-    JreEnum(OrgApacheLuceneIndexMergeTrigger, EXPLICIT) = new_OrgApacheLuceneIndexMergeTrigger_initWithNSString_withInt_(@"EXPLICIT", 2);
-    JreEnum(OrgApacheLuceneIndexMergeTrigger, MERGE_FINISHED) = new_OrgApacheLuceneIndexMergeTrigger_initWithNSString_withInt_(@"MERGE_FINISHED", 3);
-    JreEnum(OrgApacheLuceneIndexMergeTrigger, CLOSING) = new_OrgApacheLuceneIndexMergeTrigger_initWithNSString_withInt_(@"CLOSING", 4);
+    size_t objSize = class_getInstanceSize(self);
+    size_t allocSize = 5 * objSize;
+    uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
+    id e;
+    (JreEnum(OrgApacheLuceneIndexMergeTrigger, SEGMENT_FLUSH) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneIndexMergeTrigger_initWithNSString_withInt_(e, @"SEGMENT_FLUSH", 0);
+    (JreEnum(OrgApacheLuceneIndexMergeTrigger, FULL_FLUSH) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneIndexMergeTrigger_initWithNSString_withInt_(e, @"FULL_FLUSH", 1);
+    (JreEnum(OrgApacheLuceneIndexMergeTrigger, EXPLICIT) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneIndexMergeTrigger_initWithNSString_withInt_(e, @"EXPLICIT", 2);
+    (JreEnum(OrgApacheLuceneIndexMergeTrigger, MERGE_FINISHED) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneIndexMergeTrigger_initWithNSString_withInt_(e, @"MERGE_FINISHED", 3);
+    (JreEnum(OrgApacheLuceneIndexMergeTrigger, CLOSING) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneIndexMergeTrigger_initWithNSString_withInt_(e, @"CLOSING", 4);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneIndexMergeTrigger)
   }
 }
@@ -85,10 +92,6 @@ void OrgApacheLuceneIndexMergeTrigger_initWithNSString_withInt_(OrgApacheLuceneI
   JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
 }
 
-OrgApacheLuceneIndexMergeTrigger *new_OrgApacheLuceneIndexMergeTrigger_initWithNSString_withInt_(NSString *__name, jint __ordinal) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneIndexMergeTrigger, initWithNSString_withInt_, __name, __ordinal)
-}
-
 IOSObjectArray *OrgApacheLuceneIndexMergeTrigger_values() {
   OrgApacheLuceneIndexMergeTrigger_initialize();
   return [IOSObjectArray arrayWithObjects:OrgApacheLuceneIndexMergeTrigger_values_ count:5 type:OrgApacheLuceneIndexMergeTrigger_class_()];
@@ -102,7 +105,7 @@ OrgApacheLuceneIndexMergeTrigger *OrgApacheLuceneIndexMergeTrigger_valueOfWithNS
       return e;
     }
   }
-  @throw [[JavaLangIllegalArgumentException alloc] initWithNSString:name];
+  @throw [[[JavaLangIllegalArgumentException alloc] initWithNSString:name] autorelease];
   return nil;
 }
 

@@ -30,7 +30,7 @@ IOSObjectArray *OrgApacheLuceneIndexReaderSlice_EMPTY_ARRAY;
 
 + (void)initialize {
   if (self == [OrgApacheLuceneIndexReaderSlice class]) {
-    OrgApacheLuceneIndexReaderSlice_EMPTY_ARRAY = [IOSObjectArray newArrayWithLength:0 type:OrgApacheLuceneIndexReaderSlice_class_()];
+    JreStrongAssignAndConsume(&OrgApacheLuceneIndexReaderSlice_EMPTY_ARRAY, [IOSObjectArray newArrayWithLength:0 type:OrgApacheLuceneIndexReaderSlice_class_()]);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneIndexReaderSlice)
   }
 }

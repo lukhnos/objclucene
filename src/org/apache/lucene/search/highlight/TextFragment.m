@@ -42,6 +42,11 @@
   return [((id<JavaLangCharSequence>) nil_chk([((id<JavaLangCharSequence>) nil_chk(markedUpText_)) subSequenceFrom:textStartPos_ to:textEndPos_])) description];
 }
 
+- (void)dealloc {
+  RELEASE_(markedUpText_);
+  [super dealloc];
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithJavaLangCharSequence:withInt:withInt:", "TextFragment", NULL, 0x1, NULL, NULL },
@@ -67,7 +72,7 @@
 
 void OrgApacheLuceneSearchHighlightTextFragment_initWithJavaLangCharSequence_withInt_withInt_(OrgApacheLuceneSearchHighlightTextFragment *self, id<JavaLangCharSequence> markedUpText, jint textStartPos, jint fragNum) {
   NSObject_init(self);
-  self->markedUpText_ = markedUpText;
+  JreStrongAssign(&self->markedUpText_, markedUpText);
   self->textStartPos_ = textStartPos;
   self->fragNum_ = fragNum;
 }

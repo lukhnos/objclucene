@@ -38,7 +38,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)setWithCharArray:(IOSCharArray *)arr
                  withInt:(jint)end {
-  self->buf_ = arr;
+  JreStrongAssign(&self->buf_, arr);
   self->len_ = end;
 }
 
@@ -88,7 +88,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (id<JavaLangCharSequence>)subSequenceFrom:(jint)start
                                          to:(jint)end {
-  @throw new_JavaLangUnsupportedOperationException_init();
+  @throw create_JavaLangUnsupportedOperationException_init();
 }
 
 - (void)unsafeWriteWithChar:(jchar)b {
@@ -107,9 +107,9 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (void)resizeWithInt:(jint)len {
-  IOSCharArray *newbuf = [IOSCharArray newArrayWithLength:JavaLangMath_maxWithInt_withInt_(JreLShift32(((IOSCharArray *) nil_chk(buf_))->size_, 1), len)];
+  IOSCharArray *newbuf = [IOSCharArray arrayWithLength:JavaLangMath_maxWithInt_withInt_(JreLShift32(((IOSCharArray *) nil_chk(buf_))->size_, 1), len)];
   JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(buf_, 0, newbuf, 0, [self size]);
-  buf_ = newbuf;
+  JreStrongAssign(&buf_, newbuf);
 }
 
 - (void)reserveWithInt:(jint)num {
@@ -156,13 +156,18 @@ J2OBJC_IGNORE_DESIGNATED_END
 }
 
 - (IOSCharArray *)toCharArray {
-  IOSCharArray *newbuf = [IOSCharArray newArrayWithLength:[self size]];
+  IOSCharArray *newbuf = [IOSCharArray arrayWithLength:[self size]];
   JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(buf_, 0, newbuf, 0, [self size]);
   return newbuf;
 }
 
 - (NSString *)description {
   return [NSString stringWithCharacters:buf_ offset:0 length:[self size]];
+}
+
+- (void)dealloc {
+  RELEASE_(buf_);
+  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -222,7 +227,7 @@ OrgApacheLuceneAnalysisUtilOpenStringBuilder *create_OrgApacheLuceneAnalysisUtil
 
 void OrgApacheLuceneAnalysisUtilOpenStringBuilder_initWithInt_(OrgApacheLuceneAnalysisUtilOpenStringBuilder *self, jint size) {
   NSObject_init(self);
-  self->buf_ = [IOSCharArray newArrayWithLength:size];
+  JreStrongAssignAndConsume(&self->buf_, [IOSCharArray newArrayWithLength:size]);
 }
 
 OrgApacheLuceneAnalysisUtilOpenStringBuilder *new_OrgApacheLuceneAnalysisUtilOpenStringBuilder_initWithInt_(jint size) {

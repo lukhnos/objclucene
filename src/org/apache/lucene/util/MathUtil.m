@@ -89,7 +89,7 @@ OrgApacheLuceneUtilMathUtil *create_OrgApacheLuceneUtilMathUtil_init() {
 jint OrgApacheLuceneUtilMathUtil_logWithLong_withInt_(jlong x, jint base) {
   OrgApacheLuceneUtilMathUtil_initialize();
   if (base <= 1) {
-    @throw new_JavaLangIllegalArgumentException_initWithNSString_(@"base must be > 1");
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(@"base must be > 1");
   }
   jint ret = 0;
   while (x >= base) {

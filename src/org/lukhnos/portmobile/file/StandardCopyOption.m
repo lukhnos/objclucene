@@ -25,7 +25,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgLukhnosPortmobileFileStandardCopyOption class]) {
-    OrgLukhnosPortmobileFileStandardCopyOption_ATOMIC_MOVE = new_OrgLukhnosPortmobileFileStandardCopyOption_init();
+    JreStrongAssignAndConsume(&OrgLukhnosPortmobileFileStandardCopyOption_ATOMIC_MOVE, new_OrgLukhnosPortmobileFileStandardCopyOption_init());
     J2OBJC_SET_INITIALIZED(OrgLukhnosPortmobileFileStandardCopyOption)
   }
 }

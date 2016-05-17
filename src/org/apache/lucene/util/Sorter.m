@@ -46,7 +46,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 - (void)checkRangeWithInt:(jint)from
                   withInt:(jint)to {
   if (to < from) {
-    @throw new_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$I", @"'to' must be >= 'from', got from=", from, @" and to=", to));
+    @throw create_JavaLangIllegalArgumentException_initWithNSString_(JreStrcat("$I$I", @"'to' must be >= 'from', got from=", from, @" and to=", to));
   }
 }
 

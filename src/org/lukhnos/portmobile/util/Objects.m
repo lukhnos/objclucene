@@ -63,7 +63,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 id OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_(id obj) {
   OrgLukhnosPortmobileUtilObjects_initialize();
   if (obj == nil) {
-    @throw new_JavaLangNullPointerException_init();
+    @throw create_JavaLangNullPointerException_init();
   }
   return obj;
 }
@@ -71,7 +71,7 @@ id OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_(id obj) {
 id OrgLukhnosPortmobileUtilObjects_requireNonNullWithId_withNSString_(id obj, NSString *msg) {
   OrgLukhnosPortmobileUtilObjects_initialize();
   if (obj == nil) {
-    @throw new_JavaLangNullPointerException_initWithNSString_(msg);
+    @throw create_JavaLangNullPointerException_initWithNSString_(msg);
   }
   return obj;
 }

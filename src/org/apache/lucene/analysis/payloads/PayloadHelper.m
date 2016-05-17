@@ -70,7 +70,7 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 IOSByteArray *OrgApacheLuceneAnalysisPayloadsPayloadHelper_encodeFloatWithFloat_(jfloat payload) {
   OrgApacheLuceneAnalysisPayloadsPayloadHelper_initialize();
-  return OrgApacheLuceneAnalysisPayloadsPayloadHelper_encodeFloatWithFloat_withByteArray_withInt_(payload, [IOSByteArray newArrayWithLength:4], 0);
+  return OrgApacheLuceneAnalysisPayloadsPayloadHelper_encodeFloatWithFloat_withByteArray_withInt_(payload, [IOSByteArray arrayWithLength:4], 0);
 }
 
 IOSByteArray *OrgApacheLuceneAnalysisPayloadsPayloadHelper_encodeFloatWithFloat_withByteArray_withInt_(jfloat payload, IOSByteArray *data, jint offset) {
@@ -80,7 +80,7 @@ IOSByteArray *OrgApacheLuceneAnalysisPayloadsPayloadHelper_encodeFloatWithFloat_
 
 IOSByteArray *OrgApacheLuceneAnalysisPayloadsPayloadHelper_encodeIntWithInt_(jint payload) {
   OrgApacheLuceneAnalysisPayloadsPayloadHelper_initialize();
-  return OrgApacheLuceneAnalysisPayloadsPayloadHelper_encodeIntWithInt_withByteArray_withInt_(payload, [IOSByteArray newArrayWithLength:4], 0);
+  return OrgApacheLuceneAnalysisPayloadsPayloadHelper_encodeIntWithInt_withByteArray_withInt_(payload, [IOSByteArray arrayWithLength:4], 0);
 }
 
 IOSByteArray *OrgApacheLuceneAnalysisPayloadsPayloadHelper_encodeIntWithInt_withByteArray_withInt_(jint payload, IOSByteArray *data, jint offset) {

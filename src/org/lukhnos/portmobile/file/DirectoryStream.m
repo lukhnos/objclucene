@@ -42,6 +42,11 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(OrgLukhnosPortmobileFileDirectoryStream)
   return JreDefaultFastEnumeration(self, state, stackbuf, len);
 }
 
+- (void)dealloc {
+  RELEASE_(paths_);
+  [super dealloc];
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithJavaUtilList:", "SimpleDirectoryStream", NULL, 0x1, NULL, "(Ljava/util/List<TT;>;)V" },
@@ -59,7 +64,7 @@ J2OBJC_INTERFACE_TYPE_LITERAL_SOURCE(OrgLukhnosPortmobileFileDirectoryStream)
 
 void OrgLukhnosPortmobileFileDirectoryStream_SimpleDirectoryStream_initWithJavaUtilList_(OrgLukhnosPortmobileFileDirectoryStream_SimpleDirectoryStream *self, id<JavaUtilList> paths) {
   NSObject_init(self);
-  self->paths_ = paths;
+  JreStrongAssign(&self->paths_, paths);
 }
 
 OrgLukhnosPortmobileFileDirectoryStream_SimpleDirectoryStream *new_OrgLukhnosPortmobileFileDirectoryStream_SimpleDirectoryStream_initWithJavaUtilList_(id<JavaUtilList> paths) {

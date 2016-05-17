@@ -15,8 +15,6 @@
 
 __attribute__((unused)) static void OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_initWithNSString_withInt_(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type *self, NSString *__name, jint __ordinal);
 
-__attribute__((unused)) static OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type *new_OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_initWithNSString_withInt_(NSString *__name, jint __ordinal) NS_RETURNS_RETAINED;
-
 @implementation OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -64,8 +62,14 @@ OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type *OrgApacheLuc
 
 + (void)initialize {
   if (self == [OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type class]) {
-    JreEnum(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type, STRING) = new_OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_initWithNSString_withInt_(@"STRING", 0);
-    JreEnum(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type, NORMAL) = new_OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_initWithNSString_withInt_(@"NORMAL", 1);
+    size_t objSize = class_getInstanceSize(self);
+    size_t allocSize = 2 * objSize;
+    uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
+    id e;
+    (JreEnum(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type, STRING) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_initWithNSString_withInt_(e, @"STRING", 0);
+    (JreEnum(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type, NORMAL) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_initWithNSString_withInt_(e, @"NORMAL", 1);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type)
   }
 }
@@ -86,10 +90,6 @@ void OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_initWith
   JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
 }
 
-OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type *new_OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_initWithNSString_withInt_(NSString *__name, jint __ordinal) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type, initWithNSString_withInt_, __name, __ordinal)
-}
-
 IOSObjectArray *OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_values() {
   OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_initialize();
   return [IOSObjectArray arrayWithObjects:OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_values_ count:2 type:OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type_class_()];
@@ -103,7 +103,7 @@ OrgApacheLuceneQueryparserFlexibleCoreParserEscapeQuerySyntax_Type *OrgApacheLuc
       return e;
     }
   }
-  @throw [[JavaLangIllegalArgumentException alloc] initWithNSString:name];
+  @throw [[[JavaLangIllegalArgumentException alloc] initWithNSString:name] autorelease];
   return nil;
 }
 

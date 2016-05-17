@@ -82,9 +82,9 @@ J2OBJC_IGNORE_DESIGNATED_END
   jint index = n_;
   jint len = ((IOSByteArray *) nil_chk(array_))->size_;
   if (n_ + size >= len) {
-    IOSByteArray *aux = [IOSByteArray newArrayWithLength:len + blockSize_];
+    IOSByteArray *aux = [IOSByteArray arrayWithLength:len + blockSize_];
     JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(array_, 0, aux, 0, len);
-    array_ = aux;
+    JreStrongAssign(&array_, aux);
   }
   n_ += size;
   return index;
@@ -92,10 +92,15 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 - (void)trimToSize {
   if (n_ < ((IOSByteArray *) nil_chk(array_))->size_) {
-    IOSByteArray *aux = [IOSByteArray newArrayWithLength:n_];
+    IOSByteArray *aux = [IOSByteArray arrayWithLength:n_];
     JavaLangSystem_arraycopyWithId_withInt_withId_withInt_withInt_(array_, 0, aux, 0, n_);
-    array_ = aux;
+    JreStrongAssign(&array_, aux);
   }
+}
+
+- (void)dealloc {
+  RELEASE_(array_);
+  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -144,7 +149,7 @@ void OrgApacheLuceneAnalysisCompoundHyphenationByteVector_initWithInt_(OrgApache
   else {
     self->blockSize_ = OrgApacheLuceneAnalysisCompoundHyphenationByteVector_DEFAULT_BLOCK_SIZE;
   }
-  self->array_ = [IOSByteArray newArrayWithLength:self->blockSize_];
+  JreStrongAssignAndConsume(&self->array_, [IOSByteArray newArrayWithLength:self->blockSize_]);
   self->n_ = 0;
 }
 
@@ -159,7 +164,7 @@ OrgApacheLuceneAnalysisCompoundHyphenationByteVector *create_OrgApacheLuceneAnal
 void OrgApacheLuceneAnalysisCompoundHyphenationByteVector_initWithByteArray_(OrgApacheLuceneAnalysisCompoundHyphenationByteVector *self, IOSByteArray *a) {
   NSObject_init(self);
   self->blockSize_ = OrgApacheLuceneAnalysisCompoundHyphenationByteVector_DEFAULT_BLOCK_SIZE;
-  self->array_ = a;
+  JreStrongAssign(&self->array_, a);
   self->n_ = 0;
 }
 
@@ -179,7 +184,7 @@ void OrgApacheLuceneAnalysisCompoundHyphenationByteVector_initWithByteArray_with
   else {
     self->blockSize_ = OrgApacheLuceneAnalysisCompoundHyphenationByteVector_DEFAULT_BLOCK_SIZE;
   }
-  self->array_ = a;
+  JreStrongAssign(&self->array_, a);
   self->n_ = 0;
 }
 

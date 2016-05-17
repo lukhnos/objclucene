@@ -29,12 +29,18 @@ J2OBJC_IGNORE_DESIGNATED_END
     return [((id<JavaUtilMap>) nil_chk(cache_)) getWithId:type];
   }
   id value = [self computeValueWithIOSClass:type];
-  (void) [((id<JavaUtilMap>) nil_chk(cache_)) putWithId:type withId:value];
+  [((id<JavaUtilMap>) nil_chk(cache_)) putWithId:type withId:value];
   return value;
 }
 
 - (void)removeWithIOSClass:(IOSClass *)type {
-  (void) [((id<JavaUtilMap>) nil_chk(cache_)) removeWithId:type];
+  [((id<JavaUtilMap>) nil_chk(cache_)) removeWithId:type];
+}
+
+- (void)dealloc {
+  RELEASE_(defaultCachedMember_);
+  RELEASE_(cache_);
+  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -58,8 +64,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 void OrgLukhnosPortmobileLangClassValue_init(OrgLukhnosPortmobileLangClassValue *self) {
   NSObject_init(self);
   self->defaultCached_ = false;
-  self->defaultCachedMember_ = nil;
-  self->cache_ = new_JavaUtilHashMap_init();
+  JreStrongAssign(&self->defaultCachedMember_, nil);
+  JreStrongAssignAndConsume(&self->cache_, new_JavaUtilHashMap_init());
 }
 
 J2OBJC_CLASS_TYPE_LITERAL_SOURCE(OrgLukhnosPortmobileLangClassValue)

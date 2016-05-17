@@ -54,15 +54,22 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilNamedThreadFactory)
 }
 
 - (JavaLangThread *)newThreadWithJavaLangRunnable:(id<JavaLangRunnable>)r {
-  JavaLangThread *t = new_JavaLangThread_initWithJavaLangThreadGroup_withJavaLangRunnable_withNSString_withLong_(group_, r, NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"%s-%d", [IOSObjectArray newArrayWithObjects:(id[]){ self->threadNamePrefix_, JavaLangInteger_valueOfWithInt_([((JavaUtilConcurrentAtomicAtomicInteger *) nil_chk(threadNumber_)) getAndIncrement]) } count:2 type:NSObject_class_()]), 0);
+  JavaLangThread *t = create_JavaLangThread_initWithJavaLangThreadGroup_withJavaLangRunnable_withNSString_withLong_(group_, r, NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), @"%s-%d", [IOSObjectArray arrayWithObjects:(id[]){ self->threadNamePrefix_, JavaLangInteger_valueOfWithInt_([((JavaUtilConcurrentAtomicAtomicInteger *) nil_chk(threadNumber_)) getAndIncrement]) } count:2 type:NSObject_class_()]), 0);
   [t setDaemonWithBoolean:false];
   [t setPriorityWithInt:JavaLangThread_NORM_PRIORITY];
   return t;
 }
 
+- (void)dealloc {
+  RELEASE_(group_);
+  RELEASE_(threadNumber_);
+  RELEASE_(threadNamePrefix_);
+  [super dealloc];
+}
+
 + (void)initialize {
   if (self == [OrgApacheLuceneUtilNamedThreadFactory class]) {
-    OrgApacheLuceneUtilNamedThreadFactory_threadPoolNumber = new_JavaUtilConcurrentAtomicAtomicInteger_initWithInt_(1);
+    JreStrongAssignAndConsume(&OrgApacheLuceneUtilNamedThreadFactory_threadPoolNumber, new_JavaUtilConcurrentAtomicAtomicInteger_initWithInt_(1));
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneUtilNamedThreadFactory)
   }
 }
@@ -88,10 +95,10 @@ J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneUtilNamedThreadFactory)
 
 void OrgApacheLuceneUtilNamedThreadFactory_initWithNSString_(OrgApacheLuceneUtilNamedThreadFactory *self, NSString *threadNamePrefix) {
   NSObject_init(self);
-  self->threadNumber_ = new_JavaUtilConcurrentAtomicAtomicInteger_initWithInt_(1);
+  JreStrongAssignAndConsume(&self->threadNumber_, new_JavaUtilConcurrentAtomicAtomicInteger_initWithInt_(1));
   JavaLangSecurityManager *s = JavaLangSystem_getSecurityManager();
-  self->group_ = (s != nil) ? [((JavaLangSecurityManager *) nil_chk(s)) getThreadGroup] : [((JavaLangThread *) nil_chk(JavaLangThread_currentThread())) getThreadGroup];
-  self->threadNamePrefix_ = NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), OrgApacheLuceneUtilNamedThreadFactory_NAME_PATTERN, [IOSObjectArray newArrayWithObjects:(id[]){ OrgApacheLuceneUtilNamedThreadFactory_checkPrefixWithNSString_(threadNamePrefix), JavaLangInteger_valueOfWithInt_([((JavaUtilConcurrentAtomicAtomicInteger *) nil_chk(OrgApacheLuceneUtilNamedThreadFactory_threadPoolNumber)) getAndIncrement]) } count:2 type:NSObject_class_()]);
+  JreStrongAssign(&self->group_, (s != nil) ? [((JavaLangSecurityManager *) nil_chk(s)) getThreadGroup] : [((JavaLangThread *) nil_chk(JavaLangThread_currentThread())) getThreadGroup]);
+  JreStrongAssign(&self->threadNamePrefix_, NSString_formatWithJavaUtilLocale_withNSString_withNSObjectArray_(JreLoadStatic(JavaUtilLocale, ROOT), OrgApacheLuceneUtilNamedThreadFactory_NAME_PATTERN, [IOSObjectArray arrayWithObjects:(id[]){ OrgApacheLuceneUtilNamedThreadFactory_checkPrefixWithNSString_(threadNamePrefix), JavaLangInteger_valueOfWithInt_([((JavaUtilConcurrentAtomicAtomicInteger *) nil_chk(OrgApacheLuceneUtilNamedThreadFactory_threadPoolNumber)) getAndIncrement]) } count:2 type:NSObject_class_()]));
 }
 
 OrgApacheLuceneUtilNamedThreadFactory *new_OrgApacheLuceneUtilNamedThreadFactory_initWithNSString_(NSString *threadNamePrefix) {

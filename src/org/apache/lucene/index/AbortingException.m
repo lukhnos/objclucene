@@ -60,7 +60,7 @@ OrgApacheLuceneIndexAbortingException *OrgApacheLuceneIndexAbortingException_wra
     return (OrgApacheLuceneIndexAbortingException *) cast_chk(t, [OrgApacheLuceneIndexAbortingException class]);
   }
   else {
-    return new_OrgApacheLuceneIndexAbortingException_initWithNSException_(t);
+    return create_OrgApacheLuceneIndexAbortingException_initWithNSException_(t);
   }
 }
 

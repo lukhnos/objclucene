@@ -23,11 +23,16 @@
 }
 
 - (void)setTermWithNSString:(NSString *)term {
-  self->term_ = term;
+  JreStrongAssign(&self->term_, term);
 }
 
 - (void)setWeightWithFloat:(jfloat)weight {
   self->weight_ = weight;
+}
+
+- (void)dealloc {
+  RELEASE_(term_);
+  [super dealloc];
 }
 
 + (const J2ObjcClassInfo *)__metadata {
@@ -51,7 +56,7 @@
 void OrgApacheLuceneSearchHighlightWeightedTerm_initWithFloat_withNSString_(OrgApacheLuceneSearchHighlightWeightedTerm *self, jfloat weight, NSString *term) {
   NSObject_init(self);
   self->weight_ = weight;
-  self->term_ = term;
+  JreStrongAssign(&self->term_, term);
 }
 
 OrgApacheLuceneSearchHighlightWeightedTerm *new_OrgApacheLuceneSearchHighlightWeightedTerm_initWithFloat_withNSString_(jfloat weight, NSString *term) {

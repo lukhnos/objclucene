@@ -79,6 +79,12 @@ __attribute__((unused)) static void OrgApacheLuceneStoreBufferedChecksum_flush(O
   OrgApacheLuceneStoreBufferedChecksum_flush(self);
 }
 
+- (void)dealloc {
+  RELEASE_(in_);
+  RELEASE_(buffer_);
+  [super dealloc];
+}
+
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
     { "initWithJavaUtilZipChecksum:", "BufferedChecksum", NULL, 0x1, NULL, NULL },
@@ -115,8 +121,8 @@ OrgApacheLuceneStoreBufferedChecksum *create_OrgApacheLuceneStoreBufferedChecksu
 
 void OrgApacheLuceneStoreBufferedChecksum_initWithJavaUtilZipChecksum_withInt_(OrgApacheLuceneStoreBufferedChecksum *self, id<JavaUtilZipChecksum> inArg, jint bufferSize) {
   NSObject_init(self);
-  self->in_ = inArg;
-  self->buffer_ = [IOSByteArray newArrayWithLength:bufferSize];
+  JreStrongAssign(&self->in_, inArg);
+  JreStrongAssignAndConsume(&self->buffer_, [IOSByteArray newArrayWithLength:bufferSize]);
 }
 
 OrgApacheLuceneStoreBufferedChecksum *new_OrgApacheLuceneStoreBufferedChecksum_initWithJavaUtilZipChecksum_withInt_(id<JavaUtilZipChecksum> inArg, jint bufferSize) {

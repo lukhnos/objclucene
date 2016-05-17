@@ -11,8 +11,6 @@
 
 __attribute__((unused)) static void OrgApacheLuceneSearchJoinScoreMode_initWithNSString_withInt_(OrgApacheLuceneSearchJoinScoreMode *self, NSString *__name, jint __ordinal);
 
-__attribute__((unused)) static OrgApacheLuceneSearchJoinScoreMode *new_OrgApacheLuceneSearchJoinScoreMode_initWithNSString_withInt_(NSString *__name, jint __ordinal) NS_RETURNS_RETAINED;
-
 J2OBJC_INITIALIZED_DEFN(OrgApacheLuceneSearchJoinScoreMode)
 
 OrgApacheLuceneSearchJoinScoreMode *OrgApacheLuceneSearchJoinScoreMode_values_[5];
@@ -57,11 +55,20 @@ OrgApacheLuceneSearchJoinScoreMode *OrgApacheLuceneSearchJoinScoreMode_values_[5
 
 + (void)initialize {
   if (self == [OrgApacheLuceneSearchJoinScoreMode class]) {
-    JreEnum(OrgApacheLuceneSearchJoinScoreMode, None) = new_OrgApacheLuceneSearchJoinScoreMode_initWithNSString_withInt_(@"None", 0);
-    JreEnum(OrgApacheLuceneSearchJoinScoreMode, Avg) = new_OrgApacheLuceneSearchJoinScoreMode_initWithNSString_withInt_(@"Avg", 1);
-    JreEnum(OrgApacheLuceneSearchJoinScoreMode, Max) = new_OrgApacheLuceneSearchJoinScoreMode_initWithNSString_withInt_(@"Max", 2);
-    JreEnum(OrgApacheLuceneSearchJoinScoreMode, Total) = new_OrgApacheLuceneSearchJoinScoreMode_initWithNSString_withInt_(@"Total", 3);
-    JreEnum(OrgApacheLuceneSearchJoinScoreMode, Min) = new_OrgApacheLuceneSearchJoinScoreMode_initWithNSString_withInt_(@"Min", 4);
+    size_t objSize = class_getInstanceSize(self);
+    size_t allocSize = 5 * objSize;
+    uintptr_t ptr = (uintptr_t)calloc(allocSize, 1);
+    id e;
+    (JreEnum(OrgApacheLuceneSearchJoinScoreMode, None) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneSearchJoinScoreMode_initWithNSString_withInt_(e, @"None", 0);
+    (JreEnum(OrgApacheLuceneSearchJoinScoreMode, Avg) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneSearchJoinScoreMode_initWithNSString_withInt_(e, @"Avg", 1);
+    (JreEnum(OrgApacheLuceneSearchJoinScoreMode, Max) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneSearchJoinScoreMode_initWithNSString_withInt_(e, @"Max", 2);
+    (JreEnum(OrgApacheLuceneSearchJoinScoreMode, Total) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneSearchJoinScoreMode_initWithNSString_withInt_(e, @"Total", 3);
+    (JreEnum(OrgApacheLuceneSearchJoinScoreMode, Min) = e = objc_constructInstance(self, (void *)ptr), ptr += objSize);
+    OrgApacheLuceneSearchJoinScoreMode_initWithNSString_withInt_(e, @"Min", 4);
     J2OBJC_SET_INITIALIZED(OrgApacheLuceneSearchJoinScoreMode)
   }
 }
@@ -85,10 +92,6 @@ void OrgApacheLuceneSearchJoinScoreMode_initWithNSString_withInt_(OrgApacheLucen
   JavaLangEnum_initWithNSString_withInt_(self, __name, __ordinal);
 }
 
-OrgApacheLuceneSearchJoinScoreMode *new_OrgApacheLuceneSearchJoinScoreMode_initWithNSString_withInt_(NSString *__name, jint __ordinal) {
-  J2OBJC_NEW_IMPL(OrgApacheLuceneSearchJoinScoreMode, initWithNSString_withInt_, __name, __ordinal)
-}
-
 IOSObjectArray *OrgApacheLuceneSearchJoinScoreMode_values() {
   OrgApacheLuceneSearchJoinScoreMode_initialize();
   return [IOSObjectArray arrayWithObjects:OrgApacheLuceneSearchJoinScoreMode_values_ count:5 type:OrgApacheLuceneSearchJoinScoreMode_class_()];
@@ -102,7 +105,7 @@ OrgApacheLuceneSearchJoinScoreMode *OrgApacheLuceneSearchJoinScoreMode_valueOfWi
       return e;
     }
   }
-  @throw [[JavaLangIllegalArgumentException alloc] initWithNSString:name];
+  @throw [[[JavaLangIllegalArgumentException alloc] initWithNSString:name] autorelease];
   return nil;
 }
 

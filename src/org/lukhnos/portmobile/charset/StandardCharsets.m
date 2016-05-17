@@ -31,8 +31,8 @@ J2OBJC_IGNORE_DESIGNATED_END
 
 + (void)initialize {
   if (self == [OrgLukhnosPortmobileCharsetStandardCharsets class]) {
-    OrgLukhnosPortmobileCharsetStandardCharsets_ISO_8859_1 = JavaNioCharsetCharset_forNameWithNSString_(@"ISO-8859-1");
-    OrgLukhnosPortmobileCharsetStandardCharsets_UTF_8 = JavaNioCharsetCharset_forNameWithNSString_(@"UTF-8");
+    JreStrongAssign(&OrgLukhnosPortmobileCharsetStandardCharsets_ISO_8859_1, JavaNioCharsetCharset_forNameWithNSString_(@"ISO-8859-1"));
+    JreStrongAssign(&OrgLukhnosPortmobileCharsetStandardCharsets_UTF_8, JavaNioCharsetCharset_forNameWithNSString_(@"UTF-8"));
     J2OBJC_SET_INITIALIZED(OrgLukhnosPortmobileCharsetStandardCharsets)
   }
 }

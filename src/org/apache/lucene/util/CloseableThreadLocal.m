@@ -67,9 +67,9 @@ __attribute__((unused)) static void OrgApacheLuceneUtilCloseableThreadLocal_purg
 }
 
 - (void)setWithId:(id)object {
-  [((JavaLangThreadLocal *) nil_chk(t_)) setWithId:new_JavaLangRefWeakReference_initWithId_(object)];
+  [((JavaLangThreadLocal *) nil_chk(t_)) setWithId:create_JavaLangRefWeakReference_initWithId_(object)];
   @synchronized(hardRefs_) {
-    (void) [((id<JavaUtilMap>) nil_chk(hardRefs_)) putWithId:JavaLangThread_currentThread() withId:object];
+    [((id<JavaUtilMap>) nil_chk(hardRefs_)) putWithId:JavaLangThread_currentThread() withId:object];
     OrgApacheLuceneUtilCloseableThreadLocal_maybePurge(self);
   }
 }
@@ -83,11 +83,11 @@ __attribute__((unused)) static void OrgApacheLuceneUtilCloseableThreadLocal_purg
 }
 
 - (void)close {
-  hardRefs_ = nil;
+  JreStrongAssign(&hardRefs_, nil);
   if (t_ != nil) {
     [t_ remove];
   }
-  t_ = nil;
+  JreStrongAssign(&t_, nil);
 }
 
 J2OBJC_IGNORE_DESIGNATED_BEGIN
@@ -96,6 +96,13 @@ J2OBJC_IGNORE_DESIGNATED_BEGIN
   return self;
 }
 J2OBJC_IGNORE_DESIGNATED_END
+
+- (void)dealloc {
+  RELEASE_(t_);
+  RELEASE_(hardRefs_);
+  RELEASE_(countUntilPurge_);
+  [super dealloc];
+}
 
 + (const J2ObjcClassInfo *)__metadata {
   static const J2ObjcMethodInfo methods[] = {
@@ -147,9 +154,9 @@ void OrgApacheLuceneUtilCloseableThreadLocal_purge(OrgApacheLuceneUtilCloseableT
 
 void OrgApacheLuceneUtilCloseableThreadLocal_init(OrgApacheLuceneUtilCloseableThreadLocal *self) {
   NSObject_init(self);
-  self->t_ = new_JavaLangThreadLocal_init();
-  self->hardRefs_ = new_JavaUtilWeakHashMap_init();
-  self->countUntilPurge_ = new_JavaUtilConcurrentAtomicAtomicInteger_initWithInt_(OrgApacheLuceneUtilCloseableThreadLocal_PURGE_MULTIPLIER);
+  JreStrongAssignAndConsume(&self->t_, new_JavaLangThreadLocal_init());
+  JreStrongAssignAndConsume(&self->hardRefs_, new_JavaUtilWeakHashMap_init());
+  JreStrongAssignAndConsume(&self->countUntilPurge_, new_JavaUtilConcurrentAtomicAtomicInteger_initWithInt_(OrgApacheLuceneUtilCloseableThreadLocal_PURGE_MULTIPLIER));
 }
 
 OrgApacheLuceneUtilCloseableThreadLocal *new_OrgApacheLuceneUtilCloseableThreadLocal_init() {
