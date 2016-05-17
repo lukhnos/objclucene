@@ -48,7 +48,7 @@
 #include "java/util/regex/Matcher.h"
 #include "java/util/regex/Pattern.h"
 #include "org/apache/lucene/analysis/hunspell/Dictionary.h"
-#include "org/apache/lucene/analysis/hunspell/ISO8859_14Decoder.h"
+// #include "org/apache/lucene/analysis/hunspell/ISO8859_14Decoder.h" // disabled by translate.py
 #include "org/apache/lucene/store/ByteArrayDataOutput.h"
 #include "org/apache/lucene/util/ArrayUtil.h"
 #include "org/apache/lucene/util/BytesRef.h"
